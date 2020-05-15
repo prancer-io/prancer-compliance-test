@@ -1,7 +1,7 @@
 {
     "testSet": [
         {
-            "testName": "test5",
+            "masterTestName": "test5",
             "version": "0.1",
             "cases": [
                 {
