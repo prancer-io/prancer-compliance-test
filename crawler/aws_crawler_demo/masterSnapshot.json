@@ -28,6 +28,90 @@
           ]
         },
         {
+          "masterSnapshotId": "AWS_EC2_03",
+          "arn": "arn:aws:ec2:us-east-2::",
+          "collection": "ec2",
+          "listMethod": "describe_instances",
+          "detailMethods": [
+            "describe_instances",
+            "describe_snapshots",
+            "describe_images",
+            "describe_volumes"
+          ]
+        },
+        {
+          "masterSnapshotId": "AWS_EC2_04",
+          "arn": "arn:aws:ec2:us-east-2::",
+          "collection": "ec2",
+          "listMethod": "describe_instances",
+          "detailMethods": [
+            "describe_instances",
+            "describe_snapshots",
+            "describe_snapshot_attribute"
+          ]
+        },
+        {
+          "masterSnapshotId": "AWS_RDS_01",
+          "arn": "arn:aws:rds:us-east-2::",
+          "collection": "rds",
+          "listMethod": "describe_db_instances",
+          "detailMethods": [
+            "describe_db_instances",
+            "describe_db_snapshots"
+          ]
+        },
+        {
+          "masterSnapshotId": "AWS_CF_01",
+          "arn": "arn:aws:cloudformation:us-east-2::",
+          "collection": "cloudformation",
+          "listMethod": "list_stacks",
+          "detailMethods": [
+            "describe_stacks",
+            "describe_stack_resource",
+            "describe_stack_resource_drifts",
+            "get_stack_policy",
+            "describe_stack_events"
+          ]
+        },
+        {
+          "masterSnapshotId": "AWS_CT_01",
+          "arn": "arn:aws:cloudtrail:us-east-2::",
+          "collection": "cloudtrail",
+          "listMethod": "list_trails",
+          "detailMethods": [
+            "describe_trails"
+          ]
+        },
+        {
+          "masterSnapshotId": "AWS_ELB_01",
+          "arn": "arn:aws:elb:us-east-2::",
+          "collection": "elb",
+          "listMethod": "describe_load_balancers",
+          "detailMethods": [
+            "describe_load_balancers",
+            "describe_load_balancer_attributes",
+            "describe_load_balancer_policies"
+          ]
+        },
+        {
+          "masterSnapshotId": "AWS_SQS_01",
+          "arn": "arn:aws:sqs:us-east-2::",
+          "collection": "sqs",
+          "listMethod": "list_queues",
+          "detailMethods": [
+            "get_queue_attributes"
+          ]
+        },
+        {
+          "masterSnapshotId": "AWS_LAMBDA_01",
+          "arn": "arn:aws:lambda:us-east-2::",
+          "collection": "lambda",
+          "listMethod": "list_functions",
+          "detailMethods": [
+            "get_function"
+          ]
+        },
+        {
           "masterSnapshotId": "AWS_ECS_01",
           "arn": "arn:aws:ecs:us-east-2::",
           "collection": "ecs",
