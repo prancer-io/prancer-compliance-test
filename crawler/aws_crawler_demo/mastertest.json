@@ -1,0 +1,151 @@
+{
+    "testSet": [
+        {
+            "testName": "TEST_GOOGLE",
+            "version": "0.1",
+            "cases": [
+                {
+                    "masterTestId": "AWS_S3_01",
+                    "type": "rego",
+                    "rule": "file(input_s3_01_2.rego)",
+                    "masterSnapshotId": [
+                        "AWS_S3_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "Access logging should be enabled on S3 buckets",
+                    "description": "Access logging provides detailed informations about requests that are made to a bucket. It is recommended that enable server access logging for track the requests.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM v3.0.1-IAM-03",
+                                "CSA CCM v3.0.1-IAM-06",
+                                "GDPR-Article 30",
+                                "HITRUST Version 9.2-Control Reference: 10.k",
+                                "NIST 800-171 Rev1-3.4.5",
+                                "NIST 800-53 Rev4-CM-5 (1)",
+                                "PCI DSS v3.2-10.1",
+                                "PCI DSS v3.2-10.2.3",
+                                "SOC 2-CC8.1",
+                                "CSA",
+                                "NIST",
+                                "PCI"
+                            ],
+                            "service": [
+                                "s3"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_EC2_01",
+                    "type": "rego",
+                    "rule": "file(input_ec2_02_1.rego)",
+                    "masterSnapshotId": [
+                        "AWS_EC2_02"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "Default Security Group should restrict inbound and outbound traffic for AllUsers",
+                    "description": "Initial configuration of the default security group is deny all inbound traffic from internet and allow all outbound traffic. So when you launch an instance, the instance is automatically assigned to default security group and as a result, the instance may send outbound traffic. It is recommended to assign Security Group at time of launch an instance.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS v1.2.0 (AWS)-4.4",
+                                "CSA CCM v3.0.1-DSI-02",
+                                "CSA CCM v3.0.1-IAM-07",
+                                "CSA CCM v3.0.1-IVS-06",
+                                "CSA CCM v3.0.1-IVS-08",
+                                "GDPR-Article 46",
+                                "HITRUST Version 9.2-Control Reference: 09.ab",
+                                "ISO 27001:2013-A.6.2.2",
+                                "NIST 800-171 Rev1-3.13.1",
+                                "NIST 800-171 Rev1-3.13.2",
+                                "NIST 800-171 Rev1-3.13.5",
+                                "NIST 800-171 Rev1-3.14.6",
+                                "NIST 800-53 Rev4-SC-7 (19)",
+                                "NIST 800-53 Rev4-SI-4 (4)",
+                                "NIST CSF-DE.AE-1",
+                                "NIST CSF-DE.CM-7",
+                                "SOC 2-CC6.1",
+                                "CIS",
+                                "CSA",
+                                "ISO",
+                                "NIST"
+                            ],
+                            "service": [
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_ECS_01",
+                    "type": "rego",
+                    "rule": "file(input_ecs_01.rego)",
+                    "masterSnapshotId": [
+                        "AWS_ECS_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS ECS task definition elevated privileges should be disabled",
+                    "description": "When you enabled the Privileged parameter of ECS containers, the container is given elevated privileges on the host container instance (same as the root user). Set the Privileged parameter to false in security configuration of your task definition.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "ecs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_EKS_01",
+                    "type": "rego",
+                    "rule": "file(input_eks_01.rego)",
+                    "masterSnapshotId": [
+                        "AWS_EKS_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS EKS cluster endpoint access disabled public access",
+                    "description": "If the public access is enabled for your cluster's endpoint then your API server will accessible from the internet. Disable your cluster endpoint to the public access and enable the private access so that all communication between nodes stays within your VPC.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "eks"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_ELASTICCACHE_01",
+                    "type": "rego",
+                    "rule": "file(input_elasticcache_01.rego)",
+                    "masterSnapshotId": [
+                        "AWS_ELASTICCACHE_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS ElastiCache Redis cluster with Multi-AZ automatic failover feature set to disabled",
+                    "description": "",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "elasticache"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

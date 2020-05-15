@@ -1,0 +1,40 @@
+{
+    "snapshots": [
+        {
+            "type": "azure",
+            "connectorUser": "USER_1",
+            "nodes": [
+                {
+                    "masterSnapshotId": "AZRSNP_224",
+                    "type": "Microsoft.ContainerRegistry/registries",
+                    "collection": "Microsoft.ContainerRegistry"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_231",
+                    "type": "Microsoft.Network/networkSecurityGroups",
+                    "collection": "Microsoft.Network"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_284",
+                    "type": "Microsoft.Network/virtualNetworks",
+                    "collection": "Microsoft.Network"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_277",
+                    "type": "Microsoft.Compute/disks",
+                    "collection": "Microsoft.Compute"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_274",
+                    "type": "Microsoft.Compute/virtualMachines",
+                    "collection": "Microsoft.Compute"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_301",
+                    "type": "Microsoft.Storage/storageAccounts",
+                    "collection": "Microsoft.Storage"
+                }
+            ]
+        }
+    ]
+}

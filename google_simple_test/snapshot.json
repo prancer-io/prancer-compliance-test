@@ -1,0 +1,84 @@
+{
+    "snapshots": [
+        {
+            "source": "googleCrawlerStructure",
+            "type": "google",
+            "testUser": "prancer-test-account",
+            "project-id": "disco-vista-260919",
+            "nodes": [
+                {
+                    "type": "projects.zones.clusters.get",
+                    "collection": "kubernetes.clusters",
+                    "validate": true,
+                    "snapshotId": "GOOGLE_CLUSTER_1",
+                    "path": "v1/projects/disco-vista-260919/zones/asia-east1-b/clusters/standard-cluster-1",
+                    "status": "active"
+                },
+                {
+                    "type": "projects.zones.clusters.get",
+                    "collection": "kubernetes.clusters",
+                    "validate": true,
+                    "snapshotId": "GOOGLE_CLUSTER_2",
+                    "path": "v1/projects/disco-vista-260919/zones/us-central1-c/clusters/cluster-1",
+                    "status": "active"
+                },
+                {
+                    "type": "firewalls.get",
+                    "collection": "firewalls",
+                    "validate": true,
+                    "snapshotId": "GOOGLE_FIREWALL_1",
+                    "path": "compute/v1/projects/disco-vista-260919/global/firewalls/default-allow-ftp",
+                    "status": "active"
+                },
+                {
+                    "type": "firewalls.get",
+                    "collection": "firewalls",
+                    "validate": true,
+                    "snapshotId": "GOOGLE_FIREWALL_2",
+                    "path": "compute/v1/projects/disco-vista-260919/global/firewalls/default-allow-http",
+                    "status": "active"
+                },
+                {
+                    "type": "firewalls.get",
+                    "collection": "firewalls",
+                    "validate": true,
+                    "snapshotId": "GOOGLE_FIREWALL_3",
+                    "path": "compute/v1/projects/disco-vista-260919/global/firewalls/default-allow-https",
+                    "status": "active"
+                },
+                {
+                    "type": "firewalls.get",
+                    "collection": "firewalls",
+                    "validate": true,
+                    "snapshotId": "GOOGLE_FIREWALL_4",
+                    "path": "compute/v1/projects/disco-vista-260919/global/firewalls/default-allow-icmp",
+                    "status": "active"
+                },
+                {
+                    "type": "instances.get",
+                    "collection": "instances",
+                    "validate": true,
+                    "snapshotId": "GOOGLE_INSTANCE_1",
+                    "path": "compute/v1/projects/disco-vista-260919/zones/us-central1-a/instances/instance-1",
+                    "status": "active"
+                },
+                {
+                    "type": "instances.get",
+                    "collection": "instances",
+                    "validate": true,
+                    "snapshotId": "GOOGLE_INSTANCE_2",
+                    "path": "compute/v1/projects/disco-vista-260919/zones/us-central1-a/instances/instance-2",
+                    "status": "active"
+                },
+                {
+                    "type": "instances.get",
+                    "collection": "instances",
+                    "validate": true,
+                    "snapshotId": "GOOGLE_INSTANCE_3",
+                    "path": "compute/v1/projects/disco-vista-260919/zones/us-central1-a/instances/instance-3",
+                    "status": "active"
+                }
+            ]
+        }
+    ]
+}

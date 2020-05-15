@@ -1,0 +1,30 @@
+{
+  "snapshots": [
+    {
+      "type": "google",
+      "connectorUser": "USER_1",
+      "nodes": [
+        {
+          "masterSnapshotId": "GOOGLE_CLUSTER_",
+          "type": "projects.zones.clusters.list",
+          "collection": "kubernetes.clusters"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_FIREWALL_",
+          "type": "firewalls.list",
+          "collection": "firewalls"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_INSTANCE_",
+          "type": "instances.aggregatedList",
+          "collection": "instances"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_NETWORK_",
+          "type": "networks.list",
+          "collection": "networks"
+        }
+      ]
+    }
+  ]
+}

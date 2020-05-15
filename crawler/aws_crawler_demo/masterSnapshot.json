@@ -1,0 +1,60 @@
+{
+  "snapshots": [
+    {
+      "type": "aws",
+      "connectorUser": "USER_1",
+      "nodes": [
+        {
+          "masterSnapshotId": "AWS_S3_01",
+          "arn": "arn:aws:s3:us-east-2::",
+          "collection": "s3",
+          "listMethod": "list_buckets",
+          "detailMethods": [
+            "get_bucket_acl",
+            "get_bucket_location",
+            "get_bucket_logging",
+            "get_bucket_versioning",
+            "get_bucket_policy"
+          ]
+        },
+        {
+          "masterSnapshotId": "AWS_EC2_02",
+          "arn": "arn:aws:ec2:us-east-2::",
+          "collection": "ec2",
+          "listMethod": "describe_instances",
+          "detailMethods": [
+            "describe_instances",
+            "describe_security_groups"
+          ]
+        },
+        {
+          "masterSnapshotId": "AWS_ECS_01",
+          "arn": "arn:aws:ecs:us-east-2::",
+          "collection": "ecs",
+          "listMethod": "list_task_definitions",
+          "detailMethods": [
+            "describe_task_definition"
+          ]
+        },
+        {
+          "masterSnapshotId": "AWS_EKS_01",
+          "arn": "arn:aws:eks:us-east-2::",
+          "collection": "eks",
+          "listMethod": "list_clusters",
+          "detailMethods": [
+            "describe_cluster"
+          ]
+        },
+        {
+          "masterSnapshotId": "AWS_ELASTICCACHE_01",
+          "arn": "arn:aws:elasticache:us-east-2::",
+          "collection": "elasticache",
+          "listMethod": "describe_replication_groups",
+          "detailMethods": [
+            "describe_replication_groups"
+          ]
+        }
+      ]
+    }
+  ]
+}
