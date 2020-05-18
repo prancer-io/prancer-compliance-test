@@ -1,0 +1,276 @@
+{
+    "testSet": [
+        {
+            "testName": "test5",
+            "version": "0.1",
+            "cases": [
+                {
+                    "testId": "AWS_S3_01",
+                    "type": "rego",
+                    "rule": "file(input_s3_01_2.rego)",
+                    "snapshotId": [
+                        "AWS_S3_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "Access logging should be enabled on S3 buckets",
+                    "description": "Access logging provides detailed informations about requests that are made to a bucket. It is recommended that enable server access logging for track the requests.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM v3.0.1-IAM-03",
+                                "CSA CCM v3.0.1-IAM-06",
+                                "GDPR-Article 30",
+                                "HITRUST Version 9.2-Control Reference: 10.k",
+                                "NIST 800-171 Rev1-3.4.5",
+                                "NIST 800-53 Rev4-CM-5 (1)",
+                                "PCI DSS v3.2-10.1",
+                                "PCI DSS v3.2-10.2.3",
+                                "SOC 2-CC8.1",
+                                "CSA",
+                                "NIST",
+                                "PCI"
+                            ],
+                            "service": [
+                                "s3"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "testId": "AWS_S3_02",
+                    "type": "rego",
+                    "rule": "file(input_s3_01_3.rego)",
+                    "eval": "data.rule.rulepass",
+                    "snapshotId": [
+                        "AWS_S3_01"
+                    ],
+                    "title": "S3 bucket should not enabled global view ACL permissions",
+                    "description": "If S3 bucket has Global View ACL permissions enabled for the All Users group, then it will allow external resources to see the permission settings associated to the object.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "s3"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "testId": "AWS_EC2_01",
+                    "type": "rego",
+                    "rule": "file(input_ec2_02_1.rego)",
+                    "eval": "data.rule.rulepass",
+                    "snapshotId": [
+                        "AWS_EC2_02"
+                    ],
+                    "title": "Default Security Group should restrict inbound and outbound traffic for AllUsers",
+                    "description": "Initial configuration of the default security group is deny all inbound traffic from internet and allow all outbound traffic. So when you launch an instance, the instance is automatically assigned to default security group and as a result, the instance may send outbound traffic. It is recommended to assign Security Group at time of launch an instance.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS v1.2.0 (AWS)-4.4",
+                                "CSA CCM v3.0.1-DSI-02",
+                                "CSA CCM v3.0.1-IAM-07",
+                                "CSA CCM v3.0.1-IVS-06",
+                                "CSA CCM v3.0.1-IVS-08",
+                                "GDPR-Article 46",
+                                "HITRUST Version 9.2-Control Reference: 09.ab",
+                                "ISO 27001:2013-A.6.2.2",
+                                "NIST 800-171 Rev1-3.13.1",
+                                "NIST 800-171 Rev1-3.13.2",
+                                "NIST 800-171 Rev1-3.13.5",
+                                "NIST 800-171 Rev1-3.14.6",
+                                "NIST 800-53 Rev4-SC-7 (19)",
+                                "NIST 800-53 Rev4-SI-4 (4)",
+                                "NIST CSF-DE.AE-1",
+                                "NIST CSF-DE.CM-7",
+                                "SOC 2-CC6.1",
+                                "CIS",
+                                "CSA",
+                                "ISO",
+                                "NIST"
+                            ],
+                            "service": [
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "testId": "AWS_EC2_02",
+                    "type": "rego",
+                    "rule": "file(input_ec2_03_1.rego)",
+                    "eval": "data.rule.rulepass",
+                    "snapshotId": [
+                        "AWS_EC2_03"
+                    ],
+                    "title": "EBS Volume is attached",
+                    "description": "EBS volumes persist independently from the running life of an EC2 instance. You can attach EBS volumes to any of your instance. You can dynamically increase size, modify the provisioned IOPS capacity, and change volume type on live production volumes.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "testId": "AWS_EC2_04",
+                    "type": "rego",
+                    "rule": "file(input_ec2_04_1.rego)",
+                    "eval": "data.rule.rulepass",
+                    "snapshotId": [
+                        "AWS_EC2_04"
+                    ],
+                    "title": "EBS snapshots should not accessible publicly",
+                    "description": "If permission of Elastic Block Store (Amazon EBS) snapshots is set to public, then any unauthorized user with AWS console access can gain access to the sensitive data of the snapshots. It is recommended to set the permission of EBS snapshots to private.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM v3.0.1-DSI-02",
+                                "CSA CCM v3.0.1-IVS-06",
+                                "CSA CCM v3.0.1-IVS-08",
+                                "CSA CCM v3.0.1-MOS-13",
+                                "GDPR-Article 25",
+                                "HITRUST Version 9.2-Control Reference: 01.n",
+                                "HITRUST Version 9.2-Control Reference: 01.p",
+                                "HITRUST Version 9.2-Control Reference: 05.j",
+                                "HITRUST Version 9.2-Control Reference: 06.e",
+                                "HITRUST Version 9.2-Control Reference: 07.e",
+                                "ISO 27001:2013-A.14.1.2",
+                                "ISO 27001:2013-A.14.1.3",
+                                "ISO 27001:2013-A.18.1.3",
+                                "ISO 27001:2013-A.8.2.3",
+                                "NIST 800-171 Rev1-3.1.9",
+                                "NIST 800-171 Rev1-3.13.1",
+                                "NIST 800-171 Rev1-3.13.2",
+                                "NIST 800-171 Rev1-3.13.5",
+                                "NIST 800-53 Rev4-AC-8c",
+                                "NIST 800-53 Rev4-SC-7b",
+                                "PCI DSS v3.2-7.1",
+                                "CSA",
+                                "ISO",
+                                "NIST",
+                                "PCI"
+                            ],
+                            "service": [
+                                "ec2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "testId": "AWS_RDS_01",
+                    "type": "rego",
+                    "rule": "file(input_rds_01.rego)",
+                    "eval": "data.rule.rulepass",
+                    "snapshotId": [
+                        "GOOGLE_CLUSTER_2"
+                    ],
+                    "title": "Automatic Backup setting in RDS instance",
+                    "description": "RDS creates a storage volume snapshot of your DB instance if automatic Backup is set. Amazon RDS creates a storage volume snapshot of your DB instance, backing up the entire DB instance and not just individual databases. It is recommended to set Automatic backups for your RDS servers.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "rds"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "testId": "AWS_RDS_02",
+                    "type": "rego",
+                    "rule": "file(input_rds_02.rego)",
+                    "eval": "data.rule.rulepass",
+                    "snapshotId": [
+                        "AWS_RDS_01"
+                    ],
+                    "title": "RDS instance should be encrypted",
+                    "description": "Amazon Relational Database Service (RDS) is a web service that makes it easier to set up and manage databases. Amazon allows customers to turn on encryption for RDS which is recommended for compliance and security reasons.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM v3.0.1-CCC-04",
+                                "CSA CCM v3.0.1-EKM-02",
+                                "CSA CCM v3.0.1-EKM-03",
+                                "CSA CCM v3.0.1-EKM-04",
+                                "GDPR-Article 25",
+                                "GDPR-Article 32",
+                                "HIPAA-164.312(a)(2)(iv)",
+                                "HITRUST Version 9.2-Control Reference: 01.i",
+                                "HITRUST Version 9.2-Control Reference: 01.j",
+                                "HITRUST Version 9.2-Control Reference: 01.n",
+                                "HITRUST Version 9.2-Control Reference: 01.v",
+                                "HITRUST Version 9.2-Control Reference: 01.y",
+                                "HITRUST Version 9.2-Control Reference: 06.f",
+                                "HITRUST Version 9.2-Control Reference: 09.ab",
+                                "HITRUST Version 9.2-Control Reference: 09.m",
+                                "HITRUST Version 9.2-Control Reference: 09.s",
+                                "HITRUST Version 9.2-Control Reference: 09.x",
+                                "HITRUST Version 9.2-Control Reference: 09.y",
+                                "HITRUST Version 9.2-Control Reference: 10.c",
+                                "HITRUST Version 9.2-Control Reference: 10.f",
+                                "ISO 27001:2013-A.10.1.2",
+                                "ISO 27001:2013-A.14.1.3",
+                                "ISO 27001:2013-A.18.1.3",
+                                "ISO 27001:2013-A.8.2.3",
+                                "NIST 800-171 Rev1-3.1.13",
+                                "NIST 800-171 Rev1-3.13.11",
+                                "NIST 800-53 Rev4-AC-17 (2)",
+                                "NIST 800-53 Rev4-SC-13",
+                                "NIST 800-53 Rev4-SI-7 (6)",
+                                "NIST CSF-PR.DS-1",
+                                "PCI DSS v3.2-3.4.1",
+                                "CSA",
+                                "HIPAA",
+                                "ISO",
+                                "NIST",
+                                "PCI"
+                            ],
+                            "service": [
+                                "rds"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "testId": "AWS_RDS_03",
+                    "type": "rego",
+                    "rule": "file(input_rds_03.rego)",
+                    "eval": "data.rule.rulepass",
+                    "snapshotId": [
+                        "AWS_RDS_01"
+                    ],
+                    "title": "RDS instance with copy tags to snapshots enabled",
+                    "description": "Copy tags to snapshots copies all the user defined tags from the DB instance to snapshots. It allows you to add metadata and apply access policies to your RDS resources.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "rds"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

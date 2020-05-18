@@ -1,0 +1,242 @@
+{
+    "snapshots": [
+        {
+            "source": "awsStructure",
+            "testUser": "prancer_praveen",
+            "accountId": "155603667260",
+            "type": "aws",
+            "nodes": [
+                {
+                    "validate": true,
+                    "snapshotId": "AWS_S3_010",
+                    "arn": "arn:aws:s3:us-east-2::prancertest123",
+                    "masterSnapshotId": "AWS_S3_01",
+                    "status": "active",
+                    "collection": "s3",
+                    "detailMethods": [
+                        "get_bucket_acl",
+                        "get_bucket_location",
+                        "get_bucket_logging",
+                        "get_bucket_versioning",
+                        "get_bucket_policy"
+                    ]
+                },
+                {
+                    "validate": true,
+                    "snapshotId": "AWS_S3_011",
+                    "arn": "arn:aws:s3:us-east-2::test-prancer",
+                    "masterSnapshotId": "AWS_S3_01",
+                    "status": "active",
+                    "collection": "s3",
+                    "detailMethods": [
+                        "get_bucket_acl",
+                        "get_bucket_location",
+                        "get_bucket_logging",
+                        "get_bucket_versioning",
+                        "get_bucket_policy"
+                    ]
+                },
+                {
+                    "validate": true,
+                    "snapshotId": "AWS_EC2_020",
+                    "arn": "arn:aws:ec2:us-east-2::i-0e7679edefaf34e00",
+                    "masterSnapshotId": "AWS_EC2_02",
+                    "status": "active",
+                    "collection": "ec2",
+                    "detailMethods": [
+                        "describe_instances",
+                        "describe_security_groups"
+                    ]
+                },
+                {
+                    "validate": true,
+                    "snapshotId": "AWS_EC2_030",
+                    "arn": "arn:aws:ec2:us-east-2::i-0e7679edefaf34e00",
+                    "masterSnapshotId": "AWS_EC2_03",
+                    "status": "active",
+                    "collection": "ec2",
+                    "detailMethods": [
+                        "describe_instances",
+                        "describe_snapshots",
+                        "describe_images",
+                        "describe_volumes"
+                    ]
+                },
+                {
+                    "validate": true,
+                    "snapshotId": "AWS_EC2_040",
+                    "arn": "arn:aws:ec2:us-east-2::i-0e7679edefaf34e00",
+                    "masterSnapshotId": "AWS_EC2_04",
+                    "status": "active",
+                    "collection": "ec2",
+                    "detailMethods": [
+                        "describe_instances",
+                        "describe_snapshots",
+                        "describe_snapshot_attribute"
+                    ]
+                },
+                {
+                    "validate": true,
+                    "snapshotId": "AWS_RDS_010",
+                    "arn": "arn:aws:rds:us-east-2::database-1",
+                    "masterSnapshotId": "AWS_RDS_01",
+                    "status": "active",
+                    "collection": "rds",
+                    "detailMethods": [
+                        "describe_db_instances",
+                        "describe_db_snapshots"
+                    ]
+                },
+                {
+                    "validate": true,
+                    "snapshotId": "AWS_CF_010",
+                    "arn": "arn:aws:cloudformation:us-east-2::EC2ContainerService-prances-ecs",
+                    "masterSnapshotId": "AWS_CF_01",
+                    "status": "active",
+                    "collection": "cloudformation",
+                    "detailMethods": [
+                        "describe_stacks",
+                        "describe_stack_resource",
+                        "describe_stack_resource_drifts",
+                        "get_stack_policy",
+                        "describe_stack_events"
+                    ]
+                },
+                {
+                    "validate": true,
+                    "snapshotId": "AWS_CT_010",
+                    "arn": "arn:aws:cloudtrail:us-east-2::prancer_trail",
+                    "masterSnapshotId": "AWS_CT_01",
+                    "status": "active",
+                    "collection": "cloudtrail",
+                    "detailMethods": [
+                        "describe_trails"
+                    ]
+                },
+                {
+                    "validate": true,
+                    "snapshotId": "AWS_CT_011",
+                    "arn": "arn:aws:cloudtrail:us-east-2::test_trail",
+                    "masterSnapshotId": "AWS_CT_01",
+                    "status": "active",
+                    "collection": "cloudtrail",
+                    "detailMethods": [
+                        "describe_trails"
+                    ]
+                },
+                {
+                    "validate": true,
+                    "snapshotId": "AWS_ELB_010",
+                    "arn": "arn:aws:elb:us-east-2::prancer-prancer",
+                    "masterSnapshotId": "AWS_ELB_01",
+                    "status": "active",
+                    "collection": "elb",
+                    "detailMethods": [
+                        "describe_load_balancers",
+                        "describe_load_balancer_attributes",
+                        "describe_load_balancer_policies"
+                    ]
+                },
+                {
+                    "validate": true,
+                    "snapshotId": "AWS_SQS_010",
+                    "arn": "arn:aws:sqs:us-east-2::https://us-east-2.queue.amazonaws.com/155603667260/prancer_sqs",
+                    "masterSnapshotId": "AWS_SQS_01",
+                    "status": "active",
+                    "collection": "sqs",
+                    "detailMethods": [
+                        "get_queue_attributes"
+                    ]
+                },
+                {
+                    "validate": true,
+                    "snapshotId": "AWS_SQS_011",
+                    "arn": "arn:aws:sqs:us-east-2::https://us-east-2.queue.amazonaws.com/155603667260/prancer_test_queue",
+                    "masterSnapshotId": "AWS_SQS_01",
+                    "status": "active",
+                    "collection": "sqs",
+                    "detailMethods": [
+                        "get_queue_attributes"
+                    ]
+                },
+                {
+                    "validate": true,
+                    "snapshotId": "AWS_LAMBDA_010",
+                    "arn": "arn:aws:lambda:us-east-2::prancer_lambda",
+                    "masterSnapshotId": "AWS_LAMBDA_01",
+                    "status": "active",
+                    "collection": "lambda",
+                    "detailMethods": [
+                        "get_function"
+                    ]
+                },
+                {
+                    "validate": true,
+                    "snapshotId": "AWS_ECS_010",
+                    "arn": "arn:aws:ecs:us-east-2:155603667260:task-definition/prancer_ecs_task:1",
+                    "masterSnapshotId": "AWS_ECS_01",
+                    "status": "active",
+                    "collection": "ecs",
+                    "detailMethods": [
+                        "describe_task_definition"
+                    ]
+                },
+                {
+                    "validate": true,
+                    "snapshotId": "AWS_ECS_011",
+                    "arn": "arn:aws:ecs:us-east-2:155603667260:task-definition/prancer_ecs_task:3",
+                    "masterSnapshotId": "AWS_ECS_01",
+                    "status": "active",
+                    "collection": "ecs",
+                    "detailMethods": [
+                        "describe_task_definition"
+                    ]
+                },
+                {
+                    "validate": true,
+                    "snapshotId": "AWS_EKS_010",
+                    "arn": "arn:aws:eks:us-east-2::prancer_cluster",
+                    "masterSnapshotId": "AWS_EKS_01",
+                    "status": "active",
+                    "collection": "eks",
+                    "detailMethods": [
+                        "describe_cluster"
+                    ]
+                },
+                {
+                    "validate": true,
+                    "snapshotId": "AWS_ELASTICCACHE_010",
+                    "arn": "arn:aws:elasticache:us-east-2::prancer-redis",
+                    "masterSnapshotId": "AWS_ELASTICCACHE_01",
+                    "status": "active",
+                    "collection": "elasticache",
+                    "detailMethods": [
+                        "describe_replication_groups"
+                    ]
+                },
+                {
+                    "validate": true,
+                    "snapshotId": "AWS_ELASTICCACHE_020",
+                    "arn": "arn:aws:elasticache:us-east-2::p-subnet",
+                    "masterSnapshotId": "AWS_ELASTICCACHE_02",
+                    "status": "active",
+                    "collection": "elasticache",
+                    "detailMethods": [
+                        "describe_cache_subnet_groups"
+                    ]
+                },
+                {
+                    "validate": true,
+                    "snapshotId": "AWS_ACM_010",
+                    "arn": "arn:aws:acm:us-east-2:155603667260:certificate/01d58965-ae64-4f38-8b56-9ebaa16feafb",
+                    "masterSnapshotId": "AWS_ACM_01",
+                    "status": "active",
+                    "collection": "acm",
+                    "detailMethods": [
+                        "describe_certificate"
+                    ]
+                }
+            ]
+        }
+    ]
+}

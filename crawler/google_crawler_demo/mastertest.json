@@ -1,7 +1,7 @@
 {
     "testSet": [
         {
-            "testName": "TEST_GOOGLE",
+            "masterTestName": "TEST_GOOGLE",
             "version": "0.1",
             "cases": [
                 {
