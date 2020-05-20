@@ -52,6 +52,15 @@
                     "snapshotId": "AZRSNP_301",
                     "collection": "Microsoft.Storage",
                     "type": "Microsoft.Storage/storageAccounts"
+                },
+                {
+                  "snapshotId": "AZRSNP_211",
+                  "type": "Microsoft.Authorization/policyAssignments",
+                  "collection": "Microsoft.Authorization",
+                  "path": "/subscriptions/d34d6141-7a19-4458-b0dd-f038bb7760c1/providers/Microsoft.Authorization/policyAssignments/SecurityCenterBuiltIn",
+                  "status": "active",
+                  "validate": true,
+
                 }
             ]
         }
