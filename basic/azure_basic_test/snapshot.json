@@ -1,7 +1,7 @@
 {
     "snapshots": [
         {
-            "source": "azureStructure2",
+            "source": "azureStructure",
             "testUser": "ajey.khanapuri@liquware.com",
             "subscriptionId": "db3667b7-cef9-4523-8e45-e2d9ed4518ab",
             "nodes": [
