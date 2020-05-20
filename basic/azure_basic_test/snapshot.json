@@ -9,9 +9,7 @@
                     "validate": true,
                     "path": "/subscriptions/d34d6141-7a19-4458-b0dd-f038bb7760c1/resourceGroups/prancer-resources-rg/providers/Microsoft.ContainerRegistry/registries/acrprancertest01",
                     "status": "active",
-                    "snapshotId": [
-                        "AZRSNP_224"
-                    ],
+                    "snapshotId": "AZRSNP_224",
                     "collection": "Microsoft.ContainerRegistry",
                     "type": "Microsoft.ContainerRegistry/registries"
                 },
@@ -19,9 +17,7 @@
                     "validate": true,
                     "path": "/subscriptions/d34d6141-7a19-4458-b0dd-f038bb7760c1/resourceGroups/NetworkWatcherRG/providers/Microsoft.Network/networkSecurityGroups/automation-linux-nsg",
                     "status": "active",
-                    "snapshotId": [
-                        "AZRSNP_231"
-                    ],
+                    "snapshotId": "AZRSNP_231",
                     "collection": "Microsoft.Network",
                     "type": "Microsoft.Network/networkSecurityGroups"
                 },
@@ -29,9 +25,7 @@
                     "validate": true,
                     "path": "/subscriptions/d34d6141-7a19-4458-b0dd-f038bb7760c1/resourceGroups/NetworkWatcherRG/providers/Microsoft.Network/virtualNetworks/NetworkWatcherRG-vnet",
                     "status": "active",
-                    "snapshotId": [
-                        "AZRSNP_284"
-                    ],
+                    "snapshotId": "AZRSNP_284",
                     "collection": "Microsoft.Network",
                     "type": "Microsoft.Network/virtualNetworks"
                 },
@@ -39,9 +33,7 @@
                     "validate": true,
                     "path": "/subscriptions/d34d6141-7a19-4458-b0dd-f038bb7760c1/resourceGroups/NETWORKWATCHERRG/providers/Microsoft.Compute/disks/automation-linux_OsDisk_1_d114cf301a36425ea8137fe692b7012d",
                     "status": "active",
-                    "snapshotId": [
-                        "AZRSNP_277"
-                    ],
+                    "snapshotId": "AZRSNP_277",
                     "collection": "Microsoft.Compute",
                     "type": "Microsoft.Compute/disks"
                 },
@@ -49,29 +41,7 @@
                     "validate": true,
                     "path": "/subscriptions/d34d6141-7a19-4458-b0dd-f038bb7760c1/resourceGroups/NetworkWatcherRG/providers/Microsoft.Compute/virtualMachines/automation-linux",
                     "status": "active",
-                    "snapshotId": [
-                        "AZRSNP_274"
-                    ],
-                    "collection": "Microsoft.Compute",
-                    "type": "Microsoft.Compute/virtualMachines"
-                },
-                {
-                    "validate": true,
-                    "path": "/subscriptions/d34d6141-7a19-4458-b0dd-f038bb7760c1/resourceGroups/NetworkWatcherRG/providers/Microsoft.Compute/virtualMachines/automation-linux/extensions/customScript",
-                    "status": "active",
-                    "snapshotId": [
-                        "AZRSNP_274"
-                    ],
-                    "collection": "Microsoft.Compute",
-                    "type": "Microsoft.Compute/virtualMachines"
-                },
-                {
-                    "validate": true,
-                    "path": "/subscriptions/d34d6141-7a19-4458-b0dd-f038bb7760c1/resourceGroups/NetworkWatcherRG/providers/Microsoft.Compute/virtualMachines/automation-linux/extensions/enablevmaccess",
-                    "status": "active",
-                    "snapshotId": [
-                        "AZRSNP_274"
-                    ],
+                    "snapshotId": "AZRSNP_274",
                     "collection": "Microsoft.Compute",
                     "type": "Microsoft.Compute/virtualMachines"
                 },
@@ -79,39 +49,7 @@
                     "validate": true,
                     "path": "/subscriptions/d34d6141-7a19-4458-b0dd-f038bb7760c1/resourceGroups/core-terraf-auto-rg/providers/Microsoft.Storage/storageAccounts/azrcterrafstr10",
                     "status": "active",
-                    "snapshotId": [
-                        "AZRSNP_301"
-                    ],
-                    "collection": "Microsoft.Storage",
-                    "type": "Microsoft.Storage/storageAccounts"
-                },
-                {
-                    "validate": true,
-                    "path": "/subscriptions/d34d6141-7a19-4458-b0dd-f038bb7760c1/resourceGroups/NetworkWatcherRG/providers/Microsoft.Storage/storageAccounts/liqteststr01",
-                    "status": "active",
-                    "snapshotId": [
-                        "AZRSNP_301"
-                    ],
-                    "collection": "Microsoft.Storage",
-                    "type": "Microsoft.Storage/storageAccounts"
-                },
-                {
-                    "validate": true,
-                    "path": "/subscriptions/d34d6141-7a19-4458-b0dd-f038bb7760c1/resourceGroups/prancer-resources-rg/providers/Microsoft.Storage/storageAccounts/strprancerbin01",
-                    "status": "active",
-                    "snapshotId": [
-                        "AZRSNP_301"
-                    ],
-                    "collection": "Microsoft.Storage",
-                    "type": "Microsoft.Storage/storageAccounts"
-                },
-                {
-                    "validate": true,
-                    "path": "/subscriptions/d34d6141-7a19-4458-b0dd-f038bb7760c1/resourceGroups/secrets-kv-rg/providers/Microsoft.Storage/storageAccounts/secretskvsa",
-                    "status": "active",
-                    "snapshotId": [
-                        "AZRSNP_301"
-                    ],
+                    "snapshotId": "AZRSNP_301",
                     "collection": "Microsoft.Storage",
                     "type": "Microsoft.Storage/storageAccounts"
                 }
