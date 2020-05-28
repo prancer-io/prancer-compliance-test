@@ -1,7 +1,7 @@
 {
     "snapshots": [
         {
-            "source": "googleCrawlerStructure",
+            "source": "git_google_structure",
             "type": "google",
             "testUser": "prancer-test-account",
             "project-id": "disco-vista-260919",
