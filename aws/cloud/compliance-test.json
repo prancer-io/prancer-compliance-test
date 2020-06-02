@@ -874,6 +874,200 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterTestId": "AWS_ACM_01",
+                    "type": "rego",
+                    "rule": "file(input_acm_01.rego)",
+                    "masterSnapshotId": [
+                        "AWS_ACM_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS Certificate Manager (ACM) has certificates with Certificate Transparency logging enabled",
+                    "description": "AWS Certificate Transparency Logging makes it possible for you to detect SSL/TLS certificates that have been mistakenly issued. It is recommended to enable Transparency logging for all certificates.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM v3.0.1-IAM-03",
+                                "CSA CCM v3.0.1-IAM-06",
+                                "HITRUST Version 9.2-Control Reference: 10.k",
+                                "NIST 800-171 Rev1-3.4.5, NIST 800-53 Rev4-CM-5 (1)",
+                                "CSA",
+                                "NIST"
+                            ],
+                            "service": [
+                                "acm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_ACM_02",
+                    "type": "rego",
+                    "rule": "file(input_acm_02.rego)",
+                    "masterSnapshotId": [
+                        "AWS_ACM_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "Detact unused AWS Certificate Manager (ACM) certificates",
+                    "description": "This policy will detact any unused certificates available in AWS Certificate Manager (ACM). As a best practice, delete unused certificates or assign it to some resources.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM v3.0.1-EKM-01",
+                                "CSA CCM v3.0.1-IAM-02",
+                                "CSA CCM v3.0.1-IAM-04",
+                                "CSA CCM v3.0.1-IAM-08",
+                                "CSA CCM v3.0.1-IAM-12",
+                                "CSA CCM v3.0.1-IVS-11",
+                                "CSA CCM v3.0.1-MOS-16",
+                                "HITRUST Version 9.2-Control Reference: 01.q",
+                                "NIST 800-171 Rev1-3.5.1",
+                                "NIST 800-171 Rev1-3.5.2",
+                                "NIST 800-53 Rev4-IA-5 (2)(a)",
+                                "CSA",
+                                "NIST"
+                            ],
+                            "service": [
+                                "acm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_CLOUDFRONT_01",
+                    "type": "rego",
+                    "rule": "file(input_cloudfront_01.rego)",
+                    "masterSnapshotId": [
+                        "AWS_CLOUDFRONT_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS CloudFront Distributions with Field-Level Encryption should be enabled",
+                    "description": "Field-level encryption provides a security layer which protects specific data throughout system processing. It is recommended to enable field-level encryption for CloudFront distributions.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "acm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_CLOUDFRONT_02",
+                    "type": "rego",
+                    "rule": "file(input_cloudfront_02.rego)",
+                    "masterSnapshotId": [
+                        "AWS_CLOUDFRONT_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS CloudFront distribution should using secure SSL protocols for HTTPS communication",
+                    "description": "It is a recommanded to use secure ciphers TLSv1.0, TLSv1.1, and/or TLSv1.2 in a CloudFront Distribution's certificate configuration.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "acm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_EFS_01",
+                    "type": "rego",
+                    "rule": "file(input_efs_01.rego)",
+                    "masterSnapshotId": [
+                        "AWS_EFS_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS Elastic File System (EFS) with encryption for data at rest should be enabled",
+                    "description": "It is recommanded to enable the encryption of data at rest for your EFS. It will encrypt the all data on your file system, which prevents the unauthrized users from access your data stored in EFS.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "efs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_IAM_01",
+                    "type": "rego",
+                    "rule": "file(input_iam_01.rego)",
+                    "masterSnapshotId": [
+                        "AWS_IAM_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS Access key should not contain any access key for root user.",
+                    "description": "The root user have access to all your AWS services. It is recommend that you do not use the AWS account root user for your daily tasks.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_IAM_02",
+                    "type": "rego",
+                    "rule": "file(input_iam_02.rego)",
+                    "masterSnapshotId": [
+                        "AWS_IAM_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS IAM password policy should be secure.",
+                    "description": "You can set IAM password policy on your AWS account to specify complexity for your IAM user's password. You can configure the rotation period for require IAM users to change their password and also you can prevent the IAM user to reusing previous password. As a best practice, it is recommanded to set strong IAM password policy.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM v3.0.1-EKM-01",
+                                "CSA CCM v3.0.1-IAM-02",
+                                "CSA CCM v3.0.1-IAM-04",
+                                "CSA CCM v3.0.1-IAM-08",
+                                "CSA CCM v3.0.1-IAM-12",
+                                "CSA CCM v3.0.1-IVS-11",
+                                "CSA CCM v3.0.1-MOS-16",
+                                "GDPR-Article 25",
+                                "HIPAA-164.312(d)",
+                                "HITRUST Version 9.2-Control Reference: 01.d",
+                                "HITRUST Version 9.2-Control Reference: 01.r",
+                                "ISO 27001:2013-A.18.1.3",
+                                "NIST 800-171 Rev1-3.5.10",
+                                "NIST 800-171 Rev1-3.5.7",
+                                "NIST 800-171 Rev1-3.5.8",
+                                "NIST 800-171 Rev1-3.5.9",
+                                "NIST 800-53 Rev4-IA-5 (1)(a)",
+                                "NIST 800-53 Rev4-IA-5 (1)(d)",
+                                "SOC 2-CC6.1",
+                                "SOC 2-CC8.1",
+                                "CSA",
+                                "HIPAA",
+                                "ISO",
+                                "NIST"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
                 }
             ]
         }

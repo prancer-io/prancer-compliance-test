@@ -137,6 +137,46 @@
           "detailMethods": [
             "describe_replication_groups"
           ]
+        },
+        {
+          "masterSnapshotId": "AWS_ACM_01",
+          "arn": "arn:aws:acm:us-east-2::",
+          "collection": "acm",
+          "listMethod": "list_certificates",
+          "detailMethods": [
+            "describe_certificate"
+          ]
+        },
+        {
+          "masterSnapshotId": "AWS_CLOUDFRONT_01",
+          "arn": "arn:aws:cloudfront:us-east-2::",
+          "collection": "cloudfront",
+          "listMethod": "list_distributions",
+          "detailMethods": [
+            "get_distribution"
+          ]
+        },
+        {
+          "masterSnapshotId": "AWS_EFS_01",
+          "arn": "arn:aws:efs:us-east-2::",
+          "collection": "efs",
+          "listMethod": "describe_file_systems",
+          "detailMethods": [
+            "describe_file_systems"
+          ]
+        },
+        {
+          "masterSnapshotId": "AWS_IAM_01",
+          "arn": "arn:aws:iam:us-east-2::",
+          "collection": "iam",
+          "listMethod": "list_users",
+          "detailMethods": [
+            "get_user",
+            "list_ssh_public_keys",
+            "get_account_summary",
+            "get_account_password_policy",
+            "list_attached_user_policies"
+          ]
         }
       ]
     }
