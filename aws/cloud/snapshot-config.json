@@ -6,7 +6,7 @@
       "nodes": [
         {
           "masterSnapshotId": "AWS_S3_01",
-          "arn": "arn:aws:s3:us-east-2::",
+          "arn": "arn:aws:s3:::",
           "collection": "s3",
           "listMethod": "list_buckets",
           "detailMethods": [
@@ -19,7 +19,7 @@
         },
         {
           "masterSnapshotId": "AWS_EC2_02",
-          "arn": "arn:aws:ec2:us-east-2::",
+          "arn": "arn:aws:ec2:::",
           "collection": "ec2",
           "listMethod": "describe_instances",
           "detailMethods": [
@@ -29,7 +29,7 @@
         },
         {
           "masterSnapshotId": "AWS_EC2_03",
-          "arn": "arn:aws:ec2:us-east-2::",
+          "arn": "arn:aws:ec2:::",
           "collection": "ec2",
           "listMethod": "describe_instances",
           "detailMethods": [
@@ -41,7 +41,7 @@
         },
         {
           "masterSnapshotId": "AWS_EC2_04",
-          "arn": "arn:aws:ec2:us-east-2::",
+          "arn": "arn:aws:ec2:::",
           "collection": "ec2",
           "listMethod": "describe_instances",
           "detailMethods": [
@@ -52,7 +52,7 @@
         },
         {
           "masterSnapshotId": "AWS_RDS_01",
-          "arn": "arn:aws:rds:us-east-2::",
+          "arn": "arn:aws:rds:::",
           "collection": "rds",
           "listMethod": "describe_db_instances",
           "detailMethods": [
@@ -62,7 +62,7 @@
         },
         {
           "masterSnapshotId": "AWS_CF_01",
-          "arn": "arn:aws:cloudformation:us-east-2::",
+          "arn": "arn:aws:cloudformation:::",
           "collection": "cloudformation",
           "listMethod": "list_stacks",
           "detailMethods": [
@@ -75,7 +75,7 @@
         },
         {
           "masterSnapshotId": "AWS_CT_01",
-          "arn": "arn:aws:cloudtrail:us-east-2::",
+          "arn": "arn:aws:cloudtrail:::",
           "collection": "cloudtrail",
           "listMethod": "list_trails",
           "detailMethods": [
@@ -84,7 +84,7 @@
         },
         {
           "masterSnapshotId": "AWS_ELB_01",
-          "arn": "arn:aws:elb:us-east-2::",
+          "arn": "arn:aws:elb:::",
           "collection": "elb",
           "listMethod": "describe_load_balancers",
           "detailMethods": [
@@ -95,7 +95,7 @@
         },
         {
           "masterSnapshotId": "AWS_SQS_01",
-          "arn": "arn:aws:sqs:us-east-2::",
+          "arn": "arn:aws:sqs:::",
           "collection": "sqs",
           "listMethod": "list_queues",
           "detailMethods": [
@@ -104,7 +104,7 @@
         },
         {
           "masterSnapshotId": "AWS_LAMBDA_01",
-          "arn": "arn:aws:lambda:us-east-2::",
+          "arn": "arn:aws:lambda:::",
           "collection": "lambda",
           "listMethod": "list_functions",
           "detailMethods": [
@@ -113,7 +113,7 @@
         },
         {
           "masterSnapshotId": "AWS_ECS_01",
-          "arn": "arn:aws:ecs:us-east-2::",
+          "arn": "arn:aws:ecs:::",
           "collection": "ecs",
           "listMethod": "list_task_definitions",
           "detailMethods": [
@@ -122,7 +122,7 @@
         },
         {
           "masterSnapshotId": "AWS_EKS_01",
-          "arn": "arn:aws:eks:us-east-2::",
+          "arn": "arn:aws:eks:::",
           "collection": "eks",
           "listMethod": "list_clusters",
           "detailMethods": [
@@ -131,7 +131,7 @@
         },
         {
           "masterSnapshotId": "AWS_ELASTICCACHE_01",
-          "arn": "arn:aws:elasticache:us-east-2::",
+          "arn": "arn:aws:elasticache:::",
           "collection": "elasticache",
           "listMethod": "describe_replication_groups",
           "detailMethods": [
@@ -140,7 +140,7 @@
         },
         {
           "masterSnapshotId": "AWS_ACM_01",
-          "arn": "arn:aws:acm:us-east-2::",
+          "arn": "arn:aws:acm:::",
           "collection": "acm",
           "listMethod": "list_certificates",
           "detailMethods": [
@@ -149,7 +149,7 @@
         },
         {
           "masterSnapshotId": "AWS_CLOUDFRONT_01",
-          "arn": "arn:aws:cloudfront:us-east-2::",
+          "arn": "arn:aws:cloudfront:::",
           "collection": "cloudfront",
           "listMethod": "list_distributions",
           "detailMethods": [
@@ -158,7 +158,7 @@
         },
         {
           "masterSnapshotId": "AWS_EFS_01",
-          "arn": "arn:aws:efs:us-east-2::",
+          "arn": "arn:aws:efs:::",
           "collection": "efs",
           "listMethod": "describe_file_systems",
           "detailMethods": [
@@ -167,7 +167,7 @@
         },
         {
           "masterSnapshotId": "AWS_IAM_01",
-          "arn": "arn:aws:iam:us-east-2::",
+          "arn": "arn:aws:iam:::",
           "collection": "iam",
           "listMethod": "list_users",
           "detailMethods": [
