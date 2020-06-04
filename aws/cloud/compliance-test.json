@@ -1,4 +1,8 @@
 {
+    "contentVersion": "1.0.0.0",
+    "fileType": "mastertest",
+    "notification": [],
+    "masterSnapshot": "awssnapshot",
     "testSet": [
         {
             "masterTestName": "test3",
@@ -598,7 +602,7 @@
                     ],
                     "eval": "data.rule.rulepass",
                     "title": "Dead letter queue should be configured in AWS SQS",
-                    "description": "",
+                    "description": "By configuring the dead letter queue in your AWS Simple Queue Services (SQS), you can isolate problematic messages which are not processed (consumed) successfully.",
                     "tags": [
                         {
                             "cloud": "AWS",
@@ -953,7 +957,7 @@
                                 "CUSTOM"
                             ],
                             "service": [
-                                "acm"
+                                "cloudfront"
                             ]
                         }
                     ]
@@ -975,7 +979,223 @@
                                 "CUSTOM"
                             ],
                             "service": [
-                                "acm"
+                                "cloudfront"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_CLOUDFRONT_03",
+                    "type": "rego",
+                    "rule": "file(input_cloudfront_03.rego)",
+                    "masterSnapshotId": [
+                        "AWS_CLOUDFRONT_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS CloudFront distribution access logging should be enabled",
+                    "description": "This policy testcase will alert you if it identifies any CloudFront distributions which have access logging disabled. If the access log is enabled on distributions then it will creates log files that contains every user request's detailed information that CloudFront receives. You can also configure the S3 bucket for save these log files.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "cloudfront"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_CLOUDFRONT_04",
+                    "type": "rego",
+                    "rule": "file(input_cloudfront_04.rego)",
+                    "masterSnapshotId": [
+                        "AWS_CLOUDFRONT_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS CloudFront origin protocol policy enforce the HTTPS-only",
+                    "description": "You can configure the allow traffics between a CloudFront distribution and the origin. As a best practice, it is recommanded to enforce HTTPS-only traffic to connect to your origin.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "cloudfront"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_CLOUDFRONT_05",
+                    "type": "rego",
+                    "rule": "file(input_cloudfront_05.rego)",
+                    "masterSnapshotId": [
+                        "AWS_CLOUDFRONT_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS CloudFront viewer protocol policy is configured with HTTPS",
+                    "description": "It is best prectice to allow CloudFront viewers to access your web content using HTTPS. So you can configure Viewer Protocol Policy in CloudFront to require that viewers use HTTPS request.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "cloudfront"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_CLOUDFRONT_06",
+                    "type": "rego",
+                    "rule": "file(input_cloudfront_06.rego)",
+                    "masterSnapshotId": [
+                        "AWS_CLOUDFRONT_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS CloudFront AWS Web Application Firewall (AWS WAF) Web ACL is configured.",
+                    "description": "AWS Web Application Firewall (AWS WAF) allow or block requests based on criteria that you specify. It gives you fine-grained control over the web requests that your Amazon CloudFront distribution responds to. As a best practice, enable the AWS WAF service on CloudFront web distributions to protect against application layer attacks.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "cloudfront"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_CLOUDFRONT_07",
+                    "type": "rego",
+                    "rule": "file(input_cloudfront_07.rego)",
+                    "masterSnapshotId": [
+                        "AWS_CLOUDFRONT_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS CloudFront web distribution with Custom SSL Certificate",
+                    "description": "Custom SSL certificates also allow users to access CloudFront content by using an alternate domain name. It is a recommanded to use custom SSL Certificate to access CloudFront content. You can use a certificate stored in AWS Certificate Manager (ACM) or certificate stored in IAM.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "cloudfront"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_CLOUDFRONT_08",
+                    "type": "rego",
+                    "rule": "file(input_cloudfront_08.rego)",
+                    "masterSnapshotId": [
+                        "AWS_CLOUDFRONT_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS CloudFront web distribution with geo restriction enabled",
+                    "description": "By enabling geo restriction you can allow or block IP addresses by whitelist or blacklist a country. Only the request comes from the specified countries can access web application content.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "cloudfront"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_CLOUDFRONT_09",
+                    "type": "rego",
+                    "rule": "file(input_cloudfront_09.rego)",
+                    "masterSnapshotId": [
+                        "AWS_CLOUDFRONT_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS Cloudfront Distribution with S3 have Origin Access set to enabled",
+                    "description": "If the restrict bucket access is enabled for AWS CloudFront distributions then users always access your Amazon S3 content using CloudFront URLs. It restrict any direct access to content through Amazon S3 URLs.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "cloudfront"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_CONFIGSERVICE_01",
+                    "type": "rego",
+                    "rule": "file(input_configservice_01.rego)",
+                    "masterSnapshotId": [
+                        "AWS_CONFIGSERVICE_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS Config service must set to record all resources",
+                    "description": "AWS Config will discover resources, monitors it and records your AWS resource configurations. It provides the history of your resource's configuration changes and enables you to simplify compliance auditing and operational troubleshooting.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM v3.0.1-AAC-01",
+                                "CSA CCM v3.0.1-AAC-02",
+                                "CSA CCM v3.0.1-AIS-01",
+                                "CSA CCM v3.0.1-GRM-01",
+                                "CSA CCM v3.0.1-IAM-13",
+                                "CSA CCM v3.0.1-IVS-05",
+                                "CSA CCM v3.0.1-IVS-07",
+                                "CSA CCM v3.0.1-MOS-19",
+                                "CSA CCM v3.0.1-TVM-02",
+                                "GDPR-Article 30",
+                                "HITRUST Version 9.2-Control Reference: 01.j",
+                                "HITRUST Version 9.2-Control Reference: 05.h",
+                                "HITRUST Version 9.2-Control Reference: 06.g",
+                                "HITRUST Version 9.2-Control Reference: 06.h",
+                                "HITRUST Version 9.2-Control Reference: 10.k",
+                                "HITRUST Version 9.2-Control Reference: 10.m",
+                                "ISO 27001:2013-A.12.5.1",
+                                "ISO 27001:2013-A.14.1.3",
+                                "NIST 800-171 Rev1-3.11.2",
+                                "NIST 800-171 Rev1-3.11.3",
+                                "NIST 800-171 Rev1-3.12.1",
+                                "NIST 800-171 Rev1-3.12.2",
+                                "NIST 800-171 Rev1-3.12.3",
+                                "NIST 800-171 Rev1-3.12.4",
+                                "NIST 800-171 Rev1-3.4.1",
+                                "NIST 800-171 Rev1-3.4.2",
+                                "NIST 800-53 Rev4-CA-7d",
+                                "NIST 800-53 Rev4-CM-2 (2)",
+                                "NIST 800-53 Rev4-CM-6c",
+                                "NIST 800-53 Rev4-CM-6d",
+                                "NIST 800-53 Rev4-RA-5b.1",
+                                "SOC 2-CC6.1",
+                                "SOC 2-CC6.6",
+                                "SOC 2-CC7.2",
+                                "SOC 2-CC7.3",
+                                "SOC 2-CC7.4",
+                                "SOC 2-CC7.5",
+                                "SOC 2-CC8.1",
+                                "CSA",
+                                "ISO",
+                                "NIST"
+                            ],
+                            "service": [
+                                "config"
                             ]
                         }
                     ]
@@ -1065,6 +1285,151 @@
                             ],
                             "service": [
                                 "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_IAM_03",
+                    "type": "rego",
+                    "rule": "file(input_iam_03.rego)",
+                    "masterSnapshotId": [
+                        "AWS_IAM_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS Access key should not contain any access key for root user.",
+                    "description": "You can set IAM password policy on your AWS account to specify complexity for your IAM user's password. You can configure the rotation period for require IAM users to change their password and also you can prevent the IAM user to reusing previous password. As a best practice, it is recommanded to set strong IAM password policy.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_IAM_04",
+                    "type": "rego",
+                    "rule": "file(input_iam_04.rego)",
+                    "masterSnapshotId": [
+                        "AWS_IAM_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS IAM policy attached to group of IAM users",
+                    "description": "For access the AWS resources by users, require to create IAM policy and attach the policy to users. As a best practice, it is recommanded to add a user to an IAM group and attach the policy to the group. So It is very helpful to manage the policy configurations on a group of IAM users.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CIS v1.2.0 (AWS)-1.16",
+                                "CSA CCM v3.0.1-DSI-06",
+                                "CSA CCM v3.0.1-IAM-01",
+                                "CSA CCM v3.0.1-IAM-02",
+                                "CSA CCM v3.0.1-IAM-06",
+                                "CSA CCM v3.0.1-IAM-09",
+                                "CSA CCM v3.0.1-IAM-10",
+                                "CSA CCM v3.0.1-IVS-11",
+                                "CSA CCM v3.0.1-STA-01",
+                                "HIPAA-164.312(a)(1)",
+                                "HITRUST Version 9.2-Control Reference: 01.c",
+                                "HITRUST Version 9.2-Control Reference: 01.i",
+                                "HITRUST Version 9.2-Control Reference: 01.s",
+                                "HITRUST Version 9.2-Control Reference: 01.v",
+                                "HITRUST Version 9.2-Control Reference: 01.y",
+                                "HITRUST Version 9.2-Control Reference: 05.i",
+                                "ISO 27001:2013-A.9.2.5",
+                                "NIST 800-171 Rev1-3.1.5",
+                                "NIST 800-171 Rev1-3.1.6",
+                                "NIST 800-171 Rev1-3.1.7",
+                                "NIST 800-53 Rev4-AC-6",
+                                "NIST 800-53 Rev4-AC-6 (6)",
+                                "SOC 2-CC6.3",
+                                "CIS",
+                                "CSA",
+                                "HIPAA",
+                                "ISO",
+                                "NIST"
+                            ],
+                            "service": [
+                                "iam"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_SSM_01",
+                    "type": "rego",
+                    "rule": "file(input_ssm_01.rego)",
+                    "masterSnapshotId": [
+                        "AWS_SSM_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS SSM parameter should be encrypted using SecureString datatype",
+                    "description": "AWS Systems Manager (SSM) parameters that store sensitive data like passwords, license keys etc. should be encrypted using SecureString datatype. So it will be kept as secured.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "ssm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_REDSHIFT_01",
+                    "type": "rego",
+                    "rule": "file(input_redshift_01.rego)",
+                    "masterSnapshotId": [
+                        "AWS_REDSHIFT_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS Redshift instances should be encrypted",
+                    "description": "As a best practice, the instances should be encrypted for clusters which protects the data to be exposed at rest.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM v3.0.1-CCC-04",
+                                "CSA CCM v3.0.1-EKM-02",
+                                "CSA CCM v3.0.1-EKM-03",
+                                "CSA CCM v3.0.1-EKM-04",
+                                "GDPR-Article 25",
+                                "GDPR-Article 32",
+                                "HITRUST Version 9.2-Control Reference: 01.j",
+                                "HITRUST Version 9.2-Control Reference: 01.v",
+                                "HITRUST Version 9.2-Control Reference: 01.y",
+                                "HITRUST Version 9.2-Control Reference: 05.i",
+                                "HITRUST Version 9.2-Control Reference: 06.f",
+                                "HITRUST Version 9.2-Control Reference: 09.ab",
+                                "HITRUST Version 9.2-Control Reference: 09.s",
+                                "HITRUST Version 9.2-Control Reference: 09.x",
+                                "HITRUST Version 9.2-Control Reference: 09.y",
+                                "HITRUST Version 9.2-Control Reference: 10.f",
+                                "ISO 27001:2013-A.10.1.2",
+                                "ISO 27001:2013-A.14.1.3",
+                                "ISO 27001:2013-A.18.1.3",
+                                "ISO 27001:2013-A.8.2.3",
+                                "NIST 800-171 Rev1-3.1.13",
+                                "NIST 800-171 Rev1-3.13.11",
+                                "NIST 800-53 Rev4-AC-17 (2)",
+                                "NIST 800-53 Rev4-SC-13",
+                                "NIST 800-53 Rev4-SI-7 (6)",
+                                "NIST CSF-PR.DS-1",
+                                "PCI DSS v3.2-3.4.1",
+                                "CSA",
+                                "ISO",
+                                "NIST",
+                                "PCI"
+                            ],
+                            "service": [
+                                "redshift"
                             ]
                         }
                     ]

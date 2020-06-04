@@ -177,6 +177,15 @@
             "get_account_password_policy",
             "list_attached_user_policies"
           ]
+        },
+        {
+          "masterSnapshotId": "AWS_REDSHIFT_01",
+          "arn": "arn:aws:redshift:::",
+          "collection": "redshift",
+          "listMethod": "describe_clusters",
+          "detailMethods": [
+            "describe_clusters"
+          ]
         }
       ]
     }

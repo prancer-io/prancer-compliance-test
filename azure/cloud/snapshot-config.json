@@ -33,6 +33,21 @@
                     "masterSnapshotId": "AZRSNP_301",
                     "type": "Microsoft.Storage/storageAccounts",
                     "collection": "Microsoft.Storage"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_219",
+                    "type": "Microsoft.ContainerService/managedClusters",
+                    "collection": "Microsoft.Compute"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_221",
+                    "type": "Microsoft.Network/applicationGateways",
+                    "collection": "Microsoft.Network"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_260",
+                    "type": "Microsoft.Network/networkWatchers",
+                    "collection": "Microsoft.Network"
                 }
             ]
         }
