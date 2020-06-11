@@ -5,6 +5,94 @@
             "version": "0.1",
             "cases": [
                 {
+                        "masterTestId": "AZURE_TEST_216",
+                        "type": "rego",
+                        "rule": "file(azure_216.rego)",
+                        "eval": "data.rule.rulepass",
+                        "tags": [
+                            {
+                                "cloud": "azure",
+                                "compliance": [
+                                    "COSTUM"
+                                ],
+                                "service": [
+                                    "Microsoft.ContainerService",
+                                    "Container",
+                                    "Azure Kubernetes Service"
+                                ]
+                            }
+                        ],
+                        "masterSnapshotId" : ["AZRSNP_219"],
+                        "title" : "Azure AKS cluster HTTP application routing enabled",
+                        "description" :"HTTP application routing configures an Ingress controller in your AKS cluster. As applications are deployed, the solution also creates publicly accessible DNS names for application endpoints. While this makes it easy to access applications that are deployed to your Azure AKS cluster, this add-on is not recommended for production use.This policy checks your AKS cluster HTTP application routing add-on setting and alerts if enabled."
+                },
+                {
+                        "masterTestId": "AZURE_TEST_217",
+                        "type": "rego",
+                        "rule": "file(azure_217.rego)",
+                        "eval": "data.rule.rulepass",
+                        "tags": [
+                            {
+                                "cloud": "azure",
+                                "compliance": [
+                                    "COSTUM"
+                                ],
+                                "service": [
+                                    "Microsoft.ContainerService",
+                                    "Container",
+                                    "Azure Kubernetes Service"
+                                ]
+                            }
+                        ],
+                        "masterSnapshotId" : ["AZRSNP_219"],
+                        "title" : "Azure AKS cluster monitoring enabled",
+                        "description" :"Azure Monitor for containers is a feature designed to monitor the performance of container workloads deployed to either Azure Container Instances or managed Kubernetes clusters hosted on Azure Kubernetes Service (AKS). Monitoring your containers is critical, especially when you're running a production cluster, at scale, with multiple applications.This policy checks your AKS cluster monitoring add-on setting and alerts if no configuration is found, or monitoring is disabled."
+                },
+                {
+                        "masterTestId": "AZURE_TEST_218",
+                        "type": "rego",
+                        "rule": "file(azure_218.rego)",
+                        "eval": "data.rule.rulepass",
+                        "tags": [
+                            {
+                                "cloud": "azure",
+                                "compliance": [
+                                    "COSTUM"
+                                ],
+                                "service": [
+                                    "Microsoft.ContainerService",
+                                    "Container",
+                                    "Azure Kubernetes Service"
+                                ]
+                            }
+                        ],
+                        "masterSnapshotId" : ["AZRSNP_219"],
+                        "title" : "Azure AKS cluster pool profile count contains 3 more then nodes",
+                        "description" :"Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes."
+                },
+                {
+                        "masterTestId": "AZURE_TEST_219",
+                        "type": "rego",
+                        "rule": "file(azure_219.rego)",
+                        "eval": "data.rule.rulepass",
+                        "tags": [
+                            {
+                                "cloud": "azure",
+                                "compliance": [
+                                    "COSTUM"
+                                ],
+                                "service": [
+                                    "Microsoft.ContainerService",
+                                    "Container",
+                                    "Azure Kubernetes Service"
+                                ]
+                            }
+                        ],
+                        "masterSnapshotId" : ["AZRSNP_219"],
+                        "title" : "Azure AKS enable role-based access control (RBAC) enforced",
+                        "description" :"To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster."
+                },
+                {
                     "masterTestId": "AZURE_TEST_224",
                     "type": "rego",
                     "rule": "file(azure_224.rego)",
@@ -109,7 +197,7 @@
                         {
                             "cloud": "Azure",
                             "compliance": [
-                                "COSTUM"
+                                "CUSTOM"
                             ],
                             "service": [
                                 "Microsoft.Network",
@@ -132,7 +220,7 @@
                         {
                             "cloud": "Azure",
                             "compliance": [
-                                "COSTUM"
+                                "CUSTOM"
                             ],
                             "service": [
                                 "Microsoft.Network",
@@ -155,7 +243,7 @@
                         {
                             "cloud": "Azure",
                             "compliance": [
-                                "COSTUM"
+                                "CUSTOM"
                             ],
                             "service": [
                                 "Microsoft.Network",
@@ -201,7 +289,7 @@
                         {
                             "cloud": "Azure",
                             "compliance": [
-                                "COSTUM"
+                                "CUSTOM"
                             ],
                             "service": [
                                 "Microsoft.Network",
@@ -214,6 +302,469 @@
                     "masterSnapshotId": [
                         "AZRSNP_231"
                     ]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_236",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_236.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group (NSG) dose not having Inbound rule overly permissive to allow all traffic from any source on any protocol",
+                    "description" : "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_237",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_237.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group (NSG) dose not having Inbound rule overly permissive to allow all traffic from any source on any destiation",
+                    "description" : "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_238",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_238.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows CIFS (UDP Port 445)",
+                    "description" : "This policy detects any NSG rule that allows CIFS traffic on UDP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict CIFS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_239",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_239.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows DNS (TCP Port 53)",
+                    "description" : "This policy detects any NSG rule that allows DNS traffic on TCP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_240",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_240.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows DNS (UDP Port 53)",
+                    "description" : "This policy detects any NSG rule that allows DNS traffic on UDP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_241",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_241.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows FTP (TCP Port 21)",
+                    "description" : "This policy detects any NSG rule that allows FTP traffic on TCP port 21 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict FTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_242",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_242.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows FTP-Data (TCP Port 20)",
+                    "description" : "This policy detects any NSG rule that allows FTP-Data traffic on TCP port 20 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict FTP-Data solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_243",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_243.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows ICMP (Ping)",
+                    "description" : "ICMP is used by devices to communicate error messages and status. While ICMP is useful for  diagnostics and troubleshooting, it can also be used to exploit or disrupt systems.This policy detects any NSG rule that allows ICMP (Ping) traffic from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict ICMP (Ping) solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_244",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_244.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows MSQL (TCP Port 4333)",
+                    "description" : "This policy detects any NSG rule that allows MSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_245",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_245.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows MySQL (TCP Port 3306)",
+                    "description" : "This policy detects any NSG rule that allows MySQL traffic on TCP port 3306 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict MySQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_246",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_246.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows NetBIOS (UDP Port 137)",
+                    "description" : "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_247",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_247.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows NetBIOS (UDP Port 138)",
+                    "description" : "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_248",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_248.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows PostgreSQL (TCP Port 5432)",
+                    "description" : "This policy detects any NSG rule that allows PostgreSQL traffic on TCP port 5432 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict PostgreSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_249",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_249.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "next generation firewall is set to OFF in Security Center",
+                    "description" : "This policy detects any NSG rule that allows SMTP traffic on TCP port 25 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict SMTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_250",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_250.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows SQLServer (UDP Port 1434)",
+                    "description" : "This policy detects any NSG rule that allows SQLServer traffic on UDP port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_251",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_251.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows SqlServer (TCP Port 1433)",
+                    "description" : "This policy detects any NSG rule that allows SqlServer traffic on TCP port 1433 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict SqlServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_252",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_252.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                            
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows MSQL (TCP Port 4333)",
+                    "description" : "Telnet provides a plaintext connection to manage devices using the command line, and is less secure than SSH.This policy detects any NSG rule that allows Telnet traffic on TCP port 23 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict Telnet solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_253",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_253.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows VNC Listener (TCP Port 5500)",
+                    "description" : "This policy detects any NSG rule that allows VNC Listener traffic on TCP port 5500 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict VNC Listener solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_254",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_254.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows VNC Server (TCP Port 5900)",
+                    "description" : "This policy detects any NSG rule that allows VNC Server traffic on TCP port 5900 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict VNC Server solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_255",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_255.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows Windows RPC (TCP Port 135)",
+                    "description" : "This policy detects any NSG rule that allows Windows RPC traffic on TCP port 135 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict Windows RPC solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_256",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_256.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows Windows SMB (TCP Port 445)",
+                    "description" : "This policy detects any NSG rule that allows Windows SMB traffic on TCP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict Windows SMB solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_257",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_257.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group with Outbound rule to allow all traffic to any source",
+                    "description" : "This policy identifies NSGs which allows outgoing traffic to any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic to known sources on authorized protocols and ports.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
                 },
                 {
                     "masterTestId": "AZURE_TEST_284",
@@ -260,6 +811,497 @@
                     "masterSnapshotId": [
                         "AZRSNP_284"
                     ]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_211",
+                    "type": "rego",
+                    "rule": "file(azure_pollicy_assignments_211.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-2.13", 
+                                "CSA CCM v3.0.1-IAM-02", 
+                                "ISO 27001:2013-A.13.1.1", 
+                                "ISO 27001:2013-A.14.1.3", 
+                                "ISO 27001:2013-A.16.1.4", 
+                                "ISO 27001:2013-A.18.1.3", 
+                                "ISO 27001:2013-A.6.2.2", 
+                                "ISO 27001:2013-A.9.2.5", 
+                                "NIST 800-53 Rev4-IA-10", 
+                                "NIST 800-53 Rev4-SC-2",
+                                "CIS", 
+                                "CSA", 
+                                "ISO", 
+                                "NIST"
+                            ],
+                            "service": [
+                                "Microsoft.Authorization",
+                                "Management and Governance"
+                            ]
+                        }
+                    ],
+                    "title" : "Adaptive Application Controls is set to OFF in Security Center",
+                    "description" : "Turning on Adaptive Application Controls will make sure that only certain applications can run on your VMs in Microsoft Azure. This will prevent any malicious, unwanted, or unsupported software on the VMs.",
+                    "masterSnapshotId" : ["AZRSNP_211"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_258",
+                    "type": "rego",
+                    "rule": "file(azure_pollicy_assignments_258.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-2.7",
+                                "CSA CCM v3.0.1-IAM-07", 
+                                "ISO 27001:2013-A.13.1.3", 
+                                "ISO 27001:2013-A.14.1.3", 
+                                "ISO 27001:2013-A.18.1.3", 
+                                "ISO 27001:2013-A.6.2.2", 
+                                "ISO 27001:2013-A.9.2.5", 
+                                "NIST 800-53 Rev4-SI-4 (4)", 
+                                "PCI DSS v3.2-1.3.5",
+                                "CIS", 
+                                "CSA", 
+                                "ISO", 
+                                "NIST"
+                            ],
+                            "service": [
+                                "Microsoft.Authorization",
+                                "Management and Governance"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Groups (NSG) is set to OFF in Security Center",
+                    "description" : "Turning on Network Security Groups will identify the Network Security Groups which are not enabled. Network Security Groups are designed to control inbound and outbound traffic to VMs that have open endpoints.",
+                    "masterSnapshotId" : ["AZRSNP_211"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_285",
+                    "type": "rego",
+                    "rule": "file(azure_pollicy_assignments_285.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-2.6", 
+                                "CSA CCM v3.0.1-CCC-04", 
+                                "CSA CCM v3.0.1-EKM-02", 
+                                "CSA CCM v3.0.1-EKM-03", 
+                                "CSA CCM v3.0.1-EKM-04", 
+                                "HIPAA-164.312(a)(2)(iv)", 
+                                "ISO 27001:2013-A.10.1.2", 
+                                "ISO 27001:2013-A.18.1.3", 
+                                "ISO 27001:2013-A.8.2.3", 
+                                "NIST 800-53 Rev4-AC-17 (2)", 
+                                "NIST 800-53 Rev4-SC-13", 
+                                "NIST 800-53 Rev4-SI-7 (6)", 
+                                "PCI DSS v3.2-3.4.1",
+                                "CIS",
+                                "CSA",
+                                "HIPAA",
+                                "ISO",
+                                "NIST",
+                                "PCI" 
+                            ],
+                            "service": [
+                                "Microsoft.Authorization",
+                                "Management and Governance"
+                            ]
+                        }
+                    ],
+                    "title" : "Disk encryption is set to OFF in Security Center",
+                    "description" : "Turning on Disk encryption for virtual machines will secure the data by encrypting it.",
+                    "masterSnapshotId" : ["AZRSNP_211"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_286",
+                    "type": "rego",
+                    "rule": "file(azure_pollicy_assignments_286.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-2.5", 
+                                "CSA CCM v3.0.1-DSI-02", 
+                                "CSA CCM v3.0.1-IAM-07", 
+                                "CSA CCM v3.0.1-IVS-06", 
+                                "CSA CCM v3.0.1-IVS-08", 
+                                "ISO 27001:2013-A.13.1.1", 
+                                "ISO 27001:2013-A.14.1.2", 
+                                "ISO 27001:2013-A.18.1.3", 
+                                "ISO 27001:2013-A.6.2.2", 
+                                "ISO 27001:2013-A.8.2.3", 
+                                "ISO 27001:2013-A.9.2.5", 
+                                "NIST 800-53 Rev4-SC-7 (12)", 
+                                "NIST 800-53 Rev4-SI-4 (23)", 
+                                "PCI DSS v3.2-5.3", 
+                                "PCI DSS v3.2-5.4",
+                                "CIS",
+                                "CSA",
+                                "ISO",
+                                "NIST",
+                                "PCI"
+                            ],
+                            "service": [
+                                "Microsoft.Authorization",
+                                "Management and Governance"
+                            ]
+                        }
+                    ],
+                    "title" : "Endpoint protection is set to OFF in Security Center",
+                    "description" : "Turning on the Endpoint Protection will make sure that any issues or shortcomings in endpoint protection for all Microsoft Windows virtual machines are identified so that they can, in turn, be removed.",
+                    "masterSnapshotId" : ["AZRSNP_211"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_287",
+                    "type": "rego",
+                    "rule": "file(azure_pollicy_assignments_287.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-2.12", 
+                                "ISO 27001:2013-A.13.1.3", 
+                                "ISO 27001:2013-A.14.1.3", 
+                                "ISO 27001:2013-A.18.1.3", 
+                                "ISO 27001:2013-A.6.2.2", 
+                                "ISO 27001:2013-A.9.2.5", 
+                                "NIST 800-53 Rev4-AC-17 (9)",
+                                "CIS",
+                                "ISO",
+                                "NIST"
+                            ],
+                            "service": [
+                                "Microsoft.Authorization",
+                                "Management and Governance"
+                            ]
+                        }
+                    ],
+                    "title" : "JIT Network Access is set to OFF in Security Center",
+                    "description" : "Turning on JIT Network Access will enhance the protection of VMs by creating a Just in Time VM. The JIT VM with NSG rule will restrict the availability of access to the ports to connect to the VM for a pre-set time and only after checking the Role Based Access Control permissions of the user. This feature will control the brute force attacks on the VMs.",
+                    "masterSnapshotId" : ["AZRSNP_211"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_288",
+                    "type": "rego",
+                    "rule": "file(azure_pollicy_assignments_288.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-2.9", 
+                                "CSA CCM v3.0.1-DSI-02", 
+                                "CSA CCM v3.0.1-IAM-07", 
+                                "CSA CCM v3.0.1-IVS-06", 
+                                "CSA CCM v3.0.1-IVS-08", 
+                                "ISO 27001:2013-A.13.1.1", 
+                                "ISO 27001:2013-A.14.1.3", 
+                                "ISO 27001:2013-A.18.1.3", 
+                                "ISO 27001:2013-A.6.2.2", 
+                                "ISO 27001:2013-A.9.2.5", 
+                                "NIST 800-53 Rev4-SC-7", 
+                                "NIST 800-53 Rev4-SI-4 (11)", 
+                                "NIST 800-53 Rev4-SI-4 (4)", 
+                                "PCI DSS v3.2-1.1, PCI DSS v3.2-1.4",
+                                "CIS",
+                                "CSA",
+                                "ISO",
+                                "NIST",
+                                "PCI"
+                            ],
+                            "service": [
+                                "Microsoft.Authorization",
+                                "Management and Governance"
+                            ]
+                        }
+                    ],
+                    "title" : "Next generation firewall is set to OFF in Security Center",
+                    "description" : "Turning on Next Generation Firewall (NGFW) will extend protection beyond a traditional firewall setting of Network Security Groups in Microsoft Azure environment. A Next-Generation Firewall (NGFW) is a part of the third generation of firewall technology, combining a traditional firewall with other network device filtering functionalities.",
+                    "masterSnapshotId" : ["AZRSNP_211"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_290",
+                    "type": "rego",
+                    "rule": "file(azure_pollicy_assignments_290.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-2.15", 
+                                "CSA CCM v3.0.1-CCC-04", 
+                                "CSA CCM v3.0.1-EKM-02", 
+                                "CSA CCM v3.0.1-EKM-03", 
+                                "CSA CCM v3.0.1-EKM-04", 
+                                "HIPAA-164.312(a)(2)(iv)", 
+                                "ISO 27001:2013-A.10.1.2", 
+                                "ISO 27001:2013-A.18.1.3", 
+                                "ISO 27001:2013-A.8.2.3", 
+                                "NIST 800-53 Rev4-AC-17 (2)", 
+                                "NIST 800-53 Rev4-SC-13", 
+                                "NIST 800-53 Rev4-SI-7 (6)", 
+                                "PCI DSS v3.2-3.4.1",
+                                "CIS",
+                                "CSA",
+                                "HIPAA",
+                                "ISO",
+                                "NIST",
+                                "PCI"
+                            ],
+                            "service": [
+                                "Microsoft.Authorization",
+                                "Management and Governance"
+                            ]
+                        }
+                    ],
+                    "title" : "SQL Encryption is set to OFF in Security Center",
+                    "description" : "Turning on SQL Encryption enables encryption at rest for your SQL database, related backups, and transaction log files. This will make sure that even if the database is compromised, the data is not readable.",
+                    "masterSnapshotId" : ["AZRSNP_211"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_292",
+                    "type": "rego",
+                    "rule": "file(azure_pollicy_assignments_292.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-2.14", 
+                                "CSA CCM v3.0.1-CCC-04", 
+                                "CSA CCM v3.0.1-IAM-03", 
+                                "CSA CCM v3.0.1-IAM-06", 
+                                "HIPAA-164.312(b)", 
+                                "ISO 27001:2013-A.12.4.2", 
+                                "ISO 27001:2013-A.14.1.3", 
+                                "ISO 27001:2013-A.16.1.4", 
+                                "ISO 27001:2013-A.18.1.3", 
+                                "ISO 27001:2013-A.8.2.3", 
+                                "NIST 800-53 Rev4-AU-2a", 
+                                "NIST 800-53 Rev4-CM-5 (1)", 
+                                "NIST 800-53 Rev4-SA-11 (2)", 
+                                "NIST 800-53 Rev4-SA-15 (4)", 
+                                "NIST 800-53 Rev4-SI-7 (8)", 
+                                "PCI DSS v3.2-2.2",
+                                "CIS",
+                                "CSA",
+                                "HIPAA",
+                                "ISO",
+                                "NIST",
+                                "PCI"
+                            ],
+                            "service": [
+                                "Microsoft.Authorization",
+                                "Management and Governance"
+                            ]
+                        }
+                    ],
+                    "title" : "SQL auditing & Threat detection is set to OFF in Security Center",
+                    "description" : "Turning on SQL auditing & Threat detection will make sure that the databases adhere to regulatory compliance. It will also help understand database activity, and gain insights into discrepancies and anomalies that could show business concerns or any security violations.",
+                    "masterSnapshotId" : ["AZRSNP_211"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_295",
+                    "type": "rego",
+                    "rule": "file(azure_pollicy_assignments_295.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-2.4", 
+                                "CSA CCM v3.0.1-GRM-01", 
+                                "CSA CCM v3.0.1-IAM-13", 
+                                "CSA CCM v3.0.1-IVS-07", 
+                                "CSA CCM v3.0.1-MOS-19", 
+                                "HIPAA-164.308(a)(1)", 
+                                "ISO 27001:2013-A.13.1.3", 
+                                "ISO 27001:2013-A.14.1.3", 
+                                "ISO 27001:2013-A.16.1.4", 
+                                "ISO 27001:2013-A.18.1.3", 
+                                "ISO 27001:2013-A.6.2.2", 
+                                "ISO 27001:2013-A.8.2.3", 
+                                "ISO 27001:2013-A.9.2.5", 
+                                "NIST 800-53 Rev4-CM-2", 
+                                "NIST 800-53 Rev4-CM-6a", 
+                                "PCI DSS v3.2-2.2",
+                                "CIS",
+                                "CSA",
+                                "HIPAA",
+                                "ISO",
+                                "NIST",
+                                "PCI"
+                            ],
+                            "service": [
+                                "Microsoft.Authorization",
+                                "Management and Governance"
+                            ]
+                        }
+                    ],
+                    "title" : "Security Configurations is set to OFF in Security Center",
+                    "description" : "Turning on the Security configurations will enable the daily analysis of operating system configurations. The rules for hardening the operating system like firewall rules, password and audit policies are reviewed. Recommendations are made for setting the right level of security controls.",
+                    "masterSnapshotId" : ["AZRSNP_211"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_303",
+                    "type": "rego",
+                    "rule": "file(azure_pollicy_assignments_303.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-2.11", 
+                                "CSA CCM v3.0.1-CCC-04", 
+                                "CSA CCM v3.0.1-EKM-02", 
+                                "CSA CCM v3.0.1-EKM-03", 
+                                "CSA CCM v3.0.1-EKM-04", 
+                                "HIPAA-164.312(a)(2)(iv)", 
+                                "ISO 27001:2013-A.10.1.2", 
+                                "ISO 27001:2013-A.18.1.3", 
+                                "NIST 800-53 Rev4-AC-17 (2)", 
+                                "NIST 800-53 Rev4-SC-13", 
+                                "NIST 800-53 Rev4-SI-7 (6)", 
+                                "PCI DSS v3.2-3.4.1",
+                                "CIS",
+                                "CSA",
+                                "HIPAA",
+                                "ISO",
+                                "NIST",
+                                "PCI"
+                            ],
+                            "service": [
+                                "Microsoft.Authorization",
+                                "Management and Governance"
+                            ]
+                        }
+                    ],
+                    "title" : "Storage Encryption is set to OFF in Security Center",
+                    "description" : "Turning on Storage Encryption will encrypt the data written to the storage and decrypt it when retrieved from the storage. The data encryption starts from the point this setting is turned on. The old data remains unencrypted.",
+                    "masterSnapshotId" : ["AZRSNP_211"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_304",
+                    "type": "rego",
+                    "rule": "file(azure_pollicy_assignments_304.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-2.3", 
+                                "CSA CCM v3.0.1-DCS-01", 
+                                "CSA CCM v3.0.1-IVS-02", 
+                                "CSA CCM v3.0.1-MOS-09", 
+                                "CSA CCM v3.0.1-MOS-17", 
+                                "CSA CCM v3.0.1-TVM-01", 
+                                "ISO 27001:2013-A.18.1.3", 
+                                "ISO 27001:2013-A.8.2.3", 
+                                "NIST 800-53 Rev4-CM-8 (1)", 
+                                "NIST 800-53 Rev4-CM-8 (2)", 
+                                "NIST 800-53 Rev4-SI-3 (2)", 
+                                "NIST 800-53 Rev4-SI-8 (2)", 
+                                "PCI DSS v3.2-6.2",
+                                "CIS",
+                                "CSA",
+                                "ISO",
+                                "NIST",
+                                "PCI"
+                            ],
+                            "service": [
+                                "Microsoft.Authorization",
+                                "Management and Governance"
+                            ]
+                        }
+                    ],
+                    "title" : "System updates is set to OFF in Security Center",
+                    "description" : "Turning on the System updates will retrieve a list of recommended security and critical updates for the given virtual system from Microsoft Windows Update or Microsoft Windows Server Update. These updates are also shown for Linux systems through distro-provided package management systems. The recommendation is to apply all the latest updates.",
+                    "masterSnapshotId" : ["AZRSNP_211"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_308",
+                    "type": "rego",
+                    "rule": "file(azure_pollicy_assignments_308.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-2.10", 
+                                "CSA CCM v3.0.1-AIS-01", 
+                                "CSA CCM v3.0.1-IVS-05", 
+                                "CSA CCM v3.0.1-TVM-02", 
+                                "HIPAA-164.308(a)(1)", 
+                                "ISO 27001:2013-A.14.1.3", 
+                                "ISO 27001:2013-A.16.1.4", 
+                                "ISO 27001:2013-A.18.1.3", 
+                                "ISO 27001:2013-A.8.2.3", 
+                                "NIST 800-53 Rev4-RA-5a", 
+                                "PCI DSS v3.2-6.2",
+                                "CIS",
+                                "CSA",
+                                "HIPAA",
+                                "ISO",
+                                "NIST",
+                                "PCI"
+                            ],
+                            "service": [
+                                "Microsoft.Authorization",
+                                "Management and Governance"
+                            ]
+                        }
+                    ],
+                    "title" : "Vulnerability assessment is set to OFF in Security Center",
+                    "description" : "Turning on Vulnerability assessment will recommend that you install a vulnerability assessment solution on your VM. A partner agent, after deployment, will report any vulnerability data for the VM.",
+                    "masterSnapshotId" : ["AZRSNP_211"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_309",
+                    "type": "rego",
+                    "rule": "file(azure_pollicy_assignments_309.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-2.8", 
+                                "CSA CCM v3.0.1-DSI-02", 
+                                "CSA CCM v3.0.1-IAM-07", 
+                                "CSA CCM v3.0.1-IVS-06", 
+                                "CSA CCM v3.0.1-IVS-08", 
+                                "ISO 27001:2013-A.13.1.1", 
+                                "ISO 27001:2013-A.14.1.2", 
+                                "ISO 27001:2013-A.18.1.3", 
+                                "ISO 27001:2013-A.6.2.2", 
+                                "ISO 27001:2013-A.9.2.5", 
+                                "NIST 800-53 Rev4-SC-7", 
+                                "NIST 800-53 Rev4-SI-4 (11)", 
+                                "NIST 800-53 Rev4-SI-4 (4)", 
+                                "PCI DSS v3.2-1.1", 
+                                "PCI DSS v3.2-1.4",
+                                "CIS",
+                                "CSA",
+                                "ISO",
+                                "NIST",
+                                "PCI"
+                            ],
+                            "service": [
+                                "Microsoft.Authorization",
+                                "Management and Governance"
+                            ]
+                        }
+                    ],
+                    "title" : "Web application firewall is set to OFF in Security Center",
+                    "description" : "Turning on Web application firewall will identify if WAF is recommended for the public facing IP instances in your environment. Web Application Firewall or WAF is recommended for any public facing IP instance (VM or Load Balancer) which has an associated Network Security Group with open inbound ports 80 and 443.",
+                    "masterSnapshotId" : ["AZRSNP_211"]
                 },
                 {
                     "masterTestId": "AZURE_TEST_274",
