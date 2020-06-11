@@ -197,7 +197,7 @@
                         {
                             "cloud": "Azure",
                             "compliance": [
-                                "COSTUM"
+                                "CUSTOM"
                             ],
                             "service": [
                                 "Microsoft.Network",
@@ -220,7 +220,7 @@
                         {
                             "cloud": "Azure",
                             "compliance": [
-                                "COSTUM"
+                                "CUSTOM"
                             ],
                             "service": [
                                 "Microsoft.Network",
@@ -243,7 +243,7 @@
                         {
                             "cloud": "Azure",
                             "compliance": [
-                                "COSTUM"
+                                "CUSTOM"
                             ],
                             "service": [
                                 "Microsoft.Network",
@@ -289,7 +289,7 @@
                         {
                             "cloud": "Azure",
                             "compliance": [
-                                "COSTUM"
+                                "CUSTOM"
                             ],
                             "service": [
                                 "Microsoft.Network",
@@ -302,6 +302,469 @@
                     "masterSnapshotId": [
                         "AZRSNP_231"
                     ]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_236",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_236.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group (NSG) dose not having Inbound rule overly permissive to allow all traffic from any source on any protocol",
+                    "description" : "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_237",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_237.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group (NSG) dose not having Inbound rule overly permissive to allow all traffic from any source on any destiation",
+                    "description" : "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_238",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_238.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows CIFS (UDP Port 445)",
+                    "description" : "This policy detects any NSG rule that allows CIFS traffic on UDP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict CIFS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_239",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_239.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows DNS (TCP Port 53)",
+                    "description" : "This policy detects any NSG rule that allows DNS traffic on TCP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_240",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_240.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows DNS (UDP Port 53)",
+                    "description" : "This policy detects any NSG rule that allows DNS traffic on UDP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_241",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_241.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows FTP (TCP Port 21)",
+                    "description" : "This policy detects any NSG rule that allows FTP traffic on TCP port 21 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict FTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_242",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_242.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows FTP-Data (TCP Port 20)",
+                    "description" : "This policy detects any NSG rule that allows FTP-Data traffic on TCP port 20 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict FTP-Data solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_243",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_243.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows ICMP (Ping)",
+                    "description" : "ICMP is used by devices to communicate error messages and status. While ICMP is useful for  diagnostics and troubleshooting, it can also be used to exploit or disrupt systems.This policy detects any NSG rule that allows ICMP (Ping) traffic from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict ICMP (Ping) solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_244",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_244.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows MSQL (TCP Port 4333)",
+                    "description" : "This policy detects any NSG rule that allows MSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_245",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_245.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows MySQL (TCP Port 3306)",
+                    "description" : "This policy detects any NSG rule that allows MySQL traffic on TCP port 3306 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict MySQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_246",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_246.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows NetBIOS (UDP Port 137)",
+                    "description" : "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_247",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_247.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows NetBIOS (UDP Port 138)",
+                    "description" : "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_248",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_248.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows PostgreSQL (TCP Port 5432)",
+                    "description" : "This policy detects any NSG rule that allows PostgreSQL traffic on TCP port 5432 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict PostgreSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_249",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_249.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "next generation firewall is set to OFF in Security Center",
+                    "description" : "This policy detects any NSG rule that allows SMTP traffic on TCP port 25 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict SMTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_250",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_250.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows SQLServer (UDP Port 1434)",
+                    "description" : "This policy detects any NSG rule that allows SQLServer traffic on UDP port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_251",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_251.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows SqlServer (TCP Port 1433)",
+                    "description" : "This policy detects any NSG rule that allows SqlServer traffic on TCP port 1433 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict SqlServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_252",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_252.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                            
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows MSQL (TCP Port 4333)",
+                    "description" : "Telnet provides a plaintext connection to manage devices using the command line, and is less secure than SSH.This policy detects any NSG rule that allows Telnet traffic on TCP port 23 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict Telnet solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_253",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_253.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows VNC Listener (TCP Port 5500)",
+                    "description" : "This policy detects any NSG rule that allows VNC Listener traffic on TCP port 5500 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict VNC Listener solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_254",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_254.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows VNC Server (TCP Port 5900)",
+                    "description" : "This policy detects any NSG rule that allows VNC Server traffic on TCP port 5900 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict VNC Server solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_255",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_255.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows Windows RPC (TCP Port 135)",
+                    "description" : "This policy detects any NSG rule that allows Windows RPC traffic on TCP port 135 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict Windows RPC solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_256",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_256.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group allows Windows SMB (TCP Port 445)",
+                    "description" : "This policy detects any NSG rule that allows Windows SMB traffic on TCP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict Windows SMB solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_257",
+                    "type": "rego",
+                    "rule": "file(azure_network_security_257.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.Network",
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "title" : "Azure Network Security Group with Outbound rule to allow all traffic to any source",
+                    "description" : "This policy identifies NSGs which allows outgoing traffic to any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic to known sources on authorized protocols and ports.",
+                    "masterSnapshotId" : ["AZRSNP_231"]
                 },
                 {
                     "masterTestId": "AZURE_TEST_284",
