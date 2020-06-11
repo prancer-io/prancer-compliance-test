@@ -5,6 +5,94 @@
             "version": "0.1",
             "cases": [
                 {
+                        "masterTestId": "AZURE_TEST_216",
+                        "type": "rego",
+                        "rule": "file(azure_216.rego)",
+                        "eval": "data.rule.rulepass",
+                        "tags": [
+                            {
+                                "cloud": "azure",
+                                "compliance": [
+                                    "COSTUM"
+                                ],
+                                "service": [
+                                    "Microsoft.ContainerService",
+                                    "Container",
+                                    "Azure Kubernetes Service"
+                                ]
+                            }
+                        ],
+                        "masterSnapshotId" : ["AZRSNP_219"],
+                        "title" : "Azure AKS cluster HTTP application routing enabled",
+                        "description" :"HTTP application routing configures an Ingress controller in your AKS cluster. As applications are deployed, the solution also creates publicly accessible DNS names for application endpoints. While this makes it easy to access applications that are deployed to your Azure AKS cluster, this add-on is not recommended for production use.This policy checks your AKS cluster HTTP application routing add-on setting and alerts if enabled."
+                },
+                {
+                        "masterTestId": "AZURE_TEST_217",
+                        "type": "rego",
+                        "rule": "file(azure_217.rego)",
+                        "eval": "data.rule.rulepass",
+                        "tags": [
+                            {
+                                "cloud": "azure",
+                                "compliance": [
+                                    "COSTUM"
+                                ],
+                                "service": [
+                                    "Microsoft.ContainerService",
+                                    "Container",
+                                    "Azure Kubernetes Service"
+                                ]
+                            }
+                        ],
+                        "masterSnapshotId" : ["AZRSNP_219"],
+                        "title" : "Azure AKS cluster monitoring enabled",
+                        "description" :"Azure Monitor for containers is a feature designed to monitor the performance of container workloads deployed to either Azure Container Instances or managed Kubernetes clusters hosted on Azure Kubernetes Service (AKS). Monitoring your containers is critical, especially when you're running a production cluster, at scale, with multiple applications.This policy checks your AKS cluster monitoring add-on setting and alerts if no configuration is found, or monitoring is disabled."
+                },
+                {
+                        "masterTestId": "AZURE_TEST_218",
+                        "type": "rego",
+                        "rule": "file(azure_218.rego)",
+                        "eval": "data.rule.rulepass",
+                        "tags": [
+                            {
+                                "cloud": "azure",
+                                "compliance": [
+                                    "COSTUM"
+                                ],
+                                "service": [
+                                    "Microsoft.ContainerService",
+                                    "Container",
+                                    "Azure Kubernetes Service"
+                                ]
+                            }
+                        ],
+                        "masterSnapshotId" : ["AZRSNP_219"],
+                        "title" : "Azure AKS cluster pool profile count contains 3 more then nodes",
+                        "description" :"Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes."
+                },
+                {
+                        "masterTestId": "AZURE_TEST_219",
+                        "type": "rego",
+                        "rule": "file(azure_219.rego)",
+                        "eval": "data.rule.rulepass",
+                        "tags": [
+                            {
+                                "cloud": "azure",
+                                "compliance": [
+                                    "COSTUM"
+                                ],
+                                "service": [
+                                    "Microsoft.ContainerService",
+                                    "Container",
+                                    "Azure Kubernetes Service"
+                                ]
+                            }
+                        ],
+                        "masterSnapshotId" : ["AZRSNP_219"],
+                        "title" : "Azure AKS enable role-based access control (RBAC) enforced",
+                        "description" :"To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster."
+                },
+                {
                     "masterTestId": "AZURE_TEST_224",
                     "type": "rego",
                     "rule": "file(azure_224.rego)",

@@ -5,6 +5,11 @@
             "connectorUser": "USER_1",
             "nodes": [
                 {
+                   "masterSnapshotId": "AZRSNP_219",
+                   "type": "Microsoft.ContainerService/managedClusters",
+                   "collection": "Microsoft.Compute"
+                },
+                {
                     "masterSnapshotId": "AZRSNP_224",
                     "type": "Microsoft.ContainerRegistry/registries",
                     "collection": "Microsoft.ContainerRegistry"
