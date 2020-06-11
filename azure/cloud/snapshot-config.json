@@ -5,6 +5,11 @@
             "connectorUser": "USER_1",
             "nodes": [
                 {
+                   "masterSnapshotId": "AZRSNP_211",
+                   "type": "Microsoft.Authorization/policyAssignments",
+                   "collection": "Microsoft.policyAssignments"
+                },
+                {
                    "masterSnapshotId": "AZRSNP_219",
                    "type": "Microsoft.ContainerService/managedClusters",
                    "collection": "Microsoft.Compute"
