@@ -7,7 +7,7 @@
         {
           "masterSnapshotId": "GOOGLE_CLUSTER_",
           "type": "container/projects.zones.clusters.list",
-          "collection": "projects"
+          "collection": "kubernetes.clusters"
         },
         {
           "masterSnapshotId": "GOOGLE_acceleratorTypes_",
