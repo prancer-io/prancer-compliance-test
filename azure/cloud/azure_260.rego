@@ -12,9 +12,9 @@ rulepass = true {
 # properties.retentionPolicy.days >= 90
 
 nsg_retentionPolicy["retentionPolicy_enabled"] {
-   input.properties.retentionPolicy.enabled == true 
+   input.properties.retentionPolicy.enabled == true
 }
 
 nsg_retentionPolicy["retentionPolicy_day_90"] {
-   input.properties.retentionPolicy.days >= 90 
+   input.properties.retentionPolicy.days >= 90
 }
