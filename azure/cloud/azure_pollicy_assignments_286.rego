@@ -14,8 +14,9 @@ rulepass = false {
 #  properties.parameters.EndpointProtectionMonitoringEffect.value 
 
 endpoint_protection["vmss_endpoint_protection_set_on"] {
-   input.properties.parameters.vmssEndpointProtectionMonitoringEffect.value = "Disabled"
+   input.properties.parameters.vmssEndpointProtectionMonitoringEffect.value == "Disabled"
 }
+
 endpoint_protection["endpoint_protection_set_on"] {
-   input.properties.parameters.endpointProtectionMonitoringEffect.value = "Disabled"
+   input.properties.parameters.endpointProtectionMonitoringEffect.value == "Disabled"
 }

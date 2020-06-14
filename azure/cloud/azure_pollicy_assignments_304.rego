@@ -8,11 +8,5 @@ default rulepass = true
 # https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0
 
 rulepass = false {                                      
-   count(system_updates) == 1
-}
-
-#  properties.parameters.systemUpdatesMonitoringEffect.value 
-
-system_updates["system_updates_access_set_on"] {
-   input.properties.parameters.systemUpdatesMonitoringEffect.value = "Disabled"
+   input.properties.parameters.systemUpdatesMonitoringEffect.value == "Disabled"
 }

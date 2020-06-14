@@ -7,12 +7,6 @@ default rulepass = false
 # https://docs.microsoft.com/en-us/rest/api/aks/managedclusters/get
 # https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.ContainerService/managedClusters
 
-rulepass = true {                                      
-   count(role_based_access_control) == 1
-}
-
-# properties.enableRBAC is true
-
-role_based_access_control["role_based_access_control"] {
-   input.properties.enableRBAC = true
+rulepass {
+   input.properties.enableRBAC == true
 }

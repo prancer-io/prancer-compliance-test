@@ -7,11 +7,5 @@ default rulepass = true
 # https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0
 
 rulepass = false {                                      
-   count(disk_encryption) == 1
-}
-
-#  properties.parameters.diskEncryptionMonitoringEffect.value 
-
-disk_encryption["disk_encryption_set_on"] {
-   input.properties.parameters.diskEncryptionMonitoringEffect.value = "Disabled"
+   input.properties.parameters.diskEncryptionMonitoringEffect.value == "Disabled"
 }

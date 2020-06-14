@@ -14,9 +14,9 @@ rulepass = false {
 #  properties.parameters.secureTransferToStorageAccountMonitoringEffect.value 
 
 storage_encryption["storage_encryption_access_set_on_dasabled"] {
-   input.properties.parameters.secureTransferToStorageAccountMonitoringEffect.value = "Disabled"
+   input.properties.parameters.secureTransferToStorageAccountMonitoringEffect.value == "Disabled"
 }
 
 storage_encryption["storage_encryption_access_set_on_dany"] {
-   input.properties.parameters.secureTransferToStorageAccountMonitoringEffect.value = "Deny"
+   input.properties.parameters.secureTransferToStorageAccountMonitoringEffect.value == "Deny"
 }

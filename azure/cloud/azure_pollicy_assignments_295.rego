@@ -8,11 +8,5 @@ default rulepass = true
 # https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0
 
 rulepass = false {                                      
-   count(security_configurations) == 1
-}
-
-#  properties.parameters.containerBenchmarkMonitoringEffect.value 
-
-security_configurations["security_configurations_access_set_on"] {
-   input.properties.parameters.containerBenchmarkMonitoringEffect.value = "Disabled"
+   input.properties.parameters.containerBenchmarkMonitoringEffect.value == "Disabled"
 }

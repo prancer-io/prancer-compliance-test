@@ -8,11 +8,5 @@ default rulepass = true
 # https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0
 
 rulepass = false {                                      
-   count(sql_encryption) == 1
-}
-
-#  properties.parameters.sqlDbEncryptionMonitoringEffect.value 
-
-sql_encryption ["sql_encryption_set_on"] {
-   input.properties.parameters.sqlDbEncryptionMonitoringEffect.value = "Disabled"
+   input.properties.parameters.sqlDbEncryptionMonitoringEffect.value == "Disabled"
 }
