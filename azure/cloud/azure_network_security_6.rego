@@ -20,12 +20,12 @@ get_access[security_rule] {
     security_rule.properties.direction = "Inbound"
 }
 
-sourcePort:=["1433", "1521", "3306", "5000", "5432", "5984", "6379", "6380", "8080", "9042", "11211", "27017", "28015", "29015", "50000"]
+sourcePort := ["1433", "1521", "3306", "5000", "5432", "5984", "6379", "6380", "8080", "9042", "11211", "27017", "28015", "29015", "50000"]
 
 # Method for check rule
 get_source_port[security_rule] {
     get_access[security_rule]
-    sourcePort[_] = security_rule.properties.sourcePortRange
+    sourcePort[_] == security_rule.properties.sourcePortRange
 }
 
 # Method for check rule
@@ -33,13 +33,13 @@ get_source_port_ranges[security_rule] {
     get_access[security_rule]
     # some source_port_range
     source_port_range := security_rule.properties.sourcePortRanges[_]
-    sourcePort[_] = source_port_range
+    sourcePort[_] == source_port_range
 }
 
 # Method for check rule
 get_destination_port[security_rule] {
     get_access[security_rule]
-    sourcePort[_]= security_rule.properties.destinationPortRange
+    sourcePort[_] == security_rule.properties.destinationPortRange
 }
 
 # Method for check rule
@@ -53,13 +53,13 @@ get_destination_port_ranges[security_rule] {
 # Method for check rule
 get_source_PortRange_Any[security_rule] {
     get_access[security_rule]
-    security_rule.properties.sourcePortRange = "*"
+    security_rule.properties.sourcePortRange == "*"
 }
 
 # Method for check rule
 get_destination_PortRange_Any[security_rule] {
     get_access[security_rule]
-    security_rule.properties.destinationPortRange = "*"
+    security_rule.properties.destinationPortRange == "*"
 }
 
 
@@ -68,25 +68,25 @@ get_destination_PortRange_Any[security_rule] {
 public_security_rules_any["internet_on_DB_port_any_source"] {
     some security_rule
     get_source_port[security_rule]
-    security_rule.properties.sourceAddressPrefix = "*"
+    security_rule.properties.sourceAddressPrefix == "*"
 }
 
 public_security_rules_any["internet_on_DB_port_any_source_range"] {
     some security_rule
     get_source_port_ranges[security_rule]
-    security_rule.properties.sourceAddressPrefix = "*"
+    security_rule.properties.sourceAddressPrefix == "*"
 }
 
 public_security_rules_any["internet_on_DB_port_any_destination"] {
     some security_rule
     get_destination_port[security_rule]
-    security_rule.properties.sourceAddressPrefix = "*"
+    security_rule.properties.sourceAddressPrefix == "*"
 }
 
 public_security_rules_any["internet_on_DB_port_any_destination_range"] {
     some security_rule
     get_destination_port_ranges[security_rule]
-    security_rule.properties.sourceAddressPrefix = "*"
+    security_rule.properties.sourceAddressPrefix == "*"
 }
 
 
@@ -95,13 +95,13 @@ public_security_rules_any["internet_on_DB_port_any_destination_range"] {
 public_security_rules_any["internet_on_Any_port_any_source"] {
     some security_rule
     get_source_PortRange_Any[security_rule]
-    security_rule.properties.sourceAddressPrefix = "*"
+    security_rule.properties.sourceAddressPrefix == "*"
 }
 
 public_security_rules_any["internet_on_Any_port_any_destination"] {
     some security_rule
     get_destination_PortRange_Any[security_rule]
-    security_rule.properties.sourceAddressPrefix = "*"
+    security_rule.properties.sourceAddressPrefix == "*"
 }
 
 # or securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix = 'Internet' 
@@ -109,25 +109,25 @@ public_security_rules_any["internet_on_Any_port_any_destination"] {
 public_security_rules_Internet["internet_on_PortRange_DB_port_Internet_source"] {
     some security_rule
     get_source_port[security_rule]
-    security_rule.properties.sourceAddressPrefix = "Internet"
+    security_rule.properties.sourceAddressPrefix == "Internet"
 }
 
 public_security_rules_Internet["internet_on_PortRange_DB_port_Internet_source_range"] {
     some security_rule
     get_source_port_ranges[security_rule]
-    security_rule.properties.sourceAddressPrefix = "Internet"
+    security_rule.properties.sourceAddressPrefix == "Internet"
 }
 
 public_security_rules_Internet["internet_on_PortRange_DB_port_Internet_destination"] {
     some security_rule
     get_destination_port[security_rule]
-    security_rule.properties.sourceAddressPrefix = "Internet"
+    security_rule.properties.sourceAddressPrefix == "Internet"
 }
 
 public_security_rules_Internet["internet_on_PortRange_DB_port_Internet_destination_range"] {
     some security_rule
     get_destination_port_ranges[security_rule]
-    security_rule.properties.sourceAddressPrefix = "Internet"
+    security_rule.properties.sourceAddressPrefix == "Internet"
 }
 
 # or "securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == 'Internet'
@@ -135,11 +135,11 @@ public_security_rules_Internet["internet_on_PortRange_DB_port_Internet_destinati
 public_security_rules_Internet["internet_on_Any_PortRange_Internet_source"] {
     some security_rule
     get_source_PortRange_Any[security_rule]
-    security_rule.properties.sourceAddressPrefix = "Internet"
+    security_rule.properties.sourceAddressPrefix == "Internet"
 }
 
 public_security_rules_Internet["internet_on_Any_PortRange_Internet_destnation"] {
     some security_rule
     get_destination_PortRange_Any[security_rule]
-    security_rule.properties.sourceAddressPrefix = "Internet"
+    security_rule.properties.sourceAddressPrefix == "Internet"
 }

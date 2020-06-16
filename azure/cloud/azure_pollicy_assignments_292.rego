@@ -1,5 +1,5 @@
 package rule
-default rulepass = true
+default rulepass = false
 
 # SQL auditing & Threat detection is set to OFF in Security Center
 # If SQL auditing & Threat detection is set to ON in Security Center test will pass
@@ -7,12 +7,6 @@ default rulepass = true
 
 # https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0
 
-rulepass = false {                                      
-   count(sql_auditing_threat_detection) == 1
-}
-
-#  properties.parameters.sqlServerAuditingMonitoringEffect.value 
-
-sql_auditing_threat_detection["sql_auditing_threat_detection_access_set_on"] {
-   input.properties.parameters.sqlServerAuditingMonitoringEffect.value = "Disabled"
+rulepass {
+    contains(input.id, "sqlServerAuditingMonitoring")
 }

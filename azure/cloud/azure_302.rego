@@ -8,12 +8,6 @@ default rulepass = false
 # https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.Storage/storageAccounts/vatsalstorage1
 # https://docs.microsoft.com/en-us/rest/api/storagerp/storageaccounts/getproperties
 
-rulepass = true {
-   count(firewalls) == 1
-}
-
-# properties.networkAcls.defaultAction = "Deny"
-
-firewalls["firewalls_enabled"] {
-   input.properties.networkAcls.defaultAction = "Deny" 
+rulepass {
+   input.properties.networkAcls.defaultAction == "Deny"
 }

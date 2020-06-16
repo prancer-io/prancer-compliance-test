@@ -15,8 +15,9 @@ rulepass = false {
 # flowAnalyticsConfiguration.networkWatcherFlowAnalyticsConfiguration.enabled = false
 
 flowLogsSettings["flowLogsSettings_enabled"] {
-   input.properties.enabled = false
+   input.properties.enabled == false
 }
+
 flowLogsSettings["flowLogsSettings_networkWatcherFlowAnalyticsConfiguration_enabled"] {
-   input.properties.flowAnalyticsConfiguration.networkWatcherFlowAnalyticsConfiguration.enabled = false
+   input.properties.flowAnalyticsConfiguration.networkWatcherFlowAnalyticsConfiguration.enabled == false
 }
