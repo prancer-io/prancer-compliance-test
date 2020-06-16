@@ -8,5 +8,5 @@ default rulepass = false
 # https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.ContainerService/managedClusters
 
 rulepass {
-   input.properties.addonProfiles.httpapplicationrouting.enabled == true
+   input.properties.addonProfiles.httpApplicationRouting.enabled == false
 }

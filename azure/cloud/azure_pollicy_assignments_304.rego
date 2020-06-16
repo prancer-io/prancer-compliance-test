@@ -1,5 +1,5 @@
 package rule
-default rulepass = true
+default rulepass = false
 
 # System updates is set to OFF in Security Center
 # If System updates is set to ON in Security Center test will pass
@@ -7,6 +7,6 @@ default rulepass = true
 
 # https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0
 
-rulepass = false {                                      
-   input.properties.parameters.systemUpdatesMonitoringEffect.value == "Disabled"
+rulepass {
+    contains(input.id, "systemUpdatesMonitoring")
 }

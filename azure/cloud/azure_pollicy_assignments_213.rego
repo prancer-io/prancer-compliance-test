@@ -1,12 +1,12 @@
 package rule
-default rulepass = true
+default rulepass = false
 
 # https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0
 
-rulepass = false {
-   input.properties.parameters.ArcLinuxMonitoringEffect.value == "Disabled"
+rulepass {
+   contains(input.id, "ArcLinuxMonitoring")
 }
 
-rulepass = false {
-   input.properties.parameters.ArcWindowsMonitoringEffect.value == "Disabled"
+rulepass {
+   contains(input.id, "ArcWindowsMonitoring")
 }

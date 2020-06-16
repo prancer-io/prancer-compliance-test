@@ -6,3 +6,7 @@ default rulepass = true
 rulepass = false {
    input.properties.publicAccess == "Container"
 }
+
+rulepass = false {
+   input.properties.publicAccess == "Blob"
+}
