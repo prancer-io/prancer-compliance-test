@@ -186,6 +186,15 @@
           "detailMethods": [
             "describe_clusters"
           ]
+        },
+        {
+          "masterSnapshotId": "AWS_SSM_01",
+          "arn": "arn:aws:ssm:::",
+          "collection": "ssm",
+          "listMethod": "describe_parameters",
+          "detailMethods": [
+            "describe_parameters"
+          ]
         }
       ]
     }
