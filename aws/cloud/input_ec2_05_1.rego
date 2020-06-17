@@ -2,6 +2,9 @@ package rule
 
 default rulepass = false
 
+# API Documentation: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html
+# Id: 42
+
 rulepass = true{
   instance := input.Reservations[_].Instances[_]
   instance.IamInstanceProfile.Arn

@@ -2,6 +2,9 @@ package rule
 
 default rulepass = false
 
+# API Documentation: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshotAttribute.html
+# Id: 39
+
 rulepass = true{
     volumePermission := input.CreateVolumePermissions[_]
     volumePermission.UserId
