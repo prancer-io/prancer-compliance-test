@@ -10,12 +10,12 @@ default aks_cni_net = null
 
 aks_cni_net {
     input.type == "Microsoft.ContainerService/managedClusters"
-    input.properties.networkProfile.networkPlugin == "azure"
+    lower(input.properties.networkProfile.networkPlugin) == "azure"
 }
 
 aks_cni_net = false {
     input.type == "Microsoft.ContainerService/managedClusters"
-    input.properties.networkProfile.networkPlugin != "azure"
+    lower(input.properties.networkProfile.networkPlugin) != "azure"
 }
 
 aks_cni_net_err = "Azure AKS cluster Azure CNI networking not enabled" {

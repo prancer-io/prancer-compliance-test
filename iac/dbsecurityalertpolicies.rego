@@ -10,13 +10,13 @@ default dbsec_threat_retention = null
 
 dbsec_threat_retention {
     input.type == "Microsoft.Sql/servers/databases/securityAlertPolicies"
-    input.properties.state == "Enabled"
+    lower(input.properties.state) == "enabled"
     input.properties.retentionDays > 90
 }
 
 dbsec_threat_retention = false {
     input.type == "Microsoft.Sql/servers/databases/securityAlertPolicies"
-    input.properties.state != "Enabled"
+    lower(input.properties.state) != "enabled"
 }
 
 dbsec_threat_retention = false {
@@ -36,14 +36,14 @@ default dbsec_threat_email = null
 
 dbsec_threat_email {
     input.type == "Microsoft.Sql/servers/databases/securityAlertPolicies"
-    input.properties.state == "Enabled"
+    lower(input.properties.state) == "enabled"
     input.properties.emailAccountAdmins == true
     count(input.properties.emailAddresses) > 0
 }
 
 dbsec_threat_email = false {
     input.type == "Microsoft.Sql/servers/databases/securityAlertPolicies"
-    input.properties.state != "Enabled"
+    lower(input.properties.state) != "enabled"
 }
 
 dbsec_threat_email = false {
@@ -69,13 +69,13 @@ default dbsec_threat_alert = null
 
 dbsec_threat_alert {
     input.type == "Microsoft.Sql/servers/databases/securityAlertPolicies"
-    input.properties.state == "Enabled"
+    lower(input.properties.state) == "enabled"
     count(input.properties.disabledAlerts) == 0
 }
 
 dbsec_threat_alert = false {
     input.type == "Microsoft.Sql/servers/databases/securityAlertPolicies"
-    input.properties.state != "Enabled"
+    lower(input.properties.state) != "enabled"
 }
 
 dbsec_threat_alert = false {
@@ -95,12 +95,12 @@ default dbsec_threat_off = false
 
 dbsec_threat_off {
     input.type == "Microsoft.Sql/servers/databases/securityAlertPolicies"
-    input.properties.state == "Enabled"
+    lower(input.properties.state) == "enabled"
 }
 
 dbsec_threat_off = false {
     input.type == "Microsoft.Sql/servers/databases/securityAlertPolicies"
-    input.properties.state == "Enabled"
+    lower(input.properties.state) == "enabled"
 }
 
 dbsec_threat_off_err = "Threat Detection on SQL databases is set to Off" {
