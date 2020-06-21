@@ -9,17 +9,17 @@ package rule
 default gw_tls = null
 
 gw_tls {
-    input.type == "Microsoft.Network/applicationGateways"
+    lower(input.type) == "microsoft.network/applicationgateways"
     lower(input.properties.sslPolicy.minProtocolVersion) == "tlsv1_2"
 }
 
 gw_tls {
-    input.type == "Microsoft.Network/applicationGateways"
+    lower(input.type) == "microsoft.network/applicationgateways"
     lower(input.properties.sslPolicy.minProtocolVersion) == "tlsv1_3"
 }
 
 gw_tls = false {
-    input.type == "Microsoft.Network/applicationGateways"
+    lower(input.type) == "microsoft.network/applicationgateways"
     lower(input.properties.sslPolicy.minProtocolVersion) != "tlsv1_2"
     lower(input.properties.sslPolicy.minProtocolVersion) != "tlsv1_3"
 }
@@ -35,12 +35,12 @@ gw_tls_err = "Azure Application Gateway allows TLSv1.1 or lower" {
 default gw_waf = null
 
 gw_waf {
-    input.type == "Microsoft.Network/applicationGateways"
+    lower(input.type) == "microsoft.network/applicationgateways"
     input.properties.webApplicationFirewallConfiguration.enabled == true
 }
 
 gw_waf = false {
-    input.type == "Microsoft.Network/applicationGateways"
+    lower(input.type) == "microsoft.network/applicationgateways"
     input.properties.webApplicationFirewallConfiguration.enabled != true
 }
 

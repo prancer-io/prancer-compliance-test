@@ -9,12 +9,12 @@ package rule
 default acr_webhooks = null
 
 acr_webhooks {
-    input.type == "Microsoft.ContainerRegistry/registries/webhooks"
+    lower(input.type) == "microsoft.containerregistry/registries/webhooks"
     substring(lower(input.properties.serviceUri), 0, 6) == "https:"
 }
 
 acr_webhooks = false {
-    input.type == "Microsoft.ContainerRegistry/registries/webhooks"
+    lower(input.type) == "microsoft.containerregistry/registries/webhooks"
     substring(lower(input.properties.serviceUri), 0, 6) != "https:"
 }
 

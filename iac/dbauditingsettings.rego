@@ -9,18 +9,18 @@ package rule
 default sql_log_retention = null
 
 sql_log_retention {
-    input.type == "Microsoft.Sql/servers/auditingSettings"
+    lower(input.type) == "microsoft.sql/servers/auditingsettings"
     lower(input.properties.state) == "enabled"
     to_number(input.properties.retentionDays) > 90
 }
 
 sql_log_retention = false {
-    input.type == "Microsoft.Sql/servers/auditingSettings"
+    lower(input.type) == "microsoft.sql/servers/auditingsettings"
     lower(input.properties.state) != "enabled"
 }
 
 sql_log_retention = false {
-    input.type == "Microsoft.Sql/servers/auditingSettings"
+    lower(input.type) == "microsoft.sql/servers/auditingsettings"
     to_number(input.properties.retentionDays) <= 90
 }
 
