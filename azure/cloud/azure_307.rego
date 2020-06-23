@@ -1,9 +1,9 @@
 package rule
 
-default rulepass = false
+default rulepass = true
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/vpngateways
 
-rulepass {
-   input.properties.networkAcls.defaultAction == "Deny"
+rulepass = false {
+   lower(input.properties.connections[_].properties.ipsecPolicies[_].ipsecEncryption) == "none"
 }

@@ -1592,6 +1592,1075 @@
                     ],
                     "title": "Azure Network Watcher Network Security Group (NSG) flow logs retention is less than 90 days",
                     "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs retention period is 90 days or less.NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:-Outbound and inbound flows on a per-rule basis.-Network interface to which the flow applies.-5-tuple information about the flow (source/destination IP, source/destination port, protocol).-Whether the traffic was allowed or denied."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_1",
+                    "type": "rego",
+                    "rule": "file(azure_1.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "HIPAA-164.308(a)(6)(i)",
+                                "HIPAA-164.308(a)(6)(ii)",
+                                "NIST CSF-DE.AE-1",
+                                "NIST CSF-DE.CM-1",
+                                "NIST CSF-DE.CM-7"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ],
+                    "title": "Instance is communicating with ports known to mine Bitcoin",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_210",
+                    "type": "rego",
+                    "rule": "file(azure_210.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-5.2",
+                                "CSA CCM v3.0.1-BCR-11",
+                                "CSA CCM v3.0.1-GRM-01",
+                                "CSA CCM v3.0.1-MOS-19",
+                                "HIPAA-164.312(b)",
+                                "ISO 27001:2013-A.12.4.2",
+                                "ISO 27001:2013-A.18.1.3",
+                                "NIST 800-53 Rev4-AU-11",
+                                "NIST 800-53 Rev4-CM-2 (3)",
+                                "NIST 800-53 Rev4-SI-12",
+                                "PCI DSS v3.2-10.7"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_210"
+                    ],
+                    "title": "Activity Log Retention should not be set to less than 365 days",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_212",
+                    "type": "rego",
+                    "rule": "file(azure_212.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-4.2.1",
+                                "CSA CCM v3.0.1-CCC-04",
+                                "CSA CCM v3.0.1-IAM-03",
+                                "CSA CCM v3.0.1-IAM-06",
+                                "HIPAA-164.312(b)",
+                                "ISO 27001:2013-A.12.4.2",
+                                "ISO 27001:2013-A.18.1.3",
+                                "NIST 800-53 Rev4-AU-2a",
+                                "NIST 800-53 Rev4-CM-5 (1)",
+                                "NIST 800-53 Rev4-SI-7 (8)",
+                                "PCI DSS v3.2-10.3"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_212"
+                    ],
+                    "title": "Auditing for SQL database should be set to On",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_214",
+                    "type": "rego",
+                    "rule": "file(azure_214.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_214"
+                    ],
+                    "title": "Azure ACR HTTPS not enabled for webhook",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_215",
+                    "type": "rego",
+                    "rule": "file(azure_215.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_219"
+                    ],
+                    "title": "Azure AKS cluster Azure CNI networking not enabled",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_220",
+                    "type": "rego",
+                    "rule": "file(azure_220.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_221"
+                    ],
+                    "title": "Azure Application Gateway allows TLSv1.1 or lower",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_222",
+                    "type": "rego",
+                    "rule": "file(azure_222.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_222"
+                    ],
+                    "title": "Azure Blob container(s) with public access and logging set to less than 180 days",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_226",
+                    "type": "rego",
+                    "rule": "file(azure_226.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_226"
+                    ],
+                    "title": "Azure Key Vault audit logging is disabled",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_227",
+                    "type": "rego",
+                    "rule": "file(azure_227.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_227"
+                    ],
+                    "title": "Azure Key Vault secrets have no expiration date",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_228",
+                    "type": "rego",
+                    "rule": "file(azure_228.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_226"
+                    ],
+                    "title": "Azure Load Balancer diagnostics logs are disabled",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_261",
+                    "type": "rego",
+                    "rule": "file(azure_261.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_261"
+                    ],
+                    "title": "Azure Resource Group does not have a resource lock",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_262",
+                    "type": "rego",
+                    "rule": "file(azure_262.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-4.2.7",
+                                "CSA CCM v3.0.1-BCR-11",
+                                "CSA CCM v3.0.1-GRM-01",
+                                "CSA CCM v3.0.1-MOS-19",
+                                "HIPAA-164.312(b)",
+                                "ISO 27001:2013-A.12.4.2",
+                                "ISO 27001:2013-A.18.1.3",
+                                "NIST 800-53 Rev4-AU-11",
+                                "NIST 800-53 Rev4-CM-2 (3)",
+                                "NIST 800-53 Rev4-SI-12",
+                                "PCI DSS v3.2-10.7"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_212"
+                    ],
+                    "title": "Azure SQL Database with Auditing Retention less than 90 days",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_263",
+                    "type": "rego",
+                    "rule": "file(azure_263.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-4.2.8",
+                                "CSA CCM v3.0.1-BCR-11",
+                                "CSA CCM v3.0.1-GRM-01",
+                                "CSA CCM v3.0.1-MOS-19",
+                                "HIPAA-164.312(b)",
+                                "ISO 27001:2013-A.12.4.2",
+                                "ISO 27001:2013-A.16.1.4",
+                                "ISO 27001:2013-A.18.1.3",
+                                "NIST 800-53 Rev4-AU-11",
+                                "NIST 800-53 Rev4-CM-2 (3)",
+                                "NIST 800-53 Rev4-SI-12",
+                                "PCI DSS v3.2-11.3"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_263"
+                    ],
+                    "title": "Azure SQL Database with Threat Retention less than or equals to 90 days",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_264",
+                    "type": "rego",
+                    "rule": "file(azure_264.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CSA CCM v3.0.1-AAC-01",
+                                "CSA CCM v3.0.1-AAC-02",
+                                "CSA CCM v3.0.1-BCR-01",
+                                "CSA CCM v3.0.1-BCR-09",
+                                "CSA CCM v3.0.1-CCC-04",
+                                "CSA CCM v3.0.1-DCS-01",
+                                "CSA CCM v3.0.1-IAM-07",
+                                "CSA CCM v3.0.1-SEF-01",
+                                "CSA CCM v3.0.1-SEF-03",
+                                "CSA CCM v3.0.1-STA-02",
+                                "HIPAA-164.308(a)(6)(ii)",
+                                "ISO 27001:2013-A.12.4.3",
+                                "ISO 27001:2013-A.16.1.2",
+                                "ISO 27001:2013-A.18.1.3",
+                                "NIST 800-53 Rev4-AU-5 (2)",
+                                "NIST 800-53 Rev4-CA-7g",
+                                "NIST 800-53 Rev4-CP-2a.3",
+                                "NIST 800-53 Rev4-IR-6 (2)",
+                                "NIST 800-53 Rev4-IR-9 (1)",
+                                "NIST 800-53 Rev4-SI-4 (5)",
+                                "NIST 800-53 Rev4-SI-7 (2)",
+                                "PCI DSS v3.2-12.10.1"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_263"
+                    ],
+                    "title": "Azure SQL Databases with disabled Email service and co-administrators for Threat Detection",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_265",
+                    "type": "rego",
+                    "rule": "file(azure_265.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_265"
+                    ],
+                    "title": "Azure SQL Server advanced data security does not have an email alert recipient",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_266",
+                    "type": "rego",
+                    "rule": "file(azure_266.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_265"
+                    ],
+                    "title": "Azure SQL Server advanced data security does not send alerts to service and co-administrators",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_267",
+                    "type": "rego",
+                    "rule": "file(azure_267.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_265"
+                    ],
+                    "title": "Azure SQL Server advanced data security is disabled",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_268",
+                    "type": "rego",
+                    "rule": "file(azure_268.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_212"
+                    ],
+                    "title": "Azure SQL Server audit log retention is less than 91 days",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_270",
+                    "type": "rego",
+                    "rule": "file(azure_270.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_263"
+                    ],
+                    "title": "Azure SQL Server threat detection alerts not enabled for all threat types",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_271",
+                    "type": "rego",
+                    "rule": "file(azure_271.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_263"
+                    ],
+                    "title": "Azure SQL Server threat logs retention is less than 91 days",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_272",
+                    "type": "rego",
+                    "rule": "file(azure_272.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_226"
+                    ],
+                    "title": "Azure Storage Account with Auditing Retention less than 90 days (TJX)",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_273",
+                    "type": "rego",
+                    "rule": "file(azure_273.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_273"
+                    ],
+                    "title": "Azure Virtual Machine does not have endpoint protection installed",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_275",
+                    "type": "rego",
+                    "rule": "file(azure_275.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_275"
+                    ],
+                    "title": "Azure Virtual Network subnet is not configured with a Network Security Group",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_276",
+                    "type": "rego",
+                    "rule": "file(azure_276.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_275"
+                    ],
+                    "title": "Azure Virtual Network subnet is not configured with a Network Security Group (TJX)",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_278",
+                    "type": "rego",
+                    "rule": "file(azure_278.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_226"
+                    ],
+                    "title": "Azure storage account logging for blobs is disabled",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_279",
+                    "type": "rego",
+                    "rule": "file(azure_279.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_226"
+                    ],
+                    "title": "Azure storage account logging for queues is disabled",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_280",
+                    "type": "rego",
+                    "rule": "file(azure_280.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_226"
+                    ],
+                    "title": "Azure storage account logging for queues is disabled (TJX)",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_281",
+                    "type": "rego",
+                    "rule": "file(azure_281.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_226"
+                    ],
+                    "title": "Azure storage account logging for tables is disabled",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_282",
+                    "type": "rego",
+                    "rule": "file(azure_282.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_226"
+                    ],
+                    "title": "Azure storage account logging for tables is disabled (TJX)",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_283",
+                    "type": "rego",
+                    "rule": "file(azure_283.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_283"
+                    ],
+                    "title": "Azure storage accounts has blob container(s) with public access",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_291",
+                    "type": "rego",
+                    "rule": "file(azure_291.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-6.3",
+                                "CSA CCM v3.0.1-DSI-06",
+                                "CSA CCM v3.0.1-IAM-02",
+                                "CSA CCM v3.0.1-IAM-03",
+                                "CSA CCM v3.0.1-IAM-06",
+                                "CSA CCM v3.0.1-IVS-11",
+                                "ISO 27001:2013-A.13.1.1",
+                                "ISO 27001:2013-A.14.1.3",
+                                "ISO 27001:2013-A.6.2.2",
+                                "NIST 800-53 Rev4-AC-3",
+                                "PCI DSS v3.2-1.3.2"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_291"
+                    ],
+                    "title": "SQL Server Firewall rules allow access to any Azure internal resources",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_293",
+                    "type": "rego",
+                    "rule": "file(azure_293.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-4.2.6",
+                                "CSA CCM v3.0.1-CCC-04",
+                                "CSA CCM v3.0.1-EKM-02",
+                                "CSA CCM v3.0.1-EKM-03",
+                                "CSA CCM v3.0.1-EKM-04",
+                                "HIPAA-164.312(a)(2)(iv)",
+                                "ISO 27001:2013-A.10.1.2",
+                                "ISO 27001:2013-A.18.1.3",
+                                "NIST 800-53 Rev4-AC-17 (2)",
+                                "NIST 800-53 Rev4-SC-13",
+                                "NIST 800-53 Rev4-SI-7 (6)",
+                                "PCI DSS v3.2-3.4.1"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_293"
+                    ],
+                    "title": "SQL databases has encryption disabled",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_294",
+                    "type": "rego",
+                    "rule": "file(azure_294.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CSA CCM v3.0.1-DCS-01",
+                                "CSA CCM v3.0.1-DSI-06",
+                                "CSA CCM v3.0.1-EKM-01",
+                                "CSA CCM v3.0.1-IAM-01",
+                                "CSA CCM v3.0.1-IAM-02",
+                                "CSA CCM v3.0.1-IAM-03",
+                                "CSA CCM v3.0.1-IAM-04",
+                                "CSA CCM v3.0.1-IAM-05",
+                                "CSA CCM v3.0.1-IAM-08",
+                                "CSA CCM v3.0.1-IAM-09",
+                                "CSA CCM v3.0.1-IAM-10",
+                                "CSA CCM v3.0.1-IAM-11",
+                                "CSA CCM v3.0.1-IAM-12",
+                                "CSA CCM v3.0.1-IAM-13",
+                                "CSA CCM v3.0.1-IVS-02",
+                                "CSA CCM v3.0.1-IVS-11",
+                                "CSA CCM v3.0.1-MOS-09",
+                                "CSA CCM v3.0.1-MOS-16",
+                                "ISO 27001:2013-A.14.1.3",
+                                "ISO 27001:2013-A.9.2.5",
+                                "NIST 800-53 Rev4-AC-2 (7)(a)",
+                                "NIST 800-53 Rev4-CM-8 (4)",
+                                "NIST 800-53 Rev4-IA-5d",
+                                "PCI DSS v3.2-8.7"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_294"
+                    ],
+                    "title": "SQL servers which do not have Azure Active Directory admin configured",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_296",
+                    "type": "rego",
+                    "rule": "file(azure_296.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-2.16",
+                                "CSA CCM v3.0.1-AAC-01",
+                                "CSA CCM v3.0.1-AAC-02",
+                                "CSA CCM v3.0.1-BCR-01",
+                                "CSA CCM v3.0.1-BCR-09",
+                                "CSA CCM v3.0.1-CCC-04",
+                                "CSA CCM v3.0.1-DCS-01",
+                                "CSA CCM v3.0.1-IAM-07",
+                                "CSA CCM v3.0.1-SEF-01",
+                                "CSA CCM v3.0.1-SEF-03",
+                                "CSA CCM v3.0.1-STA-02",
+                                "HIPAA-164.308(a)(6)(ii)",
+                                "ISO 27001:2013-A.12.4.3",
+                                "ISO 27001:2013-A.16.1.2",
+                                "ISO 27001:2013-A.18.1.3",
+                                "ISO 27001:2013-A.8.2.3",
+                                "NIST 800-53 Rev4-AU-5 (2)",
+                                "NIST 800-53 Rev4-CA-7g",
+                                "NIST 800-53 Rev4-CP-2a.3",
+                                "NIST 800-53 Rev4-IR-6 (2)",
+                                "NIST 800-53 Rev4-IR-9 (1)",
+                                "NIST 800-53 Rev4-SI-4 (5)",
+                                "NIST 800-53 Rev4-SI-7 (2)",
+                                "PCI DSS v3.2-12.10.1"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_296"
+                    ],
+                    "title": "Security contact emails is not set in Security Center",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_297",
+                    "type": "rego",
+                    "rule": "file(azure_297.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-4.2.4",
+                                "CSA CCM v3.0.1-IAM-07",
+                                "HIPAA-164.312(b)",
+                                "ISO 27001:2013-A.16.1.2",
+                                "ISO 27001:2013-A.18.1.3",
+                                "NIST 800-53 Rev4-AU-5 (2)",
+                                "NIST 800-53 Rev4-IR-9 (1)",
+                                "NIST 800-53 Rev4-SI-4 (5)",
+                                "PCI DSS v3.2-11.5"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_212"
+                    ],
+                    "title": "Send alerts on field value on SQL Databases is misconfigured",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_299",
+                    "type": "rego",
+                    "rule": "file(azure_299.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-2.18",
+                                "CSA CCM v3.0.1-AAC-01",
+                                "CSA CCM v3.0.1-AAC-02",
+                                "CSA CCM v3.0.1-BCR-01",
+                                "CSA CCM v3.0.1-BCR-09",
+                                "CSA CCM v3.0.1-CCC-04",
+                                "CSA CCM v3.0.1-DCS-01",
+                                "CSA CCM v3.0.1-IAM-07",
+                                "CSA CCM v3.0.1-SEF-01",
+                                "CSA CCM v3.0.1-SEF-03",
+                                "CSA CCM v3.0.1-STA-02",
+                                "HIPAA-164.308(a)(6)(ii)",
+                                "ISO 27001:2013-A.12.4.3",
+                                "ISO 27001:2013-A.16.1.2",
+                                "ISO 27001:2013-A.18.1.3",
+                                "ISO 27001:2013-A.8.2.3",
+                                "NIST 800-53 Rev4-AU-5 (2)",
+                                "NIST 800-53 Rev4-CA-7g",
+                                "NIST 800-53 Rev4-CP-2a.3",
+                                "NIST 800-53 Rev4-IR-6 (2)",
+                                "NIST 800-53 Rev4-IR-9 (1)",
+                                "NIST 800-53 Rev4-SI-4 (5)",
+                                "NIST 800-53 Rev4-SI-7 (2)",
+                                "PCI DSS v3.2-12.10.1"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_299"
+                    ],
+                    "title": "Send me emails about alerts is set to OFF in Security Center",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_2",
+                    "type": "rego",
+                    "rule": "file(azure_2.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "HIPAA-164.308(a)(6)(i)", 
+                                "HIPAA-164.308(a)(6)(ii)", 
+                                "NIST CSF-DE.AE-1", 
+                                "NIST CSF-DE.CM-1", 
+                                "NIST CSF-DE.CM-7"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ],
+                    "title": "Instance is communicating with ports known to mine Ethereum",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_300",
+                    "type": "rego",
+                    "rule": "file(azure_300.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-2.1",
+                                "ISO 27001:2013-A.18.1.3",
+                                "ISO 27001:2013-A.8.2.3",
+                                "ISO 27001:2013-A.9.2.5"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_300"
+                    ],
+                    "title": "Standard pricing tier is not selected in Security Center",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_305",
+                    "type": "rego",
+                    "rule": "file(azure_305.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-4.2.2",
+                                "ISO 27001:2013-A.14.1.2",
+                                "ISO 27001:2013-A.16.1.4",
+                                "ISO 27001:2013-A.18.1.3",
+                                "ISO 27001:2013-A.8.2.3",
+                                "NIST 800-53 Rev4-SA-11 (2)",
+                                "NIST 800-53 Rev4-SA-15 (4)",
+                                "PCI DSS v3.2-2.2"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_263"
+                    ],
+                    "title": "Threat Detection on SQL databases is set to Off",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_306",
+                    "type": "rego",
+                    "rule": "file(azure_306.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-4.2.3",
+                                "CSA CCM v3.0.1-BCR-05",
+                                "CSA CCM v3.0.1-BCR-09",
+                                "CSA CCM v3.0.1-GRM-02",
+                                "CSA CCM v3.0.1-GRM-09",
+                                "CSA CCM v3.0.1-GRM-10",
+                                "CSA CCM v3.0.1-STA-06",
+                                "ISO 27001:2013-A.14.1.2",
+                                "ISO 27001:2013-A.16.1.4",
+                                "ISO 27001:2013-A.18.1.3",
+                                "ISO 27001:2013-A.8.2.3",
+                                "NIST 800-53 Rev4-RA-3e",
+                                "NIST 800-53 Rev4-SA-11 (2)",
+                                "PCI DSS v3.2-2.2"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_263"
+                    ],
+                    "title": "Threat Detection types on SQL databases is misconfigured",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_307",
+                    "type": "rego",
+                    "rule": "file(azure_307.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "HIPAA-164.312(e)(2)(ii)",
+                                "ISO 27001:2013-A.10.1.2",
+                                "ISO 27001:2013-A.13.1.1",
+                                "ISO 27001:2013-A.14.1.2",
+                                "ISO 27001:2013-A.9.2.5",
+                                "NIST 800-53 Rev4-AC-17 (2)",
+                                "PCI DSS v3.2-4.1.1"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_307"
+                    ],
+                    "title": "VPN is not configured with cryptographic algorithm",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_3",
+                    "type": "rego",
+                    "rule": "file(azure_3.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "GDPR-Article 46",
+                                "HIPAA-164.312(e)(2)(ii)",
+                                "NIST CSF-DE.AE-1",
+                                "NIST CSF-DE.CM-1",
+                                "NIST CSF-DE.CM-7",
+                                "NIST CSF-PR.DS-2",
+                                "PCI DSS v3.2-4.1",
+                                "SOC 2-CC6.7"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ],
+                    "title": "Internet connectivity via tcp over insecure port",
+                    "description": ""
+                },                {
+                    "masterTestId": "AZURE_TEST_5",
+                    "type": "rego",
+                    "rule": "file(azure_5.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ],
+                    "title": "Memcached DDoS attack attempted",
+                    "description": ""
+                },
+                {
+                    "masterTestId": "AZURE_TEST_7",
+                    "type": "rego",
+                    "rule": "file(azure_7.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ],
+                    "title": "RedisWannaMine vulnerable instances with active network traffic",
+                    "description": ""
+                },
+                {
+                    "masterTestId": "AZURE_TEST_213",
+                    "type": "rego",
+                    "rule": "file(azure_pollicy_assignments_213.rego)",
+                    "eval": "data.rule.rulepass",
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS v1.0 (Azure)-2.2",
+                                "HIPAA-164.312(b)",
+                                "ISO 27001:2013-A.14.1.3",
+                                "ISO 27001:2013-A.16.1.4",
+                                "ISO 27001:2013-A.18.1.3",
+                                "ISO 27001:2013-A.8.2.3",
+                                "ISO 27001:2013-A.9.2.5",
+                                "NIST 800-53 Rev4-CA-8 (1)"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_211"
+                    ],
+                    "title": "Automatic provisioning of monitoring agent is set to Off in Security Center",
+                    "description": ""
                 }
             ]
         }
