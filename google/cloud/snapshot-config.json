@@ -6,23 +6,253 @@
       "nodes": [
         {
           "masterSnapshotId": "GOOGLE_CLUSTER_",
-          "type": "projects.zones.clusters.list",
+          "type": "container/projects.zones.clusters.list",
           "collection": "kubernetes.clusters"
         },
         {
-          "masterSnapshotId": "GOOGLE_FIREWALL_",
-          "type": "firewalls.list",
-          "collection": "firewalls"
+          "masterSnapshotId": "GOOGLE_acceleratorTypes_",
+          "type": "compute/acceleratorTypes.aggregatedList",
+          "collection": "acceleratorTypes"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_addresses_",
+          "type": "compute/addresses.aggregatedList",
+          "collection": "addresses"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_autoscalers_",
+          "type": "compute/autoscalers.aggregatedList",
+          "collection": "autoscalers"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_backendServices_",
+          "type": "compute/backendServices.aggregatedList",
+          "collection": "backendServices"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_diskTypes_",
+          "type": "compute/diskTypes.aggregatedList",
+          "collection": "diskTypes"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_disks_",
+          "type": "compute/disks.aggregatedList",
+          "collection": "disks"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_forwardingRules_",
+          "type": "compute/forwardingRules.aggregatedList",
+          "collection": "forwardingRules"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_globalOperations_",
+          "type": "compute/globalOperations.aggregatedList",
+          "collection": "globalOperations"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_healthChecks_",
+          "type": "compute/healthChecks.aggregatedList",
+          "collection": "healthChecks"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_instanceGroupManagers_",
+          "type": "compute/instanceGroupManagers.aggregatedList",
+          "collection": "instanceGroupManagers"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_instanceGroups_",
+          "type": "compute/instanceGroups.aggregatedList",
+          "collection": "instanceGroups"
         },
         {
           "masterSnapshotId": "GOOGLE_INSTANCE_",
-          "type": "instances.aggregatedList",
+          "type": "compute/instances.aggregatedList",
           "collection": "instances"
         },
         {
+          "masterSnapshotId": "GOOGLE_interconnectAttachments_",
+          "type": "compute/interconnectAttachments.aggregatedList",
+          "collection": "interconnectAttachments"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_machineTypes_",
+          "type": "compute/machineTypes.aggregatedList",
+          "collection": "machineTypes"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_networkEndpointGroups_",
+          "type": "compute/networkEndpointGroups.aggregatedList",
+          "collection": "networkEndpointGroups"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_nodeGroups_",
+          "type": "compute/nodeGroups.aggregatedList",
+          "collection": "nodeGroups"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_nodeTemplates_",
+          "type": "compute/nodeTemplates.aggregatedList",
+          "collection": "nodeTemplates"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_nodeTypes_",
+          "type": "compute/nodeTypes.aggregatedList",
+          "collection": "nodeTypes"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_regionCommitments_",
+          "type": "compute/regionCommitments.aggregatedList",
+          "collection": "regionCommitments"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_reservations_",
+          "type": "compute/reservations.aggregatedList",
+          "collection": "reservations"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_resourcePolicies_",
+          "type": "compute/resourcePolicies.aggregatedList",
+          "collection": "resourcePolicies"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_routers_",
+          "type": "compute/routers.aggregatedList",
+          "collection": "routers"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_sslCertificates_",
+          "type": "compute/sslCertificates.aggregatedList",
+          "collection": "sslCertificates"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_subnetworks_",
+          "type": "compute/subnetworks.aggregatedList",
+          "collection": "subnetworks"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_targetHttpProxies_",
+          "type": "compute/targetHttpProxies.aggregatedList",
+          "collection": "targetHttpProxies"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_targetHttpsProxies_",
+          "type": "compute/targetHttpsProxies.aggregatedList",
+          "collection": "targetHttpsProxies"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_targetInstances_",
+          "type": "compute/targetInstances.aggregatedList",
+          "collection": "targetInstances"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_targetPools_",
+          "type": "compute/targetPools.aggregatedList",
+          "collection": "targetPools"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_targetVpnGateways_",
+          "type": "compute/targetVpnGateways.aggregatedList",
+          "collection": "targetVpnGateways"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_urlMaps_",
+          "type": "compute/urlMaps.aggregatedList",
+          "collection": "urlMaps"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_vpnGateways_",
+          "type": "compute/vpnGateways.aggregatedList",
+          "collection": "vpnGateways"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_vpnTunnels_",
+          "type": "compute/vpnTunnels.aggregatedList",
+          "collection": "vpnTunnels"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_backendBuckets_",
+          "type": "compute/backendBuckets.list",
+          "collection": "backendBuckets"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_externalVpnGateways_",
+          "type": "compute/externalVpnGateways.list",
+          "collection": "externalVpnGateways"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_FIREWALL_",
+          "type": "compute/firewalls.list",
+          "collection": "firewalls"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_httpHealthChecks_",
+          "type": "compute/httpHealthChecks.list",
+          "collection": "httpHealthChecks"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_httpsHealthChecks_",
+          "type": "compute/httpsHealthChecks.list",
+          "collection": "httpsHealthChecks"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_images_",
+          "type": "compute/images.list",
+          "collection": "images"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_instanceTemplates_",
+          "type": "compute/instanceTemplates.list",
+          "collection": "instanceTemplates"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_interconnectLocations_",
+          "type": "compute/interconnectLocations.list",
+          "collection": "interconnectLocations"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_interconnects_",
+          "type": "compute/interconnects.list",
+          "collection": "interconnects"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_licenses_",
+          "type": "compute/licenses.list",
+          "collection": "licenses"
+        },
+        {
           "masterSnapshotId": "GOOGLE_NETWORK_",
-          "type": "networks.list",
+          "type": "compute/networks.list",
           "collection": "networks"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_routes_",
+          "type": "compute/routes.list",
+          "collection": "routes"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_securityPolicies_",
+          "type": "compute/securityPolicies.list",
+          "collection": "securityPolicies"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_snapshots_",
+          "type": "compute/snapshots.list",
+          "collection": "snapshots"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_sslPolicies_",
+          "type": "compute/sslPolicies.list",
+          "collection": "sslPolicies"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_targetSslProxies_",
+          "type": "compute/targetSslProxies.list",
+          "collection": "targetSslProxies"
+        },
+        {
+          "masterSnapshotId": "GOOGLE_targetTcpProxies_",
+          "type": "compute/targetTcpProxies.list",
+          "collection": "targetTcpProxies"
         }
       ]
     }
