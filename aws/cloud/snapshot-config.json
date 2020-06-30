@@ -7,7 +7,7 @@
         {
           "masterSnapshotId": "AWS_S3_01",
           "arn": "arn:aws:s3:::",
-          "collection": "s3",
+          "collection": "aws_s3",
           "listMethod": "list_buckets",
           "detailMethods": [
             "get_bucket_acl",
@@ -18,42 +18,25 @@
           ]
         },
         {
-          "masterSnapshotId": "AWS_EC2_02",
+          "masterSnapshotId": "AWS_EC2_01",
           "arn": "arn:aws:ec2:::",
-          "collection": "ec2",
+          "collection": "aws_ec2",
           "listMethod": "describe_instances",
           "detailMethods": [
             "describe_instances",
-            "describe_security_groups"
-          ]
-        },
-        {
-          "masterSnapshotId": "AWS_EC2_03",
-          "arn": "arn:aws:ec2:::",
-          "collection": "ec2",
-          "listMethod": "describe_instances",
-          "detailMethods": [
-            "describe_instances",
+            "describe_security_groups",
             "describe_snapshots",
+            "describe_snapshot_attribute",
+
             "describe_images",
             "describe_volumes"
-          ]
-        },
-        {
-          "masterSnapshotId": "AWS_EC2_04",
-          "arn": "arn:aws:ec2:::",
-          "collection": "ec2",
-          "listMethod": "describe_instances",
-          "detailMethods": [
-            "describe_instances",
-            "describe_snapshots",
-            "describe_snapshot_attribute"
+
           ]
         },
         {
           "masterSnapshotId": "AWS_RDS_01",
           "arn": "arn:aws:rds:::",
-          "collection": "rds",
+          "collection": "aws_rds",
           "listMethod": "describe_db_instances",
           "detailMethods": [
             "describe_db_instances",
@@ -63,7 +46,7 @@
         {
           "masterSnapshotId": "AWS_CF_01",
           "arn": "arn:aws:cloudformation:::",
-          "collection": "cloudformation",
+          "collection": "aws_cloudformation",
           "listMethod": "list_stacks",
           "detailMethods": [
             "describe_stacks",
@@ -76,7 +59,7 @@
         {
           "masterSnapshotId": "AWS_CT_01",
           "arn": "arn:aws:cloudtrail:::",
-          "collection": "cloudtrail",
+          "collection": "aws_cloudtrail",
           "listMethod": "list_trails",
           "detailMethods": [
             "describe_trails"
@@ -85,7 +68,7 @@
         {
           "masterSnapshotId": "AWS_ELB_01",
           "arn": "arn:aws:elb:::",
-          "collection": "elb",
+          "collection": "aws_elb",
           "listMethod": "describe_load_balancers",
           "detailMethods": [
             "describe_load_balancers",
@@ -96,7 +79,7 @@
         {
           "masterSnapshotId": "AWS_SQS_01",
           "arn": "arn:aws:sqs:::",
-          "collection": "sqs",
+          "collection": "aws_sqs",
           "listMethod": "list_queues",
           "detailMethods": [
             "get_queue_attributes"
@@ -105,7 +88,7 @@
         {
           "masterSnapshotId": "AWS_LAMBDA_01",
           "arn": "arn:aws:lambda:::",
-          "collection": "lambda",
+          "collection": "aws_lambda",
           "listMethod": "list_functions",
           "detailMethods": [
             "get_function"
@@ -114,7 +97,7 @@
         {
           "masterSnapshotId": "AWS_ECS_01",
           "arn": "arn:aws:ecs:::",
-          "collection": "ecs",
+          "collection": "aws_ecs",
           "listMethod": "list_task_definitions",
           "detailMethods": [
             "describe_task_definition"
@@ -123,7 +106,7 @@
         {
           "masterSnapshotId": "AWS_EKS_01",
           "arn": "arn:aws:eks:::",
-          "collection": "eks",
+          "collection": "aws_eks",
           "listMethod": "list_clusters",
           "detailMethods": [
             "describe_cluster"
@@ -132,7 +115,7 @@
         {
           "masterSnapshotId": "AWS_ELASTICCACHE_01",
           "arn": "arn:aws:elasticache:::",
-          "collection": "elasticache",
+          "collection": "aws_elasticache",
           "listMethod": "describe_replication_groups",
           "detailMethods": [
             "describe_replication_groups"
@@ -141,7 +124,7 @@
         {
           "masterSnapshotId": "AWS_ACM_01",
           "arn": "arn:aws:acm:::",
-          "collection": "acm",
+          "collection": "aws_acm",
           "listMethod": "list_certificates",
           "detailMethods": [
             "describe_certificate"
@@ -150,7 +133,7 @@
         {
           "masterSnapshotId": "AWS_CLOUDFRONT_01",
           "arn": "arn:aws:cloudfront:::",
-          "collection": "cloudfront",
+          "collection": "aws_cloudfront",
           "listMethod": "list_distributions",
           "detailMethods": [
             "get_distribution"
@@ -159,7 +142,7 @@
         {
           "masterSnapshotId": "AWS_EFS_01",
           "arn": "arn:aws:efs:::",
-          "collection": "efs",
+          "collection": "aws_efs",
           "listMethod": "describe_file_systems",
           "detailMethods": [
             "describe_file_systems"
@@ -168,7 +151,7 @@
         {
           "masterSnapshotId": "AWS_IAM_01",
           "arn": "arn:aws:iam:::",
-          "collection": "iam",
+          "collection": "aws_iam",
           "listMethod": "list_users",
           "detailMethods": [
             "get_user",
@@ -181,19 +164,10 @@
         {
           "masterSnapshotId": "AWS_REDSHIFT_01",
           "arn": "arn:aws:redshift:::",
-          "collection": "redshift",
+          "collection": "aws_redshift",
           "listMethod": "describe_clusters",
           "detailMethods": [
             "describe_clusters"
-          ]
-        },
-        {
-          "masterSnapshotId": "AWS_SSM_01",
-          "arn": "arn:aws:ssm:::",
-          "collection": "ssm",
-          "listMethod": "describe_parameters",
-          "detailMethods": [
-            "describe_parameters"
           ]
         }
       ]

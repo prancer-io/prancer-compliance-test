@@ -68,7 +68,7 @@
                     "type": "rego",
                     "rule": "file(input_ec2_02_1.rego)",
                     "masterSnapshotId": [
-                        "AWS_EC2_02"
+                        "AWS_EC2_01"
                     ],
                     "eval": "data.rule.rulepass",
                     "title": "Default Security Group should restrict inbound and outbound traffic for AllUsers",
@@ -110,7 +110,7 @@
                     "type": "rego",
                     "rule": "file(input_ec2_03_1.rego)",
                     "masterSnapshotId": [
-                        "AWS_EC2_03"
+                        "AWS_EC2_01"
                     ],
                     "eval": "data.rule.rulepass",
                     "title": "EBS Volume is attached",
@@ -132,7 +132,7 @@
                     "type": "rego",
                     "rule": "file(input_ec2_05_1.rego)",
                     "masterSnapshotId": [
-                        "AWS_EC2_02"
+                        "AWS_EC2_01"
                     ],
                     "eval": "data.rule.rulepass",
                     "title": "EC2 Instance IAM Role enabled",
@@ -154,7 +154,7 @@
                     "type": "rego",
                     "rule": "file(input_ec2_04_1.rego)",
                     "masterSnapshotId": [
-                        "AWS_EC2_04"
+                        "AWS_EC2_01"
                     ],
                     "eval": "data.rule.rulepass",
                     "title": "EBS snapshots should not accessible publicly",
