@@ -341,6 +341,94 @@
                     ]
                 },
                 {
+                    "masterTestId": "AWS_RDS_06",
+                    "type": "rego",
+                    "rule": "file(input_rds_06.rego)",
+                    "masterSnapshotId": [
+                        "AWS_RDS_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS RDS minor upgrades not enabled",
+                    "description": "When Amazon Relational Database Service (Amazon RDS) supports a new version of a database engine, you can upgrade your DB instances to the new version. There are two kinds of upgrades: major version upgrades and minor version upgrades. Minor upgrades helps maintain a secure and stable RDS with minimal impact on the application. For this reason, we recommend that your automatic minor upgrade is enabled. Minor version upgrades only occur automatically if a minor upgrade replaces an unsafe version, such as a minor upgrade that contains bug fixes for a previous version.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "rds"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_RDS_07",
+                    "type": "rego",
+                    "rule": "file(input_rds_07.rego)",
+                    "masterSnapshotId": [
+                        "AWS_RDS_02_UNDEFINED_DescribeDBClusters"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS RDS DB cluster encryption is disabled",
+                    "description": "This policy identifies RDS DB clusters for which encryption is disabled. Amazon Aurora encrypted DB clusters provide an additional layer of data protection by securing your data from unauthorized access to the underlying storage. You can use Amazon Aurora encryption to increase data protection of your applications deployed in the cloud, and to fulfill compliance requirements for data-at-rest encryption.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "rds"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_RDS_08",
+                    "type": "rego",
+                    "rule": "file(input_rds_08.rego)",
+                    "masterSnapshotId": [
+                        "AWS_RDS_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS RDS database not encrypted using Customer Managed Key",
+                    "description": "This policy identifies RDS databases that are encrypted with default KMS keys and not with customer managed keys. As a best practice, use customer managed keys to encrypt the data on your RDS databases and maintain control of your keys and data on sensitive workloads.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "rds"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_RDS_09",
+                    "type": "rego",
+                    "rule": "file(input_rds_09.rego)",
+                    "masterSnapshotId": [
+                        "AWS_RDS_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS RDS retention policy less than 7 days",
+                    "description": "RDS Retention Policies for Backups are an important part of your DR/BCP strategy. Recovering data from catastrophic failures, malicious attacks, or corruption often requires a several day window of potentially good backup material to leverage. As such, the best practice is to ensure your RDS clusters are retaining at least 7 days of backups, if not more (up to a maximum of 35).",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "rds"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "AWS_CF_01",
                     "type": "rego",
                     "rule": "file(input_cf_01.rego)",
