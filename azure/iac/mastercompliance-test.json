@@ -1,0 +1,692 @@
+{
+    "testSet": [
+        {
+            "masterTestName": "AZURE_TEST",
+            "version": "0.1",
+            "cases": [
+                {
+                    "masterTestId": "TEST_ACTIVITY_LOG_ALERT",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(activitylogalerts.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.alerts",
+                            "message": "data.rule.alerts_err"
+                        }
+                    ],
+                    "title": "Activity log alerts settings",
+                    "description": "Send me emails about alerts is set to ON in Security Center",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_AKS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.aks_cni_net",
+                            "message": "data.rule.aks_cni_net_err"
+                        },
+                        {
+                            "eval": "data.rule.aks_http_routing",
+                            "message": "data.rule.aks_http_routing_err"
+                        },
+                        {
+                            "eval": "data.rule.aks_monitoring",
+                            "message": "data.rule.aks_monitoring_err"
+                        },
+                        {
+                            "eval": "data.rule.aks_nodes",
+                            "message": "data.rule.aks_nodes_err"
+                        },
+                        {
+                            "eval": "data.rule.aks_rbac",
+                            "message": "data.rule.aks_rbac_err"
+                        }
+                    ],
+                    "title": "Azure AKS cluster configuration check.",
+                    "description": "Azure AKS cluster Azure CNI networking is enabled. Azure AKS cluster HTTP application routing should be enabled. Azure AKS cluster monitoring should be enabled. Azure AKS cluster pool profile count contains less than 3 nodes. Azure AKS enable role-based access control (RBAC) is enforced.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APPLICATION_GATEWAYS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(applicationgateways.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.gw_tls",
+                            "message": "data.rule.gw_tls_err"
+                        },
+                        {
+                            "eval": "data.rule.gw_waf",
+                            "message": "data.rule.gw_waf_err"
+                        }
+                    ],
+                    "title": "Azure Application Gateway configurtaion check.",
+                    "description": "Azure Application Gateway allows TLSv1.1 or lower.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DB_ADMINISTRATORS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbadministrators.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.db_ad_admin",
+                            "message": "data.rule.db_ad_admin_err"
+                        }
+                    ],
+                    "title": "Azure SQL DB Administrator check.",
+                    "description": "SQL servers which do not have Azure Active Directory admin configured.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DB_AUDITING_DB_SETTINGS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbauditingdbsettings.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.sql_log_audit ",
+                            "message": "data.rule.sql_log_audit _err"
+                        },
+                        {
+                            "eval": "data.rule.sql_log_retention  ",
+                            "message": "data.rule.sql_log_retention  _err"
+                        }
+                    ],
+                    "title": "Azure SQL DB Auditing DB Settings.",
+                    "description": "Auditing for SQL database should be set to On. Azure SQL Database with Auditing Retention less than 90 days.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DB_ENCRYPTIONS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbdataencryption.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.db_encrypt",
+                            "message": "data.rule.db_encrypt_err"
+                        }
+                    ],
+                    "title": "Azure SQL DB Encryption.",
+                    "description": "SQL databases has encryption disabled. ",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DB_FIREWALL_RULES",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbauditingdbsettings.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.db_firewall",
+                            "message": "data.rule.db_firewall_err"
+                        }
+                    ],
+                    "title": "Azure SQL DB Firewall Rules.",
+                    "description": "SQL Server Firewall rules allow access to any Azure internal resources.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbsecurityalertpolicies.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.dbsec_threat_retention",
+                            "message": "data.rule.dbsec_threat_retention_err"
+                        },
+                        {
+                            "eval": "data.rule.dbsec_threat_email",
+                            "message": "data.rule.dbsec_threat_email_err"
+                        },
+                        {
+                            "eval": "data.rule.dbsec_threat_alert",
+                            "message": "data.rule.dbsec_threat_alert_err"
+                        },
+                        {
+                            "eval": "data.rule.sql_alert",
+                            "message": "data.rule.sql_alert_err"
+                        },
+                        {
+                            "eval": "data.rule.dbsec_threat_off",
+                            "message": "data.rule.dbsec_threat_off_err"
+                        },
+                        {
+                            "eval": "data.rule.dbsec_threat_off",
+                            "message": "data.rule.dbsec_threat_off_err"
+                        }
+                    ],
+                    "title": "Azure SQL DB Security Alert Policy.",
+                    "description": "Azure SQL DB with Threat Retention less than 91 days. Azure SQL DB with disabled Email service and co-administrators for Threat Detection. Azure SQL Server threat detection alerts not enabled for all threat types. Send alerts on field value on SQL Databases is misconfigured. Threat Detection on SQL databases is set to Off. ",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DB_VALENRABILITY_ASSESSMENTS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbvulnerabilityassessments.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.db_ads_mail",
+                            "message": "data.rule.db_ads_mail_err"
+                        },
+                        {
+                            "eval": "data.rule.db_ads_alert",
+                            "message": "data.rule.db_ads_alert_err"
+                        },
+                        {
+                            "eval": "data.rule.db_ads_scan",
+                            "message": "data.rule.db_ads_scan_err"
+                        }
+                    ],
+                    "title": "Azure DB vulnerability Assessments.",
+                    "description": "Azure SQL Server advanced data security does not have an email alert recipient. Azure SQL Server advanced data security does not send alerts to service and co-administrators. Azure SQL Server advanced data security is disabled.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(diagnosticsettings.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.log_keyvault",
+                            "message": "data.rule.log_keyvault_err"
+                        },
+                        {
+                            "eval": "data.rule.log_lbs",
+                            "message": "data.rule.log_lbs_err"
+                        },
+                        {
+                            "eval": "data.rule.log_storage_retention",
+                            "message": "data.rule.log_storage_retention_err"
+                        },
+                        {
+                            "eval": "data.rule.log_blob",
+                            "message": "data.rule.log_blob_err"
+                        },
+                        {
+                            "eval": "data.rule.log_queue",
+                            "message": "data.rule.log_queue_err"
+                        },
+                        {
+                            "eval": "data.rule.log_table",
+                            "message": "data.rule.log_table_err"
+                        }
+                    ],
+                    "title": "Azure Diagonastic Settings.",
+                    "description": "Azure Key Vault audit logging is disabled. Azure Load Balancer diagnostics logs are disabled. Azure Storage Account with Auditing Retention less than 90 days. Azure storage account logging for blobs is disabled. Azure storage account logging for queues is disabled. Azure storage account logging for tables is disabled.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DISKS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(disks.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.disk_encrypt",
+                            "message": "data.rule.disk_encrypt_err"
+                        }
+                    ],
+                    "title": "Azure Disk.",
+                    "description": "Azure disk for VM operating system is not encrypted at rest using ADE.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KEYVAULT_SECRETS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(keyvaultsecrets.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.kv_expire",
+                            "message": "data.rule.kv_expire_err"
+                        }
+                    ],
+                    "title": "Azure Key Vault Secrets.",
+                    "description": "Azure Key Vault secrets have no expiration date.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_LOCKS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(locks.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.rg_locks",
+                            "message": "data.rule.rg_locks_err"
+                        }
+                    ],
+                    "title": "Azure Locks.",
+                    "description": "Instance is communicating with ports known to mine Bitcoin.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_NETWORK_WATCHERS_FLOW_LOGS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(networkwatchersflowlogs.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.netwatch_logs",
+                            "message": "data.rule.netwatch_logs_err"
+                        },
+                        {
+                            "eval": "data.rule.netwatch_log_retention",
+                            "message": "data.rule.netwatch_log_retention_err"
+                        }
+                    ],
+                    "title": "Azure Watcher.",
+                    "description": "Network Watchers Flow Logs.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.nsg_inbound",
+                            "message": "data.rule.nsg_inbound_err"
+                        },
+                        {
+                            "eval": "data.rule.nsg_outbound",
+                            "message": "data.rule.nsg_outbound_err"
+                        }
+                    ],
+                    "title": "Azure Network Security Group.",
+                    "description": "Check for allowed inbound and outbound ports in network security group.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_PRICING",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(pricing.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.pricing",
+                            "message": "data.rule.pricing_err"
+                        }
+                    ],
+                    "title": "Azure Pricing.",
+                    "description": "Standard pricing tier is not selected in Security Center.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_REGISTRIES_LIST",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registrieslist.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.acr_classic",
+                            "message": "data.rule.acr_classic_err"
+                        }
+                    ],
+                    "title": "Azure Registries List.",
+                    "description": "Azure Container Registry using the deprecated classic registry.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_REGISTRIES_WEBHOOK",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registrieswebhooks.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.acr_webhooks",
+                            "message": "data.rule.acr_webhooks_err"
+                        }
+                    ],
+                    "title": "Azure Registries Webhook.",
+                    "description": "Azure ACR HTTPS not enabled for webhook.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_CONTACTS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitycontacts.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.securitycontacts",
+                            "message": "data.rule.securitycontacts_err"
+                        }
+                    ],
+                    "title": "Azure security contacts.",
+                    "description": "Security contact emails is not set in Security Center.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.storage_secure",
+                            "message": "data.rule.storage_secure_err"
+                        },
+                        {
+                            "eval": "data.rule.storage_acl",
+                            "message": "data.rule.storage_acl_err"
+                        }
+                    ],
+                    "title": "Azure storage contacts.",
+                    "description": "Storage Accounts without Secure transfer enabled. Storage Accounts without their firewalls enabled.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_BLOB_CONTAINER",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageblobcontainers.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.storage_public_access",
+                            "message": "data.rule.storage_public_access_err"
+                        }
+                    ],
+                    "title": "Azure storage blob container.",
+                    "description": "Azure Blob container(s) with public access and logging set to less than 180 days.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_VIRTUAL_MACHINE",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(vm.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.vm_aset",
+                            "message": "data.rule.vm_aset_err"
+                        }
+                    ],
+                    "title": "Azure virtual machine.",
+                    "description": "Azure Blob container(s) with public access and logging set to less than 180 days.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_VIRTUAL_MACHINE",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(vmextensions.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.vm_protection",
+                            "message": "data.rule.vm_protection_err"
+                        }
+                    ],
+                    "title": "Azure virtual machine extensions.",
+                    "description": "Azure Virtual Machine does not have endpoint protection installed.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_VNET_PEERINGS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(vnetpeerings.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.vnet_peer",
+                            "message": "data.rule.vnet_peer_err"
+                        }
+                    ],
+                    "title": "Azure Virtual network peering.",
+                    "description": "Azure virtual network peer is disconnected.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_VNET_PEERINGS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(vnetsubnets.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.vnet_subnet_nsg",
+                            "message": "data.rule.vnet_subnet_nsg_err"
+                        }
+                    ],
+                    "title": "Azure virtual network peering.",
+                    "description": "Azure virtual network peer is disconnected.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_VPN_GATEWAYS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(vpngateways.rego)",
+                    "evals": [
+                        {
+                            "eval": "data.rule.vpn_encrypt",
+                            "message": "data.rule.vpn_encrypt_err"
+                        }
+                    ],
+                    "title": "Azure VPN Gateway.",
+                    "description": "VPN is not configured with cryptographic algorithm.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

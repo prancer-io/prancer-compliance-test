@@ -24,7 +24,7 @@ dbsec_threat_retention = false {
     input.properties.retentionDays <= 90
 }
 
-dbsec_threat_retention_err "Azure SQL DB with Threat Retention less than 91 days" {
+dbsec_threat_retention_err = "Azure SQL DB with Threat Retention less than 91 days" {
     dbsec_threat_retention == false
 }
 
