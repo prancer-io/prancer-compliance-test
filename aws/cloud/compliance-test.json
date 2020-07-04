@@ -1076,6 +1076,28 @@
                     ]
                 },
                 {
+                    "masterTestId": "AWS_LAMBDA_04",
+                    "type": "rego",
+                    "rule": "file(input_lambda_04.rego)",
+                    "masterSnapshotId": [
+                        "AWS_LAMBDA_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS Lambda nearing availability code storage limit",
+                    "description": "This policy identifies AWS Lambda functions which are using same IAM role. Multiple Lambda functions using same IAM role violate the Principle of Least Privilege. Lambda function privileges are controlled by IAM roles. So Lambda functions execution role should be attached with appropriate IAM roles instead of generic roles.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "lambda"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "AWS_ECS_01",
                     "type": "rego",
                     "rule": "file(input_ecs_01.rego)",

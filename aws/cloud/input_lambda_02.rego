@@ -5,7 +5,7 @@ default rulepass = false
 # API: https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html
 # Id: 106
 
-rulepass = true{
+rulepass {
    input.Configuration.VpcConfig
    input.Configuration.VpcConfig.VpcId
 }
