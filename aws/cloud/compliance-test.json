@@ -64,6 +64,268 @@
                     ]
                 },
                 {
+                    "masterTestId": "AWS_S3_03",
+                    "type": "rego",
+                    "rule": "file(input_s3_03.rego)",
+                    "masterSnapshotId": [
+                        "AWS_S3_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS S3 Bucket Policy allows public access to CloudTrail logs",
+                    "description": "This policy scans your bucket policy that is applied to the S3 bucket to prevent public access to the CloudTrail logs. CloudTrail logs a record of every API call made in your AWS account. These logs file are stored in an S3 bucket. Bucket policy or the access control list (ACL) applied to the S3 bucket does not prevent public access to the CloudTrail logs. It is recommended that the bucket policy or access control list (ACL) applied to the S3 bucket that stores CloudTrail logs prevents public access. Allowing public access to CloudTrail log content may aid an adversary in identifying weaknesses in the affected account's use or configuration.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "s3"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_S3_04",
+                    "type": "rego",
+                    "rule": "file(input_s3_04.rego)",
+                    "masterSnapshotId": [
+                        "AWS_S3_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS S3 Bucket has Global DELETE Permissions enabled via bucket policy",
+                    "description": "This policy identifies the S3 Bucket(s) which will allow any unauthenticated user to DELETE objects from a bucket. These permissions permit anyone, malicious or not, to DELETE objects from your S3 bucket if they can guess the namespace. Since the S3 service does not protect the namespace other than with ACLs and Bucket Policy, you risk loss or compromise of critical data by leaving this open.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "s3"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_S3_05",
+                    "type": "rego",
+                    "rule": "file(input_s3_05.rego)",
+                    "masterSnapshotId": [
+                        "AWS_S3_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS S3 Bucket has Global GET Permissions enabled via bucket policy",
+                    "description": "This policy identifies the S3 Bucket(s) which will allow any unauthenticated user to GET objects from a bucket. These permissions permit anyone, malicious or not, to GET objects from your S3 bucket if they can guess the namespace. Since the S3 service does not protect the namespace other than with ACLs and Bucket Policy, you risk loss or compromise of critical data by leaving this open.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "s3"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_S3_06",
+                    "type": "rego",
+                    "rule": "file(input_s3_06.rego)",
+                    "masterSnapshotId": [
+                        "AWS_S3_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS S3 Bucket has Global LIST Permissions enabled via bucket policy",
+                    "description": "This policy identifies the S3 Bucket(s) which will allow any unauthenticated user to LIST objects from a bucket. These permissions permit anyone, malicious or not, to LIST objects from your S3 bucket if they can guess the namespace. Since the S3 service does not protect the namespace other than with ACLs and Bucket Policy, you risk loss or compromise of critical data by leaving this open.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "s3"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_S3_07",
+                    "type": "rego",
+                    "rule": "file(input_s3_07.rego)",
+                    "masterSnapshotId": [
+                        "AWS_S3_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS S3 Bucket has Global PUT Permissions enabled via bucket policy",
+                    "description": "This policy identifies the S3 Bucket(s) which will allow any unauthenticated user to PUT objects into a bucket. These permissions permit anyone, malicious or not, to PUT objects into your S3 bucket if they can guess the namespace. Since the S3 service does not protect the namespace other than with ACLs and Bucket Policy, you risk compromise of critical data by leaving this open.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "s3"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_S3_08",
+                    "type": "rego",
+                    "rule": "file(input_s3_08.rego)",
+                    "masterSnapshotId": [
+                        "AWS_S3_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS S3 Object Versioning is disabled",
+                    "description": "This policy identifies the S3 buckets which have Object Versioning disabled. S3 Object Versioning is an important capability in protecting your data within a bucket. Once you enable Object Versioning, you cannot remove it; you can suspend Object Versioning at any time on a bucket if you do not wish for it to persist. It is recommended to enable Object Versioning on S3.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "s3"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_S3_09",
+                    "type": "rego",
+                    "rule": "file(input_s3_09.rego)",
+                    "masterSnapshotId": [
+                        "AWS_S3_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS S3 bucket not configured with secure data transport policy",
+                    "description": "This policy identifies S3 buckets which are not configured with secure data transport policy. AWS S3 buckets should enforce encryption of data over the network using Secure Sockets Layer (SSL). It is recommended to add a bucket policy that explicitly denies (Effect: Deny) all access (Action: s3:*) from anybody who browses (Principal: *) to Amazon S3 objects within an Amazon S3 bucket if they are not accessed through HTTPS (aws:SecureTransport: false).",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "s3"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_S3_10",
+                    "type": "rego",
+                    "rule": "file(input_s3_10.rego)",
+                    "masterSnapshotId": [
+                        "AWS_S3_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS S3 buckets are accessible to any authenticated user",
+                    "description": "This policy identifies S3 buckets accessible to any authenticated AWS users. Amazon S3 allows customer to store and retrieve any type of content from anywhere in the web. Often, customers have legitimate reasons to expose the S3 bucket to public, for example to host website content. However, these buckets often contain highly sensitive enterprise data which if left accessible to anyone with valid AWS credentials, may result in sensitive data leaks.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM v3.0.1-DSI-02",
+                                "CSA CCM v3.0.1-IVS-06",
+                                "CSA CCM v3.0.1-IVS-08",
+                                "CSA CCM v3.0.1-MOS-13",
+                                "GDPR-Article 25",
+                                "HITRUST Version 9.2-Control Reference: 01.n",
+                                "HITRUST Version 9.2-Control Reference: 01.p",
+                                "HITRUST Version 9.2-Control Reference: 05.j",
+                                "HITRUST Version 9.2-Control Reference: 06.e",
+                                "HITRUST Version 9.2-Control Reference: 07.e",
+                                "ISO 27001:2013-A.18.1.3",
+                                "NIST 800-171 Rev1-3.1.9",
+                                "NIST 800-171 Rev1-3.13.1",
+                                "NIST 800-171 Rev1-3.13.2",
+                                "NIST 800-171 Rev1-3.13.5",
+                                "NIST 800-53 Rev4-AC-8c",
+                                "NIST 800-53 Rev4-SC-7b",
+                                "PCI DSS v3.2-10.1"
+                            ],
+                            "service": [
+                                "s3"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_S3_11",
+                    "type": "rego",
+                    "rule": "file(input_s3_11.rego)",
+                    "masterSnapshotId": [
+                        "AWS_S3_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS S3 buckets are accessible to public",
+                    "description": "This policy identifies S3 buckets which are publicly accessible. Amazon S3 allows customers to store and retrieve any type of content from anywhere in the web. Often, customers have legitimate reasons to expose the S3 bucket to public, for example, to host website content. However, these buckets often contain highly sensitive enterprise data which if left open to public may result in sensitive data leaks.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM v3.0.1-DSI-02",
+                                "CSA CCM v3.0.1-IVS-06",
+                                "CSA CCM v3.0.1-IVS-08",
+                                "CSA CCM v3.0.1-MOS-13",
+                                "GDPR-Article 25",
+                                "HITRUST Version 9.2-Control Reference: 01.n",
+                                "HITRUST Version 9.2-Control Reference: 01.p",
+                                "HITRUST Version 9.2-Control Reference: 05.j",
+                                "HITRUST Version 9.2-Control Reference: 06.e",
+                                "HITRUST Version 9.2-Control Reference: 07.e",
+                                "ISO 27001:2013-A.14.1.2",
+                                "ISO 27001:2013-A.14.1.3",
+                                "ISO 27001:2013-A.18.1.3",
+                                "ISO 27001:2013-A.8.2.3",
+                                "ISO 27001:2013-A.9.2.5",
+                                "NIST 800-171 Rev1-3.1.9",
+                                "NIST 800-171 Rev1-3.13.1",
+                                "NIST 800-171 Rev1-3.13.2",
+                                "NIST 800-171 Rev1-3.13.5",
+                                "NIST 800-53 Rev4-AC-8c",
+                                "NIST 800-53 Rev4-SC-7b",
+                                "PCI DSS v3.2-10.1",
+                                "PCI DSS v3.2-7.1",
+                                "SOC 2-CC6.1",
+                                "SOC 2-CC6.6",
+                                "SOC 2-CC6.7"
+                            ],
+                            "service": [
+                                "s3"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_S3_12",
+                    "type": "rego",
+                    "rule": "file(input_s3_12.rego)",
+                    "masterSnapshotId": [
+                        "AWS_S3_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "S3 buckets with configurations set to host websites",
+                    "description": "To host a website on AWS S3 you should configure a bucket as a website. This policy identifies all the S3 buckets that are configured to host websites. By frequently surveying these S3 buckets you can ensure that only authorized buckets are enabled to host websites. Make sure to disable static website hosting for unauthorized S3 buckets.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "ISO 27001:2013-A.18.1.3"
+                            ],
+                            "service": [
+                                "s3"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "AWS_EC2_01",
                     "type": "rego",
                     "rule": "file(input_ec2_02_1.rego)",
