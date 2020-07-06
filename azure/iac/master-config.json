@@ -1,0 +1,18 @@
+{
+    "snapshots": [
+        {
+            "type": "filesystem",
+            "connectorUser": "USER_1",
+            "nodes": [
+                {
+                    "masterSnapshotId": "ARM_TEMPLATE_SNAPSHOT",
+                    "type": "arm",
+                    "collection": "armtemplate",
+                    "paths": [
+                        "/"
+                    ]
+                }
+            ]
+        }
+    ]
+}
