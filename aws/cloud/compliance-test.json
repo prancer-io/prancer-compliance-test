@@ -1530,6 +1530,176 @@
                     ]
                 },
                 {
+                    "masterTestId": "AWS_ELB_TEST_04",
+                    "type": "rego",
+                    "rule": "file(input_elb_04.rego)",
+                    "masterSnapshotId": [
+                        "AWS_ELB_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with insecure ciphers",
+                    "description": "This policy identifies Elastic Load Balancers (Classic) which are configured with SSL negotiation policy containing insecure ciphers. An SSL cipher is an encryption algorithm that uses encryption keys to create a coded message. SSL protocols use several SSL ciphers to encrypt data over the Internet. As many of the other ciphers are not secure, it is recommended to use only the ciphers recommended in the following AWS link: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-ssl-security-policy.html.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "elb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_ELB_TEST_05",
+                    "type": "rego",
+                    "rule": "file(input_elb_05.rego)",
+                    "masterSnapshotId": [
+                        "AWS_ELB_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with vulnerable SSL protocol",
+                    "description": "This policy identifies Elastic Load Balancers (Classic) which are configured with SSL negotiation policy containing vulnerable SSL protocol. The SSL protocol establishes a secure connection between a client and a server and ensures that all the data passed between the client and your load balancer is private. As a security best practice, it is recommended to use the latest version SSL protocol.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "elb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_ELB_TEST_06",
+                    "type": "rego",
+                    "rule": "file(input_elb_06.rego)",
+                    "masterSnapshotId": [
+                        "AWS_ELB_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS Elastic Load Balancer (ELB) has security group with no inbound rules",
+                    "description": "This policy identifies Elastic Load Balancers (ELB) which have security group with no inbound rules. A security group with no inbound rule will deny all incoming requests. ELB security groups should have at least one inbound rule, ELB with no inbound permissions will deny all traffic incoming to ELB; in other words, the ELB is useless without inbound permissions.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "elb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_ELB_TEST_07",
+                    "type": "rego",
+                    "rule": "file(input_elb_07.rego)",
+                    "masterSnapshotId": [
+                        "AWS_ELB_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS Elastic Load Balancer (ELB) has security group with no outbound rules",
+                    "description": "This policy identifies Elastic Load Balancers (ELB) which have security group with no outbound rules. A security group with no outbound rule will deny all outgoing requests. ELB security groups should have at least one outbound rule, ELB with no outbound permissions will deny all traffic going to any EC2 instances or resources configured behind that ELB; in other words, the ELB is useless without outbound permissions.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "elb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_ELB_TEST_08",
+                    "type": "rego",
+                    "rule": "file(input_elb_08.rego)",
+                    "masterSnapshotId": [
+                        "AWS_ELB_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS Elastic Load Balancer (ELB) not in use",
+                    "description": "This policy identifies unused Elastic Load Balancers (ELBs) in your AWS account. Any Elastic Load Balancer in your AWS account is adding charges to your monthly bill, although it is not used by any resources. As a best practice, it is recommended to remove ELBs that are not associated with any instances, it will also help you avoid unexpected charges on your bill.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "ISO 27001:2013-A.14.1.3"
+                            ],
+                            "service": [
+                                "elb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_ELB_TEST_09",
+                    "type": "rego",
+                    "rule": "file(input_elb_09.rego)",
+                    "masterSnapshotId": [
+                        "AWS_ELB_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balancer (ALB) with access log disabled",
+                    "description": "This policy identifies ELBv2 ALBs which have access log disabled. Access logs capture detailed information about requests sent to your load balancer and each log contains information such as the time the request was received, the client's IP address, latencies, request paths, and server responses. You can use these access logs to analyze traffic patterns and troubleshoot issues.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CUSTOM"
+                            ],
+                            "service": [
+                                "elb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "AWS_ELB_TEST_10",
+                    "type": "rego",
+                    "rule": "file(input_elb_10.rego)",
+                    "masterSnapshotId": [
+                        "AWS_ELB_01"
+                    ],
+                    "eval": "data.rule.rulepass",
+                    "title": "AWS Elastic Load Balancer with listener TLS/SSL disabled",
+                    "description": "This policy identifies Elastic Load Balancers which have listener TLS/SSL disabled. As Load Balancers will be handling all incoming requests and routing the traffic accordingly; The listeners on the load balancers should always receive traffic over secure channel with a valid SSL certificate configured.",
+                    "tags": [
+                        {
+                            "cloud": "AWS",
+                            "compliance": [
+                                "CSA CCM v3.0.1-DSI-03",
+                                "CSA CCM v3.0.1-EKM-03",
+                                "CSA CCM v3.0.1-IPY-04",
+                                "CSA CCM v3.0.1-IVS-10",
+                                "GDPR-Article 46",
+                                "HITRUST Version 9.2-Control Reference: 05.i",
+                                "HITRUST Version 9.2-Control Reference: 09.m",
+                                "HITRUST Version 9.2-Control Reference: 09.v",
+                                "HITRUST Version 9.2-Control Reference: 09.x",
+                                "ISO 27001:2013-A.13.1.1",
+                                "ISO 27001:2013-A.14.1.3",
+                                "ISO 27001:2013-A.6.2.2",
+                                "ISO 27001:2013-A.8.2.3",
+                                "NIST 800-171 Rev1-3.13.8",
+                                "NIST 800-53 Rev4-SC-8 (1)",
+                                "NIST CSF-PR.DS-2",
+                                "SOC 2-CC6.7"
+                            ],
+                            "service": [
+                                "elb"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "AWS_SQS_01",
                     "type": "rego",
                     "rule": "file(input_sqs_01.rego)",
