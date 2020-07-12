@@ -68,7 +68,7 @@ redshift_audit = false {
 
 redshift_audit = false {
     lower(input.Type) == "aws::redshift::cluster"
-    not input.Properties.LoggingProperties.BucketName
+    not input.Properties.LoggingProperties
 }
 
 redshift_audit = false {
