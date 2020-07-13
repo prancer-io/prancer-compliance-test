@@ -9,10 +9,6 @@ ports = [
     "445", "53", "5432", "5500", "5900"
 ]
 
-common_ports := [
-    20, 21, 22, 23, 25, 53, 80, 135, 137, 138, 139, 443, 445, 1433, 1434, 3306, 3389, 4333, 5432
-]
-
 errors := {
     "135": "AWS Security Groups allow internet traffic from internet to Windows RPC port (135)",
     "137": "AWS Security Groups allow internet traffic from internet to NetBIOS port (137)",
@@ -58,11 +54,13 @@ secgroup_false[port] = false {
 
 secgroup_false["all"] = false {
     lower(input.Type) == "aws::ec2::securitygroup"
+    lower(input.Properties.GroupName) == "default"
     input.Properties.SecurityGroupIngress[_].CidrIpv6 == "::/0"
 }
 
 secgroup_false["all"] = false {
     lower(input.Type) == "aws::ec2::securitygroup"
+    lower(input.Properties.GroupName) == "default"
     input.Properties.SecurityGroupIngress[_].CidrIp == "0.0.0.0/0"
 }
 
@@ -77,23 +75,6 @@ secgroup_false["proto_all"] = false {
     ingress.IpProtocol == "-1"
     ingress.CidrIpv6="::/0"
 }
-
-secgroup_false["common_ports"] = false {
-    ingress := input.Properties.SecurityGroupIngress[_]
-    port := common_ports[_]
-    ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
-    to_number(ingress.FromPort) <= port
-    to_number(ingress.ToPort) >= port
-}
-
-secgroup_false["common_ports"] = false {
-    ingress := input.SecurityGroups[_].IpPermissions[_]
-    port := common_ports[_]
-    ingress.Ipv6Ranges[_].CidrIpv6="::/0"
-    to_number(ingress.FromPort) <= port
-    to_number(ingress.ToPort) >= port
-}
-
 
 securitygroup = true {
     lower(input.Type) == "aws::ec2::securitygroup"

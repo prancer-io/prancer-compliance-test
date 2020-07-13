@@ -15,7 +15,7 @@ ssm_secure {
 
 ssm_secure = false {
     lower(input.Type) == "aws::ssm::parameter"
-        lower(input.Properties.Type) != "securestring"
+    lower(input.Properties.Type) != "securestring"
 }
 
 ssm_secure_err = "AWS SSM Parameter is not encrypted" {

@@ -1,6 +1,7 @@
 package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html
 
 #
 # Id: 62
@@ -302,4 +303,24 @@ elb_listener_ssl = false {
 
 elb_listener_ssl_err = "AWS Elastic Load Balancer with listener TLS/SSL disabled" {
     elb_listener_ssl == false
+}
+
+#
+# Id: 6
+#
+
+default elb_over_https = null
+
+elb_over_https {
+    lower(input.Type) == "aws::elasticloadbalancingv2::listener"
+    lower(input.Properties.Protocol) != "http"
+}
+
+elb_over_https = false {
+    lower(input.Type) == "aws::elasticloadbalancingv2::listener"
+    lower(input.Properties.Protocol) == "http"
+}
+
+elb_over_https_err = "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balancer (ALB) with access log disabled" {
+    elb_over_https == false
 }
