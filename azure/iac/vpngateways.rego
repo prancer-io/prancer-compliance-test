@@ -8,18 +8,21 @@ package rule
 
 default vpn_encrypt = null
 
+azure_issue["vpn_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/vpngateways"
+    lower(resource.properties.connections[_].properties.ipsecPolicies[_].ipsecEncryption) == "none"
+}
+
 vpn_encrypt {
-    lower(input.type) == "microsoft.network/vpngateways"
-    count([ c | 
-        lower(input.properties.connections[i].properties.ipsecPolicies[i].ipsecEncryption) == "none";
-        c := 1]) == 0
+    lower(input.resources[_].type) == "microsoft.network/vpngateways"
+    not azure_issue["vpn_encrypt"]
 }
 
 vpn_encrypt = false {
-    lower(input.type) == "microsoft.network/vpngateways"
-    lower(input.properties.connections[_].properties.ipsecPolicies[_].ipsecEncryption) == "none"
+    azure_issue["vpn_encrypt"]
 }
 
-vpn_encrypt_err = "Azure virtual network peer is disconnected" {
-    vpn_encrypt == false
+vpn_encrypt_err = "VPN is not configured with cryptographic algorithm" {
+    azure_issue["vpn_encrypt"]
 }
