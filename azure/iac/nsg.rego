@@ -3,7 +3,6 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups
 
 #
-# Internet connectivity via tcp over insecure port (3)
 # Memcached DDoS attack attempted (5)
 # RedisWannaMine vulnerable instances with active network traffic (7)
 # Azure NSG allows SSH traffic from internet on port 22 (229)
@@ -17,7 +16,6 @@ package rule
 # Azure NSG having Inbound rule overly permissive to allow all traffic from any source to any destination (237)
 # Azure Network Security Group allows CIFS (238)
 # Azure Network Security Group allows DNS (239/240)
-# Azure Network Security Group allows FTP (241)
 # Azure Network Security Group allows FTP-Data (242)
 # Azure Network Security Group allows ICMP (243)
 # Azure Network Security Group allows MSQL (244)
@@ -43,9 +41,10 @@ iports := [
 
 # allowed in all
 nsg_inbound[port] {
+    resource := input.resources[_]
     port := iports[_]
-    lower(input.type) == "microsoft.network/networksecuritygroups"
-    rules := input.properties.securityRules[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.destinationAddressPrefix == "*"
@@ -54,20 +53,22 @@ nsg_inbound[port] {
 
 # allowed in port
 nsg_inbound[port] {
+    resource := input.resources[_]
     port := iports[_]
-    lower(input.type) == "microsoft.network/networksecuritygroups"
-    rules := input.properties.securityRules[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.destinationAddressPrefix == "*"
     rules.properties.destinationPortRange == port
 }
 
-# allowed in list
+# allowed in range
 nsg_inbound[port] {
+    resource := input.resources[_]
     port := iports[_]
-    lower(input.type) == "microsoft.network/networksecuritygroups"
-    rules := input.properties.securityRules[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.destinationAddressPrefix == "*"
@@ -79,9 +80,10 @@ nsg_inbound[port] {
 
 # allowed in list
 nsg_inbound[port] {
+    resource := input.resources[_]
     port := iports[_]
-    lower(input.type) == "microsoft.network/networksecuritygroups"
-    rules := input.properties.securityRules[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.destinationAddressPrefix == "*"
@@ -90,8 +92,10 @@ nsg_inbound[port] {
 
 # allowed in list range
 nsg_inbound[port] {
+    resource := input.resources[_]
     port := iports[_]
-    rules := input.properties.securityRules[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.destinationAddressPrefix == "*"
@@ -172,13 +176,89 @@ nsg_inbound_err["Azure Network Security Group allows ICMP"] {
     rules.properties.sourceAddressPrefix == "*"
 }
 
-nsg_inbound_err["Internet connectivity via tcp over insecure port"] {
+#
+# Azure Network Security Group allows FTP (241)
+#
+
+default inbound_port_21 = null
+
+azure_issue["inbound_port_21"] {
     to_number(nsg_inbound[_]) == 21
 }
 
-nsg_inbound_err["Internet connectivity via tcp over insecure port"] {
+inbound_port_21 {
+    lower(input.resources[_].type) == "microsoft.network/vpngateways"
+    not azure_issue["inbound_port_21"]
+}
+
+inbound_port_21 = false {
+    azure_issue["inbound_port_21"]
+}
+
+inbound_port_21_err = "Azure Network Security Group allows FTP" {
+    azure_issue["inbound_port_21"]
+}
+
+#
+# Azure Network Security Group allows Telnet (252)
+#
+
+default inbound_port_23 = null
+
+azure_issue["inbound_port_23"] {
     to_number(nsg_inbound[_]) == 23
 }
+
+inbound_port_23 {
+    lower(input.resources[_].type) == "microsoft.network/vpngateways"
+    not azure_issue["inbound_port_23"]
+}
+
+inbound_port_23 = false {
+    azure_issue["inbound_port_23"]
+}
+
+inbound_port_23_err = "Azure Network Security Group allows Telnet" {
+    azure_issue["inbound_port_23"]
+}
+
+#
+# Internet connectivity via tcp over insecure port (3)
+#
+
+default inbound_insecure_port = null
+
+azure_issue["inbound_insecure_port"] {
+    to_number(nsg_inbound[_]) == 21
+}
+
+azure_issue["inbound_insecure_port"] {
+    to_number(nsg_inbound[_]) == 23
+}
+
+azure_issue["inbound_insecure_port"] {
+    to_number(nsg_inbound[_]) == 80
+}
+
+inbound_insecure_port {
+    lower(input.resources[_].type) == "microsoft.network/vpngateways"
+    not azure_issue["inbound_insecure_port"]
+}
+
+inbound_insecure_port = false {
+    azure_issue["inbound_insecure_port"]
+}
+
+inbound_insecure_port_err = "Internet connectivity via tcp over insecure port" {
+    azure_issue["inbound_insecure_port"]
+}
+
+
+
+
+
+
+
 
 nsg_inbound_err["Internet connectivity via tcp over insecure port"] {
     to_number(nsg_inbound[_]) == 80

@@ -9,21 +9,42 @@ package rule
 
 default storage_public_access = null
 
+azure_attribute_absence["storage_public_access"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/containers"
+    not resource.properties.publicAccess
+}
+
+azure_issue["storage_public_access"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/containers"
+    lower(resource.properties.publicAccess) == "container"
+}
+
+azure_issue["storage_public_access"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/containers"
+    lower(resource.properties.publicAccess) == "blob"
+}
+
 storage_public_access {
-    lower(input.type) == "microsoft.storage/storageaccounts/blobservices/containers"
-    lower(input.properties.publicAccess) == "none"
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts/blobservices/containers"
+    not azure_issue["storage_public_access"]
+    not azure_attribute_absence["storage_public_access"]
 }
 
 storage_public_access = false {
-    lower(input.type) == "microsoft.storage/storageaccounts/blobservices/containers"
-    lower(input.properties.publicAccess) == "container"
+    azure_issue["storage_public_access"]
 }
 
 storage_public_access = false {
-    lower(input.type) == "microsoft.storage/storageaccounts/blobservices/containers"
-    lower(input.properties.publicAccess) == "blob"
+    azure_attribute_absence["storage_public_access"]
 }
 
 storage_public_access_err = "Azure storage accounts has blob containers with public access" {
-    storage_public_access == false
+    azure_issue["storage_public_access"]
+}
+
+storage_public_access_err = "Storage account attribute publicAccess missing in the resource" {
+    azure_attribute_absence["storage_public_access"]
 }
