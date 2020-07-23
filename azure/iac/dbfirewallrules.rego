@@ -8,22 +8,48 @@ package rule
 
 default db_firewall = null
 
+azure_attribute_absence["db_firewall"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/firewallrules"
+    not resource.properties.startIpAddress
+}
+
+azure_attribute_absence["db_firewall"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/firewallrules"
+    not resource.properties.endIpAddress
+}
+
+azure_issue["db_firewall"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/firewallrules"
+    resource.properties.startIpAddress == "0.0.0.0"
+}
+
+azure_issue["db_firewall"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/firewallrules"
+    resource.properties.endIpAddress == "0.0.0.0"
+}
+
 db_firewall {
-    lower(input.type) == "microsoft.sql/servers/firewallrules"
-    input.properties.startIpAddress != "0.0.0.0"
-    input.properties.endIpAddress != "0.0.0.0"
+    lower(input.resources[_].type) == "microsoft.sql/servers/firewallrules"
+    not azure_issue["db_firewall"]
+    not azure_attribute_absence["db_firewall"]
 }
 
 db_firewall = false {
-    lower(input.type) == "microsoft.sql/servers/firewallrules"
-    input.properties.startIpAddress == "0.0.0.0"
+    azure_issue["db_firewall"]
 }
 
 db_firewall = false {
-    lower(input.type) == "microsoft.sql/servers/firewallrules"
-    input.properties.endIpAddress == "0.0.0.0"
+    azure_attribute_absence["db_firewall"]
 }
 
 db_firewall_err = "SQL Server Firewall rules allow access to any Azure internal resources" {
-    db_firewall == false
+    azure_issue["db_firewall"]
+}
+
+db_firewall_miss_err = "Firewall rule attribute startIpAddress/endIpAddress missing in the resource" {
+    azure_attribute_absence["db_firewall"]
 }

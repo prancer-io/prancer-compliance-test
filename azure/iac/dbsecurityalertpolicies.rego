@@ -8,24 +8,44 @@ package rule
 
 default dbsec_threat_retention = null
 
+azure_attribute_absence["dbsec_threat_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    not resource.properties.state
+}
+
+azure_issue["dbsec_threat_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    lower(resource.properties.state) != "enabled"
+}
+
+azure_issue["dbsec_threat_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    to_number(resource.properties.retentionDays) <= 90
+}
+
 dbsec_threat_retention {
-    lower(input.type) == "microsoft.sql/servers/databases/securityalertpolicies"
-    lower(input.properties.state) == "enabled"
-    input.properties.retentionDays > 90
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    not azure_issue["dbsec_threat_retention"]
+    not azure_attribute_absence["dbsec_threat_retention"]
 }
 
 dbsec_threat_retention = false {
-    lower(input.type) == "microsoft.sql/servers/databases/securityalertpolicies"
-    lower(input.properties.state) != "enabled"
+    azure_issue["dbsec_threat_retention"]
 }
 
 dbsec_threat_retention = false {
-    lower(input.type) == "microsoft.sql/servers/databases/securityalertpolicies"
-    input.properties.retentionDays <= 90
+    azure_attribute_absence["dbsec_threat_retention"]
 }
 
 dbsec_threat_retention_err = "Azure SQL DB with Threat Retention less than 91 days" {
-    dbsec_threat_retention == false
+    azure_issue["dbsec_threat_retention"]
+}
+
+dbsec_threat_retention_miss_err = "DB policy attribute state missing in the resource" {
+    azure_attribute_absence["dbsec_threat_retention"]
 }
 
 #
@@ -34,30 +54,50 @@ dbsec_threat_retention_err = "Azure SQL DB with Threat Retention less than 91 da
 
 default dbsec_threat_email = null
 
+azure_attribute_absence["dbsec_threat_email"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    not resource.properties.state
+}
+
+azure_issue["dbsec_threat_email"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    lower(resource.properties.state) != "enabled"
+}
+
+azure_issue["dbsec_threat_email"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    resource.properties.emailAccountAdmins != true
+}
+
+azure_issue["dbsec_threat_email"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    count(resource.properties.emailAddresses) == 0
+}
+
 dbsec_threat_email {
-    lower(input.type) == "microsoft.sql/servers/databases/securityalertpolicies"
-    lower(input.properties.state) == "enabled"
-    input.properties.emailAccountAdmins == true
-    count(input.properties.emailAddresses) > 0
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    not azure_issue["dbsec_threat_email"]
+    not azure_attribute_absence["dbsec_threat_email"]
 }
 
 dbsec_threat_email = false {
-    lower(input.type) == "microsoft.sql/servers/databases/securityalertpolicies"
-    lower(input.properties.state) != "enabled"
+    azure_issue["dbsec_threat_email"]
 }
 
 dbsec_threat_email = false {
-    lower(input.type) == "microsoft.sql/servers/databases/securityalertpolicies"
-    input.properties.emailAccountAdmins == false
-}
-
-dbsec_threat_email = false {
-    lower(input.type) == "microsoft.sql/servers/databases/securityalertpolicies"
-    count(input.properties.emailAddresses) == 0
+    azure_attribute_absence["dbsec_threat_email"]
 }
 
 dbsec_threat_email_err = "Azure SQL DB with disabled Email service and co-administrators for Threat Detection" {
-    dbsec_threat_email == false
+    azure_issue["dbsec_threat_email"]
+}
+
+dbsec_threat_email_miss_err = "DB policy attribute state missing in the resource" {
+    azure_attribute_absence["dbsec_threat_email"]
 }
 
 #
@@ -67,24 +107,44 @@ dbsec_threat_email_err = "Azure SQL DB with disabled Email service and co-admini
 
 default dbsec_threat_alert = null
 
+azure_attribute_absence["dbsec_threat_alert"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    not resource.properties.state
+}
+
+azure_issue["dbsec_threat_alert"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    lower(resource.properties.state) != "enabled"
+}
+
+azure_issue["dbsec_threat_alert"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    count(resource.properties.disabledAlerts) > 0
+}
+
 dbsec_threat_alert {
-    lower(input.type) == "microsoft.sql/servers/databases/securityalertpolicies"
-    lower(input.properties.state) == "enabled"
-    count(input.properties.disabledAlerts) == 0
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    not azure_issue["dbsec_threat_alert"]
+    not azure_attribute_absence["dbsec_threat_alert"]
 }
 
 dbsec_threat_alert = false {
-    lower(input.type) == "microsoft.sql/servers/databases/securityalertpolicies"
-    lower(input.properties.state) != "enabled"
+    azure_issue["dbsec_threat_alert"]
 }
 
 dbsec_threat_alert = false {
-    lower(input.type) == "microsoft.sql/servers/databases/securityalertpolicies"
-    count(input.properties.disabledAlerts) > 0
+    azure_attribute_absence["dbsec_threat_alert"]
 }
 
 dbsec_threat_alert_err = "Azure SQL Server threat detection alerts not enabled for all threat types" {
-    dbsec_threat_alert == false
+    azure_issue["dbsec_threat_alert"]
+}
+
+dbsec_threat_alert_miss_err = "DB policy attribute state missing in the resource" {
+    azure_attribute_absence["dbsec_threat_alert"]
 }
 
 #
@@ -93,42 +153,89 @@ dbsec_threat_alert_err = "Azure SQL Server threat detection alerts not enabled f
 
 default sql_alert = null
 
+azure_attribute_absence["sql_alert"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    not resource.properties.state
+}
+
+azure_issue["sql_alert"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    lower(resource.properties.state) != "enabled"
+}
+
+azure_issue["sql_alert"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    not resource.properties.emailAccountAdmins
+}
+
+azure_issue["sql_alert"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    resource.properties.emailAccountAdmins != true
+}
+
 sql_alert {
-    input.type == "Microsoft.Sql/servers/auditingSettings"
-    lower(input.properties.state) == "enabled"
-    input.properties.emailAccountAdmins == true
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    not azure_issue["sql_alert"]
+    not azure_attribute_absence["sql_alert"]
 }
 
 sql_alert = false {
-    input.type == "Microsoft.Sql/servers/auditingSettings"
-    lower(input.properties.state) != "enabled"
+    azure_issue["sql_alert"]
 }
 
 sql_alert = false {
-    input.type == "Microsoft.Sql/servers/auditingSettings"
-    input.properties.emailAccountAdmins == false
+    azure_attribute_absence["sql_alert"]
 }
 
 sql_alert_err = "Send alerts on field value on SQL Databases is misconfigured" {
-    sql_alert == false
+    azure_issue["sql_alert"]
 }
+
+sql_alert_miss_err = "DB policy attribute state missing in the resource" {
+    azure_attribute_absence["sql_alert"]
+}
+
 
 #
 # Threat Detection on SQL databases is set to Off (305)
 #
 
-default dbsec_threat_off = false
+default dbsec_threat_off = null
+
+azure_attribute_absence["dbsec_threat_off"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    not resource.properties.state
+}
+
+azure_issue["dbsec_threat_off"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    lower(resource.properties.state) != "enabled"
+}
 
 dbsec_threat_off {
-    lower(input.type) == "microsoft.sql/servers/databases/securityalertpolicies"
-    lower(input.properties.state) == "enabled"
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    not azure_issue["dbsec_threat_off"]
+    not azure_attribute_absence["dbsec_threat_off"]
 }
 
 dbsec_threat_off = false {
-    lower(input.type) == "microsoft.sql/servers/databases/securityalertpolicies"
-    lower(input.properties.state) == "enabled"
+    azure_issue["dbsec_threat_off"]
+}
+
+dbsec_threat_off = false {
+    azure_attribute_absence["dbsec_threat_off"]
 }
 
 dbsec_threat_off_err = "Threat Detection on SQL databases is set to Off" {
-    dbsec_threat_off == false
+    azure_issue["dbsec_threat_off"]
+}
+
+dbsec_threat_off_miss_err = "DB policy attribute state missing in the resource" {
+    azure_attribute_absence["dbsec_threat_off"]
 }
