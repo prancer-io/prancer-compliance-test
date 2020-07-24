@@ -8,23 +8,38 @@ package rule
 
 default api_gw_cert = null
 
+aws_attribute_absence["api_gw_cert"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::apigateway::stage"
+    not resource.Properties.ClientCertificateId
+}
+
+aws_issue["api_gw_cert"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::apigateway::stage"
+    lower(resource.Properties.ClientCertificateId) == "none"
+}
+
 api_gw_cert {
-    lower(input.Type) == "aws::apigateway::stage"
-    lower(input.Properties.ClientCertificateId) != "none"
+    lower(input.resources[_].Type) == "aws::apigateway::stage"
+    not aws_issue["api_gw_cert"]
+    not aws_attribute_absence["api_gw_cert"]
 }
 
 api_gw_cert = false {
-    lower(input.Type) == "aws::apigateway::stage"
-    not input.Properties.ClientCertificateId
+    aws_issue["api_gw_cert"]
 }
 
 api_gw_cert = false {
-    lower(input.Type) == "aws::apigateway::stage"
-    lower(input.Properties.ClientCertificateId) == "none"
+    aws_attribute_absence["api_gw_cert"]
 }
 
 api_gw_cert_err = "AWS API Gateway endpoints without client certificate authentication" {
-    api_gw_cert == false
+    aws_issue["api_gw_cert"]
+}
+
+api_gw_cert_miss_err = "API Gateway attribute ClientCertificateId missing in the resource" {
+    aws_attribute_absence["api_gw_cert"]
 }
 
 #
@@ -37,18 +52,20 @@ db_ports := [
     1433, 1521, 3306, 5000, 5432, 5984, 6379, 6380, 8080, 9042, 11211, 27017, 28015, 29015, 50000
 ]
 
-db_exposed_f["ipv4"] {
-    lower(input.Type) == "aws::ec2::securitygroup"
-    ingress := input.Properties.SecurityGroupIngress[_]
+aws_issue["db_exposed"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[_]
     port := db_ports[_]
     ingress.CidrIp == "0.0.0.0/0"
     to_number(ingress.FromPort) <= port
     to_number(ingress.ToPort) >= port
 }
 
-db_exposed_f["ipv6"] {
-    lower(input.Type) == "aws::ec2::securitygroup"
-    ingress := input.Properties.SecurityGroupIngress[_]
+aws_issue["db_exposed"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[_]
     port := db_ports[_]
     ingress.CidrIpv6="::/0"
     to_number(ingress.FromPort) <= port
@@ -56,17 +73,16 @@ db_exposed_f["ipv6"] {
 }
 
 db_exposed {
-    lower(input.Type) == "aws::ec2::securitygroup"
-    count(db_exposed_f) == 0
+    lower(input.resources[_].Type) == "aws::ec2::securitygroup"
+    not aws_issue["db_exposed"]
 }
 
 db_exposed = false {
-    lower(input.Type) == "aws::ec2::securitygroup"
-    count(db_exposed_f) > 0
+    aws_issue["db_exposed"]
 }
 
 db_exposed_err = "Publicly exposed DB Ports" {
-    db_exposed == false
+    aws_issue["db_exposed"]
 }
 
 #
@@ -79,17 +95,19 @@ bc_ports := [
     8332, 8333
 ]
 
-bitcoin_ports_f["ipv4"] {
-    lower(input.Type) == "aws::ec2::securitygroup"
-    ingress := input.Properties.SecurityGroupIngress[_]
+aws_issue["bitcoin_ports"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[_]
     port := bc_ports[_]
     ingress.CidrIp == "0.0.0.0/0"
     to_number(ingress.FromPort) <= port
     to_number(ingress.ToPort) >= port
 }
 
-bitcoin_ports_f["ipv6"] {
-    lower(input.Type) == "aws::ec2::securitygroup"
+aws_issue["bitcoin_ports"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::ec2::securitygroup"
     ingress := input.Properties.SecurityGroupIngress[_]
     port := bc_ports[_]
     ingress.CidrIpv6="::/0"
@@ -98,17 +116,16 @@ bitcoin_ports_f["ipv6"] {
 }
 
 bitcoin_ports {
-    lower(input.Type) == "aws::ec2::securitygroup"
-    count(bitcoin_ports_f) == 0
+    lower(input.resources[_].Type) == "aws::ec2::securitygroup"
+    not aws_issue["bitcoin_ports"]
 }
 
 bitcoin_ports = false {
-    lower(input.Type) == "aws::ec2::securitygroup"
-    count(bitcoin_ports_f) > 0
+    aws_issue["bitcoin_ports"]
 }
 
 bitcoin_ports_err = "Instance is communicating with ports known to mine Bitcoin" {
-    bitcoin_ports == false
+    aws_issue["bitcoin_ports"]
 }
 
 #
@@ -121,18 +138,20 @@ eth_ports := [
     8545, 30303
 ]
 
-ethereum_ports_f["ipv4"] {
-    lower(input.Type) == "aws::ec2::securitygroup"
-    ingress := input.Properties.SecurityGroupIngress[_]
+aws_issue["ethereum_ports"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[_]
     port := eth_ports[_]
     ingress.CidrIp == "0.0.0.0/0"
     to_number(ingress.FromPort) <= port
     to_number(ingress.ToPort) >= port
 }
 
-ethereum_ports_f["ipv6"] {
-    lower(input.Type) == "aws::ec2::securitygroup"
-    ingress := input.Properties.SecurityGroupIngress[_]
+aws_issue["ethereum_ports"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[_]
     port := eth_ports[_]
     ingress.CidrIpv6="::/0"
     to_number(ingress.FromPort) <= port
@@ -140,15 +159,14 @@ ethereum_ports_f["ipv6"] {
 }
 
 ethereum_ports {
-    lower(input.Type) == "aws::ec2::securitygroup"
-    count(ethereum_ports_f) == 0
+    lower(input.resources[_].Type) == "aws::ec2::securitygroup"
+    not aws_issue["ethereum_ports"]
 }
 
 ethereum_ports = false {
-    lower(input.Type) == "aws::ec2::securitygroup"
-    count(ethereum_ports_f) > 0
+    aws_issue["ethereum_ports"]
 }
 
 ethereum_ports_err = "Instance is communicating with ports known to mine Ethereum" {
-    ethereum_ports == false
+    aws_issue["ethereum_ports"]
 }

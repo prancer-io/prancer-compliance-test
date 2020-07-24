@@ -8,18 +8,23 @@ package rule
 
 default ct_regions = null
 
+aws_issue["ct_regions"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::cloudtrail::trail"
+    not resource.Properties.IsMultiRegionTrail
+}
+
 ct_regions {
-    lower(input.Type) == "aws::cloudtrail::trail"
-    input.Properties.IsMultiRegionTrail == true
+    lower(input.resources[_].Type) == "aws::cloudtrail::trail"
+    not aws_issue["ct_regions"]
 }
 
 ct_regions = false {
-    lower(input.Type) == "aws::cloudtrail::trail"
-    input.Properties.IsMultiRegionTrail == false
+    aws_issue["ct_regions"]
 }
 
 ct_regions_err = "AWS CloudTrail is not enabled in all regions" {
-    ct_regions == false
+    aws_issue["ct_log_validation"]
 }
 
 #
@@ -28,18 +33,23 @@ ct_regions_err = "AWS CloudTrail is not enabled in all regions" {
 
 default ct_log_validation = null
 
+aws_issue["ct_log_validation"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::cloudtrail::trail"
+    not resource.Properties.EnableLogFileValidation
+}
+
 ct_log_validation {
-    lower(input.Type) == "aws::cloudtrail::trail"
-    input.Properties.EnableLogFileValidation == true
+    lower(input.resources[_].Type) == "aws::cloudtrail::trail"
+    not aws_issue["ct_log_validation"]
 }
 
 ct_log_validation = false {
-    lower(input.Type) == "aws::cloudtrail::trail"
-    input.Properties.EnableLogFileValidation == false
+    aws_issue["ct_log_validation"]
 }
 
 ct_log_validation_err = "AWS CloudTrail log validation is not enabled in all regions" {
-    ct_log_validation == false
+    aws_issue["ct_log_validation"]
 }
 
 #
@@ -48,23 +58,38 @@ ct_log_validation_err = "AWS CloudTrail log validation is not enabled in all reg
 
 default ct_master_key = null
 
+aws_attribute_absence["ct_master_key"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::cloudtrail::trail"
+    not resource.Properties.KMSKeyId
+}
+
+aws_issue["ct_master_key"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::cloudtrail::trail"
+    count(resource.Properties.KMSKeyId) == 0
+}
+
 ct_master_key {
-    lower(input.Type) == "aws::cloudtrail::trail"
-    count(input.Properties.KMSKeyId) > 0
+    lower(input.resources[_].Type) == "aws::cloudtrail::trail"
+    not aws_issue["ct_master_key"]
+    not aws_attribute_absence["ct_master_key"]
 }
 
 ct_master_key = false {
-    lower(input.Type) == "aws::cloudtrail::trail"
-    not input.Properties.KMSKeyId
+    aws_issue["ct_master_key"]
 }
 
 ct_master_key = false {
-    lower(input.Type) == "aws::cloudtrail::trail"
-    count(input.Properties.KMSKeyId) == 0
+    aws_attribute_absence["ct_master_key"]
 }
 
 ct_master_key_err = "AWS CloudTrail logs are not encrypted using Customer Master Keys (CMKs)" {
-    ct_master_key == false
+    aws_issue["ct_master_key"]
+}
+
+ct_master_key_miss_err = "CloudTrail attribute agentPoolProfiles missing in the resource" {
+    aws_attribute_absence["ct_master_key"]
 }
 
 #
@@ -73,21 +98,36 @@ ct_master_key_err = "AWS CloudTrail logs are not encrypted using Customer Master
 
 default ct_cloudwatch = null
 
+aws_attribute_absence["ct_cloudwatch"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::cloudtrail::trail"
+    not resource.Properties.CloudWatchLogsRoleArn
+}
+
+aws_issue["ct_cloudwatch"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::cloudtrail::trail"
+    count(resource.Properties.CloudWatchLogsRoleArn) == 0
+}
+
 ct_cloudwatch {
-    lower(input.Type) == "aws::cloudtrail::trail"
-    count(input.Properties.CloudWatchLogsRoleArn) > 0
+    lower(input.resources[_].Type) == "aws::cloudtrail::trail"
+    not aws_issue["ct_cloudwatch"]
+    not aws_attribute_absence["ct_cloudwatch"]
 }
 
 ct_cloudwatch = false {
-    lower(input.Type) == "aws::cloudtrail::trail"
-    not input.Properties.CloudWatchLogsRoleArn
+    aws_issue["ct_cloudwatch"]
 }
 
 ct_cloudwatch = false {
-    lower(input.Type) == "aws::cloudtrail::trail"
-    count(input.Properties.CloudWatchLogsRoleArn) == 0
+    aws_attribute_absence["ct_cloudwatch"]
 }
 
 ct_cloudwatch_err = "CloudTrail trail is not integrated with CloudWatch Log" {
-    ct_cloudwatch == false
+    aws_issue["ct_cloudwatch"]
+}
+
+ct_cloudwatch_miss_err = "CloudTrail attribute CloudWatchLogsRoleArn missing in the resource" {
+    aws_attribute_absence["ct_cloudwatch"]
 }
