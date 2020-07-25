@@ -8,21 +8,36 @@ package rule
 
 default ec2_iam_role = null
 
+aws_attribute_absence["ec2_iam_role"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::ec2::instance"
+    not resource.Properties.IamInstanceProfile
+}
+
+aws_issue["ec2_iam_role"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::ec2::instance"
+    not startswith(lower(resource.Properties.IamInstanceProfile), "arn:")
+}
+
 ec2_iam_role {
-    lower(input.Type) == "aws::ec2::instance"
-    startswith(lower(input.Properties.IamInstanceProfile), "arn:")
+    lower(input.resources[_].Type) == "aws::ec2::instance"
+    not aws_issue["ec2_iam_role"]
+    not aws_attribute_absence["ec2_iam_role"]
 }
 
 ec2_iam_role = false {
-    lower(input.Type) == "aws::ec2::instance"
-    not startswith(lower(input.Properties.IamInstanceProfile), "arn:")
+    aws_issue["ec2_iam_role"]
 }
 
 ec2_iam_role = false {
-    lower(input.Type) == "aws::ec2::instance"
-    not input.Properties.IamInstanceProfile
+    aws_attribute_absence["ec2_iam_role"]
 }
 
 ec2_iam_role_err = "AWS EC2 Instance IAM Role not enabled" {
-    ec2_iam_role == false
+    aws_issue["ec2_iam_role"]
+}
+
+ec2_iam_role_miss_err = "EC2 instance attribute IamInstanceProfile missing in the resource" {
+    aws_attribute_absence["ec2_iam_role"]
 }
