@@ -82,26 +82,26 @@ insecure_ciphers := [
     "EXP-KRB5-RC4-MD5"
 ]
 
-elb_insecure_cipher_f["insecure_ciphers"] {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    policy := input.Properties.Policies
+aws_issue["elb_insecure_cipher"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    policy := resource.Properties.Policies
     attribute := policy.Attributes[_]
     lower(attribute.AttributeName) == lower(insecure_ciphers[_])
-    attribute.AttributeValue == "true"
+    lower(attribute.AttributeValue) == "true"
 }
 
 elb_insecure_cipher {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    count(elb_insecure_cipher_f) == 0
+    lower(input.resources[_].Type) == "aws::elasticloadbalancing::loadbalancer"
+    not aws_issue["elb_insecure_cipher"]
 }
 
 elb_insecure_cipher = false {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    count(elb_insecure_cipher_f) > 0
+    aws_issue["elb_insecure_cipher"]
 }
 
 elb_insecure_cipher_err = "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with insecure ciphers" {
-    elb_insecure_cipher == false
+    aws_issue["elb_insecure_cipher"]
 }
 
 #
@@ -116,26 +116,26 @@ insecure_ssl_protocols := [
     "Protocol-TLSv1.1"
 ]
 
-elb_insecure_protocol_f["insecure_protocols"] {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    policy := input.Properties.Policies
+aws_issue["elb_insecure_protocol"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    policy := resource.Properties.Policies
     attribute := policy.Attributes[_]
     lower(attribute.AttributeName) == lower(insecure_ssl_protocols[_])
     lower(attribute.AttributeValue) == "true"
 }
 
 elb_insecure_protocol {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    count(elb_insecure_protocol_f) == 0
+    lower(input.resources[_].Type) == "aws::elasticloadbalancing::loadbalancer"
+    not aws_issue["elb_insecure_protocol"]
 }
 
 elb_insecure_protocol = false {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    count(elb_insecure_protocol_f) > 0
+    aws_issue["elb_insecure_protocol"]
 }
 
 elb_insecure_protocol_err = "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with vulnerable SSL protocol" {
-    elb_insecure_protocol == false
+    aws_issue["elb_insecure_protocol"]
 }
 
 #
@@ -144,18 +144,23 @@ elb_insecure_protocol_err = "AWS Elastic Load Balancer (Classic) SSL negotiation
 
 default elb_access_log = null
 
+aws_issue["elb_access_log"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    not resource.Properties.AccessLoggingPolicy.Enabled
+}
+
 elb_access_log {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    input.Properties.AccessLoggingPolicy.Enabled == true
+    lower(input.resources[_].Type) == "aws::elasticloadbalancing::loadbalancer"
+    not aws_issue["elb_access_log"]
 }
 
 elb_access_log = false {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    input.Properties.AccessLoggingPolicy.Enabled == false
+    aws_issue["elb_access_log"]
 }
 
 elb_access_log_err = "AWS Elastic Load Balancer (Classic) with access log disabled" {
-    elb_access_log == false
+    aws_issue["elb_access_log"]
 }
 
 #
@@ -164,18 +169,23 @@ elb_access_log_err = "AWS Elastic Load Balancer (Classic) with access log disabl
 
 default elb_conn_drain = null
 
+aws_issue["elb_conn_drain"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    not resource.Properties.ConnectionDraining.Enabled
+}
+
 elb_conn_drain {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    input.Properties.ConnectionDraining.Enabled == true
+    lower(input.resources[_].Type) == "aws::elasticloadbalancing::loadbalancer"
+    not aws_issue["elb_conn_drain"]
 }
 
 elb_conn_drain = false {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    input.Properties.ConnectionDraining.Enabled == false
+    aws_issue["elb_conn_drain"]
 }
 
 elb_conn_drain_err = "AWS Elastic Load Balancer (Classic) with connection draining disabled" {
-    elb_conn_drain == false
+    aws_issue["elb_conn_drain"]
 }
 
 #
@@ -184,18 +194,23 @@ elb_conn_drain_err = "AWS Elastic Load Balancer (Classic) with connection draini
 
 default elb_crosszone = null
 
+aws_issue["elb_crosszone"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    not resource.Properties.CrossZone
+}
+
 elb_crosszone {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    input.Properties.CrossZone == true
+    lower(input.resources[_].Type) == "aws::elasticloadbalancing::loadbalancer"
+    not aws_issue["elb_crosszone"]
 }
 
 elb_crosszone = false {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    input.Properties.CrossZone == false
+    aws_issue["elb_crosszone"]
 }
 
 elb_crosszone_err = "AWS Elastic Load Balancer (Classic) with cross-zone load balancing disabled" {
-    elb_crosszone == false
+    aws_issue["elb_access_log"]
 }
 
 #
@@ -206,18 +221,33 @@ elb_crosszone_err = "AWS Elastic Load Balancer (Classic) with cross-zone load ba
 
 default elb_sec_group = null
 
+aws_attribute_absence["elb_sec_group"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    not resource.Properties.SecurityGroups
+}
+
+aws_issue["elb_sec_group"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) == 0
+}
+
 elb_sec_group {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    count(input.Properties.SecurityGroups) > 0
+    lower(input.resources[_].Type) == "aws::elasticloadbalancing::loadbalancer"
+    not aws_issue["elb_sec_group"]
 }
 
 elb_sec_group = false {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    count(input.Properties.SecurityGroups) == 0
+    aws_issue["elb_sec_group"]
 }
 
 elb_sec_group_err = "AWS Elastic Load Balancer (ELB) has security group with no inbound/outbound rules" {
-    elb_crosszone == false
+    aws_issue["elb_access_log"]
+}
+
+elb_sec_group_miss_err = "ELB attribute SecurityGroups missing in the resource" {
+    aws_issue["elb_access_log"]
 }
 
 #
@@ -226,25 +256,39 @@ elb_sec_group_err = "AWS Elastic Load Balancer (ELB) has security group with no 
 
 default elb_not_in_use = null
 
+aws_attribute_absence["elb_not_in_use"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    not resource.Properties.Instances
+}
+
+aws_issue["elb_not_in_use"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.Instances) == 0
+}
+
 elb_not_in_use {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    count(input.Properties.Instances) > 0
+    lower(input.resources[_].Type) == "aws::elasticloadbalancing::loadbalancer"
+    not aws_issue["elb_not_in_use"]
+    not aws_attribute_absence["elb_not_in_use"]
 }
 
 elb_not_in_use = false {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    count(input.Properties.Instances) == 0
+    aws_issue["elb_not_in_use"]
 }
 
 elb_not_in_use = false {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    not input.Properties.Instances
+    aws_attribute_absence["elb_not_in_use"]
 }
 
 elb_not_in_use_err = "AWS Elastic Load Balancer (ELB) not in use" {
-    elb_not_in_use == false
+    aws_issue["elb_not_in_use"]
 }
 
+elb_not_in_use_miss_err = "ELB attribute Instances missing in the resource" {
+    aws_attribute_absence["elb_not_in_use"]
+}
 
 #
 # Id: 72
@@ -252,57 +296,88 @@ elb_not_in_use_err = "AWS Elastic Load Balancer (ELB) not in use" {
 
 default elb_alb_logs = null
 
+aws_attribute_absence["elb_alb_logs"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    not resource.Properties.LoadBalancerAttributes
+}
+
+aws_issue["elb_alb_logs"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    item := resource.Properties.LoadBalancerAttributes[_]
+    lower(item.Key) == "access_logs.s3.enabled"
+    lower(item.Value) != "true"
+}
+
 elb_alb_logs {
-    lower(input.Type) == "aws::elasticloadbalancingv2::loadbalancer"
-    input.Properties.LoadBalancerAttribute.Key == "access_logs.s3.enabled"
-    input.Properties.LoadBalancerAttribute.Value == "true"
+    lower(input.resources[_].Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    not aws_issue["elb_alb_logs"]
 }
 
 elb_alb_logs = false {
-    lower(input.Type) == "aws::elasticloadbalancingv2::loadbalancer"
-    input.Properties.LoadBalancerAttribute.Key == "access_logs.s3.enabled"
-    input.Properties.LoadBalancerAttribute.Value == "false"
+    aws_issue["elb_alb_logs"]
 }
 
 elb_alb_logs_err = "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balancer (ALB) with access log disabled" {
-    elb_alb_logs == false
+    aws_issue["elb_alb_logs"]
+}
+
+elb_alb_logs_miss_err = "ELBv2 attribute LoadBalancerAttributes missing in the resource" {
+    aws_issue["elb_alb_logs"]
 }
 
 #
 # Id: 73
 #
 
-
 default elb_listener_ssl = null
 
-elb_listener_ssl_f["empty_ssl"] {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    input.Properties.Listeners[_].SSLCertificateId == ""
+aws_attribute_absence["elb_listener_ssl"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    not resource.Properties.Listeners
 }
 
-elb_listener_ssl_f["null_ssl"] {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    input.Properties.Listeners[_].SSLCertificateId == null
+aws_issue["elb_listener_ssl"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    resource.Properties.Listeners[_].SSLCertificateId == ""
 }
 
-elb_listener_ssl_f["missing_ssl"] {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    listener := input.Properties.Listeners[_]
+aws_issue["elb_listener_ssl"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    resource.Properties.Listeners[_].SSLCertificateId == null
+}
+
+aws_issue["elb_listener_ssl"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    listener := resource.Properties.Listeners[_]
     not listener.SSLCertificateId
 }
 
 elb_listener_ssl {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    count(elb_listener_ssl_f) == 0
+    lower(input.resources[_].Type) == "aws::elasticloadbalancing::loadbalancer"
+    not aws_issue["elb_listener_ssl"]
+    not aws_attribute_absence["elb_listener_ssl"]
 }
 
 elb_listener_ssl = false {
-    lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
-    count(elb_listener_ssl_f) > 0
+    aws_issue["elb_listener_ssl"]
+}
+
+elb_listener_ssl = false {
+    aws_attribute_absence["elb_listener_ssl"]
 }
 
 elb_listener_ssl_err = "AWS Elastic Load Balancer with listener TLS/SSL disabled" {
-    elb_listener_ssl == false
+    aws_issue["elb_listener_ssl"]
+}
+
+elb_listener_ssl_miss_err = "ELB attribute Listeners missing in the resource" {
+    aws_attribute_absence["elb_listener_ssl"]
 }
 
 #
@@ -311,16 +386,36 @@ elb_listener_ssl_err = "AWS Elastic Load Balancer with listener TLS/SSL disabled
 
 default elb_over_https = null
 
+aws_attribute_absence["elb_over_https"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    not resource.Properties.Protocol
+}
+
+aws_issue["elb_over_https"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    lower(resource.Properties.Protocol) == "http"
+}
+
 elb_over_https {
-    lower(input.Type) == "aws::elasticloadbalancingv2::listener"
-    lower(input.Properties.Protocol) != "http"
+    lower(input.resources[_].Type) == "aws::elasticloadbalancingv2::listener"
+    not aws_issue["elb_over_https"]
+    not aws_attribute_absence["elb_over_https"]
 }
 
 elb_over_https = false {
-    lower(input.Type) == "aws::elasticloadbalancingv2::listener"
-    lower(input.Properties.Protocol) == "http"
+    aws_issue["elb_over_https"]
+}
+
+elb_over_https = false {
+    aws_attribute_absence["elb_over_https"]
 }
 
 elb_over_https_err = "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balancer (ALB) with access log disabled" {
-    elb_over_https == false
+    aws_issue["elb_over_https"]
+}
+
+elb_over_https_miss_err = "ELBv2 attribute Protocol missing in the resource" {
+    aws_attribute_absence["elb_over_https"]
 }
