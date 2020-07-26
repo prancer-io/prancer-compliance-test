@@ -307,7 +307,7 @@ default cf_default_ssl = null
 aws_issue["cf_default_ssl"] {
     resource := input.resources[_]
     lower(resource.Type) == "aws::cloudfront::distribution"
-    input.Properties.DistributionConfig.viewerCertificate.certificateSource
+    resource.Properties.DistributionConfig.viewerCertificate.certificateSource
 }
 
 cf_default_ssl {

@@ -88,7 +88,7 @@ ct_master_key_err = "AWS CloudTrail logs are not encrypted using Customer Master
     aws_issue["ct_master_key"]
 }
 
-ct_master_key_miss_err = "CloudTrail attribute agentPoolProfiles missing in the resource" {
+ct_master_key_miss_err = "CloudTrail attribute KMSKeyId missing in the resource" {
     aws_attribute_absence["ct_master_key"]
 }
 

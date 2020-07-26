@@ -8,21 +8,21 @@ package rule
 
 default vpc_subnet_autoip = null
 
-vpc_subnet_autoip {
-    lower(input.Type) == "aws::ec2::subnet"
-    input.Properties.MapPublicIpOnLaunch == false
+aws_issue["vpc_subnet_autoip"] {
+    resource := input.resources[_]
+    lower(resource.Type) == "aws::ec2::subnet"
+    resource.Properties.MapPublicIpOnLaunch
 }
 
 vpc_subnet_autoip {
-    lower(input.Type) == "aws::ec2::subnet"
-    not input.Properties.MapPublicIpOnLaunch
+    lower(input.resources[_].Type) == "aws::ec2::subnet"
+    not aws_issue["vpc_subnet_autoip"]
 }
 
 vpc_subnet_autoip = false {
-    lower(input.Type) == "aws::ec2::subnet"
-    input.Properties.MapPublicIpOnLaunch == true
+    aws_issue["vpc_subnet_autoip"]
 }
 
 vpc_subnet_autoip_err = "AWS VPC subnets should not allow automatic public IP assignment" {
-    vpc_subnet_autoip == false
+    aws_issue["vpc_subnet_autoip"]
 }

@@ -108,7 +108,7 @@ aws_issue["bitcoin_ports"] {
 aws_issue["bitcoin_ports"] {
     resource := input.resources[_]
     lower(resource.Type) == "aws::ec2::securitygroup"
-    ingress := input.Properties.SecurityGroupIngress[_]
+    ingress := resource.Properties.SecurityGroupIngress[_]
     port := bc_ports[_]
     ingress.CidrIpv6="::/0"
     to_number(ingress.FromPort) <= port

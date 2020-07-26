@@ -192,7 +192,7 @@ esearch_search_slow_log_err = "AWS Elasticsearch domain has Search slow logs set
     aws_issue["esearch_search_slow_log"]
 }
 
-esearch_search_slow_log_miss_err = "Elasticsearch attribute agentPoolProfiles missing in the resource" {
+esearch_search_slow_log_miss_err = "Elasticsearch attribute LogPublishingOptions missing in the resource" {
     aws_attribute_absence["esearch_search_slow_log"]
 }
 
