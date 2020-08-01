@@ -433,3 +433,373 @@ k8s_egress_metering = false {
 k8s_egress_metering_err = "GCP Kubernetes Engine Clusters not configured with network traffic egress metering" {
     gc_issue["k8s_egress_metering"]
 }
+
+#
+# Id: 316
+#
+
+default k8s_private = null
+
+gc_issue["k8s_private"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.privateClusterConfig
+}
+
+k8s_private {
+    lower(input.json.resources[_].type) == "container.v1.cluster"
+    not gc_issue["k8s_private"]
+}
+
+k8s_private = false {
+    gc_issue["k8s_private"]
+}
+
+k8s_private_err = "GCP Kubernetes Engine Clusters not configured with private cluster" {
+    gc_issue["k8s_private"]
+}
+
+#
+# Id: 317
+#
+
+default k8s_private_node = null
+
+gc_issue["k8s_private_node"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.privateClusterConfig.enablePrivateNodes
+}
+
+k8s_private_node {
+    lower(input.json.resources[_].type) == "container.v1.cluster"
+    not gc_issue["k8s_private_node"]
+}
+
+k8s_private_node = false {
+    gc_issue["k8s_private_node"]
+}
+
+k8s_private_node_err = "GCP Kubernetes Engine Clusters not configured with private nodes feature" {
+    gc_issue["k8s_private_node"]
+}
+
+#
+# Id: 318
+#
+
+default k8s_node_image = null
+
+gc_attribute_absence["k8s_node_image"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.nodeConfig.imageType
+    nodePools := resource.properties.nodePools[_]
+    not nodePools.config.imageType
+}
+
+gc_issue["k8s_node_image"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "container.v1.cluster"
+    not startswith(lower(resource.properties.nodeConfig.imageType), "cos")
+}
+
+gc_issue["k8s_node_image"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "container.v1.cluster"
+    not startswith(lower(resource.properties.nodePools[_].config.imageType), "cos")
+}
+
+k8s_node_image {
+    lower(input.json.resources[_].type) == "container.v1.cluster"
+    not gc_issue["k8s_node_image"]
+    not gc_attribute_absence["k8s_node_image"]
+}
+
+k8s_node_image = false {
+    gc_issue["k8s_node_image"]
+}
+
+k8s_node_image = false {
+    gc_attribute_absence["k8s_node_image"]
+}
+
+k8s_node_image_err = "GCP Kubernetes Engine Clusters not using Container-Optimized OS for Node image" {
+    gc_issue["k8s_node_image"]
+}
+
+k8s_node_image_miss_err = "Kubernetes Engine Cluster attribute imageType config missing in the resource" {
+    gc_attribute_absence["k8s_node_image"]
+}
+
+#
+# Id: 319
+#
+
+default k8s_network = null
+
+gc_issue["k8s_network"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.network
+}
+
+gc_issue["k8s_network"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "container.v1.cluster"
+    lower(resource.properties.network) == "default"
+}
+
+k8s_network {
+    lower(input.json.resources[_].type) == "container.v1.cluster"
+    not gc_issue["k8s_network"]
+}
+
+k8s_network = false {
+    gc_issue["k8s_network"]
+}
+
+k8s_network_err = "GCP Kubernetes Engine Clusters using the default network" {
+    gc_issue["k8s_network"]
+}
+
+#
+# Id: 320
+#
+
+default k8s_dashboard = null
+
+gc_issue["k8s_dashboard"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.addonsConfig.kubernetesDashboard.disabled
+}
+
+k8s_dashboard {
+    lower(input.json.resources[_].type) == "container.v1.cluster"
+    not gc_issue["k8s_dashboard"]
+}
+
+k8s_dashboard = false {
+    gc_issue["k8s_dashboard"]
+}
+
+k8s_dashboard_err = "GCP Kubernetes Engine Clusters web UI/Dashboard is set to Enabled" {
+    gc_issue["k8s_dashboard"]
+}
+
+#
+# Id: 321
+#
+
+default k8s_labels = null
+
+gc_issue["k8s_labels"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.resourceLabels
+}
+
+gc_issue["k8s_labels"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "container.v1.cluster"
+    count(resource.properties.resourceLabels) == 0
+}
+
+k8s_labels {
+    lower(input.json.resources[_].type) == "container.v1.cluster"
+    not gc_issue["k8s_labels"]
+}
+
+k8s_labels = false {
+    gc_issue["k8s_labels"]
+}
+
+k8s_labels_err = "GCP Kubernetes Engine Clusters without any label information" {
+    gc_issue["k8s_labels"]
+}
+
+#
+# Id: 322
+#
+
+default k8s_db_encrypt = null
+
+gc_attribute_absence["k8s_db_encrypt"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.databaseEncryption
+}
+
+gc_issue["k8s_db_encrypt"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "container.v1.cluster"
+    lower(resource.properties.databaseEncryption.state) != "encrypted"
+}
+
+gc_issue["k8s_db_encrypt"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.databaseEncryption.keyName
+}
+
+gc_issue["k8s_db_encrypt"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "container.v1.cluster"
+    count(resource.properties.databaseEncryption.keyName) == 0
+}
+
+k8s_db_encrypt {
+    lower(input.json.resources[_].type) == "container.v1.cluster"
+    not gc_issue["k8s_db_encrypt"]
+    not gc_attribute_absence["k8s_db_encrypt"]
+}
+
+k8s_db_encrypt = false {
+    gc_issue["k8s_db_encrypt"]
+}
+
+k8s_db_encrypt = false {
+    gc_attribute_absence["k8s_db_encrypt"]
+}
+
+k8s_db_encrypt_err = "GCP Kubernetes cluster Application-layer Secrets not encrypted" {
+    gc_issue["k8s_db_encrypt"]
+}
+
+k8s_db_encrypt_miss_err = "Kubernetes Engine Cluster attribute databaseEncryption config missing in the resource" {
+    gc_attribute_absence["k8s_db_encrypt"]
+}
+
+#
+# Id: 323
+#
+
+default k8s_intra_node = null
+
+gc_issue["k8s_intra_node"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.networkConfig.enableIntraNodeVisibility
+}
+
+k8s_intra_node {
+    lower(input.json.resources[_].type) == "container.v1.cluster"
+    not gc_issue["k8s_intra_node"]
+}
+
+k8s_intra_node = false {
+    gc_issue["k8s_intra_node"]
+}
+
+k8s_intra_node_err = "GCP Kubernetes cluster intra-node visibility disabled" {
+    gc_issue["k8s_intra_node"]
+}
+
+#
+# Id: 324
+#
+
+default k8s_istio = null
+
+gc_issue["k8s_istio"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "container.v1.cluster"
+    resource.properties.addonsConfig.istioConfig.disabled == false
+}
+
+k8s_istio {
+    lower(input.json.resources[_].type) == "container.v1.cluster"
+    not gc_issue["k8s_istio"]
+}
+
+k8s_istio = false {
+    gc_issue["k8s_istio"]
+}
+
+k8s_istio_err = "GCP Kubernetes cluster istioConfig not enabled" {
+    gc_issue["k8s_istio"]
+}
+
+#
+# Id: 325
+#
+
+default k8s_zones = null
+
+gc_issue["k8s_zones"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "container.v1.cluster"
+    resource.properties.zone
+    count(resource.properties.locations) < 3
+}
+
+k8s_zones {
+    lower(input.json.resources[_].type) == "container.v1.cluster"
+    not gc_issue["k8s_zones"]
+}
+
+k8s_zones = false {
+    gc_issue["k8s_zones"]
+}
+
+k8s_zones_err = "GCP Kubernetes cluster Application-layer Secrets not encrypted" {
+    gc_issue["k8s_zones"]
+}
+
+k8s_zones_miss_err = "GCP Kubernetes cluster not in redundant zones" {
+    gc_attribute_absence["k8s_zones"]
+}
+
+#
+# Id: 326
+#
+
+default k8s_auto_upgrade = null
+
+gc_attribute_absence["k8s_auto_upgrade"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.currentNodeCount
+}
+
+gc_issue["k8s_auto_upgrade"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "container.v1.cluster"
+    to_number(resource.properties.currentNodeCount) < 3
+    resource.properties.nodePools[_].management.autoUpgrade
+}
+
+gc_issue["k8s_auto_upgrade"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.databaseEncryption.keyName
+}
+
+gc_issue["k8s_auto_upgrade"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "container.v1.cluster"
+    count(resource.properties.databaseEncryption.keyName) == 0
+}
+
+k8s_auto_upgrade {
+    lower(input.json.resources[_].type) == "container.v1.cluster"
+    not gc_issue["k8s_auto_upgrade"]
+    not gc_attribute_absence["k8s_auto_upgrade"]
+}
+
+k8s_auto_upgrade = false {
+    gc_issue["k8s_auto_upgrade"]
+}
+
+k8s_auto_upgrade = false {
+    gc_attribute_absence["k8s_auto_upgrade"]
+}
+
+k8s_auto_upgrade_err = "GCP Kubernetes cluster size contains less than 3 nodes with auto upgrade enabled" {
+    gc_issue["k8s_auto_upgrade"]
+}
+
+k8s_auto_upgrade_miss_err = "Kubernetes Engine Cluster attribute currentNodeCount config missing in the resource" {
+    gc_attribute_absence["k8s_auto_upgrade"]
+}
