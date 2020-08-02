@@ -43,41 +43,42 @@ storage_encrypt_miss_err = "GCP Storage bucket attribute encryption missing in t
 }
 
 #
-# Id: 334
+# Id: 336
 #
 
-default storage_encrypt = null
+default storage_versioning = null
 
-gc_attribute_absence["storage_encrypt"] {
+gc_attribute_absence["storage_versioning"] {
     resource := input.json.resources[_]
     lower(resource.type) == "storage.v1.bucket"
-    not resource.properties.encryption.defaultKmsKeyName
+    not resource.properties.versioning
 }
 
-gc_issue["storage_encrypt"] {
+gc_issue["storage_versioning"] {
     resource := input.json.resources[_]
     lower(resource.type) == "storage.v1.bucket"
-    count(resource.properties.encryption.defaultKmsKeyName) == 0
+    contains(lower(resource.properties.acl[_].email), "logging")
+    not resource.properties.versioning.enabled
 }
 
-storage_encrypt {
+storage_versioning {
     lower(input.json.resources[_].type) == "storage.v1.bucket"
-    not gc_issue["storage_encrypt"]
-    not gc_attribute_absence["storage_encrypt"]
+    not gc_issue["storage_versioning"]
+    not gc_attribute_absence["storage_versioning"]
 }
 
-storage_encrypt = false {
-    gc_issue["storage_encrypt"]
+storage_versioning = false {
+    gc_issue["storage_versioning"]
 }
 
-storage_encrypt = false {
-    gc_attribute_absence["storage_encrypt"]
+storage_versioning = false {
+    gc_attribute_absence["storage_versioning"]
 }
 
-storage_encrypt_err = "GCP Storage buckets are publicly accessible to all authenticated users" {
-    gc_issue["storage_encrypt"]
+storage_versioning_err = "GCP Storage log buckets have object versioning disabled" {
+    gc_issue["storage_versioning"]
 }
 
-storage_encrypt_miss_err = "GCP Storage bucket attribute encryption missing in the resource" {
-    gc_attribute_absence["storage_encrypt"]
+storage_versioning_miss_err = "GCP Storage attribute versioning missing in the resource" {
+    gc_attribute_absence["storage_versioning"]
 }
