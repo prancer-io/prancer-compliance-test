@@ -1,6 +1,6 @@
 package rule
 
-# https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances
+# https://cloud.google.com/storage/docs/json_api/v1/buckets
 
 #
 # Id: 333
@@ -153,15 +153,15 @@ storage_logging_err = "Storage Bucket does not have Access and Storage Logging e
 # Id: 390
 #
 
-default storage_versioning = null
+default storage_public_logs = null
 
-gc_attribute_absence["storage_versioning"] {
+gc_attribute_absence["storage_public_logs"] {
     resource := input.json.resources[_]
     lower(resource.type) == "storage.v1.bucket"
     not resource.properties.acl
 }
 
-gc_issue["storage_versioning"] {
+gc_issue["storage_public_logs"] {
     resource := input.json.resources[_]
     lower(resource.type) == "storage.v1.bucket"
     acl := resource.properties.acl[_]
@@ -169,7 +169,7 @@ gc_issue["storage_versioning"] {
     contains(lower(acl.entity), "allusers")
 }
 
-gc_issue["storage_versioning"] {
+gc_issue["storage_public_logs"] {
     resource := input.json.resources[_]
     lower(resource.type) == "storage.v1.bucket"
     acl := resource.properties.acl[_]
@@ -177,24 +177,24 @@ gc_issue["storage_versioning"] {
     contains(lower(acl.entity), "allauthenticatedusers")
 }
 
-storage_versioning {
+storage_public_logs {
     lower(input.json.resources[_].type) == "storage.v1.bucket"
-    not gc_issue["storage_versioning"]
-    not gc_attribute_absence["storage_versioning"]
+    not gc_issue["storage_public_logs"]
+    not gc_attribute_absence["storage_public_logs"]
 }
 
-storage_versioning = false {
-    gc_issue["storage_versioning"]
+storage_public_logs = false {
+    gc_issue["storage_public_logs"]
 }
 
-storage_versioning = false {
-    gc_attribute_absence["storage_versioning"]
+storage_public_logs = false {
+    gc_attribute_absence["storage_public_logs"]
 }
 
-storage_versioning_err = "Storage Buckets with publicly accessible Stackdriver logs" {
-    gc_issue["storage_versioning"]
+storage_public_logs_err = "Storage Buckets with publicly accessible Stackdriver logs" {
+    gc_issue["storage_public_logs"]
 }
 
-storage_versioning_miss_err = "GCP Storage attribute acl missing in the resource" {
-    gc_attribute_absence["storage_versioning"]
+storage_public_logs_miss_err = "GCP Storage attribute acl missing in the resource" {
+    gc_attribute_absence["storage_public_logs"]
 }
