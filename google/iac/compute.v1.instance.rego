@@ -83,25 +83,25 @@ vm_serial_port_err = "GCP VM instances have serial port access enabled" {
 # Id: 396
 #
 
-default vm_pre_empible = null
+default vm_pre_emptible = null
 
-gc_issue["vm_pre_empible"] {
+gc_issue["vm_pre_emptible"] {
     resource := input.json.resources[_]
     lower(resource.type) == "compute.v1.instance"
     resource.properties.scheduling.preemptible == true
 }
 
-vm_pre_empible {
+vm_pre_emptible {
     lower(input.json.resources[_].type) == "compute.v1.instance"
-    not gc_issue["vm_pre_empible"]
+    not gc_issue["vm_pre_emptible"]
 }
 
-vm_pre_empible = false {
-    gc_issue["vm_pre_empible"]
+vm_pre_emptible = false {
+    gc_issue["vm_pre_emptible"]
 }
 
-vm_pre_empible_err = "VM Instances enabled with Pre-Emptible termination" {
-    gc_issue["vm_pre_empible"]
+vm_pre_emptible_err = "VM Instances enabled with Pre-Emptible termination" {
+    gc_issue["vm_pre_emptible"]
 }
 
 #
