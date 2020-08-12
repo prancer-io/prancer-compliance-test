@@ -182,6 +182,12 @@ gc_issue["sql_exposed"] {
     resource.properties.settings.ipConfiguration.authorizedNetworks[_] == "0.0.0.0/0"
 }
 
+gc_issue["sql_exposed"] {
+    resource := input.json.resources[_]
+    lower(resource.type) == "sqladmin.v1beta4.instance"
+    resource.properties.settings.ipConfiguration.authorizedNetworks[_] == "::/0"
+}
+
 sql_exposed {
     lower(input.json.resources[_].type) == "sqladmin.v1beta4.instance"
     not gc_issue["sql_exposed"]
