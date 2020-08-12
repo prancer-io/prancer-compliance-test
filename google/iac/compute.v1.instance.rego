@@ -139,31 +139,31 @@ vm_metadata_err = "VM Instances without any Custom metadata information" {
 # Id: 398
 #
 
-default vm_labels = null
+default vm_no_labels = null
 
-gc_issue["vm_labels"] {
+gc_issue["vm_no_labels"] {
     resource := input.json.resources[_]
     lower(resource.type) == "compute.v1.instance"
     not resource.properties.labels
 }
 
-gc_issue["vm_labels"] {
+gc_issue["vm_no_labels"] {
     resource := input.json.resources[_]
     lower(resource.type) == "compute.v1.instance"
     count(resource.properties.labels) == 0
 }
 
-vm_labels {
+vm_no_labels {
     lower(input.json.resources[_].type) == "compute.v1.instance"
-    not gc_issue["vm_labels"]
+    not gc_issue["vm_no_labels"]
 }
 
-vm_labels = false {
-    gc_issue["vm_labels"]
+vm_no_labels = false {
+    gc_issue["vm_no_labels"]
 }
 
-vm_labels_err = "VM Instances without any Label information" {
-    gc_issue["vm_labels"]
+vm_no_labels_err = "VM Instances without any Label information" {
+    gc_issue["vm_no_labels"]
 }
 
 #
