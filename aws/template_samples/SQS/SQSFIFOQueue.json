@@ -71,34 +71,9 @@
         "ReceiveMessageWaitTimeSeconds": {
           "Ref": "ReceiveMessageWaitTimeSeconds"
         },
-        "RedrivePolicy": {
-          "Fn::If": [
-            "CreateDeadLetterQueue",
-            {
-              "deadLetterTargetArn": {
-                "Fn::GetAtt": [
-                  "MyDeadLetterQueue",
-                  "Arn"
-                ]
-              },
-              "maxReceiveCount": 5
-            },
-            {
-              "Ref": "AWS::NoValue"
-            }
-          ]
-        },
         "VisibilityTimeout": {
           "Ref": "VisibilityTimeout"
         }
-      }
-    },
-    "MyDeadLetterQueue": {
-      "Condition": "CreateDeadLetterQueue",
-      "Type": "AWS::SQS::Queue",
-      "Properties": {
-        "FifoQueue": "true",
-         "QueueName":{"Fn::Join" : [ "", [ {"Ref":"QueueName"},"Deadletter", ".fifo" ] ]}
       }
     }
   },
