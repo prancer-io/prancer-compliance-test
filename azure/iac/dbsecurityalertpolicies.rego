@@ -117,7 +117,7 @@ sql_alert_err = "Send alerts on field value on SQL Databases is misconfigured" {
 # Threat Detection on SQL databases is set to Off (305)
 #
 
-default dbsec_threat_off = false
+default dbsec_threat_off = null
 
 dbsec_threat_off {
     lower(input.type) == "microsoft.sql/servers/databases/securityalertpolicies"
