@@ -86,7 +86,7 @@ aks_nodes_err = "Azure AKS cluster pool profile count contains less than 3 nodes
 # Azure AKS enable role-based access control (RBAC) not enforced (219)
 #
 
-default aks_rbac = false
+default aks_rbac = null
 
 aks_rbac {
     lower(input.type) == "microsoft.containerservice/managedclusters"
