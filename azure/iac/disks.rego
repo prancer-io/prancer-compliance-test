@@ -8,31 +8,46 @@ package rule
 
 default disk_encrypt = null
 
-disk_encrypt {
-    lower(input.type) == "microsoft.compute/disks"
-    input.properties.osType
-    input.properties.encryptionSettingsCollection.encryptionSettings
-    input.properties.encryptionSettingsCollection.enabled == true
+azure_attribute_absence["disk_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.compute/disks"
+    resource.properties.osType
+    not resource.properties.encryptionSettingsCollection.encryptionSettings
+    resource.properties.encryptionSettingsCollection.enabled == true
+}
+
+azure_issue["disk_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.compute/disks"
+    resource.properties.osType
+    resource.properties.encryptionSettingsCollection.enabled != true
+}
+
+azure_issue["disk_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.compute/disks"
+    resource.properties.osType
+    not resource.properties.encryptionSettingsCollection.enabled
 }
 
 disk_encrypt {
-    lower(input.type) == "microsoft.compute/disks"
-    not input.properties.osType
+    lower(input.resources[_].type) == "microsoft.compute/disks"
+    not azure_issue["disk_encrypt"]
+    not azure_attribute_absence["disk_encrypt"]
 }
 
 disk_encrypt = false {
-    lower(input.type) == "microsoft.compute/disks"
-    input.properties.osType
-    not input.properties.encryptionSettingsCollection.encryptionSettings
-    input.properties.encryptionSettingsCollection.enabled == true
+    azure_issue["disk_encrypt"]
 }
 
 disk_encrypt = false {
-    lower(input.type) == "microsoft.compute/disks"
-    input.properties.osType
-    input.properties.encryptionSettingsCollection.enabled != true
+    azure_attribute_absence["disk_encrypt"]
 }
 
 disk_encrypt_err = "Azure disk for VM operating system is not encrypted at rest using ADE" {
-    disk_encrypt == false
+    azure_issue["disk_encrypt"]
+}
+
+disk_encrypt_miss_err = "Disk attribute encryptionSettings missing in the resource" {
+    azure_attribute_absence["disk_encrypt"]
 }

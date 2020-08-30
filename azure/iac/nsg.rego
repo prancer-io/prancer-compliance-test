@@ -2,50 +2,18 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups
 
-#
-# Internet connectivity via tcp over insecure port (3)
-# Memcached DDoS attack attempted (5)
-# RedisWannaMine vulnerable instances with active network traffic (7)
-# Azure NSG allows SSH traffic from internet on port 22 (229)
-# Azure NSG allows traffic from internet on port 3389 (230)
-# Azure NSG having Inbound rule overly permissive to all TCP traffic from any source (231)
-# Azure NSG having Inbound rule overly permissive to all UDP traffic from any source (232)
-# Azure NSG having Inbound rule overly permissive to all traffic from Internet on TCP protocol (233)
-# Azure NSG having Inbound rule overly permissive to all traffic from Internet on UDP protocol (234)
-# Azure NSG having Inbound rule overly permissive to all traffic from Internet on any protocol (235)
-# Azure NSG having Inbound rule overly permissive to allow all traffic from any source on any protocol (236)
-# Azure NSG having Inbound rule overly permissive to allow all traffic from any source to any destination (237)
-# Azure Network Security Group allows CIFS (238)
-# Azure Network Security Group allows DNS (239/240)
-# Azure Network Security Group allows FTP (241)
-# Azure Network Security Group allows FTP-Data (242)
-# Azure Network Security Group allows ICMP (243)
-# Azure Network Security Group allows MSQL (244)
-# Azure Network Security Group allows MySQL (245)
-# Azure Network Security Group allows NetBIOS (246/247)
-# Azure Network Security Group allows PostgreSQL (248)
-# Azure Network Security Group allows SMTP (249)
-# Azure Network Security Group allows SQLServer (250/251)
-# Azure Network Security Group allows Telnet (252)
-# Azure Network Security Group allows VNC Listener (253)
-# Azure Network Security Group allows VNC Server (254)
-# Azure Network Security Group allows Windows RPC (255)
-# Azure Network Security Group allows Windows SMB (256)
-# Publicly exposed DB Ports (6)
-#
-
-default nsg = null
-
 iports := [
-    "21", "22", "23", "25", "53", "80", "135", "137", "138", "445", "1434", "3306", 
-    "4333", "5432", "5500", "5900", "6379", "11211"
+    "21", "22", "23", "25", "53", "80", "135", "137", "138", "445", "1433", "1434", "1521", 
+    "3306", "4333", "5000", "5432", "5500", "5900", "5984", "6379", "6380", "9042", "11211",
+    "27017", "28015", "29015", "50000"
 ]
 
 # allowed in all
 nsg_inbound[port] {
+    resource := input.resources[_]
     port := iports[_]
-    lower(input.type) == "microsoft.network/networksecuritygroups"
-    rules := input.properties.securityRules[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.destinationAddressPrefix == "*"
@@ -54,20 +22,22 @@ nsg_inbound[port] {
 
 # allowed in port
 nsg_inbound[port] {
+    resource := input.resources[_]
     port := iports[_]
-    lower(input.type) == "microsoft.network/networksecuritygroups"
-    rules := input.properties.securityRules[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.destinationAddressPrefix == "*"
     rules.properties.destinationPortRange == port
 }
 
-# allowed in list
+# allowed in range
 nsg_inbound[port] {
+    resource := input.resources[_]
     port := iports[_]
-    lower(input.type) == "microsoft.network/networksecuritygroups"
-    rules := input.properties.securityRules[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.destinationAddressPrefix == "*"
@@ -79,19 +49,22 @@ nsg_inbound[port] {
 
 # allowed in list
 nsg_inbound[port] {
+    resource := input.resources[_]
     port := iports[_]
-    lower(input.type) == "microsoft.network/networksecuritygroups"
-    rules := input.properties.securityRules[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.destinationAddressPrefix == "*"
-    rules.properties.destinationPortRanges[_] == iports[_]
+    rules.properties.destinationPortRanges[_] == port
 }
 
 # allowed in list range
 nsg_inbound[port] {
+    resource := input.resources[_]
     port := iports[_]
-    rules := input.properties.securityRules[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.destinationAddressPrefix == "*"
@@ -100,9 +73,16 @@ nsg_inbound[port] {
     to_number(port_range[1]) >= to_number(port)
 }
 
-nsg_inbound_err["Azure NSG having Inbound rule overly permissive to all TCP traffic from any source"] {
-    lower(input.type) == "microsoft.network/networksecuritygroups"
-    rules := input.properties.securityRules[_]
+#
+# Azure Network Security Group (NSG) having Inbound rule overly permissive to all TCP traffic from any source (231)
+#
+
+default nsg_in_tcp_all_src = null
+
+azure_issue["nsg_in_tcp_all_src"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.protocol == "TCP"
@@ -110,9 +90,29 @@ nsg_inbound_err["Azure NSG having Inbound rule overly permissive to all TCP traf
     rules.properties.destinationPortRange == "*"
 }
 
-nsg_inbound_err["Azure NSG having Inbound rule overly permissive to all UDP traffic from any source"] {
-    lower(input.type) == "microsoft.network/networksecuritygroups"
-    rules := input.properties.securityRules[_]
+nsg_in_tcp_all_src {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["nsg_in_tcp_all_src"]
+}
+
+nsg_in_tcp_all_src = false {
+    azure_issue["nsg_in_tcp_all_src"]
+}
+
+nsg_in_tcp_all_src_err = "Azure NSG having Inbound rule overly permissive to all TCP traffic from any source" {
+    azure_issue["nsg_in_tcp_all_src"]
+}
+
+#
+# Azure Network Security Group (NSG) having Inbound rule overly permissive to all UDP traffic from any source (232)
+#
+
+default nsg_in_udp_all_src = null
+
+azure_issue["nsg_in_udp_all_src"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.protocol == "UDP"
@@ -120,9 +120,29 @@ nsg_inbound_err["Azure NSG having Inbound rule overly permissive to all UDP traf
     rules.properties.destinationPortRange == "*"
 }
 
-nsg_inbound_err["Azure NSG having Inbound rule overly permissive to all traffic from Internet on TCP protocol"] {
-    lower(input.type) == "microsoft.network/networksecuritygroups"
-    rules := input.properties.securityRules[_]
+nsg_in_udp_all_src {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["nsg_in_udp_all_src"]
+}
+
+nsg_in_udp_all_src = false {
+    azure_issue["nsg_in_udp_all_src"]
+}
+
+nsg_in_udp_all_src_err = "Azure NSG having Inbound rule overly permissive to all UDP traffic from any source" {
+    azure_issue["nsg_in_udp_all_src"]
+}
+
+#
+# Azure NSG having Inbound rule overly permissive to all traffic from Internet on TCP protocol (233)
+#
+
+default nsg_in_tcp_all = null
+
+azure_issue["nsg_in_tcp_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.protocol == "TCP"
@@ -131,9 +151,29 @@ nsg_inbound_err["Azure NSG having Inbound rule overly permissive to all traffic 
     rules.properties.destinationPortRange == "*"
 }
 
-nsg_inbound_err["Azure NSG having Inbound rule overly permissive to all UDP traffic from any source"] {
-    lower(input.type) == "microsoft.network/networksecuritygroups"
-    rules := input.properties.securityRules[_]
+nsg_in_tcp_all {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["nsg_in_tcp_all"]
+}
+
+nsg_in_tcp_all = false {
+    azure_issue["nsg_in_tcp_all"]
+}
+
+nsg_in_tcp_all_err = "Azure NSG having Inbound rule overly permissive to all traffic from Internet on TCP protocol" {
+    azure_issue["nsg_in_tcp_all"]
+}
+
+#
+# Azure NSG having Inbound rule overly permissive to all traffic from Internet on UDP protocol (234)
+#
+
+default nsg_in_udp_all = null
+
+azure_issue["nsg_in_udp_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.protocol == "UDP"
@@ -142,9 +182,29 @@ nsg_inbound_err["Azure NSG having Inbound rule overly permissive to all UDP traf
     rules.properties.destinationPortRange == "*"
 }
 
-nsg_inbound_err["Azure NSG having Inbound rule overly permissive to all traffic from Internet on any protocol"] {
-    lower(input.type) == "microsoft.network/networksecuritygroups"
-    rules := input.properties.securityRules[_]
+nsg_in_udp_all {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["nsg_in_udp_all"]
+}
+
+nsg_in_udp_all = false {
+    azure_issue["nsg_in_udp_all"]
+}
+
+nsg_in_udp_all_err = "Azure NSG having Inbound rule overly permissive to all UDP traffic from any source" {
+    azure_issue["nsg_in_udp_all"]
+}
+
+#
+# Azure NSG having Inbound rule overly permissive to all traffic from Internet on any protocol (235)
+#
+
+default nsg_in_all = null
+
+azure_issue["nsg_in_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.protocol == "*"
@@ -152,9 +212,29 @@ nsg_inbound_err["Azure NSG having Inbound rule overly permissive to all traffic 
     rules.properties.destinationPortRange == "*"
 }
 
-nsg_inbound_err["Azure NSG having Inbound rule overly permissive to allow all traffic from any source on any protocol"] {
-    lower(input.type) == "microsoft.network/networksecuritygroups"
-    rules := input.properties.securityRules[_]
+nsg_in_all {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["nsg_in_all"]
+}
+
+nsg_in_all = false {
+    azure_issue["nsg_in_all"]
+}
+
+nsg_in_all_err = "Azure NSG having Inbound rule overly permissive to all traffic from Internet on any protocol" {
+    azure_issue["nsg_in_all"]
+}
+
+#
+# Azure NSG having Inbound rule overly permissive to allow all traffic from any source on any protocol (236)
+#
+
+default nsg_in_all_src = null
+
+azure_issue["nsg_in_all_src"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.protocol == "*"
@@ -163,120 +243,621 @@ nsg_inbound_err["Azure NSG having Inbound rule overly permissive to allow all tr
     rules.properties.destinationPortRange == "*"
 }
 
-nsg_inbound_err["Azure Network Security Group allows ICMP"] {
-    lower(input.type) == "microsoft.network/networksecuritygroups"
-    rules := input.properties.securityRules[_]
+nsg_in_all_src {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["nsg_in_all_src"]
+}
+
+nsg_in_all_src = false {
+    azure_issue["nsg_in_all_src"]
+}
+
+nsg_in_all_src_err = "Azure NSG having Inbound rule overly permissive to allow all traffic from any source on any protocol" {
+    azure_issue["nsg_in_all_src"]
+}
+
+#
+# Azure NSG having Inbound rule overly permissive to allow all traffic from any source to any destination (237)
+#
+
+default nsg_in_all_dst = null
+
+azure_issue["nsg_in_all_dst"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
+    rules.properties.access == "Allow"
+    rules.properties.direction == "Inbound"
+    rules.properties.protocol == "*"
+    rules.properties.sourceAddressPrefix == "*"
+    rules.properties.destinationAddressPrefix == "*"
+    rules.properties.destinationPortRange == "*"
+}
+
+nsg_in_all_dst {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["nsg_in_all_dst"]
+}
+
+nsg_in_all_dst = false {
+    azure_issue["nsg_in_all_dst"]
+}
+
+nsg_in_all_dst_err = "Azure NSG having Inbound rule overly permissive to allow all traffic from any source to any destination" {
+    azure_issue["nsg_in_all_dst"]
+}
+
+#
+# Azure Network Security Group allows ICMP (243)
+#
+
+default nsg_allow_icmp = null
+
+azure_issue["nsg_allow_icmp"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.protocol == "ICMP"
     rules.properties.sourceAddressPrefix == "*"
 }
 
-nsg_inbound_err["Internet connectivity via tcp over insecure port"] {
+nsg_allow_icmp {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["nsg_allow_icmp"]
+}
+
+nsg_allow_icmp = false {
+    azure_issue["nsg_allow_icmp"]
+}
+
+nsg_allow_icmp_err = "Azure NSG having Inbound rule overly permissive to allow all traffic from any source to any destination" {
+    azure_issue["nsg_allow_icmp"]
+}
+
+#
+# Azure Network Security Group allows FTP (241)
+#
+
+default inbound_port_21 = null
+
+azure_issue["inbound_port_21"] {
     to_number(nsg_inbound[_]) == 21
 }
 
-nsg_inbound_err["Internet connectivity via tcp over insecure port"] {
+inbound_port_21 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["inbound_port_21"]
+}
+
+inbound_port_21 = false {
+    azure_issue["inbound_port_21"]
+}
+
+inbound_port_21_err = "Azure Network Security Group allows FTP" {
+    azure_issue["inbound_port_21"]
+}
+
+#
+# Internet connectivity via tcp over insecure port (3)
+#
+
+default inbound_insecure_port = null
+
+azure_issue["inbound_insecure_port"] {
+    to_number(nsg_inbound[_]) == 21
+}
+
+azure_issue["inbound_insecure_port"] {
     to_number(nsg_inbound[_]) == 23
 }
 
-nsg_inbound_err["Internet connectivity via tcp over insecure port"] {
+azure_issue["inbound_insecure_port"] {
     to_number(nsg_inbound[_]) == 80
 }
 
-nsg_inbound_err["Memcached DDoS attack attempted"] {
+inbound_insecure_port {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["inbound_insecure_port"]
+}
+
+inbound_insecure_port = false {
+    azure_issue["inbound_insecure_port"]
+}
+
+inbound_insecure_port_err = "Internet connectivity via tcp over insecure port" {
+    azure_issue["inbound_insecure_port"]
+}
+
+#
+# Memcached DDoS attack attempted (5)
+#
+
+default inbound_port_11211 = null
+
+azure_issue["inbound_port_11211"] {
     to_number(nsg_inbound[_]) == 11211
 }
 
-nsg_inbound_err["RedisWannaMine vulnerable instances with active network traffic"] {
+inbound_port_11211 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["inbound_port_11211"]
+}
+
+inbound_port_11211 = false {
+    azure_issue["inbound_port_11211"]
+}
+
+inbound_port_11211_err = "Memcached DDoS attack attempted" {
+    azure_issue["inbound_port_11211"]
+}
+
+#
+# RedisWannaMine vulnerable instances with active network traffic (7)
+#
+
+default inbound_port_6379 = null
+
+azure_issue["inbound_port_6379"] {
     to_number(nsg_inbound[_]) == 6379
 }
 
-nsg_inbound_err["Azure NSG allows SSH traffic from internet on port 22"] {
-    to_number(nsg_inbound[_]) == 22
+inbound_port_6379 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["inbound_port_6379"]
 }
 
-nsg_inbound_err["Azure NSG allows traffic from internet on port 3389"] {
-    to_number(nsg_inbound[_]) == 3389
+inbound_port_6379 = false {
+    azure_issue["inbound_port_6379"]
 }
 
-nsg_inbound_err["Azure Network Security Group allows CIFS"] {
-    to_number(nsg_inbound[_]) == 445
+inbound_port_6379_err = "RedisWannaMine vulnerable instances with active network traffic" {
+    azure_issue["inbound_port_6379"]
 }
 
-nsg_inbound_err["Azure Network Security Group allows Windows SMB"] {
-    to_number(nsg_inbound[_]) == 445
+#
+# Publicly exposed DB Ports (6)
+#
+
+default inbound_port_dbs = null
+
+azure_issue["inbound_port_dbs"] {
+    to_number(nsg_inbound[_]) == 1433
 }
 
-nsg_inbound_err["Azure Network Security Group allows DNS"] {
-    to_number(nsg_inbound[_]) == 53
+azure_issue["inbound_port_dbs"] {
+    to_number(nsg_inbound[_]) == 1521
 }
 
-nsg_inbound_err["Azure Network Security Group allows FTP"] {
-    to_number(nsg_inbound[_]) == 21
-}
-
-nsg_inbound_err["Azure Network Security Group allows FTP-Data"] {
-    to_number(nsg_inbound[_]) == 20
-}
-
-nsg_inbound_err["Azure Network Security Group allows MSQL"] {
-    to_number(nsg_inbound[_]) == 4333
-}
-
-nsg_inbound_err["Azure Network Security Group allows MySQL"] {
+azure_issue["inbound_port_dbs"] {
     to_number(nsg_inbound[_]) == 3306
 }
 
-nsg_inbound_err["Azure Network Security Group allows NetBIOS"] {
-    to_number(nsg_inbound[_]) == 137
+azure_issue["inbound_port_dbs"] {
+    to_number(nsg_inbound[_]) == 5000
 }
 
-nsg_inbound_err["Azure Network Security Group allows NetBIOS"] {
-    to_number(nsg_inbound[_]) == 138
-}
-
-nsg_inbound_err["Azure Network Security Group allows PostgreSQL"] {
+azure_issue["inbound_port_dbs"] {
     to_number(nsg_inbound[_]) == 5432
 }
 
-nsg_inbound_err["Azure Network Security Group allows SMTP"] {
+azure_issue["inbound_port_dbs"] {
+    to_number(nsg_inbound[_]) == 5984
+}
+
+azure_issue["inbound_port_dbs"] {
+    to_number(nsg_inbound[_]) == 6379
+}
+
+azure_issue["inbound_port_dbs"] {
+    to_number(nsg_inbound[_]) == 6380
+}
+
+azure_issue["inbound_port_dbs"] {
+    to_number(nsg_inbound[_]) == 9042
+}
+
+azure_issue["inbound_port_dbs"] {
+    to_number(nsg_inbound[_]) == 11211
+}
+
+azure_issue["inbound_port_dbs"] {
+    to_number(nsg_inbound[_]) == 27017
+}
+
+azure_issue["inbound_port_dbs"] {
+    to_number(nsg_inbound[_]) == 28015
+}
+
+azure_issue["inbound_port_dbs"] {
+    to_number(nsg_inbound[_]) == 29015
+}
+
+azure_issue["inbound_port_dbs"] {
+    to_number(nsg_inbound[_]) == 50000
+}
+
+inbound_port_dbs {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["inbound_port_dbs"]
+}
+
+inbound_port_dbs = false {
+    azure_issue["inbound_port_dbs"]
+}
+
+inbound_port_dbs_err = "Publicly exposed DB Ports" {
+    azure_issue["inbound_port_dbs"]
+}
+
+#
+# Azure NSG allows SSH traffic from internet on port 22 (229)
+#
+
+default inbound_port_22 = null
+
+azure_issue["inbound_port_22"] {
+    to_number(nsg_inbound[_]) == 22
+}
+
+inbound_port_22 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["inbound_port_22"]
+}
+
+inbound_port_22 = false {
+    azure_issue["inbound_port_22"]
+}
+
+inbound_port_22_err = "Azure NSG allows SSH traffic from internet on port 22" {
+    azure_issue["inbound_port_22"]
+}
+
+#
+# Azure NSG allows traffic from internet on port 3389 (230)
+#
+
+default inbound_port_3389 = null
+
+azure_issue["inbound_port_3389"] {
+    to_number(nsg_inbound[_]) == 3389
+}
+
+inbound_port_3389 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["inbound_port_3389"]
+}
+
+inbound_port_3389 = false {
+    azure_issue["inbound_port_3389"]
+}
+
+inbound_port_3389_err = "Azure NSG allows traffic from internet on port 3389" {
+    azure_issue["inbound_port_3389"]
+}
+
+#
+# Azure Network Security Group allows CIFS/Windows SMB (238/256)
+#
+
+default inbound_port_445 = null
+
+azure_issue["inbound_port_445"] {
+    to_number(nsg_inbound[_]) == 445
+}
+
+inbound_port_445 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["inbound_port_445"]
+}
+
+inbound_port_445 = false {
+    azure_issue["inbound_port_445"]
+}
+
+inbound_port_445_err = "Azure Network Security Group allows CIFS" {
+    azure_issue["inbound_port_445"]
+}
+
+inbound_port_smb_err = "Azure Network Security Group allows Windows SMB" {
+    azure_issue["inbound_port_445"]
+}
+
+#
+# Azure Network Security Group allows DNS (239/240)
+#
+
+default inbound_port_53 = null
+
+azure_issue["inbound_port_53"] {
+    to_number(nsg_inbound[_]) == 53
+}
+
+inbound_port_53 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["inbound_port_53"]
+}
+
+inbound_port_53 = false {
+    azure_issue["inbound_port_53"]
+}
+
+inbound_port_53_err = "Azure Network Security Group allows CIFS" {
+    azure_issue["inbound_port_53"]
+}
+
+#
+# Azure Network Security Group allows FTP-Data (242)
+#
+
+default inbound_port_20 = null
+
+azure_issue["inbound_port_20"] {
+    to_number(nsg_inbound[_]) == 20
+}
+
+inbound_port_20 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["inbound_port_20"]
+}
+
+inbound_port_20 = false {
+    azure_issue["inbound_port_20"]
+}
+
+inbound_port_20_err = "Azure Network Security Group allows FTP-Data" {
+    azure_issue["inbound_port_20"]
+}
+
+#
+# Azure Network Security Group allows MSQL (244)
+#
+
+default inbound_port_4333 = null
+
+azure_issue["inbound_port_4333"] {
+    to_number(nsg_inbound[_]) == 4333
+}
+
+inbound_port_4333 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["inbound_port_4333"]
+}
+
+inbound_port_4333 = false {
+    azure_issue["inbound_port_4333"]
+}
+
+inbound_port_4333_err = "Azure Network Security Group allows MSQL" {
+    azure_issue["inbound_port_4333"]
+}
+
+#
+# Azure Network Security Group allows MySQL (245)
+#
+
+default inbound_port_3306 = null
+
+azure_issue["inbound_port_3306"] {
+    to_number(nsg_inbound[_]) == 3306
+}
+
+inbound_port_3306 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["inbound_port_3306"]
+}
+
+inbound_port_3306 = false {
+    azure_issue["inbound_port_3306"]
+}
+
+inbound_port_3306_err = "Azure Network Security Group allows MySQL" {
+    azure_issue["inbound_port_3306"]
+}
+
+#
+# Azure Network Security Group allows NetBIOS (246/247)
+#
+
+default inbound_port_netbios = null
+
+azure_issue["inbound_port_netbios"] {
+    to_number(nsg_inbound[_]) == 137
+}
+
+azure_issue["inbound_port_netbios"] {
+    to_number(nsg_inbound[_]) == 138
+}
+
+inbound_port_netbios {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["inbound_port_netbios"]
+}
+
+inbound_port_netbios = false {
+    azure_issue["inbound_port_netbios"]
+}
+
+inbound_port_netbios_err = "Azure Network Security Group allows NetBIOS" {
+    azure_issue["inbound_port_netbios"]
+}
+
+#
+# Azure Network Security Group allows PostgreSQL (248)
+#
+
+default inbound_port_5432 = null
+
+azure_issue["inbound_port_5432"] {
+    to_number(nsg_inbound[_]) == 5432
+}
+
+inbound_port_5432 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["inbound_port_5432"]
+}
+
+inbound_port_5432 = false {
+    azure_issue["inbound_port_5432"]
+}
+
+inbound_port_5432_err = "Azure Network Security Group allows PostgreSQL" {
+    azure_issue["inbound_port_5432"]
+}
+
+#
+# Azure Network Security Group allows SMTP (249)
+#
+
+default inbound_port_25 = null
+
+azure_issue["inbound_port_25"] {
     to_number(nsg_inbound[_]) == 25
 }
 
-nsg_inbound_err["Azure Network Security Group allows SMTP"] {
+inbound_port_25 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["inbound_port_25"]
+}
+
+inbound_port_25 = false {
+    azure_issue["inbound_port_25"]
+}
+
+inbound_port_25_err = "Azure Network Security Group allows SMTP" {
+    azure_issue["inbound_port_25"]
+}
+
+#
+# Azure Network Security Group allows SQLServer (250/251)
+#
+
+default inbound_port_sqlserver = null
+
+azure_issue["inbound_port_sqlserver"] {
+    to_number(nsg_inbound[_]) == 1433
+}
+
+azure_issue["inbound_port_sqlserver"] {
     to_number(nsg_inbound[_]) == 1434
 }
 
-nsg_inbound_err["Azure Network Security Group allows Telnet"] {
+inbound_port_sqlserver {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["inbound_port_sqlserver"]
+}
+
+inbound_port_sqlserver = false {
+    azure_issue["inbound_port_sqlserver"]
+}
+
+inbound_port_sqlserver_err = "Azure Network Security Group allows SQLServer" {
+    azure_issue["inbound_port_sqlserver"]
+}
+
+#
+# Azure Network Security Group allows Telnet (252)
+#
+
+default inbound_port_23 = null
+
+azure_issue["inbound_port_23"] {
     to_number(nsg_inbound[_]) == 23
 }
 
-nsg_inbound_err["Azure Network Security Group allows VNC Listener"] {
+inbound_port_23 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["inbound_port_23"]
+}
+
+inbound_port_23 = false {
+    azure_issue["inbound_port_23"]
+}
+
+inbound_port_23_err = "Azure Network Security Group allows Telnet" {
+    azure_issue["inbound_port_23"]
+}
+
+#
+# Azure Network Security Group allows VNC Listener (253)
+#
+
+default inbound_port_5500 = null
+
+azure_issue["inbound_port_5500"] {
     to_number(nsg_inbound[_]) == 5500
 }
 
-nsg_inbound_err["Azure Network Security Group allows VNC Server"] {
+inbound_port_5500 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["inbound_port_5500"]
+}
+
+inbound_port_5500 = false {
+    azure_issue["inbound_port_5500"]
+}
+
+inbound_port_5500_err = "Azure Network Security Group allows VNC Listener" {
+    azure_issue["inbound_port_5500"]
+}
+
+#
+# Azure Network Security Group allows VNC Server (254)
+#
+
+default inbound_port_5900 = null
+
+azure_issue["inbound_port_5900"] {
     to_number(nsg_inbound[_]) == 5900
 }
 
-nsg_inbound_err["Azure Network Security Group allows Windows RPC"] {
-    to_number(nsg_inbound[_]) == 135
+inbound_port_5900 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["inbound_port_5900"]
+}
+
+inbound_port_5900 = false {
+    azure_issue["inbound_port_5900"]
+}
+
+inbound_port_5900_err = "Azure Network Security Group allows VNC Server" {
+    azure_issue["inbound_port_5900"]
 }
 
 #
-# Instance is communicating with ports known to mine Bitcoin (1)
-# Instance is communicating with ports known to mine Ethereum (2)
-# Azure NSG with Outbound rule to allow all traffic to any source (257)
+# Azure Network Security Group allows Windows RPC (255)
 #
+
+default inbound_port_135 = null
+
+azure_issue["inbound_port_135"] {
+    to_number(nsg_inbound[_]) == 135
+}
+
+inbound_port_135 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["inbound_port_135"]
+}
+
+inbound_port_135 = false {
+    azure_issue["inbound_port_135"]
+}
+
+inbound_port_135_err = "Azure Network Security Group allows Windows RPC" {
+    azure_issue["inbound_port_135"]
+}
+
+
 
 oports := ["8332", "8333", "8545", "30303"]
 
 # allowed in all
 nsg_outbound[port] {
     port := oports[_]
-    lower(input.type) == "microsoft.network/networksecuritygroups"
-    rules := input.properties.securityRules[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Outbound"
     rules.properties.destinationAddressPrefix == "*"
@@ -286,19 +867,21 @@ nsg_outbound[port] {
 # allowed in port
 nsg_outbound[port] {
     port := oports[_]
-    lower(input.type) == "microsoft.network/networksecuritygroups"
-    rules := input.properties.securityRules[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Outbound"
     rules.properties.destinationAddressPrefix == "*"
     rules.properties.destinationPortRange == port
 }
 
-# allowed in list
+# allowed in range
 nsg_outbound[port] {
     port := oports[_]
-    lower(input.type) == "microsoft.network/networksecuritygroups"
-    rules := input.properties.securityRules[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Outbound"
     rules.properties.destinationAddressPrefix == "*"
@@ -316,13 +899,15 @@ nsg_outbound[port] {
     rules.properties.access == "Allow"
     rules.properties.direction == "Outbound"
     rules.properties.destinationAddressPrefix == "*"
-    rules.properties.destinationPortRanges[_] == oports[_]
+    rules.properties.destinationPortRanges[_] == port
 }
 
 # allowed in list range
 nsg_outbound[port] {
     port := oports[_]
-    rules := input.properties.securityRules[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Outbound"
     rules.properties.destinationAddressPrefix == "*"
@@ -331,46 +916,85 @@ nsg_outbound[port] {
     to_number(port_range[1]) >= to_number(port)
 }
 
-nsg_outbound_err["Azure NSG with Outbound rule to allow all traffic to any source"] {
-    port := oports[_]
-    lower(input.type) == "microsoft.network/networksecuritygroups"
-    rules := input.properties.securityRules[_]
+#
+# Azure NSG with Outbound rule to allow all traffic to any source (257)
+#
+
+default nsg_out_all = null
+
+azure_issue["nsg_out_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Outbound"
     rules.properties.destinationAddressPrefix == "*"
     rules.properties.destinationPortRange == "*"
 }
 
-nsg_outbound_err["Instance is communicating with ports known to mine Bitcoin"] {
+nsg_out_all {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["nsg_out_all"]
+}
+
+nsg_out_all = false {
+    azure_issue["nsg_out_all"]
+}
+
+nsg_out_all_err = "Azure NSG with Outbound rule to allow all traffic to any source" {
+    azure_issue["nsg_out_all"]
+}
+
+#
+# Instance is communicating with ports known to mine Bitcoin (1)
+#
+
+default outbound_port_bitcoin = null
+
+azure_issue["outbound_port_bitcoin"] {
     to_number(nsg_outbound[_]) == 8332
 }
 
-nsg_outbound_err["Instance is communicating with ports known to mine Bitcoin"] {
+azure_issue["outbound_port_bitcoin"] {
     to_number(nsg_outbound[_]) == 8333
 }
 
-nsg_outbound_err["Instance is communicating with ports known to mine Ethereum"] {
+outbound_port_bitcoin {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["outbound_port_bitcoin"]
+}
+
+outbound_port_bitcoin = false {
+    azure_issue["outbound_port_bitcoin"]
+}
+
+outbound_port_bitcoin_err = "Instance is communicating with ports known to mine Bitcoin" {
+    azure_issue["outbound_port_bitcoin"]
+}
+
+#
+# Instance is communicating with ports known to mine Ethereum (2)
+#
+
+default outbound_port_ethereum = null
+
+azure_issue["outbound_port_ethereum"] {
     to_number(nsg_outbound[_]) == 8545
 }
 
-nsg_outbound_err["Instance is communicating with ports known to mine Ethereum"] {
+azure_issue["outbound_port_ethereum"] {
     to_number(nsg_outbound[_]) == 30303
 }
 
-nsg {
-    lower(input.type) == "microsoft.network/networksecuritygroups"
-    count(nsg_inbound_err) == 0
-    count(nsg_outbound_err) == 0
+outbound_port_ethereum {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["outbound_port_ethereum"]
 }
 
-nsg = false {
-    count(nsg_inbound_err) > 0
+outbound_port_ethereum = false {
+    azure_issue["outbound_port_ethereum"]
 }
 
-nsg = false {
-    count(nsg_outbound_err) > 0
-}
-
-nsg_err = nsg_outbound_err | nsg_inbound_err {
-    nsg == false
+outbound_port_ethereum_err = "Instance is communicating with ports known to mine Ethereum" {
+    azure_issue["outbound_port_ethereum"]
 }

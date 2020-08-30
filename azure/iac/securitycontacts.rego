@@ -8,21 +8,36 @@ package rule
 
 default securitycontacts = null
 
+azure_attribute_absence["securitycontacts"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.security/securitycontacts"
+    not resource.properties.email
+}
+
+azure_issue["securitycontacts"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.security/securitycontacts"
+    re_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", resource.properties.email) == false
+}
+
 securitycontacts {
-    lower(input.type) == "microsoft.security/securitycontacts"
-    re_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", input.properties.email)
+    lower(input.resources[_].type) == "microsoft.security/securitycontacts"
+    not azure_issue["securitycontacts"]
+    not azure_attribute_absence["securitycontacts"]
 }
 
 securitycontacts = false {
-    lower(input.type) == "microsoft.security/securitycontacts"
-    re_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", input.properties.email) == false
+    azure_issue["securitycontacts"]
 }
 
 securitycontacts = false {
-    lower(input.type) == "microsoft.security/securitycontacts"
-    count([c | input.properties.email; c := 1]) == 0
+    azure_attribute_absence["securitycontacts"]
 }
 
 securitycontacts_err = "Security contact emails is not set in Security Center" {
-    securitycontacts == false
+    azure_issue["securitycontacts"]
+}
+
+securitycontacts_miss_err = "Security Contacts attribute mail missing in the resource" {
+    azure_attribute_absence["securitycontacts"]
 }

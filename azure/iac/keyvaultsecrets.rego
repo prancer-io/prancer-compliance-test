@@ -8,21 +8,37 @@ package rule
 
 default kv_expire = null
 
+azure_attribute_absence["kv_expire"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.keyvault/vaults/secrets"
+    resource.properties.attributes.enabled != false
+    not resource.properties.attributes.exp
+}
+
+azure_issue["kv_expire"] {
+    resource := input.resources[_]
+    resource.properties.attributes.enabled != false
+    to_number(resource.properties.attributes.exp) < 0
+}
+
 kv_expire {
-    lower(input.type) == "microsoft.keyvault/vaults/secrets"
-    to_number(input.properties.attributes.exp) > 0
+    lower(input.resources[_].type) == "microsoft.keyvault/vaults/secrets"
+    not azure_issue["kv_expire"]
+    not azure_attribute_absence["kv_expire"]
 }
 
 kv_expire = false {
-    lower(input.type) == "microsoft.keyvault/vaults/secrets"
-    to_number(input.properties.attributes.exp) == 0
+    azure_issue["kv_expire"]
 }
 
 kv_expire = false {
-    lower(input.type) == "microsoft.keyvault/vaults/secrets"
-    count([c | input.properties.attributes.exp; c := 1]) == 0
+    azure_attribute_absence["kv_expire"]
 }
 
 kv_expire_err = "Azure Key Vault secrets have no expiration date" {
-    kv_expire == false
+    azure_issue["kv_expire"]
+}
+
+kv_expire_miss_err = "Azure Key Vault attribute exp missing in the resource" {
+    azure_attribute_absence["kv_expire"]
 }

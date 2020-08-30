@@ -8,18 +8,38 @@ package rule
 
 default aks_cni_net = null
 
+azure_attribute_absence["aks_cni_net"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.networkProfile.networkPlugin
+}
+
+azure_issue["aks_cni_net"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    lower(resource.properties.networkProfile.networkPlugin) != "azure"
+}
+
 aks_cni_net {
-    lower(input.type) == "microsoft.containerservice/managedclusters"
-    lower(input.properties.networkProfile.networkPlugin) == "azure"
+    lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
+    not azure_issue["aks_cni_net"]
+    not azure_attribute_absence["aks_cni_net"]
 }
 
 aks_cni_net = false {
-    lower(input.type) == "microsoft.containerservice/managedclusters"
-    lower(input.properties.networkProfile.networkPlugin) != "azure"
+    azure_issue["aks_cni_net"]
+}
+
+aks_cni_net = false {
+    azure_attribute_absence["aks_cni_net"]
 }
 
 aks_cni_net_err = "Azure AKS cluster Azure CNI networking not enabled" {
-    aks_cni_net = false
+    azure_issue["aks_cni_net"]
+}
+
+aks_cni_net_miss_err = "AKS cluster attribute networkProfile.networkPlugin missing in the resource" {
+    azure_attribute_absence["aks_cni_net"]
 }
 
 #
@@ -28,18 +48,38 @@ aks_cni_net_err = "Azure AKS cluster Azure CNI networking not enabled" {
 
 default aks_http_routing = null
 
+azure_attribute_absence["aks_http_routing"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.addonProfiles.httpApplicationRouting
+}
+
+azure_issue["aks_http_routing"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    resource.properties.addonProfiles.httpApplicationRouting.enabled == true
+}
+
 aks_http_routing {
-    lower(input.type) == "microsoft.containerservice/managedclusters"
-    input.properties.addonProfiles.httpApplicationRouting.enabled == false
+    lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
+    not azure_issue["aks_http_routing"]
+    not azure_attribute_absence["aks_http_routing"]
 }
 
 aks_http_routing = false {
-    lower(input.type) == "microsoft.containerservice/managedclusters"
-    input.properties.addonProfiles.httpApplicationRouting.enabled == true
+    azure_issue["aks_http_routing"]
+}
+
+aks_http_routing = false {
+    azure_attribute_absence["aks_http_routing"]
 }
 
 aks_http_routing_err = "Azure AKS cluster HTTP application routing enabled" {
-    aks_http_routing == false
+    azure_issue["aks_http_routing"]
+}
+
+aks_http_routing_miss_err = "AKS cluster attribute addonProfiles.httpApplicationRouting missing in the resource" {
+    azure_attribute_absence["aks_http_routing"]
 }
 
 #
@@ -48,18 +88,38 @@ aks_http_routing_err = "Azure AKS cluster HTTP application routing enabled" {
 
 default aks_monitoring = null
 
+azure_attribute_absence["aks_monitoring"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.addonProfiles.omsagent.enabled
+}
+
+azure_issue["aks_monitoring"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    input.properties.addonProfiles.omsagent.enabled != true
+}
+
 aks_monitoring {
-    lower(input.type) == "microsoft.containerservice/managedclusters"
-    input.properties.addonProfiles.omsagent.enabled == true
+    lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
+    not azure_issue["aks_monitoring"]
+    not azure_attribute_absence["aks_monitoring"]
 }
 
 aks_monitoring = false {
-    lower(input.type) == "microsoft.containerservice/managedclusters"
-    input.properties.addonProfiles.omsagent.enabled == false
+    azure_issue["aks_monitoring"]
+}
+
+aks_monitoring = false {
+    azure_attribute_absence["aks_monitoring"]
 }
 
 aks_monitoring_err = "Azure AKS cluster monitoring not enabled" {
-    aks_monitoring == false
+    azure_issue["aks_monitoring"]
+}
+
+aks_monitoring_miss_err = "AKS cluster attribute addonProfiles.omsagent missing in the resource" {
+    azure_attribute_absence["aks_monitoring"]
 }
 
 #
@@ -68,18 +128,38 @@ aks_monitoring_err = "Azure AKS cluster monitoring not enabled" {
 
 default aks_nodes = null
 
+azure_attribute_absence["aks_nodes"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.agentPoolProfiles
+}
+
+azure_issue["aks_nodes"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    min([ c | c := resource.properties.agentPoolProfiles[_].count]) < 3
+}
+
 aks_nodes {
-    lower(input.type) == "microsoft.containerservice/managedclusters"
-    min([ c | c := to_number(input.properties.agentPoolProfiles[_].count)]) >= 3
+    lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
+    not azure_issue["aks_nodes"]
+    not azure_attribute_absence["aks_nodes"]
 }
 
 aks_nodes = false {
-    lower(input.type) == "microsoft.containerservice/managedclusters"
-    min([ c | c := to_number(input.properties.agentPoolProfiles[_].count)]) < 3
+    azure_issue["aks_nodes"]
+}
+
+aks_nodes = false {
+    azure_attribute_absence["aks_nodes"]
 }
 
 aks_nodes_err = "Azure AKS cluster pool profile count contains less than 3 nodes" {
-    aks_nodes == false
+    azure_issue["aks_nodes"]
+}
+
+aks_nodes_miss_err = "AKS cluster attribute agentPoolProfiles missing in the resource" {
+    azure_attribute_absence["aks_nodes"]
 }
 
 #
@@ -88,16 +168,36 @@ aks_nodes_err = "Azure AKS cluster pool profile count contains less than 3 nodes
 
 default aks_rbac = null
 
+azure_attribute_absence["aks_rbac"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.enableRBAC
+}
+
+azure_issue["aks_rbac"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    resource.properties.enableRBAC != true
+}
+
 aks_rbac {
-    lower(input.type) == "microsoft.containerservice/managedclusters"
-    input.properties.enableRBAC == true
+    lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
+    not azure_issue["aks_rbac"]
+    not azure_attribute_absence["aks_rbac"]
 }
 
 aks_rbac = false {
-    lower(input.type) == "microsoft.containerservice/managedclusters"
-    input.properties.enableRBAC == false
+    azure_issue["aks_rbac"]
+}
+
+aks_rbac = false {
+    azure_attribute_absence["aks_rbac"]
 }
 
 aks_rbac_err = "Azure AKS enable role-based access control (RBAC) not enforced" {
-    aks_rbac == false
+    azure_issue["aks_rbac"]
+}
+
+aks_rbac_miss_err = "AKS cluster attribute enableRBAC missing in the resource" {
+    azure_attribute_absence["aks_rbac"]
 }

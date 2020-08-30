@@ -9,16 +9,21 @@ package rule
 
 default vnet_subnet_nsg = null
 
+azure_issue["vnet_subnet_nsg"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/virtualnetworks/subnets"
+    count([c | resource.properties.networkSecurityGroup.id; c := 1]) == 0
+}
+
 vnet_subnet_nsg {
-    lower(input.type) == "microsoft.network/virtualnetworks/subnets"
-    input.properties.networkSecurityGroup.id
+    lower(input.resources[_].type) == "microsoft.network/virtualnetworks/subnets"
+    not azure_issue["vnet_subnet_nsg"]
 }
 
 vnet_subnet_nsg = false {
-    lower(input.type) == "microsoft.network/virtualnetworks/subnets"
-    count([c | input.properties.networkSecurityGroup.id; c := 1]) == 0
+    azure_issue["vnet_subnet_nsg"]
 }
 
 vnet_subnet_nsg_err = "Azure Virtual Network subnet is not configured with a Network Security Group" {
-    vnet_subnet_nsg == false
+    azure_issue["vnet_subnet_nsg"]
 }

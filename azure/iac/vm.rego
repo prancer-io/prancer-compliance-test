@@ -8,16 +8,21 @@ package rule
 
 default vm_aset = null
 
+azure_issue["vm_aset"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.compute/virtualmachinescalesets/virtualmachines"
+    not resource.properties.availabilitySet
+}
+
 vm_aset {
-    lower(input.type) == "microsoft.compute/virtualmachinescalesets/virtualmachines"
-    input.properties.availabilitySet
+    lower(input.resources[_].type) == "microsoft.compute/virtualmachinescalesets/virtualmachines"
+    not azure_issue["vm_aset"]
 }
 
 vm_aset = false {
-    lower(input.type) == "microsoft.compute/virtualmachinescalesets/virtualmachines"
-    not input.properties.availabilitySet
+    azure_issue["vm_aset"]
 }
 
 vm_aset_err = "Azure Virtual Machine is not assigned to an availability set" {
-    vm_aset == false
+    azure_issue["vm_aset"]
 }
