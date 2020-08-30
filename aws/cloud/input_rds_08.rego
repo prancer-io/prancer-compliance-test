@@ -3,11 +3,9 @@ package rule
 default rulepass = false
 
 # API: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html
-# Id: 128
+# Id: 122
 
 rulepass {
-   db_instance := input.DBInstances[_]
-   db_instance.CopyTagsToSnapshot == true
+    instance := input.DBInstances[_]
+    instance.PerformanceInsightsKMSKeyId
 }
-
-# If CopyTagsToSnapshot is enabled then test will pass.

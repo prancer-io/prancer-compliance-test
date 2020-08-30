@@ -5,7 +5,7 @@ default rulepass = false
 # API: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html
 # Id: 121
 
-rulepass = true{
+rulepass {
    db_instance := input.DBInstances[_]
    db_instance.PubliclyAccessible == false
 }
