@@ -878,7 +878,8 @@ nsg_outbound[port] {
 # allowed in list
 nsg_outbound[port] {
     port := oports[_]
-    lower(input.type) == "azurerm_network_security_rule"
+    resource := input.json.resources[_]
+    lower(resource.type) == "azurerm_network_security_rule"
     rules := input.properties.securityRules[_]
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "Outbound"
