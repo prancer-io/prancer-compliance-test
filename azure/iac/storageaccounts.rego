@@ -103,7 +103,7 @@ azure_issue["storage_threat_protection"] {
     lower(nested.type) == "providers/advancedthreatprotectionsettings"
     nested.properties.isEnabled != true
     nested_type := "providers/advancedthreatprotectionsettings"
-    count([ c | lower(resource.resources[_].type) == nested_type; c = 1]) ==0
+    count([ c | lower(resource.resources[_].type) == nested_type; c = 1]) == 0
 }
 
 storage_threat_protection {
