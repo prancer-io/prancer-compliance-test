@@ -24,7 +24,7 @@ ct_regions = false {
 }
 
 ct_regions_err = "AWS CloudTrail is not enabled in all regions" {
-    aws_issue["ct_log_validation"]
+    aws_issue["ct_regions"]
 }
 
 #

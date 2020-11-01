@@ -56,7 +56,7 @@ aws_issue["proto_all"] {
     lower(resource.Type) == "aws::ec2::securitygroup"
     ingress := resource.Properties.SecurityGroupIngress[_]
     ingress.IpProtocol == "-1"
-    ingress.CidrIpv6="::/0"
+    ingress.CidrIpv6 == "::/0"
 }
 
 #
