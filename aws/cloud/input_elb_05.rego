@@ -1,9 +1,12 @@
+#
+# PR-AWS-0063
+#
+
 package rule
 
 default rulepass = true
 
 # API : https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html
-# Id: 63
 
 insecure_ssl_protocol := [
     "Protocol-SSLv3",

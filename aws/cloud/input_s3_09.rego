@@ -1,9 +1,12 @@
+#
+# PR-AWS-0148
+#
+
 package rule
 
 default rulepass = true
 
 # API: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html
-# ID: 148
 
 rulepass = false {
     policy := input.Policy.Statement[_]

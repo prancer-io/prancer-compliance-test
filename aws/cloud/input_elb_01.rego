@@ -1,9 +1,12 @@
+#
+# PR-AWS-0064
+#
+
 package rule
 
 default rulepass = false
 
 # API : https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html
-# Id: 64
 
 rulepass = true{
    input.LoadBalancerAttributes.AccessLog.Enabled=true
