@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/compute/docs/reference/rest/v1/subnetworks
 
 #
-# PR-GCP-0074-CFR
+# PR-GCP-0074-GDF
 #
 
 default vpc_flow_logs = null
@@ -28,7 +28,7 @@ vpc_flow_logs_err = "GCP VPC Flow logs for the subnet is set to Off" {
 }
 
 #
-# PR-GCP-0075-CFR
+# PR-GCP-0075-GDF
 #
 
 default vpc_private_ip_google = null

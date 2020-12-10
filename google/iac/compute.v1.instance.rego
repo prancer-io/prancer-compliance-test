@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/compute/docs/reference/rest/v1/instances
 
 #
-# PR-GCP-0070-CFR
+# PR-GCP-0070-GDF
 #
 
 default vm_ip_forward = null
@@ -28,7 +28,7 @@ vm_ip_forward_err = "GCP VM instances have IP forwarding enabled" {
 }
 
 #
-# PR-GCP-0071-CFR
+# PR-GCP-0071-GDF
 #
 
 default vm_block_project_ssh_keys = null
@@ -53,7 +53,7 @@ vm_block_project_ssh_keys_err = "GCP VM instances have block project-wide SSH ke
 }
 
 #
-# PR-GCP-0072-CFR
+# PR-GCP-0072-GDF
 #
 
 default vm_serial_port = null
@@ -80,7 +80,7 @@ vm_serial_port_err = "GCP VM instances have serial port access enabled" {
 }
 
 #
-# PR-GCP-0091-CFR
+# PR-GCP-0091-GDF
 #
 
 default vm_pre_emptible = null
@@ -105,7 +105,7 @@ vm_pre_emptible_err = "VM Instances enabled with Pre-Emptible termination" {
 }
 
 #
-# PR-GCP-0092-CFR
+# PR-GCP-0092-GDF
 #
 
 default vm_metadata = null
@@ -136,7 +136,7 @@ vm_metadata_err = "VM Instances without any Custom metadata information" {
 }
 
 #
-# PR-GCP-0093-CFR
+# PR-GCP-0093-GDF
 #
 
 default vm_no_labels = null
@@ -167,7 +167,7 @@ vm_no_labels_err = "VM Instances without any Label information" {
 }
 
 #
-# PR-GCP-0094-CFR
+# PR-GCP-0094-GDF
 #
 
 default vm_info = null

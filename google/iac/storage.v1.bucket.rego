@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/storage/docs/json_api/v1/buckets
 
 #
-# PR-GCP-0063-CFR
+# PR-GCP-0063-GDF
 #
 
 default storage_encrypt = null
@@ -43,7 +43,7 @@ storage_encrypt_miss_err = "GCP Storage bucket attribute encryption missing in t
 }
 
 #
-# PR-GCP-0066-CFR
+# PR-GCP-0066-GDF
 #
 
 default storage_versioning = null
@@ -84,7 +84,7 @@ storage_versioning_miss_err = "GCP Storage attribute versioning missing in the r
 }
 
 #
-# PR-GCP-0078-CFR
+# PR-GCP-0078-GDF
 #
 
 default storage_stack_logging = null
@@ -125,7 +125,7 @@ storage_stack_logging_miss_err = "GCP Storage attribute logging missing in the r
 }
 
 #
-# PR-GCP-0089-CFR
+# PR-GCP-0089-GDF
 #
 
 default storage_logging = null
@@ -150,7 +150,7 @@ storage_logging_err = "Storage Bucket does not have Access and Storage Logging e
 }
 
 #
-# PR-GCP-0090-CFR
+# PR-GCP-0090-GDF
 #
 
 default storage_public_logs = null

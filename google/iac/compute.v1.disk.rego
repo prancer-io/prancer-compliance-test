@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/compute/docs/reference/rest/v1/disks
 
 #
-# PR-GCP-0069-CFR
+# PR-GCP-0069-GDF
 #
 
 default disk_encrypt = null

@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/compute/docs/reference/rest/v1/targetHttpsProxies
 
 #
-# PR-GCP-0057-CFR
+# PR-GCP-0057-GDF
 #
 
 default lbs_ssl_policy = null
@@ -34,7 +34,7 @@ lbs_ssl_policy_err = "GCP Load balancer HTTPS target proxy configured with defau
 }
 
 #
-# PR-GCP-0058-CFR
+# PR-GCP-0058-GDF
 #
 
 default lbs_quic = null

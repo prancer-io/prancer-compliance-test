@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys
 
 #
-# PR-GCP-0067-CFR
+# PR-GCP-0067-GDF
 #
 
 default svc_account_key = null

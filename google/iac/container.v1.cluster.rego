@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters
 
 #
-# PR-GCP-0030-CFR
+# PR-GCP-0030-GDF
 #
 
 default k8s_svc_account = null
@@ -43,7 +43,7 @@ k8s_svc_account_miss_err = "Kubernetes Engine Cluster attribute nodePools config
 }
 
 #
-# PR-GCP-0031-CFR
+# PR-GCP-0031-GDF
 #
 
 default k8s_basicauth = null
@@ -74,7 +74,7 @@ k8s_basicauth_err = "GCP Kubernetes Engine Clusters Basic Authentication is set 
 }
 
 #
-# PR-GCP-0032-CFR
+# PR-GCP-0032-GDF
 #
 
 default k8s_client_cert = null
@@ -105,7 +105,7 @@ k8s_client_cert_err = "GCP Kubernetes Engine Clusters Client Certificate is set 
 }
 
 #
-# PR-GCP-0033-CFR
+# PR-GCP-0033-GDF
 #
 
 default k8s_alias_ip = null
@@ -130,7 +130,7 @@ k8s_alias_ip_err = "GCP Kubernetes Engine Clusters have Alias IP disabled" {
 }
 
 #
-# PR-GCP-0034-CFR
+# PR-GCP-0034-GDF
 #
 
 default k8s_alpha = null
@@ -155,7 +155,7 @@ k8s_alpha_err = "GCP Kubernetes Engine Clusters have Alpha cluster feature enabl
 }
 
 #
-# PR-GCP-0035-CFR
+# PR-GCP-0035-GDF
 #
 
 default k8s_http_lbs = null
@@ -180,7 +180,7 @@ k8s_http_lbs_err = "GCP Kubernetes Engine Clusters have HTTP load balancing disa
 }
 
 #
-# PR-GCP-0036-CFR
+# PR-GCP-0036-GDF
 #
 
 default k8s_legacy_abac = null
@@ -205,7 +205,7 @@ k8s_legacy_abac_err = "GCP Kubernetes Engine Clusters have Legacy Authorization 
 }
 
 #
-# PR-GCP-0037-CFR
+# PR-GCP-0037-GDF
 #
 
 default k8s_master_auth_net = null
@@ -230,7 +230,7 @@ k8s_master_auth_net_err = "GCP Kubernetes Engine Clusters have Master authorized
 }
 
 #
-# PR-GCP-0038-CFR
+# PR-GCP-0038-GDF
 #
 
 default k8s_net_policy = null
@@ -255,7 +255,7 @@ k8s_net_policy_err = "GCP Kubernetes Engine Clusters have Network policy disable
 }
 
 #
-# PR-GCP-0039-CFR
+# PR-GCP-0039-GDF
 #
 
 default k8s_logging = null
@@ -295,7 +295,7 @@ k8s_logging_miss_err = "Kubernetes Engine Cluster attribute loggingService confi
 }
 
 #
-# PR-GCP-0040-CFR
+# PR-GCP-0040-GDF
 #
 
 default k8s_monitor = null
@@ -335,7 +335,7 @@ k8s_monitor_miss_err = "Kubernetes Engine Cluster attribute monitoringService co
 }
 
 #
-# PR-GCP-0041-CFR
+# PR-GCP-0041-GDF
 #
 
 default k8s_binary_auth = null
@@ -360,7 +360,7 @@ k8s_binary_auth_err = "GCP Kubernetes Engine Clusters have binary authorization 
 }
 
 #
-# PR-GCP-0042-CFR
+# PR-GCP-0042-GDF
 #
 
 default k8s_legacy_endpoint = null
@@ -385,7 +385,7 @@ k8s_legacy_endpoint_err = "GCP Kubernetes Engine Clusters have legacy compute en
 }
 
 #
-# PR-GCP-0043-CFR
+# PR-GCP-0043-GDF
 #
 
 default k8s_pod_security = null
@@ -410,7 +410,7 @@ k8s_pod_security_err = "GCP Kubernetes Engine Clusters have pod security policy 
 }
 
 #
-# PR-GCP-0045-CFR
+# PR-GCP-0045-GDF
 #
 
 default k8s_egress_metering = null
@@ -435,7 +435,7 @@ k8s_egress_metering_err = "GCP Kubernetes Engine Clusters not configured with ne
 }
 
 #
-# PR-GCP-0046-CFR
+# PR-GCP-0046-GDF
 #
 
 default k8s_private = null
@@ -460,7 +460,7 @@ k8s_private_err = "GCP Kubernetes Engine Clusters not configured with private cl
 }
 
 #
-# PR-GCP-0047-CFR
+# PR-GCP-0047-GDF
 #
 
 default k8s_private_node = null
@@ -485,7 +485,7 @@ k8s_private_node_err = "GCP Kubernetes Engine Clusters not configured with priva
 }
 
 #
-# PR-GCP-0048-CFR
+# PR-GCP-0048-GDF
 #
 
 default k8s_node_image = null
@@ -533,7 +533,7 @@ k8s_node_image_miss_err = "Kubernetes Engine Cluster attribute imageType config 
 }
 
 #
-# PR-GCP-0049-CFR
+# PR-GCP-0049-GDF
 #
 
 default k8s_network = null
@@ -564,7 +564,7 @@ k8s_network_err = "GCP Kubernetes Engine Clusters using the default network" {
 }
 
 #
-# PR-GCP-0050-CFR
+# PR-GCP-0050-GDF
 #
 
 default k8s_dashboard = null
@@ -589,7 +589,7 @@ k8s_dashboard_err = "GCP Kubernetes Engine Clusters web UI/Dashboard is set to E
 }
 
 #
-# PR-GCP-0051-CFR
+# PR-GCP-0051-GDF
 #
 
 default k8s_labels = null
@@ -620,7 +620,7 @@ k8s_labels_err = "GCP Kubernetes Engine Clusters without any label information" 
 }
 
 #
-# PR-GCP-0052-CFR
+# PR-GCP-0052-GDF
 #
 
 default k8s_db_encrypt = null
@@ -672,7 +672,7 @@ k8s_db_encrypt_miss_err = "Kubernetes Engine Cluster attribute databaseEncryptio
 }
 
 #
-# PR-GCP-0053-CFR
+# PR-GCP-0053-GDF
 #
 
 default k8s_intra_node = null
@@ -697,7 +697,7 @@ k8s_intra_node_err = "GCP Kubernetes cluster intra-node visibility disabled" {
 }
 
 #
-# PR-GCP-0054-CFR
+# PR-GCP-0054-GDF
 #
 
 default k8s_istio = null
@@ -722,7 +722,7 @@ k8s_istio_err = "GCP Kubernetes cluster istioConfig not enabled" {
 }
 
 #
-# PR-GCP-0055-CFR
+# PR-GCP-0055-GDF
 #
 
 default k8s_zones = null
@@ -752,7 +752,7 @@ k8s_zones_miss_err = "GCP Kubernetes cluster not in redundant zones" {
 }
 
 #
-# PR-GCP-0056-CFR
+# PR-GCP-0056-GDF
 #
 
 default k8s_auto_upgrade = null
