@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-stack.html
 
 #
-# Id: 14
+# PR-AWS-0014-CFR
 #
 
 default cf_sns = null

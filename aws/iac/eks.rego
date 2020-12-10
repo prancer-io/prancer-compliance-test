@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html
 
 #
-# Id: 50
+# PR-AWS-0050-CFR
 #
 
 default eks_multiple_sg = null

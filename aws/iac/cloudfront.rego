@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html
 
 #
-# Id: 15
+# PR-AWS-0015-CFR
 #
 
 default cf_default_cache = null
@@ -44,7 +44,7 @@ cf_default_cache_miss_err = "Cloudfront attribute DistributionConfig missing in 
 
 
 #
-# Id: 16
+# PR-AWS-0016-CFR
 #
 
 default cf_ssl_protocol = null
@@ -86,7 +86,7 @@ cf_ssl_protocol_miss_err = "Cloudfront attribute DistributionConfig Origins miss
 
 
 #
-# Id: 17
+# PR-AWS-0017-CFR
 #
 
 default cf_logging = null
@@ -126,7 +126,7 @@ cf_logging_miss_err = "Cloudfront attribute DistributionConfig Logging in the re
 }
 
 #
-# Id: 18
+# PR-AWS-0018-CFR
 #
 
 default cf_https_only = null
@@ -169,7 +169,7 @@ cf_https_only_miss_err = "Cloudfront attribute DistributionConfig Origins missin
 
 
 #
-# Id: 19
+# PR-AWS-0019-CFR
 #
 
 default cf_https = null
@@ -211,7 +211,7 @@ cf_https_miss_err = "Cloudfront attribute ViewerProtocolPolicy missing in the re
 }
 
 #
-# Id: 20
+# PR-AWS-0020-CFR
 #
 
 default cf_min_protocol = null
@@ -259,7 +259,7 @@ cf_min_protocol_miss_err = "Cloudfront attribute MinimumProtocolVersion missing 
 }
 
 #
-# Id: 21
+# PR-AWS-0021-CFR
 #
 
 default cf_firewall = null
@@ -299,7 +299,7 @@ cf_firewall_miss_err = "Cloudfront attribute WebACLId missing in the resource" {
 }
 
 #
-# Id: 22
+# PR-AWS-0022-CFR
 #
 
 default cf_default_ssl = null
@@ -324,7 +324,7 @@ cf_default_ssl_err = "AWS CloudFront web distribution with default SSL certifica
 }
 
 #
-# Id: 23
+# PR-AWS-0023-CFR
 #
 
 default cf_geo_restriction = null
@@ -364,7 +364,7 @@ cf_geo_restriction_miss_err = "Cloudfront attribute Geo RestrictionType missing 
 }
 
 #
-# Id: 24
+# PR-AWS-0024-CFR
 #
 
 default cf_s3_origin = null

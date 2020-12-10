@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-parameter.html
 
 #
-# Id: 158
+# PR-AWS-0158-CFR
 #
 
 default ssm_secure = null

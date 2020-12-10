@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-subnet.html
 
 #
-# Id: 184
+# PR-AWS-0184-CFR
 #
 
 default vpc_subnet_autoip = null

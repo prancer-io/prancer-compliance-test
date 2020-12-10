@@ -4,7 +4,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html
 
 #
-# Id: 62
+# PR-AWS-0062-CFR
 #
 
 default elb_insecure_cipher = null
@@ -105,7 +105,7 @@ elb_insecure_cipher_err = "AWS Elastic Load Balancer (Classic) SSL negotiation p
 }
 
 #
-# Id: 63
+# PR-AWS-0063-CFR
 #
 
 default elb_insecure_protocol = null
@@ -139,7 +139,7 @@ elb_insecure_protocol_err = "AWS Elastic Load Balancer (Classic) SSL negotiation
 }
 
 #
-# Id: 64
+# PR-AWS-0064-CFR
 #
 
 default elb_access_log = null
@@ -164,7 +164,7 @@ elb_access_log_err = "AWS Elastic Load Balancer (Classic) with access log disabl
 }
 
 #
-# Id: 65
+# PR-AWS-0065-CFR
 #
 
 default elb_conn_drain = null
@@ -189,7 +189,7 @@ elb_conn_drain_err = "AWS Elastic Load Balancer (Classic) with connection draini
 }
 
 #
-# Id: 66
+# PR-AWS-0066-CFR
 #
 
 default elb_crosszone = null
@@ -214,7 +214,8 @@ elb_crosszone_err = "AWS Elastic Load Balancer (Classic) with cross-zone load ba
 }
 
 #
-# Id: 67, 68
+# PR-AWS-0067-CFR
+# PR-AWS-0068-CFR
 #
 
 # There is only reference to security groups, no info about security group rules
@@ -251,7 +252,7 @@ elb_sec_group_miss_err = "ELB attribute SecurityGroups missing in the resource" 
 }
 
 #
-# Id: 69
+# PR-AWS-0069-CFR
 #
 
 default elb_not_in_use = null
@@ -291,7 +292,7 @@ elb_not_in_use_miss_err = "ELB attribute Instances missing in the resource" {
 }
 
 #
-# Id: 72
+# PR-AWS-0072-CFR
 #
 
 default elb_alb_logs = null
@@ -328,7 +329,7 @@ elb_alb_logs_miss_err = "ELBv2 attribute LoadBalancerAttributes missing in the r
 }
 
 #
-# Id: 73
+# PR-AWS-0073-CFR
 #
 
 default elb_listener_ssl = null
@@ -381,7 +382,7 @@ elb_listener_ssl_miss_err = "ELB attribute Listeners missing in the resource" {
 }
 
 #
-# Id: 6
+# PR-AWS-0006-CFR
 #
 
 default elb_over_https = null

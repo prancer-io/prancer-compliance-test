@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html
 
 #
-# Id: 105
+# PR-AWS-0105-CFR
 #
 
 default lambda_env = null
@@ -57,7 +57,7 @@ lambda_env_miss_err = "Lambda function attribute KmsKeyArn/Environment missing i
 }
 
 #
-# Id: 106
+# PR-AWS-0106-CFR
 #
 
 default lambda_vpc = null
@@ -97,7 +97,7 @@ lambda_vpc_miss_err = "Lambda function attribute VpcConfig.SubnetIds missing in 
 }
 
 #
-# Id: 107
+# PR-AWS-0107-CFR
 #
 
 default lambda_tracing = null

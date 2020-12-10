@@ -60,7 +60,7 @@ aws_issue["proto_all"] {
 }
 
 #
-# AWS Security Groups allow internet traffic from internet to Windows RPC port (135)
+# PR-AWS-0175-CFR
 #
 
 default port_135 = null
@@ -79,7 +79,7 @@ port_135_err = "AWS Security Groups allow internet traffic from internet to Wind
 }
 
 #
-# AWS Security Groups allow internet traffic from internet to NetBIOS port (137)
+# PR-AWS-0165-CFR
 #
 
 default port_137 = null
@@ -98,7 +98,7 @@ port_137_err = "AWS Security Groups allow internet traffic from internet to NetB
 }
 
 #
-# AWS Security Groups allow internet traffic from internet to NetBIOS port (138)
+# PR-AWS-0166-CFR
 #
 
 default port_138 = null
@@ -117,7 +117,7 @@ port_138_err = "AWS Security Groups allow internet traffic from internet to NetB
 }
 
 #
-# AWS Security Groups allow internet traffic from internet to SQLServer port (1433)
+# PR-AWS-0170-CFR
 #
 
 default port_1433 = null
@@ -136,7 +136,7 @@ port_1433_err = "AWS Security Groups allow internet traffic from internet to SQL
 }
 
 #
-# AWS Security Groups allow internet traffic from internet to SQLServer port (1434)
+# PR-AWS-0171-CFR
 #
 
 default port_1434 = null
@@ -155,7 +155,7 @@ port_1434_err = "AWS Security Groups allow internet traffic from internet to SQL
 }
 
 #
-# AWS Security Groups allow internet traffic from internet to FTP-Data port (20)
+# PR-AWS-0162-CFR
 #
 
 default port_20 = null
@@ -174,7 +174,7 @@ port_20_err = "AWS Security Groups allow internet traffic from internet to FTP-D
 }
 
 #
-# AWS Security Groups allow internet traffic from internet to FTP port (21)
+# PR-AWS-0161-CFR
 #
 
 default port_21 = null
@@ -193,7 +193,7 @@ port_21_err = "AWS Security Groups allow internet traffic from internet to FTP p
 }
 
 #
-# AWS Security Groups allow internet traffic to SSH port (22)
+# PR-AWS-0176-CFR
 #
 
 default port_22 = null
@@ -212,7 +212,7 @@ port_22_err = "AWS Security Groups allow internet traffic to SSH port (22)" {
 }
 
 #
-# AWS Security Groups allow internet traffic from internet to Telnet port (23)
+# PR-AWS-0172-CFR
 #
 
 default port_23 = null
@@ -231,7 +231,7 @@ port_23_err = "AWS Security Groups allow internet traffic from internet to Telne
 }
 
 #
-# AWS Security Groups allow internet traffic from internet to SMTP port (25)
+# PR-AWS-0169-CFR
 #
 
 default port_25 = null
@@ -250,7 +250,7 @@ port_25_err = "AWS Security Groups allow internet traffic from internet to SMTP 
 }
 
 #
-# AWS Security Groups allow internet traffic from internet to MYSQL port (3306)
+# PR-AWS-0164-CFR
 #
 
 default port_3306 = null
@@ -269,7 +269,7 @@ port_3306_err = "AWS Security Groups allow internet traffic from internet to MYS
 }
 
 #
-# AWS Security Groups allow internet traffic from internet to RDP port (3389)
+# PR-AWS-0168-CFR
 #
 
 default port_3389 = null
@@ -288,7 +288,7 @@ port_3389_err = "AWS Security Groups allow internet traffic from internet to RDP
 }
 
 #
-# AWS Security Groups allow internet traffic from internet to MSQL port (4333)
+# PR-AWS-0163-CFR
 #
 
 default port_4333 = null
@@ -307,7 +307,7 @@ port_4333_err = "AWS Security Groups allow internet traffic from internet to MSQ
 }
 
 #
-# AWS Security Groups allow internet traffic from internet to CIFS port (445)
+# PR-AWS-0159-CFR
 #
 
 default port_445 = null
@@ -326,7 +326,7 @@ port_445_err = "AWS Security Groups allow internet traffic from internet to CIFS
 }
 
 #
-# AWS Security Groups allow internet traffic from internet to DNS port (53)
+# PR-AWS-0160-CFR
 #
 
 default port_53 = null
@@ -345,7 +345,7 @@ port_53_err = "AWS Security Groups allow internet traffic from internet to DNS p
 }
 
 #
-# AWS Security Groups allow internet traffic from internet to PostgreSQL port (5432)
+# PR-AWS-0167-CFR
 #
 
 default port_5432 = null
@@ -364,7 +364,7 @@ port_5432_err = "AWS Security Groups allow internet traffic from internet to Pos
 }
 
 #
-# AWS Security Groups allow internet traffic from internet to VNC Listener port (5500)
+# PR-AWS-0173-CFR
 #
 
 default port_5500 = null
@@ -383,7 +383,7 @@ port_5500_err = "AWS Security Groups allow internet traffic from internet to VNC
 }
 
 #
-# AWS Security Groups allow internet traffic from internet to VNC Server port (5900)
+# PR-AWS-0174-CFR
 #
 
 default port_5900 = null
@@ -402,7 +402,7 @@ port_5900_err = "AWS Security Groups allow internet traffic from internet to VNC
 }
 
 #
-# AWS Default Security Group does not restrict all traffic
+# PR-AWS-0035-CFR
 #
 
 default port_all = null
@@ -421,7 +421,7 @@ port_all_err = "AWS Default Security Group does not restrict all traffic" {
 }
 
 #
-# AWS Security Groups with Inbound rule overly permissive to All Traffic
+# PR-AWS-0178-CFR
 #
 
 default port_proto_all = null

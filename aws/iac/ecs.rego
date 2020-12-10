@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
 
 #
-# Id: 47
+# PR-AWS-0047-CFR
 #
 
 default ecs_task_evelated = null
@@ -43,7 +43,7 @@ ecs_task_evelated_miss_err = "ECS taskdefinition attribute ContainerDefinitions 
 }
 
 #
-# Id: 48
+# PR-AWS-0048-CFR
 #
 
 default ecs_exec = null
@@ -83,7 +83,7 @@ ecs_exec_miss_err = "ECS taskdefinition attribute ExecutionRoleArn missing in th
 }
 
 #
-# Id: 49
+# PR-AWS-0049-CFR
 #
 
 default ecs_root_user = null

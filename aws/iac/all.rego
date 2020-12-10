@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html
 
 #
-# Id: 2
+# PR-AWS-0002-CFR
 #
 
 default api_gw_cert = null
@@ -43,7 +43,7 @@ api_gw_cert_miss_err = "API Gateway attribute ClientCertificateId missing in the
 }
 
 #
-# Id: 359
+# gID6
 #
 
 default db_exposed = null
@@ -86,7 +86,7 @@ db_exposed_err = "Publicly exposed DB Ports" {
 }
 
 #
-# Id: 349
+# gID1
 #
 
 default bitcoin_ports = null
@@ -129,7 +129,7 @@ bitcoin_ports_err = "Instance is communicating with ports known to mine Bitcoin"
 }
 
 #
-# Id: 350
+# gID2
 #
 
 default ethereum_ports = null
