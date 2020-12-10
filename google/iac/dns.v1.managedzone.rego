@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/dns/docs/reference/v1/managedZones
 
 #
-# Id: 273
+# PR-GCP-0003-CFR
 #
 
 default dnssec_state = null
@@ -44,7 +44,7 @@ dnssec_state_miss_err = "GCP Cloud DNS attribute dnssecConfig.state missing in t
 }
 
 #
-# Id: 274
+# PR-GCP-0004-CFR
 #
 
 default dnssec_key_rsasha1 = null
@@ -87,7 +87,7 @@ dnssec_key_rsasha1_miss_err = "GCP Cloud DNS attribute dnssecConfig.defaultKeySp
 }
 
 #
-# Id: 275
+# PR-GCP-0005-CFR
 #
 
 default dnssec_zone_rsasha1 = null
