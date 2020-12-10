@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html
 
 #
-# Id: 74
+# PR-AWS-0074-TRF
 #
 
 default esearch_vpc = null
@@ -43,7 +43,7 @@ esearch_vpc_miss_err = "Elasticsearch attribute vpc_options.subnet_ids missing i
 }
 
 #
-# Id: 76
+# PR-AWS-0076-TRF
 #
 
 default esearch_encrypt = null
@@ -68,7 +68,7 @@ esearch_encrypt_err = "AWS Elasticsearch domain Encryption for data at rest is d
 }
 
 #
-# Id: 77
+# PR-AWS-0077-TRF
 #
 
 default esearch_master = null
@@ -93,7 +93,7 @@ esearch_master_err = "AWS Elasticsearch domain has Dedicated master set to disab
 }
 
 #
-# Id: 78
+# PR-AWS-0078-TRF
 #
 
 default esearch_index_slow_log = null
@@ -141,7 +141,7 @@ esearch_index_slow_log_miss_err = "Elasticsearch attribute log_publishing_option
 }
 
 #
-# Id: 79
+# PR-AWS-0079-TRF
 #
 
 default esearch_search_slow_log = null
@@ -189,7 +189,7 @@ esearch_search_slow_log_miss_err = "Elasticsearch attribute log_publishing_optio
 }
 
 #
-# Id: 80
+# PR-AWS-0080-TRF
 #
 
 default esearch_zone_awareness = null

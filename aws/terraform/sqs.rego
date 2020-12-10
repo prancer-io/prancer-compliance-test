@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html
 
 #
-# Id: 155
+# PR-AWS-0155-TRF
 #
 
 default sqs_deadletter = null
@@ -28,7 +28,7 @@ sqs_deadletter_err = "AWS SQS does not have a dead letter queue configured" {
 }
 
 #
-# Id: 156
+# PR-AWS-0156-TRF
 #
 
 default sqs_encrypt_key = null
@@ -68,7 +68,7 @@ sqs_encrypt_key_miss_err = "SQS Queue attribute kms_master_key_id missing in the
 }
 
 #
-# Id: 156
+# PR-AWS-0157-TRF
 #
 
 default sqs_encrypt = null

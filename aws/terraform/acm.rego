@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html
 
 #
-# Id: 1
+# PR-AWS-0001-TRF
 #
 
 default acm_wildcard = null
@@ -49,7 +49,7 @@ acm_wildcard_miss_err = "Certificate manager attribute domain_name missing in th
 }
 
 #
-# Id: 9
+# PR-AWS-0009-TRF
 #
 
 default acm_ct_log = null

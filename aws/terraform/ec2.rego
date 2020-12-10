@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
 
 #
-# Id: 42
+# PR-AWS-0042-TRF
 #
 
 default ec2_iam_role = null
