@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters
 
 #
-# Id: 300
+# PR-GCP-0030-TRF
 #
 
 default k8s_svc_account = null
@@ -49,7 +49,7 @@ k8s_svc_account_miss_err = "Kubernetes Engine Cluster attribute nodePools config
 }
 
 #
-# Id: 301
+# PR-GCP-0031-TRF
 #
 
 default k8s_basicauth = null
@@ -80,7 +80,7 @@ k8s_basicauth_err = "GCP Kubernetes Engine Clusters Basic Authentication is set 
 }
 
 #
-# Id: 302
+# PR-GCP-0032-TRF
 #
 
 default k8s_client_cert = null
@@ -111,7 +111,7 @@ k8s_client_cert_err = "GCP Kubernetes Engine Clusters Client Certificate is set 
 }
 
 #
-# Id: 303
+# PR-GCP-0033-TRF
 #
 
 default k8s_alias_ip = null
@@ -136,7 +136,7 @@ k8s_alias_ip_err = "GCP Kubernetes Engine Clusters have Alias IP disabled" {
 }
 
 #
-# Id: 304
+# PR-GCP-0034-TRF
 #
 
 default k8s_alpha = null
@@ -161,7 +161,7 @@ k8s_alpha_err = "GCP Kubernetes Engine Clusters have Alpha cluster feature enabl
 }
 
 #
-# Id: 305
+# PR-GCP-0035-TRF
 #
 
 default k8s_http_lbs = null
@@ -186,7 +186,7 @@ k8s_http_lbs_err = "GCP Kubernetes Engine Clusters have HTTP load balancing disa
 }
 
 #
-# Id: 306
+# PR-GCP-0036-TRF
 #
 
 default k8s_legacy_abac = null
@@ -211,7 +211,7 @@ k8s_legacy_abac_err = "GCP Kubernetes Engine Clusters have Legacy Authorization 
 }
 
 #
-# Id: 307
+# PR-GCP-0037-TRF
 #
 
 default k8s_master_auth_net = null
@@ -236,7 +236,7 @@ k8s_master_auth_net_err = "GCP Kubernetes Engine Clusters have Master authorized
 }
 
 #
-# Id: 308
+# PR-GCP-0038-TRF
 #
 
 default k8s_net_policy = null
@@ -261,7 +261,7 @@ k8s_net_policy_err = "GCP Kubernetes Engine Clusters have Network policy disable
 }
 
 #
-# Id: 309
+# PR-GCP-0039-TRF
 #
 
 default k8s_logging = null
@@ -301,7 +301,7 @@ k8s_logging_miss_err = "Kubernetes Engine Cluster attribute logging_service conf
 }
 
 #
-# Id: 310
+# PR-GCP-0040-TRF
 #
 
 default k8s_monitor = null
@@ -341,7 +341,7 @@ k8s_monitor_miss_err = "Kubernetes Engine Cluster attribute monitoring_service c
 }
 
 #
-# Id: 311
+# PR-GCP-0041-TRF
 #
 
 default k8s_binary_auth = null
@@ -366,7 +366,7 @@ k8s_binary_auth_err = "GCP Kubernetes Engine Clusters have binary authorization 
 }
 
 #
-# Id: 312
+# PR-GCP-0042-TRF
 #
 
 default k8s_legacy_endpoint = null
@@ -397,7 +397,7 @@ k8s_legacy_endpoint_err = "GCP Kubernetes Engine Clusters have legacy compute en
 }
 
 #
-# Id: 313
+# PR-GCP-0043-TRF
 #
 
 default k8s_pod_security = null
@@ -422,7 +422,7 @@ k8s_pod_security_err = "GCP Kubernetes Engine Clusters have pod security policy 
 }
 
 #
-# Id: 315
+# PR-GCP-0045-TRF
 #
 
 default k8s_egress_metering = null
@@ -447,7 +447,7 @@ k8s_egress_metering_err = "GCP Kubernetes Engine Clusters not configured with ne
 }
 
 #
-# Id: 316
+# PR-GCP-0046-TRF
 #
 
 default k8s_private = null
@@ -472,7 +472,7 @@ k8s_private_err = "GCP Kubernetes Engine Clusters not configured with private cl
 }
 
 #
-# Id: 317
+# PR-GCP-0047-TRF
 #
 
 default k8s_private_node = null
@@ -497,7 +497,7 @@ k8s_private_node_err = "GCP Kubernetes Engine Clusters not configured with priva
 }
 
 #
-# Id: 318
+# PR-GCP-0048-TRF
 #
 
 default k8s_node_image = null
@@ -543,7 +543,7 @@ k8s_node_image_miss_err = "Kubernetes Engine Cluster attribute image_type config
 }
 
 #
-# Id: 319
+# PR-GCP-0049-TRF
 #
 
 default k8s_network = null
@@ -581,7 +581,7 @@ k8s_network_err = "GCP Kubernetes Engine Clusters using the default network" {
 }
 
 #
-# Id: 321
+# PR-GCP-0051-TRF
 #
 
 default k8s_labels = null
@@ -612,7 +612,7 @@ k8s_labels_err = "GCP Kubernetes Engine Clusters without any label information" 
 }
 
 #
-# Id: 322
+# PR-GCP-0052-TRF
 #
 
 default k8s_db_encrypt = null
@@ -658,7 +658,7 @@ k8s_db_encrypt_miss_err = "Kubernetes Engine Cluster attribute database_encrypti
 }
 
 #
-# Id: 323
+# PR-GCP-0053-TRF
 #
 
 default k8s_intra_node = null
@@ -683,7 +683,7 @@ k8s_intra_node_err = "GCP Kubernetes cluster intra-node visibility disabled" {
 }
 
 #
-# Id: 324
+# PR-GCP-0054-TRF
 #
 
 default k8s_istio = null
@@ -708,7 +708,7 @@ k8s_istio_err = "GCP Kubernetes cluster istio_config not enabled" {
 }
 
 #
-# Id: 325
+# PR-GCP-0055-TRF
 #
 
 default k8s_zones = null
