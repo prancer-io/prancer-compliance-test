@@ -102,7 +102,7 @@ dbsec_threat_email_miss_err = "DB policy attribute state missing in the resource
 
 #
 # Azure SQL Server threat detection alerts not enabled for all threat types (270)
-# Threat Detection types on SQL databases is misconfigured (305)
+# Threat Detection types on SQL databases is misconfigured (306)
 #
 
 default dbsec_threat_alert = null
