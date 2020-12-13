@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/databases/transparentdataencryption
 
 #
-# SQL databases has encryption disabled (293)
+# PR-AZR-0084-ARM
 #
 
 default db_encrypt = null

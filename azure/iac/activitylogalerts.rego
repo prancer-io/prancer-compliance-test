@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-04-01/activitylogalerts
 
 #
-# Send me emails about alerts is set to OFF in Security Center (299)
+# PR-AZR-0090-ARM
 #
 
 default alerts = null

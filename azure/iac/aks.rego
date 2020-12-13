@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters
 
 #
-# Azure AKS cluster Azure CNI networking not enabled (215)
+# PR-AZR-0006-ARM
 #
 
 default aks_cni_net = null
@@ -43,7 +43,7 @@ aks_cni_net_miss_err = "AKS cluster attribute networkProfile.networkPlugin missi
 }
 
 #
-# Azure AKS cluster HTTP application routing enabled (216)
+# PR-AZR-0007-ARM
 #
 
 default aks_http_routing = null
@@ -83,7 +83,7 @@ aks_http_routing_miss_err = "AKS cluster attribute addonProfiles.httpApplication
 }
 
 #
-# Azure AKS cluster monitoring not enabled (217)
+# PR-AZR-0008-ARM
 #
 
 default aks_monitoring = null
@@ -123,7 +123,7 @@ aks_monitoring_miss_err = "AKS cluster attribute addonProfiles.omsagent missing 
 }
 
 #
-# Azure AKS cluster pool profile count contains less than 3 nodes (218)
+# PR-AZR-0009-ARM
 #
 
 default aks_nodes = null
@@ -163,7 +163,7 @@ aks_nodes_miss_err = "AKS cluster attribute agentPoolProfiles missing in the res
 }
 
 #
-# Azure AKS enable role-based access control (RBAC) not enforced (219)
+# PR-AZR-0010-ARM
 #
 
 default aks_rbac = null

@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachinescalesets/virtualmachines
 
 #
-# Azure Virtual Machine is not assigned to an availability set (274)
+# PR-AZR-0065-ARM
 #
 
 default vm_aset = null

@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2019-06-01-preview/servers/administrators
 
 #
-# SQL servers which do not have Azure Active Directory admin configured (294)
+# PR-AZR-0085-ARM
 #
 
 default db_ad_admin = null

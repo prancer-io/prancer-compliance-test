@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs
 
 #
-# Azure Network Watcher NSG flow logs are disabled (259)
+# PR-AZR-0050-ARM
 #
 
 default netwatch_logs = null
@@ -49,7 +49,7 @@ netwatch_logs_miss_err = "NetWatcher FlowLog extension attribute retentionPolicy
 }
 
 #
-# Azure Network Watcher NSG flow logs retention is less than 90 days (260)
+# PR-AZR-0051-ARM
 #
 
 default netwatch_log_retention = null

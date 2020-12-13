@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/disks
 
 #
-# Azure disk for VM operating system is not encrypted at rest using ADE (277)
+# PR-AZR-0068-ARM
 #
 
 default disk_encrypt = null

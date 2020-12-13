@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/vpngateways
 
 #
-# VPN is not configured with cryptographic algorithm (307)
+# PR-AZR-0098-ARM
 #
 
 default vpn_encrypt = null
