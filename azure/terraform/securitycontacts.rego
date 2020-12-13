@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_security_center_contact
 
 #
-# Security contact emails is not set in Security Center (296)
+# PR-AZR-0087-TRF
 #
 
 default securitycontacts = null

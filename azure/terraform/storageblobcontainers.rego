@@ -3,8 +3,8 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-06-01/storageaccounts/blobservices/containers
 
 #
-# Azure storage accounts has blob containers with public access (283)
-# Azure Blob container(s) with public access and logging set to less than 180 days (222)
+# PR-AZR-0074-TRF
+# PR-AZR-0013-TRF
 #
 
 default storage_public_access = null

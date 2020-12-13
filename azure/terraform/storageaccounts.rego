@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_storage_account
 
 #
-# Storage Accounts without Secure transfer enabled (301)
+# PR-AZR-0092-TRF
 #
 
 default storage_secure = null
@@ -32,7 +32,7 @@ storage_secure_err = "Storage Accounts without Secure transfer enabled" {
 }
 
 #
-# Storage Accounts without their firewalls enabled (302)
+# PR-AZR-0093-TRF
 #
 
 default storage_acl = null

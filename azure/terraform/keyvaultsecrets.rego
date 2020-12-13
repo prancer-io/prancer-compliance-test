@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_key_vault_secret
 
 #
-# Azure Key Vault secrets have no expiration date (227)
+# PR-AZR-0018-TRF
 #
 
 default kv_expire = null

@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_kubernetes_cluster
 
 #
-# Azure AKS cluster Azure CNI networking not enabled (215)
+# PR-AZR-0006-TRF
 #
 
 default aks_cni_net = null
@@ -43,7 +43,7 @@ aks_cni_net_miss_err = "AKS cluster attribute network_policy missing in the reso
 }
 
 #
-# Azure AKS cluster HTTP application routing enabled (216)
+# PR-AZR-0007-TRF
 #
 
 default aks_http_routing = null
@@ -68,7 +68,7 @@ aks_http_routing_err = "Azure AKS cluster HTTP application routing enabled" {
 }
 
 #
-# Azure AKS cluster monitoring not enabled (217)
+# PR-AZR-0008-TRF
 #
 
 default aks_monitoring = null
@@ -108,7 +108,7 @@ aks_monitoring_miss_err = "AKS cluster attribute oms_agent missing in the resour
 }
 
 #
-# Azure AKS cluster pool profile count contains less than 3 nodes (218)
+# PR-AZR-0009-TRF
 #
 
 default aks_nodes = null
@@ -148,7 +148,7 @@ aks_nodes_miss_err = "AKS cluster attribute agentPoolProfiles missing in the res
 }
 
 #
-# Azure AKS enable role-based access control (RBAC) not enforced (219)
+# PR-AZR-0010-TRF
 #
 
 default aks_rbac = null

@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/rest/api/containerregistry/registries/list
 
 #
-# Azure Container Registry using the deprecated classic registry (224)
+# PR-AZR-0015-TRF
 #
 
 default acr_classic = null

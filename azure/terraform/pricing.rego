@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_security_center_subscription_pricing
 
 #
-# Standard pricing tier is not selected in Security Center (300)
+# PR-AZR-0091-TRF
 #
 
 default pricing = null

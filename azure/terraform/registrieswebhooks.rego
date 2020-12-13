@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_container_registry_webhook
 
 #
-# Azure ACR HTTPS not enabled for webhook (214)
+# PR-AZR-0005-TRF
 #
 
 default acr_webhooks = null
