@@ -1,8 +1,11 @@
+#
+# PR-AWS-0035
+#
+
 package rule
 default rulepass = false
 
 # API Documentation: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html
-# Id: 35
 
 rulepass = true {                                      
    count(uphold) == 0

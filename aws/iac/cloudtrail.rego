@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html
 
 #
-# Id: 26
+# PR-AWS-0026-CFR
 #
 
 default ct_regions = null
@@ -28,7 +28,7 @@ ct_regions_err = "AWS CloudTrail is not enabled in all regions" {
 }
 
 #
-# Id: 27
+# PR-AWS-0027-CFR
 #
 
 default ct_log_validation = null
@@ -53,7 +53,7 @@ ct_log_validation_err = "AWS CloudTrail log validation is not enabled in all reg
 }
 
 #
-# Id: 28
+# PR-AWS-0028-CFR
 #
 
 default ct_master_key = null
@@ -93,7 +93,7 @@ ct_master_key_miss_err = "CloudTrail attribute KMSKeyId missing in the resource"
 }
 
 #
-# Id: 268
+# PR-AWS-0192-CFR
 #
 
 default ct_cloudwatch = null

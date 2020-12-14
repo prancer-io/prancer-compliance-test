@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/auditingsettings
 
 #
-# Azure SQL Server audit log retention is less than 91 days (268)
+# PR-AZR-0059-ARM
 #
 
 default sql_log_retention = null

@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volume.html
 
 #
-# Id: 41
+# PR-AWS-0041-TRF
 #
 
 default ebs_encrypt = null

@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/compute/docs/reference/rest/v1/firewalls
 
 #
-# Id: 269
+# PR-GCP-0002-TRF
 #
 
 default firewall_default = null
@@ -94,7 +94,7 @@ firewall_default_miss_err = "GCP vm firewall attribute name missing in the resou
 }
 
 #
-# Id: 276
+# PR-GCP-0006-TRF
 #
 
 default firewall_port_53 = null
@@ -195,7 +195,7 @@ firewall_port_53_err = "GCP Firewall rule allows internet traffic to DNS port (5
 }
 
 #
-# Id: 277
+# PR-GCP-0007-TRF
 #
 
 default firewall_port_21 = null
@@ -296,7 +296,7 @@ firewall_port_21_err = "GCP Firewall rule allows internet traffic to FTP port (2
 }
 
 #
-# Id: 278
+# PR-GCP-0008-TRF
 #
 
 default firewall_port_80 = null
@@ -397,7 +397,7 @@ firewall_port_80_err = "GCP Firewall rule allows internet traffic to HTTP port (
 }
 
 #
-# Id: 279
+# PR-GCP-0009-TRF
 #
 
 default firewall_port_445 = null
@@ -498,7 +498,7 @@ firewall_port_445_err = "GCP Firewall rule allows internet traffic to Microsoft-
 }
 
 #
-# Id: 280
+# PR-GCP-0010-TRF
 #
 
 default firewall_port_27017 = null
@@ -599,7 +599,7 @@ firewall_port_27017_err = "GCP Firewall rule allows internet traffic to MongoDB 
 }
 
 #
-# Id: 281
+# PR-GCP-0011-TRF
 #
 
 default firewall_port_3306 = null
@@ -700,7 +700,7 @@ firewall_port_3306_err = "GCP Firewall rule allows internet traffic to MySQL DB 
 }
 
 #
-# Id: 282
+# PR-GCP-0012-TRF
 #
 
 default firewall_port_139 = null
@@ -801,7 +801,7 @@ firewall_port_139_err = "GCP Firewall rule allows internet traffic to NetBIOS-SS
 }
 
 #
-# Id: 283
+# PR-GCP-0013-TRF
 #
 
 default firewall_port_1521 = null
@@ -902,7 +902,7 @@ firewall_port_1521_err = "GCP Firewall rule allows internet traffic to Oracle DB
 }
 
 #
-# Id: 284
+# PR-GCP-0014-TRF
 #
 
 default firewall_port_110 = null
@@ -1003,7 +1003,7 @@ firewall_port_110_err = "GCP Firewall rule allows internet traffic to POP3 port 
 }
 
 #
-# Id: 285
+# PR-GCP-0015-TRF
 #
 
 default firewall_port_5432 = null
@@ -1104,7 +1104,7 @@ firewall_port_5432_err = "GCP Firewall rule allows internet traffic to PostgreSQ
 }
 
 #
-# Id: 286
+# PR-GCP-0016-TRF
 #
 
 default firewall_port_3389 = null
@@ -1205,7 +1205,7 @@ firewall_port_3389_err = "GCP Firewall rule allows internet traffic to RDP port 
 }
 
 #
-# Id: 287
+# PR-GCP-0017-TRF
 #
 
 default firewall_port_25 = null
@@ -1306,7 +1306,7 @@ firewall_port_25_err = "GCP Firewall rule allows internet traffic to SMTP port (
 }
 
 #
-# Id: 288
+# PR-GCP-0018-TRF
 #
 
 default firewall_port_22 = null
@@ -1407,7 +1407,7 @@ firewall_port_22_err = "GCP Firewall rule allows internet traffic to SSH port (2
 }
 
 #
-# Id: 289
+# PR-GCP-0019-TRF
 #
 
 default firewall_port_23 = null
@@ -1508,7 +1508,7 @@ firewall_port_23_err = "GCP Firewall rule allows internet traffic to Telnet port
 }
 
 #
-# Id: 290
+# PR-GCP-0020-TRF
 #
 
 default firewall_inbound = null
@@ -1545,7 +1545,7 @@ firewall_inbound_err = "GCP Firewall rules allow inbound traffic from anywhere w
 }
 
 #
-# Id: 291
+# PR-GCP-0021-TRF
 #
 
 default firewall_inbound_all = null

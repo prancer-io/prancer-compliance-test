@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways
 
 #
-# Azure Application Gateway allows TLSv1.1 or lower (220)
+# PR-AZR-0011-ARM
 #
 
 default gw_tls = null
@@ -44,7 +44,7 @@ gw_tls_miss_err = "App gateway attribute webApplicationFirewallConfiguration mis
 }
 
 #
-# Azure Application Gateway does not have the WAF enabled (221)
+# PR-AZR-0012-ARM
 #
 
 default gw_waf = null

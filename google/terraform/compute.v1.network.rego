@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/compute/docs/reference/rest/v1/networks
 
 #
-# Id: 346
+# PR-GCP-0076-TRF
 #
 
 default net_legacy = null
@@ -28,7 +28,7 @@ net_legacy_err = "GCP project is configured with legacy network" {
 }
 
 #
-# Id: 347
+# PR-GCP-0077-TRF
 #
 
 default net_default = null

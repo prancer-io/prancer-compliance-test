@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts
 
 #
-# Storage Accounts without Secure transfer enabled (301)
+# PR-AZR-0092-ARM
 #
 
 default storage_secure = null
@@ -43,7 +43,7 @@ storage_secure_miss_err = "Storage Account attribute supportsHttpsTrafficOnly mi
 }
 
 #
-# Storage Accounts without their firewalls enabled (302)
+# PR-AZR-0093-ARM
 #
 
 default storage_acl = null

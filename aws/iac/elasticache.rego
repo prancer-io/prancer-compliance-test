@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html
 
 #
-# Id: 55
+# PR-AWS-0055-CFR
 #
 
 default cache_failover = null
@@ -29,7 +29,7 @@ cache_failover_err = "AWS ElastiCache Redis cluster with Multi-AZ Automatic Fail
 }
 
 #
-# Id: 56
+# PR-AWS-0056-CFR
 #
 
 default cache_redis_auth = null
@@ -75,7 +75,7 @@ cache_redis_auth_miss_err = "ElastiCache Redis cluster attribute AuthToken missi
 }
 
 #
-# Id: 57
+# PR-AWS-0057-CFR
 #
 
 default cache_redis_encrypt = null
@@ -100,7 +100,7 @@ cache_redis_encrypt_err = "AWS ElastiCache Redis cluster with encryption for dat
 }
 
 #
-# Id: 58
+# PR-AWS-0058-CFR
 #
 
 default cache_encrypt = null

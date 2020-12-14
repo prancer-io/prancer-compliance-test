@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances
 
 #
-# Id: 332
+# PR-GCP-0062-GDF
 #
 
 default sql_labels = null
@@ -34,7 +34,7 @@ sql_labels_err = "GCP SQL Instances without any Label information" {
 }
 
 #
-# Id: 363
+# PR-GCP-0080-GDF
 #
 
 default sql_binary_logs = null
@@ -76,7 +76,7 @@ sql_binary_logs_miss_err = "GCP DB Instance attribute databaseVersion missing in
 }
 
 #
-# Id: 364
+# PR-GCP-0081-GDF
 #
 
 default sql_backup = null
@@ -117,7 +117,7 @@ sql_backup_miss_err = "GCP DB Instance attribute backupConfiguration missing in 
 }
 
 #
-# Id: 366
+# PR-GCP-0082-GDF
 #
 
 default sql_ssl = null
@@ -158,7 +158,7 @@ sql_ssl_miss_err = "GCP DB Instance attribute ipConfiguration.requireSsl missing
 }
 
 #
-# Id: 367
+# PR-GCP-0083-GDF
 #
 
 default sql_exposed = null

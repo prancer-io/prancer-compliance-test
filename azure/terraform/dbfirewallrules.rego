@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2015-05-01-preview/servers/firewallrules
 
 #
-# SQL Server Firewall rules allow access to any Azure internal resources (291)
+# PR-AZR-0082-TRF
 #
 
 default db_firewall = null

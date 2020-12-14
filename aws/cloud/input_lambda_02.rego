@@ -1,9 +1,12 @@
+#
+# PR-AWS-0106
+#
+
 package rule
 
 default rulepass = false
 
 # API: https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html
-# Id: 106
 
 rulepass {
    input.Configuration.VpcConfig

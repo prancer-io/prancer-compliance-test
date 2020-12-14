@@ -69,7 +69,7 @@ nsg_inbound[port] {
 }
 
 #
-# Azure Network Security Group (NSG) having inbound rule overly permissive to all TCP traffic from any source (231)
+# PR-AZR-0022-TRF
 #
 
 default nsg_in_tcp_all_src = null
@@ -98,7 +98,7 @@ nsg_in_tcp_all_src_err = "Azure NSG having inbound rule overly permissive to all
 }
 
 #
-# Azure Network Security Group (NSG) having inbound rule overly permissive to all UDP traffic from any source (232)
+# PR-AZR-0023-TRF
 #
 
 default nsg_in_udp_all_src = null
@@ -127,7 +127,7 @@ nsg_in_udp_all_src_err = "Azure NSG having inbound rule overly permissive to all
 }
 
 #
-# Azure NSG having inbound rule overly permissive to all traffic from Internet on TCP protocol (233)
+# PR-AZR-0024-TRF
 #
 
 default nsg_in_tcp_all = null
@@ -157,7 +157,7 @@ nsg_in_tcp_all_err = "Azure NSG having inbound rule overly permissive to all tra
 }
 
 #
-# Azure NSG having inbound rule overly permissive to all traffic from Internet on UDP protocol (234)
+# PR-AZR-0025-TRF
 #
 
 default nsg_in_udp_all = null
@@ -187,7 +187,7 @@ nsg_in_udp_all_err = "Azure NSG having inbound rule overly permissive to all UDP
 }
 
 #
-# Azure NSG having inbound rule overly permissive to all traffic from Internet on any protocol (235)
+# PR-AZR-0026-TRF
 #
 
 default nsg_in_all = null
@@ -216,7 +216,7 @@ nsg_in_all_err = "Azure NSG having inbound rule overly permissive to all traffic
 }
 
 #
-# Azure NSG having inbound rule overly permissive to allow all traffic from any source on any protocol (236)
+# PR-AZR-0027-TRF
 #
 
 default nsg_in_all_src = null
@@ -246,7 +246,7 @@ nsg_in_all_src_err = "Azure NSG having inbound rule overly permissive to allow a
 }
 
 #
-# Azure NSG having inbound rule overly permissive to allow all traffic from any source to any destination (237)
+# PR-AZR-0028-TRF
 #
 
 default nsg_in_all_dst = null
@@ -276,7 +276,7 @@ nsg_in_all_dst_err = "Azure NSG having inbound rule overly permissive to allow a
 }
 
 #
-# Azure Network Security Group allows ICMP (243)
+# PR-AZR-0034-TRF
 #
 
 default nsg_allow_icmp = null
@@ -304,7 +304,7 @@ nsg_allow_icmp_err = "Azure NSG having inbound rule overly permissive to allow a
 }
 
 #
-# Azure Network Security Group allows FTP (241)
+# PR-AZR-0032-TRF
 #
 
 default inbound_port_21 = null
@@ -327,7 +327,7 @@ inbound_port_21_err = "Azure Network Security Group allows FTP" {
 }
 
 #
-# Internet connectivity via tcp over insecure port (3)
+# gID3
 #
 
 default inbound_insecure_port = null
@@ -358,7 +358,7 @@ inbound_insecure_port_err = "Internet connectivity via tcp over insecure port" {
 }
 
 #
-# Memcached DDoS attack attempted (5)
+# gID5
 #
 
 default inbound_port_11211 = null
@@ -381,7 +381,7 @@ inbound_port_11211_err = "Memcached DDoS attack attempted" {
 }
 
 #
-# RedisWannaMine vulnerable instances with active network traffic (7)
+# gID7
 #
 
 default inbound_port_6379 = null
@@ -404,7 +404,7 @@ inbound_port_6379_err = "RedisWannaMine vulnerable instances with active network
 }
 
 #
-# Publicly exposed DB Ports (6)
+# gID6
 #
 
 default inbound_port_dbs = null
@@ -479,7 +479,7 @@ inbound_port_dbs_err = "Publicly exposed DB Ports" {
 }
 
 #
-# Azure NSG allows SSH traffic from internet on port 22 (229)
+# PR-AZR-0020-TRF
 #
 
 default inbound_port_22 = null
@@ -502,7 +502,7 @@ inbound_port_22_err = "Azure NSG allows SSH traffic from internet on port 22" {
 }
 
 #
-# Azure NSG allows traffic from internet on port 3389 (230)
+# PR-AZR-0021-TRF
 #
 
 default inbound_port_3389 = null
@@ -525,7 +525,8 @@ inbound_port_3389_err = "Azure NSG allows traffic from internet on port 3389" {
 }
 
 #
-# Azure Network Security Group allows CIFS/Windows SMB (238/256)
+# PR-AZR-0029-TRF
+# PR-AZR-0047-TRF
 #
 
 default inbound_port_445 = null
@@ -552,7 +553,8 @@ inbound_port_smb_err = "Azure Network Security Group allows Windows SMB" {
 }
 
 #
-# Azure Network Security Group allows DNS (239/240)
+# PR-AZR-0030-TRF
+# PR-AZR-0031-TRF
 #
 
 default inbound_port_53 = null
@@ -575,7 +577,7 @@ inbound_port_53_err = "Azure Network Security Group allows CIFS" {
 }
 
 #
-# Azure Network Security Group allows FTP-Data (242)
+# PR-AZR-0033-TRF
 #
 
 default inbound_port_20 = null
@@ -598,7 +600,7 @@ inbound_port_20_err = "Azure Network Security Group allows FTP-Data" {
 }
 
 #
-# Azure Network Security Group allows MSQL (244)
+# PR-AZR-0035-TRF
 #
 
 default inbound_port_4333 = null
@@ -621,7 +623,7 @@ inbound_port_4333_err = "Azure Network Security Group allows MSQL" {
 }
 
 #
-# Azure Network Security Group allows MySQL (245)
+# PR-AZR-0036-TRF
 #
 
 default inbound_port_3306 = null
@@ -644,7 +646,8 @@ inbound_port_3306_err = "Azure Network Security Group allows MySQL" {
 }
 
 #
-# Azure Network Security Group allows NetBIOS (246/247)
+# PR-AZR-0037-TRF
+# PR-AZR-0038-TRF
 #
 
 default inbound_port_netbios = null
@@ -671,7 +674,7 @@ inbound_port_netbios_err = "Azure Network Security Group allows NetBIOS" {
 }
 
 #
-# Azure Network Security Group allows PostgreSQL (248)
+# PR-AZR-0039-TRF
 #
 
 default inbound_port_5432 = null
@@ -694,7 +697,7 @@ inbound_port_5432_err = "Azure Network Security Group allows PostgreSQL" {
 }
 
 #
-# Azure Network Security Group allows SMTP (249)
+# PR-AZR-0040-TRF
 #
 
 default inbound_port_25 = null
@@ -717,7 +720,8 @@ inbound_port_25_err = "Azure Network Security Group allows SMTP" {
 }
 
 #
-# Azure Network Security Group allows SQLServer (250/251)
+# PR-AZR-0041-TRF
+# PR-AZR-0042-TRF
 #
 
 default inbound_port_sqlserver = null
@@ -744,7 +748,7 @@ inbound_port_sqlserver_err = "Azure Network Security Group allows SQLServer" {
 }
 
 #
-# Azure Network Security Group allows Telnet (252)
+# PR-AZR-0043-TRF
 #
 
 default inbound_port_23 = null
@@ -767,7 +771,7 @@ inbound_port_23_err = "Azure Network Security Group allows Telnet" {
 }
 
 #
-# Azure Network Security Group allows VNC Listener (253)
+# PR-AZR-0044-TRF
 #
 
 default inbound_port_5500 = null
@@ -790,7 +794,7 @@ inbound_port_5500_err = "Azure Network Security Group allows VNC Listener" {
 }
 
 #
-# Azure Network Security Group allows VNC Server (254)
+# PR-AZR-0045-TRF
 #
 
 default inbound_port_5900 = null
@@ -813,7 +817,7 @@ inbound_port_5900_err = "Azure Network Security Group allows VNC Server" {
 }
 
 #
-# Azure Network Security Group allows Windows RPC (255)
+# PR-AZR-0046-TRF
 #
 
 default inbound_port_135 = null
@@ -901,7 +905,7 @@ nsg_outbound[port] {
 }
 
 #
-# Azure NSG with Outbound rule to allow all traffic to any source (257)
+# PR-AZR-0048-TRF
 #
 
 default nsg_out_all = null
@@ -929,7 +933,7 @@ nsg_out_all_err = "Azure NSG with Outbound rule to allow all traffic to any sour
 }
 
 #
-# Instance is communicating with ports known to mine Bitcoin (1)
+# gID1
 #
 
 default outbound_port_bitcoin = null
@@ -956,7 +960,7 @@ outbound_port_bitcoin_err = "Instance is communicating with ports known to mine 
 }
 
 #
-# Instance is communicating with ports known to mine Ethereum (2)
+# gID2
 #
 
 default outbound_port_ethereum = null

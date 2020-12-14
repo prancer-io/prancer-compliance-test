@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings
 
 #
-# Auditing for SQL database should be set to On (212)
+# PR-AZR-0003-ARM
 #
 
 default sql_db_log_audit = null
@@ -43,7 +43,7 @@ sql_db_log_audit_miss_err = "Auditing for SQL database should be set to On" {
 }
 
 #
-# Azure SQL Database with Auditing Retention less than 90 days (262)
+# PR-AZR-0053-ARM
 #
 
 default sql_db_log_retention = null

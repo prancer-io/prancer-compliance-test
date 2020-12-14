@@ -1,9 +1,12 @@
+#
+# PR-AWS-0038
+#
+
 package rule
 
 default rulepass = false
 
 # API Documentation: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVolumes.html
-# Id: 35
 
 rulepass = true{
    input.Volumes[_].Attachments[_].State="attached"

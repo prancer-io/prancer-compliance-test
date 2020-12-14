@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/virtualnetworkpeerings
 
 #
-# Azure virtual network peer is disconnected (284)
+# PR-AZR-0075-ARM
 #
 
 default vnet_peer = null

@@ -4,7 +4,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html
 
 #
-# Id: 152
+# PR-AWS-0152-CFR
 #
 
 default sns_protocol = null
@@ -44,7 +44,7 @@ sns_protocol_miss_err = "SNS attribute Protocol missing in the resource" {
 }
 
 #
-# Id: 153
+# PR-AWS-0153-CFR
 #
 
 default sns_encrypt_key = null
@@ -69,7 +69,7 @@ sns_encrypt_key_err = "AWS SNS topic encrypted using default KMS key instead of 
 }
 
 #
-# Id: 154
+# PR-AWS-0154-CFR
 #
 
 default sns_encrypt = null

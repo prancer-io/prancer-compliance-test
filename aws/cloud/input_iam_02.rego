@@ -1,9 +1,12 @@
+#
+# PR-AWS-0082
+#
+
 package rule
 
 default rulepass = false
 
 # API: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountPasswordPolicy.html
-# Id: 82
 
 rulepass = true{
    input.PasswordPolicy.RequireNumbers=true

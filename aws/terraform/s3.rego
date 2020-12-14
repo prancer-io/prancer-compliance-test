@@ -4,7 +4,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html
 
 #
-# Id: 4
+# PR-AWS-0004-TRF
 #
 
 default s3_accesslog = null
@@ -56,7 +56,7 @@ s3_accesslog_miss_err = "S3 Bucket attribute target_bucket/target_prefix missing
 }
 
 #
-# Id: 140
+# PR-AWS-0140-TRF
 #
 
 default s3_acl_delete = null
@@ -108,7 +108,7 @@ s3_acl_delete_miss_err = "S3 Policy attribute policy.Statement missing in the re
 }
 
 #
-# Id: 141
+# PR-AWS-0141-TRF
 #
 
 default s3_acl_get = null
@@ -160,7 +160,7 @@ s3_acl_get_miss_err = "S3 Policy attribute policy.Statement missing in the resou
 }
 
 #
-# Id: 142
+# PR-AWS-0142-TRF
 #
 
 default s3_acl_list = null
@@ -212,7 +212,7 @@ s3_acl_list_miss_err = "S3 Policy attribute policy.Statement missing in the reso
 }
 
 #
-# Id: 143
+# PR-AWS-0143-TRF
 #
 
 default s3_acl_put = null
@@ -264,7 +264,7 @@ s3_acl_put_miss_err = "S3 Policy attribute policy.Statement missing in the resou
 }
 
 #
-# Id: 145
+# PR-AWS-0145-TRF
 #
 
 default s3_versioning = null
@@ -304,7 +304,7 @@ s3_versioning_miss_err = "S3 Bucket attribute versioning.enabled missing in the 
 }
 
 #
-# Id: 148
+# PR-AWS-0148-TRF
 #
 
 default s3_transport = null
@@ -344,7 +344,7 @@ s3_transport_miss_err = "S3 Policy attribute Condition SecureTransport missing i
 }
 
 #
-# Id: 362
+# PR-AWS-0362-TRF
 #
 
 default s3_website = null

@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-filesystem.html
 
 #
-# Id: 60
+# PR-AWS-0060-TRF
 #
 
 default efs_kms = null
@@ -49,7 +49,7 @@ efs_kms_miss_err = "EFS attribute kms_key_id missing in the resource" {
 }
 
 #
-# Id: 61
+# PR-AWS-0061-TRF
 #
 
 default efs_encrypt = null

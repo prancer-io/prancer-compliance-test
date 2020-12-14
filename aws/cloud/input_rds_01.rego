@@ -1,9 +1,12 @@
+#
+# PR-AWS-0129
+#
+
 package rule
 
 default rulepass = false
 
 # API: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html
-# Id: 129
 
 rulepass {
    db_instance := input.DBInstances[_]

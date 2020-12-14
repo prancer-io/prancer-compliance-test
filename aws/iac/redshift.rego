@@ -4,7 +4,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html
 
 #
-# Id: 133
+# PR-AWS-0133-CFR
 #
 
 default redshift_encrypt_key = null
@@ -50,7 +50,7 @@ redshift_encrypt_key_miss_err = "Redshift attribute KmsKeyId missing in the reso
 }
 
 #
-# Id: 134
+# PR-AWS-0134-CFR
 #
 
 default redshift_public = null
@@ -75,7 +75,7 @@ redshift_public_err = "AWS Redshift clusters should not be publicly accessible" 
 }
 
 #
-# Id: 135
+# PR-AWS-0135-CFR
 #
 
 default redshift_audit = null
@@ -116,7 +116,7 @@ redshift_audit_miss_err = "Redshift attribute LoggingProperties.BucketName missi
 
 
 #
-# Id: 136
+# PR-AWS-0136-CFR
 #
 
 default redshift_require_ssl = null
@@ -164,7 +164,7 @@ redshift_require_ssl_miss_err = "Redshift attribute Properties missing in the re
 }
 
 #
-# Id: 137
+# PR-AWS-0137-CFR
 #
 
 default redshift_encrypt = null

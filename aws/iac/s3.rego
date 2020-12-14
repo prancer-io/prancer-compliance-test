@@ -4,7 +4,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html
 
 #
-# Id: 4
+# PR-AWS-0004-CFR
 #
 
 default s3_accesslog = null
@@ -56,7 +56,7 @@ s3_accesslog_miss_err = "S3 Bucket attribute DestinationBucketName/LogFilePrefix
 }
 
 #
-# Id: 140
+# PR-AWS-0140-CFR
 #
 
 default s3_acl_delete = null
@@ -108,7 +108,7 @@ s3_acl_delete_miss_err = "S3 Policy attribute PolicyDocument.Statement missing i
 }
 
 #
-# Id: 141
+# PR-AWS-0141-CFR
 #
 
 default s3_acl_get = null
@@ -160,7 +160,7 @@ s3_acl_get_miss_err = "S3 Policy attribute PolicyDocument.Statement missing in t
 }
 
 #
-# Id: 142
+# PR-AWS-0142-CFR
 #
 
 default s3_acl_list = null
@@ -212,7 +212,7 @@ s3_acl_list_miss_err = "S3 Policy attribute PolicyDocument.Statement missing in 
 }
 
 #
-# Id: 143
+# PR-AWS-0143-CFR
 #
 
 default s3_acl_put = null
@@ -264,7 +264,7 @@ s3_acl_put_miss_err = "S3 Policy attribute PolicyDocument.Statement missing in t
 }
 
 #
-# Id: 145
+# PR-AWS-0145-CFR
 #
 
 default s3_versioning = null
@@ -304,7 +304,7 @@ s3_versioning_miss_err = "S3 Bucket attribute VersioningConfiguration.Status mis
 }
 
 #
-# Id: 148
+# PR-AWS-0148-CFR
 #
 
 default s3_transport = null
@@ -344,7 +344,7 @@ s3_transport_miss_err = "S3 Policy attribute Condition SecureTransport missing i
 }
 
 #
-# Id: 362
+# PR-AWS-0196-CFR
 #
 
 default s3_website = null

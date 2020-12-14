@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines/extensions
 
 #
-# Azure Virtual Machine does not have endpoint protection installed (273)
+# PR-AZR-0064-ARM
 #
 
 default vm_protection = null

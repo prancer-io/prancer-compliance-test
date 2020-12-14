@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
 
 #
-# Id: 48
+# PR-AWS-0048-TRF
 #
 
 default ecs_exec = null

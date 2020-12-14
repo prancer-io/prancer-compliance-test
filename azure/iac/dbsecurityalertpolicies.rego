@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies
 
 #
-# Azure SQL DB with Threat Retention less than 91 days (263)
+# PR-AZR-0054-ARM
 #
 
 default dbsec_threat_retention = null
@@ -49,7 +49,7 @@ dbsec_threat_retention_miss_err = "DB policy attribute state missing in the reso
 }
 
 #
-# Azure SQL DB with disabled Email service and co-administrators for Threat Detection (264)
+# PR-AZR-0055-ARM
 #
 
 default dbsec_threat_email = null
@@ -101,8 +101,8 @@ dbsec_threat_email_miss_err = "DB policy attribute state missing in the resource
 }
 
 #
-# Azure SQL Server threat detection alerts not enabled for all threat types (270)
-# Threat Detection types on SQL databases is misconfigured (305)
+# PR-AZR-0061-ARM
+# PR-AZR-0097-ARM
 #
 
 default dbsec_threat_alert = null
@@ -148,7 +148,7 @@ dbsec_threat_alert_miss_err = "DB policy attribute state missing in the resource
 }
 
 #
-# Send alerts on field value on SQL Databases is misconfigured (297)
+# PR-AZR-0088-ARM
 #
 
 default sql_alert = null
@@ -201,7 +201,7 @@ sql_alert_miss_err = "DB policy attribute state missing in the resource" {
 
 
 #
-# Threat Detection on SQL databases is set to Off (305)
+# PR-AZR-0096-ARM
 #
 
 default dbsec_threat_off = null

@@ -1,9 +1,12 @@
+#
+# PR-AWS-0160
+#
+
 package rule
 
 default rulepass = true
 
 # API: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html
-# ID: 160
 
 rulepass = false {
    ingress := input.SecurityGroups[_].IpPermissions[_]

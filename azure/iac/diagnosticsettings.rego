@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings
 
 #
-# Azure Key Vault audit logging is disabled (226)
+# PR-AZR-0017-ARM
 #
 
 default log_keyvault = null
@@ -44,24 +44,8 @@ log_keyvault_miss_err = "Diagnostics attribute logs missing in the resource" {
     azure_attribute_absence["log_keyvault"]
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #
-# Azure Load Balancer diagnostics logs are disabled (228)
+# PR-AZR-0019-ARM
 #
 
 default log_lbs = null
@@ -107,7 +91,7 @@ log_lbs_miss_err = "Azure Load Balancer diagnostics logs are disabled" {
 }
 
 #
-# Azure Storage Account with Auditing Retention less than 90 days (272)
+# PR-AZR-0063-ARM
 #
 
 default log_storage_retention = null
@@ -173,7 +157,7 @@ log_storage_retention_miss_err = "Diagnostics attribute logs missing in the reso
 }
 
 #
-# Azure storage account logging for blobs is disabled (278)
+# PR-AZR-0069-ARM
 #
 
 default log_blob = null
@@ -219,8 +203,8 @@ log_blob_miss_err = "Diagnostics attribute logs missing in the resource" {
 }
 
 #
-# Azure storage account logging for queues is disabled (279)
-# Azure storage account logging for queues is disabled TJX (280)
+# PR-AZR-0070-ARM
+# PR-AZR-0071-ARM
 #
 
 default log_queue = null
@@ -266,8 +250,8 @@ log_queue_miss_err = "Diagnostics attribute logs missing in the resource" {
 }
 
 #
-# Azure storage account logging for tables is disabled (281)
-# Azure storage account logging for tables is disabled TJX (282)
+# PR-AZR-0072-ARM
+# PR-AZR-0073-ARM
 #
 
 default log_table = null

@@ -3,8 +3,8 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/subnets
 
 #
-# Azure Virtual Network subnet is not configured with a Network Security Group (275)
-# Azure Virtual Network subnet is not configured with a Network Security Group TJX (276)
+# PR-AZR-0066-ARM
+# PR-AZR-0067-ARM
 #
 
 default vnet_subnet_nsg = null

@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/2016-09-01/locks
 
 #
-# Azure Resource Group does not have a resource lock (261)
+# PR-AZR-0052-ARM
 #
 
 default rg_locks = null

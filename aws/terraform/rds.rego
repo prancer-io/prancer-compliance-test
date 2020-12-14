@@ -4,7 +4,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html
 
 #
-# Id: 119
+# PR-AWS-0119-TRF
 #
 
 default rds_cluster_encrypt = null
@@ -29,7 +29,7 @@ rds_cluster_encrypt_err = "AWS RDS DB cluster encryption is disabled" {
 }
 
 #
-# Id: 121
+# PR-AWS-0121-TRF
 #
 
 default rds_public = null
@@ -54,7 +54,7 @@ rds_public_err = "AWS RDS DB cluster encryption is disabled" {
 }
 
 #
-# Id: 125
+# PR-AWS-0125-TRF
 #
 
 default rds_encrypt = null
@@ -79,7 +79,7 @@ rds_encrypt_err = "AWS RDS instance is not encrypted" {
 }
 
 #
-# Id: 127
+# PR-AWS-0127-TRF
 #
 
 default rds_multiaz = null
@@ -121,7 +121,7 @@ rds_multiaz_miss_err = "RDS dbcluster attribute engine missing in the resource" 
 }
 
 #
-# Id: 128
+# PR-AWS-0128-TRF
 #
 
 default rds_snapshot = null
@@ -146,7 +146,7 @@ rds_snapshot_err = "AWS RDS instance with copy tags to snapshots disabled" {
 }
 
 #
-# Id: 129
+# PR-AWS-0129-TRF
 #
 
 default rds_backup = null
@@ -186,7 +186,7 @@ rds_backup_miss_err = "RDS attribute backup_retention_period missing in the reso
 }
 
 #
-# Id: 130
+# PR-AWS-0130-TRF
 #
 
 default rds_upgrade = null
@@ -211,7 +211,7 @@ rds_upgrade_err = "AWS RDS minor upgrades not enabled" {
 }
 
 #
-# Id: 131
+# PR-AWS-0131-TRF
 #
 
 default rds_retention = null

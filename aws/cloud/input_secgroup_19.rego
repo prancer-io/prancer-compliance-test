@@ -1,9 +1,12 @@
+#
+# PR-AWS-0177
+#
+
 package rule
 
 default rulepass = true
 
 # API: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html
-# ID: 177
 
 common_ports := [
     20, 21, 22, 23, 25, 53, 80, 135, 137, 138, 139, 443, 445, 1433, 1434, 3306, 3389, 4333, 5432
