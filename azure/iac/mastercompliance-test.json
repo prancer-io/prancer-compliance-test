@@ -1,7 +1,7 @@
 {
     "testSet": [
         {
-            "masterTestName": "AZURE_TEST",
+            "masterTestName": "AZURE_iac_TEST",
             "version": "0.1",
             "cases": [
                 {
@@ -13,8 +13,11 @@
                     "rule": "file(activitylogalerts.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0090-ARM",
                             "eval": "data.rule.alerts",
-                            "message": "data.rule.alerts_err"
+                            "message": "data.rule.alerts_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Activity log alerts settings",
@@ -22,7 +25,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": ["CIS","CSA CCM","HIPAA","ISO","NIST","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -36,24 +39,39 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0006-ARM",
                             "eval": "data.rule.aks_cni_net",
-                            "message": "data.rule.aks_cni_net_err"
+                            "message": "data.rule.aks_cni_net_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         },
                         {
+                            "id":"PR-AZR-0007-ARM",
                             "eval": "data.rule.aks_http_routing",
-                            "message": "data.rule.aks_http_routing_err"
+                            "message": "data.rule.aks_http_routing_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         },
                         {
+                            "id":"PR-AZR-0008-ARM",
                             "eval": "data.rule.aks_monitoring",
-                            "message": "data.rule.aks_monitoring_err"
+                            "message": "data.rule.aks_monitoring_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         },
                         {
+                            "id":"PR-AZR-0009-ARM",
                             "eval": "data.rule.aks_nodes",
-                            "message": "data.rule.aks_nodes_err"
+                            "message": "data.rule.aks_nodes_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         },
                         {
+                            "id":"PR-AZR-0010-ARM",
                             "eval": "data.rule.aks_rbac",
-                            "message": "data.rule.aks_rbac_err"
+                            "message": "data.rule.aks_rbac_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure AKS cluster configuration check.",
@@ -75,12 +93,18 @@
                     "rule": "file(applicationgateways.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0011-ARM",
                             "eval": "data.rule.gw_tls",
-                            "message": "data.rule.gw_tls_err"
+                            "message": "data.rule.gw_tls_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         },
                         {
+                            "id":"PR-AZR-0012-ARM",
                             "eval": "data.rule.gw_waf",
-                            "message": "data.rule.gw_waf_err"
+                            "message": "data.rule.gw_waf_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure Application Gateway configurtaion check.",
@@ -102,8 +126,11 @@
                     "rule": "file(dbadministrators.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0085-ARM",
                             "eval": "data.rule.db_ad_admin",
-                            "message": "data.rule.db_ad_admin_err"
+                            "message": "data.rule.db_ad_admin_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure SQL DB Administrator check.",
@@ -111,7 +138,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": ["CSA CCM","ISO 27001","NIST","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -125,16 +152,47 @@
                     "rule": "file(dbauditingdbsettings.rego)",
                     "evals": [
                         {
-                            "eval": "data.rule.sql_log_audit ",
-                            "message": "data.rule.sql_log_audit _err"
+                            "id":"PR-AZR-0003-ARM",
+                            "eval": "data.rule.sql_db_log_audit",
+                            "message": "data.rule.sql_db_log_audit_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         },
                         {
-                            "eval": "data.rule.sql_log_retention  ",
-                            "message": "data.rule.sql_log_retention  _err"
+                            "id":"PR-AZR-0053-ARM",
+                            "eval": "data.rule.sql_db_log_retention",
+                            "message": "data.rule.sql_db_log_retention_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure SQL DB Auditing DB Settings.",
                     "description": "Auditing for SQL database should be set to On. Azure SQL Database with Auditing Retention less than 90 days.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_DB_AUDITING_SETTINGS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbauditingsettings.rego)",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0059-ARM",
+                            "eval": "data.rule.sql_log_retention",
+                            "message": "data.rule.sql_log_retention_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
+                    "title": "Azure SQL Server audit log retention is less than 91 days",
+                    "description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance._x000D__x000D_This policy identifies SQL servers which do not retain audit logs for more than 90 days. As a best practice, configure the audit logs retention time period to be greater than 90 days.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -152,8 +210,11 @@
                     "rule": "file(dbdataencryption.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0084-ARM",
                             "eval": "data.rule.db_encrypt",
-                            "message": "data.rule.db_encrypt_err"
+                            "message": "data.rule.db_encrypt_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure SQL DB Encryption.",
@@ -161,7 +222,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -175,8 +236,11 @@
                     "rule": "file(dbauditingdbsettings.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0082-ARM",
                             "eval": "data.rule.db_firewall",
-                            "message": "data.rule.db_firewall_err"
+                            "message": "data.rule.db_firewall_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure SQL DB Firewall Rules.",
@@ -184,7 +248,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": ["CIS","CSA CCM","ISO 27001","NIST","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -198,28 +262,39 @@
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0054-ARM",
                             "eval": "data.rule.dbsec_threat_retention",
-                            "message": "data.rule.dbsec_threat_retention_err"
+                            "message": "data.rule.dbsec_threat_retention_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         },
                         {
+                            "id":"PR-AZR-0055-ARM",
                             "eval": "data.rule.dbsec_threat_email",
-                            "message": "data.rule.dbsec_threat_email_err"
+                            "message": "data.rule.dbsec_threat_email_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         },
                         {
+                            "id":"PR-AZR-0097-ARM",
                             "eval": "data.rule.dbsec_threat_alert",
-                            "message": "data.rule.dbsec_threat_alert_err"
+                            "message": "data.rule.dbsec_threat_alert_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         },
                         {
+                            "id":"PR-AZR-0088-ARM",
                             "eval": "data.rule.sql_alert",
-                            "message": "data.rule.sql_alert_err"
+                            "message": "data.rule.sql_alert_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         },
                         {
+                            "id":"PR-AZR-0096-ARM",
                             "eval": "data.rule.dbsec_threat_off",
-                            "message": "data.rule.dbsec_threat_off_err"
-                        },
-                        {
-                            "eval": "data.rule.dbsec_threat_off",
-                            "message": "data.rule.dbsec_threat_off_err"
+                            "message": "data.rule.dbsec_threat_off_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure SQL DB Security Alert Policy.",
@@ -241,16 +316,25 @@
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0056-ARM",
                             "eval": "data.rule.db_ads_mail",
-                            "message": "data.rule.db_ads_mail_err"
+                            "message": "data.rule.db_ads_mail_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         },
                         {
+                            "id":"PR-AZR-0057-ARM",
                             "eval": "data.rule.db_ads_alert",
-                            "message": "data.rule.db_ads_alert_err"
+                            "message": "data.rule.db_ads_alert_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         },
                         {
+                            "id":"PR-AZR-0058-ARM",
                             "eval": "data.rule.db_ads_scan",
-                            "message": "data.rule.db_ads_scan_err"
+                            "message": "data.rule.db_ads_scan_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure DB vulnerability Assessments.",
@@ -272,28 +356,46 @@
                     "rule": "file(diagnosticsettings.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0017-ARM",
                             "eval": "data.rule.log_keyvault",
-                            "message": "data.rule.log_keyvault_err"
+                            "message": "data.rule.log_keyvault_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         },
                         {
+                            "id":"PR-AZR-0019-ARM",
                             "eval": "data.rule.log_lbs",
-                            "message": "data.rule.log_lbs_err"
+                            "message": "data.rule.log_lbs_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         },
                         {
+                            "id":"PR-AZR-0063-ARM",
                             "eval": "data.rule.log_storage_retention",
-                            "message": "data.rule.log_storage_retention_err"
+                            "message": "data.rule.log_storage_retention_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         },
                         {
+                            "id":"PR-AZR-0069-ARM",
                             "eval": "data.rule.log_blob",
-                            "message": "data.rule.log_blob_err"
+                            "message": "data.rule.log_blob_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         },
                         {
+                            "id":"PR-AZR-0071-ARM",
                             "eval": "data.rule.log_queue",
-                            "message": "data.rule.log_queue_err"
+                            "message": "data.rule.log_queue_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         },
                         {
+                            "id":"PR-AZR-0073-ARM",
                             "eval": "data.rule.log_table",
-                            "message": "data.rule.log_table_err"
+                            "message": "data.rule.log_table_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure Diagonastic Settings.",
@@ -315,8 +417,11 @@
                     "rule": "file(disks.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0068-ARM",
                             "eval": "data.rule.disk_encrypt",
-                            "message": "data.rule.disk_encrypt_err"
+                            "message": "data.rule.disk_encrypt_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure Disk.",
@@ -338,8 +443,11 @@
                     "rule": "file(keyvaultsecrets.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0018-ARM",
                             "eval": "data.rule.kv_expire",
-                            "message": "data.rule.kv_expire_err"
+                            "message": "data.rule.kv_expire_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure Key Vault Secrets.",
@@ -361,8 +469,12 @@
                     "rule": "file(locks.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0052-ARM",
                             "eval": "data.rule.rg_locks",
-                            "message": "data.rule.rg_locks_err"
+                            "message": "data.rule.rg_locks_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                            
                         }
                     ],
                     "title": "Azure Locks.",
@@ -384,12 +496,18 @@
                     "rule": "file(networkwatchersflowlogs.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0050-ARM",
                             "eval": "data.rule.netwatch_logs",
-                            "message": "data.rule.netwatch_logs_err"
+                            "message": "data.rule.netwatch_logs_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         },
                         {
+                            "id":"PR-AZR-0051-ARM",
                             "eval": "data.rule.netwatch_log_retention",
-                            "message": "data.rule.netwatch_log_retention_err"
+                            "message": "data.rule.netwatch_log_retention_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure Watcher.",
@@ -411,12 +529,221 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "eval": "data.rule.nsg_inbound",
-                            "message": "data.rule.nsg_inbound_err"
+                            "id":"PR-AZR-0022-ARM",
+                            "eval": "data.rule.nsg_in_tcp_all_src",
+                            "message": "data.rule.nsg_in_tcp_all_src_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         },
                         {
-                            "eval": "data.rule.nsg_outbound",
-                            "message": "data.rule.nsg_outbound_err"
+                            "id":"PR-AZR-0023-ARM",
+                            "eval": "data.rule.nsg_in_udp_all_src",
+                            "message": "data.rule.nsg_in_udp_all_src_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0024-ARM",
+                            "eval": "data.rule.nsg_in_tcp_all",
+                            "message": "data.rule.nsg_in_tcp_all_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0025-ARM",
+                            "eval": "data.rule.nsg_in_udp_all",
+                            "message": "data.rule.nsg_in_udp_all_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0026-ARM",
+                            "eval": "data.rule.nsg_in_all",
+                            "message": "data.rule.nsg_in_all_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0027-ARM",
+                            "eval": "data.rule.nsg_in_all_src",
+                            "message": "data.rule.nsg_in_all_src_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0028-ARM",
+                            "eval": "data.rule.nsg_in_all_dst",
+                            "message": "data.rule.nsg_in_all_dst_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0034-ARM",
+                            "eval": "data.rule.nsg_allow_icmp",
+                            "message": "data.rule.nsg_allow_icmp_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0032-ARM",
+                            "eval": "data.rule.inbound_port_21",
+                            "message": "data.rule.inbound_port_21_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"gID3",
+                            "eval": "data.rule.inbound_insecure_port",
+                            "message": "data.rule.inbound_insecure_port_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"gID5",
+                            "eval": "data.rule.inbound_port_11211",
+                            "message": "data.rule.inbound_port_11211_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"gID7",
+                            "eval": "data.rule.inbound_port_6379",
+                            "message": "data.rule.inbound_port_6379_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"gID6",
+                            "eval": "data.rule.inbound_port_dbs",
+                            "message": "data.rule.inbound_port_dbs_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0020-ARM",
+                            "eval": "data.rule.inbound_port_22",
+                            "message": "data.rule.inbound_port_22_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0021-ARM",
+                            "eval": "data.rule.inbound_port_3389",
+                            "message": "data.rule.inbound_port_3389_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0047-ARM",
+                            "eval": "data.rule.inbound_port_445",
+                            "message": "data.rule.inbound_port_445_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0031-ARM",
+                            "eval": "data.rule.inbound_port_53",
+                            "message": "data.rule.inbound_port_53_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0033-ARM",
+                            "eval": "data.rule.inbound_port_20",
+                            "message": "data.rule.inbound_port_20_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0035-ARM",
+                            "eval": "data.rule.inbound_port_4333",
+                            "message": "data.rule.inbound_port_4333_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0036-ARM",
+                            "eval": "data.rule.inbound_port_3306",
+                            "message": "data.rule.inbound_port_3306_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0038-ARM",
+                            "eval": "data.rule.inbound_port_netbios",
+                            "message": "data.rule.inbound_port_netbios_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0039-ARM",
+                            "eval": "data.rule.inbound_port_5432",
+                            "message": "data.rule.inbound_port_5432_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0040-ARM",
+                            "eval": "data.rule.inbound_port_25",
+                            "message": "data.rule.inbound_port_25_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0042-ARM",
+                            "eval": "data.rule.inbound_port_sqlserver",
+                            "message": "data.rule.inbound_port_sqlserver_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0043-ARM",
+                            "eval": "data.rule.inbound_port_23",
+                            "message": "data.rule.inbound_port_23_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0044-ARM",
+                            "eval": "data.rule.inbound_port_5500",
+                            "message": "data.rule.inbound_port_5500_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0045-ARM",
+                            "eval": "data.rule.inbound_port_5900",
+                            "message": "data.rule.inbound_port_5900_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0046-ARM",
+                            "eval": "data.rule.inbound_port_135",
+                            "message": "data.rule.inbound_port_135_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"PR-AZR-0048-ARM",
+                            "eval": "data.rule.nsg_out_all",
+                            "message": "data.rule.nsg_out_all_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"gID1",
+                            "eval": "data.rule.outbound_port_bitcoin",
+                            "message": "data.rule.outbound_port_bitcoin_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        },
+                        {
+                            "id":"gID2",
+                            "eval": "data.rule.outbound_port_ethereum",
+                            "message": "data.rule.outbound_port_ethereum_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure Network Security Group.",
@@ -438,8 +765,11 @@
                     "rule": "file(pricing.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0091-ARM",
                             "eval": "data.rule.pricing",
-                            "message": "data.rule.pricing_err"
+                            "message": "data.rule.pricing_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure Pricing.",
@@ -447,7 +777,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": ["CIS","ISO 27001"],
                             "service": []
                         }
                     ]
@@ -461,8 +791,12 @@
                     "rule": "file(registrieslist.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0015-ARM",
                             "eval": "data.rule.acr_classic",
-                            "message": "data.rule.acr_classic_err"
+                            "message": "data.rule.acr_classic_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        
                         }
                     ],
                     "title": "Azure Registries List.",
@@ -484,8 +818,11 @@
                     "rule": "file(registrieswebhooks.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0005-ARM",
                             "eval": "data.rule.acr_webhooks",
-                            "message": "data.rule.acr_webhooks_err"
+                            "message": "data.rule.acr_webhooks_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure Registries Webhook.",
@@ -507,8 +844,11 @@
                     "rule": "file(securitycontacts.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0087-ARM",
                             "eval": "data.rule.securitycontacts",
-                            "message": "data.rule.securitycontacts_err"
+                            "message": "data.rule.securitycontacts_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure security contacts.",
@@ -516,7 +856,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -530,12 +870,18 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0092-ARM",
                             "eval": "data.rule.storage_secure",
-                            "message": "data.rule.storage_secure_err"
+                            "message": "data.rule.storage_secure_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         },
                         {
+                            "id":"PR-AZR-0093-ARM",
                             "eval": "data.rule.storage_acl",
-                            "message": "data.rule.storage_acl_err"
+                            "message": "data.rule.storage_acl_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure storage contacts.",
@@ -557,8 +903,11 @@
                     "rule": "file(storageblobcontainers.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0013-ARM",
                             "eval": "data.rule.storage_public_access",
-                            "message": "data.rule.storage_public_access_err"
+                            "message": "data.rule.storage_public_access_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure storage blob container.",
@@ -580,8 +929,11 @@
                     "rule": "file(vm.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0065-ARM",
                             "eval": "data.rule.vm_aset",
-                            "message": "data.rule.vm_aset_err"
+                            "message": "data.rule.vm_aset_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure virtual machine.",
@@ -603,8 +955,11 @@
                     "rule": "file(vmextensions.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0064-ARM",
                             "eval": "data.rule.vm_protection",
-                            "message": "data.rule.vm_protection_err"
+                            "message": "data.rule.vm_protection_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure virtual machine extensions.",
@@ -626,8 +981,11 @@
                     "rule": "file(vnetpeerings.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0075-ARM",
                             "eval": "data.rule.vnet_peer",
-                            "message": "data.rule.vnet_peer_err"
+                            "message": "data.rule.vnet_peer_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure Virtual network peering.",
@@ -649,8 +1007,11 @@
                     "rule": "file(vnetsubnets.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0067-ARM",
                             "eval": "data.rule.vnet_subnet_nsg",
-                            "message": "data.rule.vnet_subnet_nsg_err"
+                            "message": "data.rule.vnet_subnet_nsg_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure virtual network peering.",
@@ -672,8 +1033,11 @@
                     "rule": "file(vpngateways.rego)",
                     "evals": [
                         {
+                            "id":"PR-AZR-0098-ARM",
                             "eval": "data.rule.vpn_encrypt",
-                            "message": "data.rule.vpn_encrypt_err"
+                            "message": "data.rule.vpn_encrypt_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
                         }
                     ],
                     "title": "Azure VPN Gateway.",
@@ -681,7 +1045,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": ["HIPAA","ISO 27001","NIST","PCI DSS"],
                             "service": []
                         }
                     ]
