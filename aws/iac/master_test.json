@@ -1035,8 +1035,8 @@
                             "remediationFunction":""
                         }
                     ],
-                    "title": "Azure storage contacts.",
-                    "description": "Storage Accounts without Secure transfer enabled. Storage Accounts without their firewalls enabled.",
+                    "title": "",
+                    "description": "",
                     "tags": [
                         {
                             "cloud": "git",
