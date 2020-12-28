@@ -1,14 +1,22 @@
 {
     "testSet": [
         {
-            "masterTestName": "AZURE_TEST",
+            "masterTestName": "AZURE_Cloud_TEST",
             "version": "0.1",
             "cases": [
                 {
                         "masterTestId": "AZURE_TEST_216",
                         "type": "rego",
                         "rule": "file(azure_216.rego)",
-                        "eval": "data.rule.rulepass",
+                        "evals": [
+                            {
+                                "id":"PR-AZR-0007",
+                                "eval":"data.rule.rulepass",
+                                "message": "data.rule.rulepass_err",
+                                "remediationDescription":"",
+                                "remediationFunction":""
+                            }
+                        ],
                         "tags": [
                             {
                                 "cloud": "azure",
@@ -30,7 +38,15 @@
                         "masterTestId": "AZURE_TEST_217",
                         "type": "rego",
                         "rule": "file(azure_217.rego)",
-                        "eval": "data.rule.rulepass",
+                        "evals": [
+                            {
+                                "id":"PR-AZR-0008",
+                                "eval":"data.rule.rulepass",
+                                "message": "data.rule.rulepass_err",
+                                "remediationDescription":"",
+                                "remediationFunction":""
+                            }
+                        ],
                         "tags": [
                             {
                                 "cloud": "azure",
@@ -52,7 +68,15 @@
                         "masterTestId": "AZURE_TEST_218",
                         "type": "rego",
                         "rule": "file(azure_218.rego)",
-                        "eval": "data.rule.rulepass",
+                        "evals": [
+                            {
+                                "id":"PR-AZR-0009",
+                                "eval":"data.rule.rulepass",
+                                "message": "data.rule.rulepass_err",
+                                "remediationDescription":"",
+                                "remediationFunction":""
+                            }
+                        ],
                         "tags": [
                             {
                                 "cloud": "azure",
@@ -74,7 +98,15 @@
                         "masterTestId": "AZURE_TEST_219",
                         "type": "rego",
                         "rule": "file(azure_219.rego)",
-                        "eval": "data.rule.rulepass",
+                        "evals":  [
+                            {
+                                "id":"PR-AZR-0010",
+                                "eval":"data.rule.rulepass",
+                                "message": "data.rule.rulepass_err",
+                                "remediationDescription":"",
+                                "remediationFunction":""
+                            }
+                        ],
                         "tags": [
                             {
                                 "cloud": "azure",
@@ -96,7 +128,15 @@
                     "masterTestId": "AZURE_TEST_224",
                     "type": "rego",
                     "rule": "file(azure_224.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0015",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "Azure",
@@ -120,22 +160,21 @@
                     "masterTestId": "AZURE_TEST_229",
                     "type": "rego",
                     "rule": "file(azure_network_security_229.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0020",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "Azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-6.2",
-                                "CSA CCM v3.0.1-DSI-02",
-                                "CSA CCM v3.0.1-IAM-07",
-                                "CSA CCM v3.0.1-IVS-06",
-                                "CSA CCM v3.0.1-IVS-08",
-                                "HIPAA-164.312(e)(2)(i)",
-                                "NIST 800-53 Rev4-SC-7 (19)",
-                                "NIST 800-53 Rev4-SI-4 (4)",
-                                "PCI DSS v3.2-1.2.1",
                                 "CIS",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
                                 "NIST",
                                 "PCI"
@@ -156,22 +195,21 @@
                     "masterTestId": "AZURE_TEST_230",
                     "type": "rego",
                     "rule": "file(azure_network_security_230.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0021",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "Azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-6.1",
-                                "CSA CCM v3.0.1-DSI-02",
-                                "CSA CCM v3.0.1-IAM-07",
-                                "CSA CCM v3.0.1-IVS-06",
-                                "CSA CCM v3.0.1-IVS-08",
-                                "HIPAA-164.312(e)(2)(i)",
-                                "NIST 800-53 Rev4-SC-7 (19)",
-                                "NIST 800-53 Rev4-SI-4 (4)",
-                                "PCI DSS v3.2-1.2.1",
                                 "CIS",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
                                 "NIST",
                                 "PCI"
@@ -192,7 +230,15 @@
                     "masterTestId": "AZURE_TEST_231",
                     "type": "rego",
                     "rule": "file(azure_network_security_231.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0022",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "Azure",
@@ -215,7 +261,15 @@
                     "masterTestId": "AZURE_TEST_232",
                     "type": "rego",
                     "rule": "file(azure_network_security_232.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0023",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "Azure",
@@ -238,7 +292,15 @@
                     "masterTestId": "AZURE_TEST_233",
                     "type": "rego",
                     "rule": "file(azure_network_security_233.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0024",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "Azure",
@@ -261,7 +323,15 @@
                     "masterTestId": "AZURE_TEST_234",
                     "type": "rego",
                     "rule": "file(azure_network_security_234.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0025",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "Azure",
@@ -284,7 +354,15 @@
                     "masterTestId": "AZURE_TEST_235",
                     "type": "rego",
                     "rule": "file(azure_network_security_235.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0026",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "Azure",
@@ -307,7 +385,15 @@
                     "masterTestId": "AZURE_TEST_236",
                     "type": "rego",
                     "rule": "file(azure_network_security_236.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0027",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -328,7 +414,15 @@
                     "masterTestId": "AZURE_TEST_237",
                     "type": "rego",
                     "rule": "file(azure_network_security_237.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0028",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -349,7 +443,15 @@
                     "masterTestId": "AZURE_TEST_238",
                     "type": "rego",
                     "rule": "file(azure_network_security_238.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0029",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -370,7 +472,15 @@
                     "masterTestId": "AZURE_TEST_239",
                     "type": "rego",
                     "rule": "file(azure_network_security_239.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0030",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -391,7 +501,15 @@
                     "masterTestId": "AZURE_TEST_240",
                     "type": "rego",
                     "rule": "file(azure_network_security_240.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0031",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -412,7 +530,15 @@
                     "masterTestId": "AZURE_TEST_241",
                     "type": "rego",
                     "rule": "file(azure_network_security_241.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0032",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -433,7 +559,15 @@
                     "masterTestId": "AZURE_TEST_242",
                     "type": "rego",
                     "rule": "file(azure_network_security_242.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0033",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -454,7 +588,15 @@
                     "masterTestId": "AZURE_TEST_243",
                     "type": "rego",
                     "rule": "file(azure_network_security_243.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0034",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -475,7 +617,15 @@
                     "masterTestId": "AZURE_TEST_244",
                     "type": "rego",
                     "rule": "file(azure_network_security_244.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0035",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -496,7 +646,15 @@
                     "masterTestId": "AZURE_TEST_245",
                     "type": "rego",
                     "rule": "file(azure_network_security_245.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0036",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -517,7 +675,15 @@
                     "masterTestId": "AZURE_TEST_246",
                     "type": "rego",
                     "rule": "file(azure_network_security_246.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0037",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -538,7 +704,15 @@
                     "masterTestId": "AZURE_TEST_247",
                     "type": "rego",
                     "rule": "file(azure_network_security_247.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0038",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -559,7 +733,15 @@
                     "masterTestId": "AZURE_TEST_248",
                     "type": "rego",
                     "rule": "file(azure_network_security_248.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0039",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -580,7 +762,15 @@
                     "masterTestId": "AZURE_TEST_249",
                     "type": "rego",
                     "rule": "file(azure_network_security_249.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0040",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -601,7 +791,15 @@
                     "masterTestId": "AZURE_TEST_250",
                     "type": "rego",
                     "rule": "file(azure_network_security_250.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0041",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -622,7 +820,15 @@
                     "masterTestId": "AZURE_TEST_251",
                     "type": "rego",
                     "rule": "file(azure_network_security_251.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0042",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -643,7 +849,15 @@
                     "masterTestId": "AZURE_TEST_252",
                     "type": "rego",
                     "rule": "file(azure_network_security_252.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0043",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -665,7 +879,15 @@
                     "masterTestId": "AZURE_TEST_253",
                     "type": "rego",
                     "rule": "file(azure_network_security_253.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0044",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -686,7 +908,15 @@
                     "masterTestId": "AZURE_TEST_254",
                     "type": "rego",
                     "rule": "file(azure_network_security_254.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0045",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -707,7 +937,15 @@
                     "masterTestId": "AZURE_TEST_255",
                     "type": "rego",
                     "rule": "file(azure_network_security_255.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0046",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -728,7 +966,15 @@
                     "masterTestId": "AZURE_TEST_256",
                     "type": "rego",
                     "rule": "file(azure_network_security_256.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0047",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -749,7 +995,15 @@
                     "masterTestId": "AZURE_TEST_257",
                     "type": "rego",
                     "rule": "file(azure_network_security_257.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0048",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -770,7 +1024,15 @@
                     "masterTestId": "AZURE_TEST_284",
                     "type": "rego",
                     "rule": "file(azure_network_peer_284.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0075",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "Azure",
@@ -793,7 +1055,15 @@
                     "masterTestId": "AZURE_TEST_6",
                     "type": "rego",
                     "rule": "file(azure_network_security_6.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"gID6",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "Azure",
@@ -816,24 +1086,22 @@
                     "masterTestId": "AZURE_TEST_211",
                     "type": "rego",
                     "rule": "file(azure_pollicy_assignments_211.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0002",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-2.13", 
-                                "CSA CCM v3.0.1-IAM-02", 
-                                "ISO 27001:2013-A.13.1.1", 
-                                "ISO 27001:2013-A.14.1.3", 
-                                "ISO 27001:2013-A.16.1.4", 
-                                "ISO 27001:2013-A.18.1.3", 
-                                "ISO 27001:2013-A.6.2.2", 
-                                "ISO 27001:2013-A.9.2.5", 
-                                "NIST 800-53 Rev4-IA-10", 
-                                "NIST 800-53 Rev4-SC-2",
                                 "CIS", 
-                                "CSA", 
-                                "ISO", 
+                                "CSA CCM", 
+                                "ISO 27001", 
                                 "NIST"
                             ],
                             "service": [
@@ -850,24 +1118,24 @@
                     "masterTestId": "AZURE_TEST_258",
                     "type": "rego",
                     "rule": "file(azure_pollicy_assignments_258.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0049",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-2.7",
-                                "CSA CCM v3.0.1-IAM-07", 
-                                "ISO 27001:2013-A.13.1.3", 
-                                "ISO 27001:2013-A.14.1.3", 
-                                "ISO 27001:2013-A.18.1.3", 
-                                "ISO 27001:2013-A.6.2.2", 
-                                "ISO 27001:2013-A.9.2.5", 
-                                "NIST 800-53 Rev4-SI-4 (4)", 
-                                "PCI DSS v3.2-1.3.5",
                                 "CIS", 
-                                "CSA", 
-                                "ISO", 
-                                "NIST"
+                                "CSA CCM", 
+                                "ISO 27001", 
+                                "NIST",
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -883,30 +1151,25 @@
                     "masterTestId": "AZURE_TEST_285",
                     "type": "rego",
                     "rule": "file(azure_pollicy_assignments_285.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0076",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-2.6", 
-                                "CSA CCM v3.0.1-CCC-04", 
-                                "CSA CCM v3.0.1-EKM-02", 
-                                "CSA CCM v3.0.1-EKM-03", 
-                                "CSA CCM v3.0.1-EKM-04", 
-                                "HIPAA-164.312(a)(2)(iv)", 
-                                "ISO 27001:2013-A.10.1.2", 
-                                "ISO 27001:2013-A.18.1.3", 
-                                "ISO 27001:2013-A.8.2.3", 
-                                "NIST 800-53 Rev4-AC-17 (2)", 
-                                "NIST 800-53 Rev4-SC-13", 
-                                "NIST 800-53 Rev4-SI-7 (6)", 
-                                "PCI DSS v3.2-3.4.1",
                                 "CIS",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI" 
+                                "PCI DSS" 
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -922,31 +1185,24 @@
                     "masterTestId": "AZURE_TEST_286",
                     "type": "rego",
                     "rule": "file(azure_pollicy_assignments_286.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0077",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-2.5", 
-                                "CSA CCM v3.0.1-DSI-02", 
-                                "CSA CCM v3.0.1-IAM-07", 
-                                "CSA CCM v3.0.1-IVS-06", 
-                                "CSA CCM v3.0.1-IVS-08", 
-                                "ISO 27001:2013-A.13.1.1", 
-                                "ISO 27001:2013-A.14.1.2", 
-                                "ISO 27001:2013-A.18.1.3", 
-                                "ISO 27001:2013-A.6.2.2", 
-                                "ISO 27001:2013-A.8.2.3", 
-                                "ISO 27001:2013-A.9.2.5", 
-                                "NIST 800-53 Rev4-SC-7 (12)", 
-                                "NIST 800-53 Rev4-SI-4 (23)", 
-                                "PCI DSS v3.2-5.3", 
-                                "PCI DSS v3.2-5.4",
                                 "CIS",
-                                "CSA",
-                                "ISO",
+                                "CSA CCM",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -962,20 +1218,21 @@
                     "masterTestId": "AZURE_TEST_287",
                     "type": "rego",
                     "rule": "file(azure_pollicy_assignments_287.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0078",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-2.12", 
-                                "ISO 27001:2013-A.13.1.3", 
-                                "ISO 27001:2013-A.14.1.3", 
-                                "ISO 27001:2013-A.18.1.3", 
-                                "ISO 27001:2013-A.6.2.2", 
-                                "ISO 27001:2013-A.9.2.5", 
-                                "NIST 800-53 Rev4-AC-17 (9)",
                                 "CIS",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST"
                             ],
                             "service": [
@@ -992,30 +1249,24 @@
                     "masterTestId": "AZURE_TEST_288",
                     "type": "rego",
                     "rule": "file(azure_pollicy_assignments_288.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0079",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-2.9", 
-                                "CSA CCM v3.0.1-DSI-02", 
-                                "CSA CCM v3.0.1-IAM-07", 
-                                "CSA CCM v3.0.1-IVS-06", 
-                                "CSA CCM v3.0.1-IVS-08", 
-                                "ISO 27001:2013-A.13.1.1", 
-                                "ISO 27001:2013-A.14.1.3", 
-                                "ISO 27001:2013-A.18.1.3", 
-                                "ISO 27001:2013-A.6.2.2", 
-                                "ISO 27001:2013-A.9.2.5", 
-                                "NIST 800-53 Rev4-SC-7", 
-                                "NIST 800-53 Rev4-SI-4 (11)", 
-                                "NIST 800-53 Rev4-SI-4 (4)", 
-                                "PCI DSS v3.2-1.1, PCI DSS v3.2-1.4",
                                 "CIS",
-                                "CSA",
-                                "ISO",
+                                "CSA CCM",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -1031,30 +1282,25 @@
                     "masterTestId": "AZURE_TEST_290",
                     "type": "rego",
                     "rule": "file(azure_pollicy_assignments_290.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0081",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-2.15", 
-                                "CSA CCM v3.0.1-CCC-04", 
-                                "CSA CCM v3.0.1-EKM-02", 
-                                "CSA CCM v3.0.1-EKM-03", 
-                                "CSA CCM v3.0.1-EKM-04", 
-                                "HIPAA-164.312(a)(2)(iv)", 
-                                "ISO 27001:2013-A.10.1.2", 
-                                "ISO 27001:2013-A.18.1.3", 
-                                "ISO 27001:2013-A.8.2.3", 
-                                "NIST 800-53 Rev4-AC-17 (2)", 
-                                "NIST 800-53 Rev4-SC-13", 
-                                "NIST 800-53 Rev4-SI-7 (6)", 
-                                "PCI DSS v3.2-3.4.1",
                                 "CIS",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -1070,33 +1316,25 @@
                     "masterTestId": "AZURE_TEST_292",
                     "type": "rego",
                     "rule": "file(azure_pollicy_assignments_292.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0083",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-2.14", 
-                                "CSA CCM v3.0.1-CCC-04", 
-                                "CSA CCM v3.0.1-IAM-03", 
-                                "CSA CCM v3.0.1-IAM-06", 
-                                "HIPAA-164.312(b)", 
-                                "ISO 27001:2013-A.12.4.2", 
-                                "ISO 27001:2013-A.14.1.3", 
-                                "ISO 27001:2013-A.16.1.4", 
-                                "ISO 27001:2013-A.18.1.3", 
-                                "ISO 27001:2013-A.8.2.3", 
-                                "NIST 800-53 Rev4-AU-2a", 
-                                "NIST 800-53 Rev4-CM-5 (1)", 
-                                "NIST 800-53 Rev4-SA-11 (2)", 
-                                "NIST 800-53 Rev4-SA-15 (4)", 
-                                "NIST 800-53 Rev4-SI-7 (8)", 
-                                "PCI DSS v3.2-2.2",
                                 "CIS",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -1112,33 +1350,25 @@
                     "masterTestId": "AZURE_TEST_295",
                     "type": "rego",
                     "rule": "file(azure_pollicy_assignments_295.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0086",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-2.4", 
-                                "CSA CCM v3.0.1-GRM-01", 
-                                "CSA CCM v3.0.1-IAM-13", 
-                                "CSA CCM v3.0.1-IVS-07", 
-                                "CSA CCM v3.0.1-MOS-19", 
-                                "HIPAA-164.308(a)(1)", 
-                                "ISO 27001:2013-A.13.1.3", 
-                                "ISO 27001:2013-A.14.1.3", 
-                                "ISO 27001:2013-A.16.1.4", 
-                                "ISO 27001:2013-A.18.1.3", 
-                                "ISO 27001:2013-A.6.2.2", 
-                                "ISO 27001:2013-A.8.2.3", 
-                                "ISO 27001:2013-A.9.2.5", 
-                                "NIST 800-53 Rev4-CM-2", 
-                                "NIST 800-53 Rev4-CM-6a", 
-                                "PCI DSS v3.2-2.2",
                                 "CIS",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -1154,29 +1384,25 @@
                     "masterTestId": "AZURE_TEST_303",
                     "type": "rego",
                     "rule": "file(azure_pollicy_assignments_303.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0094",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-2.11", 
-                                "CSA CCM v3.0.1-CCC-04", 
-                                "CSA CCM v3.0.1-EKM-02", 
-                                "CSA CCM v3.0.1-EKM-03", 
-                                "CSA CCM v3.0.1-EKM-04", 
-                                "HIPAA-164.312(a)(2)(iv)", 
-                                "ISO 27001:2013-A.10.1.2", 
-                                "ISO 27001:2013-A.18.1.3", 
-                                "NIST 800-53 Rev4-AC-17 (2)", 
-                                "NIST 800-53 Rev4-SC-13", 
-                                "NIST 800-53 Rev4-SI-7 (6)", 
-                                "PCI DSS v3.2-3.4.1",
                                 "CIS",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -1192,29 +1418,24 @@
                     "masterTestId": "AZURE_TEST_304",
                     "type": "rego",
                     "rule": "file(azure_pollicy_assignments_304.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0095",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-2.3", 
-                                "CSA CCM v3.0.1-DCS-01", 
-                                "CSA CCM v3.0.1-IVS-02", 
-                                "CSA CCM v3.0.1-MOS-09", 
-                                "CSA CCM v3.0.1-MOS-17", 
-                                "CSA CCM v3.0.1-TVM-01", 
-                                "ISO 27001:2013-A.18.1.3", 
-                                "ISO 27001:2013-A.8.2.3", 
-                                "NIST 800-53 Rev4-CM-8 (1)", 
-                                "NIST 800-53 Rev4-CM-8 (2)", 
-                                "NIST 800-53 Rev4-SI-3 (2)", 
-                                "NIST 800-53 Rev4-SI-8 (2)", 
-                                "PCI DSS v3.2-6.2",
                                 "CIS",
-                                "CSA",
-                                "ISO",
+                                "CSA CCM",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -1230,28 +1451,25 @@
                     "masterTestId": "AZURE_TEST_308",
                     "type": "rego",
                     "rule": "file(azure_pollicy_assignments_308.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0099",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-2.10", 
-                                "CSA CCM v3.0.1-AIS-01", 
-                                "CSA CCM v3.0.1-IVS-05", 
-                                "CSA CCM v3.0.1-TVM-02", 
-                                "HIPAA-164.308(a)(1)", 
-                                "ISO 27001:2013-A.14.1.3", 
-                                "ISO 27001:2013-A.16.1.4", 
-                                "ISO 27001:2013-A.18.1.3", 
-                                "ISO 27001:2013-A.8.2.3", 
-                                "NIST 800-53 Rev4-RA-5a", 
-                                "PCI DSS v3.2-6.2",
                                 "CIS",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -1267,31 +1485,24 @@
                     "masterTestId": "AZURE_TEST_309",
                     "type": "rego",
                     "rule": "file(azure_pollicy_assignments_309.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0100",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-2.8", 
-                                "CSA CCM v3.0.1-DSI-02", 
-                                "CSA CCM v3.0.1-IAM-07", 
-                                "CSA CCM v3.0.1-IVS-06", 
-                                "CSA CCM v3.0.1-IVS-08", 
-                                "ISO 27001:2013-A.13.1.1", 
-                                "ISO 27001:2013-A.14.1.2", 
-                                "ISO 27001:2013-A.18.1.3", 
-                                "ISO 27001:2013-A.6.2.2", 
-                                "ISO 27001:2013-A.9.2.5", 
-                                "NIST 800-53 Rev4-SC-7", 
-                                "NIST 800-53 Rev4-SI-4 (11)", 
-                                "NIST 800-53 Rev4-SI-4 (4)", 
-                                "PCI DSS v3.2-1.1", 
-                                "PCI DSS v3.2-1.4",
                                 "CIS",
-                                "CSA",
-                                "ISO",
+                                "CSA CCM",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -1307,7 +1518,15 @@
                     "masterTestId": "AZURE_TEST_274",
                     "type": "rego",
                     "rule": "file(azure_274.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0065",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "Azure",
@@ -1330,7 +1549,15 @@
                     "masterTestId": "AZURE_TEST_277",
                     "type": "rego",
                     "rule": "file(azure_277.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0068",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "Azure",
@@ -1356,26 +1583,12 @@
                         {
                             "cloud": "Azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-3.1",
-                                "CSA CCM v3.0.1-CCC-04",
-                                "CSA CCM v3.0.1-EKM-02",
-                                "CSA CCM v3.0.1-EKM-03",
-                                "CSA CCM v3.0.1-EKM-04",
-                                "HIPAA-164.312(e)(2)(ii)",
-                                "ISO 27001:2013-A.10.1.2",
-                                "ISO 27001:2013-A.14.1.2",
-                                "ISO 27001:2013-A.18.1.3",
-                                "NIST 800-53 Rev4-AC-17 (2)",
-                                "NIST 800-53 Rev4-SC-13",
-                                "NIST 800-53 Rev4-SI-7 (6)",
-                                "PCI DSS v3.2-4.1",
-                                "PCI DSS v3.2-6.5.3",
                                 "CIS",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Microsoft.Storage",
@@ -1384,7 +1597,15 @@
                             ]
                         }
                     ],
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0092",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "title": "Storage Accounts without Secure transfer enabled",
                     "description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPs. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesnâ€™t support HTTPs for custom domain names, this option is not applied when using a custom domain name.",
                     "masterSnapshotId": [
@@ -1399,17 +1620,10 @@
                         {
                             "cloud": "Azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-3.1",
-                                "HIPAA-164.312(e)(2)(ii)",
-                                "NIST 800-53 Rev4-AC-17 (2)",
-                                "NIST 800-53 Rev4-SC-13",
-                                "NIST 800-53 Rev4-SI-7 (6)",
-                                "PCI DSS v3.2-4.1",
-                                "PCI DSS v3.2-6.5.3",
                                 "CIS",
                                 "HIPAA",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Microsoft.Storage",
@@ -1418,7 +1632,15 @@
                             ]
                         }
                     ],
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0093",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "title": "Storage Accounts without Secure transfer enabled",
                     "description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on.You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
                     "masterSnapshotId": [
@@ -1426,106 +1648,18 @@
                     ]
                 },
                 {
-                    "masterTestId": "AZURE_TEST_216",
-                    "type": "rego",
-                    "rule": "file(azure_216.rego)",
-                    "eval": "data.rule.rulepass",
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "COSTUM"
-                            ],
-                            "service": [
-                                "Microsoft.ContainerService",
-                                "Container",
-                                "Azure Kubernetes Service"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_219"
-                    ],
-                    "title": "Azure AKS cluster HTTP application routing enabled",
-                    "description": "HTTP application routing configures an Ingress controller in your AKS cluster. As applications are deployed, the solution also creates publicly accessible DNS names for application endpoints. While this makes it easy to access applications that are deployed to your Azure AKS cluster, this add-on is not recommended for production use.This policy checks your AKS cluster HTTP application routing add-on setting and alerts if enabled."
-                },
-                {
-                    "masterTestId": "AZURE_TEST_217",
-                    "type": "rego",
-                    "rule": "file(azure_217.rego)",
-                    "eval": "data.rule.rulepass",
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "COSTUM"
-                            ],
-                            "service": [
-                                "Microsoft.ContainerService",
-                                "Container",
-                                "Azure Kubernetes Service"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_219"
-                    ],
-                    "title": "Azure AKS cluster monitoring enabled",
-                    "description": "Azure Monitor for containers is a feature designed to monitor the performance of container workloads deployed to either Azure Container Instances or managed Kubernetes clusters hosted on Azure Kubernetes Service (AKS). Monitoring your containers is critical, especially when you're running a production cluster, at scale, with multiple applications.This policy checks your AKS cluster monitoring add-on setting and alerts if no configuration is found, or monitoring is disabled."
-                },
-                {
-                    "masterTestId": "AZURE_TEST_218",
-                    "type": "rego",
-                    "rule": "file(azure_218.rego)",
-                    "eval": "data.rule.rulepass",
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "COSTUM"
-                            ],
-                            "service": [
-                                "Microsoft.ContainerService",
-                                "Container",
-                                "Azure Kubernetes Service"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_219"
-                    ],
-                    "title": "Azure AKS cluster pool profile count contains 3 more then nodes",
-                    "description": "Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes."
-                },
-                {
-                    "masterTestId": "AZURE_TEST_219",
-                    "type": "rego",
-                    "rule": "file(azure_219.rego)",
-                    "eval": "data.rule.rulepass",
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [
-                                "COSTUM"
-                            ],
-                            "service": [
-                                "Microsoft.ContainerService",
-                                "Container",
-                                "Azure Kubernetes Service"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        "AZRSNP_219"
-                    ],
-                    "title": "Azure AKS enable role-based access control (RBAC) enforced",
-                    "description": "To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster."
-                },
-                {
                     "masterTestId": "AZURE_TEST_221",
                     "type": "rego",
                     "rule": "file(azure_221.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0012",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -1549,7 +1683,15 @@
                     "masterTestId": "AZURE_TEST_259",
                     "type": "rego",
                     "rule": "file(azure_259.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0050",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -1573,7 +1715,15 @@
                     "masterTestId": "AZURE_TEST_260",
                     "type": "rego",
                     "rule": "file(azure_260.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0051",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -1597,16 +1747,21 @@
                     "masterTestId": "AZURE_TEST_1",
                     "type": "rego",
                     "rule": "file(azure_1.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"gID1",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "HIPAA-164.308(a)(6)(i)",
-                                "HIPAA-164.308(a)(6)(ii)",
-                                "NIST CSF-DE.AE-1",
-                                "NIST CSF-DE.CM-1",
-                                "NIST CSF-DE.CM-7"
+                                "HIPAA",
+                                "NIST"
                             ],
                             "service": []
                         }
@@ -1620,22 +1775,25 @@
                     "masterTestId": "AZURE_TEST_210",
                     "type": "rego",
                     "rule": "file(azure_210.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0001",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-5.2",
-                                "CSA CCM v3.0.1-BCR-11",
-                                "CSA CCM v3.0.1-GRM-01",
-                                "CSA CCM v3.0.1-MOS-19",
-                                "HIPAA-164.312(b)",
-                                "ISO 27001:2013-A.12.4.2",
-                                "ISO 27001:2013-A.18.1.3",
-                                "NIST 800-53 Rev4-AU-11",
-                                "NIST 800-53 Rev4-CM-2 (3)",
-                                "NIST 800-53 Rev4-SI-12",
-                                "PCI DSS v3.2-10.7"
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST",
+                                "PCI DSS"
                             ],
                             "service": []
                         }
@@ -1649,22 +1807,25 @@
                     "masterTestId": "AZURE_TEST_212",
                     "type": "rego",
                     "rule": "file(azure_212.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0003",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-4.2.1",
-                                "CSA CCM v3.0.1-CCC-04",
-                                "CSA CCM v3.0.1-IAM-03",
-                                "CSA CCM v3.0.1-IAM-06",
-                                "HIPAA-164.312(b)",
-                                "ISO 27001:2013-A.12.4.2",
-                                "ISO 27001:2013-A.18.1.3",
-                                "NIST 800-53 Rev4-AU-2a",
-                                "NIST 800-53 Rev4-CM-5 (1)",
-                                "NIST 800-53 Rev4-SI-7 (8)",
-                                "PCI DSS v3.2-10.3"
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST",
+                                "PCI DSS"
                             ],
                             "service": []
                         }
@@ -1678,7 +1839,15 @@
                     "masterTestId": "AZURE_TEST_214",
                     "type": "rego",
                     "rule": "file(azure_214.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0005",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -1697,7 +1866,15 @@
                     "masterTestId": "AZURE_TEST_215",
                     "type": "rego",
                     "rule": "file(azure_215.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0006",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -1716,7 +1893,15 @@
                     "masterTestId": "AZURE_TEST_220",
                     "type": "rego",
                     "rule": "file(azure_220.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0011",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -1735,7 +1920,15 @@
                     "masterTestId": "AZURE_TEST_222",
                     "type": "rego",
                     "rule": "file(azure_222.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0013",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -1754,7 +1947,15 @@
                     "masterTestId": "AZURE_TEST_226",
                     "type": "rego",
                     "rule": "file(azure_226.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0017",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -1768,12 +1969,20 @@
                         "AZRSNP_226"
                     ],
                     "title": "Azure Key Vault audit logging is disabled",
-                    "description": ""
+                    "description": "This policy identifies Azure Key Vault instances for which audit logging is disabled. As a best practice, enable audit event logging for Key Vault instances to monitor how and when your key vaults are accessed, and by whom."
                 },                {
                     "masterTestId": "AZURE_TEST_227",
                     "type": "rego",
                     "rule": "file(azure_227.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0018",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -1792,7 +2001,15 @@
                     "masterTestId": "AZURE_TEST_228",
                     "type": "rego",
                     "rule": "file(azure_228.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0019",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -1811,7 +2028,15 @@
                     "masterTestId": "AZURE_TEST_261",
                     "type": "rego",
                     "rule": "file(azure_261.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0052",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -1825,27 +2050,30 @@
                         "AZRSNP_261"
                     ],
                     "title": "Azure Resource Group does not have a resource lock",
-                    "description": ""
+                    "description": "Azure Resource Manager locks provide a way to lock down Azure resources from being deleted or modified. The lock level can be set to either 'CanNotDelete' or 'ReadOnly'. When you apply a lock at a parent scope, all resources within the scope inherit the same lock, and the most restrictive lock takes precedence._x000D__x000D_This policy identifies Azure Resource Groups that do not have a lock set. As a best practice, place a lock on important resources to prevent accidental or malicious modification or deletion by unauthorized users."
                 },                {
                     "masterTestId": "AZURE_TEST_262",
                     "type": "rego",
                     "rule": "file(azure_262.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0053",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-4.2.7",
-                                "CSA CCM v3.0.1-BCR-11",
-                                "CSA CCM v3.0.1-GRM-01",
-                                "CSA CCM v3.0.1-MOS-19",
-                                "HIPAA-164.312(b)",
-                                "ISO 27001:2013-A.12.4.2",
-                                "ISO 27001:2013-A.18.1.3",
-                                "NIST 800-53 Rev4-AU-11",
-                                "NIST 800-53 Rev4-CM-2 (3)",
-                                "NIST 800-53 Rev4-SI-12",
-                                "PCI DSS v3.2-10.7"
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST",
+                                "PCI DSS"
                             ],
                             "service": []
                         }
@@ -1859,23 +2087,25 @@
                     "masterTestId": "AZURE_TEST_263",
                     "type": "rego",
                     "rule": "file(azure_263.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0054",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-4.2.8",
-                                "CSA CCM v3.0.1-BCR-11",
-                                "CSA CCM v3.0.1-GRM-01",
-                                "CSA CCM v3.0.1-MOS-19",
-                                "HIPAA-164.312(b)",
-                                "ISO 27001:2013-A.12.4.2",
-                                "ISO 27001:2013-A.16.1.4",
-                                "ISO 27001:2013-A.18.1.3",
-                                "NIST 800-53 Rev4-AU-11",
-                                "NIST 800-53 Rev4-CM-2 (3)",
-                                "NIST 800-53 Rev4-SI-12",
-                                "PCI DSS v3.2-11.3"
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST",
+                                "PCI DSS"
                             ],
                             "service": []
                         }
@@ -1889,33 +2119,24 @@
                     "masterTestId": "AZURE_TEST_264",
                     "type": "rego",
                     "rule": "file(azure_264.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0055",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CSA CCM v3.0.1-AAC-01",
-                                "CSA CCM v3.0.1-AAC-02",
-                                "CSA CCM v3.0.1-BCR-01",
-                                "CSA CCM v3.0.1-BCR-09",
-                                "CSA CCM v3.0.1-CCC-04",
-                                "CSA CCM v3.0.1-DCS-01",
-                                "CSA CCM v3.0.1-IAM-07",
-                                "CSA CCM v3.0.1-SEF-01",
-                                "CSA CCM v3.0.1-SEF-03",
-                                "CSA CCM v3.0.1-STA-02",
-                                "HIPAA-164.308(a)(6)(ii)",
-                                "ISO 27001:2013-A.12.4.3",
-                                "ISO 27001:2013-A.16.1.2",
-                                "ISO 27001:2013-A.18.1.3",
-                                "NIST 800-53 Rev4-AU-5 (2)",
-                                "NIST 800-53 Rev4-CA-7g",
-                                "NIST 800-53 Rev4-CP-2a.3",
-                                "NIST 800-53 Rev4-IR-6 (2)",
-                                "NIST 800-53 Rev4-IR-9 (1)",
-                                "NIST 800-53 Rev4-SI-4 (5)",
-                                "NIST 800-53 Rev4-SI-7 (2)",
-                                "PCI DSS v3.2-12.10.1"
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST",
+                                "PCI DSS"
                             ],
                             "service": []
                         }
@@ -1929,7 +2150,15 @@
                     "masterTestId": "AZURE_TEST_265",
                     "type": "rego",
                     "rule": "file(azure_265.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0056",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -1948,7 +2177,15 @@
                     "masterTestId": "AZURE_TEST_266",
                     "type": "rego",
                     "rule": "file(azure_266.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0057",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -1967,7 +2204,15 @@
                     "masterTestId": "AZURE_TEST_267",
                     "type": "rego",
                     "rule": "file(azure_267.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0058",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -1986,7 +2231,15 @@
                     "masterTestId": "AZURE_TEST_268",
                     "type": "rego",
                     "rule": "file(azure_268.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0059",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -2005,7 +2258,15 @@
                     "masterTestId": "AZURE_TEST_270",
                     "type": "rego",
                     "rule": "file(azure_270.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0061",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -2024,7 +2285,15 @@
                     "masterTestId": "AZURE_TEST_271",
                     "type": "rego",
                     "rule": "file(azure_271.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0062",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -2043,7 +2312,15 @@
                     "masterTestId": "AZURE_TEST_272",
                     "type": "rego",
                     "rule": "file(azure_272.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0063",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -2062,7 +2339,15 @@
                     "masterTestId": "AZURE_TEST_273",
                     "type": "rego",
                     "rule": "file(azure_273.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0064",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -2081,7 +2366,15 @@
                     "masterTestId": "AZURE_TEST_275",
                     "type": "rego",
                     "rule": "file(azure_275.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0066",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -2100,7 +2393,15 @@
                     "masterTestId": "AZURE_TEST_276",
                     "type": "rego",
                     "rule": "file(azure_276.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0067",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -2119,7 +2420,15 @@
                     "masterTestId": "AZURE_TEST_278",
                     "type": "rego",
                     "rule": "file(azure_278.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0069",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -2138,7 +2447,15 @@
                     "masterTestId": "AZURE_TEST_279",
                     "type": "rego",
                     "rule": "file(azure_279.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0070",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -2157,7 +2474,15 @@
                     "masterTestId": "AZURE_TEST_280",
                     "type": "rego",
                     "rule": "file(azure_280.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0071",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -2176,7 +2501,15 @@
                     "masterTestId": "AZURE_TEST_281",
                     "type": "rego",
                     "rule": "file(azure_281.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0072",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -2195,7 +2528,15 @@
                     "masterTestId": "AZURE_TEST_282",
                     "type": "rego",
                     "rule": "file(azure_282.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0073",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -2214,7 +2555,15 @@
                     "masterTestId": "AZURE_TEST_283",
                     "type": "rego",
                     "rule": "file(azure_283.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0074",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -2233,22 +2582,24 @@
                     "masterTestId": "AZURE_TEST_291",
                     "type": "rego",
                     "rule": "file(azure_291.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0082",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-6.3",
-                                "CSA CCM v3.0.1-DSI-06",
-                                "CSA CCM v3.0.1-IAM-02",
-                                "CSA CCM v3.0.1-IAM-03",
-                                "CSA CCM v3.0.1-IAM-06",
-                                "CSA CCM v3.0.1-IVS-11",
-                                "ISO 27001:2013-A.13.1.1",
-                                "ISO 27001:2013-A.14.1.3",
-                                "ISO 27001:2013-A.6.2.2",
-                                "NIST 800-53 Rev4-AC-3",
-                                "PCI DSS v3.2-1.3.2"
+                                "CIS",
+                                "CSA CCM",
+                                "ISO 27001",
+                                "NIST",
+                                "PCI DSS"
                             ],
                             "service": []
                         }
@@ -2262,23 +2613,25 @@
                     "masterTestId": "AZURE_TEST_293",
                     "type": "rego",
                     "rule": "file(azure_293.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0084",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-4.2.6",
-                                "CSA CCM v3.0.1-CCC-04",
-                                "CSA CCM v3.0.1-EKM-02",
-                                "CSA CCM v3.0.1-EKM-03",
-                                "CSA CCM v3.0.1-EKM-04",
-                                "HIPAA-164.312(a)(2)(iv)",
-                                "ISO 27001:2013-A.10.1.2",
-                                "ISO 27001:2013-A.18.1.3",
-                                "NIST 800-53 Rev4-AC-17 (2)",
-                                "NIST 800-53 Rev4-SC-13",
-                                "NIST 800-53 Rev4-SI-7 (6)",
-                                "PCI DSS v3.2-3.4.1"
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST",
+                                "PCI DSS"
                             ],
                             "service": []
                         }
@@ -2292,35 +2645,23 @@
                     "masterTestId": "AZURE_TEST_294",
                     "type": "rego",
                     "rule": "file(azure_294.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0085",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CSA CCM v3.0.1-DCS-01",
-                                "CSA CCM v3.0.1-DSI-06",
-                                "CSA CCM v3.0.1-EKM-01",
-                                "CSA CCM v3.0.1-IAM-01",
-                                "CSA CCM v3.0.1-IAM-02",
-                                "CSA CCM v3.0.1-IAM-03",
-                                "CSA CCM v3.0.1-IAM-04",
-                                "CSA CCM v3.0.1-IAM-05",
-                                "CSA CCM v3.0.1-IAM-08",
-                                "CSA CCM v3.0.1-IAM-09",
-                                "CSA CCM v3.0.1-IAM-10",
-                                "CSA CCM v3.0.1-IAM-11",
-                                "CSA CCM v3.0.1-IAM-12",
-                                "CSA CCM v3.0.1-IAM-13",
-                                "CSA CCM v3.0.1-IVS-02",
-                                "CSA CCM v3.0.1-IVS-11",
-                                "CSA CCM v3.0.1-MOS-09",
-                                "CSA CCM v3.0.1-MOS-16",
-                                "ISO 27001:2013-A.14.1.3",
-                                "ISO 27001:2013-A.9.2.5",
-                                "NIST 800-53 Rev4-AC-2 (7)(a)",
-                                "NIST 800-53 Rev4-CM-8 (4)",
-                                "NIST 800-53 Rev4-IA-5d",
-                                "PCI DSS v3.2-8.7"
+                                "CSA CCM",
+                                "ISO 27001",
+                                "NIST",
+                                "PCI DSS"
                             ],
                             "service": []
                         }
@@ -2334,35 +2675,25 @@
                     "masterTestId": "AZURE_TEST_296",
                     "type": "rego",
                     "rule": "file(azure_296.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0087",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-2.16",
-                                "CSA CCM v3.0.1-AAC-01",
-                                "CSA CCM v3.0.1-AAC-02",
-                                "CSA CCM v3.0.1-BCR-01",
-                                "CSA CCM v3.0.1-BCR-09",
-                                "CSA CCM v3.0.1-CCC-04",
-                                "CSA CCM v3.0.1-DCS-01",
-                                "CSA CCM v3.0.1-IAM-07",
-                                "CSA CCM v3.0.1-SEF-01",
-                                "CSA CCM v3.0.1-SEF-03",
-                                "CSA CCM v3.0.1-STA-02",
-                                "HIPAA-164.308(a)(6)(ii)",
-                                "ISO 27001:2013-A.12.4.3",
-                                "ISO 27001:2013-A.16.1.2",
-                                "ISO 27001:2013-A.18.1.3",
-                                "ISO 27001:2013-A.8.2.3",
-                                "NIST 800-53 Rev4-AU-5 (2)",
-                                "NIST 800-53 Rev4-CA-7g",
-                                "NIST 800-53 Rev4-CP-2a.3",
-                                "NIST 800-53 Rev4-IR-6 (2)",
-                                "NIST 800-53 Rev4-IR-9 (1)",
-                                "NIST 800-53 Rev4-SI-4 (5)",
-                                "NIST 800-53 Rev4-SI-7 (2)",
-                                "PCI DSS v3.2-12.10.1"
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST",
+                                "PCI DSS"
                             ],
                             "service": []
                         }
@@ -2376,20 +2707,25 @@
                     "masterTestId": "AZURE_TEST_297",
                     "type": "rego",
                     "rule": "file(azure_297.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0088",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-4.2.4",
-                                "CSA CCM v3.0.1-IAM-07",
-                                "HIPAA-164.312(b)",
-                                "ISO 27001:2013-A.16.1.2",
-                                "ISO 27001:2013-A.18.1.3",
-                                "NIST 800-53 Rev4-AU-5 (2)",
-                                "NIST 800-53 Rev4-IR-9 (1)",
-                                "NIST 800-53 Rev4-SI-4 (5)",
-                                "PCI DSS v3.2-11.5"
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST",
+                                "PCI DSS"
                             ],
                             "service": []
                         }
@@ -2403,35 +2739,25 @@
                     "masterTestId": "AZURE_TEST_299",
                     "type": "rego",
                     "rule": "file(azure_299.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0090",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-2.18",
-                                "CSA CCM v3.0.1-AAC-01",
-                                "CSA CCM v3.0.1-AAC-02",
-                                "CSA CCM v3.0.1-BCR-01",
-                                "CSA CCM v3.0.1-BCR-09",
-                                "CSA CCM v3.0.1-CCC-04",
-                                "CSA CCM v3.0.1-DCS-01",
-                                "CSA CCM v3.0.1-IAM-07",
-                                "CSA CCM v3.0.1-SEF-01",
-                                "CSA CCM v3.0.1-SEF-03",
-                                "CSA CCM v3.0.1-STA-02",
-                                "HIPAA-164.308(a)(6)(ii)",
-                                "ISO 27001:2013-A.12.4.3",
-                                "ISO 27001:2013-A.16.1.2",
-                                "ISO 27001:2013-A.18.1.3",
-                                "ISO 27001:2013-A.8.2.3",
-                                "NIST 800-53 Rev4-AU-5 (2)",
-                                "NIST 800-53 Rev4-CA-7g",
-                                "NIST 800-53 Rev4-CP-2a.3",
-                                "NIST 800-53 Rev4-IR-6 (2)",
-                                "NIST 800-53 Rev4-IR-9 (1)",
-                                "NIST 800-53 Rev4-SI-4 (5)",
-                                "NIST 800-53 Rev4-SI-7 (2)",
-                                "PCI DSS v3.2-12.10.1"
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST",
+                                "PCI DSS"
                             ],
                             "service": []
                         }
@@ -2445,16 +2771,21 @@
                     "masterTestId": "AZURE_TEST_2",
                     "type": "rego",
                     "rule": "file(azure_2.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"gID2",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "HIPAA-164.308(a)(6)(i)", 
-                                "HIPAA-164.308(a)(6)(ii)", 
-                                "NIST CSF-DE.AE-1", 
-                                "NIST CSF-DE.CM-1", 
-                                "NIST CSF-DE.CM-7"
+                                "HIPAA", 
+                                "NIST"
                             ],
                             "service": []
                         }
@@ -2468,15 +2799,21 @@
                     "masterTestId": "AZURE_TEST_300",
                     "type": "rego",
                     "rule": "file(azure_300.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0091",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-2.1",
-                                "ISO 27001:2013-A.18.1.3",
-                                "ISO 27001:2013-A.8.2.3",
-                                "ISO 27001:2013-A.9.2.5"
+                                "CIS",
+                                "ISO 27001"
                             ],
                             "service": []
                         }
@@ -2490,19 +2827,23 @@
                     "masterTestId": "AZURE_TEST_305",
                     "type": "rego",
                     "rule": "file(azure_305.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0096",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-4.2.2",
-                                "ISO 27001:2013-A.14.1.2",
-                                "ISO 27001:2013-A.16.1.4",
-                                "ISO 27001:2013-A.18.1.3",
-                                "ISO 27001:2013-A.8.2.3",
-                                "NIST 800-53 Rev4-SA-11 (2)",
-                                "NIST 800-53 Rev4-SA-15 (4)",
-                                "PCI DSS v3.2-2.2"
+                                "CIS",
+                                "ISO 27001",
+                                "NIST",
+                                "PCI DSS"
                             ],
                             "service": []
                         }
@@ -2516,25 +2857,24 @@
                     "masterTestId": "AZURE_TEST_306",
                     "type": "rego",
                     "rule": "file(azure_306.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0097",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-4.2.3",
-                                "CSA CCM v3.0.1-BCR-05",
-                                "CSA CCM v3.0.1-BCR-09",
-                                "CSA CCM v3.0.1-GRM-02",
-                                "CSA CCM v3.0.1-GRM-09",
-                                "CSA CCM v3.0.1-GRM-10",
-                                "CSA CCM v3.0.1-STA-06",
-                                "ISO 27001:2013-A.14.1.2",
-                                "ISO 27001:2013-A.16.1.4",
-                                "ISO 27001:2013-A.18.1.3",
-                                "ISO 27001:2013-A.8.2.3",
-                                "NIST 800-53 Rev4-RA-3e",
-                                "NIST 800-53 Rev4-SA-11 (2)",
-                                "PCI DSS v3.2-2.2"
+                                "CIS",
+                                "CSA CCM",
+                                "ISO 27001",
+                                "NIST",
+                                "PCI DSS"
                             ],
                             "service": []
                         }
@@ -2548,18 +2888,23 @@
                     "masterTestId": "AZURE_TEST_307",
                     "type": "rego",
                     "rule": "file(azure_307.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0098",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "HIPAA-164.312(e)(2)(ii)",
-                                "ISO 27001:2013-A.10.1.2",
-                                "ISO 27001:2013-A.13.1.1",
-                                "ISO 27001:2013-A.14.1.2",
-                                "ISO 27001:2013-A.9.2.5",
-                                "NIST 800-53 Rev4-AC-17 (2)",
-                                "PCI DSS v3.2-4.1.1"
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST",
+                                "PCI DSS"
                             ],
                             "service": []
                         }
@@ -2573,19 +2918,24 @@
                     "masterTestId": "AZURE_TEST_3",
                     "type": "rego",
                     "rule": "file(azure_3.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"gID3",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "GDPR-Article 46",
-                                "HIPAA-164.312(e)(2)(ii)",
-                                "NIST CSF-DE.AE-1",
-                                "NIST CSF-DE.CM-1",
-                                "NIST CSF-DE.CM-7",
-                                "NIST CSF-PR.DS-2",
-                                "PCI DSS v3.2-4.1",
-                                "SOC 2-CC6.7"
+                                "GDPR",
+                                "HIPAA",
+                                "NIST",
+                                "PCI DSS",
+                                "SOC 2"
                             ],
                             "service": []
                         }
@@ -2599,7 +2949,15 @@
                     "masterTestId": "AZURE_TEST_5",
                     "type": "rego",
                     "rule": "file(azure_5.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"gID5",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -2619,7 +2977,15 @@
                     "masterTestId": "AZURE_TEST_7",
                     "type": "rego",
                     "rule": "file(azure_7.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"gID7",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
@@ -2639,19 +3005,23 @@
                     "masterTestId": "AZURE_TEST_213",
                     "type": "rego",
                     "rule": "file(azure_pollicy_assignments_213.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0004",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS v1.0 (Azure)-2.2",
-                                "HIPAA-164.312(b)",
-                                "ISO 27001:2013-A.14.1.3",
-                                "ISO 27001:2013-A.16.1.4",
-                                "ISO 27001:2013-A.18.1.3",
-                                "ISO 27001:2013-A.8.2.3",
-                                "ISO 27001:2013-A.9.2.5",
-                                "NIST 800-53 Rev4-CA-8 (1)"
+                                "CIS",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST"
                             ],
                             "service": []
                         }
