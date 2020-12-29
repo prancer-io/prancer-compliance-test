@@ -1,11 +1,11 @@
 {
     "testSet": [
         {
-            "masterTestName": "AZURE_terraform_TEST",
+            "masterTestName": "AZURE_iac_TEST",
             "version": "0.1",
             "cases": [
                 {
-                    "masterTestId": "TEST_AKS",
+                    "masterTestId": "TEST_AKS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -18,28 +18,100 @@
                             "message": "data.rule.aks_cni_net_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure AKS cluster Azure CNI networking not enabled",
+                    "description": "Azure CNI provides the following features over kubenet networking:_x000D__x000D_- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network._x000D_- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB._x000D_- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance._x000D_- Support for Network Policies securing communication between pods._x000D__x000D_This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_AKS_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0007-TRF",
                             "eval": "data.rule.aks_http_routing",
                             "message": "data.rule.aks_http_routing_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure AKS cluster HTTP application routing enabled",
+                    "description": "HTTP application routing configures an Ingress controller in your AKS cluster. As applications are deployed, the solution also creates publicly accessible DNS names for application endpoints. While this makes it easy to access applications that are deployed to your Azure AKS cluster, this add-on is not recommended for production use._x000D__x000D_This policy checks your AKS cluster HTTP application routing add-on setting and alerts if enabled.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_AKS_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0008-TRF",
                             "eval": "data.rule.aks_monitoring",
                             "message": "data.rule.aks_monitoring_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure AKS cluster monitoring not enabled",
+                    "description": "Azure Monitor for containers is a feature designed to monitor the performance of container workloads deployed to either Azure Container Instances or managed Kubernetes clusters hosted on Azure Kubernetes Service (AKS). Monitoring your containers is critical, especially when you're running a production cluster, at scale, with multiple applications._x000D__x000D_This policy checks your AKS cluster monitoring add-on setting and alerts if no configuration is found, or monitoring is disabled.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_AKS_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0009-TRF",
                             "eval": "data.rule.aks_nodes",
                             "message": "data.rule.aks_nodes_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure AKS cluster pool profile count contains less than 3 nodes",
+                    "description": "Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)_x000D__x000D_This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_AKS_5",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0010-TRF",
                             "eval": "data.rule.aks_rbac",
@@ -48,8 +120,8 @@
                             "remediationFunction":""
                         }
                     ],
-                    "title": "Azure AKS cluster configuration check.",
-                    "description": "Azure AKS cluster Azure CNI networking is enabled. Azure AKS cluster HTTP application routing should be enabled. Azure AKS cluster monitoring should be enabled. Azure AKS cluster pool profile count contains less than 3 nodes. Azure AKS enable role-based access control (RBAC) is enforced.",
+                    "title": "Azure AKS enable role-based access control (RBAC) not enforced",
+                    "description": "To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x000D__x000D_This policy checks your AKS cluster RBAC setting and alerts if disabled.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -59,7 +131,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_APPLICATION_GATEWAYS",
+                    "masterTestId": "TEST_APPLICATION_GATEWAYS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -72,7 +144,25 @@
                             "message": "data.rule.gw_tls_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Application Gateway allows TLSv1.1 or lower",
+                    "description": "The Application Gateway supports end-to-end SSL encryption using multiple TLS versions and by default, it supports TLS version 1.0 as the minimum version._x000D__x000D_This policy identifies the Application Gateway instances that are configured to use TLS versions 1.1 or lower as the minimum protocol version. As a best practice set the MinProtocolVersion to TLSv1.2 (if you use custom SSL policy) or use the predefined â€˜AppGwSslPolicy20170401Sâ€™ policy.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_APPLICATION_GATEWAYS_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(applicationgateways.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0012-TRF",
                             "eval": "data.rule.gw_waf",
@@ -81,8 +171,8 @@
                             "remediationFunction":""
                         }
                     ],
-                    "title": "Azure Application Gateway configurtaion check.",
-                    "description": "Azure Application Gateway allows TLSv1.1 or lower.",
+                    "title": "Azure Application Gateway does not have the Web application firewall (WAF) enabled",
+                    "description": "This policy identifies Azure Application Gateways that do not have Web application firewall (WAF) enabled. As a best practice, enable WAF to manage and protect your web applications behind the Application Gateway from common exploits and vulnerabilities.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -107,8 +197,8 @@
                             "remediationFunction":""
                         }
                     ],
-                    "title": "Azure SQL DB Administrator check.",
-                    "description": "SQL servers which do not have Azure Active Directory admin configured.",
+                    "title": "SQL servers which do not have Azure Active Directory admin configured",
+                    "description": "Checks to ensure that SQL servers are configured with Active Directory admin authentication. Azure Active Directory authentication is a mechanism of connecting to Microsoft Azure SQL Database and SQL Data Warehouse by using identities in Azure Active Directory (Azure AD). With Azure AD authentication, you can centrally manage the identities of database users and other Microsoft services in one central location.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -118,7 +208,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_AUDITING_DB_SETTINGS",
+                    "masterTestId": "TEST_DB_AUDITING_DB_SETTINGS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -131,7 +221,25 @@
                             "message": "data.rule.mssql_db_log_audit_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Auditing for SQL database should be set to On",
+                    "description": "Database events are tracked by the Auditing feature and the events are written to an audit log in your Azure storage account. This process helps you to monitor database activity, and get insight into anomalies that could indicate business concerns or suspected security violations.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST","PCI DSS"],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_DB_AUDITING_DB_SETTINGS_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbauditingdbsettings.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0053-TRF",
                             "eval": "data.rule.mssql_db_log_retention",
@@ -140,12 +248,12 @@
                             "remediationFunction":""
                         }
                     ],
-                    "title": "Azure SQL DB Auditing DB Settings.",
-                    "description": "Auditing for SQL database should be set to On. Azure SQL Database with Auditing Retention less than 90 days.",
+                    "title": "Azure SQL Database with Auditing Retention less than 90 days",
+                    "description": "This policy identifies SQL Databases which have Auditing Retention less than 90 days. Audit Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -181,7 +289,7 @@
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(dbfirewallrules.rego)",
+                    "rule": "file(dbauditingdbsettings.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0082-TRF",
@@ -191,8 +299,8 @@
                             "remediationFunction":""
                         }
                     ],
-                    "title": "Azure SQL DB Firewall Rules.",
-                    "description": "SQL Server Firewall rules allow access to any Azure internal resources.",
+                    "title": "SQL Server Firewall rules allow access to any Azure internal resources",
+                    "description": "Firewalls grant access to databases based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with \"0.0.0.0\" represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -202,7 +310,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES",
+                    "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -215,28 +323,100 @@
                             "message": "data.rule.dbsec_threat_retention_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure SQL Database with Threat Retention less than or equals to 90 days",
+                    "description": "This policy identifies SQL Databases which have Threat Retention less than or equals to 90 days. Threat Logs can be used to check for anomalies and gives an understanding of suspected breaches or misuse of data and access. It is recommended to configure SQL database Threat Retention to be greater than 90 days.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST","PCI DSS"],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbsecurityalertpolicies.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0055-TRF",
                             "eval": "data.rule.dbsec_threat_email",
                             "message": "data.rule.dbsec_threat_email_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure SQL Databases with disabled Email service and co-administrators for Threat Detection",
+                    "description": "This policy identifies SQL Databases which have disabled Email service and co-administrators for Threat Detection. Enable 'Email service and co-administrators' option to receive security alerts of any anomalous activities in SQL database. The alert notifications are sent to service and co-administrator email addresses so that they can mitigate any potential risks.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": ["CSA CCM","HIPAA","ISO 27001","NIST","PCI DSS"],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbsecurityalertpolicies.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0097-TRF",
                             "eval": "data.rule.dbsec_threat_alert",
                             "message": "data.rule.dbsec_threat_alert_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Threat Detection types on SQL databases is misconfigured",
+                    "description": "Ensure that Threat Detection types is set to All",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": ["CIS","CSA CCM","ISO 27001","NIST","PCI DSS"],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbsecurityalertpolicies.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0088-TRF",
                             "eval": "data.rule.sql_alert",
                             "message": "data.rule.sql_alert_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Send alerts on field value on SQL Databases is misconfigured",
+                    "description": "Checks to ensure that an valid email address is set for Threat Detection alerts. The alerts are sent to this email address when any anomalous activities are detected on SQL databases.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST","PCI DSS"],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_5",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbsecurityalertpolicies.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0096-TRF",
                             "eval": "data.rule.dbsec_threat_off",
@@ -245,18 +425,18 @@
                             "remediationFunction":""
                         }
                     ],
-                    "title": "Azure SQL DB Security Alert Policy.",
-                    "description": "Azure SQL DB with Threat Retention less than 91 days. Azure SQL DB with disabled Email service and co-administrators for Threat Detection. Azure SQL Server threat detection alerts not enabled for all threat types. Send alerts on field value on SQL Databases is misconfigured. Threat Detection on SQL databases is set to Off. ",
+                    "title": "Threat Detection on SQL databases is set to Off",
+                    "description": "SQL Threat Detection provides a new layer of security, which enables customers to detect and respond to potential threats as they occur by providing security alerts on anomalous activities. Users will receive an alert upon suspicious database activities, potential vulnerabilities, and SQL injection attacks, as well as anomalous database access patterns. SQL Threat Detection alerts provide details of suspicious activity and recommend action on how to investigate and mitigate the threat.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": ["CIS","ISO 27001","NIST","PCI DSS"],
                             "service": []
                         }
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_VALENRABILITY_ASSESSMENTS",
+                    "masterTestId": "TEST_DB_VALENRABILITY_ASSESSMENTS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -269,14 +449,50 @@
                             "message": "data.rule.db_ads_mail_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure SQL Server advanced data security does not have an email alert recipient",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL Servers that do not have an email address configured for ADS alert notifications. As a best practice, provide one or more email addresses where you want to receive alerts for any anomalous activities detected on SQL Servers.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_DB_VALENRABILITY_ASSESSMENTS_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbvulnerabilityassessments.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0057-TRF",
                             "eval": "data.rule.db_ads_alert",
                             "message": "data.rule.db_ads_alert_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure SQL Server advanced data security does not send alerts to service and co-administrators",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the administratorsâ€”service and co-administratorâ€”can receive email alerts when anomalous activities are detected on the SQL Servers.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_DB_VALENRABILITY_ASSESSMENTS_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbvulnerabilityassessments.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0058-TRF",
                             "eval": "data.rule.db_ads_scan",
@@ -285,8 +501,8 @@
                             "remediationFunction":""
                         }
                     ],
-                    "title": "Azure DB vulnerability Assessments.",
-                    "description": "Azure SQL Server advanced data security does not have an email alert recipient. Azure SQL Server advanced data security does not send alerts to service and co-administrators. Azure SQL Server advanced data security is disabled.",
+                    "title": "Azure SQL Server advanced data security is disabled",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -311,8 +527,8 @@
                             "remediationFunction":""
                         }
                     ],
-                    "title": "Azure Key Vault Secrets.",
-                    "description": "Azure Key Vault secrets have no expiration date.",
+                    "title": "Azure Key Vault secrets have no expiration date",
+                    "description": "This policy identifies Azure Key Vault secrets that do not have an expiry date. As a best practice, set an expiration date for each secret and rotate the secret regularly._x000D__x000D_Before you activate this policy, ensure that you have added the <compliance-software> Service Principal to each Key Vault: https://docs.paloaltonetworks.com/<compliance-software>/<compliance-software>-admin/connect-your-cloud-platform-to-<compliance-software>/onboard-your-azure-account/set-up-your-azure-account.html_x000D__x000D_Alternatively, run the following command on the Azure cloud shell:_x000D_az keyvault list | jq '.[].name' | xargs -I {} az keyvault set-policy --name {} --certificate-permissions list listissuers --key-permissions list --secret-permissions list --spn <<compliance-software>_app_id>",
                     "tags": [
                         {
                             "cloud": "git",
@@ -322,7 +538,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP",
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -335,210 +551,750 @@
                             "message": "data.rule.nsg_in_tcp_all_src_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to all TCP traffic from any source",
+                    "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to open TCP traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0023-TRF",
                             "eval": "data.rule.nsg_in_udp_all_src",
                             "message": "data.rule.nsg_in_udp_all_src_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to all UDP traffic from any source",
+                    "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to open UDP traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0024-TRF",
                             "eval": "data.rule.nsg_in_tcp_all",
                             "message": "data.rule.nsg_in_tcp_all_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to all traffic from Internet on TCP protocol",
+                    "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on TCP protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0025-TRF",
                             "eval": "data.rule.nsg_in_udp_all",
                             "message": "data.rule.nsg_in_udp_all_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to all traffic from Internet on UDP protocol",
+                    "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on UDP protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_5",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0026-TRF",
                             "eval": "data.rule.nsg_in_all",
                             "message": "data.rule.nsg_in_all_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to all traffic from Internet on any protocol",
+                    "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on any protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_6",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0027-TRF",
                             "eval": "data.rule.nsg_in_all_src",
                             "message": "data.rule.nsg_in_all_src_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to allow all traffic from any source on any protocol",
+                    "description": "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_7",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0028-TRF",
                             "eval": "data.rule.nsg_in_all_dst",
                             "message": "data.rule.nsg_in_all_dst_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to allow all traffic from any source to any destination (TJX)",
+                    "description": "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_8",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0034-TRF",
                             "eval": "data.rule.nsg_allow_icmp",
                             "message": "data.rule.nsg_allow_icmp_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group allows ICMP (Ping)",
+                    "description": "ICMP is used by devices to communicate error messages and status. While ICMP is useful for  diagnostics and troubleshooting, it can also be used to exploit or disrupt systems._x000D__x000D_This policy detects any NSG rule that allows ICMP (Ping) traffic from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict ICMP (Ping) solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_9",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0032-TRF",
                             "eval": "data.rule.inbound_port_21",
                             "message": "data.rule.inbound_port_21_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group allows FTP (TCP Port 21)",
+                    "description": "This policy detects any NSG rule that allows FTP traffic on TCP port 21 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict FTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_10",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"gID3",
                             "eval": "data.rule.inbound_insecure_port",
                             "message": "data.rule.inbound_insecure_port_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Internet connectivity via tcp over insecure port",
+                    "description": "Identify network traffic coming from internet which is plain text FTP, Telnet or HTTP from Internet.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": ["GDPR", "HIPAA", "NIST", "PCI DSS", "SOC 2"],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_11",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"gID5",
                             "eval": "data.rule.inbound_port_11211",
                             "message": "data.rule.inbound_port_11211_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Memcached DDoS attack attempted",
+                    "description": "Memcached is a general-purpose distributed memory caching system. It is often used to speed up dynamic database-driven websites by caching data and objects in RAM to reduce the number of times an external data source (such as a database or API) must be read. It is reported that Memcache versions 1.5.5 and below are vulnerable to DDoS amplification attack. This policy aims at finding such attacks and generate alerts.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_12",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"gID7",
                             "eval": "data.rule.inbound_port_6379",
                             "message": "data.rule.inbound_port_6379_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "RedisWannaMine vulnerable instances with active network traffic",
+                    "description": "RedisWannaMine is cryptojacking attack which aims at both database servers and application servers via remote code execution, exploiting an Apache Struts vulnerability. To inject cryptocurrency mining malware, RedWannaMine uses a transmission control protocol (TCP) scanner to check open port 445 of SMB and scans vulnerable Redis server database over port 6379(tcp), so that it can use EternalBlue to spread further.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_13",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"gID6",
                             "eval": "data.rule.inbound_port_dbs",
                             "message": "data.rule.inbound_port_dbs_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Publicly exposed DB Ports",
+                    "description": "DB Servers contain sensitive data and should not be exposed to any direct traffic from internet. This policy checks for the network traffic from internet hitting the DB Servers on their default ports. The DB servers monitored on the default ports are : Microsoft SQL Server (1433), Oracle (1521), MySQL (3306), Sybase (5000), Postgresql (5432), CouchDB (5984), Redis (6379, 6380), RethinkDB (8080,28015, 29015), CassandraDB (9042), Memcached (11211), MongoDB (27017), DB2 (50000).",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_14",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0020-TRF",
                             "eval": "data.rule.inbound_port_22",
                             "message": "data.rule.inbound_port_22_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group (NSG) allows SSH traffic from internet on port 22",
+                    "description": "Blocking SSH port 22 will protect users from attacks like Account compromise.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": ["CIS","CSA CCM","HIPAA","NIST","PCI DSS"],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_15",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0021-TRF",
                             "eval": "data.rule.inbound_port_3389",
                             "message": "data.rule.inbound_port_3389_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group (NSG) allows traffic from internet on port 3389",
+                    "description": "Blocking RDP port 3389 will protect users from attacks like account compromise, Denial of service and ransomware.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": ["CIS","CSA CCM","HIPAA","NIST","PCI DSS"],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_16",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0047-TRF",
                             "eval": "data.rule.inbound_port_445",
                             "message": "data.rule.inbound_port_445_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group allows Windows SMB (TCP Port 445)",
+                    "description": "This policy detects any NSG rule that allows Windows SMB traffic on TCP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict Windows SMB solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_17",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0031-TRF",
                             "eval": "data.rule.inbound_port_53",
                             "message": "data.rule.inbound_port_53_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group allows DNS (UDP Port 53)",
+                    "description": "This policy detects any NSG rule that allows DNS traffic on UDP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_18",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0033-TRF",
                             "eval": "data.rule.inbound_port_20",
                             "message": "data.rule.inbound_port_20_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group allows FTP-Data (TCP Port 20)",
+                    "description": "This policy detects any NSG rule that allows FTP-Data traffic on TCP port 20 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict FTP-Data solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_19",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0035-TRF",
                             "eval": "data.rule.inbound_port_4333",
                             "message": "data.rule.inbound_port_4333_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group allows MSQL (TCP Port 4333)",
+                    "description": "This policy detects any NSG rule that allows MSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_20",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0036-TRF",
                             "eval": "data.rule.inbound_port_3306",
                             "message": "data.rule.inbound_port_3306_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group allows MySQL (TCP Port 3306)",
+                    "description": "This policy detects any NSG rule that allows MySQL traffic on TCP port 3306 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict MySQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_21",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0038-TRF",
                             "eval": "data.rule.inbound_port_netbios",
                             "message": "data.rule.inbound_port_netbios_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group allows NetBIOS (UDP Port 138)",
+                    "description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_22",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0039-TRF",
                             "eval": "data.rule.inbound_port_5432",
                             "message": "data.rule.inbound_port_5432_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group allows PostgreSQL (TCP Port 5432)",
+                    "description": "This policy detects any NSG rule that allows PostgreSQL traffic on TCP port 5432 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict PostgreSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_23",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0040-TRF",
                             "eval": "data.rule.inbound_port_25",
                             "message": "data.rule.inbound_port_25_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group allows SMTP (TCP Port 25)",
+                    "description": "This policy detects any NSG rule that allows SMTP traffic on TCP port 25 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict SMTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_24",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0042-TRF",
                             "eval": "data.rule.inbound_port_sqlserver",
                             "message": "data.rule.inbound_port_sqlserver_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group allows SqlServer (TCP Port 1433)",
+                    "description": "This policy detects any NSG rule that allows SqlServer traffic on TCP port 1433 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict SqlServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_25",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0043-TRF",
                             "eval": "data.rule.inbound_port_23",
                             "message": "data.rule.inbound_port_23_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group allows Telnet (TCP Port 23)",
+                    "description": "Telnet provides a plaintext connection to manage devices using the command line, and is less secure than SSH._x000D_This policy detects any NSG rule that allows Telnet traffic on TCP port 23 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict Telnet solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_26",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0044-TRF",
                             "eval": "data.rule.inbound_port_5500",
                             "message": "data.rule.inbound_port_5500_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group allows VNC Listener (TCP Port 5500)",
+                    "description": "This policy detects any NSG rule that allows VNC Listener traffic on TCP port 5500 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict VNC Listener solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_27",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0045-TRF",
                             "eval": "data.rule.inbound_port_5900",
                             "message": "data.rule.inbound_port_5900_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group allows VNC Server (TCP Port 5900)",
+                    "description": "This policy detects any NSG rule that allows VNC Server traffic on TCP port 5900 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict VNC Server solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_28",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0046-TRF",
                             "eval": "data.rule.inbound_port_135",
                             "message": "data.rule.inbound_port_135_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group allows Windows RPC (TCP Port 135)",
+                    "description": "This policy detects any NSG rule that allows Windows RPC traffic on TCP port 135 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict Windows RPC solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_29",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0048-TRF",
                             "eval": "data.rule.nsg_out_all",
                             "message": "data.rule.nsg_out_all_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Azure Network Security Group with Outbound rule to allow all traffic to any source",
+                    "description": "This policy identifies NSGs which allows outgoing traffic to any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic to known sources on authorized protocols and ports.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_30",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"gID1",
                             "eval": "data.rule.outbound_port_bitcoin",
                             "message": "data.rule.outbound_port_bitcoin_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Instance is communicating with ports known to mine Bitcoin",
+                    "description": "Identifies traffic from internal workloads to internet IPs on ports 8332,8333 that are known to mine Bitcoins. Unless this traffic is part of authorized applications and processes, your instances may have been compromised.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": ["HIPAA", "NIST"],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_31",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
                         {
                             "id":"gID2",
                             "eval": "data.rule.outbound_port_ethereum",
@@ -547,12 +1303,12 @@
                             "remediationFunction":""
                         }
                     ],
-                    "title": "Azure Network Security Group.",
-                    "description": "Check for allowed inbound and outbound ports in network security group.",
+                    "title": "Instance is communicating with ports known to mine Ethereum",
+                    "description": "Identifies traffic from internal workloads to internet IPs on ports 8545,30303 that are known to mine Ethereum. Unless this traffic is part of authorized applications and processes, your instances may have been compromised.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": ["HIPAA", "NIST"],
                             "service": []
                         }
                     ]
@@ -573,8 +1329,8 @@
                             "remediationFunction":""
                         }
                     ],
-                    "title": "Azure Pricing.",
-                    "description": "Standard pricing tier is not selected in Security Center.",
+                    "title": "Standard pricing tier is not AC in Security Center",
+                    "description": "Selecting the standard pricing tier will enable threat detection for networks and virtual systems by providing threat intelligence, anomaly detection, and behavior analytics in Azure Security Center.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -600,8 +1356,8 @@
                         
                         }
                     ],
-                    "title": "Azure Registries List.",
-                    "description": "Azure Container Registry using the deprecated classic registry.",
+                    "title": "Azure Container Registry using the deprecated classic registry",
+                    "description": "This policy identifies an Azure Container Registry (ACR) that is using the classic SKU. The initial release of the Azure Container Registry (ACR) service that was offered as a classic SKU is being deprecated and will be unavailable after April 2019. As a best practice, upgrade your existing classic registry to a managed registry._x000D__x000D_For more information, visit https://docs.microsoft.com/en-us/azure/container-registry/container-registry-upgrade",
                     "tags": [
                         {
                             "cloud": "git",
@@ -626,8 +1382,8 @@
                             "remediationFunction":""
                         }
                     ],
-                    "title": "Azure Registries Webhook.",
-                    "description": "Azure ACR HTTPS not enabled for webhook.",
+                    "title": "Azure ACR HTTPS not enabled for webhook",
+                    "description": "Ensure you send container registry webhooks only to a HTTPS endpoint. This policy checks your container registry webhooks and alerts if it finds a URI with HTTP.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -652,8 +1408,8 @@
                             "remediationFunction":""
                         }
                     ],
-                    "title": "Azure security contacts.",
-                    "description": "Security contact emails is not set in Security Center.",
+                    "title": "Security contact emails is not set in Security Center",
+                    "description": "Setting a valid email address in Security contact emails will enable Microsoft to contact you if the Microsoft Security Response Center (MSRC) discovers that your data has been accessed by an unlawful or unauthorized party. This will make sure that you are aware of any security issues and take prompt actions to mitigate the risks.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -663,7 +1419,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_ACCOUNT",
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -676,7 +1432,25 @@
                             "message": "data.rule.storage_secure_err",
                             "remediationDescription":"",
                             "remediationFunction":""
-                        },
+                        }
+                    ],
+                    "title": "Storage Accounts without Secure transfer enabled",
+                    "description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPs. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesnâ€™t support HTTPs for custom domain names, this option is not applied when using a custom domain name.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST","PCI DSS"],
+                            "service": []
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
                         {
                             "id":"PR-AZR-0093-TRF",
                             "eval": "data.rule.storage_acl",
@@ -685,12 +1459,12 @@
                             "remediationFunction":""
                         }
                     ],
-                    "title": "Azure storage contacts.",
-                    "description": "Storage Accounts without Secure transfer enabled. Storage Accounts without their firewalls enabled.",
+                    "title": "Storage Accounts without their firewalls enabled (TJX)",
+                    "description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on._x000D__x000D_You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": ["CIS","HIPAA","NIST","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -711,8 +1485,8 @@
                             "remediationFunction":""
                         }
                     ],
-                    "title": "Azure storage blob container.",
-                    "description": "Azure Blob container(s) with public access and logging set to less than 180 days.",
+                    "title": "Azure Blob container(s) with public access and logging set to less than 180 days (TJX)",
+                    "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature._x000D__x000D_This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB') that also have Audit Log Retention set to less than 180 days._x000D__x000D_As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -737,8 +1511,8 @@
                             "remediationFunction":""
                         }
                     ],
-                    "title": "Azure virtual network peering.",
-                    "description": "Azure virtual network peer is disconnected.",
+                    "title": "Azure Virtual Network subnet is not configured with a Network Security Group (TJX)",
+                    "description": "** MODIFICATION OF DEFAULT RULE - GatewaySubnets Excluded as of 08 APR 2019, GatewaySubnets do not support the application of NSGs **_x000D__x000D_** AzureFirewallSubnet Excluded as of 08 APR 2019 **_x000D__x000D_This policy identifies Azure Virtual Network (VNet) subnets that are not associated with a Network Security Group (NSG). While binding an NSG to a network interface of a Virtual Machine (VM) enables fine-grained control to the VM, associating a NSG to a subnet enables better control over network traffic to all resources within a subnet. As a best practice, associate an NSG with a subnet so that you can protect your VMs on a subnet-level._x000D__x000D_For more information, see https://blogs.msdn.microsoft.com/igorpag/2016/05/14/azure-network-security-groups-nsg-best-practices-and-lessons-learned/",
                     "tags": [
                         {
                             "cloud": "git",
