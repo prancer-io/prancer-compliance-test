@@ -1668,26 +1668,6 @@
                             "service": []
                         }
                     ]
-                },
-                {
-                    "masterTestId": "TEST_S3",
-                    "masterSnapshotId": [
-                        "CFR_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(s3.rego)",
-                    "evals": [
-                        
-                    ],
-                    "title": "",
-                    "description": "",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": []
-                        }
-                    ]
                 },{
                     "masterTestId": "TEST_S3_1",
                     "masterSnapshotId": [
