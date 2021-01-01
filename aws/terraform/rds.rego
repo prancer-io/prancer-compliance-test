@@ -37,7 +37,7 @@ default rds_public = null
 aws_issue["rds_public"] {
     resource := input.json.resources[_]
     lower(resource.type) == "aws_db_instance"
-    resource.properties.PubliclyAccessible
+    resource.properties.publicly_accessible
 }
 
 rds_public {
@@ -49,7 +49,7 @@ rds_public = false {
     aws_issue["rds_public"]
 }
 
-rds_public_err = "AWS RDS DB cluster encryption is disabled" {
+rds_public_err = "AWS RDS database instance is publicly accessible" {
     aws_issue["rds_public"]
 }
 
