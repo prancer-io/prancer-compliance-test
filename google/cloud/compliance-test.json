@@ -1,16 +1,21 @@
 {
     "testSet": [
         {
-            "masterTestName": "TEST_GOOGLE",
+            "masterTestName": "TEST_CLOUD_GOOGLE",
             "version": "0.1",
             "cases": [
                 {
                     "masterTestId": "GOOGLE_TEST_300",
                     "type": "rego",
                     "rule": "file(google_cluster_300.rego)",
-                    "eval": "data.rule.rulepass",
-                    "masterSnapshotId": [
-                        "GOOGLE_CLUSTER_"
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0030",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
                     ],
                     "title": "GCP Kubernetes Engine Cluster Nodes does not have default Service account for Project access",
                     "description": "This policy identifies Kubernetes Engine Cluster Nodes which have default Service account for Project access. By default, Kubernetes Engine nodes are given the Compute Engine default service account. This account has broad access and more permissions than are required to run your Kubernetes Engine cluster. You should create and use a least privileged service account to run your Kubernetes Engine cluster instead of using the Compute Engine default service account. If you are not creating a separate service account for your nodes, you should limit the scopes of the node service account to reduce the possibility of a privilege escalation in an attack.",
@@ -19,9 +24,11 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CIS",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO"
+                                "ISO 27001",
+                                "NIST",
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -33,7 +40,15 @@
                     "masterTestId": "GOOGLE_TEST_301",
                     "type": "rego",
                     "rule": "file(google_cluster_301.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0031",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
@@ -45,7 +60,7 @@
                             "compliance": [
                                 "CIS",
                                 "HIPAA",
-                                "ISO"
+                                "ISO 27001"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -57,7 +72,15 @@
                     "masterTestId": "GOOGLE_TEST_302",
                     "type": "rego",
                     "rule": "file(google_cluster_302.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0032",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
@@ -68,11 +91,11 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CIS",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -84,7 +107,15 @@
                     "masterTestId": "GOOGLE_TEST_303",
                     "type": "rego",
                     "rule": "file(google_cluster_303.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0033",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
@@ -95,10 +126,10 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CIS",
-                                "CSA",
-                                "ISO",
+                                "CSA CCM",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -110,7 +141,15 @@
                     "masterTestId": "GOOGLE_TEST_304",
                     "type": "rego",
                     "rule": "file(google_cluster_304.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0034",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
@@ -132,7 +171,15 @@
                     "masterTestId": "GOOGLE_TEST_305",
                     "type": "rego",
                     "rule": "file(google_cluster_305.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0035",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
@@ -142,7 +189,7 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "ISO"
+                                "ISO 27001"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -154,7 +201,15 @@
                     "masterTestId": "GOOGLE_TEST_306",
                     "type": "rego",
                     "rule": "file(google_cluster_306.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0036",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
@@ -166,9 +221,9 @@
                             "compliance": [
                                 "CIS",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -180,7 +235,15 @@
                     "masterTestId": "GOOGLE_TEST_307",
                     "type": "rego",
                     "rule": "file(google_cluster_307.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0037",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
@@ -191,11 +254,11 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CIS",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -207,7 +270,15 @@
                     "masterTestId": "GOOGLE_TEST_308",
                     "type": "rego",
                     "rule": "file(google_cluster_308.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0038",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
@@ -218,11 +289,11 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CIS",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -234,7 +305,15 @@
                     "masterTestId": "GOOGLE_TEST_309",
                     "type": "rego",
                     "rule": "file(google_cluster_309.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0039",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
@@ -246,9 +325,9 @@
                             "compliance": [
                                 "CIS",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -260,7 +339,15 @@
                     "masterTestId": "GOOGLE_TEST_310",
                     "type": "rego",
                     "rule": "file(google_cluster_310.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0040",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
@@ -271,11 +358,11 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CIS",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -287,7 +374,15 @@
                     "masterTestId": "GOOGLE_TEST_311",
                     "type": "rego",
                     "rule": "file(google_cluster_311.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0041",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
@@ -309,7 +404,15 @@
                     "masterTestId": "GOOGLE_TEST_312",
                     "type": "rego",
                     "rule": "file(google_cluster_312.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0042",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
@@ -331,7 +434,15 @@
                     "masterTestId": "GOOGLE_TEST_317",
                     "type": "rego",
                     "rule": "file(google_cluster_317.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0047",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
@@ -353,7 +464,15 @@
                     "masterTestId": "GOOGLE_TEST_318",
                     "type": "rego",
                     "rule": "file(google_cluster_318.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0048",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
@@ -364,7 +483,7 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CIS",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -376,7 +495,15 @@
                     "masterTestId": "GOOGLE_TEST_320",
                     "type": "rego",
                     "rule": "file(google_cluster_320.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0050",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
@@ -387,9 +514,9 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CIS",
-                                "CSA",
+                                "CSA CCM",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -401,7 +528,15 @@
                     "masterTestId": "GOOGLE_TEST_321",
                     "type": "rego",
                     "rule": "file(google_cluster_321.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0051",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
@@ -412,9 +547,10 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CIS",
-                                "CSA",
+                                "CSA CCM",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -426,7 +562,15 @@
                     "masterTestId": "GOOGLE_TEST_322",
                     "type": "rego",
                     "rule": "file(google_cluster_322.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0052",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
@@ -448,7 +592,15 @@
                     "masterTestId": "GOOGLE_TEST_323",
                     "type": "rego",
                     "rule": "file(google_cluster_323.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0053",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
@@ -470,7 +622,15 @@
                     "masterTestId": "GOOGLE_TEST_326",
                     "type": "rego",
                     "rule": "file(google_cluster_326.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0056",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
@@ -492,7 +652,15 @@
                     "masterTestId": "GOOGLE_TEST_269",
                     "type": "rego",
                     "rule": "file(google_firewall_269.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0002",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
@@ -502,23 +670,11 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM v3.0.1-DSI-02",
-                                "CSA CCM v3.0.1-IAM-07",
-                                "CSA CCM v3.0.1-IVS-06",
-                                "CSA CCM v3.0.1-IVS-08",
-                                "HIPAA-164.312(e)(2)(i)",
-                                "ISO 27001:2013-A.13.1.1",
-                                "ISO 27001:2013-A.14.1.3",
-                                "ISO 27001:2013-A.16.1.4",
-                                "ISO 27001:2013-A.18.1.3",
-                                "NIST 800-53 Rev4-SC-7 (19)",
-                                "NIST 800-53 Rev4-SI-4 (4)",
-                                "PCI DSS v3.2-2.1",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Networking",
@@ -532,7 +688,15 @@
                     "masterTestId": "GOOGLE_TEST_276",
                     "type": "rego",
                     "rule": "file(google_firewall_276.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0006",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
@@ -542,25 +706,12 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM v3.0.1-DSI-02",
-                                "CSA CCM v3.0.1-IAM-07",
-                                "CSA CCM v3.0.1-IVS-06",
-                                "CSA CCM v3.0.1-IVS-08",
-                                "HIPAA-164.312(e)(2)(i)",
-                                "ISO 27001:2013-A.13.1.1",
-                                "ISO 27001:2013-A.14.1.3",
-                                "ISO 27001:2013-A.18.1.3",
-                                "NIST 800-53 Rev4-SC-7 (19)",
-                                "NIST 800-53 Rev4-SI-4 (4)",
-                                "PCI DSS v3.2-1.2.1",
-                                "SOC 2-CC6.1",
-                                "SOC 2-CC6.6",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI",
-                                "SOC"
+                                "PCI DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "Networking",
@@ -574,7 +725,15 @@
                     "masterTestId": "GOOGLE_TEST_277",
                     "type": "rego",
                     "rule": "file(google_firewall_277.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0007",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
@@ -584,25 +743,12 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM v3.0.1-DSI-02",
-                                "CSA CCM v3.0.1-IAM-07",
-                                "CSA CCM v3.0.1-IVS-06",
-                                "CSA CCM v3.0.1-IVS-08",
-                                "HIPAA-164.312(e)(2)(i)",
-                                "ISO 27001:2013-A.13.1.1",
-                                "ISO 27001:2013-A.14.1.3",
-                                "ISO 27001:2013-A.18.1.3",
-                                "NIST 800-53 Rev4-SC-7 (19)",
-                                "NIST 800-53 Rev4-SI-4 (4)",
-                                "PCI DSS v3.2-1.2.1",
-                                "SOC 2-CC6.1",
-                                "SOC 2-CC6.6",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI",
-                                "SOC"
+                                "PCI DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "Networking",
@@ -616,7 +762,15 @@
                     "masterTestId": "GOOGLE_TEST_281",
                     "type": "rego",
                     "rule": "file(google_firewall_281.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0011",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
@@ -626,25 +780,12 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM v3.0.1-DSI-02",
-                                "CSA CCM v3.0.1-IAM-07",
-                                "CSA CCM v3.0.1-IVS-06",
-                                "CSA CCM v3.0.1-IVS-08",
-                                "HIPAA-164.312(e)(2)(i)",
-                                "ISO 27001:2013-A.13.1.1",
-                                "ISO 27001:2013-A.14.1.3",
-                                "ISO 27001:2013-A.18.1.3",
-                                "NIST 800-53 Rev4-SC-7 (19)",
-                                "NIST 800-53 Rev4-SI-4 (4)",
-                                "PCI DSS v3.2-1.2.1",
-                                "SOC 2-CC6.1",
-                                "SOC 2-CC6.6",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI",
-                                "SOC"
+                                "PCI DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "Networking",
@@ -658,7 +799,15 @@
                     "masterTestId": "GOOGLE_TEST_282",
                     "type": "rego",
                     "rule": "file(google_firewall_282.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0012",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
@@ -668,25 +817,12 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM v3.0.1-DSI-02",
-                                "CSA CCM v3.0.1-IAM-07",
-                                "CSA CCM v3.0.1-IVS-06",
-                                "CSA CCM v3.0.1-IVS-08",
-                                "HIPAA-164.312(e)(2)(i)",
-                                "ISO 27001:2013-A.13.1.1",
-                                "ISO 27001:2013-A.14.1.3",
-                                "ISO 27001:2013-A.18.1.3",
-                                "NIST 800-53 Rev4-SC-7 (19)",
-                                "NIST 800-53 Rev4-SI-4 (4)",
-                                "PCI DSS v3.2-1.2.1",
-                                "SOC 2-CC6.1",
-                                "SOC 2-CC6.6",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI",
-                                "SOC"
+                                "PCI DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "Networking",
@@ -700,7 +836,15 @@
                     "masterTestId": "GOOGLE_TEST_283",
                     "type": "rego",
                     "rule": "file(google_firewall_283.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0013",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
@@ -710,25 +854,12 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM v3.0.1-DSI-02",
-                                "CSA CCM v3.0.1-IAM-07",
-                                "CSA CCM v3.0.1-IVS-06",
-                                "CSA CCM v3.0.1-IVS-08",
-                                "HIPAA-164.312(e)(2)(i)",
-                                "ISO 27001:2013-A.13.1.1",
-                                "ISO 27001:2013-A.14.1.3",
-                                "ISO 27001:2013-A.18.1.3",
-                                "NIST 800-53 Rev4-SC-7 (19)",
-                                "NIST 800-53 Rev4-SI-4 (4)",
-                                "PCI DSS v3.2-1.2.1",
-                                "SOC 2-CC6.1",
-                                "SOC 2-CC6.6",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI",
-                                "SOC"
+                                "PCI DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "Networking",
@@ -742,7 +873,15 @@
                     "masterTestId": "GOOGLE_TEST_284",
                     "type": "rego",
                     "rule": "file(google_firewall_284.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0014",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
@@ -752,25 +891,12 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM v3.0.1-DSI-02",
-                                "CSA CCM v3.0.1-IAM-07",
-                                "CSA CCM v3.0.1-IVS-06",
-                                "CSA CCM v3.0.1-IVS-08",
-                                "HIPAA-164.312(e)(2)(i)",
-                                "ISO 27001:2013-A.13.1.1",
-                                "ISO 27001:2013-A.14.1.3",
-                                "ISO 27001:2013-A.18.1.3",
-                                "NIST 800-53 Rev4-SC-7 (19)",
-                                "NIST 800-53 Rev4-SI-4 (4)",
-                                "PCI DSS v3.2-1.2.1",
-                                "SOC 2-CC6.1",
-                                "SOC 2-CC6.6",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI",
-                                "SOC"
+                                "PCI DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "Networking",
@@ -784,7 +910,15 @@
                     "masterTestId": "GOOGLE_TEST_285",
                     "type": "rego",
                     "rule": "file(google_firewall_285.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0015",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
@@ -794,25 +928,12 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM v3.0.1-DSI-02",
-                                "CSA CCM v3.0.1-IAM-07",
-                                "CSA CCM v3.0.1-IVS-06",
-                                "CSA CCM v3.0.1-IVS-08",
-                                "HIPAA-164.312(e)(2)(i)",
-                                "ISO 27001:2013-A.13.1.1",
-                                "ISO 27001:2013-A.14.1.3",
-                                "ISO 27001:2013-A.18.1.3",
-                                "NIST 800-53 Rev4-SC-7 (19)",
-                                "NIST 800-53 Rev4-SI-4 (4)",
-                                "PCI DSS v3.2-1.2.1",
-                                "SOC 2-CC6.1",
-                                "SOC 2-CC6.6",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI",
-                                "SOC"
+                                "PCI DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "Networking",
@@ -826,7 +947,15 @@
                     "masterTestId": "GOOGLE_TEST_286",
                     "type": "rego",
                     "rule": "file(google_firewall_286.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0016",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
@@ -836,26 +965,13 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CIS v1.0.0 (GCP)-3.7",
-                                "CSA CCM v3.0.1-DSI-02",
-                                "CSA CCM v3.0.1-IAM-07",
-                                "CSA CCM v3.0.1-IVS-06",
-                                "CSA CCM v3.0.1-IVS-08",
-                                "HIPAA-164.312(e)(2)(i)",
-                                "ISO 27001:2013-A.13.1.1",
-                                "ISO 27001:2013-A.14.1.3",
-                                "ISO 27001:2013-A.18.1.3",
-                                "NIST 800-53 Rev4-SC-7 (19)",
-                                "NIST 800-53 Rev4-SI-4 (4)",
-                                "PCI DSS v3.2-1.2.1",
-                                "SOC 2-CC6.1",
-                                "SOC 2-CC6.6",
-                                "CSA",
+                                "CIS",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI",
-                                "SOC"
+                                "PCI DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "Networking",
@@ -869,7 +985,15 @@
                     "masterTestId": "GOOGLE_TEST_287",
                     "type": "rego",
                     "rule": "file(google_firewall_287.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0017",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
@@ -879,25 +1003,12 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM v3.0.1-DSI-02",
-                                "CSA CCM v3.0.1-IAM-07",
-                                "CSA CCM v3.0.1-IVS-06",
-                                "CSA CCM v3.0.1-IVS-08",
-                                "HIPAA-164.312(e)(2)(i)",
-                                "ISO 27001:2013-A.13.1.1",
-                                "ISO 27001:2013-A.14.1.3",
-                                "ISO 27001:2013-A.18.1.3",
-                                "NIST 800-53 Rev4-SC-7 (19)",
-                                "NIST 800-53 Rev4-SI-4 (4)",
-                                "PCI DSS v3.2-1.2.1",
-                                "SOC 2-CC6.1",
-                                "SOC 2-CC6.6",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI",
-                                "SOC"
+                                "PCI DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "Networking",
@@ -911,7 +1022,15 @@
                     "masterTestId": "GOOGLE_TEST_288",
                     "type": "rego",
                     "rule": "file(google_firewall_288.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0018",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
@@ -921,26 +1040,13 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CIS v1.0.0 (GCP)-3.6",
-                                "CSA CCM v3.0.1-DSI-02",
-                                "CSA CCM v3.0.1-IAM-07",
-                                "CSA CCM v3.0.1-IVS-06",
-                                "CSA CCM v3.0.1-IVS-08",
-                                "HIPAA-164.312(e)(2)(i)",
-                                "ISO 27001:2013-A.13.1.1",
-                                "ISO 27001:2013-A.14.1.3",
-                                "ISO 27001:2013-A.18.1.3",
-                                "NIST 800-53 Rev4-SC-7 (19)",
-                                "NIST 800-53 Rev4-SI-4 (4)",
-                                "PCI DSS v3.2-1.2.1",
-                                "SOC 2-CC6.1",
-                                "SOC 2-CC6.6",
-                                "CSA",
+                                "CIS",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI",
-                                "SOC"
+                                "PCI DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "Networking",
@@ -954,7 +1060,15 @@
                     "masterTestId": "GOOGLE_TEST_289",
                     "type": "rego",
                     "rule": "file(google_firewall_289.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0019",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
@@ -964,26 +1078,12 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM v3.0.1-DSI-02",
-                                "CSA CCM v3.0.1-IAM-07",
-                                "CSA CCM v3.0.1-IVS-06",
-                                "CSA CCM v3.0.1-IVS-08",
-                                "HIPAA-164.312(e)(2)(i)",
-                                "ISO 27001:2013-A.13.1.1",
-                                "ISO 27001:2013-A.14.1.3",
-                                "ISO 27001:2013-A.18.1.3",
-                                "NIST 800-53 Rev4-SC-7 (19)",
-                                "NIST 800-53 Rev4-SI-4 (4)",
-                                "PCI DSS v3.2-1.2.1",
-                                "SOC 2-CC6.1",
-                                "SOC 2-CC6.6",
-                                "SOC 2-CC6.7",
-                                "CSA",
+                                "CSA CCM",
                                 "HIPAA",
-                                "ISO",
+                                "ISO 27001",
                                 "NIST",
-                                "PCI",
-                                "SOC"
+                                "PCI DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "Networking",
@@ -997,7 +1097,15 @@
                     "masterTestId": "GOOGLE_TEST_290",
                     "type": "rego",
                     "rule": "file(google_firewall_290.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0020",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
@@ -1006,7 +1114,9 @@
                     "tags": [
                         {
                             "cloud": "GCP",
-                            "compliance": [],
+                            "compliance": [
+                                "CUSTOM"
+                            ],
                             "service": [
                                 "Networking",
                                 "Virtual Private Cloud (VPC)",
@@ -1019,7 +1129,15 @@
                     "masterTestId": "GOOGLE_TEST_291",
                     "type": "rego",
                     "rule": "file(google_firewall_291.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0021",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
@@ -1029,9 +1147,7 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "ISO 27001:2013-A.13.1.1",
-                                "ISO 27001:2013-A.14.1.3",
-                                "ISO 27001:2013-A.18.1.3"
+                                "ISO 27001"
                             ],
                             "service": [
                                 "Networking",
@@ -1045,7 +1161,15 @@
                     "masterTestId": "GOOGLE_TEST_346",
                     "type": "rego",
                     "rule": "file(google_network_346.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0076",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_NETWORK_"
                     ],
@@ -1055,11 +1179,8 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CIS v1.0.0 (GCP)-3.2",
-                                "ISO 27001:2013-A.13.1.3",
-                                "ISO 27001:2013-A.14.1.3",
                                 "CIS",
-                                "ISO"
+                                "ISO 27001"
                             ],
                             "service": [
                                 "Networking",
@@ -1072,7 +1193,15 @@
                     "masterTestId": "GOOGLE_TEST_347",
                     "type": "rego",
                     "rule": "file(google_network_347.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0077",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_NETWORK_"
                     ],
@@ -1082,13 +1211,8 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CIS v1.0.0 (GCP)-3.1",
-                                "ISO 27001:2013-A.13.1.3",
-                                "ISO 27001:2013-A.14.1.3",
-                                "ISO 27001:2013-A.16.1.4",
-                                "ISO 27001:2013-A.18.1.3",
                                 "CIS",
-                                "ISO"
+                                "ISO 27001"
                             ],
                             "service": [
                                 "Networking",
@@ -1101,7 +1225,15 @@
                     "masterTestId": "GOOGLE_TEST_341",
                     "type": "rego",
                     "rule": "file(google_instance_341.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0071",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_INSTANCE_"
                     ],
@@ -1111,10 +1243,7 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CIS v1.0.0 (GCP)-4.2",
-                                "ISO 27001:2013-A.14.1.2",
-                                "ISO 27001:2013-A.18.1.3",
-                                "ISO",
+                                "ISO 27001",
                                 "CIS"
                             ],
                             "service": [
@@ -1127,7 +1256,15 @@
                     "masterTestId": "GOOGLE_TEST_396",
                     "type": "rego",
                     "rule": "file(google_instance_396.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0091",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_INSTANCE_"
                     ],
@@ -1137,9 +1274,7 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "ISO 27001:2013-A.16.1.4",
-                                "ISO 27001:2013-A.8.2.3",
-                                "ISO"
+                                "ISO 27001"
                             ],
                             "service": [
                                 "Compute"
@@ -1151,7 +1286,15 @@
                     "masterTestId": "GOOGLE_TEST_397",
                     "type": "rego",
                     "rule": "file(google_instance_397.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0092",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_INSTANCE_"
                     ],
@@ -1161,21 +1304,9 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM v3.0.1-DSI-02",
-                                "CSA CCM v3.0.1-DSI-06",
-                                "CSA CCM v3.0.1-IAM-02",
-                                "CSA CCM v3.0.1-IAM-07",
-                                "CSA CCM v3.0.1-IVS-06",
-                                "CSA CCM v3.0.1-IVS-08",
-                                "CSA CCM v3.0.1-IVS-09",
-                                "CSA CCM v3.0.1-IVS-10",
-                                "CSA CCM v3.0.1-IVS-13",
-                                "NIST 800-53 Rev4-AC-4 (19)",
-                                "NIST 800-53 Rev4-AC-4 (6)",
-                                "PCI DSS v3.2-2.4",
-                                "CSA",
+                                "CSA CCM",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Compute"
@@ -1187,7 +1318,15 @@
                     "masterTestId": "GOOGLE_TEST_398",
                     "type": "rego",
                     "rule": "file(google_instance_398.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0093",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_INSTANCE_"
                     ],
@@ -1197,21 +1336,9 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM v3.0.1-DSI-02",
-                                "CSA CCM v3.0.1-DSI-06",
-                                "CSA CCM v3.0.1-IAM-02",
-                                "CSA CCM v3.0.1-IAM-07",
-                                "CSA CCM v3.0.1-IVS-06",
-                                "CSA CCM v3.0.1-IVS-08",
-                                "CSA CCM v3.0.1-IVS-09",
-                                "CSA CCM v3.0.1-IVS-10",
-                                "CSA CCM v3.0.1-IVS-13",
-                                "NIST 800-53 Rev4-AC-4 (19)",
-                                "NIST 800-53 Rev4-AC-4 (6)",
-                                "PCI DSS v3.2-2.4",
-                                "CSA",
+                                "CSA CCM",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Compute"
@@ -1223,7 +1350,15 @@
                     "masterTestId": "GOOGLE_TEST_399",
                     "type": "rego",
                     "rule": "file(google_instance_399.rego)",
-                    "eval": "data.rule.rulepass",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0094",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
                     "masterSnapshotId": [
                         "GOOGLE_INSTANCE_"
                     ],
@@ -1233,21 +1368,9 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM v3.0.1-DSI-02",
-                                "CSA CCM v3.0.1-DSI-06",
-                                "CSA CCM v3.0.1-IAM-02",
-                                "CSA CCM v3.0.1-IAM-07",
-                                "CSA CCM v3.0.1-IVS-06",
-                                "CSA CCM v3.0.1-IVS-08",
-                                "CSA CCM v3.0.1-IVS-09",
-                                "CSA CCM v3.0.1-IVS-10",
-                                "CSA CCM v3.0.1-IVS-13",
-                                "NIST 800-53 Rev4-AC-4 (19)",
-                                "NIST 800-53 Rev4-AC-4 (6)",
-                                "PCI DSS v3.2-2.4",
-                                "CSA",
+                                "CSA CCM",
                                 "NIST",
-                                "PCI"
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Compute"
