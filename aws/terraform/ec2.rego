@@ -17,7 +17,7 @@ aws_attribute_absence["ec2_iam_role"] {
 aws_issue["ec2_iam_role"] {
     resource := input.json.resources[_]
     lower(resource.type) == "aws_instance"
-    not startswith(lower(resource.properties.iam_instance_profile), "arn:")
+    count(resource.properties.iam_instance_profile) == 0
 }
 
 ec2_iam_role {

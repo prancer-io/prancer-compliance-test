@@ -39,18 +39,18 @@ default storage_acl = null
 
 azure_attribute_absence["storage_acl"] {
     resource := input.json.resources[_]
-    lower(resource.type) == "azurerm_storage_account"
-    not resource.properties.network_rules.default_action
+    lower(resource.type) == "azurerm_storage_account_network_rules"
+    not resource.properties.default_action
 }
 
 azure_issue["storage_acl"] {
     resource := input.json.resources[_]
-    lower(resource.type) == "azurerm_storage_account"
-    lower(resource.properties.network_rules.default_action) != "deny"
+    lower(resource.type) == "azurerm_storage_account_network_rules"
+    lower(resource.properties.default_action) != "deny"
 }
 
 storage_acl {
-    lower(input.json.resources[_].type) == "azurerm_storage_account"
+    lower(input.json.resources[_].type) == "azurerm_storage_account_network_rules"
     not azure_issue["storage_acl"]
     not azure_attribute_absence["storage_acl"]
 }
@@ -67,6 +67,6 @@ storage_acl_err = "Storage Accounts without their firewalls enabled" {
     azure_issue["storage_acl"]
 }
 
-storage_acl_miss_err = "Storage Account attribute network_rules.default_action missing in the resource" {
+storage_acl_miss_err = "Storage Account attribute default_action missing in the resource" {
     azure_attribute_absence["storage_acl"]
 }

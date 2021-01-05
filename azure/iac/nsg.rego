@@ -585,7 +585,7 @@ inbound_port_53 = false {
     azure_issue["inbound_port_53"]
 }
 
-inbound_port_53_err = "Azure Network Security Group allows CIFS" {
+inbound_port_53_err = "Azure Network Security Group allows DNS" {
     azure_issue["inbound_port_53"]
 }
 

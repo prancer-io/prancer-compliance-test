@@ -94,7 +94,7 @@ gc_issue["k8s_client_cert"] {
 gc_issue["k8s_client_cert"] {
     resource := input.json.resources[_]
     lower(resource.type) == "google_container_cluster"
-    not resource.properties.master_auth.client_certificate_config
+    not resource.properties.master_auth.client_certificate_config.issue_client_certificate
 }
 
 k8s_client_cert {
@@ -717,7 +717,7 @@ gc_issue["k8s_zones"] {
     resource := input.json.resources[_]
     lower(resource.type) == "google_container_node_pool"
     resource.properties.zone
-    count(resource.properties.locations) < 3
+    count(resource.properties.node_locations) < 3
 }
 
 k8s_zones {
