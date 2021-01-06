@@ -35,7 +35,7 @@
                                 "PCI DSS",
                                 "SOC 2",
                                 "CSA CCM",
-                                "NIST"
+                                "NIST 800"
                             ],
                             "service": [
                                 "s3"
@@ -309,7 +309,7 @@
                                 "GDPR",
                                 "HITRUST",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS"
                             ],
                             "service": [
@@ -344,7 +344,7 @@
                                 "GDPR",
                                 "HITRUST",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS",
                                 "SOC 2"
                             ],
@@ -411,7 +411,8 @@
                                 "GDPR",
                                 "HITRUST",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
+                                "NIST CSF",
                                 "SOC 2"
                             ],
                             "service": [
@@ -506,7 +507,7 @@
                                 "GDPR",
                                 "HITRUST",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS"
                             ],
                             "service": [
@@ -903,7 +904,8 @@
                                 "HIPAA",
                                 "HITRUST",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
+                                "NIST CSF",
                                 "SOC 2"
                             ],
                             "service": [
@@ -1150,7 +1152,8 @@
                                 "HIPAA",
                                 "HITRUST",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
+                                "NIST CSF",
                                 "SOC 2"
                             ],
                             "service": [
@@ -1245,7 +1248,8 @@
                                 "GDPR",
                                 "HITRUST",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
+                                "NIST CSF",
                                 "PCI DSS",
                                 "SOC 2"
                             ],
@@ -1312,7 +1316,8 @@
                                 "HIPAA",
                                 "HITRUST",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
+                                "NIST CSF",
                                 "PCI DSS"
                             ],
                             "service": [
@@ -1373,7 +1378,7 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "CSA CCM","HITRUST","ISO 27001","NIST"
+                                "CSA CCM","HITRUST","ISO 27001","NIST 800"
                             ],
                             "service": [
                                 "rds"
@@ -1588,7 +1593,8 @@
                                 "HIPAA",
                                 "HITRUST",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
+                                "NIST CSF",
                                 "PCI DSS",
                                 "SOC 2"
                             ],
@@ -1626,7 +1632,8 @@
                                 "HIPAA",
                                 "HITRUST",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
+                                "NIST CSF",
                                 "SOC 2"
                             ],
                             "service": [
@@ -1662,7 +1669,8 @@
                                 "GDPR",
                                 "HITRUST",
                                 "ISO 27001",
-                                "NIST"
+                                "NIST 800",
+                                "NIST CSF"
                             ],
                             "service": [
                                 "cloudtrail"
@@ -1697,7 +1705,8 @@
                                 "GDPR",
                                 "HITRUST",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
+                                "NIST CSF",
                                 "SOC 2"
                             ],
                             "service": [
@@ -2002,7 +2011,8 @@
                                 "GDPR",
                                 "HITRUST",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
+                                "NIST CSF",
                                 "SOC 2"
                             ],
                             "service": [
@@ -2183,7 +2193,7 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "HITRUST","NIST"
+                                "HITRUST","NIST 800"
                             ],
                             "service": [
                                 "lambda"
@@ -2455,7 +2465,7 @@
                             "compliance": [
                                 "CSA CCM",
                                 "HITRUST",
-                                "NIST"
+                                "NIST 800"
                             ],
                             "service": [
                                 "acm"
@@ -2487,7 +2497,7 @@
                             "compliance": [
                                 "CSA CCM",
                                 "HITRUST",
-                                "NIST"
+                                "NIST 800"
                             ],
                             "service": [
                                 "acm"
@@ -2791,7 +2801,7 @@
                                 "GDPR",
                                 "HITRUST",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "SOC 2"
                             ],
                             "service": [
@@ -2882,7 +2892,7 @@
                         {
                             "cloud": "AWS",
                             "compliance": [
-                                "CIS","CSA CCM","GDPR","HIPAA","HITRUST","ISO 27001","NIST","PCI  DSS"
+                                "CIS","CSA CCM","GDPR","HIPAA","HITRUST","ISO 27001","NIST 800","NIST CSF","PCI  DSS"
                             ],
                             "service": [
                                 "iam"
@@ -2917,7 +2927,7 @@
                                 "HIPAA",
                                 "HITRUST",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "SOC 2"
                             ],
                             "service": [
@@ -2983,7 +2993,7 @@
                                 "HIPAA",
                                 "HITRUST",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "SOC 2"
                             ],
                             "service": [
@@ -3048,7 +3058,8 @@
                                 "GDPR",
                                 "HITRUST",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
+                                "NIST CSF",
                                 "PCI DSS"
                             ],
                             "service": [

@@ -25,7 +25,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO","NIST","PCI DSS"],
+                            "compliance": ["CIS","CSA CCM","HIPAA","ISO","NIST 800","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -228,7 +228,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","ISO 27001","NIST","PCI DSS"],
+                            "compliance": ["CSA CCM","ISO 27001","NIST 800","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -254,7 +254,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST","PCI DSS"],
+                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -279,7 +279,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST","PCI DSS"],
+                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -330,7 +330,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST","PCI DSS"],
+                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -356,7 +356,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","ISO 27001","NIST","PCI DSS"],
+                            "compliance": ["CIS","CSA CCM","ISO 27001","NIST 800","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -382,7 +382,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST","PCI DSS"],
+                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -407,7 +407,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","HIPAA","ISO 27001","NIST","PCI DSS"],
+                            "compliance": ["CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -432,7 +432,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","ISO 27001","NIST","PCI DSS"],
+                            "compliance": ["CIS","CSA CCM","ISO 27001","NIST 800","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -457,7 +457,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST","PCI DSS"],
+                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -482,7 +482,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","ISO 27001","NIST","PCI DSS"],
+                            "compliance": ["CIS","ISO 27001","NIST 800","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -1090,7 +1090,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["GDPR", "HIPAA", "NIST", "PCI DSS", "SOC 2"],
+                            "compliance": ["GDPR", "HIPAA", "NIST CSF", "PCI DSS", "SOC 2"],
                             "service": []
                         }
                     ]
@@ -1190,7 +1190,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","NIST","PCI DSS"],
+                            "compliance": ["CIS","CSA CCM","HIPAA","NIST 800","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -1215,7 +1215,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","NIST","PCI DSS"],
+                            "compliance": ["CIS","CSA CCM","HIPAA","NIST 800","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -1590,7 +1590,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["HIPAA", "NIST"],
+                            "compliance": ["HIPAA", "NIST CSF"],
                             "service": []
                         }
                     ]
@@ -1615,7 +1615,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["HIPAA", "NIST"],
+                            "compliance": ["HIPAA", "NIST CSF" ],
                             "service": []
                         }
                     ]
@@ -1720,7 +1720,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST","PCI DSS"],
+                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -1746,7 +1746,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST","PCI DSS"],
+                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -1771,7 +1771,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","HIPAA","NIST","PCI DSS"],
+                            "compliance": ["CIS","HIPAA","NIST 800","PCI DSS"],
                             "service": []
                         }
                     ]
@@ -1927,7 +1927,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["HIPAA","ISO 27001","NIST","PCI DSS"],
+                            "compliance": ["HIPAA","ISO 27001","NIST 800","PCI DSS"],
                             "service": []
                         }
                     ]
