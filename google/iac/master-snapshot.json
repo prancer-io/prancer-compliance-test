@@ -1,0 +1,18 @@
+{
+    "snapshots": [
+        {
+            "type": "filesystem",
+            "connectorUser": "USER_1",
+            "nodes": [
+                {
+                    "masterSnapshotId": "deploymentmanager_TEMPLATE_SNAPSHOT",
+                    "type": "deploymentmanager",
+                    "collection": "deploymentmanagertemplate",
+                    "paths": [
+                        "/"
+                    ]
+                }
+            ]
+        }
+    ]
+}
