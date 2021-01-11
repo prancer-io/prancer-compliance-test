@@ -1,0 +1,18 @@
+{
+    "snapshots": [
+        {
+            "type": "filesystem",
+            "connectorUser": "USER_1",
+            "nodes": [
+                {
+                    "masterSnapshotId": "terraform_TEMPLATE_SNAPSHOT",
+                    "type": "terraform",
+                    "collection": "terraformtemplate",
+                    "paths": [
+                        "/"
+                    ]
+                }
+            ]
+        }
+    ]
+}
