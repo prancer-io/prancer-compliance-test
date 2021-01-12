@@ -27,7 +27,7 @@
                                 "CSA CCM",
                                 "HIPAA",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS"
                             ],
                             "service": [
@@ -94,7 +94,7 @@
                                 "CSA CCM",
                                 "HIPAA",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS"
                             ],
                             "service": [
@@ -128,7 +128,7 @@
                                 "CIS",
                                 "CSA CCM",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS"
                             ],
                             "service": [
@@ -222,7 +222,7 @@
                                 "CIS",
                                 "HIPAA",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS"
                             ],
                             "service": [
@@ -257,7 +257,7 @@
                                 "CSA CCM",
                                 "HIPAA",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS"
                             ],
                             "service": [
@@ -292,7 +292,7 @@
                                 "CSA CCM",
                                 "HIPAA",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS"
                             ],
                             "service": [
@@ -326,7 +326,7 @@
                                 "CIS",
                                 "HIPAA",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS"
                             ],
                             "service": [
@@ -361,7 +361,7 @@
                                 "CSA CCM",
                                 "HIPAA",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS"
                             ],
                             "service": [
@@ -515,7 +515,7 @@
                             "compliance": [
                                 "CIS",
                                 "CSA CCM",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS"
                             ],
                             "service": [
@@ -549,7 +549,7 @@
                                 "CIS",
                                 "CSA CCM",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS"
                             ],
                             "service": [
@@ -673,7 +673,7 @@
                                 "CSA CCM",
                                 "HIPAA",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS"
                             ],
                             "service": [
@@ -709,7 +709,7 @@
                                 "CSA CCM",
                                 "HIPAA",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS",
                                 "SOC 2"
                             ],
@@ -746,7 +746,7 @@
                                 "CSA CCM",
                                 "HIPAA",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS",
                                 "SOC 2"
                             ],
@@ -783,7 +783,7 @@
                                 "CSA CCM",
                                 "HIPAA",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS",
                                 "SOC 2"
                             ],
@@ -820,7 +820,7 @@
                                 "CSA CCM",
                                 "HIPAA",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS",
                                 "SOC 2"
                             ],
@@ -857,7 +857,7 @@
                                 "CSA CCM",
                                 "HIPAA",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS",
                                 "SOC 2"
                             ],
@@ -894,7 +894,7 @@
                                 "CSA CCM",
                                 "HIPAA",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS",
                                 "SOC 2"
                             ],
@@ -931,7 +931,7 @@
                                 "CSA CCM",
                                 "HIPAA",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS",
                                 "SOC 2"
                             ],
@@ -969,7 +969,7 @@
                                 "CSA CCM",
                                 "HIPAA",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS",
                                 "SOC 2"
                             ],
@@ -1006,7 +1006,7 @@
                                 "CSA CCM",
                                 "HIPAA",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS",
                                 "SOC 2"
                             ],
@@ -1044,7 +1044,7 @@
                                 "CSA CCM",
                                 "HIPAA",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS",
                                 "SOC 2"
                             ],
@@ -1081,7 +1081,7 @@
                                 "CSA CCM",
                                 "HIPAA",
                                 "ISO 27001",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS",
                                 "SOC 2"
                             ],
@@ -1305,7 +1305,7 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CSA CCM",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS"
                             ],
                             "service": [
@@ -1337,7 +1337,7 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CSA CCM",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS"
                             ],
                             "service": [
@@ -1369,7 +1369,7 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CSA CCM",
-                                "NIST",
+                                "NIST 800",
                                 "PCI DSS"
                             ],
                             "service": [
