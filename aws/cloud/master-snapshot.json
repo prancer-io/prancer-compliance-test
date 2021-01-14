@@ -20,7 +20,7 @@
             {
                 "cloud": "AWS",
                 "service": [
-                    ""
+                    "aws_s3"
                 ]
             }
         ]
@@ -42,7 +42,7 @@
             {
                 "cloud": "AWS",
                 "service": [
-                    ""
+                    "aws_ec2"
                 ]
             }
         ]
@@ -60,7 +60,7 @@
             {
                 "cloud": "AWS",
                 "service": [
-                    ""
+                    "aws_rds"
                 ]
             }
         ]
@@ -81,7 +81,7 @@
             {
                 "cloud": "AWS",
                 "service": [
-                    ""
+                    "aws_cloudformation"
                 ]
             }
         ]
@@ -98,7 +98,7 @@
             {
                 "cloud": "AWS",
                 "service": [
-                    ""
+                    "aws_cloudtrail"
                 ]
             }
         ]
@@ -117,7 +117,7 @@
             {
                 "cloud": "AWS",
                 "service": [
-                    ""
+                    "aws_elb"
                 ]
             }
         ]
@@ -134,7 +134,7 @@
             {
                 "cloud": "AWS",
                 "service": [
-                    ""
+                    "aws_sqs"
                 ]
             }
         ]
@@ -151,7 +151,7 @@
             {
                 "cloud": "AWS",
                 "service": [
-                    ""
+                    "aws_lambda"
                 ]
             }
         ]
@@ -168,7 +168,7 @@
             {
                 "cloud": "AWS",
                 "service": [
-                    ""
+                    "aws_ecs"
                 ]
             }
         ]
@@ -180,7 +180,15 @@
           "listMethod": "list_clusters",
           "detailMethods": [
             "describe_cluster"
-          ]
+          ],
+          "tags": [
+            {
+                "cloud": "AWS",
+                "service": [
+                    "aws_eks"
+                ]
+            }
+        ]
         },
         {
           "masterSnapshotId": "AWS_ELASTICCACHE_01",
@@ -194,7 +202,7 @@
             {
                 "cloud": "AWS",
                 "service": [
-                    ""
+                    "aws_elasticache"
                 ]
             }
         ]
@@ -211,7 +219,7 @@
             {
                 "cloud": "AWS",
                 "service": [
-                    ""
+                    "aws_acm"
                 ]
             }
         ]
@@ -228,7 +236,7 @@
             {
                 "cloud": "AWS",
                 "service": [
-                    ""
+                    "aws_cloudfront"
                 ]
             }
         ]
@@ -245,7 +253,7 @@
             {
                 "cloud": "AWS",
                 "service": [
-                    ""
+                    "aws_efs"
                 ]
             }
         ]
@@ -266,7 +274,7 @@
             {
                 "cloud": "AWS",
                 "service": [
-                    ""
+                    "aws_iam"
                 ]
             }
         ]
@@ -283,7 +291,7 @@
             {
                 "cloud": "AWS",
                 "service": [
-                    ""
+                    "aws_redshift"
                 ]
             }
         ]
