@@ -138,7 +138,7 @@
               "sourceAddressPrefix": "*",
               "sourcePortRange": "*",
               "direction": "Inbound",
-              "access": "Deny",
+              "access": "Allow",
               "priority": 200,
               "protocol": "Tcp",
               "destinationPortRange": "22",
