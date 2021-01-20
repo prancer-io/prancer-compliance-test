@@ -1,6 +1,7 @@
 package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachinescalesets/virtualmachines
+# https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines
 
 #
 # PR-AZR-0065-ARM
