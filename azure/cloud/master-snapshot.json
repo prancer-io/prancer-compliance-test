@@ -7,142 +7,366 @@
                 {
                    "masterSnapshotId": "AZRSNP_210",
                    "type": "Microsoft.OperationalInsights/workspaces",
-                   "collection": "Microsoft.OperationalInsights"
+                   "collection": "Microsoft.OperationalInsights",
+                   "tags": [
+                     {
+                         "cloud": "azure",
+                         "service": [
+                             "Microsoft.OperationalInsights"
+                         ]
+                     }
+                 ]
                 },
                 {
                    "masterSnapshotId": "AZRSNP_211",
                    "type": "Microsoft.Authorization/policyAssignments",
-                   "collection": "Microsoft.policyAssignments"
+                   "collection": "Microsoft.policyAssignments",
+                   "tags": [
+                     {
+                         "cloud": "azure",
+                         "service": [
+                             "Microsoft.Authorization"
+                         ]
+                     }
+                 ]
                 },
                 {
                    "masterSnapshotId": "AZRSNP_219",
                    "type": "Microsoft.ContainerService/managedClusters",
-                   "collection": "Microsoft.Compute"
+                   "collection": "Microsoft.Compute",
+                   "tags": [
+                     {
+                         "cloud": "azure",
+                         "service": [
+                             "Microsoft.ContainerService"
+                         ]
+                     }
+                 ]
                 },
                 {
                     "masterSnapshotId": "AZRSNP_224",
                     "type": "Microsoft.ContainerRegistry/registries",
-                    "collection": "Microsoft.ContainerRegistry"
+                    "collection": "Microsoft.ContainerRegistry",
+                    "tags": [
+                      {
+                          "cloud": "azure",
+                          "service": [
+                              "Microsoft.ContainerRegistry"
+                          ]
+                      }
+                  ]
                 },
                 {
                     "masterSnapshotId": "AZRSNP_231",
                     "type": "Microsoft.Network/networkSecurityGroups",
-                    "collection": "Microsoft.Network"
+                    "collection": "Microsoft.Network",
+                    "tags": [
+                      {
+                          "cloud": "azure",
+                          "service": [
+                              "Microsoft.Network"
+                          ]
+                      }
+                  ]
                 },
                 {
                     "masterSnapshotId": "AZRSNP_284",
                     "type": "Microsoft.Network/virtualNetworks",
-                    "collection": "Microsoft.Network"
+                    "collection": "Microsoft.Network",
+                    "tags": [
+                      {
+                          "cloud": "azure",
+                          "service": [
+                              "Microsoft.Network"
+                          ]
+                      }
+                  ]
                 },
                 {
                     "masterSnapshotId": "AZRSNP_277",
                     "type": "Microsoft.Compute/disks",
-                    "collection": "Microsoft.Compute"
+                    "collection": "Microsoft.Compute",
+                    "tags": [
+                      {
+                          "cloud": "azure",
+                          "service": [
+                              "Microsoft.Compute"
+                          ]
+                      }
+                  ]
                 },
                 {
                     "masterSnapshotId": "AZRSNP_274",
                     "type": "Microsoft.Compute/virtualMachines",
-                    "collection": "Microsoft.Compute"
+                    "collection": "Microsoft.Compute",
+                    "tags": [
+                      {
+                          "cloud": "azure",
+                          "service": [
+                              "Microsoft.Compute"
+                          ]
+                      }
+                  ]
                 },
                 {
                     "masterSnapshotId": "AZRSNP_301",
                     "type": "Microsoft.Storage/storageAccounts",
-                    "collection": "Microsoft.Storage"
+                    "collection": "Microsoft.Storage",
+                    "tags": [
+                      {
+                          "cloud": "azure",
+                          "service": [
+                              "Microsoft.Storage"
+                          ]
+                      }
+                  ]
                 },
                 {
                     "masterSnapshotId": "AZRSNP_221",
                     "type": "Microsoft.Network/applicationGateways",
-                    "collection": "Microsoft.Network"
+                    "collection": "Microsoft.Network",
+                    "tags": [
+                      {
+                          "cloud": "azure",
+                          "service": [
+                              "Microsoft.Network"
+                          ]
+                      }
+                  ]
                 },
                 {
                     "masterSnapshotId": "AZRSNP_260",
                     "type": "Microsoft.Network/networkWatchers",
-                    "collection": "Microsoft.Network"
+                    "collection": "Microsoft.Network",
+                    "tags": [
+                      {
+                          "cloud": "azure",
+                          "service": [
+                              "Microsoft.Network"
+                          ]
+                      }
+                  ]
                 },
                 {
                    "masterSnapshotId": "AZRSNP_212",
                    "type": "Microsoft.Sql/servers/databases/auditingSettings",
-                   "collection": "Microsoft.Sql"
+                   "collection": "Microsoft.Sql",
+                   "tags": [
+                     {
+                         "cloud": "azure",
+                         "service": [
+                             "Microsoft.Sql"
+                         ]
+                     }
+                 ]
                 },
                 {
                    "masterSnapshotId": "AZRSNP_214",
                    "type": "Microsoft.ContainerRegistry/registries/webhooks",
-                   "collection": "Microsoft.ContainerRegistry"
+                   "collection": "Microsoft.ContainerRegistry",
+                   "tags": [
+                     {
+                         "cloud": "azure",
+                         "service": [
+                             "Microsoft.ContainerRegistry"
+                         ]
+                     }
+                 ]
                 },
                 {
                    "masterSnapshotId": "AZRSNP_222",
                    "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
-                   "collection": "Microsoft.Storage"
+                   "collection": "Microsoft.Storage",
+                   "tags": [
+                     {
+                         "cloud": "azure",
+                         "service": [
+                             "Microsoft.Storage"
+                         ]
+                     }
+                 ]
                 },
                 {
                    "masterSnapshotId": "AZRSNP_226",
                    "type": "Microsoft.Insights/diagnosticSettings",
-                   "collection": "Microsoft.Insights"
+                   "collection": "Microsoft.Insights",
+                   "tags": [
+                     {
+                         "cloud": "azure",
+                         "service": [
+                             "Microsoft.Insights"
+                         ]
+                     }
+                 ]
                 },
                 {
                    "masterSnapshotId": "AZRSNP_227",
                    "type": "Microsoft.KeyVault/vaults/secrets",
-                   "collection": "Microsoft.KeyVault"
+                   "collection": "Microsoft.KeyVault",
+                   "tags": [
+                     {
+                         "cloud": "azure",
+                         "service": [
+                             "Microsoft.KeyVault"
+                         ]
+                     }
+                 ]
                 },
                 {
                    "masterSnapshotId": "AZRSNP_261",
                    "type": "Microsoft.Authorization/locks",
-                   "collection": "Microsoft.Authorization"
+                   "collection": "Microsoft.Authorization",
+                   "tags": [
+                     {
+                         "cloud": "azure",
+                         "service": [
+                             "Microsoft.Authorization"
+                         ]
+                     }
+                 ]
                 },
                 {
                    "masterSnapshotId": "AZRSNP_263",
                    "type": "Microsoft.Sql/servers/databases/securityAlertPolicies",
-                   "collection": "Microsoft.Sql"
+                   "collection": "Microsoft.Sql",
+                   "tags": [
+                     {
+                         "cloud": "azure",
+                         "service": [
+                             "Microsoft.Sql"
+                         ]
+                     }
+                 ]
                 },
                 {
                    "masterSnapshotId": "AZRSNP_265",
                    "type": "Microsoft.Sql/servers/databases/vulnerabilityAssessments",
-                   "collection": "Microsoft.Sql"
+                   "collection": "Microsoft.Sql",
+                   "tags": [
+                     {
+                         "cloud": "azure",
+                         "service": [
+                             "Microsoft.Sql"
+                         ]
+                     }
+                 ]
                 },
                 {
                    "masterSnapshotId": "AZRSNP_273",
                    "type": "Microsoft.Compute/virtualMachines/extensions",
-                   "collection": "Microsoft.Compute"
+                   "collection": "Microsoft.Compute",
+                   "tags": [
+                     {
+                         "cloud": "azure",
+                         "service": [
+                             "Microsoft.Compute"
+                         ]
+                     }
+                 ]
                 },
                 {
                    "masterSnapshotId": "AZRSNP_275",
                    "type": "Microsoft.Network/virtualNetworks/subnets",
-                   "collection": "Microsoft.Network"
+                   "collection": "Microsoft.Network",
+                   "tags": [
+                     {
+                         "cloud": "azure",
+                         "service": [
+                             "Microsoft.Network"
+                         ]
+                     }
+                 ]
                 },
                 {
                    "masterSnapshotId": "AZRSNP_291",
                    "type": "Microsoft.Sql/servers/firewallRules",
-                   "collection": "Microsoft.Sql"
+                   "collection": "Microsoft.Sql",
+                   "tags": [
+                     {
+                         "cloud": "azure",
+                         "service": [
+                             "Microsoft.Sql"
+                         ]
+                     }
+                 ]
                 },
                 {
                    "masterSnapshotId": "AZRSNP_293",
                    "type": "Microsoft.Sql/servers/databases/transparentDataEncryption",
-                   "collection": "Microsoft.Sql"
+                   "collection": "Microsoft.Sql",
+                   "tags": [
+                     {
+                         "cloud": "azure",
+                         "service": [
+                             "Microsoft.Sql"
+                         ]
+                     }
+                 ]
                 },
                 {
                    "masterSnapshotId": "AZRSNP_294",
                    "type": "Microsoft.Sql/servers/administrators",
-                   "collection": "Microsoft.Sql"
+                   "collection": "Microsoft.Sql",
+                   "tags": [
+                     {
+                         "cloud": "azure",
+                         "service": [
+                             "Microsoft.Sql"
+                         ]
+                     }
+                 ]
                 },
                 {
                    "masterSnapshotId": "AZRSNP_296",
                    "type": "Microsoft.Security/securityContacts",
-                   "collection": "Microsoft.Security"
+                   "collection": "Microsoft.Security",
+                   "tags": [
+                     {
+                         "cloud": "azure",
+                         "service": [
+                             "Microsoft.Security"
+                         ]
+                     }
+                 ]
                 },
                 {
                    "masterSnapshotId": "AZRSNP_299",
                    "type": "Microsoft.Insights/activityLogAlerts",
-                   "collection": "Microsoft.Insights"
+                   "collection": "Microsoft.Insights",
+                   "tags": [
+                     {
+                         "cloud": "azure",
+                         "service": [
+                             "Microsoft.Insights"
+                         ]
+                     }
+                 ]
                 },
                 {
                    "masterSnapshotId": "AZRSNP_300",
                    "type": "Microsoft.Security/pricings",
-                   "collection": "Microsoft.Security"
+                   "collection": "Microsoft.Security",
+                   "tags": [
+                     {
+                         "cloud": "azure",
+                         "service": [
+                             "Microsoft.Security"
+                         ]
+                     }
+                 ]
                 },
                 {
                    "masterSnapshotId": "AZRSNP_307",
                    "type": "Microsoft.Network/vpnGateways",
-                   "collection": "Microsoft.Network"
+                   "collection": "Microsoft.Network",
+                   "tags": [
+                     {
+                         "cloud": "azure",
+                         "service": [
+                             "Microsoft.Network"
+                         ]
+                     }
+                 ]
                 }
             ]
         }

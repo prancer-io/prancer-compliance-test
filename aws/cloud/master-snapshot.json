@@ -15,7 +15,15 @@
             "get_bucket_logging",
             "get_bucket_versioning",
             "get_bucket_policy"
-          ]
+          ],
+          "tags": [
+            {
+                "cloud": "AWS",
+                "service": [
+                    "aws_s3"
+                ]
+            }
+        ]
         },
         {
           "masterSnapshotId": "AWS_EC2_01",
@@ -27,11 +35,17 @@
             "describe_security_groups",
             "describe_snapshots",
             "describe_snapshot_attribute",
-
             "describe_images",
             "describe_volumes"
-
-          ]
+          ],
+          "tags": [
+            {
+                "cloud": "AWS",
+                "service": [
+                    "aws_ec2"
+                ]
+            }
+        ]
         },
         {
           "masterSnapshotId": "AWS_RDS_01",
@@ -41,7 +55,15 @@
           "detailMethods": [
             "describe_db_instances",
             "describe_db_snapshots"
-          ]
+          ],
+          "tags": [
+            {
+                "cloud": "AWS",
+                "service": [
+                    "aws_rds"
+                ]
+            }
+        ]
         },
         {
           "masterSnapshotId": "AWS_CF_01",
@@ -54,7 +76,15 @@
             "describe_stack_resource_drifts",
             "get_stack_policy",
             "describe_stack_events"
-          ]
+          ],
+          "tags": [
+            {
+                "cloud": "AWS",
+                "service": [
+                    "aws_cloudformation"
+                ]
+            }
+        ]
         },
         {
           "masterSnapshotId": "AWS_CT_01",
@@ -63,7 +93,15 @@
           "listMethod": "list_trails",
           "detailMethods": [
             "describe_trails"
-          ]
+          ],
+          "tags": [
+            {
+                "cloud": "AWS",
+                "service": [
+                    "aws_cloudtrail"
+                ]
+            }
+        ]
         },
         {
           "masterSnapshotId": "AWS_ELB_01",
@@ -74,7 +112,15 @@
             "describe_load_balancers",
             "describe_load_balancer_attributes",
             "describe_load_balancer_policies"
-          ]
+          ],
+          "tags": [
+            {
+                "cloud": "AWS",
+                "service": [
+                    "aws_elb"
+                ]
+            }
+        ]
         },
         {
           "masterSnapshotId": "AWS_SQS_01",
@@ -83,7 +129,15 @@
           "listMethod": "list_queues",
           "detailMethods": [
             "get_queue_attributes"
-          ]
+          ],
+          "tags": [
+            {
+                "cloud": "AWS",
+                "service": [
+                    "aws_sqs"
+                ]
+            }
+        ]
         },
         {
           "masterSnapshotId": "AWS_LAMBDA_01",
@@ -92,7 +146,15 @@
           "listMethod": "list_functions",
           "detailMethods": [
             "get_function"
-          ]
+          ],
+          "tags": [
+            {
+                "cloud": "AWS",
+                "service": [
+                    "aws_lambda"
+                ]
+            }
+        ]
         },
         {
           "masterSnapshotId": "AWS_ECS_01",
@@ -101,7 +163,15 @@
           "listMethod": "list_task_definitions",
           "detailMethods": [
             "describe_task_definition"
-          ]
+          ],
+          "tags": [
+            {
+                "cloud": "AWS",
+                "service": [
+                    "aws_ecs"
+                ]
+            }
+        ]
         },
         {
           "masterSnapshotId": "AWS_EKS_01",
@@ -110,7 +180,15 @@
           "listMethod": "list_clusters",
           "detailMethods": [
             "describe_cluster"
-          ]
+          ],
+          "tags": [
+            {
+                "cloud": "AWS",
+                "service": [
+                    "aws_eks"
+                ]
+            }
+        ]
         },
         {
           "masterSnapshotId": "AWS_ELASTICCACHE_01",
@@ -119,7 +197,15 @@
           "listMethod": "describe_replication_groups",
           "detailMethods": [
             "describe_replication_groups"
-          ]
+          ],
+          "tags": [
+            {
+                "cloud": "AWS",
+                "service": [
+                    "aws_elasticache"
+                ]
+            }
+        ]
         },
         {
           "masterSnapshotId": "AWS_ACM_01",
@@ -128,7 +214,15 @@
           "listMethod": "list_certificates",
           "detailMethods": [
             "describe_certificate"
-          ]
+          ],
+          "tags": [
+            {
+                "cloud": "AWS",
+                "service": [
+                    "aws_acm"
+                ]
+            }
+        ]
         },
         {
           "masterSnapshotId": "AWS_CLOUDFRONT_01",
@@ -137,7 +231,15 @@
           "listMethod": "list_distributions",
           "detailMethods": [
             "get_distribution"
-          ]
+          ],
+          "tags": [
+            {
+                "cloud": "AWS",
+                "service": [
+                    "aws_cloudfront"
+                ]
+            }
+        ]
         },
         {
           "masterSnapshotId": "AWS_EFS_01",
@@ -146,7 +248,15 @@
           "listMethod": "describe_file_systems",
           "detailMethods": [
             "describe_file_systems"
-          ]
+          ],
+          "tags": [
+            {
+                "cloud": "AWS",
+                "service": [
+                    "aws_efs"
+                ]
+            }
+        ]
         },
         {
           "masterSnapshotId": "AWS_IAM_01",
@@ -159,7 +269,15 @@
             "get_account_summary",
             "get_account_password_policy",
             "list_attached_user_policies"
-          ]
+          ],
+          "tags": [
+            {
+                "cloud": "AWS",
+                "service": [
+                    "aws_iam"
+                ]
+            }
+        ]
         },
         {
           "masterSnapshotId": "AWS_REDSHIFT_01",
@@ -168,7 +286,15 @@
           "listMethod": "describe_clusters",
           "detailMethods": [
             "describe_clusters"
-          ]
+          ],
+          "tags": [
+            {
+                "cloud": "AWS",
+                "service": [
+                    "aws_redshift"
+                ]
+            }
+        ]
         }
       ]
     }
