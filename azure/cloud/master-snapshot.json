@@ -12,7 +12,7 @@
                      {
                          "cloud": "azure",
                          "service": [
-                             "Microsoft.OperationalInsights/workspaces"
+                             "Microsoft.OperationalInsights"
                          ]
                      }
                  ]
@@ -25,7 +25,7 @@
                      {
                          "cloud": "azure",
                          "service": [
-                             "Microsoft.Authorization/policyAssignments"
+                             "Microsoft.Authorization"
                          ]
                      }
                  ]
@@ -38,7 +38,7 @@
                      {
                          "cloud": "azure",
                          "service": [
-                             "Microsoft.ContainerService/managedClusters"
+                             "Microsoft.ContainerService"
                          ]
                      }
                  ]
@@ -51,7 +51,7 @@
                       {
                           "cloud": "azure",
                           "service": [
-                              "Microsoft.ContainerRegistry/registries"
+                              "Microsoft.ContainerRegistry"
                           ]
                       }
                   ]
@@ -64,7 +64,7 @@
                       {
                           "cloud": "azure",
                           "service": [
-                              "Microsoft.Network/networkSecurityGroups"
+                              "Microsoft.Network"
                           ]
                       }
                   ]
@@ -77,7 +77,7 @@
                       {
                           "cloud": "azure",
                           "service": [
-                              "Microsoft.Network/virtualNetworks"
+                              "Microsoft.Network"
                           ]
                       }
                   ]
@@ -90,7 +90,7 @@
                       {
                           "cloud": "azure",
                           "service": [
-                              "Microsoft.Compute/disks"
+                              "Microsoft.Compute"
                           ]
                       }
                   ]
@@ -103,7 +103,7 @@
                       {
                           "cloud": "azure",
                           "service": [
-                              "Microsoft.Compute/virtualMachines"
+                              "Microsoft.Compute"
                           ]
                       }
                   ]
@@ -116,7 +116,7 @@
                       {
                           "cloud": "azure",
                           "service": [
-                              "Microsoft.Storage/storageAccounts"
+                              "Microsoft.Storage"
                           ]
                       }
                   ]
@@ -129,7 +129,7 @@
                       {
                           "cloud": "azure",
                           "service": [
-                              "Microsoft.Network/applicationGateways"
+                              "Microsoft.Network"
                           ]
                       }
                   ]
@@ -142,7 +142,7 @@
                       {
                           "cloud": "azure",
                           "service": [
-                              "Microsoft.Network/networkWatchers"
+                              "Microsoft.Network"
                           ]
                       }
                   ]
@@ -155,7 +155,7 @@
                      {
                          "cloud": "azure",
                          "service": [
-                             "Microsoft.Sql/servers/databases/auditingSettings"
+                             "Microsoft.Sql"
                          ]
                      }
                  ]
@@ -168,7 +168,7 @@
                      {
                          "cloud": "azure",
                          "service": [
-                             "Microsoft.ContainerRegistry/registries/webhooks"
+                             "Microsoft.ContainerRegistry"
                          ]
                      }
                  ]
@@ -181,7 +181,7 @@
                      {
                          "cloud": "azure",
                          "service": [
-                             "Microsoft.Storage/storageAccounts/blobServices/containers"
+                             "Microsoft.Storage"
                          ]
                      }
                  ]
@@ -194,7 +194,7 @@
                      {
                          "cloud": "azure",
                          "service": [
-                             "Microsoft.Insights/diagnosticSettings"
+                             "Microsoft.Insights"
                          ]
                      }
                  ]
@@ -207,7 +207,7 @@
                      {
                          "cloud": "azure",
                          "service": [
-                             "Microsoft.KeyVault/vaults/secrets"
+                             "Microsoft.KeyVault"
                          ]
                      }
                  ]
@@ -220,7 +220,7 @@
                      {
                          "cloud": "azure",
                          "service": [
-                             "Microsoft.Authorization/locks"
+                             "Microsoft.Authorization"
                          ]
                      }
                  ]
@@ -233,7 +233,7 @@
                      {
                          "cloud": "azure",
                          "service": [
-                             "Microsoft.Sql/servers/databases/securityAlertPolicies"
+                             "Microsoft.Sql"
                          ]
                      }
                  ]
@@ -246,7 +246,7 @@
                      {
                          "cloud": "azure",
                          "service": [
-                             "Microsoft.Sql/servers/databases/vulnerabilityAssessments"
+                             "Microsoft.Sql"
                          ]
                      }
                  ]
@@ -259,7 +259,7 @@
                      {
                          "cloud": "azure",
                          "service": [
-                             "Microsoft.Compute/virtualMachines/extensions"
+                             "Microsoft.Compute"
                          ]
                      }
                  ]
@@ -272,7 +272,7 @@
                      {
                          "cloud": "azure",
                          "service": [
-                             "Microsoft.Network/virtualNetworks/subnets"
+                             "Microsoft.Network"
                          ]
                      }
                  ]
@@ -285,7 +285,7 @@
                      {
                          "cloud": "azure",
                          "service": [
-                             "Microsoft.Sql/servers/firewallRules"
+                             "Microsoft.Sql"
                          ]
                      }
                  ]
@@ -298,7 +298,7 @@
                      {
                          "cloud": "azure",
                          "service": [
-                             "Microsoft.Sql/servers/databases/transparentDataEncryption"
+                             "Microsoft.Sql"
                          ]
                      }
                  ]
@@ -311,7 +311,7 @@
                      {
                          "cloud": "azure",
                          "service": [
-                             "Microsoft.Sql/servers/administrators"
+                             "Microsoft.Sql"
                          ]
                      }
                  ]
@@ -324,7 +324,7 @@
                      {
                          "cloud": "azure",
                          "service": [
-                             "Microsoft.Security/securityContacts"
+                             "Microsoft.Security"
                          ]
                      }
                  ]
@@ -337,7 +337,7 @@
                      {
                          "cloud": "azure",
                          "service": [
-                             "Microsoft.Insights/activityLogAlerts"
+                             "Microsoft.Insights"
                          ]
                      }
                  ]
@@ -350,7 +350,7 @@
                      {
                          "cloud": "azure",
                          "service": [
-                             "Microsoft.Security/pricings"
+                             "Microsoft.Security"
                          ]
                      }
                  ]
@@ -363,7 +363,7 @@
                      {
                          "cloud": "azure",
                          "service": [
-                             "Microsoft.Network/vpnGateways"
+                             "Microsoft.Network"
                          ]
                      }
                  ]
