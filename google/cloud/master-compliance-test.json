@@ -1377,6 +1377,216 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterTestId": "GOOGLE_TEST_278",
+                    "type": "rego",
+                    "rule": "file(google_firewall_278.rego)",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0008",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "GOOGLE_INSTANCE_"
+                    ],
+                    "title": "GCP Firewall rule allows internet traffic to HTTP port (80)",
+                    "description": "This policy identifies GCP Firewall rules which allows inbound traffic on HTTP port (80) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "compliance": [
+                                "CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS","SOC 2"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "GOOGLE_TEST_279",
+                    "type": "rego",
+                    "rule": "file(google_firewall_279.rego)",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0009",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "GOOGLE_INSTANCE_"
+                    ],
+                    "title": "GCP Firewall rule allows internet traffic to Microsoft-DS port (445)",
+                    "description": "This policy identifies GCP Firewall rules which allows inbound traffic on Microsoft-DS port (445) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "compliance": [
+                                "CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS","SOC 2"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "GOOGLE_TEST_280",
+                    "type": "rego",
+                    "rule": "file(google_firewall_280.rego)",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0010",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "GOOGLE_INSTANCE_"
+                    ],
+                    "title": "GCP Firewall rule allows internet traffic to MongoDB port (27017)",
+                    "description": "This policy identifies GCP Firewall rules which allows inbound traffic on MongoDB port (27017) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "compliance": [
+                                "CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS","SOC 2"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "GOOGLE_TEST_296",
+                    "type": "rego",
+                    "rule": "file(google_iam_policy_296.rego)",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0026",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "GOOGLE_INSTANCE_"
+                    ],
+                    "title": "GCP IAM Service account has admin privileges",
+                    "description": "This policy identifies service accounts which have admin privileges. Application uses the service account to make requests to the Google API of a service so that the users aren't directly involved. It is recommended not to use admin access for ServiceAccount.",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "compliance": [
+                                "CIS","ISO 27001"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "GOOGLE_TEST_340",
+                    "type": "rego",
+                    "rule": "file(google_instance_340.rego)",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0070",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "GOOGLE_INSTANCE_"
+                    ],
+                    "title": "GCP VM instances have IP forwarding enabled",
+                    "description": "This policy identifies VM instances have IP forwarding enabled. IP Forwarding could open unintended and undesirable communication paths and allows VM instances to send and receive packets with the non-matching destination or source IPs. To enable source and destination IP match check, disable the IP Forwarding.",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "compliance": [
+                                "CIS","ISO 27001"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "GOOGLE_TEST_342",
+                    "type": "rego",
+                    "rule": "file(google_instance_342.rego)",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0072",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "GOOGLE_INSTANCE_"
+                    ],
+                    "title": "GCP VM instances have serial port access enabled",
+                    "description": "This policy identifies VM instances which have serial port access enabled. Interacting with a serial port is often referred to as the serial console. The interactive serial console does not support IP-based access restrictions such as IP whitelists. If you enable the interactive serial console on an instance, clients can attempt to connect to that instance from any IP address. So it is recommended to keep interactive serial console support disabled.",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "GOOGLE_TEST_344",
+                    "type": "rego",
+                    "rule": "file(google_instance_344.rego)",
+                    "evals": [
+                        {
+                            "id":"PR-GCP-0074",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "GOOGLE_INSTANCE_"
+                    ],
+                    "title": "GCP VPC Flow logs for the subnet is set to Off",
+                    "description": "This policy identifies the subnets in VPC Network which have Flow logs disabled. It enables to capture information about the IP traffic going to and from network interfaces in VPC Subnets.",
+                    "tags": [
+                        {
+                            "cloud": "GCP",
+                            "compliance": [
+                                "CIS","ISO 27001"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ]
                 }
             ]
         }
