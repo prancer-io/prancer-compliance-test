@@ -16,9 +16,7 @@
                             "id":"PR-AZR-0090-ARM",
                             "eval": "data.rule.alerts",
                             "message": "data.rule.alerts_err",
-                            "remediationDescription":"
-                            Make sure you are following the ARM template format presented at this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-04-01/activitylogalerts
-                            ",
+                            "remediationDescription":"Make sure you are following the ARM template format presented at this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-04-01/activitylogalerts",
                             "remediationFunction":""
                         }
                     ],
