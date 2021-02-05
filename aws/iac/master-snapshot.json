@@ -5,7 +5,7 @@
             "connectorUser": "USER_1",
             "nodes": [
                 {
-                    "masterSnapshotId": "cloudformation_TEMPLATE_SNAPSHOT",
+                    "masterSnapshotId": "CFR_TEMPLATE_SNAPSHOT",
                     "type": "cloudformation",
                     "collection": "cloudformationtemplate",
                     "paths": [
