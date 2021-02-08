@@ -146,3 +146,94 @@ pod_default_ns = false {
 pod_default_ns_err = "PR-K8S-0018-DCL: The default namespace should not be used" {
     k8s_issue["pod_default_ns"]
 }
+
+#
+# PR-K8S-0057-DCL
+#
+
+default hostpath_mount = null
+
+k8s_issue["hostpath_mount"] {
+    lower(input.kind) == "daemonset"
+    count(input.spec.template.spec.volumes[_].hostPath) > 0
+}
+
+k8s_issue["hostpath_mount"] {
+    lower(input.kind) == "deployment"
+    count(input.spec.template.spec.volumes[_].hostPath) > 0
+}
+
+k8s_issue["hostpath_mount"] {
+    lower(input.kind) == "statefulset"
+    count(input.spec.template.spec.volumes[_].hostPath) > 0
+}
+
+hostpath_mount {
+    lower(input.kind) == "daemonset"
+    not k8s_issue["hostpath_mount"]
+}
+
+hostpath_mount {
+    lower(input.kind) == "deployment"
+    not k8s_issue["hostpath_mount"]
+}
+
+hostpath_mount {
+    lower(input.kind) == "statefulset"
+    not k8s_issue["hostpath_mount"]
+}
+
+hostpath_mount = false {
+    k8s_issue["hostpath_mount"]
+}
+
+hostpath_mount_err = "PR-K8S-0057-DCL: Ensure pods outside of kube-system do not have access to node volume" {
+    k8s_issue["hostpath_mount"]
+}
+
+#
+# PR-K8S-0084-DCL
+#
+
+default pod_selinux = null
+
+k8s_issue["pod_selinux"] {
+    lower(input.kind) == "daemonset"
+    container := input.spec.template.spec.containers[_]
+    not container.securityContext.seLinuxOptions
+}
+
+k8s_issue["pod_selinux"] {
+    lower(input.kind) == "deployment"
+    container := input.spec.template.spec.containers[_]
+    not container.securityContext.seLinuxOptions
+}
+
+k8s_issue["pod_selinux"] {
+    lower(input.kind) == "statefulset"
+    container := input.spec.template.spec.containers[_]
+    not container.securityContext.seLinuxOptions
+}
+
+pod_selinux {
+    lower(input.kind) == "daemonset"
+    not k8s_issue["pod_selinux"]
+}
+
+pod_selinux {
+    lower(input.kind) == "deployment"
+    not k8s_issue["pod_selinux"]
+}
+
+pod_selinux {
+    lower(input.kind) == "statefulset"
+    not k8s_issue["pod_selinux"]
+}
+
+pod_selinux = false {
+    k8s_issue["pod_selinux"]
+}
+
+pod_selinux_err = "PR-K8S-0084-DCL: Apply Security Context to Your Pods and Containers" {
+    k8s_issue["pod_selinux"]
+}
