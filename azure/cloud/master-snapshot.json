@@ -367,6 +367,16 @@
                          ]
                      }
                  ]
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_400",
+                    "type": "Microsoft.Sql/servers",
+                    "collection": "Microsoft.SqlServers"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_401",
+                    "type": "Microsoft.Sql/managedInstances",
+                    "collection": "Microsoft.SqlInstances"
                 }
             ]
         }

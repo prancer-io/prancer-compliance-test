@@ -3031,6 +3031,62 @@
                     ],
                     "title": "Automatic provisioning of monitoring agent is set to Off in Security Center",
                     "description": ""
+                },
+                {
+                    "masterTestId": "AZURE_TEST_400",
+                    "type": "rego",
+                    "rule": "file(azure_400.rego)",
+                    "evals": [
+                        {
+                            "id":"sql_server_tls_version",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"Mannual Steps: \n 1) Open Azure Portal. \n 2) Open SQL Servers list \n 3) Select the SQL Server for which you want to modify the Mimimal TLS Version. \n 4) Click on `Firewalls and virtual networks` option under `Security` section. \n 5) Update the Minimum TLS Version to `1.2` and click on save button.",
+                            "remediationFunction":""
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_400"
+                    ],
+                    "title": "Azure SQL Server check minumum TLS version",
+                    "description": "This policy will find the Azure SQL Servers which have configured TLS version lower then 1.2"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_401",
+                    "type": "rego",
+                    "rule": "file(azure_401.rego)",
+                    "evals": [
+                        {
+                            "id":"sql_instance_tls_version",
+                            "eval":"data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription":"Mannual Steps: \n 1) Open Azure Portal. \n 2) Open SQL Instances list \n 3) Select the SQL Server for which you want to modify the Mimimal TLS Version. \n 4) Click on `Firewalls and virtual networks` option under `Security` section. \n 5) Update the Minimum TLS Version to `1.2` and click on save button.",
+                            "remediationFunction":""
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_401"
+                    ],
+                    "title": "Azure SQL Instances check minumum TLS version",
+                    "description": "This policy will find the Azure SQL Instances which have configured TLS version lower then 1.2"
                 }
             ]
         }
