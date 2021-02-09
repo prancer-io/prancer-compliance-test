@@ -1,0 +1,29 @@
+---
+Resources:
+  VPC_3389:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsSupport: 'false'
+      EnableDnsHostnames: 'false'
+      InstanceTenancy: dedicated
+      Tags:
+      - Key: name
+        Value: VPC3389
+  SecurityGroup_3389:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow 3389 to client host
+      GroupName: SG3389
+      VpcId:
+        Ref: VPC_3389
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 3389
+        ToPort: 3389
+        CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIp: 0.0.0.0/0
