@@ -1,4 +1,13 @@
----
+AWSTemplateFormatVersion: '2010-09-09'
+Metadata:
+  License: Apache-2.0
+Description: 'AWS CloudFormation Sample Template:
+  Create an Amazon VPC and securoty group from this template.'
+Parameters:
+  grpName:
+    Description: Group Name
+    Type: String
+    Default: SG22
 Resources:
   VPC_22:
     Type: AWS::EC2::VPC
@@ -14,7 +23,7 @@ Resources:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Allow 22 to client host
-      GroupName: SG22
+      GroupName: !Ref 'grpName'
       VpcId:
         Ref: VPC_22
       SecurityGroupIngress:
