@@ -1,0 +1,37 @@
+{
+  "Parameters": {},
+  "Resources": {
+    "VPC_22" : {
+      "Type" : "AWS::EC2::VPC",
+      "Properties" : {
+        "CidrBlock" : "10.0.0.0/16",
+        "EnableDnsSupport" : "false",
+        "EnableDnsHostnames" : "false",
+        "InstanceTenancy" : "dedicated",
+        "Tags" : [ {"Key" : "name", "Value" : "VPC22"} ]
+      }
+    },
+    "SecurityGroup_22" : {
+      "Type" : "AWS::EC2::SecurityGroup",
+      "Properties" : {
+        "GroupDescription" : "Allow 22 to client host",
+        "GroupName" : "SG22",
+        "VpcId" : {
+          "Ref" : "VPC_22"
+        },
+        "SecurityGroupIngress" : [{
+          "IpProtocol" : "tcp",
+          "FromPort" : 22,
+          "ToPort" : 22,
+          "CidrIp" : "0.0.0.0/0"
+        }],
+        "SecurityGroupEgress" : [{
+          "IpProtocol" : "tcp",
+          "FromPort" : 80,
+          "ToPort" : 80,
+          "CidrIp" : "0.0.0.0/0"
+        }]
+      }
+    }
+  }
+}
