@@ -13,8 +13,8 @@
                                 "id":"PR-AZR-0007",
                                 "eval":"data.rule.rulepass",
                                 "message": "data.rule.rulepass_err",
-                                "remediationDescription":"",
-                                "remediationFunction":""
+                                "remediationDescription":"1. Sign in to the Azure portal. \n 2. Goto the Kubernetes Service and select your cluster. \n 3. Click Networking option in the left window pane. \n 4. Uncheck \"Enable HTTP application routing\" and click on save button.",
+                                "remediationFunction":"PR_AZR_0007.py"
                             }
                         ],
                         "tags": [
@@ -44,7 +44,7 @@
                                 "eval":"data.rule.rulepass",
                                 "message": "data.rule.rulepass_err",
                                 "remediationDescription":"",
-                                "remediationFunction":""
+                                "remediationFunction":"PR_AZR_0008.py"
                             }
                         ],
                         "tags": [
@@ -74,7 +74,7 @@
                                 "eval":"data.rule.rulepass",
                                 "message": "data.rule.rulepass_err",
                                 "remediationDescription":"",
-                                "remediationFunction":""
+                                "remediationFunction":"PR_AZR_0009.py"
                             }
                         ],
                         "tags": [
@@ -104,7 +104,7 @@
                                 "eval":"data.rule.rulepass",
                                 "message": "data.rule.rulepass_err",
                                 "remediationDescription":"",
-                                "remediationFunction":""
+                                "remediationFunction":"PR_AZR_0010.py"
                             }
                         ],
                         "tags": [
@@ -134,7 +134,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0015.py"
                         }
                     ],
                     "tags": [
@@ -166,7 +166,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0020.py"
                         }
                     ],
                     "tags": [
@@ -201,7 +201,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0021.py"
                         }
                     ],
                     "tags": [
@@ -236,7 +236,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0022.py"
                         }
                     ],
                     "tags": [
@@ -267,7 +267,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0023.py"
                         }
                     ],
                     "tags": [
@@ -298,7 +298,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0024.py"
                         }
                     ],
                     "tags": [
@@ -329,7 +329,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0025.py"
                         }
                     ],
                     "tags": [
@@ -360,7 +360,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0026.py"
                         }
                     ],
                     "tags": [
@@ -391,7 +391,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0027.py"
                         }
                     ],
                     "tags": [
@@ -420,7 +420,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0028.py"
                         }
                     ],
                     "tags": [
@@ -449,7 +449,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0029.py"
                         }
                     ],
                     "tags": [
@@ -478,7 +478,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0030.py"
                         }
                     ],
                     "tags": [
@@ -507,7 +507,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0031.py"
                         }
                     ],
                     "tags": [
@@ -536,7 +536,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0032.py"
                         }
                     ],
                     "tags": [
@@ -565,7 +565,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0033.py"
                         }
                     ],
                     "tags": [
@@ -594,7 +594,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0034.py"
                         }
                     ],
                     "tags": [
@@ -623,7 +623,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0035.py"
                         }
                     ],
                     "tags": [
@@ -652,7 +652,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0036.py"
                         }
                     ],
                     "tags": [
@@ -681,7 +681,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0037.py"
                         }
                     ],
                     "tags": [
@@ -710,7 +710,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0038.py"
                         }
                     ],
                     "tags": [
@@ -739,7 +739,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0039.py"
                         }
                     ],
                     "tags": [
@@ -768,7 +768,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0040.py"
                         }
                     ],
                     "tags": [
@@ -797,7 +797,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0041.py"
                         }
                     ],
                     "tags": [
@@ -826,7 +826,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0042.py"
                         }
                     ],
                     "tags": [
@@ -855,7 +855,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0043.py"
                         }
                     ],
                     "tags": [
@@ -885,7 +885,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0044.py"
                         }
                     ],
                     "tags": [
@@ -914,7 +914,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0045.py"
                         }
                     ],
                     "tags": [
@@ -943,7 +943,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0046.py"
                         }
                     ],
                     "tags": [
@@ -972,7 +972,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0047.py"
                         }
                     ],
                     "tags": [
@@ -1001,7 +1001,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0048.py"
                         }
                     ],
                     "tags": [
@@ -1030,7 +1030,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0075.py"
                         }
                     ],
                     "tags": [
@@ -1061,7 +1061,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"gID6"
                         }
                     ],
                     "tags": [
@@ -1092,7 +1092,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0002.py"
                         }
                     ],
                     "tags": [
@@ -1124,7 +1124,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0049.py"
                         }
                     ],
                     "tags": [
@@ -1157,7 +1157,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0076.py"
                         }
                     ],
                     "tags": [
@@ -1191,7 +1191,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0077.py"
                         }
                     ],
                     "tags": [
@@ -1224,7 +1224,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0078.py"
                         }
                     ],
                     "tags": [
@@ -1255,7 +1255,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0079.py"
                         }
                     ],
                     "tags": [
@@ -1288,7 +1288,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0081.py"
                         }
                     ],
                     "tags": [
@@ -1322,7 +1322,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0083.py"
                         }
                     ],
                     "tags": [
@@ -1356,7 +1356,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0086.py"
                         }
                     ],
                     "tags": [
@@ -1390,7 +1390,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0094.py"
                         }
                     ],
                     "tags": [
@@ -1424,7 +1424,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0095.py"
                         }
                     ],
                     "tags": [
@@ -1457,7 +1457,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0099.py"
                         }
                     ],
                     "tags": [
@@ -1491,7 +1491,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0100.py"
                         }
                     ],
                     "tags": [
@@ -1524,7 +1524,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0065.py"
                         }
                     ],
                     "tags": [
@@ -1555,7 +1555,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0068.py"
                         }
                     ],
                     "tags": [
@@ -1603,7 +1603,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0092.py"
                         }
                     ],
                     "title": "Storage Accounts without Secure transfer enabled",
@@ -1638,7 +1638,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0093.py"
                         }
                     ],
                     "title": "Storage Accounts without Secure transfer enabled",
@@ -1657,7 +1657,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0012.py"
                         }
                     ],
                     "tags": [
@@ -1689,7 +1689,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0050.py"
                         }
                     ],
                     "tags": [
@@ -1721,7 +1721,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0051.py"
                         }
                     ],
                     "tags": [
@@ -1753,7 +1753,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"gID1.py"
                         }
                     ],
                     "tags": [
@@ -1781,7 +1781,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0001.py"
                         }
                     ],
                     "tags": [
@@ -1813,7 +1813,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0003.py"
                         }
                     ],
                     "tags": [
@@ -1845,7 +1845,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0005.py"
                         }
                     ],
                     "tags": [
@@ -1872,7 +1872,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0006.py"
                         }
                     ],
                     "tags": [
@@ -1899,7 +1899,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0011.py"
                         }
                     ],
                     "tags": [
@@ -1926,7 +1926,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0013.py"
                         }
                     ],
                     "tags": [
@@ -1953,7 +1953,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0017.py"
                         }
                     ],
                     "tags": [
@@ -1980,7 +1980,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0018.py"
                         }
                     ],
                     "tags": [
@@ -2007,7 +2007,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0019.py"
                         }
                     ],
                     "tags": [
@@ -2034,7 +2034,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0052.py"
                         }
                     ],
                     "tags": [
@@ -2061,7 +2061,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0053.py"
                         }
                     ],
                     "tags": [
@@ -2093,7 +2093,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0054.py"
                         }
                     ],
                     "tags": [
@@ -2125,7 +2125,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0055.py"
                         }
                     ],
                     "tags": [
@@ -2156,7 +2156,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0056.py"
                         }
                     ],
                     "tags": [
@@ -2183,7 +2183,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0057.py"
                         }
                     ],
                     "tags": [
@@ -2210,7 +2210,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0058.py"
                         }
                     ],
                     "tags": [
@@ -2237,7 +2237,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0059.py"
                         }
                     ],
                     "tags": [
@@ -2264,7 +2264,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0061.py"
                         }
                     ],
                     "tags": [
@@ -2291,7 +2291,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0062.py"
                         }
                     ],
                     "tags": [
@@ -2318,7 +2318,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0063.py"
                         }
                     ],
                     "tags": [
@@ -2345,7 +2345,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0064.py"
                         }
                     ],
                     "tags": [
@@ -2372,7 +2372,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0066.py"
                         }
                     ],
                     "tags": [
@@ -2399,7 +2399,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0067.py"
                         }
                     ],
                     "tags": [
@@ -2426,7 +2426,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0069.py"
                         }
                     ],
                     "tags": [
@@ -2453,7 +2453,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0070.py"
                         }
                     ],
                     "tags": [
@@ -2480,7 +2480,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0071.py"
                         }
                     ],
                     "tags": [
@@ -2507,7 +2507,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0072.py"
                         }
                     ],
                     "tags": [
@@ -2534,7 +2534,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0073.py"
                         }
                     ],
                     "tags": [
@@ -2561,7 +2561,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0074.py"
                         }
                     ],
                     "tags": [
@@ -2588,7 +2588,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0082.py"
                         }
                     ],
                     "tags": [
@@ -2619,7 +2619,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0084.py"
                         }
                     ],
                     "tags": [
@@ -2651,7 +2651,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0085.py"
                         }
                     ],
                     "tags": [
@@ -2681,7 +2681,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0087.py"
                         }
                     ],
                     "tags": [
@@ -2713,7 +2713,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0088.py"
                         }
                     ],
                     "tags": [
@@ -2745,7 +2745,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0090.py"
                         }
                     ],
                     "tags": [
@@ -2777,7 +2777,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"gID2.py"
                         }
                     ],
                     "tags": [
@@ -2805,7 +2805,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0091.py"
                         }
                     ],
                     "tags": [
@@ -2833,7 +2833,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0096.py"
                         }
                     ],
                     "tags": [
@@ -2863,7 +2863,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0097.py"
                         }
                     ],
                     "tags": [
@@ -2894,7 +2894,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0098.py"
                         }
                     ],
                     "tags": [
@@ -2924,7 +2924,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"gID3.py"
                         }
                     ],
                     "tags": [
@@ -2955,7 +2955,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"gID5.py"
                         }
                     ],
                     "tags": [
@@ -2983,7 +2983,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"gID7.py"
                         }
                     ],
                     "tags": [
@@ -3011,7 +3011,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0004.py"
                         }
                     ],
                     "tags": [
@@ -3038,11 +3038,11 @@
                     "rule": "file(azure_400.rego)",
                     "evals": [
                         {
-                            "id":"sql_server_tls_version",
+                            "id":"PR-AZR-0101",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"Mannual Steps: \n 1) Open Azure Portal. \n 2) Open SQL Servers list \n 3) Select the SQL Server for which you want to modify the Mimimal TLS Version. \n 4) Click on `Firewalls and virtual networks` option under `Security` section. \n 5) Update the Minimum TLS Version to `1.2` and click on save button.",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0101.py"
                         }
                     ],
                     "tags": [
@@ -3066,11 +3066,11 @@
                     "rule": "file(azure_401.rego)",
                     "evals": [
                         {
-                            "id":"sql_instance_tls_version",
+                            "id":"PR-AZR-0102",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"Mannual Steps: \n 1) Open Azure Portal. \n 2) Open SQL Instances list \n 3) Select the SQL Server for which you want to modify the Mimimal TLS Version. \n 4) Click on `Firewalls and virtual networks` option under `Security` section. \n 5) Update the Minimum TLS Version to `1.2` and click on save button.",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0102.py"
                         }
                     ],
                     "tags": [
