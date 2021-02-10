@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Metadata:
+  License: Apache-2.0
+Description: 'AWS CloudFormation Sample Template:
+  Create an Amazon VPC and securoty group from this template.'
+Parameters:
+  grpName:
+    Description: Group Name
+    Type: String
+    Default: SG4333
+Resources:
+  VPC_4333:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsSupport: 'false'
+      EnableDnsHostnames: 'false'
+      InstanceTenancy: dedicated
+      Tags:
+      - Key: name
+        Value: VPC4333
+  SecurityGroup_4333:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow 4333 to client host
+      GroupName: !Ref 'grpName'
+      VpcId:
+        Ref: VPC_4333
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 4333
+        ToPort: 4333
+        CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIp: 0.0.0.0/0
