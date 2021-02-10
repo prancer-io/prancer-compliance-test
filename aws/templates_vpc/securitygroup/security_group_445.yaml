@@ -1,8 +1,8 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Metadata:
   License: Apache-2.0
-Description: 'AWS CloudFormation Sample Template:
-  Create an Amazon VPC and securoty group from this template.'
+Description: 'AWS CloudFormation Sample Template: Create an Amazon VPC and securoty
+  group from this template.'
 Parameters:
   grpName:
     Description: Group Name
@@ -17,22 +17,5 @@ Resources:
       EnableDnsHostnames: 'false'
       InstanceTenancy: dedicated
       Tags:
-      - Key: name
-        Value: VPC445
-  SecurityGroup_445:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: Allow 445 to client host
-      GroupName: !Ref 'grpName'
-      VpcId:
-        Ref: VPC_445
-      SecurityGroupIngress:
-      - IpProtocol: tcp
-        FromPort: 445
-        ToPort: 445
-        CidrIp: 0.0.0.0/0
-      SecurityGroupEgress:
-      - IpProtocol: tcp
-        FromPort: 80
-        ToPort: 80
-        CidrIp: 0.0.0.0/0
+        - Key: name
+          Value: VPC445
