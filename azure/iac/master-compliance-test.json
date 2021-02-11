@@ -1955,6 +1955,32 @@
                             "service": ["microsoft.network"]
                         }
                     ]
+                },
+                {
+                    "masterTestId": "TEST_SQL_Audit",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_audit.rego)",
+                    "evals": [
+                        {
+                            "id":"PR_AZR_0003_ARM",
+                            "eval": "data.rule.sql_audit",
+                            "message": "data.rule.sql_audit_err",
+                            "remediationDescription":"Auditing for SQL database should be set to on",
+                            "remediationFunction":"PR_AZR_0003_ARM.py"
+                        }
+                    ],
+                    "title": "Auditing for SQL database should be set to on",
+                    "description": "Auditing for SQL database should be set to on.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": ["NIST 800"],
+                            "service": ["Databases"]
+                        }
+                    ]
                 }
             ]
         }
