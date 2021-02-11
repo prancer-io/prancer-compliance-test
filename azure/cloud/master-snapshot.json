@@ -239,6 +239,19 @@
                  ]
                 },
                 {
+                   "masterSnapshotId": "AZRSNP_264",
+                   "type": "Microsoft.Sql/servers/securityAlertPolicies",
+                   "collection": "Microsoft.Sql",
+                   "tags": [
+                     {
+                         "cloud": "azure",
+                         "service": [
+                             "Microsoft.Sql"
+                         ]
+                     }
+                 ]
+                },
+                {
                    "masterSnapshotId": "AZRSNP_265",
                    "type": "Microsoft.Sql/servers/databases/vulnerabilityAssessments",
                    "collection": "Microsoft.Sql",

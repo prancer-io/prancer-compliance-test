@@ -2341,6 +2341,34 @@
                     ],
                     "title": "Azure SQL Instances check minumum TLS version",
                     "description": "This policy will find the Azure SQL Instances which have configured TLS version lower then 1.2"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_402",
+                    "type": "rego",
+                    "rule": "file(azure_213.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0102",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0102.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_264"
+                    ],
+                    "title": "Advanced data security should be enabled on your SQL servers",
+                    "description": ""
                 }
             ]
         }
