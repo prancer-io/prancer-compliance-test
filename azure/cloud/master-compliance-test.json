@@ -244,7 +244,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":PR_AZR_0022.py"PR_AZR_0022.py"
+                            "remediationFunction":"PR_AZR_0022.py"
                         }
                     ],
                     "tags": [
@@ -1350,8 +1350,8 @@
                             ]
                         }
                     ],
-                    "title" : "SQL auditing & Threat detection is set to OFF in Security Center",
-                    "description" : "Turning on SQL auditing & Threat detection will make sure that the databases adhere to regulatory compliance. It will also help understand database activity, and gain insights into discrepancies and anomalies that could show business concerns or any security violations.",
+                    "title" : "SQL auditing and Threat detection is set to OFF in Security Center",
+                    "description" : "Turning on SQL auditing and Threat detection will make sure that the databases adhere to regulatory compliance. It will also help understand database activity, and gain insights into discrepancies and anomalies that could show business concerns or any security violations.",
                     "masterSnapshotId" : ["AZRSNP_211"]
                 },
                 {
