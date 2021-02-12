@@ -1,7 +1,7 @@
 package rule
 
 #
-# PR_AZR_0003_ARM
+# PR-AZR-0103-ARM
 #
 
 default sql_audit = null

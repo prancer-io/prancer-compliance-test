@@ -3103,11 +3103,11 @@
                     "rule": "file(azure_213.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0102",
+                            "id": "PR-AZR-0103",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0102.py"
+                            "remediationFunction": "PR_AZR_0103.py"
                         }
                     ],
                     "tags": [
