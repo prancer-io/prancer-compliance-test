@@ -1,7 +1,7 @@
 package rule
 
 #
-# PR-K8S-0001-DCL
+# PR-K8S-0001
 #
 
 default rulepass = null
@@ -23,6 +23,6 @@ rulepass = false {
     k8s_issue["rulepass"]
 }
 
-rulepass_err = "PR-K8S-0001-DCL: Minimize access to secrets (RBAC)" {
+rulepass_err = "PR-K8S-0001: Minimize access to secrets (RBAC)" {
     k8s_issue["rulepass"]
 }
