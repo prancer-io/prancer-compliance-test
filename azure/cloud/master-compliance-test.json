@@ -3075,11 +3075,11 @@
                     "rule": "file(azure_401.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0102",
+                            "id": "PR-AZR-0101",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open SQL Instances list \n 3) Select the SQL Server for which you want to modify the Mimimal TLS Version. \n 4) Click on `Firewalls and virtual networks` option under `Security` section. \n 5) Update the Minimum TLS Version to `1.2` and click on save button.",
-                            "remediationFunction": "PR_AZR_0102.py"
+                            "remediationFunction": "PR_AZR_0101.py"
                         }
                     ],
                     "tags": [
@@ -3100,13 +3100,69 @@
                 {
                     "masterTestId": "AZURE_TEST_402",
                     "type": "rego",
-                    "rule": "file(azure_213.rego)",
+                    "rule": "file(azure_402.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0102",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open Azure SQL list \n 3) Select the reported SQL Server. \n 4) Click on `Security Center` option under `Security` section. \n 5) Click on \"Enable Azure Defender for SQL\" button.",
+                            "remediationFunction": "PR_AZR_0102.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_402"
+                    ],
+                    "title": "Advanced data security should be enabled on your SQL servers",
+                    "description": "Azure Defender provides advanced SQL security capabilities, including SQL Vulnerability Assessment and Advanced Threat Protection. It is recomamanded to Enable the Azure Defender for SQL."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_403",
+                    "type": "rego",
+                    "rule": "file(azure_402.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0102",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open Azure SQL list \n 3) Select the reported SQL Managed Instance. \n 4) Click on `Security Center` option under `Security` section. \n 5) Click on \"Enable Azure Defender for SQL\" button.",
+                            "remediationFunction": "PR_AZR_0102.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_403"
+                    ],
+                    "title": "Advanced data security should be enabled on your SQL servers",
+                    "description": "Azure Defender provides advanced SQL security capabilities, including SQL Vulnerability Assessment and Advanced Threat Protection. It is recomamanded to Enable the Azure Defender for SQL."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_404",
+                    "type": "rego",
+                    "rule": "file(azure_404.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-0103",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open Azure SQL list \n 3) Select the reported SQL Server. \n 4) Click on `Security Center` option under `Security` section. \n 5) Click on \"Enable Azure Defender for SQL\" button.",
                             "remediationFunction": "PR_AZR_0103.py"
                         }
                     ],
@@ -3120,9 +3176,9 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_264"
+                        "AZRSNP_404"
                     ],
-                    "title": "Advanced data security should be enabled on your SQL servers",
+                    "title": "Auditing on SQL server should be enabled",
                     "description": ""
                 }
             ]

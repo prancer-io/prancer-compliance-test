@@ -86,16 +86,16 @@ public_security_rules_any["internet_on_PortRanges_22_any_source"] {
 
 # or "securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == '*'
 # @.sourcePortRanges[*] == '*')].destinationPortRanges[*] contains _Port.inRange(22)
-# public_security_rules_any["internet_on_Any_PortRange_any_source"] {
-#     some security_rule
-#     get_source_PortRange_Any[security_rule]
-#     security_rule.properties.sourceAddressPrefix == "*"
-# }
-# public_security_rules_any["internet_on_Any_PortRange_any_source"] {
-#     some security_rule
-#     get_destination_PortRange_Any[security_rule]
-#     security_rule.properties.sourceAddressPrefix == "*"
-# }
+public_security_rules_any["internet_on_Any_PortRange_any_source"] {
+    some security_rule
+    get_source_PortRange_Any[security_rule]
+    security_rule.properties.sourceAddressPrefix == "*"
+}
+public_security_rules_any["internet_on_Any_PortRange_any_source"] {
+    some security_rule
+    get_destination_PortRange_Any[security_rule]
+    security_rule.properties.sourceAddressPrefix == "*"
+}
 
 # or securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix = 'Internet' 
 # @.sourcePortRange == '22')]‌.destinationPortRange contains _Port.inRange(22) 
@@ -123,13 +123,13 @@ public_security_rules_Internet["internet_on_PortRanges_22_Internet_source"] {
 }
 # or "securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == 'Internet'
 # @.sourcePortRanges[*] == '*')].destinationPortRanges[*] contains _Port.inRange(22)
-# public_security_rules_Internet["internet_on_Any_PortRange_Internet_source"] {
-#     some security_rule
-#     get_source_PortRange_Any[security_rule]
-#     security_rule.properties.sourceAddressPrefix == "Internet"
-# }
-# public_security_rules_Internet["internet_on_Any_PortRange_Internet_source"] {
-#     some security_rule
-#     get_destination_PortRange_Any[security_rule]
-#     security_rule.properties.sourceAddressPrefix == "Internet"
-# }
+public_security_rules_Internet["internet_on_Any_PortRange_Internet_source"] {
+    some security_rule
+    get_source_PortRange_Any[security_rule]
+    security_rule.properties.sourceAddressPrefix == "Internet"
+}
+public_security_rules_Internet["internet_on_Any_PortRange_Internet_source"] {
+    some security_rule
+    get_destination_PortRange_Any[security_rule]
+    security_rule.properties.sourceAddressPrefix == "Internet"
+}

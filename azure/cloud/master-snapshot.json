@@ -239,19 +239,6 @@
                  ]
                 },
                 {
-                   "masterSnapshotId": "AZRSNP_264",
-                   "type": "Microsoft.Sql/servers/securityAlertPolicies",
-                   "collection": "Microsoft.Sql",
-                   "tags": [
-                     {
-                         "cloud": "azure",
-                         "service": [
-                             "Microsoft.Sql"
-                         ]
-                     }
-                 ]
-                },
-                {
                    "masterSnapshotId": "AZRSNP_265",
                    "type": "Microsoft.Sql/servers/databases/vulnerabilityAssessments",
                    "collection": "Microsoft.Sql",
@@ -390,6 +377,21 @@
                     "masterSnapshotId": "AZRSNP_401",
                     "type": "Microsoft.Sql/managedInstances",
                     "collection": "Microsoft.SqlInstances"
+                },
+                {
+                   "masterSnapshotId": "AZRSNP_402",
+                   "type": "Microsoft.Sql/servers/securityAlertPolicies",
+                   "collection": "Microsoft.SqlServersAlertpolicies"
+                },
+                {
+                   "masterSnapshotId": "AZRSNP_403",
+                   "type": "Microsoft.Sql/managedInstances/securityAlertPolicies",
+                   "collection": "Microsoft.SqlManagedInstancesAlertpolicies"
+                },
+                {
+                   "masterSnapshotId": "AZRSNP_404",
+                   "type": "Microsoft.Sql/servers/auditingSettings",
+                   "collection": "Microsoft.SqlServerAuditSettings"
                 }
             ]
         }

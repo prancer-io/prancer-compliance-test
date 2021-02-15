@@ -1957,23 +1957,49 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SQL_Audit",
+                    "masterTestId": "TEST_SQL_SERVER_ALERT",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(sql_audit.rego)",
+                    "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id":"PR_AZR_0003_ARM",
-                            "eval": "data.rule.sql_audit",
-                            "message": "data.rule.sql_audit_err",
-                            "remediationDescription":"Auditing for SQL database should be set to on",
-                            "remediationFunction":"PR_AZR_0003_ARM.py"
+                            "id":"PR-AZR-0102-ARM",
+                            "eval": "data.rule.sql_server_alert",
+                            "message": "data.rule.sql_server_alert_err",
+                            "remediationDescription":"Make sure you are following the ARM template guidelines for vpn gateway from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies",
+                            "remediationFunction":"PR_AZR_0102_ARM.py"
                         }
                     ],
-                    "title": "Auditing for SQL database should be set to on",
-                    "description": "Auditing for SQL database should be set to on.",
+                    "title": "Advanced data security should be enabled on your SQL servers.",
+                    "description": "Advanced data security should be enabled on your SQL servers.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": ["NIST 800"],
+                            "service": ["Databases"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SQL_MANAGED_INSTANCE_ALERT",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_alert_policy.rego)",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0102-ARM",
+                            "eval": "data.rule.sql_managed_instance_alert",
+                            "message": "data.rule.sql_managed_instance_alert_err",
+                            "remediationDescription":"Make sure you are following the ARM template guidelines for vpn gateway from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/securityalertpolicies",
+                            "remediationFunction":"PR_AZR_0102_ARM.py"
+                        }
+                    ],
+                    "title": "Advanced data security should be enabled on your SQL servers.",
+                    "description": "Advanced data security should be enabled on your SQL servers.",
                     "tags": [
                         {
                             "cloud": "git",
