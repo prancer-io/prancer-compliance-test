@@ -28,6 +28,6 @@ rulepass = false {
     k8s_issue["rulepass"]
 }
 
-rulepass_err = "PR-K8S-0022: Disable profiling, if not needed. Profiling allows for the identification of specific performance bottlenecks. It generates a significant amount of program data that could potentially be exploited to uncover system and program details. If you are not experiencing any bottlenecks and do not need the profiler for troubleshooting purposes, it is recommended to turn it off to reduce the potential attack surface." {
+rulepass_err = "PR-K8S-0022: Ensure that the --profiling argument is set to false (API Server)" {
     k8s_issue["rulepass"]
 }

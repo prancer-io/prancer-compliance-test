@@ -1,7 +1,7 @@
 package rule
 
 #
-# PR-K8S-0041
+# PR-K8S-0036
 #
 
 default rulepass = null
@@ -18,6 +18,6 @@ rulepass = false {
     k8s_issue["rulepass"]
 }
 
-rulepass_err = "PR-K8S-0041: Ensure that the admission control plugin EventRateLimit is set (API Server)" {
+rulepass_err = "PR-K8S-0036: Restrict Traffic Among Pods with a Network Policy" {
     k8s_issue["rulepass"]
 }

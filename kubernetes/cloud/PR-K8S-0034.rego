@@ -22,6 +22,6 @@ rulepass = false {
     k8s_issue["rulepass"]
 }
 
-rulepass_err = "PR-K8S-0034: Allow pods to verify the API server's serving certificate before establishing connections. Processes running within pods that need to contact the API server must verify the API server's serving certificate. Failing to do so could be a subject to man-in-the-middle attacks." {
+rulepass_err = "PR-K8S-0034: Ensure that the --root-ca-file argument is set as appropriate (Controller Manager)" {
     k8s_issue["rulepass"]
 }

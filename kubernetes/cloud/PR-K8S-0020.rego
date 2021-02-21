@@ -20,6 +20,6 @@ rulepass = false {
     k8s_issue["rulepass"]
 }
 
-rulepass_err = "PR-K8S-0020: Do not use basic authentication. Basic authentication uses plaintext credentials for authentication. Currently, the basic authentication credentials last indefinitely, and the password cannot be changed without restarting API server. The basic authentication is currently supported for convenience. Hence, basic authentication should not be used." {
+rulepass_err = "PR-K8S-0020: Ensure that the --basic-auth-file argument is not set (API Server)" {
     k8s_issue["rulepass"]
 }

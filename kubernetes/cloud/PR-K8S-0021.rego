@@ -20,6 +20,6 @@ rulepass = false {
     k8s_issue["rulepass"]
 }
 
-rulepass_err = "PR-K8S-0021: Enable runtime/default seccomp profile in your pod definitions. Seccomp (secure computing mode) is used to restrict the set of system calls applications can make, allowing cluster administrators greater control over the security of workloads running in the cluster. Kubernetes disables seccomp profiles by default for historical reasons. You should enable it to ensure that the workloads have restricted actions available within the container." {
+rulepass_err = "PR-K8S-0021: Ensure that the seccomp profile is set to runtime/default in your pod definitions" {
     k8s_issue["rulepass"]
 }

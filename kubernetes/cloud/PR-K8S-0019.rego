@@ -26,6 +26,6 @@ rulepass = false {
     k8s_issue["rulepass"]
 }
 
-rulepass_err = "PR-K8S-0019: Do not allow all requests. Setting admission control plugin AlwaysAdmit allows all requests and do not filter any requests." {
+rulepass_err = "PR-K8S-0019: Ensure that the admission control plugin AlwaysAdmit is not set (API Server)" {
     k8s_issue["rulepass"]
 }

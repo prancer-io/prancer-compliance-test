@@ -22,6 +22,6 @@ rulepass = false {
     k8s_issue["rulepass"]
 }
 
-rulepass_err = "PR-K8S-0026: Reject creating pods that do not match Pod Security Policies. A Pod Security Policy is a cluster-level resource that controls the actions that a pod can perform and what it has the ability to access. The PodSecurityPolicy objects define a set of conditions that a pod must run with in order to be accepted into the system. Pod Security Policies are comprised of settings and strategies that control the security features a pod has access to and hence this must be used to control pod access permissions." {
+rulepass_err = "PR-K8S-0026: Ensure that the admission control plugin PodSecurityPolicy is set (API Server)" {
     k8s_issue["rulepass"]
 }

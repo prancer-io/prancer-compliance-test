@@ -22,6 +22,6 @@ rulepass = false {
     k8s_issue["rulepass"]
 }
 
-rulepass_err = "PR-K8S-0024: Verify kubelet's certificate before establishing connection. The connections from the apiserver to the kubelet are used for fetching logs for pods, attaching (through kubectl) to running pods, and using the kubelet’s port-forwarding functionality. These connections terminate at the kubelet’s HTTPS endpoint. By default, the apiserver does not verify the kubelet’s serving certificate, which makes the connection subject to man-in-the-middle attacks, and unsafe to run over untrusted and/or public networks." {
+rulepass_err = "PR-K8S-0024: Ensure that the --kubelet-certificate-authority argument is set as appropriate (API Server)" {
     k8s_issue["rulepass"]
 }

@@ -18,6 +18,6 @@ rulepass = false {
     k8s_issue["rulepass"]
 }
 
-rulepass_err = "PR-K8S-0035: The default namespace should not be used" {
+rulepass_err = "PR-K8S-0035: Ensure that Service Account Tokens are only mounted where necessary (RBAC)" {
     k8s_issue["rulepass"]
 }

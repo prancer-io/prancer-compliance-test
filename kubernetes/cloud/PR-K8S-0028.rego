@@ -22,6 +22,6 @@ rulepass = false {
     k8s_issue["rulepass"]
 }
 
-rulepass_err = "PR-K8S-0028: Disable anonymous requests to the API server.When enabled, requests that are not rejected by other configured authentication methods are treated as anonymous requests. These requests are then served by the API server. You should rely on authentication to authorize access and disallow anonymous requests." {
+rulepass_err = "PR-K8S-0028: Ensure that the --anonymous-auth argument is set to false (API Server)" {
     k8s_issue["rulepass"]
 }
