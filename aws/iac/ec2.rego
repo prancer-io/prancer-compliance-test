@@ -9,8 +9,8 @@ package rule
 default ec2_iam_role = null
 
 aws_attribute_absence["ec2_iam_role"] {
-    resource := input.resources[_]
-    lower(resource.Type) == "aws::ec2::instance"
+    resource := input.Resources.Ec2Instance.Type
+    lower(Resources.Ec2Instance.Type) == "aws::ec2::instance"
     not resource.Properties.IamInstanceProfile
 }
 
