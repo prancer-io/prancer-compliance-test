@@ -5,136 +5,144 @@
             "version": "0.1",
             "cases": [
                 {
-                        "masterTestId": "AZURE_TEST_216",
-                        "type": "rego",
-                        "rule": "file(azure_216.rego)",
-                        "evals": [
-                            {
-                                "id":"PR-AZR-0007",
-                                "eval":"data.rule.rulepass",
-                                "message": "data.rule.rulepass_err",
-                                "remediationDescription":"",
-                                "remediationFunction":""
-                            }
-                        ],
-                        "tags": [
-                            {
-                                "cloud": "azure",
-                                "compliance": [
-                                    "COSTUM"
-                                ],
-                                "service": [
-                                    "Microsoft.ContainerService",
-                                    "Container",
-                                    "Azure Kubernetes Service"
-                                ]
-                            }
-                        ],
-                        "masterSnapshotId" : ["AZRSNP_219"],
-                        "title" : "Azure AKS cluster HTTP application routing enabled",
-                        "description" :"HTTP application routing configures an Ingress controller in your AKS cluster. As applications are deployed, the solution also creates publicly accessible DNS names for application endpoints. While this makes it easy to access applications that are deployed to your Azure AKS cluster, this add-on is not recommended for production use.This policy checks your AKS cluster HTTP application routing add-on setting and alerts if enabled."
+                    "masterTestId": "AZURE_TEST_216",
+                    "type": "rego",
+                    "rule": "file(PR_AZR_0007.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0007",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription": "1. Sign in to the Azure portal. \n 2. Goto the Kubernetes Service and select your cluster. \n 3. Click Networking option in the left window pane. \n 4. Uncheck \"Enable HTTP application routing\" and click on save button.",
+                            "remediationFunction": "PR_AZR_0007.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.ContainerService",
+                                "Container",
+                                "Azure Kubernetes Service"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_219"
+                    ],
+                    "title": "Azure AKS cluster HTTP application routing enabled",
+                    "description": "HTTP application routing configures an Ingress controller in your AKS cluster. As applications are deployed, the solution also creates publicly accessible DNS names for application endpoints. While this makes it easy to access applications that are deployed to your Azure AKS cluster, this add-on is not recommended for production use.This policy checks your AKS cluster HTTP application routing add-on setting and alerts if enabled."
                 },
                 {
-                        "masterTestId": "AZURE_TEST_217",
-                        "type": "rego",
-                        "rule": "file(azure_217.rego)",
-                        "evals": [
-                            {
-                                "id":"PR-AZR-0008",
-                                "eval":"data.rule.rulepass",
-                                "message": "data.rule.rulepass_err",
-                                "remediationDescription":"",
-                                "remediationFunction":""
-                            }
-                        ],
-                        "tags": [
-                            {
-                                "cloud": "azure",
-                                "compliance": [
-                                    "COSTUM"
-                                ],
-                                "service": [
-                                    "Microsoft.ContainerService",
-                                    "Container",
-                                    "Azure Kubernetes Service"
-                                ]
-                            }
-                        ],
-                        "masterSnapshotId" : ["AZRSNP_219"],
-                        "title" : "Azure AKS cluster monitoring enabled",
-                        "description" :"Azure Monitor for containers is a feature designed to monitor the performance of container workloads deployed to either Azure Container Instances or managed Kubernetes clusters hosted on Azure Kubernetes Service (AKS). Monitoring your containers is critical, especially when you're running a production cluster, at scale, with multiple applications.This policy checks your AKS cluster monitoring add-on setting and alerts if no configuration is found, or monitoring is disabled."
+                    "masterTestId": "AZURE_TEST_217",
+                    "type": "rego",
+                    "rule": "file(PR_AZR_0008.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0008",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription": "1. Sign in to the Azure portal. \n 2. Goto the Kubernetes Service and select your cluster. \n 3. Click Insights in the left window pane. \n 4. If you have an existing Log Analytics workspace in the same subscription as the cluster, select it in the drop-down list. \n 5. Select Enable.",
+                            "remediationFunction": "PR_AZR_0008.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.ContainerService",
+                                "Container",
+                                "Azure Kubernetes Service"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_219"
+                    ],
+                    "title": "Azure AKS cluster monitoring enabled",
+                    "description": "Azure Monitor for containers is a feature designed to monitor the performance of container workloads deployed to either Azure Container Instances or managed Kubernetes clusters hosted on Azure Kubernetes Service (AKS). Monitoring your containers is critical, especially when you're running a production cluster, at scale, with multiple applications.This policy checks your AKS cluster monitoring add-on setting and alerts if no configuration is found, or monitoring is disabled."
                 },
                 {
-                        "masterTestId": "AZURE_TEST_218",
-                        "type": "rego",
-                        "rule": "file(azure_218.rego)",
-                        "evals": [
-                            {
-                                "id":"PR-AZR-0009",
-                                "eval":"data.rule.rulepass",
-                                "message": "data.rule.rulepass_err",
-                                "remediationDescription":"",
-                                "remediationFunction":""
-                            }
-                        ],
-                        "tags": [
-                            {
-                                "cloud": "azure",
-                                "compliance": [
-                                    "COSTUM"
-                                ],
-                                "service": [
-                                    "Microsoft.ContainerService",
-                                    "Container",
-                                    "Azure Kubernetes Service"
-                                ]
-                            }
-                        ],
-                        "masterSnapshotId" : ["AZRSNP_219"],
-                        "title" : "Azure AKS cluster pool profile count contains 3 more then nodes",
-                        "description" :"Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes."
+                    "masterTestId": "AZURE_TEST_218",
+                    "type": "rego",
+                    "rule": "file(PR_AZR_0009.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0009",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription": "1. Sign in to the Azure portal. \n 2. Goto the Kubernetes Service and select your cluster. \n 3. Click Scale in the left window pane. \n 4. Just above Total cluster capacity, increase the total number of nodes in your pool. \n 5. Click Save.",
+                            "remediationFunction": "PR_AZR_0009.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.ContainerService",
+                                "Container",
+                                "Azure Kubernetes Service"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_219"
+                    ],
+                    "title": "Azure AKS cluster pool profile count contains 3 more then nodes",
+                    "description": "Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes."
                 },
                 {
-                        "masterTestId": "AZURE_TEST_219",
-                        "type": "rego",
-                        "rule": "file(azure_219.rego)",
-                        "evals":  [
-                            {
-                                "id":"PR-AZR-0010",
-                                "eval":"data.rule.rulepass",
-                                "message": "data.rule.rulepass_err",
-                                "remediationDescription":"",
-                                "remediationFunction":""
-                            }
-                        ],
-                        "tags": [
-                            {
-                                "cloud": "azure",
-                                "compliance": [
-                                    "COSTUM"
-                                ],
-                                "service": [
-                                    "Microsoft.ContainerService",
-                                    "Container",
-                                    "Azure Kubernetes Service"
-                                ]
-                            }
-                        ],
-                        "masterSnapshotId" : ["AZRSNP_219"],
-                        "title" : "Azure AKS enable role-based access control (RBAC) enforced",
-                        "description" :"To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster."
+                    "masterTestId": "AZURE_TEST_219",
+                    "type": "rego",
+                    "rule": "file(PR_AZR_0010.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0010",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0010.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "COSTUM"
+                            ],
+                            "service": [
+                                "Microsoft.ContainerService",
+                                "Container",
+                                "Azure Kubernetes Service"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_219"
+                    ],
+                    "title": "Azure AKS enable role-based access control (RBAC) enforced",
+                    "description": "To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster."
                 },
                 {
                     "masterTestId": "AZURE_TEST_224",
                     "type": "rego",
-                    "rule": "file(azure_224.rego)",
+                    "rule": "file(PR_AZR_0015.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0015",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0015",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "1. Log in to the Azure portal. \n 2. Select 'All services' > 'Container Registries'. \n 3. Select the container registry you need to modify. \n 4. Select 'Upgrade to managed registry'. \n 5. Select 'OK' to confirm the upgrade.",
+                            "remediationFunction": "PR_AZR_0015.py"
                         }
                     ],
                     "tags": [
@@ -159,14 +167,14 @@
                 {
                     "masterTestId": "AZURE_TEST_229",
                     "type": "rego",
-                    "rule": "file(azure_network_security_229.rego)",
+                    "rule": "file(PR_AZR_0020.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0020",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0020",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (22 PORT). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0020.py"
                         }
                     ],
                     "tags": [
@@ -194,14 +202,14 @@
                 {
                     "masterTestId": "AZURE_TEST_230",
                     "type": "rego",
-                    "rule": "file(azure_network_security_230.rego)",
+                    "rule": "file(PR_AZR_0021.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0021",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0021",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (3389 PORT). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0021.py"
                         }
                     ],
                     "tags": [
@@ -229,14 +237,14 @@
                 {
                     "masterTestId": "AZURE_TEST_231",
                     "type": "rego",
-                    "rule": "file(azure_network_security_231.rego)",
+                    "rule": "file(PR_AZR_0022.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0022",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0022.py"
                         }
                     ],
                     "tags": [
@@ -260,14 +268,14 @@
                 {
                     "masterTestId": "AZURE_TEST_232",
                     "type": "rego",
-                    "rule": "file(azure_network_security_232.rego)",
+                    "rule": "file(PR_AZR_0023.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0023",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0023.py"
                         }
                     ],
                     "tags": [
@@ -291,14 +299,14 @@
                 {
                     "masterTestId": "AZURE_TEST_233",
                     "type": "rego",
-                    "rule": "file(azure_network_security_233.rego)",
+                    "rule": "file(PR_AZR_0024.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0024",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0024.py"
                         }
                     ],
                     "tags": [
@@ -322,14 +330,14 @@
                 {
                     "masterTestId": "AZURE_TEST_234",
                     "type": "rego",
-                    "rule": "file(azure_network_security_234.rego)",
+                    "rule": "file(PR_AZR_0025.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0025",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0025.py"
                         }
                     ],
                     "tags": [
@@ -353,14 +361,14 @@
                 {
                     "masterTestId": "AZURE_TEST_235",
                     "type": "rego",
-                    "rule": "file(azure_network_security_235.rego)",
+                    "rule": "file(PR_AZR_0026.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0026",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0026.py"
                         }
                     ],
                     "tags": [
@@ -384,14 +392,14 @@
                 {
                     "masterTestId": "AZURE_TEST_236",
                     "type": "rego",
-                    "rule": "file(azure_network_security_236.rego)",
+                    "rule": "file(PR_AZR_0027.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0027",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0027.py"
                         }
                     ],
                     "tags": [
@@ -413,14 +421,14 @@
                 {
                     "masterTestId": "AZURE_TEST_237",
                     "type": "rego",
-                    "rule": "file(azure_network_security_237.rego)",
+                    "rule": "file(PR_AZR_0028.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0028",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0028.py"
                         }
                     ],
                     "tags": [
@@ -442,14 +450,14 @@
                 {
                     "masterTestId": "AZURE_TEST_238",
                     "type": "rego",
-                    "rule": "file(azure_network_security_238.rego)",
+                    "rule": "file(PR_AZR_0029.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0029",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (445 PORT). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0029.py"
                         }
                     ],
                     "tags": [
@@ -471,14 +479,14 @@
                 {
                     "masterTestId": "AZURE_TEST_239",
                     "type": "rego",
-                    "rule": "file(azure_network_security_239.rego)",
+                    "rule": "file(PR_AZR_0030.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0030",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row ( TCP PORT 53). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0030.py"
                         }
                     ],
                     "tags": [
@@ -500,14 +508,14 @@
                 {
                     "masterTestId": "AZURE_TEST_240",
                     "type": "rego",
-                    "rule": "file(azure_network_security_240.rego)",
+                    "rule": "file(PR_AZR_0031.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0031",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row ( UDP Port 53 ). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0031.py"
                         }
                     ],
                     "tags": [
@@ -529,14 +537,14 @@
                 {
                     "masterTestId": "AZURE_TEST_241",
                     "type": "rego",
-                    "rule": "file(azure_network_security_241.rego)",
+                    "rule": "file(PR_AZR_0032.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0032",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (21 PORT). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0032.py"
                         }
                     ],
                     "tags": [
@@ -558,14 +566,14 @@
                 {
                     "masterTestId": "AZURE_TEST_242",
                     "type": "rego",
-                    "rule": "file(azure_network_security_242.rego)",
+                    "rule": "file(PR_AZR_0033.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0033",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (PORT 20). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0033.py"
                         }
                     ],
                     "tags": [
@@ -587,14 +595,14 @@
                 {
                     "masterTestId": "AZURE_TEST_243",
                     "type": "rego",
-                    "rule": "file(azure_network_security_243.rego)",
+                    "rule": "file(PR_AZR_0034.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0034",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0034.py"
                         }
                     ],
                     "tags": [
@@ -616,14 +624,14 @@
                 {
                     "masterTestId": "AZURE_TEST_244",
                     "type": "rego",
-                    "rule": "file(azure_network_security_244.rego)",
+                    "rule": "file(PR_AZR_0035.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0035",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (PORT 4333). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0035.py"
                         }
                     ],
                     "tags": [
@@ -645,14 +653,14 @@
                 {
                     "masterTestId": "AZURE_TEST_245",
                     "type": "rego",
-                    "rule": "file(azure_network_security_245.rego)",
+                    "rule": "file(PR_AZR_0036.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0036",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row ( PORT 3306). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0036.py"
                         }
                     ],
                     "tags": [
@@ -674,14 +682,14 @@
                 {
                     "masterTestId": "AZURE_TEST_246",
                     "type": "rego",
-                    "rule": "file(azure_network_security_246.rego)",
+                    "rule": "file(PR_AZR_0037.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0037",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row ( PORT 137). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0037.py"
                         }
                     ],
                     "tags": [
@@ -703,14 +711,14 @@
                 {
                     "masterTestId": "AZURE_TEST_247",
                     "type": "rego",
-                    "rule": "file(azure_network_security_247.rego)",
+                    "rule": "file(PR_AZR_0038.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0038",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 138). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0038.py"
                         }
                     ],
                     "tags": [
@@ -732,14 +740,14 @@
                 {
                     "masterTestId": "AZURE_TEST_248",
                     "type": "rego",
-                    "rule": "file(azure_network_security_248.rego)",
+                    "rule": "file(PR_AZR_0039.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0039",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 5432). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0039.py"
                         }
                     ],
                     "tags": [
@@ -767,8 +775,8 @@
                             "id":"PR-AZR-0040",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 25). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0040.py"
                         }
                     ],
                     "tags": [
@@ -790,14 +798,14 @@
                 {
                     "masterTestId": "AZURE_TEST_250",
                     "type": "rego",
-                    "rule": "file(azure_network_security_250.rego)",
+                    "rule": "file(PR_AZR_0041.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0041",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 1434). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0041.py"
                         }
                     ],
                     "tags": [
@@ -819,14 +827,14 @@
                 {
                     "masterTestId": "AZURE_TEST_251",
                     "type": "rego",
-                    "rule": "file(azure_network_security_251.rego)",
+                    "rule": "file(PR_AZR_0042.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0042",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 1433). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0042.py"
                         }
                     ],
                     "tags": [
@@ -848,14 +856,14 @@
                 {
                     "masterTestId": "AZURE_TEST_252",
                     "type": "rego",
-                    "rule": "file(azure_network_security_252.rego)",
+                    "rule": "file(PR_AZR_0043.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0043",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 4333). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0043.py"
                         }
                     ],
                     "tags": [
@@ -878,14 +886,14 @@
                 {
                     "masterTestId": "AZURE_TEST_253",
                     "type": "rego",
-                    "rule": "file(azure_network_security_253.rego)",
+                    "rule": "file(PR_AZR_0044.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0044",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 5500). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0044.py"
                         }
                     ],
                     "tags": [
@@ -907,14 +915,14 @@
                 {
                     "masterTestId": "AZURE_TEST_254",
                     "type": "rego",
-                    "rule": "file(azure_network_security_254.rego)",
+                    "rule": "file(PR_AZR_0045.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0045",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 5900). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0045.py"
                         }
                     ],
                     "tags": [
@@ -936,14 +944,14 @@
                 {
                     "masterTestId": "AZURE_TEST_255",
                     "type": "rego",
-                    "rule": "file(azure_network_security_255.rego)",
+                    "rule": "file(PR_AZR_0046.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0046",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 135). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0046.py"
                         }
                     ],
                     "tags": [
@@ -965,14 +973,14 @@
                 {
                     "masterTestId": "AZURE_TEST_256",
                     "type": "rego",
-                    "rule": "file(azure_network_security_256.rego)",
+                    "rule": "file(PR_AZR_0047.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0047",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 445). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0047.py"
                         }
                     ],
                     "tags": [
@@ -994,14 +1002,14 @@
                 {
                     "masterTestId": "AZURE_TEST_257",
                     "type": "rego",
-                    "rule": "file(azure_network_security_257.rego)",
+                    "rule": "file(PR_AZR_0048.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0048",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction":"PR_AZR_0048.py"
                         }
                     ],
                     "tags": [
@@ -1023,14 +1031,14 @@
                 {
                     "masterTestId": "AZURE_TEST_284",
                     "type": "rego",
-                    "rule": "file(azure_network_peer_284.rego)",
+                    "rule": "file(PR_AZR_0075.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0075",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0075.py"
                         }
                     ],
                     "tags": [
@@ -1054,14 +1062,14 @@
                 {
                     "masterTestId": "AZURE_TEST_6",
                     "type": "rego",
-                    "rule": "file(azure_network_security_6.rego)",
+                    "rule": "file(PR_AZR_gID6.rego)",
                     "evals": [
                         {
                             "id":"gID6",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_gID6.py"
                         }
                     ],
                     "tags": [
@@ -1085,14 +1093,14 @@
                 {
                     "masterTestId": "AZURE_TEST_211",
                     "type": "rego",
-                    "rule": "file(azure_pollicy_assignments_211.rego)",
+                    "rule": "file(PR_AZR_0002.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0002",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0002.py"
                         }
                     ],
                     "tags": [
@@ -1117,14 +1125,14 @@
                 {
                     "masterTestId": "AZURE_TEST_258",
                     "type": "rego",
-                    "rule": "file(azure_pollicy_assignments_258.rego)",
+                    "rule": "file(PR_AZR_0049.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0049",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0049.py"
                         }
                     ],
                     "tags": [
@@ -1150,14 +1158,14 @@
                 {
                     "masterTestId": "AZURE_TEST_285",
                     "type": "rego",
-                    "rule": "file(azure_pollicy_assignments_285.rego)",
+                    "rule": "file(PR_AZR_0076.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0076",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0076.py"
                         }
                     ],
                     "tags": [
@@ -1191,7 +1199,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0077.py"
                         }
                     ],
                     "tags": [
@@ -1224,7 +1232,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0078.py"
                         }
                     ],
                     "tags": [
@@ -1248,14 +1256,14 @@
                 {
                     "masterTestId": "AZURE_TEST_288",
                     "type": "rego",
-                    "rule": "file(azure_pollicy_assignments_288.rego)",
+                    "rule": "file(PR_AZR_0079.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0079",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0079.py"
                         }
                     ],
                     "tags": [
@@ -1281,14 +1289,14 @@
                 {
                     "masterTestId": "AZURE_TEST_290",
                     "type": "rego",
-                    "rule": "file(azure_pollicy_assignments_290.rego)",
+                    "rule": "file(PR_AZR_0081.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0081",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0081.py"
                         }
                     ],
                     "tags": [
@@ -1315,14 +1323,14 @@
                 {
                     "masterTestId": "AZURE_TEST_292",
                     "type": "rego",
-                    "rule": "file(azure_pollicy_assignments_292.rego)",
+                    "rule": "file(PR_AZR_0083.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0083",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0083.py"
                         }
                     ],
                     "tags": [
@@ -1342,21 +1350,21 @@
                             ]
                         }
                     ],
-                    "title" : "SQL auditing & Threat detection is set to OFF in Security Center",
-                    "description" : "Turning on SQL auditing & Threat detection will make sure that the databases adhere to regulatory compliance. It will also help understand database activity, and gain insights into discrepancies and anomalies that could show business concerns or any security violations.",
+                    "title" : "SQL auditing and Threat detection is set to OFF in Security Center",
+                    "description" : "Turning on SQL auditing and Threat detection will make sure that the databases adhere to regulatory compliance. It will also help understand database activity, and gain insights into discrepancies and anomalies that could show business concerns or any security violations.",
                     "masterSnapshotId" : ["AZRSNP_211"]
                 },
                 {
                     "masterTestId": "AZURE_TEST_295",
                     "type": "rego",
-                    "rule": "file(azure_pollicy_assignments_295.rego)",
+                    "rule": "file(PR_AZR_0086.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0086",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0086.py"
                         }
                     ],
                     "tags": [
@@ -1383,14 +1391,14 @@
                 {
                     "masterTestId": "AZURE_TEST_303",
                     "type": "rego",
-                    "rule": "file(azure_pollicy_assignments_303.rego)",
+                    "rule": "file(PR_AZR_0094.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0094",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0094.py"
                         }
                     ],
                     "tags": [
@@ -1424,7 +1432,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0095.py"
                         }
                     ],
                     "tags": [
@@ -1457,7 +1465,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0099.py"
                         }
                     ],
                     "tags": [
@@ -1484,14 +1492,14 @@
                 {
                     "masterTestId": "AZURE_TEST_309",
                     "type": "rego",
-                    "rule": "file(azure_pollicy_assignments_309.rego)",
+                    "rule": "file(PR_AZR_0100.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0100",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0100.py"
                         }
                     ],
                     "tags": [
@@ -1517,14 +1525,14 @@
                 {
                     "masterTestId": "AZURE_TEST_274",
                     "type": "rego",
-                    "rule": "file(azure_274.rego)",
+                    "rule": "file(PR_AZR_0065.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0065",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0065.py"
                         }
                     ],
                     "tags": [
@@ -1548,14 +1556,14 @@
                 {
                     "masterTestId": "AZURE_TEST_277",
                     "type": "rego",
-                    "rule": "file(azure_277.rego)",
+                    "rule": "file(PR_AZR_0068.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0068",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0068.py"
                         }
                     ],
                     "tags": [
@@ -1578,7 +1586,7 @@
                 {
                     "masterTestId": "AZURE_TEST_301",
                     "type": "rego",
-                    "rule": "file(azure_301.rego)",
+                    "rule": "file(PR_AZR_0092.rego)",
                     "tags": [
                         {
                             "cloud": "Azure",
@@ -1603,7 +1611,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0092.py"
                         }
                     ],
                     "title": "Storage Accounts without Secure transfer enabled",
@@ -1615,7 +1623,7 @@
                 {
                     "masterTestId": "AZURE_TEST_302",
                     "type": "rego",
-                    "rule": "file(azure_302.rego)",
+                    "rule": "file(PR_AZR_0093.rego)",
                     "tags": [
                         {
                             "cloud": "Azure",
@@ -1638,7 +1646,7 @@
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0093.py"
                         }
                     ],
                     "title": "Storage Accounts without Secure transfer enabled",
@@ -1650,14 +1658,14 @@
                 {
                     "masterTestId": "AZURE_TEST_221",
                     "type": "rego",
-                    "rule": "file(azure_221.rego)",
+                    "rule": "file(PR_AZR_0012.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0012",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0012.py"
                         }
                     ],
                     "tags": [
@@ -1682,14 +1690,14 @@
                 {
                     "masterTestId": "AZURE_TEST_259",
                     "type": "rego",
-                    "rule": "file(azure_259.rego)",
+                    "rule": "file(PR_AZR_0050.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0050",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0050.py"
                         }
                     ],
                     "tags": [
@@ -1714,14 +1722,14 @@
                 {
                     "masterTestId": "AZURE_TEST_260",
                     "type": "rego",
-                    "rule": "file(azure_260.rego)",
+                    "rule": "file(PR_AZR_0051.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0051",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0051.py"
                         }
                     ],
                     "tags": [
@@ -1746,14 +1754,14 @@
                 {
                     "masterTestId": "AZURE_TEST_1",
                     "type": "rego",
-                    "rule": "file(azure_1.rego)",
+                    "rule": "file(gID1.rego)",
                     "evals": [
                         {
                             "id":"gID1",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_gID1.py"
                         }
                     ],
                     "tags": [
@@ -1774,14 +1782,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_210",
                     "type": "rego",
-                    "rule": "file(azure_210.rego)",
+                    "rule": "file(PR_AZR_0001.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0001",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0001.py"
                         }
                     ],
                     "tags": [
@@ -1806,14 +1814,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_212",
                     "type": "rego",
-                    "rule": "file(azure_212.rego)",
+                    "rule": "file(PR_AZR_0003.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0003",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0003.py"
                         }
                     ],
                     "tags": [
@@ -1838,14 +1846,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_214",
                     "type": "rego",
-                    "rule": "file(azure_214.rego)",
+                    "rule": "file(PR_AZR_0005.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0005",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0005.py"
                         }
                     ],
                     "tags": [
@@ -1865,14 +1873,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_215",
                     "type": "rego",
-                    "rule": "file(azure_215.rego)",
+                    "rule": "file(PR_AZR_0006.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0006",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0006.py"
                         }
                     ],
                     "tags": [
@@ -1889,17 +1897,18 @@
                     ],
                     "title": "Azure AKS cluster Azure CNI networking not enabled",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_220",
                     "type": "rego",
-                    "rule": "file(azure_220.rego)",
+                    "rule": "file(PR_AZR_0011.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0011",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0011.py"
                         }
                     ],
                     "tags": [
@@ -1919,14 +1928,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_222",
                     "type": "rego",
-                    "rule": "file(azure_222.rego)",
+                    "rule": "file(PR_AZR_0013.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0013",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0013.py"
                         }
                     ],
                     "tags": [
@@ -1946,14 +1955,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_226",
                     "type": "rego",
-                    "rule": "file(azure_226.rego)",
+                    "rule": "file(PR_AZR_0017.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0017",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0017.py"
                         }
                     ],
                     "tags": [
@@ -1973,14 +1982,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_227",
                     "type": "rego",
-                    "rule": "file(azure_227.rego)",
+                    "rule": "file(PR_AZR_0018.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0018",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0018.py"
                         }
                     ],
                     "tags": [
@@ -2000,14 +2009,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_228",
                     "type": "rego",
-                    "rule": "file(azure_228.rego)",
+                    "rule": "file(PR_AZR_0019.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0019",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0019.py"
                         }
                     ],
                     "tags": [
@@ -2027,14 +2036,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_261",
                     "type": "rego",
-                    "rule": "file(azure_261.rego)",
+                    "rule": "file(PR_AZR_0052.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0052",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0052.py"
                         }
                     ],
                     "tags": [
@@ -2054,14 +2063,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_262",
                     "type": "rego",
-                    "rule": "file(azure_262.rego)",
+                    "rule": "file(PR_AZR_0053.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0053",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0053.py"
                         }
                     ],
                     "tags": [
@@ -2086,14 +2095,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_263",
                     "type": "rego",
-                    "rule": "file(azure_263.rego)",
+                    "rule": "file(PR_AZR_0054.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0054",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0054.py"
                         }
                     ],
                     "tags": [
@@ -2118,14 +2127,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_264",
                     "type": "rego",
-                    "rule": "file(azure_264.rego)",
+                    "rule": "file(PR_AZR_0055.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0055",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0055.py"
                         }
                     ],
                     "tags": [
@@ -2149,14 +2158,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_265",
                     "type": "rego",
-                    "rule": "file(azure_265.rego)",
+                    "rule": "file(PR_AZR_0056.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0056",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0056.py"
                         }
                     ],
                     "tags": [
@@ -2176,14 +2185,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_266",
                     "type": "rego",
-                    "rule": "file(azure_266.rego)",
+                    "rule": "file(PR_AZR_0057.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0057",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0057.py"
                         }
                     ],
                     "tags": [
@@ -2203,14 +2212,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_267",
                     "type": "rego",
-                    "rule": "file(azure_267.rego)",
+                    "rule": "file(PR_AZR_0058.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0058",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0058.py"
                         }
                     ],
                     "tags": [
@@ -2230,14 +2239,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_268",
                     "type": "rego",
-                    "rule": "file(azure_268.rego)",
+                    "rule": "file(PR_AZR_0059.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0059",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0059.py"
                         }
                     ],
                     "tags": [
@@ -2257,14 +2266,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_270",
                     "type": "rego",
-                    "rule": "file(azure_270.rego)",
+                    "rule": "file(PR_AZR_0061.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0061",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0061.py"
                         }
                     ],
                     "tags": [
@@ -2284,14 +2293,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_271",
                     "type": "rego",
-                    "rule": "file(azure_271.rego)",
+                    "rule": "file(PR_AZR_0062.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0062",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0062.py"
                         }
                     ],
                     "tags": [
@@ -2311,14 +2320,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_272",
                     "type": "rego",
-                    "rule": "file(azure_272.rego)",
+                    "rule": "file(PR_AZR_0063.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0063",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0063.py"
                         }
                     ],
                     "tags": [
@@ -2338,14 +2347,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_273",
                     "type": "rego",
-                    "rule": "file(azure_273.rego)",
+                    "rule": "file(PR_AZR_0064.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0064",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0064.py"
                         }
                     ],
                     "tags": [
@@ -2365,14 +2374,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_275",
                     "type": "rego",
-                    "rule": "file(azure_275.rego)",
+                    "rule": "file(PR_AZR_0066.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0066",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0066.py"
                         }
                     ],
                     "tags": [
@@ -2392,14 +2401,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_276",
                     "type": "rego",
-                    "rule": "file(azure_276.rego)",
+                    "rule": "file(PR_AZR_0067.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0067",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0067.py"
                         }
                     ],
                     "tags": [
@@ -2419,14 +2428,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_278",
                     "type": "rego",
-                    "rule": "file(azure_278.rego)",
+                    "rule": "file(PR_AZR_0069.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0069",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0069.py"
                         }
                     ],
                     "tags": [
@@ -2446,14 +2455,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_279",
                     "type": "rego",
-                    "rule": "file(azure_279.rego)",
+                    "rule": "file(PR_AZR_0070.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0070",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0070.py"
                         }
                     ],
                     "tags": [
@@ -2473,14 +2482,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_280",
                     "type": "rego",
-                    "rule": "file(azure_280.rego)",
+                    "rule": "file(PR_AZR_0071.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0071",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0071.py"
                         }
                     ],
                     "tags": [
@@ -2500,14 +2509,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_281",
                     "type": "rego",
-                    "rule": "file(azure_281.rego)",
+                    "rule": "file(PR_AZR_0072.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0072",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0072.py"
                         }
                     ],
                     "tags": [
@@ -2527,14 +2536,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_282",
                     "type": "rego",
-                    "rule": "file(azure_282.rego)",
+                    "rule": "file(PR_AZR_0073.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0073",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0073.py"
                         }
                     ],
                     "tags": [
@@ -2554,14 +2563,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_283",
                     "type": "rego",
-                    "rule": "file(azure_283.rego)",
+                    "rule": "file(PR_AZR_0074.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0074",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0074.py"
                         }
                     ],
                     "tags": [
@@ -2581,14 +2590,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_291",
                     "type": "rego",
-                    "rule": "file(azure_291.rego)",
+                    "rule": "file(PR_AZR_0082.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0082",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0082.py"
                         }
                     ],
                     "tags": [
@@ -2612,14 +2621,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_293",
                     "type": "rego",
-                    "rule": "file(azure_293.rego)",
+                    "rule": "file(PR_AZR_0084.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0084",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0084.py"
                         }
                     ],
                     "tags": [
@@ -2644,14 +2653,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_294",
                     "type": "rego",
-                    "rule": "file(azure_294.rego)",
+                    "rule": "file(PR_AZR_0085.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0085",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0085.py"
                         }
                     ],
                     "tags": [
@@ -2674,14 +2683,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_296",
                     "type": "rego",
-                    "rule": "file(azure_296.rego)",
+                    "rule": "file(PR_AZR_0087.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0087",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0087.py"
                         }
                     ],
                     "tags": [
@@ -2706,14 +2715,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_297",
                     "type": "rego",
-                    "rule": "file(azure_297.rego)",
+                    "rule": "file(PR_AZR_0088.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0088",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0088.py"
                         }
                     ],
                     "tags": [
@@ -2735,17 +2744,18 @@
                     ],
                     "title": "Send alerts on field value on SQL Databases is misconfigured",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_299",
                     "type": "rego",
-                    "rule": "file(azure_299.rego)",
+                    "rule": "file(PR_AZR_0090.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0090",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0090.py"
                         }
                     ],
                     "tags": [
@@ -2770,14 +2780,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_2",
                     "type": "rego",
-                    "rule": "file(azure_2.rego)",
+                    "rule": "file(gID2.rego)",
                     "evals": [
                         {
                             "id":"gID2",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_gID2.py"
                         }
                     ],
                     "tags": [
@@ -2798,14 +2808,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_300",
                     "type": "rego",
-                    "rule": "file(azure_300.rego)",
+                    "rule": "file(PR_AZR_0091.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0091",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0091.py"
                         }
                     ],
                     "tags": [
@@ -2826,14 +2836,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_305",
                     "type": "rego",
-                    "rule": "file(azure_305.rego)",
+                    "rule": "file(PR_AZR_0096.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0096",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0096.py"
                         }
                     ],
                     "tags": [
@@ -2856,14 +2866,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_306",
                     "type": "rego",
-                    "rule": "file(azure_306.rego)",
+                    "rule": "file(PR_AZR_0097.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0097",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0097.py"
                         }
                     ],
                     "tags": [
@@ -2887,14 +2897,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_307",
                     "type": "rego",
-                    "rule": "file(azure_307.rego)",
+                    "rule": "file(PR_AZR_0098.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0098",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0098.py"
                         }
                     ],
                     "tags": [
@@ -2917,14 +2927,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_3",
                     "type": "rego",
-                    "rule": "file(azure_3.rego)",
+                    "rule": "file(gID3.rego)",
                     "evals": [
                         {
                             "id":"gID3",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_gID3.py"
                         }
                     ],
                     "tags": [
@@ -2948,14 +2958,14 @@
                 },                {
                     "masterTestId": "AZURE_TEST_5",
                     "type": "rego",
-                    "rule": "file(azure_5.rego)",
+                    "rule": "file(gID5.rego)",
                     "evals": [
                         {
                             "id":"gID5",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_gID5.py"
                         }
                     ],
                     "tags": [
@@ -2976,14 +2986,14 @@
                 {
                     "masterTestId": "AZURE_TEST_7",
                     "type": "rego",
-                    "rule": "file(azure_7.rego)",
+                    "rule": "file(gID7.rego)",
                     "evals": [
                         {
                             "id":"gID7",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_gID7.py"
                         }
                     ],
                     "tags": [
@@ -3004,14 +3014,14 @@
                 {
                     "masterTestId": "AZURE_TEST_213",
                     "type": "rego",
-                    "rule": "file(azure_pollicy_assignments_213.rego)",
+                    "rule": "file(PR_AZR_0004.rego)",
                     "evals": [
                         {
                             "id":"PR-AZR-0004",
                             "eval":"data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AZR_0004.py"
                         }
                     ],
                     "tags": [
@@ -3030,6 +3040,146 @@
                         "AZRSNP_211"
                     ],
                     "title": "Automatic provisioning of monitoring agent is set to Off in Security Center",
+                    "description": ""
+                },
+                {
+                    "masterTestId": "AZURE_TEST_400",
+                    "type": "rego",
+                    "rule": "file(PR_AZR_0101.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0101",
+                            "eval": "data.rule.sql_server_rulepass",
+                            "message": "data.rule.sql_server_rulepass_err",
+                            "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open SQL Servers list \n 3) Select the SQL Server for which you want to modify the Mimimal TLS Version. \n 4) Click on `Firewalls and virtual networks` option under `Security` section. \n 5) Update the Minimum TLS Version to `1.2` and click on save button.",
+                            "remediationFunction": "PR_AZR_0101.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_400"
+                    ],
+                    "title": "Azure SQL Server check minumum TLS version",
+                    "description": "This policy will find the Azure SQL Servers which have configured TLS version lower then 1.2"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_401",
+                    "type": "rego",
+                    "rule": "file(azure_401.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0101",
+                            "eval": "data.rule.sql_instance_rulepass",
+                            "message": "data.rule.sql_instance_rulepass_err",
+                            "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open SQL Instances list \n 3) Select the SQL Server for which you want to modify the Mimimal TLS Version. \n 4) Click on `Firewalls and virtual networks` option under `Security` section. \n 5) Update the Minimum TLS Version to `1.2` and click on save button.",
+                            "remediationFunction": "PR_AZR_0101.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_401"
+                    ],
+                    "title": "Azure SQL Instances check minumum TLS version",
+                    "description": "This policy will find the Azure SQL Instances which have configured TLS version lower then 1.2"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_402",
+                    "type": "rego",
+                    "rule": "file(PR_AZR_0102.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0102",
+                            "eval": "data.rule.sql_server_rulepass",
+                            "message": "data.rule.sql_server_rulepass_err",
+                            "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open Azure SQL list \n 3) Select the reported SQL Server. \n 4) Click on `Security Center` option under `Security` section. \n 5) Click on \"Enable Azure Defender for SQL\" button.",
+                            "remediationFunction": "PR_AZR_0102.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_402"
+                    ],
+                    "title": "Advanced data security should be enabled on your SQL servers",
+                    "description": "Azure Defender provides advanced SQL security capabilities, including SQL Vulnerability Assessment and Advanced Threat Protection. It is recomamanded to Enable the Azure Defender for SQL."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_403",
+                    "type": "rego",
+                    "rule": "file(PR_AZR_0102.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0102",
+                            "eval": "data.rule.sql_instance_rulepass",
+                            "message": "data.rule.sql_instance_rulepass_err",
+                            "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open Azure SQL list \n 3) Select the reported SQL Managed Instance. \n 4) Click on `Security Center` option under `Security` section. \n 5) Click on \"Enable Azure Defender for SQL\" button.",
+                            "remediationFunction": "PR_AZR_0102.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_403"
+                    ],
+                    "title": "Advanced data security should be enabled on your SQL servers",
+                    "description": "Azure Defender provides advanced SQL security capabilities, including SQL Vulnerability Assessment and Advanced Threat Protection. It is recomamanded to Enable the Azure Defender for SQL."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_404",
+                    "type": "rego",
+                    "rule": "file(PR_AZR_0103.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0103",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open Azure SQL list \n 3) Select the reported SQL Server. \n 4) Click on `Security Center` option under `Security` section. \n 5) Click on \"Enable Azure Defender for SQL\" button.",
+                            "remediationFunction": "PR_AZR_0103.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_404"
+                    ],
+                    "title": "Auditing on SQL server should be enabled",
                     "description": ""
                 }
             ]

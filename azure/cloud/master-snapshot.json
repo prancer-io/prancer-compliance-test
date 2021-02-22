@@ -70,6 +70,19 @@
                   ]
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_283",
+                    "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+                    "collection": "Microsoft.Storage",
+                    "tags": [
+                      {
+                          "cloud": "azure",
+                          "service": [
+                              "Microsoft.Storage"
+                          ]
+                      }
+                  ]
+                },
+                {
                     "masterSnapshotId": "AZRSNP_284",
                     "type": "Microsoft.Network/virtualNetworks",
                     "collection": "Microsoft.Network",
@@ -367,6 +380,31 @@
                          ]
                      }
                  ]
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_400",
+                    "type": "Microsoft.Sql/servers",
+                    "collection": "Microsoft.SqlServers"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_401",
+                    "type": "Microsoft.Sql/managedInstances",
+                    "collection": "Microsoft.SqlInstances"
+                },
+                {
+                   "masterSnapshotId": "AZRSNP_402",
+                   "type": "Microsoft.Sql/servers/securityAlertPolicies",
+                   "collection": "Microsoft.SqlServersAlertpolicies"
+                },
+                {
+                   "masterSnapshotId": "AZRSNP_403",
+                   "type": "Microsoft.Sql/managedInstances/securityAlertPolicies",
+                   "collection": "Microsoft.SqlManagedInstancesAlertpolicies"
+                },
+                {
+                   "masterSnapshotId": "AZRSNP_404",
+                   "type": "Microsoft.Sql/servers/auditingSettings",
+                   "collection": "Microsoft.SqlServerAuditSettings"
                 }
             ]
         }

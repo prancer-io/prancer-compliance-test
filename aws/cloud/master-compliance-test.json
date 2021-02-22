@@ -21,7 +21,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0004.py"
                         }
                     ],
                     "title": "Access logging should be enabled on S3 buckets",
@@ -56,7 +56,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0147.py"
                         }
                     ],
                     "title": "S3 bucket should not enabled global view ACL permissions",
@@ -86,7 +86,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0139.py"
                         }
                     ],
                     "title": "AWS S3 Bucket Policy allows public access to CloudTrail logs",
@@ -116,7 +116,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0140.py"
                         }
                     ],
                     "title": "AWS S3 Bucket has Global DELETE Permissions enabled via bucket policy",
@@ -146,7 +146,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0141.py"
                         }
                     ],
                     "title": "AWS S3 Bucket has Global GET Permissions enabled via bucket policy",
@@ -176,7 +176,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0142.py"
                         }
                     ],
                     "title": "AWS S3 Bucket has Global LIST Permissions enabled via bucket policy",
@@ -206,7 +206,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0143.py"
                         }
                     ],
                     "title": "AWS S3 Bucket has Global PUT Permissions enabled via bucket policy",
@@ -236,7 +236,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0145.py"
                         }
                     ],
                     "title": "AWS S3 Object Versioning is disabled",
@@ -266,7 +266,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0148.py"
                         }
                     ],
                     "title": "AWS S3 bucket not configured with secure data transport policy",
@@ -296,7 +296,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0149.py"
                         }
                     ],
                     "title": "AWS S3 buckets are accessible to any authenticated user",
@@ -331,7 +331,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0150.py"
                         }
                     ],
                     "title": "AWS S3 buckets are accessible to public",
@@ -367,7 +367,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0196.py"
                         }
                     ],
                     "title": "S3 buckets with configurations set to host websites",
@@ -397,7 +397,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0035.py"
                         }
                     ],
                     "title": "Default Security Group should restrict inbound and outbound traffic for AllUsers",
@@ -434,7 +434,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0038.py"
                         }
                     ],
                     "title": "EBS Volume is attached",
@@ -464,7 +464,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0042.py"
                         }
                     ],
                     "title": "EC2 Instance IAM Role enabled",
@@ -494,7 +494,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0039.py"
                         }
                     ],
                     "title": "EBS snapshots should not accessible publicly",
@@ -529,7 +529,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0044.py"
                         }
                     ],
                     "title": "AWS EC2 instance allowing public IP in subnets",
@@ -559,7 +559,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0045.py"
                         }
                     ],
                     "title": "AWS EC2 instance is not configured with VPC",
@@ -589,7 +589,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0046.py"
                         }
                     ],
                     "title": "AWS EC2 instances with Public IP and associated with Security Groups have Internet Access",
@@ -618,8 +618,8 @@
                             "id":"PR-AWS-0159",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to the AWS Console and navigate to the 'VPC' service. \n 2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'. \n 3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 445 (or range containing 445).",
+                            "remediationFunction":"PR_AWS_0159.py"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to CIFS port (445)",
@@ -648,8 +648,8 @@
                             "id":"PR-AWS-0160",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to the AWS Console and navigate to the 'VPC' service. \n 2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'. \n 3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 53 (or range containing 53).",
+                            "remediationFunction":"PR_AWS_0160.py"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to DNS port (53)",
@@ -678,8 +678,8 @@
                             "id":"PR-AWS-0161",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to the AWS Console and navigate to the 'VPC' service. \n 2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'. \n 3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 21 (or range containing 21).",
+                            "remediationFunction":"PR_AWS_0161.py"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to FTP port (21)",
@@ -708,8 +708,8 @@
                             "id":"PR-AWS-0162",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to the AWS Console and navigate to the 'VPC' service. \n 2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'. \n 3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 20 (or range containing 20).",
+                            "remediationFunction":"PR_AWS_0162.py"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to FTP-Data port (20)",
@@ -738,8 +738,8 @@
                             "id":"PR-AWS-0163",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to the AWS Console and navigate to the 'VPC' service. \n 2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'. \n 3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 4333 (or range containing 4333).",
+                            "remediationFunction":"PR_AWS_0163.py"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to MSQL port (4333)",
@@ -768,8 +768,8 @@
                             "id":"PR-AWS-0164",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to the AWS Console and navigate to the 'VPC' service. \n 2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'. \n 3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 3306 (or range containing 3306).",
+                            "remediationFunction":"PR_AWS_0164.py"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to MYSQL port (3306)",
@@ -798,8 +798,8 @@
                             "id":"PR-AWS-0165",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to the AWS Console and navigate to the 'VPC' service. \n 2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'. \n 3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 137 (or range containing 137).",
+                            "remediationFunction":"PR_AWS_0165.py"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to NetBIOS port (137)",
@@ -828,8 +828,8 @@
                             "id":"PR-AWS-0166",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"1. Login to the AWS Console and navigate to the 'VPC' service. \n 2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'. \n 3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 138 (or range containing 138).",
+                            "remediationFunction":"PR_AWS_0166.py"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to NetBIOS port (138)",
@@ -859,7 +859,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0167.py"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to PostgreSQL port (5432)",
@@ -889,7 +889,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0168.py"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to RDP port (3389)",
@@ -927,7 +927,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0169.py"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to SMTP port (25)",
@@ -957,7 +957,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0170.py"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to SQLServer port (1433)",
@@ -987,7 +987,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0171.py"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to SQLServer port (1434)",
@@ -1017,7 +1017,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0172.py"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to Telnet port (23)",
@@ -1047,7 +1047,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0173.py"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to VNC Listener port (5500)",
@@ -1077,7 +1077,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0174.py"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to VNC Server port (5900)",
@@ -1107,7 +1107,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0175.py"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to Windows RPC port (135)",
@@ -1137,7 +1137,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0176.py"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic to SSH port (22)",
@@ -1175,7 +1175,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0177.py"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic to ports which are not commonly used",
@@ -1205,7 +1205,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0178.py"
                         }
                     ],
                     "title": "AWS Security Groups with Inbound rule overly permissive to All Traffic",
@@ -1235,7 +1235,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0179.py"
                         }
                     ],
                     "title": "AWS Security groups allow internet traffic",
@@ -1272,7 +1272,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0129.py"
                         }
                     ],
                     "title": "Automatic Backup setting in RDS instance",
@@ -1302,7 +1302,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0125.py"
                         }
                     ],
                     "title": "RDS instance should be encrypted",
@@ -1339,7 +1339,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0128.py"
                         }
                     ],
                     "title": "RDS instance with copy tags to snapshots enabled",
@@ -1369,7 +1369,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0121.py"
                         }
                     ],
                     "title": "RDS database instance should not accessible publicly",
@@ -1399,7 +1399,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0127.py"
                         }
                     ],
                     "title": "RDS instance with Multi-Availability Zone enabled",
@@ -1429,7 +1429,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0130.py"
                         }
                     ],
                     "title": "AWS RDS minor upgrades not enabled",
@@ -1459,7 +1459,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0119.py"
                         }
                     ],
                     "title": "AWS RDS DB cluster encryption is disabled",
@@ -1489,7 +1489,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0122.py"
                         }
                     ],
                     "title": "AWS RDS database not encrypted using Customer Managed Key",
@@ -1519,7 +1519,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0131.py"
                         }
                     ],
                     "title": "AWS RDS retention policy less than 7 days",
@@ -1549,7 +1549,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0014.py"
                         }
                     ],
                     "title": "AWS CloudFormation stack should configured with SNS topic",
@@ -1579,7 +1579,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0026.py"
                         }
                     ],
                     "title": "AWS CloudTrail should enabled in all regions",
@@ -1617,7 +1617,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0027.py"
                         }
                     ],
                     "title": "AWS CloudTrail log validation is enabled in all regions",
@@ -1655,7 +1655,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0028.py"
                         }
                     ],
                     "title": "AWS CloudTrail logs encrypted using customer master key (CMK).",
@@ -1691,7 +1691,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0192.py"
                         }
                     ],
                     "title": "Configure CloudTrail with CloudWatch Logs",
@@ -1728,7 +1728,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0064.py"
                         }
                     ],
                     "title": "Access Log should be enabled for AWS Elastic Load Balancer",
@@ -1758,7 +1758,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0065.py"
                         }
                     ],
                     "title": "Connection draining should be enabled for AWS Elastic Load Balancer",
@@ -1788,7 +1788,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0066.py"
                         }
                     ],
                     "title": "AWS Elastic Load Balancer with enabled cross-zone load balancing",
@@ -1818,7 +1818,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0062.py"
                         }
                     ],
                     "title": "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with insecure ciphers",
@@ -1848,7 +1848,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0063.py"
                         }
                     ],
                     "title": "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with vulnerable SSL protocol",
@@ -1878,7 +1878,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0067.py"
                         }
                     ],
                     "title": "AWS Elastic Load Balancer (ELB) has security group with no inbound rules",
@@ -1908,7 +1908,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0068.py"
                         }
                     ],
                     "title": "AWS Elastic Load Balancer (ELB) has security group with no outbound rules",
@@ -1938,7 +1938,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0069.py"
                         }
                     ],
                     "title": "AWS Elastic Load Balancer (ELB) not in use",
@@ -1968,7 +1968,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0072.py"
                         }
                     ],
                     "title": "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balancer (ALB) with access log disabled",
@@ -1998,7 +1998,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0073.py"
                         }
                     ],
                     "title": "AWS Elastic Load Balancer with listener TLS/SSL disabled",
@@ -2034,7 +2034,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0155.py"
                         }
                     ],
                     "title": "AWS SQS does not have a dead letter queue configured",
@@ -2064,7 +2064,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0156.py"
                         }
                     ],
                     "title": "AWS SQS queue encryption using default KMS key instead of CMK",
@@ -2094,7 +2094,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0157.py"
                         }
                     ],
                     "title": "AWS SQS server side encryption not enabled",
@@ -2124,7 +2124,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0105.py"
                         }
                     ],
                     "title": "AWS Lambda environment variables should be encrypted at the rest using CMK",
@@ -2154,7 +2154,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0106.py"
                         }
                     ],
                     "title": "AWS Lambda environment variables should be encrypted at the rest using CMK",
@@ -2184,7 +2184,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0107.py"
                         }
                     ],
                     "title": "AWS Lambda functions should have tracing enabled",
@@ -2214,7 +2214,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0108.py"
                         }
                     ],
                     "title": "AWS Lambda nearing availability code storage limit",
@@ -2244,7 +2244,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0047.py"
                         }
                     ],
                     "title": "AWS ECS task definition elevated privileges should be disabled",
@@ -2274,7 +2274,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0049.py"
                         }
                     ],
                     "title": "AWS ECS task definition should not configure root user.",
@@ -2304,7 +2304,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0048.py"
                         }
                     ],
                     "title": "AWS ECS task definition execution IAM Role should be set properly.",
@@ -2334,7 +2334,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0051.py"
                         }
                     ],
                     "title": "AWS EKS cluster endpoint access disabled public access",
@@ -2364,7 +2364,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0054.py"
                         }
                     ],
                     "title": "AWS EKS control plane logging should be enabled",
@@ -2394,7 +2394,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0055.py"
                         }
                     ],
                     "title": "AWS ElastiCache Redis cluster with Multi-AZ automatic failover feature set to disabled",
@@ -2424,7 +2424,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0056.py"
                         }
                     ],
                     "title": "AWS ElastiCache Redis cluster with enabled Redis AUTH feature",
@@ -2454,7 +2454,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0009.py"
                         }
                     ],
                     "title": "AWS Certificate Manager (ACM) has certificates with Certificate Transparency logging enabled",
@@ -2486,7 +2486,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0012.py"
                         }
                     ],
                     "title": "Detact unused AWS Certificate Manager (ACM) certificates",
@@ -2518,7 +2518,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0015.py"
                         }
                     ],
                     "title": "AWS CloudFront Distributions with Field-Level Encryption should be enabled",
@@ -2548,7 +2548,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0016.py"
                         }
                     ],
                     "title": "AWS CloudFront distribution should using secure SSL protocols for HTTPS communication",
@@ -2578,7 +2578,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0017.py"
                         }
                     ],
                     "title": "AWS CloudFront distribution access logging should be enabled",
@@ -2608,7 +2608,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0018.py"
                         }
                     ],
                     "title": "AWS CloudFront origin protocol policy enforce the HTTPS-only",
@@ -2638,7 +2638,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0019.py"
                         }
                     ],
                     "title": "AWS CloudFront viewer protocol policy is configured with HTTPS",
@@ -2668,7 +2668,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0021.py"
                         }
                     ],
                     "title": "AWS CloudFront AWS Web Application Firewall (AWS WAF) Web ACL is configured.",
@@ -2698,7 +2698,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0022.py"
                         }
                     ],
                     "title": "AWS CloudFront web distribution with Custom SSL Certificate",
@@ -2728,7 +2728,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0023.py"
                         }
                     ],
                     "title": "AWS CloudFront web distribution with geo restriction enabled",
@@ -2758,7 +2758,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0030.py"
                         }
                     ],
                     "title": "AWS Cloudfront Distribution with S3 have Origin Access set to enabled",
@@ -2788,7 +2788,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0033.py"
                         }
                     ],
                     "title": "AWS Config service must set to record all resources",
@@ -2823,7 +2823,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0061.py"
                         }
                     ],
                     "title": "AWS Elastic File System (EFS) with encryption for data at rest should be enabled",
@@ -2853,7 +2853,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0060.py"
                         }
                     ],
                     "title": "AWS Elastic File System (EFS) not encrypted using Customer Managed Key",
@@ -2883,7 +2883,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0003.py"
                         }
                     ],
                     "title": "AWS Access key should not contain any access key for root user.",
@@ -2913,7 +2913,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0082.py"
                         }
                     ],
                     "title": "AWS IAM password policy should be secure.",
@@ -2949,7 +2949,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0084.py"
                         }
                     ],
                     "title": "AWS Access key should not contain any access key for root user.",
@@ -2979,7 +2979,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0096.py"
                         }
                     ],
                     "title": "AWS IAM policy attached to group of IAM users",
@@ -3015,7 +3015,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0158.py"
                         }
                     ],
                     "title": "AWS SSM parameter should be encrypted using SecureString datatype",
@@ -3045,7 +3045,7 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_AWS_0137.py"
                         }
                     ],
                     "title": "AWS Redshift instances should be encrypted",
