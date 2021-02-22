@@ -9,7 +9,7 @@ package rule
 default sql_server_rulepass = null
 
 sql_server_issue["sql_server_disabled_security_alert_policy"] {
-    lower(input.type) == "microsoft.sql/servers/securityalertpolicies"
+    input.type == "Microsoft.Sql/servers/securityAlertPolicies"
     input.properties.state != "Enabled"
 }
 
@@ -29,7 +29,7 @@ sql_server_rulepass_err = "Azure SQL Database Server has not enabled security al
 default sql_instance_rulepass = null
 
 sql_instance_issue["sql_instance_disabled_security_alert_policy"]{
-    lower(input.type) == "microsoft.sql/managedinstances/securityalertpolicies"
+    input.type == "Microsoft.Sql/managedInstances/securityAlertPolicies"
     input.properties.state != "Enabled"
 }
 

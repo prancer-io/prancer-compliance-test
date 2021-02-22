@@ -10,7 +10,7 @@ default rulepass = false
 default rulepass = null
 
 sql_instance_issue["sql_instance_disabled_security_alert_policy"]{
-    lower(input.type) == "microsoft.sql/servers/auditingsettings"
+    input.type == "Microsoft.Sql/servers/auditingSettings"
     input.properties.state != "Enabled"
 }
 

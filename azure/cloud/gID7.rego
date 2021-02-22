@@ -9,7 +9,8 @@ default rulepass = true
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups
 
 rulepass = false {
-   count(nsg_allowed_inbound_port) > 0
+    input.type == "Microsoft.Network/networkSecurityGroups"
+    count(nsg_allowed_inbound_port) > 0
 }
 
 ports := ["6379"]

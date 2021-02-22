@@ -70,6 +70,19 @@
                   ]
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_283",
+                    "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+                    "collection": "Microsoft.Storage",
+                    "tags": [
+                      {
+                          "cloud": "azure",
+                          "service": [
+                              "Microsoft.Storage"
+                          ]
+                      }
+                  ]
+                },
+                {
                     "masterSnapshotId": "AZRSNP_284",
                     "type": "Microsoft.Network/virtualNetworks",
                     "collection": "Microsoft.Network",

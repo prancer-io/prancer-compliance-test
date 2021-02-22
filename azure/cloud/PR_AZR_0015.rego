@@ -18,5 +18,6 @@ rulepass {
 # ['sku.name != "classic"'] is not exist
 
 classicregistry["classic_registry_is_not_exist"] {
+   input.type == "Microsoft.ContainerRegistry/registries"
    lower(input.sku.name) != "classic"
 }

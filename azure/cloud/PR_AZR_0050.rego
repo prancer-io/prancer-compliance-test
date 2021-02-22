@@ -11,7 +11,8 @@ default rulepass = true
 
 # url link not available for resource explorer
 
-rulepass = false {                                      
+rulepass = false {   
+   input.type == "Microsoft.Network/networkWatchers"
    count(flowLogsSettings) >= 1
 }
 

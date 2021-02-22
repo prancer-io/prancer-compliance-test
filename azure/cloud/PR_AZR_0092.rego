@@ -13,5 +13,6 @@ default rulepass = false
 # https://docs.microsoft.com/en-us/rest/api/storagerp/storageaccounts/getproperties
 
 rulepass {
+   input.type = "Microsoft.Storage/storageAccounts"
    input.properties.supportsHttpsTrafficOnly == true
 }

@@ -8,7 +8,8 @@ default rulepass = true
 # Azure virtual network peer is disconnected
 # If virtual network peer is connected test will pass
 
-rulepass = false {                                      
+rulepass = false {    
+   input.type == "Microsoft.Network/virtualNetworks"
    count(virtual_network_peer) >= 1
 }
 

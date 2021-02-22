@@ -12,5 +12,6 @@ default rulepass = false
 # https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0
 
 rulepass {
+    input.type == "Microsoft.Authorization/policyAssignments"
     contains(input.id, "secureTransferToStorageAccountMonitoring")
 }

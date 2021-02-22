@@ -9,6 +9,7 @@ default rulepass = false
 # If NSG flow logs retention is 90 more than 90 days test will pass
 
 rulepass = true {
+   input.type == "Microsoft.Network/networkWatchers"
    count(nsg_retentionPolicy) == 2
 }
 
