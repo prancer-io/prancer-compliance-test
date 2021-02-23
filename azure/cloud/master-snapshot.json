@@ -405,6 +405,26 @@
                    "masterSnapshotId": "AZRSNP_404",
                    "type": "Microsoft.Sql/servers/auditingSettings",
                    "collection": "Microsoft.SqlServerAuditSettings"
+                },
+                {
+                   "masterSnapshotId": "AZRSNP_311",
+                   "type": "Microsoft.Compute/virtualMachines",
+                   "collection": "Microsoft.Compute"
+                },
+                {
+                   "masterSnapshotId": "AZRSNP_310",
+                   "type": "Microsoft.Sql/managedInstances/securityAlertPolicies",
+                   "collection": "Microsoft.SqlManagedInstancesAlertpolicies"
+                },
+                {
+                   "masterSnapshotId": "AZRSNP_312",
+                   "type": "Microsoft.Compute/virtualMachines",
+                   "collection": "Microsoft.Compute"
+                },
+                {
+                   "masterSnapshotId": "AZRSNP_313",
+                   "type": "Microsoft.Compute/virtualMachines",
+                   "collection": "Microsoft.Compute"
                 }
             ]
         }

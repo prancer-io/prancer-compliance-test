@@ -3181,6 +3181,118 @@
                     ],
                     "title": "Auditing on SQL server should be enabled",
                     "description": ""
+                },
+                {
+                    "masterTestId": "AZURE_TEST_311",
+                    "type": "rego",
+                    "rule": "file(PR_AZR_311.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-311",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open Virtual Machine list \n 3) Select the reported Virtual Machine. \n 4) Click on `System assigned` option under `Identity` section. \n 5) Click on \"Enable Status\" slide button.",
+                            "remediationFunction": "PR_AZR_311.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_311"
+                    ],
+                    "title": "Add system-assigned managed identity to enable Guest Configuration assignments on virtual machines with no identities",
+                    "description": "This policy adds a system-assigned managed identity to virtual machines hosted in Azure that are supported by Guest Configuration but do not have any managed identities. A system-assigned managed identity is a prerequisite for all Guest Configuration assignments and must be added to machines before using any Guest Configuration policy definitions."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_310",
+                    "type": "rego",
+                    "rule": "file(PR_AZR_310.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-310",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open Azure SQL list \n 3) Select the reported SQL Managed Instance. \n 4) Click on `Security Center` option under `Security` section.",
+                            "remediationFunction": "PR_AZR_310.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_310"
+                    ],
+                    "title": "Enable Advanced data security on SQL servers",
+                    "description": "Azure Defender provides advanced SQL security capabilities, including SQL Vulnerability Assessment and Advanced Threat Protection. It is recomamanded to Enable the Azure Defender for SQL."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_312",
+                    "type": "rego",
+                    "rule": "file(PR_AZR_312.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-312",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open Virtual Machine list \n 3) Redeploy the virtual machine with the known publisher.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_312"
+                    ],
+                    "title": "Audit Log Analytics agent deployment in virtual machine scale sets - VM Image (OS) unlisted",
+                    "description": ""
+                }
+                {
+                    "masterTestId": "AZURE_TEST_313",
+                    "type": "rego",
+                    "rule": "file(PR_AZR_313.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-313",
+                            "eval": "data.rule.rulepass",
+                            "message": "data.rule.rulepass_err",
+                            "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open Virtual Machine list \n 3) Select the reported Virtual Machine. \n 4) Click on `System assigned` option under `Identity` section. \n 5) Click on \"Enable Status\" slide button.",
+                            "remediationFunction": "PR_AZR_313.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_313"
+                    ],
+                    "title": "Add system-assigned managed identity to enable Guest Configuration assignments on VMs with a user-assigned identity",
+                    "description": ""
                 }
             ]
         }
