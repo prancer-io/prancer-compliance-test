@@ -9,8 +9,8 @@ package rule
 default vm_ip_forward = null
 
 gc_issue["vm_ip_forward"] {
-    resource := input.json.resources[_]
-    lower(resource.type) == "compute.v1.instance"
+    resource := input.resources.type
+    lower(resources.type) == "compute.v1.instance"
     resource.properties.canIpForward
 }
 
