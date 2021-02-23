@@ -9,19 +9,19 @@ package rule
 default eks_multiple_sg = null
 
 aws_attribute_absence["eks_multiple_sg"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::eks::cluster"
     not resource.Properties.ResourcesVpcConfig.SecurityGroupIds
 }
 
 aws_issue["eks_multiple_sg"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::eks::cluster"
     count(resource.Properties.ResourcesVpcConfig.SecurityGroupIds) > 1
 }
 
 eks_multiple_sg {
-    lower(input.resources[_].Type) == "aws::eks::cluster"
+    lower(input.Resources[i].Type) == "aws::eks::cluster"
     not aws_issue["eks_multiple_sg"]
     not aws_attribute_absence["eks_multiple_sg"]
 }

@@ -9,25 +9,25 @@ package rule
 default efs_kms = null
 
 aws_attribute_absence["efs_kms"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::efs::filesystem"
     not resource.Properties.KmsKeyId
 }
 
 aws_issue["efs_kms"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::efs::filesystem"
     not startswith(resource.Properties.KmsKeyId, "arn:")
 }
 
 aws_issue["efs_kms"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::efs::filesystem"
     not resource.Properties.Encrypted
 }
 
 efs_kms {
-    lower(input.resources[_].Type) == "aws::efs::filesystem"
+    lower(input.Resources[i].Type) == "aws::efs::filesystem"
     not aws_issue["efs_kms"]
     not aws_attribute_absence["efs_kms"]
 }
@@ -55,19 +55,19 @@ efs_kms_miss_err = "EFS attribute KmsKeyId missing in the resource" {
 default efs_encrypt = null
 
 aws_attribute_absence["efs_encrypt"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::efs::filesystem"
     not resource.Properties.Encrypted
 }
 
 aws_issue["efs_encrypt"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::efs::filesystem"
     resource.Properties.Encrypted != true
 }
 
 efs_encrypt {
-    lower(input.resources[_].Type) == "aws::efs::filesystem"
+    lower(input.Resources[i].Type) == "aws::efs::filesystem"
     not aws_issue["efs_encrypt"]
     not aws_attribute_absence["efs_encrypt"]
 }

@@ -10,31 +10,31 @@ package rule
 default s3_accesslog = null
 
 aws_attribute_absence["s3_accesslog"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     not resource.Properties.LoggingConfiguration.DestinationBucketName
 }
 
 aws_attribute_absence["s3_accesslog"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     not resource.Properties.LoggingConfiguration.LogFilePrefix
 }
 
 aws_issue["s3_accesslog"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     count(resource.Properties.LoggingConfiguration.DestinationBucketName) == 0
 }
 
 aws_issue["s3_accesslog"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     count(resource.Properties.LoggingConfiguration.LogFilePrefix) == 0
 }
 
 s3_accesslog {
-    lower(input.resources[_].Type) == "aws::s3::bucket"
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
     not aws_issue["s3_accesslog"]
     not aws_attribute_absence["s3_accesslog"]
 }
@@ -62,13 +62,13 @@ s3_accesslog_miss_err = "S3 Bucket attribute DestinationBucketName/LogFilePrefix
 default s3_acl_delete = null
 
 aws_attribute_absence["s3_acl_delete"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     not resource.Properties.PolicyDocument.Statement
 }
 
 aws_issue["s3_acl_delete"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     stat := resource.Properties.PolicyDocument.Statement[_]
     lower(stat.Effect) == "allow"
@@ -77,7 +77,7 @@ aws_issue["s3_acl_delete"] {
 }
 
 aws_issue["s3_acl_delete"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     stat := resource.Properties.PolicyDocument.Statement[_]
     lower(stat.Effect) == "allow"
@@ -86,7 +86,7 @@ aws_issue["s3_acl_delete"] {
 }
 
 s3_acl_delete {
-    lower(input.resources[_].Type) == "aws::s3::bucketpolicy"
+    lower(input.Resources[i].Type) == "aws::s3::bucketpolicy"
     not aws_issue["s3_acl_delete"]
     not aws_attribute_absence["s3_acl_delete"]
 }
@@ -114,13 +114,13 @@ s3_acl_delete_miss_err = "S3 Policy attribute PolicyDocument.Statement missing i
 default s3_acl_get = null
 
 aws_attribute_absence["s3_acl_get"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     not resource.Properties.PolicyDocument.Statement
 }
 
 aws_issue["s3_acl_get"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     stat := resource.Properties.PolicyDocument.Statement[_]
     lower(stat.Effect) == "allow"
@@ -129,7 +129,7 @@ aws_issue["s3_acl_get"] {
 }
 
 aws_issue["s3_acl_get"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     stat := resource.Properties.PolicyDocument.Statement[_]
     lower(stat.Effect) == "allow"
@@ -138,7 +138,7 @@ aws_issue["s3_acl_get"] {
 }
 
 s3_acl_get {
-    lower(input.resources[_].Type) == "aws::s3::bucketpolicy"
+    lower(input.Resources[i].Type) == "aws::s3::bucketpolicy"
     not aws_issue["s3_acl_get"]
     not aws_attribute_absence["s3_acl_get"]
 }
@@ -166,13 +166,13 @@ s3_acl_get_miss_err = "S3 Policy attribute PolicyDocument.Statement missing in t
 default s3_acl_list = null
 
 aws_attribute_absence["s3_acl_list"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     not resource.Properties.PolicyDocument.Statement
 }
 
 aws_issue["s3_acl_list"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     stat := resource.Properties.PolicyDocument.Statement[_]
     lower(stat.Effect) == "allow"
@@ -181,7 +181,7 @@ aws_issue["s3_acl_list"] {
 }
 
 aws_issue["s3_acl_list"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     stat := resource.Properties.PolicyDocument.Statement[_]
     lower(stat.Effect) == "allow"
@@ -190,7 +190,7 @@ aws_issue["s3_acl_list"] {
 }
 
 s3_acl_list {
-    lower(input.resources[_].Type) == "aws::s3::bucketpolicy"
+    lower(input.Resources[i].Type) == "aws::s3::bucketpolicy"
     not aws_issue["s3_acl_list"]
     not aws_attribute_absence["s3_acl_list"]
 }
@@ -218,13 +218,13 @@ s3_acl_list_miss_err = "S3 Policy attribute PolicyDocument.Statement missing in 
 default s3_acl_put = null
 
 aws_attribute_absence["s3_acl_put"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     not resource.Properties.PolicyDocument.Statement
 }
 
 aws_issue["s3_acl_put"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     stat := resource.Properties.PolicyDocument.Statement[_]
     lower(stat.Effect) == "allow"
@@ -233,7 +233,7 @@ aws_issue["s3_acl_put"] {
 }
 
 aws_issue["s3_acl_put"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     stat := resource.Properties.PolicyDocument.Statement[_]
     lower(stat.Effect) == "allow"
@@ -242,7 +242,7 @@ aws_issue["s3_acl_put"] {
 }
 
 s3_acl_put {
-    lower(input.resources[_].Type) == "aws::s3::bucketpolicy"
+    lower(input.Resources[i].Type) == "aws::s3::bucketpolicy"
     not aws_issue["s3_acl_put"]
     not aws_attribute_absence["s3_acl_put"]
 }
@@ -270,19 +270,19 @@ s3_acl_put_miss_err = "S3 Policy attribute PolicyDocument.Statement missing in t
 default s3_versioning = null
 
 aws_attribute_absence["s3_versioning"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     not resource.Properties.VersioningConfiguration.Status
 }
 
 aws_issue["s3_versioning"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     lower(resource.Properties.VersioningConfiguration.Status) != "enabled"
 }
 
 s3_versioning {
-    lower(input.resources[_].Type) == "aws::s3::bucket"
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
     not aws_issue["s3_versioning"]
     not aws_attribute_absence["s3_versioning"]
 }
@@ -310,19 +310,19 @@ s3_versioning_miss_err = "S3 Bucket attribute VersioningConfiguration.Status mis
 default s3_transport = null
 
 aws_attribute_absence["s3_transport"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     count([c | resource.Properties.PolicyDocument.Statement[_].Condition.StringLike["aws:SecureTransport"]; c := 1]) == 0
 }
 
 aws_issue["s3_transport"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     resource.Properties.PolicyDocument.Statement[_].Condition.StringLike["aws:SecureTransport"] != true
 }
 
 s3_transport {
-    lower(input.resources[_].Type) == "aws::s3::bucketpolicy"
+    lower(input.Resources[i].Type) == "aws::s3::bucketpolicy"
     not aws_issue["s3_transport"]
     not aws_attribute_absence["s3_transport"]
 }
@@ -350,13 +350,13 @@ s3_transport_miss_err = "S3 Policy attribute Condition SecureTransport missing i
 default s3_website = null
 
 aws_issue["s3_website"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     resource.Properties.WebsiteConfiguration
 }
 
 s3_website {
-    lower(input.resources[_].Type) == "aws::s3::bucket"
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
     not aws_issue["s3_website"]
 }
 

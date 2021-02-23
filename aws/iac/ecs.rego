@@ -9,19 +9,19 @@ package rule
 default ecs_task_evelated = null
 
 aws_attribute_absence["ecs_task_evelated"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::ecs::taskdefinition"
     not resource.Properties.ContainerDefinitions
 }
 
 aws_issue["ecs_task_evelated"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::ecs::taskdefinition"
     resource.Properties.ContainerDefinitions[_].Privileged == true
 }
 
 ecs_task_evelated {
-    lower(input.resources[_].Type) == "aws::ecs::taskdefinition"
+    lower(input.Resources[i].Type) == "aws::ecs::taskdefinition"
     not aws_issue["ecs_task_evelated"]
     not aws_attribute_absence["ecs_task_evelated"]
 }
@@ -49,19 +49,19 @@ ecs_task_evelated_miss_err = "ECS taskdefinition attribute ContainerDefinitions 
 default ecs_exec = null
 
 aws_attribute_absence["ecs_exec"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::ecs::taskdefinition"
     not resource.Properties.ExecutionRoleArn
 }
 
 aws_issue["ecs_exec"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::ecs::taskdefinition"
     not startswith(lower(resource.Properties.ExecutionRoleArn), "arn:aws:iam")
 }
 
 ecs_exec {
-    lower(input.resources[_].Type) == "aws::ecs::taskdefinition"
+    lower(input.Resources[i].Type) == "aws::ecs::taskdefinition"
     not aws_issue["ecs_exec"]
     not aws_attribute_absence["ecs_exec"]
 }
@@ -89,19 +89,19 @@ ecs_exec_miss_err = "ECS taskdefinition attribute ExecutionRoleArn missing in th
 default ecs_root_user = null
 
 aws_attribute_absence["ecs_root_user"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::ecs::taskdefinition"
     not resource.Properties.ContainerDefinitions
 }
 
 aws_issue["ecs_root_user"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::ecs::taskdefinition"
     lower(resource.Properties.ContainerDefinitions[_].User) == "root"
 }
 
 ecs_root_user {
-    lower(input.resources[_].Type) == "aws::ecs::taskdefinition"
+    lower(input.Resources[i].Type) == "aws::ecs::taskdefinition"
     not aws_issue["ecs_root_user"]
     not aws_attribute_absence["ecs_root_user"]
 }

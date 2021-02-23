@@ -9,19 +9,19 @@ package rule
 default esearch_vpc = null
 
 aws_attribute_absence["esearch_vpc"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     not resource.Properties.VPCOptions.SubnetIds
 }
 
 aws_issue["esearch_vpc"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     count(resource.Properties.VPCOptions.SubnetIds) == 0
 }
 
 esearch_vpc {
-    lower(input.resources[_].Type) == "aws::elasticsearch::domain"
+    lower(input.Resources[i].Type) == "aws::elasticsearch::domain"
     not aws_issue["esearch_vpc"]
     not aws_attribute_absence["esearch_vpc"]
 }
@@ -49,13 +49,13 @@ esearch_vpc_miss_err = "Elasticsearch attribute VPCOptions.SubnetIds missing in 
 default esearch_encrypt = null
 
 aws_issue["esearch_encrypt"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     not resource.Properties.EncryptionAtRestOptions.Enabled
 }
 
 esearch_encrypt {
-    lower(input.resources[_].Type) == "aws::elasticsearch::domain"
+    lower(input.Resources[i].Type) == "aws::elasticsearch::domain"
     not aws_issue["esearch_encrypt"]
 }
 
@@ -74,13 +74,13 @@ esearch_encrypt_err = "AWS Elasticsearch domain Encryption for data at rest is d
 default esearch_master = null
 
 aws_issue["esearch_master"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     not resource.Properties.ElasticsearchClusterConfig.DedicatedMasterEnabled
 }
 
 esearch_master {
-    lower(input.resources[_].Type) == "aws::elasticsearch::domain"
+    lower(input.Resources[i].Type) == "aws::elasticsearch::domain"
     not aws_issue["esearch_master"]
 }
 
@@ -99,31 +99,31 @@ esearch_master_err = "AWS Elasticsearch domain has Dedicated master set to disab
 default esearch_index_slow_log = null
 
 aws_attribute_absence["esearch_index_slow_log"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     not resource.Properties.LogPublishingOptions
 }
 
 aws_issue["esearch_index_slow_log"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     not resource.Properties.LogPublishingOptions.INDEX_SLOW_LOGS.Enabled
 }
 
 aws_issue["esearch_index_slow_log"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     not resource.Properties.LogPublishingOptions.INDEX_SLOW_LOGS.CloudWatchLogsLogGroupArn
 }
 
 aws_issue["esearch_index_slow_log"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     count(resource.Properties.LogPublishingOptions.INDEX_SLOW_LOGS.CloudWatchLogsLogGroupArn) == 0
 }
 
 esearch_index_slow_log {
-    lower(input.resources[_].Type) == "aws::elasticsearch::domain"
+    lower(input.Resources[i].Type) == "aws::elasticsearch::domain"
     not aws_issue["esearch_index_slow_log"]
     not aws_attribute_absence["esearch_index_slow_log"]
 }
@@ -151,31 +151,31 @@ esearch_index_slow_log_miss_err = "Elasticsearch attribute LogPublishingOptions 
 default esearch_search_slow_log = null
 
 aws_attribute_absence["esearch_search_slow_log"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     not resource.Properties.LogPublishingOptions
 }
 
 aws_issue["esearch_search_slow_log"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     not resource.Properties.LogPublishingOptions.SEARCH_SLOW_LOGS.Enabled
 }
 
 aws_issue["esearch_search_slow_log"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     not resource.Properties.LogPublishingOptions.SEARCH_SLOW_LOGS.CloudWatchLogsLogGroupArn
 }
 
 aws_issue["esearch_search_slow_log"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     count(resource.Properties.LogPublishingOptions.SEARCH_SLOW_LOGS.CloudWatchLogsLogGroupArn) == 0
 }
 
 esearch_search_slow_log {
-    lower(input.resources[_].Type) == "aws::elasticsearch::domain"
+    lower(input.Resources[i].Type) == "aws::elasticsearch::domain"
     not aws_issue["esearch_search_slow_log"]
     not aws_attribute_absence["esearch_search_slow_log"]
 }
@@ -203,13 +203,13 @@ esearch_search_slow_log_miss_err = "Elasticsearch attribute LogPublishingOptions
 default esearch_zone_awareness = null
 
 aws_issue["esearch_zone_awareness"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     not resource.Properties.ElasticsearchClusterConfig.ZoneAwarenessEnabled
 }
 
 esearch_zone_awareness {
-    lower(input.resources[_].Type) == "aws::elasticsearch::domain"
+    lower(input.Resources[i].Type) == "aws::elasticsearch::domain"
     not aws_issue["esearch_zone_awareness"]
 }
 

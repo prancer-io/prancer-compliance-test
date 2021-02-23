@@ -9,13 +9,13 @@ package rule
 default ebs_encrypt = null
 
 aws_issue["ebs_encrypt"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::volume"
     not resource.Properties.Encrypted
 }
 
 ebs_encrypt {
-    lower(input.resources[_].Type) == "aws::ec2::volume"
+    lower(input.Resources[i].Type) == "aws::ec2::volume"
     not aws_issue["ebs_encrypt"]
 }
 

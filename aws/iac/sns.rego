@@ -10,19 +10,19 @@ package rule
 default sns_protocol = null
 
 aws_attribute_absence["sns_protocol"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::subscription"
     not resource.Properties.Protocol
 }
 
 aws_issue["sns_protocol"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::subscription"
     lower(resource.Properties.Protocol) == "http"
 }
 
 sns_protocol {
-    lower(input.resources[_].Type) == "aws::sns::subscription"
+    lower(input.Resources[i].Type) == "aws::sns::subscription"
     not aws_issue["sns_protocol"]
     not aws_attribute_absence["sns_protocol"]
 }
@@ -50,13 +50,13 @@ sns_protocol_miss_err = "SNS attribute Protocol missing in the resource" {
 default sns_encrypt_key = null
 
 aws_issue["sns_encrypt_key"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topic"
     contains(lower(resource.Properties.KmsMasterKeyId), "alias/aws/sns")
 }
 
 sns_encrypt_key {
-    lower(input.resources[_].Type) == "aws::sns::topic"
+    lower(input.Resources[i].Type) == "aws::sns::topic"
     not aws_issue["sns_encrypt_key"]
 }
 
@@ -75,19 +75,19 @@ sns_encrypt_key_err = "AWS SNS topic encrypted using default KMS key instead of 
 default sns_encrypt = null
 
 aws_attribute_absence["sns_encrypt"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topic"
     not resource.Properties.KmsMasterKeyId
 }
 
 aws_issue["sns_encrypt"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topic"
     count(resource.Properties.KmsMasterKeyId) == 0
 }
 
 sns_encrypt {
-    lower(input.resources[_].Type) == "aws::sns::topic"
+    lower(input.Resources[i].Type) == "aws::sns::topic"
     not aws_issue["sns_encrypt"]
     not aws_attribute_absence["sns_encrypt"]
 }
