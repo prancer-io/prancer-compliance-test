@@ -9,19 +9,19 @@ package rule
 default api_gw_cert = null
 
 aws_attribute_absence["api_gw_cert"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::apigateway::stage"
     not resource.Properties.ClientCertificateId
 }
 
 aws_issue["api_gw_cert"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::apigateway::stage"
     lower(resource.Properties.ClientCertificateId) == "none"
 }
 
 api_gw_cert {
-    lower(input.resources[_].Type) == "aws::apigateway::stage"
+    lower(input.Resources[i].Type) == "aws::apigateway::stage"
     not aws_issue["api_gw_cert"]
     not aws_attribute_absence["api_gw_cert"]
 }
@@ -53,7 +53,7 @@ db_ports := [
 ]
 
 aws_issue["db_exposed"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
     ingress := resource.Properties.SecurityGroupIngress[_]
     port := db_ports[_]
@@ -63,7 +63,7 @@ aws_issue["db_exposed"] {
 }
 
 aws_issue["db_exposed"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
     ingress := resource.Properties.SecurityGroupIngress[_]
     port := db_ports[_]
@@ -73,7 +73,7 @@ aws_issue["db_exposed"] {
 }
 
 db_exposed {
-    lower(input.resources[_].Type) == "aws::ec2::securitygroup"
+    lower(input.Resources[i].Type) == "aws::ec2::securitygroup"
     not aws_issue["db_exposed"]
 }
 
@@ -96,7 +96,7 @@ bc_ports := [
 ]
 
 aws_issue["bitcoin_ports"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
     ingress := resource.Properties.SecurityGroupIngress[_]
     port := bc_ports[_]
@@ -106,7 +106,7 @@ aws_issue["bitcoin_ports"] {
 }
 
 aws_issue["bitcoin_ports"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
     ingress := resource.Properties.SecurityGroupIngress[_]
     port := bc_ports[_]
@@ -116,7 +116,7 @@ aws_issue["bitcoin_ports"] {
 }
 
 bitcoin_ports {
-    lower(input.resources[_].Type) == "aws::ec2::securitygroup"
+    lower(input.Resources[i].Type) == "aws::ec2::securitygroup"
     not aws_issue["bitcoin_ports"]
 }
 
@@ -139,7 +139,7 @@ eth_ports := [
 ]
 
 aws_issue["ethereum_ports"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
     ingress := resource.Properties.SecurityGroupIngress[_]
     port := eth_ports[_]
@@ -149,7 +149,7 @@ aws_issue["ethereum_ports"] {
 }
 
 aws_issue["ethereum_ports"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
     ingress := resource.Properties.SecurityGroupIngress[_]
     port := eth_ports[_]
@@ -159,7 +159,7 @@ aws_issue["ethereum_ports"] {
 }
 
 ethereum_ports {
-    lower(input.resources[_].Type) == "aws::ec2::securitygroup"
+    lower(input.Resources[i].Type) == "aws::ec2::securitygroup"
     not aws_issue["ethereum_ports"]
 }
 

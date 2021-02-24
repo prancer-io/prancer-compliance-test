@@ -9,19 +9,19 @@ package rule
 default ssm_secure = null
 
 aws_attribute_absence["ssm_secure"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::ssm::parameter"
     not resource.Properties.Type
 }
 
 aws_issue["ssm_secure"] {
-    resource := input.resources[_]
+    resource := input.Resources[i]
     lower(resource.Type) == "aws::ssm::parameter"
     lower(resource.Properties.Type) != "securestring"
 }
 
 ssm_secure {
-    lower(input.resources[_].Type) == "aws::ssm::parameter"
+    lower(input.Resources[i].Type) == "aws::ssm::parameter"
     not aws_issue["ssm_secure"]
     not aws_attribute_absence["ssm_secure"]
 }
