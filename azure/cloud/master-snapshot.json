@@ -405,6 +405,24 @@
                    "masterSnapshotId": "AZRSNP_404",
                    "type": "Microsoft.Sql/servers/auditingSettings",
                    "collection": "Microsoft.SqlServerAuditSettings"
+                },
+                {
+                   "masterSnapshotId": "AZRSNP_40",
+                   "type": "Microsoft.Sql/servers/auditingSettings",
+                   "collection": "Microsoft.SqlServerAuditSettings"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_232",
+                    "type": "Microsoft.Network/publicIPAddresses",
+                    "collection": "Microsoft.Network",
+                    "tags": [
+                      {
+                          "cloud": "azure",
+                          "service": [
+                              "Microsoft.Network"
+                          ]
+                      }
+                  ]
                 }
             ]
         }
