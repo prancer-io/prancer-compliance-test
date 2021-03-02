@@ -20,7 +20,7 @@
                 {
                    "masterSnapshotId": "AZRSNP_211",
                    "type": "Microsoft.Authorization/policyAssignments",
-                   "collection": "Microsoft.policyAssignments",
+                   "collection": "Microsoft.Authorization",
                    "tags": [
                      {
                          "cloud": "azure",
@@ -33,7 +33,7 @@
                 {
                    "masterSnapshotId": "AZRSNP_219",
                    "type": "Microsoft.ContainerService/managedClusters",
-                   "collection": "Microsoft.Compute",
+                   "collection": "Microsoft.ContainerService",
                    "tags": [
                      {
                          "cloud": "azure",
