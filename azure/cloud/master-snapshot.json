@@ -265,6 +265,19 @@
                  ]
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_228",
+                    "type": "Microsoft.KeyVault/vaults",
+                    "collection": "Microsoft.KeyVault",
+                    "tags": [
+                      {
+                          "cloud": "azure",
+                          "service": [
+                              "Microsoft.KeyVault"
+                          ]
+                      }
+                  ]
+                },
+                {
                    "masterSnapshotId": "AZRSNP_261",
                    "type": "Microsoft.Authorization/locks",
                    "collection": "Microsoft.Authorization",
