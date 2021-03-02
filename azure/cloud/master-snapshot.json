@@ -70,6 +70,19 @@
                   ]
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_240",
+                    "type": "Microsoft.Logic/workflows",
+                    "collection": "Microsoft.Logic",
+                    "tags": [
+                      {
+                          "cloud": "azure",
+                          "service": [
+                              "Microsoft.Logic"
+                          ]
+                      }
+                  ]
+                },
+                {
                     "masterSnapshotId": "AZRSNP_250",
                     "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
                     "collection": "Microsoft.ManagedIdentity",
