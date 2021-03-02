@@ -122,6 +122,19 @@
                   ]
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_276",
+                    "type": "Microsoft.Compute/virtualMachineScaleSets",
+                    "collection": "Microsoft.Compute",
+                    "tags": [
+                      {
+                          "cloud": "azure",
+                          "service": [
+                              "Microsoft.Compute"
+                          ]
+                      }
+                  ]
+                },
+                {
                     "masterSnapshotId": "AZRSNP_301",
                     "type": "Microsoft.Storage/storageAccounts",
                     "collection": "Microsoft.Storage",
