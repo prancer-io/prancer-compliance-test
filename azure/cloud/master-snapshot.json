@@ -109,6 +109,19 @@
                   ]
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_285",
+                    "type": "Microsoft.Network/loadBalancers",
+                    "collection": "Microsoft.Network",
+                    "tags": [
+                      {
+                          "cloud": "azure",
+                          "service": [
+                              "Microsoft.Network"
+                          ]
+                      }
+                  ]
+                },
+                {
                     "masterSnapshotId": "AZRSNP_277",
                     "type": "Microsoft.Compute/disks",
                     "collection": "Microsoft.Compute",
