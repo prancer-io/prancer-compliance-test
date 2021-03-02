@@ -70,6 +70,19 @@
                   ]
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_233",
+                    "type": "Microsoft.Network/dnszones",
+                    "collection": "Microsoft.Network",
+                    "tags": [
+                      {
+                          "cloud": "azure",
+                          "service": [
+                              "Microsoft.Network"
+                          ]
+                      }
+                  ]
+                },
+                {
                     "masterSnapshotId": "AZRSNP_240",
                     "type": "Microsoft.Logic/workflows",
                     "collection": "Microsoft.Logic",
