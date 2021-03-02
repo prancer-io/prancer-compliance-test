@@ -70,6 +70,19 @@
                   ]
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_250",
+                    "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+                    "collection": "Microsoft.ManagedIdentity",
+                    "tags": [
+                      {
+                          "cloud": "azure",
+                          "service": [
+                              "Microsoft.ManagedIdentity"
+                          ]
+                      }
+                  ]
+                },
+                {
                     "masterSnapshotId": "AZRSNP_283",
                     "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
                     "collection": "Microsoft.Storage",
