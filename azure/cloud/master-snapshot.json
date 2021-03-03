@@ -72,41 +72,17 @@
                 {
                     "masterSnapshotId": "AZRSNP_233",
                     "type": "Microsoft.Network/dnszones",
-                    "collection": "Microsoft.Network",
-                    "tags": [
-                      {
-                          "cloud": "azure",
-                          "service": [
-                              "Microsoft.Network"
-                          ]
-                      }
-                  ]
+                    "collection": "Microsoft.Network"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_240",
                     "type": "Microsoft.Logic/workflows",
-                    "collection": "Microsoft.Logic",
-                    "tags": [
-                      {
-                          "cloud": "azure",
-                          "service": [
-                              "Microsoft.Logic"
-                          ]
-                      }
-                  ]
+                    "collection": "Microsoft.Logic"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_250",
                     "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
-                    "collection": "Microsoft.ManagedIdentity",
-                    "tags": [
-                      {
-                          "cloud": "azure",
-                          "service": [
-                              "Microsoft.ManagedIdentity"
-                          ]
-                      }
-                  ]
+                    "collection": "Microsoft.ManagedIdentity"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_283",
@@ -137,28 +113,12 @@
                 {
                     "masterSnapshotId": "AZRSNP_285",
                     "type": "Microsoft.Network/loadBalancers",
-                    "collection": "Microsoft.Network",
-                    "tags": [
-                      {
-                          "cloud": "azure",
-                          "service": [
-                              "Microsoft.Network"
-                          ]
-                      }
-                  ]
+                    "collection": "Microsoft.Network"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_286",
                     "type": "Microsoft.Network/networkInterfaces",
-                    "collection": "Microsoft.Network",
-                    "tags": [
-                      {
-                          "cloud": "azure",
-                          "service": [
-                              "Microsoft.Network"
-                          ]
-                      }
-                  ]
+                    "collection": "Microsoft.Network"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_277",
@@ -189,15 +149,7 @@
                 {
                     "masterSnapshotId": "AZRSNP_276",
                     "type": "Microsoft.Compute/virtualMachineScaleSets",
-                    "collection": "Microsoft.Compute",
-                    "tags": [
-                      {
-                          "cloud": "azure",
-                          "service": [
-                              "Microsoft.Compute"
-                          ]
-                      }
-                  ]
+                    "collection": "Microsoft.Compute"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_301",
@@ -306,15 +258,7 @@
                 {
                     "masterSnapshotId": "AZRSNP_228",
                     "type": "Microsoft.KeyVault/vaults",
-                    "collection": "Microsoft.KeyVault",
-                    "tags": [
-                      {
-                          "cloud": "azure",
-                          "service": [
-                              "Microsoft.KeyVault"
-                          ]
-                      }
-                  ]
+                    "collection": "Microsoft.KeyVault"
                 },
                 {
                    "masterSnapshotId": "AZRSNP_261",
@@ -505,15 +449,7 @@
                 {
                     "masterSnapshotId": "AZRSNP_232",
                     "type": "Microsoft.Network/publicIPAddresses",
-                    "collection": "Microsoft.Network",
-                    "tags": [
-                      {
-                          "cloud": "azure",
-                          "service": [
-                              "Microsoft.Network"
-                          ]
-                      }
-                  ]
+                    "collection": "Microsoft.Network"
                 }
             ]
         }
