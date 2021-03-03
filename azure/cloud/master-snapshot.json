@@ -218,7 +218,7 @@
                 {
                    "masterSnapshotId": "AZRSNP_40",
                    "type": "Microsoft.Sql/servers/auditingSettings",
-                   "collection": "Microsoft.SqlServerAuditSettings"
+                   "collection": "Microsoft.Sql"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_232",
