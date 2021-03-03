@@ -70,6 +70,21 @@
                   ]
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_233",
+                    "type": "Microsoft.Network/dnszones",
+                    "collection": "Microsoft.Network"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_240",
+                    "type": "Microsoft.Logic/workflows",
+                    "collection": "Microsoft.Logic"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_250",
+                    "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+                    "collection": "Microsoft.ManagedIdentity"
+                },
+                {
                     "masterSnapshotId": "AZRSNP_283",
                     "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
                     "collection": "Microsoft.Storage",
@@ -96,6 +111,16 @@
                   ]
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_285",
+                    "type": "Microsoft.Network/loadBalancers",
+                    "collection": "Microsoft.Network"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_286",
+                    "type": "Microsoft.Network/networkInterfaces",
+                    "collection": "Microsoft.Network"
+                },
+                {
                     "masterSnapshotId": "AZRSNP_277",
                     "type": "Microsoft.Compute/disks",
                     "collection": "Microsoft.Compute",
@@ -120,6 +145,11 @@
                           ]
                       }
                   ]
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_276",
+                    "type": "Microsoft.Compute/virtualMachineScaleSets",
+                    "collection": "Microsoft.Compute"
                 },
                 {
                     "masterSnapshotId": "AZRSNP_301",
@@ -224,6 +254,11 @@
                          ]
                      }
                  ]
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_228",
+                    "type": "Microsoft.KeyVault/vaults",
+                    "collection": "Microsoft.KeyVault"
                 },
                 {
                    "masterSnapshotId": "AZRSNP_261",
@@ -405,6 +440,16 @@
                    "masterSnapshotId": "AZRSNP_404",
                    "type": "Microsoft.Sql/servers/auditingSettings",
                    "collection": "Microsoft.SqlServerAuditSettings"
+                },
+                {
+                   "masterSnapshotId": "AZRSNP_40",
+                   "type": "Microsoft.Sql/servers/auditingSettings",
+                   "collection": "Microsoft.SqlServerAuditSettings"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_232",
+                    "type": "Microsoft.Network/publicIPAddresses",
+                    "collection": "Microsoft.Network"
                 }
             ]
         }
