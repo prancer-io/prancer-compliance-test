@@ -27,8 +27,13 @@ Make sure you have the following prerequisites available:
 
  > The complete code is available in the [Hello World](https://github.com/prancer-io/prancer-hello-world) repository
 
-### step 1 - create a connector file to your IaC code repo
-You should create a connector file to your IaC repository (https://github.com/prancer-io/prancer-hello-world/blob/master/gitConnectorArm.json)
+The easiest way it to clone our [Hello World]() repository, change the parameters and run it.
+
+### step 1 - Clone the `Hello World` sample repo
+`git clone https://github.com/prancer-io/prancer-hello-world`
+
+### step 2 - Change the connector file to point to your IaC code repo
+You can use the avaialble connector and change the `gitProvider` attribute to point to your own repo. (https://github.com/prancer-io/prancer-hello-world/blob/master/gitConnectorArmRemoteStructure.json)
 
 ```
     {
@@ -41,4 +46,39 @@ You should create a connector file to your IaC repository (https://github.com/pr
     }
 ```
 
-### step 2 - 
+### step 3 - Verify Master snapshot and Master test files
+The next step is to verify master snapshot and master test files which are pointed them to this repository. The complete code is already available in our `Hello World` sample reporitory. You can find the sample codes here:
+https://github.com/prancer-io/prancer-hello-world/tree/master/validation/scenario-arm-remote
+
+master-snapshot.json
+```
+    {
+    "$schema": "",
+    "contentVersion": "1.0.0.0",
+    "fileType": "masterSnapshot",
+    "connector": "gitConnectorRemote",
+    "remoteFile": "azure/iac/master-snapshot.json",
+    "connectorUsers": [
+      {
+        "id": "USER_1",
+        "testUser": "user1",
+        "source": "gitConnectorArmRemoteStructure"
+      }
+    ]
+    }
+```
+
+master-test.json
+```
+    {
+    "contentVersion": "1.0.0.0",
+    "notification": [],
+    "masterSnapshot": "master-snapshot",
+    "fileType": "mastertest",
+    "connector": "gitConnectorRemote",
+    "remoteFile": "azure/iac/master-compliance-test.json"
+    }
+```
+
+### step 4 - running the IaC Scan
+run the command `prancer --crawler scenario-arm-remote` and then `prancer scenario-remote` to complete the tests
