@@ -1,9 +1,0 @@
-resources:
-- type: compute.v1.firewall
-  name: address-{{ env["deployment"] }}
-  properties:
-    network: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/global/networks/default
-    sourceRanges: [0.0.0.0/0]
-    denied:
-    - IPProtocol: tcp
-      ports: ['11234', '16180']
