@@ -14,9 +14,9 @@ The repository consists of 4 high level folders representing each supported type
  - Kubernetes
 
 Under each top level directory, we have `cloud`, `iac` and `terraform` folders which hold the `rego` files respectively.
- - `cloud` folder holds all the rego files related to post deployment tests
- - `iac` folder holds all the rego files related to IaC Scan
- - `terraform` folder holds all the rego files related to Terraform
+ - `cloud` folder holds all the rego files related to post deployment tests. These tests contribute to have continuous compliance in the cloud
+ - `iac` folder holds all the rego files related to IaC Security Scan. These tests contribute to shift security to left concept
+ - `terraform` folder holds all the rego files related to Terraform Infrastructure as Code
 
 ## Prerequisites
 Make sure you have the following prerequisites available:
@@ -40,6 +40,7 @@ The easiest way is to clone our [Hello World](https://github.com/prancer-io/pran
 ### step 2 - Change the connector file to point to your IaC code repo
 You can use the available connector and change the `gitProvider` attribute to point to your own repo. (https://github.com/prancer-io/prancer-hello-world/blob/master/gitConnectorArmRemoteStructure.json)
 
+`cat gitConnectorArmRemoteStructure.json`
 ```
 {
     "fileType": "structure",
@@ -52,10 +53,10 @@ You can use the available connector and change the `gitProvider` attribute to po
 ```
 
 ### step 3 - Verify Master snapshot and Master test files
-The next step is to verify master snapshot and master test files which are pointed them to this repository. The complete code is already available in our `Hello World` sample repository and you don't need to change anything. You can find the sample codes here:
+The next step is to verify master snapshot and master test files which are pointed to this repository. The complete code is already available in our `Hello World` sample repository and you don't need to change anything. You can find the sample codes here:
 https://github.com/prancer-io/prancer-hello-world/tree/master/validation/scenario-arm-remote
 
-master-snapshot.json
+`cat validation/scenario-arm-remote/master-snapshot.json`
 ```
 {
     "$schema": "",
@@ -73,7 +74,7 @@ master-snapshot.json
 }
 ```
 
-master-test.json
+`cat validation/scenario-arm-remote/master-test.json`
 ```
 {
     "contentVersion": "1.0.0.0",
@@ -86,4 +87,4 @@ master-test.json
 ```
 
 ### step 4 - running the IaC Scan
-run the command `prancer --crawler scenario-arm-remote` and then `prancer scenario-arm-remote` to complete the IaC security tests for Azure ARM templates.
+run the command `prancer --crawler scenario-arm-remote` to get all the files available in your repository. And then `prancer scenario-arm-remote` to complete the IaC security tests for Azure ARM templates.
