@@ -1,9 +1,0 @@
-resources:
-- type: compute.v1.disk
-  name: disk-{{ env["deployment"] }}
-  properties:
-    zone: {{ properties["zone"] }}
-    machineType: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/zones/{{ properties["zone"] }}/machineTypes/f1-micro
-    sizeGb: 10
-    type: https://www.googleapis.com/compute/v1/projects/{{ env["project"] }}/zones/{{ properties["zone"] }}/diskTypes/pd-standard
-    sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-7-wheezy-v20140619
