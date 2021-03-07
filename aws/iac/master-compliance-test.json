@@ -2575,6 +2575,58 @@
                             "service": []
                         }
                     ]
+                },
+                {
+                    "masterTestId": "TEST_SECRETS_1",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(secrets.rego)",
+                    "evals": [
+                        {
+                            "id":"PR-AWS-0028-RGX",
+                            "eval": "data.rule.gl_aws_secrets",
+                            "message": "data.rule.gl_aws_secrets_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
+                    "title": "",
+                    "description": "",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECRETS_2",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(secrets.rego)",
+                    "evals": [
+                        {
+                            "id":"PR-AWS-0029-RGX",
+                            "eval": "data.rule.gl_aws_account",
+                            "message": "data.rule.gl_aws_account_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
+                    "title": "",
+                    "description": "",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
                 }
             ]
         }

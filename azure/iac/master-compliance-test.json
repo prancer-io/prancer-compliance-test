@@ -2007,6 +2007,32 @@
                             "service": ["Databases"]
                         }
                     ]
+                },
+                {
+                    "masterTestId": "TEST_SECRETS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(secrets.rego)",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0001-RGX",
+                            "eval": "data.rule.gl_aws_account",
+                            "message": "data.rule.gl_aws_account_err",
+                            "remediationDescription":"",
+                            "remediationFunction":"PR-AZR-0001-RGX.py"
+                        }
+                    ],
+                    "title": "",
+                    "description": "",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
                 }
             ]
         }
