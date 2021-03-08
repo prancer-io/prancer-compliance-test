@@ -7,15 +7,18 @@ package rule
 default rulepass = null
 
 k8s_issue["rulepass"] {
+    lower(input.kind) == "podsecuritypolicy"
     lower(input.spec.runAsUser.rule) == "runasany"
 }
 
 k8s_issue["rulepass"] {
+    lower(input.kind) == "podsecuritypolicy"
     lower(input.spec.runAsUser.rule) == "mustrunas"
     input.spec.runAsUser.ranges[_].min == 0
 }
 
 rulepass {
+    lower(input.kind) == "podsecuritypolicy"
     not k8s_issue["rulepass"]
 }
 

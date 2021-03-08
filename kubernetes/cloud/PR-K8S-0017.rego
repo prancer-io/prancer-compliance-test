@@ -7,12 +7,14 @@ package rule
 default rulepass = null
 
 k8s_issue["rulepass"] {
+    lower(input.kind) == "pod"
     input.spec.containers[_].name == "etcd"
     input.metadata.namespace == "kube-system"
     input.spec.containers[_].command[_] == "--peer-auto-tls=true"
 }
 
 rulepass {
+    lower(input.kind) == "pod"
     not k8s_issue["rulepass"]
 }
 

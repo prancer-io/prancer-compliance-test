@@ -4,21 +4,34 @@ package rule
 # PR-K8S-0003
 #
 
-default default_role = null
+default rulepass = null
 
-k8s_issue["default_role"] {
+k8s_issue["rulepass"] {
+    lower(input.kind) == "rolebinding"
     lower(input.roleRef.kind) == "role"
     lower(input.roleRef.name) == "default"
 }
 
-default_role {
-    not k8s_issue["default_role"]
+k8s_issue["rulepass"] {
+    lower(input.kind) == "clusterrolebinding"
+    lower(input.roleRef.kind) == "role"
+    lower(input.roleRef.name) == "default"
 }
 
-default_role = false {
-    k8s_issue["default_role"]
+rulepass {
+    lower(input.kind) == "rolebinding"
+    not k8s_issue["rulepass"]
 }
 
-default_role_err = "PR-K8S-0003: Ensure that default service accounts are not actively used. (RBAC)" {
-    k8s_issue["default_role"]
+rulepass {
+    lower(input.kind) == "clusterrolebinding"
+    not k8s_issue["rulepass"]
+}
+
+rulepass = false {
+    k8s_issue["rulepass"]
+}
+
+rulepass_err = "PR-K8S-0003: Ensure that default service accounts are not actively used. (RBAC)" {
+    k8s_issue["rulepass"]
 }

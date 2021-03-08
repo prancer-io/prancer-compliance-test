@@ -7,10 +7,12 @@ package rule
 default rulepass = null
 
 k8s_issue["rulepass"] {
+    lower(input.kind) == "serviceaccount"
     input.automountServiceAccountToken == true
 }
 
 rulepass {
+    lower(input.kind) == "serviceaccount"
     not k8s_issue["rulepass"]
 }
 

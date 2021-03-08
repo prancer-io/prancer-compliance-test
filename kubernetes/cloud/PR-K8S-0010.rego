@@ -7,16 +7,19 @@ package rule
 default rulepass = null
 
 k8s_issue["rulepass"] {
+    lower(input.kind) == "podsecuritypolicy"
     not input.spec.requiredDropCapabilities
 }
 
 k8s_issue["rulepass"] {
+    lower(input.kind) == "podsecuritypolicy"
     rdc := input.spec.requiredDropCapabilities
     count([c | rdc[_] == "NET_RAW"; c := 1]) == 0
     count([c | rdc[_] == "ALL"; c := 1]) == 0
 }
 
 rulepass {
+    lower(input.kind) == "podsecuritypolicy"
     not k8s_issue["rulepass"]
 }
 

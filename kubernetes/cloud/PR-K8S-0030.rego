@@ -7,10 +7,12 @@ package rule
 default rulepass = null
 
 k8s_issue["rulepass"] {
+    lower(input.kind) == "pod"
     input.metadata.namespace == "default"
 }
 
 rulepass {
+    lower(input.kind) == "pod"
     not k8s_issue["rulepass"]
 }
 

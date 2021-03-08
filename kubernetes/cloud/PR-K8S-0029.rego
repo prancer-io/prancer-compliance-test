@@ -7,12 +7,14 @@ package rule
 default rulepass = null
 
 k8s_issue["rulepass"] {
+    lower(input.kind) == "pod"
     input.spec.containers[_].name == "kube-scheduler"
     input.metadata.namespace == "kube-system"
     input.spec.containers[_].command[_] == "--profiling=true"
 }
 
 k8s_issue["rulepass"] {
+    lower(input.kind) == "pod"
     input.spec.containers[_].name == "kube-scheduler"
     input.metadata.namespace == "kube-system"
     count([
@@ -21,6 +23,7 @@ k8s_issue["rulepass"] {
 }
 
 rulepass {
+    lower(input.kind) == "pod"
     not k8s_issue["rulepass"]
 }
 

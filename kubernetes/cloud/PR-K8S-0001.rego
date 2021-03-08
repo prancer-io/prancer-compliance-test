@@ -7,10 +7,12 @@ package rule
 default rulepass = null
 
 k8s_issue["rulepass"] {
+    lower(input.kind) == "clusterrole"
     input.rules[_].resources[_] == "secrets"
 }
 
 k8s_issue["rulepass"] {
+    lower(input.kind) == "clusterrole"
     regex.match(".*\\*.*", input.rules[_].resources[_])
 }
 

@@ -7,18 +7,21 @@ package rule
 default rulepass = null
 
 k8s_issue["rulepass"] {
+    lower(input.kind) == "pod"
     input.spec.containers[_].name == "etcd"
     input.metadata.namespace == "kube-system"
     input.spec.containers[_].command[_] == "--peer-client-cert-auth=false"
 }
 
 k8s_issue["rulepass"] {
+    lower(input.kind) == "pod"
     input.spec.containers[_].name == "etcd"
     input.metadata.namespace == "kube-system"
     count([c | contains(input.spec.containers[_].command[_], "peer-client-cert-auth"); c := 1]) == 0
 }
 
 rulepass {
+    lower(input.kind) == "pod"
     not k8s_issue["rulepass"]
 }
 

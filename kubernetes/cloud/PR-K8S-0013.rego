@@ -4,20 +4,22 @@ package rule
 # PR-K8S-0013
 #
 
-default host_pid = null
+default rulepass = null
 
-k8s_issue["host_pid"] {
+k8s_issue["rulepass"] {
+    lower(input.kind) == "podsecuritypolicy"
     input.spec.hostPID == true
 }
 
-host_pid {
-    not k8s_issue["host_pid"]
+rulepass {
+    lower(input.kind) == "podsecuritypolicy"
+    not k8s_issue["rulepass"]
 }
 
-host_pid = false {
-    k8s_issue["host_pid"]
+rulepass = false {
+    k8s_issue["rulepass"]
 }
 
-host_pid_err = "PR-K8S-0013: Minimize the admission of containers wishing to share the host process ID namespace (PSP)" {
-    k8s_issue["host_pid"]
+rulepass_err = "PR-K8S-0013: Minimize the admission of containers wishing to share the host process ID namespace (PSP)" {
+    k8s_issue["rulepass"]
 }
