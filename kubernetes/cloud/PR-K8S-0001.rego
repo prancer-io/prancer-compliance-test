@@ -16,8 +16,23 @@ k8s_issue["rulepass"] {
     regex.match(".*\\*.*", input.rules[_].resources[_])
 }
 
+k8s_issue["rulepass"] {
+    lower(input.kind) == "role"
+    input.rules[_].resources[_] == "secrets"
+}
+
+k8s_issue["rulepass"] {
+    lower(input.kind) == "role"
+    regex.match(".*\\*.*", input.rules[_].resources[_])
+}
+
 rulepass {
     lower(input.kind) == "clusterrole"
+    not k8s_issue["rulepass"]
+}
+
+rulepass {
+    lower(input.kind) == "role"
     not k8s_issue["rulepass"]
 }
 

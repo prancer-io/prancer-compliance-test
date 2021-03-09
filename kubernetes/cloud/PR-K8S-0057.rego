@@ -7,11 +7,13 @@ package rule
 default rulepass = null
 
 k8s_issue["rulepass"] {
+    lower(input.kind) == "pod"
     input.metadata.namespace != "kube-system"
     count(input.spec.volumes[_].hostPath) > 0
 }
 
 rulepass {
+    lower(input.kind) == "pod"
     not k8s_issue["rulepass"]
 }
 

@@ -7,10 +7,12 @@ package rule
 default rulepass = null
 
 k8s_issue["rulepass"] {
+    lower(input.kind) == "networkpolicy"
     count(input.spec.ingress) == 0
 }
 
 rulepass {
+    lower(input.kind) == "networkpolicy"
     not k8s_issue["rulepass"]
 }
 
