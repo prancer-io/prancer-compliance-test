@@ -25,17 +25,11 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS 140"],
+                            "compliance": ["CIS"],
                             "service": []
                         }
                     ]
-                }
-            ]
-        },{
-            "masterTestName": "Kubernetes_iac_TEST",
-            "version": "0.1",
-            "cases": [
-                {
+                },{
                     "masterTestId": "TEST_POD_1",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -56,17 +50,11 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS 140"],
+                            "compliance": ["CIS"],
                             "service": []
                         }
                     ]
-                }
-            ]
-        },{
-            "masterTestName": "Kubernetes_iac_TEST",
-            "version": "0.1",
-            "cases": [
-                {
+                },{
                     "masterTestId": "TEST_POD_2",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -87,17 +75,11 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS 140"],
+                            "compliance": ["CIS"],
                             "service": []
                         }
                     ]
-                }
-            ]
-        },{
-            "masterTestName": "Kubernetes_iac_TEST",
-            "version": "0.1",
-            "cases": [
-                {
+                },{
                     "masterTestId": "TEST_POD_3",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -118,17 +100,11 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS 140"],
+                            "compliance": ["CIS"],
                             "service": []
                         }
                     ]
-                }
-            ]
-        },{
-            "masterTestName": "Kubernetes_iac_TEST",
-            "version": "0.1",
-            "cases": [
-                {
+                },{
                     "masterTestId": "TEST_POD_4",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -149,17 +125,11 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS 140"],
+                            "compliance": ["CIS"],
                             "service": []
                         }
                     ]
-                }
-            ]
-        },{
-            "masterTestName": "Kubernetes_iac_TEST",
-            "version": "0.1",
-            "cases": [
-                {
+                },{
                     "masterTestId": "TEST_POD_5",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -180,17 +150,11 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS 140"],
+                            "compliance": ["CIS"],
                             "service": []
                         }
                     ]
-                }
-            ]
-        },{
-            "masterTestName": "Kubernetes_iac_TEST",
-            "version": "0.1",
-            "cases": [
-                {
+                },{
                     "masterTestId": "TEST_POD_SECURITY_POLICY_1",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -211,17 +175,11 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS 140"],
+                            "compliance": ["CIS"],
                             "service": []
                         }
                     ]
-                }
-            ]
-        },{
-            "masterTestName": "Kubernetes_iac_TEST",
-            "version": "0.1",
-            "cases": [
-                {
+                },{
                     "masterTestId": "TEST_POD_SECURITY_POLICY_2",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -242,17 +200,11 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS 140"],
+                            "compliance": ["CIS"],
                             "service": []
                         }
                     ]
-                }
-            ]
-        },{
-            "masterTestName": "Kubernetes_iac_TEST",
-            "version": "0.1",
-            "cases": [
-                {
+                },{
                     "masterTestId": "TEST_POD_SECURITY_POLICY_3",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -273,17 +225,11 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS 140"],
+                            "compliance": ["CIS"],
                             "service": []
                         }
                     ]
-                }
-            ]
-        },{
-            "masterTestName": "Kubernetes_iac_TEST",
-            "version": "0.1",
-            "cases": [
-                {
+                },{
                     "masterTestId": "TEST_POD_SECURITY_POLICY_4",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -304,17 +250,11 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS 140"],
+                            "compliance": ["CIS"],
                             "service": []
                         }
                     ]
-                }
-            ]
-        },{
-            "masterTestName": "Kubernetes_iac_TEST",
-            "version": "0.1",
-            "cases": [
-                {
+                },{
                     "masterTestId": "TEST_POD_SECURITY_POLICY_5",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -335,17 +275,11 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS 140"],
+                            "compliance": ["CIS"],
                             "service": []
                         }
                     ]
-                }
-            ]
-        },{
-            "masterTestName": "Kubernetes_iac_TEST",
-            "version": "0.1",
-            "cases": [
-                {
+                },{
                     "masterTestId": "TEST_POD_SECURITY_POLICY_6",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -366,17 +300,11 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS 140"],
+                            "compliance": ["CIS"],
                             "service": []
                         }
                     ]
-                }
-            ]
-        },{
-            "masterTestName": "Kubernetes_iac_TEST",
-            "version": "0.1",
-            "cases": [
-                {
+                },{
                     "masterTestId": "TEST_POD_SECURITY_POLICY_7",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -397,17 +325,11 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS 140"],
+                            "compliance": ["CIS"],
                             "service": []
                         }
                     ]
-                }
-            ]
-        },{
-            "masterTestName": "Kubernetes_iac_TEST",
-            "version": "0.1",
-            "cases": [
-                {
+                },{
                     "masterTestId": "TEST_ROLE_1",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -428,17 +350,11 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS 140"],
+                            "compliance": ["CIS"],
                             "service": []
                         }
                     ]
-                }
-            ]
-        },{
-            "masterTestName": "Kubernetes_iac_TEST",
-            "version": "0.1",
-            "cases": [
-                {
+                },{
                     "masterTestId": "TEST_ROLE_2",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -459,17 +375,11 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS 140"],
+                            "compliance": ["CIS"],
                             "service": []
                         }
                     ]
-                }
-            ]
-        },{
-            "masterTestName": "Kubernetes_iac_TEST",
-            "version": "0.1",
-            "cases": [
-                {
+                },{
                     "masterTestId": "TEST_ROLE_BINDING_1",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -490,17 +400,11 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS 140"],
+                            "compliance": ["CIS"],
                             "service": []
                         }
                     ]
-                }
-            ]
-        },{
-            "masterTestName": "Kubernetes_iac_TEST",
-            "version": "0.1",
-            "cases": [
-                {
+                },{
                     "masterTestId": "TEST_ROLE_BINDING_2",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -521,17 +425,11 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS 140"],
+                            "compliance": ["CIS"],
                             "service": []
                         }
                     ]
-                }
-            ]
-        },{
-            "masterTestName": "Kubernetes_iac_TEST",
-            "version": "0.1",
-            "cases": [
-                {
+                },{
                     "masterTestId": "TEST_SERVICE_ACCOUNT",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -552,7 +450,7 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS 140"],
+                            "compliance": ["CIS"],
                             "service": []
                         }
                     ]
