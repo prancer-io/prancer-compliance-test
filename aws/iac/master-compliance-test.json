@@ -2592,8 +2592,8 @@
                             "remediationFunction":""
                         }
                     ],
-                    "title": "",
-                    "description": "",
+                    "title": "Secrets should be removed from the source code",
+                    "description": "We should not have any secret in the source code. Make sure to put the secrets in a vault",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2618,8 +2618,8 @@
                             "remediationFunction":""
                         }
                     ],
-                    "title": "",
-                    "description": "",
+                    "title": "Secrets should be removed from the source code",
+                    "description": "We should not have any secret in the source code. Make sure to put the secrets in a vault",
                     "tags": [
                         {
                             "cloud": "git",
