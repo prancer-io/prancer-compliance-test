@@ -7,12 +7,14 @@ package rule
 default rulepass = null
 
 k8s_issue["rulepass"] {
+    lower(input.kind) == "pod"
     input.spec.containers[_].name == "kube-apiserver"
     input.metadata.namespace == "kube-system"
     regex.match("--insecure-allow-any-token=.*", input.spec.containers[_].command[_])
 }
 
 rulepass {
+    lower(input.kind) == "pod"
     not k8s_issue["rulepass"]
 }
 

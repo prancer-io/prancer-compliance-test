@@ -7,18 +7,21 @@ package rule
 default rulepass = null
 
 k8s_issue["rulepass"] {
+    lower(input.kind) == "pod"
     input.spec.containers[_].name == "kube-apiserver"
     input.metadata.namespace == "kube-system"
     regex.match("--enable-admission-plugins.*AlwaysAdmit.*", input.spec.containers[_].command[_])
 }
 
 k8s_issue["rulepass"] {
+    lower(input.kind) == "pod"
     input.spec.containers[_].name == "kube-apiserver"
     input.metadata.namespace == "kube-system"
     count([c | contains(input.spec.containers[_].command[_], "enable-admission-plugins"); c := 1]) == 0
 }
 
 rulepass {
+    lower(input.kind) == "pod"
     not k8s_issue["rulepass"]
 }
 

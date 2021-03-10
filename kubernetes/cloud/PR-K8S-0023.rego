@@ -7,6 +7,7 @@ package rule
 default rulepass = null
 
 k8s_issue["rulepass"] {
+    lower(input.kind) == "pod"
     count([
         c | regex.match(
         	"container.apparmor.security.beta.kubernetes.io\/pod.*", 
@@ -16,6 +17,7 @@ k8s_issue["rulepass"] {
 }
 
 rulepass {
+    lower(input.kind) == "pod"
     not k8s_issue["rulepass"]
 }
 

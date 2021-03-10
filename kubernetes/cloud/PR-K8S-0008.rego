@@ -7,10 +7,12 @@ package rule
 default rulepass = null
 
 k8s_issue["rulepass"] {
+    lower(input.kind) == "podsecuritypolicy"
     input.spec.privileged
 }
 
 rulepass {
+    lower(input.kind) == "podsecuritypolicy"
     not k8s_issue["rulepass"]
 }
 
