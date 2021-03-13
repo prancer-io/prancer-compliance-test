@@ -26,7 +26,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["clusterrole","role"]
                         }
                     ]
                 },
@@ -52,7 +52,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["clusterrole","role"]
                         }
                     ]
                 },
@@ -78,7 +78,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["rolebinding","clusterrolebinding"]
                         }
                     ]
                 },
@@ -104,7 +104,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["rolebinding","clusterrolebinding"]
                         }
                     ]
                 },
@@ -130,7 +130,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["podsecuritypolicy"]
                         }
                     ]
                 },
@@ -156,7 +156,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["podsecuritypolicy"]
                         }
                     ]
                 },
@@ -182,7 +182,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["podsecuritypolicy"]
                         }
                     ]
                 },
@@ -208,7 +208,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["podsecuritypolicy"]
                         }
                     ]
                 },
@@ -234,7 +234,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["podsecuritypolicy"]
                         }
                     ]
                 },
@@ -260,7 +260,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["podsecuritypolicy"]
                         }
                     ]
                 },
@@ -286,7 +286,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["podsecuritypolicy"]
                         }
                     ]
                 },
@@ -312,7 +312,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -338,7 +338,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -364,7 +364,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -390,7 +390,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -416,7 +416,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -442,7 +442,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -468,7 +468,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -494,7 +494,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -520,7 +520,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -546,7 +546,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -572,7 +572,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -598,7 +598,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -624,7 +624,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -650,7 +650,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -676,7 +676,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -702,7 +702,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -728,7 +728,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -754,7 +754,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -780,7 +780,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -806,7 +806,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -832,7 +832,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["serviceaccount"]
                         }
                     ]
                 },
@@ -858,7 +858,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["networkpolicy"]
                         }
                     ]
                 },
@@ -884,7 +884,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -910,7 +910,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -936,7 +936,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -962,7 +962,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -988,7 +988,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1014,7 +1014,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1040,7 +1040,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1066,7 +1066,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1092,7 +1092,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1118,7 +1118,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1144,7 +1144,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1170,7 +1170,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1196,7 +1196,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1222,7 +1222,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1248,7 +1248,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1274,7 +1274,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1300,7 +1300,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1326,7 +1326,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1352,7 +1352,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1378,7 +1378,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1404,7 +1404,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1430,7 +1430,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1456,7 +1456,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1482,7 +1482,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1508,7 +1508,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1534,7 +1534,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1560,7 +1560,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1586,7 +1586,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1612,7 +1612,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1638,7 +1638,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1664,7 +1664,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1690,7 +1690,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1716,7 +1716,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1742,7 +1742,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1768,7 +1768,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 },
@@ -1794,7 +1794,7 @@
                         {
                             "cloud": "kubernetes",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": ["pod"]
                         }
                     ]
                 }
