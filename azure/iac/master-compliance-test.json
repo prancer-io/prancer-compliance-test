@@ -2007,6 +2007,32 @@
                             "service": ["Databases"]
                         }
                     ]
+                },
+                {
+                    "masterTestId": "TEST_SECRETS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(secrets.rego)",
+                    "evals": [
+                        {
+                            "id":"PR-AZR-0001-RGX",
+                            "eval": "data.rule.gl_aws_account",
+                            "message": "data.rule.gl_aws_account_err",
+                            "remediationDescription":"",
+                            "remediationFunction":"PR-AZR-0001-RGX.py"
+                        }
+                    ],
+                    "title": "Secrets should be removed from the source code",
+                    "description": "We should not have any secret in the source code. Make sure to put the secrets in a vault",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": []
+                        }
+                    ]
                 }
             ]
         }
