@@ -18,13 +18,6 @@
                     ],
                     "collection": "pod"
                 },{
-                    "masterSnapshotId": "K8SSNP_POD2_",
-                    "type": "pod",
-                    "paths": [
-                        "api/v1"
-                    ],
-                    "collection": "pod"
-                },{
                     "masterSnapshotId": "K8SSNP_SERVICEACC_",
                     "type": "serviceaccount",
                     "paths": [
