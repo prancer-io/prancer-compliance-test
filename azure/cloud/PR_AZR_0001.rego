@@ -4,12 +4,11 @@
 
 package rule
 
-default rulepass = false
+default rulepass = true
 
 # https://docs.microsoft.com/en-us/azure/azure-monitor/platform/template-workspace-configuration
 
-rulepass {
-   resources := input.resources[_]
-   resources.type == "Microsoft.OperationalInsights/workspaces"
-   to_number(resources.properties.retentionInDays) >= 365
+rulepass = false {
+    lower(input.type) == "microsoft.operationalinsights/workspaces"
+    to_number(input.properties.retentionInDays) < 365
 }

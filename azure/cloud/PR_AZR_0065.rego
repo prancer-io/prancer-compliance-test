@@ -13,6 +13,6 @@ default rulepass = false
 # https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.Compute/virtualMachines/hardikVM
 
 rulepass {
-   input.type == "Microsoft.Compute/virtualMachines"
+   lower(input.type) == "microsoft.compute/virtualmachines"
    input.properties.availabilitySet
 }

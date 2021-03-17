@@ -9,6 +9,6 @@ default rulepass = false
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/subnets
 
 rulepass {   
-   input.type == "Microsoft.Network/virtualNetworks/subnets"                                   
+   lower(input.type) == "microsoft.network/virtualnetworks/subnets"                                   
    input.properties.networkSecurityGroup.id
 }

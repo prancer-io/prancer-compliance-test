@@ -13,7 +13,7 @@ default rulepass = true
 
 
 rulepass = false {    
-    input.type == "Microsoft.Network/networkSecurityGroups"                                  
+    lower(input.type) == "microsoft.network/networksecuritygroups"                                  
     count(public_security_rules) == 1
 }
 # "securityRules[?(@.sourceAddressPrefix=='*' && @.protocol=='UDP' && @.access=='Allow' 

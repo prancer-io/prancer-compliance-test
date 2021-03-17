@@ -12,11 +12,11 @@ default rulepass = true
 # https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.Network/networkSecurityGroups/hardikVM-nsg
 
 rulepass = false {
-    input.type == "Microsoft.Network/networkSecurityGroups"
+    lower(input.type) == "microsoft.network/networksecuritygroups"
    count(public_security_rules_any) > 0
 }
 rulepass = false {
-    input.type == "Microsoft.Network/networkSecurityGroups"
+    lower(input.type) == "microsoft.network/networksecuritygroups"
    count(public_security_rules_Internet) > 0
 }
 # Method for check rule

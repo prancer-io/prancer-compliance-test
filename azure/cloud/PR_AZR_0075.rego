@@ -9,7 +9,7 @@ default rulepass = true
 # If virtual network peer is connected test will pass
 
 rulepass = false {    
-   input.type == "Microsoft.Network/virtualNetworks"
+   lower(input.type) == "microsoft.network/virtualnetworks"
    count(virtual_network_peer) >= 1
 }
 
