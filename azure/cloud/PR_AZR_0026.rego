@@ -11,9 +11,9 @@ default rulepass = true
 # https://docs.microsoft.com/en-us/rest/api/virtualnetwork/networksecuritygroups/get
 # https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.Network/networkSecurityGroups/hardikVM-nsg
 
-rulepass = false {     
-    lower(input.type) == "microsoft.network/networksecuritygroups"                                 
-   count(get_protcol_rule) > 0
+rulepass = false {
+    lower(input.type) == "microsoft.network/networksecuritygroups"
+    count(get_protcol_rule) > 0
 }
 
 # "securityRules[?(@.sourceAddressPrefix=='Internet' && @.protocol=='*' &&  @.access=='Allow' &&

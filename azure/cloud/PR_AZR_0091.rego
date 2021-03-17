@@ -8,7 +8,7 @@ default rulepass = false
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.security/pricings
 
-rulepass {        
+rulepass {
     lower(input.type) == "microsoft.security/pricings"
     lower(input.properties.pricingTier) == "standard"
 }

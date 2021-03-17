@@ -64,5 +64,5 @@ nsg_allowed_inbound_port["in_range_list"] {
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/2019-04-01/virtualnetworks
 
 rulepass {
-   input.properties.enableDdosProtection == true
+    input.properties.enableDdosProtection == true
 }

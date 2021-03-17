@@ -13,10 +13,10 @@ default rulepass = true
 
 rulepass = false {
     lower(input.type) == "microsoft.network/networksecuritygroups"
-   count(public_security_rules) > 0
+    count(public_security_rules) > 0
 }
 
-# securityRules[?(@.sourceAddressPrefix=='*' && @.destinationPortRange=="*" && @.sourcePortRange==* 
+# securityRules[?(@.sourceAddressPrefix=='*' && @.destinationPortRange=="*" && @.sourcePortRange==*
 # &&  @.access=='Allow' &&  @.destinationAddressPrefix=='*')].direction contains Inbound"
 
 get_security_rule[security_rule] {
@@ -27,12 +27,12 @@ get_security_rule[security_rule] {
     security_rule.properties.direction = "Inbound"
 }
 
-public_security_rules["source_port"] {                              
+public_security_rules["source_port"] {
     some security_rule
     get_security_rule[security_rule]
     security_rule.properties.sourcePortRange = "*"
 }
-public_security_rules["destination_port"] {                              
+public_security_rules["destination_port"] {
     some security_rule
     get_security_rule[security_rule]
     security_rule.properties.destinationPortRange = "*"

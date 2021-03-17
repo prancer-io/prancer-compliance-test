@@ -13,11 +13,11 @@ default rulepass = true
 
 rulepass = false {
     lower(input.type) == "microsoft.network/networksecuritygroups"
-   count(public_security_rules_any) > 0
+    count(public_security_rules_any) > 0
 }
 rulepass = false {
     lower(input.type) == "microsoft.network/networksecuritygroups"
-   count(public_security_rules_Internet) > 0
+    count(public_security_rules_Internet) > 0
 }
 # Method for check rule
 get_access[security_rule] {
@@ -59,7 +59,7 @@ get_destination_PortRange_Any[security_rule] {
 }
 
 
-# "securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == '*' 
+# "securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == '*'
 # @.sourcePortRange == '25')].destinationPortRange contains _Port.inRange(25)
 public_security_rules_any["internet_on_PortRange_25_any_source"] {
     some security_rule
@@ -78,12 +78,12 @@ public_security_rules_any["internet_on_PortRange_25_any_source"] {
 public_security_rules_any["internet_on_PortRanges_25_any_source"] {
     some security_rule
     get_source_PortRanges[security_rule]
-    security_rule.properties.sourceAddressPrefix = "*"  
+    security_rule.properties.sourceAddressPrefix = "*"
 }
 public_security_rules_any["internet_on_PortRanges_25_any_source"] {
     some security_rule
     get_destination_PortRanges[security_rule]
-    security_rule.properties.sourceAddressPrefix = "*"  
+    security_rule.properties.sourceAddressPrefix = "*"
 }
 
 # or "securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == '*'
@@ -99,8 +99,8 @@ public_security_rules_any["internet_on_Any_PortRange_any_source"] {
     security_rule.properties.sourceAddressPrefix = "*"
 }
 
-# or securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == 'Internet' 
-# @.sourcePortRange == '25')]‌.destinationPortRange contains _Port.inRange(25) 
+# or securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == 'Internet'
+# @.sourcePortRange == '25')]‌.destinationPortRange contains _Port.inRange(25)
 public_security_rules_Internet["internet_on_PortRange_25_Internet_source"] {
     some security_rule
     get_source_port[security_rule]

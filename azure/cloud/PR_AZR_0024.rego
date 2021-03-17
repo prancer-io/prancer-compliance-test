@@ -11,8 +11,8 @@ default rulepass = true
 # https://docs.microsoft.com/en-us/rest/api/virtualnetwork/networksecuritygroups/get
 # https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.Network/networkSecurityGroups/hardikVM-nsg
 
-rulepass = false {       
-    lower(input.type) == "microsoft.network/networksecuritygroups"                               
+rulepass = false {
+    lower(input.type) == "microsoft.network/networksecuritygroups"
     count(security_rule) > 0
 }
 
@@ -21,13 +21,13 @@ rulepass = false {
 
 security_rule["security_protocol_tcp"] {
     some security_rule
-    get_protcol_rule[security_rule]    
+    get_protcol_rule[security_rule]
     security_rule.properties.protocol = "TCP"
 }
 
 security_rule["security_protocol_any"] {
     some security_rule
-    get_protcol_rule[security_rule]    
+    get_protcol_rule[security_rule]
     security_rule.properties.protocol = "*"
 }
 

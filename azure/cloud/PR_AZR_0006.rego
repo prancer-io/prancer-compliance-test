@@ -9,6 +9,6 @@ default rulepass = false
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/2020-04-01/managedclusters
 
 rulepass {
-   lower(input.type) == "microsoft.containerregistry/registries/webhooks"
-   input.properties.networkProfile.networkPlugin == "azure"
+    lower(input.type) == "microsoft.containerregistry/registries/webhooks"
+    input.properties.networkProfile.networkPlugin == "azure"
 }

@@ -12,12 +12,12 @@ default rulepass = false
 # https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.ContainerRegistry/registries/hardikregistry
 
 rulepass {
-   count(classicregistry) == 1
+    count(classicregistry) == 1
 }
 
 # ['sku.name != "classic"'] is not exist
 
 classicregistry["classic_registry_is_not_exist"] {
-   lower(input.type) == "microsoft.containerregistry/registries"
-   lower(input.sku.name) != "classic"
+    lower(input.type) == "microsoft.containerregistry/registries"
+    lower(input.sku.name) != "classic"
 }

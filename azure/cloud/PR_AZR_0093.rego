@@ -13,6 +13,6 @@ default rulepass = false
 # https://docs.microsoft.com/en-us/rest/api/storagerp/storageaccounts/getproperties
 
 rulepass {
-   lower(input.type) == "microsoft.storage/storageaccounts"
-   input.properties.networkAcls.defaultAction == "Deny"
+    lower(input.type) == "microsoft.storage/storageaccounts"
+    input.properties.networkAcls.defaultAction == "Deny"
 }

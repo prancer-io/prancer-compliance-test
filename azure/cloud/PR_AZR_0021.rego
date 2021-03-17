@@ -59,7 +59,7 @@ get_destination_PortRange_Any[security_rule] {
 }
 
 
-# "securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == '*' 
+# "securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == '*'
 # @.sourcePortRange == '3389')].destinationPortRange contains _Port.inRange(3389)
 public_security_rules_any["internet_on_PortRange_3389_any_source"] {
     some security_rule
@@ -78,12 +78,12 @@ public_security_rules_any["internet_on_PortRange_3389_any_source"] {
 public_security_rules_any["internet_on_PortRanges_3389_any_source"] {
     some security_rule
     get_source_PortRanges[security_rule]
-    security_rule.properties.sourceAddressPrefix = "*"  
+    security_rule.properties.sourceAddressPrefix = "*"
 }
 public_security_rules_any["internet_on_PortRanges_3389_any_source"] {
     some security_rule
     get_destination_PortRanges[security_rule]
-    security_rule.properties.sourceAddressPrefix = "*"  
+    security_rule.properties.sourceAddressPrefix = "*"
 }
 
 # or "securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == '*'
@@ -99,8 +99,8 @@ public_security_rules_any["internet_on_Any_PortRange_any_source"] {
     security_rule.properties.sourceAddressPrefix = "*"
 }
 
-# or securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix = 'Internet' 
-# @.sourcePortRange == '3389')]‌.destinationPortRange contains _Port.inRange(3389) 
+# or securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix = 'Internet'
+# @.sourcePortRange == '3389')]‌.destinationPortRange contains _Port.inRange(3389)
 public_security_rules_Internet["internet_on_PortRange_3389_Internet_source"] {
     some security_rule
     get_source_port[security_rule]

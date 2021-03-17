@@ -13,7 +13,7 @@ default rulepass = true
 
 rulepass = false {
     lower(input.type) == "microsoft.network/networksecuritygroups"
-   count(get_outbound) > 0
+    count(get_outbound) > 0
 }
 # "securityRules[?(@.sourceAddressPrefix=='*' &&  @.access=='Allow' && @.destinationAddressPrefix=='*')]
 # .direction contains Outbound"
