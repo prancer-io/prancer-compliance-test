@@ -10,6 +10,7 @@ default rulepass = false
 # Id: 119
 
 rulepass {
+    lower(resource.Type) == "aws::rds::dbcluster"
    db_cluster := input.DBClusters[_]
    db_cluster.StorageEncrypted == true
 }

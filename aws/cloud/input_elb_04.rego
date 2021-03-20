@@ -82,6 +82,7 @@ insecure_ciphers := [
 ]
 
 rulepass = false {
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
    policy := input.PolicyDescriptions[_]
    policydescrib := policy.PolicyAttributeDescriptions[_]
    lower(policydescrib.AttributeName) == lower(insecure_ciphers[_])

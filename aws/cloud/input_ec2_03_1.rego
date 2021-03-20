@@ -9,10 +9,12 @@ default rulepass = false
 # API Documentation: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVolumes.html
 
 rulepass = true{
+    lower(resource.Type) == "AWS::EC2::Volume"
    input.Volumes[_].Attachments[_].State="attached"
 }
 
 rulepass = true{
+    lower(resource.Type) == "AWS::EC2::Volume"
    input.Volumes[_].Attachments[_]
 }
 

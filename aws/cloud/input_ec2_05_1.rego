@@ -10,6 +10,7 @@ default rulepass = false
 # Id: 42
 
 rulepass {
+    lower(resource.Type) == "aws::ec2::instance"
     instance := input.Reservations[_].Instances[_]
     instance.IamInstanceProfile.Arn
 }
