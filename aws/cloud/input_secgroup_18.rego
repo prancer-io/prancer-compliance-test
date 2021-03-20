@@ -10,16 +10,16 @@ default rulepass = true
 
 rulepass = false {
     lower(resource.Type) == "aws::ec2::securitygroup"
-   ingress := input.SecurityGroups[_].IpPermissions[_]
-   ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
-   to_number(ingress.FromPort) <= 22
-   to_number(ingress.ToPort) >= 22
+    ingress := input.SecurityGroups[_].IpPermissions[_]
+    ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
+    to_number(ingress.FromPort) <= 22
+    to_number(ingress.ToPort) >= 22
 }
 
 rulepass = false {
     lower(resource.Type) == "aws::ec2::securitygroup"
-   ingress := input.SecurityGroups[_].IpPermissions[_]
-   ingress.Ipv6Ranges[_].CidrIpv6="::/0"
-   to_number(ingress.FromPort) <= 22
-   to_number(ingress.ToPort) >= 22
+    ingress := input.SecurityGroups[_].IpPermissions[_]
+    ingress.Ipv6Ranges[_].CidrIpv6="::/0"
+    to_number(ingress.FromPort) <= 22
+    to_number(ingress.ToPort) >= 22
 }

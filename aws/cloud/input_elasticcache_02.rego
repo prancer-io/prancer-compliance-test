@@ -10,6 +10,6 @@ default rulepass = false
 
 rulepass = true{
     lower(resource.Type) == "aws::elasticache::replicationgroup"
-  input.ReplicationGroups[_].AuthTokenEnabled=true
-  input.ReplicationGroups[_].TransitEncryptionEnabled=true
+    input.ReplicationGroups[_].AuthTokenEnabled=true
+    input.ReplicationGroups[_].TransitEncryptionEnabled=true
 }

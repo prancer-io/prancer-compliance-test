@@ -10,5 +10,5 @@ default rulepass = false
 
 rulepass = true {
     lower(resource.Type) == "aws::cloudformation::stack"
-   count(input.Stacks[_].NotificationARNs) > 0
+    count(input.Stacks[_].NotificationARNs) > 0
 }

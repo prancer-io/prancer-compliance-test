@@ -10,6 +10,6 @@ default rulepass = false
 
 rulepass = true{
     lower(resource.Type) == "aws::cloudtrail::trail"
-   input.trailList[_].CloudWatchLogsLogGroupArn
-   input.trailList[_].CloudWatchLogsRoleArn
+    input.trailList[_].CloudWatchLogsLogGroupArn
+    input.trailList[_].CloudWatchLogsRoleArn
 }

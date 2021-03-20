@@ -10,8 +10,8 @@ default rulepass = false
 
 rulepass {
     lower(resource.Type) == "aws::lambda::function"
-   input.Configuration.VpcConfig
-   input.Configuration.VpcConfig.VpcId
+    input.Configuration.VpcConfig
+    input.Configuration.VpcConfig.VpcId
 }
 
 #If the VPC network is configured with LAMBDA then test will pass

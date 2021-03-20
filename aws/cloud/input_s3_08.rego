@@ -10,5 +10,5 @@ default rulepass = true
 
 rulepass = false {
     lower(resource.Type) == "aws::s3::bucket"
-   lower(input.Versioning.Status) == "disabled"
+    lower(input.Versioning.Status) == "disabled"
 }

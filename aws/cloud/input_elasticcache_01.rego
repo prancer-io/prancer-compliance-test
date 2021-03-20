@@ -10,5 +10,5 @@ default rulepass = false
 
 rulepass = true{
     lower(resource.Type) == "aws::elasticache::replicationgroup"
-  input.ReplicationGroups[_].AutomaticFailover="enabled"
+    input.ReplicationGroups[_].AutomaticFailover="enabled"
 }

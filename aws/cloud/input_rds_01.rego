@@ -10,8 +10,8 @@ default rulepass = false
 
 rulepass {
     lower(input.Resources[i].Type) == "aws::rds::dbinstance"
-   db_instance := input.DBInstances[_]
-   to_number(db_instance.BackupRetentionPeriod) > 0
+    db_instance := input.DBInstances[_]
+    to_number(db_instance.BackupRetentionPeriod) > 0
 }
 
 # If BackupRetentionPeriod is set for database instance then test will pass.

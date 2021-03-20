@@ -10,7 +10,7 @@ default rulepass = false
 
 rulepass = true{
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
-   input.LoadBalancerAttributes.AccessLog.Enabled=true
+    input.LoadBalancerAttributes.AccessLog.Enabled=true
 }
 
 # If the access logs enabled for load balancer then test will pass

@@ -10,5 +10,5 @@ default rulepass = false
 
 rulepass = true{
     lower(resource.Type) == "aws::cloudfront::distribution"
-   input.Distribution.DistributionConfig.ViewerCertificate.CertificateSource!="cloudfront"
+    input.Distribution.DistributionConfig.ViewerCertificate.CertificateSource!="cloudfront"
 }

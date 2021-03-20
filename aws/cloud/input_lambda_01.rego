@@ -10,7 +10,7 @@ default rulepass = false
 
 rulepass {
     lower(resource.Type) == "aws::lambda::function"
-   input.Configuration.KMSKeyArn
+    input.Configuration.KMSKeyArn
 }
 
 # if the Lambda function encrypted the envrinment variables at the rest then test will pass

@@ -10,14 +10,14 @@ default rulepass = true
 
 rulepass = false {
     lower(resource.Type) == "aws::ec2::securitygroup"
-   ingress := input.SecurityGroups[_].IpPermissions[_]
-   ingress.IpProtocol == "-1"
-   ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
+    ingress := input.SecurityGroups[_].IpPermissions[_]
+    ingress.IpProtocol == "-1"
+    ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
 }
 
 rulepass = false {
     lower(resource.Type) == "aws::ec2::securitygroup"
-   ingress := input.SecurityGroups[_].IpPermissions[_]
-   ingress.IpProtocol == "-1"
-   ingress.Ipv6Ranges[_].CidrIpv6="::/0"
+    ingress := input.SecurityGroups[_].IpPermissions[_]
+    ingress.IpProtocol == "-1"
+    ingress.Ipv6Ranges[_].CidrIpv6="::/0"
 }

@@ -10,5 +10,5 @@ default rulepass = false
 
 rulepass = true{
     lower(resource.Type) == "aws::cloudfront::distribution"
-   input.Distribution.DistributionConfig.Origins.Items[_].S3OriginConfig.OriginAccessIdentity!=""
+    input.Distribution.DistributionConfig.Origins.Items[_].S3OriginConfig.OriginAccessIdentity!=""
 }

@@ -10,5 +10,5 @@ default rulepass = false
 
 rulepass = true{
     lower(resource.Type) == "aws::cloudfront::distribution"
-   input.Distribution.DistributionConfig.Restrictions.GeoRestriction.RestrictionType="whitelist"
+    input.Distribution.DistributionConfig.Restrictions.GeoRestriction.RestrictionType="whitelist"
 }

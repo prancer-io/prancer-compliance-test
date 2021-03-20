@@ -16,8 +16,8 @@ insecure_ssl_protocol := [
 
 rulepass = false {
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
-   policy := input.PolicyDescriptions[_]
-   policydescrib := policy.PolicyAttributeDescriptions[_]
-   lower(policydescrib.AttributeName) == lower(insecure_ssl_protocol[_])
-   policydescrib.AttributeValue == "true"
+    policy := input.PolicyDescriptions[_]
+    policydescrib := policy.PolicyAttributeDescriptions[_]
+    lower(policydescrib.AttributeName) == lower(insecure_ssl_protocol[_])
+    policydescrib.AttributeValue == "true"
 }

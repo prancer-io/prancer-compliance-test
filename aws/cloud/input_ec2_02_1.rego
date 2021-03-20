@@ -9,7 +9,7 @@ default rulepass = false
 
 rulepass = true {                                      
     lower(resource.Type) == "aws::ec2::securitygroup"
-   count(uphold) == 0
+    count(uphold) == 0
 }
 
 uphold["IpPermissions_CidrIp"] {

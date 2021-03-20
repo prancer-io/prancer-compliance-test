@@ -14,18 +14,18 @@ common_ports := [
 
 rulepass = false {
     lower(resource.Type) == "aws::ec2::securitygroup"
-   ingress := input.SecurityGroups[_].IpPermissions[_]
-   port := common_ports[_]
-   ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
-   to_number(ingress.FromPort) <= port
-   to_number(ingress.ToPort) >= port
+    ingress := input.SecurityGroups[_].IpPermissions[_]
+    port := common_ports[_]
+    ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
 }
 
 rulepass = false {
     lower(resource.Type) == "aws::ec2::securitygroup"
-   ingress := input.SecurityGroups[_].IpPermissions[_]
-   port := common_ports[_]
-   ingress.Ipv6Ranges[_].CidrIpv6="::/0"
-   to_number(ingress.FromPort) <= port
-   to_number(ingress.ToPort) >= port
+    ingress := input.SecurityGroups[_].IpPermissions[_]
+    port := common_ports[_]
+    ingress.Ipv6Ranges[_].CidrIpv6="::/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
 }

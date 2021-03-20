@@ -10,32 +10,32 @@ default rulepass = true
 
 rulepass = false {
     lower(resource.Type) == "aws::s3::bucket"
-   policy := input.Policy.Statement[_]
-   policy.Principal == "*"
-   startswith(lower(policy.Action), "s3:list")
-   lower(policy.Effect) == "allow"
+    policy := input.Policy.Statement[_]
+    policy.Principal == "*"
+    startswith(lower(policy.Action), "s3:list")
+    lower(policy.Effect) == "allow"
 }
 
 rulepass = false {
     lower(resource.Type) == "aws::s3::bucket"
-   policy := input.Policy.Statement[_]
-   policy.Principal == "*"
-   policy.Action == "*"
-   lower(policy.Effect) == "allow"
+    policy := input.Policy.Statement[_]
+    policy.Principal == "*"
+    policy.Action == "*"
+    lower(policy.Effect) == "allow"
 }
 
 rulepass = false {
     lower(resource.Type) == "aws::s3::bucket"
-   policy := input.Policy.Statement[_]
-   policy.Principal.AWS == "*"
-   startswith(lower(policy.Action), "s3:list")
-   lower(policy.Effect) == "allow"
+    policy := input.Policy.Statement[_]
+    policy.Principal.AWS == "*"
+    startswith(lower(policy.Action), "s3:list")
+    lower(policy.Effect) == "allow"
 }
 
 rulepass = false {
     lower(resource.Type) == "aws::s3::bucket"
-   policy := input.Policy.Statement[_]
-   policy.Principal.AWS == "*"
-   policy.Action == "*"
-   lower(policy.Effect) == "allow"
+    policy := input.Policy.Statement[_]
+    policy.Principal.AWS == "*"
+    policy.Action == "*"
+    lower(policy.Effect) == "allow"
 }

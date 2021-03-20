@@ -10,7 +10,7 @@ default rulepass = false
 
 rulepass = true{
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
-   input.LoadBalancerAttributes.ConnectionDraining.Enabled=true
+    input.LoadBalancerAttributes.ConnectionDraining.Enabled=true
 }
 
 # If the connection draining enabled for load balancer then test will pass

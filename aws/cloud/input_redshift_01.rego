@@ -10,5 +10,5 @@ default rulepass = false
 
 rulepass = true{
     lower(resource.Type) == "aws::redshift::cluster"
-   input.Clusters[_].Encrypted=true
+    input.Clusters[_].Encrypted=true
 }

@@ -10,10 +10,10 @@ default rulepass = false
 
 rulepass {
     lower(resource.Type) == "aws::s3::bucket"	
-   not is_null(input.LoggingEnabled.TargetBucket)
+    not is_null(input.LoggingEnabled.TargetBucket)
 }
 
 rulepass {
     lower(resource.Type) == "aws::s3::bucket"
-   not input.LoggingEnabled.TargetPrefix=""
+    not input.LoggingEnabled.TargetPrefix=""
 }

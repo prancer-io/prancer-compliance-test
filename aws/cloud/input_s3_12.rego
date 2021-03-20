@@ -10,10 +10,10 @@ default rulepass = true
 
 rulepass = false {
     lower(resource.Type) == "aws::s3::bucket"
-   input.Website
+    input.Website
 }
 
 rulepass == false {
     lower(resource.Type) == "aws::s3::bucket"
-   input.WebsiteConfiguration
+    input.WebsiteConfiguration
 }

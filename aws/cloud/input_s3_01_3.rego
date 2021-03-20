@@ -10,6 +10,6 @@ default rulepass = false
 
 rulepass {
     lower(resource.Type) == "aws::s3::bucket"
-   grant := input.Grants[_]
-   not contains(lower(grant.Grantee.URI), "allusers")
+    grant := input.Grants[_]
+    not contains(lower(grant.Grantee.URI), "allusers")
 }

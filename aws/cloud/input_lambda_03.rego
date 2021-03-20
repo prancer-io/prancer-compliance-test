@@ -10,7 +10,7 @@ default rulepass = false
 
 rulepass {
     lower(resource.Type) == "aws::lambda::function"
-   lower(input.Configuration.TracingConfig.Mode) != "passthrough"
+    lower(input.Configuration.TracingConfig.Mode) != "passthrough"
 }
 
 #If the active tracing is enabled with LAMBDA then test will pass

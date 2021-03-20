@@ -10,5 +10,5 @@ default rulepass = true
 
 rulepass = false {
     lower(input.Resources[i].Type) == "aws::rds::dbinstance"
-        input.DBInstances[_].AutoMinorVersionUpgrade = false
+    input.DBInstances[_].AutoMinorVersionUpgrade = false
 }

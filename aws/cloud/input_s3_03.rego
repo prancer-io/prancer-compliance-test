@@ -10,7 +10,7 @@ default rulepass = true
 
 rulepass = false {
     lower(resource.Type) == "aws::s3::bucket"
-   policy := input.Policy.Statement[_]
-   contains(lower(policy.Principal.Service), "cloudtrail")
-   lower(policy.Effect) == "allow"
+    policy := input.Policy.Statement[_]
+    contains(lower(policy.Principal.Service), "cloudtrail")
+    lower(policy.Effect) == "allow"
 }

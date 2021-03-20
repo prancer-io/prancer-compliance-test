@@ -10,8 +10,8 @@ default rulepass = false
 
 rulepass {
     lower(input.Resources[i].Type) == "aws::rds::dbinstance"
-   db_instance := input.DBInstances[_]
-   db_instance.CopyTagsToSnapshot == true
+    db_instance := input.DBInstances[_]
+    db_instance.CopyTagsToSnapshot == true
 }
 
 # If CopyTagsToSnapshot is enabled then test will pass.

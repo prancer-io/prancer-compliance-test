@@ -10,14 +10,14 @@ default rulepass = true
 
 rulepass = false {
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
-   lbs := input.LoadBalancerDescriptions[_]
-   listeners := lbs.ListenerDescriptions[_]
-   not listeners.Listener.SSLCertificateId
+    lbs := input.LoadBalancerDescriptions[_]
+    listeners := lbs.ListenerDescriptions[_]
+    not listeners.Listener.SSLCertificateId
 }
 
 rulepass = false {
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
-   lbs := input.LoadBalancerDescriptions[_]
-   listeners := lbs.ListenerDescriptions[_]
-   not startswith(listeners.Listener.SSLCertificateId, "arn:")
+    lbs := input.LoadBalancerDescriptions[_]
+    listeners := lbs.ListenerDescriptions[_]
+    not startswith(listeners.Listener.SSLCertificateId, "arn:")
 }

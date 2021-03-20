@@ -11,6 +11,6 @@ default rulepass = false
 
 rulepass {
     lower(resource.Type) == "aws::rds::dbcluster"
-   db_cluster := input.DBClusters[_]
-   db_cluster.StorageEncrypted == true
+    db_cluster := input.DBClusters[_]
+    db_cluster.StorageEncrypted == true
 }

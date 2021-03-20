@@ -10,6 +10,6 @@ default rulepass = true
 
 rulepass = false {
     lower(input.Resources[i].Type) == "aws::rds::dbinstance"
-   db_instance := input.DBInstances[_]
-   to_number(db_instance.BackupRetentionPeriod) < 7
+    db_instance := input.DBInstances[_]
+    to_number(db_instance.BackupRetentionPeriod) < 7
 }

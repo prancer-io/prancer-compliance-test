@@ -10,12 +10,12 @@ default rulepass = false
 
 rulepass = true{
     lower(resource.Type) == "AWS::EC2::Volume"
-   input.Volumes[_].Attachments[_].State="attached"
+    input.Volumes[_].Attachments[_].State="attached"
 }
 
 rulepass = true{
     lower(resource.Type) == "AWS::EC2::Volume"
-   input.Volumes[_].Attachments[_]
+    input.Volumes[_].Attachments[_]
 }
 
 # The value for the key input.Volumes[_].Attachments[_].State is equal to "attached" and the attachment list is not null. As both

@@ -10,5 +10,5 @@ default rulepass = true
 
 rulepass = false {
     lower(resource.Type) == "aws::lambda::function"
-   to_number(input.Configuration.CodeSize) > 67500000
+    to_number(input.Configuration.CodeSize) > 67500000
 }
