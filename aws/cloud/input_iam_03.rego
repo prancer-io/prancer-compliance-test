@@ -6,7 +6,7 @@ package rule
 
 default rulepass = false
 
-rulepass = true{
+rulepass = true {
     lower(resource.Type) == "aws::iam::policy"
     ["arn:aws:iam::aws:policy/AmazonElasticTranscoderFullAccess" | input.AttachedPolicies[_].PolicyArn]
 }
