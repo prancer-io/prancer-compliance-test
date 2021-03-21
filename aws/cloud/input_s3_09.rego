@@ -9,7 +9,7 @@ default rulepass = true
 # API: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html
 
 rulepass = false {
-    lower(resource.Type) == "aws::s3::bucket"
+    lower(input.Type) == "aws::s3::bucket"
     policy := input.Policy.Statement[_]
     policy.Condition.Bool.aws:SecureTransport != true
     startswith(lower(policy.Action), "s3:")
@@ -18,7 +18,7 @@ rulepass = false {
 }
 
 rulepass = false {
-    lower(resource.Type) == "aws::s3::bucket"
+    lower(input.Type) == "aws::s3::bucket"
     policy := input.Policy.Statement[_]
     policy.Condition.Bool.aws:SecureTransport != true
     startswith(lower(policy.Action), "s3:")

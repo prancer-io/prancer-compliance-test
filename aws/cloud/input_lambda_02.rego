@@ -9,7 +9,7 @@ default rulepass = false
 # API: https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html
 
 rulepass {
-    lower(resource.Type) == "aws::lambda::function"
+    lower(input.Type) == "aws::lambda::function"
     input.Configuration.VpcConfig
     input.Configuration.VpcConfig.VpcId
 }

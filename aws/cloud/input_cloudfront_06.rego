@@ -10,6 +10,6 @@ default rulepass = false
 # Id: 21
 
 rulepass = true {
-    lower(resource.Type) == "aws::cloudfront::distribution"
+    lower(input.Type) == "aws::cloudfront::distribution"
     input.Distribution.DistributionConfig.WebACLId!=""
 }
