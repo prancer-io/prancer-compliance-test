@@ -7,11 +7,11 @@ default rulepass = false
 
 # GCP IAM Service account has admin privileges
 
-rulepass = true {                                      
+rulepass = true {
    count(userRole) >= 2
 }
 
-# user contains iam.gserviceaccount.com AND 
+# user contains iam.gserviceaccount.com AND
 # (roles[*] contains admin or roles[*] contains Admin or roles[*] contains roles/editor or roles[*] contains roles/owner)
 
 userRole["adminUser"] {

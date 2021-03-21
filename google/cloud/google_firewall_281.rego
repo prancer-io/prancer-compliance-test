@@ -8,14 +8,14 @@ default rulepass = false
 # Firewall rule allows internet traffic to MySQL DB port (3306)
 # If Firewall rule not allows internet traffic to MySQL DB port (3306)
 # API and Response Reference : https://cloud.google.com/compute/docs/reference/rest/v1/firewalls/list
-rulepass = true {                                      
+rulepass = true {
     lower(input.type) == "compute.v1.firewall"
    count(allowport) > 0
 }
 
 get_access[security_rule] {
    security_rule := input
-   security_rule.disabled= false 
+   security_rule.disabled= false
 }
 
 # (sourceRanges[*] contains 0.0.0.0/0 and allowed[*].ports[3306] )

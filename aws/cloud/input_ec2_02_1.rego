@@ -7,7 +7,7 @@ default rulepass = false
 
 # API Documentation: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html
 
-rulepass = true {                                      
+rulepass = true {
     lower(input.Type) == "aws::ec2::securitygroup"
     count(uphold) == 0
 }

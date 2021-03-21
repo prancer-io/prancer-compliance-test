@@ -6,7 +6,7 @@ package rule
 default rulepass = false
 
 # VM Instances without any custom metadata information
-rulepass = true {                                      
+rulepass = true {
     lower(input.type) == "compute.v1.instance"
    count(metadata) == 1
 }

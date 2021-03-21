@@ -8,7 +8,7 @@ default rulepass = false
 # GCP VM instances have block project-wide SSH keys feature disabled
 # 'metadata.items[*].key does not contain block-project-ssh-keys'
 
-rulepass = true {                                      
+rulepass = true {
     lower(input.type) == "compute.v1.instance"
    count(blocksshkey) == 0
 }

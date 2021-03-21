@@ -7,7 +7,7 @@ default rulepass = false
 
 # enableFlowLogs is false or enableFlowLogs does not exist'
 
-rulepass = true {                                      
+rulepass = true {
     lower(input.type) == "compute.v1.instance"
    count(enableFlowLogs) >= 2
 }
@@ -19,5 +19,5 @@ enableFlowLogs["input.enableFlowLogs"] {
 }
 
 enableFlowLogs["input.enableFlowLogs"] {
-   not input.enableFlowLogs 
+   not input.enableFlowLogs
 }

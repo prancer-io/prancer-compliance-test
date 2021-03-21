@@ -7,7 +7,7 @@ default rulepass = false
 
 # GCP VM instances have IP forwarding enabled
 
-rulepass = true {                                      
+rulepass = true {
     lower(input.type) == "compute.v1.instance"
    count(ipforwarding) == 1
 }

@@ -6,7 +6,7 @@ package rule
 default rulepass = false
 
 # VM Instances enabled with Pre-Emptible termination
-rulepass = true {                                      
+rulepass = true {
     lower(input.type) == "compute.v1.instance"
    count(scheduling) == 1
 }

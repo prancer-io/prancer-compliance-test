@@ -10,7 +10,7 @@ default rulepass = false
 
 # API and Response Reference : https://cloud.google.com/compute/docs/reference/rest/v1/firewalls/list
 
-rulepass = true {                                      
+rulepass = true {
     lower(input.type) == "compute.v1.firewall"
    count(firewallRuleName) == 0
 }

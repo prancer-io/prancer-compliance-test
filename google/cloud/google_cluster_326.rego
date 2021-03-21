@@ -10,12 +10,12 @@ default rulepass = false
 
 # API Reference : https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters/get
 
-# Response will be Cluster Object: 
+# Response will be Cluster Object:
 # https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters#Cluster
 
 # $.nodePools[*].management.autoUpgrade is true and $.nodePools[*].initialNodeCount is more than or equals to 3
 
-rulepass = true {                                      
+rulepass = true {
     lower(input.type) == "container.v1.cluster"
    count(initial_node_count) = 1
 }
