@@ -12,25 +12,25 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "compute.v1.firewall"
-   count(firewallRuleName) == 0
+    count(firewallRuleName) == 0
 }
 
 firewallRuleName[input.id] {
-   input.name == "default-allow-ssh"
-   input.sourceRanges[_]="0.0.0.0/0"
+    input.name == "default-allow-ssh"
+    input.sourceRanges[_]="0.0.0.0/0"
 }
 
 firewallRuleName[input.id] {
-   input.name == "default-allow-icmp"
-   input.sourceRanges[_]="0.0.0.0/0"
+    input.name == "default-allow-icmp"
+    input.sourceRanges[_]="0.0.0.0/0"
 }
 
 firewallRuleName[input.id] {
-   input.name == "default-allow-internal"
-   input.sourceRanges[_]="0.0.0.0/0"
+    input.name == "default-allow-internal"
+    input.sourceRanges[_]="0.0.0.0/0"
 }
 
 firewallRuleName[input.id] {
-   input.name == "default-allow-rdp"
-   input.sourceRanges[_]="0.0.0.0/0"
+    input.name == "default-allow-rdp"
+    input.sourceRanges[_]="0.0.0.0/0"
 }

@@ -15,10 +15,10 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "container.v1.cluster"
-   count(enableAuthorizeNetwork) == 1
+    count(enableAuthorizeNetwork) == 1
 }
 
 # 'masterAuthorizedNetworksConfig.enabled is equals true'
 enableAuthorizeNetwork["AuthorizeNetwork"] {
-   input.masterAuthorizedNetworksConfig.enabled = true
+    input.masterAuthorizedNetworksConfig.enabled = true
 }

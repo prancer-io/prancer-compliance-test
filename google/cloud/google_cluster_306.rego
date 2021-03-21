@@ -15,10 +15,10 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "container.v1.cluster"
-   count(legacyAuthorization) == 0
+    count(legacyAuthorization) == 0
 }
 
 # 'legacyAbac.enabled equals true'
 legacyAuthorization["legacy_authorization"] {
-   input.legacyAbac.enabled = true
+    input.legacyAbac.enabled = true
 }

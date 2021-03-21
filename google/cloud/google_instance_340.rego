@@ -9,10 +9,10 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "compute.v1.instance"
-   count(ipforwarding) == 1
+    count(ipforwarding) == 1
 }
 
 # 'canIpForward is false'
 ipforwarding[input.id] {
-   input.canIpForward=true
+    input.canIpForward=true
 }

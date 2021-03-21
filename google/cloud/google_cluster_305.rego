@@ -15,10 +15,10 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "container.v1.cluster"
-   count(httpLoadBalancing) == 0
+    count(httpLoadBalancing) == 0
 }
 
 # 'addonsConfig.httpLoadBalancing.disabled equals false'
 httpLoadBalancing["httpLoadBalancing"] {
-   input.addonsConfig.httpLoadBalancing.disabled = true
+    input.addonsConfig.httpLoadBalancing.disabled = true
 }

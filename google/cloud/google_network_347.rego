@@ -12,9 +12,9 @@ default rulepass = true
 
 rulepass = false {
     lower(input.type) == "compute.v1.network"
-   count(networksname) == 1
+    count(networksname) == 1
 }
 
 networksname[input.id] {
-   input.name == "default"
+    input.name == "default"
 }

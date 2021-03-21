@@ -15,11 +15,11 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "container.v1.cluster"
-   count(database_encryption) == 1
+    count(database_encryption) == 1
 }
 
 # 'databaseEncryption.state is equals to ENCRYPTED'
 database_encryption["application_layer_encrypted"] {
-   input.databaseEncryption.state = "ENCRYPTED"
-   input.databaseEncryption.keyName != null
+    input.databaseEncryption.state = "ENCRYPTED"
+    input.databaseEncryption.keyName != null
 }

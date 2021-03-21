@@ -15,11 +15,11 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "container.v1.cluster"
-   count(resourceLabels) == 1
+    count(resourceLabels) == 1
 }
 
 # 'resourceLabels exist and should contains some value'
 resourceLabels["resource_labels_exist"] {
-   input.resourceLabels
-   count(input.resourceLabels) > 0
+    input.resourceLabels
+    count(input.resourceLabels) > 0
 }

@@ -15,11 +15,11 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "container.v1.cluster"
-   count(binaryAuthorization) == 1
+    count(binaryAuthorization) == 1
 }
 
 # 'binaryAuthorization exist and binaryAuthorization.enabled is true'
 binaryAuthorization["binary_authorization"] {
-   input.binaryAuthorization
-   input.binaryAuthorization.enabled == true
+    input.binaryAuthorization
+    input.binaryAuthorization.enabled == true
 }

@@ -15,11 +15,11 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "container.v1.cluster"
-   count(loggingService) == 1
+    count(loggingService) == 1
 }
 
 # 'loggingService have some value and loggingService not equals none'
 loggingService["LoggingService"] {
-   input.loggingService
-   input.loggingService != "none"
+    input.loggingService
+    input.loggingService != "none"
 }

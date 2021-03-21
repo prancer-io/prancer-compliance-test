@@ -15,10 +15,10 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "container.v1.cluster"
-   count(useIpAliases) == 1
+    count(useIpAliases) == 1
 }
 
 # 'ipAllocationPolicy.useIpAliases equals true'
 useIpAliases[input.ipAllocationPolicy["useIpAliases"]] {
-   input.ipAllocationPolicy.useIpAliases = true
+    input.ipAllocationPolicy.useIpAliases = true
 }

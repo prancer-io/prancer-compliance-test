@@ -15,11 +15,11 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "container.v1.cluster"
-   count(networkPolicy) == 1
+    count(networkPolicy) == 1
 }
 
 # '( networkPolicyConfig.disabled not exist or equals False ) and ( networkpolicy.enabled equals True )'
 networkPolicy["NetworkPolicyNotExist"] {
-   not input.masterAuth.networkPolicyConfig.disabled
-   input.networkPolicy.enabled = true
+    not input.masterAuth.networkPolicyConfig.disabled
+    input.networkPolicy.enabled = true
 }

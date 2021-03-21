@@ -17,10 +17,10 @@ default rulepass = false
 # Kubernetes Engine Clusters web UI/Dashboard is set to Disabled
 rulepass = true {
     lower(input.type) == "container.v1.cluster"
-   count(kubernetesdashboard) == 1
+    count(kubernetesdashboard) == 1
 }
 
 # 'addonsConfig.kubernetesDashboard does not exist'
 kubernetesdashboard["kubernetes_dashboard_is_disabled"] {
-   input.addonsConfig.kubernetesDashboard.disabled = true
+    input.addonsConfig.kubernetesDashboard.disabled = true
 }

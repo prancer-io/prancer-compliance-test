@@ -15,11 +15,11 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "container.v1.cluster"
-   count(basicauth) == 1
+    count(basicauth) == 1
 }
 
 # masterAuth.username and masterAuth.password exists'
 basicauth["basic_authentication"] {
-   input.masterAuth.username != null
-   input.masterAuth.password != null
+    input.masterAuth.username != null
+    input.masterAuth.password != null
 }

@@ -17,10 +17,10 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "container.v1.cluster"
-   count(disable_legacy_endpoints) == 1
+    count(disable_legacy_endpoints) == 1
 }
 
 # 'binaryAuthorization exist and binaryAuthorization.enabled is true'
 disable_legacy_endpoints["disable_legacy_endpoints"] {
-   input.nodeConfig.metadata["disable-legacy-endpoints"] = "true"
+    input.nodeConfig.metadata["disable-legacy-endpoints"] = "true"
 }

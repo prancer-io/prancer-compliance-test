@@ -15,11 +15,11 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "container.v1.cluster"
-   count(clientCertificate) == 1
+    count(clientCertificate) == 1
 }
 
 # 'masterAuth.clientKey and masterAuth.clientCertificate exist'
 clientCertificate["masterAuth"] {
-   input.masterAuth["clientKey"] != null
-   input.masterAuth["clientCertificate"] != null
+    input.masterAuth["clientKey"] != null
+    input.masterAuth["clientCertificate"] != null
 }

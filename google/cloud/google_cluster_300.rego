@@ -15,11 +15,11 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "container.v1.cluster"
-   count(defaultserviceaccount) == 1
+    count(defaultserviceaccount) == 1
 }
 
 # nodePools[*].config.serviceAccount does not contains default
 
 defaultserviceaccount["default_serviceaccount_not_exist"] {
-   input.nodePools[_].config.serviceAccount != "default"
+    input.nodePools[_].config.serviceAccount != "default"
 }

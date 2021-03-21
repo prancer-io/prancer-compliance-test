@@ -15,10 +15,10 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "container.v1.cluster"
-   count(private_node_feature) == 1
+    count(private_node_feature) == 1
 }
 
 # '$.privateClusterConfig.enablePrivateNodes is true'
 private_node_feature["private_node_feature"] {
-   input.privateClusterConfig.enablePrivateNodes = true
+    input.privateClusterConfig.enablePrivateNodes = true
 }

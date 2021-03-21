@@ -9,15 +9,15 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "compute.v1.instance"
-   count(enableFlowLogs) >= 2
+    count(enableFlowLogs) >= 2
 }
 
 # nodePools[*].config.serviceAccount contains default
 enableFlowLogs["input.enableFlowLogs"] {
-   input.enableFlowLogs = "false"
+    input.enableFlowLogs = "false"
 
 }
 
 enableFlowLogs["input.enableFlowLogs"] {
-   not input.enableFlowLogs
+    not input.enableFlowLogs
 }

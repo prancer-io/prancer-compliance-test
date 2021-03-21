@@ -15,10 +15,10 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "container.v1.cluster"
-   count(introNodeVisibility) == 1
+    count(introNodeVisibility) == 1
 }
 
 # 'networkConfig.enableIntraNodeVisibility is equals to true'
 introNodeVisibility["intranode_visibility_enabled"] {
-   input.networkConfig.enableIntraNodeVisibility = true
+    input.networkConfig.enableIntraNodeVisibility = true
 }

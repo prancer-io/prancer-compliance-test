@@ -17,10 +17,10 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "container.v1.cluster"
-   count(initial_node_count) = 1
+    count(initial_node_count) = 1
 }
 
 initial_node_count["initial_node_count_and_auto_upgrade"] {
-   input.nodePools[_].initialNodeCount >= 3
-   input.nodePools[_].management.autoUpgrade = true
+    input.nodePools[_].initialNodeCount >= 3
+    input.nodePools[_].management.autoUpgrade = true
 }

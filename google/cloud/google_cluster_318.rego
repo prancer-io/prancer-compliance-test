@@ -16,12 +16,12 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "container.v1.cluster"
-   count(image_type_validation) == 1
+    count(image_type_validation) == 1
 }
 
 # 'nodeConfig.imageType is equals COS'
 image_type_validation["image_type_COS"] {
-   startswith(input.nodeConfig.imageType) = "COS"
-   nodePool := input.nodePools[_]
-   startswith(nodePool.config.imageType) = "COS"
+    startswith(input.nodeConfig.imageType) = "COS"
+    nodePool := input.nodePools[_]
+    startswith(nodePool.config.imageType) = "COS"
 }

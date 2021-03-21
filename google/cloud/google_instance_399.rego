@@ -9,21 +9,21 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "compute.v1.instance"
-   count(scheduling) >= 1
+    count(scheduling) >= 1
 }
 
 # '$.labels equals null or
 scheduling["labels"] {
-   not input.labels
+    not input.labels
 }
 
 # $.zone equals null or
 scheduling["zone"] {
-   input.zone
+    input.zone
 }
 
 # $.metadata equals null'
 scheduling["metadata"] {
-   not input.metadata
+    not input.metadata
 }
 

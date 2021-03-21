@@ -8,24 +8,24 @@ default rulepass = false
 # GCP IAM Service account has admin privileges
 
 rulepass = true {
-   count(userRole) >= 2
+    count(userRole) >= 2
 }
 
 # user contains iam.gserviceaccount.com AND
 # (roles[*] contains admin or roles[*] contains Admin or roles[*] contains roles/editor or roles[*] contains roles/owner)
 
 userRole["adminUser"] {
-   contains(input.bindings[_].role, "admin")
+    contains(input.bindings[_].role, "admin")
 }
 
 userRole["editorUser"] {
-   contains(input.bindings[_].role, "roles/editor")
+    contains(input.bindings[_].role, "roles/editor")
 }
 
 userRole["ownerUser"] {
-   contains(input.bindings[_].role, "roles/owner")
+    contains(input.bindings[_].role, "roles/owner")
 }
 
 userRole["serviceAccountUser"] {
-   contains(input.bindings[_].members[_], "iam.gserviceaccount.com")
+    contains(input.bindings[_].members[_], "iam.gserviceaccount.com")
 }

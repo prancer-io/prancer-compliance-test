@@ -15,10 +15,10 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "container.v1.cluster"
-   count(alphaFeature) == 0
+    count(alphaFeature) == 0
 }
 
 # 'enableKubernetesAlpha is true'
 alphaFeature["KubernetesAlphaFeature"] {
-   input.enableKubernetesAlpha = true
+    input.enableKubernetesAlpha = true
 }

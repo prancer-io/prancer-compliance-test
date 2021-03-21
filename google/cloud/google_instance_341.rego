@@ -10,9 +10,9 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "compute.v1.instance"
-   count(blocksshkey) == 0
+    count(blocksshkey) == 0
 }
 
 blocksshkey[input.id] {
-   input.metadata.items[_].key="block-project-ssh-keys"
+    input.metadata.items[_].key="block-project-ssh-keys"
 }

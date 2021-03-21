@@ -15,11 +15,11 @@ default rulepass = false
 
 rulepass = true {
     lower(input.type) == "container.v1.cluster"
-   count(monitoringService) == 1
+    count(monitoringService) == 1
 }
 
 # 'monitoringService exist and monitoringService is not equals none'
 monitoringService["monitoring_service"] {
-   input.monitoringService
-   input.monitoringService != "none"
+    input.monitoringService
+    input.monitoringService != "none"
 }
