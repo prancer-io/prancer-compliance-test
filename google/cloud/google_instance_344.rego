@@ -8,6 +8,7 @@ default rulepass = false
 # enableFlowLogs is false or enableFlowLogs does not exist'
 
 rulepass = true {                                      
+    lower(input.type) == "compute.v1.instance"
    count(enableFlowLogs) >= 2
 }
 

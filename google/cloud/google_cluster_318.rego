@@ -15,6 +15,7 @@ default rulepass = false
 # https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters#Cluster
 
 rulepass = true {                                      
+    lower(input.type) == "container.v1.cluster"
    count(image_type_validation) == 1
 }
 

@@ -9,6 +9,7 @@ default rulepass = false
 # If GCP Firewall rule not allows internet traffic to MongoDB port (27017)
 # API and Response Reference : https://cloud.google.com/compute/docs/reference/rest/v1/firewalls/list
 rulepass = true {                                      
+    lower(input.type) == "compute.v1.firewall"
    count(allowport) > 0
 }
 

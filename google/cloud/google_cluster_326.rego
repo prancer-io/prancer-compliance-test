@@ -16,6 +16,7 @@ default rulepass = false
 # $.nodePools[*].management.autoUpgrade is true and $.nodePools[*].initialNodeCount is more than or equals to 3
 
 rulepass = true {                                      
+    lower(input.type) == "container.v1.cluster"
    count(initial_node_count) = 1
 }
 

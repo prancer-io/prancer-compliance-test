@@ -9,6 +9,7 @@ default rulepass = true
 # If GCP Firewall with Inbound rule overly not permissive to All Traffic
 # API and Response Reference : https://cloud.google.com/compute/docs/reference/rest/v1/firewalls/list
 rulepass = false {                                      
+    lower(input.type) == "compute.v1.firewall"
    count(allow_all_traffic) > 0
 }
 

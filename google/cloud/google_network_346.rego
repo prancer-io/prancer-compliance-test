@@ -11,6 +11,7 @@ default rulepass = true
 # API and Response Reference : https://cloud.google.com/compute/docs/reference/rest/v1/networks/list
 
 rulepass = false {                                      
+    lower(input.type) == "compute.v1.network"
    count(networksname) == 1
 }
 

@@ -8,6 +8,7 @@ default rulepass = false
 # metadata.items[*].key contains serial-port-enable and metadata.items[*].value contains true'
 
 rulepass = true {                                      
+    lower(input.type) == "compute.v1.instance"
    count(metadata) == 1
 }
 

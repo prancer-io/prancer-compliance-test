@@ -11,8 +11,10 @@ default rulepass = true
 # API and Response Reference : https://cloud.google.com/compute/docs/reference/rest/v1/firewalls/list
 
 rulepass = false {                                      
+    lower(input.type) == "compute.v1.firewall"
    count(allowport) > 0
 }
+
 get_access[security_rule] {
    security_rule := input
    security_rule.disabled= false 

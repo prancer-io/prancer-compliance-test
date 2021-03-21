@@ -9,6 +9,7 @@ default rulepass = false
 # 'metadata.items[*].key does not contain block-project-ssh-keys'
 
 rulepass = true {                                      
+    lower(input.type) == "compute.v1.instance"
    count(blocksshkey) == 0
 }
 

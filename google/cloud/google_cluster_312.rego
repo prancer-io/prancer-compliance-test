@@ -16,6 +16,7 @@ default rulepass = false
 # Steps for disable the legacy metadata: https://cloud.google.com/kubernetes-engine/docs/how-to/protecting-cluster-metadata#disable-legacy-apis
 
 rulepass = true {                                      
+    lower(input.type) == "container.v1.cluster"
    count(disable_legacy_endpoints) == 1
 }
 

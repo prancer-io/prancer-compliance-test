@@ -8,6 +8,7 @@ default rulepass = false
 # VM instances without metadata, zone or label information
 
 rulepass = true {                                      
+    lower(input.type) == "compute.v1.instance"
    count(scheduling) >= 1
 }
 

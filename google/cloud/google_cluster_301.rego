@@ -13,7 +13,8 @@ default rulepass = false
 # Response will be Cluster Object: 
 # https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters#Cluster
 
-rulepass = true {                                      
+rulepass = true {     
+    lower(input.type) == "container.v1.cluster"
    count(basicauth) == 1
 }
 

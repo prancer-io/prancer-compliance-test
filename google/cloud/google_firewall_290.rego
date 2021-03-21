@@ -9,6 +9,7 @@ default rulepass = true
 # If Firewall rules not allow inbound traffic from anywhere with no target tags set
 # API and Response Reference : https://cloud.google.com/compute/docs/reference/rest/v1/firewalls/list
 rulepass = false {                                      
+    lower(input.type) == "compute.v1.firewall"
    count(notargettags) > 0
 }
 
