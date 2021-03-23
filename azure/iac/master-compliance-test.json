@@ -2018,8 +2018,8 @@
                     "evals": [
                         {
                             "id":"PR-AZR-0001-RGX",
-                            "eval": "data.rule.gl_aws_account",
-                            "message": "data.rule.gl_aws_account_err",
+                            "eval": "data.rule.gl_azure_secrets",
+                            "message": "data.rule.gl_azure_secrets_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR-AZR-0001-RGX.py"
                         }
