@@ -1,14 +1,8 @@
 {
-    "contentVersion": "1.0.0.0",
-    "fileType": "masterSnapshot",
     "snapshots": [
         {
-            "source": "k8sConnector",
-            "serviceAccount": "prancer_ro",
-            "namespace": [
-                "default",
-                "backend-test"
-            ],
+            "type": "kubernetes",
+            "connectorUser": "USER_1",
             "nodes": [
                 {
                     "masterSnapshotId": "K8SSNP_POD_",
