@@ -17,7 +17,8 @@
                             "eval": "data.rule.acm_wildcard",
                             "message": "data.rule.acm_wildcard_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS ACM Certificate with wildcard domain name",
@@ -42,7 +43,8 @@
                             "eval": "data.rule.acm_ct_log",
                             "message": "data.rule.acm_ct_log_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Certificate Manager (ACM) has certificates with Certificate Transparency Logging disabled",
@@ -68,7 +70,8 @@
                             "eval": "data.rule.cf_default_cache",
                             "message": "data.rule.cf_default_cache_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS CloudFront Distributions with Field-Level Encryption not enabled",
@@ -93,7 +96,8 @@
                             "eval": "data.rule.cf_ssl_protocol",
                             "message": "data.rule.cf_ssl_protocol_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS CloudFront distribution is using insecure SSL protocols for HTTPS communication",
@@ -118,7 +122,8 @@
                             "eval": "data.rule.cf_logging",
                             "message": "data.rule.cf_logging_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS CloudFront distribution with access logging disabled",
@@ -143,7 +148,8 @@
                             "eval": "data.rule.cf_https_only",
                             "message": "data.rule.cf_https_only_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS CloudFront origin protocol policy does not enforce HTTPS-only",
@@ -168,7 +174,8 @@
                             "eval": "data.rule.cf_https",
                             "message": "data.rule.cf_https_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS CloudFront viewer protocol policy is not configured with HTTPS",
@@ -193,7 +200,8 @@
                             "eval": "data.rule.cf_min_protocol",
                             "message": "data.rule.cf_min_protocol_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS CloudFront web distribution that allow TLS versions 1.0 or lower",
@@ -218,7 +226,8 @@
                             "eval": "data.rule.cf_firewall",
                             "message": "data.rule.cf_firewall_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS CloudFront web distribution with AWS Web Application Firewall (AWS WAF) service disabled",
@@ -243,7 +252,8 @@
                             "eval": "data.rule.cf_default_ssl",
                             "message": "data.rule.cf_default_ssl_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS CloudFront web distribution with default SSL certificate",
@@ -268,7 +278,8 @@
                             "eval": "data.rule.cf_geo_restriction",
                             "message": "data.rule.cf_geo_restriction_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS CloudFront web distribution with geo restriction disabled",
@@ -293,7 +304,8 @@
                             "eval": "data.rule.cf_s3_origin",
                             "message": "data.rule.cf_s3_origin_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Cloudfront Distribution with S3 have Origin Access set to disabled",
@@ -319,7 +331,8 @@
                             "eval": "data.rule.ct_regions",
                             "message": "data.rule.ct_regions_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS CloudTrail is not enabled in all regions",
@@ -344,7 +357,8 @@
                             "eval": "data.rule.ct_log_validation",
                             "message": "data.rule.ct_log_validation_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS CloudTrail log validation is not enabled in all regions",
@@ -369,7 +383,8 @@
                             "eval": "data.rule.ct_master_key",
                             "message": "data.rule.ct_master_key_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS CloudTrail logs are not encrypted using Customer Master Keys (CMKs)",
@@ -394,7 +409,8 @@
                             "eval": "data.rule.ct_cloudwatch",
                             "message": "data.rule.ct_cloudwatch_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "CloudTrail trail is not integrated with CloudWatch Log",
@@ -419,7 +435,8 @@
                             "eval": "data.rule.dynabodb_encrypt",
                             "message": "data.rule.dynabodb_encrypt_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS DynamoDB encrypted using AWS owned CMK instead of AWS managed CMK",
@@ -445,7 +462,8 @@
                             "eval": "data.rule.ebs_encrypt",
                             "message": "data.rule.ebs_encrypt_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS EBS volumes are not encrypted",
@@ -471,7 +489,8 @@
                             "eval": "data.rule.ec2_iam_role",
                             "message": "data.rule.ec2_iam_role_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS EC2 Instance IAM Role not enabled",
@@ -497,7 +516,8 @@
                             "eval": "data.rule.ecs_exec",
                             "message": "data.rule.ecs_exec_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS ECS/ Fargate task definition execution IAM Role not found",
@@ -523,7 +543,8 @@
                             "eval": "data.rule.efs_kms",
                             "message": "data.rule.efs_kms_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Elastic File System (EFS) not encrypted using Customer Managed Key",
@@ -548,7 +569,8 @@
                             "eval": "data.rule.efs_encrypt",
                             "message": "data.rule.efs_encrypt_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Elastic File System (EFS) with encryption for data at rest disabled",
@@ -574,7 +596,8 @@
                             "eval": "data.rule.eks_multiple_sg",
                             "message": "data.rule.eks_multiple_sg_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS EKS cluster control plane assigned multiple security groups",
@@ -600,7 +623,8 @@
                             "eval": "data.rule.esearch_vpc",
                             "message": "data.rule.esearch_vpc_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS ElasticSearch cluster not in a VPC",
@@ -625,7 +649,8 @@
                             "eval": "data.rule.esearch_encrypt",
                             "message": "data.rule.esearch_encrypt_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Elasticsearch domain Encryption for data at rest is disabled",
@@ -650,7 +675,8 @@
                             "eval": "data.rule.esearch_master",
                             "message": "data.rule.esearch_master_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Elasticsearch domain has Dedicated master set to disabled",
@@ -675,7 +701,8 @@
                             "eval": "data.rule.esearch_index_slow_log",
                             "message": "data.rule.esearch_index_slow_log_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Elasticsearch domain has Index slow logs set to disabled",
@@ -700,7 +727,8 @@
                             "eval": "data.rule.esearch_search_slow_log",
                             "message": "data.rule.esearch_search_slow_log_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Elasticsearch domain has Search slow logs set to disabled",
@@ -725,7 +753,8 @@
                             "eval": "data.rule.esearch_zone_awareness",
                             "message": "data.rule.esearch_zone_awareness_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Elasticsearch domain has Zone Awareness set to disabled",
@@ -751,7 +780,8 @@
                             "eval": "data.rule.elb_insecure_cipher",
                             "message": "data.rule.elb_insecure_cipher_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with insecure ciphers",
@@ -776,7 +806,8 @@
                             "eval": "data.rule.elb_insecure_protocol",
                             "message": "data.rule.elb_insecure_protocol_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with vulnerable SSL protocol",
@@ -801,7 +832,8 @@
                             "eval": "data.rule.elb_access_log",
                             "message": "data.rule.elb_access_log_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Elastic Load Balancer (Classic) with access log disabled",
@@ -826,7 +858,8 @@
                             "eval": "data.rule.elb_conn_drain",
                             "message": "data.rule.elb_conn_drain_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Elastic Load Balancer (Classic) with connection draining disabled",
@@ -851,7 +884,8 @@
                             "eval": "data.rule.elb_crosszone",
                             "message": "data.rule.elb_crosszone_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Elastic Load Balancer (Classic) with cross-zone load balancing disabled",
@@ -876,7 +910,8 @@
                             "eval": "data.rule.elb_sec_group",
                             "message": "data.rule.elb_sec_group_err",
                             "remediationDescription":"",
-                            "remediationFunction":"" 
+                            "remediationFunction":"",
+                            "severity":"Medium" 
                         }
                     ],
                     "title": "AWS Elastic Load Balancer (ELB) has security group with no outbound rules",
@@ -901,7 +936,8 @@
                             "eval": "data.rule.elb_not_in_use",
                             "message": "data.rule.elb_not_in_use_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Elastic Load Balancer (ELB) not in use",
@@ -926,7 +962,8 @@
                             "eval": "data.rule.elb_alb_logs",
                             "message": "data.rule.elb_alb_logs_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balancer (ALB) with access log disabled",
@@ -951,7 +988,8 @@
                             "eval": "data.rule.elb_listener_ssl",
                             "message": "data.rule.elb_listener_ssl_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Elastic Load Balancer with listener TLS/SSL disabled",
@@ -976,7 +1014,8 @@
                             "eval": "data.rule.elb_over_https",
                             "message": "data.rule.elb_over_https_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Application Load Balancer (ALB) listener that allow connection requests over HTTP",
@@ -1002,7 +1041,8 @@
                             "eval": "data.rule.lambda_env",
                             "message": "data.rule.lambda_env_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Lambda Environment Variables not encrypted at-rest using CMK",
@@ -1027,7 +1067,8 @@
                             "eval": "data.rule.lambda_vpc",
                             "message": "data.rule.lambda_vpc_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Lambda Function is not assigned to access within VPC",
@@ -1052,7 +1093,8 @@
                             "eval": "data.rule.lambda_tracing",
                             "message": "data.rule.lambda_tracing_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Lambda functions with tracing not enabled",
@@ -1078,7 +1120,8 @@
                             "eval": "data.rule.rds_cluster_encrypt",
                             "message": "data.rule.rds_cluster_encrypt_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS RDS DB cluster encryption is disabled",
@@ -1103,7 +1146,8 @@
                             "eval": "data.rule.rds_public",
                             "message": "data.rule.rds_public_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS RDS database instance is publicly accessible",
@@ -1128,7 +1172,8 @@
                             "eval": "data.rule.rds_encrypt",
                             "message": "data.rule.rds_encrypt_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS RDS instance is not encrypted",
@@ -1153,7 +1198,8 @@
                             "eval": "data.rule.rds_multiaz",
                             "message": "data.rule.rds_multiaz_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS RDS instance with Multi-Availability Zone disabled",
@@ -1178,7 +1224,8 @@
                             "eval": "data.rule.rds_snapshot",
                             "message": "data.rule.rds_snapshot_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         } 
                     ],
                     "title": "AWS RDS instance with copy tags to snapshots disabled",
@@ -1203,7 +1250,8 @@
                             "eval": "data.rule.rds_backup",
                             "message": "data.rule.rds_backup_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS RDS instance without Automatic Backup setting",
@@ -1228,7 +1276,8 @@
                             "eval": "data.rule.rds_upgrade",
                             "message": "data.rule.rds_upgrade_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS RDS minor upgrades not enabled",
@@ -1253,7 +1302,8 @@
                             "eval": "data.rule.rds_retention",
                             "message": "data.rule.rds_retention_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS RDS retention policy less than 7 days",
@@ -1279,7 +1329,8 @@
                             "eval": "data.rule.redshift_encrypt_key",
                             "message": "data.rule.redshift_encrypt_key_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Redshift Cluster not encrypted using Customer Managed Key",
@@ -1304,7 +1355,8 @@
                             "eval": "data.rule.redshift_public",
                             "message": "data.rule.redshift_public_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Redshift clusters should not be publicly accessible",
@@ -1329,7 +1381,8 @@
                             "eval": "data.rule.redshift_audit",
                             "message": "data.rule.redshift_audit_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Redshift database does not have audit logging enabled",
@@ -1354,7 +1407,8 @@
                             "eval": "data.rule.redshift_require_ssl",
                             "message": "data.rule.redshift_require_ssl_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Redshift does not have require_ssl configured",
@@ -1379,7 +1433,8 @@
                             "eval": "data.rule.redshift_encrypt",
                             "message": "data.rule.redshift_encrypt_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Redshift instances are not encrypted",
@@ -1404,7 +1459,8 @@
                             "eval": "data.rule.s3_accesslog",
                             "message": "data.rule.s3_accesslog_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         
                         }
                     ],
@@ -1430,7 +1486,8 @@
                             "eval": "data.rule.s3_acl_delete",
                             "message": "data.rule.s3_acl_delete_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         
                         }
                     ],
@@ -1456,7 +1513,8 @@
                             "eval": "data.rule.s3_acl_get",
                             "message": "data.rule.s3_acl_get_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS S3 Bucket has Global GET Permissions enabled via bucket policy",
@@ -1481,7 +1539,8 @@
                             "eval": "data.rule.s3_acl_list",
                             "message": "data.rule.s3_acl_list_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS S3 Bucket has Global LIST Permissions enabled via bucket policy",
@@ -1506,7 +1565,8 @@
                             "eval": "data.rule.s3_acl_put",
                             "message": "data.rule.s3_acl_put_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS S3 Bucket has Global PUT Permissions enabled via bucket policy",
@@ -1531,7 +1591,8 @@
                             "eval": "data.rule.s3_versioning",
                             "message": "data.rule.s3_versioning_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS S3 Object Versioning is disabled",
@@ -1556,7 +1617,8 @@
                             "eval": "data.rule.s3_transport",
                             "message": "data.rule.s3_transport_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS S3 bucket not configured with secure data transport policy",
@@ -1581,7 +1643,8 @@
                             "eval": "data.rule.s3_website",
                             "message": "data.rule.s3_website_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "S3 buckets with configurations set to host websites",
@@ -1607,7 +1670,8 @@
                             "eval": "data.rule.port_135",
                             "message": "data.rule.port_135_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to Windows RPC port (135)",
@@ -1632,7 +1696,8 @@
                             "eval": "data.rule.port_137",
                             "message": "data.rule.port_137_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to NetBIOS port (137)",
@@ -1657,7 +1722,8 @@
                             "eval": "data.rule.port_138",
                             "message": "data.rule.port_138_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to NetBIOS port (138)",
@@ -1682,7 +1748,8 @@
                             "eval": "data.rule.port_1433",
                             "message": "data.rule.port_1433_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to SQLServer port (1433)",
@@ -1707,7 +1774,8 @@
                             "eval": "data.rule.port_1434",
                             "message": "data.rule.port_1434_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to SQLServer port (1434)",
@@ -1732,7 +1800,8 @@
                             "eval": "data.rule.port_20",
                             "message": "data.rule.port_20_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to FTP-Data port (20)",
@@ -1757,7 +1826,8 @@
                             "eval": "data.rule.port_21",
                             "message": "data.rule.port_21_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to FTP port (21)",
@@ -1782,7 +1852,8 @@
                             "eval": "data.rule.port_22",
                             "message": "data.rule.port_22_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic to SSH port (22)",
@@ -1807,7 +1878,8 @@
                             "eval": "data.rule.port_23",
                             "message": "data.rule.port_23_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to Telnet port (23)",
@@ -1832,7 +1904,8 @@
             "eval": "data.rule.port_25",
             "message": "data.rule.port_25_err",
             "remediationDescription":"",
-            "remediationFunction":""
+            "remediationFunction":"",
+            "severity":"Medium"
         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to SMTP port (25)",
@@ -1857,7 +1930,8 @@
                             "eval": "data.rule.port_3306",
                             "message": "data.rule.port_3306_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to MYSQL port (3306)",
@@ -1882,7 +1956,8 @@
                             "eval": "data.rule.port_3389",
                             "message": "data.rule.port_3389_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to RDP port (3389)",
@@ -1907,7 +1982,8 @@
                             "eval": "data.rule.port_4333",
                             "message": "data.rule.port_4333_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to MSQL port (4333)",
@@ -1932,7 +2008,8 @@
                             "eval": "data.rule.port_445",
                             "message": "data.rule.port_445_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to CIFS port (445)",
@@ -1957,7 +2034,8 @@
                             "eval": "data.rule.port_53",
                             "message": "data.rule.port_53_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to DNS port (53)",
@@ -1982,7 +2060,8 @@
                             "eval": "data.rule.port_5432",
                             "message": "data.rule.port_5432_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to PostgreSQL port (5432)",
@@ -2007,7 +2086,8 @@
                             "eval": "data.rule.port_5500",
                             "message": "data.rule.port_5500_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to VNC Listener port (5500)",
@@ -2032,7 +2112,8 @@
                             "eval": "data.rule.port_5900",
                             "message": "data.rule.port_5900_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to VNC Server port (5900)",
@@ -2057,7 +2138,8 @@
                             "eval": "data.rule.port_all",
                             "message": "data.rule.port_all_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Default Security Group does not restrict all traffic",
@@ -2082,7 +2164,8 @@
                             "eval": "data.rule.port_proto_all",
                             "message": "data.rule.port_proto_all_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS Security Groups with Inbound rule overly permissive to All Traffic",
@@ -2108,7 +2191,8 @@
                             "eval": "data.rule.sns_protocol",
                             "message": "data.rule.sns_protocol_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS SNS subscription is not configured with HTTPS",
@@ -2133,7 +2217,8 @@
                             "eval": "data.rule.sns_encrypt_key",
                             "message": "data.rule.sns_encrypt_key_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS SNS topic encrypted using default KMS key instead of CMK",
@@ -2158,7 +2243,8 @@
                             "eval": "data.rule.sns_encrypt",
                             "message": "data.rule.sns_encrypt_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS SNS topic with server-side encryption disabled",
@@ -2184,7 +2270,8 @@
                             "eval": "data.rule.sqs_deadletter",
                             "message": "data.rule.sqs_deadletter_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS SQS does not have a dead letter queue configured",
@@ -2209,7 +2296,8 @@
                             "eval": "data.rule.sqs_encrypt_key",
                             "message": "data.rule.sqs_encrypt_key_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS SQS queue encryption using default KMS key instead of CMK",
@@ -2234,7 +2322,8 @@
                             "eval": "data.rule.sqs_encrypt",
                             "message": "data.rule.sqs_encrypt_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS SQS server side encryption not enabled",
@@ -2260,7 +2349,8 @@
                             "eval": "data.rule.vpc_subnet_autoip",
                             "message": "data.rule.vpc_subnet_autoip_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "AWS VPC subnets should not allow automatic public IP assignment",
