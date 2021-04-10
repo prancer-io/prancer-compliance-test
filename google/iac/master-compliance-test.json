@@ -17,7 +17,8 @@
                             "eval": "data.rule.disk_encrypt",
                             "message": "data.rule.disk_encrypt_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP VM disks not encrypted with Customer-Supplied Encryption Keys (CSEK)",
@@ -43,7 +44,8 @@
                             "eval": "data.rule.firewall_default",
                             "message": "data.rule.firewall_default_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "Default Firewall rule should not have any rules (except http and https)",
@@ -68,7 +70,8 @@
                             "eval": "data.rule.firewall_port_53",
                             "message": "data.rule.firewall_port_53_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Firewall rule allows internet traffic to DNS port (53)",
@@ -93,7 +96,8 @@
                             "eval": "data.rule.firewall_port_21",
                             "message": "data.rule.firewall_port_21_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Firewall rule allows internet traffic to FTP port (21)",
@@ -118,7 +122,8 @@
                             "eval": "data.rule.firewall_port_80",
                             "message": "data.rule.firewall_port_80_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Firewall rule allows internet traffic to HTTP port (80)",
@@ -143,7 +148,8 @@
                             "eval": "data.rule.firewall_port_445",
                             "message": "data.rule.firewall_port_445_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Firewall rule allows internet traffic to Microsoft-DS port (445)",
@@ -168,7 +174,8 @@
                             "eval": "data.rule.firewall_port_27017",
                             "message": "data.rule.firewall_port_27017_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Firewall rule allows internet traffic to MongoDB port (27017)",
@@ -193,7 +200,8 @@
                             "eval": "data.rule.firewall_port_3306",
                             "message": "data.rule.firewall_port_3306_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Firewall rule allows internet traffic to MySQL DB port (3306)",
@@ -218,7 +226,8 @@
                             "eval": "data.rule.firewall_port_139",
                             "message": "data.rule.firewall_port_139_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Firewall rule allows internet traffic to NetBIOS-SSN port (139)",
@@ -243,7 +252,8 @@
                             "eval": "data.rule.firewall_port_1521",
                             "message": "data.rule.firewall_port_1521_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Firewall rule allows internet traffic to Oracle DB port (1521)",
@@ -268,7 +278,8 @@
                             "eval": "data.rule.firewall_port_110",
                             "message": "data.rule.firewall_port_110_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Firewall rule allows internet traffic to POP3 port (110)",
@@ -293,7 +304,8 @@
                             "eval": "data.rule.firewall_port_5432",
                             "message": "data.rule.firewall_port_5432_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Firewall rule allows internet traffic to PostgreSQL port (5432)",
@@ -318,7 +330,8 @@
                             "eval": "data.rule.firewall_port_3389",
                             "message": "data.rule.firewall_port_3389_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Firewall rule allows internet traffic to RDP port (3389)",
@@ -343,7 +356,8 @@
                             "eval": "data.rule.firewall_port_25",
                             "message": "data.rule.firewall_port_25_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Firewall rule allows internet traffic to SMTP port (25)",
@@ -368,7 +382,8 @@
                             "eval": "data.rule.firewall_port_22",
                             "message": "data.rule.firewall_port_22_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Firewall rule allows internet traffic to SSH port (22)",
@@ -393,7 +408,8 @@
                             "eval": "data.rule.firewall_port_23",
                             "message": "data.rule.firewall_port_23_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Firewall rule allows internet traffic to Telnet port (23)",
@@ -418,7 +434,8 @@
                             "eval": "data.rule.firewall_inbound",
                             "message": "data.rule.firewall_inbound_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Firewall rules allow inbound traffic from anywhere with no target tags set",
@@ -443,7 +460,8 @@
                             "eval": "data.rule.firewall_inbound_all",
                             "message": "data.rule.firewall_inbound_all_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Firewall with Inbound rule overly permissive to All Traffic",
@@ -468,7 +486,8 @@
                             "eval": "data.rule.vm_ip_forward",
                             "message": "data.rule.vm_ip_forward_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP VM instances have IP forwarding enabled",
@@ -493,7 +512,8 @@
                             "eval": "data.rule.vm_block_project_ssh_keys",
                             "message": "data.rule.vm_block_project_ssh_keys_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP VM instances have block project-wide SSH keys feature disabled",
@@ -518,7 +538,8 @@
                             "eval": "data.rule.vm_serial_port",
                             "message": "data.rule.vm_serial_port_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP VM instances have serial port access enabled",
@@ -543,7 +564,8 @@
                             "eval": "data.rule.vm_pre_emptible",
                             "message": "data.rule.vm_pre_emptible_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "VM Instances enabled with Pre-Emptible termination",
@@ -568,7 +590,8 @@
                             "eval": "data.rule.vm_metadata",
                             "message": "data.rule.vm_metadata_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "VM Instances without any Custom metadata information",
@@ -593,7 +616,8 @@
                             "eval": "data.rule.vm_no_labels",
                             "message": "data.rule.vm_no_labels_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "VM Instances without any Label information",
@@ -618,7 +642,8 @@
                             "eval": "data.rule.vm_info",
                             "message": "data.rule.vm_info_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "VM instances without metadata, zone or label information",
@@ -643,7 +668,8 @@
                             "eval": "data.rule.net_legacy",
                             "message": "data.rule.net_legacy_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP project is configured with legacy network",
@@ -668,7 +694,8 @@
                             "eval": "data.rule.net_default",
                             "message": "data.rule.net_default_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP project is using the default network",
@@ -693,7 +720,8 @@
                             "eval": "data.rule.vpc_flow_logs",
                             "message": "data.rule.vpc_flow_logs_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP VPC Flow logs for the subnet is set to Off",
@@ -718,7 +746,8 @@
                             "eval": "data.rule.vpc_private_ip_google",
                             "message": "data.rule.vpc_private_ip_google_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP VPC Network subnets have Private Google access disabled",
@@ -743,7 +772,8 @@
                             "eval": "data.rule.lbs_ssl_policy",
                             "message": "data.rule.lbs_ssl_policy_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Load balancer HTTPS target proxy configured with default SSL policy instead of custom SSL policy",
@@ -768,7 +798,8 @@
                             "eval": "data.rule.lbs_quic",
                             "message": "data.rule.lbs_quic_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Load balancer HTTPS target proxy is not configured with QUIC protocol",
@@ -794,7 +825,8 @@
                             "eval": "data.rule.k8s_svc_account",
                             "message": "data.rule.k8s_svc_account_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes Engine Cluster Nodes have default Service account for Project access",
@@ -819,7 +851,8 @@
                             "eval": "data.rule.k8s_basicauth",
                             "message": "data.rule.k8s_basicauth_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes Engine Clusters Basic Authentication is set to Enabled",
@@ -844,7 +877,8 @@
                             "eval": "data.rule.k8s_client_cert",
                             "message": "data.rule.k8s_client_cert_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes Engine Clusters Client Certificate is set to Disabled",
@@ -869,7 +903,8 @@
                             "eval": "data.rule.k8s_alias_ip",
                             "message": "data.rule.k8s_alias_ip_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes Engine Clusters have Alias IP disabled",
@@ -894,7 +929,8 @@
                             "eval": "data.rule.k8s_alpha",
                             "message": "data.rule.k8s_alpha_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes Engine Clusters have Alpha cluster feature enabled",
@@ -919,7 +955,8 @@
                             "eval": "data.rule.k8s_http_lbs",
                             "message": "data.rule.k8s_http_lbs_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes Engine Clusters have HTTP load balancing disabled",
@@ -944,7 +981,8 @@
                             "eval": "data.rule.k8s_legacy_abac",
                             "message": "data.rule.k8s_legacy_abac_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes Engine Clusters have Legacy Authorization enabled",
@@ -969,7 +1007,8 @@
                             "eval": "data.rule.k8s_master_auth_net",
                             "message": "data.rule.k8s_master_auth_net_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes Engine Clusters have Master authorized networks disabled",
@@ -994,7 +1033,8 @@
                             "eval": "data.rule.k8s_net_policy",
                             "message": "data.rule.k8s_net_policy_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes Engine Clusters have Network policy disabled",
@@ -1019,7 +1059,8 @@
                             "eval": "data.rule.k8s_logging",
                             "message": "data.rule.k8s_logging_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes Engine Clusters have Stackdriver Logging disabled",
@@ -1044,7 +1085,8 @@
                             "eval": "data.rule.k8s_monitor",
                             "message": "data.rule.k8s_monitor_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes Engine Clusters have Stackdriver Monitoring disabled",
@@ -1069,7 +1111,8 @@
                             "eval": "data.rule.k8s_binary_auth",
                             "message": "data.rule.k8s_binary_auth_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes Engine Clusters have binary authorization disabled",
@@ -1094,7 +1137,8 @@
                             "eval": "data.rule.k8s_legacy_endpoint",
                             "message": "data.rule.k8s_legacy_endpoint_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes Engine Clusters have legacy compute engine metadata endpoints enabled",
@@ -1119,7 +1163,8 @@
                             "eval": "data.rule.k8s_pod_security",
                             "message": "data.rule.k8s_pod_security_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes Engine Clusters have pod security policy disabled",
@@ -1144,7 +1189,8 @@
                             "eval": "data.rule.k8s_egress_metering",
                             "message": "data.rule.k8s_egress_metering_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes Engine Clusters not configured with network traffic egress metering",
@@ -1169,7 +1215,8 @@
                             "eval": "data.rule.k8s_private",
                             "message": "data.rule.k8s_private_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes Engine Clusters not configured with private cluster",
@@ -1194,7 +1241,8 @@
                             "eval": "data.rule.k8s_private_node",
                             "message": "data.rule.k8s_private_node_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes Engine Clusters not configured with private nodes feature",
@@ -1219,7 +1267,8 @@
                             "eval": "data.rule.k8s_node_image",
                             "message": "data.rule.k8s_node_image_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes Engine Clusters not using Container-Optimized OS for Node image",
@@ -1244,7 +1293,8 @@
                             "eval": "data.rule.k8s_network",
                             "message": "data.rule.k8s_network_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes Engine Clusters using the default network",
@@ -1269,7 +1319,8 @@
                             "eval": "data.rule.k8s_dashboard",
                             "message": "data.rule.k8s_dashboard_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes Engine Clusters web UI/Dashboard is set to Enabled",
@@ -1294,7 +1345,8 @@
                             "eval": "data.rule.k8s_labels",
                             "message": "data.rule.k8s_labels_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes Engine Clusters without any label information",
@@ -1319,7 +1371,8 @@
                             "eval": "data.rule.k8s_db_encrypt",
                             "message": "data.rule.k8s_db_encrypt_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes cluster Application-layer Secrets not encrypted",
@@ -1344,7 +1397,8 @@
                             "eval": "data.rule.k8s_intra_node",
                             "message": "data.rule.k8s_intra_node_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes cluster intra-node visibility disabled",
@@ -1369,7 +1423,8 @@
                             "eval": "data.rule.k8s_istio",
                             "message": "data.rule.k8s_istio_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes cluster istioConfig not enabled",
@@ -1394,7 +1449,8 @@
                             "eval": "data.rule.k8s_zones",
                             "message": "data.rule.k8s_zones_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes cluster not in redundant zones",
@@ -1419,7 +1475,8 @@
                             "eval": "data.rule.k8s_auto_upgrade",
                             "message": "data.rule.k8s_auto_upgrade_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Kubernetes cluster size contains less than 3 nodes with auto upgrade enabled",
@@ -1444,7 +1501,8 @@
                             "eval": "data.rule.dnssec_state",
                             "message": "data.rule.dnssec_state_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Cloud DNS has DNSSEC disabled",
@@ -1469,7 +1527,8 @@
                             "eval": "data.rule.dnssec_key_rsasha1",
                             "message": "data.rule.dnssec_key_rsasha1_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Cloud DNS zones using RSASHA1 algorithm for DNSSEC key-signing",
@@ -1494,7 +1553,8 @@
                             "eval": "data.rule.dnssec_zone_rsasha1",
                             "message": "data.rule.dnssec_zone_rsasha1_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Cloud DNS zones using RSASHA1 algorithm for DNSSEC zone-signing",
@@ -1520,7 +1580,8 @@
                             "eval": "data.rule.svc_account_key",
                             "message": "data.rule.svc_account_key_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP User managed service account keys are not rotated for 90 days",
@@ -1546,7 +1607,8 @@
                             "eval": "data.rule.sql_labels",
                             "message": "data.rule.sql_labels_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP SQL Instances without any Label information",
@@ -1571,7 +1633,8 @@
                             "eval": "data.rule.sql_binary_logs",
                             "message": "data.rule.sql_binary_logs_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "SQL DB Instance backup Binary logs configuration is not enabled",
@@ -1596,7 +1659,8 @@
                             "eval": "data.rule.sql_backup",
                             "message": "data.rule.sql_backup_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "SQL DB instance backup configuration is not enabled",
@@ -1621,7 +1685,8 @@
                             "eval": "data.rule.sql_ssl",
                             "message": "data.rule.sql_ssl_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "SQL Instances do not have SSL configured",
@@ -1646,7 +1711,8 @@
                             "eval": "data.rule.sql_exposed",
                             "message": "data.rule.sql_exposed_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "SQL Instances with network authorization exposing them to the Internet",
@@ -1671,7 +1737,8 @@
                             "eval": "data.rule.storage_encrypt",
                             "message": "data.rule.storage_encrypt_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Storage bucket encrypted using default KMS key instead of a customer-managed key",
@@ -1696,7 +1763,8 @@
                             "eval": "data.rule.storage_versioning",
                             "message": "data.rule.storage_versioning_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "GCP Storage log buckets have object versioning disabled",
@@ -1721,7 +1789,8 @@
                             "eval": "data.rule.storage_stack_logging",
                             "message": "data.rule.storage_stack_logging_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "Logging on the Stackdriver exported Bucket is disabled",
@@ -1746,7 +1815,8 @@
                             "eval": "data.rule.storage_logging",
                             "message": "data.rule.storage_logging_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "Storage Bucket does not have Access and Storage Logging enabled",
@@ -1771,7 +1841,8 @@
                             "eval": "data.rule.storage_public_logs",
                             "message": "data.rule.storage_public_logs_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"",
+                            "severity":"Medium"
                         }
                     ],
                     "title": "Storage Buckets with publicly accessible Stackdriver logs",
