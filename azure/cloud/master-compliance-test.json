@@ -14,7 +14,8 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription": "1. Sign in to the Azure portal. \n 2. Goto the Kubernetes Service and select your cluster. \n 3. Click Networking option in the left window pane. \n 4. Uncheck \"Enable HTTP application routing\" and click on save button.",
-                            "remediationFunction": "PR_AZR_0007.py"
+                            "remediationFunction": "PR_AZR_0007.py",
+                            "severity":"Medium"
                         }
                     ],
                     "tags": [
@@ -46,7 +47,8 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription": "1. Sign in to the Azure portal. \n 2. Goto the Kubernetes Service and select your cluster. \n 3. Click Insights in the left window pane. \n 4. If you have an existing Log Analytics workspace in the same subscription as the cluster, select it in the drop-down list. \n 5. Select Enable.",
-                            "remediationFunction": "PR_AZR_0008.py"
+                            "remediationFunction": "PR_AZR_0008.py",
+                            "severity":"Medium"
                         }
                     ],
                     "tags": [
@@ -78,7 +80,8 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription": "1. Sign in to the Azure portal. \n 2. Goto the Kubernetes Service and select your cluster. \n 3. Click Scale in the left window pane. \n 4. Just above Total cluster capacity, increase the total number of nodes in your pool. \n 5. Click Save.",
-                            "remediationFunction": "PR_AZR_0009.py"
+                            "remediationFunction": "PR_AZR_0009.py",
+                            "severity":"Medium"
                         }
                     ],
                     "tags": [
@@ -110,7 +113,8 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0010.py"
+                            "remediationFunction": "PR_AZR_0010.py",
+                            "severity":"Medium"
                         }
                     ],
                     "tags": [
@@ -142,7 +146,8 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription": "1. Log in to the Azure portal. \n 2. Select 'All services' > 'Container Registries'. \n 3. Select the container registry you need to modify. \n 4. Select 'Upgrade to managed registry'. \n 5. Select 'OK' to confirm the upgrade.",
-                            "remediationFunction": "PR_AZR_0015.py"
+                            "remediationFunction": "PR_AZR_0015.py",
+                            "severity":"Medium"
                         }
                     ],
                     "tags": [
@@ -174,7 +179,8 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (22 PORT). \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction": "PR_AZR_0020.py"
+                            "remediationFunction": "PR_AZR_0020.py",
+                            "severity":"Medium"
                         }
                     ],
                     "tags": [
@@ -209,7 +215,8 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (3389 PORT). \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction": "PR_AZR_0021.py"
+                            "remediationFunction": "PR_AZR_0021.py",
+                            "severity":"Medium"
                         }
                     ],
                     "tags": [
@@ -245,7 +252,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0022.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -276,7 +284,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0023.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -307,7 +316,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0024.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -338,7 +348,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0025.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -369,7 +380,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0026.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -400,7 +412,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0027.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -429,7 +442,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0028.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -458,7 +472,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (445 PORT). \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0029.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -487,7 +502,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row ( TCP PORT 53). \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0030.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -516,7 +532,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row ( UDP Port 53 ). \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0031.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -545,7 +562,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (21 PORT). \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0032.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -574,7 +592,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (PORT 20). \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0033.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -603,7 +622,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0034.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -632,7 +652,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (PORT 4333). \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0035.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -661,7 +682,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row ( PORT 3306). \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0036.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -690,7 +712,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row ( PORT 137). \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0037.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -719,7 +742,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 138). \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0038.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -748,7 +772,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 5432). \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0039.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -777,7 +802,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 25). \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0040.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -806,7 +832,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 1434). \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0041.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -835,7 +862,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 1433). \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0042.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -864,7 +892,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 4333). \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0043.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -894,7 +923,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 5500). \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0044.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -923,7 +953,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 5900). \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0045.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -952,7 +983,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 135). \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0046.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -981,7 +1013,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 445). \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0047.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1010,7 +1043,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
                             "remediationFunction":"PR_AZR_0048.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1039,7 +1073,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0075.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1070,7 +1105,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_gID6.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1101,7 +1137,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0002.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1133,7 +1170,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0049.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1166,7 +1204,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0076.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1200,7 +1239,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0077.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1233,7 +1273,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0078.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1264,7 +1305,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0079.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1297,7 +1339,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0081.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1331,7 +1374,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0083.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1365,7 +1409,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0086.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1399,7 +1444,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0094.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1433,7 +1479,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0095.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1466,7 +1513,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0099.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1500,7 +1548,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0100.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1533,7 +1582,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0065.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1564,7 +1614,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0068.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1612,7 +1663,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0092.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "title": "Storage Accounts without Secure transfer enabled",
                     "description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPs. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesnâ€™t support HTTPs for custom domain names, this option is not applied when using a custom domain name.",
@@ -1647,7 +1699,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0093.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "title": "Storage Accounts without Secure transfer enabled",
                     "description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on.You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
@@ -1666,7 +1719,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0012.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1698,7 +1752,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0050.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1730,7 +1785,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0051.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1762,7 +1818,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_gID1.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1790,7 +1847,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0001.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1822,7 +1880,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0003.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1854,7 +1913,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0005.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1881,7 +1941,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0006.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1909,7 +1970,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0011.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1936,7 +1998,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0013.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1963,7 +2026,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0017.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -1990,7 +2054,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0018.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2017,7 +2082,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0019.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2044,7 +2110,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0052.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2071,7 +2138,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0053.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2103,7 +2171,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0054.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2135,7 +2204,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0055.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2166,7 +2236,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0056.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2193,7 +2264,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0057.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2220,7 +2292,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0058.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2247,7 +2320,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0059.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2274,7 +2348,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0061.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2301,7 +2376,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0062.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2328,7 +2404,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0063.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2355,7 +2432,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0064.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2382,7 +2460,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0066.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2409,7 +2488,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0067.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2436,7 +2516,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0069.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2463,7 +2544,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0070.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2490,7 +2572,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0071.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2517,7 +2600,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0072.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2544,7 +2628,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0073.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2571,7 +2656,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0074.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2598,7 +2684,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0082.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2629,7 +2716,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0084.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2661,7 +2749,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0085.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2691,7 +2780,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0087.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2723,7 +2813,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0088.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2756,7 +2847,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0090.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2788,7 +2880,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_gID2.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2816,7 +2909,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0091.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2844,7 +2938,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0096.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2874,7 +2969,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0097.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2905,7 +3001,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0098.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2935,7 +3032,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_gID3.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2966,7 +3064,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_gID5.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -2994,7 +3093,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_gID7.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -3022,7 +3122,8 @@
                             "message": "data.rule.rulepass_err",
                             "remediationDescription":"",
                             "remediationFunction":"PR_AZR_0004.py"
-                        }
+,
+"severity":"Medium"                        }
                     ],
                     "tags": [
                         {
@@ -3052,7 +3153,8 @@
                             "eval": "data.rule.sql_server_rulepass",
                             "message": "data.rule.sql_server_rulepass_err",
                             "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open SQL Servers list \n 3) Select the SQL Server for which you want to modify the Mimimal TLS Version. \n 4) Click on `Firewalls and virtual networks` option under `Security` section. \n 5) Update the Minimum TLS Version to `1.2` and click on save button.",
-                            "remediationFunction": "PR_AZR_0101.py"
+                            "remediationFunction": "PR_AZR_0101.py",
+                            "severity":"Medium"
                         }
                     ],
                     "tags": [
@@ -3080,7 +3182,8 @@
                             "eval": "data.rule.sql_instance_rulepass",
                             "message": "data.rule.sql_instance_rulepass_err",
                             "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open SQL Instances list \n 3) Select the SQL Server for which you want to modify the Mimimal TLS Version. \n 4) Click on `Firewalls and virtual networks` option under `Security` section. \n 5) Update the Minimum TLS Version to `1.2` and click on save button.",
-                            "remediationFunction": "PR_AZR_0101.py"
+                            "remediationFunction": "PR_AZR_0101.py",
+                            "severity":"Medium"
                         }
                     ],
                     "tags": [
@@ -3108,7 +3211,8 @@
                             "eval": "data.rule.sql_server_rulepass",
                             "message": "data.rule.sql_server_rulepass_err",
                             "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open Azure SQL list \n 3) Select the reported SQL Server. \n 4) Click on `Security Center` option under `Security` section. \n 5) Click on \"Enable Azure Defender for SQL\" button.",
-                            "remediationFunction": "PR_AZR_0102.py"
+                            "remediationFunction": "PR_AZR_0102.py",
+                            "severity":"Medium"
                         }
                     ],
                     "tags": [
@@ -3136,7 +3240,8 @@
                             "eval": "data.rule.sql_instance_rulepass",
                             "message": "data.rule.sql_instance_rulepass_err",
                             "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open Azure SQL list \n 3) Select the reported SQL Managed Instance. \n 4) Click on `Security Center` option under `Security` section. \n 5) Click on \"Enable Azure Defender for SQL\" button.",
-                            "remediationFunction": "PR_AZR_0102.py"
+                            "remediationFunction": "PR_AZR_0102.py",
+                            "severity":"Medium"
                         }
                     ],
                     "tags": [
@@ -3164,7 +3269,8 @@
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
                             "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open Azure SQL list \n 3) Select the reported SQL Server. \n 4) Click on `Security Center` option under `Security` section. \n 5) Click on \"Enable Azure Defender for SQL\" button.",
-                            "remediationFunction": "PR_AZR_0103.py"
+                            "remediationFunction": "PR_AZR_0103.py",
+                            "severity":"Medium"
                         }
                     ],
                     "tags": [
