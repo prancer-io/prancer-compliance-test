@@ -13,11 +13,12 @@
                     "rule": "file(networkPolicy.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0036-DCL",
+                            "id": "PR-K8S-0036-DCL",
                             "eval": "data.rule.empty_ingress",
                             "message": "data.rule.empty_ingress_err",
-                            "remediationDescription":"Pods in a cluster can communicate with each other and should be controlled using Network Policies as needed for your workload. Network policies are implemented by the network plugin, so you must be using a networking solution which supports NetworkPolicy - simply creating the resource without a controller to implement it will have no effect. Kubernetes' Network Policies make it much more difficult for attackers to move laterally within your cluster. You can also use the Kubernetes Network Policy API to create Pod-level firewall rules. These firewall rules determine which Pods and services can access one another inside your cluster. You can find an example of NetworkPolicy : https://kubernetes.io/docs/concepts/services-networking/network-policies/#the-networkpolicy-resource For more information on NetworkPolicy, please refer : https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.16/#networkpolicy-v1-networking-k8s-io",
-                            "remediationFunction":"PR-K8S-0036-DCL.py"
+                            "remediationDescription": "Pods in a cluster can communicate with each other and should be controlled using Network Policies as needed for your workload. Network policies are implemented by the network plugin, so you must be using a networking solution which supports NetworkPolicy - simply creating the resource without a controller to implement it will have no effect. Kubernetes' Network Policies make it much more difficult for attackers to move laterally within your cluster. You can also use the Kubernetes Network Policy API to create Pod-level firewall rules. These firewall rules determine which Pods and services can access one another inside your cluster. You can find an example of NetworkPolicy : https://kubernetes.io/docs/concepts/services-networking/network-policies/#the-networkpolicy-resource For more information on NetworkPolicy, please refer : https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.16/#networkpolicy-v1-networking-k8s-io",
+                            "remediationFunction": "PR-K8S-0036-DCL.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Restrict Traffic Among Pods with a Network Policy",
@@ -25,11 +26,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_1",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -38,11 +42,12 @@
                     "rule": "file(pod.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0015-DCL",
+                            "id": "PR-K8S-0015-DCL",
                             "eval": "data.rule.run_pod_as_root",
                             "message": "data.rule.run_pod_as_root_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.runAsUser.rule is set to either MustRunAsNonRoot or MustRunAs with the range of UIDs not including 0.",
-                            "remediationFunction":"PR-K8S-0015-DCL.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.runAsUser.rule is set to either MustRunAsNonRoot or MustRunAs with the range of UIDs not including 0.",
+                            "remediationFunction": "PR-K8S-0015-DCL.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Do not admit root containers",
@@ -50,11 +55,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_2",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -63,11 +71,12 @@
                     "rule": "file(pod.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0018-DCL",
+                            "id": "PR-K8S-0018-DCL",
                             "eval": "data.rule.run_privileged_pod",
                             "message": "data.rule.run_privileged_pod_err",
-                            "remediationDescription":"Use this example PodSecurityPolicy object in a file to create a policy that simply prevents the creation of privileged pods. /n apiVersion: policy/v1beta1 /n kind: PodSecurityPolicy /n metadata: /n name: example /n spec: /n privileged: false # Don't allow privileged pods! /n # The rest fills in some required fields. /n seLinux: /n rule: RunAsAny /n supplementalGroups: /n rule: RunAsAny /n runAsUser: /n  rule: RunAsAny /n fsGroup: /n rule: RunAsAny /n volumes: /n - '*' /n For more on how to enable and update pod specification using Pod Security Policy, please refer : https://kubernetes.io/docs/concepts/policy/pod-security-policy/#privileged",
-                            "remediationFunction":"PR-K8S-0018-DCL.py"
+                            "remediationDescription": "Use this example PodSecurityPolicy object in a file to create a policy that simply prevents the creation of privileged pods. /n apiVersion: policy/v1beta1 /n kind: PodSecurityPolicy /n metadata: /n name: example /n spec: /n privileged: false # Don't allow privileged pods! /n # The rest fills in some required fields. /n seLinux: /n rule: RunAsAny /n supplementalGroups: /n rule: RunAsAny /n runAsUser: /n  rule: RunAsAny /n fsGroup: /n rule: RunAsAny /n volumes: /n - '*' /n For more on how to enable and update pod specification using Pod Security Policy, please refer : https://kubernetes.io/docs/concepts/policy/pod-security-policy/#privileged",
+                            "remediationFunction": "PR-K8S-0018-DCL.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Ensure that Containers are not running in privileged mode",
@@ -75,11 +84,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_3",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -88,11 +100,12 @@
                     "rule": "file(pod.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0030-DCL",
+                            "id": "PR-K8S-0030-DCL",
                             "eval": "data.rule.pod_default_ns",
                             "message": "data.rule.pod_default_ns_err",
-                            "remediationDescription":"Ensure that namespaces are created to allow for appropriate segregation of Kubernetes resources and that all new resources are created in a specific namespace.",
-                            "remediationFunction":"PR-K8S-0030-DCL.py"
+                            "remediationDescription": "Ensure that namespaces are created to allow for appropriate segregation of Kubernetes resources and that all new resources are created in a specific namespace.",
+                            "remediationFunction": "PR-K8S-0030-DCL.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "The default namespace should not be used",
@@ -100,11 +113,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_4",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -113,11 +129,12 @@
                     "rule": "file(pod.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0057-DCL",
+                            "id": "PR-K8S-0057-DCL",
                             "eval": "data.rule.hostpath_mount",
                             "message": "data.rule.hostpath_mount_err",
-                            "remediationDescription":"Please refer to the Kubernetes documentation on how to configure the hostpath: /n https://kubernetes.io/docs/concepts/storage/volumes/#hostpath",
-                            "remediationFunction":"PR-K8S-0057-DCL.py"
+                            "remediationDescription": "Please refer to the Kubernetes documentation on how to configure the hostpath: /n https://kubernetes.io/docs/concepts/storage/volumes/#hostpath",
+                            "remediationFunction": "PR-K8S-0057-DCL.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure pods outside of kube-system do not have access to node volume",
@@ -125,11 +142,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_5",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -138,11 +158,12 @@
                     "rule": "file(pod.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0084-DCL",
+                            "id": "PR-K8S-0084-DCL",
                             "eval": "data.rule.pod_selinux",
                             "message": "data.rule.pod_selinux_err",
-                            "remediationDescription":"Follow the Kubernetes documentation and apply security contexts to your pods. For a suggested list of security contexts, you may refer to the CIS Security Benchmark for Docker Containers. Please refer : https://kubernetes.io/docs/concepts/policy/security-context/",
-                            "remediationFunction":"PR-K8S-0084-DCL.py"
+                            "remediationDescription": "Follow the Kubernetes documentation and apply security contexts to your pods. For a suggested list of security contexts, you may refer to the CIS Security Benchmark for Docker Containers. Please refer : https://kubernetes.io/docs/concepts/policy/security-context/",
+                            "remediationFunction": "PR-K8S-0084-DCL.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Apply Security Context to Your Pods and Containers",
@@ -150,11 +171,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_SECURITY_POLICY_1",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -163,11 +187,12 @@
                     "rule": "file(podSecurityPolicy.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0008-DCL",
+                            "id": "PR-K8S-0008-DCL",
                             "eval": "data.rule.privileged",
                             "message": "data.rule.privileged_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.privileged field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies",
-                            "remediationFunction":"PR-K8S-0008-DCL.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.privileged field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies",
+                            "remediationFunction": "PR-K8S-0008-DCL.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Minimize the admission of privileged containers (PSP)",
@@ -175,11 +200,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_SECURITY_POLICY_2",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -188,11 +216,12 @@
                     "rule": "file(podSecurityPolicy.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0009-DCL",
+                            "id": "PR-K8S-0009-DCL",
                             "eval": "data.rule.run_as_root",
                             "message": "data.rule.run_as_root_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.runAsUser.rule is set to either MustRunAsNonRoot or MustRunAs with the range of UIDs not including 0.  References: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies",
-                            "remediationFunction":"PR-K8S-0009-DCL.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.runAsUser.rule is set to either MustRunAsNonRoot or MustRunAs with the range of UIDs not including 0.  References: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies",
+                            "remediationFunction": "PR-K8S-0009-DCL.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Minimize the admission of root containers (PSP)",
@@ -200,11 +229,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_SECURITY_POLICY_3",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -213,11 +245,12 @@
                     "rule": "file(podSecurityPolicy.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0010-DCL",
+                            "id": "PR-K8S-0010-DCL",
                             "eval": "data.rule.drop_capabilities",
                             "message": "data.rule.drop_capabilities_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.requiredDropCapabilities is set to include either NET_RAW or ALL. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies https://www.nccgroup.trust/uk/our-research/abusing-privileged-and-unprivileged-linux-containers/",
-                            "remediationFunction":"PR-K8S-0010-DCL.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.requiredDropCapabilities is set to include either NET_RAW or ALL. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies https://www.nccgroup.trust/uk/our-research/abusing-privileged-and-unprivileged-linux-containers/",
+                            "remediationFunction": "PR-K8S-0010-DCL.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Minimize the admission of containers with the NET_RAW capability (PSP)",
@@ -225,11 +258,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_SECURITY_POLICY_4",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -238,11 +274,12 @@
                     "rule": "file(podSecurityPolicy.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0011-DCL",
+                            "id": "PR-K8S-0011-DCL",
                             "eval": "data.rule.host_ipc",
                             "message": "data.rule.host_ipc_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostIPC field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
-                            "remediationFunction":"PR-K8S-0011-DCL.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostIPC field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
+                            "remediationFunction": "PR-K8S-0011-DCL.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Minimize the admission of containers wishing to share the host IPC namespace (PSP)",
@@ -250,11 +287,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_SECURITY_POLICY_5",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -263,11 +303,12 @@
                     "rule": "file(podSecurityPolicy.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0012-DCL",
+                            "id": "PR-K8S-0012-DCL",
                             "eval": "data.rule.host_network",
                             "message": "data.rule.host_network_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostNetwork field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
-                            "remediationFunction":"PR-K8S-0012-DCL.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostNetwork field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
+                            "remediationFunction": "PR-K8S-0012-DCL.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Minimize the admission of containers wishing to share the host network namespace (PSP)",
@@ -275,11 +316,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_SECURITY_POLICY_6",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -288,11 +332,12 @@
                     "rule": "file(podSecurityPolicy.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0013-DCL",
+                            "id": "PR-K8S-0013-DCL",
                             "eval": "data.rule.host_pid",
                             "message": "data.rule.host_pid_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostPID field is omitted or set to false. References:  https://kubernetes.io/docs/concepts/policy/pod-security-policy",
-                            "remediationFunction":"PR-K8S-0013-DCL.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostPID field is omitted or set to false. References:  https://kubernetes.io/docs/concepts/policy/pod-security-policy",
+                            "remediationFunction": "PR-K8S-0013-DCL.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Minimize the admission of containers wishing to share the host process ID namespace (PSP)",
@@ -300,11 +345,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_SECURITY_POLICY_7",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -313,11 +361,12 @@
                     "rule": "file(podSecurityPolicy.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0014-DCL",
+                            "id": "PR-K8S-0014-DCL",
                             "eval": "data.rule.privilege_escalation",
                             "message": "data.rule.privilege_escalation_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.allowPrivilegeEscalation field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
-                            "remediationFunction":"PR-K8S-0014-DCL.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.allowPrivilegeEscalation field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
+                            "remediationFunction": "PR-K8S-0014-DCL.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Minimize the admission of containers with allowPrivilegeEscalation (PSP)",
@@ -325,11 +374,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ROLE_1",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -338,11 +390,12 @@
                     "rule": "file(role.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0001-DCL",
+                            "id": "PR-K8S-0001-DCL",
                             "eval": "data.rule.rbac_secrets",
                             "message": "data.rule.rbac_secrets_err",
-                            "remediationDescription":"Where possible, remove get, list and watch access to secret objects in the cluster.",
-                            "remediationFunction":"PR-K8S-0001-DCL.py"
+                            "remediationDescription": "Where possible, remove get, list and watch access to secret objects in the cluster.",
+                            "remediationFunction": "PR-K8S-0001-DCL.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "MINIMIZE ACCESS TO SECRETS (RBAC)",
@@ -350,11 +403,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ROLE_2",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -363,11 +419,12 @@
                     "rule": "file(role.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0002-DCL",
+                            "id": "PR-K8S-0002-DCL",
                             "eval": "data.rule.rbac_wildcard",
                             "message": "data.rule.rbac_wildcard_err",
-                            "remediationDescription":"Where possible, remove get, list and watch access to secret objects in the cluster.",
-                            "remediationFunction":"PR-K8S-0002-DCL.py"
+                            "remediationDescription": "Where possible, remove get, list and watch access to secret objects in the cluster.",
+                            "remediationFunction": "PR-K8S-0002-DCL.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Minimize wildcard use in Roles and ClusterRoles (RBAC)",
@@ -375,11 +432,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ROLE_BINDING_1",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -388,11 +448,12 @@
                     "rule": "file(roleBinding.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0003-DCL",
+                            "id": "PR-K8S-0003-DCL",
                             "eval": "data.rule.default_role",
                             "message": "data.rule.default_role_err",
-                            "remediationDescription":"Create explicit service accounts wherever a Kubernetes workload requires specific access to the Kubernetes API server. Modify the configuration of each default service account to include this value: automountServiceAccountToken: false",
-                            "remediationFunction":"PR-K8S-0003-DCL.py"
+                            "remediationDescription": "Create explicit service accounts wherever a Kubernetes workload requires specific access to the Kubernetes API server. Modify the configuration of each default service account to include this value: automountServiceAccountToken: false",
+                            "remediationFunction": "PR-K8S-0003-DCL.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Ensure that default service accounts are not actively used. (RBAC)",
@@ -400,11 +461,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ROLE_BINDING_2",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -413,11 +477,12 @@
                     "rule": "file(roleBinding.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0004-DCL",
+                            "id": "PR-K8S-0004-DCL",
                             "eval": "data.rule.admin_role",
                             "message": "data.rule.admin_role_err",
-                            "remediationDescription":"Identify all clusterrolebindings to the cluster-admin role. Check if they are used and if they need this role or if they could use a role with fewer privileges. Where possible, first bind users to a lower privileged role and then remove the clusterrolebinding to the cluster-admin role : kubectl delete clusterrolebinding [name]",
-                            "remediationFunction":"PR-K8S-0004-DCL.py"
+                            "remediationDescription": "Identify all clusterrolebindings to the cluster-admin role. Check if they are used and if they need this role or if they could use a role with fewer privileges. Where possible, first bind users to a lower privileged role and then remove the clusterrolebinding to the cluster-admin role : kubectl delete clusterrolebinding [name]",
+                            "remediationFunction": "PR-K8S-0004-DCL.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Ensure that the cluster-admin role is only used where required (RBAC)",
@@ -425,11 +490,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SERVICE_ACCOUNT",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -438,11 +506,12 @@
                     "rule": "file(serviceAccount.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0035-DCL",
+                            "id": "PR-K8S-0035-DCL",
                             "eval": "data.rule.sa_token",
                             "message": "data.rule.sa_token_err",
-                            "remediationDescription":"Modify the definition of pods and service accounts which do not need to mount service account tokens to disable it.",
-                            "remediationFunction":"PR-K8S-0035-DCL.py"
+                            "remediationDescription": "Modify the definition of pods and service accounts which do not need to mount service account tokens to disable it.",
+                            "remediationFunction": "PR-K8S-0035-DCL.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that Service Account Tokens are only mounted where necessary (RBAC)",
@@ -450,7 +519,9 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": []
                         }
                     ]

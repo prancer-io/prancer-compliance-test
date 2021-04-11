@@ -7,17 +7,19 @@
                 {
                     "masterTestId": "K8S_test_0001",
                     "masterSnapshotId": [
-                        "K8SSNP_CLUSTERROLE_","K8SSNP_ROLE_"
+                        "K8SSNP_CLUSTERROLE_",
+                        "K8SSNP_ROLE_"
                     ],
                     "type": "rego",
                     "rule": "file(PR-K8S-0001.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0001",
+                            "id": "PR-K8S-0001",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Where possible, remove get, list and watch access to secret objects in the cluster.",
-                            "remediationFunction":"PR-K8S-0001.py"
+                            "remediationDescription": "Where possible, remove get, list and watch access to secret objects in the cluster.",
+                            "remediationFunction": "PR-K8S-0001.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "MINIMIZE ACCESS TO SECRETS (RBAC)",
@@ -25,25 +27,32 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["clusterrole","role"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "clusterrole",
+                                "role"
+                            ]
                         }
                     ]
                 },
                 {
                     "masterTestId": "K8S_test_0002",
                     "masterSnapshotId": [
-                        "K8SSNP_CLUSTERROLE_","K8SSNP_ROLE_"
+                        "K8SSNP_CLUSTERROLE_",
+                        "K8SSNP_ROLE_"
                     ],
                     "type": "rego",
                     "rule": "file(PR-K8S-0002.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0002",
+                            "id": "PR-K8S-0002",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Where possible, remove get, list and watch access to secret objects in the cluster.",
-                            "remediationFunction":"PR-K8S-0002.py"
+                            "remediationDescription": "Where possible, remove get, list and watch access to secret objects in the cluster.",
+                            "remediationFunction": "PR-K8S-0002.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Minimize wildcard use in Roles and ClusterRoles (RBAC)",
@@ -51,25 +60,32 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["clusterrole","role"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "clusterrole",
+                                "role"
+                            ]
                         }
                     ]
                 },
                 {
                     "masterTestId": "K8S_test_0003",
                     "masterSnapshotId": [
-                        "K8SSNP_ROLEBINDING_","K8SSNP_CLUSTERROLEBINDING_"
+                        "K8SSNP_ROLEBINDING_",
+                        "K8SSNP_CLUSTERROLEBINDING_"
                     ],
                     "type": "rego",
                     "rule": "file(PR-K8S-0003.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0003",
+                            "id": "PR-K8S-0003",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Create explicit service accounts wherever a Kubernetes workload requires specific access to the Kubernetes API server. Modify the configuration of each default service account to include this value: automountServiceAccountToken: false",
-                            "remediationFunction":"PR-K8S-0003.py"
+                            "remediationDescription": "Create explicit service accounts wherever a Kubernetes workload requires specific access to the Kubernetes API server. Modify the configuration of each default service account to include this value: automountServiceAccountToken: false",
+                            "remediationFunction": "PR-K8S-0003.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Ensure that default service accounts are not actively used. (RBAC)",
@@ -77,25 +93,32 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["rolebinding","clusterrolebinding"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "rolebinding",
+                                "clusterrolebinding"
+                            ]
                         }
                     ]
                 },
                 {
                     "masterTestId": "K8S_test_0004",
                     "masterSnapshotId": [
-                        "K8SSNP_ROLEBINDING_","K8SSNP_CLUSTERROLEBINDING_"
+                        "K8SSNP_ROLEBINDING_",
+                        "K8SSNP_CLUSTERROLEBINDING_"
                     ],
                     "type": "rego",
                     "rule": "file(PR-K8S-0004.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0004",
+                            "id": "PR-K8S-0004",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Identify all clusterrolebindings to the cluster-admin role. Check if they are used and if they need this role or if they could use a role with fewer privileges. Where possible, first bind users to a lower privileged role and then remove the clusterrolebinding to the cluster-admin role : kubectl delete clusterrolebinding [name] ",
-                            "remediationFunction":"PR-K8S-0004.py"
+                            "remediationDescription": "Identify all clusterrolebindings to the cluster-admin role. Check if they are used and if they need this role or if they could use a role with fewer privileges. Where possible, first bind users to a lower privileged role and then remove the clusterrolebinding to the cluster-admin role : kubectl delete clusterrolebinding [name] ",
+                            "remediationFunction": "PR-K8S-0004.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Ensure that the cluster-admin role is only used where required (RBAC)",
@@ -103,8 +126,13 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["rolebinding","clusterrolebinding"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "rolebinding",
+                                "clusterrolebinding"
+                            ]
                         }
                     ]
                 },
@@ -117,11 +145,12 @@
                     "rule": "file(PR-K8S-0008.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0008",
+                            "id": "PR-K8S-0008",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.privileged field is omitted or set to false.  References: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies",
-                            "remediationFunction":"PR-K8S-0008.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.privileged field is omitted or set to false.  References: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies",
+                            "remediationFunction": "PR-K8S-0008.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Minimize the admission of privileged containers (PSP)",
@@ -129,8 +158,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["podsecuritypolicy"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "podsecuritypolicy"
+                            ]
                         }
                     ]
                 },
@@ -143,11 +176,12 @@
                     "rule": "file(PR-K8S-0009.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0009",
+                            "id": "PR-K8S-0009",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.runAsUser.rule is set to either MustRunAsNonRoot or MustRunAs with the range of UIDs not including 0. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies",
-                            "remediationFunction":"PR-K8S-0009.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.runAsUser.rule is set to either MustRunAsNonRoot or MustRunAs with the range of UIDs not including 0. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies",
+                            "remediationFunction": "PR-K8S-0009.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Minimize the admission of root containers (PSP)",
@@ -155,8 +189,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["podsecuritypolicy"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "podsecuritypolicy"
+                            ]
                         }
                     ]
                 },
@@ -169,11 +207,12 @@
                     "rule": "file(PR-K8S-0010.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0010",
+                            "id": "PR-K8S-0010",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.requiredDropCapabilities is set to include either NET_RAW or ALL. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies https://www.nccgroup.trust/uk/our-research/abusing-privileged-and-unprivileged-linux-containers/",
-                            "remediationFunction":"PR-K8S-0010.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.requiredDropCapabilities is set to include either NET_RAW or ALL. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies https://www.nccgroup.trust/uk/our-research/abusing-privileged-and-unprivileged-linux-containers/",
+                            "remediationFunction": "PR-K8S-0010.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Minimize the admission of containers with the NET_RAW capability (PSP)",
@@ -181,8 +220,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["podsecuritypolicy"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "podsecuritypolicy"
+                            ]
                         }
                     ]
                 },
@@ -195,11 +238,12 @@
                     "rule": "file(PR-K8S-0011.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0011",
+                            "id": "PR-K8S-0011",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostIPC field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
-                            "remediationFunction":"PR-K8S-0011.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostIPC field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
+                            "remediationFunction": "PR-K8S-0011.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Minimize the admission of containers wishing to share the host IPC namespace (PSP)",
@@ -207,8 +251,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["podsecuritypolicy"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "podsecuritypolicy"
+                            ]
                         }
                     ]
                 },
@@ -221,11 +269,12 @@
                     "rule": "file(PR-K8S-0012.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0012",
+                            "id": "PR-K8S-0012",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostNetwork field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
-                            "remediationFunction":"PR-K8S-0012.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostNetwork field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
+                            "remediationFunction": "PR-K8S-0012.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Minimize the admission of containers wishing to share the host network namespace (PSP)",
@@ -233,8 +282,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["podsecuritypolicy"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "podsecuritypolicy"
+                            ]
                         }
                     ]
                 },
@@ -247,11 +300,12 @@
                     "rule": "file(PR-K8S-0013.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0013",
+                            "id": "PR-K8S-0013",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostPID field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
-                            "remediationFunction":"PR-K8S-0013.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostPID field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
+                            "remediationFunction": "PR-K8S-0013.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Minimize the admission of containers wishing to share the host process ID namespace (PSP)",
@@ -259,8 +313,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["podsecuritypolicy"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "podsecuritypolicy"
+                            ]
                         }
                     ]
                 },
@@ -273,11 +331,12 @@
                     "rule": "file(PR-K8S-0014.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0014",
+                            "id": "PR-K8S-0014",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.allowPrivilegeEscalation field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
-                            "remediationFunction":"PR-K8S-0014.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.allowPrivilegeEscalation field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
+                            "remediationFunction": "PR-K8S-0014.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Minimize the admission of containers with allowPrivilegeEscalation (PSP)",
@@ -285,8 +344,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["podsecuritypolicy"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "podsecuritypolicy"
+                            ]
                         }
                     ]
                 },
@@ -299,11 +362,12 @@
                     "rule": "file(PR-K8S-0015.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0015",
+                            "id": "PR-K8S-0015",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":" Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.runAsUser.rule is set to either MustRunAsNonRoot or MustRunAs with the range of UIDs not including 0.",
-                            "remediationFunction":"PR-K8S-0015.py"
+                            "remediationDescription": " Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.runAsUser.rule is set to either MustRunAsNonRoot or MustRunAs with the range of UIDs not including 0.",
+                            "remediationFunction": "PR-K8S-0015.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Do not admit root containers",
@@ -311,8 +375,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -325,11 +393,12 @@
                     "rule": "file(PR-K8S-0016.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0016",
+                            "id": "PR-K8S-0016",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the etcd pod specification file $etcdconf on the master node and set the below parameter. --peer-client-cert-auth=true References: https://coreos.com/etcd/docs/latest/op-guide/security.html https://kubernetes.io/docs/admin/etcd/ https://coreos.com/etcd/docs/latest/op-guide/configuration.html#peer-client-cert-auth",
-                            "remediationFunction":"PR-K8S-0016.py"
+                            "remediationDescription": "Edit the etcd pod specification file $etcdconf on the master node and set the below parameter. --peer-client-cert-auth=true References: https://coreos.com/etcd/docs/latest/op-guide/security.html https://kubernetes.io/docs/admin/etcd/ https://coreos.com/etcd/docs/latest/op-guide/configuration.html#peer-client-cert-auth",
+                            "remediationFunction": "PR-K8S-0016.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Ensure that the --peer-client-cert-auth argument is set to true (etcd)",
@@ -337,8 +406,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -351,11 +424,12 @@
                     "rule": "file(PR-K8S-0017.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0017",
+                            "id": "PR-K8S-0017",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the etcd pod specification file $etcdconf on the master /n node and either remove the --peer-auto-tls parameter or set it to false. --peer-auto-tls=false References: https://coreos.com/etcd/docs/latest/op-guide/security.html https://kubernetes.io/docs/admin/etcd/ https://coreos.com/etcd/docs/latest/op-guide/configuration.html#peer-auto-tls",
-                            "remediationFunction":"PR-K8S-0017.py"
+                            "remediationDescription": "Edit the etcd pod specification file $etcdconf on the master /n node and either remove the --peer-auto-tls parameter or set it to false. --peer-auto-tls=false References: https://coreos.com/etcd/docs/latest/op-guide/security.html https://kubernetes.io/docs/admin/etcd/ https://coreos.com/etcd/docs/latest/op-guide/configuration.html#peer-auto-tls",
+                            "remediationFunction": "PR-K8S-0017.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Ensure that the --peer-auto-tls argument is not set to true (etcd)",
@@ -363,8 +437,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -377,11 +455,12 @@
                     "rule": "file(PR-K8S-0018.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0018",
+                            "id": "PR-K8S-0018",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Use this example PodSecurityPolicy object in a file to create a policy that simply prevents the creation of privileged pods. apiVersion: policy/v1beta1 /n kind: PodSecurityPolicy /n metadata: /n name: example /n spec: /n privileged: false # Don't allow privileged pods! /n # The rest fills in some required fields. seLinux: /n rule: RunAsAny /n supplementalGroups: /n rule: RunAsAny /n runAsUser: /n rule: RunAsAny /n fsGroup: /n rule: RunAsAny /n volumes: /n - '*' /n For more on how to enable and update pod specification using Pod Security Policy, please refer : https://kubernetes.io/docs/concepts/policy/pod-security-policy/#privileged",
-                            "remediationFunction":"PR-K8S-0018.py"
+                            "remediationDescription": "Use this example PodSecurityPolicy object in a file to create a policy that simply prevents the creation of privileged pods. apiVersion: policy/v1beta1 /n kind: PodSecurityPolicy /n metadata: /n name: example /n spec: /n privileged: false # Don't allow privileged pods! /n # The rest fills in some required fields. seLinux: /n rule: RunAsAny /n supplementalGroups: /n rule: RunAsAny /n runAsUser: /n rule: RunAsAny /n fsGroup: /n rule: RunAsAny /n volumes: /n - '*' /n For more on how to enable and update pod specification using Pod Security Policy, please refer : https://kubernetes.io/docs/concepts/policy/pod-security-policy/#privileged",
+                            "remediationFunction": "PR-K8S-0018.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Ensure that Containers are not running in privileged mode",
@@ -389,8 +468,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -403,11 +486,12 @@
                     "rule": "file(PR-K8S-0019.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0019",
+                            "id": "PR-K8S-0019",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the API server pod specification file $apiserverconf /n on the master node and set the --enable-admission-plugins parameter to a /n value that does not include AlwaysAdmit. References: https://kubernetes.io/docs/admin/kube-apiserver/  https://kubernetes.io/docs/admin/admission-controllers/#alwaysadmit",
-                            "remediationFunction":"PR-K8S-0019.py"
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf /n on the master node and set the --enable-admission-plugins parameter to a /n value that does not include AlwaysAdmit. References: https://kubernetes.io/docs/admin/kube-apiserver/  https://kubernetes.io/docs/admin/admission-controllers/#alwaysadmit",
+                            "remediationFunction": "PR-K8S-0019.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the admission control plugin AlwaysAdmit is not set (API Server) ",
@@ -415,8 +499,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -429,11 +517,12 @@
                     "rule": "file(PR-K8S-0020.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0020",
+                            "id": "PR-K8S-0020",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Follow the documentation and configure alternate mechanisms for authentication. Then, /n edit the API server pod specification file $apiserverconf /n on the master node and remove the --basic-auth-file= /n parameter. References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/authentication/#static-password-file ",
-                            "remediationFunction":"PR-K8S-0020.py"
+                            "remediationDescription": "Follow the documentation and configure alternate mechanisms for authentication. Then, /n edit the API server pod specification file $apiserverconf /n on the master node and remove the --basic-auth-file= /n parameter. References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/authentication/#static-password-file ",
+                            "remediationFunction": "PR-K8S-0020.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --basic-auth-file argument is not set (API Server) ",
@@ -441,8 +530,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -455,11 +548,12 @@
                     "rule": "file(PR-K8S-0021.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0021",
+                            "id": "PR-K8S-0021",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Seccomp is an alpha feature currently. By default, all alpha features are disabled. So, you would need to enable alpha features in the apiserver by passing \"--feature-gates=AllAlpha=true\" argument. Edit the /etc/kubernetes/apiserver file on the master node and set the KUBE_API_ARGS parameter to \"--feature-gates=AllAlpha=true\" KUBE_API_ARGS=\"--feature-gates=AllAlpha=true\" Based on your system, restart the kube-apiserver service. For example: systemctl restart kube-apiserver.service References: https://github.com/kubernetes/kubernetes/issues/39845 https://github.com/kubernetes/kubernetes/pull/21790 https://github.com/kubernetes/community/blob/master/contributors/design-proposals/seccomp.md#examples https://docs.docker.com/engine/security/seccomp/",
-                            "remediationFunction":"PR-K8S-0021.py"
+                            "remediationDescription": "Seccomp is an alpha feature currently. By default, all alpha features are disabled. So, you would need to enable alpha features in the apiserver by passing \"--feature-gates=AllAlpha=true\" argument. Edit the /etc/kubernetes/apiserver file on the master node and set the KUBE_API_ARGS parameter to \"--feature-gates=AllAlpha=true\" KUBE_API_ARGS=\"--feature-gates=AllAlpha=true\" Based on your system, restart the kube-apiserver service. For example: systemctl restart kube-apiserver.service References: https://github.com/kubernetes/kubernetes/issues/39845 https://github.com/kubernetes/kubernetes/pull/21790 https://github.com/kubernetes/community/blob/master/contributors/design-proposals/seccomp.md#examples https://docs.docker.com/engine/security/seccomp/",
+                            "remediationFunction": "PR-K8S-0021.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Ensure that the seccomp profile is set to runtime/default in your pod definitions",
@@ -467,8 +561,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -481,11 +579,12 @@
                     "rule": "file(PR-K8S-0022.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0022",
+                            "id": "PR-K8S-0022",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the API server pod specification file $apiserverconf on the master node and set the below parameter.--profiling=false References: https://kubernetes.io/docs/admin/kube-apiserver/ https://github.com/kubernetes/community/blob/master/contributors/devel/profiling.md",
-                            "remediationFunction":"PR-K8S-0022.py"
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the below parameter.--profiling=false References: https://kubernetes.io/docs/admin/kube-apiserver/ https://github.com/kubernetes/community/blob/master/contributors/devel/profiling.md",
+                            "remediationFunction": "PR-K8S-0022.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --profiling argument is set to false (API Server) ",
@@ -493,8 +592,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -507,11 +610,12 @@
                     "rule": "file(PR-K8S-0023.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0023",
+                            "id": "PR-K8S-0023",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"To enable containers with AppArmor, please refer to the documentation - https://kubernetes.io/docs/tutorials/clusters/apparmor/#securing-a-pod",
-                            "remediationFunction":"PR-K8S-0023.py"
+                            "remediationDescription": "To enable containers with AppArmor, please refer to the documentation - https://kubernetes.io/docs/tutorials/clusters/apparmor/#securing-a-pod",
+                            "remediationFunction": "PR-K8S-0023.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Ensure containers are secured with AppArmor profile",
@@ -519,8 +623,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -533,11 +641,12 @@
                     "rule": "file(PR-K8S-0024.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0024",
+                            "id": "PR-K8S-0024",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Follow the Kubernetes documentation and setup the TLS connection between the /n apiserver and kubelets. Then, edit the API server pod specification file /n $apiserverconf on the master node and set the --kubelet-certificate-authority parameter to the path to the cert file for the certificate authority. --kubelet-certificate-authority= References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/kubelet-authentication-authorization/ https://kubernetes.io/docs/concepts/cluster-administration/master-node-communication/#apiserver---kubelet ",
-                            "remediationFunction":"PR-K8S-0024.py"
+                            "remediationDescription": "Follow the Kubernetes documentation and setup the TLS connection between the /n apiserver and kubelets. Then, edit the API server pod specification file /n $apiserverconf on the master node and set the --kubelet-certificate-authority parameter to the path to the cert file for the certificate authority. --kubelet-certificate-authority= References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/kubelet-authentication-authorization/ https://kubernetes.io/docs/concepts/cluster-administration/master-node-communication/#apiserver---kubelet ",
+                            "remediationFunction": "PR-K8S-0024.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --kubelet-certificate-authority argument is set as appropriate (API Server) ",
@@ -545,8 +654,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -559,11 +672,12 @@
                     "rule": "file(PR-K8S-0025.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0025",
+                            "id": "PR-K8S-0025",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Follow the Kubernetes documentation and set up the TLS connection between the apiserver and kubelets. Then, edit API server pod specification file /n $apiserverconf on the master node and set the /n kubelet client certificate and key parameters as below. /n --kubelet-client-certificate= /n --kubelet-client-key= /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/kubelet-authentication-authorization/ https://kubernetes.io/docs/concepts/cluster-administration/master-node-communication/#apiserver---kubelet ",
-                            "remediationFunction":"PR-K8S-0025.py"
+                            "remediationDescription": "Follow the Kubernetes documentation and set up the TLS connection between the apiserver and kubelets. Then, edit API server pod specification file /n $apiserverconf on the master node and set the /n kubelet client certificate and key parameters as below. /n --kubelet-client-certificate= /n --kubelet-client-key= /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/kubelet-authentication-authorization/ https://kubernetes.io/docs/concepts/cluster-administration/master-node-communication/#apiserver---kubelet ",
+                            "remediationFunction": "PR-K8S-0025.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --kubelet-client-certificate and --kubelet-client-key arguments are set as appropriate (API Server) ",
@@ -571,8 +685,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -585,11 +703,12 @@
                     "rule": "file(PR-K8S-0026.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0026",
+                            "id": "PR-K8S-0026",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Follow the documentation and create Pod Security Policy objects as per your environment. Then, edit the API server pod specification file $apiserverconf /n on the master node and set the --enable-admission-plugins parameter to a /n value that includes PodSecurityPolicy : /n --enable-admission-plugins=...,PodSecurityPolicy,... /n Then restart the API Server. References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/admission-controllers/#podsecuritypolicy https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies",
-                            "remediationFunction":"PR-K8S-0026.py"
+                            "remediationDescription": "Follow the documentation and create Pod Security Policy objects as per your environment. Then, edit the API server pod specification file $apiserverconf /n on the master node and set the --enable-admission-plugins parameter to a /n value that includes PodSecurityPolicy : /n --enable-admission-plugins=...,PodSecurityPolicy,... /n Then restart the API Server. References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/admission-controllers/#podsecuritypolicy https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies",
+                            "remediationFunction": "PR-K8S-0026.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Ensure that the admission control plugin PodSecurityPolicy is set (API Server)",
@@ -597,8 +716,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -611,11 +734,12 @@
                     "rule": "file(PR-K8S-0027.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0027",
+                            "id": "PR-K8S-0027",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the API server pod specification file $apiserverbin on the master node and set the --authorization-mode parameter to a value that includes RBAC, for example: --authorization-mode=Node,RBAC /n References: https://kubernetes.io/docs/reference/access-authn-authz/rbac/",
-                            "remediationFunction":"PR-K8S-0027.py"
+                            "remediationDescription": "Edit the API server pod specification file $apiserverbin on the master node and set the --authorization-mode parameter to a value that includes RBAC, for example: --authorization-mode=Node,RBAC /n References: https://kubernetes.io/docs/reference/access-authn-authz/rbac/",
+                            "remediationFunction": "PR-K8S-0027.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --authorization-mode argument includes RBAC (API Server) ",
@@ -623,8 +747,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -637,11 +765,12 @@
                     "rule": "file(PR-K8S-0028.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0028",
+                            "id": "PR-K8S-0028",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the API server pod specification file /etc/kubernetes/manifests/kube-apiserver.yaml on the master node and set the below parameter. --anonymous-auth=false /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/authentication/#anonymous-requests",
-                            "remediationFunction":"PR-K8S-0028.py"
+                            "remediationDescription": "Edit the API server pod specification file /etc/kubernetes/manifests/kube-apiserver.yaml on the master node and set the below parameter. --anonymous-auth=false /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/authentication/#anonymous-requests",
+                            "remediationFunction": "PR-K8S-0028.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --anonymous-auth argument is set to false (API Server) ",
@@ -649,8 +778,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -663,11 +796,12 @@
                     "rule": "file(PR-K8S-0029.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0029",
+                            "id": "PR-K8S-0029",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the Scheduler pod specification file $schedulerconf /n file on the master node and set the below parameter. --profiling=false /n References: https://kubernetes.io/docs/admin/kube-scheduler/ https://github.com/kubernetes/community/blob/master/contributors/devel/profiling.md",
-                            "remediationFunction":"PR-K8S-0029.py"
+                            "remediationDescription": "Edit the Scheduler pod specification file $schedulerconf /n file on the master node and set the below parameter. --profiling=false /n References: https://kubernetes.io/docs/admin/kube-scheduler/ https://github.com/kubernetes/community/blob/master/contributors/devel/profiling.md",
+                            "remediationFunction": "PR-K8S-0029.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --profiling argument is set to false (Scheduler) ",
@@ -675,8 +809,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -689,11 +827,12 @@
                     "rule": "file(PR-K8S-0030.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0030",
+                            "id": "PR-K8S-0030",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":" Ensure that namespaces are created to allow for appropriate segregation of Kubernetes resources and that all new resources are created in a specific namespace. ",
-                            "remediationFunction":"PR-K8S-0030.py"
+                            "remediationDescription": " Ensure that namespaces are created to allow for appropriate segregation of Kubernetes resources and that all new resources are created in a specific namespace. ",
+                            "remediationFunction": "PR-K8S-0030.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " The default namespace should not be used ",
@@ -701,8 +840,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -715,11 +858,12 @@
                     "rule": "file(PR-K8S-0031.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0031",
+                            "id": "PR-K8S-0031",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the Controller Manager pod specification file $controllermanagerconf /n on the master node and set the --terminated-pod-gc-threshold to an appropriate threshold, for example: /n --terminated-pod-gc-threshold=10 /n References: https://kubernetes.io/docs/admin/kube-controller-manager/ https://github.com/kubernetes/kubernetes/issues/28484",
-                            "remediationFunction":"PR-K8S-0031.py"
+                            "remediationDescription": "Edit the Controller Manager pod specification file $controllermanagerconf /n on the master node and set the --terminated-pod-gc-threshold to an appropriate threshold, for example: /n --terminated-pod-gc-threshold=10 /n References: https://kubernetes.io/docs/admin/kube-controller-manager/ https://github.com/kubernetes/kubernetes/issues/28484",
+                            "remediationFunction": "PR-K8S-0031.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --terminated-pod-gc-threshold argument is set as appropriate (Controller Manager) ",
@@ -727,8 +871,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -741,11 +889,12 @@
                     "rule": "file(PR-K8S-0032.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0032",
+                            "id": "PR-K8S-0032",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the Controller Manager pod specification file $controllermanagerconf /n on the master node and set the below parameter. /n --profiling=false /n References: https://kubernetes.io/docs/admin/kube-controller-manager/ https://github.com/kubernetes/community/blob/master/contributors/devel/profiling.md",
-                            "remediationFunction":"PR-K8S-0032.py"
+                            "remediationDescription": "Edit the Controller Manager pod specification file $controllermanagerconf /n on the master node and set the below parameter. /n --profiling=false /n References: https://kubernetes.io/docs/admin/kube-controller-manager/ https://github.com/kubernetes/community/blob/master/contributors/devel/profiling.md",
+                            "remediationFunction": "PR-K8S-0032.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --profiling argument is set to false (Controller Manager) ",
@@ -753,8 +902,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -767,11 +920,12 @@
                     "rule": "file(PR-K8S-0033.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0033",
+                            "id": "PR-K8S-0033",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the Controller Manager pod specification file $controllermanagerconf /n on the master node to set the below parameter. /n --use-service-account-credentials=true /n References: https://kubernetes.io/docs/admin/kube-controller-manager/ https://kubernetes.io/docs/admin/service-accounts-admin/ https://github.com/kubernetes/kubernetes/blob/release-1.6/plugin/pkg/auth/authorizer/rbac/bootstrappolicy/testdata/controller-roles.yaml https://github.com/kubernetes/kubernetes/blob/release-1.6/plugin/pkg/auth/authorizer/rbac/bootstrappolicy/testdata/controller-role-bindings.yaml https://kubernetes.io/docs/admin/authorization/rbac/#controller-roles",
-                            "remediationFunction":"PR-K8S-0033.py"
+                            "remediationDescription": "Edit the Controller Manager pod specification file $controllermanagerconf /n on the master node to set the below parameter. /n --use-service-account-credentials=true /n References: https://kubernetes.io/docs/admin/kube-controller-manager/ https://kubernetes.io/docs/admin/service-accounts-admin/ https://github.com/kubernetes/kubernetes/blob/release-1.6/plugin/pkg/auth/authorizer/rbac/bootstrappolicy/testdata/controller-roles.yaml https://github.com/kubernetes/kubernetes/blob/release-1.6/plugin/pkg/auth/authorizer/rbac/bootstrappolicy/testdata/controller-role-bindings.yaml https://kubernetes.io/docs/admin/authorization/rbac/#controller-roles",
+                            "remediationFunction": "PR-K8S-0033.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --use-service-account-credentials argument is set to true (Controller Manager) ",
@@ -779,8 +933,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -793,11 +951,12 @@
                     "rule": "file(PR-K8S-0034.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0034",
+                            "id": "PR-K8S-0034",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the Controller Manager pod specification file $controllermanagerconf /n on the master node and set the --root-ca-file parameter to /n the certificate bundle file. /n --root-ca-file= /n References: https://kubernetes.io/docs/admin/kube-controller-manager/ https://github.com/kubernetes/kubernetes/issues/11000 ",
-                            "remediationFunction":"PR-K8S-0034.py"
+                            "remediationDescription": "Edit the Controller Manager pod specification file $controllermanagerconf /n on the master node and set the --root-ca-file parameter to /n the certificate bundle file. /n --root-ca-file= /n References: https://kubernetes.io/docs/admin/kube-controller-manager/ https://github.com/kubernetes/kubernetes/issues/11000 ",
+                            "remediationFunction": "PR-K8S-0034.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --root-ca-file argument is set as appropriate (Controller Manager) ",
@@ -805,8 +964,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -819,11 +982,12 @@
                     "rule": "file(PR-K8S-0035.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0035",
+                            "id": "PR-K8S-0035",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":" Modify the definition of pods and service accounts which do not need to mount service account tokens to disable it. ",
-                            "remediationFunction":"PR-K8S-0035.py"
+                            "remediationDescription": " Modify the definition of pods and service accounts which do not need to mount service account tokens to disable it. ",
+                            "remediationFunction": "PR-K8S-0035.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that Service Account Tokens are only mounted where necessary (RBAC) ",
@@ -831,8 +995,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["serviceaccount"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "serviceaccount"
+                            ]
                         }
                     ]
                 },
@@ -845,11 +1013,12 @@
                     "rule": "file(PR-K8S-0036.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0036",
+                            "id": "PR-K8S-0036",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Pods in a cluster can communicate with each other and should be controlled using Network Policies as needed for your workload. Network policies are implemented by the network plugin, so you must be using a networking solution which supports NetworkPolicy - simply creating the resource without a controller to implement it will have no effect. Kubernetes' Network Policies make it much more difficult for attackers to move laterally within your cluster. You can also use the Kubernetes Network Policy API to create Pod-level firewall rules. These firewall rules determine which Pods and services can access one another inside your cluster. You can find an example of NetworkPolicy : https://kubernetes.io/docs/concepts/services-networking/network-policies/#the-networkpolicy-resource /nFor more information on NetworkPolicy, please refer : https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.16/#networkpolicy-v1-networking-k8s-io",
-                            "remediationFunction":"PR-K8S-0036.py"
+                            "remediationDescription": "Pods in a cluster can communicate with each other and should be controlled using Network Policies as needed for your workload. Network policies are implemented by the network plugin, so you must be using a networking solution which supports NetworkPolicy - simply creating the resource without a controller to implement it will have no effect. Kubernetes' Network Policies make it much more difficult for attackers to move laterally within your cluster. You can also use the Kubernetes Network Policy API to create Pod-level firewall rules. These firewall rules determine which Pods and services can access one another inside your cluster. You can find an example of NetworkPolicy : https://kubernetes.io/docs/concepts/services-networking/network-policies/#the-networkpolicy-resource /nFor more information on NetworkPolicy, please refer : https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.16/#networkpolicy-v1-networking-k8s-io",
+                            "remediationFunction": "PR-K8S-0036.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Restrict Traffic Among Pods with a Network Policy",
@@ -857,8 +1026,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["networkpolicy"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "networkpolicy"
+                            ]
                         }
                     ]
                 },
@@ -871,11 +1044,12 @@
                     "rule": "file(PR-K8S-0041.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0041",
+                            "id": "PR-K8S-0041",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Follow the Kubernetes documentation and set the desired limits in a configuration file. Then, edit the API server pod specification file /n $apiserverconf and set the below parameters. /n --enable-admission-plugins=...,EventRateLimit,... /n --admission-control-config-file= /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/admission-controllers/#eventratelimit https://github.com/staebler/community/blob/9873b632f4d99b5d99c38c9b15fe2f8b93d0a746/contributors/design-proposals/admission_control_event_rate_limit.md ",
-                            "remediationFunction":"PR-K8S-0041.py"
+                            "remediationDescription": "Follow the Kubernetes documentation and set the desired limits in a configuration file. Then, edit the API server pod specification file /n $apiserverconf and set the below parameters. /n --enable-admission-plugins=...,EventRateLimit,... /n --admission-control-config-file= /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/admission-controllers/#eventratelimit https://github.com/staebler/community/blob/9873b632f4d99b5d99c38c9b15fe2f8b93d0a746/contributors/design-proposals/admission_control_event_rate_limit.md ",
+                            "remediationFunction": "PR-K8S-0041.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the admission control plugin EventRateLimit is set (API Server) ",
@@ -883,8 +1057,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -897,11 +1075,12 @@
                     "rule": "file(PR-K8S-0042.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0042",
+                            "id": "PR-K8S-0042",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the API server pod specification file $apiserverconf /n on the master node and remove the --insecure-bind-address /n parameter. References: https://kubernetes.io/docs/admin/kube-apiserver/",
-                            "remediationFunction":"PR-K8S-0042.py"
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf /n on the master node and remove the --insecure-bind-address /n parameter. References: https://kubernetes.io/docs/admin/kube-apiserver/",
+                            "remediationFunction": "PR-K8S-0042.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --insecure-bind-address argument is not set (API Server) ",
@@ -909,8 +1088,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -923,11 +1106,12 @@
                     "rule": "file(PR-K8S-0043.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0043",
+                            "id": "PR-K8S-0043",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the API server pod specification file $apiserverconf on the master node and either remove the --secure-port parameter or set it to a different (non-zero) desired port. References: https://kubernetes.io/docs/admin/kube-apiserver/",
-                            "remediationFunction":"PR-K8S-0043.py"
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and either remove the --secure-port parameter or set it to a different (non-zero) desired port. References: https://kubernetes.io/docs/admin/kube-apiserver/",
+                            "remediationFunction": "PR-K8S-0043.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --secure-port argument is not set to 0 (API Server) ",
@@ -935,8 +1119,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -949,11 +1137,12 @@
                     "rule": "file(PR-K8S-0044.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0044",
+                            "id": "PR-K8S-0044",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the API server pod specification file $apiserverconf /n on the master node and set the below parameter. --repair-malformed-updates=false ",
-                            "remediationFunction":"PR-K8S-0044.py"
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf /n on the master node and set the below parameter. --repair-malformed-updates=false ",
+                            "remediationFunction": "PR-K8S-0044.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --repair-malformed-updates argument is set to false (API Server) ",
@@ -961,8 +1150,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -975,11 +1168,12 @@
                     "rule": "file(PR-K8S-0045.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0045",
+                            "id": "PR-K8S-0045",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the API server pod specification file $apiserverconf on the master node and set the --enable-admission-plugins to /n include AlwaysPullImages. /n --enable-admission-plugins=...,AlwaysPullImages,... /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/admission-controllers/#alwayspullimages",
-                            "remediationFunction":"PR-K8S-0045.py"
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the --enable-admission-plugins to /n include AlwaysPullImages. /n --enable-admission-plugins=...,AlwaysPullImages,... /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/admission-controllers/#alwayspullimages",
+                            "remediationFunction": "PR-K8S-0045.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the admission control plugin AlwaysPullImages is set (API Server) ",
@@ -987,8 +1181,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1001,11 +1199,12 @@
                     "rule": "file(PR-K8S-0046.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0046",
+                            "id": "PR-K8S-0046",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the API server pod specification file $apiserverconf /n on the master node and set the --disable-admission-plugins parameter to /n ensure it does not include NamespaceLifecycle. /n --disable-admission-plugins=...,NamespaceLifecycle,... /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/admission-controllers/#namespacelifecycle",
-                            "remediationFunction":"PR-K8S-0046.py"
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf /n on the master node and set the --disable-admission-plugins parameter to /n ensure it does not include NamespaceLifecycle. /n --disable-admission-plugins=...,NamespaceLifecycle,... /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/admission-controllers/#namespacelifecycle",
+                            "remediationFunction": "PR-K8S-0046.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the admission control plugin NamespaceLifecycle is set (API Server) ",
@@ -1013,8 +1212,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1027,11 +1230,12 @@
                     "rule": "file(PR-K8S-0047.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0047",
+                            "id": "PR-K8S-0047",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the API server pod specification file $apiserverconf /n on the master node and remove the --insecure-allow-any-token /n parameter. ",
-                            "remediationFunction":"PR-K8S-0047.py"
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf /n on the master node and remove the --insecure-allow-any-token /n parameter. ",
+                            "remediationFunction": "PR-K8S-0047.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --insecure-allow-any-token argument is not set (API Server) ",
@@ -1039,8 +1243,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1053,11 +1261,12 @@
                     "rule": "file(PR-K8S-0048.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0048",
+                            "id": "PR-K8S-0048",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the API server pod specification file $apiserverconf on the master node and set the --authorization-mode parameter to a value that includes Node. /n --authorization-mode=Node,RBAC ",
-                            "remediationFunction":"PR-K8S-0048.py"
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the --authorization-mode parameter to a value that includes Node. /n --authorization-mode=Node,RBAC ",
+                            "remediationFunction": "PR-K8S-0048.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --authorization-mode argument is set to Node (API Server) ",
@@ -1065,8 +1274,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1079,11 +1292,12 @@
                     "rule": "file(PR-K8S-0049.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0049",
+                            "id": "PR-K8S-0049",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Follow the Kubernetes documentation and configure NodeRestriction plug-in on kubelets. Then, edit the API server pod specification file $apiserverconf on the master node and set the --enable-admission-plugins parameter to a value that includes NodeRestriction. /n --enable-admission-plugins=...,NodeRestriction,... /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/admission-controllers/#noderestriction https://kubernetes.io/docs/admin/authorization/node/ https://acotten.com/post/kube17-security",
-                            "remediationFunction":"PR-K8S-0049.py"
+                            "remediationDescription": "Follow the Kubernetes documentation and configure NodeRestriction plug-in on kubelets. Then, edit the API server pod specification file $apiserverconf on the master node and set the --enable-admission-plugins parameter to a value that includes NodeRestriction. /n --enable-admission-plugins=...,NodeRestriction,... /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/admission-controllers/#noderestriction https://kubernetes.io/docs/admin/authorization/node/ https://acotten.com/post/kube17-security",
+                            "remediationFunction": "PR-K8S-0049.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the admission control plugin NodeRestriction is set (API Server) ",
@@ -1091,8 +1305,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1105,11 +1323,12 @@
                     "rule": "file(PR-K8S-0050.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0050",
+                            "id": "PR-K8S-0050",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the API server pod specification file $apiserverconf apiserver.yaml on the master node and set the below parameter. --insecure-port=0 /n References: https://kubernetes.io/docs/admin/kube-apiserver/",
-                            "remediationFunction":"PR-K8S-0050.py"
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf apiserver.yaml on the master node and set the below parameter. --insecure-port=0 /n References: https://kubernetes.io/docs/admin/kube-apiserver/",
+                            "remediationFunction": "PR-K8S-0050.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --insecure-port argument is set to 0 (API Server) ",
@@ -1117,8 +1336,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1131,11 +1354,12 @@
                     "rule": "file(PR-K8S-0052.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0052",
+                            "id": "PR-K8S-0052",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the Scheduler pod specification file $schedulerconf file on the master node and ensure the correct value for the --address parameter. ",
-                            "remediationFunction":"PR-K8S-0052.py"
+                            "remediationDescription": "Edit the Scheduler pod specification file $schedulerconf file on the master node and ensure the correct value for the --address parameter. ",
+                            "remediationFunction": "PR-K8S-0052.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --address argument is set to 127.0.0.1 (Scheduler) ",
@@ -1143,8 +1367,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1157,11 +1385,12 @@
                     "rule": "file(PR-K8S-0053.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0053",
+                            "id": "PR-K8S-0053",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the Controller Manager pod specification file $controllermanagerconf controller-manager.yaml on the master node and ensure the correct value for the --address parameter. ",
-                            "remediationFunction":"PR-K8S-0053.py"
+                            "remediationDescription": "Edit the Controller Manager pod specification file $controllermanagerconf controller-manager.yaml on the master node and ensure the correct value for the --address parameter. ",
+                            "remediationFunction": "PR-K8S-0053.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --address argument is set to 127.0.0.1 (Controller Manager) ",
@@ -1169,8 +1398,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1183,11 +1416,12 @@
                     "rule": "file(PR-K8S-0054.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0054",
+                            "id": "PR-K8S-0054",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the API server pod specification file $apiserverconf on the master node and set the --enable-admission-plugins parameter to a value that includes DenyEscalatingExec. --enable-admission-plugins=...,DenyEscalatingExec,... ",
-                            "remediationFunction":"PR-K8S-0054.py"
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the --enable-admission-plugins parameter to a value that includes DenyEscalatingExec. --enable-admission-plugins=...,DenyEscalatingExec,... ",
+                            "remediationFunction": "PR-K8S-0054.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the admission control plugin DenyEscalatingExec is set (API Server) ",
@@ -1195,8 +1429,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1209,11 +1447,12 @@
                     "rule": "file(PR-K8S-0055.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0055",
+                            "id": "PR-K8S-0055",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the Controller Manager pod specification file /etc/kubernetes/manifests/kube-controller-manager.yaml on the master node and ensure the correct value for the --bind-address parameter References: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/",
-                            "remediationFunction":"PR-K8S-0055.py"
+                            "remediationDescription": "Edit the Controller Manager pod specification file /etc/kubernetes/manifests/kube-controller-manager.yaml on the master node and ensure the correct value for the --bind-address parameter References: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/",
+                            "remediationFunction": "PR-K8S-0055.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --bind-address argument is set to 127.0.0.1 (Controller Manager) ",
@@ -1221,8 +1460,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1235,11 +1478,12 @@
                     "rule": "file(PR-K8S-0056.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0056",
+                            "id": "PR-K8S-0056",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the Scheduler pod specification file /etc/kubernetes/manifests/kube-scheduler.yaml on the master node and ensure the correct value for the --bind-address parameter References: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/",
-                            "remediationFunction":"PR-K8S-0056.py"
+                            "remediationDescription": "Edit the Scheduler pod specification file /etc/kubernetes/manifests/kube-scheduler.yaml on the master node and ensure the correct value for the --bind-address parameter References: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/",
+                            "remediationFunction": "PR-K8S-0056.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --bind-address argument is set to 127.0.0.1 (Scheduler) ",
@@ -1247,8 +1491,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1261,11 +1509,12 @@
                     "rule": "file(PR-K8S-0057.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0057",
+                            "id": "PR-K8S-0057",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Please refer to the Kubernetes documentation on how to configure the hostpath: https://kubernetes.io/docs/concepts/storage/volumes/#hostpath",
-                            "remediationFunction":"PR-K8S-0057.py"
+                            "remediationDescription": "Please refer to the Kubernetes documentation on how to configure the hostpath: https://kubernetes.io/docs/concepts/storage/volumes/#hostpath",
+                            "remediationFunction": "PR-K8S-0057.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure pods outside of kube-system do not have access to node volume ",
@@ -1273,8 +1522,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1287,11 +1540,12 @@
                     "rule": "file(PR-K8S-0058.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0058",
+                            "id": "PR-K8S-0058",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the API server pod specification file $apiserverconf on the master node and set the --authorization-mode parameter to values other than AlwaysAllow. One such example could be as below. --authorization-mode=RBAC References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/authorization/",
-                            "remediationFunction":"PR-K8S-0058.py"
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the --authorization-mode parameter to values other than AlwaysAllow. One such example could be as below. --authorization-mode=RBAC References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/authorization/",
+                            "remediationFunction": "PR-K8S-0058.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --authorization-mode argument is not set to AlwaysAllow (API Server) ",
@@ -1299,8 +1553,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1313,11 +1571,12 @@
                     "rule": "file(PR-K8S-0059.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0059",
+                            "id": "PR-K8S-0059",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the API server pod specification file $apiserverconf on the master node and set the --audit-log-path parameter to a suitable path and file where you would like audit logs to be written, for example: --audit-log-path=/var/log/apiserver/audit.log ",
-                            "remediationFunction":"PR-K8S-0059.py"
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the --audit-log-path parameter to a suitable path and file where you would like audit logs to be written, for example: --audit-log-path=/var/log/apiserver/audit.log ",
+                            "remediationFunction": "PR-K8S-0059.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --audit-log-path argument is set as appropriate (API Server) ",
@@ -1325,8 +1584,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1339,11 +1602,12 @@
                     "rule": "file(PR-K8S-0060.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0060",
+                            "id": "PR-K8S-0060",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the API server pod specification file $apiserverconf on the master node and set the --audit-log-maxage parameter to 30 or as an appropriate number of days: --audit-log-maxage=30 References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/concepts/cluster-administration/audit/ https://github.com/kubernetes/features/issues/22",
-                            "remediationFunction":"PR-K8S-0060.py"
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the --audit-log-maxage parameter to 30 or as an appropriate number of days: --audit-log-maxage=30 References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/concepts/cluster-administration/audit/ https://github.com/kubernetes/features/issues/22",
+                            "remediationFunction": "PR-K8S-0060.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --audit-log-maxage argument is set to 30 or as appropriate (API Server) ",
@@ -1351,8 +1615,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1365,11 +1633,12 @@
                     "rule": "file(PR-K8S-0061.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0061",
+                            "id": "PR-K8S-0061",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the API server pod specification file $apiserverconf on the master node and set the --audit-log-maxbackup parameter to 10 or to an appropriate value. --audit-log-maxbackup=10 References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/concepts/cluster-administration/audit/ https://github.com/kubernetes/features/issues/22",
-                            "remediationFunction":"PR-K8S-0061.py"
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the --audit-log-maxbackup parameter to 10 or to an appropriate value. --audit-log-maxbackup=10 References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/concepts/cluster-administration/audit/ https://github.com/kubernetes/features/issues/22",
+                            "remediationFunction": "PR-K8S-0061.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --audit-log-maxbackup argument is set to 10 or as appropriate (API Server) ",
@@ -1377,8 +1646,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1391,11 +1664,12 @@
                     "rule": "file(PR-K8S-0062.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0062",
+                            "id": "PR-K8S-0062",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the API server pod specification file $apiserverconf on the master node and set the --audit-log-maxsize parameter to an appropriate size in MB. For example, to set it as 100 MB: --audit-log-maxsize=100 References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/concepts/cluster-administration/audit/ https://github.com/kubernetes/features/issues/22",
-                            "remediationFunction":"PR-K8S-0062.py"
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the --audit-log-maxsize parameter to an appropriate size in MB. For example, to set it as 100 MB: --audit-log-maxsize=100 References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/concepts/cluster-administration/audit/ https://github.com/kubernetes/features/issues/22",
+                            "remediationFunction": "PR-K8S-0062.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --audit-log-maxsize argument is set to 100 or as appropriate (API Server) ",
@@ -1403,8 +1677,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1417,11 +1695,12 @@
                     "rule": "file(PR-K8S-0063.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0063",
+                            "id": "PR-K8S-0063",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Follow the Kubernetes documentation and set the desired audit policy in the /etc/kubernetes/audit-policy.yaml file. Then, edit the API server pod specification file $apiserverconf and set the below parameters. --audit-policy-file=/etc/kubernetes/audit-policy.yaml ",
-                            "remediationFunction":"PR-K8S-0063.py"
+                            "remediationDescription": "Follow the Kubernetes documentation and set the desired audit policy in the /etc/kubernetes/audit-policy.yaml file. Then, edit the API server pod specification file $apiserverconf and set the below parameters. --audit-policy-file=/etc/kubernetes/audit-policy.yaml ",
+                            "remediationFunction": "PR-K8S-0063.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the AdvancedAuditing argument is not set to false (API Server) ",
@@ -1429,8 +1708,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1443,11 +1726,12 @@
                     "rule": "file(PR-K8S-0067.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0067",
+                            "id": "PR-K8S-0067",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the Controller Manager pod specification file $controllermanagerconf controller-manager.yaml on the master node and set the --feature-gates parameter to include RotateKubeletServerCertificate=true. --feature-gates=RotateKubeletServerCertificate=true References: https://kubernetes.io/docs/admin/kubelet-tls-bootstrapping/#approval-controller https://github.com/kubernetes/features/issues/267 https://github.com/kubernetes/kubernetes/pull/45059 https://kubernetes.io/docs/admin/kube-controller-manager/",
-                            "remediationFunction":"PR-K8S-0067.py"
+                            "remediationDescription": "Edit the Controller Manager pod specification file $controllermanagerconf controller-manager.yaml on the master node and set the --feature-gates parameter to include RotateKubeletServerCertificate=true. --feature-gates=RotateKubeletServerCertificate=true References: https://kubernetes.io/docs/admin/kubelet-tls-bootstrapping/#approval-controller https://github.com/kubernetes/features/issues/267 https://github.com/kubernetes/kubernetes/pull/45059 https://kubernetes.io/docs/admin/kube-controller-manager/",
+                            "remediationFunction": "PR-K8S-0067.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the RotateKubeletServerCertificate argument is set to true (Controller Manager) ",
@@ -1455,8 +1739,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1469,11 +1757,12 @@
                     "rule": "file(PR-K8S-0068.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0068",
+                            "id": "PR-K8S-0068",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Follow the Kubernetes documentation and set up the TLS connection between the apiserver and etcd. Then, edit the API server pod specification file $apiserverconf on the master node and set the etcd certificate authority file parameter. --etcd-cafile= /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://coreos.com/etcd/docs/latest/op-guide/security.html ",
-                            "remediationFunction":"PR-K8S-0068.py"
+                            "remediationDescription": "Follow the Kubernetes documentation and set up the TLS connection between the apiserver and etcd. Then, edit the API server pod specification file $apiserverconf on the master node and set the etcd certificate authority file parameter. --etcd-cafile= /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://coreos.com/etcd/docs/latest/op-guide/security.html ",
+                            "remediationFunction": "PR-K8S-0068.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --etcd-cafile argument is set as appropriate (API Server) ",
@@ -1481,8 +1770,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1495,11 +1788,12 @@
                     "rule": "file(PR-K8S-0069.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0069",
+                            "id": "PR-K8S-0069",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the API server pod specification file $apiserverconf on the master node and remove the --kubelet-https parameter. References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/kubelet-authentication-authorization/",
-                            "remediationFunction":"PR-K8S-0069.py"
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and remove the --kubelet-https parameter. References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/kubelet-authentication-authorization/",
+                            "remediationFunction": "PR-K8S-0069.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --kubelet-https argument is set to true (API Server) ",
@@ -1507,8 +1801,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1521,11 +1819,12 @@
                     "rule": "file(PR-K8S-0070.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0070",
+                            "id": "PR-K8S-0070",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the Controller Manager pod specification file $controllermanagerconf on the master node and set the --service-account-private- key-file parameter to the private key file for service accounts. --service-account-private-key-file= References: https://kubernetes.io/docs/admin/kube-controller-manager/ ",
-                            "remediationFunction":"PR-K8S-0070.py"
+                            "remediationDescription": "Edit the Controller Manager pod specification file $controllermanagerconf on the master node and set the --service-account-private- key-file parameter to the private key file for service accounts. --service-account-private-key-file= References: https://kubernetes.io/docs/admin/kube-controller-manager/ ",
+                            "remediationFunction": "PR-K8S-0070.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --service-account-private-key-file argument is set as appropriate (Controller Manager) ",
@@ -1533,8 +1832,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1547,11 +1850,12 @@
                     "rule": "file(PR-K8S-0071.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0071",
+                            "id": "PR-K8S-0071",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Follow the Kubernetes documentation and set up the TLS connection between the apiserver and etcd. Then, edit the API server pod specification file $apiserverconf on the master node and set the etcd certificate and key file parameters. /n --etcd-certfile= /n --etcd-keyfile= /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://coreos.com/etcd/docs/latest/op-guide/security.html ",
-                            "remediationFunction":"PR-K8S-0071.py"
+                            "remediationDescription": "Follow the Kubernetes documentation and set up the TLS connection between the apiserver and etcd. Then, edit the API server pod specification file $apiserverconf on the master node and set the etcd certificate and key file parameters. /n --etcd-certfile= /n --etcd-keyfile= /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://coreos.com/etcd/docs/latest/op-guide/security.html ",
+                            "remediationFunction": "PR-K8S-0071.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --etcd-certfile and --etcd-keyfile arguments are set as appropriate (API Server) ",
@@ -1559,8 +1863,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1573,11 +1881,12 @@
                     "rule": "file(PR-K8S-0072.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0072",
+                            "id": "PR-K8S-0072",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the etcd pod specification file $etcdconf on the master node and set the below parameter. --client-cert-auth=\"true\" /n References: https://coreos.com/etcd/docs/latest/op-guide/security.html https://kubernetes.io/docs/admin/etcd/ https://coreos.com/etcd/docs/latest/op-guide/configuration.html#client-cert-auth",
-                            "remediationFunction":"PR-K8S-0072.py"
+                            "remediationDescription": "Edit the etcd pod specification file $etcdconf on the master node and set the below parameter. --client-cert-auth=\"true\" /n References: https://coreos.com/etcd/docs/latest/op-guide/security.html https://kubernetes.io/docs/admin/etcd/ https://coreos.com/etcd/docs/latest/op-guide/configuration.html#client-cert-auth",
+                            "remediationFunction": "PR-K8S-0072.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --client-cert-auth argument is set to true (etcd) ",
@@ -1585,8 +1894,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1599,11 +1912,12 @@
                     "rule": "file(PR-K8S-0073.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0073",
+                            "id": "PR-K8S-0073",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the etcd pod specification file $etcdconf on the master node and either remove the --auto-tls parameter or set it to false. --auto-tls=false /n References: https://coreos.com/etcd/docs/latest/op-guide/security.html https://kubernetes.io/docs/admin/etcd/ https://coreos.com/etcd/docs/latest/op-guide/configuration.html#auto-tls",
-                            "remediationFunction":"PR-K8S-0073.py"
+                            "remediationDescription": "Edit the etcd pod specification file $etcdconf on the master node and either remove the --auto-tls parameter or set it to false. --auto-tls=false /n References: https://coreos.com/etcd/docs/latest/op-guide/security.html https://kubernetes.io/docs/admin/etcd/ https://coreos.com/etcd/docs/latest/op-guide/configuration.html#auto-tls",
+                            "remediationFunction": "PR-K8S-0073.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --auto-tls argument is not set to true (etcd) ",
@@ -1611,8 +1925,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1625,11 +1943,12 @@
                     "rule": "file(PR-K8S-0074.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0074",
+                            "id": "PR-K8S-0074",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Follow the documentation and configure alternate mechanisms for authentication. Then, edit the API server pod specification file $apiserverconf on the master node and remove the --token-auth-file= parameter. ",
-                            "remediationFunction":"PR-K8S-0074.py"
+                            "remediationDescription": "Follow the documentation and configure alternate mechanisms for authentication. Then, edit the API server pod specification file $apiserverconf on the master node and remove the --token-auth-file= parameter. ",
+                            "remediationFunction": "PR-K8S-0074.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --token-auth-file parameter is not set (API Server) ",
@@ -1637,8 +1956,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1651,11 +1974,12 @@
                     "rule": "file(PR-K8S-0075.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0075",
+                            "id": "PR-K8S-0075",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Follow the Kubernetes documentation and set up the TLS connection on the apiserver. Then, edit the API server pod specification file $apiserverconf on the master node and set the TLS certificate and private key file parameters. /n --tls-cert-file= /n --tls-private-key-file= /n References: https://kubernetes.io/docs/admin/kube-apiserver/ http://rootsquash.com/2016/05/10/securing-the-kubernetes-api/ https://github.com/kelseyhightower/docker-kubernetes-tls-guide ",
-                            "remediationFunction":"PR-K8S-0075.py"
+                            "remediationDescription": "Follow the Kubernetes documentation and set up the TLS connection on the apiserver. Then, edit the API server pod specification file $apiserverconf on the master node and set the TLS certificate and private key file parameters. /n --tls-cert-file= /n --tls-private-key-file= /n References: https://kubernetes.io/docs/admin/kube-apiserver/ http://rootsquash.com/2016/05/10/securing-the-kubernetes-api/ https://github.com/kelseyhightower/docker-kubernetes-tls-guide ",
+                            "remediationFunction": "PR-K8S-0075.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --tls-cert-file and --tls-private-key-file arguments are set as appropriate (API Server) ",
@@ -1663,8 +1987,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1677,11 +2005,12 @@
                     "rule": "file(PR-K8S-0076.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0076",
+                            "id": "PR-K8S-0076",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Follow the Kubernetes documentation and set up the TLS connection on the apiserver. Then, edit the API server pod specification file $apiserverconf on the master node and set the client certificate authority file. /n --client-ca-file= /n References: https://kubernetes.io/docs/admin/kube-apiserver/ http://rootsquash.com/2016/05/10/securing-the-kubernetes-api/ https://github.com/kelseyhightower/docker-kubernetes-tls-guide ",
-                            "remediationFunction":"PR-K8S-0076.py"
+                            "remediationDescription": "Follow the Kubernetes documentation and set up the TLS connection on the apiserver. Then, edit the API server pod specification file $apiserverconf on the master node and set the client certificate authority file. /n --client-ca-file= /n References: https://kubernetes.io/docs/admin/kube-apiserver/ http://rootsquash.com/2016/05/10/securing-the-kubernetes-api/ https://github.com/kelseyhightower/docker-kubernetes-tls-guide ",
+                            "remediationFunction": "PR-K8S-0076.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --client-ca-file argument is set as appropriate (API Server) ",
@@ -1689,8 +2018,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1703,11 +2036,12 @@
                     "rule": "file(PR-K8S-0078.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0078",
+                            "id": "PR-K8S-0078",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the API server pod specification file $apiserverconf on the master node and set the below parameter. --service-account-lookup=true /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://github.com/kubernetes/kubernetes/issues/24167 https://en.wikipedia.org/wiki/Time_of_check_to_time_of_use",
-                            "remediationFunction":"PR-K8S-0078.py"
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the below parameter. --service-account-lookup=true /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://github.com/kubernetes/kubernetes/issues/24167 https://en.wikipedia.org/wiki/Time_of_check_to_time_of_use",
+                            "remediationFunction": "PR-K8S-0078.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --service-account-lookup argument is set to true (API Server) ",
@@ -1715,8 +2049,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1729,11 +2067,12 @@
                     "rule": "file(PR-K8S-0079.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0079",
+                            "id": "PR-K8S-0079",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Follow the documentation and create ServiceAccount objects as per your environment. Then, edit the API server pod specification file $apiserverconf on the master node and set the --enable-admission-plugins parameter to a value that includes ServiceAccount. /n --enable-admission-plugins=...,ServiceAccount,... /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/admission-controllers/#serviceaccount https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/",
-                            "remediationFunction":"PR-K8S-0079.py"
+                            "remediationDescription": "Follow the documentation and create ServiceAccount objects as per your environment. Then, edit the API server pod specification file $apiserverconf on the master node and set the --enable-admission-plugins parameter to a value that includes ServiceAccount. /n --enable-admission-plugins=...,ServiceAccount,... /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/admission-controllers/#serviceaccount https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/",
+                            "remediationFunction": "PR-K8S-0079.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the admission control plugin ServiceAccount is set (API Server) ",
@@ -1741,8 +2080,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1755,11 +2098,12 @@
                     "rule": "file(PR-K8S-0083.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0083",
+                            "id": "PR-K8S-0083",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Edit the API server pod specification file $apiserverconf on the master node and set the --service-account-key-file parameter to the public key file for service accounts: --service-account-key-file= /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://github.com/kubernetes/kubernetes/issues/24167 ",
-                            "remediationFunction":"PR-K8S-0083.py"
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the --service-account-key-file parameter to the public key file for service accounts: --service-account-key-file= /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://github.com/kubernetes/kubernetes/issues/24167 ",
+                            "remediationFunction": "PR-K8S-0083.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Ensure that the --service-account-key-file argument is set as appropriate (API Server) ",
@@ -1767,8 +2111,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },
@@ -1781,11 +2129,12 @@
                     "rule": "file(PR-K8S-0084.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0084",
+                            "id": "PR-K8S-0084",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"Follow the Kubernetes documentation and apply security contexts to your pods. For a suggested list of security contexts, you may refer to the CIS Security Benchmark for Docker Containers. Please refer : https://kubernetes.io/docs/concepts/policy/security-context/",
-                            "remediationFunction":"PR-K8S-0084.py"
+                            "remediationDescription": "Follow the Kubernetes documentation and apply security contexts to your pods. For a suggested list of security contexts, you may refer to the CIS Security Benchmark for Docker Containers. Please refer : https://kubernetes.io/docs/concepts/policy/security-context/",
+                            "remediationFunction": "PR-K8S-0084.py",
+                            "severity": "Medium"
                         }
                     ],
                     "title": " Apply Security Context to Your Pods and Containers ",
@@ -1793,8 +2142,12 @@
                     "tags": [
                         {
                             "cloud": "kubernetes",
-                            "compliance": ["CIS"],
-                            "service": ["pod"]
+                            "compliance": [
+                                "CIS"
+                            ],
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 }
