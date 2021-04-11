@@ -51,7 +51,9 @@
                         {
                             "cloud": "git",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },{
@@ -76,7 +78,9 @@
                         {
                             "cloud": "git",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },{
@@ -101,7 +105,9 @@
                         {
                             "cloud": "git",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },{
@@ -126,7 +132,9 @@
                         {
                             "cloud": "git",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },{
@@ -151,7 +159,9 @@
                         {
                             "cloud": "git",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": [
+                                "pod"
+                            ]
                         }
                     ]
                 },{
@@ -176,7 +186,9 @@
                         {
                             "cloud": "git",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": [
+                                "podsecuritypolicy"
+                            ]
                         }
                     ]
                 },{
@@ -201,7 +213,9 @@
                         {
                             "cloud": "git",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": [
+                                "podsecuritypolicy"
+                            ]
                         }
                     ]
                 },{
@@ -226,7 +240,9 @@
                         {
                             "cloud": "git",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": [
+                                "podsecuritypolicy"
+                            ]
                         }
                     ]
                 },{
@@ -251,7 +267,9 @@
                         {
                             "cloud": "git",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": [
+                                "podsecuritypolicy"
+                            ]
                         }
                     ]
                 },{
@@ -276,7 +294,9 @@
                         {
                             "cloud": "git",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": [
+                                "podsecuritypolicy"
+                            ]
                         }
                     ]
                 },{
@@ -301,7 +321,9 @@
                         {
                             "cloud": "git",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": [
+                                "podsecuritypolicy"
+                            ]
                         }
                     ]
                 },{
@@ -326,7 +348,9 @@
                         {
                             "cloud": "git",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": [
+                                "podsecuritypolicy"
+                            ]
                         }
                     ]
                 },{
@@ -351,7 +375,9 @@
                         {
                             "cloud": "git",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": [
+                                "role"
+                            ]
                         }
                     ]
                 },{
@@ -376,7 +402,9 @@
                         {
                             "cloud": "git",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": [
+                                "role"
+                            ]
                         }
                     ]
                 },{
@@ -401,7 +429,9 @@
                         {
                             "cloud": "git",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": [
+                                "rolebinding"
+                            ]
                         }
                     ]
                 },{
@@ -426,7 +456,9 @@
                         {
                             "cloud": "git",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": [
+                                "rolebinding"
+                            ]
                         }
                     ]
                 },{
@@ -451,7 +483,9 @@
                         {
                             "cloud": "git",
                             "compliance": ["CIS"],
-                            "service": []
+                            "service": [
+                                "serviceaccount"
+                            ]
                         }
                     ]
                 }
