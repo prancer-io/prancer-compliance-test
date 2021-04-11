@@ -13,12 +13,12 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0006-TRF",
+                            "id": "PR-AZR-0006-TRF",
                             "eval": "data.rule.aks_cni_net",
                             "message": "data.rule.aks_cni_net_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure AKS cluster Azure CNI networking not enabled",
@@ -30,7 +30,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_AKS_2",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -39,12 +40,12 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0007-TRF",
+                            "id": "PR-AZR-0007-TRF",
                             "eval": "data.rule.aks_http_routing",
                             "message": "data.rule.aks_http_routing_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure AKS cluster HTTP application routing enabled",
@@ -56,7 +57,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_AKS_3",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -65,12 +67,12 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0008-TRF",
+                            "id": "PR-AZR-0008-TRF",
                             "eval": "data.rule.aks_monitoring",
                             "message": "data.rule.aks_monitoring_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure AKS cluster monitoring not enabled",
@@ -82,7 +84,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_AKS_4",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -91,12 +94,12 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0009-TRF",
+                            "id": "PR-AZR-0009-TRF",
                             "eval": "data.rule.aks_nodes",
                             "message": "data.rule.aks_nodes_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure AKS cluster pool profile count contains less than 3 nodes",
@@ -108,7 +111,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_AKS_5",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -117,12 +121,12 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0010-TRF",
+                            "id": "PR-AZR-0010-TRF",
                             "eval": "data.rule.aks_rbac",
                             "message": "data.rule.aks_rbac_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure AKS enable role-based access control (RBAC) not enforced",
@@ -144,12 +148,12 @@
                     "rule": "file(applicationgateways.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0011-TRF",
+                            "id": "PR-AZR-0011-TRF",
                             "eval": "data.rule.gw_tls",
                             "message": "data.rule.gw_tls_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Application Gateway allows TLSv1.1 or lower",
@@ -161,7 +165,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_APPLICATION_GATEWAYS_2",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -170,12 +175,12 @@
                     "rule": "file(applicationgateways.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0012-TRF",
+                            "id": "PR-AZR-0012-TRF",
                             "eval": "data.rule.gw_waf",
                             "message": "data.rule.gw_waf_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Application Gateway does not have the Web application firewall (WAF) enabled",
@@ -197,12 +202,12 @@
                     "rule": "file(dbadministrators.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0085-TRF",
+                            "id": "PR-AZR-0085-TRF",
                             "eval": "data.rule.db_ad_admin",
                             "message": "data.rule.db_ad_admin_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "SQL servers which do not have Azure Active Directory admin configured",
@@ -210,7 +215,12 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","ISO 27001","NIST 800","PCI DSS"],
+                            "compliance": [
+                                "CSA CCM",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
                             "service": []
                         }
                     ]
@@ -224,12 +234,12 @@
                     "rule": "file(dbauditingdbsettings.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0003-TRF",
+                            "id": "PR-AZR-0003-TRF",
                             "eval": "data.rule.mssql_db_log_auditt",
                             "message": "data.rule.mssql_db_log_audit_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Auditing for SQL database should be set to On",
@@ -237,11 +247,19 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DB_AUDITING_DB_SETTINGS_2",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -250,12 +268,12 @@
                     "rule": "file(dbauditingdbsettings.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0053-TRF",
+                            "id": "PR-AZR-0053-TRF",
                             "eval": "data.rule.mssql_db_log_retention",
                             "message": "data.rule.mssql_db_log_retention_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure SQL Database with Auditing Retention less than 90 days",
@@ -263,11 +281,19 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DB_AUDITING_SETTINGS",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -276,12 +302,12 @@
                     "rule": "file(dbauditingsettings.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0059-TRF",
+                            "id": "PR-AZR-0059-TRF",
                             "eval": "data.rule.mssql_log_retention",
                             "message": "data.rule.mssql_log_retention_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure SQL Server audit log retention is less than 91 days",
@@ -303,12 +329,12 @@
                     "rule": "file(dbauditingdbsettings.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0082-TRF",
+                            "id": "PR-AZR-0082-TRF",
                             "eval": "data.rule.db_firewall",
                             "message": "data.rule.db_firewall_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "SQL Server Firewall rules allow access to any Azure internal resources",
@@ -316,7 +342,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","ISO 27001","NIST 800","PCI DSS"],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
                             "service": []
                         }
                     ]
@@ -330,12 +362,12 @@
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0054-TRF",
+                            "id": "PR-AZR-0054-TRF",
                             "eval": "data.rule.dbsec_threat_retention",
                             "message": "data.rule.dbsec_threat_retention_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure SQL Database with Threat Retention less than or equals to 90 days",
@@ -343,11 +375,19 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_2",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -356,12 +396,12 @@
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0055-TRF",
+                            "id": "PR-AZR-0055-TRF",
                             "eval": "data.rule.dbsec_threat_email",
                             "message": "data.rule.dbsec_threat_email_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure SQL Databases with disabled Email service and co-administrators for Threat Detection",
@@ -369,11 +409,18 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
+                            "compliance": [
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_3",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -382,12 +429,12 @@
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0097-TRF",
+                            "id": "PR-AZR-0097-TRF",
                             "eval": "data.rule.dbsec_threat_alert",
                             "message": "data.rule.dbsec_threat_alert_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Threat Detection types on SQL databases is misconfigured",
@@ -395,11 +442,18 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","ISO 27001","NIST 800","PCI DSS"],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_4",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -408,12 +462,12 @@
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0088-TRF",
+                            "id": "PR-AZR-0088-TRF",
                             "eval": "data.rule.sql_alert",
                             "message": "data.rule.sql_alert_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Send alerts on field value on SQL Databases is misconfigured",
@@ -421,11 +475,19 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_5",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -434,12 +496,12 @@
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0096-TRF",
+                            "id": "PR-AZR-0096-TRF",
                             "eval": "data.rule.dbsec_threat_off",
                             "message": "data.rule.dbsec_threat_off_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Threat Detection on SQL databases is set to Off",
@@ -447,7 +509,12 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","ISO 27001","NIST 800","PCI DSS"],
+                            "compliance": [
+                                "CIS",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
                             "service": []
                         }
                     ]
@@ -461,12 +528,12 @@
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0056-TRF",
+                            "id": "PR-AZR-0056-TRF",
                             "eval": "data.rule.db_ads_mail",
                             "message": "data.rule.db_ads_mail_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure SQL Server advanced data security does not have an email alert recipient",
@@ -478,7 +545,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DB_VALENRABILITY_ASSESSMENTS_2",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -487,12 +555,12 @@
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0057-TRF",
+                            "id": "PR-AZR-0057-TRF",
                             "eval": "data.rule.db_ads_alert",
                             "message": "data.rule.db_ads_alert_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure SQL Server advanced data security does not send alerts to service and co-administrators",
@@ -504,7 +572,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DB_VALENRABILITY_ASSESSMENTS_3",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -513,12 +582,12 @@
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0058-TRF",
+                            "id": "PR-AZR-0058-TRF",
                             "eval": "data.rule.db_ads_scan",
                             "message": "data.rule.db_ads_scan_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure SQL Server advanced data security is disabled",
@@ -540,12 +609,12 @@
                     "rule": "file(keyvaultsecrets.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0018-TRF",
+                            "id": "PR-AZR-0018-TRF",
                             "eval": "data.rule.kv_expire",
                             "message": "data.rule.kv_expire_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Key Vault secrets have no expiration date",
@@ -567,12 +636,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0022-TRF",
+                            "id": "PR-AZR-0022-TRF",
                             "eval": "data.rule.nsg_in_tcp_all_src",
                             "message": "data.rule.nsg_in_tcp_all_src_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to all TCP traffic from any source",
@@ -584,7 +653,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_2",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -593,12 +663,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0023-TRF",
+                            "id": "PR-AZR-0023-TRF",
                             "eval": "data.rule.nsg_in_udp_all_src",
                             "message": "data.rule.nsg_in_udp_all_src_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to all UDP traffic from any source",
@@ -610,7 +680,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_3",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -619,12 +690,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0024-TRF",
+                            "id": "PR-AZR-0024-TRF",
                             "eval": "data.rule.nsg_in_tcp_all",
                             "message": "data.rule.nsg_in_tcp_all_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to all traffic from Internet on TCP protocol",
@@ -636,7 +707,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_4",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -645,12 +717,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0025-TRF",
+                            "id": "PR-AZR-0025-TRF",
                             "eval": "data.rule.nsg_in_udp_all",
                             "message": "data.rule.nsg_in_udp_all_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to all traffic from Internet on UDP protocol",
@@ -662,7 +734,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_5",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -671,12 +744,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0026-TRF",
+                            "id": "PR-AZR-0026-TRF",
                             "eval": "data.rule.nsg_in_all",
                             "message": "data.rule.nsg_in_all_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to all traffic from Internet on any protocol",
@@ -688,7 +761,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_6",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -697,12 +771,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0027-TRF",
+                            "id": "PR-AZR-0027-TRF",
                             "eval": "data.rule.nsg_in_all_src",
                             "message": "data.rule.nsg_in_all_src_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to allow all traffic from any source on any protocol",
@@ -714,7 +788,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_7",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -723,12 +798,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0028-TRF",
+                            "id": "PR-AZR-0028-TRF",
                             "eval": "data.rule.nsg_in_all_dst",
                             "message": "data.rule.nsg_in_all_dst_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to allow all traffic from any source to any destination (TJX)",
@@ -740,7 +815,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_8",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -749,12 +825,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0034-TRF",
+                            "id": "PR-AZR-0034-TRF",
                             "eval": "data.rule.nsg_allow_icmp",
                             "message": "data.rule.nsg_allow_icmp_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group allows ICMP (Ping)",
@@ -766,7 +842,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_9",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -775,12 +852,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0032-TRF",
+                            "id": "PR-AZR-0032-TRF",
                             "eval": "data.rule.inbound_port_21",
                             "message": "data.rule.inbound_port_21_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group allows FTP (TCP Port 21)",
@@ -792,7 +869,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_10",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -801,12 +879,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"gID3",
+                            "id": "gID3",
                             "eval": "data.rule.inbound_insecure_port",
                             "message": "data.rule.inbound_insecure_port_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Internet connectivity via tcp over insecure port",
@@ -814,11 +892,18 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["GDPR", "HIPAA", "NIST CSF", "PCI DSS", "SOC 2"],
+                            "compliance": [
+                                "GDPR",
+                                "HIPAA",
+                                "NIST CSF",
+                                "PCI DSS",
+                                "SOC 2"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_11",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -827,12 +912,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"gID5",
+                            "id": "gID5",
                             "eval": "data.rule.inbound_port_11211",
                             "message": "data.rule.inbound_port_11211_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Memcached DDoS attack attempted",
@@ -844,7 +929,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_12",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -853,12 +939,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"gID7",
+                            "id": "gID7",
                             "eval": "data.rule.inbound_port_6379",
                             "message": "data.rule.inbound_port_6379_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "RedisWannaMine vulnerable instances with active network traffic",
@@ -870,7 +956,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_13",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -879,12 +966,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"gID6",
+                            "id": "gID6",
                             "eval": "data.rule.inbound_port_dbs",
                             "message": "data.rule.inbound_port_dbs_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Publicly exposed DB Ports",
@@ -896,7 +983,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_14",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -905,12 +993,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0020-TRF",
+                            "id": "PR-AZR-0020-TRF",
                             "eval": "data.rule.inbound_port_22",
                             "message": "data.rule.inbound_port_22_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group (NSG) allows SSH traffic from internet on port 22",
@@ -918,11 +1006,18 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","NIST 800","PCI DSS"],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_15",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -931,12 +1026,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0021-TRF",
+                            "id": "PR-AZR-0021-TRF",
                             "eval": "data.rule.inbound_port_3389",
                             "message": "data.rule.inbound_port_3389_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group (NSG) allows traffic from internet on port 3389",
@@ -944,11 +1039,18 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","NIST 800","PCI DSS"],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_16",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -957,12 +1059,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0047-TRF",
+                            "id": "PR-AZR-0047-TRF",
                             "eval": "data.rule.inbound_port_445",
                             "message": "data.rule.inbound_port_445_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group allows Windows SMB (TCP Port 445)",
@@ -974,7 +1076,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_17",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -983,12 +1086,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0031-TRF",
+                            "id": "PR-AZR-0031-TRF",
                             "eval": "data.rule.inbound_port_53",
                             "message": "data.rule.inbound_port_53_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group allows DNS (UDP Port 53)",
@@ -1000,7 +1103,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_18",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1009,12 +1113,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0033-TRF",
+                            "id": "PR-AZR-0033-TRF",
                             "eval": "data.rule.inbound_port_20",
                             "message": "data.rule.inbound_port_20_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group allows FTP-Data (TCP Port 20)",
@@ -1026,7 +1130,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_19",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1035,12 +1140,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0035-TRF",
+                            "id": "PR-AZR-0035-TRF",
                             "eval": "data.rule.inbound_port_4333",
                             "message": "data.rule.inbound_port_4333_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group allows MSQL (TCP Port 4333)",
@@ -1052,7 +1157,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_20",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1061,12 +1167,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0036-TRF",
+                            "id": "PR-AZR-0036-TRF",
                             "eval": "data.rule.inbound_port_3306",
                             "message": "data.rule.inbound_port_3306_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group allows MySQL (TCP Port 3306)",
@@ -1078,7 +1184,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_21",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1087,12 +1194,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0038-TRF",
+                            "id": "PR-AZR-0038-TRF",
                             "eval": "data.rule.inbound_port_netbios",
                             "message": "data.rule.inbound_port_netbios_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group allows NetBIOS (UDP Port 138)",
@@ -1104,7 +1211,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_22",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1113,12 +1221,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0039-TRF",
+                            "id": "PR-AZR-0039-TRF",
                             "eval": "data.rule.inbound_port_5432",
                             "message": "data.rule.inbound_port_5432_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group allows PostgreSQL (TCP Port 5432)",
@@ -1130,7 +1238,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_23",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1139,12 +1248,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0040-TRF",
+                            "id": "PR-AZR-0040-TRF",
                             "eval": "data.rule.inbound_port_25",
                             "message": "data.rule.inbound_port_25_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group allows SMTP (TCP Port 25)",
@@ -1156,7 +1265,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_24",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1165,12 +1275,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0042-TRF",
+                            "id": "PR-AZR-0042-TRF",
                             "eval": "data.rule.inbound_port_sqlserver",
                             "message": "data.rule.inbound_port_sqlserver_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group allows SqlServer (TCP Port 1433)",
@@ -1182,7 +1292,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_25",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1191,12 +1302,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0043-TRF",
+                            "id": "PR-AZR-0043-TRF",
                             "eval": "data.rule.inbound_port_23",
                             "message": "data.rule.inbound_port_23_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group allows Telnet (TCP Port 23)",
@@ -1208,7 +1319,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_26",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1217,12 +1329,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0044-TRF",
+                            "id": "PR-AZR-0044-TRF",
                             "eval": "data.rule.inbound_port_5500",
                             "message": "data.rule.inbound_port_5500_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group allows VNC Listener (TCP Port 5500)",
@@ -1234,7 +1346,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_27",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1243,12 +1356,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0045-TRF",
+                            "id": "PR-AZR-0045-TRF",
                             "eval": "data.rule.inbound_port_5900",
                             "message": "data.rule.inbound_port_5900_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group allows VNC Server (TCP Port 5900)",
@@ -1260,7 +1373,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_28",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1269,12 +1383,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0046-TRF",
+                            "id": "PR-AZR-0046-TRF",
                             "eval": "data.rule.inbound_port_135",
                             "message": "data.rule.inbound_port_135_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group allows Windows RPC (TCP Port 135)",
@@ -1286,7 +1400,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_29",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1295,12 +1410,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0048-TRF",
+                            "id": "PR-AZR-0048-TRF",
                             "eval": "data.rule.nsg_out_all",
                             "message": "data.rule.nsg_out_all_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Network Security Group with Outbound rule to allow all traffic to any source",
@@ -1312,7 +1427,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_30",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1321,12 +1437,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"gID1",
+                            "id": "gID1",
                             "eval": "data.rule.outbound_port_bitcoin",
                             "message": "data.rule.outbound_port_bitcoin_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Instance is communicating with ports known to mine Bitcoin",
@@ -1334,11 +1450,15 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["HIPAA", "NIST CSF"],
+                            "compliance": [
+                                "HIPAA",
+                                "NIST CSF"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_31",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1347,12 +1467,12 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"gID2",
+                            "id": "gID2",
                             "eval": "data.rule.outbound_port_ethereum",
                             "message": "data.rule.outbound_port_ethereum_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Instance is communicating with ports known to mine Ethereum",
@@ -1360,7 +1480,10 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["HIPAA", "NIST CSF"],
+                            "compliance": [
+                                "HIPAA",
+                                "NIST CSF"
+                            ],
                             "service": []
                         }
                     ]
@@ -1374,12 +1497,12 @@
                     "rule": "file(pricing.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0091-TRF",
+                            "id": "PR-AZR-0091-TRF",
                             "eval": "data.rule.pricing",
                             "message": "data.rule.pricing_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Standard pricing tier is not AC in Security Center",
@@ -1387,7 +1510,10 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","ISO 27001"],
+                            "compliance": [
+                                "CIS",
+                                "ISO 27001"
+                            ],
                             "service": []
                         }
                     ]
@@ -1401,13 +1527,12 @@
                     "rule": "file(registrieslist.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0015-TRF",
+                            "id": "PR-AZR-0015-TRF",
                             "eval": "data.rule.acr_classic",
                             "message": "data.rule.acr_classic_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
-                        
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Container Registry using the deprecated classic registry",
@@ -1429,12 +1554,12 @@
                     "rule": "file(registrieswebhooks.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0005-TRF",
+                            "id": "PR-AZR-0005-TRF",
                             "eval": "data.rule.acr_webhooks",
                             "message": "data.rule.acr_webhooks_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure ACR HTTPS not enabled for webhook",
@@ -1456,12 +1581,12 @@
                     "rule": "file(securitycontacts.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0087-TRF",
+                            "id": "PR-AZR-0087-TRF",
                             "eval": "data.rule.securitycontacts",
                             "message": "data.rule.securitycontacts_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Security contact emails is not set in Security Center",
@@ -1469,7 +1594,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
                             "service": []
                         }
                     ]
@@ -1483,12 +1615,12 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0092-TRF",
+                            "id": "PR-AZR-0092-TRF",
                             "eval": "data.rule.storage_secure",
                             "message": "data.rule.storage_secure_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Storage Accounts without Secure transfer enabled",
@@ -1496,11 +1628,19 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_STORAGE_ACCOUNT_2",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1509,12 +1649,12 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0093-TRF",
+                            "id": "PR-AZR-0093-TRF",
                             "eval": "data.rule.storage_acl",
                             "message": "data.rule.storage_acl_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Storage Accounts without their firewalls enabled (TJX)",
@@ -1522,7 +1662,12 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","HIPAA","NIST 800","PCI DSS"],
+                            "compliance": [
+                                "CIS",
+                                "HIPAA",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
                             "service": []
                         }
                     ]
@@ -1536,12 +1681,12 @@
                     "rule": "file(storageblobcontainers.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0013-TRF",
+                            "id": "PR-AZR-0013-TRF",
                             "eval": "data.rule.storage_public_access",
                             "message": "data.rule.storage_public_access_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Blob container(s) with public access and logging set to less than 180 days (TJX)",
@@ -1563,12 +1708,12 @@
                     "rule": "file(vnetsubnets.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0067-TRF",
+                            "id": "PR-AZR-0067-TRF",
                             "eval": "data.rule.vnet_subnet_nsg",
                             "message": "data.rule.vnet_subnet_nsg_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"",
-                            "severity":"Medium"
+                            "remediationDescription": "",
+                            "remediationFunction": "",
+                            "severity": "Medium"
                         }
                     ],
                     "title": "Azure Virtual Network subnet is not configured with a Network Security Group (TJX)",
