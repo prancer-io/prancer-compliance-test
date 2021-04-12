@@ -13,23 +13,27 @@
                     "rule": "file(networkPolicy.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0036-DCL",
+                            "id": "PR-K8S-0036-DCL",
                             "eval": "data.rule.empty_ingress",
                             "message": "data.rule.empty_ingress_err",
-                            "remediationDescription":"Pods in a cluster can communicate with each other and should be controlled using Network Policies as needed for your workload. Network policies are implemented by the network plugin, so you must be using a networking solution which supports NetworkPolicy - simply creating the resource without a controller to implement it will have no effect. Kubernetes' Network Policies make it much more difficult for attackers to move laterally within your cluster. You can also use the Kubernetes Network Policy API to create Pod-level firewall rules. These firewall rules determine which Pods and services can access one another inside your cluster. You can find an example of NetworkPolicy : https://kubernetes.io/docs/concepts/services-networking/network-policies/#the-networkpolicy-resource For more information on NetworkPolicy, please refer : https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.16/#networkpolicy-v1-networking-k8s-io",
-                            "remediationFunction":"PR-K8S-0036-DCL.py"
+                            "remediationDescription": "Pods in a cluster can communicate with each other and should be controlled using Network Policies as needed for your workload. Network policies are implemented by the network plugin, so you must be using a networking solution which supports NetworkPolicy - simply creating the resource without a controller to implement it will have no effect. Kubernetes' Network Policies make it much more difficult for attackers to move laterally within your cluster. You can also use the Kubernetes Network Policy API to create Pod-level firewall rules. These firewall rules determine which Pods and services can access one another inside your cluster. You can find an example of NetworkPolicy : https://kubernetes.io/docs/concepts/services-networking/network-policies/#the-networkpolicy-resource For more information on NetworkPolicy, please refer : https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.16/#networkpolicy-v1-networking-k8s-io",
+                            "remediationFunction": "PR-K8S-0036-DCL.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Restrict Traffic Among Pods with a Network Policy",
                     "description": "Network policies are Kubernetes resources that control the traffic between pods and/or network endpoints. They uses labels to select pods and specify the traffic that is directed toward those pods using rules.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_1",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -38,25 +42,29 @@
                     "rule": "file(pod.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0015-DCL",
+                            "id": "PR-K8S-0015-DCL",
                             "eval": "data.rule.run_pod_as_root",
                             "message": "data.rule.run_pod_as_root_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.runAsUser.rule is set to either MustRunAsNonRoot or MustRunAs with the range of UIDs not including 0.",
-                            "remediationFunction":"PR-K8S-0015-DCL.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.runAsUser.rule is set to either MustRunAsNonRoot or MustRunAs with the range of UIDs not including 0.",
+                            "remediationFunction": "PR-K8S-0015-DCL.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Do not admit root containers",
                     "description": "Do not generally permit containers to be run as the root user.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": [
                                 "pod"
                             ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_2",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -65,25 +73,29 @@
                     "rule": "file(pod.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0018-DCL",
+                            "id": "PR-K8S-0018-DCL",
                             "eval": "data.rule.run_privileged_pod",
                             "message": "data.rule.run_privileged_pod_err",
-                            "remediationDescription":"Use this example PodSecurityPolicy object in a file to create a policy that simply prevents the creation of privileged pods. /n apiVersion: policy/v1beta1 /n kind: PodSecurityPolicy /n metadata: /n name: example /n spec: /n privileged: false # Don't allow privileged pods! /n # The rest fills in some required fields. /n seLinux: /n rule: RunAsAny /n supplementalGroups: /n rule: RunAsAny /n runAsUser: /n  rule: RunAsAny /n fsGroup: /n rule: RunAsAny /n volumes: /n - '*' /n For more on how to enable and update pod specification using Pod Security Policy, please refer : https://kubernetes.io/docs/concepts/policy/pod-security-policy/#privileged",
-                            "remediationFunction":"PR-K8S-0018-DCL.py"
+                            "remediationDescription": "Use this example PodSecurityPolicy object in a file to create a policy that simply prevents the creation of privileged pods. /n apiVersion: policy/v1beta1 /n kind: PodSecurityPolicy /n metadata: /n name: example /n spec: /n privileged: false # Don't allow privileged pods! /n # The rest fills in some required fields. /n seLinux: /n rule: RunAsAny /n supplementalGroups: /n rule: RunAsAny /n runAsUser: /n  rule: RunAsAny /n fsGroup: /n rule: RunAsAny /n volumes: /n - '*' /n For more on how to enable and update pod specification using Pod Security Policy, please refer : https://kubernetes.io/docs/concepts/policy/pod-security-policy/#privileged",
+                            "remediationFunction": "PR-K8S-0018-DCL.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Ensure that Containers are not running in privileged mode",
                     "description": "Pod Security Policies are cluster-wide resources that control security sensitive aspects of pod specification. Pod Security Policy objects define a set of conditions that a pod must run with in order to be accepted into the system, as well as defaults for their related fields.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": [
                                 "pod"
                             ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_3",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -92,25 +104,29 @@
                     "rule": "file(pod.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0030-DCL",
+                            "id": "PR-K8S-0030-DCL",
                             "eval": "data.rule.pod_default_ns",
                             "message": "data.rule.pod_default_ns_err",
-                            "remediationDescription":"Ensure that namespaces are created to allow for appropriate segregation of Kubernetes resources and that all new resources are created in a specific namespace.",
-                            "remediationFunction":"PR-K8S-0030-DCL.py"
+                            "remediationDescription": "Ensure that namespaces are created to allow for appropriate segregation of Kubernetes resources and that all new resources are created in a specific namespace.",
+                            "remediationFunction": "PR-K8S-0030-DCL.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "The default namespace should not be used",
                     "description": "Kubernetes provides a default namespace, where objects are placed if no namespace is specified for them. Placing objects in this namespace makes application of RBAC and other controls more difficult.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": [
                                 "pod"
                             ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_4",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -119,25 +135,29 @@
                     "rule": "file(pod.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0057-DCL",
+                            "id": "PR-K8S-0057-DCL",
                             "eval": "data.rule.hostpath_mount",
                             "message": "data.rule.hostpath_mount_err",
-                            "remediationDescription":"Please refer to the Kubernetes documentation on how to configure the hostpath: /n https://kubernetes.io/docs/concepts/storage/volumes/#hostpath",
-                            "remediationFunction":"PR-K8S-0057-DCL.py"
+                            "remediationDescription": "Please refer to the Kubernetes documentation on how to configure the hostpath: /n https://kubernetes.io/docs/concepts/storage/volumes/#hostpath",
+                            "remediationFunction": "PR-K8S-0057-DCL.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": " Ensure pods outside of kube-system do not have access to node volume",
                     "description": " A hostPath volume mounts a file or directory from the host node’s filesystem into your Pod. This is not something that most Pods will need, but it offers a powerful escape hatch for some applications. It is important to watch out when using this type of volume because; when Kubernetes adds resource-aware scheduling, as is planned, it will not be able to account for resource used by a hostPath.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": [
                                 "pod"
                             ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_5",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -146,25 +166,29 @@
                     "rule": "file(pod.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0084-DCL",
+                            "id": "PR-K8S-0084-DCL",
                             "eval": "data.rule.pod_selinux",
                             "message": "data.rule.pod_selinux_err",
-                            "remediationDescription":"Follow the Kubernetes documentation and apply security contexts to your pods. For a suggested list of security contexts, you may refer to the CIS Security Benchmark for Docker Containers. Please refer : https://kubernetes.io/docs/concepts/policy/security-context/",
-                            "remediationFunction":"PR-K8S-0084-DCL.py"
+                            "remediationDescription": "Follow the Kubernetes documentation and apply security contexts to your pods. For a suggested list of security contexts, you may refer to the CIS Security Benchmark for Docker Containers. Please refer : https://kubernetes.io/docs/concepts/policy/security-context/",
+                            "remediationFunction": "PR-K8S-0084-DCL.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Apply Security Context to Your Pods and Containers",
                     "description": "Apply Security Context to Your Pods and Containers. A security context defines the operating system security settings (uid, gid, capabilities, SELinux role, etc..) applied to a container. When designing your containers and pods, make sure that you configure the security context for your pods, containers, and volumes. A security context is a property defined in the deployment yaml. It controls the security parameters that will be assigned to the pod/container/volume.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": [
                                 "pod"
                             ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_SECURITY_POLICY_1",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -173,25 +197,29 @@
                     "rule": "file(podSecurityPolicy.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0008-DCL",
+                            "id": "PR-K8S-0008-DCL",
                             "eval": "data.rule.privileged",
                             "message": "data.rule.privileged_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.privileged field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies",
-                            "remediationFunction":"PR-K8S-0008-DCL.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.privileged field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies",
+                            "remediationFunction": "PR-K8S-0008-DCL.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Minimize the admission of privileged containers (PSP)",
                     "description": "Do not generally permit containers to be run with the securityContext.privileged flag set to true. Privileged containers have access to all Linux Kernel capabilities and devices. A container running with full privileges can do almost everything that the host can do. This flag exists to allow special use-cases, like manipulating the network stack and accessing devices. There should be at least one PodSecurityPolicy (PSP) defined which does not permit privileged containers. If you need to run privileged containers, this should be defined in a separate PSP and you should carefully check RBAC controls to ensure that only limited service accounts and users are given permission to access that PSP.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": [
                                 "podsecuritypolicy"
                             ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_SECURITY_POLICY_2",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -200,25 +228,29 @@
                     "rule": "file(podSecurityPolicy.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0009-DCL",
+                            "id": "PR-K8S-0009-DCL",
                             "eval": "data.rule.run_as_root",
                             "message": "data.rule.run_as_root_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.runAsUser.rule is set to either MustRunAsNonRoot or MustRunAs with the range of UIDs not including 0.  References: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies",
-                            "remediationFunction":"PR-K8S-0009-DCL.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.runAsUser.rule is set to either MustRunAsNonRoot or MustRunAs with the range of UIDs not including 0.  References: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies",
+                            "remediationFunction": "PR-K8S-0009-DCL.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Minimize the admission of root containers (PSP)",
                     "description": "Do not generally permit containers to be run as the root user. Containers may run as any Linux user. Containers which run as the root user, whilst constrained by Container Runtime security features still have a escalated likelihood of container breakout. Ideally, all containers should run as a defined non-UID 0 user. There should be at least one PodSecurityPolicy (PSP) defined which does not permit root users in a container. If you need to run root containers, this should be defined in a separate PSP and you should carefully check RBAC controls to ensure that only limited service accounts and users are given permission to access that PSP.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": [
                                 "podsecuritypolicy"
                             ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_SECURITY_POLICY_3",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -227,25 +259,29 @@
                     "rule": "file(podSecurityPolicy.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0010-DCL",
+                            "id": "PR-K8S-0010-DCL",
                             "eval": "data.rule.drop_capabilities",
                             "message": "data.rule.drop_capabilities_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.requiredDropCapabilities is set to include either NET_RAW or ALL. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies https://www.nccgroup.trust/uk/our-research/abusing-privileged-and-unprivileged-linux-containers/",
-                            "remediationFunction":"PR-K8S-0010-DCL.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.requiredDropCapabilities is set to include either NET_RAW or ALL. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies https://www.nccgroup.trust/uk/our-research/abusing-privileged-and-unprivileged-linux-containers/",
+                            "remediationFunction": "PR-K8S-0010-DCL.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Minimize the admission of containers with the NET_RAW capability (PSP)",
                     "description": "Do not generally permit containers with the potentially dangerous NET_RAW capability. Containers run with a default set of capabilities as assigned by the Container Runtime. By default this can include potentially dangerous capabilities. With Docker as the container runtime the NET_RAW capability is enabled which may be misused by malicious containers. Ideally, all containers should drop this capability. There should be at least one PodSecurityPolicy (PSP) defined which prevents containers with the NET_RAW capability from launching. If you need to run containers with this capability, this should be defined in a separate PSP and you should carefully check RBAC controls to ensure that only limited service accounts and users are given permission to access that PSP.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": [
                                 "podsecuritypolicy"
                             ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_SECURITY_POLICY_4",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -254,25 +290,29 @@
                     "rule": "file(podSecurityPolicy.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0011-DCL",
+                            "id": "PR-K8S-0011-DCL",
                             "eval": "data.rule.host_ipc",
                             "message": "data.rule.host_ipc_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostIPC field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
-                            "remediationFunction":"PR-K8S-0011-DCL.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostIPC field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
+                            "remediationFunction": "PR-K8S-0011-DCL.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Minimize the admission of containers wishing to share the host IPC namespace (PSP)",
                     "description": "Do not generally permit containers to be run with the hostIPC flag set to true. A container running in the host's IPC namespace can use IPC to interact with processes outside the container. There should be at least one PodSecurityPolicy (PSP) defined which does not permit containers to share the host IPC namespace. If you have a requirement to containers which require hostIPC, this should be defined in a separate PSP and you should carefully check RBAC controls to ensure that only limited service accounts and users are given permission to access that PSP.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": [
                                 "podsecuritypolicy"
                             ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_SECURITY_POLICY_5",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -281,25 +321,29 @@
                     "rule": "file(podSecurityPolicy.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0012-DCL",
+                            "id": "PR-K8S-0012-DCL",
                             "eval": "data.rule.host_network",
                             "message": "data.rule.host_network_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostNetwork field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
-                            "remediationFunction":"PR-K8S-0012-DCL.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostNetwork field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
+                            "remediationFunction": "PR-K8S-0012-DCL.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Minimize the admission of containers wishing to share the host network namespace (PSP)",
                     "description": "Do not generally permit containers to be run with the hostNetwork flag set to true. A container running in the host's network namespace could access the local loopback device, and could access network traffic to and from other pods. There should be at least one PodSecurityPolicy (PSP) defined which does not permit containers to share the host network namespace. If you have need to run containers which require hostNetwork, this should be defined in a separate PSP and you should carefully check RBAC controls to ensure that only limited service accounts and users are given permission to access that PSP.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": [
                                 "podsecuritypolicy"
                             ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_SECURITY_POLICY_6",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -308,25 +352,29 @@
                     "rule": "file(podSecurityPolicy.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0013-DCL",
+                            "id": "PR-K8S-0013-DCL",
                             "eval": "data.rule.host_pid",
                             "message": "data.rule.host_pid_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostPID field is omitted or set to false. References:  https://kubernetes.io/docs/concepts/policy/pod-security-policy",
-                            "remediationFunction":"PR-K8S-0013-DCL.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostPID field is omitted or set to false. References:  https://kubernetes.io/docs/concepts/policy/pod-security-policy",
+                            "remediationFunction": "PR-K8S-0013-DCL.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Minimize the admission of containers wishing to share the host process ID namespace (PSP)",
                     "description": " Do not generally permit containers to be run with the hostPID flag set to true. A container running in the host's PID namespace can inspect processes running outside the container. If the container also has access to ptrace capabilities this can be used to escalate privileges outside of the container. There should be at least one PodSecurityPolicy (PSP) defined which does not permit containers to share the host PID namespace. If you need to run containers which require hostPID, this should be defined in a separate PSP and you should carefully check RBAC controls to ensure that only limited service accounts and users are given permission to access that PSP.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": [
                                 "podsecuritypolicy"
                             ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_POD_SECURITY_POLICY_7",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -335,25 +383,29 @@
                     "rule": "file(podSecurityPolicy.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0014-DCL",
+                            "id": "PR-K8S-0014-DCL",
                             "eval": "data.rule.privilege_escalation",
                             "message": "data.rule.privilege_escalation_err",
-                            "remediationDescription":"Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.allowPrivilegeEscalation field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
-                            "remediationFunction":"PR-K8S-0014-DCL.py"
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.allowPrivilegeEscalation field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
+                            "remediationFunction": "PR-K8S-0014-DCL.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Minimize the admission of containers with allowPrivilegeEscalation (PSP)",
                     "description": "Do not generally permit containers to be run with the allowPrivilegeEscalation flag set to true.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": [
                                 "podsecuritypolicy"
                             ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ROLE_1",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -362,25 +414,29 @@
                     "rule": "file(role.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0001-DCL",
+                            "id": "PR-K8S-0001-DCL",
                             "eval": "data.rule.rbac_secrets",
                             "message": "data.rule.rbac_secrets_err",
-                            "remediationDescription":"Where possible, remove get, list and watch access to secret objects in the cluster.",
-                            "remediationFunction":"PR-K8S-0001-DCL.py"
+                            "remediationDescription": "Where possible, remove get, list and watch access to secret objects in the cluster.",
+                            "remediationFunction": "PR-K8S-0001-DCL.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "MINIMIZE ACCESS TO SECRETS (RBAC)",
                     "description": "The Kubernetes API stores secrets, which may be service account tokens for the Kubernetes API or credentials used by workloads in the cluster. Access to these secrets should be restricted to the smallest possible group of users to reduce the risk of privilege escalation. Inappropriate access to secrets stored within the Kubernetes cluster can allow for an attacker to gain additional access to the Kubernetes cluster or external resources whose credentials are stored as secrets.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": [
                                 "role"
                             ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ROLE_2",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -389,25 +445,29 @@
                     "rule": "file(role.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0002-DCL",
+                            "id": "PR-K8S-0002-DCL",
                             "eval": "data.rule.rbac_wildcard",
                             "message": "data.rule.rbac_wildcard_err",
-                            "remediationDescription":"Where possible, remove get, list and watch access to secret objects in the cluster.",
-                            "remediationFunction":"PR-K8S-0002-DCL.py"
+                            "remediationDescription": "Where possible, remove get, list and watch access to secret objects in the cluster.",
+                            "remediationFunction": "PR-K8S-0002-DCL.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Minimize wildcard use in Roles and ClusterRoles (RBAC)",
                     "description": "Kubernetes Roles and ClusterRoles provide access to resources based on sets of objects and actions that can be taken on those objects. It is possible to set either of these to be the wildcard \" * \" which matches all items. Use of wildcards is not optimal from a security perspective as it may allow for inadvertent access to be granted when new resources are added to the Kubernetes API either as CRDs or in later versions of the product. The principle of least privilege recommends that users are provided only the access required for their role and nothing more. The use of wildcard rights grants is likely to provide excessive rights to the Kubernetes API.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": [
                                 "role"
                             ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ROLE_BINDING_1",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -416,25 +476,29 @@
                     "rule": "file(roleBinding.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0003-DCL",
+                            "id": "PR-K8S-0003-DCL",
                             "eval": "data.rule.default_role",
                             "message": "data.rule.default_role_err",
-                            "remediationDescription":"Create explicit service accounts wherever a Kubernetes workload requires specific access to the Kubernetes API server. Modify the configuration of each default service account to include this value: automountServiceAccountToken: false",
-                            "remediationFunction":"PR-K8S-0003-DCL.py"
+                            "remediationDescription": "Create explicit service accounts wherever a Kubernetes workload requires specific access to the Kubernetes API server. Modify the configuration of each default service account to include this value: automountServiceAccountToken: false",
+                            "remediationFunction": "PR-K8S-0003-DCL.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Ensure that default service accounts are not actively used. (RBAC)",
                     "description": "The default service account should not be used to ensure that rights granted to applications can be more easily audited and reviewed. Kubernetes provides a default service account which is used by cluster workloads where no specific service account is assigned to the pod. Where access to the Kubernetes API from a pod is required, a specific service account should be created for that pod, and rights granted to that service account. The default service account should be configured such that it does not provide a service account token and does not have any explicit rights assignments.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": [
                                 "rolebinding"
                             ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ROLE_BINDING_2",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -443,25 +507,29 @@
                     "rule": "file(roleBinding.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0004-DCL",
+                            "id": "PR-K8S-0004-DCL",
                             "eval": "data.rule.admin_role",
                             "message": "data.rule.admin_role_err",
-                            "remediationDescription":"Identify all clusterrolebindings to the cluster-admin role. Check if they are used and if they need this role or if they could use a role with fewer privileges. Where possible, first bind users to a lower privileged role and then remove the clusterrolebinding to the cluster-admin role : kubectl delete clusterrolebinding [name]",
-                            "remediationFunction":"PR-K8S-0004-DCL.py"
+                            "remediationDescription": "Identify all clusterrolebindings to the cluster-admin role. Check if they are used and if they need this role or if they could use a role with fewer privileges. Where possible, first bind users to a lower privileged role and then remove the clusterrolebinding to the cluster-admin role : kubectl delete clusterrolebinding [name]",
+                            "remediationFunction": "PR-K8S-0004-DCL.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Ensure that the cluster-admin role is only used where required (RBAC)",
                     "description": "The RBAC role cluster-admin provides wide-ranging powers over the environment and should be used only where and when needed. Kubernetes provides a set of default roles where RBAC is used. Some of these roles such as cluster-admin provide wide-ranging privileges which should only be applied where absolutely necessary. Roles such as cluster-admin allow super-user access to perform any action on any resource. When used in a ClusterRoleBinding, it gives full control over every resource in the cluster and in all namespaces. When used in a RoleBinding, it gives full control over every resource in the rolebinding's namespace, including the namespace itself.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": [
                                 "rolebinding"
                             ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SERVICE_ACCOUNT",
                     "masterSnapshotId": [
                         "K8S_TEMPLATE_SNAPSHOT"
@@ -470,19 +538,22 @@
                     "rule": "file(serviceAccount.rego)",
                     "evals": [
                         {
-                            "id":"PR-K8S-0035-DCL",
+                            "id": "PR-K8S-0035-DCL",
                             "eval": "data.rule.sa_token",
                             "message": "data.rule.sa_token_err",
-                            "remediationDescription":"Modify the definition of pods and service accounts which do not need to mount service account tokens to disable it.",
-                            "remediationFunction":"PR-K8S-0035-DCL.py"
+                            "remediationDescription": "Modify the definition of pods and service accounts which do not need to mount service account tokens to disable it.",
+                            "remediationFunction": "PR-K8S-0035-DCL.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": " Ensure that Service Account Tokens are only mounted where necessary (RBAC)",
                     "description": " Service accounts tokens should not be mounted in pods except where the workload running in the pod explicitly needs to communicate with the API server. Mounting service account tokens inside pods can provide an avenue for privilege escalation attacks where an attacker is able to compromise a single pod in the cluster. Avoiding mounting these tokens removes this attack avenue. ",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS"],
+                            "compliance": [
+                                "CIS"
+                            ],
                             "service": [
                                 "serviceaccount"
                             ]
