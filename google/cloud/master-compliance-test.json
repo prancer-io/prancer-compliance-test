@@ -10,11 +10,11 @@
                     "rule": "file(google_cluster_300.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0030",
+                            "id": "PR-GCP-0030",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "GCP Kubernetes Engine Cluster Nodes does not have default Service account for Project access",
@@ -42,11 +42,11 @@
                     "rule": "file(google_cluster_301.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0031",
+                            "id": "PR-GCP-0031",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -74,11 +74,11 @@
                     "rule": "file(google_cluster_302.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0032",
+                            "id": "PR-GCP-0032",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -109,11 +109,11 @@
                     "rule": "file(google_cluster_303.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0033",
+                            "id": "PR-GCP-0033",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -143,11 +143,11 @@
                     "rule": "file(google_cluster_304.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0034",
+                            "id": "PR-GCP-0034",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -173,11 +173,11 @@
                     "rule": "file(google_cluster_305.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0035",
+                            "id": "PR-GCP-0035",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -203,11 +203,11 @@
                     "rule": "file(google_cluster_306.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0036",
+                            "id": "PR-GCP-0036",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -237,11 +237,11 @@
                     "rule": "file(google_cluster_307.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0037",
+                            "id": "PR-GCP-0037",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -272,11 +272,11 @@
                     "rule": "file(google_cluster_308.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0038",
+                            "id": "PR-GCP-0038",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -307,11 +307,11 @@
                     "rule": "file(google_cluster_309.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0039",
+                            "id": "PR-GCP-0039",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -341,11 +341,11 @@
                     "rule": "file(google_cluster_310.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0040",
+                            "id": "PR-GCP-0040",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -376,11 +376,11 @@
                     "rule": "file(google_cluster_311.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0041",
+                            "id": "PR-GCP-0041",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -406,11 +406,11 @@
                     "rule": "file(google_cluster_312.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0042",
+                            "id": "PR-GCP-0042",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -436,11 +436,11 @@
                     "rule": "file(google_cluster_317.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0047",
+                            "id": "PR-GCP-0047",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -466,11 +466,11 @@
                     "rule": "file(google_cluster_318.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0048",
+                            "id": "PR-GCP-0048",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -497,11 +497,11 @@
                     "rule": "file(google_cluster_320.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0050",
+                            "id": "PR-GCP-0050",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -530,11 +530,11 @@
                     "rule": "file(google_cluster_321.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0051",
+                            "id": "PR-GCP-0051",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -564,11 +564,11 @@
                     "rule": "file(google_cluster_322.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0052",
+                            "id": "PR-GCP-0052",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -594,11 +594,11 @@
                     "rule": "file(google_cluster_323.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0053",
+                            "id": "PR-GCP-0053",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -624,11 +624,11 @@
                     "rule": "file(google_cluster_326.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0056",
+                            "id": "PR-GCP-0056",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -654,11 +654,11 @@
                     "rule": "file(google_firewall_269.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0002",
+                            "id": "PR-GCP-0002",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -677,9 +677,7 @@
                                 "PCI DSS"
                             ],
                             "service": [
-                                "Networking",
-                                "Virtual Private Cloud (VPC)",
-                                "firewalls"
+                                "Networking"
                             ]
                         }
                     ]
@@ -690,11 +688,11 @@
                     "rule": "file(google_firewall_276.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0006",
+                            "id": "PR-GCP-0006",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -714,9 +712,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "Networking",
-                                "Virtual Private Cloud (VPC)",
-                                "firewalls"
+                                "Networking"
                             ]
                         }
                     ]
@@ -727,11 +723,11 @@
                     "rule": "file(google_firewall_277.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0007",
+                            "id": "PR-GCP-0007",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -751,9 +747,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "Networking",
-                                "Virtual Private Cloud (VPC)",
-                                "firewalls"
+                                "Networking"
                             ]
                         }
                     ]
@@ -764,11 +758,11 @@
                     "rule": "file(google_firewall_281.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0011",
+                            "id": "PR-GCP-0011",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -788,9 +782,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "Networking",
-                                "Virtual Private Cloud (VPC)",
-                                "firewalls"
+                                "Networking"
                             ]
                         }
                     ]
@@ -801,11 +793,11 @@
                     "rule": "file(google_firewall_282.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0012",
+                            "id": "PR-GCP-0012",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -825,9 +817,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "Networking",
-                                "Virtual Private Cloud (VPC)",
-                                "firewalls"
+                                "Networking"
                             ]
                         }
                     ]
@@ -838,11 +828,11 @@
                     "rule": "file(google_firewall_283.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0013",
+                            "id": "PR-GCP-0013",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -862,9 +852,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "Networking",
-                                "Virtual Private Cloud (VPC)",
-                                "firewalls"
+                                "Networking"
                             ]
                         }
                     ]
@@ -875,11 +863,11 @@
                     "rule": "file(google_firewall_284.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0014",
+                            "id": "PR-GCP-0014",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -899,9 +887,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "Networking",
-                                "Virtual Private Cloud (VPC)",
-                                "firewalls"
+                                "Networking"
                             ]
                         }
                     ]
@@ -912,11 +898,11 @@
                     "rule": "file(google_firewall_285.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0015",
+                            "id": "PR-GCP-0015",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -936,9 +922,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "Networking",
-                                "Virtual Private Cloud (VPC)",
-                                "firewalls"
+                                "Networking"
                             ]
                         }
                     ]
@@ -949,11 +933,11 @@
                     "rule": "file(google_firewall_286.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0016",
+                            "id": "PR-GCP-0016",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -974,9 +958,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "Networking",
-                                "Virtual Private Cloud (VPC)",
-                                "firewalls"
+                                "Networking"
                             ]
                         }
                     ]
@@ -987,11 +969,11 @@
                     "rule": "file(google_firewall_287.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0017",
+                            "id": "PR-GCP-0017",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -1011,9 +993,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "Networking",
-                                "Virtual Private Cloud (VPC)",
-                                "firewalls"
+                                "Networking"
                             ]
                         }
                     ]
@@ -1024,11 +1004,11 @@
                     "rule": "file(google_firewall_288.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0018",
+                            "id": "PR-GCP-0018",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -1049,9 +1029,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "Networking",
-                                "Virtual Private Cloud (VPC)",
-                                "firewalls"
+                                "Networking"
                             ]
                         }
                     ]
@@ -1062,11 +1040,11 @@
                     "rule": "file(google_firewall_289.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0019",
+                            "id": "PR-GCP-0019",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -1086,9 +1064,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "Networking",
-                                "Virtual Private Cloud (VPC)",
-                                "firewalls"
+                                "Networking"
                             ]
                         }
                     ]
@@ -1099,11 +1075,11 @@
                     "rule": "file(google_firewall_290.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0020",
+                            "id": "PR-GCP-0020",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -1118,9 +1094,7 @@
                                 "CUSTOM"
                             ],
                             "service": [
-                                "Networking",
-                                "Virtual Private Cloud (VPC)",
-                                "firewalls"
+                                "Networking"
                             ]
                         }
                     ]
@@ -1131,11 +1105,11 @@
                     "rule": "file(google_firewall_291.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0021",
+                            "id": "PR-GCP-0021",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -1150,9 +1124,7 @@
                                 "ISO 27001"
                             ],
                             "service": [
-                                "Networking",
-                                "Virtual Private Cloud (VPC)",
-                                "firewalls"
+                                "Networking"
                             ]
                         }
                     ]
@@ -1163,11 +1135,11 @@
                     "rule": "file(google_network_346.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0076",
+                            "id": "PR-GCP-0076",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -1183,8 +1155,7 @@
                                 "ISO 27001"
                             ],
                             "service": [
-                                "Networking",
-                                "Virtual Private Cloud (VPC)"
+                                "Networking"
                             ]
                         }
                     ]
@@ -1195,11 +1166,11 @@
                     "rule": "file(google_network_347.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0077",
+                            "id": "PR-GCP-0077",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -1215,8 +1186,7 @@
                                 "ISO 27001"
                             ],
                             "service": [
-                                "Networking",
-                                "Virtual Private Cloud (VPC)"
+                                "Networking"
                             ]
                         }
                     ]
@@ -1227,11 +1197,11 @@
                     "rule": "file(google_instance_341.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0071",
+                            "id": "PR-GCP-0071",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -1258,11 +1228,11 @@
                     "rule": "file(google_instance_396.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0091",
+                            "id": "PR-GCP-0091",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -1288,11 +1258,11 @@
                     "rule": "file(google_instance_397.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0092",
+                            "id": "PR-GCP-0092",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -1320,11 +1290,11 @@
                     "rule": "file(google_instance_398.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0093",
+                            "id": "PR-GCP-0093",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -1352,11 +1322,11 @@
                     "rule": "file(google_instance_399.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0094",
+                            "id": "PR-GCP-0094",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -1384,11 +1354,11 @@
                     "rule": "file(google_firewall_278.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0008",
+                            "id": "PR-GCP-0008",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -1400,7 +1370,12 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS","SOC 2"
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "Compute"
@@ -1414,11 +1389,11 @@
                     "rule": "file(google_firewall_279.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0009",
+                            "id": "PR-GCP-0009",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -1430,7 +1405,12 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS","SOC 2"
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "Compute"
@@ -1444,11 +1424,11 @@
                     "rule": "file(google_firewall_280.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0010",
+                            "id": "PR-GCP-0010",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -1460,7 +1440,12 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS","SOC 2"
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS",
+                                "SOC 2"
                             ],
                             "service": [
                                 "Compute"
@@ -1474,11 +1459,11 @@
                     "rule": "file(google_iam_policy_296.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0026",
+                            "id": "PR-GCP-0026",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -1490,7 +1475,8 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CIS","ISO 27001"
+                                "CIS",
+                                "ISO 27001"
                             ],
                             "service": [
                                 "Compute"
@@ -1504,11 +1490,11 @@
                     "rule": "file(google_instance_340.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0070",
+                            "id": "PR-GCP-0070",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -1520,7 +1506,8 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CIS","ISO 27001"
+                                "CIS",
+                                "ISO 27001"
                             ],
                             "service": [
                                 "Compute"
@@ -1534,11 +1521,11 @@
                     "rule": "file(google_instance_342.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0072",
+                            "id": "PR-GCP-0072",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -1564,11 +1551,11 @@
                     "rule": "file(google_instance_344.rego)",
                     "evals": [
                         {
-                            "id":"PR-GCP-0074",
+                            "id": "PR-GCP-0074",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "masterSnapshotId": [
@@ -1580,7 +1567,8 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CIS","ISO 27001"
+                                "CIS",
+                                "ISO 27001"
                             ],
                             "service": [
                                 "Compute"
