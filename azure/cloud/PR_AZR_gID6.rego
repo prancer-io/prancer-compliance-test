@@ -12,11 +12,11 @@ default rulepass = true
 # https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.Network/networkSecurityGroups/hardikVM-nsg
 
 rulepass = false {
-    input.type == "Microsoft.Network/virtualNetworks"
+    lower(input.type) == "microsoft.network/virtualnetworks"
     count(public_security_rules_any) > 0
 }
 rulepass = false {
-    input.type == "Microsoft.Network/virtualNetworks"
+    lower(input.type) == "microsoft.network/virtualnetworks"
     count(public_security_rules_Internet) > 0
 }
 # Method for check rule
@@ -69,7 +69,7 @@ get_destination_PortRange_Any[security_rule] {
 }
 
 
-# "securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == '*' 
+# "securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == '*'
 # @.sourcePortRange == '1433, 1521, 3306, 5000, 5432, 5984, 6379, 6380, 8080, 9042, 11211, 27017, 28015, 29015, 50000')].destinationPortRange contains _Port.inRange(1433, 1521, 3306, 5000, 5432, 5984, 6379, 6380, 8080, 9042, 11211, 27017, 28015, 29015, 50000)
 public_security_rules_any["internet_on_DB_port_any_source"] {
     some security_rule
@@ -110,8 +110,8 @@ public_security_rules_any["internet_on_Any_port_any_destination"] {
     security_rule.properties.sourceAddressPrefix == "*"
 }
 
-# or securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix = 'Internet' 
-# @.sourcePortRange == '1433, 1521, 3306, 5000, 5432, 5984, 6379, 6380, 8080, 9042, 11211, 27017, 28015, 29015, 50000')]‌.destinationPortRange contains _Port.inRange(1433, 1521, 3306, 5000, 5432, 5984, 6379, 6380, 8080, 9042, 11211, 27017, 28015, 29015, 50000) 
+# or securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix = 'Internet'
+# @.sourcePortRange == '1433, 1521, 3306, 5000, 5432, 5984, 6379, 6380, 8080, 9042, 11211, 27017, 28015, 29015, 50000')]‌.destinationPortRange contains _Port.inRange(1433, 1521, 3306, 5000, 5432, 5984, 6379, 6380, 8080, 9042, 11211, 27017, 28015, 29015, 50000)
 public_security_rules_Internet["internet_on_PortRange_DB_port_Internet_source"] {
     some security_rule
     get_source_port[security_rule]

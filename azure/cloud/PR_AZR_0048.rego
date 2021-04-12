@@ -12,8 +12,8 @@ default rulepass = true
 # https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.Network/networkSecurityGroups/hardikVM-nsg
 
 rulepass = false {
-    input.type == "Microsoft.Network/networkSecurityGroups"
-   count(get_outbound) > 0
+    lower(input.type) == "microsoft.network/networksecuritygroups"
+    count(get_outbound) > 0
 }
 # "securityRules[?(@.sourceAddressPrefix=='*' &&  @.access=='Allow' && @.destinationAddressPrefix=='*')]
 # .direction contains Outbound"

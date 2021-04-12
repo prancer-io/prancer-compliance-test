@@ -11,20 +11,20 @@ default rulepass = true
 # https://docs.microsoft.com/en-us/rest/api/virtualnetwork/networksecuritygroups/get
 # https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.Network/networkSecurityGroups/hardikVM-nsg
 
-rulepass = false {   
-    input.type == "Microsoft.Network/networkSecurityGroups"                                   
-   count(public_security_rules) > 0
+rulepass = false {
+    lower(input.type) == "microsoft.network/networksecuritygroups"
+    count(public_security_rules) > 0
 }
-# "securityRules[?(@.sourceAddressPrefix=='*' && @.protocol=='*' && @.access=='Allow' 
+# "securityRules[?(@.sourceAddressPrefix=='*' && @.protocol=='*' && @.access=='Allow'
 # && @.sourcePortRange!='*')].direction contains Inbound"
 
-public_security_rules["source_port"] {                              
+public_security_rules["source_port"] {
     some security_rule
     get_security_rule[security_rule]
     security_rule.properties.sourcePortRange != "*"
 }
 
-public_security_rules["source_port_range"] {                              
+public_security_rules["source_port_range"] {
     some security_rule
     get_security_rule[security_rule]
     security_rule.properties.sourcePortRanges[_] != "*"

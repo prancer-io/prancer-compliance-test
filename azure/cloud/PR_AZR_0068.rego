@@ -12,20 +12,20 @@ default rulepass = false
 # https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.Compute/disks
 
 rulepass {
-   input.type == "Microsoft.Compute/disks"
-   count(disks) == 1
+    lower(input.type) == "microsoft.compute/disks"
+    count(disks) == 1
 }
 
-# 'osType exists and 
-# (encryptionSettings is exist or 
+# 'osType exists and
+# (encryptionSettings is exist or
 # encryptionSettings.enabled == true)'
 
 disks["osType exists"] {
-   input.properties.osType
-   input.properties.encryptionSettingsCollection.encryptionSettings
-   input.properties.encryptionSettingsCollection.enabled == true
+    input.properties.osType
+    input.properties.encryptionSettingsCollection.encryptionSettings
+    input.properties.encryptionSettingsCollection.enabled == true
 }
 
 disks["osType Not exists"] {
-   not input.properties.osType
+    not input.properties.osType
 }

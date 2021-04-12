@@ -10,23 +10,25 @@ default rulepass = true
 
 # API and Response Reference : https://cloud.google.com/compute/docs/reference/rest/v1/firewalls/list
 
-rulepass = false {                                      
-   count(allowport) > 0
+rulepass = false {
+    lower(input.type) == "compute.v1.firewall"
+    count(allowport) > 0
 }
+
 get_access[security_rule] {
-   security_rule := input
-   security_rule.disabled= false 
+    security_rule := input
+    security_rule.disabled= false
 }
 
 # (sourceRanges[*] contains 0.0.0.0/0 and allowed[*].ports[53] )
 allowport["ALLOW_PROT_SOURCERANGE_IN_INTERNET"] {
-   get_access[security_rule]
-   input.sourceRanges[_]="0.0.0.0/0"
-   input.allowed[_].ports[_]="53"
+    get_access[security_rule]
+    input.sourceRanges[_]="0.0.0.0/0"
+    input.allowed[_].ports[_]="53"
 }
 # (sourceRanges[*] contains 0.0.0.0/0 and allowed[*].IPProtocol[*])
 allowport["ALLOW_IPPROTOCOL_SOURCERANGE_IN_INTERNET"] {
-   get_access[security_rule]
-   input.sourceRanges[_]="0.0.0.0/0"
-   input.allowed[_].IPProtocol="all"
+    get_access[security_rule]
+    input.sourceRanges[_]="0.0.0.0/0"
+    input.allowed[_].IPProtocol="all"
 }

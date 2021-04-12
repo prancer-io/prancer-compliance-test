@@ -10,15 +10,16 @@ default rulepass = false
 
 # API Reference : https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters/get
 
-# Response will be Cluster Object: 
+# Response will be Cluster Object:
 # https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters#Cluster
 
-rulepass = true {                                      
-   count(monitoringService) == 1
+rulepass = true {
+    lower(input.type) == "container.v1.cluster"
+    count(monitoringService) == 1
 }
 
 # 'monitoringService exist and monitoringService is not equals none'
 monitoringService["monitoring_service"] {
-   input.monitoringService
-   input.monitoringService != "none"
+    input.monitoringService
+    input.monitoringService != "none"
 }

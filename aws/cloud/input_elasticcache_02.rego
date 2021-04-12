@@ -8,7 +8,8 @@ default rulepass = false
 
 # API: https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeGlobalReplicationGroups.html
 
-rulepass = true{
-  input.ReplicationGroups[_].AuthTokenEnabled=true
-  input.ReplicationGroups[_].TransitEncryptionEnabled=true
+rulepass = true {
+    lower(input.Type) == "aws::elasticache::replicationgroup"
+    input.ReplicationGroups[_].AuthTokenEnabled=true
+    input.ReplicationGroups[_].TransitEncryptionEnabled=true
 }

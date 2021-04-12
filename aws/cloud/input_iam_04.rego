@@ -8,7 +8,8 @@ default rulepass = false
 
 # API: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAttachedUserPolicies.html
 
-rulepass = true{
-	is_array(input.AttachedPolicies)=true
-	count(input.AttachedPolicies)>1
+rulepass = true {
+    lower(input.Type) == "aws::iam::policy"
+    is_array(input.AttachedPolicies)=true
+    count(input.AttachedPolicies)>1
 }

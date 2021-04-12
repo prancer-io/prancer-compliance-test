@@ -7,22 +7,23 @@ default rulepass = false
 
 # VM instances without metadata, zone or label information
 
-rulepass = true {                                      
-   count(scheduling) >= 1
+rulepass = true {
+    lower(input.type) == "compute.v1.instance"
+    count(scheduling) >= 1
 }
 
-# '$.labels equals null or 
+# '$.labels equals null or
 scheduling["labels"] {
-   not input.labels
+    not input.labels
 }
 
-# $.zone equals null or 
+# $.zone equals null or
 scheduling["zone"] {
-   input.zone
+    input.zone
 }
 
 # $.metadata equals null'
 scheduling["metadata"] {
-   not input.metadata
+    not input.metadata
 }
 

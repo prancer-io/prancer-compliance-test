@@ -9,7 +9,7 @@ default rulepass = true
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups
 
 rulepass = false {
-    input.type == "Microsoft.Network/networkSecurityGroups"
+    lower(input.type) == "microsoft.network/networksecuritygroups"
     count(nsg_allowed_inbound_port) > 0
 }
 
@@ -64,5 +64,5 @@ nsg_allowed_inbound_port["in_range_list"] {
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/2019-04-01/virtualnetworks
 
 rulepass {
-   input.properties.enableDdosProtection == true
+    input.properties.enableDdosProtection == true
 }

@@ -12,12 +12,12 @@ default rulepass = true
 # https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.Network/networkSecurityGroups/hardikVM-nsg
 
 rulepass = false {
-    input.type == "Microsoft.Network/networkSecurityGroups"
-   count(public_security_rules_any) > 0
+    lower(input.type) == "microsoft.network/networksecuritygroups"
+    count(public_security_rules_any) > 0
 }
 rulepass = false {
-    input.type == "Microsoft.Network/networkSecurityGroups"
-   count(public_security_rules_Internet) > 0
+    lower(input.type) == "microsoft.network/networksecuritygroups"
+    count(public_security_rules_Internet) > 0
 }
 # Method for check rule
 get_access[security_rule] {
@@ -59,7 +59,7 @@ get_destination_PortRange_Any[security_rule] {
 }
 
 
-# "securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == '*' && @.protocol = 'TCP' 
+# "securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == '*' && @.protocol = 'TCP'
 # @.sourcePortRange == '21')].destinationPortRange contains _Port.inRange(21)
 public_security_rules_any["internet_on_PortRange_21_any_source"] {
     some security_rule
@@ -81,13 +81,13 @@ public_security_rules_any["internet_on_PortRanges_21_any_source"] {
     some security_rule
     get_source_PortRanges[security_rule]
     security_rule.properties.sourceAddressPrefix = "*"
-    security_rule.properties.protocol = "TCP"  
+    security_rule.properties.protocol = "TCP"
 }
 public_security_rules_any["internet_on_PortRanges_21_any_source"] {
     some security_rule
     get_destination_PortRanges[security_rule]
     security_rule.properties.sourceAddressPrefix = "*"
-    security_rule.properties.protocol = "TCP"  
+    security_rule.properties.protocol = "TCP"
 }
 
 # or "securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == '*' && @.protocol = 'TCP'
@@ -105,8 +105,8 @@ public_security_rules_any["internet_on_Any_PortRange_any_source"] {
     security_rule.properties.protocol = "TCP"
 }
 
-# or securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == 'Internet' && @.protocol = 'TCP' 
-# @.sourcePortRange == '21')]‌.destinationPortRange contains _Port.inRange(21) 
+# or securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == 'Internet' && @.protocol = 'TCP'
+# @.sourcePortRange == '21')]‌.destinationPortRange contains _Port.inRange(21)
 public_security_rules_Internet["internet_on_PortRange_21_Internet_source"] {
     some security_rule
     get_source_port[security_rule]

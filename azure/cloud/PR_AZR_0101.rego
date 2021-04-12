@@ -1,7 +1,11 @@
+#
+# PR-AZR-0101
+#
+
 package rule
 
 sql_database_issue["invalid_sql_minimal_tls_version"] {
-    input.type == "Microsoft.Sql/servers"
+    lower(input.type) == "microsoft.sql/servers"
     input.properties.minimalTlsVersion != "1.2"
 }
 
@@ -21,7 +25,7 @@ sql_server_rulepass_err = "Azure SQL Server has configured TLS version lower the
 
 
 sql_database_issue["invalid_sql_instance_tls_version"] {
-    input.type == "Microsoft.Sql/managedInstances"
+    lower(input.type) == "microsoft.sql/managedinstances"
     input.properties.minimalTlsVersion != "1.2"
 }
 

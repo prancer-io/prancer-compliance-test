@@ -8,6 +8,7 @@ default rulepass = false
 
 # API Reference : https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistributionConfig.html
 
-rulepass = true{
-   input.Distribution.DistributionConfig.Origins.Items[_].S3OriginConfig.OriginAccessIdentity!=""
+rulepass = true {
+    lower(input.Type) == "aws::cloudfront::distribution"
+    input.Distribution.DistributionConfig.Origins.Items[_].S3OriginConfig.OriginAccessIdentity!=""
 }

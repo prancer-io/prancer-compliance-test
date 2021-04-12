@@ -10,14 +10,15 @@ default rulepass = false
 
 # API Reference : https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters/get
 
-# Response will be Cluster Object: 
+# Response will be Cluster Object:
 # https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters#Cluster
 
-rulepass = true {                                      
-   count(legacyAuthorization) == 0
+rulepass = true {
+    lower(input.type) == "container.v1.cluster"
+    count(legacyAuthorization) == 0
 }
 
 # 'legacyAbac.enabled equals true'
 legacyAuthorization["legacy_authorization"] {
-   input.legacyAbac.enabled = true
+    input.legacyAbac.enabled = true
 }

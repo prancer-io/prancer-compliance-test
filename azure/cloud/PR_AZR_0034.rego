@@ -12,8 +12,8 @@ default rulepass = true
 # https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.Network/networkSecurityGroups/hardikVM-nsg
 
 rulepass = false {
-    input.type == "Microsoft.Network/networkSecurityGroups"
-   count(public_security_rules_icmp) > 0
+    lower(input.type) == "microsoft.network/networksecuritygroups"
+    count(public_security_rules_icmp) > 0
 }
 # Method for check rule
 get_porotocol_sourcePortRange[security_rule] {
@@ -30,20 +30,20 @@ get_porotocol_destinationPortRange[security_rule] {
     security_rule.properties.destinationPortRange = "*"
     security_rule.properties.protocol = "ICMP"
 }
-# or "securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == '*' && 
+# or "securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == '*' &&
 # @.protocol == 'ICMP'&& @.sourcePortRanges[*] == '*')].destinationPortRanges[*] contains _Port.inRange(*)
 public_security_rules_icmp["internet_on_icmp_protocol_any_source"] {
     some security_rule
-    get_porotocol_sourcePortRange[security_rule] 
-    get_porotocol_destinationPortRange[security_rule] 
+    get_porotocol_sourcePortRange[security_rule]
+    get_porotocol_destinationPortRange[security_rule]
     security_rule.properties.sourceAddressPrefix = "*"
 }
 
-# or "securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == 'Internet' && 
+# or "securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == 'Internet' &&
 # @.protocol == 'ICMP' && @.sourcePortRanges[*] == '*')].destinationPortRanges[*] contains _Port.inRange(*)
 public_security_rules_icmp["internet_on_Any_PortRange_Internet_source"] {
     some security_rule
-    get_porotocol_sourcePortRange[security_rule] 
-    get_porotocol_destinationPortRange[security_rule] 
+    get_porotocol_sourcePortRange[security_rule]
+    get_porotocol_destinationPortRange[security_rule]
     security_rule.properties.sourceAddressPrefix = "Internet"
 }

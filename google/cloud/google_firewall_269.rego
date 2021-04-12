@@ -10,26 +10,27 @@ default rulepass = false
 
 # API and Response Reference : https://cloud.google.com/compute/docs/reference/rest/v1/firewalls/list
 
-rulepass = true {                                      
-   count(firewallRuleName) == 0
+rulepass = true {
+    lower(input.type) == "compute.v1.firewall"
+    count(firewallRuleName) == 0
 }
 
 firewallRuleName[input.id] {
-   input.name == "default-allow-ssh"
-   input.sourceRanges[_]="0.0.0.0/0"
+    input.name == "default-allow-ssh"
+    input.sourceRanges[_]="0.0.0.0/0"
 }
 
 firewallRuleName[input.id] {
-   input.name == "default-allow-icmp"
-   input.sourceRanges[_]="0.0.0.0/0"
+    input.name == "default-allow-icmp"
+    input.sourceRanges[_]="0.0.0.0/0"
 }
 
 firewallRuleName[input.id] {
-   input.name == "default-allow-internal"
-   input.sourceRanges[_]="0.0.0.0/0"
+    input.name == "default-allow-internal"
+    input.sourceRanges[_]="0.0.0.0/0"
 }
 
 firewallRuleName[input.id] {
-   input.name == "default-allow-rdp"
-   input.sourceRanges[_]="0.0.0.0/0"
+    input.name == "default-allow-rdp"
+    input.sourceRanges[_]="0.0.0.0/0"
 }

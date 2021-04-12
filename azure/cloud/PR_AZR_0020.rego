@@ -12,11 +12,11 @@ default rulepass = true
 # https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.Network/networkSecurityGroups/hardikVM-nsg
 
 rulepass = false {
-    input.type == "Microsoft.Network/networkSecurityGroups"
+    lower(input.type) == "microsoft.network/networksecuritygroups"
     count(public_security_rules_any) > 0
 }
 rulepass = false {
-    input.type == "Microsoft.Network/networkSecurityGroups"
+    lower(input.type) == "microsoft.network/networksecuritygroups"
     count(public_security_rules_Internet) > 0
 }
 # Method for check rule
@@ -59,7 +59,7 @@ get_destination_PortRange_Any[security_rule] {
 }
 
 
-# "securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == '*' 
+# "securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix == '*'
 # @.sourcePortRange == '22')].destinationPortRange contains _Port.inRange(22)
 public_security_rules_any["internet_on_PortRange_22_any_source"] {
     some security_rule
@@ -99,8 +99,8 @@ public_security_rules_any["internet_on_Any_PortRange_any_source"] {
     security_rule.properties.sourceAddressPrefix == "*"
 }
 
-# or securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix = 'Internet' 
-# @.sourcePortRange == '22')]‌.destinationPortRange contains _Port.inRange(22) 
+# or securityRules[?(@.access == 'Allow' && @.direction == 'Inbound' && @.sourceAddressPrefix = 'Internet'
+# @.sourcePortRange == '22')]‌.destinationPortRange contains _Port.inRange(22)
 public_security_rules_Internet["internet_on_PortRange_22_Internet_source"] {
     some security_rule
     get_source_port[security_rule]

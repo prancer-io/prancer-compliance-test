@@ -9,8 +9,9 @@ default rulepass = false
 # API: https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html
 
 rulepass {
-   input.Configuration.VpcConfig
-   input.Configuration.VpcConfig.VpcId
+    lower(input.Type) == "aws::lambda::function"
+    input.Configuration.VpcConfig
+    input.Configuration.VpcConfig.VpcId
 }
 
 #If the VPC network is configured with LAMBDA then test will pass

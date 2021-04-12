@@ -12,11 +12,11 @@ default rulepass = true
 # https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.Network/networkSecurityGroups/hardikVM-nsg
 
 rulepass = false {
-    input.type == "Microsoft.Network/networkSecurityGroups"
-   count(public_security_rules) > 0
+    lower(input.type) == "microsoft.network/networksecuritygroups"
+    count(public_security_rules) > 0
 }
 
-# securityRules[?(@.sourceAddressPrefix=='*' && @.destinationPortRange=="*" && @.sourcePortRange==* 
+# securityRules[?(@.sourceAddressPrefix=='*' && @.destinationPortRange=="*" && @.sourcePortRange==*
 # &&  @.access=='Allow' &&  @.destinationAddressPrefix=='*')].direction contains Inbound"
 
 get_security_rule[security_rule] {
@@ -27,12 +27,12 @@ get_security_rule[security_rule] {
     security_rule.properties.direction = "Inbound"
 }
 
-public_security_rules["source_port"] {                              
+public_security_rules["source_port"] {
     some security_rule
     get_security_rule[security_rule]
     security_rule.properties.sourcePortRange = "*"
 }
-public_security_rules["destination_port"] {                              
+public_security_rules["destination_port"] {
     some security_rule
     get_security_rule[security_rule]
     security_rule.properties.destinationPortRange = "*"

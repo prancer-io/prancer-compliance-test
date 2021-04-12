@@ -9,9 +9,11 @@ default rulepass = true
 # API: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketWebsite.html
 
 rulepass = false {
-   input.Website
+    lower(input.Type) == "aws::s3::bucket"
+    input.Website
 }
 
 rulepass == false {
-   input.WebsiteConfiguration
+    lower(input.Type) == "aws::s3::bucket"
+    input.WebsiteConfiguration
 }
