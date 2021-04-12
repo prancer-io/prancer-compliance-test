@@ -33,6 +33,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_219"
                     ],
+                    "severity": "Medium",
                     "title": "Azure AKS cluster HTTP application routing enabled",
                     "description": "HTTP application routing configures an Ingress controller in your AKS cluster. As applications are deployed, the solution also creates publicly accessible DNS names for application endpoints. While this makes it easy to access applications that are deployed to your Azure AKS cluster, this add-on is not recommended for production use.This policy checks your AKS cluster HTTP application routing add-on setting and alerts if enabled."
                 },
@@ -65,6 +66,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_219"
                     ],
+                    "severity": "Medium",
                     "title": "Azure AKS cluster monitoring enabled",
                     "description": "Azure Monitor for containers is a feature designed to monitor the performance of container workloads deployed to either Azure Container Instances or managed Kubernetes clusters hosted on Azure Kubernetes Service (AKS). Monitoring your containers is critical, especially when you're running a production cluster, at scale, with multiple applications.This policy checks your AKS cluster monitoring add-on setting and alerts if no configuration is found, or monitoring is disabled."
                 },
@@ -97,6 +99,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_219"
                     ],
+                    "severity": "Medium",
                     "title": "Azure AKS cluster pool profile count contains 3 more then nodes",
                     "description": "Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes."
                 },
@@ -129,6 +132,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_219"
                     ],
+                    "severity": "Medium",
                     "title": "Azure AKS enable role-based access control (RBAC) enforced",
                     "description": "To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster."
                 },
@@ -161,6 +165,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_224"
                     ],
+                    "severity": "Medium",
                     "title": "Azure Container Registry using the deprecated not classic registry",
                     "description": "This policy identifies an Azure Container Registry (ACR) that is using the classic SKU. The initial release of the Azure Container Registry (ACR) service that was offered as a classic SKU is being deprecated and will be unavailable after April 2019. As a best practice, upgrade your existing classic registry to a managed registry."
                 },
@@ -193,6 +198,7 @@
                             ]
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group (NSG) allows SSH traffic from internet on port 22",
                     "description": "Blocking SSH port 22 will protect users from attacks like Account compromise.",
                     "masterSnapshotId": [
@@ -228,6 +234,7 @@
                             ]
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group (NSG) allows traffic from internet on port 3389",
                     "description": "Blocking RDP port 3389 will protect users from attacks like account compromise, Denial of service and ransomware.",
                     "masterSnapshotId": [
@@ -240,11 +247,11 @@
                     "rule": "file(PR_AZR_0022.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0022",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0022",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0022.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0022.py"
                         }
                     ],
                     "tags": [
@@ -259,6 +266,7 @@
                             ]
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group (NSG) dose not having Inbound rule overly permissive to all TCP traffic from any source",
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to open TCP traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
                     "masterSnapshotId": [
@@ -271,11 +279,11 @@
                     "rule": "file(PR_AZR_0023.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0023",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0023",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0023.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0023.py"
                         }
                     ],
                     "tags": [
@@ -290,6 +298,7 @@
                             ]
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group (NSG) dose not having Inbound rule overly permissive to all UDP traffic from any source",
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to open UDP traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
                     "masterSnapshotId": [
@@ -302,11 +311,11 @@
                     "rule": "file(PR_AZR_0024.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0024",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0024",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0024.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0024.py"
                         }
                     ],
                     "tags": [
@@ -321,6 +330,7 @@
                             ]
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group (NSG) dose not having Inbound rule overly permissive to all traffic from Internet on TCP protocol",
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on TCP protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
                     "masterSnapshotId": [
@@ -333,11 +343,11 @@
                     "rule": "file(PR_AZR_0025.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0025",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0025",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0025.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0025.py"
                         }
                     ],
                     "tags": [
@@ -352,6 +362,7 @@
                             ]
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group (NSG) dose not having Inbound rule overly permissive to all traffic from Internet on UDP protocol",
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on UDP protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
                     "masterSnapshotId": [
@@ -364,11 +375,11 @@
                     "rule": "file(PR_AZR_0026.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0026",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0026",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0026.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0026.py"
                         }
                     ],
                     "tags": [
@@ -383,6 +394,7 @@
                             ]
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group (NSG) dose not having Inbound rule overly permissive to all traffic from Internet on any protocol",
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on any protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
                     "masterSnapshotId": [
@@ -395,11 +407,11 @@
                     "rule": "file(PR_AZR_0027.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0027",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0027",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0027.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0027.py"
                         }
                     ],
                     "tags": [
@@ -414,9 +426,12 @@
                             ]
                         }
                     ],
-                    "title" : "Azure Network Security Group (NSG) dose not having Inbound rule overly permissive to allow all traffic from any source on any protocol",
-                    "description" : "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group (NSG) dose not having Inbound rule overly permissive to allow all traffic from any source on any protocol",
+                    "description": "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_237",
@@ -424,11 +439,11 @@
                     "rule": "file(PR_AZR_0028.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0028",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0028",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0028.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0028.py"
                         }
                     ],
                     "tags": [
@@ -443,9 +458,12 @@
                             ]
                         }
                     ],
-                    "title" : "Azure Network Security Group (NSG) dose not having Inbound rule overly permissive to allow all traffic from any source on any destiation",
-                    "description" : "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group (NSG) dose not having Inbound rule overly permissive to allow all traffic from any source on any destiation",
+                    "description": "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_238",
@@ -453,11 +471,11 @@
                     "rule": "file(PR_AZR_0029.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0029",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0029",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (445 PORT). \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0029.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (445 PORT). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0029.py"
                         }
                     ],
                     "tags": [
@@ -472,9 +490,12 @@
                             ]
                         }
                     ],
-                    "title" : "Azure Network Security Group allows CIFS (UDP Port 445)",
-                    "description" : "This policy detects any NSG rule that allows CIFS traffic on UDP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict CIFS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group allows CIFS (UDP Port 445)",
+                    "description": "This policy detects any NSG rule that allows CIFS traffic on UDP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict CIFS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_239",
@@ -482,11 +503,11 @@
                     "rule": "file(PR_AZR_0030.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0030",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0030",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row ( TCP PORT 53). \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0030.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row ( TCP PORT 53). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0030.py"
                         }
                     ],
                     "tags": [
@@ -501,9 +522,12 @@
                             ]
                         }
                     ],
-                    "title" : "Azure Network Security Group allows DNS (TCP Port 53)",
-                    "description" : "This policy detects any NSG rule that allows DNS traffic on TCP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group allows DNS (TCP Port 53)",
+                    "description": "This policy detects any NSG rule that allows DNS traffic on TCP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_240",
@@ -511,11 +535,11 @@
                     "rule": "file(PR_AZR_0031.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0031",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0031",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row ( UDP Port 53 ). \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0031.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row ( UDP Port 53 ). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0031.py"
                         }
                     ],
                     "tags": [
@@ -530,9 +554,12 @@
                             ]
                         }
                     ],
-                    "title" : "Azure Network Security Group allows DNS (UDP Port 53)",
-                    "description" : "This policy detects any NSG rule that allows DNS traffic on UDP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group allows DNS (UDP Port 53)",
+                    "description": "This policy detects any NSG rule that allows DNS traffic on UDP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_241",
@@ -540,11 +567,11 @@
                     "rule": "file(PR_AZR_0032.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0032",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0032",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (21 PORT). \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0032.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (21 PORT). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0032.py"
                         }
                     ],
                     "tags": [
@@ -559,9 +586,12 @@
                             ]
                         }
                     ],
-                    "title" : "Azure Network Security Group allows FTP (TCP Port 21)",
-                    "description" : "This policy detects any NSG rule that allows FTP traffic on TCP port 21 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict FTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group allows FTP (TCP Port 21)",
+                    "description": "This policy detects any NSG rule that allows FTP traffic on TCP port 21 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict FTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_242",
@@ -569,11 +599,11 @@
                     "rule": "file(PR_AZR_0033.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0033",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0033",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (PORT 20). \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0033.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (PORT 20). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0033.py"
                         }
                     ],
                     "tags": [
@@ -588,9 +618,12 @@
                             ]
                         }
                     ],
-                    "title" : "Azure Network Security Group allows FTP-Data (TCP Port 20)",
-                    "description" : "This policy detects any NSG rule that allows FTP-Data traffic on TCP port 20 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict FTP-Data solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group allows FTP-Data (TCP Port 20)",
+                    "description": "This policy detects any NSG rule that allows FTP-Data traffic on TCP port 20 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict FTP-Data solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_243",
@@ -598,11 +631,11 @@
                     "rule": "file(PR_AZR_0034.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0034",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0034",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0034.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0034.py"
                         }
                     ],
                     "tags": [
@@ -617,9 +650,12 @@
                             ]
                         }
                     ],
-                    "title" : "Azure Network Security Group allows ICMP (Ping)",
-                    "description" : "ICMP is used by devices to communicate error messages and status. While ICMP is useful for  diagnostics and troubleshooting, it can also be used to exploit or disrupt systems.This policy detects any NSG rule that allows ICMP (Ping) traffic from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict ICMP (Ping) solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group allows ICMP (Ping)",
+                    "description": "ICMP is used by devices to communicate error messages and status. While ICMP is useful for  diagnostics and troubleshooting, it can also be used to exploit or disrupt systems.This policy detects any NSG rule that allows ICMP (Ping) traffic from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict ICMP (Ping) solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_244",
@@ -627,11 +663,11 @@
                     "rule": "file(PR_AZR_0035.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0035",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0035",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (PORT 4333). \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0035.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (PORT 4333). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0035.py"
                         }
                     ],
                     "tags": [
@@ -646,9 +682,12 @@
                             ]
                         }
                     ],
-                    "title" : "Azure Network Security Group allows MSQL (TCP Port 4333)",
-                    "description" : "This policy detects any NSG rule that allows MSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group allows MSQL (TCP Port 4333)",
+                    "description": "This policy detects any NSG rule that allows MSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_245",
@@ -656,11 +695,11 @@
                     "rule": "file(PR_AZR_0036.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0036",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0036",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row ( PORT 3306). \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0036.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row ( PORT 3306). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0036.py"
                         }
                     ],
                     "tags": [
@@ -675,9 +714,12 @@
                             ]
                         }
                     ],
-                    "title" : "Azure Network Security Group allows MySQL (TCP Port 3306)",
-                    "description" : "This policy detects any NSG rule that allows MySQL traffic on TCP port 3306 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict MySQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group allows MySQL (TCP Port 3306)",
+                    "description": "This policy detects any NSG rule that allows MySQL traffic on TCP port 3306 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict MySQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_246",
@@ -685,11 +727,11 @@
                     "rule": "file(PR_AZR_0037.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0037",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0037",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row ( PORT 137). \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0037.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row ( PORT 137). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0037.py"
                         }
                     ],
                     "tags": [
@@ -704,9 +746,12 @@
                             ]
                         }
                     ],
-                    "title" : "Azure Network Security Group allows NetBIOS (UDP Port 137)",
-                    "description" : "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group allows NetBIOS (UDP Port 137)",
+                    "description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_247",
@@ -714,11 +759,11 @@
                     "rule": "file(PR_AZR_0038.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0038",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0038",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 138). \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0038.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 138). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0038.py"
                         }
                     ],
                     "tags": [
@@ -733,9 +778,12 @@
                             ]
                         }
                     ],
-                    "title" : "Azure Network Security Group allows NetBIOS (UDP Port 138)",
-                    "description" : "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group allows NetBIOS (UDP Port 138)",
+                    "description": "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_248",
@@ -743,11 +791,11 @@
                     "rule": "file(PR_AZR_0039.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0039",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0039",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 5432). \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0039.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 5432). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0039.py"
                         }
                     ],
                     "tags": [
@@ -762,9 +810,12 @@
                             ]
                         }
                     ],
-                    "title" : "Azure Network Security Group allows PostgreSQL (TCP Port 5432)",
-                    "description" : "This policy detects any NSG rule that allows PostgreSQL traffic on TCP port 5432 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict PostgreSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group allows PostgreSQL (TCP Port 5432)",
+                    "description": "This policy detects any NSG rule that allows PostgreSQL traffic on TCP port 5432 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict PostgreSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_249",
@@ -772,11 +823,11 @@
                     "rule": "file(azure_network_security_249.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0040",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0040",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 25). \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0040.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 25). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0040.py"
                         }
                     ],
                     "tags": [
@@ -791,9 +842,12 @@
                             ]
                         }
                     ],
-                    "title" : "next generation firewall is set to OFF in Security Center",
-                    "description" : "This policy detects any NSG rule that allows SMTP traffic on TCP port 25 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict SMTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "next generation firewall is set to OFF in Security Center",
+                    "description": "This policy detects any NSG rule that allows SMTP traffic on TCP port 25 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict SMTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_250",
@@ -801,11 +855,11 @@
                     "rule": "file(PR_AZR_0041.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0041",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0041",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 1434). \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0041.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 1434). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0041.py"
                         }
                     ],
                     "tags": [
@@ -820,9 +874,12 @@
                             ]
                         }
                     ],
-                    "title" : "Azure Network Security Group allows SQLServer (UDP Port 1434)",
-                    "description" : "This policy detects any NSG rule that allows SQLServer traffic on UDP port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group allows SQLServer (UDP Port 1434)",
+                    "description": "This policy detects any NSG rule that allows SQLServer traffic on UDP port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_251",
@@ -830,11 +887,11 @@
                     "rule": "file(PR_AZR_0042.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0042",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0042",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 1433). \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0042.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 1433). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0042.py"
                         }
                     ],
                     "tags": [
@@ -849,9 +906,12 @@
                             ]
                         }
                     ],
-                    "title" : "Azure Network Security Group allows SqlServer (TCP Port 1433)",
-                    "description" : "This policy detects any NSG rule that allows SqlServer traffic on TCP port 1433 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict SqlServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group allows SqlServer (TCP Port 1433)",
+                    "description": "This policy detects any NSG rule that allows SqlServer traffic on TCP port 1433 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict SqlServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_252",
@@ -859,11 +919,11 @@
                     "rule": "file(PR_AZR_0043.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0043",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0043",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 4333). \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0043.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 4333). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0043.py"
                         }
                     ],
                     "tags": [
@@ -876,12 +936,14 @@
                                 "Microsoft.Network",
                                 "Networking"
                             ]
-                            
                         }
                     ],
-                    "title" : "Azure Network Security Group allows MSQL (TCP Port 4333)",
-                    "description" : "Telnet provides a plaintext connection to manage devices using the command line, and is less secure than SSH.This policy detects any NSG rule that allows Telnet traffic on TCP port 23 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict Telnet solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group allows MSQL (TCP Port 4333)",
+                    "description": "Telnet provides a plaintext connection to manage devices using the command line, and is less secure than SSH.This policy detects any NSG rule that allows Telnet traffic on TCP port 23 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict Telnet solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_253",
@@ -889,11 +951,11 @@
                     "rule": "file(PR_AZR_0044.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0044",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0044",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 5500). \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0044.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 5500). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0044.py"
                         }
                     ],
                     "tags": [
@@ -908,9 +970,12 @@
                             ]
                         }
                     ],
-                    "title" : "Azure Network Security Group allows VNC Listener (TCP Port 5500)",
-                    "description" : "This policy detects any NSG rule that allows VNC Listener traffic on TCP port 5500 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict VNC Listener solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group allows VNC Listener (TCP Port 5500)",
+                    "description": "This policy detects any NSG rule that allows VNC Listener traffic on TCP port 5500 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict VNC Listener solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_254",
@@ -918,11 +983,11 @@
                     "rule": "file(PR_AZR_0045.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0045",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0045",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 5900). \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0045.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 5900). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0045.py"
                         }
                     ],
                     "tags": [
@@ -937,9 +1002,12 @@
                             ]
                         }
                     ],
-                    "title" : "Azure Network Security Group allows VNC Server (TCP Port 5900)",
-                    "description" : "This policy detects any NSG rule that allows VNC Server traffic on TCP port 5900 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict VNC Server solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group allows VNC Server (TCP Port 5900)",
+                    "description": "This policy detects any NSG rule that allows VNC Server traffic on TCP port 5900 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict VNC Server solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_255",
@@ -947,11 +1015,11 @@
                     "rule": "file(PR_AZR_0046.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0046",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0046",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 135). \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0046.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 135). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0046.py"
                         }
                     ],
                     "tags": [
@@ -966,9 +1034,12 @@
                             ]
                         }
                     ],
-                    "title" : "Azure Network Security Group allows Windows RPC (TCP Port 135)",
-                    "description" : "This policy detects any NSG rule that allows Windows RPC traffic on TCP port 135 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict Windows RPC solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group allows Windows RPC (TCP Port 135)",
+                    "description": "This policy detects any NSG rule that allows Windows RPC traffic on TCP port 135 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict Windows RPC solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_256",
@@ -976,11 +1047,11 @@
                     "rule": "file(PR_AZR_0047.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0047",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0047",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 445). \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0047.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 445). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0047.py"
                         }
                     ],
                     "tags": [
@@ -995,9 +1066,12 @@
                             ]
                         }
                     ],
-                    "title" : "Azure Network Security Group allows Windows SMB (TCP Port 445)",
-                    "description" : "This policy detects any NSG rule that allows Windows SMB traffic on TCP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict Windows SMB solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group allows Windows SMB (TCP Port 445)",
+                    "description": "This policy detects any NSG rule that allows Windows SMB traffic on TCP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.As a best practice, restrict Windows SMB solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_257",
@@ -1005,11 +1079,11 @@
                     "rule": "file(PR_AZR_0048.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0048",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0048",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
-                            "remediationFunction":"PR_AZR_0048.py"
+                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationFunction": "PR_AZR_0048.py"
                         }
                     ],
                     "tags": [
@@ -1024,9 +1098,12 @@
                             ]
                         }
                     ],
-                    "title" : "Azure Network Security Group with Outbound rule to allow all traffic to any source",
-                    "description" : "This policy identifies NSGs which allows outgoing traffic to any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic to known sources on authorized protocols and ports.",
-                    "masterSnapshotId" : ["AZRSNP_231"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group with Outbound rule to allow all traffic to any source",
+                    "description": "This policy identifies NSGs which allows outgoing traffic to any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic to known sources on authorized protocols and ports.",
+                    "masterSnapshotId": [
+                        "AZRSNP_231"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_284",
@@ -1034,11 +1111,11 @@
                     "rule": "file(PR_AZR_0075.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0075",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0075",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0075.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0075.py"
                         }
                     ],
                     "tags": [
@@ -1053,6 +1130,7 @@
                             ]
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure virtual network peer is disconnected",
                     "description": "Virtual network peering enables you to connect two Azure virtual networks so that the resources in these networks are directly connected.This policy identifies Azure virtual network peers that are disconnected. Typically, the disconnection happens when a peering configuration is deleted on one virtual network, and the other virtual network reports the peering status as disconnected.",
                     "masterSnapshotId": [
@@ -1065,11 +1143,11 @@
                     "rule": "file(PR_AZR_gID6.rego)",
                     "evals": [
                         {
-                            "id":"gID6",
-                            "eval":"data.rule.rulepass",
+                            "id": "gID6",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_gID6.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_gID6.py"
                         }
                     ],
                     "tags": [
@@ -1084,6 +1162,7 @@
                             ]
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Publicly exposed DB Ports",
                     "description": "DB Servers contain sensitive data and should not be exposed to any direct traffic from internet. This policy checks for the network traffic from internet hitting the DB Servers on their default ports. The DB servers default ports are : Microsoft SQL Server (1433), Oracle (1521), MySQL (3306), Sybase (5000), Postgresql (5432), CouchDB (5984), Redis (6379, 6380), RethinkDB (8080,28015, 29015), CassandraDB (9042), Memcached (11211), MongoDB (27017), DB2 (50000).",
                     "masterSnapshotId": [
@@ -1096,20 +1175,20 @@
                     "rule": "file(PR_AZR_0002.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0002",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0002",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0002.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0002.py"
                         }
                     ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS", 
-                                "CSA CCM", 
-                                "ISO 27001", 
+                                "CIS",
+                                "CSA CCM",
+                                "ISO 27001",
                                 "NIST 800"
                             ],
                             "service": [
@@ -1118,9 +1197,12 @@
                             ]
                         }
                     ],
-                    "title" : "Adaptive Application Controls is set to OFF in Security Center",
-                    "description" : "Turning on Adaptive Application Controls will make sure that only certain applications can run on your VMs in Microsoft Azure. This will prevent any malicious, unwanted, or unsupported software on the VMs.",
-                    "masterSnapshotId" : ["AZRSNP_211"]
+                    "severity": "Medium",
+                    "title": "Adaptive Application Controls is set to OFF in Security Center",
+                    "description": "Turning on Adaptive Application Controls will make sure that only certain applications can run on your VMs in Microsoft Azure. This will prevent any malicious, unwanted, or unsupported software on the VMs.",
+                    "masterSnapshotId": [
+                        "AZRSNP_211"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_258",
@@ -1128,20 +1210,20 @@
                     "rule": "file(PR_AZR_0049.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0049",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0049",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0049.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0049.py"
                         }
                     ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CIS", 
-                                "CSA CCM", 
-                                "ISO 27001", 
+                                "CIS",
+                                "CSA CCM",
+                                "ISO 27001",
                                 "NIST 800",
                                 "PCI DSS"
                             ],
@@ -1151,9 +1233,12 @@
                             ]
                         }
                     ],
-                    "title" : "Azure Network Security Groups (NSG) is set to OFF in Security Center",
-                    "description" : "Turning on Network Security Groups will identify the Network Security Groups which are not enabled. Network Security Groups are designed to control inbound and outbound traffic to VMs that have open endpoints.",
-                    "masterSnapshotId" : ["AZRSNP_211"]
+                    "severity": "Medium",
+                    "title": "Azure Network Security Groups (NSG) is set to OFF in Security Center",
+                    "description": "Turning on Network Security Groups will identify the Network Security Groups which are not enabled. Network Security Groups are designed to control inbound and outbound traffic to VMs that have open endpoints.",
+                    "masterSnapshotId": [
+                        "AZRSNP_211"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_285",
@@ -1161,11 +1246,11 @@
                     "rule": "file(PR_AZR_0076.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0076",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0076",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0076.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0076.py"
                         }
                     ],
                     "tags": [
@@ -1177,7 +1262,7 @@
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS" 
+                                "PCI DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -1185,9 +1270,12 @@
                             ]
                         }
                     ],
-                    "title" : "Disk encryption is set to OFF in Security Center",
-                    "description" : "Turning on Disk encryption for virtual machines will secure the data by encrypting it.",
-                    "masterSnapshotId" : ["AZRSNP_211"]
+                    "severity": "Medium",
+                    "title": "Disk encryption is set to OFF in Security Center",
+                    "description": "Turning on Disk encryption for virtual machines will secure the data by encrypting it.",
+                    "masterSnapshotId": [
+                        "AZRSNP_211"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_286",
@@ -1195,11 +1283,11 @@
                     "rule": "file(azure_pollicy_assignments_286.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0077",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0077",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0077.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0077.py"
                         }
                     ],
                     "tags": [
@@ -1218,9 +1306,12 @@
                             ]
                         }
                     ],
-                    "title" : "Endpoint protection is set to OFF in Security Center",
-                    "description" : "Turning on the Endpoint Protection will make sure that any issues or shortcomings in endpoint protection for all Microsoft Windows virtual machines are identified so that they can, in turn, be removed.",
-                    "masterSnapshotId" : ["AZRSNP_211"]
+                    "severity": "Medium",
+                    "title": "Endpoint protection is set to OFF in Security Center",
+                    "description": "Turning on the Endpoint Protection will make sure that any issues or shortcomings in endpoint protection for all Microsoft Windows virtual machines are identified so that they can, in turn, be removed.",
+                    "masterSnapshotId": [
+                        "AZRSNP_211"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_287",
@@ -1228,11 +1319,11 @@
                     "rule": "file(azure_pollicy_assignments_287.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0078",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0078",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0078.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0078.py"
                         }
                     ],
                     "tags": [
@@ -1249,9 +1340,12 @@
                             ]
                         }
                     ],
-                    "title" : "JIT Network Access is set to OFF in Security Center",
-                    "description" : "Turning on JIT Network Access will enhance the protection of VMs by creating a Just in Time VM. The JIT VM with NSG rule will restrict the availability of access to the ports to connect to the VM for a pre-set time and only after checking the Role Based Access Control permissions of the user. This feature will control the brute force attacks on the VMs.",
-                    "masterSnapshotId" : ["AZRSNP_211"]
+                    "severity": "Medium",
+                    "title": "JIT Network Access is set to OFF in Security Center",
+                    "description": "Turning on JIT Network Access will enhance the protection of VMs by creating a Just in Time VM. The JIT VM with NSG rule will restrict the availability of access to the ports to connect to the VM for a pre-set time and only after checking the Role Based Access Control permissions of the user. This feature will control the brute force attacks on the VMs.",
+                    "masterSnapshotId": [
+                        "AZRSNP_211"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_288",
@@ -1259,11 +1353,11 @@
                     "rule": "file(PR_AZR_0079.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0079",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0079",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0079.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0079.py"
                         }
                     ],
                     "tags": [
@@ -1282,9 +1376,12 @@
                             ]
                         }
                     ],
-                    "title" : "Next generation firewall is set to OFF in Security Center",
-                    "description" : "Turning on Next Generation Firewall (NGFW) will extend protection beyond a traditional firewall setting of Network Security Groups in Microsoft Azure environment. A Next-Generation Firewall (NGFW) is a part of the third generation of firewall technology, combining a traditional firewall with other network device filtering functionalities.",
-                    "masterSnapshotId" : ["AZRSNP_211"]
+                    "severity": "Medium",
+                    "title": "Next generation firewall is set to OFF in Security Center",
+                    "description": "Turning on Next Generation Firewall (NGFW) will extend protection beyond a traditional firewall setting of Network Security Groups in Microsoft Azure environment. A Next-Generation Firewall (NGFW) is a part of the third generation of firewall technology, combining a traditional firewall with other network device filtering functionalities.",
+                    "masterSnapshotId": [
+                        "AZRSNP_211"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_290",
@@ -1292,11 +1389,11 @@
                     "rule": "file(PR_AZR_0081.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0081",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0081",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0081.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0081.py"
                         }
                     ],
                     "tags": [
@@ -1316,9 +1413,12 @@
                             ]
                         }
                     ],
-                    "title" : "SQL Encryption is set to OFF in Security Center",
-                    "description" : "Turning on SQL Encryption enables encryption at rest for your SQL database, related backups, and transaction log files. This will make sure that even if the database is compromised, the data is not readable.",
-                    "masterSnapshotId" : ["AZRSNP_211"]
+                    "severity": "Medium",
+                    "title": "SQL Encryption is set to OFF in Security Center",
+                    "description": "Turning on SQL Encryption enables encryption at rest for your SQL database, related backups, and transaction log files. This will make sure that even if the database is compromised, the data is not readable.",
+                    "masterSnapshotId": [
+                        "AZRSNP_211"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_292",
@@ -1326,11 +1426,11 @@
                     "rule": "file(PR_AZR_0083.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0083",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0083",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0083.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0083.py"
                         }
                     ],
                     "tags": [
@@ -1350,9 +1450,12 @@
                             ]
                         }
                     ],
-                    "title" : "SQL auditing and Threat detection is set to OFF in Security Center",
-                    "description" : "Turning on SQL auditing and Threat detection will make sure that the databases adhere to regulatory compliance. It will also help understand database activity, and gain insights into discrepancies and anomalies that could show business concerns or any security violations.",
-                    "masterSnapshotId" : ["AZRSNP_211"]
+                    "severity": "Medium",
+                    "title": "SQL auditing and Threat detection is set to OFF in Security Center",
+                    "description": "Turning on SQL auditing and Threat detection will make sure that the databases adhere to regulatory compliance. It will also help understand database activity, and gain insights into discrepancies and anomalies that could show business concerns or any security violations.",
+                    "masterSnapshotId": [
+                        "AZRSNP_211"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_295",
@@ -1360,11 +1463,11 @@
                     "rule": "file(PR_AZR_0086.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0086",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0086",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0086.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0086.py"
                         }
                     ],
                     "tags": [
@@ -1384,9 +1487,12 @@
                             ]
                         }
                     ],
-                    "title" : "Security Configurations is set to OFF in Security Center",
-                    "description" : "Turning on the Security configurations will enable the daily analysis of operating system configurations. The rules for hardening the operating system like firewall rules, password and audit policies are reviewed. Recommendations are made for setting the right level of security controls.",
-                    "masterSnapshotId" : ["AZRSNP_211"]
+                    "severity": "Medium",
+                    "title": "Security Configurations is set to OFF in Security Center",
+                    "description": "Turning on the Security configurations will enable the daily analysis of operating system configurations. The rules for hardening the operating system like firewall rules, password and audit policies are reviewed. Recommendations are made for setting the right level of security controls.",
+                    "masterSnapshotId": [
+                        "AZRSNP_211"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_303",
@@ -1394,11 +1500,11 @@
                     "rule": "file(PR_AZR_0094.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0094",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0094",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0094.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0094.py"
                         }
                     ],
                     "tags": [
@@ -1418,9 +1524,12 @@
                             ]
                         }
                     ],
-                    "title" : "Storage Encryption is set to OFF in Security Center",
-                    "description" : "Turning on Storage Encryption will encrypt the data written to the storage and decrypt it when retrieved from the storage. The data encryption starts from the point this setting is turned on. The old data remains unencrypted.",
-                    "masterSnapshotId" : ["AZRSNP_211"]
+                    "severity": "Medium",
+                    "title": "Storage Encryption is set to OFF in Security Center",
+                    "description": "Turning on Storage Encryption will encrypt the data written to the storage and decrypt it when retrieved from the storage. The data encryption starts from the point this setting is turned on. The old data remains unencrypted.",
+                    "masterSnapshotId": [
+                        "AZRSNP_211"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_304",
@@ -1428,11 +1537,11 @@
                     "rule": "file(azure_pollicy_assignments_304.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0095",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0095",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0095.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0095.py"
                         }
                     ],
                     "tags": [
@@ -1451,9 +1560,12 @@
                             ]
                         }
                     ],
-                    "title" : "System updates is set to OFF in Security Center",
-                    "description" : "Turning on the System updates will retrieve a list of recommended security and critical updates for the given virtual system from Microsoft Windows Update or Microsoft Windows Server Update. These updates are also shown for Linux systems through distro-provided package management systems. The recommendation is to apply all the latest updates.",
-                    "masterSnapshotId" : ["AZRSNP_211"]
+                    "severity": "Medium",
+                    "title": "System updates is set to OFF in Security Center",
+                    "description": "Turning on the System updates will retrieve a list of recommended security and critical updates for the given virtual system from Microsoft Windows Update or Microsoft Windows Server Update. These updates are also shown for Linux systems through distro-provided package management systems. The recommendation is to apply all the latest updates.",
+                    "masterSnapshotId": [
+                        "AZRSNP_211"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_308",
@@ -1461,11 +1573,11 @@
                     "rule": "file(azure_pollicy_assignments_308.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0099",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0099",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0099.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0099.py"
                         }
                     ],
                     "tags": [
@@ -1485,9 +1597,12 @@
                             ]
                         }
                     ],
-                    "title" : "Vulnerability assessment is set to OFF in Security Center",
-                    "description" : "Turning on Vulnerability assessment will recommend that you install a vulnerability assessment solution on your VM. A partner agent, after deployment, will report any vulnerability data for the VM.",
-                    "masterSnapshotId" : ["AZRSNP_211"]
+                    "severity": "Medium",
+                    "title": "Vulnerability assessment is set to OFF in Security Center",
+                    "description": "Turning on Vulnerability assessment will recommend that you install a vulnerability assessment solution on your VM. A partner agent, after deployment, will report any vulnerability data for the VM.",
+                    "masterSnapshotId": [
+                        "AZRSNP_211"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_309",
@@ -1495,11 +1610,11 @@
                     "rule": "file(PR_AZR_0100.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0100",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0100",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0100.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0100.py"
                         }
                     ],
                     "tags": [
@@ -1518,9 +1633,12 @@
                             ]
                         }
                     ],
-                    "title" : "Web application firewall is set to OFF in Security Center",
-                    "description" : "Turning on Web application firewall will identify if WAF is recommended for the public facing IP instances in your environment. Web Application Firewall or WAF is recommended for any public facing IP instance (VM or Load Balancer) which has an associated Network Security Group with open inbound ports 80 and 443.",
-                    "masterSnapshotId" : ["AZRSNP_211"]
+                    "severity": "Medium",
+                    "title": "Web application firewall is set to OFF in Security Center",
+                    "description": "Turning on Web application firewall will identify if WAF is recommended for the public facing IP instances in your environment. Web Application Firewall or WAF is recommended for any public facing IP instance (VM or Load Balancer) which has an associated Network Security Group with open inbound ports 80 and 443.",
+                    "masterSnapshotId": [
+                        "AZRSNP_211"
+                    ]
                 },
                 {
                     "masterTestId": "AZURE_TEST_274",
@@ -1528,11 +1646,11 @@
                     "rule": "file(PR_AZR_0065.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0065",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0065",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0065.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0065.py"
                         }
                     ],
                     "tags": [
@@ -1547,6 +1665,7 @@
                             ]
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Virtual Machine is assigned to an availability set",
                     "description": "To provide application redundancy during planned or unplanned maintenance events, you can group two or more virtual machines (VMs) in an availability set. An availability set ensures that the VMs are distributed across multiple isolated hardware nodes in a cluster so that only a subset of your VMs are impacted should a hardware or software failure occur on Azure.This policy identifies Azure VMs that are not deployed in an availability set. As a high availability (HA) best practice, deploy your VMs in an availability set.",
                     "masterSnapshotId": [
@@ -1559,11 +1678,11 @@
                     "rule": "file(PR_AZR_0068.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0068",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0068",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0068.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0068.py"
                         }
                     ],
                     "tags": [
@@ -1577,6 +1696,7 @@
                             ]
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure disk for VM operating system is encrypted at rest using ADE",
                     "description": "To meet your organizational security or compliance requirement, Azure provides disk encryption at rest using Azure Storage Service Encryption (SSE) and Azure Disk Encryption (ADE). Starting February 2017, SSE is enabled by default for all managed disks. ADE is integrated with Azure Key Vault to help you control, manage, and audit the disk encryption keys and secrets.This policy detects Virtual Machine (VM) OS disks that are not encrypted at rest using ADE. As a best practice, enable ADE for provide volume encryption for the OS disk. For more information, see https://docs.microsoft.com/en-us/azure/security/azure-security-disk-encryption-overview.",
                     "masterSnapshotId": [
@@ -1607,13 +1727,14 @@
                     ],
                     "evals": [
                         {
-                            "id":"PR-AZR-0092",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0092",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0092.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0092.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Storage Accounts without Secure transfer enabled",
                     "description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPs. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesnâ€™t support HTTPs for custom domain names, this option is not applied when using a custom domain name.",
                     "masterSnapshotId": [
@@ -1642,13 +1763,14 @@
                     ],
                     "evals": [
                         {
-                            "id":"PR-AZR-0093",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0093",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0093.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0093.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Storage Accounts without Secure transfer enabled",
                     "description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on.You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
                     "masterSnapshotId": [
@@ -1661,11 +1783,11 @@
                     "rule": "file(PR_AZR_0012.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0012",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0012",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0012.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0012.py"
                         }
                     ],
                     "tags": [
@@ -1684,6 +1806,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_221"
                     ],
+                    "severity": "Medium",
                     "title": "Azure Application Gateway dose have the Web application firewall (WAF) enabled",
                     "description": "This policy identifies Azure Application Gateways that do not have Web application firewall (WAF) enabled. As a best practice, enable WAF to manage and protect your web applications behind the Application Gateway from common exploits and vulnerabilities."
                 },
@@ -1693,11 +1816,11 @@
                     "rule": "file(PR_AZR_0050.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0050",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0050",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0050.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0050.py"
                         }
                     ],
                     "tags": [
@@ -1716,6 +1839,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_260"
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Watcher Network Security Group (NSG) flow logs are desebled",
                     "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs are disabled.NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:-Outbound and inbound flows on a per-rule basis.-Network interface to which the flow applies.-5-tuple information about the flow (source/destination IP, source/destination port, protocol).-Whether the traffic was allowed or denied"
                 },
@@ -1725,11 +1849,11 @@
                     "rule": "file(PR_AZR_0051.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0051",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0051",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0051.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0051.py"
                         }
                     ],
                     "tags": [
@@ -1748,6 +1872,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_260"
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Watcher Network Security Group (NSG) flow logs retention is less than 90 days",
                     "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs retention period is 90 days or less.NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:-Outbound and inbound flows on a per-rule basis.-Network interface to which the flow applies.-5-tuple information about the flow (source/destination IP, source/destination port, protocol).-Whether the traffic was allowed or denied."
                 },
@@ -1757,11 +1882,11 @@
                     "rule": "file(gID1.rego)",
                     "evals": [
                         {
-                            "id":"gID1",
-                            "eval":"data.rule.rulepass",
+                            "id": "gID1",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_gID1.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_gID1.py"
                         }
                     ],
                     "tags": [
@@ -1777,19 +1902,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_231"
                     ],
+                    "severity": "Medium",
                     "title": "Instance is communicating with ports known to mine Bitcoin",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_210",
                     "type": "rego",
                     "rule": "file(PR_AZR_0001.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0001",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0001",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0001.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0001.py"
                         }
                     ],
                     "tags": [
@@ -1809,19 +1936,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_210"
                     ],
+                    "severity": "Medium",
                     "title": "Activity Log Retention should not be set to less than 365 days",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_212",
                     "type": "rego",
                     "rule": "file(PR_AZR_0003.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0003",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0003",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0003.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0003.py"
                         }
                     ],
                     "tags": [
@@ -1841,19 +1970,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_212"
                     ],
+                    "severity": "Medium",
                     "title": "Auditing for SQL database should be set to On",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_214",
                     "type": "rego",
                     "rule": "file(PR_AZR_0005.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0005",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0005",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0005.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0005.py"
                         }
                     ],
                     "tags": [
@@ -1868,19 +1999,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_214"
                     ],
+                    "severity": "Medium",
                     "title": "Azure ACR HTTPS not enabled for webhook",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_215",
                     "type": "rego",
                     "rule": "file(PR_AZR_0006.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0006",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0006",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0006.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0006.py"
                         }
                     ],
                     "tags": [
@@ -1895,6 +2028,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_219"
                     ],
+                    "severity": "Medium",
                     "title": "Azure AKS cluster Azure CNI networking not enabled",
                     "description": ""
                 },
@@ -1904,11 +2038,11 @@
                     "rule": "file(PR_AZR_0011.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0011",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0011",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0011.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0011.py"
                         }
                     ],
                     "tags": [
@@ -1923,19 +2057,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_221"
                     ],
+                    "severity": "Medium",
                     "title": "Azure Application Gateway allows TLSv1.1 or lower",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_222",
                     "type": "rego",
                     "rule": "file(PR_AZR_0013.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0013",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0013",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0013.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0013.py"
                         }
                     ],
                     "tags": [
@@ -1950,19 +2086,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_222"
                     ],
+                    "severity": "Medium",
                     "title": "Azure Blob container(s) with public access and logging set to less than 180 days",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_226",
                     "type": "rego",
                     "rule": "file(PR_AZR_0017.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0017",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0017",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0017.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0017.py"
                         }
                     ],
                     "tags": [
@@ -1977,19 +2115,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_226"
                     ],
+                    "severity": "Medium",
                     "title": "Azure Key Vault audit logging is disabled",
                     "description": "This policy identifies Azure Key Vault instances for which audit logging is disabled. As a best practice, enable audit event logging for Key Vault instances to monitor how and when your key vaults are accessed, and by whom."
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_227",
                     "type": "rego",
                     "rule": "file(PR_AZR_0018.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0018",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0018",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0018.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0018.py"
                         }
                     ],
                     "tags": [
@@ -2004,19 +2144,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_227"
                     ],
+                    "severity": "Medium",
                     "title": "Azure Key Vault secrets have no expiration date",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_228",
                     "type": "rego",
                     "rule": "file(PR_AZR_0019.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0019",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0019",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0019.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0019.py"
                         }
                     ],
                     "tags": [
@@ -2031,19 +2173,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_226"
                     ],
+                    "severity": "Medium",
                     "title": "Azure Load Balancer diagnostics logs are disabled",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_261",
                     "type": "rego",
                     "rule": "file(PR_AZR_0052.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0052",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0052",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0052.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0052.py"
                         }
                     ],
                     "tags": [
@@ -2058,19 +2202,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_261"
                     ],
+                    "severity": "Medium",
                     "title": "Azure Resource Group does not have a resource lock",
                     "description": "Azure Resource Manager locks provide a way to lock down Azure resources from being deleted or modified. The lock level can be set to either 'CanNotDelete' or 'ReadOnly'. When you apply a lock at a parent scope, all resources within the scope inherit the same lock, and the most restrictive lock takes precedence._x000D__x000D_This policy identifies Azure Resource Groups that do not have a lock set. As a best practice, place a lock on important resources to prevent accidental or malicious modification or deletion by unauthorized users."
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_262",
                     "type": "rego",
                     "rule": "file(PR_AZR_0053.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0053",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0053",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0053.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0053.py"
                         }
                     ],
                     "tags": [
@@ -2090,19 +2236,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_212"
                     ],
+                    "severity": "Medium",
                     "title": "Azure SQL Database with Auditing Retention less than 90 days",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_263",
                     "type": "rego",
                     "rule": "file(PR_AZR_0054.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0054",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0054",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0054.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0054.py"
                         }
                     ],
                     "tags": [
@@ -2122,19 +2270,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_263"
                     ],
+                    "severity": "Medium",
                     "title": "Azure SQL Database with Threat Retention less than or equals to 90 days",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_264",
                     "type": "rego",
                     "rule": "file(PR_AZR_0055.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0055",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0055",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0055.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0055.py"
                         }
                     ],
                     "tags": [
@@ -2153,19 +2303,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_263"
                     ],
+                    "severity": "Medium",
                     "title": "Azure SQL Databases with disabled Email service and co-administrators for Threat Detection",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_265",
                     "type": "rego",
                     "rule": "file(PR_AZR_0056.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0056",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0056",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0056.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0056.py"
                         }
                     ],
                     "tags": [
@@ -2180,19 +2332,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_265"
                     ],
+                    "severity": "Medium",
                     "title": "Azure SQL Server advanced data security does not have an email alert recipient",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_266",
                     "type": "rego",
                     "rule": "file(PR_AZR_0057.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0057",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0057",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0057.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0057.py"
                         }
                     ],
                     "tags": [
@@ -2207,19 +2361,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_265"
                     ],
+                    "severity": "Medium",
                     "title": "Azure SQL Server advanced data security does not send alerts to service and co-administrators",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_267",
                     "type": "rego",
                     "rule": "file(PR_AZR_0058.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0058",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0058",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0058.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0058.py"
                         }
                     ],
                     "tags": [
@@ -2234,19 +2390,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_265"
                     ],
+                    "severity": "Medium",
                     "title": "Azure SQL Server advanced data security is disabled",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_268",
                     "type": "rego",
                     "rule": "file(PR_AZR_0059.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0059",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0059",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0059.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0059.py"
                         }
                     ],
                     "tags": [
@@ -2261,19 +2419,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_212"
                     ],
+                    "severity": "Medium",
                     "title": "Azure SQL Server audit log retention is less than 91 days",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_270",
                     "type": "rego",
                     "rule": "file(PR_AZR_0061.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0061",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0061",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0061.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0061.py"
                         }
                     ],
                     "tags": [
@@ -2288,19 +2448,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_263"
                     ],
+                    "severity": "Medium",
                     "title": "Azure SQL Server threat detection alerts not enabled for all threat types",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_271",
                     "type": "rego",
                     "rule": "file(PR_AZR_0062.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0062",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0062",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0062.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0062.py"
                         }
                     ],
                     "tags": [
@@ -2315,19 +2477,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_263"
                     ],
+                    "severity": "Medium",
                     "title": "Azure SQL Server threat logs retention is less than 91 days",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_272",
                     "type": "rego",
                     "rule": "file(PR_AZR_0063.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0063",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0063",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0063.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0063.py"
                         }
                     ],
                     "tags": [
@@ -2342,19 +2506,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_226"
                     ],
+                    "severity": "Medium",
                     "title": "Azure Storage Account with Auditing Retention less than 90 days (TJX)",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_273",
                     "type": "rego",
                     "rule": "file(PR_AZR_0064.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0064",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0064",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0064.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0064.py"
                         }
                     ],
                     "tags": [
@@ -2369,19 +2535,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_273"
                     ],
+                    "severity": "Medium",
                     "title": "Azure Virtual Machine does not have endpoint protection installed",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_275",
                     "type": "rego",
                     "rule": "file(PR_AZR_0066.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0066",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0066",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0066.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0066.py"
                         }
                     ],
                     "tags": [
@@ -2396,19 +2564,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_275"
                     ],
+                    "severity": "Medium",
                     "title": "Azure Virtual Network subnet is not configured with a Network Security Group",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_276",
                     "type": "rego",
                     "rule": "file(PR_AZR_0067.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0067",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0067",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0067.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0067.py"
                         }
                     ],
                     "tags": [
@@ -2423,19 +2593,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_275"
                     ],
+                    "severity": "Medium",
                     "title": "Azure Virtual Network subnet is not configured with a Network Security Group (TJX)",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_278",
                     "type": "rego",
                     "rule": "file(PR_AZR_0069.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0069",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0069",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0069.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0069.py"
                         }
                     ],
                     "tags": [
@@ -2450,19 +2622,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_226"
                     ],
+                    "severity": "Medium",
                     "title": "Azure storage account logging for blobs is disabled",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_279",
                     "type": "rego",
                     "rule": "file(PR_AZR_0070.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0070",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0070",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0070.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0070.py"
                         }
                     ],
                     "tags": [
@@ -2477,19 +2651,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_226"
                     ],
+                    "severity": "Medium",
                     "title": "Azure storage account logging for queues is disabled",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_280",
                     "type": "rego",
                     "rule": "file(PR_AZR_0071.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0071",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0071",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0071.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0071.py"
                         }
                     ],
                     "tags": [
@@ -2504,19 +2680,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_226"
                     ],
+                    "severity": "Medium",
                     "title": "Azure storage account logging for queues is disabled (TJX)",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_281",
                     "type": "rego",
                     "rule": "file(PR_AZR_0072.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0072",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0072",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0072.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0072.py"
                         }
                     ],
                     "tags": [
@@ -2531,19 +2709,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_226"
                     ],
+                    "severity": "Medium",
                     "title": "Azure storage account logging for tables is disabled",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_282",
                     "type": "rego",
                     "rule": "file(PR_AZR_0073.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0073",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0073",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0073.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0073.py"
                         }
                     ],
                     "tags": [
@@ -2558,19 +2738,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_226"
                     ],
+                    "severity": "Medium",
                     "title": "Azure storage account logging for tables is disabled (TJX)",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_283",
                     "type": "rego",
                     "rule": "file(PR_AZR_0074.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0074",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0074",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0074.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0074.py"
                         }
                     ],
                     "tags": [
@@ -2585,19 +2767,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_283"
                     ],
+                    "severity": "Medium",
                     "title": "Azure storage accounts has blob container(s) with public access",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_291",
                     "type": "rego",
                     "rule": "file(PR_AZR_0082.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0082",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0082",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0082.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0082.py"
                         }
                     ],
                     "tags": [
@@ -2616,19 +2800,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_291"
                     ],
+                    "severity": "Medium",
                     "title": "SQL Server Firewall rules allow access to any Azure internal resources",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_293",
                     "type": "rego",
                     "rule": "file(PR_AZR_0084.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0084",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0084",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0084.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0084.py"
                         }
                     ],
                     "tags": [
@@ -2648,19 +2834,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_293"
                     ],
+                    "severity": "Medium",
                     "title": "SQL databases has encryption disabled",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_294",
                     "type": "rego",
                     "rule": "file(PR_AZR_0085.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0085",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0085",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0085.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0085.py"
                         }
                     ],
                     "tags": [
@@ -2678,19 +2866,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_294"
                     ],
+                    "severity": "Medium",
                     "title": "SQL servers which do not have Azure Active Directory admin configured",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_296",
                     "type": "rego",
                     "rule": "file(PR_AZR_0087.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0087",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0087",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0087.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0087.py"
                         }
                     ],
                     "tags": [
@@ -2710,19 +2900,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_296"
                     ],
+                    "severity": "Medium",
                     "title": "Security contact emails is not set in Security Center",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_297",
                     "type": "rego",
                     "rule": "file(PR_AZR_0088.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0088",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0088",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0088.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0088.py"
                         }
                     ],
                     "tags": [
@@ -2742,6 +2934,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_212"
                     ],
+                    "severity": "Medium",
                     "title": "Send alerts on field value on SQL Databases is misconfigured",
                     "description": ""
                 },
@@ -2751,11 +2944,11 @@
                     "rule": "file(PR_AZR_0090.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0090",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0090",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0090.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0090.py"
                         }
                     ],
                     "tags": [
@@ -2775,26 +2968,28 @@
                     "masterSnapshotId": [
                         "AZRSNP_299"
                     ],
+                    "severity": "Medium",
                     "title": "Send me emails about alerts is set to OFF in Security Center",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_2",
                     "type": "rego",
                     "rule": "file(gID2.rego)",
                     "evals": [
                         {
-                            "id":"gID2",
-                            "eval":"data.rule.rulepass",
+                            "id": "gID2",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_gID2.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_gID2.py"
                         }
                     ],
                     "tags": [
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "HIPAA", 
+                                "HIPAA",
                                 "NIST CSF"
                             ],
                             "service": []
@@ -2803,19 +2998,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_231"
                     ],
+                    "severity": "Medium",
                     "title": "Instance is communicating with ports known to mine Ethereum",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_300",
                     "type": "rego",
                     "rule": "file(PR_AZR_0091.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0091",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0091",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0091.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0091.py"
                         }
                     ],
                     "tags": [
@@ -2831,19 +3028,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_300"
                     ],
+                    "severity": "Medium",
                     "title": "Standard pricing tier is not selected in Security Center",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_305",
                     "type": "rego",
                     "rule": "file(PR_AZR_0096.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0096",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0096",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0096.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0096.py"
                         }
                     ],
                     "tags": [
@@ -2861,19 +3060,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_263"
                     ],
+                    "severity": "Medium",
                     "title": "Threat Detection on SQL databases is set to Off",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_306",
                     "type": "rego",
                     "rule": "file(PR_AZR_0097.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0097",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0097",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0097.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0097.py"
                         }
                     ],
                     "tags": [
@@ -2892,19 +3093,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_263"
                     ],
+                    "severity": "Medium",
                     "title": "Threat Detection types on SQL databases is misconfigured",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_307",
                     "type": "rego",
                     "rule": "file(PR_AZR_0098.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0098",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0098",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0098.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0098.py"
                         }
                     ],
                     "tags": [
@@ -2922,19 +3125,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_307"
                     ],
+                    "severity": "Medium",
                     "title": "VPN is not configured with cryptographic algorithm",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_3",
                     "type": "rego",
                     "rule": "file(gID3.rego)",
                     "evals": [
                         {
-                            "id":"gID3",
-                            "eval":"data.rule.rulepass",
+                            "id": "gID3",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_gID3.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_gID3.py"
                         }
                     ],
                     "tags": [
@@ -2953,19 +3158,21 @@
                     "masterSnapshotId": [
                         "AZRSNP_231"
                     ],
+                    "severity": "Medium",
                     "title": "Internet connectivity via tcp over insecure port",
                     "description": ""
-                },                {
+                },
+                {
                     "masterTestId": "AZURE_TEST_5",
                     "type": "rego",
                     "rule": "file(gID5.rego)",
                     "evals": [
                         {
-                            "id":"gID5",
-                            "eval":"data.rule.rulepass",
+                            "id": "gID5",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_gID5.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_gID5.py"
                         }
                     ],
                     "tags": [
@@ -2980,6 +3187,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_231"
                     ],
+                    "severity": "Medium",
                     "title": "Memcached DDoS attack attempted",
                     "description": ""
                 },
@@ -2989,11 +3197,11 @@
                     "rule": "file(gID7.rego)",
                     "evals": [
                         {
-                            "id":"gID7",
-                            "eval":"data.rule.rulepass",
+                            "id": "gID7",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_gID7.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_gID7.py"
                         }
                     ],
                     "tags": [
@@ -3008,6 +3216,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_231"
                     ],
+                    "severity": "Medium",
                     "title": "RedisWannaMine vulnerable instances with active network traffic",
                     "description": ""
                 },
@@ -3017,11 +3226,11 @@
                     "rule": "file(PR_AZR_0004.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0004",
-                            "eval":"data.rule.rulepass",
+                            "id": "PR-AZR-0004",
+                            "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0004.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0004.py"
                         }
                     ],
                     "tags": [
@@ -3039,6 +3248,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_211"
                     ],
+                    "severity": "Medium",
                     "title": "Automatic provisioning of monitoring agent is set to Off in Security Center",
                     "description": ""
                 },
@@ -3067,6 +3277,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_400"
                     ],
+                    "severity": "Medium",
                     "title": "Azure SQL Server check minumum TLS version",
                     "description": "This policy will find the Azure SQL Servers which have configured TLS version lower then 1.2"
                 },
@@ -3095,6 +3306,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_401"
                     ],
+                    "severity": "Medium",
                     "title": "Azure SQL Instances check minumum TLS version",
                     "description": "This policy will find the Azure SQL Instances which have configured TLS version lower then 1.2"
                 },
@@ -3123,6 +3335,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_402"
                     ],
+                    "severity": "Medium",
                     "title": "Advanced data security should be enabled on your SQL servers",
                     "description": "Azure Defender provides advanced SQL security capabilities, including SQL Vulnerability Assessment and Advanced Threat Protection. It is recomamanded to Enable the Azure Defender for SQL."
                 },
@@ -3151,6 +3364,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_403"
                     ],
+                    "severity": "Medium",
                     "title": "Advanced data security should be enabled on your SQL servers",
                     "description": "Azure Defender provides advanced SQL security capabilities, including SQL Vulnerability Assessment and Advanced Threat Protection. It is recomamanded to Enable the Azure Defender for SQL."
                 },
@@ -3179,6 +3393,7 @@
                     "masterSnapshotId": [
                         "AZRSNP_404"
                     ],
+                    "severity": "Medium",
                     "title": "Auditing on SQL server should be enabled",
                     "description": ""
                 }
