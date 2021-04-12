@@ -17,6 +17,7 @@
                             "remediationFunction": ""
                         }
                     ],
+                    "severity": "Medium",
                     "title": "GCP Kubernetes Engine Cluster Nodes does not have default Service account for Project access",
                     "description": "This policy identifies Kubernetes Engine Cluster Nodes which have default Service account for Project access. By default, Kubernetes Engine nodes are given the Compute Engine default service account. This account has broad access and more permissions than are required to run your Kubernetes Engine cluster. You should create and use a least privileged service account to run your Kubernetes Engine cluster instead of using the Compute Engine default service account. If you are not creating a separate service account for your nodes, you should limit the scopes of the node service account to reduce the possibility of a privilege escalation in an attack.",
                     "tags": [
@@ -52,6 +53,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Kubernetes Engine Clusters Basic Authentication is set to Enabled",
                     "description": "This policy identifies Kubernetes Engine Clusters which have enabled Basic authentication. Basic authentication allows a user to authenticate to the cluster with a username and password. Disabling Basic authentication will prevent attacks like brute force. Authenticate using client certificate or IAM.",
                     "tags": [
@@ -84,6 +86,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Kubernetes Engine Clusters Client Certificate is set to enabled",
                     "description": "This policy identifies Kubernetes Engine Clusters which have enabled Client Certificate. A client certificate is a base64-encoded public certificate used by clients to authenticate to the cluster endpoint. Enabling Client Certificate will provide more security to authenticate users to the cluster.",
                     "tags": [
@@ -119,6 +122,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Kubernetes Engine Clusters have Alias IP Enabled",
                     "description": "This policy identifies Kubernetes Engine Clusters which have enabled Alias IP. Alias IP allows the networking layer to perform anti-spoofing checks to ensure that egress traffic is not sent with arbitrary source IPs. By enabling Alias IPs, Kubernetes Engine clusters can allocate IP addresses from a CIDR block known to Google Cloud Platform. This makes your cluster more scalable and allows your cluster to better interact with other GCP products and entities.",
                     "tags": [
@@ -153,6 +157,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Kubernetes Engine Clusters have Alpha cluster feature disabled",
                     "description": "This policy identifies GCP Kubernetes Engine Clusters which have disabled alpha cluster. It is recommended to not use alpha clusters or alpha features for production workloads. Alpha clusters expire after 30 days and do not receive security updates. This cluster will not be covered by the Kubernetes Engine SLA.",
                     "tags": [
@@ -183,6 +188,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Kubernetes Engine Clusters have HTTP load balancing Enabled",
                     "description": "This policy identifies GCP Kubernetes Engine Clusters which have disabled HTTP load balancing. HTTP/HTTPS load balancing provides global load balancing for HTTP/HTTPS requests destined for your instances. Enabling HTTP/HTTPS load balancers will let the Kubernetes Engine to terminate unauthorized HTTP/HTTPS requests and make better context-aware load balancing decisions.",
                     "tags": [
@@ -213,6 +219,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Kubernetes Engine Clusters have Legacy Authorization disabled",
                     "description": "This policy identifies GCP Kubernetes Engine Clusters which have enabled legacy authorizer. The legacy authorizer in Kubernetes Engine grants broad and statically defined permissions to all cluster users. After legacy authorizer setting is disabled, RBAC can limit permissions for authorized users based on need.",
                     "tags": [
@@ -247,6 +254,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Kubernetes Engine Clusters have Master authorized networks enabled",
                     "description": "This policy identifies Kubernetes Engine Clusters which have enabled Master authorized networks. Enabling Master authorized networks will let the Kubernetes Engine block untrusted non-GCP source IPs from accessing the Kubernetes master through HTTPS.",
                     "tags": [
@@ -282,6 +290,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Kubernetes Engine Clusters have Network policy enabled",
                     "description": "This policy identifies Kubernetes Engine Clusters which have enabled Network policy. A network policy defines how groups of pods are allowed to communicate with each other and other network endpoints. By enabling network policy in a namespace for a pod, it will reject any connections that are not allowed by the network policy.",
                     "tags": [
@@ -317,6 +326,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Kubernetes Engine Clusters have Stackdriver Logging enabled",
                     "description": "This policy identifies Kubernetes Engine Clusters which have enabled Stackdriver Logging. Enabling Stackdriver Logging will let the Kubernetes Engine to collect, process, and store your container and system logs in a dedicated persistent data store.",
                     "tags": [
@@ -351,6 +361,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Kubernetes Engine Clusters have Stackdriver Monitoring enabled",
                     "description": "This policy identifies Kubernetes Engine Clusters which have enabled Stackdriver monitoring. Enabling Stackdriver monitoring will let the Kubernetes Engine to monitor signals and build operations in the clusters.",
                     "tags": [
@@ -386,6 +397,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Kubernetes Engine Clusters have binary authorization enabled",
                     "description": "This policy identifies Google Kubernetes Engine (GKE) clusters that have enabled binary authorization. Binary authorization is a security control that ensures only trusted container images are deployed on GKE clusters. As a best practice, verify images prior to deployment to reduce the risk of running unintended or malicious code in your environment.",
                     "tags": [
@@ -416,6 +428,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Kubernetes Engine Clusters have legacy compute engine metadata endpoints disabled",
                     "description": "This policy identifies Google Kubernetes Engine (GKE) clusters that have legacy compute engine metadata endpoints disabled. Because GKE uses instance metadata to configure node VMs, some of this metadata is potentially sensitive and should be protected from workloads running on the cluster. Legacy metadata APIs expose the Compute Engine's instance metadata of server endpoints. As a best practice, disable legacy API and use v1 APIs to restrict a potential attacker from retrieving instance metadata.",
                     "tags": [
@@ -446,6 +459,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Kubernetes Engine Clusters configured with private nodes feature",
                     "description": "This policy identifies Google Kubernetes Engine (GKE) Clusters which are configured with the private nodes feature. Private nodes feature makes your master inaccessible from the public internet and nodes do not have public IP addresses, so your workloads run in an environment that is isolated from the internet.",
                     "tags": [
@@ -476,6 +490,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Kubernetes Engine Clusters using Container-Optimized OS for Node image",
                     "description": "This policy identifies Kubernetes Engine Clusters which have a container-optimized operating system for node image. Container-Optimized OS is an operating system image for your Compute Engine VMs that is optimized for running Docker containers. By using Container-Optimized OS for node image, you can bring up your Docker containers on Google Cloud Platform quickly, efficiently, and securely. The Container-Optimized OS node image is based on a recent version of the Linux kernel and is optimized to enhance node security. It is also regularly updated with features, security fixes, and patches. The Container-Optimized OS image provides better support, security, and stability than other images.",
                     "tags": [
@@ -507,6 +522,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Kubernetes Engine Clusters web UI/Dashboard is set to Disabled",
                     "description": "This policy identifies Kubernetes Engine Clusters which have enabled Kubernetes web UI/Dashboard. Since all the data is being transmitted over HTTP protocol, disabling Kubernetes web UI/Dashboard will protect the data from sniffers on the same network.",
                     "tags": [
@@ -540,6 +556,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Kubernetes Engine Clusters without any label information",
                     "description": "This policy identifies all Kubernetes Engine Clusters which do not have labels. Having a cluster label helps you identify and categorize Kubernetes clusters.",
                     "tags": [
@@ -574,6 +591,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Kubernetes cluster Application-layer Secrets is encrypted",
                     "description": "Application-layer Secrets Encryption provides an additional layer of security for sensitive data, such as Secrets, stored in etcd. Using this functionality, you can use a key, that you manage in Cloud KMS, to encrypt data at the application layer. This protects against attackers who gain access to an offline copy of etcd. This policy checks your cluster for the Application-layer Secrets Encryption security feature and alerts if it is not enabled.",
                     "tags": [
@@ -604,6 +622,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Kubernetes cluster intra-node visibility enbled",
                     "description": "With Intranode Visibility, all network traffic in your cluster is seen by the Google Cloud Platform network. This means you can see flow logs for all traffic between Pods, including traffic between Pods on the same node. And you can create firewall rules that apply to all traffic between Pods. This policy checks your cluster's intra-node visibility feature and generates an alert if it's disabled.",
                     "tags": [
@@ -634,6 +653,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_CLUSTER_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Kubernetes cluster size contains less than 3 nodes with auto upgrade enabled",
                     "description": "Ensure your Kubernetes cluster size contains 3 or more nodes. (Clusters smaller than 3 may experience downtime during upgrades.) This policy checks the size of your cluster pools and alerts if there are fewer than 3 nodes in a pool.",
                     "tags": [
@@ -664,6 +684,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
+                    "severity": "Medium",
                     "title": "Default Firewall rule should not have any rules (except http and https)",
                     "description": "Checks to ensure that the default Firewall rule should not have any (non http, https) rules. The default Firewall rules will apply all instances by default in the absence of specific custom rules with higher priority. It is a safe practice to not have these rules in the default Firewall.",
                     "tags": [
@@ -698,6 +719,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Firewall rule allows internet traffic to DNS port (53)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on DNS port (53) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
@@ -733,6 +755,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Firewall rule allows internet traffic to FTP port (21)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on FTP port (21) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
@@ -768,6 +791,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Firewall rule allows internet traffic to MySQL DB port (3306)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on MySQL DB port (3306) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
@@ -803,6 +827,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Firewall rule allows internet traffic to NetBIOS-SSN port (139)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on NetBIOS-SSN port (139) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
@@ -838,6 +863,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Firewall rule allows internet traffic to Oracle DB port (1521)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on Oracle DB port (1521) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
@@ -873,6 +899,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Firewall rule allows internet traffic to POP3 port (110)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on POP3 port (110) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
@@ -908,6 +935,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Firewall rule allows internet traffic to PostgreSQL port (5432)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on PostgreSQL port (5432) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
@@ -943,6 +971,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Firewall rule allows internet traffic to RDP port (3389)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on RDP port (3389) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
@@ -979,6 +1008,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Firewall rule allows internet traffic to SMTP port (25)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on SMTP port (25) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
@@ -1014,6 +1044,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Firewall rule allows internet traffic to SSH port (22)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on SSH port (22) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
@@ -1050,6 +1081,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Firewall rule allows internet traffic to Telnet port (23)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on Telnet port (23) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
@@ -1085,6 +1117,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Firewall rules allow inbound traffic from anywhere with no target tags set",
                     "description": "This policy identifies GCP Firewall rules which allow inbound traffic from anywhere with no target filtering.The default target is all instances in the network. The use of target tags or target service accounts allows the rule to apply to select instances. Not using any firewall rule filtering may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
                     "tags": [
@@ -1115,6 +1148,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_FIREWALL_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Firewall with Inbound rule overly permissive to All Traffic",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on all protocols from public internet. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
                     "tags": [
@@ -1145,6 +1179,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_NETWORK_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP project is configured with legacy network",
                     "description": "This policy identifies the projects which have configured with legacy networks. Legacy networks have a single network IPv4 prefix range and a single gateway IP address for the whole network. Subnetworks cannot be created in a legacy network. Legacy networks can have an impact on high network traffic projects and subject to the single point of failure.",
                     "tags": [
@@ -1176,6 +1211,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_NETWORK_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP project is using the default network",
                     "description": "This policy identifies the projects which have default network configured. It is recommended to use network configuration based on your security and networking requirements, you should create your network and delete the default network.",
                     "tags": [
@@ -1207,6 +1243,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_INSTANCE_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP VM instances have block project-wide SSH keys feature disabled",
                     "description": "This policy identifies VM instances which have block project-wide SSH keys feature disabled. Project-wide SSH keys are stored in Compute/Project-metadata. Project-wide SSH keys can be used to login into all the instances within a project. Using project-wide SSH keys eases the SSH key management but if compromised, poses the security risk which can impact all the instances within a project. It is recommended to use Instance specific SSH keys which can limit the attack surface if the SSH keys are compromised.",
                     "tags": [
@@ -1238,6 +1275,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_INSTANCE_"
                     ],
+                    "severity": "Medium",
                     "title": "VM Instances enabled with Pre-Emptible termination",
                     "description": "Checks to verify if any VM instance is initiated with the flag 'Pre-Emptible termination' set to True. Setting this instance to True implies that this VM instance will shut down within 24 hours or can also be terminated by a Service Engine when high demand is encountered. While this might save costs, it can also lead to unexpected loss of service when the VM instance is terminated.",
                     "tags": [
@@ -1268,6 +1306,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_INSTANCE_"
                     ],
+                    "severity": "Medium",
                     "title": "VM Instances without any Custom metadata information",
                     "description": "VM instance does not have any Custom metadata. Custom metadata can be used for easy identification and searches.",
                     "tags": [
@@ -1300,6 +1339,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_INSTANCE_"
                     ],
+                    "severity": "Medium",
                     "title": "VM Instances without any Label information",
                     "description": "VM instance does not have any Labels. Labels can be used for easy identification and searches.",
                     "tags": [
@@ -1332,6 +1372,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_INSTANCE_"
                     ],
+                    "severity": "Medium",
                     "title": "VM instances without metadata, zone or label information",
                     "description": "Checks to ensure that VM instances have proper metadata, zone and label information tags. These tags can be used for easier identification and searches.",
                     "tags": [
@@ -1364,6 +1405,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_INSTANCE_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Firewall rule allows internet traffic to HTTP port (80)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on HTTP port (80) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
@@ -1399,6 +1441,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_INSTANCE_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Firewall rule allows internet traffic to Microsoft-DS port (445)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on Microsoft-DS port (445) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
@@ -1434,6 +1477,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_INSTANCE_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP Firewall rule allows internet traffic to MongoDB port (27017)",
                     "description": "This policy identifies GCP Firewall rules which allows inbound traffic on MongoDB port (27017) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
                     "tags": [
@@ -1469,6 +1513,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_INSTANCE_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP IAM Service account has admin privileges",
                     "description": "This policy identifies service accounts which have admin privileges. Application uses the service account to make requests to the Google API of a service so that the users aren't directly involved. It is recommended not to use admin access for ServiceAccount.",
                     "tags": [
@@ -1500,6 +1545,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_INSTANCE_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP VM instances have IP forwarding enabled",
                     "description": "This policy identifies VM instances have IP forwarding enabled. IP Forwarding could open unintended and undesirable communication paths and allows VM instances to send and receive packets with the non-matching destination or source IPs. To enable source and destination IP match check, disable the IP Forwarding.",
                     "tags": [
@@ -1531,6 +1577,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_INSTANCE_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP VM instances have serial port access enabled",
                     "description": "This policy identifies VM instances which have serial port access enabled. Interacting with a serial port is often referred to as the serial console. The interactive serial console does not support IP-based access restrictions such as IP whitelists. If you enable the interactive serial console on an instance, clients can attempt to connect to that instance from any IP address. So it is recommended to keep interactive serial console support disabled.",
                     "tags": [
@@ -1561,6 +1608,7 @@
                     "masterSnapshotId": [
                         "GOOGLE_INSTANCE_"
                     ],
+                    "severity": "Medium",
                     "title": "GCP VPC Flow logs for the subnet is set to Off",
                     "description": "This policy identifies the subnets in VPC Network which have Flow logs disabled. It enables to capture information about the IP traffic going to and from network interfaces in VPC Subnets.",
                     "tags": [
