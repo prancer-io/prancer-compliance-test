@@ -13,11 +13,11 @@
                     "rule": "file(acm.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0001-CFR",
+                            "id": "PR-AWS-0001-CFR",
                             "eval": "data.rule.acm_wildcard",
                             "message": "data.rule.acm_wildcard_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS ACM Certificate with wildcard domain name",
@@ -26,10 +26,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "acm"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ACM_2",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -38,11 +41,11 @@
                     "rule": "file(acm.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0009-CFR",
+                            "id": "PR-AWS-0009-CFR",
                             "eval": "data.rule.acm_ct_log",
                             "message": "data.rule.acm_ct_log_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Certificate Manager (ACM) has certificates with Certificate Transparency Logging disabled",
@@ -50,8 +53,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","HITRUST","NIST 800"],
-                            "service": []
+                            "compliance": [
+                                "CSA CCM",
+                                "HITRUST",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "acm"
+                            ]
                         }
                     ]
                 },
@@ -64,11 +73,11 @@
                     "rule": "file(all.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0002-CFR",
+                            "id": "PR-AWS-0002-CFR",
                             "eval": "data.rule.api_gw_cert",
                             "message": "data.rule.api_gw_cert_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS API Gateway endpoints without client certificate authentication",
@@ -76,11 +85,17 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","HITRUST","ISO 27001","NIST 800"],
+                            "compliance": [
+                                "CSA CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ALL_2",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -89,11 +104,11 @@
                     "rule": "file(all.rego)",
                     "evals": [
                         {
-                            "id":"gID6",
+                            "id": "gID6",
                             "eval": "data.rule.db_exposed",
                             "message": "data.rule.db_exposed_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "Publicly exposed DB Ports",
@@ -105,7 +120,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ALL_3",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -114,11 +130,11 @@
                     "rule": "file(all.rego)",
                     "evals": [
                         {
-                            "id":"gID1",
+                            "id": "gID1",
                             "eval": "data.rule.aks_monitoring",
                             "message": "data.rule.aks_monitoring_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "Instance is communicating with ports known to mine Bitcoin",
@@ -126,11 +142,15 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["HIPAA", "NIST 800"],
+                            "compliance": [
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ALL_4",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -139,11 +159,11 @@
                     "rule": "file(all.rego)",
                     "evals": [
                         {
-                            "id":"gID2",
+                            "id": "gID2",
                             "eval": "data.rule.aks_nodes",
                             "message": "data.rule.aks_nodes_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "Instance is communicating with ports known to mine Ethereum",
@@ -151,7 +171,10 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["HIPAA", "NIST 800"],
+                            "compliance": [
+                                "HIPAA",
+                                "NIST 800"
+                            ],
                             "service": []
                         }
                     ]
@@ -165,11 +188,11 @@
                     "rule": "file(cloudformation.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0014-CFR",
+                            "id": "PR-AWS-0014-CFR",
                             "eval": "data.rule.cf_sns",
                             "message": "data.rule.cf_sns_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS CloudFormation stack configured without SNS topic",
@@ -178,7 +201,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -191,11 +216,11 @@
                     "rule": "file(cloudfront.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0015-CFR",
+                            "id": "PR-AWS-0015-CFR",
                             "eval": "data.rule.cf_default_cache",
                             "message": "data.rule.cf_default_cache_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS CloudFront Distributions with Field-Level Encryption not enabled",
@@ -204,10 +229,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "cloudfront"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_CLOUD_FRONT_2",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -216,11 +244,11 @@
                     "rule": "file(cloudfront.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0016-CFR",
+                            "id": "PR-AWS-0016-CFR",
                             "eval": "data.rule.cf_ssl_protocol",
                             "message": "data.rule.cf_ssl_protocol_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS CloudFront distribution is using insecure SSL protocols for HTTPS communication",
@@ -229,10 +257,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "cloudfront"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_CLOUD_FRONT_3",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -241,11 +272,11 @@
                     "rule": "file(cloudfront.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0017-CFR",
+                            "id": "PR-AWS-0017-CFR",
                             "eval": "data.rule.cf_logging",
                             "message": "data.rule.cf_logging_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS CloudFront distribution with access logging disabled",
@@ -254,10 +285,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "cloudfront"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_CLOUD_FRONT_4",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -266,11 +300,11 @@
                     "rule": "file(cloudfront.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0018-CFR",
+                            "id": "PR-AWS-0018-CFR",
                             "eval": "data.rule.cf_https_only",
                             "message": "data.rule.cf_https_only_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS CloudFront origin protocol policy does not enforce HTTPS-only",
@@ -279,10 +313,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "cloudfront"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_CLOUD_FRONT_5",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -291,11 +328,11 @@
                     "rule": "file(cloudfront.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0019-CFR",
+                            "id": "PR-AWS-0019-CFR",
                             "eval": "data.rule.cf_https",
                             "message": "data.rule.cf_https_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS CloudFront viewer protocol policy is not configured with HTTPS",
@@ -304,10 +341,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "cloudfront"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_CLOUD_FRONT_6",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -316,11 +356,11 @@
                     "rule": "file(cloudfront.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0020-CFR",
+                            "id": "PR-AWS-0020-CFR",
                             "eval": "data.rule.cf_min_protocol",
                             "message": "data.rule.cf_min_protocol_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS CloudFront web distribution that allow TLS versions 1.0 or lower",
@@ -329,10 +369,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "cloudfront"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_CLOUD_FRONT_7",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -341,11 +384,11 @@
                     "rule": "file(cloudfront.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0021-CFR",
+                            "id": "PR-AWS-0021-CFR",
                             "eval": "data.rule.cf_firewall",
                             "message": "data.rule.cf_firewall_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS CloudFront web distribution with AWS Web Application Firewall (AWS WAF) service disabled",
@@ -354,10 +397,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "cloudfront"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_CLOUD_FRONT_8",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -366,11 +412,11 @@
                     "rule": "file(cloudfront.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0022-CFR",
+                            "id": "PR-AWS-0022-CFR",
                             "eval": "data.rule.cf_default_ssl",
                             "message": "data.rule.cf_default_ssl_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS CloudFront web distribution with default SSL certificate",
@@ -379,10 +425,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "cloudfront"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_CLOUD_FRONT_9",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -391,11 +440,11 @@
                     "rule": "file(cloudfront.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0023-CFR",
+                            "id": "PR-AWS-0023-CFR",
                             "eval": "data.rule.cf_geo_restriction",
                             "message": "data.rule.cf_geo_restriction_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS CloudFront web distribution with geo restriction disabled",
@@ -404,10 +453,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "cloudfront"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_CLOUD_FRONT_10",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -416,11 +468,11 @@
                     "rule": "file(cloudfront.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0024-CFR",
+                            "id": "PR-AWS-0024-CFR",
                             "eval": "data.rule.cf_s3_origin",
                             "message": "data.rule.cf_s3_origin_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS CloudTrail S3 buckets have not enabled MFA Delete",
@@ -429,7 +481,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "cloudfront"
+                            ]
                         }
                     ]
                 },
@@ -442,11 +496,11 @@
                     "rule": "file(cloudtrail.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0026-CFR",
+                            "id": "PR-AWS-0026-CFR",
                             "eval": "data.rule.ct_regions",
                             "message": "data.rule.ct_regions_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS CloudTrail is not enabled in all regions",
@@ -454,11 +508,24 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","GDPR","HIPAA","HITRUST","ISO 27001","NIST 800","NIST CSF","PCI DSS","SOC 2"],
-                            "service": []
+                            "compliance": [
+                                "CIS",
+                                "GDPR",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloudtrail"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_CLOUD_TRAIL_2",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -467,11 +534,11 @@
                     "rule": "file(cloudtrail.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0027-CFR",
+                            "id": "PR-AWS-0027-CFR",
                             "eval": "data.rule.ct_log_validation",
                             "message": "data.rule.ct_log_validation_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS CloudTrail log validation is not enabled in all regions",
@@ -479,11 +546,23 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","GDPR","HITRUST","ISO 27001","NIST 800","NIST CSF","SOC 2"],
-                            "service": []
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloudtrail"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_CLOUD_TRAIL_3",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -492,11 +571,11 @@
                     "rule": "file(cloudtrail.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0028-CFR",
+                            "id": "PR-AWS-0028-CFR",
                             "eval": "data.rule.ct_master_key",
                             "message": "data.rule.ct_master_key_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS CloudTrail logs are not encrypted using Customer Master Keys (CMKs)",
@@ -504,11 +583,22 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","GDPR","HITRUST","ISO 27001","NIST 800","NIST CSF"],
-                            "service": []
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF"
+                            ],
+                            "service": [
+                                "cloudtrail"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_CLOUD_TRAIL_4",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -517,11 +607,11 @@
                     "rule": "file(cloudtrail.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0192-CFR",
+                            "id": "PR-AWS-0192-CFR",
                             "eval": "data.rule.ct_cloudwatch",
                             "message": "data.rule.ct_cloudwatch_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "CloudTrail trail is not integrated with CloudWatch Log",
@@ -529,11 +619,23 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","GDPR","HITRUST","ISO 27001","NIST 800","NIST CSF","SOC 2"],
-                            "service": []
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloudtrail"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DYNAMO_DB",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -542,11 +644,11 @@
                     "rule": "file(dynamodb.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0036-CFR",
+                            "id": "PR-AWS-0036-CFR",
                             "eval": "data.rule.dynabodb_encrypt",
                             "message": "data.rule.dynabodb_encrypt_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS DynamoDB encrypted using AWS owned CMK instead of AWS managed CMK",
@@ -555,7 +657,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "dynamodb"
+                            ]
                         }
                     ]
                 },
@@ -568,11 +672,11 @@
                     "rule": "file(ebs.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0041-CFR",
+                            "id": "PR-AWS-0041-CFR",
                             "eval": "data.rule.ebs_encrypt",
                             "message": "data.rule.ebs_encrypt_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS EBS volumes are not encrypted",
@@ -580,7 +684,16 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","GDPR","HIPAA","HITRUST","ISO 27001","NIST 800","NIST CSF","PCI DSS"],
+                            "compliance": [
+                                "CSA CCM",
+                                "GDPR",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI DSS"
+                            ],
                             "service": []
                         }
                     ]
@@ -594,11 +707,11 @@
                     "rule": "file(ec2.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0042-CFR",
+                            "id": "PR-AWS-0042-CFR",
                             "eval": "data.rule.ec2_iam_role",
                             "message": "data.rule.ec2_iam_role_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS EC2 Instance IAM Role not enabled",
@@ -607,7 +720,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "ec2"
+                            ]
                         }
                     ]
                 },
@@ -620,11 +735,11 @@
                     "rule": "file(ecs.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0047-CFR",
+                            "id": "PR-AWS-0047-CFR",
                             "eval": "data.rule.ecs_task_evelated",
                             "message": "data.rule.ecs_task_evelated_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS ECS task definition elevated privileges enabled",
@@ -633,10 +748,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "ecs"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ECS_2",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -645,11 +763,11 @@
                     "rule": "file(ecs.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0048-CFR",
+                            "id": "PR-AWS-0048-CFR",
                             "eval": "data.rule.ecs_exec",
                             "message": "data.rule.ecs_exec_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS ECS/ Fargate task definition execution IAM Role not found",
@@ -658,10 +776,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "ecs"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ECS_3",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -670,11 +791,11 @@
                     "rule": "file(ecs.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0049-CFR",
+                            "id": "PR-AWS-0049-CFR",
                             "eval": "data.rule.ecs_root_user",
                             "message": "data.rule.ecs_root_user_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS ECS/ Fargate task definition root user found",
@@ -683,7 +804,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "ecs"
+                            ]
                         }
                     ]
                 },
@@ -696,11 +819,11 @@
                     "rule": "file(efs.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0060-CFR",
+                            "id": "PR-AWS-0060-CFR",
                             "eval": "data.rule.efs_kms",
                             "message": "data.rule.efs_kms_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Elastic File System (EFS) not encrypted using Customer Managed Key",
@@ -709,10 +832,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "efs"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_EFS_2",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -721,11 +847,11 @@
                     "rule": "file(efs.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0061-CFR",
+                            "id": "PR-AWS-0061-CFR",
                             "eval": "data.rule.efs_encrypt",
                             "message": "data.rule.efs_encrypt_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Elastic File System (EFS) with encryption for data at rest disabled",
@@ -734,7 +860,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "efs"
+                            ]
                         }
                     ]
                 },
@@ -747,11 +875,11 @@
                     "rule": "file(eks.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0050-CFR",
+                            "id": "PR-AWS-0050-CFR",
                             "eval": "data.rule.eks_multiple_sg",
                             "message": "data.rule.eks_multiple_sg_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS EKS cluster control plane assigned multiple security groups",
@@ -760,7 +888,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "eks"
+                            ]
                         }
                     ]
                 },
@@ -773,11 +903,11 @@
                     "rule": "file(elasticache.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0055-CFR",
+                            "id": "PR-AWS-0055-CFR",
                             "eval": "data.rule.cache_failover",
                             "message": "data.rule.cache_failover_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS ElastiCache Redis cluster with Multi-AZ Automatic Failover feature set to disabled",
@@ -786,22 +916,26 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "elasticache"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ELASTICACHE_2",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(elasticache.rego)",
-                    "evals": [{
-                            "id":"PR-AWS-0056-CFR",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0056-CFR",
                             "eval": "data.rule.cache_redis_auth",
                             "message": "data.rule.cache_redis_auth_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS ElastiCache Redis cluster with Redis AUTH feature disabled",
@@ -810,10 +944,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "elasticache"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ELASTICACHE_3",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -822,11 +959,11 @@
                     "rule": "file(elasticache.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0057-CFR",
+                            "id": "PR-AWS-0057-CFR",
                             "eval": "data.rule.cache_redis_encrypt",
                             "message": "data.rule.cache_redis_encrypt_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS ElastiCache Redis cluster with encryption for data at rest disabled",
@@ -835,10 +972,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "elasticache"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ELASTICACHE_4",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -847,11 +987,11 @@
                     "rule": "file(elasticache.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0058-CFR",
+                            "id": "PR-AWS-0058-CFR",
                             "eval": "data.rule.cache_encrypt",
                             "message": "data.rule.cache_encrypt_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS ElastiCache Redis cluster with in-transit encryption disabled",
@@ -860,7 +1000,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "elasticache"
+                            ]
                         }
                     ]
                 },
@@ -873,11 +1015,11 @@
                     "rule": "file(elasticsearch.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0074-CFR",
+                            "id": "PR-AWS-0074-CFR",
                             "eval": "data.rule.esearch_vpc",
                             "message": "data.rule.esearch_vpc_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS ElasticSearch cluster not in a VPC",
@@ -889,7 +1031,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ELASTIC_SEARCH_2",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -898,11 +1041,11 @@
                     "rule": "file(elasticsearch.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0076-CFR",
+                            "id": "PR-AWS-0076-CFR",
                             "eval": "data.rule.esearch_encrypt",
                             "message": "data.rule.esearch_encrypt_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Elasticsearch domain Encryption for data at rest is disabled",
@@ -910,11 +1053,17 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","HITRUST","ISO 27001","NIST 800"],
+                            "compliance": [
+                                "CSA CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ELASTIC_SEARCH_3",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -923,11 +1072,11 @@
                     "rule": "file(elasticsearch.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0077-CFR",
+                            "id": "PR-AWS-0077-CFR",
                             "eval": "data.rule.esearch_master",
                             "message": "data.rule.esearch_master_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Elasticsearch domain has Dedicated master set to disabled",
@@ -939,7 +1088,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ELASTIC_SEARCH_4",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -948,11 +1098,11 @@
                     "rule": "file(elasticsearch.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0078-CFR",
+                            "id": "PR-AWS-0078-CFR",
                             "eval": "data.rule.esearch_index_slow_log",
                             "message": "data.rule.esearch_index_slow_log_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Elasticsearch domain has Index slow logs set to disabled",
@@ -960,11 +1110,16 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","HITRUST","NIST 800"],
+                            "compliance": [
+                                "CSA CCM",
+                                "HITRUST",
+                                "NIST 800"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ELASTIC_SEARCH_5",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -973,11 +1128,11 @@
                     "rule": "file(elasticsearch.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0079-CFR",
+                            "id": "PR-AWS-0079-CFR",
                             "eval": "data.rule.esearch_search_slow_log",
                             "message": "data.rule.esearch_search_slow_log_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Elasticsearch domain has Search slow logs set to disabled",
@@ -985,11 +1140,16 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","HITRUST","NIST 800"],
+                            "compliance": [
+                                "CSA CCM",
+                                "HITRUST",
+                                "NIST 800"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ELASTIC_SEARCH_6",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -998,11 +1158,11 @@
                     "rule": "file(elasticsearch.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0080-CFR",
+                            "id": "PR-AWS-0080-CFR",
                             "eval": "data.rule.esearch_zone_awareness",
                             "message": "data.rule.esearch_zone_awareness_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Elasticsearch domain has Zone Awareness set to disabled",
@@ -1010,7 +1170,10 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","NIST 800"],
+                            "compliance": [
+                                "CSA CCM",
+                                "NIST 800"
+                            ],
                             "service": []
                         }
                     ]
@@ -1024,11 +1187,11 @@
                     "rule": "file(elb.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0062-CFR",
+                            "id": "PR-AWS-0062-CFR",
                             "eval": "data.rule.elb_insecure_cipher",
                             "message": "data.rule.elb_insecure_cipher_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with insecure ciphers",
@@ -1037,10 +1200,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "elb"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ELB_2",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1049,11 +1215,11 @@
                     "rule": "file(elb.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0063-CFR",
+                            "id": "PR-AWS-0063-CFR",
                             "eval": "data.rule.elb_insecure_protocol",
                             "message": "data.rule.elb_insecure_protocol_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with vulnerable SSL protocol",
@@ -1062,10 +1228,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "elb"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ELB_3",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1074,11 +1243,11 @@
                     "rule": "file(elb.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0064-CFR",
+                            "id": "PR-AWS-0064-CFR",
                             "eval": "data.rule.elb_access_log",
                             "message": "data.rule.elb_access_log_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Elastic Load Balancer (Classic) with access log disabled",
@@ -1087,10 +1256,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "elb"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ELB_4",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1099,11 +1271,11 @@
                     "rule": "file(elb.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0065-CFR",
+                            "id": "PR-AWS-0065-CFR",
                             "eval": "data.rule.elb_conn_drain",
                             "message": "data.rule.elb_conn_drain_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Elastic Load Balancer (Classic) with connection draining disabled",
@@ -1112,10 +1284,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "elb"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ELB_5",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1124,11 +1299,11 @@
                     "rule": "file(elb.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0066-CFR",
+                            "id": "PR-AWS-0066-CFR",
                             "eval": "data.rule.elb_crosszone",
                             "message": "data.rule.elb_crosszone_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Elastic Load Balancer (Classic) with cross-zone load balancing disabled",
@@ -1137,10 +1312,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "elb"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ELB_6",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1149,11 +1327,11 @@
                     "rule": "file(elb.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0068-CFR",
+                            "id": "PR-AWS-0068-CFR",
                             "eval": "data.rule.elb_sec_group",
                             "message": "data.rule.elb_sec_group_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"" 
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Elastic Load Balancer (ELB) has security group with no outbound rules",
@@ -1162,10 +1340,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "elb"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ELB_7",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1174,11 +1355,11 @@
                     "rule": "file(elb.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0069-CFR",
+                            "id": "PR-AWS-0069-CFR",
                             "eval": "data.rule.elb_not_in_use",
                             "message": "data.rule.elb_not_in_use_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Elastic Load Balancer (ELB) not in use",
@@ -1186,11 +1367,16 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["ISO 27001"],
-                            "service": []
+                            "compliance": [
+                                "ISO 27001"
+                            ],
+                            "service": [
+                                "elb"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ELB_8",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1199,11 +1385,11 @@
                     "rule": "file(elb.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0072-CFR",
+                            "id": "PR-AWS-0072-CFR",
                             "eval": "data.rule.elb_alb_logs",
                             "message": "data.rule.elb_alb_logs_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balancer (ALB) with access log disabled",
@@ -1212,10 +1398,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "elb"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ELB_9",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1224,11 +1413,11 @@
                     "rule": "file(elb.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0073-CFR",
+                            "id": "PR-AWS-0073-CFR",
                             "eval": "data.rule.elb_listener_ssl",
                             "message": "data.rule.elb_listener_ssl_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Elastic Load Balancer with listener TLS/SSL disabled",
@@ -1236,11 +1425,22 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","GDPR","HITRUST","ISO 27001","NIST 800","NIST CSF","SOC 2"],
-                            "service": []
+                            "compliance": [
+                                "CSA CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "elb"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_ELB_10",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1249,11 +1449,11 @@
                     "rule": "file(elb.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0006-CFR",
+                            "id": "PR-AWS-0006-CFR",
                             "eval": "data.rule.elb_over_https",
                             "message": "data.rule.elb_over_https_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Application Load Balancer (ALB) listener that allow connection requests over HTTP",
@@ -1262,7 +1462,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "elb"
+                            ]
                         }
                     ]
                 },
@@ -1275,11 +1477,11 @@
                     "rule": "file(lambda.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0105-CFR",
+                            "id": "PR-AWS-0105-CFR",
                             "eval": "data.rule.lambda_env",
                             "message": "data.rule.lambda_env_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Lambda Environment Variables not encrypted at-rest using CMK",
@@ -1288,10 +1490,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "lambda"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_LAMBDA_2",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1300,11 +1505,11 @@
                     "rule": "file(lambda.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0106-CFR",
+                            "id": "PR-AWS-0106-CFR",
                             "eval": "data.rule.lambda_vpc",
                             "message": "data.rule.lambda_vpc_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Lambda Function is not assigned to access within VPC",
@@ -1313,10 +1518,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "lambda"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_LAMBDA_3",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1325,11 +1533,11 @@
                     "rule": "file(lambda.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0107-CFR",
+                            "id": "PR-AWS-0107-CFR",
                             "eval": "data.rule.lambda_tracing",
                             "message": "data.rule.lambda_tracing_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Lambda functions with tracing not enabled",
@@ -1337,8 +1545,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["HITRUST","NIST 800"],
-                            "service": []
+                            "compliance": [
+                                "HITRUST",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "lambda"
+                            ]
                         }
                     ]
                 },
@@ -1351,11 +1564,11 @@
                     "rule": "file(rds.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0119-CFR",
+                            "id": "PR-AWS-0119-CFR",
                             "eval": "data.rule.rds_cluster_encrypt",
                             "message": "data.rule.rds_cluster_encrypt_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS RDS DB cluster encryption is disabled",
@@ -1364,10 +1577,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "rds"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_RDS_2",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1376,11 +1592,11 @@
                     "rule": "file(rds.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0121-CFR",
+                            "id": "PR-AWS-0121-CFR",
                             "eval": "data.rule.rds_public",
                             "message": "data.rule.rds_public_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS RDS database instance is publicly accessible",
@@ -1388,11 +1604,19 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","HITRUST","ISO 27001","NIST 800"],
-                            "service": []
+                            "compliance": [
+                                "CSA CCM",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "rds"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_RDS_3",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1401,11 +1625,11 @@
                     "rule": "file(rds.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0125-CFR",
+                            "id": "PR-AWS-0125-CFR",
                             "eval": "data.rule.rds_encrypt",
                             "message": "data.rule.rds_encrypt_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS RDS instance is not encrypted",
@@ -1413,11 +1637,23 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","GDPR","HIPAA","HITRUST","ISO 27001","NIST 800","NIST CSF","PCI DSS"],
-                            "service": []
+                            "compliance": [
+                                "CSA CCM",
+                                "GDPR",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "rds"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_RDS_4",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1426,11 +1662,11 @@
                     "rule": "file(rds.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0127-CFR",
+                            "id": "PR-AWS-0127-CFR",
                             "eval": "data.rule.rds_multiaz",
                             "message": "data.rule.rds_multiaz_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS RDS instance with Multi-Availability Zone disabled",
@@ -1439,10 +1675,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "rds"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_RDS_5",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1451,12 +1690,12 @@
                     "rule": "file(rds.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0128-CFR",
+                            "id": "PR-AWS-0128-CFR",
                             "eval": "data.rule.rds_snapshot",
                             "message": "data.rule.rds_snapshot_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
-                        } 
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
                     ],
                     "title": "AWS RDS instance with copy tags to snapshots disabled",
                     "description": "This policy identifies RDS instances which have copy tags to snapshots disabled. Copy tags to snapshots copies all the user-defined tags from the DB instance to snapshots. Copying tags allow you to add metadata and apply access policies to your Amazon RDS resources.",
@@ -1464,10 +1703,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "rds"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_RDS_6",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1476,11 +1718,11 @@
                     "rule": "file(rds.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0129-CFR",
+                            "id": "PR-AWS-0129-CFR",
                             "eval": "data.rule.rds_backup",
                             "message": "data.rule.rds_backup_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS RDS instance without Automatic Backup setting",
@@ -1489,10 +1731,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "rds"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_RDS_7",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1501,11 +1746,11 @@
                     "rule": "file(rds.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0130-CFR",
+                            "id": "PR-AWS-0130-CFR",
                             "eval": "data.rule.rds_upgrade",
                             "message": "data.rule.rds_upgrade_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS RDS minor upgrades not enabled",
@@ -1514,10 +1759,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "rds"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_RDS_8",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1526,11 +1774,11 @@
                     "rule": "file(rds.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0131-CFR",
+                            "id": "PR-AWS-0131-CFR",
                             "eval": "data.rule.rds_retention",
                             "message": "data.rule.rds_retention_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS RDS retention policy less than 7 days",
@@ -1539,7 +1787,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "rds"
+                            ]
                         }
                     ]
                 },
@@ -1552,11 +1802,11 @@
                     "rule": "file(redshift.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0133-CFR",
+                            "id": "PR-AWS-0133-CFR",
                             "eval": "data.rule.redshift_encrypt_key",
                             "message": "data.rule.redshift_encrypt_key_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Redshift Cluster not encrypted using Customer Managed Key",
@@ -1565,10 +1815,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "redshift"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_RED_SHIFT_2",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1577,11 +1830,11 @@
                     "rule": "file(redshift.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0134-CFR",
+                            "id": "PR-AWS-0134-CFR",
                             "eval": "data.rule.redshift_public",
                             "message": "data.rule.redshift_public_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Redshift clusters should not be publicly accessible",
@@ -1589,11 +1842,21 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","GDPR","HITRUST","ISO 27001","NIST 800","SOC 2"],
-                            "service": []
+                            "compliance": [
+                                "CSA CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "redshift"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_RED_SHIFT_3",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1602,11 +1865,11 @@
                     "rule": "file(redshift.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0135-CFR",
+                            "id": "PR-AWS-0135-CFR",
                             "eval": "data.rule.redshift_audit",
                             "message": "data.rule.redshift_audit_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Redshift database does not have audit logging enabled",
@@ -1614,11 +1877,21 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","GDPR","HITRUST","ISO 27001","NIST 800","SOC 2"],
-                            "service": []
+                            "compliance": [
+                                "CSA CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "redshift"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_RED_SHIFT_4",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1626,12 +1899,12 @@
                     "type": "rego",
                     "rule": "file(redshift.rego)",
                     "evals": [
-                       {
-                            "id":"PR-AWS-0136-CFR",
+                        {
+                            "id": "PR-AWS-0136-CFR",
                             "eval": "data.rule.redshift_require_ssl",
                             "message": "data.rule.redshift_require_ssl_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Redshift does not have require_ssl configured",
@@ -1639,11 +1912,20 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","GDPR","HITRUST","ISO 27001","NIST 800"],
-                            "service": []
+                            "compliance": [
+                                "CSA CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "redshift"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_RED_SHIFT_5",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1651,12 +1933,12 @@
                     "type": "rego",
                     "rule": "file(redshift.rego)",
                     "evals": [
-                       {
-                            "id":"PR-AWS-0137-CFR",
+                        {
+                            "id": "PR-AWS-0137-CFR",
                             "eval": "data.rule.redshift_encrypt",
                             "message": "data.rule.redshift_encrypt_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Redshift instances are not encrypted",
@@ -1664,11 +1946,22 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","GDPR","HITRUST","ISO 27001","NIST 800","NIST CSF","PCI DSS"],
-                            "service": []
+                            "compliance": [
+                                "CSA CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "redshift"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_S3_1",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1677,12 +1970,11 @@
                     "rule": "file(s3.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0004-CFR",
+                            "id": "PR-AWS-0004-CFR",
                             "eval": "data.rule.s3_accesslog",
                             "message": "data.rule.s3_accesslog_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
-                        
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Access logging not enabled on S3 buckets",
@@ -1690,11 +1982,21 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","GDPR","HITRUST","NIST 800","PCI DSS","SOC 2"],
-                            "service": []
+                            "compliance": [
+                                "CSA CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "NIST 800",
+                                "PCI DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "s3"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_S3_2",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1703,12 +2005,11 @@
                     "rule": "file(s3.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0140-CFR",
+                            "id": "PR-AWS-0140-CFR",
                             "eval": "data.rule.s3_acl_delete",
                             "message": "data.rule.s3_acl_delete_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
-                        
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS S3 Bucket has Global DELETE Permissions enabled via bucket policy",
@@ -1717,10 +2018,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "s3"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_S3_3",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1729,11 +2033,11 @@
                     "rule": "file(s3.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0141-CFR",
+                            "id": "PR-AWS-0141-CFR",
                             "eval": "data.rule.s3_acl_get",
                             "message": "data.rule.s3_acl_get_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS S3 Bucket has Global GET Permissions enabled via bucket policy",
@@ -1742,10 +2046,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "s3"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_S3_4",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1754,11 +2061,11 @@
                     "rule": "file(s3.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0142-CFR",
+                            "id": "PR-AWS-0142-CFR",
                             "eval": "data.rule.s3_acl_list",
                             "message": "data.rule.s3_acl_list_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS S3 Bucket has Global LIST Permissions enabled via bucket policy",
@@ -1767,10 +2074,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "s3"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_S3_5",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1779,11 +2089,11 @@
                     "rule": "file(s3.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0143-CFR",
+                            "id": "PR-AWS-0143-CFR",
                             "eval": "data.rule.s3_acl_put",
                             "message": "data.rule.s3_acl_put_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS S3 Bucket has Global PUT Permissions enabled via bucket policy",
@@ -1792,10 +2102,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "s3"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_S3_6",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1804,11 +2117,11 @@
                     "rule": "file(s3.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0145-CFR",
+                            "id": "PR-AWS-0145-CFR",
                             "eval": "data.rule.s3_versioning",
                             "message": "data.rule.s3_versioning_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS S3 Object Versioning is disabled",
@@ -1817,10 +2130,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "s3"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_S3_7",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1829,11 +2145,11 @@
                     "rule": "file(s3.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0148-CFR",
+                            "id": "PR-AWS-0148-CFR",
                             "eval": "data.rule.s3_transport",
                             "message": "data.rule.s3_transport_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS S3 bucket not configured with secure data transport policy",
@@ -1842,10 +2158,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "s3"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_S3_8",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1854,11 +2173,11 @@
                     "rule": "file(s3.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0196-CFR",
+                            "id": "PR-AWS-0196-CFR",
                             "eval": "data.rule.s3_website",
                             "message": "data.rule.s3_website_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "S3 buckets with configurations set to host websites",
@@ -1866,8 +2185,12 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["ISO 27001"],
-                            "service": []
+                            "compliance": [
+                                "ISO 27001"
+                            ],
+                            "service": [
+                                "s3"
+                            ]
                         }
                     ]
                 },
@@ -1880,11 +2203,11 @@
                     "rule": "file(securitygroup.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0175-CFR",
+                            "id": "PR-AWS-0175-CFR",
                             "eval": "data.rule.port_135",
                             "message": "data.rule.port_135_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to Windows RPC port (135)",
@@ -1896,7 +2219,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SECURITY_GROUP_2",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1905,11 +2229,11 @@
                     "rule": "file(securitygroup.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0165-CFR",
+                            "id": "PR-AWS-0165-CFR",
                             "eval": "data.rule.port_137",
                             "message": "data.rule.port_137_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to NetBIOS port (137)",
@@ -1921,7 +2245,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SECURITY_GROUP_3",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1930,11 +2255,11 @@
                     "rule": "file(securitygroup.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0166-CFR",
+                            "id": "PR-AWS-0166-CFR",
                             "eval": "data.rule.port_138",
                             "message": "data.rule.port_138_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to NetBIOS port (138)",
@@ -1946,7 +2271,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SECURITY_GROUP_4",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1955,11 +2281,11 @@
                     "rule": "file(securitygroup.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0170-CFR",
+                            "id": "PR-AWS-0170-CFR",
                             "eval": "data.rule.port_1433",
                             "message": "data.rule.port_1433_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to SQLServer port (1433)",
@@ -1971,7 +2297,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SECURITY_GROUP_5",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -1980,11 +2307,11 @@
                     "rule": "file(securitygroup.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0171-CFR",
+                            "id": "PR-AWS-0171-CFR",
                             "eval": "data.rule.port_1434",
                             "message": "data.rule.port_1434_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to SQLServer port (1434)",
@@ -1996,7 +2323,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SECURITY_GROUP_6",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -2005,11 +2333,11 @@
                     "rule": "file(securitygroup.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0162-CFR",
+                            "id": "PR-AWS-0162-CFR",
                             "eval": "data.rule.port_20",
                             "message": "data.rule.port_20_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to FTP-Data port (20)",
@@ -2021,7 +2349,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SECURITY_GROUP_7",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -2030,11 +2359,11 @@
                     "rule": "file(securitygroup.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0161-CFR",
+                            "id": "PR-AWS-0161-CFR",
                             "eval": "data.rule.port_21",
                             "message": "data.rule.port_21_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to FTP port (21)",
@@ -2046,7 +2375,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SECURITY_GROUP_8",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -2055,11 +2385,11 @@
                     "rule": "file(securitygroup.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0176-CFR",
+                            "id": "PR-AWS-0176-CFR",
                             "eval": "data.rule.port_22",
                             "message": "data.rule.port_22_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic to SSH port (22)",
@@ -2067,11 +2397,22 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","GDPR","HIPAA","HITRUST","ISO 27001","NIST 800","NIST CSF","SOC 2"],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "GDPR",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "SOC 2"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SECURITY_GROUP_9",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -2080,11 +2421,11 @@
                     "rule": "file(securitygroup.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0172-CFR",
+                            "id": "PR-AWS-0172-CFR",
                             "eval": "data.rule.port_23",
                             "message": "data.rule.port_23_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to Telnet port (23)",
@@ -2096,7 +2437,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SECURITY_GROUP_10",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -2105,12 +2447,12 @@
                     "rule": "file(securitygroup.rego)",
                     "evals": [
                         {
-            "id":"PR-AWS-0169-CFR",
-            "eval": "data.rule.port_25",
-            "message": "data.rule.port_25_err",
-            "remediationDescription":"",
-            "remediationFunction":""
-        }
+                            "id": "PR-AWS-0169-CFR",
+                            "eval": "data.rule.port_25",
+                            "message": "data.rule.port_25_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to SMTP port (25)",
                     "description": "This policy identifies the security groups which are exposing SMTP port (25) to the internet. It is recommended that Global permission to access the well known services SMTP port (25) should not be allowed in a security group.",
@@ -2121,7 +2463,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SECURITY_GROUP_11",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -2130,11 +2473,11 @@
                     "rule": "file(securitygroup.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0164-CFR",
+                            "id": "PR-AWS-0164-CFR",
                             "eval": "data.rule.port_3306",
                             "message": "data.rule.port_3306_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to MYSQL port (3306)",
@@ -2146,7 +2489,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SECURITY_GROUP_12",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -2155,11 +2499,11 @@
                     "rule": "file(securitygroup.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0168-CFR",
+                            "id": "PR-AWS-0168-CFR",
                             "eval": "data.rule.port_3389",
                             "message": "data.rule.port_3389_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to RDP port (3389)",
@@ -2167,11 +2511,22 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","GDPR","HIPAA","HITRUST","ISO 27001","NIST 800","NIST CSF","SOC 2"],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "GDPR",
+                                "HIPAA",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "SOC 2"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SECURITY_GROUP_13",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -2180,11 +2535,11 @@
                     "rule": "file(securitygroup.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0163-CFR",
+                            "id": "PR-AWS-0163-CFR",
                             "eval": "data.rule.port_4333",
                             "message": "data.rule.port_4333_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to MSQL port (4333)",
@@ -2196,7 +2551,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SECURITY_GROUP_14",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -2205,11 +2561,11 @@
                     "rule": "file(securitygroup.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0159-CFR",
+                            "id": "PR-AWS-0159-CFR",
                             "eval": "data.rule.port_445",
                             "message": "data.rule.port_445_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to CIFS port (445)",
@@ -2221,7 +2577,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SECURITY_GROUP_15",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -2230,11 +2587,11 @@
                     "rule": "file(securitygroup.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0160-CFR",
+                            "id": "PR-AWS-0160-CFR",
                             "eval": "data.rule.port_53",
                             "message": "data.rule.port_53_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to DNS port (53)",
@@ -2246,7 +2603,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SECURITY_GROUP_16",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -2255,11 +2613,11 @@
                     "rule": "file(securitygroup.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0167-CFR",
+                            "id": "PR-AWS-0167-CFR",
                             "eval": "data.rule.port_5432",
                             "message": "data.rule.port_5432_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to PostgreSQL port (5432)",
@@ -2271,7 +2629,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SECURITY_GROUP_17",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -2280,11 +2639,11 @@
                     "rule": "file(securitygroup.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0173-CFR",
+                            "id": "PR-AWS-0173-CFR",
                             "eval": "data.rule.port_5500",
                             "message": "data.rule.port_5500_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to VNC Listener port (5500)",
@@ -2296,7 +2655,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SECURITY_GROUP_18",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -2305,11 +2665,11 @@
                     "rule": "file(securitygroup.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0174-CFR",
+                            "id": "PR-AWS-0174-CFR",
                             "eval": "data.rule.port_5900",
                             "message": "data.rule.port_5900_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Security Groups allow internet traffic from internet to VNC Server port (5900)",
@@ -2321,7 +2681,8 @@
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SECURITY_GROUP_19",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -2330,11 +2691,11 @@
                     "rule": "file(securitygroup.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0035-CFR",
+                            "id": "PR-AWS-0035-CFR",
                             "eval": "data.rule.port_all",
                             "message": "data.rule.port_all_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Default Security Group does not restrict all traffic",
@@ -2342,11 +2703,20 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","GDPR","HITRUST","NIST 800","NIST CSF","SOC 2"],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "SOC 2"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SECURITY_GROUP_20",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -2355,11 +2725,11 @@
                     "rule": "file(securitygroup.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0178-CFR",
+                            "id": "PR-AWS-0178-CFR",
                             "eval": "data.rule.port_proto_all",
                             "message": "data.rule.port_proto_all_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS Security Groups with Inbound rule overly permissive to All Traffic",
@@ -2381,11 +2751,11 @@
                     "rule": "file(sns.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0152-CFR",
+                            "id": "PR-AWS-0152-CFR",
                             "eval": "data.rule.sns_protocol",
                             "message": "data.rule.sns_protocol_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS SNS subscription is not configured with HTTPS",
@@ -2394,10 +2764,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "sns"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SNS_2",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -2405,12 +2778,12 @@
                     "type": "rego",
                     "rule": "file(sns.rego)",
                     "evals": [
-                       {
-                            "id":"PR-AWS-0153-CFR",
+                        {
+                            "id": "PR-AWS-0153-CFR",
                             "eval": "data.rule.sns_encrypt_key",
                             "message": "data.rule.sns_encrypt_key_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS SNS topic encrypted using default KMS key instead of CMK",
@@ -2419,10 +2792,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "sns"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SNS_3",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -2431,11 +2807,11 @@
                     "rule": "file(sns.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0154-CFR",
+                            "id": "PR-AWS-0154-CFR",
                             "eval": "data.rule.sns_encrypt",
                             "message": "data.rule.sns_encrypt_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS SNS topic with server-side encryption disabled",
@@ -2444,7 +2820,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "sns"
+                            ]
                         }
                     ]
                 },
@@ -2457,11 +2835,11 @@
                     "rule": "file(sqs.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0155-CFR",
+                            "id": "PR-AWS-0155-CFR",
                             "eval": "data.rule.sqs_deadletter",
                             "message": "data.rule.sqs_deadletter_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS SQS does not have a dead letter queue configured",
@@ -2470,10 +2848,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "sqs"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SQS_2",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -2482,11 +2863,11 @@
                     "rule": "file(sqs.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0156-CFR",
+                            "id": "PR-AWS-0156-CFR",
                             "eval": "data.rule.sqs_encrypt_key",
                             "message": "data.rule.sqs_encrypt_key_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS SQS queue encryption using default KMS key instead of CMK",
@@ -2495,10 +2876,13 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "sqs"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_SQS_3",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -2507,11 +2891,11 @@
                     "rule": "file(sqs.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0157-CFR",
+                            "id": "PR-AWS-0157-CFR",
                             "eval": "data.rule.sqs_encrypt",
                             "message": "data.rule.sqs_encrypt_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS SQS server side encryption not enabled",
@@ -2520,7 +2904,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "sqs"
+                            ]
                         }
                     ]
                 },
@@ -2533,11 +2919,11 @@
                     "rule": "file(ssm.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0158-CFR",
+                            "id": "PR-AWS-0158-CFR",
                             "eval": "data.rule.ssm_secure",
                             "message": "data.rule.ssm_secure_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS SSM Parameter is not encrypted",
@@ -2546,7 +2932,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "ssm"
+                            ]
                         }
                     ]
                 },
@@ -2559,11 +2947,11 @@
                     "rule": "file(vpc.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0184-CFR",
+                            "id": "PR-AWS-0184-CFR",
                             "eval": "data.rule.vpc_subnet_autoip",
                             "message": "data.rule.vpc_subnet_autoip_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "AWS VPC subnets should not allow automatic public IP assignment",
@@ -2571,7 +2959,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","GDPR","HITRUST","ISO 27001","NIST 800","NIST CSF"],
+                            "compliance": [
+                                "CSA CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF"
+                            ],
                             "service": []
                         }
                     ]
@@ -2585,11 +2980,11 @@
                     "rule": "file(secrets.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0028-RGX",
+                            "id": "PR-AWS-0028-RGX",
                             "eval": "data.rule.gl_aws_secrets",
                             "message": "data.rule.gl_aws_secrets_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "Secrets should be removed from the source code",
@@ -2611,11 +3006,11 @@
                     "rule": "file(secrets.rego)",
                     "evals": [
                         {
-                            "id":"PR-AWS-0029-RGX",
+                            "id": "PR-AWS-0029-RGX",
                             "eval": "data.rule.gl_aws_account",
                             "message": "data.rule.gl_aws_account_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription": "",
+                            "remediationFunction": ""
                         }
                     ],
                     "title": "Secrets should be removed from the source code",
