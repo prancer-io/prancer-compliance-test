@@ -13,20 +13,30 @@
                     "rule": "file(activitylogalerts.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0090-ARM",
+                            "id": "PR-AZR-0090-ARM",
                             "eval": "data.rule.alerts",
                             "message": "data.rule.alerts_err",
-                            "remediationDescription":"Make sure you are following the ARM template format presented at this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-04-01/activitylogalerts",
-                            "remediationFunction":"PR_AZR_0090_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template format presented at this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-04-01/activitylogalerts",
+                            "remediationFunction": "PR_AZR_0090_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Activity log alerts settings should be enabled",
                     "description": "Activity log alerts are alerts that activate when a new activity log event occurs that matches the conditions specified in the alert. Based on the order and volume of the events recorded in Azure activity log, the alert rule will fire. Activity log alert rules are Azure resources, so they can be created by using an Azure Resource Manager template. ",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO","NIST 800","PCI DSS"],
-                            "service": ["microsoft.insights"]
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "microsoft.insights"
+                            ]
                         }
                     ]
                 },
@@ -39,23 +49,27 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0006-ARM",
+                            "id": "PR-AZR-0006-ARM",
                             "eval": "data.rule.aks_cni_net",
                             "message": "data.rule.aks_cni_net_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for AKS from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters",
-                            "remediationFunction":"PR_AZR_0006_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for AKS from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters",
+                            "remediationFunction": "PR_AZR_0006_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure CNI networking should be enabled in Azure AKS cluster",
                     "description": "Azure CNI provides the following features over kubenet networking:_x000D__x000D_- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network._x000D_- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB._x000D_- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance._x000D_- Support for Network Policies securing communication between pods._x000D__x000D_This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.containerservice"]
+                            "service": [
+                                "microsoft.containerservice"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_AKS_2",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -64,23 +78,27 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0007-ARM",
+                            "id": "PR-AZR-0007-ARM",
                             "eval": "data.rule.aks_http_routing",
                             "message": "data.rule.aks_http_routing_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for AKS from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters addonProfiles.httpApplicationRouting.enabled",
-                            "remediationFunction":"PR_AZR_0007_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for AKS from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters addonProfiles.httpApplicationRouting.enabled",
+                            "remediationFunction": "PR_AZR_0007_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure AKS cluster HTTP application routing should be disabled",
                     "description": "The HTTP application routing add-on is designed to let you quickly create an ingress controller and access your applications. This add-on is not currently designed for use in a production environment and is not recommended for production use. For production-ready ingress deployments that include multiple replicas and TLS support, see Create an HTTPS ingress controller.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.containerservice"]
+                            "service": [
+                                "microsoft.containerservice"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_AKS_3",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -89,23 +107,27 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0008-ARM",
+                            "id": "PR-AZR-0008-ARM",
                             "eval": "data.rule.aks_monitoring",
                             "message": "data.rule.aks_monitoring_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for AKS from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters addonProfiles.omsagent.enabled",
-                            "remediationFunction":"PR_AZR_0008_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for AKS from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters addonProfiles.omsagent.enabled",
+                            "remediationFunction": "PR_AZR_0008_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure AKS cluster monitoring should be enabled",
                     "description": "Azure Monitor for containers gives you performance visibility by collecting memory and processor metrics from controllers, nodes, and containers that are available in Kubernetes through the Metrics API. Container logs are also collected. After you enable monitoring from Kubernetes clusters, metrics and logs are automatically collected for you through a containerized version of the Log Analytics agent for Linux. Metrics are written to the metrics store and log data is written to the logs store associated with your Log Analytics workspace.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.containerservice"]
+                            "service": [
+                                "microsoft.containerservice"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_AKS_4",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -114,23 +136,27 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0009-ARM",
+                            "id": "PR-AZR-0009-ARM",
                             "eval": "data.rule.aks_nodes",
                             "message": "data.rule.aks_nodes_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for AKS from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters set minCount for Minimum number of nodes for auto-scaling to 3",
-                            "remediationFunction":"PR_AZR_0009_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for AKS from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters set minCount for Minimum number of nodes for auto-scaling to 3",
+                            "remediationFunction": "PR_AZR_0009_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure AKS cluster pool profile count should contain 3 nodes or more",
                     "description": "Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)_x000D__x000D_This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.containerservice"]
+                            "service": [
+                                "microsoft.containerservice"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_AKS_5",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -139,20 +165,23 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0010-ARM",
+                            "id": "PR-AZR-0010-ARM",
                             "eval": "data.rule.aks_rbac",
                             "message": "data.rule.aks_rbac_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for AKS from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters set enable RBAC to true to enable Kubernetes Role-Based Access Control.",
-                            "remediationFunction":"PR_AZR_0010_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for AKS from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters set enable RBAC to true to enable Kubernetes Role-Based Access Control.",
+                            "remediationFunction": "PR_AZR_0010_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure AKS enable role-based access control (RBAC) should be enforced",
                     "description": "Azure Kubernetes Service (AKS) can be configured to use Azure Active Directory (AD) for user authentication. In this configuration, you sign in to an AKS cluster using an Azure AD authentication token. You can also configure Kubernetes role-based access control (Kubernetes RBAC) to limit access to cluster resources based a user's identity or group membership. https://docs.microsoft.com/en-us/azure/aks/azure-ad-rbac",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.containerservice"]
+                            "service": [
+                                "microsoft.containerservice"
+                            ]
                         }
                     ]
                 },
@@ -165,23 +194,27 @@
                     "rule": "file(applicationgateways.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0011-ARM",
+                            "id": "PR-AZR-0011-ARM",
                             "eval": "data.rule.gw_tls",
                             "message": "data.rule.gw_tls_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for Application Gateway from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways Ssl protocols to be disabled on application gateway. - TLSv1_0, TLSv1_1",
-                            "remediationFunction":"PR_AZR_0011_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for Application Gateway from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways Ssl protocols to be disabled on application gateway. - TLSv1_0, TLSv1_1",
+                            "remediationFunction": "PR_AZR_0011_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Application Gateway should not allow TLSv1.1 or lower",
                     "description": "Transport Layer Security (TLS), previously known as Secure Sockets Layer (SSL), is the standard security technology for establishing an encrypted link between a web server and a browser. This link ensures that all data passed between the web server and browsers remain private and encrypted. Application gateway supports both TLS termination at the gateway as well as end to end TLS encryption. The minimum allowed TLS version should be 1.2",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_APPLICATION_GATEWAYS_2",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -190,20 +223,23 @@
                     "rule": "file(applicationgateways.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0012-ARM",
+                            "id": "PR-AZR-0012-ARM",
                             "eval": "data.rule.gw_waf",
                             "message": "data.rule.gw_waf_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for Application Gateway from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways webApplicationFirewallConfiguration should be enabled",
-                            "remediationFunction":"PR_AZR_0012_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for Application Gateway from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways webApplicationFirewallConfiguration should be enabled",
+                            "remediationFunction": "PR_AZR_0012_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Application Gateway should have the Web application firewall (WAF) enabled",
                     "description": "Azure Web Application Firewall (WAF) on Azure Application Gateway provides centralized protection of your web applications from common exploits and vulnerabilities. Web applications are increasingly targeted by malicious attacks that exploit commonly known vulnerabilities. SQL injection and cross-site scripting are among the most common attacks.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
                 },
@@ -216,20 +252,28 @@
                     "rule": "file(dbadministrators.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0085-ARM",
+                            "id": "PR-AZR-0085-ARM",
                             "eval": "data.rule.db_ad_admin",
                             "message": "data.rule.db_ad_admin_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2019-06-01-preview/servers/administrators  administratorType should be ActiveDirectory",
-                            "remediationFunction":"PR_AZR_0085_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2019-06-01-preview/servers/administrators  administratorType should be ActiveDirectory",
+                            "remediationFunction": "PR_AZR_0085_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "SQL servers should be integrated with Azure Active Directory for administration",
                     "description": "Azure Active Directory (Azure AD) authentication is a mechanism for connecting to Azure SQL Database, Azure SQL Managed Instance, and Synapse SQL in Azure Synapse Analytics by using identities in Azure AD. With Azure AD authentication, you can centrally manage the identities of database users and other Microsoft services in one central location. Central ID management provides a single place to manage database users and simplifies permission management.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","ISO 27001","NIST 800","PCI DSS"],
-                            "service": ["microsoft.sql"]
+                            "compliance": [
+                                "CSA CCM",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "microsoft.sql"
+                            ]
                         }
                     ]
                 },
@@ -242,23 +286,34 @@
                     "rule": "file(dbauditingdbsettings.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0003-ARM",
+                            "id": "PR-AZR-0003-ARM",
                             "eval": "data.rule.sql_db_log_audit",
                             "message": "data.rule.sql_db_log_audit_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings  make sure the state of auditing is enabled",
-                            "remediationFunction":"PR_AZR_0003_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings  make sure the state of auditing is enabled",
+                            "remediationFunction": "PR_AZR_0003_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Auditing for SQL database should be set to On",
                     "description": "Database events are tracked by the Auditing feature and the events are written to an audit log in your Azure storage account. This process helps you to monitor database activity, and get insight into anomalies that could indicate business concerns or suspected security violations.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
-                            "service": ["microsoft.sql"]
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "microsoft.sql"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DB_AUDITING_DB_SETTINGS_2",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -267,23 +322,32 @@
                     "rule": "file(dbauditingdbsettings.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0053-ARM",
+                            "id": "PR-AZR-0053-ARM",
                             "eval": "data.rule.sql_db_log_retention",
                             "message": "data.rule.sql_db_log_retention_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings  make sure retentionDays is at least 90",
-                            "remediationFunction":"PR_AZR_0053_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings  make sure retentionDays is at least 90",
+                            "remediationFunction": "PR_AZR_0053_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure SQL Database Auditing Retention should be more than 90 days",
                     "description": "This policy identifies SQL Databases which have Auditing Retention less than 90 days. Audit Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
                             "service": []
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DB_AUDITING_SETTINGS",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -292,20 +356,23 @@
                     "rule": "file(dbauditingsettings.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0059-ARM",
+                            "id": "PR-AZR-0059-ARM",
                             "eval": "data.rule.sql_log_retention",
                             "message": "data.rule.sql_log_retention_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR_AZR_0059_ARM.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0059_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure SQL Server audit log retention is less than 91 days",
                     "description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance._x000D__x000D_This policy identifies SQL servers which do not retain audit logs for more than 90 days. As a best practice, configure the audit logs retention time period to be greater than 90 days.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.sql"]
+                            "service": [
+                                "microsoft.sql"
+                            ]
                         }
                     ]
                 },
@@ -318,20 +385,30 @@
                     "rule": "file(dbdataencryption.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0084-ARM",
+                            "id": "PR-AZR-0084-ARM",
                             "eval": "data.rule.db_encrypt",
                             "message": "data.rule.db_encrypt_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/databases/transparentdataencryption  status should be Enabled",
-                            "remediationFunction":"PR_AZR_0084_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/databases/transparentdataencryption  status should be Enabled",
+                            "remediationFunction": "PR_AZR_0084_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "SQL databases Transparent Data Encryption should be enabled",
                     "description": "Transparent data encryption protects Azure database against malicious activity. It performs real-time encryption and decryption of the database, related reinforcements, and exchange log records without requiring any changes to the application. It encrypts the storage of the entire database by using a symmetric key called the database encryption key.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
-                            "service": ["microsoft.sql"]
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "microsoft.sql"
+                            ]
                         }
                     ]
                 },
@@ -344,20 +421,29 @@
                     "rule": "file(dbfirewallrules.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0082-ARM",
+                            "id": "PR-AZR-0082-ARM",
                             "eval": "data.rule.db_firewall",
                             "message": "data.rule.db_firewall_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2015-05-01-preview/servers/firewallrules  startIPAddress and endIPAddress should not be 0.0.0.0",
-                            "remediationFunction":"PR_AZR_0082_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2015-05-01-preview/servers/firewallrules  startIPAddress and endIPAddress should not be 0.0.0.0",
+                            "remediationFunction": "PR_AZR_0082_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "SQL Server Firewall rules should not allow access to all Azure internal resources",
                     "description": "Firewalls grant access to databases based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with \"0.0.0.0\" represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","ISO 27001","NIST 800","PCI DSS"],
-                            "service": ["microsoft.sql"]
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "microsoft.sql"
+                            ]
                         }
                     ]
                 },
@@ -370,23 +456,34 @@
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0054-ARM",
+                            "id": "PR-AZR-0054-ARM",
                             "eval": "data.rule.dbsec_threat_retention",
                             "message": "data.rule.dbsec_threat_retention_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies  retentionDays should be more than 90 days",
-                            "remediationFunction":"PR_AZR_0054_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies  retentionDays should be more than 90 days",
+                            "remediationFunction": "PR_AZR_0054_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure SQL Database Threat Retention should be configured for more than 90 days",
                     "description": "This policy identifies SQL Databases which have Threat Retention less than or equals to 90 days. Threat Logs can be used to check for anomalies and gives an understanding of suspected breaches or misuse of data and access. It is recommended to configure SQL database Threat Retention to be greater than 90 days.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
-                            "service": ["microsoft.sql"]
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "microsoft.sql"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_2",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -395,23 +492,33 @@
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0055-ARM",
+                            "id": "PR-AZR-0055-ARM",
                             "eval": "data.rule.dbsec_threat_email",
                             "message": "data.rule.dbsec_threat_email_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies  emailAccountAdmins and emailAddresses should be set",
-                            "remediationFunction":"PR_AZR_0055_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies  emailAccountAdmins and emailAddresses should be set",
+                            "remediationFunction": "PR_AZR_0055_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure SQL Databases Email service and co-administrators for Threat Detection should be enabled",
                     "description": "This policy identifies SQL Databases which have disabled Email service and co-administrators for Threat Detection. Enable 'Email service and co-administrators' option to receive security alerts of any anomalous activities in SQL database. The alert notifications are sent to service and co-administrator email addresses so that they can mitigate any potential risks.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
-                            "service": ["microsoft.sql"]
+                            "compliance": [
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "microsoft.sql"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_3",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -420,23 +527,33 @@
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0097-ARM",
+                            "id": "PR-AZR-0097-ARM",
                             "eval": "data.rule.dbsec_threat_alert",
                             "message": "data.rule.dbsec_threat_alert_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies  disabledAlerts should be empty or not present",
-                            "remediationFunction":"PR_AZR_0097_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies  disabledAlerts should be empty or not present",
+                            "remediationFunction": "PR_AZR_0097_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Threat Detection types on SQL databases should not exclude any alerts",
                     "description": "Ensure that Threat Detection types is not excluding anything",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","ISO 27001","NIST 800","PCI DSS"],
-                            "service": ["microsoft.sql"]
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "microsoft.sql"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_4",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -445,23 +562,34 @@
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0088-ARM",
+                            "id": "PR-AZR-0088-ARM",
                             "eval": "data.rule.sql_alert",
                             "message": "data.rule.sql_alert_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies  emailAddresses and emailAccountAdmins should be set",
-                            "remediationFunction":"PR_AZR_0088_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies  emailAddresses and emailAccountAdmins should be set",
+                            "remediationFunction": "PR_AZR_0088_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "SQL Alerts should be sent to a vlaid email address",
                     "description": "Checks to ensure that an valid email address is set for Threat Detection alerts. The alerts are sent to this email address when any anomalous activities are detected on SQL databases.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
-                            "service": ["microsoft.sql"]
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "microsoft.sql"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_5",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -470,19 +598,25 @@
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0096-ARM",
+                            "id": "PR-AZR-0096-ARM",
                             "eval": "data.rule.dbsec_threat_off",
                             "message": "data.rule.dbsec_threat_off_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies  state should be enabled",
-                            "remediationFunction":"PR_AZR_0096_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies  state should be enabled",
+                            "remediationFunction": "PR_AZR_0096_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Threat Detection on SQL databases should set to on",
                     "description": "SQL Threat Detection provides a new layer of security, which enables customers to detect and respond to potential threats as they occur by providing security alerts on anomalous activities. Users will receive an alert upon suspicious database activities, potential vulnerabilities, and SQL injection attacks, as well as anomalous database access patterns. SQL Threat Detection alerts provide details of suspicious activity and recommend action on how to investigate and mitigate the threat.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","ISO 27001","NIST 800","PCI DSS"]
+                            "compliance": [
+                                "CIS",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ]
                         }
                     ]
                 },
@@ -495,23 +629,27 @@
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0056-ARM",
+                            "id": "PR-AZR-0056-ARM",
                             "eval": "data.rule.db_ads_mail",
                             "message": "data.rule.db_ads_mail_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments  Specifies an array of e-mail addresses to which the scan notification is sent.",
-                            "remediationFunction":"PR_AZR_0056_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments  Specifies an array of e-mail addresses to which the scan notification is sent.",
+                            "remediationFunction": "PR_AZR_0056_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure SQL Server advanced data security should have an email alert recipient",
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL Servers that do not have an email address configured for ADS alert notifications. As a best practice, provide one or more email addresses where you want to receive alerts for any anomalous activities detected on SQL Servers.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.sql"]
+                            "service": [
+                                "microsoft.sql"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DB_VULNERABILITY_ASSESSMENTS_2",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -520,23 +658,27 @@
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0057-ARM",
+                            "id": "PR-AZR-0057-ARM",
                             "eval": "data.rule.db_ads_alert",
                             "message": "data.rule.db_ads_alert_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments  Specifies that the schedule scan notification will be is sent to the subscription administrators.",
-                            "remediationFunction":"PR_AZR_0057_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments  Specifies that the schedule scan notification will be is sent to the subscription administrators.",
+                            "remediationFunction": "PR_AZR_0057_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure SQL Server advanced data security should send alerts to subscription administrators",
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the subscription admin can receive email alerts when anomalous activities are detected on the SQL Servers.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.sql"]
+                            "service": [
+                                "microsoft.sql"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DB_VULNERABILITY_ASSESSMENTS_3",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -545,20 +687,23 @@
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0058-ARM",
+                            "id": "PR-AZR-0058-ARM",
                             "eval": "data.rule.db_ads_scan",
                             "message": "data.rule.db_ads_scan_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments  recurringScans should be enabled",
-                            "remediationFunction":"PR_AZR_0058_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments  recurringScans should be enabled",
+                            "remediationFunction": "PR_AZR_0058_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure SQL Server advanced data security should be enabled",
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.sql"]
+                            "service": [
+                                "microsoft.sql"
+                            ]
                         }
                     ]
                 },
@@ -571,23 +716,27 @@
                     "rule": "file(diagnosticsettings.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0017-ARM",
+                            "id": "PR-AZR-0017-ARM",
                             "eval": "data.rule.log_keyvault",
                             "message": "data.rule.log_keyvault_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings  make sure to enable diagnostics settings for keyvault",
-                            "remediationFunction":"PR_AZR_0017_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings  make sure to enable diagnostics settings for keyvault",
+                            "remediationFunction": "PR_AZR_0017_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Key Vault audit logging should be enabled",
                     "description": "This policy identifies Azure Key Vault instances for which audit logging is disabled. As a best practice, enable audit event logging for Key Vault instances to monitor how and when your key vaults are accessed, and by whom.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.keyvault"]
+                            "service": [
+                                "microsoft.keyvault"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DIAGONASTIC_SETTINGS_2",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -596,23 +745,27 @@
                     "rule": "file(diagnosticsettings.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0019-ARM",
+                            "id": "PR-AZR-0019-ARM",
                             "eval": "data.rule.log_lbs",
                             "message": "data.rule.log_lbs_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings  make sure to enable diagnostics settings for load balancers",
-                            "remediationFunction":"PR_AZR_0019_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings  make sure to enable diagnostics settings for load balancers",
+                            "remediationFunction": "PR_AZR_0019_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Load Balancer diagnostics logs should be enabled",
                     "description": "Azure Load Balancers provide different types of logsâ€”alert events, health probe, metricsâ€”to help you manage and troubleshoot issues. This policy identifies Azure Load Balancers that have diagnostics logs disabled. As a best practice, enable diagnostic logs to start collecting the data available through these logs.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DIAGONASTIC_SETTINGS_3",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -621,23 +774,27 @@
                     "rule": "file(diagnosticsettings.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0063-ARM",
+                            "id": "PR-AZR-0063-ARM",
                             "eval": "data.rule.log_storage_retention",
                             "message": "data.rule.log_storage_retention_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings  retentionPolicy should be enabled and more than 90 days",
-                            "remediationFunction":"PR_AZR_0063_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings  retentionPolicy should be enabled and more than 90 days",
+                            "remediationFunction": "PR_AZR_0063_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Auditing Retention should be enabled for Azure Storage Account for more than 90 days",
                     "description": "This policy identifies Storage Accounts which have Auditing Retentions less than 90 days. Audit Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access. It is recommended to configure Storage Account Audit Log Retention to be greater than or equal to 90 days.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.storage"]
+                            "service": [
+                                "microsoft.storage"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DIAGONASTIC_SETTINGS_4",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -646,23 +803,27 @@
                     "rule": "file(diagnosticsettings.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0069-ARM",
+                            "id": "PR-AZR-0069-ARM",
                             "eval": "data.rule.log_blob",
                             "message": "data.rule.log_blob_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings  should be enabled for blobs",
-                            "remediationFunction":"PR_AZR_0069_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings  should be enabled for blobs",
+                            "remediationFunction": "PR_AZR_0069_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure storage account logging for blobs should be enabled",
                     "description": "Storage Logging records details of requests (read, write, and delete operations) against your Azure blobs. The logs include additional information such as:_x000D_- Timing and server latency._x000D_- Success or failure, and HTTP status code._x000D_- Authentication details_x000D__x000D_This policy identifies Azure storage accounts that do not have logging enabled for blobs. As a best practice, enable logging for read, write, and delete request types on blobs.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.storage"]
+                            "service": [
+                                "microsoft.storage"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DIAGONASTIC_SETTINGS_5",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -671,23 +832,27 @@
                     "rule": "file(diagnosticsettings.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0071-ARM",
+                            "id": "PR-AZR-0071-ARM",
                             "eval": "data.rule.log_queue",
                             "message": "data.rule.log_queue_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings  should be enabled for queues",
-                            "remediationFunction":"PR_AZR_0071_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings  should be enabled for queues",
+                            "remediationFunction": "PR_AZR_0071_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure storage account logging for queues should be enabled",
                     "description": "Queue logging cannot be enabled for Storage Accounts with 'kind' of BlobStorage **_x000D__x000D_Storage Logging records details of requests (read, write, and delete operations) against your Azure queues. The logs include additional information such as:_x000D_- Timing and server latency._x000D_- Success or failure, and HTTP status code._x000D_- Authentication details_x000D__x000D_This policy identifies Azure storage accounts that do not have logging enabled for queues. As a best practice, enable logging for read, write, and delete request types on queues.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.storage"]
+                            "service": [
+                                "microsoft.storage"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_DIAGONASTIC_SETTINGS_6",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -696,20 +861,23 @@
                     "rule": "file(diagnosticsettings.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0073-ARM",
+                            "id": "PR-AZR-0073-ARM",
                             "eval": "data.rule.log_table",
                             "message": "data.rule.log_table_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings  should be enabled for tables",
-                            "remediationFunction":"PR_AZR_0073_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings  should be enabled for tables",
+                            "remediationFunction": "PR_AZR_0073_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure storage account logging for tables should be enabled",
                     "description": "** MODIFICATION OF DEFAULT RULE - As of 12-APR-2019, Table logging cannot be enabled for Storage Accounts with 'kind' of BlobStorage **_x000D__x000D_Storage Logging records details of requests (read, write, and delete operations) against your Azure tables. The logs include additional information such as:_x000D_- Timing and server latency._x000D_- Success or failure, and HTTP status code._x000D_- Authentication details_x000D__x000D_This policy identifies Azure storage accounts that do not have logging enabled for tables. As a best practice, enable logging for read, write, and delete request types on tables.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.storage"]
+                            "service": [
+                                "microsoft.storage"
+                            ]
                         }
                     ]
                 },
@@ -722,20 +890,23 @@
                     "rule": "file(disks.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0068-ARM",
+                            "id": "PR-AZR-0068-ARM",
                             "eval": "data.rule.disk_encrypt",
                             "message": "data.rule.disk_encrypt_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for Disks from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/disks  encryptionSettingsCollection enabled should be true",
-                            "remediationFunction":"PR_AZR_0068_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for Disks from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/disks  encryptionSettingsCollection enabled should be true",
+                            "remediationFunction": "PR_AZR_0068_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure disk for VM operating system should be encrypted at rest",
                     "description": "To meet your organizational security or compliance requirement, Azure provides disk encryption at rest using Azure Storage Service Encryption (SSE) and Azure Disk Encryption (ADE). Starting February 2017, SSE is enabled by default for all managed disks. ADE is integrated with Azure Key Vault to help you control, manage, and audit the disk encryption keys and secrets._x000D__x000D_This policy detects Virtual Machine (VM) OS disks that are not encrypted at rest using ADE. As a best practice, enable ADE for provide volume encryption for the OS disk. For more information, see https://docs.microsoft.com/en-us/azure/security/azure-security-disk-encryption-overview.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.compute"]
+                            "service": [
+                                "microsoft.compute"
+                            ]
                         }
                     ]
                 },
@@ -748,20 +919,23 @@
                     "rule": "file(keyvaultsecrets.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0018-ARM",
+                            "id": "PR-AZR-0018-ARM",
                             "eval": "data.rule.kv_expire",
                             "message": "data.rule.kv_expire_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for Disks from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/disks  expiration should be set for secrets",
-                            "remediationFunction":"PR_AZR_0018_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for Disks from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/disks  expiration should be set for secrets",
+                            "remediationFunction": "PR_AZR_0018_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Key Vault secrets should have expiration date",
                     "description": "This policy identifies Azure Key Vault secrets that do not have an expiry date. As a best practice, set an expiration date for each secret and rotate the secret regularly.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.keyvault"]
+                            "service": [
+                                "microsoft.keyvault"
+                            ]
                         }
                     ]
                 },
@@ -774,21 +948,23 @@
                     "rule": "file(locks.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0052-ARM",
+                            "id": "PR-AZR-0052-ARM",
                             "eval": "data.rule.rg_locks",
                             "message": "data.rule.rg_locks_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for locks from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/2016-09-01/locks",
-                            "remediationFunction":"PR_AZR_0052_ARM.py"
-                            
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for locks from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/2016-09-01/locks",
+                            "remediationFunction": "PR_AZR_0052_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Resource Group should have a resource lock",
                     "description": "Azure Resource Manager locks provide a way to lock down Azure resources from being deleted or modified. The lock level can be set to either 'CanNotDelete' or 'ReadOnly'. When you apply a lock at a parent scope, all resources within the scope inherit the same lock, and the most restrictive lock takes precedence._x000D__x000D_This policy identifies Azure Resource Groups that do not have a lock set. As a best practice, place a lock on important resources to prevent accidental or malicious modification or deletion by unauthorized users.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.authorization"]
+                            "service": [
+                                "microsoft.authorization"
+                            ]
                         }
                     ]
                 },
@@ -801,23 +977,27 @@
                     "rule": "file(networkwatchersflowlogs.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0050-ARM",
+                            "id": "PR-AZR-0050-ARM",
                             "eval": "data.rule.netwatch_logs",
                             "message": "data.rule.netwatch_logs_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for Network Watcher from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs enabled should be true",
-                            "remediationFunction":"PR_AZR_0050_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for Network Watcher from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs enabled should be true",
+                            "remediationFunction": "PR_AZR_0050_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Watcher Network Security Group (NSG) flow logs should be enabled",
                     "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs are disabled. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'._x000D__x000D_NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:_x000D_- Outbound and inbound flows on a per-rule basis._x000D_- Network interface to which the flow applies._x000D_- 5-tuple information about the flow (source/destination IP, source/destination port, protocol)._x000D_- Whether the traffic was allowed or denied._x000D__x000D_As a best practice, enable NSG flow logs to improve network visibility.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_WATCHERS_FLOW_LOGS_2",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -826,20 +1006,23 @@
                     "rule": "file(networkwatchersflowlogs.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0051-ARM",
+                            "id": "PR-AZR-0051-ARM",
                             "eval": "data.rule.netwatch_log_retention",
                             "message": "data.rule.netwatch_log_retention_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for Network Watcher from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs enabled should be true",
-                            "remediationFunction":"PR_AZR_0051_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for Network Watcher from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs enabled should be true",
+                            "remediationFunction": "PR_AZR_0051_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Watcher Network Security Group (NSG) flow logs retention should be more than 90 days",
                     "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs retention period is 90 days or less. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'._x000D__x000D_NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:_x000D_- Outbound and inbound flows on a per-rule basis._x000D_- Network interface to which the flow applies._x000D_- 5-tuple information about the flow (source/destination IP, source/destination port, protocol)._x000D_- Whether the traffic was allowed or denied._x000D__x000D_As a best practice, enable NSG flow logs and set the log retention period to at least 90 days.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
                 },
@@ -852,23 +1035,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0022-ARM",
+                            "id": "PR-AZR-0022-ARM",
                             "eval": "data.rule.nsg_in_tcp_all_src",
                             "message": "data.rule.nsg_in_tcp_all_src_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0022_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0022_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group (NSG) shouldn't have Inbound rule overly permissive to all TCP traffic from any source",
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to open TCP traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_2",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -877,23 +1064,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0023-ARM",
+                            "id": "PR-AZR-0023-ARM",
                             "eval": "data.rule.nsg_in_udp_all_src",
                             "message": "data.rule.nsg_in_udp_all_src_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0023_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0023_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group (NSG) shouldn't have Inbound rule overly permissive to all UDP traffic from any source",
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to open UDP traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_3",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -902,23 +1093,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0024-ARM",
+                            "id": "PR-AZR-0024-ARM",
                             "eval": "data.rule.nsg_in_tcp_all",
                             "message": "data.rule.nsg_in_tcp_all_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0024_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0024_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group (NSG) shouldn't have Inbound rule overly permissive to all traffic from Internet on TCP protocol",
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on TCP protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_4",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -927,23 +1122,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0025-ARM",
+                            "id": "PR-AZR-0025-ARM",
                             "eval": "data.rule.nsg_in_udp_all",
                             "message": "data.rule.nsg_in_udp_all_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0025_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0025_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group (NSG) shouldn't have Inbound rule overly permissive to all traffic from Internet on UDP protocol",
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on UDP protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_5",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -952,23 +1151,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0026-ARM",
+                            "id": "PR-AZR-0026-ARM",
                             "eval": "data.rule.nsg_in_all",
                             "message": "data.rule.nsg_in_all_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0026_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0026_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group (NSG) shouldn't have Inbound rule overly permissive to all traffic from Internet on any protocol",
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on any protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_6",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -977,23 +1180,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0027-ARM",
+                            "id": "PR-AZR-0027-ARM",
                             "eval": "data.rule.nsg_in_all_src",
                             "message": "data.rule.nsg_in_all_src_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0027_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0027_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group (NSG) shouldn't have Inbound rule overly permissive to allow all traffic from any source on any protocol",
                     "description": "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_7",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1002,23 +1209,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0028-ARM",
+                            "id": "PR-AZR-0028-ARM",
                             "eval": "data.rule.nsg_in_all_dst",
                             "message": "data.rule.nsg_in_all_dst_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0028_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0028_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to allow all traffic from any source to any destination",
                     "description": "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_8",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1027,23 +1238,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0034-ARM",
+                            "id": "PR-AZR-0034-ARM",
                             "eval": "data.rule.nsg_allow_icmp",
                             "message": "data.rule.nsg_allow_icmp_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0034_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0034_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group shouldn't allows ICMP (Ping)",
                     "description": "ICMP is used by devices to communicate error messages and status. While ICMP is useful for  diagnostics and troubleshooting, it can also be used to exploit or disrupt systems._x000D__x000D_This policy detects any NSG rule that allows ICMP (Ping) traffic from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict ICMP (Ping) solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_9",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1052,23 +1267,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0032-ARM",
+                            "id": "PR-AZR-0032-ARM",
                             "eval": "data.rule.inbound_port_21",
                             "message": "data.rule.inbound_port_21_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0032_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0032_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group shouldn't allow FTP (TCP Port 21)",
                     "description": "This policy detects any NSG rule that allows FTP traffic on TCP port 21 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict FTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_10",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1077,23 +1296,33 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"gID3",
+                            "id": "gID3",
                             "eval": "data.rule.inbound_insecure_port",
                             "message": "data.rule.inbound_insecure_port_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"gID3.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "gID3.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Internet connectivity via tcp over insecure port should be prevented",
                     "description": "Identify network traffic coming from internet which is plain text FTP, Telnet or HTTP from Internet.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["GDPR", "HIPAA", "NIST CSF", "PCI DSS", "SOC 2"],
-                            "service": ["microsoft.network"]
+                            "compliance": [
+                                "GDPR",
+                                "HIPAA",
+                                "NIST CSF",
+                                "PCI DSS",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_11",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1102,23 +1331,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"gID5",
+                            "id": "gID5",
                             "eval": "data.rule.inbound_port_11211",
                             "message": "data.rule.inbound_port_11211_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"gID5.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "gID5.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Memcached DDoS attack attempt should be prevented",
                     "description": "Memcached is a general-purpose distributed memory caching system. It is often used to speed up dynamic database-driven websites by caching data and objects in RAM to reduce the number of times an external data source (such as a database or API) must be read. It is reported that Memcache versions 1.5.5 and below are vulnerable to DDoS amplification attack. This policy aims at finding such attacks and generate alerts.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_12",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1127,23 +1360,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"gID7",
+                            "id": "gID7",
                             "eval": "data.rule.inbound_port_6379",
                             "message": "data.rule.inbound_port_6379_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"gID7.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "gID7.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "RedisWannaMine vulnerable instances with active network traffic should be locked down",
                     "description": "RedisWannaMine is cryptojacking attack which aims at both database servers and application servers via remote code execution, exploiting an Apache Struts vulnerability. To inject cryptocurrency mining malware, RedWannaMine uses a transmission control protocol (TCP) scanner to check open port 445 of SMB and scans vulnerable Redis server database over port 6379(tcp), so that it can use EternalBlue to spread further.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_13",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1152,23 +1389,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"gID6",
+                            "id": "gID6",
                             "eval": "data.rule.inbound_port_dbs",
                             "message": "data.rule.inbound_port_dbs_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"gID6.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "gID6.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Publicly should not expose DB Ports",
                     "description": "DB Servers contain sensitive data and should not be exposed to any direct traffic from internet. This policy checks for the network traffic from internet hitting the DB Servers on their default ports. The DB servers monitored on the default ports are : Microsoft SQL Server (1433), Oracle (1521), MySQL (3306), Sybase (5000), Postgresql (5432), CouchDB (5984), Redis (6379, 6380), RethinkDB (8080,28015, 29015), CassandraDB (9042), Memcached (11211), MongoDB (27017), DB2 (50000).",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_14",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1177,23 +1418,33 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0020-ARM",
+                            "id": "PR-AZR-0020-ARM",
                             "eval": "data.rule.inbound_port_22",
                             "message": "data.rule.inbound_port_22_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0020_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0020_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group (NSG) should not allow SSH traffic from internet on port 22",
                     "description": "Blocking SSH port 22 will protect users from attacks like Account compromise.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","NIST 800","PCI DSS"],
-                            "service": ["microsoft.network"]
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_15",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1202,23 +1453,33 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0021-ARM",
+                            "id": "PR-AZR-0021-ARM",
                             "eval": "data.rule.inbound_port_3389",
                             "message": "data.rule.inbound_port_3389_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0021_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0021_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group (NSG) should not allow traffic from internet on port 3389",
                     "description": "Blocking RDP port 3389 will protect users from attacks like account compromise, Denial of service and ransomware.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","NIST 800","PCI DSS"],
-                            "service": ["microsoft.network"]
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_16",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1227,23 +1488,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0047-ARM",
+                            "id": "PR-AZR-0047-ARM",
                             "eval": "data.rule.inbound_port_445",
                             "message": "data.rule.inbound_port_445_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0047_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0047_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group should not allow Windows SMB (TCP Port 445)",
                     "description": "This policy detects any NSG rule that allows Windows SMB traffic on TCP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict Windows SMB solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_17",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1252,23 +1517,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0031-ARM",
+                            "id": "PR-AZR-0031-ARM",
                             "eval": "data.rule.inbound_port_53",
                             "message": "data.rule.inbound_port_53_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0031_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0031_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group should not allow DNS (UDP Port 53)",
                     "description": "This policy detects any NSG rule that allows DNS traffic on UDP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_18",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1277,23 +1546,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0033-ARM",
+                            "id": "PR-AZR-0033-ARM",
                             "eval": "data.rule.inbound_port_20",
                             "message": "data.rule.inbound_port_20_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0033_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0033_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group should not allow FTP-Data (TCP Port 20)",
                     "description": "This policy detects any NSG rule that allows FTP-Data traffic on TCP port 20 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict FTP-Data solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_19",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1302,23 +1575,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0035-ARM",
+                            "id": "PR-AZR-0035-ARM",
                             "eval": "data.rule.inbound_port_4333",
                             "message": "data.rule.inbound_port_4333_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0035_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0035_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group should not allow MS SQL (TCP Port 4333)",
                     "description": "This policy detects any NSG rule that allows MSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_20",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1327,23 +1604,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0036-ARM",
+                            "id": "PR-AZR-0036-ARM",
                             "eval": "data.rule.inbound_port_3306",
                             "message": "data.rule.inbound_port_3306_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0036_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0036_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group should not allow MySQL (TCP Port 3306)",
                     "description": "This policy detects any NSG rule that allows MySQL traffic on TCP port 3306 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict MySQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_21",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1352,23 +1633,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0038-ARM",
+                            "id": "PR-AZR-0038-ARM",
                             "eval": "data.rule.inbound_port_netbios",
                             "message": "data.rule.inbound_port_netbios_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0038_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0038_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group should not allow NetBIOS (UDP Port 138)",
                     "description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_22",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1377,23 +1662,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0039-ARM",
+                            "id": "PR-AZR-0039-ARM",
                             "eval": "data.rule.inbound_port_5432",
                             "message": "data.rule.inbound_port_5432_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0039_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0039_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group should not allow PostgreSQL (TCP Port 5432)",
                     "description": "This policy detects any NSG rule that allows PostgreSQL traffic on TCP port 5432 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict PostgreSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_23",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1402,23 +1691,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0040-ARM",
+                            "id": "PR-AZR-0040-ARM",
                             "eval": "data.rule.inbound_port_25",
                             "message": "data.rule.inbound_port_25_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0040_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0040_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group should not allow SMTP (TCP Port 25)",
                     "description": "This policy detects any NSG rule that allows SMTP traffic on TCP port 25 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict SMTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_24",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1427,23 +1720,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0042-ARM",
+                            "id": "PR-AZR-0042-ARM",
                             "eval": "data.rule.inbound_port_sqlserver",
                             "message": "data.rule.inbound_port_sqlserver_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0042_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0042_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group should not allow SqlServer (TCP Port 1433)",
                     "description": "This policy detects any NSG rule that allows SqlServer traffic on TCP port 1433 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict SqlServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_25",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1452,23 +1749,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0043-ARM",
+                            "id": "PR-AZR-0043-ARM",
                             "eval": "data.rule.inbound_port_23",
                             "message": "data.rule.inbound_port_23_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0043_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0043_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group should not allow Telnet (TCP Port 23)",
                     "description": "Telnet provides a plaintext connection to manage devices using the command line, and is less secure than SSH._x000D_This policy detects any NSG rule that allows Telnet traffic on TCP port 23 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict Telnet solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_26",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1477,23 +1778,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0044-ARM",
+                            "id": "PR-AZR-0044-ARM",
                             "eval": "data.rule.inbound_port_5500",
                             "message": "data.rule.inbound_port_5500_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0044_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0044_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group should not allow VNC Listener (TCP Port 5500)",
                     "description": "This policy detects any NSG rule that allows VNC Listener traffic on TCP port 5500 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict VNC Listener solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_27",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1502,23 +1807,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0045-ARM",
+                            "id": "PR-AZR-0045-ARM",
                             "eval": "data.rule.inbound_port_5900",
                             "message": "data.rule.inbound_port_5900_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0045_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0045_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group should not allow VNC Server (TCP Port 5900)",
                     "description": "This policy detects any NSG rule that allows VNC Server traffic on TCP port 5900 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict VNC Server solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_28",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1527,23 +1836,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0046-ARM",
+                            "id": "PR-AZR-0046-ARM",
                             "eval": "data.rule.inbound_port_135",
                             "message": "data.rule.inbound_port_135_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0046_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0046_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group should not allow Windows RPC (TCP Port 135)",
                     "description": "This policy detects any NSG rule that allows Windows RPC traffic on TCP port 135 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict Windows RPC solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_29",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1552,23 +1865,27 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0048-ARM",
+                            "id": "PR-AZR-0048-ARM",
                             "eval": "data.rule.nsg_out_all",
                             "message": "data.rule.nsg_out_all_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"PR_AZR_0048_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0048_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Network Security Group with Outbound rule to should not allow all traffic to any source",
                     "description": "This policy identifies NSGs which allows outgoing traffic to any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic to known sources on authorized protocols and ports.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_30",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1577,23 +1894,30 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"gID1",
+                            "id": "gID1",
                             "eval": "data.rule.outbound_port_bitcoin",
                             "message": "data.rule.outbound_port_bitcoin_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"gID1.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "gID1.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Instance should not be allowed with ports known to mine Bitcoin",
                     "description": "Identifies traffic from internal workloads to internet IPs on ports 8332,8333 that are known to mine Bitcoins. Unless this traffic is part of authorized applications and processes, your instances may have been compromised.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["HIPAA", "NIST CSF"],
-                            "service": ["microsoft.network"]
+                            "compliance": [
+                                "HIPAA",
+                                "NIST CSF"
+                            ],
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_31",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1602,20 +1926,26 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id":"gID2",
+                            "id": "gID2",
                             "eval": "data.rule.outbound_port_ethereum",
                             "message": "data.rule.outbound_port_ethereum_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction":"gID2.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "gID2.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Instance should not be allowed communicating with ports known to mine Ethereum",
                     "description": "Identifies traffic from internal workloads to internet IPs on ports 8545,30303 that are known to mine Ethereum. Unless this traffic is part of authorized applications and processes, your instances may have been compromised.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["HIPAA", "NIST CSF" ],
-                            "service": ["microsoft.network"]
+                            "compliance": [
+                                "HIPAA",
+                                "NIST CSF"
+                            ],
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
                 },
@@ -1628,20 +1958,26 @@
                     "rule": "file(pricing.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0091-ARM",
+                            "id": "PR-AZR-0091-ARM",
                             "eval": "data.rule.pricing",
                             "message": "data.rule.pricing_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for pricing from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.security/pricings",
-                            "remediationFunction":"PR_AZR_0091_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for pricing from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.security/pricings",
+                            "remediationFunction": "PR_AZR_0091_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Standard pricing tier should be selected in Security Center",
                     "description": "Selecting the standard pricing tier will enable threat detection for networks and virtual systems by providing threat intelligence, anomaly detection, and behavior analytics in Azure Security Center.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","ISO 27001"],
-                            "service": ["microsoft.security"]
+                            "compliance": [
+                                "CIS",
+                                "ISO 27001"
+                            ],
+                            "service": [
+                                "microsoft.security"
+                            ]
                         }
                     ]
                 },
@@ -1654,21 +1990,23 @@
                     "rule": "file(registrieslist.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0015-ARM",
+                            "id": "PR-AZR-0015-ARM",
                             "eval": "data.rule.acr_classic",
                             "message": "data.rule.acr_classic_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for container registry from this URL : https://docs.microsoft.com/en-us/rest/api/containerregistry/registries/list",
-                            "remediationFunction":"PR_AZR_0015_ARM.py"
-                        
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for container registry from this URL : https://docs.microsoft.com/en-us/rest/api/containerregistry/registries/list",
+                            "remediationFunction": "PR_AZR_0015_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Container Registry using the deprecated classic registry",
                     "description": "This policy identifies an Azure Container Registry (ACR) that is using the classic SKU. The initial release of the Azure Container Registry (ACR) service that was offered as a classic SKU is being deprecated and will be unavailable after April 2019. As a best practice, upgrade your existing classic registry to a managed registry._x000D__x000D_For more information, visit https://docs.microsoft.com/en-us/azure/container-registry/container-registry-upgrade",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.containerregistry"]
+                            "service": [
+                                "microsoft.containerregistry"
+                            ]
                         }
                     ]
                 },
@@ -1681,20 +2019,23 @@
                     "rule": "file(registrieswebhooks.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0005-ARM",
+                            "id": "PR-AZR-0005-ARM",
                             "eval": "data.rule.acr_webhooks",
                             "message": "data.rule.acr_webhooks_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for registry webhook from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries/webhooks",
-                            "remediationFunction":"PR_AZR_0005_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for registry webhook from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries/webhooks",
+                            "remediationFunction": "PR_AZR_0005_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure ACR HTTPS should be enabled for webhook",
                     "description": "Ensure you send container registry webhooks only to a HTTPS endpoint. This policy checks your container registry webhooks and alerts if it finds a URI with HTTP.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.containerregistry"]
+                            "service": [
+                                "microsoft.containerregistry"
+                            ]
                         }
                     ]
                 },
@@ -1707,20 +2048,30 @@
                     "rule": "file(securitycontacts.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0087-ARM",
+                            "id": "PR-AZR-0087-ARM",
                             "eval": "data.rule.securitycontacts",
                             "message": "data.rule.securitycontacts_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for security center from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts",
-                            "remediationFunction":"PR_AZR_0087_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for security center from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts",
+                            "remediationFunction": "PR_AZR_0087_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Security contact emails should be set set in Security Center",
                     "description": "Setting a valid email address in Security contact emails will enable Microsoft to contact you if the Microsoft Security Response Center (MSRC) discovers that your data has been accessed by an unlawful or unauthorized party. This will make sure that you are aware of any security issues and take prompt actions to mitigate the risks.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
-                            "service": ["microsoft.security"]
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "microsoft.security"
+                            ]
                         }
                     ]
                 },
@@ -1733,23 +2084,34 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0092-ARM",
+                            "id": "PR-AZR-0092-ARM",
                             "eval": "data.rule.storage_secure",
                             "message": "data.rule.storage_secure_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts supportsHttpsTrafficOnly should be true",
-                            "remediationFunction":"PR_AZR_0092_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts supportsHttpsTrafficOnly should be true",
+                            "remediationFunction": "PR_AZR_0092_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Secure transfer should be enabled for Storage Accounts",
                     "description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPs. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesnâ€™t support HTTPs for custom domain names, this option is not applied when using a custom domain name.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","CSA CCM","HIPAA","ISO 27001","NIST 800","PCI DSS"],
-                            "service": ["microsoft.storage"]
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "microsoft.storage"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_STORAGE_ACCOUNT_2",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1758,23 +2120,32 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0093-ARM",
+                            "id": "PR-AZR-0093-ARM",
                             "eval": "data.rule.storage_acl",
                             "message": "data.rule.storage_acl_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts networkAcls should be configured",
-                            "remediationFunction":"PR_AZR_0093_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts networkAcls should be configured",
+                            "remediationFunction": "PR_AZR_0093_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Storage Accounts should have firewall rules enabled",
                     "description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on._x000D__x000D_You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","HIPAA","NIST 800","PCI DSS"],
-                            "service": ["microsoft.storage"]
+                            "compliance": [
+                                "CIS",
+                                "HIPAA",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "microsoft.storage"
+                            ]
                         }
                     ]
-                },{
+                },
+                {
                     "masterTestId": "TEST_STORAGE_ACCOUNT_3",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1783,20 +2154,28 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id":"",
+                            "id": "",
                             "eval": "data.rule.storage_acl",
                             "message": "data.rule.storage_acl_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts",
-                            "remediationFunction":""
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts",
+                            "remediationFunction": ""
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Advanced Threat Protection should be enabled for all the storage accounts",
                     "description": "Advanced Threat Protection (ATP) for Azure Storage provides an additional layer of security intelligence that detects unusual and potentially harmful attempts to access or exploit storage accounts. This layer of protection allows you to protect and address concerns about potential threats to your storage accounts as they occur, without needing to be an expert in security.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CIS","HIPAA","NIST","PCI DSS"],
-                            "service": ["microsoft.storage"]
+                            "compliance": [
+                                "CIS",
+                                "HIPAA",
+                                "NIST",
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "microsoft.storage"
+                            ]
                         }
                     ]
                 },
@@ -1809,20 +2188,23 @@
                     "rule": "file(storageblobcontainers.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0013-ARM",
+                            "id": "PR-AZR-0013-ARM",
                             "eval": "data.rule.storage_public_access",
                             "message": "data.rule.storage_public_access_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-06-01/storageaccounts/blobservices/containers",
-                            "remediationFunction":"PR_AZR_0013_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-06-01/storageaccounts/blobservices/containers",
+                            "remediationFunction": "PR_AZR_0013_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Blob container(s) with public access and logging set to less than 180 days",
                     "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature._x000D__x000D_This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB') that also have Audit Log Retention set to less than 180 days._x000D__x000D_As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.storage"]
+                            "service": [
+                                "microsoft.storage"
+                            ]
                         }
                     ]
                 },
@@ -1835,20 +2217,23 @@
                     "rule": "file(vm.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0065-ARM",
+                            "id": "PR-AZR-0065-ARM",
                             "eval": "data.rule.vm_aset",
                             "message": "data.rule.vm_aset_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines",
-                            "remediationFunction":"PR_AZR_0065_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines",
+                            "remediationFunction": "PR_AZR_0065_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Virtual Machine should be assigned to an availability set",
                     "description": "To provide application redundancy during planned or unplanned maintenance events, you can group two or more virtual machines (VMs) in an availability set. An availability set ensures that the VMs are distributed across multiple isolated hardware nodes in a cluster so that only a subset of your VMs are impacted should a hardware or software failure occur on Azure._x000D__x000D_This policy identifies Azure VMs that are not deployed in an availability set. As a high availability (HA) best practice, deploy your VMs in an availability set.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.compute"]
+                            "service": [
+                                "microsoft.compute"
+                            ]
                         }
                     ]
                 },
@@ -1861,20 +2246,23 @@
                     "rule": "file(vmextensions.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0064-ARM",
+                            "id": "PR-AZR-0064-ARM",
                             "eval": "data.rule.vm_protection",
                             "message": "data.rule.vm_protection_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for extensions from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines/extensions",
-                            "remediationFunction":"PR_AZR_0064_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for extensions from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines/extensions",
+                            "remediationFunction": "PR_AZR_0064_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Virtual Machine should have endpoint protection installed",
                     "description": "This policy identifies Azure Virtual Machines (VMs) that do not have endpoint protection installed. Installing endpoint protection systems (like Antimalware for Azure) provides for real-time protection capability that helps identify and remove viruses, spyware, and other malicious software. As a best practice, install endpoint protection on all VMs and computers to help identify and remove viruses, spyware, and other malicious software.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.compute"]
+                            "service": [
+                                "microsoft.compute"
+                            ]
                         }
                     ]
                 },
@@ -1887,20 +2275,23 @@
                     "rule": "file(vnetpeerings.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0075-ARM",
+                            "id": "PR-AZR-0075-ARM",
                             "eval": "data.rule.vnet_peer",
                             "message": "data.rule.vnet_peer_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for vnet from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/virtualnetworkpeerings",
-                            "remediationFunction":"PR_AZR_0075_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for vnet from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/virtualnetworkpeerings",
+                            "remediationFunction": "PR_AZR_0075_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure virtual network peering should be connected",
                     "description": "Virtual network peering enables you to connect two Azure virtual networks so that the resources in these networks are directly connected._x000D__x000D_This policy identifies Azure virtual network peers that are disconnected. Typically, the disconnection happens when a peering configuration is deleted on one virtual network, and the other virtual network reports the peering status as disconnected.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
                 },
@@ -1913,20 +2304,23 @@
                     "rule": "file(vnetsubnets.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0067-ARM",
+                            "id": "PR-AZR-0067-ARM",
                             "eval": "data.rule.vnet_subnet_nsg",
                             "message": "data.rule.vnet_subnet_nsg_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for vnet from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/subnets",
-                            "remediationFunction":"PR_AZR_0067_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for vnet from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/subnets",
+                            "remediationFunction": "PR_AZR_0067_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Azure Virtual Network subnet should always have Network Security Group",
                     "description": "This policy identifies Azure Virtual Network (VNet) subnets that are not associated with a Network Security Group (NSG). While binding an NSG to a network interface of a Virtual Machine (VM) enables fine-grained control to the VM, associating a NSG to a subnet enables better control over network traffic to all resources within a subnet. As a best practice, associate an NSG with a subnet so that you can protect your VMs on a subnet-level._x000D__x000D_For more information, see https://blogs.msdn.microsoft.com/igorpag/2016/05/14/azure-network-security-groups-nsg-best-practices-and-lessons-learned/",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["microsoft.network"]
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
                 },
@@ -1939,20 +2333,28 @@
                     "rule": "file(vpngateways.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0098-ARM",
+                            "id": "PR-AZR-0098-ARM",
                             "eval": "data.rule.vpn_encrypt",
                             "message": "data.rule.vpn_encrypt_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for vpn gateway from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/vpngateways",
-                            "remediationFunction":"PR_AZR_0098_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for vpn gateway from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/vpngateways",
+                            "remediationFunction": "PR_AZR_0098_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "VPN should be configured with cryptographic algorithm",
                     "description": "Azure VPN gateways to use a custom IPsec/IKE policy with specific cryptographic algorithms and key strengths, rather than the Azure default policy sets. IPsec and IKE protocol standard supports a wide range of cryptographic algorithms in various combinations. If customers do not request a specific combination of cryptographic algorithms and parameters, Azure VPN gateways use a set of default proposals. Typically due to compliance or security requirements, you can now configure your Azure VPN gateways to use a custom IPsec/IKE policy with specific cryptographic algorithms and key strengths, rather than the Azure default policy sets. It is thus recommended to use custom policy sets and choose strong cryptography.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["HIPAA","ISO 27001","NIST 800","PCI DSS"],
-                            "service": ["microsoft.network"]
+                            "compliance": [
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI DSS"
+                            ],
+                            "service": [
+                                "microsoft.network"
+                            ]
                         }
                     ]
                 },
@@ -1965,20 +2367,25 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0102-ARM",
+                            "id": "PR-AZR-0102-ARM",
                             "eval": "data.rule.sql_server_alert",
                             "message": "data.rule.sql_server_alert_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for vpn gateway from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies",
-                            "remediationFunction":"PR_AZR_0102_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for vpn gateway from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies",
+                            "remediationFunction": "PR_AZR_0102_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Advanced data security should be enabled on your SQL servers.",
                     "description": "Advanced data security should be enabled on your SQL servers.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["NIST 800"],
-                            "service": ["Databases"]
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
                         }
                     ]
                 },
@@ -1991,20 +2398,25 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0102-ARM",
+                            "id": "PR-AZR-0102-ARM",
                             "eval": "data.rule.sql_managed_instance_alert",
                             "message": "data.rule.sql_managed_instance_alert_err",
-                            "remediationDescription":"Make sure you are following the ARM template guidelines for vpn gateway from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/securityalertpolicies",
-                            "remediationFunction":"PR_AZR_0102_ARM.py"
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for vpn gateway from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/securityalertpolicies",
+                            "remediationFunction": "PR_AZR_0102_ARM.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Advanced data security should be enabled on your SQL servers.",
                     "description": "Advanced data security should be enabled on your SQL servers.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["NIST 800"],
-                            "service": ["Databases"]
+                            "compliance": [
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
                         }
                     ]
                 },
@@ -2017,13 +2429,14 @@
                     "rule": "file(secrets.rego)",
                     "evals": [
                         {
-                            "id":"PR-AZR-0001-RGX",
+                            "id": "PR-AZR-0001-RGX",
                             "eval": "data.rule.gl_azure_secrets",
                             "message": "data.rule.gl_azure_secrets_err",
-                            "remediationDescription":"",
-                            "remediationFunction":"PR-AZR-0001-RGX.py"
+                            "remediationDescription": "",
+                            "remediationFunction": "PR-AZR-0001-RGX.py"
                         }
                     ],
+                    "severity": "Medium",
                     "title": "Secrets should be removed from the source code",
                     "description": "We should not have any secret in the source code. Make sure to put the secrets in a vault",
                     "tags": [
