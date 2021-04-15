@@ -9,13 +9,13 @@ package rule
 default net_legacy = null
 
 gc_issue["net_legacy"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.network"
     not resource.properties.autoCreateSubnetworks
 }
 
 net_legacy {
-    lower(input.json.resources[_].type) == "compute.v1.network"
+    lower(input.resources[_].type) == "compute.v1.network"
     not gc_issue["net_legacy"]
 }
 
@@ -35,19 +35,19 @@ default net_default = null
 
 
 gc_attribute_absence["net_default"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.network"
     not resource.properties.name
 }
 
 gc_issue["net_default"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.network"
     lower(resource.properties.name) == "default"
 }
 
 net_default {
-    lower(input.json.resources[_].type) == "compute.v1.network"
+    lower(input.resources[_].type) == "compute.v1.network"
     not gc_issue["net_default"]
     not gc_attribute_absence["net_default"]
 }

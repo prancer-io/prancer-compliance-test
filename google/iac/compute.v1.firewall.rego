@@ -10,41 +10,41 @@ default firewall_default = null
 
 
 gc_attribute_absence["firewall_default"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     not resource.properties.name
 }
 
 gc_issue["firewall_default"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     lower(resource.properties.name) == "default-allow-ssh"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
 }
 
 gc_issue["firewall_default"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     lower(resource.properties.name) == "default-allow-icmp"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
 }
 
 gc_issue["firewall_default"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     lower(resource.properties.name) == "default-allow-internal"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
 }
 
 gc_issue["firewall_default"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     lower(resource.properties.name) == "default-allow-rdp"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
 }
 
 firewall_default {
-    lower(input.json.resources[_].type) == "compute.v1.firewall"
+    lower(input.resources[_].type) == "compute.v1.firewall"
     not gc_issue["firewall_default"]
     not gc_attribute_absence["firewall_default"]
 }
@@ -72,7 +72,7 @@ firewall_default_miss_err = "GCP vm firewall attribute name missing in the resou
 default firewall_port_53 = null
 
 gc_issue["firewall_port_53"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -80,7 +80,7 @@ gc_issue["firewall_port_53"] {
 }
 
 gc_issue["firewall_port_53"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -92,7 +92,7 @@ gc_issue["firewall_port_53"] {
 }
 
 gc_issue["firewall_port_53"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -101,7 +101,7 @@ gc_issue["firewall_port_53"] {
 }
 
 gc_issue["firewall_port_53"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -110,7 +110,7 @@ gc_issue["firewall_port_53"] {
 }
 
 firewall_port_53 {
-    lower(input.json.resources[_].type) == "compute.v1.firewall"
+    lower(input.resources[_].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_53"]
 }
 
@@ -129,7 +129,7 @@ firewall_port_53_err = "GCP Firewall rule allows internet traffic to DNS port (5
 default firewall_port_21 = null
 
 gc_issue["firewall_port_21"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -137,7 +137,7 @@ gc_issue["firewall_port_21"] {
 }
 
 gc_issue["firewall_port_21"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -149,7 +149,7 @@ gc_issue["firewall_port_21"] {
 }
 
 gc_issue["firewall_port_21"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -158,7 +158,7 @@ gc_issue["firewall_port_21"] {
 }
 
 gc_issue["firewall_port_21"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -167,7 +167,7 @@ gc_issue["firewall_port_21"] {
 }
 
 firewall_port_21 {
-    lower(input.json.resources[_].type) == "compute.v1.firewall"
+    lower(input.resources[_].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_21"]
 }
 
@@ -186,7 +186,7 @@ firewall_port_21_err = "GCP Firewall rule allows internet traffic to FTP port (2
 default firewall_port_80 = null
 
 gc_issue["firewall_port_80"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -194,7 +194,7 @@ gc_issue["firewall_port_80"] {
 }
 
 gc_issue["firewall_port_80"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -206,7 +206,7 @@ gc_issue["firewall_port_80"] {
 }
 
 gc_issue["firewall_port_80"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -215,7 +215,7 @@ gc_issue["firewall_port_80"] {
 }
 
 gc_issue["firewall_port_80"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -224,7 +224,7 @@ gc_issue["firewall_port_80"] {
 }
 
 firewall_port_80 {
-    lower(input.json.resources[_].type) == "compute.v1.firewall"
+    lower(input.resources[_].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_80"]
 }
 
@@ -243,7 +243,7 @@ firewall_port_80_err = "GCP Firewall rule allows internet traffic to HTTP port (
 default firewall_port_445 = null
 
 gc_issue["firewall_port_445"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -251,7 +251,7 @@ gc_issue["firewall_port_445"] {
 }
 
 gc_issue["firewall_port_445"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -263,7 +263,7 @@ gc_issue["firewall_port_445"] {
 }
 
 gc_issue["firewall_port_445"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -272,7 +272,7 @@ gc_issue["firewall_port_445"] {
 }
 
 gc_issue["firewall_port_445"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -281,7 +281,7 @@ gc_issue["firewall_port_445"] {
 }
 
 firewall_port_445 {
-    lower(input.json.resources[_].type) == "compute.v1.firewall"
+    lower(input.resources[_].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_445"]
 }
 
@@ -300,7 +300,7 @@ firewall_port_445_err = "GCP Firewall rule allows internet traffic to Microsoft-
 default firewall_port_27017 = null
 
 gc_issue["firewall_port_27017"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -308,7 +308,7 @@ gc_issue["firewall_port_27017"] {
 }
 
 gc_issue["firewall_port_27017"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -320,7 +320,7 @@ gc_issue["firewall_port_27017"] {
 }
 
 gc_issue["firewall_port_27017"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -329,7 +329,7 @@ gc_issue["firewall_port_27017"] {
 }
 
 gc_issue["firewall_port_27017"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -338,7 +338,7 @@ gc_issue["firewall_port_27017"] {
 }
 
 firewall_port_27017 {
-    lower(input.json.resources[_].type) == "compute.v1.firewall"
+    lower(input.resources[_].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_27017"]
 }
 
@@ -357,7 +357,7 @@ firewall_port_27017_err = "GCP Firewall rule allows internet traffic to MongoDB 
 default firewall_port_3306 = null
 
 gc_issue["firewall_port_3306"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -365,7 +365,7 @@ gc_issue["firewall_port_3306"] {
 }
 
 gc_issue["firewall_port_3306"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -377,7 +377,7 @@ gc_issue["firewall_port_3306"] {
 }
 
 gc_issue["firewall_port_3306"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -386,7 +386,7 @@ gc_issue["firewall_port_3306"] {
 }
 
 gc_issue["firewall_port_3306"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -395,7 +395,7 @@ gc_issue["firewall_port_3306"] {
 }
 
 firewall_port_3306 {
-    lower(input.json.resources[_].type) == "compute.v1.firewall"
+    lower(input.resources[_].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_3306"]
 }
 
@@ -414,7 +414,7 @@ firewall_port_3306_err = "GCP Firewall rule allows internet traffic to MySQL DB 
 default firewall_port_139 = null
 
 gc_issue["firewall_port_139"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -422,7 +422,7 @@ gc_issue["firewall_port_139"] {
 }
 
 gc_issue["firewall_port_139"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -434,7 +434,7 @@ gc_issue["firewall_port_139"] {
 }
 
 gc_issue["firewall_port_139"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -443,7 +443,7 @@ gc_issue["firewall_port_139"] {
 }
 
 gc_issue["firewall_port_139"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -452,7 +452,7 @@ gc_issue["firewall_port_139"] {
 }
 
 firewall_port_139 {
-    lower(input.json.resources[_].type) == "compute.v1.firewall"
+    lower(input.resources[_].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_139"]
 }
 
@@ -471,7 +471,7 @@ firewall_port_139_err = "GCP Firewall rule allows internet traffic to NetBIOS-SS
 default firewall_port_1521 = null
 
 gc_issue["firewall_port_1521"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -479,7 +479,7 @@ gc_issue["firewall_port_1521"] {
 }
 
 gc_issue["firewall_port_1521"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -491,7 +491,7 @@ gc_issue["firewall_port_1521"] {
 }
 
 gc_issue["firewall_port_1521"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -500,7 +500,7 @@ gc_issue["firewall_port_1521"] {
 }
 
 gc_issue["firewall_port_1521"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -509,7 +509,7 @@ gc_issue["firewall_port_1521"] {
 }
 
 firewall_port_1521 {
-    lower(input.json.resources[_].type) == "compute.v1.firewall"
+    lower(input.resources[_].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_1521"]
 }
 
@@ -528,7 +528,7 @@ firewall_port_1521_err = "GCP Firewall rule allows internet traffic to Oracle DB
 default firewall_port_110 = null
 
 gc_issue["firewall_port_110"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -536,7 +536,7 @@ gc_issue["firewall_port_110"] {
 }
 
 gc_issue["firewall_port_110"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -548,7 +548,7 @@ gc_issue["firewall_port_110"] {
 }
 
 gc_issue["firewall_port_110"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -557,7 +557,7 @@ gc_issue["firewall_port_110"] {
 }
 
 gc_issue["firewall_port_110"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -566,7 +566,7 @@ gc_issue["firewall_port_110"] {
 }
 
 firewall_port_110 {
-    lower(input.json.resources[_].type) == "compute.v1.firewall"
+    lower(input.resources[_].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_110"]
 }
 
@@ -585,7 +585,7 @@ firewall_port_110_err = "GCP Firewall rule allows internet traffic to POP3 port 
 default firewall_port_5432 = null
 
 gc_issue["firewall_port_5432"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -593,7 +593,7 @@ gc_issue["firewall_port_5432"] {
 }
 
 gc_issue["firewall_port_5432"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -605,7 +605,7 @@ gc_issue["firewall_port_5432"] {
 }
 
 gc_issue["firewall_port_5432"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -614,7 +614,7 @@ gc_issue["firewall_port_5432"] {
 }
 
 gc_issue["firewall_port_5432"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -623,7 +623,7 @@ gc_issue["firewall_port_5432"] {
 }
 
 firewall_port_5432 {
-    lower(input.json.resources[_].type) == "compute.v1.firewall"
+    lower(input.resources[_].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_5432"]
 }
 
@@ -642,7 +642,7 @@ firewall_port_5432_err = "GCP Firewall rule allows internet traffic to PostgreSQ
 default firewall_port_3389 = null
 
 gc_issue["firewall_port_3389"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -650,7 +650,7 @@ gc_issue["firewall_port_3389"] {
 }
 
 gc_issue["firewall_port_3389"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -662,7 +662,7 @@ gc_issue["firewall_port_3389"] {
 }
 
 gc_issue["firewall_port_3389"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -671,7 +671,7 @@ gc_issue["firewall_port_3389"] {
 }
 
 gc_issue["firewall_port_3389"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -680,7 +680,7 @@ gc_issue["firewall_port_3389"] {
 }
 
 firewall_port_3389 {
-    lower(input.json.resources[_].type) == "compute.v1.firewall"
+    lower(input.resources[_].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_3389"]
 }
 
@@ -699,7 +699,7 @@ firewall_port_3389_err = "GCP Firewall rule allows internet traffic to RDP port 
 default firewall_port_25 = null
 
 gc_issue["firewall_port_25"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -707,7 +707,7 @@ gc_issue["firewall_port_25"] {
 }
 
 gc_issue["firewall_port_25"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -719,7 +719,7 @@ gc_issue["firewall_port_25"] {
 }
 
 gc_issue["firewall_port_25"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -728,7 +728,7 @@ gc_issue["firewall_port_25"] {
 }
 
 gc_issue["firewall_port_25"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -737,7 +737,7 @@ gc_issue["firewall_port_25"] {
 }
 
 firewall_port_25 {
-    lower(input.json.resources[_].type) == "compute.v1.firewall"
+    lower(input.resources[_].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_25"]
 }
 
@@ -756,7 +756,7 @@ firewall_port_25_err = "GCP Firewall rule allows internet traffic to SMTP port (
 default firewall_port_22 = null
 
 gc_issue["firewall_port_22"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -764,7 +764,7 @@ gc_issue["firewall_port_22"] {
 }
 
 gc_issue["firewall_port_22"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -776,7 +776,7 @@ gc_issue["firewall_port_22"] {
 }
 
 gc_issue["firewall_port_22"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -785,7 +785,7 @@ gc_issue["firewall_port_22"] {
 }
 
 gc_issue["firewall_port_22"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -794,7 +794,7 @@ gc_issue["firewall_port_22"] {
 }
 
 firewall_port_22 {
-    lower(input.json.resources[_].type) == "compute.v1.firewall"
+    lower(input.resources[_].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_22"]
 }
 
@@ -813,7 +813,7 @@ firewall_port_22_err = "GCP Firewall rule allows internet traffic to SSH port (2
 default firewall_port_23 = null
 
 gc_issue["firewall_port_23"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -821,7 +821,7 @@ gc_issue["firewall_port_23"] {
 }
 
 gc_issue["firewall_port_23"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -833,7 +833,7 @@ gc_issue["firewall_port_23"] {
 }
 
 gc_issue["firewall_port_23"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -842,7 +842,7 @@ gc_issue["firewall_port_23"] {
 }
 
 gc_issue["firewall_port_23"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     allow := resource.properties.allowed[_]
@@ -851,7 +851,7 @@ gc_issue["firewall_port_23"] {
 }
 
 firewall_port_23 {
-    lower(input.json.resources[_].type) == "compute.v1.firewall"
+    lower(input.resources[_].type) == "compute.v1.firewall"
     not gc_issue["firewall_port_23"]
 }
 
@@ -870,7 +870,7 @@ firewall_port_23_err = "GCP Firewall rule allows internet traffic to Telnet port
 default firewall_inbound = null
 
 gc_issue["firewall_inbound"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     lower(resource.properties.direction) == "ingress"
@@ -879,7 +879,7 @@ gc_issue["firewall_inbound"] {
 }
 
 firewall_inbound {
-    lower(input.json.resources[_].type) == "compute.v1.firewall"
+    lower(input.resources[_].type) == "compute.v1.firewall"
     not gc_issue["firewall_inbound"]
 }
 
@@ -898,14 +898,14 @@ firewall_inbound_err = "GCP Firewall rules allow inbound traffic from anywhere w
 default firewall_inbound_all = null
 
 gc_issue["firewall_inbound_all"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "compute.v1.firewall"
     resource.properties.sourceRanges[_] == "0.0.0.0/0"
     lower(resource.properties.allowed[_].IPProtocol) == "all"
 }
 
 firewall_inbound_all {
-    lower(input.json.resources[_].type) == "compute.v1.firewall"
+    lower(input.resources[_].type) == "compute.v1.firewall"
     not gc_issue["firewall_inbound_all"]
 }
 

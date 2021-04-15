@@ -10,20 +10,20 @@ default svc_account_key = null
 
 
 gc_attribute_absence["svc_account_key"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "iam.v1.serviceaccounts.key"
     not resource.properties.name
 }
 
 gc_issue["svc_account_key"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "iam.v1.serviceaccounts.key"
     contains(lower(resource.properties.name), "iam.gserviceaccount.com")
     time.now_ns() - time.parse_rfc3339_ns(resource.properties.validAfterTime) > 7776000000000000
 }
 
 svc_account_key {
-    lower(input.json.resources[_].type) == "iam.v1.serviceaccounts.key"
+    lower(input.resources[_].type) == "iam.v1.serviceaccounts.key"
     not gc_issue["svc_account_key"]
     not gc_attribute_absence["svc_account_key"]
 }
