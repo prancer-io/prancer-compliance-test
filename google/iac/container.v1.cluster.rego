@@ -9,19 +9,19 @@ package rule
 default k8s_svc_account = null
 
 gc_attribute_absence["k8s_svc_account"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     count([c | r = resource.properties.nodePools[_].config; c := 1]) == 0
 }
 
 gc_issue["k8s_svc_account"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     resource.properties.nodePools[_].config.serviceAccount == "default"
 }
 
 k8s_svc_account {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_svc_account"]
     not gc_attribute_absence["k8s_svc_account"]
 }
@@ -49,19 +49,19 @@ k8s_svc_account_miss_err = "Kubernetes Engine Cluster attribute nodePools config
 default k8s_basicauth = null
 
 gc_issue["k8s_basicauth"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     count(resource.properties.masterAuth.username) > 0
 }
 
 gc_issue["k8s_basicauth"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     count(resource.properties.masterAuth.password) > 0
 }
 
 k8s_basicauth {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_basicauth"]
 }
 
@@ -80,19 +80,19 @@ k8s_basicauth_err = "GCP Kubernetes Engine Clusters Basic Authentication is set 
 default k8s_client_cert = null
 
 gc_issue["k8s_client_cert"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.masterAuth.clientKey
 }
 
 gc_issue["k8s_client_cert"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.masterAuth.clientCertificate
 }
 
 k8s_client_cert {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_client_cert"]
 }
 
@@ -111,13 +111,13 @@ k8s_client_cert_err = "GCP Kubernetes Engine Clusters Client Certificate is set 
 default k8s_alias_ip = null
 
 gc_issue["k8s_alias_ip"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.ipAllocationPolicy.useIpAliases
 }
 
 k8s_alias_ip {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_alias_ip"]
 }
 
@@ -136,13 +136,13 @@ k8s_alias_ip_err = "GCP Kubernetes Engine Clusters have Alias IP disabled" {
 default k8s_alpha = null
 
 gc_issue["k8s_alpha"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     resource.properties.enableKubernetesAlpha
 }
 
 k8s_alpha {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_alpha"]
 }
 
@@ -161,13 +161,13 @@ k8s_alpha_err = "GCP Kubernetes Engine Clusters have Alpha cluster feature enabl
 default k8s_http_lbs = null
 
 gc_issue["k8s_http_lbs"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     resource.properties.addonsConfig.httpLoadBalancing.disabled
 }
 
 k8s_http_lbs {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_http_lbs"]
 }
 
@@ -186,13 +186,13 @@ k8s_http_lbs_err = "GCP Kubernetes Engine Clusters have HTTP load balancing disa
 default k8s_legacy_abac = null
 
 gc_issue["k8s_legacy_abac"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     resource.properties.legacyAbac.enabled
 }
 
 k8s_legacy_abac {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_legacy_abac"]
 }
 
@@ -211,13 +211,13 @@ k8s_legacy_abac_err = "GCP Kubernetes Engine Clusters have Legacy Authorization 
 default k8s_master_auth_net = null
 
 gc_issue["k8s_master_auth_net"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.masterAuthorizedNetworksConfig.enabled
 }
 
 k8s_master_auth_net {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_master_auth_net"]
 }
 
@@ -236,13 +236,13 @@ k8s_master_auth_net_err = "GCP Kubernetes Engine Clusters have Master authorized
 default k8s_net_policy = null
 
 gc_issue["k8s_net_policy"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.networkPolicy.enabled
 }
 
 k8s_net_policy {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_net_policy"]
 }
 
@@ -261,19 +261,19 @@ k8s_net_policy_err = "GCP Kubernetes Engine Clusters have Network policy disable
 default k8s_logging = null
 
 gc_attribute_absence["k8s_logging"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.loggingService
 }
 
 gc_issue["k8s_logging"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     lower(resource.properties.loggingService) == "none"
 }
 
 k8s_logging {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_logging"]
     not gc_attribute_absence["k8s_logging"]
 }
@@ -301,19 +301,19 @@ k8s_logging_miss_err = "Kubernetes Engine Cluster attribute loggingService confi
 default k8s_monitor = null
 
 gc_attribute_absence["k8s_monitor"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.monitoringService
 }
 
 gc_issue["k8s_monitor"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     lower(resource.properties.monitoringService) == "none"
 }
 
 k8s_monitor {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_monitor"]
     not gc_attribute_absence["k8s_monitor"]
 }
@@ -341,13 +341,13 @@ k8s_monitor_miss_err = "Kubernetes Engine Cluster attribute monitoringService co
 default k8s_binary_auth = null
 
 gc_issue["k8s_binary_auth"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.binaryAuthorization.enabled
 }
 
 k8s_binary_auth {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_binary_auth"]
 }
 
@@ -366,13 +366,13 @@ k8s_binary_auth_err = "GCP Kubernetes Engine Clusters have binary authorization 
 default k8s_legacy_endpoint = null
 
 gc_issue["k8s_legacy_endpoint"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     resource.properties.nodeConfig.metadata["disable-legacy-endpoints"]
 }
 
 k8s_legacy_endpoint {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_legacy_endpoint"]
 }
 
@@ -391,13 +391,13 @@ k8s_legacy_endpoint_err = "GCP Kubernetes Engine Clusters have legacy compute en
 default k8s_pod_security = null
 
 gc_issue["k8s_pod_security"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.podSecurityPolicyConfig.enabled
 }
 
 k8s_pod_security {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_pod_security"]
 }
 
@@ -416,13 +416,13 @@ k8s_pod_security_err = "GCP Kubernetes Engine Clusters have pod security policy 
 default k8s_egress_metering = null
 
 gc_issue["k8s_egress_metering"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.resourceUsageExportConfig.enableNetworkEgressMetering
 }
 
 k8s_egress_metering {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_egress_metering"]
 }
 
@@ -441,13 +441,13 @@ k8s_egress_metering_err = "GCP Kubernetes Engine Clusters not configured with ne
 default k8s_private = null
 
 gc_issue["k8s_private"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.privateClusterConfig
 }
 
 k8s_private {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_private"]
 }
 
@@ -466,13 +466,13 @@ k8s_private_err = "GCP Kubernetes Engine Clusters not configured with private cl
 default k8s_private_node = null
 
 gc_issue["k8s_private_node"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.privateClusterConfig.enablePrivateNodes
 }
 
 k8s_private_node {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_private_node"]
 }
 
@@ -491,7 +491,7 @@ k8s_private_node_err = "GCP Kubernetes Engine Clusters not configured with priva
 default k8s_node_image = null
 
 gc_attribute_absence["k8s_node_image"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.nodeConfig.imageType
     nodePools := resource.properties.nodePools[_]
@@ -499,19 +499,19 @@ gc_attribute_absence["k8s_node_image"] {
 }
 
 gc_issue["k8s_node_image"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not startswith(lower(resource.properties.nodeConfig.imageType), "cos")
 }
 
 gc_issue["k8s_node_image"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not startswith(lower(resource.properties.nodePools[_].config.imageType), "cos")
 }
 
 k8s_node_image {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_node_image"]
     not gc_attribute_absence["k8s_node_image"]
 }
@@ -539,19 +539,19 @@ k8s_node_image_miss_err = "Kubernetes Engine Cluster attribute imageType config 
 default k8s_network = null
 
 gc_issue["k8s_network"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.network
 }
 
 gc_issue["k8s_network"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     lower(resource.properties.network) == "default"
 }
 
 k8s_network {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_network"]
 }
 
@@ -570,13 +570,13 @@ k8s_network_err = "GCP Kubernetes Engine Clusters using the default network" {
 default k8s_dashboard = null
 
 gc_issue["k8s_dashboard"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.addonsConfig.kubernetesDashboard.disabled
 }
 
 k8s_dashboard {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_dashboard"]
 }
 
@@ -595,19 +595,19 @@ k8s_dashboard_err = "GCP Kubernetes Engine Clusters web UI/Dashboard is set to E
 default k8s_labels = null
 
 gc_issue["k8s_labels"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.resourceLabels
 }
 
 gc_issue["k8s_labels"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     count(resource.properties.resourceLabels) == 0
 }
 
 k8s_labels {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_labels"]
 }
 
@@ -626,31 +626,31 @@ k8s_labels_err = "GCP Kubernetes Engine Clusters without any label information" 
 default k8s_db_encrypt = null
 
 gc_attribute_absence["k8s_db_encrypt"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.databaseEncryption
 }
 
 gc_issue["k8s_db_encrypt"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     lower(resource.properties.databaseEncryption.state) != "encrypted"
 }
 
 gc_issue["k8s_db_encrypt"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.databaseEncryption.keyName
 }
 
 gc_issue["k8s_db_encrypt"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     count(resource.properties.databaseEncryption.keyName) == 0
 }
 
 k8s_db_encrypt {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_db_encrypt"]
     not gc_attribute_absence["k8s_db_encrypt"]
 }
@@ -678,13 +678,13 @@ k8s_db_encrypt_miss_err = "Kubernetes Engine Cluster attribute databaseEncryptio
 default k8s_intra_node = null
 
 gc_issue["k8s_intra_node"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.networkConfig.enableIntraNodeVisibility
 }
 
 k8s_intra_node {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_intra_node"]
 }
 
@@ -703,13 +703,13 @@ k8s_intra_node_err = "GCP Kubernetes cluster intra-node visibility disabled" {
 default k8s_istio = null
 
 gc_issue["k8s_istio"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     resource.properties.addonsConfig.istioConfig.disabled == false
 }
 
 k8s_istio {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_istio"]
 }
 
@@ -728,14 +728,14 @@ k8s_istio_err = "GCP Kubernetes cluster istioConfig not enabled" {
 default k8s_zones = null
 
 gc_issue["k8s_zones"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     resource.properties.zone
     count(resource.properties.locations) < 3
 }
 
 k8s_zones {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_zones"]
 }
 
@@ -758,32 +758,32 @@ k8s_zones_miss_err = "GCP Kubernetes cluster not in redundant zones" {
 default k8s_auto_upgrade = null
 
 gc_attribute_absence["k8s_auto_upgrade"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.currentNodeCount
 }
 
 gc_issue["k8s_auto_upgrade"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     to_number(resource.properties.currentNodeCount) < 3
     resource.properties.nodePools[_].management.autoUpgrade
 }
 
 gc_issue["k8s_auto_upgrade"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.databaseEncryption.keyName
 }
 
 gc_issue["k8s_auto_upgrade"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "container.v1.cluster"
     count(resource.properties.databaseEncryption.keyName) == 0
 }
 
 k8s_auto_upgrade {
-    lower(input.json.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[_].type) == "container.v1.cluster"
     not gc_issue["k8s_auto_upgrade"]
     not gc_attribute_absence["k8s_auto_upgrade"]
 }

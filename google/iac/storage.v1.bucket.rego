@@ -9,19 +9,19 @@ package rule
 default storage_encrypt = null
 
 gc_attribute_absence["storage_encrypt"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "storage.v1.bucket"
     not resource.properties.encryption.defaultKmsKeyName
 }
 
 gc_issue["storage_encrypt"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "storage.v1.bucket"
     count(resource.properties.encryption.defaultKmsKeyName) == 0
 }
 
 storage_encrypt {
-    lower(input.json.resources[_].type) == "storage.v1.bucket"
+    lower(input.resources[_].type) == "storage.v1.bucket"
     not gc_issue["storage_encrypt"]
     not gc_attribute_absence["storage_encrypt"]
 }
@@ -49,20 +49,20 @@ storage_encrypt_miss_err = "GCP Storage bucket attribute encryption missing in t
 default storage_versioning = null
 
 gc_attribute_absence["storage_versioning"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "storage.v1.bucket"
     not resource.properties.versioning
 }
 
 gc_issue["storage_versioning"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "storage.v1.bucket"
     contains(lower(resource.properties.acl[_].email), "logging")
     not resource.properties.versioning.enabled
 }
 
 storage_versioning {
-    lower(input.json.resources[_].type) == "storage.v1.bucket"
+    lower(input.resources[_].type) == "storage.v1.bucket"
     not gc_issue["storage_versioning"]
     not gc_attribute_absence["storage_versioning"]
 }
@@ -90,20 +90,20 @@ storage_versioning_miss_err = "GCP Storage attribute versioning missing in the r
 default storage_stack_logging = null
 
 gc_attribute_absence["storage_stack_logging"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "storage.v1.bucket"
     not resource.properties.logging
 }
 
 gc_issue["storage_stack_logging"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "storage.v1.bucket"
     contains(lower(resource.properties.acl[_].email), "logging")
     not resource.properties.logging
 }
 
 storage_stack_logging {
-    lower(input.json.resources[_].type) == "storage.v1.bucket"
+    lower(input.resources[_].type) == "storage.v1.bucket"
     not gc_issue["storage_stack_logging"]
     not gc_attribute_absence["storage_stack_logging"]
 }
@@ -131,13 +131,13 @@ storage_stack_logging_miss_err = "GCP Storage attribute logging missing in the r
 default storage_logging = null
 
 gc_issue["storage_logging"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "storage.v1.bucket"
     not resource.properties.logging.logBucket
 }
 
 storage_logging {
-    lower(input.json.resources[_].type) == "storage.v1.bucket"
+    lower(input.resources[_].type) == "storage.v1.bucket"
     not gc_issue["storage_logging"]
 }
 
@@ -156,13 +156,13 @@ storage_logging_err = "Storage Bucket does not have Access and Storage Logging e
 default storage_public_logs = null
 
 gc_attribute_absence["storage_public_logs"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "storage.v1.bucket"
     not resource.properties.acl
 }
 
 gc_issue["storage_public_logs"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "storage.v1.bucket"
     acl := resource.properties.acl[_]
     contains(lower(acl.email), "logging")
@@ -170,7 +170,7 @@ gc_issue["storage_public_logs"] {
 }
 
 gc_issue["storage_public_logs"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "storage.v1.bucket"
     acl := resource.properties.acl[_]
     contains(lower(acl.email), "logging")
@@ -178,7 +178,7 @@ gc_issue["storage_public_logs"] {
 }
 
 storage_public_logs {
-    lower(input.json.resources[_].type) == "storage.v1.bucket"
+    lower(input.resources[_].type) == "storage.v1.bucket"
     not gc_issue["storage_public_logs"]
     not gc_attribute_absence["storage_public_logs"]
 }
