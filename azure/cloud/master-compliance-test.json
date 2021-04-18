@@ -64,7 +64,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure AKS cluster monitoring enabled",
-                    "description": "Azure Monitor for Containerss is a feature designed to monitor the performance of Containers workloads deployed to either Azure Containers Instances or managed Kubernetes clusters hosted on Azure Kubernetes Service (AKS). Monitoring your Containerss is critical, especially when you're running a production cluster, at scale, with multiple applications.This policy checks your AKS cluster monitoring add-on setting and alerts if no configuration is found, or monitoring is disabled."
+                    "description": "Azure Monitor for Containers is a feature designed to monitor the performance of Container workloads deployed to either Azure Container Instances or managed Kubernetes clusters hosted on Azure Kubernetes Service (AKS). Monitoring your Containers is critical, especially when you're running a production cluster, at scale, with multiple applications.This policy checks your AKS cluster monitoring add-on setting and alerts if no configuration is found, or monitoring is disabled."
                 },
                 {
                     "masterTestId": "AZURE_TEST_218",
@@ -137,7 +137,7 @@
                             "id": "PR-AZR-0015",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Log in to the Azure portal. \n 2. Select 'All services' > 'Containers Registries'. \n 3. Select the Containers registry you need to modify. \n 4. Select 'Upgrade to managed registry'. \n 5. Select 'OK' to confirm the upgrade.",
+                            "remediationDescription": "1. Log in to the Azure portal. \n 2. Select 'All services' > 'Container Registries'. \n 3. Select the Container registry you need to modify. \n 4. Select 'Upgrade to managed registry'. \n 5. Select 'OK' to confirm the upgrade.",
                             "remediationFunction": "PR_AZR_0015.py"
                         }
                     ],
@@ -156,8 +156,8 @@
                         "AZRSNP_224"
                     ],
                     "severity": "Medium",
-                    "title": "Azure Containers Registry using the deprecated not classic registry",
-                    "description": "This policy identifies an Azure Containers Registry (ACR) that is using the classic SKU. The initial release of the Azure Containers Registry (ACR) service that was offered as a classic SKU is being deprecated and will be unavailable after April 2019. As a best practice, upgrade your existing classic registry to a managed registry."
+                    "title": "Azure Container Registry using the deprecated not classic registry",
+                    "description": "This policy identifies an Azure Container Registry (ACR) that is using the classic SKU. The initial release of the Azure Container Registry (ACR) service that was offered as a classic SKU is being deprecated and will be unavailable after April 2019. As a best practice, upgrade your existing classic registry to a managed registry."
                 },
                 {
                     "masterTestId": "AZURE_TEST_229",
