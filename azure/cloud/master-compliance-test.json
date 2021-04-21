@@ -187,10 +187,10 @@
                             "cloud": "Azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "NIST 800",
-                                "PCI"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Microsoft.Network",
@@ -223,10 +223,10 @@
                             "cloud": "Azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "NIST 800",
-                                "PCI"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Microsoft.Network",
@@ -1187,7 +1187,7 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "ISO 27001",
                                 "NIST 800"
                             ],
@@ -1222,10 +1222,10 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -1258,11 +1258,11 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -1295,10 +1295,10 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -1365,10 +1365,10 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -1401,11 +1401,11 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -1438,11 +1438,11 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -1475,11 +1475,11 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -1512,11 +1512,11 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -1549,10 +1549,10 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -1585,11 +1585,11 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -1622,10 +1622,10 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Microsoft.Authorization",
@@ -1712,11 +1712,11 @@
                             "cloud": "Azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Microsoft.Storage",
@@ -1752,7 +1752,7 @@
                                 "CIS",
                                 "HIPAA",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Microsoft.Storage",
@@ -1924,11 +1924,11 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": []
                         }
@@ -1958,11 +1958,11 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": []
                         }
@@ -2224,11 +2224,11 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": []
                         }
@@ -2258,11 +2258,11 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": []
                         }
@@ -2291,11 +2291,11 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": []
                         }
@@ -2789,10 +2789,10 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": []
                         }
@@ -2822,11 +2822,11 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": []
                         }
@@ -2855,10 +2855,10 @@
                         {
                             "cloud": "azure",
                             "compliance": [
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": []
                         }
@@ -2888,11 +2888,11 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": []
                         }
@@ -2922,11 +2922,11 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": []
                         }
@@ -2956,11 +2956,11 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": []
                         }
@@ -3052,7 +3052,7 @@
                                 "CIS",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": []
                         }
@@ -3082,10 +3082,10 @@
                             "cloud": "azure",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": []
                         }
@@ -3117,7 +3117,7 @@
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": []
                         }
@@ -3149,7 +3149,7 @@
                                 "GDPR",
                                 "HIPAA",
                                 "NIST CSF",
-                                "PCI DSS",
+                                "PCI-DSS",
                                 "SOC 2"
                             ],
                             "service": []
