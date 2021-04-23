@@ -25,11 +25,11 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -94,11 +94,11 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -130,10 +130,10 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -230,7 +230,7 @@
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -262,11 +262,11 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -298,11 +298,11 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -337,7 +337,7 @@
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -369,11 +369,11 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -498,7 +498,7 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CIS",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -530,9 +530,9 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -564,10 +564,10 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Kubernetes Engine"
@@ -691,11 +691,11 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Networking"
@@ -726,11 +726,11 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS",
+                                "PCI-DSS",
                                 "SOC 2"
                             ],
                             "service": [
@@ -762,11 +762,11 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS",
+                                "PCI-DSS",
                                 "SOC 2"
                             ],
                             "service": [
@@ -798,11 +798,11 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS",
+                                "PCI-DSS",
                                 "SOC 2"
                             ],
                             "service": [
@@ -834,11 +834,11 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS",
+                                "PCI-DSS",
                                 "SOC 2"
                             ],
                             "service": [
@@ -870,11 +870,11 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS",
+                                "PCI-DSS",
                                 "SOC 2"
                             ],
                             "service": [
@@ -906,11 +906,11 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS",
+                                "PCI-DSS",
                                 "SOC 2"
                             ],
                             "service": [
@@ -942,11 +942,11 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS",
+                                "PCI-DSS",
                                 "SOC 2"
                             ],
                             "service": [
@@ -979,11 +979,11 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS",
+                                "PCI-DSS",
                                 "SOC 2"
                             ],
                             "service": [
@@ -1015,11 +1015,11 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS",
+                                "PCI-DSS",
                                 "SOC 2"
                             ],
                             "service": [
@@ -1052,11 +1052,11 @@
                             "cloud": "GCP",
                             "compliance": [
                                 "CIS",
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS",
+                                "PCI-DSS",
                                 "SOC 2"
                             ],
                             "service": [
@@ -1088,11 +1088,11 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS",
+                                "PCI-DSS",
                                 "SOC 2"
                             ],
                             "service": [
@@ -1313,9 +1313,9 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Compute"
@@ -1346,9 +1346,9 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Compute"
@@ -1379,9 +1379,9 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "NIST 800",
-                                "PCI DSS"
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "Compute"
@@ -1412,11 +1412,11 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS",
+                                "PCI-DSS",
                                 "SOC 2"
                             ],
                             "service": [
@@ -1448,11 +1448,11 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS",
+                                "PCI-DSS",
                                 "SOC 2"
                             ],
                             "service": [
@@ -1484,11 +1484,11 @@
                         {
                             "cloud": "GCP",
                             "compliance": [
-                                "CSA CCM",
+                                "CSA-CCM",
                                 "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
-                                "PCI DSS",
+                                "PCI-DSS",
                                 "SOC 2"
                             ],
                             "service": [
