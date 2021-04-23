@@ -24,9 +24,7 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.ContainerService",
-                                "Container",
-                                "Azure Kubernetes Service"
+                                "Containers"
                             ]
                         }
                     ],
@@ -57,9 +55,7 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.ContainerService",
-                                "Container",
-                                "Azure Kubernetes Service"
+                                "Containers"
                             ]
                         }
                     ],
@@ -68,7 +64,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure AKS cluster monitoring enabled",
-                    "description": "Azure Monitor for containers is a feature designed to monitor the performance of container workloads deployed to either Azure Container Instances or managed Kubernetes clusters hosted on Azure Kubernetes Service (AKS). Monitoring your containers is critical, especially when you're running a production cluster, at scale, with multiple applications.This policy checks your AKS cluster monitoring add-on setting and alerts if no configuration is found, or monitoring is disabled."
+                    "description": "Azure Monitor for Containers is a feature designed to monitor the performance of Container workloads deployed to either Azure Container Instances or managed Kubernetes clusters hosted on Azure Kubernetes Service (AKS). Monitoring your Containers is critical, especially when you're running a production cluster, at scale, with multiple applications.This policy checks your AKS cluster monitoring add-on setting and alerts if no configuration is found, or monitoring is disabled."
                 },
                 {
                     "masterTestId": "AZURE_TEST_218",
@@ -90,9 +86,7 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.ContainerService",
-                                "Container",
-                                "Azure Kubernetes Service"
+                                "Containers"
                             ]
                         }
                     ],
@@ -123,9 +117,7 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.ContainerService",
-                                "Container",
-                                "Azure Kubernetes Service"
+                                "Containers"
                             ]
                         }
                     ],
@@ -145,7 +137,7 @@
                             "id": "PR-AZR-0015",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Log in to the Azure portal. \n 2. Select 'All services' > 'Container Registries'. \n 3. Select the container registry you need to modify. \n 4. Select 'Upgrade to managed registry'. \n 5. Select 'OK' to confirm the upgrade.",
+                            "remediationDescription": "1. Log in to the Azure portal. \n 2. Select 'All services' > 'Container Registries'. \n 3. Select the Container registry you need to modify. \n 4. Select 'Upgrade to managed registry'. \n 5. Select 'OK' to confirm the upgrade.",
                             "remediationFunction": "PR_AZR_0015.py"
                         }
                     ],
@@ -156,9 +148,7 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.ContainerRegistry",
-                                "Container",
-                                "Container Registry"
+                                "Containers"
                             ]
                         }
                     ],
@@ -193,7 +183,6 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -229,7 +218,6 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -261,7 +249,6 @@
                                 "CUSTOM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -293,7 +280,6 @@
                                 "CUSTOM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -325,7 +311,6 @@
                                 "CUSTOM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -357,7 +342,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -389,7 +373,6 @@
                                 "CUSTOM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -421,7 +404,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -453,7 +435,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -485,7 +466,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -517,7 +497,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -549,7 +528,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -581,7 +559,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -613,7 +590,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -645,7 +621,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -677,7 +652,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -709,7 +683,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -741,7 +714,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -773,7 +745,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -805,7 +776,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -837,7 +807,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -869,7 +838,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -901,7 +869,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -933,7 +900,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -965,7 +931,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -997,7 +962,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -1029,7 +993,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -1061,7 +1024,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -1093,7 +1055,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -1125,7 +1086,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -1157,7 +1117,6 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
                                 "Networking"
                             ]
                         }
@@ -1192,7 +1151,6 @@
                                 "NIST 800"
                             ],
                             "service": [
-                                "Microsoft.Authorization",
                                 "Management and Governance"
                             ]
                         }
@@ -1228,7 +1186,6 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Microsoft.Authorization",
                                 "Management and Governance"
                             ]
                         }
@@ -1265,7 +1222,6 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Microsoft.Authorization",
                                 "Management and Governance"
                             ]
                         }
@@ -1301,7 +1257,6 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Microsoft.Authorization",
                                 "Management and Governance"
                             ]
                         }
@@ -1335,7 +1290,6 @@
                                 "NIST 800"
                             ],
                             "service": [
-                                "Microsoft.Authorization",
                                 "Management and Governance"
                             ]
                         }
@@ -1371,7 +1325,6 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Microsoft.Authorization",
                                 "Management and Governance"
                             ]
                         }
@@ -1408,7 +1361,6 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Microsoft.Authorization",
                                 "Management and Governance"
                             ]
                         }
@@ -1445,7 +1397,6 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Microsoft.Authorization",
                                 "Management and Governance"
                             ]
                         }
@@ -1482,7 +1433,6 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Microsoft.Authorization",
                                 "Management and Governance"
                             ]
                         }
@@ -1519,7 +1469,6 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Microsoft.Authorization",
                                 "Management and Governance"
                             ]
                         }
@@ -1555,7 +1504,6 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Microsoft.Authorization",
                                 "Management and Governance"
                             ]
                         }
@@ -1592,7 +1540,6 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Microsoft.Authorization",
                                 "Management and Governance"
                             ]
                         }
@@ -1628,7 +1575,6 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Microsoft.Authorization",
                                 "Management and Governance"
                             ]
                         }
@@ -1660,8 +1606,7 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Compute",
-                                "Virtual Machines"
+                                "Compute"
                             ]
                         }
                     ],
@@ -1692,7 +1637,7 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Compute"
+                                "Compute"
                             ]
                         }
                     ],
@@ -1719,9 +1664,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Microsoft.Storage",
-                                "Storage",
-                                "Storage Accounts"
+                                "Storage"
                             ]
                         }
                     ],
@@ -1755,9 +1698,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Microsoft.Storage",
-                                "Storage",
-                                "Storage Accounts"
+                                "Storage"
                             ]
                         }
                     ],
@@ -1797,9 +1738,7 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
-                                "Networking",
-                                "Application Gateway"
+                                "Networking"
                             ]
                         }
                     ],
@@ -1830,9 +1769,7 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
-                                "Networking",
-                                "Network Watcher"
+                                "Networking"
                             ]
                         }
                     ],
@@ -1863,9 +1800,7 @@
                                 "COSTUM"
                             ],
                             "service": [
-                                "Microsoft.Network",
-                                "Networking",
-                                "Network Watcher"
+                                "Networking"
                             ]
                         }
                     ],
