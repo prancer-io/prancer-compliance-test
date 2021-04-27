@@ -13,6 +13,19 @@
                     ]
                 }
             ]
+        },{
+            "type": "filesystem",
+            "connectorUser": "USER_2",
+            "nodes": [
+                {
+                    "masterSnapshotId": "K8S_TEMPLATE_SNAPSHOT",
+                    "type": "helmChart",
+                    "collection": "helmTemplate",
+                    "paths": [
+                        "/"
+                    ]
+                }
+            ]
         }
     ]
 } 
