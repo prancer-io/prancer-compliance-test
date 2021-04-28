@@ -9,7 +9,7 @@
                     "type": "terraform",
                     "collection": "terraformtemplate",
                     "paths": [
-                        "/"
+                        "/azure/"
                     ]
                 }
             ]
