@@ -10,19 +10,19 @@ default dnssec_state = null
 
 
 gc_attribute_absence["dnssec_state"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "google_dns_managed_zone"
     not resource.properties.dnssec_config.state
 }
 
 gc_issue["dnssec_state"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "google_dns_managed_zone"
     lower(resource.properties.dnssec_config.state) == "off"
 }
 
 dnssec_state {
-    lower(input.json.resources[_].type) == "google_dns_managed_zone"
+    lower(input.resources[_].type) == "google_dns_managed_zone"
     not gc_issue["dnssec_state"]
     not gc_attribute_absence["dnssec_state"]
 }
@@ -51,13 +51,13 @@ default dnssec_key_rsasha1 = null
 
 
 gc_attribute_absence["dnssec_key_rsasha1"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "google_dns_managed_zone"
     not resource.properties.dnssec_config.default_key_specs
 }
 
 gc_issue["dnssec_key_rsasha1"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "google_dns_managed_zone"
     key := resource.properties.dnssec_config.default_key_specs[_]
     contains(lower(key.key_type), "keysigning")
@@ -65,7 +65,7 @@ gc_issue["dnssec_key_rsasha1"] {
 }
 
 dnssec_key_rsasha1 {
-    lower(input.json.resources[_].type) == "google_dns_managed_zone"
+    lower(input.resources[_].type) == "google_dns_managed_zone"
     not gc_issue["dnssec_key_rsasha1"]
     not gc_attribute_absence["dnssec_key_rsasha1"]
 }
@@ -94,13 +94,13 @@ default dnssec_zone_rsasha1 = null
 
 
 gc_attribute_absence["dnssec_zone_rsasha1"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "google_dns_managed_zone"
     not resource.properties.dnssec_config.default_key_specs
 }
 
 gc_issue["dnssec_zone_rsasha1"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "google_dns_managed_zone"
     key := resource.properties.dnssec_config.default_key_specs[_]
     contains(lower(key.key_type), "zonesigning")
@@ -108,7 +108,7 @@ gc_issue["dnssec_zone_rsasha1"] {
 }
 
 dnssec_zone_rsasha1 {
-    lower(input.json.resources[_].type) == "google_dns_managed_zone"
+    lower(input.resources[_].type) == "google_dns_managed_zone"
     not gc_issue["dnssec_zone_rsasha1"]
     not gc_attribute_absence["dnssec_zone_rsasha1"]
 }

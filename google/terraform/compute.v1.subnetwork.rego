@@ -9,13 +9,13 @@ package rule
 default vpc_flow_logs = null
 
 gc_issue["vpc_flow_logs"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "google_compute_subnetwork"
     count(resource.properties.log_config) == 0
 }
 
 vpc_flow_logs {
-    lower(input.json.resources[_].type) == "google_compute_subnetwork"
+    lower(input.resources[_].type) == "google_compute_subnetwork"
     not gc_issue["vpc_flow_logs"]
 }
 
@@ -34,13 +34,13 @@ vpc_flow_logs_err = "GCP VPC Flow logs for the subnet is set to Off" {
 default vpc_private_ip_google = null
 
 gc_issue["vpc_private_ip_google"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "google_compute_subnetwork"
     not resource.properties.private_ip_google_access
 }
 
 vpc_private_ip_google {
-    lower(input.json.resources[_].type) == "google_compute_subnetwork"
+    lower(input.resources[_].type) == "google_compute_subnetwork"
     not gc_issue["vpc_private_ip_google"]
 }
 

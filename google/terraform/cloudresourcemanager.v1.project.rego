@@ -9,13 +9,13 @@ package rule
 default net_default = null
 
 gc_issue["net_default"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "google_project"
     resource.properties.auto_create_network != false
 }
 
 net_default {
-    lower(input.json.resources[_].type) == "google_project"
+    lower(input.resources[_].type) == "google_project"
     not gc_issue["net_default"]
 }
 
