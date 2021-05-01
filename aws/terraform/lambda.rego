@@ -9,33 +9,33 @@ package rule
 default lambda_env = null
 
 aws_attribute_absence["lambda_env"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_lambda_function"
     not resource.properties.kms_key_arn
 }
 
 aws_attribute_absence["lambda_env"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_lambda_function"
     not resource.properties.environment
 }
 
 aws_issue["lambda_env"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_lambda_function"
     resource.properties.environment
     not resource.properties.kms_key_arn
 }
 
 aws_issue["lambda_env"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_lambda_function"
     resource.properties.environment
     not startswith(lower(resource.properties.kms_key_arn), "arn:")
 }
 
 lambda_env {
-    lower(input.json.resources[_].type) == "aws_lambda_function"
+    lower(input.resources[_].type) == "aws_lambda_function"
     not aws_issue["lambda_env"]
     not aws_attribute_absence["lambda_env"]
 }
@@ -63,19 +63,19 @@ lambda_env_miss_err = "Lambda function attribute kms_key_arn/environment missing
 default lambda_vpc = null
 
 aws_attribute_absence["lambda_vpc"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_lambda_function"
     not resource.properties.vpc_config.subnet_ids
 }
 
 aws_issue["lambda_vpc"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_lambda_function"
     count(resource.properties.vpc_config.subnet_ids) == 0
 }
 
 lambda_vpc {
-    lower(input.json.resources[_].type) == "aws_lambda_function"
+    lower(input.resources[_].type) == "aws_lambda_function"
     not aws_issue["lambda_vpc"]
     not aws_attribute_absence["lambda_vpc"]
 }
@@ -103,19 +103,19 @@ lambda_vpc_miss_err = "Lambda function attribute vpc_config.subnet_ids missing i
 default lambda_tracing = null
 
 aws_attribute_absence["lambda_tracing"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_lambda_function"
     not resource.properties.tracing_config.mode
 }
 
 aws_issue["lambda_tracing"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_lambda_function"
     lower(resource.properties.tracing_config.mode) == "passthrough"
 }
 
 lambda_tracing {
-    lower(input.json.resources[_].type) == "aws_lambda_function"
+    lower(input.resources[_].type) == "aws_lambda_function"
     not aws_issue["lambda_tracing"]
     not aws_attribute_absence["lambda_tracing"]
 }

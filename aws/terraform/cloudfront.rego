@@ -9,19 +9,19 @@ package rule
 default cf_default_cache = null
 
 aws_attribute_absence["cf_default_cache"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     not resource.properties.default_cache_behavior.field_level_encryption_id
 }
 
 aws_issue["cf_default_cache"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     count(resource.properties.default_cache_behavior.field_level_encryption_id) == 0
 }
 
 cf_default_cache {
-    lower(input.json.resources[_].type) == "aws_cloudfront_distribution"
+    lower(input.resources[_].type) == "aws_cloudfront_distribution"
     not aws_issue["cf_default_cache"]
     not aws_attribute_absence["cf_default_cache"]
 }
@@ -50,19 +50,19 @@ cf_default_cache_miss_err = "Cloudfront attribute DistributionConfig missing in 
 default cf_ssl_protocol = null
 
 aws_attribute_absence["cf_ssl_protocol"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     not resource.properties.origin.custom_origin_config.origin_ssl_protocols
 }
 
 aws_issue["cf_ssl_protocol"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     lower(resource.properties.origin.custom_origin_config.origin_ssl_protocols[_]) == "sslv3"
 }
 
 cf_ssl_protocol {
-    lower(input.json.resources[_].type) == "aws_cloudfront_distribution"
+    lower(input.resources[_].type) == "aws_cloudfront_distribution"
     not aws_issue["cf_ssl_protocol"]
     not aws_attribute_absence["cf_ssl_protocol"]
 }
@@ -91,19 +91,19 @@ cf_ssl_protocol_miss_err = "Cloudfront attribute origin_ssl_protocols missing in
 default cf_logging = null
 
 aws_attribute_absence["cf_logging"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     not resource.properties.logging_config.bucket
 }
 
 aws_issue["cf_logging"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     count(resource.properties.logging_config.bucket) == 0
 }
 
 cf_logging {
-    lower(input.json.resources[_].type) == "aws_cloudfront_distribution"
+    lower(input.resources[_].type) == "aws_cloudfront_distribution"
     not aws_issue["cf_logging"]
     not aws_attribute_absence["cf_logging"]
 }
@@ -131,19 +131,19 @@ cf_logging_miss_err = "Cloudfront attribute logging_config.bucket in the resourc
 default cf_https_only = null
 
 aws_attribute_absence["cf_https_only"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     not resource.properties.default_cache_behavior.viewer_protocol_policy
 }
 
 aws_issue["cf_https_only"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     lower(resource.properties.default_cache_behavior.viewer_protocol_policy) != "https-only"
 }
 
 cf_https_only {
-    lower(input.json.resources[_].type) == "aws_cloudfront_distribution"
+    lower(input.resources[_].type) == "aws_cloudfront_distribution"
     not aws_issue["cf_https_only"]
     not aws_attribute_absence["cf_https_only"]
 }
@@ -172,13 +172,13 @@ cf_https_only_miss_err = "Cloudfront attribute viewer_protocol_policy missing in
 default cf_https = null
 
 aws_attribute_absence["cf_https"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     not resource.properties.default_cache_behavior.viewer_protocol_policy
 }
 
 aws_issue["cf_https"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     cache := resource.properties.default_cache_behavior
     lower(cache.viewer_protocol_policy) != "https-only"
@@ -186,7 +186,7 @@ aws_issue["cf_https"] {
 }
 
 cf_https {
-    lower(input.json.resources[_].type) == "aws_cloudfront_distribution"
+    lower(input.resources[_].type) == "aws_cloudfront_distribution"
     not aws_issue["cf_https"]
     not aws_attribute_absence["cf_https"]
 }
@@ -214,25 +214,25 @@ cf_https_miss_err = "Cloudfront attribute viewer_protocol_policy missing in the 
 default cf_min_protocol = null
 
 aws_attribute_absence["cf_min_protocol"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     not resource.properties.viewer_certificate.minimum_protocol_version
 }
 
 aws_issue["cf_min_protocol"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     lower(resource.properties.viewer_certificate.minimum_protocol_version) == "tlsv1"
 }
 
 aws_issue["cf_min_protocol"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     lower(resource.properties.viewer_certificate.minimum_protocol_version) == "tlsv1_2016"
 }
 
 cf_min_protocol {
-    lower(input.json.resources[_].type) == "aws_cloudfront_distribution"
+    lower(input.resources[_].type) == "aws_cloudfront_distribution"
     not aws_issue["cf_min_protocol"]
     not aws_attribute_absence["cf_min_protocol"]
 }
@@ -260,19 +260,19 @@ cf_min_protocol_miss_err = "Cloudfront attribute minimum_protocol_version missin
 default cf_firewall = null
 
 aws_attribute_absence["cf_firewall"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     not resource.properties.web_acl_id
 }
 
 aws_issue["cf_firewall"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     count(resource.properties.web_acl_id) == 0
 }
 
 cf_firewall {
-    lower(input.json.resources[_].type) == "aws_cloudfront_distribution"
+    lower(input.resources[_].type) == "aws_cloudfront_distribution"
     not aws_issue["cf_firewall"]
     not aws_attribute_absence["cf_firewall"]
 }
@@ -300,13 +300,13 @@ cf_firewall_miss_err = "Cloudfront attribute web_acl_id missing in the resource"
 default cf_default_ssl = null
 
 aws_issue["cf_default_ssl"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     resource.properties.viewer_certificate.cloudfront_default_certificate
 }
 
 cf_default_ssl {
-    lower(input.json.resources[_].type) == "aws_cloudfront_distribution"
+    lower(input.resources[_].type) == "aws_cloudfront_distribution"
     not aws_issue["cf_default_ssl"]
 }
 
@@ -325,19 +325,19 @@ cf_default_ssl_err = "AWS CloudFront web distribution with default SSL certifica
 default cf_geo_restriction = null
 
 aws_attribute_absence["cf_geo_restriction"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     not resource.properties.restrictions.geo_restriction.restriction_type
 }
 
 aws_issue["cf_geo_restriction"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     lower(resource.properties.restrictions.geo_restriction.restriction_type) == "none"
 }
 
 cf_geo_restriction {
-    lower(input.json.resources[_].type) == "aws_cloudfront_distribution"
+    lower(input.resources[_].type) == "aws_cloudfront_distribution"
     not aws_issue["cf_geo_restriction"]
     not aws_attribute_absence["cf_geo_restriction"]
 }
@@ -365,19 +365,19 @@ cf_geo_restriction_miss_err = "Cloudfront attribute geo restriction_type missing
 default cf_s3_origin = null
 
 aws_attribute_absence["cf_s3_origin"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     not resource.properties.origin
 }
 
 aws_issue["cf_s3_origin"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     count(resource.properties.origin.s3_origin_config.origin_access_identity) == 0
 }
 
 cf_s3_origin {
-    lower(input.json.resources[_].type) == "aws_cloudfront_distribution"
+    lower(input.resources[_].type) == "aws_cloudfront_distribution"
     not aws_issue["cf_s3_origin"]
     not aws_attribute_absence["cf_s3_origin"]
 }

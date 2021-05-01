@@ -10,13 +10,13 @@ package rule
 default rds_cluster_encrypt = null
 
 aws_issue["rds_cluster_encrypt"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_rds_cluster"
     not resource.properties.storage_encrypted
 }
 
 rds_cluster_encrypt {
-    lower(input.json.resources[_].type) == "aws_rds_cluster"
+    lower(input.resources[_].type) == "aws_rds_cluster"
     not aws_issue["rds_cluster_encrypt"]
 }
 
@@ -35,13 +35,13 @@ rds_cluster_encrypt_err = "AWS RDS DB cluster encryption is disabled" {
 default rds_public = null
 
 aws_issue["rds_public"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_db_instance"
     resource.properties.publicly_accessible
 }
 
 rds_public {
-    lower(input.json.resources[_].type) == "aws_db_instance"
+    lower(input.resources[_].type) == "aws_db_instance"
     not aws_issue["rds_public"]
 }
 
@@ -60,13 +60,13 @@ rds_public_err = "AWS RDS database instance is publicly accessible" {
 default rds_encrypt = null
 
 aws_issue["rds_encrypt"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_db_instance"
     not resource.properties.storage_encrypted
 }
 
 rds_encrypt {
-    lower(input.json.resources[_].type) == "aws_db_instance"
+    lower(input.resources[_].type) == "aws_db_instance"
     not aws_issue["rds_encrypt"]
 }
 
@@ -85,13 +85,13 @@ rds_encrypt_err = "AWS RDS instance is not encrypted" {
 default rds_multiaz = null
 
 aws_attribute_absence["rds_multiaz"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_db_instance"
     not resource.properties.engine
 }
 
 aws_issue["rds_multiaz"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_db_instance"
     lower(resource.properties.engine) != "aurora"
     lower(resource.properties.engine) != "sqlserver"
@@ -99,7 +99,7 @@ aws_issue["rds_multiaz"] {
 }
 
 rds_multiaz {
-    lower(input.json.resources[_].type) == "aws_db_instance"
+    lower(input.resources[_].type) == "aws_db_instance"
     not aws_issue["rds_multiaz"]
     not aws_attribute_absence["rds_multiaz"]
 }
@@ -127,13 +127,13 @@ rds_multiaz_miss_err = "RDS dbcluster attribute engine missing in the resource" 
 default rds_snapshot = null
 
 aws_issue["rds_snapshot"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_db_instance"
     not resource.properties.copy_tags_to_snapshot
 }
 
 rds_snapshot {
-    lower(input.json.resources[_].type) == "aws_db_instance"
+    lower(input.resources[_].type) == "aws_db_instance"
     not aws_issue["rds_snapshot"]
 }
 
@@ -152,19 +152,19 @@ rds_snapshot_err = "AWS RDS instance with copy tags to snapshots disabled" {
 default rds_backup = null
 
 aws_attribute_absence["rds_backup"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_db_instance"
     not resource.properties.backup_retention_period
 }
 
 aws_issue["rds_backup"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_db_instance"
     to_number(resource.properties.backup_retention_period) == 0
 }
 
 rds_backup {
-    lower(input.json.resources[_].type) == "aws_db_instance"
+    lower(input.resources[_].type) == "aws_db_instance"
     not aws_issue["rds_backup"]
     not aws_attribute_absence["rds_backup"]
 }
@@ -192,13 +192,13 @@ rds_backup_miss_err = "RDS attribute backup_retention_period missing in the reso
 default rds_upgrade = null
 
 aws_issue["rds_upgrade"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_db_instance"
     not resource.properties.auto_minor_version_upgrade
 }
 
 rds_upgrade {
-    lower(input.json.resources[_].type) == "aws_db_instance"
+    lower(input.resources[_].type) == "aws_db_instance"
     not aws_issue["rds_upgrade"]
 }
 
@@ -217,19 +217,19 @@ rds_upgrade_err = "AWS RDS minor upgrades not enabled" {
 default rds_retention = null
 
 aws_attribute_absence["rds_retention"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_db_instance"
     not resource.properties.backup_retention_period
 }
 
 aws_issue["rds_retention"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_db_instance"
     to_number(resource.properties.backup_retention_period) < 7
 }
 
 rds_retention {
-    lower(input.json.resources[_].type) == "aws_db_instance"
+    lower(input.resources[_].type) == "aws_db_instance"
     not aws_issue["rds_retention"]
     not aws_attribute_absence["rds_retention"]
 }

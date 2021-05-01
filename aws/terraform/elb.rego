@@ -83,7 +83,7 @@ insecure_ciphers := [
 ]
 
 aws_issue["elb_insecure_cipher"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_load_balancer_policy"
     policy := resource.properties.policy_attribute[_]
     lower(policy.name) == lower(insecure_ciphers[_])
@@ -91,7 +91,7 @@ aws_issue["elb_insecure_cipher"] {
 }
 
 elb_insecure_cipher {
-    lower(input.json.resources[_].type) == "aws_load_balancer_policy"
+    lower(input.resources[_].type) == "aws_load_balancer_policy"
     not aws_issue["elb_insecure_cipher"]
 }
 
@@ -116,7 +116,7 @@ insecure_ssl_protocols := [
 ]
 
 aws_issue["elb_insecure_protocol"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_load_balancer_policy"
     policy := resource.properties.policy_attribute[_]
     lower(policy.name) == lower(insecure_ssl_protocols[_])
@@ -124,7 +124,7 @@ aws_issue["elb_insecure_protocol"] {
 }
 
 elb_insecure_protocol {
-    lower(input.json.resources[_].type) == "aws_load_balancer_policy"
+    lower(input.resources[_].type) == "aws_load_balancer_policy"
     not aws_issue["elb_insecure_protocol"]
 }
 
@@ -143,13 +143,13 @@ elb_insecure_protocol_err = "AWS Elastic Load Balancer (Classic) SSL negotiation
 default elb_access_log = null
 
 aws_issue["elb_access_log"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_elb"
     resource.properties.access_logs.enabled == false
 }
 
 elb_access_log {
-    lower(input.json.resources[_].type) == "aws_elb"
+    lower(input.resources[_].type) == "aws_elb"
     not aws_issue["elb_access_log"]
 }
 
@@ -168,13 +168,13 @@ elb_access_log_err = "AWS Elastic Load Balancer (Classic) with access log disabl
 default elb_conn_drain = null
 
 aws_issue["elb_conn_drain"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_elb"
     not resource.properties.connection_draining
 }
 
 elb_conn_drain {
-    lower(input.json.resources[_].type) == "aws_elb"
+    lower(input.resources[_].type) == "aws_elb"
     not aws_issue["elb_conn_drain"]
 }
 
@@ -193,13 +193,13 @@ elb_conn_drain_err = "AWS Elastic Load Balancer (Classic) with connection draini
 default elb_crosszone = null
 
 aws_issue["elb_crosszone"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_elb"
     resource.properties.cross_zone_load_balancing == false
 }
 
 elb_crosszone {
-    lower(input.json.resources[_].type) == "aws_elb"
+    lower(input.resources[_].type) == "aws_elb"
     not aws_issue["elb_crosszone"]
 }
 
@@ -221,19 +221,19 @@ elb_crosszone_err = "AWS Elastic Load Balancer (Classic) with cross-zone load ba
 default elb_sec_group = null
 
 aws_attribute_absence["elb_sec_group"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_elb"
     not resource.properties.security_groups
 }
 
 aws_issue["elb_sec_group"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_elb"
     count(resource.properties.security_groups) == 0
 }
 
 elb_sec_group {
-    lower(input.json.resources[_].type) == "aws_elb"
+    lower(input.resources[_].type) == "aws_elb"
     not aws_issue["elb_sec_group"]
 }
 
@@ -256,19 +256,19 @@ elb_sec_group_miss_err = "ELB attribute security_groups missing in the resource"
 default elb_not_in_use = null
 
 aws_attribute_absence["elb_not_in_use"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_elb"
     not resource.properties.instances
 }
 
 aws_issue["elb_not_in_use"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_elb"
     count(resource.properties.instances) == 0
 }
 
 elb_not_in_use {
-    lower(input.json.resources[_].type) == "aws_elb"
+    lower(input.resources[_].type) == "aws_elb"
     not aws_issue["elb_not_in_use"]
     not aws_attribute_absence["elb_not_in_use"]
 }
@@ -297,25 +297,25 @@ elb_not_in_use_miss_err = "ELB attribute instances missing in the resource" {
 default elb_alb_logs = null
 
 aws_attribute_absence["elb_alb_logs"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_lb"
     not resource.properties.access_logs
 }
 
 aws_issue["elb_alb_logs"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_lb"
     resource.properties.access_logs[_].enabled != true
 }
 
 aws_issue["elb_alb_logs"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_lb"
     count(resource.properties.access_logs) == 0
 }
 
 elb_alb_logs {
-    lower(input.json.resources[_].type) == "aws_lb"
+    lower(input.resources[_].type) == "aws_lb"
     not aws_attribute_absence["elb_alb_logs"]
     not aws_issue["elb_alb_logs"]
 }
@@ -343,32 +343,32 @@ elb_alb_logs_miss_err = "ELBv2 attribute access_logs.enabled missing in the reso
 default elb_listener_ssl = null
 
 aws_attribute_absence["elb_listener_ssl"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_elb"
     not resource.properties.listeners
 }
 
 aws_issue["elb_listener_ssl"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_elb"
     resource.properties.listeners[_].ssl_certificate_id == ""
 }
 
 aws_issue["elb_listener_ssl"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_elb"
     resource.properties.listeners[_].ssl_certificate_id == null
 }
 
 aws_issue["elb_listener_ssl"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_elb"
     listener := resource.properties.listeners[_]
     not listener.ssl_certificate_id
 }
 
 elb_listener_ssl {
-    lower(input.json.resources[_].type) == "aws_elb"
+    lower(input.resources[_].type) == "aws_elb"
     not aws_issue["elb_listener_ssl"]
     not aws_attribute_absence["elb_listener_ssl"]
 }
@@ -396,20 +396,20 @@ elb_listener_ssl_miss_err = "ELB attribute listeners missing in the resource" {
 default elb_over_https = null
 
 aws_attribute_absence["elb_over_https"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_elb"
     listener := resource.properties.listener[_]
     not listener.lb_protocol
 }
 
 aws_issue["elb_over_https"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_elb"
     lower(resource.properties.listener[_].lb_protocol) == "http"
 }
 
 elb_over_https {
-    lower(input.json.resources[_].type) == "aws_elb"
+    lower(input.resources[_].type) == "aws_elb"
     not aws_issue["elb_over_https"]
     not aws_attribute_absence["elb_over_https"]
 }

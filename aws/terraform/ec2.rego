@@ -9,19 +9,19 @@ package rule
 default ec2_iam_role = null
 
 aws_attribute_absence["ec2_iam_role"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_instance"
     not resource.properties.iam_instance_profile
 }
 
 aws_issue["ec2_iam_role"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_instance"
     count(resource.properties.iam_instance_profile) == 0
 }
 
 ec2_iam_role {
-    lower(input.json.resources[_].type) == "aws_instance"
+    lower(input.resources[_].type) == "aws_instance"
     not aws_issue["ec2_iam_role"]
     not aws_attribute_absence["ec2_iam_role"]
 }
