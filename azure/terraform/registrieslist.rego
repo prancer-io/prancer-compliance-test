@@ -9,19 +9,19 @@ package rule
 default acr_classic = null
 
 azure_attribute_absence["acr_classic"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_container_registry"
     not resource.properties.sku
 }
 
 azure_issue["acr_classic"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_container_registry"
     lower(resource.properties.sku) == "classic"
 }
 
 acr_classic {
-    lower(input.json.resources[_].type) == "azurerm_container_registry"
+    lower(input.resources[_].type) == "azurerm_container_registry"
     not azure_issue["acr_classic"]
     not azure_attribute_absence["acr_classic"]
 }

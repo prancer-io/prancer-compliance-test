@@ -9,19 +9,19 @@ package rule
 default ecs_exec = null
 
 aws_attribute_absence["ecs_exec"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_ecs_task_definition"
     not resource.properties.execution_role_arn
 }
 
 aws_issue["ecs_exec"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_ecs_task_definition"
     not startswith(lower(resource.properties.execution_role_arn), "arn:aws:iam")
 }
 
 ecs_exec {
-    lower(input.json.resources[_].type) == "aws_ecs_task_definition"
+    lower(input.resources[_].type) == "aws_ecs_task_definition"
     not aws_issue["ecs_exec"]
     not aws_attribute_absence["ecs_exec"]
 }

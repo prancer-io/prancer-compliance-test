@@ -8,7 +8,7 @@ ports = [
 ]
 
 aws_issue[port] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_security_group"
     ingress := resource.properties.ingress[_]
     port := ports[_]
@@ -19,7 +19,7 @@ aws_issue[port] {
 }
 
 aws_issue[port] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_security_group_rule"
     port := ports[_]
 
@@ -29,7 +29,7 @@ aws_issue[port] {
 }
 
 aws_issue[port] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_security_group"
     ingress := resource.properties.ingress[_]
     port := ports[_]
@@ -40,7 +40,7 @@ aws_issue[port] {
 }
 
 aws_issue[port] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_security_group_rule"
     port := ports[_]
 
@@ -50,35 +50,35 @@ aws_issue[port] {
 }
 
 aws_issue["all"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_security_group"
     lower(resource.properties.GroupName) == "default"
     resource.properties.ingress[_].ipv6_cidr_blocks[_] == "::/0"
 }
 
 aws_issue["all"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_security_group_rule"
     lower(resource.properties.GroupName) == "default"
     resource.properties.ingress[_].ipv6_cidr_blocks[_] == "::/0"
 }
 
 aws_issue["all"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_security_group"
     lower(resource.properties.GroupName) == "default"
     resource.properties.ingress[_].cidr_blocks[_] == "0.0.0.0/0"
 }
 
 aws_issue["all"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_security_group_rule"
     lower(resource.properties.GroupName) == "default"
     resource.properties.ingress[_].cidr_blocks[_] == "0.0.0.0/0"
 }
 
 aws_issue["proto_all"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_security_group"
     ingress := resource.properties.ingress[_]
     ingress.protocol == "-1"
@@ -86,7 +86,7 @@ aws_issue["proto_all"] {
 }
 
 aws_issue["proto_all"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_security_group"
     ingress := resource.properties.ingress[_]
     ingress.protocol == "all"
@@ -94,21 +94,21 @@ aws_issue["proto_all"] {
 }
 
 aws_issue["proto_all"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_security_group_rule"
     resource.properties.protocol == "-1"
     resource.properties.cidr_blocks[_] == "0.0.0.0/0"
 }
 
 aws_issue["proto_all"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_security_group_rule"
     resource.properties.protocol == "all"
     resource.properties.cidr_blocks[_] == "0.0.0.0/0"
 }
 
 aws_issue["proto_all"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_security_group"
     ingress := resource.properties.ingress[_]
     ingress.protocol == "-1"
@@ -116,7 +116,7 @@ aws_issue["proto_all"] {
 }
 
 aws_issue["proto_all"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_security_group"
     ingress := resource.properties.ingress[_]
     ingress.protocol == "all"
@@ -124,14 +124,14 @@ aws_issue["proto_all"] {
 }
 
 aws_issue["proto_all"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_security_group_rule"
     resource.properties.protocol == "-1"
     resource.properties.ipv6_cidr_blocks[_] == "::/0"
 }
 
 aws_issue["proto_all"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_security_group_rule"
     resource.properties.protocol == "all"
     resource.properties.ipv6_cidr_blocks[_] == "::/0"
@@ -145,7 +145,7 @@ aws_issue["proto_all"] {
 default port_135 = null
 
 port_135 {
-    lower(input.json.resources[_].type) == "aws_security_group_rule"
+    lower(input.resources[_].type) == "aws_security_group_rule"
     not aws_issue["135"]
 }
 
@@ -164,7 +164,7 @@ port_135_err = "AWS Security Groups allow internet traffic from internet to Wind
 default port_137 = null
 
 port_137 {
-    lower(input.json.resources[_].type) == "aws_security_group_rule"
+    lower(input.resources[_].type) == "aws_security_group_rule"
     not aws_issue["137"]
 }
 
@@ -183,7 +183,7 @@ port_137_err = "AWS Security Groups allow internet traffic from internet to NetB
 default port_138 = null
 
 port_138 {
-    lower(input.json.resources[_].type) == "aws_security_group_rule"
+    lower(input.resources[_].type) == "aws_security_group_rule"
     not aws_issue["138"]
 }
 
@@ -202,7 +202,7 @@ port_138_err = "AWS Security Groups allow internet traffic from internet to NetB
 default port_1433 = null
 
 port_1433 {
-    lower(input.json.resources[_].type) == "aws_security_group_rule"
+    lower(input.resources[_].type) == "aws_security_group_rule"
     not aws_issue["1433"]
 }
 
@@ -221,7 +221,7 @@ port_1433_err = "AWS Security Groups allow internet traffic from internet to SQL
 default port_1434 = null
 
 port_1434 {
-    lower(input.json.resources[_].type) == "aws_security_group_rule"
+    lower(input.resources[_].type) == "aws_security_group_rule"
     not aws_issue["1434"]
 }
 
@@ -240,7 +240,7 @@ port_1434_err = "AWS Security Groups allow internet traffic from internet to SQL
 default port_20 = null
 
 port_20 {
-    lower(input.json.resources[_].type) == "aws_security_group_rule"
+    lower(input.resources[_].type) == "aws_security_group_rule"
     not aws_issue["20"]
 }
 
@@ -259,7 +259,7 @@ port_20_err = "AWS Security Groups allow internet traffic from internet to FTP-D
 default port_21 = null
 
 port_21 {
-    lower(input.json.resources[_].type) == "aws_security_group_rule"
+    lower(input.resources[_].type) == "aws_security_group_rule"
     not aws_issue["21"]
 }
 
@@ -278,7 +278,7 @@ port_21_err = "AWS Security Groups allow internet traffic from internet to FTP p
 default port_22 = null
 
 port_22 {
-    lower(input.json.resources[_].type) == "aws_security_group_rule"
+    lower(input.resources[_].type) == "aws_security_group_rule"
     not aws_issue["22"]
 }
 
@@ -297,7 +297,7 @@ port_22_err = "AWS Security Groups allow internet traffic to SSH port (22)" {
 default port_23 = null
 
 port_23 {
-    lower(input.json.resources[_].type) == "aws_security_group_rule"
+    lower(input.resources[_].type) == "aws_security_group_rule"
     not aws_issue["23"]
 }
 
@@ -316,7 +316,7 @@ port_23_err = "AWS Security Groups allow internet traffic from internet to Telne
 default port_25 = null
 
 port_25 {
-    lower(input.json.resources[_].type) == "aws_security_group_rule"
+    lower(input.resources[_].type) == "aws_security_group_rule"
     not aws_issue["25"]
 }
 
@@ -335,7 +335,7 @@ port_25_err = "AWS Security Groups allow internet traffic from internet to SMTP 
 default port_3306 = null
 
 port_3306 {
-    lower(input.json.resources[_].type) == "aws_security_group_rule"
+    lower(input.resources[_].type) == "aws_security_group_rule"
     not aws_issue["3306"]
 }
 
@@ -354,7 +354,7 @@ port_3306_err = "AWS Security Groups allow internet traffic from internet to MYS
 default port_3389 = null
 
 port_3389 {
-    lower(input.json.resources[_].type) == "aws_security_group_rule"
+    lower(input.resources[_].type) == "aws_security_group_rule"
     not aws_issue["3389"]
 }
 
@@ -373,7 +373,7 @@ port_3389_err = "AWS Security Groups allow internet traffic from internet to RDP
 default port_4333 = null
 
 port_4333 {
-    lower(input.json.resources[_].type) == "aws_security_group_rule"
+    lower(input.resources[_].type) == "aws_security_group_rule"
     not aws_issue["4333"]
 }
 
@@ -392,7 +392,7 @@ port_4333_err = "AWS Security Groups allow internet traffic from internet to MSQ
 default port_445 = null
 
 port_445 {
-    lower(input.json.resources[_].type) == "aws_security_group_rule"
+    lower(input.resources[_].type) == "aws_security_group_rule"
     not aws_issue["445"]
 }
 
@@ -411,7 +411,7 @@ port_445_err = "AWS Security Groups allow internet traffic from internet to CIFS
 default port_53 = null
 
 port_53 {
-    lower(input.json.resources[_].type) == "aws_security_group_rule"
+    lower(input.resources[_].type) == "aws_security_group_rule"
     not aws_issue["53"]
 }
 
@@ -430,7 +430,7 @@ port_53_err = "AWS Security Groups allow internet traffic from internet to DNS p
 default port_5432 = null
 
 port_5432 {
-    lower(input.json.resources[_].type) == "aws_security_group_rule"
+    lower(input.resources[_].type) == "aws_security_group_rule"
     not aws_issue["5432"]
 }
 
@@ -449,7 +449,7 @@ port_5432_err = "AWS Security Groups allow internet traffic from internet to Pos
 default port_5500 = null
 
 port_5500 {
-    lower(input.json.resources[_].type) == "aws_security_group_rule"
+    lower(input.resources[_].type) == "aws_security_group_rule"
     not aws_issue["5500"]
 }
 
@@ -468,7 +468,7 @@ port_5500_err = "AWS Security Groups allow internet traffic from internet to VNC
 default port_5900 = null
 
 port_5900 {
-    lower(input.json.resources[_].type) == "aws_security_group_rule"
+    lower(input.resources[_].type) == "aws_security_group_rule"
     not aws_issue["5900"]
 }
 
@@ -487,7 +487,7 @@ port_5900_err = "AWS Security Groups allow internet traffic from internet to VNC
 default port_all = null
 
 port_all {
-    lower(input.json.resources[_].type) == "aws_security_group_rule"
+    lower(input.resources[_].type) == "aws_security_group_rule"
     not aws_issue["all"]
 }
 
@@ -506,7 +506,7 @@ port_all_err = "AWS Default Security Group does not restrict all traffic" {
 default port_proto_all = null
 
 port_proto_all {
-    lower(input.json.resources[_].type) == "aws_security_group_rule"
+    lower(input.resources[_].type) == "aws_security_group_rule"
     not aws_issue["proto_all"]
 }
 

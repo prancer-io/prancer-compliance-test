@@ -9,13 +9,13 @@ package rule
 default disk_encrypt = null
 
 gc_issue["disk_encrypt"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "google_compute_disk"
     not resource.properties.disk_encryption_key
 }
 
 disk_encrypt {
-    lower(input.json.resources[_].type) == "google_compute_disk"
+    lower(input.resources[_].type) == "google_compute_disk"
     not gc_issue["disk_encrypt"]
 }
 

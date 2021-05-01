@@ -9,13 +9,13 @@ package rule
 default vpc_subnet_autoip = null
 
 aws_issue["vpc_subnet_autoip"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_subnet"
     resource.properties.map_public_ip_on_launch
 }
 
 vpc_subnet_autoip {
-    lower(input.json.resources[_].type) == "aws_subnet"
+    lower(input.resources[_].type) == "aws_subnet"
     not aws_issue["vpc_subnet_autoip"]
 }
 

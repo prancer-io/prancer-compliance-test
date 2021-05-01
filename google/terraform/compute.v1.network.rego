@@ -9,13 +9,13 @@ package rule
 default net_legacy = null
 
 gc_issue["net_legacy"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "google_compute_network"
     not resource.properties.auto_create_subnetworks
 }
 
 net_legacy {
-    lower(input.json.resources[_].type) == "google_compute_network"
+    lower(input.resources[_].type) == "google_compute_network"
     not gc_issue["net_legacy"]
 }
 

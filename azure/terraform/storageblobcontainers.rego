@@ -10,13 +10,13 @@ package rule
 default storage_public_access = null
 
 azure_issue["storage_public_access"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_storage_account"
     resource.properties.allow_blob_public_access
 }
 
 storage_public_access {
-    lower(input.json.resources[_].type) == "azurerm_storage_account"
+    lower(input.resources[_].type) == "azurerm_storage_account"
     not azure_issue["storage_public_access"]
 }
 

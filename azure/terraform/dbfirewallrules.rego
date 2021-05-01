@@ -9,31 +9,31 @@ package rule
 default db_firewall = null
 
 azure_attribute_absence["db_firewall"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_sql_firewall_rule"
     not resource.properties.start_ip_address
 }
 
 azure_attribute_absence["db_firewall"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_sql_firewall_rule"
     not resource.properties.end_ip_address
 }
 
 azure_issue["db_firewall"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_sql_firewall_rule"
     resource.properties.start_ip_address == "0.0.0.0"
 }
 
 azure_issue["db_firewall"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_sql_firewall_rule"
     resource.properties.end_ip_address == "0.0.0.0"
 }
 
 db_firewall {
-    lower(input.json.resources[_].type) == "azurerm_sql_firewall_rule"
+    lower(input.resources[_].type) == "azurerm_sql_firewall_rule"
     not azure_issue["db_firewall"]
     not azure_attribute_absence["db_firewall"]
 }

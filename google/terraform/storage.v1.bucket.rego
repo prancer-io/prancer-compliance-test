@@ -9,19 +9,19 @@ package rule
 default storage_encrypt = null
 
 gc_attribute_absence["storage_encrypt"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket"
     not resource.properties.encryption.default_kms_key_name
 }
 
 gc_issue["storage_encrypt"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket"
     count(resource.properties.encryption.default_kms_key_name) == 0
 }
 
 storage_encrypt {
-    lower(input.json.resources[_].type) == "google_storage_bucket"
+    lower(input.resources[_].type) == "google_storage_bucket"
     not gc_issue["storage_encrypt"]
     not gc_attribute_absence["storage_encrypt"]
 }
@@ -49,19 +49,19 @@ storage_encrypt_miss_err = "GCP Storage bucket attribute encryption missing in t
 default storage_versioning = null
 
 gc_attribute_absence["storage_versioning"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket"
     not resource.properties.versioning
 }
 
 gc_issue["storage_versioning"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket"
     resource.properties.versioning.enabled != true
 }
 
 storage_versioning {
-    lower(input.json.resources[_].type) == "google_storage_bucket"
+    lower(input.resources[_].type) == "google_storage_bucket"
     not gc_issue["storage_versioning"]
     not gc_attribute_absence["storage_versioning"]
 }
@@ -89,13 +89,13 @@ storage_versioning_miss_err = "GCP Storage attribute versioning missing in the r
 default storage_logging = null
 
 gc_issue["storage_logging"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket"
     not resource.properties.logging.log_bucket
 }
 
 storage_logging {
-    lower(input.json.resources[_].type) == "google_storage_bucket"
+    lower(input.resources[_].type) == "google_storage_bucket"
     not gc_issue["storage_logging"]
 }
 
@@ -114,7 +114,7 @@ storage_logging_err = "Storage Bucket does not have Access and Storage Logging e
 default storage_public_logs = null
 
 gc_issue["storage_public_logs"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket_acl"
     acl := resource.properties.acl[_]
     contains(lower(acl.role_entity), "logging")
@@ -122,7 +122,7 @@ gc_issue["storage_public_logs"] {
 }
 
 gc_issue["storage_public_logs"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket_acl"
     acl := resource.properties.acl[_]
     contains(lower(acl.role_entity), "logging")
@@ -130,7 +130,7 @@ gc_issue["storage_public_logs"] {
 }
 
 storage_public_logs {
-    lower(input.json.resources[_].type) == "google_storage_bucket_acl"
+    lower(input.resources[_].type) == "google_storage_bucket_acl"
     not gc_issue["storage_public_logs"]
 }
 

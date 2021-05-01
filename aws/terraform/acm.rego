@@ -9,25 +9,25 @@ package rule
 default acm_wildcard = null
 
 aws_attribute_absence["acm_wildcard"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_acm_certificate"
     not resource.properties.domain_name
 }
 
 aws_issue["acm_wildcard"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_acm_certificate"
     startswith(resource.properties.domain_name, "*")
 }
 
 aws_issue["acm_wildcard"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_acm_certificate"
     startswith(resource.properties.DomainValidationOptions[_].domain_name, "*")
 }
 
 acm_wildcard {
-    lower(input.json.resources[_].type) == "aws_acm_certificate"
+    lower(input.resources[_].type) == "aws_acm_certificate"
     not aws_issue["acm_wildcard"]
     not aws_attribute_absence["acm_wildcard"]
 }
@@ -55,19 +55,19 @@ acm_wildcard_miss_err = "Certificate manager attribute domain_name missing in th
 default acm_ct_log = null
 
 aws_attribute_absence["acm_ct_log"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_acm_certificate"
     not resource.properties.certificate_transparency_logging_preference
 }
 
 aws_issue["acm_ct_log"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_acm_certificate"
     lower(resource.properties.certificate_transparency_logging_preference) != "enabled"
 }
 
 acm_ct_log {
-    lower(input.json.resources[_].type) == "aws_acm_certificate"
+    lower(input.resources[_].type) == "aws_acm_certificate"
     not aws_issue["acm_ct_log"]
     not aws_attribute_absence["acm_ct_log"]
 }

@@ -10,7 +10,7 @@ iports := [
 
 # allowed in all
 nsg_inbound[port] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     port := iports[_]
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
@@ -21,7 +21,7 @@ nsg_inbound[port] {
 
 # allowed in port
 nsg_inbound[port] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     port := iports[_]
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
@@ -32,7 +32,7 @@ nsg_inbound[port] {
 
 # allowed in range
 nsg_inbound[port] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     port := iports[_]
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
@@ -46,7 +46,7 @@ nsg_inbound[port] {
 
 # allowed in list
 nsg_inbound[port] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     port := iports[_]
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
@@ -57,7 +57,7 @@ nsg_inbound[port] {
 
 # allowed in list range
 nsg_inbound[port] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     port := iports[_]
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
@@ -75,7 +75,7 @@ nsg_inbound[port] {
 default nsg_in_tcp_all_src = null
 
 azure_issue["nsg_in_tcp_all_src"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
@@ -85,7 +85,7 @@ azure_issue["nsg_in_tcp_all_src"] {
 }
 
 nsg_in_tcp_all_src {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["nsg_in_tcp_all_src"]
 }
 
@@ -104,7 +104,7 @@ nsg_in_tcp_all_src_err = "Azure NSG having inbound rule overly permissive to all
 default nsg_in_udp_all_src = null
 
 azure_issue["nsg_in_udp_all_src"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
@@ -114,7 +114,7 @@ azure_issue["nsg_in_udp_all_src"] {
 }
 
 nsg_in_udp_all_src {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["nsg_in_udp_all_src"]
 }
 
@@ -133,7 +133,7 @@ nsg_in_udp_all_src_err = "Azure NSG having inbound rule overly permissive to all
 default nsg_in_tcp_all = null
 
 azure_issue["nsg_in_tcp_all"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
@@ -144,7 +144,7 @@ azure_issue["nsg_in_tcp_all"] {
 }
 
 nsg_in_tcp_all {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["nsg_in_tcp_all"]
 }
 
@@ -163,7 +163,7 @@ nsg_in_tcp_all_err = "Azure NSG having inbound rule overly permissive to all tra
 default nsg_in_udp_all = null
 
 azure_issue["nsg_in_udp_all"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
@@ -174,7 +174,7 @@ azure_issue["nsg_in_udp_all"] {
 }
 
 nsg_in_udp_all {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["nsg_in_udp_all"]
 }
 
@@ -193,7 +193,7 @@ nsg_in_udp_all_err = "Azure NSG having inbound rule overly permissive to all UDP
 default nsg_in_all = null
 
 azure_issue["nsg_in_all"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
@@ -203,7 +203,7 @@ azure_issue["nsg_in_all"] {
 }
 
 nsg_in_all {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["nsg_in_all"]
 }
 
@@ -222,7 +222,7 @@ nsg_in_all_err = "Azure NSG having inbound rule overly permissive to all traffic
 default nsg_in_all_src = null
 
 azure_issue["nsg_in_all_src"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
@@ -233,7 +233,7 @@ azure_issue["nsg_in_all_src"] {
 }
 
 nsg_in_all_src {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["nsg_in_all_src"]
 }
 
@@ -252,7 +252,7 @@ nsg_in_all_src_err = "Azure NSG having inbound rule overly permissive to allow a
 default nsg_in_all_dst = null
 
 azure_issue["nsg_in_all_dst"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
@@ -263,7 +263,7 @@ azure_issue["nsg_in_all_dst"] {
 }
 
 nsg_in_all_dst {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["nsg_in_all_dst"]
 }
 
@@ -282,7 +282,7 @@ nsg_in_all_dst_err = "Azure NSG having inbound rule overly permissive to allow a
 default nsg_allow_icmp = null
 
 azure_issue["nsg_allow_icmp"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
@@ -291,7 +291,7 @@ azure_issue["nsg_allow_icmp"] {
 }
 
 nsg_allow_icmp {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["nsg_allow_icmp"]
 }
 
@@ -314,7 +314,7 @@ azure_issue["inbound_port_21"] {
 }
 
 inbound_port_21 {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["inbound_port_21"]
 }
 
@@ -345,7 +345,7 @@ azure_issue["inbound_insecure_port"] {
 }
 
 inbound_insecure_port {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["inbound_insecure_port"]
 }
 
@@ -368,7 +368,7 @@ azure_issue["inbound_port_11211"] {
 }
 
 inbound_port_11211 {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["inbound_port_11211"]
 }
 
@@ -391,7 +391,7 @@ azure_issue["inbound_port_6379"] {
 }
 
 inbound_port_6379 {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["inbound_port_6379"]
 }
 
@@ -466,7 +466,7 @@ azure_issue["inbound_port_dbs"] {
 }
 
 inbound_port_dbs {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["inbound_port_dbs"]
 }
 
@@ -489,7 +489,7 @@ azure_issue["inbound_port_22"] {
 }
 
 inbound_port_22 {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["inbound_port_22"]
 }
 
@@ -512,7 +512,7 @@ azure_issue["inbound_port_3389"] {
 }
 
 inbound_port_3389 {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["inbound_port_3389"]
 }
 
@@ -536,7 +536,7 @@ azure_issue["inbound_port_445"] {
 }
 
 inbound_port_445 {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["inbound_port_445"]
 }
 
@@ -564,7 +564,7 @@ azure_issue["inbound_port_53"] {
 }
 
 inbound_port_53 {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["inbound_port_53"]
 }
 
@@ -587,7 +587,7 @@ azure_issue["inbound_port_20"] {
 }
 
 inbound_port_20 {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["inbound_port_20"]
 }
 
@@ -610,7 +610,7 @@ azure_issue["inbound_port_4333"] {
 }
 
 inbound_port_4333 {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["inbound_port_4333"]
 }
 
@@ -633,7 +633,7 @@ azure_issue["inbound_port_3306"] {
 }
 
 inbound_port_3306 {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["inbound_port_3306"]
 }
 
@@ -661,7 +661,7 @@ azure_issue["inbound_port_netbios"] {
 }
 
 inbound_port_netbios {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["inbound_port_netbios"]
 }
 
@@ -684,7 +684,7 @@ azure_issue["inbound_port_5432"] {
 }
 
 inbound_port_5432 {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["inbound_port_5432"]
 }
 
@@ -707,7 +707,7 @@ azure_issue["inbound_port_25"] {
 }
 
 inbound_port_25 {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["inbound_port_25"]
 }
 
@@ -735,7 +735,7 @@ azure_issue["inbound_port_sqlserver"] {
 }
 
 inbound_port_sqlserver {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["inbound_port_sqlserver"]
 }
 
@@ -758,7 +758,7 @@ azure_issue["inbound_port_23"] {
 }
 
 inbound_port_23 {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["inbound_port_23"]
 }
 
@@ -781,7 +781,7 @@ azure_issue["inbound_port_5500"] {
 }
 
 inbound_port_5500 {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["inbound_port_5500"]
 }
 
@@ -804,7 +804,7 @@ azure_issue["inbound_port_5900"] {
 }
 
 inbound_port_5900 {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["inbound_port_5900"]
 }
 
@@ -827,7 +827,7 @@ azure_issue["inbound_port_135"] {
 }
 
 inbound_port_135 {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["inbound_port_135"]
 }
 
@@ -846,7 +846,7 @@ oports := ["8332", "8333", "8545", "30303"]
 # allowed in all
 nsg_outbound[port] {
     port := oports[_]
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "Outbound"
@@ -857,7 +857,7 @@ nsg_outbound[port] {
 # allowed in port
 nsg_outbound[port] {
     port := oports[_]
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "Outbound"
@@ -868,7 +868,7 @@ nsg_outbound[port] {
 # allowed in range
 nsg_outbound[port] {
     port := oports[_]
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "Outbound"
@@ -882,7 +882,7 @@ nsg_outbound[port] {
 # allowed in list
 nsg_outbound[port] {
     port := oports[_]
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_network_security_rule"
     rules := input.properties.securityRules[_]
     lower(resource.properties.access) == "allow"
@@ -894,7 +894,7 @@ nsg_outbound[port] {
 # allowed in list range
 nsg_outbound[port] {
     port := oports[_]
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "Outbound"
@@ -911,7 +911,7 @@ nsg_outbound[port] {
 default nsg_out_all = null
 
 azure_issue["nsg_out_all"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "Outbound"
@@ -920,7 +920,7 @@ azure_issue["nsg_out_all"] {
 }
 
 nsg_out_all {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["nsg_out_all"]
 }
 
@@ -947,7 +947,7 @@ azure_issue["outbound_port_bitcoin"] {
 }
 
 outbound_port_bitcoin {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["outbound_port_bitcoin"]
 }
 
@@ -974,7 +974,7 @@ azure_issue["outbound_port_ethereum"] {
 }
 
 outbound_port_ethereum {
-    lower(input.json.resources[_].type) == "azurerm_network_security_rule"
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
     not azure_issue["outbound_port_ethereum"]
 }
 

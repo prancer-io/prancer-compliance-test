@@ -9,13 +9,13 @@ package rule
 default sql_public_access = null
 
 azure_issue["sql_public_access"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_sql_server"
     lower(resource.properties.publicNetworkAccess) != "disabled"
 }
 
 sql_public_access {
-    lower(input.json.resources[_].type) == "azurerm_sql_server"
+    lower(input.resources[_].type) == "azurerm_sql_server"
     not azure_issue["sql_public_access"]
 }
 

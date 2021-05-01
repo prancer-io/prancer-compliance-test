@@ -10,19 +10,19 @@ package rule
 default sns_protocol = null
 
 aws_attribute_absence["sns_protocol"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_sns_topic_subscription"
     not resource.properties.protocol
 }
 
 aws_issue["sns_protocol"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_sns_topic_subscription"
     lower(resource.properties.protocol) == "http"
 }
 
 sns_protocol {
-    lower(input.json.resources[_].type) == "aws_sns_topic_subscription"
+    lower(input.resources[_].type) == "aws_sns_topic_subscription"
     not aws_issue["sns_protocol"]
     not aws_attribute_absence["sns_protocol"]
 }
@@ -50,13 +50,13 @@ sns_protocol_miss_err = "SNS attribute protocol missing in the resource" {
 default sns_encrypt_key = null
 
 aws_issue["sns_encrypt_key"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_sns_topic"
     contains(lower(resource.properties.kms_master_key_id), "alias/aws/sns")
 }
 
 sns_encrypt_key {
-    lower(input.json.resources[_].type) == "aws_sns_topic"
+    lower(input.resources[_].type) == "aws_sns_topic"
     not aws_issue["sns_encrypt_key"]
 }
 
@@ -75,19 +75,19 @@ sns_encrypt_key_err = "AWS SNS topic encrypted using default KMS key instead of 
 default sns_encrypt = null
 
 aws_attribute_absence["sns_encrypt"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_sns_topic"
     not resource.properties.kms_master_key_id
 }
 
 aws_issue["sns_encrypt"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "aws_sns_topic"
     count(resource.properties.kms_master_key_id) == 0
 }
 
 sns_encrypt {
-    lower(input.json.resources[_].type) == "aws_sns_topic"
+    lower(input.resources[_].type) == "aws_sns_topic"
     not aws_issue["sns_encrypt"]
     not aws_attribute_absence["sns_encrypt"]
 }

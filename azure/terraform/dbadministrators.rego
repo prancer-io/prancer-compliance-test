@@ -9,16 +9,16 @@ package rule
 default db_ad_admin = null
 
 azure_attribute_absence["db_ad_admin"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_sql_server"
-    count([c | input.json.resources[_].type == "azurerm_sql_active_directory_administrator"; 
+    count([c | input.resources[_].type == "azurerm_sql_active_directory_administrator"; 
            c := 1]) == 0
 }
 
 azure_issue["db_ad_admin"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_sql_server"
-    count([c | r := input.json.resources[_];
+    count([c | r := input.resources[_];
                r.type == "azurerm_sql_active_directory_administrator";
                re_match(concat("", ["^.*\\.", resource.name, "\\..*$"]), r.properties.server_name);
                c := 1]) == 0
@@ -26,7 +26,7 @@ azure_issue["db_ad_admin"] {
 }
 
 db_ad_admin {
-    lower(input.json.resources[_].type) == "azurerm_sql_server"
+    lower(input.resources[_].type) == "azurerm_sql_server"
     not azure_issue["db_ad_admin"]
     not azure_attribute_absence["db_ad_admin"]
 }

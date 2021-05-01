@@ -9,19 +9,19 @@ package rule
 default kv_expire = null
 
 azure_attribute_absence["kv_expire"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_key_vault_secret"
     not resource.properties.expiration_date
 }
 
 azure_issue["kv_expire"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_key_vault_secret"
     count(resource.properties.expiration_date) = 0
 }
 
 kv_expire {
-    lower(input.json.resources[_].type) == "azurerm_key_vault_secret"
+    lower(input.resources[_].type) == "azurerm_key_vault_secret"
     not azure_issue["kv_expire"]
     not azure_attribute_absence["kv_expire"]
 }
