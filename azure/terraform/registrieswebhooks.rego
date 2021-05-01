@@ -9,19 +9,19 @@ package rule
 default acr_webhooks = null
 
 azure_attribute_absence["acr_webhooks"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_container_registry_webhook"
     not resource.properties.service_uri
 }
 
 azure_issue["acr_webhooks"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_container_registry_webhook"
     substring(lower(resource.properties.service_uri), 0, 6) != "https:"
 }
 
 acr_webhooks {
-    lower(input.json.resources[_].type) == "azurerm_container_registry_webhook"
+    lower(input.resources[_].type) == "azurerm_container_registry_webhook"
     not azure_issue["acr_webhooks"]
     not azure_attribute_absence["acr_webhooks"]
 }

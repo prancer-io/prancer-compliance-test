@@ -9,19 +9,19 @@ package rule
 default aks_cni_net = null
 
 azure_attribute_absence["aks_cni_net"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     not resource.properties.network_policy
 }
 
 azure_issue["aks_cni_net"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     lower(resource.properties.network_policy) != "azure"
 }
 
 aks_cni_net {
-    lower(input.json.resources[_].type) == "azurerm_kubernetes_cluster"
+    lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
     not azure_issue["aks_cni_net"]
     not azure_attribute_absence["aks_cni_net"]
 }
@@ -49,13 +49,13 @@ aks_cni_net_miss_err = "AKS cluster attribute network_policy missing in the reso
 default aks_http_routing = null
 
 azure_issue["aks_http_routing"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     resource.properties.http_application_routing.enabled == true
 }
 
 aks_http_routing {
-    lower(input.json.resources[_].type) == "azurerm_kubernetes_cluster"
+    lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
     not azure_issue["aks_http_routing"]
 }
 
@@ -74,19 +74,19 @@ aks_http_routing_err = "Azure AKS cluster HTTP application routing enabled" {
 default aks_monitoring = null
 
 azure_attribute_absence["aks_monitoring"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     not resource.properties.oms_agent.enabled
 }
 
 azure_issue["aks_monitoring"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     input.properties.oms_agent.enabled != true
 }
 
 aks_monitoring {
-    lower(input.json.resources[_].type) == "azurerm_kubernetes_cluster"
+    lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
     not azure_issue["aks_monitoring"]
     not azure_attribute_absence["aks_monitoring"]
 }
@@ -114,19 +114,19 @@ aks_monitoring_miss_err = "AKS cluster attribute oms_agent missing in the resour
 default aks_nodes = null
 
 azure_attribute_absence["aks_nodes"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     not resource.properties.default_node_pool.node_count
 }
 
 azure_issue["aks_nodes"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     to_number(resource.properties.default_node_pool.node_count) < 3
 }
 
 aks_nodes {
-    lower(input.json.resources[_].type) == "azurerm_kubernetes_cluster"
+    lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
     not azure_issue["aks_nodes"]
     not azure_attribute_absence["aks_nodes"]
 }
@@ -154,19 +154,19 @@ aks_nodes_miss_err = "AKS cluster attribute agentPoolProfiles missing in the res
 default aks_rbac = null
 
 azure_attribute_absence["aks_rbac"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     not resource.properties.role_based_access_control.enabled
 }
 
 azure_issue["aks_rbac"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     resource.properties.role_based_access_control.enabled != true
 }
 
 aks_rbac {
-    lower(input.json.resources[_].type) == "azurerm_kubernetes_cluster"
+    lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
     not azure_issue["aks_rbac"]
     not azure_attribute_absence["aks_rbac"]
 }

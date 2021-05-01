@@ -9,19 +9,19 @@ package rule
 default pricing = null
 
 azure_attribute_absence["pricing"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_security_center_subscription_pricing"
     not resource.properties.tier
 }
 
 azure_issue["pricing"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_security_center_subscription_pricing"
     lower(resource.properties.tier) != "standard"
 }
 
 pricing {
-    lower(input.json.resources[_].type) == "azurerm_security_center_subscription_pricing"
+    lower(input.resources[_].type) == "azurerm_security_center_subscription_pricing"
     not azure_issue["pricing"]
     not azure_attribute_absence["pricing"]
 }

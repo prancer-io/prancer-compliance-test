@@ -9,19 +9,19 @@ package rule
 default securitycontacts = null
 
 azure_attribute_absence["securitycontacts"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_security_center_contact"
     not resource.properties.email
 }
 
 azure_issue["securitycontacts"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_security_center_contact"
     re_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", resource.properties.email) == false
 }
 
 securitycontacts {
-    lower(input.json.resources[_].type) == "azurerm_security_center_contact"
+    lower(input.resources[_].type) == "azurerm_security_center_contact"
     not azure_issue["securitycontacts"]
     not azure_attribute_absence["securitycontacts"]
 }

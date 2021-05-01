@@ -9,13 +9,13 @@ package rule
 default sql_public_endpoint = null
 
 azure_issue["sql_public_endpoint"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_mssql_server"
     resource.properties.public_network_access_enabled != false
 }
 
 sql_public_endpoint {
-    lower(input.json.resources[_].type) == "azurerm_mssql_server"
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     not azure_issue["sql_public_endpoint"]
 }
 

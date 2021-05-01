@@ -9,20 +9,20 @@ package rule
 default gw_tls = null
 
 azure_attribute_absence["gw_tls"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
     not resource.properties.ssl_policy.min_protocol_version
 }
 
 azure_issue["gw_tls"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
     lower(resource.properties.ssl_policy.min_protocol_version) != "tlsv1_2"
     lower(resource.properties.ssl_policy.min_protocol_version) != "tlsv1_3"
 }
 
 gw_tls {
-    lower(input.json.resources[_].type) == "azurerm_application_gateway"
+    lower(input.resources[_].type) == "azurerm_application_gateway"
     not azure_issue["gw_tls"]
     not azure_attribute_absence["gw_tls"]
 }
@@ -50,19 +50,19 @@ gw_tls_miss_err = "App gateway attribute min_protocol_version missing in the res
 default gw_waf = null
 
 azure_attribute_absence["gw_waf"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
     not resource.properties.waf_configuration.enabled
 }
 
 azure_issue["gw_waf"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
     resource.properties.waf_configuration.enabled != true
 }
 
 gw_waf {
-    lower(input.json.resources[_].type) == "azurerm_application_gateway"
+    lower(input.resources[_].type) == "azurerm_application_gateway"
     not azure_issue["gw_waf"]
     not azure_attribute_absence["gw_waf"]
 }

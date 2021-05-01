@@ -9,19 +9,19 @@ package rule
 default mssql_log_retention = null
 
 azure_attribute_absence["mssql_log_retention"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_mssql_server_extended_auditing_policy"
     not resource.properties.retention_in_days
 }
 
 azure_issue["mssql_log_retention"] {
-    resource := input.json.resources[_]
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_mssql_server_extended_auditing_policy"
     to_number(resource.properties.retention_in_days) < 91
 }
 
 mssql_log_retention {
-    lower(input.json.resources[_].type) == "azurerm_mssql_server_extended_auditing_policy"
+    lower(input.resources[_].type) == "azurerm_mssql_server_extended_auditing_policy"
     not azure_issue["mssql_log_retention"]
     not azure_attribute_absence["mssql_log_retention"]
 }
