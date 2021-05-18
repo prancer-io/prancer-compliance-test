@@ -9,7 +9,7 @@ package rule
 default dnssec_disabled = null
 
 
-gc_attribute_absence["dnssec_disabled"] {
+gc_attribute["dnssec_disabled"] {
     lower(input.kind) == "dnsmanagedzone"
     not input.spec.dnssecConfig.state
 }
@@ -22,23 +22,14 @@ gc_issue["dnssec_disabled"] {
 dnssec_disabled {
     lower(input.kind) == "dnsmanagedzone"
     not gc_issue["dnssec_disabled"]
-    not gc_attribute_absence["dnssec_disabled"]
 }
 
 dnssec_disabled = false {
     gc_issue["dnssec_disabled"]
 }
 
-dnssec_disabled = false {
-    gc_attribute_absence["dnssec_disabled"]
-}
-
-dnssec_disabled_err = "GCP Cloud DNS has DNSSEC disabled" {
+dnssec_disabled_err = "DNSSEC is disabled for Cloud DNS zones." {
     gc_issue["dnssec_disabled"]
-}
-
-dnssec_disabled_miss_err = "GCP Cloud DNS attribute dnssecConfig.state missing in the resource" {
-    gc_attribute_absence["dnssec_disabled"]
 }
 
 #
@@ -46,12 +37,6 @@ dnssec_disabled_miss_err = "GCP Cloud DNS attribute dnssecConfig.state missing i
 #
 
 default rsasha1_for_signing = null
-
-
-gc_attribute_absence["rsasha1_for_signing"] {
-    lower(input.kind) == "dnsmanagedzone"
-    not input.spec.dnssecConfig.defaultKeySpecs
-}
 
 gc_issue["rsasha1_for_signing"] {
     lower(input.kind) == "dnsmanagedzone"
@@ -63,21 +48,12 @@ gc_issue["rsasha1_for_signing"] {
 rsasha1_for_signing {
     lower(input.kind) == "dnsmanagedzone"
     not gc_issue["rsasha1_for_signing"]
-    not gc_attribute_absence["rsasha1_for_signing"]
 }
 
 rsasha1_for_signing = false {
     gc_issue["rsasha1_for_signing"]
 }
 
-rsasha1_for_signing = false {
-    gc_attribute_absence["rsasha1_for_signing"]
-}
-
-rsasha1_for_signing_err = "GCP Cloud DNS zones using RSASHA1 algorithm for DNSSEC key-signing" {
+rsasha1_for_signing_err = "RSASHA1 is used for key signing in Cloud DNS zones." {
     gc_issue["rsasha1_for_signing"]
-}
-
-rsasha1_for_signing_miss_err = "GCP Cloud DNS attribute dnssecConfig.defaultKeySpecs missing in the resource" {
-    gc_attribute_absence["rsasha1_for_signing"]
 }
