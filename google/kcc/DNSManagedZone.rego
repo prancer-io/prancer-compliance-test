@@ -9,7 +9,7 @@ package rule
 default dnssec_disabled = null
 
 
-gc_attribute["dnssec_disabled"] {
+gc_issue["dnssec_disabled"] {
     lower(input.kind) == "dnsmanagedzone"
     not input.spec.dnssecConfig.state
 }

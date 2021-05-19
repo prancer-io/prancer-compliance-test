@@ -1,27 +1,28 @@
 package rule
 
-# https://github.com/GoogleCloudPlatform/k8s-config-connector/blob/master/samples/resources/computedisk/zonal-compute-disk/compute_v1beta1_computedisk.yaml
+# https://cloud.google.com/config-connector/docs/reference/resource-docs/compute/computedisk
 
 #
-# PR-GCP-0069-KCC
+# DISK_CMEK_DISABLED
+# DISK_CSEK_DISABLED
 #
 
-default disk_encrypt = null
+default disk_cmek_disabled = null
 
-gc_issue["disk_encrypt"] {
+gc_issue["disk_cmek_disabled"] {
     lower(input.kind) == "computedisk"
     not input.spec.diskEncryptionKey
 }
 
-disk_encrypt {
+disk_cmek_disabled {
     lower(input.kind) == "computedisk"
-    not gc_issue["disk_encrypt"]
+    not gc_issue["disk_cmek_disabled"]
 }
 
-disk_encrypt = false {
-    gc_issue["disk_encrypt"]
+disk_cmek_disabled = false {
+    gc_issue["disk_cmek_disabled"]
 }
 
-disk_encrypt_err = "GCP VM disks not encrypted with Customer-Supplied Encryption Keys (CSEK)" {
-    gc_issue["disk_encrypt"]
+disk_cmek_disabled_err = "Disks on this VM are not encrypted with CMEK or CSEC." {
+    gc_issue["disk_cmek_disabled"]
 }

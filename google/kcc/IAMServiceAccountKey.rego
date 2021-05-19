@@ -1,43 +1,27 @@
 package rule
 
-# https://github.com/GoogleCloudPlatform/k8s-config-connector/blob/master/samples/resources/iamserviceaccountkey/iam_v1beta1_iamserviceaccountkey.yaml
+# https://cloud.google.com/config-connector/docs/reference/resource-docs/iam/iamserviceaccountkey
 
 #
-# PR-GCP-0067-KCC
+# API_KEY_NOT_ROTATED
 #
 
-default svc_account_key = null
+default api_key_not_rotated = null
 
-
-gc_attribute_absence["svc_account_key"] {
+gc_issue["api_key_not_rotated"] {
     lower(input.kind) == "iamserviceaccountkey"
-    not input.spec.name
-}
-
-gc_issue["svc_account_key"] {
-    lower(input.kind) == "iamserviceaccountkey"
-    contains(lower(input.spec.name), "iam.gserviceaccount.com")
     time.now_ns() - time.parse_rfc3339_ns(input.spec.validAfter) > 7776000000000000
 }
 
-svc_account_key {
+api_key_not_rotated {
     lower(input.kind) == "iamserviceaccountkey"
-    not gc_issue["svc_account_key"]
-    not gc_attribute_absence["svc_account_key"]
+    not gc_issue["api_key_not_rotated"]
 }
 
-svc_account_key = false {
-    gc_issue["svc_account_key"]
+api_key_not_rotated = false {
+    gc_issue["api_key_not_rotated"]
 }
 
-svc_account_key = false {
-    gc_attribute_absence["svc_account_key"]
-}
-
-svc_account_key_err = "GCP User managed service account keys are not rotated for 90 days" {
-    gc_issue["svc_account_key"]
-}
-
-svc_account_key_miss_err = "GCP User managed service account keys attribute name missing in the resource" {
-    gc_attribute_absence["svc_account_key"]
+api_key_not_rotated_err = "The API key hasn't been rotated for more than 90 days." {
+    gc_issue["api_key_not_rotated"]
 }
