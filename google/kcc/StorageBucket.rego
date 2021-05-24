@@ -146,3 +146,39 @@ locked_retention_policy_not_set_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/config-connector/docs/reference/resource-docs/storage/storagebucket"
 }
+
+#
+# OBJECT_VERSIONING_DISABLED
+#
+
+default object_versioning_disabled = null
+
+gc_issue["object_versioning_disabled"] {
+    lower(input.kind) == "storagebucket"
+    not input.spec.versioning.enabled
+}
+
+object_versioning_disabled {
+    lower(input.kind) == "storagebucket"
+    not gc_issue["object_versioning_disabled"]
+}
+
+object_versioning_disabled = false {
+    gc_issue["object_versioning_disabled"]
+}
+
+object_versioning_disabled_err = "Object versioning isn't enabled on a storage bucket where sinks are configured." {
+    gc_issue["object_versioning_disabled"]
+}
+
+object_versioning_disabled_metadata := {
+    "Policy Code": "OBJECT_VERSIONING_DISABLED",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "KCC",
+    "Policy Title": "Object Versioning Disabled",
+    "Policy Description": "Object versioning isn't enabled on a storage bucket where sinks are configured.",
+    "Resource Type": "StorageBucket",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/config-connector/docs/reference/resource-docs/storage/storagebucket"
+}
