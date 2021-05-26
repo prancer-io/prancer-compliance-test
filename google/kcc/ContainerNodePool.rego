@@ -26,6 +26,18 @@ auto_repair_disabled_err = "A GKE cluster's auto repair feature, which keeps nod
     gc_issue["auto_repair_disabled"]
 }
 
+auto_repair_disabled_metadata := {
+    "Policy Code": "AUTO_REPAIR_DISABLED",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "KCC",
+    "Policy Title": "Auto Repair Disabled",
+    "Policy Description": "A GKE cluster's auto repair feature, which keeps nodes in a healthy, running state, is disabled.",
+    "Resource Type": "ContainerNodePool",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/config-connector/docs/reference/resource-docs/container/containernodepool"
+}
+
 #
 # AUTO_UPGRADE_DISABLED
 #
@@ -48,6 +60,18 @@ auto_upgrade_disabled = false {
 
 auto_upgrade_disabled_err = "A GKE cluster's auto upgrade feature, which keeps clusters and node pools on the latest stable version of Kubernetes, is disabled." {
     gc_issue["auto_upgrade_disabled"]
+}
+
+auto_upgrade_disabled_metadata := {
+    "Policy Code": "AUTO_UPGRADE_DISABLED",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "KCC",
+    "Policy Title": "Auto Upgrade Disabled",
+    "Policy Description": "A GKE cluster's auto upgrade feature, which keeps clusters and node pools on the latest stable version of Kubernetes, is disabled.",
+    "Resource Type": "ContainerNodePool",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/config-connector/docs/reference/resource-docs/container/containernodepool"
 }
 
 #
@@ -79,6 +103,18 @@ cos_not_used_err = "Compute Engine VMs aren't using the Container-Optimized OS t
     gc_issue["cos_not_used"]
 }
 
+cos_not_used_metadata := {
+    "Policy Code": "COS_NOT_USED",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "KCC",
+    "Policy Title": "COS Not Used",
+    "Policy Description": "Compute Engine VMs aren't using the Container-Optimized OS that is designed for running Docker containers on Google Cloud securely.",
+    "Resource Type": "ContainerNodePool",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/config-connector/docs/reference/resource-docs/container/containernodepool"
+}
+
 #
 # LEGACY_METADATA_ENABLED
 #
@@ -101,4 +137,16 @@ legacy_metadata_enabled = false {
 
 legacy_metadata_enabled_err = "Legacy metadata is enabled on GKE clusters." {
     gc_issue["legacy_metadata_enabled"]
+}
+
+legacy_metadata_enabled_metadata := {
+    "Policy Code": "LEGACY_METADATA_ENABLED",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "KCC",
+    "Policy Title": "Legacy Metadata Enabled",
+    "Policy Description": "Legacy metadata is enabled on GKE clusters.",
+    "Resource Type": "ContainerNodePool",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/config-connector/docs/reference/resource-docs/container/containernodepool"
 }

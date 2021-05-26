@@ -33,7 +33,7 @@ default_network_metadata := {
     "Language": "KCC",
     "Policy Title": "Default Network",
     "Policy Description": "The default network exists in a project.",
-    "Resource Type": "computenetwork",
+    "Resource Type": "ComputeNetwork",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/config-connector/docs/reference/resource-docs/compute/computenetwork"
 }
@@ -69,7 +69,7 @@ legacy_network_metadata := {
     "Language": "KCC",
     "Policy Title": "Default Network",
     "Policy Description": "A legacy network exists in a project.",
-    "Resource Type": "computenetwork",
+    "Resource Type": "ComputeNetwork",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/config-connector/docs/reference/resource-docs/compute/computenetwork"
 }
