@@ -31,3 +31,15 @@ allowport["IPProtocol_TCP"] {
     input.sourceRanges[_]="0.0.0.0/0"
     input.allowed[_].IPProtocol="all"
 }
+
+metadata := {
+    "Policy Code": "PR-GCP-0015",
+    "Type": "Cloud",
+    "Product": "GCP",
+    "Language": "Cloud",
+    "Policy Title": "GCP Firewall rule allows internet traffic to PostgreSQL port (5432)",
+    "Policy Description": "This policy identifies GCP Firewall rules which allows inbound traffic on PostgreSQL port (5432) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+    "Resource Type": "compute.v1.firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls/list"
+}
