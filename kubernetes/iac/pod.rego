@@ -59,6 +59,18 @@ run_pod_as_root_err = "PR-K8S-0015-DCL: Do not generally permit containers to be
     k8s_issue["run_pod_as_root"]
 }
 
+run_pod_as_root_metadata := {
+    "Policy Code": "PR-K8S-0015-DCL",
+    "Type": "IaC",
+    "Product": "Kubernetes",
+    "Language": "K8s DL",
+    "Policy Title": "Do not generally permit containers to be run as the root user. ",
+    "Policy Description": "Do not generally permit containers to be run as the root user. ",
+    "Resource Type": "statefulset",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}
+
 #
 # PR-K8S-0018-DCL
 #
@@ -101,6 +113,18 @@ run_privileged_pod = false {
 
 run_privileged_pod_err = "PR-K8S-0018-DCL: Ensure that Containers are not running in privileged mode" {
     k8s_issue["run_privileged_pod"]
+}
+
+run_privileged_pod_metadata := {
+    "Policy Code": "PR-K8S-0015-DCL",
+    "Type": "IaC",
+    "Product": "Kubernetes",
+    "Language": "K8s DL",
+    "Policy Title": "Do not generally permit containers to be run as the root user. ",
+    "Policy Description": "Do not generally permit containers to be run as the root user. ",
+    "Resource Type": "statefulset",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
 }
 
 #
@@ -147,6 +171,18 @@ pod_default_ns_err = "PR-K8S-0018-DCL: The default namespace should not be used"
     k8s_issue["pod_default_ns"]
 }
 
+pod_default_ns_metadata := {
+    "Policy Code": "PR-K8S-0018-DCL",
+    "Type": "IaC",
+    "Product": "Kubernetes",
+    "Language": "K8s DL",
+    "Policy Title": "Do not generally permit containers to be run as the root user. ",
+    "Policy Description": "Do not generally permit containers to be run as the root user. ",
+    "Resource Type": "statefulset",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}
+
 #
 # PR-K8S-0057-DCL
 #
@@ -189,6 +225,18 @@ hostpath_mount = false {
 
 hostpath_mount_err = "PR-K8S-0057-DCL: Ensure pods outside of kube-system do not have access to node volume" {
     k8s_issue["hostpath_mount"]
+}
+
+hostpath_mount_metadata := {
+    "Policy Code": "PR-K8S-0018-DCL",
+    "Type": "IaC",
+    "Product": "Kubernetes",
+    "Language": "K8s DL",
+    "Policy Title": "Do not generally permit containers to be run as the root user. ",
+    "Policy Description": "Do not generally permit containers to be run as the root user. ",
+    "Resource Type": "statefulset",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
 }
 
 #
@@ -236,4 +284,16 @@ pod_selinux = false {
 
 pod_selinux_err = "PR-K8S-0084-DCL: Apply Security Context to Your Pods and Containers" {
     k8s_issue["pod_selinux"]
+}
+
+pod_selinux_metadata := {
+    "Policy Code": "PR-K8S-0030-DCL",
+    "Type": "IaC",
+    "Product": "Kubernetes",
+    "Language": "K8s DL",
+    "Policy Title": "Do not generally permit containers to be run as the root user. ",
+    "Policy Description": "Do not generally permit containers to be run as the root user. ",
+    "Resource Type": "statefulset",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
 }

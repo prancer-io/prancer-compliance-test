@@ -27,3 +27,15 @@ rulepass = false {
 rulepass_err = "PR-K8S-0033: Ensure that the --use-service-account-credentials argument is set to true (Controller Manager)" {
     k8s_issue["rulepass"]
 }
+
+k8s_issue_metadata := {
+    "Policy Code": "PR-K8S-0033",
+    "Type": "Cloud",
+    "Product": "Kubernetes",
+    "Language": "Cloud",
+    "Policy Title": "Ensure that the --use-service-account-credentials argument is set to true (Controller Manager) ",
+    "Policy Description": "Ensure that the --use-service-account-credentials argument is set to true (Controller Manager) ",
+    "Resource Type": "pod",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}

@@ -24,3 +24,15 @@ rulepass = false {
 rulepass_err = "PR-K8S-0057: Ensure pods outside of kube-system do not have access to node volume" {
     k8s_issue["rulepass"]
 }
+
+k8s_issue_metadata := {
+    "Policy Code": "PR-K8S-0057",
+    "Type": "Cloud",
+    "Product": "Kubernetes",
+    "Language": "Cloud",
+    "Policy Title": "Ensure pods outside of kube-system do not have access to node volume ",
+    "Policy Description": "Ensure pods outside of kube-system do not have access to node volume ",
+    "Resource Type": "pod",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}

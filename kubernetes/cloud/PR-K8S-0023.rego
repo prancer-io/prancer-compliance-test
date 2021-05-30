@@ -28,3 +28,15 @@ rulepass = false {
 rulepass_err = "PR-K8S-0023: Ensure containers are secured with AppArmor profile" {
     k8s_issue["rulepass"]
 }
+
+k8s_issue_metadata := {
+    "Policy Code": "PR-K8S-0023",
+    "Type": "Cloud",
+    "Product": "Kubernetes",
+    "Language": "Cloud",
+    "Policy Title": "Ensure containers are secured with AppArmor profile ",
+    "Policy Description": "Ensure containers are secured with AppArmor profile ",
+    "Resource Type": "pod",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}

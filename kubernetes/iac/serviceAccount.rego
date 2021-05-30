@@ -23,3 +23,15 @@ sa_token = false {
 sa_token_err = "PR-K8S-0035-DCL: The default namespace should not be used" {
     k8s_issue["sa_token"]
 }
+
+sa_token_metadata := {
+    "Policy Code": "PR-K8S-0035-DCL",
+    "Type": "IaC",
+    "Product": "Kubernetes",
+    "Language": "K8s DL",
+    "Policy Title": "The default namespace should not be used ",
+    "Policy Description": "The default namespace should not be used ",
+    "Resource Type": "serviceaccount",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}

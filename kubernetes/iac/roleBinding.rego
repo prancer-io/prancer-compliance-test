@@ -36,6 +36,18 @@ default_role_err = "PR-K8S-0003-DCL: Ensure that default service accounts are no
     k8s_issue["default_role"]
 }
 
+default_role_metadata := {
+    "Policy Code": "PR-K8S-0003-DCL",
+    "Type": "IaC",
+    "Product": "Kubernetes",
+    "Language": "K8s DL",
+    "Policy Title": "Ensure that default service accounts are not actively used. (RBAC) ",
+    "Policy Description": "Ensure that default service accounts are not actively used. (RBAC) ",
+    "Resource Type": "rolebinding",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}
+
 #
 # PR-K8S-0004-DCL
 #
@@ -70,4 +82,16 @@ admin_role = false {
 
 admin_role_err = "PR-K8S-0004-DCL: Ensure that the cluster-admin role is only used where required (RBAC)" {
     k8s_issue["admin_role"]
+}
+
+admin_role_metadata := {
+    "Policy Code": "PR-K8S-0003-DCL",
+    "Type": "IaC",
+    "Product": "Kubernetes",
+    "Language": "K8s DL",
+    "Policy Title": "Ensure that default service accounts are not actively used. (RBAC) ",
+    "Policy Description": "Ensure that default service accounts are not actively used. (RBAC) ",
+    "Resource Type": "rolebinding",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
 }

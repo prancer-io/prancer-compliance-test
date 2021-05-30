@@ -30,3 +30,15 @@ rulepass = false {
 rulepass_err = "PR-K8S-0010: Minimize the admission of containers with the NET_RAW capability (PSP)" {
     k8s_issue["rulepass"]
 }
+
+k8s_issue_metadata := {
+    "Policy Code": "PR-K8S-0010",
+    "Type": "Cloud",
+    "Product": "Kubernetes",
+    "Language": "Cloud",
+    "Policy Title": "Minimize the admission of containers with the NET_RAW capability (PSP) ",
+    "Policy Description": "Minimize the admission of containers with the NET_RAW capability (PSP) ",
+    "Resource Type": "podsecuritypolicy",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}

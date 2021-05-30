@@ -24,6 +24,18 @@ privileged_err = "PR-K8S-0008-DCL: Minimize the admission of privileged containe
     k8s_issue["privileged"]
 }
 
+privileged_metadata := {
+    "Policy Code": "PR-K8S-0008-DCL",
+    "Type": "IaC",
+    "Product": "Kubernetes",
+    "Language": "K8s DL",
+    "Policy Title": "Minimize the admission of privileged containers (PSP) ",
+    "Policy Description": "Minimize the admission of privileged containers (PSP) ",
+    "Resource Type": "podsecuritypolicy",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}
+
 #
 # PR-K8S-0009-DCL
 #
@@ -52,6 +64,18 @@ run_as_root = false {
 
 run_as_root_err = "PR-K8S-0009-DCL: Minimize the admission of root containers (PSP)" {
     k8s_issue["run_as_root"]
+}
+
+run_as_root_metadata := {
+    "Policy Code": "PR-K8S-0008-DCL",
+    "Type": "IaC",
+    "Product": "Kubernetes",
+    "Language": "K8s DL",
+    "Policy Title": "Minimize the admission of privileged containers (PSP) ",
+    "Policy Description": "Minimize the admission of privileged containers (PSP) ",
+    "Resource Type": "podsecuritypolicy",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
 }
 
 #
@@ -85,6 +109,18 @@ drop_capabilities_err = "PR-K8S-0010-DCL: Minimize the admission of containers w
     k8s_issue["drop_capabilities"]
 }
 
+drop_capabilities_metadata := {
+    "Policy Code": "PR-K8S-0009-DCL",
+    "Type": "IaC",
+    "Product": "Kubernetes",
+    "Language": "K8s DL",
+    "Policy Title": "Minimize the admission of privileged containers (PSP) ",
+    "Policy Description": "Minimize the admission of privileged containers (PSP) ",
+    "Resource Type": "podsecuritypolicy",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}
+
 #
 # PR-K8S-0011-DCL
 #
@@ -107,6 +143,18 @@ host_ipc = false {
 
 host_ipc_err = "PR-K8S-0011-DCL: Minimize the admission of containers wishing to share the host IPC namespace (PSP)" {
     k8s_issue["host_ipc"]
+}
+
+host_ipc_metadata := {
+    "Policy Code": "PR-K8S-0009-DCL",
+    "Type": "IaC",
+    "Product": "Kubernetes",
+    "Language": "K8s DL",
+    "Policy Title": "Minimize the admission of privileged containers (PSP) ",
+    "Policy Description": "Minimize the admission of privileged containers (PSP) ",
+    "Resource Type": "podsecuritypolicy",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
 }
 
 #
@@ -133,6 +181,18 @@ host_network_err = "PR-K8S-0012-DCL: Minimize the admission of containers wishin
     k8s_issue["host_network"]
 }
 
+host_network_metadata := {
+    "Policy Code": "PR-K8S-0010-DCL",
+    "Type": "IaC",
+    "Product": "Kubernetes",
+    "Language": "K8s DL",
+    "Policy Title": "Minimize the admission of privileged containers (PSP) ",
+    "Policy Description": "Minimize the admission of privileged containers (PSP) ",
+    "Resource Type": "podsecuritypolicy",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}
+
 #
 # PR-K8S-0013-DCL
 #
@@ -157,6 +217,18 @@ host_pid_err = "PR-K8S-0013-DCL: Minimize the admission of containers wishing to
     k8s_issue["host_pid"]
 }
 
+host_pid_metadata := {
+    "Policy Code": "PR-K8S-0010-DCL",
+    "Type": "IaC",
+    "Product": "Kubernetes",
+    "Language": "K8s DL",
+    "Policy Title": "Minimize the admission of privileged containers (PSP) ",
+    "Policy Description": "Minimize the admission of privileged containers (PSP) ",
+    "Resource Type": "podsecuritypolicy",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}
+
 #
 # PR-K8S-0014-DCL
 #
@@ -179,5 +251,17 @@ privilege_escalation = false {
 
 privilege_escalation_err = "PR-K8S-0014-DCL: Minimize the admission of containers with allowPrivilegeEscalation (PSP)" {
     k8s_issue["privilege_escalation"]
+}
+
+privilege_escalation_metadata := {
+    "Policy Code": "PR-K8S-0011-DCL",
+    "Type": "IaC",
+    "Product": "Kubernetes",
+    "Language": "K8s DL",
+    "Policy Title": "Minimize the admission of privileged containers (PSP) ",
+    "Policy Description": "Minimize the admission of privileged containers (PSP) ",
+    "Resource Type": "podsecuritypolicy",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
 }
 

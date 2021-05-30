@@ -43,3 +43,15 @@ rulepass = false {
 rulepass_err = "PR-K8S-0001: Minimize access to secrets (RBAC)" {
     k8s_issue["rulepass"]
 }
+
+k8s_issue_metadata := {
+    "Policy Code": "PR-K8S-0001",
+    "Type": "Cloud",
+    "Product": "Kubernetes",
+    "Language": "Cloud",
+    "Policy Title": "Minimize access to secrets (RBAC) ",
+    "Policy Description": "Minimize access to secrets (RBAC) ",
+    "Resource Type": "role",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}
