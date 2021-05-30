@@ -42,6 +42,18 @@ storage_encrypt_miss_err = "GCP Storage bucket attribute encryption missing in t
     gc_attribute_absence["storage_encrypt"]
 }
 
+storage_encrypt_metadata := {
+    "Policy Code": "PR-GCP-0063-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Storage bucket encrypted using default KMS key instead of a customer-managed key",
+    "Policy Description": "This policy identifies Storage buckets that are encrypted with the default Google-managed keys. As a best practice, use Customer-managed key to encrypt the data in your storage bucket and ensure full control over your data.",
+    "Resource Type": "google_storage_bucket",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
+}
+
 #
 # PR-GCP-0066-TRF
 #
@@ -82,6 +94,18 @@ storage_versioning_miss_err = "GCP Storage attribute versioning missing in the r
     gc_attribute_absence["storage_versioning"]
 }
 
+storage_versioning_metadata := {
+    "Policy Code": "PR-GCP-0066-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Storage log buckets have object versioning disabled",
+    "Policy Description": "This policy identifies Storage log buckets which have object versioning disabled. Enabling object versioning on storage log buckets will protect your cloud storage data from being overwritten or accidentally deleted. It is recommended to enable object versioning feature on all storage buckets where sinks are configured.",
+    "Resource Type": "google_storage_bucket",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
+}
+
 #
 # PR-GCP-0089-TRF
 #
@@ -105,6 +129,18 @@ storage_logging = false {
 
 storage_logging_err = "Storage Bucket does not have Access and Storage Logging enabled" {
     gc_issue["storage_logging"]
+}
+
+storage_logging_metadata := {
+    "Policy Code": "PR-GCP-0089-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "Storage Bucket does not have Access and Storage Logging enabled",
+    "Policy Description": "Checks to verify that the configuration on the Storage Buckets is enabled for access logs and storage logs.",
+    "Resource Type": "google_storage_bucket",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
 }
 
 #
@@ -140,4 +176,16 @@ storage_public_logs = false {
 
 storage_public_logs_err = "Storage Buckets with publicly accessible Stackdriver logs" {
     gc_issue["storage_public_logs"]
+}
+
+storage_public_logs_metadata := {
+    "Policy Code": "PR-GCP-0090-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "Storage Buckets with publicly accessible Stackdriver logs",
+    "Policy Description": "Checks to ensure that Stackdriver logs on Storage Buckets are not public. Giving public access to Stackdriver logs will enable anyone with a web association to retrieve sensitive information that is critical to business. Stackdriver Logging enables to store, search, investigate, monitor and alert on log information/events from Google Cloud Platform. The permission needs to be set only for authorized users.",
+    "Resource Type": "google_storage_bucket",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/storage/docs/json_api/v1/buckets"
 }
