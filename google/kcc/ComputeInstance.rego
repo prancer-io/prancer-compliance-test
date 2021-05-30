@@ -4,7 +4,7 @@ package rule
 
 #
 # COMPUTE_SECURE_BOOT_DISABLED
-#
+# PR-GCP-0025-KCC
 
 default compute_secure_boot_disabled = null
 
@@ -50,7 +50,7 @@ compute_secure_boot_disabled_metadata := {
 
 #
 # COMPUTE_SERIAL_PORTS_ENABLED
-#
+# PR-GCP-0026-KCC
 
 default compute_serial_ports_enabled = null
 
@@ -88,7 +88,7 @@ compute_serial_ports_enabled_metadata := {
 
 #
 # IP_FORWARDING_ENABLED
-#
+# PR-GCP-0027-KCC
 
 default ip_forwarding_enabled = null
 
@@ -124,7 +124,7 @@ ip_forwarding_enabled_metadata := {
 
 #
 # OS_LOGIN_DISABLED
-#
+# PR-GCP-0028-KCC
 
 default os_login_disabled = null
 
@@ -162,7 +162,7 @@ os_login_disabled_metadata := {
 
 #
 # PUBLIC_IP_ADDRESS
-#
+# PR-GCP-0029-KCC
 
 default public_ip_address = null
 
@@ -198,7 +198,7 @@ public_ip_address_metadata := {
 
 #
 # SHIELDED_VM_DISABLED
-#
+# PR-GCP-0030-KCC
 
 default shielded_vm_disabled = null
 
@@ -244,7 +244,7 @@ shielded_vm_disabled_metadata := {
 
 #
 # ORG_POLICY_CONFIDENTIAL_VM_POLICY
-#
+# PR-GCP-0031-KCC
 
 default org_policy_confidential_vm_policy = null
 

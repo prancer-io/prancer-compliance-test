@@ -4,7 +4,7 @@ package rule
 
 #
 # AUTO_BACKUP_DISABLED
-#
+# PR-GCP-0056-KCC
 
 default auto_backup_disabled = null
 
@@ -40,7 +40,7 @@ auto_backup_disabled_metadata := {
 
 #
 # SSL_NOT_ENFORCED
-#
+# PR-GCP-0057-KCC
 
 default ssl_not_enforced = null
 
@@ -76,7 +76,7 @@ ssl_not_enforced_metadata := {
 
 #
 # SQL_NO_ROOT_PASSWORD
-#
+# PR-GCP-0058-KCC
 
 default sql_no_root_password = null
 

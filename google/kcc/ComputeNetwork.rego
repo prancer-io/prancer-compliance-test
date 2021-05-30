@@ -4,7 +4,7 @@ package rule
 
 #
 # DEFAULT_NETWORK
-#
+# PR-GCP-0032-KCC
 
 default default_network = null
 
@@ -40,7 +40,7 @@ default_network_metadata := {
 
 #
 # LEGACY_NETWORK
-#
+# PR-GCP-0033-KCC
 
 default legacy_network = null
 

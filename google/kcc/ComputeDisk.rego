@@ -5,7 +5,7 @@ package rule
 #
 # DISK_CMEK_DISABLED
 # DISK_CSEK_DISABLED
-#
+# PR-GCP-0001-KCC
 
 default disk_cmek_disabled = null
 

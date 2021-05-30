@@ -4,7 +4,7 @@ package rule
 
 #
 # AUTO_REPAIR_DISABLED
-#
+# PR-GCP-0045-KCC
 
 default auto_repair_disabled = null
 
@@ -40,7 +40,7 @@ auto_repair_disabled_metadata := {
 
 #
 # AUTO_UPGRADE_DISABLED
-#
+# PR-GCP-0046-KCC
 
 default auto_upgrade_disabled = null
 
@@ -76,7 +76,7 @@ auto_upgrade_disabled_metadata := {
 
 #
 # COS_NOT_USED
-#
+# PR-GCP-0047-KCC
 
 default cos_not_used = null
 
@@ -117,7 +117,7 @@ cos_not_used_metadata := {
 
 #
 # LEGACY_METADATA_ENABLED
-#
+# PR-GCP-0048-KCC
 
 default legacy_metadata_enabled = null
 

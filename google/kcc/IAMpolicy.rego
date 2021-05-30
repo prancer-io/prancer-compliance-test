@@ -4,7 +4,7 @@ package rule
 
 #
 # AUDIT_LOGGING_DISABLED
-#
+# PR-GCP-0051-KCC
 
 default audit_logging_disabled = null
 
@@ -40,7 +40,7 @@ audit_logging_disabled_metadata := {
 
 #
 # PRIMITIVE_ROLES_USED
-#
+# PR-GCP-0052-KCC
 
 default primitive_roles_used = null
 
@@ -86,7 +86,7 @@ primitive_roles_used_metadata := {
 
 #
 # REDIS_ROLE_USED_ON_ORG
-#
+# PR-GCP-0053-KCC
 
 default redis_role_used_on_org = null
 

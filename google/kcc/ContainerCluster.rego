@@ -4,7 +4,7 @@ package rule
 
 #
 # CLUSTER_LOGGING_DISABLED
-#
+# PR-GCP-0035-KCC
 
 default cluster_logging_disabled = null
 
@@ -40,7 +40,7 @@ cluster_logging_disabled_metadata := {
 
 #
 # CLUSTER_MONITORING_DISABLED
-#
+# PR-GCP-0036-KCC
 
 default cluster_monitoring_disabled = null
 
@@ -76,7 +76,7 @@ cluster_monitoring_disabled_metadata := {
 
 #
 # COS_NOT_USED
-#
+# PR-GCP-0037-KCC
 
 default cos_not_used = null
 
@@ -113,7 +113,7 @@ cos_not_used_metadata := {
 
 #
 # LEGACY_AUTHORIZATION_ENABLED
-#
+# PR-GCP-0038-KCC
 
 default legacy_authorization_enabled = null
 
@@ -149,7 +149,7 @@ legacy_authorization_enabled_metadata := {
 
 #
 # MASTER_AUTHORIZED_NETWORKS_DISABLED
-#
+# PR-GCP-0039-KCC
 
 default master_authorized_networks_disabled = null
 
@@ -185,7 +185,7 @@ master_authorized_networks_disabled_metadata := {
 
 #
 # NETWORK_POLICY_DISABLED
-#
+# PR-GCP-0040-KCC
 
 default network_policy_disabled = null
 
@@ -221,7 +221,7 @@ network_policy_disabled_metadata := {
 
 #
 # POD_SECURITY_POLICY_DISABLED
-#
+# PR-GCP-0041-KCC
 
 default pod_security_policy_disabled = null
 
@@ -257,7 +257,7 @@ pod_security_policy_disabled_metadata := {
 
 #
 # PRIVATE_CLUSTER_DISABLED
-#
+# PR-GCP-0042-KCC
 
 default private_cluster_disabled = null
 
@@ -293,7 +293,7 @@ private_cluster_disabled_metadata := {
 
 #
 # WEB_UI_ENABLED
-#
+# PR-GCP-0043-KCC
 
 default web_ui_enabled = null
 
@@ -329,7 +329,7 @@ web_ui_enabled_metadata := {
 
 #
 # WORKLOAD_IDENTITY_DISABLED
-#
+# PR-GCP-0044-KCC
 
 default workload_identity_disabled = null
 

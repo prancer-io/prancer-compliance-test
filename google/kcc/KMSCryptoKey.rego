@@ -4,7 +4,7 @@ package rule
 
 #
 # KMS_KEY_NOT_ROTATED
-#
+# PR-GCP-0055-KCC
 
 default kms_key_not_rotated = null
 

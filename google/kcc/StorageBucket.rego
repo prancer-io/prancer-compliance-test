@@ -4,7 +4,7 @@ package rule
 
 #
 # BUCKET_CMEK_DISABLED
-#
+# PR-GCP-0059-KCC
 
 default bucket_cmek_disabled = null
 
@@ -41,7 +41,7 @@ bucket_cmek_disabled_metadata := {
 
 #
 # BUCKET_POLICY_ONLY_DISABLED
-#
+# PR-GCP-0060-KCC
 
 default bucket_policy_only_disabled = null
 
@@ -77,7 +77,7 @@ bucket_policy_only_disabled_metadata := {
 
 #
 # BUCKET_LOGGING_DISABLED
-#
+# PR-GCP-0061-KCC
 
 default bucket_logging_disabled = null
 
@@ -113,7 +113,7 @@ bucket_logging_disabled_metadata := {
 
 #
 # LOCKED_RETENTION_POLICY_NOT_SET
-#
+# PR-GCP-0062-KCC
 
 default locked_retention_policy_not_set = null
 
@@ -149,7 +149,7 @@ locked_retention_policy_not_set_metadata := {
 
 #
 # OBJECT_VERSIONING_DISABLED
-#
+# PR-GCP-0063-KCC
 
 default object_versioning_disabled = null
 

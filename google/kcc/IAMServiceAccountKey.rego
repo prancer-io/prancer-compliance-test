@@ -4,7 +4,7 @@ package rule
 
 #
 # SERVICE_ACCOUNT_KEY_NOT_ROTATED
-#
+# PR-GCP-0054-KCC
 
 default service_account_key_not_rotated = null
 

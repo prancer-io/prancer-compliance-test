@@ -4,7 +4,7 @@ package rule
 
 #
 # PRIVATE_GOOGLE_ACCESS_DISABLED
-#
+# PR-GCP-0034-KCC
 
 default private_google_access_disabled = null
 

@@ -4,7 +4,7 @@ package rule
 
 #
 # EGRESS_DENY_RULE_NOT_SET
-#
+# PR-GCP-0002-KCC
 
 default egress_deny_rule_not_set = null
 
@@ -48,7 +48,7 @@ egress_deny_rule_not_set_metadata := {
 
 #
 # FIREWALL_RULE_LOGGING_DISABLED
-#
+# PR-GCP-0003-KCC
 
 default firewall_rule_logging_disabled = null
 
@@ -84,7 +84,7 @@ firewall_rule_logging_disabled_metadata := {
 
 #
 # OPEN_CASSANDRA_PORT
-#
+# PR-GCP-0004-KCC
 
 default open_cassandra_port = null
 
@@ -237,7 +237,7 @@ open_cassandra_port_metadata := {
 
 #
 # OPEN_CISCOSECURE_WEBSM_PORT
-#
+# PR-GCP-0005-KCC
 
 default open_ciscosecure_websm_port = null
 
@@ -288,7 +288,7 @@ open_ciscosecure_websm_port_metadata := {
 
 #
 # OPEN_DIRECTORY_SERVICES_PORT
-#
+# PR-GCP-0006-KCC
 
 default open_directory_services_port = null
 
@@ -339,7 +339,7 @@ open_directory_services_port_metadata := {
 
 #
 # OPEN_DNS_PORT
-#
+# PR-GCP-0007-KCC
 
 default open_dns_port = null
 
@@ -390,7 +390,7 @@ open_dns_port_metadata := {
 
 #
 # OPEN_ELASTICSEARCH_PORT
-#
+# PR-GCP-0008-KCC
 
 default open_elasticsearch_port = null
 
@@ -461,7 +461,7 @@ open_elasticsearch_port_metadata := {
 
 #
 # OPEN_FIREWALL
-#
+# PR-GCP-0009-KCC
 
 default open_firewall = null
 
@@ -500,7 +500,7 @@ open_firewall_metadata := {
 
 #
 # OPEN_FTP_PORT
-#
+# PR-GCP-0010-KCC
 
 default open_ftp_port = null
 
@@ -551,7 +551,7 @@ open_ftp_port_metadata := {
 
 #
 # OPEN_HTTP_PORT
-#
+# PR-GCP-0011-KCC
 
 default open_http_port = null
 
@@ -602,7 +602,7 @@ open_http_port_metadata := {
 
 #
 # OPEN_LDAP_PORT
-#
+# PR-GCP-0012-KCC
 
 default open_ldap_port = null
 
@@ -673,7 +673,7 @@ open_ldap_port_metadata := {
 
 #
 # OPEN_MEMCACHED_PORT
-#
+# PR-GCP-0013-KCC
 
 default open_memcached_port = null
 
@@ -745,7 +745,7 @@ open_memcached_port_metadata := {
 
 #
 # OPEN_MONGODB_PORT
-#
+# PR-GCP-0014-KCC
 
 default open_mongodb_port = null
 
@@ -797,7 +797,7 @@ open_mongodb_port_metadata := {
 
 #
 # OPEN_MYSQL_PORT
-#
+# PR-GCP-0015-KCC
 
 default open_mysql_port = null
 
@@ -848,7 +848,7 @@ open_mysql_port_metadata := {
 
 #
 # OPEN_NETBIOS_PORT
-#
+# PR-GCP-0016-KCC
 
 default open_netbios_port = null
 
@@ -900,7 +900,7 @@ open_netbios_port_metadata := {
 
 #
 # OPEN_ORACLEDB_PORT
-#
+# PR-GCP-0017-KCC
 
 default open_oracledb_port = null
 
@@ -972,7 +972,7 @@ open_oracledb_port_metadata := {
 
 #
 # OPEN_POP3_PORT
-#
+# PR-GCP-0018-KCC
 
 default open_pop3_port = null
 
@@ -1023,7 +1023,7 @@ open_pop3_port_metadata := {
 
 #
 # OPEN_POSTGRESQL_PORT
-#
+# PR-GCP-0019-KCC
 
 default open_postgresql_port = null
 
@@ -1074,7 +1074,7 @@ open_postgresql_port_metadata := {
 
 #
 # OPEN_RDP_PORT
-#
+# PR-GCP-0020-KCC
 
 default open_rdp_port = null
 
@@ -1125,7 +1125,7 @@ open_rdp_port_metadata := {
 
 #
 # OPEN_REDIS_PORT
-#
+# PR-GCP-0021-KCC
 
 default open_redis_port = null
 
@@ -1176,7 +1176,7 @@ open_redis_port_metadata := {
 
 #
 # OPEN_SMTP_PORT
-#
+# PR-GCP-0022-KCC
 
 default open_smtp_port = null
 
@@ -1227,7 +1227,7 @@ open_smtp_port_metadata := {
 
 #
 # OPEN_SSH_PORT
-#
+# PR-GCP-0023-KCC
 
 default open_ssh_port = null
 
@@ -1278,7 +1278,7 @@ open_ssh_port_metadata := {
 
 #
 # OPEN_TELNET_PORT
-#
+# PR-GCP-0024-KCC
 
 default open_telnet_port = null
 

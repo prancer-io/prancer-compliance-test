@@ -4,7 +4,7 @@ package rule
 
 #
 # DNSSEC_DISABLED
-#
+# PR-GCP-0049-KCC
 
 default dnssec_disabled = null
 
@@ -46,7 +46,7 @@ dnssec_disabled_metadata := {
 
 #
 # RSASHA1_FOR_SIGNING
-#
+# PR-GCP-0050-KCC
 
 default rsasha1_for_signing = null
 
