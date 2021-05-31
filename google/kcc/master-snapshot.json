@@ -9,7 +9,7 @@
                     "type": "yaml",
                     "collection": "deploymentmanagertemplate",
                     "paths": [
-                        "/"
+                        "/samples/resources/"
                     ]
                 }
             ]
