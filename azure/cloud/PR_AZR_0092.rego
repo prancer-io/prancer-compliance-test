@@ -16,3 +16,8 @@ rulepass {
     lower(input.type) == "microsoft.storage/storageaccounts"
     input.properties.supportsHttpsTrafficOnly == true
 }
+
+rulepass {
+    lower(input.type) == "microsoft.storage/storageaccounts"
+    not input.properties.supportsHttpsTrafficOnly
+}
