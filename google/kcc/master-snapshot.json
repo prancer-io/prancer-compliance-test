@@ -6,7 +6,7 @@
             "nodes": [
                 {
                     "masterSnapshotId": "KCC_TEMPLATE_SNAPSHOT",
-                    "type": "deploymentmanager",
+                    "type": "yaml",
                     "collection": "deploymentmanagertemplate",
                     "paths": [
                         "/"
