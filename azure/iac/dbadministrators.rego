@@ -14,14 +14,32 @@ azure_attribute_absence["db_ad_admin"] {
     not resource.properties.administratorType
 }
 
+azure_attribute_absence["db_ad_admin"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/managedinstances/administrators"
+    not resource.properties.administratorType
+}
+
 azure_issue["db_ad_admin"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/administrators"
     lower(resource.properties.administratorType) != "activedirectory"
 }
 
+azure_issue["db_ad_admin"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/managedinstances/administrators"
+    lower(resource.properties.administratorType) != "activedirectory"
+}
+
 db_ad_admin {
     lower(input.resources[_].type) == "microsoft.sql/servers/administrators"
+    not azure_issue["db_ad_admin"]
+    not azure_attribute_absence["db_ad_admin"]
+}
+
+db_ad_admin {
+    lower(input.resources[_].type) == "microsoft.sql/managedinstances/administrators"
     not azure_issue["db_ad_admin"]
     not azure_attribute_absence["db_ad_admin"]
 }

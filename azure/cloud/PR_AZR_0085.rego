@@ -11,3 +11,8 @@ rulepass {
     lower(input.type) == "microsoft.sql/servers/administrators"
     input.properties.administratorType == "ActiveDirectory"
 }
+
+rulepass {
+    lower(input.type) == "microsoft.sql/managedinstances/administrators"
+    input.properties.administratorType == "ActiveDirectory"
+}
