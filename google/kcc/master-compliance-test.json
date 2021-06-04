@@ -1,0 +1,1783 @@
+{
+    "testSet": [
+        {
+            "masterTestName": "GOOGLE_kcc_TEST",
+            "version": "0.1",
+            "cases": [
+                {
+                    "masterTestId": "TEST_ComputeDisk",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeDisk.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0001-KCC",
+                            "eval": "data.rule.disk_cmek_disabled",
+                            "message": "data.rule.disk_cmek_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Disk CMEK Disabled",
+                    "description": "Disks on this VM are not encrypted with CMEK or CSEC.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeDisk"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_1",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0002-KCC",
+                            "eval": "data.rule.egress_deny_rule_not_set",
+                            "message": "data.rule.egress_deny_rule_not_set_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Egress Deny Rule Not Set",
+                    "description": "An egress deny rule is not set on a firewall.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_2",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0003-KCC",
+                            "eval": "data.rule.firewall_rule_logging_disabled",
+                            "message": "data.rule.firewall_rule_logging_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Firewall Rule Logging Disabled",
+                    "description": "Firewall rule logging is disabled.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_3",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0004-KCC",
+                            "eval": "data.rule.open_cassandra_port",
+                            "message": "data.rule.open_cassandra_port_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "OPEN CASSANDRA PORT",
+                    "description": "A firewall is configured to have an open CASSANDRA port that allows generic access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_4",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0005-KCC",
+                            "eval": "data.rule.open_ciscosecure_websm_port",
+                            "message": "data.rule.open_ciscosecure_websm_port_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Open Ciscosecure Websm Port",
+                    "description": "A firewall is configured to have an open CISCOSECURE_WEBSM port that allows generic access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_5",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0006-KCC",
+                            "eval": "data.rule.open_directory_services_port",
+                            "message": "data.rule.open_directory_services_port_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Open Directory Services Port",
+                    "description": "A firewall is configured to have an open DIRECTORY_SERVICES port that allows generic access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_6",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0007-KCC",
+                            "eval": "data.rule.open_dns_port",
+                            "message": "data.rule.open_dns_port_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Open DNS Port",
+                    "description": "A firewall is configured to have an open DNS port that allows generic access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_7",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0008-KCC",
+                            "eval": "data.rule.open_elasticsearch_port",
+                            "message": "data.rule.open_elasticsearch_port_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Open DNS Port",
+                    "description": "A firewall is configured to have an open ELASTICSEARCH port that allows generic access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_8",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0009-KCC",
+                            "eval": "data.rule.open_firewall",
+                            "message": "data.rule.open_firewall_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Open Firewall",
+                    "description": "A firewall is configured to be open to public access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_9",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0010-KCC",
+                            "eval": "data.rule.open_ftp_port",
+                            "message": "data.rule.open_ftp_port_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Open FTP Port",
+                    "description": "A firewall is configured to have an open FTP port that allows generic access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_10",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0011-KCC",
+                            "eval": "data.rule.open_http_port",
+                            "message": "data.rule.open_http_port_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Open HTTP Port",
+                    "description": "A firewall is configured to have an open HTTP port that allows generic access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_11",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0012-KCC",
+                            "eval": "data.rule.open_ldap_port",
+                            "message": "data.rule.open_ldap_port_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Open LDAP Port",
+                    "description": "A firewall is configured to have an open LDAP port that allows generic access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_12",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0013-KCC",
+                            "eval": "data.rule.open_memcached_port",
+                            "message": "data.rule.open_memcached_port_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Open MEMCACHED Port",
+                    "description": "A firewall is configured to have an open MEMCACHED port that allows generic access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_13",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0014-KCC",
+                            "eval": "data.rule.open_mongodb_port",
+                            "message": "data.rule.open_mongodb_port_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Open MONGODB Port",
+                    "description": "A firewall is configured to have an open MONGODB port that allows generic access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_14",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0015-KCC",
+                            "eval": "data.rule.open_mysql_port",
+                            "message": "data.rule.open_mysql_port_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Open MySQL Port",
+                    "description": "A firewall is configured to have an open MySQL port that allows generic access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_15",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0016-KCC",
+                            "eval": "data.rule.open_netbios_port",
+                            "message": "data.rule.open_netbios_port_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Open NETBIOS Port",
+                    "description": "A firewall is configured to have an open NETBIOS port that allows generic access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_16",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0017-KCC",
+                            "eval": "data.rule.open_oracledb_port",
+                            "message": "data.rule.open_oracledb_port_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Open ORACLEDB Port",
+                    "description": "A firewall is configured to have an open ORACLEDB port that allows generic access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_17",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0018-KCC",
+                            "eval": "data.rule.open_pop3_port",
+                            "message": "data.rule.open_pop3_port_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Open POP3 Port",
+                    "description": "A firewall is configured to have an open POP3 port that allows generic access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_18",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0019-KCC",
+                            "eval": "data.rule.open_postgresql_port",
+                            "message": "data.rule.open_postgresql_port_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Open POSTGRESQL Port",
+                    "description": "A firewall is configured to have an open POSTGRESQL port that allows generic access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_19",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0020-KCC",
+                            "eval": "data.rule.open_rdp_port",
+                            "message": "data.rule.open_rdp_port_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Open RDP Port",
+                    "description": "A firewall is configured to have an open RDP port that allows generic access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_20",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0021-KCC",
+                            "eval": "data.rule.open_redis_port",
+                            "message": "data.rule.open_redis_port_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Open REDIS Port",
+                    "description": "A firewall is configured to have an open REDIS port that allows generic access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_21",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0022-KCC",
+                            "eval": "data.rule.open_smtp_port",
+                            "message": "data.rule.open_smtp_port_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Open SMTP Port",
+                    "description": "A firewall is configured to have an open SMTP port that allows generic access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_22",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0023-KCC",
+                            "eval": "data.rule.open_ssh_port",
+                            "message": "data.rule.open_ssh_port_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Open SSH Port",
+                    "description": "A firewall is configured to have an open SSH port that allows generic access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeFirewall_23",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeFirewall.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0024-KCC",
+                            "eval": "data.rule.open_telnet_port",
+                            "message": "data.rule.open_telnet_port_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Open TELNET Port",
+                    "description": "A firewall is configured to have an open TELNET port that allows generic access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeFirewall"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeInstance_1",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeInstance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0025-KCC",
+                            "eval": "data.rule.compute_secure_boot_disabled",
+                            "message": "data.rule.compute_secure_boot_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Compute Secure Boot Disabled",
+                    "description": "This Shielded VM does not have Secure Boot enabled.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeInstance"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeInstance_2",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeInstance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0026-KCC",
+                            "eval": "data.rule.compute_serial_ports_enabled",
+                            "message": "data.rule.compute_serial_ports_enabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Compute Serial Ports Enabled",
+                    "description": "Serial ports are enabled for an instance, allowing connections to the instance's serial console.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeInstance"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeInstance_3",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeInstance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0027-KCC",
+                            "eval": "data.rule.ip_forwarding_enabled",
+                            "message": "data.rule.ip_forwarding_enabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IP Forwarding Enabled",
+                    "description": "IP forwarding is enabled on instances.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeInstance"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeInstance_4",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeInstance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0028-KCC",
+                            "eval": "data.rule.os_login_disabled",
+                            "message": "data.rule.os_login_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "OS Login Disabled",
+                    "description": "OS Login is disabled on this instance.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeInstance"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeInstance_5",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeInstance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0029-KCC",
+                            "eval": "data.rule.public_ip_address",
+                            "message": "data.rule.public_ip_address_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Public IP Address",
+                    "description": "An instance has a public IP address.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeInstance"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeInstance_6",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeInstance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0030-KCC",
+                            "eval": "data.rule.shielded_vm_disabled",
+                            "message": "data.rule.shielded_vm_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Shielded VM Disabled",
+                    "description": "Shielded VM is disabled on this instance.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeInstance"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeInstance_7",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeInstance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0031-KCC",
+                            "eval": "data.rule.org_policy_confidential_vm_policy",
+                            "message": "data.rule.org_policy_confidential_vm_policy_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Org Policy Confidential VM Policy",
+                    "description": "A Compute Engine resource is out of compliance with the constraints/compute.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeInstance"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeNetwork_1",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeNetwork.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0032-KCC",
+                            "eval": "data.rule.default_network",
+                            "message": "data.rule.default_network_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Default Network",
+                    "description": "The default network exists in a project.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeNetwork"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeNetwork_2",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeNetwork.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0033-KCC",
+                            "eval": "data.rule.legacy_network",
+                            "message": "data.rule.legacy_network_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Default Network",
+                    "description": "A legacy network exists in a project.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeNetwork"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ComputeSubnetwork",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ComputeSubnetwork.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0034-KCC",
+                            "eval": "data.rule.private_google_access_disabled",
+                            "message": "data.rule.private_google_access_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Bucket CMEK Disabled",
+                    "description": "There are private subnetworks without access to Google public APIs.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ComputeSubnetwork"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ContainerCluster_1",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ContainerCluster.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0035-KCC",
+                            "eval": "data.rule.cluster_logging_disabled",
+                            "message": "data.rule.cluster_logging_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Cluster Logging Disabled",
+                    "description": "Logging isn't enabled for a GKE cluster.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ContainerCluster"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ContainerCluster_2",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ContainerCluster.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0036-KCC",
+                            "eval": "data.rule.cluster_monitoring_disabled",
+                            "message": "data.rule.cluster_monitoring_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Cluster Monitoring Disabled",
+                    "description": "Monitoring is disabled on GKE clusters.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ContainerCluster"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ContainerCluster_3",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ContainerCluster.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0037-KCC",
+                            "eval": "data.rule.cos_not_used",
+                            "message": "data.rule.cos_not_used_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "COS Not Used",
+                    "description": "Compute Engine VMs aren't using the Container-Optimized OS that is designed for running Docker containers on Google Cloud securely.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["ContainerCluster"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ContainerCluster_4",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ContainerCluster.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0038-KCC",
+                            "eval": "data.rule.legacy_authorization_enabled",
+                            "message": "data.rule.legacy_authorization_enabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Legacy Authorization Enabled",
+                    "description": "Legacy Authorization is enabled on GKE clusters.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["ContainerCluster"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ContainerCluster_5",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ContainerCluster.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0039-KCC",
+                            "eval": "data.rule.master_authorized_networks_disabled",
+                            "message": "data.rule.master_authorized_networks_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Master Authorized Networks Disabled",
+                    "description": "Master Authorized Networks is not enabled on GKE clusters.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["ContainerCluster"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ContainerCluster_6",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ContainerCluster.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0040-KCC",
+                            "eval": "data.rule.network_policy_disabled",
+                            "message": "data.rule.network_policy_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Network Policy Disabled",
+                    "description": "Network policy is disabled on GKE clusters.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["ContainerCluster"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ContainerCluster_7",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ContainerCluster.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0041-KCC",
+                            "eval": "data.rule.pod_security_policy_disabled",
+                            "message": "data.rule.pod_security_policy_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Pod Security Policy Disabled",
+                    "description": "PodSecurityPolicy is disabled on a GKE cluster.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["ContainerCluster"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ContainerCluster_8",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ContainerCluster.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0042-KCC",
+                            "eval": "data.rule.private_cluster_disabled",
+                            "message": "data.rule.private_cluster_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Private Cluster Disabled",
+                    "description": "A GKE cluster has a Private cluster disabled.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["ContainerCluster"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ContainerCluster_9",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ContainerCluster.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0043-KCC",
+                            "eval": "data.rule.web_ui_enabled",
+                            "message": "data.rule.web_ui_enabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Web UI Enabled",
+                    "description": "The GKE web UI (dashboard) is enabled.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["ContainerCluster"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ContainerCluster_10",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ContainerCluster.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0044-KCC",
+                            "eval": "data.rule.workload_identity_disabled",
+                            "message": "data.rule.workload_identity_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Workload Identity Disabled",
+                    "description": "Workload Identity is disabled on a GKE cluster.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["ContainerCluster"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ContainerNodePool_1",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ContainerNodePool.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0045-KCC",
+                            "eval": "data.rule.auto_repair_disabled",
+                            "message": "data.rule.auto_repair_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Auto Repair Disabled",
+                    "description": "A GKE cluster's auto repair feature, which keeps nodes in a healthy, running state, is disabled.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["ContainerNodePool"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ContainerNodePool_2",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ContainerNodePool.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0046-KCC",
+                            "eval": "data.rule.auto_upgrade_disabled",
+                            "message": "data.rule.auto_upgrade_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Auto Upgrade Disabled",
+                    "description": "A GKE cluster's auto upgrade feature, which keeps clusters and node pools on the latest stable version of Kubernetes, is disabled.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["ContainerNodePool"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ContainerNodePool_3",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ContainerNodePool.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0047-KCC",
+                            "eval": "data.rule.cos_not_used",
+                            "message": "data.rule.cos_not_used_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "COS Not Used",
+                    "description": "Compute Engine VMs aren't using the Container-Optimized OS that is designed for running Docker containers on Google Cloud securely.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["ContainerNodePool"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ContainerNodePool_4",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ContainerNodePool.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0048-KCC",
+                            "eval": "data.rule.legacy_metadata_enabled",
+                            "message": "data.rule.legacy_metadata_enabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Legacy Metadata Enabled",
+                    "description": "Legacy metadata is enabled on GKE clusters.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["ContainerNodePool"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DNSManagedZone_1",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(DNSManagedZone.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0049-KCC",
+                            "eval": "data.rule.dnssec_disabled",
+                            "message": "data.rule.dnssec_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "DNSSEC Disabled",
+                    "description": "DNSSEC is disabled for Cloud DNS zones.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["DNSManagedZone"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DNSManagedZone_2",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(DNSManagedZone.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0050-KCC",
+                            "eval": "data.rule.rsasha1_for_signing",
+                            "message": "data.rule.rsasha1_for_signing_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "RSASHA1 For Signing",
+                    "description": "RSASHA1 is used for key signing in Cloud DNS zones.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["DNSManagedZone"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAMpolicy_1",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(IAMpolicy.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0051-KCC",
+                            "eval": "data.rule.audit_logging_disabled",
+                            "message": "data.rule.audit_logging_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Audit Logging Disabled",
+                    "description": "Audit logging has been disabled for this resource.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["IAMPolicy"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAMPolicy_2",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(IAMPolicy.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0052-KCC",
+                            "eval": "data.rule.primitive_roles_used",
+                            "message": "data.rule.primitive_roles_used_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Primitive Roles Used",
+                    "description": "A user has the basic role, Owner, Writer, or Reader. These roles are too permissive and shouldn't be used.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["IAMPolicy"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAMPolicy_3",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(IAMPolicy.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0053-KCC",
+                            "eval": "data.rule.redis_role_used_on_org",
+                            "message": "data.rule.redis_role_used_on_org_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Redis Role Used On Org",
+                    "description": "A Redis IAM role is assigned at the organization or folder level.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["IAMPolicy"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAMServiceAccountKey",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(IAMServiceAccountKey.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0054-KCC",
+                            "eval": "data.rule.service_account_key_not_rotated",
+                            "message": "data.rule.service_account_key_not_rotated_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Service Account Key Not Rotated",
+                    "description": "A service account key hasn't been rotated for more than 90 days",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["IAMServiceAccountKey"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KMSCryptoKey",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(KMSCryptoKey.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0055-KCC",
+                            "eval": "data.rule.kms_key_not_rotated",
+                            "message": "data.rule.kms_key_not_rotated_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "KMS Key Not Rotated",
+                    "description": "Rotation isn't configured on a Cloud KMS encryption key.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["KMSCryptoKey"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SQLInstance_1",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(SQLInstance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0056-KCC",
+                            "eval": "data.rule.auto_backup_disabled",
+                            "message": "data.rule.auto_backup_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Auto Backup Disabled",
+                    "description": "A Cloud SQL database doesn't have automatic backups enabled.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["SQLInstance"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SQLInstance_2",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(SQLInstance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0057-KCC",
+                            "eval": "data.rule.ssl_not_enforced",
+                            "message": "data.rule.ssl_not_enforced_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "SSL Not Enforced",
+                    "description": "A Cloud SQL database instance doesn't require all incoming connections to use SSL.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["SQLInstance"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SQLInstance_3",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(SQLInstance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0058-KCC",
+                            "eval": "data.rule.sql_no_root_password",
+                            "message": "data.rule.sql_no_root_password_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Sql No Root Password",
+                    "description": "A Cloud SQL database doesn't have a password configured for the root account.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["SQLInstance"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_StorageBucket_1",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(StorageBucket.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0059-KCC",
+                            "eval": "data.rule.bucket_cmek_disabled",
+                            "message": "data.rule.bucket_cmek_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Bucket CMEK Disabled",
+                    "description": "A bucket is not encrypted with customer-managed encryption keys (CMEK).",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["StorageBucket"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_StorageBucket_2",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(StorageBucket.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0060-KCC",
+                            "eval": "data.rule.bucket_policy_only_disabled",
+                            "message": "data.rule.bucket_policy_only_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Bucket Policy Only Disabled",
+                    "description": "Uniform bucket-level access, previously called Bucket Policy Only, isn't configured.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["StorageBucket"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_StorageBucket_3",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(StorageBucket.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0061-KCC",
+                            "eval": "data.rule.bucket_logging_disabled",
+                            "message": "data.rule.bucket_logging_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Bucket Logging Disabled",
+                    "description": "There is a storage bucket without logging enabled.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["StorageBucket"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_StorageBucket_4",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(StorageBucket.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0062-KCC",
+                            "eval": "data.rule.locked_retention_policy_not_set",
+                            "message": "data.rule.locked_retention_policy_not_set_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Locked Retention Policy Not Set",
+                    "description": "A locked retention policy is not set for logs.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["StorageBucket"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_StorageBucket_5",
+                    "masterSnapshotId": [
+                        "KCC_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(StorageBucket.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-GCP-0063-KCC",
+                            "eval": "data.rule.object_versioning_disabled",
+                            "message": "data.rule.object_versioning_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Object Versioning Disabled",
+                    "description": "Object versioning isn't enabled on a storage bucket where sinks are configured.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["StorageBucket"]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
