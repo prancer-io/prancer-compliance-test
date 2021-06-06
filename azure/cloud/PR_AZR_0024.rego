@@ -16,6 +16,18 @@ rulepass = false {
     count(security_rule) > 0
 }
 
+metadata := {
+    "Policy Code": "PR-AZR-0024",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "Cloud",
+    "Policy Title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to all traffic from Internet on TCP protocol",
+    "Policy Description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on TCP protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
+    "Resource Type": "microsoft.network/networksecuritygroups",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/rest/api/virtualnetwork/networksecuritygroups/get"
+}
+
 # "securityRules[?(@.sourceAddressPrefix=='Internet' && @.protocol=='TCP' &&  @.access=='Allow' &&
 # )].direction contains Inbound"
 

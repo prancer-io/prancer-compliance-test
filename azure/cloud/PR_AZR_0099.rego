@@ -15,3 +15,15 @@ rulepass {
     lower(input.type) == "microsoft.authorization/policyassignments"
     contains(input.id, "vulnerabilityAssesmentMonitoring")
 }
+
+metadata := {
+    "Policy Code": "PR-AZR-0099",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "Cloud",
+    "Policy Title": "Vulnerability assessment is set to OFF in Security Center",
+    "Policy Description": "Turning on Vulnerability assessment will recommend that you install a vulnerability assessment solution on your VM. A partner agent, after deployment, will report any vulnerability data for the VM.",
+    "Resource Type": "microsoft.authorization/policyassignments",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0"
+}

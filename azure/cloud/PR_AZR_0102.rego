@@ -25,7 +25,6 @@ sql_server_rulepass_err = "Azure SQL Database Server has not enabled security al
     sql_database_issue["sql_server_disabled_security_alert_policy"]
 }
 
-
 default sql_instance_rulepass = null
 
 sql_instance_issue["sql_instance_disabled_security_alert_policy"]{
@@ -43,4 +42,16 @@ sql_instance_rulepass = false {
 
 sql_instance_rulepass_err = "Azure SQL Instance has not enabled security alert policy" {
     sql_database_issue["sql_instance_disabled_security_alert_policy"]
+}
+
+metadata := {
+    "Policy Code": "PR-AZR-0102",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "Cloud",
+    "Policy Title": "Azure SQL Instance has not enabled security alert policy",
+    "Policy Description": "Azure SQL Instance has not enabled security alert policy",
+    "Resource Type": "microsoft.sql/servers/securityalertpolicies",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies"
 }

@@ -19,6 +19,18 @@ rulepass = false {
     lower(input.type) == "microsoft.network/virtualnetworks"
     count(public_security_rules_Internet) > 0
 }
+
+metadata := {
+    "Policy Code": "",
+    "Type": "Cloud",
+    "Product": "",
+    "Language": "Cloud",
+    "Policy Title": "Publicly exposed DB Ports",
+    "Policy Description": "DB Servers contain sensitive data and should not be exposed to any direct traffic from internet. This policy checks for the network traffic from internet hitting the DB Servers on their default ports. The DB servers monitored on the default ports are : Microsoft SQL Server (1433), Oracle (1521), MySQL (3306), Sybase (5000), Postgresql (5432), CouchDB (5984), Redis (6379, 6380), RethinkDB (8080,28015, 29015), CassandraDB (9042), Memcached (11211), MongoDB (27017), DB2 (50000).",
+    "Resource Type": "microsoft.network/virtualnetworks",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/rest/api/virtualnetwork/networksecuritygroups/get"
+}
 # Method for check rule
 get_access[security_rule] {
     security_rule := input.properties.securityRules[_]

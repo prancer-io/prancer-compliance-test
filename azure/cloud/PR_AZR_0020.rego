@@ -19,6 +19,18 @@ rulepass = false {
     lower(input.type) == "microsoft.network/networksecuritygroups"
     count(public_security_rules_Internet) > 0
 }
+
+metadata := {
+    "Policy Code": "PR-AZR-0020",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "Cloud",
+    "Policy Title": "Azure Network Security Group (NSG) allows SSH traffic from internet on port 22",
+    "Policy Description": "Blocking SSH port 22 will protect users from attacks like Account compromise.",
+    "Resource Type": "microsoft.network/networksecuritygroups",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/rest/api/virtualnetwork/networksecuritygroups/get"
+}
 # Method for check rule
 get_access[security_rule] {
     security_rule := input.properties.securityRules[_]
