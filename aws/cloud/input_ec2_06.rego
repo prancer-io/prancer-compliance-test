@@ -21,3 +21,15 @@ rulepass = false {
     instance.PublicIpAddress
     instance.SecurityGroups[_].IpPermissionsEgress[_].Ipv6Ranges[_].CidrIpv6 == "::/0"
 }
+
+rulepass_metadata := {
+    "Policy Code": "PR-AWS-0044",
+    "Type": "Cloud",
+    "Product": "AWS",
+    "Language": "Cloud",
+    "Policy Title": "AWS EC2 instance allowing public IP in subnets",
+    "Policy Description": "This policy identifies the EC2 intances which are allowing public IP in their subnets. This will allow traffic from the internet visible to EC2 instance. Therefore it's a best practice to ensure that there are no EC2 instances with Public IP which have Internet Access.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html"
+}

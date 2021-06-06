@@ -21,3 +21,15 @@ rulepass = false {
     ingress.IpProtocol == "-1"
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
 }
+
+rulepass_metadata := {
+    "Policy Code": "PR-AWS-0178",
+    "Type": "Cloud",
+    "Product": "AWS",
+    "Language": "Cloud",
+    "Policy Title": "AWS Security Groups with Inbound rule overly permissive to All Traffic",
+    "Policy Description": "This policy identifies AWS Security Groups which do allow inbound traffic on all protocols from public internet. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html"
+}

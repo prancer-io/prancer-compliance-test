@@ -23,3 +23,15 @@ rulepass = false {
     to_number(ingress.FromPort) <= 135
     to_number(ingress.ToPort) >= 135
 }
+
+rulepass_metadata := {
+    "Policy Code": "PR-AWS-0175",
+    "Type": "Cloud",
+    "Product": "AWS",
+    "Language": "Cloud",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to Windows RPC port (135)",
+    "Policy Description": "This policy identifies the security groups which are exposing Windows RPC port (135) to the internet. It is recommended that Global permission to access the well known services Windows RPC port (135) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html"
+}

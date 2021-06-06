@@ -23,3 +23,15 @@ rulepass = false {
     to_number(ingress.FromPort) <= 1433
     to_number(ingress.ToPort) >= 1433
 }
+
+rulepass_metadata := {
+    "Policy Code": "PR-AWS-0170",
+    "Type": "Cloud",
+    "Product": "AWS",
+    "Language": "Cloud",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to SQLServer port (1433)",
+    "Policy Description": "This policy identifies the security groups which are exposing SQLServer port (1433) to the internet. It is recommended that Global permission to access the well known services SQLServer port (1433) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html"
+}

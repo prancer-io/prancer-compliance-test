@@ -23,3 +23,15 @@ rulepass = false {
     to_number(ingress.FromPort) <= 5900
     to_number(ingress.ToPort) >= 5900
 }
+
+rulepass_metadata := {
+    "Policy Code": "PR-AWS-0174",
+    "Type": "Cloud",
+    "Product": "AWS",
+    "Language": "Cloud",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to VNC Server port (5900)",
+    "Policy Description": "This policy identifies the security groups which are exposing VNC Server port (5900) to the internet. It is recommended that Global permission to access the well known services VNC Server port (5900) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html"
+}
