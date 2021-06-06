@@ -20,7 +20,7 @@ rulepass = false {
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0179",
     "Type": "Cloud",
     "Product": "AWS",

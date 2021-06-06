@@ -13,7 +13,7 @@ rulepass = true {
     input.Distribution.DistributionConfig.DefaultCacheBehavior.FieldLevelEncryptionId! == ""
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0015",
     "Type": "Cloud",
     "Product": "AWS",

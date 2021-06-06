@@ -30,7 +30,7 @@ rulepass = false {
     to_number(ingress.ToPort) >= port
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0177",
     "Type": "Cloud",
     "Product": "AWS",

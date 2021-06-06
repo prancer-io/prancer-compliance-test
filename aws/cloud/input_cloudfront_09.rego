@@ -13,7 +13,7 @@ rulepass = true {
     input.Distribution.DistributionConfig.Origins.Items[_].S3OriginConfig.OriginAccessIdentity!=""
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0030",
     "Type": "Cloud",
     "Product": "AWS",

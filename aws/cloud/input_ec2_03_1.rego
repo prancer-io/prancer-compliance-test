@@ -18,7 +18,7 @@ rulepass = true {
     input.Volumes[_].Attachments[_]
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0038",
     "Type": "Cloud",
     "Product": "AWS",

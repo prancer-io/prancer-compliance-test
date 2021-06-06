@@ -13,7 +13,7 @@ rulepass = true {
     input.LoadBalancerAttributes.CrossZoneLoadBalancing.Enabled=true
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0066",
     "Type": "Cloud",
     "Product": "AWS",

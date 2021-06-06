@@ -14,7 +14,7 @@ rulepass = true {
     input.Distribution.DistributionConfig.WebACLId!=""
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0021",
     "Type": "Cloud",
     "Product": "AWS",

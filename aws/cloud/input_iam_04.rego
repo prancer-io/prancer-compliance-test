@@ -14,7 +14,7 @@ rulepass = true {
     count(input.AttachedPolicies)>1
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0096",
     "Type": "Cloud",
     "Product": "AWS",

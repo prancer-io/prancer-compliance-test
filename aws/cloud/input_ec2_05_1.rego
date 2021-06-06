@@ -15,7 +15,7 @@ rulepass {
     instance.IamInstanceProfile.Arn
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0042",
     "Type": "Cloud",
     "Product": "AWS",

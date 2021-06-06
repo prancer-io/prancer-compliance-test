@@ -13,7 +13,7 @@ rulepass = true {
     input.Distribution.DistributionConfig.Restrictions.GeoRestriction.RestrictionType="whitelist"
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0023",
     "Type": "Cloud",
     "Product": "AWS",

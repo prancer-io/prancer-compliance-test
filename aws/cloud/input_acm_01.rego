@@ -13,7 +13,7 @@ rulepass = true {
     input.Certificate.Options.CertificateTransparencyLoggingPreference="ENABLED"
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0009",
     "Type": "Cloud",
     "Product": "AWS",

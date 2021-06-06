@@ -18,7 +18,7 @@ rulepass {
     lower(input.taskDefinition.containerDefinitions[0].user) != "root"
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0049",
     "Type": "Cloud",
     "Product": "AWS",

@@ -14,7 +14,7 @@ rulepass {
     db_instance.PubliclyAccessible == false
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0121",
     "Type": "Cloud",
     "Product": "AWS",

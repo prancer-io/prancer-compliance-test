@@ -13,7 +13,7 @@ rulepass = true {
     input.ReplicationGroups[_].AutomaticFailover="enabled"
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0055",
     "Type": "Cloud",
     "Product": "AWS",

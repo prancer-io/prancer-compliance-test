@@ -13,7 +13,7 @@ rulepass = false {
     input.FileSystems[_].Encrypted == false
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0061",
     "Type": "Cloud",
     "Product": "AWS",

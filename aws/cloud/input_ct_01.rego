@@ -13,7 +13,7 @@ rulepass = true {
     input.trailList[_].IsMultiRegionTrail=true
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0026",
     "Type": "Cloud",
     "Product": "AWS",

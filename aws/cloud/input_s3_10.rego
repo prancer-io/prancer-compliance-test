@@ -14,7 +14,7 @@ rulepass = false {
     contains(lower(grant.Grantee.URI), "authenticatedusers")
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0149",
     "Type": "Cloud",
     "Product": "AWS",

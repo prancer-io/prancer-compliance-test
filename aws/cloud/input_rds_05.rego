@@ -15,7 +15,7 @@ rulepass {
     instance.MultiAZ == true
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0127",
     "Type": "Cloud",
     "Product": "AWS",

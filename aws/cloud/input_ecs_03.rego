@@ -13,7 +13,7 @@ rulepass {
     startswith(input.taskDefinition.executionRoleArn, "arn:aws:iam")
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0048",
     "Type": "Cloud",
     "Product": "AWS",

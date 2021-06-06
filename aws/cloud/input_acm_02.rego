@@ -13,7 +13,7 @@ rulepass = true {
     count(input.Certificate.InUseBy) > 0
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0012",
     "Type": "Cloud",
     "Product": "AWS",

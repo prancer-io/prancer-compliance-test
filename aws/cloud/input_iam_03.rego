@@ -11,7 +11,7 @@ rulepass = true {
     ["arn:aws:iam::aws:policy/AmazonElasticTranscoderFullAccess" | input.AttachedPolicies[_].PolicyArn]
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0084",
     "Type": "Cloud",
     "Product": "AWS",

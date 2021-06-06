@@ -12,7 +12,7 @@ rulepass = true {
     count(uphold) == 0
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0035",
     "Type": "Cloud",
     "Product": "AWS",

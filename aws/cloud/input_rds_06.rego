@@ -13,7 +13,7 @@ rulepass = false {
     input.DBInstances[_].AutoMinorVersionUpgrade = false
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0130",
     "Type": "Cloud",
     "Product": "AWS",

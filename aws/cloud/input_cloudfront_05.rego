@@ -18,7 +18,7 @@ rulepass = true {
     input.Distribution.DistributionConfig.DefaultCacheBehavior.ViewerProtocolPolicy=="redirect-to-https"
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0019",
     "Type": "Cloud",
     "Product": "AWS",

@@ -22,7 +22,7 @@ rulepass = false {
     policydescrib.AttributeValue == "true"
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0063",
     "Type": "Cloud",
     "Product": "AWS",

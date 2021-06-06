@@ -13,7 +13,7 @@ rulepass = true {
     count(input.Stacks[_].NotificationARNs) > 0
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0014",
     "Type": "Cloud",
     "Product": "AWS",

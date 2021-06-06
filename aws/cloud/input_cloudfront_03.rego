@@ -15,7 +15,7 @@ rulepass = true {
     input.Distribution.DistributionConfig.Logging.Bucket!=""
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0017",
     "Type": "Cloud",
     "Product": "AWS",

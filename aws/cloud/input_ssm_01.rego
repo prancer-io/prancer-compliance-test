@@ -13,7 +13,7 @@ rulepass = true {
     input.Parameters[_].Type='SecureString'
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0158",
     "Type": "Cloud",
     "Product": "AWS",

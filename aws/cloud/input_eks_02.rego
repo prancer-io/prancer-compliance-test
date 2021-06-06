@@ -13,7 +13,7 @@ rulepass = true {
     input.cluster.logging.clusterLogging[_].enabled=true
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0054",
     "Type": "Cloud",
     "Product": "AWS",

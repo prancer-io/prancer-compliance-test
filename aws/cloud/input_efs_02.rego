@@ -19,7 +19,7 @@ rulepass = false {
     not startswith(fs.KmsKeyId, "arn:")
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0060",
     "Type": "Cloud",
     "Product": "AWS",

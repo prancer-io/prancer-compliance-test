@@ -14,7 +14,7 @@ rulepass {
     db_instance.CopyTagsToSnapshot == true
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0128",
     "Type": "Cloud",
     "Product": "AWS",

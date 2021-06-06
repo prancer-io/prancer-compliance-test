@@ -14,7 +14,7 @@ rulepass {
     input.Configuration.VpcConfig.VpcId
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0106",
     "Type": "Cloud",
     "Product": "AWS",

@@ -14,7 +14,7 @@ rulepass = true {
     input.trailList[_].CloudWatchLogsRoleArn
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0192",
     "Type": "Cloud",
     "Product": "AWS",

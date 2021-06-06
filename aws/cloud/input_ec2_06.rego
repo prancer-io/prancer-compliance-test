@@ -22,7 +22,7 @@ rulepass = false {
     instance.SecurityGroups[_].IpPermissionsEgress[_].Ipv6Ranges[_].CidrIpv6 == "::/0"
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0044",
     "Type": "Cloud",
     "Product": "AWS",

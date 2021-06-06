@@ -13,7 +13,7 @@ rulepass = true {
     input.Distribution.DistributionConfig.Origins.Items[_].CustomOriginConfig.OriginSslProtocols.Items[_]!="SSLv3"
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0016",
     "Type": "Cloud",
     "Product": "AWS",

@@ -13,7 +13,7 @@ rulepass {
     input.taskDefinition.containerDefinitions[_].privileged == false
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0047",
     "Type": "Cloud",
     "Product": "AWS",

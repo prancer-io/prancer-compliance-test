@@ -18,7 +18,7 @@ rulepass = false {
     not lbdescrib.Instances
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0069",
     "Type": "Cloud",
     "Product": "AWS",

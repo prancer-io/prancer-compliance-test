@@ -13,7 +13,7 @@ rulepass = false {
     input.LoadBalancerAttributes.AccessLog.Enabled == false
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0072",
     "Type": "Cloud",
     "Product": "AWS",

@@ -22,7 +22,7 @@ rulepass = false {
     not startswith(listeners.Listener.SSLCertificateId, "arn:")
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0073",
     "Type": "Cloud",
     "Product": "AWS",

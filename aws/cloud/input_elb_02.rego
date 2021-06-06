@@ -13,7 +13,7 @@ rulepass = true {
     input.LoadBalancerAttributes.ConnectionDraining.Enabled=true
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0065",
     "Type": "Cloud",
     "Product": "AWS",

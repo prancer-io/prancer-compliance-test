@@ -18,7 +18,7 @@ rulepass {
     not input.LoggingEnabled.TargetPrefix=""
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0004",
     "Type": "Cloud",
     "Product": "AWS",

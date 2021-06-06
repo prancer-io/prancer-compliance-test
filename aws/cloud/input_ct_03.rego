@@ -13,7 +13,7 @@ rulepass = true {
     input.trailList[_].KmsKeyId
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0028",
     "Type": "Cloud",
     "Product": "AWS",

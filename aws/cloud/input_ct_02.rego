@@ -13,7 +13,7 @@ rulepass = true {
     input.trailList[_].LogFileValidationEnabled=true
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0027",
     "Type": "Cloud",
     "Product": "AWS",

@@ -40,7 +40,7 @@ rulepass = false {
     lower(policy.Effect) == "allow"
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0142",
     "Type": "Cloud",
     "Product": "AWS",

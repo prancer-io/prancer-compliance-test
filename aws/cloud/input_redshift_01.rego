@@ -13,7 +13,7 @@ rulepass = true {
     input.Clusters[_].Encrypted=true
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0137",
     "Type": "Cloud",
     "Product": "AWS",

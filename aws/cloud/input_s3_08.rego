@@ -13,7 +13,7 @@ rulepass = false {
     lower(input.Versioning.Status) == "disabled"
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0145",
     "Type": "Cloud",
     "Product": "AWS",

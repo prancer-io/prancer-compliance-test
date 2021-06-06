@@ -13,7 +13,7 @@ rulepass = false {
     to_number(input.Configuration.CodeSize) > 67500000
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0108",
     "Type": "Cloud",
     "Product": "AWS",

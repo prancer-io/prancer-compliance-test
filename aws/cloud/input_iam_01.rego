@@ -13,7 +13,7 @@ rulepass = true {
     input.SummaryMap.AccountAccessKeysPresent=0
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0003",
     "Type": "Cloud",
     "Product": "AWS",

@@ -13,7 +13,7 @@ rulepass {
     lower(input.Configuration.TracingConfig.Mode) != "passthrough"
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0107",
     "Type": "Cloud",
     "Product": "AWS",

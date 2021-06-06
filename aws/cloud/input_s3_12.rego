@@ -18,7 +18,7 @@ rulepass == false {
     input.WebsiteConfiguration
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0196",
     "Type": "Cloud",
     "Product": "AWS",

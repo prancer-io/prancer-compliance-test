@@ -14,7 +14,7 @@ rulepass = true {
     input.ReplicationGroups[_].TransitEncryptionEnabled=true
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0056",
     "Type": "Cloud",
     "Product": "AWS",

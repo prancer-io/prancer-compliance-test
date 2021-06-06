@@ -14,7 +14,7 @@ rulepass = true {
     input.cluster.resourcesVpcConfig.endpointPublicAccess=false
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0051",
     "Type": "Cloud",
     "Product": "AWS",

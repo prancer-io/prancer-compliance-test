@@ -14,7 +14,7 @@ rulepass = false {
     not instance.VpcId
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0045",
     "Type": "Cloud",
     "Product": "AWS",

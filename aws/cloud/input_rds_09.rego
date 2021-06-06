@@ -14,7 +14,7 @@ rulepass = false {
     to_number(db_instance.BackupRetentionPeriod) < 7
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0131",
     "Type": "Cloud",
     "Product": "AWS",

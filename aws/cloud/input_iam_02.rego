@@ -21,7 +21,7 @@ rulepass = true {
     input.PasswordPolicy.MinimumPasswordLength
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0082",
     "Type": "Cloud",
     "Product": "AWS",

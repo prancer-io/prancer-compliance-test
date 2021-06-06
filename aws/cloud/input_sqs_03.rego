@@ -14,7 +14,7 @@ rulepass {
     lower(input.Attributes.KmsMasterKeyId) != "alias/aws/sqs"
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0157",
     "Type": "Cloud",
     "Product": "AWS",

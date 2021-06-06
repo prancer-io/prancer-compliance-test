@@ -14,7 +14,7 @@ rulepass {
     contains(lower(input.Attributes.RedrivePolicy), "deadlettertargetarn")
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0155",
     "Type": "Cloud",
     "Product": "AWS",

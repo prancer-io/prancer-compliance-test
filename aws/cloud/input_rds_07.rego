@@ -15,7 +15,7 @@ rulepass {
     db_cluster.StorageEncrypted == true
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0119",
     "Type": "Cloud",
     "Product": "AWS",

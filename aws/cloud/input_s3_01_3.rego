@@ -14,7 +14,7 @@ rulepass {
     not contains(lower(grant.Grantee.URI), "allusers")
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0147",
     "Type": "Cloud",
     "Product": "AWS",

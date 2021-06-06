@@ -13,7 +13,7 @@ rulepass = true {
     input.Distribution.DistributionConfig.ViewerCertificate.CertificateSource!="cloudfront"
 }
 
-rulepass_metadata := {
+metadata := {
     "Policy Code": "PR-AWS-0022",
     "Type": "Cloud",
     "Product": "AWS",
