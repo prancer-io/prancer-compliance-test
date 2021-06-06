@@ -11,13 +11,14 @@ default storage_secure = null
 azure_attribute_absence["storage_secure"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
+    resource.apiVersion < "2019-04-01"
     not resource.properties.supportsHttpsTrafficOnly
 }
 
 azure_issue["storage_secure"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
-    resource.properties.supportsHttpsTrafficOnly != true
+    resource.properties.supportsHttpsTrafficOnly == false
 }
 
 storage_secure {

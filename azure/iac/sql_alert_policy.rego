@@ -24,6 +24,7 @@ azure_sql_security_alert_disabled["sql_server_security_alert_disabled"] {
 }
 
 sql_server_alert {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
     not azure_sql_security_alert_disabled["sql_server_security_alert_disabled"]
 }
 
@@ -48,12 +49,11 @@ sql_server_alert_metadata := {
 }
 
 
-
 default sql_managed_instance_alert = null
 
 azure_sql_security_alert_disabled["sql_instance_security_alert_disabled"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/managedInstances"
+    lower(resource.type) == "microsoft.sql/managedinstances"
     sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     sql_resources.properties.state == "Disabled"
@@ -61,11 +61,12 @@ azure_sql_security_alert_disabled["sql_instance_security_alert_disabled"] {
 
 azure_sql_security_alert_disabled["sql_instance_security_alert_disabled"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/managedInstances/securityalertpolicies"
+    lower(resource.type) == "microsoft.sql/managedinstances/securityalertpolicies"
     resource.properties.state == "Disabled"
 }
 
 sql_managed_instance_alert {
+    lower(input.resources[_].type) == "microsoft.sql/managedinstances"
     not azure_sql_security_alert_disabled["sql_instance_security_alert_disabled"]
 }
 

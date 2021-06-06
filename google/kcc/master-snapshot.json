@@ -1,0 +1,18 @@
+{
+    "snapshots": [
+        {
+            "type": "filesystem",
+            "connectorUser": "USER_1",
+            "nodes": [
+                {
+                    "masterSnapshotId": "KCC_TEMPLATE_SNAPSHOT",
+                    "type": "yaml",
+                    "collection": "deploymentmanagertemplate",
+                    "paths": [
+                        "/samples/resources/"
+                    ]
+                }
+            ]
+        }
+    ]
+}
