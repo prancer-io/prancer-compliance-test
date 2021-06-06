@@ -41,3 +41,15 @@ acr_webhooks_err = "Azure ACR HTTPS not enabled for webhook" {
 acr_webhooks_miss_err = "Container registy webhook attribute service_uri missing in the resource" {
     azure_attribute_absence["acr_webhooks"]
 }
+
+acr_webhooks_metadata := {
+    "Policy Code": "PR-AZR-0005-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure ACR HTTPS not enabled for webhook",
+    "Policy Description": "Ensure you send container registry webhooks only to a HTTPS endpoint. This policy checks your container registry webhooks and alerts if it finds a URI with HTTP.",
+    "Resource Type": "azurerm_container_registry_webhook",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_container_registry_webhook"
+}
