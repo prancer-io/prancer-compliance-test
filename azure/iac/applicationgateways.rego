@@ -43,6 +43,18 @@ gw_tls_miss_err = "App gateway attribute webApplicationFirewallConfiguration mis
     azure_attribute_absence["gw_tls"]
 }
 
+gw_tls_metadata := {
+    "Policy Code": "PR-AZR-0011-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Azure Application Gateway allows TLSv1.1 or lower",
+    "Policy Description": "The Application Gateway supports end-to-end SSL encryption using multiple TLS versions and by default, it supports TLS version 1.0 as the minimum version._x005F_x000D_ _x005F_x000D_ This policy identifies the Application Gateway instances that are configured to use TLS versions 1.1 or lower as the minimum protocol version. As a best practice set the MinProtocolVersion to TLSv1.2 (if you use custom SSL policy) or use the predefined â€˜AppGwSslPolicy20170401Sâ€™ policy.",
+    "Resource Type": "microsoft.network/applicationgateways",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways"
+}
+
 #
 # PR-AZR-0012-ARM
 #
@@ -81,4 +93,16 @@ gw_waf_err = "Azure Application Gateway does not have the WAF enabled" {
 
 gw_waf_miss_err = "App gateway attribute webApplicationFirewallConfiguration missing in the resource" {
     azure_attribute_absence["gw_waf"]
+}
+
+gw_waf_metadata := {
+    "Policy Code": "PR-AZR-0012-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Azure Application Gateway does not have the Web application firewall (WAF) enabled",
+    "Policy Description": "This policy identifies Azure Application Gateways that do not have Web application firewall (WAF) enabled. As a best practice, enable WAF to manage and protect your web applications behind the Application Gateway from common exploits and vulnerabilities.",
+    "Resource Type": "microsoft.network/applicationgateways",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways"
 }

@@ -35,6 +35,18 @@ sql_server_alert_err = "Security alert for SQL server is Disabled" {
     azure_sql_security_alert_disabled["sql_server_security_alert_disabled"]
 }
 
+sql_server_alert_metadata := {
+    "Policy Code": "PR-AZR-0103-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "",
+    "Policy Description": "",
+    "Resource Type": "securityalertpolicies",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies"
+}
+
 
 
 default sql_managed_instance_alert = null
@@ -63,4 +75,16 @@ sql_managed_instance_alert = false {
 
 sql_managed_instance_alert_err = "Security alert for SQL managed instance is Disabled" {
     azure_sql_security_alert_disabled["sql_instance_security_alert_disabled"]
+}
+
+sql_managed_instance_alert_metadata := {
+    "Policy Code": "",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Security alert for SQL managed instance is Disabled",
+    "Policy Description": "Security alert for SQL managed instance is Disabled",
+    "Resource Type": "securityalertpolicies",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies"
 }

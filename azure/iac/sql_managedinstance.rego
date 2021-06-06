@@ -26,3 +26,15 @@ sql_public_endpoint = false {
 sql_public_endpoint_err = "SQL Managed Instance with enabled public endpoint detected!" {
     azure_issue["sql_public_endpoint"]
 }
+
+sql_public_endpoint_metadata := {
+    "Policy Code": "",
+    "Type": "IaC",
+    "Product": "",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "SQL Managed Instance with enabled public endpoint detected!",
+    "Policy Description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance",
+    "Resource Type": "microsoft.sql/managedinstances",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances"
+}
