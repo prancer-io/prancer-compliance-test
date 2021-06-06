@@ -46,7 +46,7 @@ db_ad_admin_metadata := {
     "Policy Code": "PR-AZR-0085-ARM",
     "Type": "IaC",
     "Product": "AZR",
-    "Language": "AWS Cloud formation",
+    "Language": "ARM template",
     "Policy Title": "SQL servers which do not have Azure Active Directory admin configured",
     "Policy Description": "Checks to ensure that SQL servers are configured with Active Directory admin authentication. Azure Active Directory authentication is a mechanism of connecting to Microsoft Azure SQL Database and SQL Data Warehouse by using identities in Azure Active Directory (Azure AD). With Azure AD authentication, you can centrally manage the identities of database users and other Microsoft services in one central location.",
     "Resource Type": "microsoft.sql/servers/administrators",

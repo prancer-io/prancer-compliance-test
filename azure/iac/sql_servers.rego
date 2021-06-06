@@ -31,7 +31,7 @@ sql_public_access_metadata := {
     "Policy Code": "",
     "Type": "IaC",
     "Product": "",
-    "Language": "AWS Cloud formation",
+    "Language": "ARM template",
     "Policy Title": "SQL servers with public access detected!",
     "Policy Description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance",
     "Resource Type": "microsoft.sql/servers",

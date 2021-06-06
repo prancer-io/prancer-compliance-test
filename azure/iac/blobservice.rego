@@ -37,7 +37,7 @@ storage_blob_soft_delete_metadata := {
     "Policy Code": "",
     "Type": "IaC",
     "Product": "",
-    "Language": "AWS Cloud formation",
+    "Language": "ARM template",
     "Policy Title": "Soft delete on Blob not enabled",
     "Policy Description": "Soft delete on Blob not enabled",
     "Resource Type": "microsoft.storage/storageaccounts/blobservices",

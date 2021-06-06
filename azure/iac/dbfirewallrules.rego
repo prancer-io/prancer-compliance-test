@@ -58,7 +58,7 @@ db_firewall_metadata := {
     "Policy Code": "PR-AZR-0082-ARM",
     "Type": "IaC",
     "Product": "AZR",
-    "Language": "AWS Cloud formation",
+    "Language": "ARM template",
     "Policy Title": "SQL Server Firewall rules allow access to any Azure internal resources",
     "Policy Description": "Firewalls grant access to databases based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with 0.0.0.0 represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access.",
     "Resource Type": "microsoft.sql/servers/firewallrules",

@@ -46,7 +46,7 @@ db_encrypt_metadata := {
     "Policy Code": "PR-AZR-0084-ARM",
     "Type": "IaC",
     "Product": "AZR",
-    "Language": "AWS Cloud formation",
+    "Language": "ARM template",
     "Policy Title": "SQL databases has encryption disabled",
     "Policy Description": "Transparent data encryption protects Azure database against malicious activity. It performs real-time encryption and decryption of the database, related reinforcements, and exchange log records without requiring any changes to the application. It encrypts the storage of the entire database by using a symmetric key called the database encryption key.",
     "Resource Type": "microsoft.sql/servers/databases/transparentdataencryption",

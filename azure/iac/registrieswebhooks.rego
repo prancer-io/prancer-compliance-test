@@ -46,7 +46,7 @@ acr_webhooks_metadata := {
     "Policy Code": "PR-AZR-0005-ARM",
     "Type": "IaC",
     "Product": "AZR",
-    "Language": "AWS Cloud formation",
+    "Language": "ARM template",
     "Policy Title": "Azure ACR HTTPS not enabled for webhook",
     "Policy Description": "Ensure you send container registry webhooks only to a HTTPS endpoint. This policy checks your container registry webhooks and alerts if it finds a URI with HTTP.",
     "Resource Type": "microsoft.containerregistry/registries/webhooks",
