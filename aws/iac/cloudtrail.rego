@@ -27,6 +27,18 @@ ct_regions_err = "AWS CloudTrail is not enabled in all regions" {
     aws_issue["ct_regions"]
 }
 
+ct_regions_metadata := {
+    "Policy Code": "PR-AWS-0026-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS CloudTrail is not enabled in all regions",
+    "Policy Description": "Checks to ensure that CloudTrail is enabled across all regions. AWS CloudTrail is a service that enables governance, compliance, operational PR-AWS-0026-CFR-DESC risk auditing of the AWS account. It is a compliance and security best practice to turn on CloudTrail across different regions to get a complete audit trail of activities across various services.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html"
+}
+
 #
 # PR-AWS-0027-CFR
 #
@@ -50,6 +62,18 @@ ct_log_validation = false {
 
 ct_log_validation_err = "AWS CloudTrail log validation is not enabled in all regions" {
     aws_issue["ct_log_validation"]
+}
+
+ct_log_validation_metadata := {
+    "Policy Code": "PR-AWS-0027-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS CloudTrail log validation is not enabled in all regions",
+    "Policy Description": "This policy identifies AWS CloudTrails in which log validation is not enabled in all regions. CloudTrail log file validation creates a digitally signed digest file containing a hash of each log that CloudTrail writes to S3. These digest files can be used to determine whether a log file was modified after CloudTrail delivered the log. It is recommended that file validation be enabled on all CloudTrails.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html"
 }
 
 #
@@ -92,6 +116,18 @@ ct_master_key_miss_err = "CloudTrail attribute KMSKeyId missing in the resource"
     aws_attribute_absence["ct_master_key"]
 }
 
+ct_master_key_metadata := {
+    "Policy Code": "PR-AWS-0028-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS CloudTrail logs are not encrypted using Customer Master Keys (CMKs)",
+    "Policy Description": "Checks to ensure that CloudTrail logs are encrypted. AWS CloudTrail is a service that enables governance, compliance, operational PR-AWS-0028-CFR-DESC risk auditing of the AWS account. It is a compliance and security best practice to encrypt the CloudTrail data since it may contain sensitive information.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html"
+}
+
 #
 # PR-AWS-0192-CFR
 #
@@ -130,4 +166,16 @@ ct_cloudwatch_err = "CloudTrail trail is not integrated with CloudWatch Log" {
 
 ct_cloudwatch_miss_err = "CloudTrail attribute CloudWatchLogsRoleArn missing in the resource" {
     aws_attribute_absence["ct_cloudwatch"]
+}
+
+ct_cloudwatch_metadata := {
+    "Policy Code": "PR-AWS-0192-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "CloudTrail trail is not integrated with CloudWatch Log",
+    "Policy Description": "Enabling the CloudTrail trail logs integrated with CloudWatch Logs will enable the real-time as well as historic activity logging. This will further effective monitoring and alarm capability.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html"
 }

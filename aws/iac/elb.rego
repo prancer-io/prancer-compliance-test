@@ -104,6 +104,18 @@ elb_insecure_cipher_err = "AWS Elastic Load Balancer (Classic) SSL negotiation p
     aws_issue["elb_insecure_cipher"]
 }
 
+elb_insecure_cipher_metadata := {
+    "Policy Code": "PR-AWS-0062-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with insecure ciphers",
+    "Policy Description": "This policy identifies Elastic Load Balancers (Classic) which are configured with SSL negotiation policy containing insecure ciphers. An SSL cipher is an encryption algorithm that uses encryption keys to create a coded message. SSL protocols use several SSL ciphers to encrypt data over the Internet. As many of the other ciphers are not secure, it is recommended to use only the ciphers recommended in the following AWS link: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-ssl-security-policy.html.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
+}
+
 #
 # PR-AWS-0063-CFR
 #
@@ -138,6 +150,18 @@ elb_insecure_protocol_err = "AWS Elastic Load Balancer (Classic) SSL negotiation
     aws_issue["elb_insecure_protocol"]
 }
 
+elb_insecure_protocol_metadata := {
+    "Policy Code": "PR-AWS-0063-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with vulnerable SSL protocol",
+    "Policy Description": "This policy identifies Elastic Load Balancers (Classic) which are configured with SSL negotiation policy containing vulnerable SSL protocol. The SSL protocol establishes a secure connection between a client and a server and ensures that all the data passed between the client and your load balancer is private. As a security best practice, it is recommended to use the latest version SSL protocol.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
+}
+
 #
 # PR-AWS-0064-CFR
 #
@@ -161,6 +185,18 @@ elb_access_log = false {
 
 elb_access_log_err = "AWS Elastic Load Balancer (Classic) with access log disabled" {
     aws_issue["elb_access_log"]
+}
+
+elb_access_log_metadata := {
+    "Policy Code": "PR-AWS-0064-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Elastic Load Balancer (Classic) with access log disabled",
+    "Policy Description": "This policy identifies Classic Elastic Load Balancers which have access log disabled. When Access log enabled, Classic load balancer captures detailed information about requests sent to your load balancer. Each log contains information such as the time the request was received, the client's IP address, latencies, request paths, and server responses. You can use these access logs to analyze traffic patterns and to troubleshoot issues.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
 }
 
 #
@@ -188,6 +224,18 @@ elb_conn_drain_err = "AWS Elastic Load Balancer (Classic) with connection draini
     aws_issue["elb_conn_drain"]
 }
 
+elb_conn_drain_metadata := {
+    "Policy Code": "PR-AWS-0065-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Elastic Load Balancer (Classic) with connection draining disabled",
+    "Policy Description": "This policy identifies Classic Elastic Load Balancers which have connection draining disabled. Connection Draining feature ensures that a Classic load balancer stops sending requests to instances that are de-registering or unhealthy, while keeping the existing connections open. This enables the load balancer to complete in-flight requests made to instances that are de-registering or unhealthy.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
+}
+
 #
 # PR-AWS-0066-CFR
 #
@@ -210,11 +258,23 @@ elb_crosszone = false {
 }
 
 elb_crosszone_err = "AWS Elastic Load Balancer (Classic) with cross-zone load balancing disabled" {
-    aws_issue["elb_access_log"]
+    aws_issue["elb_crosszone"]
+}
+
+elb_crosszone_metadata := {
+    "Policy Code": "PR-AWS-0066-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Elastic Load Balancer (Classic) with cross-zone load balancing disabled",
+    "Policy Description": "This policy identifies Classic Elastic Load Balancers which have cross-zone load balancing disabled. When Cross-zone load balancing enabled, classic load balancer distributes requests evenly across the registered instances in all enabled Availability Zones. Cross-zone load balancing reduces the need to maintain equivalent numbers of instances in each enabled Availability Zone, and improves your application's ability to handle the loss of one or more instances.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
 }
 
 #
-# PR-AWS-0067-CFR
+# PR-AWS-0067-CFR 
 # PR-AWS-0068-CFR
 #
 
@@ -244,11 +304,23 @@ elb_sec_group = false {
 }
 
 elb_sec_group_err = "AWS Elastic Load Balancer (ELB) has security group with no inbound/outbound rules" {
-    aws_issue["elb_access_log"]
+    aws_issue["elb_sec_group"]
 }
 
 elb_sec_group_miss_err = "ELB attribute SecurityGroups missing in the resource" {
-    aws_issue["elb_access_log"]
+    aws_issue["elb_sec_group"]
+}
+
+elb_sec_group_metadata := {
+    "Policy Code": "PR-AWS-0067-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Elastic Load Balancer (ELB) has security group with no inbound rules",
+    "Policy Description": "This policy identifies Elastic Load Balancers (ELB) which have security group with no inbound rules. A security group with no inbound rule will deny all incoming requests. ELB security groups should have at least one inbound rule, ELB with no inbound permissions will deny all traffic incoming to ELB; in other words, the ELB is useless without inbound permissions.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
 }
 
 #
@@ -291,6 +363,18 @@ elb_not_in_use_miss_err = "ELB attribute Instances missing in the resource" {
     aws_attribute_absence["elb_not_in_use"]
 }
 
+elb_not_in_use_metadata := {
+    "Policy Code": "PR-AWS-0069-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Elastic Load Balancer (ELB) not in use",
+    "Policy Description": "This policy identifies unused Elastic Load Balancers (ELBs) in your AWS account. Any Elastic Load Balancer in your AWS account is adding charges to your monthly bill, although it is not used by any resources. As a best practice, it is recommended to remove ELBs that are not associated with any instances, it will also help you avoid unexpected charges on your bill.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
+}
+
 #
 # PR-AWS-0072-CFR
 #
@@ -326,6 +410,18 @@ elb_alb_logs_err = "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balanc
 
 elb_alb_logs_miss_err = "ELBv2 attribute LoadBalancerAttributes missing in the resource" {
     aws_issue["elb_alb_logs"]
+}
+
+elb_alb_logs_metadata := {
+    "Policy Code": "PR-AWS-0072-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balancer (ALB) with access log disabled",
+    "Policy Description": "This policy identifies ELBv2 ALBs which have access log disabled. Access logs capture detailed information about requests sent to your load balancer and each log contains information such as the time the request was received, the client's IP address, latencies, request paths, and server responses. You can use these access logs to analyze traffic patterns and troubleshoot issues.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
 }
 
 #
@@ -381,6 +477,18 @@ elb_listener_ssl_miss_err = "ELB attribute Listeners missing in the resource" {
     aws_attribute_absence["elb_listener_ssl"]
 }
 
+elb_listener_ssl_metadata := {
+    "Policy Code": "PR-AWS-0073-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Elastic Load Balancer with listener TLS/SSL disabled",
+    "Policy Description": "This policy identifies Elastic Load Balancers which have listener TLS/SSL disabled. As Load Balancers will be handling all incoming requests and routing the traffic accordingly; The listeners on the load balancers should always receive traffic over secure channel with a valid SSL certificate configured.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
+}
+
 #
 # PR-AWS-0006-CFR
 #
@@ -419,4 +527,16 @@ elb_over_https_err = "AWS Elastic Load Balancer v2 (ELBv2) Application Load Bala
 
 elb_over_https_miss_err = "ELBv2 attribute Protocol missing in the resource" {
     aws_attribute_absence["elb_over_https"]
+}
+
+elb_over_https_metadata := {
+    "Policy Code": "PR-AWS-0006-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Application Load Balancer (ALB) listener that allow connection requests over HTTP",
+    "Policy Description": "This policy identifies Application Load Balancer (ALB) listeners that are configured to accept connection requests over HTTP instead of HTTPS. As a best practice, use the HTTPS protocol to encrypt the communication between the application clients and the application load balancer.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
 }

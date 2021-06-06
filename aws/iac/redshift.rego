@@ -49,6 +49,18 @@ redshift_encrypt_key_miss_err = "Redshift attribute KmsKeyId missing in the reso
     aws_attribute_absence["redshift_encrypt_key"]
 }
 
+redshift_encrypt_key_metadata := {
+    "Policy Code": "PR-AWS-0133-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Redshift Cluster not encrypted using Customer Managed Key",
+    "Policy Description": "This policy identifies Redshift Clusters which are encrypted with default KMS keys and not with Keys managed by Customer. It is a best practice to use customer managed KMS Keys to encrypt your Redshift databases data. Customer-managed CMKs give you more flexibility, including the ability to create, rotate, disable, define access control for, and audit the encryption keys used to help protect your data.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
+}
+
 #
 # PR-AWS-0134-CFR
 #
@@ -72,6 +84,18 @@ redshift_public = false {
 
 redshift_public_err = "AWS Redshift clusters should not be publicly accessible" {
     aws_issue["redshift_public"]
+}
+
+redshift_public_metadata := {
+    "Policy Code": "PR-AWS-0134-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Redshift clusters should not be publicly accessible",
+    "Policy Description": "This policy identifies AWS Redshift clusters which are accessible publicly.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
 }
 
 #
@@ -112,6 +136,18 @@ redshift_audit_err = "AWS Redshift database does not have audit logging enabled"
 
 redshift_audit_miss_err = "Redshift attribute LoggingProperties.BucketName missing in the resource" {
     aws_attribute_absence["redshift_audit"]
+}
+
+redshift_audit_metadata := {
+    "Policy Code": "PR-AWS-0135-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Redshift database does not have audit logging enabled",
+    "Policy Description": "Audit logging is not enabled by default in Amazon Redshift. When you enable logging on your cluster, Amazon Redshift creates and uploads logs to Amazon S3 that capture data from the creation of the cluster to the present time.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
 }
 
 
@@ -163,6 +199,18 @@ redshift_require_ssl_miss_err = "Redshift attribute Properties missing in the re
     aws_attribute_absence["redshift_require_ssl"]
 }
 
+redshift_require_ssl_metadata := {
+    "Policy Code": "PR-AWS-0136-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Redshift does not have require_ssl configured",
+    "Policy Description": "This policy identifies Redshift databases in which data connection to and from is occurring on an insecure channel. SSL connections ensures the security of the data in transit.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
+}
+
 #
 # PR-AWS-0137-CFR
 #
@@ -186,4 +234,16 @@ redshift_encrypt = false {
 
 redshift_encrypt_err = "AWS Redshift instances are not encrypted" {
     aws_issue["redshift_encrypt"]
+}
+
+redshift_encrypt_metadata := {
+    "Policy Code": "PR-AWS-0137-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Redshift instances are not encrypted",
+    "Policy Description": "This policy identifies AWS Redshift instances which are not encrypted. These instances should be encrypted for clusters to help protect data at rest which otherwise can result in a data breach.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
 }

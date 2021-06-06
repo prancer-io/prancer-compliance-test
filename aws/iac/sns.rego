@@ -43,6 +43,18 @@ sns_protocol_miss_err = "SNS attribute Protocol missing in the resource" {
     aws_attribute_absence["sns_protocol"]
 }
 
+sns_protocol_metadata := {
+    "Policy Code": "PR-AWS-0152-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS SNS subscription is not configured with HTTPS",
+    "Policy Description": "This policy identifies SNS subscriptions using HTTP instead of HTTPS as the delivery protocol in order to enforce SSL encryption for all subscription requests. It is strongly recommended use only HTTPS-based subscriptions by implementing secure SNS topic policies.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html"
+}
+
 #
 # PR-AWS-0153-CFR
 #
@@ -66,6 +78,18 @@ sns_encrypt_key = false {
 
 sns_encrypt_key_err = "AWS SNS topic encrypted using default KMS key instead of CMK" {
     aws_issue["sns_encrypt_key"]
+}
+
+sns_encrypt_key_metadata := {
+    "Policy Code": "PR-AWS-0153-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS SNS topic encrypted using default KMS key instead of CMK",
+    "Policy Description": "This policy identifies Amazon Simple Notification Service (SNS) topics that are encrypted with the default AWS Key Management Service (KMS) keys. As a best practice, use Customer Master Keys (CMK) to encrypt the data in your SNS topics and ensure full control over your data.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html"
 }
 
 #
@@ -106,4 +130,16 @@ sns_encrypt_err = "AWS SNS topic with server-side encryption disabled" {
 
 sns_encrypt_miss_err = "SNS attribute KmsMasterKeyId missing in the resource" {
     aws_attribute_absence["sns_encrypt"]
+}
+
+sns_encrypt_metadata := {
+    "Policy Code": "PR-AWS-0154-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS SNS topic with server-side encryption disabled",
+    "Policy Description": "This policy identifies Amazon Simple Notification Service (SNS) topics that have server-side encryption disabled. As a best practice, enable server-side encryption for at-rest encryption of message content published to SNS topics. When you publish a message, the SNS encrypts your message as soon as it receives it, and decrypts it just prior to delivery.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html"
 }
