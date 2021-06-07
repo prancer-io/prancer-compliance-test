@@ -93,6 +93,18 @@ firewall_default_miss_err = "GCP vm firewall attribute name missing in the resou
     gc_attribute_absence["firewall_default"]
 }
 
+firewall_default_metadata := {
+    "Policy Code": "PR-GCP-0002-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "Default Firewall rule should not have any rules (except http and https)",
+    "Policy Description": "Checks to ensure that the default Firewall rule should not have any (non http, https) rules. The default Firewall rules will apply all instances by default in the absence of specific custom rules with higher priority. It is a safe practice to not have these rules in the default Firewall.",
+    "Resource Type": "google_compute_firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
+}
+
 #
 # PR-GCP-0006-TRF
 #
@@ -192,6 +204,18 @@ firewall_port_53 = false {
 
 firewall_port_53_err = "GCP Firewall rule allows internet traffic to DNS port (53)" {
     gc_issue["firewall_port_53"]
+}
+
+firewall_port_53_metadata := {
+    "Policy Code": "PR-GCP-0006-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Firewall rule allows internet traffic to DNS port (53)",
+    "Policy Description": "This policy identifies GCP Firewall rules which allows inbound traffic on DNS port (53) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+    "Resource Type": "google_compute_firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
 }
 
 #
@@ -295,6 +319,18 @@ firewall_port_21_err = "GCP Firewall rule allows internet traffic to FTP port (2
     gc_issue["firewall_port_21"]
 }
 
+firewall_port_21_metadata := {
+    "Policy Code": "PR-GCP-0007-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Firewall rule allows internet traffic to FTP port (21)",
+    "Policy Description": "This policy identifies GCP Firewall rules which allows inbound traffic on FTP port (21) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+    "Resource Type": "google_compute_firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
+}
+
 #
 # PR-GCP-0008-TRF
 #
@@ -394,6 +430,18 @@ firewall_port_80 = false {
 
 firewall_port_80_err = "GCP Firewall rule allows internet traffic to HTTP port (80)" {
     gc_issue["firewall_port_80"]
+}
+
+firewall_port_80_metadata := {
+    "Policy Code": "PR-GCP-0008-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Firewall rule allows internet traffic to HTTP port (80)",
+    "Policy Description": "This policy identifies GCP Firewall rules which allows inbound traffic on HTTP port (80) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+    "Resource Type": "google_compute_firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
 }
 
 #
@@ -497,6 +545,18 @@ firewall_port_445_err = "GCP Firewall rule allows internet traffic to Microsoft-
     gc_issue["firewall_port_445"]
 }
 
+firewall_port_445_metadata := {
+    "Policy Code": "PR-GCP-0009-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Firewall rule allows internet traffic to Microsoft-DS port (445)",
+    "Policy Description": "This policy identifies GCP Firewall rules which allows inbound traffic on Microsoft-DS port (445) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+    "Resource Type": "google_compute_firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
+}
+
 #
 # PR-GCP-0010-TRF
 #
@@ -596,6 +656,18 @@ firewall_port_27017 = false {
 
 firewall_port_27017_err = "GCP Firewall rule allows internet traffic to MongoDB port (27017)" {
     gc_issue["firewall_port_27017"]
+}
+
+firewall_port_27017_metadata := {
+    "Policy Code": "PR-GCP-0010-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Firewall rule allows internet traffic to MongoDB port (27017)",
+    "Policy Description": "This policy identifies GCP Firewall rules which allows inbound traffic on MongoDB port (27017) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+    "Resource Type": "google_compute_firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
 }
 
 #
@@ -699,6 +771,18 @@ firewall_port_3306_err = "GCP Firewall rule allows internet traffic to MySQL DB 
     gc_issue["firewall_port_3306"]
 }
 
+firewall_port_3306_metadata := {
+    "Policy Code": "PR-GCP-0011-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Firewall rule allows internet traffic to MySQL DB port (3306)",
+    "Policy Description": "This policy identifies GCP Firewall rules which allows inbound traffic on MySQL DB port (3306) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+    "Resource Type": "google_compute_firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
+}
+
 #
 # PR-GCP-0012-TRF
 #
@@ -798,6 +882,18 @@ firewall_port_139 = false {
 
 firewall_port_139_err = "GCP Firewall rule allows internet traffic to NetBIOS-SSN port (139)" {
     gc_issue["firewall_port_139"]
+}
+
+firewall_port_139_metadata := {
+    "Policy Code": "PR-GCP-0012-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Firewall rule allows internet traffic to NetBIOS-SSN port (139)",
+    "Policy Description": "This policy identifies GCP Firewall rules which allows inbound traffic on NetBIOS-SSN port (139) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+    "Resource Type": "google_compute_firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
 }
 
 #
@@ -901,6 +997,18 @@ firewall_port_1521_err = "GCP Firewall rule allows internet traffic to Oracle DB
     gc_issue["firewall_port_1521"]
 }
 
+firewall_port_1521_metadata := {
+    "Policy Code": "PR-GCP-0013-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Firewall rule allows internet traffic to Oracle DB port (1521)",
+    "Policy Description": "This policy identifies GCP Firewall rules which allows inbound traffic on Oracle DB port (1521) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+    "Resource Type": "google_compute_firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
+}
+
 #
 # PR-GCP-0014-TRF
 #
@@ -1000,6 +1108,18 @@ firewall_port_110 = false {
 
 firewall_port_110_err = "GCP Firewall rule allows internet traffic to POP3 port (110)" {
     gc_issue["firewall_port_110"]
+}
+
+firewall_port_110_metadata := {
+    "Policy Code": "PR-GCP-0014-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Firewall rule allows internet traffic to POP3 port (110)",
+    "Policy Description": "This policy identifies GCP Firewall rules which allows inbound traffic on POP3 port (110) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+    "Resource Type": "google_compute_firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
 }
 
 #
@@ -1103,6 +1223,18 @@ firewall_port_5432_err = "GCP Firewall rule allows internet traffic to PostgreSQ
     gc_issue["firewall_port_5432"]
 }
 
+firewall_port_5432_metadata := {
+    "Policy Code": "PR-GCP-0015-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Firewall rule allows internet traffic to PostgreSQL port (5432)",
+    "Policy Description": "This policy identifies GCP Firewall rules which allows inbound traffic on PostgreSQL port (5432) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+    "Resource Type": "google_compute_firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
+}
+
 #
 # PR-GCP-0016-TRF
 #
@@ -1202,6 +1334,18 @@ firewall_port_3389 = false {
 
 firewall_port_3389_err = "GCP Firewall rule allows internet traffic to RDP port (3389)" {
     gc_issue["firewall_port_3389"]
+}
+
+firewall_port_3389_metadata := {
+    "Policy Code": "PR-GCP-0016-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Firewall rule allows internet traffic to RDP port (3389)",
+    "Policy Description": "This policy identifies GCP Firewall rules which allows inbound traffic on RDP port (3389) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+    "Resource Type": "google_compute_firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
 }
 
 #
@@ -1305,6 +1449,18 @@ firewall_port_25_err = "GCP Firewall rule allows internet traffic to SMTP port (
     gc_issue["firewall_port_25"]
 }
 
+firewall_port_25_metadata := {
+    "Policy Code": "PR-GCP-0017-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Firewall rule allows internet traffic to SMTP port (25)",
+    "Policy Description": "This policy identifies GCP Firewall rules which allows inbound traffic on SMTP port (25) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+    "Resource Type": "google_compute_firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
+}
+
 #
 # PR-GCP-0018-TRF
 #
@@ -1404,6 +1560,18 @@ firewall_port_22 = false {
 
 firewall_port_22_err = "GCP Firewall rule allows internet traffic to SSH port (22)" {
     gc_issue["firewall_port_22"]
+}
+
+firewall_port_22_metadata := {
+    "Policy Code": "PR-GCP-0018-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Firewall rule allows internet traffic to SSH port (22)",
+    "Policy Description": "This policy identifies GCP Firewall rules which allows inbound traffic on SSH port (22) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+    "Resource Type": "google_compute_firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
 }
 
 #
@@ -1507,6 +1675,18 @@ firewall_port_23_err = "GCP Firewall rule allows internet traffic to Telnet port
     gc_issue["firewall_port_23"]
 }
 
+firewall_port_23_metadata := {
+    "Policy Code": "PR-GCP-0019-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Firewall rule allows internet traffic to Telnet port (23)",
+    "Policy Description": "This policy identifies GCP Firewall rules which allows inbound traffic on Telnet port (23) from public internet. Allowing access from arbitrary internet IP addresses to this port increases the attack surface of your network.",
+    "Resource Type": "google_compute_firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
+}
+
 #
 # PR-GCP-0020-TRF
 #
@@ -1575,4 +1755,28 @@ firewall_inbound_all = false {
 
 firewall_inbound_all_err = "GCP Firewall with Inbound rule overly permissive to All Traffic" {
     gc_issue["firewall_inbound_all"]
+}
+
+firewall_inbound_all_metadata := {
+    "Policy Code": "PR-GCP-0020-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Firewall rules allow inbound traffic from anywhere with no target tags set",
+    "Policy Description": "This policy identifies GCP Firewall rules which allow inbound traffic from anywhere with no target filtering. _x005F_x000D_ _x005F_x000D_ The default target is all instances in the network. The use of target tags or target service accounts allows the rule to apply to select instances. Not using any firewall rule filtering may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
+    "Resource Type": "google_compute_firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
+}
+
+firewall_inbound_metadata := {
+    "Policy Code": "PR-GCP-0021-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Firewall with Inbound rule overly permissive to All Traffic",
+    "Policy Description": "This policy identifies GCP Firewall rules which allows inbound traffic on all protocols from public internet. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
+    "Resource Type": "google_compute_firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"
 }

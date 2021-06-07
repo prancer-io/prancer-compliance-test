@@ -15,3 +15,15 @@ rulepass = true {
 labels["label"] {
     not input.labels
 }
+
+metadata := {
+    "Policy Code": "PR-GCP-0093",
+    "Type": "Cloud",
+    "Product": "GCP",
+    "Language": "Cloud",
+    "Policy Title": "VM Instances without any Label information",
+    "Policy Description": "VM instance does not have any Labels. Labels can be used for easy identification and searches.",
+    "Resource Type": "compute.v1.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}

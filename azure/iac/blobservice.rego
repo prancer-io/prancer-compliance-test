@@ -32,3 +32,15 @@ storage_blob_soft_delete = false {
 storage_blob_soft_delete_err = "Soft delete on Blob not enabled" {
     azure_issue["storage_blob_soft_delete"]
 }
+
+storage_blob_soft_delete_metadata := {
+    "Policy Code": "",
+    "Type": "IaC",
+    "Product": "",
+    "Language": "ARM template",
+    "Policy Title": "Soft delete on Blob not enabled",
+    "Policy Description": "Soft delete on Blob not enabled",
+    "Resource Type": "microsoft.storage/storageaccounts/blobservices",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/blobservices/blobservices"
+}

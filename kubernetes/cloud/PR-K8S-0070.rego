@@ -27,3 +27,15 @@ rulepass = false {
 rulepass_err = "PR-K8S-0070: Ensure that the --service-account-private-key-file argument is set as appropriate (Controller Manager)" {
     k8s_issue["rulepass"]
 }
+
+k8s_issue_metadata := {
+    "Policy Code": "PR-K8S-0070",
+    "Type": "Cloud",
+    "Product": "Kubernetes",
+    "Language": "Cloud",
+    "Policy Title": "Ensure that the --service-account-private-key-file argument is set as appropriate (Controller Manager) ",
+    "Policy Description": "Ensure that the --service-account-private-key-file argument is set as appropriate (Controller Manager) ",
+    "Resource Type": "pod",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}

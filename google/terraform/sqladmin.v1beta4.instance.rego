@@ -33,6 +33,18 @@ sql_labels_err = "GCP SQL Instances without any Label information" {
     gc_issue["sql_labels"]
 }
 
+sql_labels_metadata := {
+    "Policy Code": "PR-GCP-0062-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP SQL Instances without any Label information",
+    "Policy Description": "This policy identifies the SQL DB instance which does not have any Labels. Labels can be used for easy identification and searches.",
+    "Resource Type": "google_sql_database_instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
+}
+
 #
 # PR-GCP-0063-TRF
 #
@@ -73,6 +85,18 @@ sql_binary_logs_err = "SQL DB Instance backup Binary logs configuration is not e
 
 sql_binary_logs_miss_err = "GCP DB Instance attribute databaseVersion missing in the resource" {
     gc_attribute_absence["sql_binary_logs"]
+}
+
+sql_binary_logs_metadata := {
+    "Policy Code": "PR-GCP-0063-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Storage bucket encrypted using default KMS key instead of a customer-managed key",
+    "Policy Description": "This policy identifies Storage buckets that are encrypted with the default Google-managed keys. As a best practice, use Customer-managed key to encrypt the data in your storage bucket and ensure full control over your data.",
+    "Resource Type": "google_sql_database_instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
 }
 
 #
@@ -116,6 +140,18 @@ sql_backup_miss_err = "GCP DB Instance attribute backupConfiguration missing in 
     gc_attribute_absence["sql_backup"]
 }
 
+sql_backup_metadata := {
+    "Policy Code": "PR-GCP-0064-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Storage buckets are publicly accessible to all authenticated users",
+    "Policy Description": "This policy identifies the buckets which are publicly accessible to all authenticated users. Enabling public access to Storage Buckets enables anybody with a web association to access sensitive information that is critical to business. Access over a whole bucket is controlled by IAM. Access to individual objects within the bucket is controlled by its ACLs.",
+    "Resource Type": "google_sql_database_instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
+}
+
 #
 # PR-GCP-0066-TRF
 #
@@ -155,6 +191,18 @@ sql_ssl_err = "SQL Instances do not have SSL configured" {
 
 sql_ssl_miss_err = "GCP DB Instance attribute ip_configuration.requireSsl missing in the resource" {
     gc_attribute_absence["sql_ssl"]
+}
+
+sql_ssl_metadata := {
+    "Policy Code": "PR-GCP-0066-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP Storage log buckets have object versioning disabled",
+    "Policy Description": "This policy identifies Storage log buckets which have object versioning disabled. Enabling object versioning on storage log buckets will protect your cloud storage data from being overwritten or accidentally deleted. It is recommended to enable object versioning feature on all storage buckets where sinks are configured.",
+    "Resource Type": "google_sql_database_instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
 }
 
 #
@@ -208,4 +256,16 @@ sql_exposed_err = "SQL Instances with network authorization exposing them to the
 
 sql_exposed_miss_err = "GCP DB Instance attribute ip_configuration.authorized_networks missing in the resource" {
     gc_attribute_absence["sql_exposed"]
+}
+
+sql_exposed_metadata := {
+    "Policy Code": "PR-GCP-0067-TRF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "Terraform",
+    "Policy Title": "GCP User managed service account keys are not rotated for 90 days",
+    "Policy Description": "This policy identifies user-managed service account keys which are not rotated from last 90 days or more. Rotating Service Account keys will reduce the window of opportunity for an access key that is associated with a compromised or terminated account to be used. Service Account keys should be rotated to ensure that data cannot be accessed with an old key which might have been lost, cracked, or stolen. It is recommended that all user-managed service account keys are regularly rotated.",
+    "Resource Type": "google_sql_database_instance",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances"
 }

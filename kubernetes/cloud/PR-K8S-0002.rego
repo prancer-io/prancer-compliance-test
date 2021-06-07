@@ -53,3 +53,15 @@ rulepass = false {
 rulepass_err = "PR-K8S-0002: Minimize wildcard use in Roles and ClusterRoles (RBAC)" {
     k8s_issue["rulepass"]
 }
+
+k8s_issue_metadata := {
+    "Policy Code": "PR-K8S-0002",
+    "Type": "Cloud",
+    "Product": "Kubernetes",
+    "Language": "Cloud",
+    "Policy Title": "Minimize wildcard use in Roles and ClusterRoles (RBAC) ",
+    "Policy Description": "Minimize wildcard use in Roles and ClusterRoles (RBAC) ",
+    "Resource Type": "role",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}

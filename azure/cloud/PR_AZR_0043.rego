@@ -19,6 +19,18 @@ rulepass = false {
     lower(input.type) == "microsoft.network/networksecuritygroups"
     count(public_security_rules_Internet) > 0
 }
+
+metadata := {
+    "Policy Code": "PR-AZR-0043",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "Cloud",
+    "Policy Title": "Azure Network Security Group allows Telnet (TCP Port 23)",
+    "Policy Description": "Telnet provides a plaintext connection to manage devices using the command line, and is less secure than SSH._x005F_x000D_ This policy detects any NSG rule that allows Telnet traffic on TCP port 23 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict Telnet solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Resource Type": "microsoft.network/networksecuritygroups",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/rest/api/virtualnetwork/networksecuritygroups/get"
+}
 # Method for check rule
 get_access[security_rule] {
     security_rule := input.properties.securityRules[_]

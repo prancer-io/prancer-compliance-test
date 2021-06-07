@@ -41,3 +41,15 @@ pricing_err = "Standard pricing tier is not selected in Security Center" {
 pricing_miss_err = "Pricing attribute pricingTier missing in the resource" {
     azure_attribute_absence["pricing"]
 }
+
+pricing_metadata := {
+    "Policy Code": "PR-AZR-0091-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Standard pricing tier is not selected in Security Center",
+    "Policy Description": "Selecting the standard pricing tier will enable threat detection for networks and virtual systems by providing threat intelligence, anomaly detection, and behavior analytics in Azure Security Center.",
+    "Resource Type": "microsoft.security/pricings",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.security/pricings"
+}

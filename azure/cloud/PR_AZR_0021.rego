@@ -19,6 +19,18 @@ rulepass = false {
     lower(input.type) == "microsoft.network/networksecuritygroups"
     count(public_security_rules_Internet) > 0
 }
+
+metadata := {
+    "Policy Code": "PR-AZR-0021",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "Cloud",
+    "Policy Title": "Azure Network Security Group (NSG) allows traffic from internet on port 3389",
+    "Policy Description": "Blocking RDP port 3389 will protect users from attacks like account compromise, Denial of service and ransomware.",
+    "Resource Type": "microsoft.network/networksecuritygroups",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/rest/api/virtualnetwork/networksecuritygroups/get"
+}
 # Method for check rule
 get_access[security_rule] {
     security_rule := input.properties.securityRules[_]

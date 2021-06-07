@@ -43,6 +43,18 @@ dnssec_state_miss_err = "GCP Cloud DNS attribute dnssecConfig.state missing in t
     gc_attribute_absence["dnssec_state"]
 }
 
+dnssec_state_metadata := {
+    "Policy Code": "PR-GCP-0003-GDF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "GCP Cloud DNS has DNSSEC disabled",
+    "Policy Description": "This policy identifies GCP Cloud DNS which has DNSSEC disabled. Domain Name System Security Extensions (DNSSEC) adds security to the Domain Name System (DNS) protocol by enabling DNS responses to be validated. Attackers can hijack the process of domain/IP lookup and redirect users to a malicious site through DNS hijacking and man-in-the-middle attacks. DNSSEC helps mitigate the risk of such attacks by cryptographically signing DNS records. As a result, it prevents attackers from issuing fake DNS responses that may misdirect browsers to fake websites.",
+    "Resource Type": "dns.v1.managedzone",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/dns/docs/reference/v1/managedZones"
+}
+
 #
 # PR-GCP-0004-GDF
 #
@@ -86,6 +98,18 @@ dnssec_key_rsasha1_miss_err = "GCP Cloud DNS attribute dnssecConfig.defaultKeySp
     gc_attribute_absence["dnssec_key_rsasha1"]
 }
 
+dnssec_key_rsasha1_metadata := {
+    "Policy Code": "PR-GCP-0004-GDF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "GCP Cloud DNS zones using RSASHA1 algorithm for DNSSEC key-signing",
+    "Policy Description": "This policy identifies the GCP Cloud DNS zones which are using the RSASHA1 algorithm for DNSSEC key-signing. DNSSEC is a feature of the Domain Name System that authenticates responses to domain name lookups and also prevents attackers from manipulating or poisoning the responses to DNS requests. So the algorithm used for key signing should be recommended one and it should not be weak.",
+    "Resource Type": "dns.v1.managedzone",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/dns/docs/reference/v1/managedZones"
+}
+
 #
 # PR-GCP-0005-GDF
 #
@@ -127,4 +151,16 @@ dnssec_zone_rsasha1_err = "GCP Cloud DNS zones using RSASHA1 algorithm for DNSSE
 
 dnssec_zone_rsasha1_miss_err = "GCP Cloud DNS attribute dnssecConfig.defaultKeySpecs missing in the resource" {
     gc_attribute_absence["dnssec_zone_rsasha1"]
+}
+
+dnssec_zone_rsasha1_metadata := {
+    "Policy Code": "PR-GCP-0005-GDF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "GCP Cloud DNS zones using RSASHA1 algorithm for DNSSEC zone-signing",
+    "Policy Description": "This policy identifies the GCP Cloud DNS zones which are using the RSASHA1 algorithm for DNSSEC zone-signing. DNSSEC is a feature of the Domain Name System that authenticates responses to domain name lookups and also prevents attackers from manipulating or poisoning the responses to DNS requests. So the algorithm used for key signing should be recommended one and it should not be weak.",
+    "Resource Type": "dns.v1.managedzone",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/dns/docs/reference/v1/managedZones"
 }

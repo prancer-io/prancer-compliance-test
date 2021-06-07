@@ -15,3 +15,15 @@ rulepass = true {
 metadata["metadata_items"] {
     not input.metadata
 }
+
+metadata := {
+    "Policy Code": "PR-GCP-0092",
+    "Type": "Cloud",
+    "Product": "GCP",
+    "Language": "Cloud",
+    "Policy Title": "VM Instances without any Custom metadata information",
+    "Policy Description": "VM instance does not have any Custom metadata. Custom metadata can be used for easy identification and searches.",
+    "Resource Type": "compute.v1.instance",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}

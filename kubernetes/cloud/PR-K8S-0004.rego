@@ -35,3 +35,15 @@ rulepass = false {
 rulepass_err = "PR-K8S-0004: Ensure that the cluster-admin role is only used where required (RBAC)" {
     k8s_issue["rulepass"]
 }
+
+k8s_issue_metadata := {
+    "Policy Code": "PR-K8S-0004",
+    "Type": "Cloud",
+    "Product": "Kubernetes",
+    "Language": "Cloud",
+    "Policy Title": "Ensure that the cluster-admin role is only used where required (RBAC) ",
+    "Policy Description": "Ensure that the cluster-admin role is only used where required (RBAC) ",
+    "Resource Type": "rolebinding",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}

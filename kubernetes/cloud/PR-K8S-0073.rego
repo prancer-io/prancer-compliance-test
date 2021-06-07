@@ -25,3 +25,15 @@ rulepass = false {
 rulepass_err = "PR-K8S-0073: Ensure that the --auto-tls argument is not set to true (etcd)" {
     k8s_issue["rulepass"]
 }
+
+k8s_issue_metadata := {
+    "Policy Code": "PR-K8S-0073",
+    "Type": "Cloud",
+    "Product": "Kubernetes",
+    "Language": "Cloud",
+    "Policy Title": "Ensure that the --auto-tls argument is not set to true (etcd) ",
+    "Policy Description": "Ensure that the --auto-tls argument is not set to true (etcd) ",
+    "Resource Type": "pod",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}

@@ -26,3 +26,15 @@ sql_public_access = false {
 sql_public_access_err = "SQL servers with public access detected!" {
     azure_issue["sql_public_access"]
 }
+
+sql_public_access_metadata := {
+    "Policy Code": "",
+    "Type": "IaC",
+    "Product": "",
+    "Language": "ARM template",
+    "Policy Title": "SQL servers with public access detected!",
+    "Policy Description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance",
+    "Resource Type": "microsoft.sql/servers",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers"
+}

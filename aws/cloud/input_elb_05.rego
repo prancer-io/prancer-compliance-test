@@ -21,3 +21,15 @@ rulepass = false {
     lower(policydescrib.AttributeName) == lower(insecure_ssl_protocol[_])
     policydescrib.AttributeValue == "true"
 }
+
+metadata := {
+    "Policy Code": "PR-AWS-0063",
+    "Type": "Cloud",
+    "Product": "AWS",
+    "Language": "Cloud",
+    "Policy Title": "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with vulnerable SSL protocol",
+    "Policy Description": "This policy identifies Elastic Load Balancers (Classic) which are configured with SSL negotiation policy containing vulnerable SSL protocol. The SSL protocol establishes a secure connection between a client and a server and ensures that all the data passed between the client and your load balancer is private. As a security best practice, it is recommended to use the latest version SSL protocol.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html"
+}

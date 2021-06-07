@@ -29,3 +29,15 @@ userRole["ownerUser"] {
 userRole["serviceAccountUser"] {
     contains(input.bindings[_].members[_], "iam.gserviceaccount.com")
 }
+
+metadata := {
+    "Policy Code": "PR-GCP-0026",
+    "Type": "Cloud",
+    "Product": "GCP",
+    "Language": "Cloud",
+    "Policy Title": "GCP IAM Service account has admin privileges",
+    "Policy Description": "This policy identifies service accounts which have admin privileges. Application uses the service account to make requests to the Google API of a service so that the users aren't directly involved. It is recommended not to use admin access for ServiceAccount.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}

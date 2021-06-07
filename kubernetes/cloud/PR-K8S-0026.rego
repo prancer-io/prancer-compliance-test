@@ -27,3 +27,15 @@ rulepass = false {
 rulepass_err = "PR-K8S-0026: Ensure that the admission control plugin PodSecurityPolicy is set (API Server)" {
     k8s_issue["rulepass"]
 }
+
+k8s_issue_metadata := {
+    "Policy Code": "PR-K8S-0026",
+    "Type": "Cloud",
+    "Product": "Kubernetes",
+    "Language": "Cloud",
+    "Policy Title": "Ensure that the admission control plugin PodSecurityPolicy is set (API Server) ",
+    "Policy Description": "Ensure that the admission control plugin PodSecurityPolicy is set (API Server) ",
+    "Resource Type": "pod",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}

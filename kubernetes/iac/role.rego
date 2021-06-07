@@ -44,6 +44,18 @@ rbac_secrets_err = "PR-K8S-0001-DCL: Minimize access to secrets (RBAC)" {
     k8s_issue["rbac_secrets"]
 }
 
+rbac_secrets_metadata := {
+    "Policy Code": "PR-K8S-0001-DCL",
+    "Type": "IaC",
+    "Product": "Kubernetes",
+    "Language": "K8s DL",
+    "Policy Title": "Minimize access to secrets (RBAC) ",
+    "Policy Description": "Minimize access to secrets (RBAC) ",
+    "Resource Type": "role",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}
+
 #
 # PR-K8S-0002-DCL
 #
@@ -96,4 +108,16 @@ rbac_wildcard = false {
 
 rbac_wildcard_err = "PR-K8S-0002-DCL: Minimize wildcard use in Roles and ClusterRoles (RBAC)" {
     k8s_issue["rbac_wildcard"]
+}
+
+rbac_wildcard_metadata := {
+    "Policy Code": "PR-K8S-0001-DCL",
+    "Type": "IaC",
+    "Product": "Kubernetes",
+    "Language": "K8s DL",
+    "Policy Title": "Minimize access to secrets (RBAC) ",
+    "Policy Description": "Minimize access to secrets (RBAC) ",
+    "Resource Type": "role",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
 }

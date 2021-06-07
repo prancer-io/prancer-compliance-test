@@ -27,3 +27,15 @@ rulepass = false {
 rulepass_err = "PR-K8S-0072: Ensure that the --client-cert-auth argument is set to true (etcd)" {
     k8s_issue["rulepass"]
 }
+
+k8s_issue_metadata := {
+    "Policy Code": "PR-K8S-0072",
+    "Type": "Cloud",
+    "Product": "Kubernetes",
+    "Language": "Cloud",
+    "Policy Title": "Ensure that the --client-cert-auth argument is set to true (etcd) ",
+    "Policy Description": "Ensure that the --client-cert-auth argument is set to true (etcd) ",
+    "Resource Type": "pod",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}

@@ -26,6 +26,18 @@ gl_aws_secrets_err = "There is a possibility that AWS secret has leaked" {
     aws_issue["gl_aws_secrets"]
 }
 
+gl_aws_secrets_metadata := {
+    "Policy Code": "PR-AWS-0028-RGX",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS CloudTrail logs are not encrypted using Customer Master Keys (CMKs)",
+    "Policy Description": "Checks to ensure that CloudTrail logs are encrypted. AWS CloudTrail is a service that enables governance, compliance, operational PR-AWS-0028-RGX-DESC risk auditing of the AWS account. It is a compliance and security best practice to encrypt the CloudTrail data since it may contain sensitive information.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}
+
 #
 # PR-AWS-0029-RGX
 #
@@ -51,4 +63,16 @@ gl_aws_account = false {
 
 gl_aws_account_err = "There is a possibility that AWS account ID has leaked" {
     aws_issue["gl_aws_account"]
+}
+
+gl_aws_account_metadata := {
+    "Policy Code": "PR-AWS-0029-RGX",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS CloudTrail logs should integrate with CloudWatch for all regions",
+    "Policy Description": "This policy identifies the Cloudtrails which is not integrated with cloudwatch for all regions. CloudTrail uses Amazon S3 for log file storage and delivery, so log files are stored durably. In addition to capturing CloudTrail logs within a specified S3 bucket for long term analysis, realtime analysis can be performed by configuring CloudTrail to send logs to CloudWatch Logs. For a trail that is enabled in all regions in an account, CloudTrail sends log files from all those regions to a CloudWatch Logs log group. It is recommended that CloudTrail logs be sent to CloudWatch Logs.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
 }

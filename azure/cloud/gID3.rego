@@ -13,6 +13,18 @@ rulepass = false {
     count(nsg_allowed_inbound_port) > 0
 }
 
+metadata := {
+    "Policy Code": "",
+    "Type": "Cloud",
+    "Product": "",
+    "Language": "Cloud",
+    "Policy Title": "Internet connectivity via tcp over insecure port",
+    "Policy Description": "Identify network traffic coming from internet which is plain text FTP, Telnet or HTTP from Internet.",
+    "Resource Type": "microsoft.network/networksecuritygroups",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
+}
+
 ports := ["21", "23", "80"]
 
 nsg_allowed_inbound_port["in_all"] {

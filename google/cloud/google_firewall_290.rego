@@ -25,3 +25,15 @@ notargettags["NO_TARGET_TAGSSERVICEACCOUNT"] {
     input.disabled= false
     not input.targetServiceAccounts
 }
+
+metadata := {
+    "Policy Code": "PR-GCP-0020",
+    "Type": "Cloud",
+    "Product": "GCP",
+    "Language": "Cloud",
+    "Policy Title": "GCP Firewall rules allow inbound traffic from anywhere with no target tags set",
+    "Policy Description": "This policy identifies GCP Firewall rules which allow inbound traffic from anywhere with no target filtering. _x005F_x000D_ _x005F_x000D_ The default target is all instances in the network. The use of target tags or target service accounts allows the rule to apply to select instances. Not using any firewall rule filtering may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
+    "Resource Type": "compute.v1.firewall",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls/list"
+}

@@ -27,3 +27,15 @@ rulepass = false {
 rulepass_err = "PR-K8S-0067: Ensure that the RotateKubeletServerCertificate argument is set to true (Controller Manager)" {
     k8s_issue["rulepass"]
 }
+
+k8s_issue_metadata := {
+    "Policy Code": "PR-K8S-0067",
+    "Type": "Cloud",
+    "Product": "Kubernetes",
+    "Language": "Cloud",
+    "Policy Title": "Ensure that the RotateKubeletServerCertificate argument is set to true (Controller Manager) ",
+    "Policy Description": "Ensure that the RotateKubeletServerCertificate argument is set to true (Controller Manager) ",
+    "Resource Type": "pod",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}

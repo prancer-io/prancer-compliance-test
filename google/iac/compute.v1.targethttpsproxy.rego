@@ -33,6 +33,18 @@ lbs_ssl_policy_err = "GCP Load balancer HTTPS target proxy configured with defau
     gc_issue["lbs_ssl_policy"]
 }
 
+lbs_ssl_policy_metadata := {
+    "Policy Code": "PR-GCP-0057-GDF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "GCP Load balancer HTTPS target proxy configured with default SSL policy instead of custom SSL policy",
+    "Policy Description": "This policy identifies Load balancer HTTPS target proxies which are configured with default SSL Policy instead of custom SSL policy. It is a best practice to use custom SSL policy to access load balancers. It gives you closer control over SSL/TLS versions and ciphers.",
+    "Resource Type": "compute.v1.targethttpsproxy",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/targetHttpsProxies"
+}
+
 #
 # PR-GCP-0058-GDF
 #
@@ -71,4 +83,16 @@ lbs_quic_err = "GCP Load balancer HTTPS target proxy is not configured with QUIC
 
 lbs_quic_miss_err = "GCP Load balancer attribute quicOverride missing in the resource" {
     gc_attribute_absence["lbs_quic"]
+}
+
+lbs_quic_metadata := {
+    "Policy Code": "PR-GCP-0058-GDF",
+    "Type": "IaC",
+    "Product": "GCP",
+    "Language": "GCP deployment",
+    "Policy Title": "GCP Load balancer HTTPS target proxy is not configured with QUIC protocol",
+    "Policy Description": "This policy identifies Load Balancer HTTPS target proxies which are not configured with QUIC protocol. Enabling QUIC protocol in load balancer target https proxies adds advantage by establishing connections faster, stream-based multiplexing, improved loss recovery, and eliminates head-of-line blocking.",
+    "Resource Type": "compute.v1.targethttpsproxy",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/targetHttpsProxies"
 }

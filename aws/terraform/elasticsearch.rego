@@ -42,6 +42,18 @@ esearch_vpc_miss_err = "Elasticsearch attribute vpc_options.subnet_ids missing i
     aws_attribute_absence["esearch_vpc"]
 }
 
+esearch_vpc_metadata := {
+    "Policy Code": "PR-AWS-0074-TRF",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS ElasticSearch cluster not in a VPC",
+    "Policy Description": "VPC support for Amazon ES is easy to configure, reliable, and offers an extra layer of security. With VPC support, traffic between other services and Amazon ES stays entirely within the AWS network, isolated from the public Internet. You can manage network access using existing VPC security groups, and you can use AWS Identity and Access Management (IAM) policies for additional protection. VPC support for Amazon ES domains is available at no additional charge.",
+    "Resource Type": "aws_elasticsearch_domain",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
+}
+
 #
 # PR-AWS-0076-TRF
 #
@@ -67,6 +79,18 @@ esearch_encrypt_err = "AWS Elasticsearch domain Encryption for data at rest is d
     aws_issue["esearch_encrypt"]
 }
 
+esearch_encrypt_metadata := {
+    "Policy Code": "PR-AWS-0076-TRF",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS Elasticsearch domain Encryption for data at rest is disabled",
+    "Policy Description": "This policy identifies Elasticsearch domains for which encryption is disabled. Encryption of data at rest is required to prevent unauthorized users from accessing the sensitive information available on your Elasticsearch domains components. This may include all data of file systems, primary and replica indices, log files, memory swap files and automated snapshots. The Elasticsearch uses AWS KMS service to store and manage the encryption keys. It is highly recommended to implement encryption at rest when you are working with production data that have sensitive information, to protect from unauthorized access.",
+    "Resource Type": "aws_elasticsearch_domain",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
+}
+
 #
 # PR-AWS-0077-TRF
 #
@@ -90,6 +114,18 @@ esearch_master = false {
 
 esearch_master_err = "AWS Elasticsearch domain has Dedicated master set to disabled" {
     aws_issue["esearch_master"]
+}
+
+esearch_master_metadata := {
+    "Policy Code": "PR-AWS-0077-TRF",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS Elasticsearch domain has Dedicated master set to disabled",
+    "Policy Description": "This policy identifies Elasticsearch domains for which Dedicated master is disabled in your AWS account. If dedicated master nodes are provided those handle the management tasks and cluster nodes can easily manage index and search requests from different types of workload and make them more resilient in production. Dedicated master nodes improve environmental stability by freeing all the management tasks from the cluster data nodes.",
+    "Resource Type": "aws_elasticsearch_domain",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
 }
 
 #
@@ -140,6 +176,18 @@ esearch_index_slow_log_miss_err = "Elasticsearch attribute log_publishing_option
     aws_attribute_absence["esearch_index_slow_log"]
 }
 
+esearch_index_slow_log_metadata := {
+    "Policy Code": "PR-AWS-0078-TRF",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS Elasticsearch domain has Index slow logs set to disabled",
+    "Policy Description": "This policy identifies Elasticsearch domains for which Index slow logs is disabled in your AWS account. Enabling support for publishing indexing slow logs to AWS CloudWatch Logs enables you have full insight into the performance of indexing operations performed on your Elasticsearch clusters. This will help you in identifying performance issues caused by specific queries or due to changes in cluster usage, so that you can optimize your index configuration to address the problem.",
+    "Resource Type": "aws_elasticsearch_domain",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
+}
+
 #
 # PR-AWS-0079-TRF
 #
@@ -188,6 +236,18 @@ esearch_search_slow_log_miss_err = "Elasticsearch attribute log_publishing_optio
     aws_attribute_absence["esearch_search_slow_log"]
 }
 
+esearch_search_slow_log_metadata := {
+    "Policy Code": "PR-AWS-0079-TRF",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS Elasticsearch domain has Search slow logs set to disabled",
+    "Policy Description": "This policy identifies Elasticsearch domains for which Search slow logs is disabled in your AWS account. Enabling support for publishing Search slow logs to AWS CloudWatch Logs enables you to have full insight into the performance of search operations performed on your Elasticsearch clusters. This will help you in identifying performance issues caused by specific search queries so that you can optimize your queries to address the problem.",
+    "Resource Type": "aws_elasticsearch_domain",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
+}
+
 #
 # PR-AWS-0080-TRF
 #
@@ -211,4 +271,16 @@ esearch_zone_awareness = false {
 
 esearch_zone_awareness_err = "AWS Elasticsearch domain has Zone Awareness set to disabled" {
     aws_issue["esearch_zone_awareness"]
+}
+
+esearch_zone_awareness_metadata := {
+    "Policy Code": "PR-AWS-0080-TRF",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS Elasticsearch domain has Zone Awareness set to disabled",
+    "Policy Description": "This policy identifies Elasticsearch domains for which Zone Awareness is disabled in your AWS account. Enabling Zone Awareness (cross-zone replication) increases the availability by distributing your Elasticsearch data nodes across two availability zones available in the same AWS region. It also prevents data loss and minimizes downtime in the event of node or availability zone failure.",
+    "Resource Type": "aws_elasticsearch_domain",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
 }

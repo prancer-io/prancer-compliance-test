@@ -13,3 +13,15 @@ rulepass = false {
     grant := input.Grants[_]
     contains(lower(grant.Grantee.URI), "allusers")
 }
+
+metadata := {
+    "Policy Code": "PR-AWS-0150",
+    "Type": "Cloud",
+    "Product": "AWS",
+    "Language": "Cloud",
+    "Policy Title": "AWS S3 buckets are accessible to public",
+    "Policy Description": "This policy identifies S3 buckets which are publicly accessible. Amazon S3 allows customers to store and retrieve any type of content from anywhere in the web. Often, customers have legitimate reasons to expose the S3 bucket to public, for example, to host website content. However, these buckets often contain highly sensitive enterprise data which if left open to public may result in sensitive data leaks.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketAcl.html"
+}

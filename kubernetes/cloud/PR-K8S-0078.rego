@@ -25,3 +25,15 @@ rulepass = false {
 rulepass_err = "PR-K8S-0078: Ensure that the --service-account-lookup argument is set to true (API Server)" {
     k8s_issue["rulepass"]
 }
+
+k8s_issue_metadata := {
+    "Policy Code": "PR-K8S-0078",
+    "Type": "Cloud",
+    "Product": "Kubernetes",
+    "Language": "Cloud",
+    "Policy Title": "Ensure that the --service-account-lookup argument is set to true (API Server) ",
+    "Policy Description": "Ensure that the --service-account-lookup argument is set to true (API Server) ",
+    "Resource Type": "pod",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}

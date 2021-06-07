@@ -23,3 +23,15 @@ resourceLabels["resource_labels_exist"] {
     input.resourceLabels
     count(input.resourceLabels) > 0
 }
+
+metadata := {
+    "Policy Code": "PR-GCP-0051",
+    "Type": "Cloud",
+    "Product": "GCP",
+    "Language": "Cloud",
+    "Policy Title": "GCP Kubernetes Engine Clusters without any label information",
+    "Policy Description": "This policy identifies all Kubernetes Engine Clusters which do not have labels. Having a cluster label helps you identify and categorize Kubernetes clusters.",
+    "Resource Type": "container.v1.cluster",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters/get"
+}

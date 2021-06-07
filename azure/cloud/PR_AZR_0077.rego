@@ -14,3 +14,15 @@ rulepass {
     lower(input.type) == "microsoft.authorization/policyassignments"
     contains(input.id, "vmssEndpointProtectionMonitoring")
 }
+
+metadata := {
+    "Policy Code": "PR-AZR-0077",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "Cloud",
+    "Policy Title": "Endpoint protection is set to OFF in Security Center",
+    "Policy Description": "Turning on the Endpoint Protection will make sure that any issues or shortcomings in endpoint protection for all Microsoft Windows virtual machines are identified so that they can, in turn, be removed.",
+    "Resource Type": "microsoft.authorization/policyassignments",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0"
+}

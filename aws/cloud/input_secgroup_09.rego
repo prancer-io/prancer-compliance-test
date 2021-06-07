@@ -23,3 +23,15 @@ rulepass = false {
     to_number(ingress.FromPort) <= 5432
     to_number(ingress.ToPort) >= 5432
 }
+
+metadata := {
+    "Policy Code": "PR-AWS-0167",
+    "Type": "Cloud",
+    "Product": "AWS",
+    "Language": "Cloud",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to PostgreSQL port (5432)",
+    "Policy Description": "This policy identifies the security groups which are exposing PostgreSQL port (5432) to the internet. It is recommended that Global permission to access the well known services PostgreSQL port (5432) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html"
+}

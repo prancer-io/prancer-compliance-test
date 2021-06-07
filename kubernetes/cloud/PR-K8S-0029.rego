@@ -34,3 +34,15 @@ rulepass = false {
 rulepass_err = "PR-K8S-0029: Ensure that the --profiling argument is set to false (Scheduler)" {
     k8s_issue["rulepass"]
 }
+
+k8s_issue_metadata := {
+    "Policy Code": "PR-K8S-0029",
+    "Type": "Cloud",
+    "Product": "Kubernetes",
+    "Language": "Cloud",
+    "Policy Title": "Ensure that the --profiling argument is set to false (Scheduler) ",
+    "Policy Description": "Ensure that the --profiling argument is set to false (Scheduler) ",
+    "Resource Type": "pod",
+    "Policy Help URL": "",
+    "Resource Help URL": ""
+}

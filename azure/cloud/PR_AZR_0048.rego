@@ -15,6 +15,18 @@ rulepass = false {
     lower(input.type) == "microsoft.network/networksecuritygroups"
     count(get_outbound) > 0
 }
+
+metadata := {
+    "Policy Code": "PR-AZR-0048",
+    "Type": "Cloud",
+    "Product": "AZR",
+    "Language": "Cloud",
+    "Policy Title": "Azure Network Security Group with Outbound rule to allow all traffic to any source",
+    "Policy Description": "This policy identifies NSGs which allows outgoing traffic to any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic to known sources on authorized protocols and ports.",
+    "Resource Type": "microsoft.network/networksecuritygroups",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/rest/api/virtualnetwork/networksecuritygroups/get"
+}
 # "securityRules[?(@.sourceAddressPrefix=='*' &&  @.access=='Allow' && @.destinationAddressPrefix=='*')]
 # .direction contains Outbound"
 
