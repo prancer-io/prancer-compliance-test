@@ -50,6 +50,7 @@ kv_expire_metadata := {
     "Language": "ARM template",
     "Policy Title": "Azure Key Vault secrets have no expiration date",
     "Policy Description": "PR-AZR-0018-ARM-DESC",
+    "Compliance": [],
     "Resource Type": "microsoft.keyvault/vaults/secrets",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/secrets"

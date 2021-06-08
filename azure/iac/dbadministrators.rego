@@ -67,6 +67,7 @@ db_ad_admin_metadata := {
     "Language": "ARM template",
     "Policy Title": "SQL servers which do not have Azure Active Directory admin configured",
     "Policy Description": "Checks to ensure that SQL servers are configured with Active Directory admin authentication. Azure Active Directory authentication is a mechanism of connecting to Microsoft Azure SQL Database and SQL Data Warehouse by using identities in Azure Active Directory (Azure AD). With Azure AD authentication, you can centrally manage the identities of database users and other Microsoft services in one central location.",
+    "Compliance": ["CSA-CCM","ISO 27001","NIST 800","PCI-DSS"],
     "Resource Type": "microsoft.sql/servers/administrators",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2019-06-01-preview/servers/administrators"

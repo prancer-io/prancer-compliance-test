@@ -111,6 +111,7 @@ gl_azure_secrets_metadata := {
     "Language": "ARM template",
     "Policy Title": "Activity Log Retention should not be set to less than 365 days",
     "Policy Description": "A Log Profile controls how your Activity Log is exported and retained. Since the average time to detect a breach is over 200 days, it is recommended to retain your activity log for 365 days or more in order to have time to respond to any incidents.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": ""

@@ -49,6 +49,7 @@ aks_cni_net_metadata := {
     "Language": "ARM template",
     "Policy Title": "Azure AKS cluster Azure CNI networking not enabled",
     "Policy Description": "Azure CNI provides the following features over kubenet networking:_x005F_x000D_ _x005F_x000D_ - Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network._x005F_x000D_ - Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB._x005F_x000D_ - You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance._x005F_x000D_ - Support for Network Policies securing communication between pods._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.",
+    "Compliance": [],
     "Resource Type": "microsoft.containerservice/managedclusters",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
@@ -101,6 +102,7 @@ aks_http_routing_metadata := {
     "Language": "ARM template",
     "Policy Title": "Azure AKS cluster HTTP application routing enabled",
     "Policy Description": "HTTP application routing configures an Ingress controller in your AKS cluster. As applications are deployed, the solution also creates publicly accessible DNS names for application endpoints. While this makes it easy to access applications that are deployed to your Azure AKS cluster, this add-on is not recommended for production use._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster HTTP application routing add-on setting and alerts if enabled.",
+    "Compliance": [],
     "Resource Type": "microsoft.containerservice/managedclusters",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
@@ -153,6 +155,7 @@ aks_monitoring_metadata := {
     "Language": "ARM template",
     "Policy Title": "Azure AKS cluster monitoring not enabled",
     "Policy Description": "Azure Monitor for containers is a feature designed to monitor the performance of container workloads deployed to either Azure Container Instances or managed Kubernetes clusters hosted on Azure Kubernetes Service (AKS). Monitoring your containers is critical, especially when you're running a production cluster, at scale, with multiple applications._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster monitoring add-on setting and alerts if no configuration is found, or monitoring is disabled.",
+    "Compliance": [],
     "Resource Type": "microsoft.containerservice/managedclusters",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
@@ -205,6 +208,7 @@ aks_nodes_metadata := {
     "Language": "ARM template",
     "Policy Title": "Azure AKS cluster pool profile count contains less than 3 nodes",
     "Policy Description": "Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)_x005F_x000D_ _x005F_x000D_ This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.",
+    "Compliance": [],
     "Resource Type": "microsoft.containerservice/managedclusters",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
@@ -257,6 +261,7 @@ aks_rbac_metadata := {
     "Language": "ARM template",
     "Policy Title": "Azure AKS enable role-based access control (RBAC) not enforced",
     "Policy Description": "To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster RBAC setting and alerts if disabled.",
+    "Compliance": [],
     "Resource Type": "microsoft.containerservice/managedclusters",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"

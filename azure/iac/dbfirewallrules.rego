@@ -61,6 +61,7 @@ db_firewall_metadata := {
     "Language": "ARM template",
     "Policy Title": "SQL Server Firewall rules allow access to any Azure internal resources",
     "Policy Description": "Firewalls grant access to databases based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with 0.0.0.0 represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access.",
+    "Compliance": ["CIS","CSA-CCM","ISO 27001","NIST 800","PCI-DSS"],
     "Resource Type": "microsoft.sql/servers/firewallrules",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2015-05-01-preview/servers/firewallrules"
