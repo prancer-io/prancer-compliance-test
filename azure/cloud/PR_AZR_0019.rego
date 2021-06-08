@@ -24,6 +24,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "Azure Load Balancer diagnostics logs are disabled",
     "Policy Description": "Azure Load Balancers provide different types of logsâ€”alert events, health probe, metricsâ€”to help you manage and troubleshoot issues. This policy identifies Azure Load Balancers that have diagnostics logs disabled. As a best practice, enable diagnostic logs to start collecting the data available through these logs.",
+    "Compliance": [],
     "Resource Type": "microsoft.insights/diagnosticsettings",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-05-01-preview/diagnosticsettings"

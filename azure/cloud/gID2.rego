@@ -20,6 +20,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "Instance is communicating with ports known to mine Ethereum",
     "Policy Description": "Identifies traffic from internal workloads to internet IPs on ports 8545,30303 that are known to mine Ethereum. Unless this traffic is part of authorized applications and processes, your instances may have been compromised.",
+    "Compliance": ["HIPAA", "NIST"], 
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"

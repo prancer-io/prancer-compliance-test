@@ -27,6 +27,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "Azure Network Security Group (NSG) allows SSH traffic from internet on port 22",
     "Policy Description": "Blocking SSH port 22 will protect users from attacks like Account compromise.",
+    "Compliance": ["CIS","CSA-CCM","HIPAA","NIST 800","PCI-DSS"],
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/rest/api/virtualnetwork/networksecuritygroups/get"

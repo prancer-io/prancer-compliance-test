@@ -23,6 +23,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to all traffic from Internet on any protocol",
     "Policy Description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on any protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
+    "Compliance": [],
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/rest/api/virtualnetwork/networksecuritygroups/get"

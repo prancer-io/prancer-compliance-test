@@ -21,6 +21,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "Azure SQL Server threat logs retention is less than 91 days",
     "Policy Description": "This policy identifies SQL servers for which threat detection logs are retained for 90 days or less. Because threat detection logs help you investigate suspicious activities including detecting an SQL Server breach with known attack signatures, as a best practice, set the log retention period to more than 90 days.",
+    "Compliance": [],
     "Resource Type": "microsoft.sql/servers/databases/securityalertpolicies",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/securityalertpolicies"

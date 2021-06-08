@@ -23,6 +23,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "Next generation firewall is set to OFF in Security Center",
     "Policy Description": "Turning on Next Generation Firewall (NGFW) will extend protection beyond a traditional firewall setting of Network Security Groups in Microsoft Azure environment. A Next-Generation Firewall (NGFW) is a part of the third generation of firewall technology, combining a traditional firewall with other network device filtering functionalities.",
+    "Compliance": ["CIS","CSA-CCM","ISO 27001","NIST 800","PCI-DSS"],
     "Resource Type": "microsoft.authorization/policyassignments",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0"

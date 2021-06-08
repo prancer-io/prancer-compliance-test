@@ -23,6 +23,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "Azure AKS cluster pool profile count contains less than 3 nodes",
     "Policy Description": "Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)_x005F_x000D_ _x005F_x000D_ This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.",
+    "Compliance": [],
     "Resource Type": "microsoft.containerservice/managedclusters",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/rest/api/aks/managedclusters/get"

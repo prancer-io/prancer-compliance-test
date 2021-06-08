@@ -21,6 +21,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "Azure SQL Database with Threat Retention less than or equals to 90 days",
     "Policy Description": "This policy identifies SQL Databases which have Threat Retention less than or equals to 90 days. Threat Logs can be used to check for anomalies and gives an understanding of suspected breaches or misuse of data and access. It is recommended to configure SQL database Threat Retention to be greater than 90 days.",
+    "Compliance": ["CIS","CSA-CCM","HIPAA","ISO 27001","NIST 800","PCI-DSS"],
     "Resource Type": "microsoft.sql/servers/databases/securityalertpolicies",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies"

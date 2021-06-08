@@ -20,6 +20,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "Azure SQL Server advanced data security is disabled",
     "Policy Description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x005F_x000D_ _x005F_x000D_ This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers.",
+    "Compliance": [],
     "Resource Type": "microsoft.sql/servers/databases/vulnerabilityassessments",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments"

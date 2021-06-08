@@ -23,6 +23,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "SQL Encryption is set to OFF in Security Center",
     "Policy Description": "Turning on SQL Encryption enables encryption at rest for your SQL database, related backups, and transaction log files. This will make sure that even if the database is compromised, the data is not readable.",
+    "Compliance": ["CIS","CSA-CCM","HIPAA","ISO 27001","NIST 800","PCI-DSS"],
     "Resource Type": "microsoft.authorization/policyassignments",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0"

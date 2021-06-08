@@ -50,6 +50,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "Azure SQL Managed Instance has configured TLS version lower then 1.2",
     "Policy Description": "Azure SQL Managed Instance has configured TLS version lower then 1.2",
+    "Compliance": [],
     "Resource Type": "microsoft.sql/servers",
     "Policy Help URL": "",
     "Resource Help URL": ""

@@ -19,6 +19,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "Azure Key Vault secrets have no expiration date",
     "Policy Description": "PR-AZR-0018-DESC",
+    "Compliance": [],
     "Resource Type": "microsoft.keyvault/vaults/secrets",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/secrets"

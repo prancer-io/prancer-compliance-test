@@ -23,6 +23,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "Storage Encryption is set to OFF in Security Center",
     "Policy Description": "Turning on Storage Encryption will encrypt the data written to the storage and decrypt it when retrieved from the storage. The data encryption starts from the point this setting is turned on. The old data remains unencrypted.",
+    "Compliance": ["CIS","CSA-CCM","HIPAA","ISO 27001","NIST 800","PCI-DSS"],
     "Resource Type": "microsoft.authorization/policyassignments",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0"

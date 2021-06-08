@@ -33,6 +33,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "Azure SQL Instance has not enabled security alert policy",
     "Policy Description": "Azure SQL Instance has not enabled security alert policy",
+    "Compliance": [],
     "Resource Type": "microsoft.sql/servers/auditingsettings",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/auditingsettings"

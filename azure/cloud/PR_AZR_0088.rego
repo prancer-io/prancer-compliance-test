@@ -21,6 +21,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "Send alerts on field value on SQL Databases is misconfigured",
     "Policy Description": "Checks to ensure that an valid email address is set for Threat Detection alerts. The alerts are sent to this email address when any anomalous activities are detected on SQL databases.",
+    "Compliance": ["CIS","CSA-CCM","HIPAA","ISO 27001","NIST 800","PCI-DSS"],
     "Resource Type": "microsoft.sql/servers/databases/auditingsettings",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings"

@@ -23,6 +23,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "Azure Application Gateway does not have the Web application firewall (WAF) enabled",
     "Policy Description": "This policy identifies Azure Application Gateways that do not have Web application firewall (WAF) enabled. As a best practice, enable WAF to manage and protect your web applications behind the Application Gateway from common exploits and vulnerabilities.",
+    "Compliance": [],
     "Resource Type": "microsoft.network/applicationgateways",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/rest/api/application-gateway/applicationgateways/get"

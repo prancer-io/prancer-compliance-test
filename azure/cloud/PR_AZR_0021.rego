@@ -27,6 +27,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "Azure Network Security Group (NSG) allows traffic from internet on port 3389",
     "Policy Description": "Blocking RDP port 3389 will protect users from attacks like account compromise, Denial of service and ransomware.",
+    "Compliance": ["CIS","CSA-CCM","HIPAA","NIST 800","PCI-DSS"],
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/rest/api/virtualnetwork/networksecuritygroups/get"
