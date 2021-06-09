@@ -20,6 +20,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "AWS Elastic File System (EFS) with encryption for data at rest disabled",
     "Policy Description": "This policy identifies Elastic File Systems (EFSs) for which encryption for data at rest disabled. It is highly recommended to implement at-rest encryption in order to prevent unauthorized users from reading sensitive data saved to EFS.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/efs/latest/ug/API_DescribeFileSystems.html"
