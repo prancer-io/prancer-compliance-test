@@ -22,6 +22,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "AWS EC2 Instance IAM Role not enabled",
     "Policy Description": "AWS provides Identity Access Management (IAM) roles to securely access AWS services and resources. The role is an identity with permission policies that define what the identity can and cannot do in AWS. As a best practice, create IAM roles and attach the role to manage EC2 instance permissions securely instead of distributing or sharing keys or passwords.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html"

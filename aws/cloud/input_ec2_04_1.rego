@@ -27,6 +27,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "AWS EBS snapshots are accessible to public",
     "Policy Description": "This policy identifies EC2 EBS snapshots which are accessible to public. Amazon Elastic Block Store (Amazon EBS) provides persistent block storage volumes for use with Amazon EC2 instances in the AWS Cloud. If EBS snapshots are inadvertently shared to public, any unauthorized user with AWS console access can gain access to the snapshots and gain access to sensitive data.",
+    "Compliance": ["CSA-CCM","GDPR","HITRUST","ISO 27001","NIST 800","PCI-DSS"],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshotAttribute.html"

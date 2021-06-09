@@ -25,6 +25,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "AWS EBS Volume is unattached",
     "Policy Description": "EBS volumes often persist after an EC2 instance has been terminated. We recommend regular review of these volumes, since they can contain sensitive data related to your company, application, infrastructure, or even users.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVolumes.html"

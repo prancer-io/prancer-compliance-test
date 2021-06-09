@@ -21,6 +21,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "CloudTrail trail is not integrated with CloudWatch Log",
     "Policy Description": "Enabling the CloudTrail trail logs integrated with CloudWatch Logs will enable the real-time as well as historic activity logging. This will further effective monitoring and alarm capability.",
+    "Compliance": ["CIS","CSA-CCM","GDPR","HITRUST","ISO 27001","NIST 800","SOC 2"],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_GetTrail.html"

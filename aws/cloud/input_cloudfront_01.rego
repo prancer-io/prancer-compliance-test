@@ -20,6 +20,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "AWS CloudFront Distributions with Field-Level Encryption not enabled",
     "Policy Description": "This policy identifies CloudFront distributions for which field-level encryption is not enabled. Field-level encryption adds an additional layer of security along with HTTPS which protects specific data throughout system processing so that only certain applications can see it.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributions.html"

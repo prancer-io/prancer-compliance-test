@@ -20,6 +20,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "AWS CloudFormation stack configured without SNS topic",
     "Policy Description": "This policy identifies CloudFormation stacks which are configured without SNS topic. It is recommended to configure Simple Notification Service (SNS) topic to be notified of CloudFormation stack status and changes.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStacks.html"
