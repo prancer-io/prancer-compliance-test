@@ -34,6 +34,7 @@ sql_public_access_metadata := {
     "Language": "ARM template",
     "Policy Title": "SQL servers with public access detected!",
     "Policy Description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance",
+    "Compliance": [],
     "Resource Type": "microsoft.sql/servers",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers"

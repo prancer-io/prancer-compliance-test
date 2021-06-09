@@ -34,6 +34,7 @@ sql_public_endpoint_metadata := {
     "Language": "ARM template",
     "Policy Title": "SQL Managed Instance with enabled public endpoint detected!",
     "Policy Description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance",
+    "Compliance": [],
     "Resource Type": "microsoft.sql/managedinstances",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances"

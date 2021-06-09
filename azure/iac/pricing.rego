@@ -49,6 +49,7 @@ pricing_metadata := {
     "Language": "ARM template",
     "Policy Title": "Standard pricing tier is not selected in Security Center",
     "Policy Description": "Selecting the standard pricing tier will enable threat detection for networks and virtual systems by providing threat intelligence, anomaly detection, and behavior analytics in Azure Security Center.",
+    "Compliance": ["CIS","ISO 27001"],
     "Resource Type": "microsoft.security/pricings",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.security/pricings"

@@ -1,6 +1,6 @@
 package rule
 
-# PR-AZR-0001-RGX
+# PR-AZR-0001-ARM
 #
 
 default gl_azure_secrets = null
@@ -104,12 +104,13 @@ gl_azure_secrets_err = "There is a possibility that Azure secret has leaked" {
 }
 
 gl_azure_secrets_metadata := {
-    "Policy Code": "PR-AZR-0001-RGX",
+    "Policy Code": "PR-AZR-0001-ARM",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "Activity Log Retention should not be set to less than 365 days",
     "Policy Description": "A Log Profile controls how your Activity Log is exported and retained. Since the average time to detect a breach is over 200 days, it is recommended to retain your activity log for 365 days or more in order to have time to respond to any incidents.",
+    "Compliance": ["CIS","CSA-CCM","HIPAA","ISO 27001","NIST 800","PCI-DSS"],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": ""

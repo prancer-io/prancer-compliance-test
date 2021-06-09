@@ -49,6 +49,7 @@ vnet_peer_metadata := {
     "Language": "ARM template",
     "Policy Title": "Azure virtual network peer is disconnected",
     "Policy Description": "Virtual network peering enables you to connect two Azure virtual networks so that the resources in these networks are directly connected._x005F_x000D_ _x005F_x000D_ This policy identifies Azure virtual network peers that are disconnected. Typically, the disconnection happens when a peering configuration is deleted on one virtual network, and the other virtual network reports the peering status as disconnected.",
+    "Compliance": [],
     "Resource Type": "microsoft.network/virtualnetworks/virtualnetworkpeerings",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/virtualnetworkpeerings"

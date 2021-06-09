@@ -43,6 +43,7 @@ sql_server_alert_metadata := {
     "Language": "ARM template",
     "Policy Title": "",
     "Policy Description": "",
+    "Compliance": [],
     "Resource Type": "securityalertpolicies",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies"
@@ -85,6 +86,7 @@ sql_managed_instance_alert_metadata := {
     "Language": "ARM template",
     "Policy Title": "Security alert for SQL managed instance is Disabled",
     "Policy Description": "Security alert for SQL managed instance is Disabled",
+    "Compliance": [],
     "Resource Type": "securityalertpolicies",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies"

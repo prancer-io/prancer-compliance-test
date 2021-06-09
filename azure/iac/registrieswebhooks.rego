@@ -49,6 +49,7 @@ acr_webhooks_metadata := {
     "Language": "ARM template",
     "Policy Title": "Azure ACR HTTPS not enabled for webhook",
     "Policy Description": "Ensure you send container registry webhooks only to a HTTPS endpoint. This policy checks your container registry webhooks and alerts if it finds a URI with HTTP.",
+    "Compliance": [],
     "Resource Type": "microsoft.containerregistry/registries/webhooks",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries/webhooks"
