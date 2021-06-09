@@ -49,6 +49,7 @@ kv_expire_metadata := {
     "Language": "Terraform",
     "Policy Title": "Azure Key Vault secrets have no expiration date",
     "Policy Description": "PR-AZR-0018-TRF-DESC",
+    "Compliance": [],
     "Resource Type": "azurerm_key_vault_secret",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_key_vault_secret"

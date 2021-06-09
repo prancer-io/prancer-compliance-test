@@ -50,6 +50,7 @@ gw_tls_metadata := {
     "Language": "Terraform",
     "Policy Title": "Azure Application Gateway allows TLSv1.1 or lower",
     "Policy Description": "The Application Gateway supports end-to-end SSL encryption using multiple TLS versions and by default, it supports TLS version 1.0 as the minimum version._x005F_x000D_ _x005F_x000D_ This policy identifies the Application Gateway instances that are configured to use TLS versions 1.1 or lower as the minimum protocol version. As a best practice set the MinProtocolVersion to TLSv1.2 (if you use custom SSL policy) or use the predefined â€˜AppGwSslPolicy20170401Sâ€™ policy.",
+    "Compliance": [],
     "Resource Type": "azurerm_application_gateway",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_application_gateway"
@@ -102,6 +103,7 @@ gw_waf_metadata := {
     "Language": "Terraform",
     "Policy Title": "Azure Application Gateway does not have the Web application firewall (WAF) enabled",
     "Policy Description": "This policy identifies Azure Application Gateways that do not have Web application firewall (WAF) enabled. As a best practice, enable WAF to manage and protect your web applications behind the Application Gateway from common exploits and vulnerabilities.",
+    "Compliance": [],
     "Resource Type": "azurerm_application_gateway",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_application_gateway"

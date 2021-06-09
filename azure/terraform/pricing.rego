@@ -49,6 +49,7 @@ pricing_metadata := {
     "Language": "Terraform",
     "Policy Title": "Standard pricing tier is not selected in Security Center",
     "Policy Description": "Selecting the standard pricing tier will enable threat detection for networks and virtual systems by providing threat intelligence, anomaly detection, and behavior analytics in Azure Security Center.",
+    "Compliance": ["CIS","ISO 27001"],
     "Resource Type": "azurerm_security_center_subscription_pricing",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_security_center_subscription_pricing"

@@ -54,6 +54,7 @@ mssql_db_log_audit_metadata := {
     "Language": "Terraform",
     "Policy Title": "Auditing for SQL database should be set to On",
     "Policy Description": "Database events are tracked by the Auditing feature and the events are written to an audit log in your Azure storage account. This process helps you to monitor database activity, and get insight into anomalies that could indicate business concerns or suspected security violations.",
+    "Compliance": ["CIS","CSA-CCM","HIPAA","ISO 27001","NIST 800","PCI-DSS"],
     "Resource Type": "azurerm_mssql_database_extended_auditing_policy",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings"
@@ -106,6 +107,7 @@ mssql_db_log_retention_metadata := {
     "Language": "Terraform",
     "Policy Title": "Azure SQL Database with Auditing Retention less than 90 days",
     "Policy Description": "This policy identifies SQL Databases which have Auditing Retention less than 90 days. Audit Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days.",
+    "Compliance": ["CIS","CSA-CCM","HIPAA","ISO 27001","NIST 800","PCI-DSS"],
     "Resource Type": "azurerm_mssql_database_extended_auditing_policy",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings"

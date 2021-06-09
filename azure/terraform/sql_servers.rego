@@ -34,6 +34,7 @@ sql_public_access_metadata := {
     "Language": "Terraform",
     "Policy Title": "SQL servers with public access detected!",
     "Policy Description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance",
+    "Compliance": [],
     "Resource Type": "azurerm_sql_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_sql_server"
