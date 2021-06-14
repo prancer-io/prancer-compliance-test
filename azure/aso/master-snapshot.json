@@ -1,0 +1,18 @@
+{
+    "snapshots": [
+        {
+            "type": "filesystem",
+            "connectorUser": "USER_1",
+            "nodes": [
+                {
+                    "masterSnapshotId": "ASO_TEMPLATE_SNAPSHOT",
+                    "type": "arm",
+                    "collection": "asotemplate",
+                    "paths": [
+                        "/"
+                    ]
+                }
+            ]
+        }
+    ]
+}
