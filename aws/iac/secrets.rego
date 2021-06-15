@@ -33,6 +33,7 @@ gl_aws_secrets_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS CloudTrail logs are not encrypted using Customer Master Keys (CMKs)",
     "Policy Description": "Checks to ensure that CloudTrail logs are encrypted. AWS CloudTrail is a service that enables governance, compliance, operational PR-AWS-0028-RGX-DESC risk auditing of the AWS account. It is a compliance and security best practice to encrypt the CloudTrail data since it may contain sensitive information.",
+    "Compliance": ["CIS","CSA-CCM","GDPR","HITRUST","ISO 27001","NIST 800"],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": ""
@@ -72,6 +73,7 @@ gl_aws_account_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS CloudTrail logs should integrate with CloudWatch for all regions",
     "Policy Description": "This policy identifies the Cloudtrails which is not integrated with cloudwatch for all regions. CloudTrail uses Amazon S3 for log file storage and delivery, so log files are stored durably. In addition to capturing CloudTrail logs within a specified S3 bucket for long term analysis, realtime analysis can be performed by configuring CloudTrail to send logs to CloudWatch Logs. For a trail that is enabled in all regions in an account, CloudTrail sends log files from all those regions to a CloudWatch Logs log group. It is recommended that CloudTrail logs be sent to CloudWatch Logs.",
+    "Compliance": ["CSA-CCM","GDPR","HITRUST","ISO 27001","NIST 800","SOC 2"],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": ""

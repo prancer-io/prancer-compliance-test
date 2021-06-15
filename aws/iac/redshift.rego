@@ -56,6 +56,7 @@ redshift_encrypt_key_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Redshift Cluster not encrypted using Customer Managed Key",
     "Policy Description": "This policy identifies Redshift Clusters which are encrypted with default KMS keys and not with Keys managed by Customer. It is a best practice to use customer managed KMS Keys to encrypt your Redshift databases data. Customer-managed CMKs give you more flexibility, including the ability to create, rotate, disable, define access control for, and audit the encryption keys used to help protect your data.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
@@ -93,6 +94,7 @@ redshift_public_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Redshift clusters should not be publicly accessible",
     "Policy Description": "This policy identifies AWS Redshift clusters which are accessible publicly.",
+    "Compliance": ["CSA-CCM","GDPR","HITRUST","ISO 27001","NIST 800","SOC 2"],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
@@ -145,6 +147,7 @@ redshift_audit_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Redshift database does not have audit logging enabled",
     "Policy Description": "Audit logging is not enabled by default in Amazon Redshift. When you enable logging on your cluster, Amazon Redshift creates and uploads logs to Amazon S3 that capture data from the creation of the cluster to the present time.",
+    "Compliance": ["CSA-CCM","GDPR","HITRUST","ISO 27001","NIST 800","SOC 2"],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
@@ -206,6 +209,7 @@ redshift_require_ssl_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Redshift does not have require_ssl configured",
     "Policy Description": "This policy identifies Redshift databases in which data connection to and from is occurring on an insecure channel. SSL connections ensures the security of the data in transit.",
+    "Compliance": ["CSA-CCM","GDPR","HITRUST","ISO 27001","NIST 800"],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
@@ -243,6 +247,7 @@ redshift_encrypt_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Redshift instances are not encrypted",
     "Policy Description": "This policy identifies AWS Redshift instances which are not encrypted. These instances should be encrypted for clusters to help protect data at rest which otherwise can result in a data breach.",
+    "Compliance": ["CSA-CCM","GDPR","HITRUST","ISO 27001","NIST 800","PCI-DSS"],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"

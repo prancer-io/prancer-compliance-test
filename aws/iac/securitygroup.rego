@@ -85,6 +85,7 @@ port_135_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups allow internet traffic from internet to Windows RPC port (135)",
     "Policy Description": "This policy identifies the security groups which are exposing Windows RPC port (135) to the internet. It is recommended that Global permission to access the well known services Windows RPC port (135) should not be allowed in a security group.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
@@ -116,6 +117,7 @@ port_137_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups allow internet traffic from internet to NetBIOS port (137)",
     "Policy Description": "This policy identifies the security groups which are exposing NetBIOS port (137) to the internet. It is recommended that Global permission to access the well known services NetBIOS port (137) should not be allowed in a security group.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
@@ -147,6 +149,7 @@ port_138_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups allow internet traffic from internet to NetBIOS port (138)",
     "Policy Description": "This policy identifies the security groups which are exposing NetBIOS port (138) to the internet. It is recommended that Global permission to access the well known services NetBIOS port (138) should not be allowed in a security group.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
@@ -178,6 +181,7 @@ port_1433_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups allow internet traffic from internet to SQLServer port (1433)",
     "Policy Description": "This policy identifies the security groups which are exposing SQLServer port (1433) to the internet. It is recommended that Global permission to access the well known services SQLServer port (1433) should not be allowed in a security group.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
@@ -209,6 +213,7 @@ port_1434_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups allow internet traffic from internet to SQLServer port (1434)",
     "Policy Description": "This policy identifies the security groups which are exposing SQLServer port (1434) to the internet. It is recommended that Global permission to access the well known services SQLServer port (1434) should not be allowed in a security group.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
@@ -240,6 +245,7 @@ port_20_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups allow internet traffic from internet to FTP-Data port (20)",
     "Policy Description": "This policy identifies the security groups which are exposing FTP-Data port (20) to the internet. It is recommended that Global permission to access the well known services FTP-Data port (20) should not be allowed in a security group.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
@@ -271,6 +277,7 @@ port_21_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups allow internet traffic from internet to FTP port (21)",
     "Policy Description": "This policy identifies the security groups which are exposing FTP port (21) to the internet. It is recommended that Global permission to access the well known services FTP port (21) should not be allowed in a security group.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
@@ -302,6 +309,7 @@ port_22_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups allow internet traffic to SSH port (22)",
     "Policy Description": "This policy identifies AWS Security Groups which do allow inbound traffic on SSH port (22) from public internet. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
+    "Compliance": ["CIS","CSA-CCM,""GDPR","HIPAA","HITRUST","ISO 27001","NIST 800","SOC 2"],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
@@ -333,6 +341,7 @@ port_23_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups allow internet traffic from internet to Telnet port (23)",
     "Policy Description": "This policy identifies the security groups which are exposing Telnet port (23) to the internet. It is recommended that Global permission to access the well known services Telnet port (23) should not be allowed in a security group.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
@@ -364,6 +373,7 @@ port_25_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups allow internet traffic from internet to SMTP port (25)",
     "Policy Description": "This policy identifies the security groups which are exposing SMTP port (25) to the internet. It is recommended that Global permission to access the well known services SMTP port (25) should not be allowed in a security group.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
@@ -395,6 +405,7 @@ port_3306_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups allow internet traffic from internet to MYSQL port (3306)",
     "Policy Description": "This policy identifies the security groups which are exposing MYSQL port (3306) to the internet. It is recommended that Global permission to access the well known services MYSQL port (3306) should not be allowed in a security group.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
@@ -426,6 +437,7 @@ port_3389_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups allow internet traffic from internet to RDP port (3389)",
     "Policy Description": "This policy identifies the security groups which is exposing RDP port (3389) to the internet. Security Groups do not allow inbound traffic on RDP port (3389) from public internet. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
+    "Compliance": ["CIS","CSA-CCM","GDPR","HIPAA","HITRUST","ISO 27001","NIST 800","SOC 2"],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
@@ -457,6 +469,7 @@ port_4333_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups allow internet traffic from internet to MSQL port (4333)",
     "Policy Description": "This policy identifies the security groups which are exposing MSQL port (4333) to the internet. It is recommended that Global permission to access the well known services MSQL port (4333) should not be allowed in a security group.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
@@ -488,6 +501,7 @@ port_445_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups allow internet traffic from internet to CIFS port (445)",
     "Policy Description": "This policy identifies the security groups which are exposing CIFS port (445) to the internet. It is recommended that Global permission to access the well known services CIFS port (445) should not be allowed in a security group.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
@@ -519,6 +533,7 @@ port_53_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups allow internet traffic from internet to DNS port (53)",
     "Policy Description": "This policy identifies the security groups which are exposing DNS port (53) to the internet. It is recommended that Global permission to access the well known services DNS port (53) should not be allowed in a security group.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
@@ -550,6 +565,7 @@ port_5432_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups allow internet traffic from internet to PostgreSQL port (5432)",
     "Policy Description": "This policy identifies the security groups which are exposing PostgreSQL port (5432) to the internet. It is recommended that Global permission to access the well known services PostgreSQL port (5432) should not be allowed in a security group.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
@@ -581,6 +597,7 @@ port_5500_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups allow internet traffic from internet to VNC Listener port (5500)",
     "Policy Description": "This policy identifies the security groups which are exposing VNC Listener port (5500) to the internet. It is recommended that Global permission to access the well known services VNC Listener port (5500) should not be allowed in a security group.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
@@ -612,6 +629,7 @@ port_5900_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups allow internet traffic from internet to VNC Server port (5900)",
     "Policy Description": "This policy identifies the security groups which are exposing VNC Server port (5900) to the internet. It is recommended that Global permission to access the well known services VNC Server port (5900) should not be allowed in a security group.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
@@ -643,6 +661,7 @@ port_all_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Default Security Group does not restrict all traffic",
     "Policy Description": "This policy identifies the default security group which does not restrict all inbound and outbound traffic. A VPC comes with a default security group whose initial configuration deny all inbound traffic from internet and allow all outbound traffic. If you do not specify a security group when you launch an instance, the instance is automatically assigned to this default security group. As a result, the instance may accidentally send outbound traffic.",
+    "Compliance": ["CIS","CSA-CCM","GDPR","HITRUST","NIST 800","SOC 2"],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
@@ -674,6 +693,7 @@ port_proto_all_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups with Inbound rule overly permissive to All Traffic",
     "Policy Description": "This policy identifies AWS Security Groups which do allow inbound traffic on all protocols from public internet. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
