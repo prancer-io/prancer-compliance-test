@@ -6,7 +6,7 @@
             "nodes": [
                 {
                     "masterSnapshotId": "ASO_TEMPLATE_SNAPSHOT",
-                    "type": "arm",
+                    "type": "aso",
                     "collection": "asotemplate",
                     "paths": [
                         "/"
