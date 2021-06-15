@@ -49,6 +49,7 @@ dynamodb_encrypt_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS DynamoDB encrypted using AWS owned CMK instead of AWS managed CMK",
     "Policy Description": "This policy identifies the DynamoDB tables that use AWS owned CMK (default ) instead of AWS managed CMK (KMS ) to encrypt data. AWS managed CMK provide additional features such as the ability to view the CMK and key policy, and audit the encryption and decryption of DynamoDB tables.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html"

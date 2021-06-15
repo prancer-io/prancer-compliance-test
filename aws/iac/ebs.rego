@@ -34,6 +34,7 @@ ebs_encrypt_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS EBS volumes are not encrypted",
     "Policy Description": "This policy identifies the EBS volumes which are not encrypted. The snapshots that you take of an encrypted EBS volume are also encrypted and can be moved between AWS Regions as needed. You cannot share encrypted snapshots with other AWS accounts and you cannot make them public. It is recommended that EBS volume should be encrypted.",
+    "Compliance": ["CSA-CCM","GDPR","HIPAA","HITRUST","ISO 27001","NIST 800","PCI-DSS"],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volume.html"

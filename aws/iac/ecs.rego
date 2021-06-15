@@ -49,6 +49,7 @@ ecs_task_evelated_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS ECS task definition elevated privileges enabled",
     "Policy Description": "Ensure your ECS containers are not given elevated privileges on the host container instance._x005F_x000D_ _x005F_x000D_ When the Privileged parameter is true, the container is given elevated privileges on the host container instance (similar to the root user)._x005F_x000D_ _x005F_x000D_ This policy checks the security configuration of your task definition and alerts if elevated privileges are enabled._x005F_x000D_ _x005F_x000D_ Note: This parameter is not supported for Windows containers or tasks using the Fargate launch type.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html"
@@ -101,6 +102,7 @@ ecs_exec_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS ECS/ Fargate task definition execution IAM Role not found",
     "Policy Description": "The execution IAM Role is required by tasks to pull container images and publish container logs to Amazon CloudWatch on your behalf. This policy generates an alert if a task execution role is not found in your task definition.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html"
@@ -153,6 +155,7 @@ ecs_root_user_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS ECS/ Fargate task definition root user found",
     "Policy Description": "The user name to use inside the container should not be root. This policy generates an alert if root user is found in your container definition._x005F_x000D_ _x005F_x000D_ The User parameter maps to User in the Create a container section of the Docker Remote API and the --user option to docker run_x005F_x000D_ _x005F_x000D_ Note: This parameter is not supported for Windows containers.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html"

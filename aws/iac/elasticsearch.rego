@@ -49,6 +49,7 @@ esearch_vpc_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS ElasticSearch cluster not in a VPC",
     "Policy Description": "VPC support for Amazon ES is easy to configure, reliable, and offers an extra layer of security. With VPC support, traffic between other services and Amazon ES stays entirely within the AWS network, isolated from the public Internet. You can manage network access using existing VPC security groups, and you can use AWS Identity and Access Management (IAM) policies for additional protection. VPC support for Amazon ES domains is available at no additional charge.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
@@ -86,6 +87,7 @@ esearch_encrypt_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Elasticsearch domain Encryption for data at rest is disabled",
     "Policy Description": "This policy identifies Elasticsearch domains for which encryption is disabled. Encryption of data at rest is required to prevent unauthorized users from accessing the sensitive information available on your Elasticsearch domains components. This may include all data of file systems, primary and replica indices, log files, memory swap files and automated snapshots. The Elasticsearch uses AWS KMS service to store and manage the encryption keys. It is highly recommended to implement encryption at rest when you are working with production data that have sensitive information, to protect from unauthorized access.",
+    "Compliance": ["CSA-CCM","HITRUST","ISO 27001","NIST 800"],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
@@ -123,6 +125,7 @@ esearch_master_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Elasticsearch domain has Dedicated master set to disabled",
     "Policy Description": "This policy identifies Elasticsearch domains for which Dedicated master is disabled in your AWS account. If dedicated master nodes are provided those handle the management tasks and cluster nodes can easily manage index and search requests from different types of workload and make them more resilient in production. Dedicated master nodes improve environmental stability by freeing all the management tasks from the cluster data nodes.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
@@ -187,6 +190,7 @@ esearch_index_slow_log_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Elasticsearch domain has Index slow logs set to disabled",
     "Policy Description": "This policy identifies Elasticsearch domains for which Index slow logs is disabled in your AWS account. Enabling support for publishing indexing slow logs to AWS CloudWatch Logs enables you have full insight into the performance of indexing operations performed on your Elasticsearch clusters. This will help you in identifying performance issues caused by specific queries or due to changes in cluster usage, so that you can optimize your index configuration to address the problem.",
+    "Compliance": ["CSA-CCM","HITRUST","NIST 800"],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
@@ -251,6 +255,7 @@ esearch_search_slow_log_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Elasticsearch domain has Search slow logs set to disabled",
     "Policy Description": "This policy identifies Elasticsearch domains for which Search slow logs is disabled in your AWS account. Enabling support for publishing Search slow logs to AWS CloudWatch Logs enables you to have full insight into the performance of search operations performed on your Elasticsearch clusters. This will help you in identifying performance issues caused by specific search queries so that you can optimize your queries to address the problem.",
+    "Compliance": ["CSA-CCM","HITRUST","NIST 800"],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
@@ -288,6 +293,7 @@ esearch_zone_awareness_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Elasticsearch domain has Zone Awareness set to disabled",
     "Policy Description": "This policy identifies Elasticsearch domains for which Zone Awareness is disabled in your AWS account. Enabling Zone Awareness (cross-zone replication) increases the availability by distributing your Elasticsearch data nodes across two availability zones available in the same AWS region. It also prevents data loss and minimizes downtime in the event of node or availability zone failure.",
+    "Compliance": ["CSA-CCM","NIST 800"],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
