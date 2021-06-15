@@ -20,6 +20,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "AWS Redshift instances are not encrypted",
     "Policy Description": "This policy identifies AWS Redshift instances which are not encrypted. These instances should be encrypted for clusters to help protect data at rest which otherwise can result in a data breach.",
+    "Compliance": ["CSA-CCM","GDPR","HITRUST","ISO 27001","NIST 800","PCI-DSS"],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeClusters.html"

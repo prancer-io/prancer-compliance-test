@@ -21,6 +21,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "AWS IAM policy attached to users",
     "Policy Description": "This policy identifies IAM policies attached to user.By default, IAM users, groups, and roles have no access to AWS resources. IAM policies are the means by which privileges are granted to users, groups, or roles. It is recommended that IAM policies be applied directly to groups and roles but not users.",
+    "Compliance": ["CIS","CSA-CCM","HIPAA","HITRUST","ISO 27001","NIST 800","SOC 2"],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAttachedUserPolicies.html"

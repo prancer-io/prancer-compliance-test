@@ -21,6 +21,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "AWS RDS database instance is publicly accessible",
     "Policy Description": "This policy identifies RDS database instances which are publicly accessible.DB instances should not be publicly accessible to protect the integrety of data.Public accessibility of DB instances can be modified by turning on or off the Public accessibility parameter.",
+    "Compliance": ["CSA-CCM","HITRUST","ISO 27001","NIST 800"],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html"

@@ -31,6 +31,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "AWS Security Groups allow internet traffic from internet to RDP port (3389)",
     "Policy Description": "This policy identifies the security groups which is exposing RDP port (3389) to the internet. Security Groups do not allow inbound traffic on RDP port (3389) from public internet. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
+    "Compliance": ["CIS","CSA-CCM","GDPR","HIPAA","HITRUST","ISO 27001","NIST 800","SOC 2"],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html"

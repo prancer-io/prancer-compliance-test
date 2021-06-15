@@ -37,6 +37,7 @@ metadata := {
     "Language": "Cloud",
     "Policy Title": "AWS Security Groups allow internet traffic to ports which are not commonly used",
     "Policy Description": "This policy identifies security groups which are exposing ports to the internet that are not covered in other policies. It is recommended that Global permission be reduced as much as possible. Ports excluded from this policy are; 20, 21, 22, 23, 25, 53, 80, 135, 137, 138, 139, 443, 445, 1433, 1434, 3306, 3389, 4333 and 5432 which are covered in other policies.",
+    "Compliance": [],
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html"
