@@ -49,6 +49,7 @@ cf_default_cache_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS CloudFront Distributions with Field-Level Encryption not enabled",
     "Policy Description": "This policy identifies CloudFront distributions for which field-level encryption is not enabled. Field-level encryption adds an additional layer of security along with HTTPS which protects specific data throughout system processing so that only certain applications can see it.",
+    "Compliance": [],
     "Resource Type": "aws_cloudfront_distribution",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html"
@@ -102,6 +103,7 @@ cf_ssl_protocol_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS CloudFront distribution is using insecure SSL protocols for HTTPS communication",
     "Policy Description": "CloudFront, a content delivery network (CDN) offered by AWS, is not using a secure cipher for distribution. It is a best security practice to enforce the use of secure ciphers TLSv1.0, TLSv1.1, and/or TLSv1.2 in a CloudFront Distribution's certificate configuration. This policy scans for any deviations from this practice and returns the results.",
+    "Compliance": [],
     "Resource Type": "aws_cloudfront_distribution",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html"
@@ -155,6 +157,7 @@ cf_logging_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS CloudFront distribution with access logging disabled",
     "Policy Description": "This policy identifies CloudFront distributions which have access logging disabled. Enabling access log on distributions creates log files that contain detailed information about every user request that CloudFront receives. Access logs are available for web distributions. If you enable logging, you can also specify the Amazon S3 bucket that you want CloudFront to save files in.",
+    "Compliance": [],
     "Resource Type": "aws_cloudfront_distribution",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html"
@@ -207,6 +210,7 @@ cf_https_only_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS CloudFront origin protocol policy does not enforce HTTPS-only",
     "Policy Description": "It is a best security practice to enforce HTTPS-only traffic between a CloudFront distribution and the origin. This policy scans for any deviations from this practice and returns the results.",
+    "Compliance": [],
     "Resource Type": "aws_cloudfront_distribution",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html"
@@ -262,6 +266,7 @@ cf_https_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS CloudFront viewer protocol policy is not configured with HTTPS",
     "Policy Description": "For web distributions, you can configure CloudFront to require that viewers use HTTPS to request your objects, so connections are encrypted when CloudFront communicates with viewers.",
+    "Compliance": [],
     "Resource Type": "aws_cloudfront_distribution",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html"
@@ -320,6 +325,7 @@ cf_min_protocol_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS CloudFront web distribution that allow TLS versions 1.0 or lower",
     "Policy Description": "This policy identifies AWS CloudFront web distributions which are configured with TLS versions for HTTPS communication between viewers and CloudFront. As a best practice, use TLSv1.1_2016 or later as the minimum protocol version in your CloudFront distribution security policies.",
+    "Compliance": [],
     "Resource Type": "aws_cloudfront_distribution",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html"
@@ -372,6 +378,7 @@ cf_firewall_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS CloudFront web distribution with AWS Web Application Firewall (AWS WAF) service disabled",
     "Policy Description": "This policy identifies Amazon CloudFront web distributions which have the AWS Web Application Firewall (AWS WAF) service disabled. As a best practice, enable the AWS WAF service on CloudFront web distributions to protect against application layer attacks. To block malicious requests to your Cloudfront Content Delivery Network, define the block criteria in the WAF web access control list (web ACL).",
+    "Compliance": [],
     "Resource Type": "aws_cloudfront_distribution",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html"
@@ -409,6 +416,7 @@ cf_default_ssl_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS CloudFront web distribution with default SSL certificate",
     "Policy Description": "This policy identifies CloudFront web distributions which have a default SSL certificate to access CloudFront content. It is a best practice to use custom SSL Certificate to access CloudFront content. It gives you full control over the content data. custom SSL certificates also allow your users to access your content by using an alternate domain name. You can use a certificate stored in AWS Certificate Manager (ACM) or you can use a certificate stored in IAM.",
+    "Compliance": [],
     "Resource Type": "aws_cloudfront_distribution",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html"
@@ -461,6 +469,7 @@ cf_geo_restriction_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS CloudFront web distribution with geo restriction disabled",
     "Policy Description": "This policy identifies CloudFront web distributions which have geo restriction feature disabled. Geo Restriction has the ability to block IP addresses based on Geo IP by whitelist or blacklist a country in order to allow or restrict users in specific locations from accessing web application content.",
+    "Compliance": [],
     "Resource Type": "aws_cloudfront_distribution",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html"
@@ -513,6 +522,7 @@ cf_s3_origin_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS Cloudfront Distribution with S3 have Origin Access set to disabled",
     "Policy Description": "This policy identifies the AWS CloudFront distributions which are utilizing S3 bucket and have Origin Access Disabled. The origin access identity feature should be enabled for all your AWS CloudFront CDN distributions in order to restrict any direct access to your objects through Amazon S3 URLs.",
+    "Compliance": [],
     "Resource Type": "aws_cloudfront_distribution",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html"

@@ -110,6 +110,7 @@ elb_insecure_cipher_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with insecure ciphers",
     "Policy Description": "This policy identifies Elastic Load Balancers (Classic) which are configured with SSL negotiation policy containing insecure ciphers. An SSL cipher is an encryption algorithm that uses encryption keys to create a coded message. SSL protocols use several SSL ciphers to encrypt data over the Internet. As many of the other ciphers are not secure, it is recommended to use only the ciphers recommended in the following AWS link: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-ssl-security-policy.html.",
+    "Compliance": [],
     "Resource Type": "aws_elb",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
@@ -155,6 +156,7 @@ elb_insecure_protocol_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with vulnerable SSL protocol",
     "Policy Description": "This policy identifies Elastic Load Balancers (Classic) which are configured with SSL negotiation policy containing vulnerable SSL protocol. The SSL protocol establishes a secure connection between a client and a server and ensures that all the data passed between the client and your load balancer is private. As a security best practice, it is recommended to use the latest version SSL protocol.",
+    "Compliance": [],
     "Resource Type": "aws_elb",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
@@ -192,6 +194,7 @@ elb_access_log_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS Elastic Load Balancer (Classic) with access log disabled",
     "Policy Description": "This policy identifies Classic Elastic Load Balancers which have access log disabled. When Access log enabled, Classic load balancer captures detailed information about requests sent to your load balancer. Each log contains information such as the time the request was received, the client's IP address, latencies, request paths, and server responses. You can use these access logs to analyze traffic patterns and to troubleshoot issues.",
+    "Compliance": [],
     "Resource Type": "aws_elb",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
@@ -229,6 +232,7 @@ elb_conn_drain_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS Elastic Load Balancer (Classic) with connection draining disabled",
     "Policy Description": "This policy identifies Classic Elastic Load Balancers which have connection draining disabled. Connection Draining feature ensures that a Classic load balancer stops sending requests to instances that are de-registering or unhealthy, while keeping the existing connections open. This enables the load balancer to complete in-flight requests made to instances that are de-registering or unhealthy.",
+    "Compliance": [],
     "Resource Type": "aws_elb",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
@@ -266,6 +270,7 @@ elb_crosszone_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS Elastic Load Balancer (Classic) with cross-zone load balancing disabled",
     "Policy Description": "This policy identifies Classic Elastic Load Balancers which have cross-zone load balancing disabled. When Cross-zone load balancing enabled, classic load balancer distributes requests evenly across the registered instances in all enabled Availability Zones. Cross-zone load balancing reduces the need to maintain equivalent numbers of instances in each enabled Availability Zone, and improves your application's ability to handle the loss of one or more instances.",
+    "Compliance": [],
     "Resource Type": "aws_elb",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
@@ -316,6 +321,7 @@ elb_sec_group_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS Elastic Load Balancer (ELB) has security group with no inbound rules",
     "Policy Description": "This policy identifies Elastic Load Balancers (ELB) which have security group with no inbound rules. A security group with no inbound rule will deny all incoming requests. ELB security groups should have at least one inbound rule, ELB with no inbound permissions will deny all traffic incoming to ELB; in other words, the ELB is useless without inbound permissions.",
+    "Compliance": [],
     "Resource Type": "aws_elb",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
@@ -368,6 +374,7 @@ elb_not_in_use_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS Elastic Load Balancer (ELB) not in use",
     "Policy Description": "This policy identifies unused Elastic Load Balancers (ELBs) in your AWS account. Any Elastic Load Balancer in your AWS account is adding charges to your monthly bill, although it is not used by any resources. As a best practice, it is recommended to remove ELBs that are not associated with any instances, it will also help you avoid unexpected charges on your bill.",
+    "Compliance": ["ISO 27001"],
     "Resource Type": "aws_elb",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
@@ -427,6 +434,7 @@ elb_alb_logs_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balancer (ALB) with access log disabled",
     "Policy Description": "This policy identifies ELBv2 ALBs which have access log disabled. Access logs capture detailed information about requests sent to your load balancer and each log contains information such as the time the request was received, the client's IP address, latencies, request paths, and server responses. You can use these access logs to analyze traffic patterns and troubleshoot issues.",
+    "Compliance": [],
     "Resource Type": "aws_elb",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
@@ -492,6 +500,7 @@ elb_listener_ssl_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS Elastic Load Balancer with listener TLS/SSL disabled",
     "Policy Description": "This policy identifies Elastic Load Balancers which have listener TLS/SSL disabled. As Load Balancers will be handling all incoming requests and routing the traffic accordingly; The listeners on the load balancers should always receive traffic over secure channel with a valid SSL certificate configured.",
+    "Compliance": ["CSA-CCM","GDPR","HITRUST","ISO 27001","NIST 800","SOC 2"],
     "Resource Type": "aws_elb",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
@@ -545,6 +554,7 @@ elb_over_https_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS Application Load Balancer (ALB) listener that allow connection requests over HTTP",
     "Policy Description": "This policy identifies Application Load Balancer (ALB) listeners that are configured to accept connection requests over HTTP instead of HTTPS. As a best practice, use the HTTPS protocol to encrypt the communication between the application clients and the application load balancer.",
+    "Compliance": [],
     "Resource Type": "aws_elb",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"

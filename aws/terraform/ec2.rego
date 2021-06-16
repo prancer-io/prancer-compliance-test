@@ -49,6 +49,7 @@ ec2_iam_role_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS EC2 Instance IAM Role not enabled",
     "Policy Description": "AWS provides Identity Access Management (IAM) roles to securely access AWS services and resources. The role is an identity with permission policies that define what the identity can and cannot do in AWS. As a best practice, create IAM roles and attach the role to manage EC2 instance permissions securely instead of distributing or sharing keys or passwords.",
+    "Compliance": [],
     "Resource Type": "aws_instance",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html"

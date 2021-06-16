@@ -49,6 +49,7 @@ eks_multiple_sg_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS EKS cluster control plane assigned multiple security groups",
     "Policy Description": "Amazon EKS strongly recommends that you use a dedicated security group for each cluster control plane (one per cluster). This policy checks the number of security groups assigned to your cluster's control plane and alerts if there are more than one.",
+    "Compliance": [],
     "Resource Type": "aws_eks_cluster",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html"
