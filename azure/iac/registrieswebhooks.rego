@@ -38,7 +38,7 @@ acr_webhooks_err = "Azure ACR HTTPS not enabled for webhook" {
     azure_issue["acr_webhooks"]
 }
 
-acr_webhooks_miss_err = "Container registy webhook attribute serviceUri missing in the resource" {
+acr_webhooks_err = "Container registy webhook attribute serviceUri missing in the resource" {
     azure_attribute_absence["acr_webhooks"]
 }
 

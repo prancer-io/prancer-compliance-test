@@ -44,7 +44,7 @@ vnet_subnet_nsg_err = "Azure Virtual Network subnet is not configured with a Net
     azure_issue["vnet_subnet_nsg"]
 }
 
-vnet_subnet_nsg_miss_err = "Azure Virtual Network subnet is not configured with a Network Security Group" {
+vnet_subnet_nsg_err = "Azure Virtual Network subnet is not configured with a Network Security Group" {
     azure_attribute_absence["vnet_subnet_nsg"]
 }
 

@@ -38,7 +38,7 @@ aks_cni_net_err = "Azure AKS cluster Azure CNI networking not enabled" {
     azure_issue["aks_cni_net"]
 }
 
-aks_cni_net_miss_err = "AKS cluster attribute networkProfile.networkPlugin missing in the resource" {
+aks_cni_net_err = "AKS cluster attribute networkProfile.networkPlugin missing in the resource" {
     azure_attribute_absence["aks_cni_net"]
 }
 
@@ -90,7 +90,7 @@ aks_http_routing_err = "Azure AKS cluster HTTP application routing enabled" {
     azure_issue["aks_http_routing"]
 }
 
-aks_http_routing_miss_err = "AKS cluster attribute addonProfiles.httpApplicationRouting missing in the resource" {
+aks_http_routing_err = "AKS cluster attribute addonProfiles.httpApplicationRouting missing in the resource" {
     azure_attribute_absence["aks_http_routing"]
 }
 
@@ -142,7 +142,7 @@ aks_monitoring_err = "Azure AKS cluster monitoring not enabled" {
     azure_issue["aks_monitoring"]
 }
 
-aks_monitoring_miss_err = "AKS cluster attribute addonProfiles.omsagent missing in the resource" {
+aks_monitoring_err = "AKS cluster attribute addonProfiles.omsagent missing in the resource" {
     azure_attribute_absence["aks_monitoring"]
 }
 
@@ -194,7 +194,7 @@ aks_nodes_err = "Azure AKS cluster pool profile count contains less than 3 nodes
     azure_issue["aks_nodes"]
 }
 
-aks_nodes_miss_err = "AKS cluster attribute agentPoolProfiles missing in the resource" {
+aks_nodes_err = "AKS cluster attribute agentPoolProfiles missing in the resource" {
     azure_attribute_absence["aks_nodes"]
 }
 
@@ -246,7 +246,7 @@ aks_rbac_err = "Azure AKS enable role-based access control (RBAC) not enforced" 
     azure_issue["aks_rbac"]
 }
 
-aks_rbac_miss_err = "AKS cluster attribute enableRBAC missing in the resource" {
+aks_rbac_err = "AKS cluster attribute enableRBAC missing in the resource" {
     azure_attribute_absence["aks_rbac"]
 }
 

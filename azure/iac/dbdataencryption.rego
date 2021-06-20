@@ -38,7 +38,7 @@ db_encrypt_err = "SQL databases has encryption disabled" {
     azure_issue["db_encrypt"]
 }
 
-db_encrypt_miss_err = "DB encryption attribute status missing in the resource" {
+db_encrypt_err = "DB encryption attribute status missing in the resource" {
     azure_attribute_absence["db_encrypt"]
 }
 

@@ -50,7 +50,7 @@ db_firewall_err = "SQL Server Firewall rules allow access to any Azure internal 
     azure_issue["db_firewall"]
 }
 
-db_firewall_miss_err = "Firewall rule attribute startIpAddress/endIpAddress missing in the resource" {
+db_firewall_err = "Firewall rule attribute startIpAddress/endIpAddress missing in the resource" {
     azure_attribute_absence["db_firewall"]
 }
 
