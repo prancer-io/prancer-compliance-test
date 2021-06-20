@@ -38,7 +38,7 @@ dynabodb_encrypt_err = "AWS DynamoDB encrypted using AWS owned CMK instead of AW
     aws_issue["dynabodb_encrypt"]
 }
 
-dynabodb_encrypt_miss_err = "DynamoDB attribute server_side_encryption missing in the resource" {
+dynabodb_encrypt_err = "DynamoDB attribute server_side_encryption missing in the resource" {
     aws_attribute_absence["dynabodb_encrypt"]
 }
 

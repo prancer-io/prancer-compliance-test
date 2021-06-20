@@ -38,7 +38,7 @@ cf_default_cache_err = "AWS CloudFront Distributions with Field-Level Encryption
     aws_issue["cf_default_cache"]
 }
 
-cf_default_cache_miss_err = "Cloudfront attribute DistributionConfig missing in the resource" {
+cf_default_cache_err = "Cloudfront attribute DistributionConfig missing in the resource" {
     aws_attribute_absence["cf_default_cache"]
 }
 
@@ -92,7 +92,7 @@ cf_ssl_protocol_err = "AWS CloudFront distribution is using insecure SSL protoco
     aws_issue["cf_ssl_protocol"]
 }
 
-cf_ssl_protocol_miss_err = "Cloudfront attribute DistributionConfig Origins missing in the resource" {
+cf_ssl_protocol_err = "Cloudfront attribute DistributionConfig Origins missing in the resource" {
     aws_attribute_absence["cf_ssl_protocol"]
 }
 
@@ -145,7 +145,7 @@ cf_logging_err = "AWS CloudFront distribution with access logging disabled" {
     aws_issue["cf_logging"]
 }
 
-cf_logging_miss_err = "Cloudfront attribute DistributionConfig Logging in the resource" {
+cf_logging_err = "Cloudfront attribute DistributionConfig Logging in the resource" {
     aws_attribute_absence["cf_logging"]
 }
 
@@ -199,7 +199,7 @@ cf_https_only_err = "AWS CloudFront origin protocol policy does not enforce HTTP
     aws_issue["cf_https_only"]
 }
 
-cf_https_only_miss_err = "Cloudfront attribute DistributionConfig Origins missing in the resource" {
+cf_https_only_err = "Cloudfront attribute DistributionConfig Origins missing in the resource" {
     aws_attribute_absence["cf_https_only"]
 }
 
@@ -254,7 +254,7 @@ cf_https_err = "AWS CloudFront viewer protocol policy is not configured with HTT
     aws_issue["cf_https"]
 }
 
-cf_https_miss_err = "Cloudfront attribute ViewerProtocolPolicy missing in the resource" {
+cf_https_err = "Cloudfront attribute ViewerProtocolPolicy missing in the resource" {
     aws_attribute_absence["cf_https"]
 }
 
@@ -314,7 +314,7 @@ cf_min_protocol_err = "AWS CloudFront web distribution that allow TLS versions 1
     aws_issue["cf_min_protocol"]
 }
 
-cf_min_protocol_miss_err = "Cloudfront attribute MinimumProtocolVersion missing in the resource" {
+cf_min_protocol_err = "Cloudfront attribute MinimumProtocolVersion missing in the resource" {
     aws_attribute_absence["cf_min_protocol"]
 }
 
@@ -366,7 +366,7 @@ cf_firewall_err = "AWS CloudFront web distribution with AWS Web Application Fire
     aws_issue["cf_firewall"]
 }
 
-cf_firewall_miss_err = "Cloudfront attribute WebACLId missing in the resource" {
+cf_firewall_err = "Cloudfront attribute WebACLId missing in the resource" {
     aws_attribute_absence["cf_firewall"]
 }
 
@@ -455,7 +455,7 @@ cf_geo_restriction_err = "AWS CloudFront web distribution with geo restriction d
     aws_issue["cf_geo_restriction"]
 }
 
-cf_geo_restriction_miss_err = "Cloudfront attribute Geo RestrictionType missing in the resource" {
+cf_geo_restriction_err = "Cloudfront attribute Geo RestrictionType missing in the resource" {
     aws_attribute_absence["cf_geo_restriction"]
 }
 
@@ -509,7 +509,7 @@ cf_s3_origin_err = "AWS Cloudfront Distribution with S3 have Origin Access set t
     aws_issue["cf_s3_origin"]
 }
 
-cf_s3_origin_miss_err = "Cloudfront attribute Origins missing in the resource" {
+cf_s3_origin_err = "Cloudfront attribute Origins missing in the resource" {
     aws_attribute_absence["cf_s3_origin"]
 }
 

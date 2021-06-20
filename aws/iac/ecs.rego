@@ -38,7 +38,7 @@ ecs_task_evelated_err = "AWS ECS task definition elevated privileges enabled" {
     aws_issue["ecs_task_evelated"]
 }
 
-ecs_task_evelated_miss_err = "ECS taskdefinition attribute ContainerDefinitions missing in the resource" {
+ecs_task_evelated_err = "ECS taskdefinition attribute ContainerDefinitions missing in the resource" {
     aws_attribute_absence["ecs_task_evelated"]
 }
 
@@ -90,7 +90,7 @@ ecs_exec_err = "AWS ECS/Fargate task definition execution IAM Role not found" {
     aws_issue["ecs_exec"]
 }
 
-ecs_exec_miss_err = "ECS taskdefinition attribute ExecutionRoleArn missing in the resource" {
+ecs_exec_err = "ECS taskdefinition attribute ExecutionRoleArn missing in the resource" {
     aws_attribute_absence["ecs_exec"]
 }
 
@@ -142,7 +142,7 @@ ecs_root_user_err = "AWS ECS/Fargate task definition root user found" {
     aws_issue["ecs_root_user"]
 }
 
-ecs_root_user_miss_err = "ECS taskdefinition attribute ContainerDefinitions missing in the resource" {
+ecs_root_user_err = "ECS taskdefinition attribute ContainerDefinitions missing in the resource" {
     aws_attribute_absence["ecs_root_user"]
 }
 

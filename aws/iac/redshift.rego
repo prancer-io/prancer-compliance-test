@@ -45,7 +45,7 @@ redshift_encrypt_key_err = "AWS Redshift Cluster not encrypted using Customer Ma
     aws_issue["redshift_encrypt_key"]
 }
 
-redshift_encrypt_key_miss_err = "Redshift attribute KmsKeyId missing in the resource" {
+redshift_encrypt_key_err = "Redshift attribute KmsKeyId missing in the resource" {
     aws_attribute_absence["redshift_encrypt_key"]
 }
 
@@ -134,7 +134,7 @@ redshift_audit_err = "AWS Redshift database does not have audit logging enabled"
     aws_issue["redshift_audit"]
 }
 
-redshift_audit_miss_err = "Redshift attribute LoggingProperties.BucketName missing in the resource" {
+redshift_audit_err = "Redshift attribute LoggingProperties.BucketName missing in the resource" {
     aws_attribute_absence["redshift_audit"]
 }
 
@@ -195,7 +195,7 @@ redshift_require_ssl_err = "AWS Redshift does not have require_ssl configured" {
     aws_issue["redshift_require_ssl"]
 }
 
-redshift_require_ssl_miss_err = "Redshift attribute Properties missing in the resource" {
+redshift_require_ssl_err = "Redshift attribute Properties missing in the resource" {
     aws_attribute_absence["redshift_require_ssl"]
 }
 

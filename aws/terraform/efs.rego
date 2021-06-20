@@ -44,7 +44,7 @@ efs_kms_err = "AWS Elastic File System (EFS) not encrypted using Customer Manage
     aws_issue["efs_kms"]
 }
 
-efs_kms_miss_err = "EFS attribute kms_key_id missing in the resource" {
+efs_kms_err = "EFS attribute kms_key_id missing in the resource" {
     aws_attribute_absence["efs_kms"]
 }
 
@@ -96,7 +96,7 @@ efs_encrypt_err = "AWS Elastic File System (EFS) with encryption for data at res
     aws_issue["efs_encrypt"]
 }
 
-efs_encrypt_miss_err = "EFS attribute encrypted missing in the resource" {
+efs_encrypt_err = "EFS attribute encrypted missing in the resource" {
     aws_attribute_absence["efs_encrypt"]
 }
 
