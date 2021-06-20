@@ -40,7 +40,7 @@ svc_account_key_err = "GCP User managed service account keys are not rotated for
     gc_issue["svc_account_key"]
 }
 
-svc_account_key_miss_err = "GCP User managed service account keys attribute name missing in the resource" {
+svc_account_key_err = "GCP User managed service account keys attribute name missing in the resource" {
     gc_attribute_absence["svc_account_key"]
 }
 

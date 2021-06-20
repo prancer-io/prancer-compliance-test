@@ -44,7 +44,7 @@ k8s_svc_account_err = "GCP Kubernetes Engine Cluster Nodes have default Service 
     gc_issue["k8s_svc_account"]
 }
 
-k8s_svc_account_miss_err = "Kubernetes Engine Cluster attribute nodePools config missing in the resource" {
+k8s_svc_account_err = "Kubernetes Engine Cluster attribute nodePools config missing in the resource" {
     gc_attribute_absence["k8s_svc_account"]
 }
 
@@ -404,7 +404,7 @@ k8s_logging_err = "GCP Kubernetes Engine Clusters have Stackdriver Logging disab
     gc_issue["k8s_logging"]
 }
 
-k8s_logging_miss_err = "Kubernetes Engine Cluster attribute logging_service config missing in the resource" {
+k8s_logging_err = "Kubernetes Engine Cluster attribute logging_service config missing in the resource" {
     gc_attribute_absence["k8s_logging"]
 }
 
@@ -456,7 +456,7 @@ k8s_monitor_err = "GCP Kubernetes Engine Clusters have Stackdriver Monitoring di
     gc_issue["k8s_monitor"]
 }
 
-k8s_monitor_miss_err = "Kubernetes Engine Cluster attribute monitoring_service config missing in the resource" {
+k8s_monitor_err = "Kubernetes Engine Cluster attribute monitoring_service config missing in the resource" {
     gc_attribute_absence["k8s_monitor"]
 }
 
@@ -742,7 +742,7 @@ k8s_node_image_err = "GCP Kubernetes Engine Clusters not using Container-Optimiz
     gc_issue["k8s_node_image"]
 }
 
-k8s_node_image_miss_err = "Kubernetes Engine Cluster attribute image_type config missing in the resource" {
+k8s_node_image_err = "Kubernetes Engine Cluster attribute image_type config missing in the resource" {
     gc_attribute_absence["k8s_node_image"]
 }
 
@@ -893,7 +893,7 @@ k8s_db_encrypt_err = "GCP Kubernetes cluster Application-layer Secrets not encry
     gc_issue["k8s_db_encrypt"]
 }
 
-k8s_db_encrypt_miss_err = "Kubernetes Engine Cluster attribute database_encryption config missing in the resource" {
+k8s_db_encrypt_err = "Kubernetes Engine Cluster attribute database_encryption config missing in the resource" {
     gc_attribute_absence["k8s_db_encrypt"]
 }
 
@@ -1009,7 +1009,7 @@ k8s_zones_err = "GCP Kubernetes cluster Application-layer Secrets not encrypted"
     gc_issue["k8s_zones"]
 }
 
-k8s_zones_miss_err = "GCP Kubernetes cluster not in redundant zones" {
+k8s_zones_err = "GCP Kubernetes cluster not in redundant zones" {
     gc_attribute_absence["k8s_zones"]
 }
 

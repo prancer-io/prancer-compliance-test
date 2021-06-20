@@ -76,7 +76,7 @@ net_default_err = "GCP project is using the default network" {
     gc_issue["net_default"]
 }
 
-net_default_miss_err = "GCP network attribute name missing in the resource" {
+net_default_err = "GCP network attribute name missing in the resource" {
     gc_attribute_absence["net_default"]
 }
 
