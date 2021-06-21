@@ -9,7 +9,7 @@
                     "type": "aso",
                     "collection": "asotemplate",
                     "paths": [
-                        "/"
+                        "/azure-service-operator/config/samples/"
                     ]
                 }
             ]
