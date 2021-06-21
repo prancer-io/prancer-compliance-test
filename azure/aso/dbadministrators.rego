@@ -10,12 +10,12 @@ default db_ad_admin = null
 
 azure_issue["db_ad_admin"] {
     lower(input.kind) == "mysqlserveradministrator"
-    not resource.spec.administratorType
+    not spec[_].administratorType
 }
 
 azure_issue["db_ad_admin"] {
     lower(input.kind) == "mysqlserveradministrator"
-    lower(resource.properties.administratorType) != "activedirectory"
+    lower(properties.administratorType) != "activedirectory"
 }
 
 db_ad_admin {

@@ -10,22 +10,22 @@ default db_firewall = null
 
 azure_issue["db_firewall"] {
     lower(input.kind) == "azuresqlfirewallrule"
-    not resource.spec.startIpAddress
+    not spec[_].startIpAddress
 }
 
 azure_issue["db_firewall"] {
     lower(input.kind) == "azuresqlfirewallrule"
-    not resource.spec.endIpAddress
+    not spec[_].endIpAddress
 }
 
 azure_issue["db_firewall"] {
     lower(input.kind) == "azuresqlfirewallrule"
-    resource.spec.startIpAddress == "0.0.0.0"
+    spec[_].startIpAddress == "0.0.0.0"
 }
 
 azure_issue["db_firewall"] {
     lower(input.kind) == "azuresqlfirewallrule"
-    resource.spec.endIpAddress == "0.0.0.0"
+    spec[_].endIpAddress == "0.0.0.0"
 }
 
 db_firewall {

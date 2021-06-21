@@ -10,7 +10,7 @@ default storage_secure = null
 
 azure_issue["storage_secure"] {
     lower(input.kind) == "storageaccount"
-    resource.spec.supportsHttpsTrafficOnly == false
+    spec[_].supportsHttpsTrafficOnly == false
 }
 
 storage_secure {
