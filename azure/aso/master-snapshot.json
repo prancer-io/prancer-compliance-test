@@ -9,7 +9,7 @@
                     "type": "aso",
                     "collection": "asotemplate",
                     "paths": [
-                        "/config/samples/kustomization.yaml"
+                        "/config/samples/kustomization.yaml/"
                     ]
                 }
             ]
