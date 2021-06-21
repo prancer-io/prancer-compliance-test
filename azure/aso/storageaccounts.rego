@@ -9,13 +9,12 @@ package rule
 default storage_secure = null
 
 azure_issue["storage_secure"] {
-    resource := input.resources[_]
-    lower(resource.kind) == "storageaccount"
+    lower(input.kind) == "storageaccount"
     resource.spec.supportsHttpsTrafficOnly == false
 }
 
 storage_secure {
-    lower(input.resources[_].type) == "storageaccount"
+    lower(input.type) == "storageaccount"
     not azure_issue["storage_secure"]
 }
 

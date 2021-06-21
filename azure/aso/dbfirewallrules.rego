@@ -9,26 +9,22 @@ package rule
 default db_firewall = null
 
 azure_issue["db_firewall"] {
-    resource := input.resources[_]
-    lower(resource.kind) == "azuresqlfirewallrule"
+    lower(input.kind) == "azuresqlfirewallrule"
     not resource.spec.startIpAddress
 }
 
 azure_issue["db_firewall"] {
-    resource := input.resources[_]
-    lower(resource.kind) == "azuresqlfirewallrule"
+    lower(input.kind) == "azuresqlfirewallrule"
     not resource.spec.endIpAddress
 }
 
 azure_issue["db_firewall"] {
-    resource := input.resources[_]
-    lower(resource.kind) == "azuresqlfirewallrule"
+    lower(input.kind) == "azuresqlfirewallrule"
     resource.spec.startIpAddress == "0.0.0.0"
 }
 
 azure_issue["db_firewall"] {
-    resource := input.resources[_]
-    lower(resource.kind) == "azuresqlfirewallrule"
+    lower(input.kind) == "azuresqlfirewallrule"
     resource.spec.endIpAddress == "0.0.0.0"
 }
 

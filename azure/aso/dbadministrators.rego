@@ -9,19 +9,17 @@ package rule
 default db_ad_admin = null
 
 azure_issue["db_ad_admin"] {
-    resource := input.resources[_]
-    lower(resource.kind) == "mysqlserveradministrator"
+    lower(input.kind) == "mysqlserveradministrator"
     not resource.spec.administratorType
 }
 
 azure_issue["db_ad_admin"] {
-    resource := input.resources[_]
-    lower(resource.kind) == "mysqlserveradministrator"
+    lower(input.kind) == "mysqlserveradministrator"
     lower(resource.properties.administratorType) != "activedirectory"
 }
 
 db_ad_admin {
-    lower(input.resources[_].kind) == "mysqlserveradministrator"
+    lower(input.kind) == "mysqlserveradministrator"
     not azure_issue["db_ad_admin"]
 }
 
