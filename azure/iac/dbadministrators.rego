@@ -56,7 +56,7 @@ db_ad_admin_err = "SQL servers which do not have Azure Active Directory admin co
     azure_issue["db_ad_admin"]
 }
 
-db_ad_admin_miss_err = "DB administrators attribute administratorType missing in the resource" {
+db_ad_admin_err = "DB administrators attribute administratorType missing in the resource" {
     azure_attribute_absence["db_ad_admin"]
 }
 

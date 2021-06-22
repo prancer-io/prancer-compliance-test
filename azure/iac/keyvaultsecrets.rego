@@ -39,7 +39,7 @@ kv_expire_err = "Azure Key Vault secrets have no expiration date" {
     azure_issue["kv_expire"]
 }
 
-kv_expire_miss_err = "Azure Key Vault attribute exp missing in the resource" {
+kv_expire_err = "Azure Key Vault attribute exp missing in the resource" {
     azure_attribute_absence["kv_expire"]
 }
 

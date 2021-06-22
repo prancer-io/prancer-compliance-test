@@ -51,7 +51,7 @@ s3_accesslog_err = "AWS Access logging not enabled on S3 buckets" {
     aws_issue["s3_accesslog"]
 }
 
-s3_accesslog_miss_err = "S3 Bucket attribute target_bucket/target_prefix missing in the resource" {
+s3_accesslog_err = "S3 Bucket attribute target_bucket/target_prefix missing in the resource" {
     aws_attribute_absence["s3_accesslog"]
 }
 
@@ -115,7 +115,7 @@ s3_acl_delete_err = "AWS S3 Bucket has Global DELETE Permissions enabled via buc
     aws_issue["s3_acl_delete"]
 }
 
-s3_acl_delete_miss_err = "S3 Policy attribute policy.Statement missing in the resource" {
+s3_acl_delete_err = "S3 Policy attribute policy.Statement missing in the resource" {
     aws_attribute_absence["s3_acl_delete"]
 }
 
@@ -179,7 +179,7 @@ s3_acl_get_err = "AWS S3 Bucket has Global get Permissions enabled via bucket po
     aws_issue["s3_acl_get"]
 }
 
-s3_acl_get_miss_err = "S3 Policy attribute policy.Statement missing in the resource" {
+s3_acl_get_err = "S3 Policy attribute policy.Statement missing in the resource" {
     aws_attribute_absence["s3_acl_get"]
 }
 
@@ -243,7 +243,7 @@ s3_acl_list_err = "AWS S3 Bucket has Global list Permissions enabled via bucket 
     aws_issue["s3_acl_list"]
 }
 
-s3_acl_list_miss_err = "S3 Policy attribute policy.Statement missing in the resource" {
+s3_acl_list_err = "S3 Policy attribute policy.Statement missing in the resource" {
     aws_attribute_absence["s3_acl_list"]
 }
 
@@ -307,7 +307,7 @@ s3_acl_put_err = "AWS S3 Bucket has Global put Permissions enabled via bucket po
     aws_issue["s3_acl_put"]
 }
 
-s3_acl_put_miss_err = "S3 Policy attribute policy.Statement missing in the resource" {
+s3_acl_put_err = "S3 Policy attribute policy.Statement missing in the resource" {
     aws_attribute_absence["s3_acl_put"]
 }
 
@@ -359,7 +359,7 @@ s3_versioning_err = "AWS S3 Object Versioning is disabled" {
     aws_issue["s3_versioning"]
 }
 
-s3_versioning_miss_err = "S3 Bucket attribute versioning.enabled missing in the resource" {
+s3_versioning_err = "S3 Bucket attribute versioning.enabled missing in the resource" {
     aws_attribute_absence["s3_versioning"]
 }
 
@@ -411,7 +411,7 @@ s3_transport_err = "AWS S3 bucket not configured with secure data transport poli
     aws_issue["s3_transport"]
 }
 
-s3_transport_miss_err = "S3 Policy attribute Condition SecureTransport missing in the resource" {
+s3_transport_err = "S3 Policy attribute Condition SecureTransport missing in the resource" {
     aws_attribute_absence["s3_transport"]
 }
 

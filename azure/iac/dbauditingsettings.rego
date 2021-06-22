@@ -50,7 +50,7 @@ sql_log_retention_err = "Azure SQL Server audit log retention is less than 91 da
     azure_issue["sql_log_retention"]
 }
 
-sql_log_retention_miss_err = "Auditing settings attribute state/retentionDays missing in the resource" {
+sql_log_retention_err = "Auditing settings attribute state/retentionDays missing in the resource" {
     azure_attribute_absence["sql_log_retention"]
 }
 

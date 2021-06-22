@@ -307,7 +307,7 @@ elb_sec_group_err = "AWS Elastic Load Balancer (ELB) has security group with no 
     aws_issue["elb_sec_group"]
 }
 
-elb_sec_group_miss_err = "ELB attribute SecurityGroups missing in the resource" {
+elb_sec_group_err = "ELB attribute SecurityGroups missing in the resource" {
     aws_issue["elb_sec_group"]
 }
 
@@ -359,7 +359,7 @@ elb_not_in_use_err = "AWS Elastic Load Balancer (ELB) not in use" {
     aws_issue["elb_not_in_use"]
 }
 
-elb_not_in_use_miss_err = "ELB attribute Instances missing in the resource" {
+elb_not_in_use_err = "ELB attribute Instances missing in the resource" {
     aws_attribute_absence["elb_not_in_use"]
 }
 
@@ -408,7 +408,7 @@ elb_alb_logs_err = "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balanc
     aws_issue["elb_alb_logs"]
 }
 
-elb_alb_logs_miss_err = "ELBv2 attribute LoadBalancerAttributes missing in the resource" {
+elb_alb_logs_err = "ELBv2 attribute LoadBalancerAttributes missing in the resource" {
     aws_issue["elb_alb_logs"]
 }
 
@@ -473,7 +473,7 @@ elb_listener_ssl_err = "AWS Elastic Load Balancer with listener TLS/SSL disabled
     aws_issue["elb_listener_ssl"]
 }
 
-elb_listener_ssl_miss_err = "ELB attribute Listeners missing in the resource" {
+elb_listener_ssl_err = "ELB attribute Listeners missing in the resource" {
     aws_attribute_absence["elb_listener_ssl"]
 }
 
@@ -525,7 +525,7 @@ elb_over_https_err = "AWS Elastic Load Balancer v2 (ELBv2) Application Load Bala
     aws_issue["elb_over_https"]
 }
 
-elb_over_https_miss_err = "ELBv2 attribute Protocol missing in the resource" {
+elb_over_https_err = "ELBv2 attribute Protocol missing in the resource" {
     aws_attribute_absence["elb_over_https"]
 }
 

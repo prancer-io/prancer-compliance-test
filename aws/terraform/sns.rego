@@ -39,7 +39,7 @@ sns_protocol_err = "AWS SNS subscription is not configured with HTTPS" {
     aws_issue["sns_protocol"]
 }
 
-sns_protocol_miss_err = "SNS attribute protocol missing in the resource" {
+sns_protocol_err = "SNS attribute protocol missing in the resource" {
     aws_attribute_absence["sns_protocol"]
 }
 
@@ -128,7 +128,7 @@ sns_encrypt_err = "AWS SNS topic with server-side encryption disabled" {
     aws_issue["sns_encrypt"]
 }
 
-sns_encrypt_miss_err = "SNS attribute kms_master_key_id missing in the resource" {
+sns_encrypt_err = "SNS attribute kms_master_key_id missing in the resource" {
     aws_attribute_absence["sns_encrypt"]
 }
 

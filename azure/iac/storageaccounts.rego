@@ -39,7 +39,7 @@ storage_secure_err = "Storage Accounts without Secure transfer enabled" {
     azure_issue["storage_secure"]
 }
 
-storage_secure_miss_err = "Storage Account attribute supportsHttpsTrafficOnly missing in the resource" {
+storage_secure_err = "Storage Account attribute supportsHttpsTrafficOnly missing in the resource" {
     azure_attribute_absence["storage_secure"]
 }
 
@@ -91,7 +91,7 @@ storage_acl_err = "Storage Accounts without their firewalls enabled" {
     azure_issue["storage_acl"]
 }
 
-storage_acl_miss_err = "Storage Account attribute networkAcls.defaultAction missing in the resource" {
+storage_acl_err = "Storage Account attribute networkAcls.defaultAction missing in the resource" {
     azure_attribute_absence["storage_acl"]
 }
 

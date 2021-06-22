@@ -82,7 +82,7 @@ cache_redis_auth_err = "AWS ElastiCache Redis cluster with encryption for data a
     aws_issue["cache_redis_auth"]
 }
 
-cache_redis_auth_miss_err = "ElastiCache Redis cluster attribute AuthToken missing in the resource" {
+cache_redis_auth_err = "ElastiCache Redis cluster attribute AuthToken missing in the resource" {
     aws_attribute_absence["cache_redis_auth"]
 }
 

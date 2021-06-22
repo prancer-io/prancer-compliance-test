@@ -38,7 +38,7 @@ acr_classic_err = "Azure Container Registry using the deprecated classic registr
     azure_issue["acr_classic"]
 }
 
-acr_classic_miss_err = "Azure Container registry attribute sku.name missing in the resource" {
+acr_classic_err = "Azure Container registry attribute sku.name missing in the resource" {
     azure_attribute_absence["acr_classic"]
 }
 

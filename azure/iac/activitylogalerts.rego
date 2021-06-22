@@ -38,7 +38,7 @@ alerts_err = "Send me emails about alerts is set to OFF in Security Center" {
     azure_issue["alerts"]
 }
 
-alerts_miss_err = "Activitylog alerts attribute enabled missing in the resource" {
+alerts_err = "Activitylog alerts attribute enabled missing in the resource" {
     azure_attribute_absence["alerts"]
 }
 

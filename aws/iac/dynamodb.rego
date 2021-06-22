@@ -38,7 +38,7 @@ dynamodb_encrypt_err = "AWS DynamoDB encrypted using AWS owned CMK instead of AW
     aws_issue["dynamodb_encrypt"]
 }
 
-dynamodb_encrypt_miss_err = "DynamoDB attribute SSEType missing in the resource" {
+dynamodb_encrypt_err = "DynamoDB attribute SSEType missing in the resource" {
     aws_attribute_absence["dynamodb_encrypt"]
 }
 
