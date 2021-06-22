@@ -224,6 +224,16 @@
                     "masterSnapshotId": "AZRSNP_232",
                     "type": "Microsoft.Network/publicIPAddresses",
                     "collection": "Microsoft.Network"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_405",
+                    "type": "Microsoft.Sql/servers/administrators",
+                    "collection": "Microsoft.Sql"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_406",
+                    "type": "Microsoft.Sql/managedInstances/administrators",
+                    "collection": "Microsoft.Sql"
                 }
             ]
         }
