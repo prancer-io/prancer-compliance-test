@@ -6,8 +6,8 @@
             "nodes": [
                 {
                     "masterSnapshotId": "KCC_TEMPLATE_SNAPSHOT",
-                    "type": "yaml",
-                    "collection": "deploymentmanagertemplate",
+                    "type": "kcc",
+                    "collection": "kcctemplate",
                     "paths": [
                         "/samples/resources/"
                     ]
