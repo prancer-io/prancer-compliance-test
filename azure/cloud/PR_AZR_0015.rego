@@ -33,7 +33,7 @@ classicregistry["classic_registry_is_not_exist"] {
 }
 
 
-rulepass = {
+rulepass {
     lower(input.type) == "microsoft.containerregistry/registries"
     not classicregistry["classic_registry_is_not_exist"]
 }
