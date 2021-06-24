@@ -13,7 +13,7 @@ common_ports := [
 ]
 
 rulepass = false {
-    lower(input.Type) == "aws::ec2::securitygroup"
+    # lower(input.Type) == "aws::ec2::securitygroup"
     ingress := input.SecurityGroups[_].IpPermissions[_]
     port := common_ports[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
@@ -22,7 +22,7 @@ rulepass = false {
 }
 
 rulepass = false {
-    lower(input.Type) == "aws::ec2::securitygroup"
+    # lower(input.Type) == "aws::ec2::securitygroup"
     ingress := input.SecurityGroups[_].IpPermissions[_]
     port := common_ports[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
