@@ -9,8 +9,8 @@ default rulepass = false
 # API Reference : https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html
 
 rulepass = true {
-    # lower(input.json.Type) == "aws::certificatemanager::certificate"
-    input.json.Certificate.Options.CertificateTransparencyLoggingPreference="ENABLED"
+    # lower(input.Type) == "aws::certificatemanager::certificate"
+    input.Certificate.Options.CertificateTransparencyLoggingPreference="ENABLED"
 }
 
 metadata := {

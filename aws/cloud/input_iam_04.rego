@@ -9,9 +9,9 @@ default rulepass = false
 # API: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAttachedUserPolicies.html
 
 rulepass = true {
-    # lower(input.json.Type) == "aws::iam::policy"
-    is_array(input.json.AttachedPolicies)=true
-    count(input.json.AttachedPolicies)>1
+    # lower(input.Type) == "aws::iam::policy"
+    is_array(input.AttachedPolicies)=true
+    count(input.AttachedPolicies)>1
 }
 
 metadata := {

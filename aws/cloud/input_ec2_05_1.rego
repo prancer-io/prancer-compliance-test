@@ -10,8 +10,8 @@ default rulepass = false
 # Id: 42
 
 rulepass {
-    # lower(input.json.Type) == "aws::ec2::instance"
-    instance := input.json.Reservations[_].Instances[_]
+    # lower(input.Type) == "aws::ec2::instance"
+    instance := input.Reservations[_].Instances[_]
     instance.IamInstanceProfile.Arn
 }
 

@@ -9,8 +9,8 @@ default rulepass = false
 # API: https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html
 
 rulepass {
-    # lower(input.json.Type) == "aws::lambda::function"
-    lower(input.json.Configuration.TracingConfig.Mode) != "passthrough"
+    # lower(input.Type) == "aws::lambda::function"
+    lower(input.Configuration.TracingConfig.Mode) != "passthrough"
 }
 
 metadata := {

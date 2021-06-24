@@ -9,8 +9,8 @@ default rulepass = true
 # API : https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html
 
 rulepass = false {
-    # lower(input.json.Type) == "aws::elasticloadbalancing::loadbalancer"
-    count(input.json.LoadBalancerDescriptions[_].SecurityGroups) == 0
+    # lower(input.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(input.LoadBalancerDescriptions[_].SecurityGroups) == 0
 }
 
 metadata := {

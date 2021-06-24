@@ -13,8 +13,8 @@ common_ports := [
 ]
 
 rulepass = false {
-    # lower(input.json.Type) == "aws::ec2::securitygroup"
-    ingress := input.json.SecurityGroups[_].IpPermissions[_]
+    # lower(input.Type) == "aws::ec2::securitygroup"
+    ingress := input.SecurityGroups[_].IpPermissions[_]
     port := common_ports[_]
     ingress.IpRanges[_].CidrIp == "0.0.0.0/0"
     to_number(ingress.FromPort) <= port
@@ -22,8 +22,8 @@ rulepass = false {
 }
 
 rulepass = false {
-    # lower(input.json.Type) == "aws::ec2::securitygroup"
-    ingress := input.json.SecurityGroups[_].IpPermissions[_]
+    # lower(input.Type) == "aws::ec2::securitygroup"
+    ingress := input.SecurityGroups[_].IpPermissions[_]
     port := common_ports[_]
     ingress.Ipv6Ranges[_].CidrIpv6="::/0"
     to_number(ingress.FromPort) <= port

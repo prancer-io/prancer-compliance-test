@@ -9,9 +9,9 @@ default rulepass = false
 # API: https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html
 
 rulepass {
-    # lower(input.json.Type) == "aws::lambda::function"
-    input.json.Configuration.VpcConfig
-    input.json.Configuration.VpcConfig.VpcId
+    # lower(input.Type) == "aws::lambda::function"
+    input.Configuration.VpcConfig
+    input.Configuration.VpcConfig.VpcId
 }
 
 metadata := {
