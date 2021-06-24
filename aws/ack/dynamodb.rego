@@ -1,6 +1,6 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html
+# https://github.com/aws-controllers-k8s/dynamodb-controller
 
 #
 # PR-AWS-0036-ACK
