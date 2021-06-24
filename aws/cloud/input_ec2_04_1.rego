@@ -9,14 +9,14 @@ default rulepass = false
 # API Documentation: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshotAttribute.html
 
 rulepass = true {
-    # lower(input.json.Type) == "AWS::EC2::Volume"
-    volumePermission := input.json.CreateVolumePermissions[_]
+    # lower(input.Type) == "AWS::EC2::Volume"
+    volumePermission := input.CreateVolumePermissions[_]
     volumePermission.UserId
 }
 
 rulepass = true {
-    # lower(input.json.Type) == "AWS::EC2::Volume"
-    volumePermission := input.json.CreateVolumePermissions[_]
+    # lower(input.Type) == "AWS::EC2::Volume"
+    volumePermission := input.CreateVolumePermissions[_]
     volumePermission.Group != "all"
 }
 

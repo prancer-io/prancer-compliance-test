@@ -9,8 +9,8 @@ default rulepass = true
 # API: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketAcl.html
 
 rulepass = false {
-    # lower(input.json.Type) == "aws::s3::bucket"
-    grant := input.json.Grants[_]
+    # lower(input.Type) == "aws::s3::bucket"
+    grant := input.Grants[_]
     contains(lower(grant.Grantee.URI), "authenticatedusers")
 }
 

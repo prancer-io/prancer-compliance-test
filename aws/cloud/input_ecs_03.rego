@@ -9,8 +9,8 @@ default rulepass = false
 # API Documentation: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTaskDefinition.html
 
 rulepass {
-    # lower(input.json.Type) == "aws::ecs::taskdefinition"
-    startswith(input.json.taskDefinition.executionRoleArn, "arn:aws:iam")
+    # lower(input.Type) == "aws::ecs::taskdefinition"
+    startswith(input.taskDefinition.executionRoleArn, "arn:aws:iam")
 }
 
 metadata := {

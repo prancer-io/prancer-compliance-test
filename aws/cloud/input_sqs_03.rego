@@ -9,9 +9,9 @@ default rulepass = false
 # API: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_GetQueueAttributes.html
 
 rulepass {
-    # lower(input.json.Type) == "aws::sqs::queue"
-    input.json.Attributes.KmsMasterKeyId
-    lower(input.json.Attributes.KmsMasterKeyId) != "alias/aws/sqs"
+    # lower(input.Type) == "aws::sqs::queue"
+    input.Attributes.KmsMasterKeyId
+    lower(input.Attributes.KmsMasterKeyId) != "alias/aws/sqs"
 }
 
 metadata := {

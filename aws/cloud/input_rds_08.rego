@@ -9,8 +9,8 @@ default rulepass = false
 # API: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html
 
 rulepass {
-    # lower(input.json.Type) == "aws::rds::dbinstance"
-    instance := input.json.DBInstances[_]
+    # lower(input.Type) == "aws::rds::dbinstance"
+    instance := input.DBInstances[_]
     instance.PerformanceInsightsKMSKeyId
 }
 

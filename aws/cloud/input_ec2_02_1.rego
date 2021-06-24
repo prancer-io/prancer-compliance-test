@@ -8,7 +8,7 @@ default rulepass = false
 # API Documentation: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html
 
 rulepass = true {
-    # lower(input.json.Type) == "aws::ec2::securitygroup"
+    # lower(input.Type) == "aws::ec2::securitygroup"
     count(uphold) == 0
 }
 
@@ -25,17 +25,17 @@ metadata := {
 }
 
 uphold["IpPermissions_CidrIp"] {
-    input.json.SecurityGroups[_].IpPermissions[_].IpRanges[_].CidrIp="0.0.0.0/0"
+    input.SecurityGroups[_].IpPermissions[_].IpRanges[_].CidrIp="0.0.0.0/0"
 }
 
 uphold["IpPermissions_CidrIpv6"] {
-    input.json.SecurityGroups[_].IpPermissions[_].Ipv6Ranges[_].CidrIpv6="::/0"
+    input.SecurityGroups[_].IpPermissions[_].Ipv6Ranges[_].CidrIpv6="::/0"
 }
 
 uphold["IpPermissionsEgress_CidrIp"] {
-    input.json.SecurityGroups[_].IpPermissionsEgress[_].IpRanges[_].CidrIp="0.0.0.0/0"
+    input.SecurityGroups[_].IpPermissionsEgress[_].IpRanges[_].CidrIp="0.0.0.0/0"
 }
 
 uphold["IpPermissionsEgress_CidrIpV6"] {
-    input.json.SecurityGroups[_].IpPermissionsEgress[_].Ipv6Ranges[_].CidrIpV6="::/0"
+    input.SecurityGroups[_].IpPermissionsEgress[_].Ipv6Ranges[_].CidrIpV6="::/0"
 }

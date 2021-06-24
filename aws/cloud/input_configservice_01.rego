@@ -7,8 +7,8 @@ package rule
 default rulepass = false
 
 rulepass = true {
-    input.json.ConfigurationRecorders[_].recordingGroup.allSupported=true
-    input.json.ConfigurationRecorders[_].recordingGroup.includeGlobalResourceTypes=true
+    input.ConfigurationRecorders[_].recordingGroup.allSupported=true
+    input.ConfigurationRecorders[_].recordingGroup.includeGlobalResourceTypes=true
 }
 
 metadata := {

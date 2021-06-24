@@ -9,9 +9,9 @@ default rulepass = false
 # API: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeCluster.html
 
 rulepass = true {
-    # lower(input.json.Type) == "aws::eks::cluster"
-    input.json.cluster.resourcesVpcConfig.endpointPrivateAccess=true
-    input.json.cluster.resourcesVpcConfig.endpointPublicAccess=false
+    # lower(input.Type) == "aws::eks::cluster"
+    input.cluster.resourcesVpcConfig.endpointPrivateAccess=true
+    input.cluster.resourcesVpcConfig.endpointPublicAccess=false
 }
 
 metadata := {

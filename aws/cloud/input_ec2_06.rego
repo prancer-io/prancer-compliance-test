@@ -9,15 +9,15 @@ default rulepass = true
 # API Documentation: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html
 
 rulepass = false {
-    # lower(input.json.Type) == "aws::ec2::instance"
-    instance := input.json.Reservations[_].Instances[_]
+    # lower(input.Type) == "aws::ec2::instance"
+    instance := input.Reservations[_].Instances[_]
     instance.PublicIpAddress
     instance.SecurityGroups[_].IpPermissionsEgress[_].IpRanges[_].CidrIp == "0.0.0.0/0"
 }
 
 rulepass = false {
-    # lower(input.json.Type) == "aws::ec2::instance"
-    instance := input.json.Reservations[_].Instances[_]
+    # lower(input.Type) == "aws::ec2::instance"
+    instance := input.Reservations[_].Instances[_]
     instance.PublicIpAddress
     instance.SecurityGroups[_].IpPermissionsEgress[_].Ipv6Ranges[_].CidrIpv6 == "::/0"
 }
