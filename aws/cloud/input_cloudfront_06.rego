@@ -10,8 +10,8 @@ default rulepass = false
 # Id: 21
 
 rulepass = true {
-    # lower(input.Type) == "aws::cloudfront::distribution"
-    input.Distribution.DistributionConfig.WebACLId!=""
+    # lower(input.json.Type) == "aws::cloudfront::distribution"
+    input.json.Distribution.DistributionConfig.WebACLId!=""
 }
 
 metadata := {

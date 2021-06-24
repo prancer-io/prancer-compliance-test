@@ -9,13 +9,13 @@ default rulepass = false
 # API Documentation: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTaskDefinition.html
 
 rulepass {
-    # lower(input.Type) == "aws::ecs::taskdefinition"
-    not input.taskDefinition.containerDefinitions[0].user
+    # lower(input.json.Type) == "aws::ecs::taskdefinition"
+    not input.json.taskDefinition.containerDefinitions[0].user
 }
 
 rulepass {
-    # lower(input.Type) == "aws::ecs::taskdefinition"
-    lower(input.taskDefinition.containerDefinitions[0].user) != "root"
+    # lower(input.json.Type) == "aws::ecs::taskdefinition"
+    lower(input.json.taskDefinition.containerDefinitions[0].user) != "root"
 }
 
 metadata := {

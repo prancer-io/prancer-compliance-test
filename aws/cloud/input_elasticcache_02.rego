@@ -9,9 +9,9 @@ default rulepass = false
 # API: https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeGlobalReplicationGroups.html
 
 rulepass = true {
-    # lower(input.Type) == "aws::elasticache::replicationgroup"
-    input.ReplicationGroups[_].AuthTokenEnabled=true
-    input.ReplicationGroups[_].TransitEncryptionEnabled=true
+    # lower(input.json.Type) == "aws::elasticache::replicationgroup"
+    input.json.ReplicationGroups[_].AuthTokenEnabled=true
+    input.json.ReplicationGroups[_].TransitEncryptionEnabled=true
 }
 
 metadata := {

@@ -9,8 +9,8 @@ default rulepass = false
 # API Reference : https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributions.html
 
 rulepass = true {
-    # lower(input.Type) == "aws::cloudfront::distribution"
-    input.Distribution.DistributionConfig.Restrictions.GeoRestriction.RestrictionType="whitelist"
+    # lower(input.json.Type) == "aws::cloudfront::distribution"
+    input.json.Distribution.DistributionConfig.Restrictions.GeoRestriction.RestrictionType="whitelist"
 }
 
 metadata := {

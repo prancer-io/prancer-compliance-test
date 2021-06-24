@@ -9,8 +9,8 @@ default rulepass = false
 # API Documentation: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTaskDefinition.html
 
 rulepass {
-    # lower(input.Type) == "aws::ecs::taskdefinition"
-    input.taskDefinition.containerDefinitions[_].privileged == false
+    # lower(input.json.Type) == "aws::ecs::taskdefinition"
+    input.json.taskDefinition.containerDefinitions[_].privileged == false
 }
 
 metadata := {

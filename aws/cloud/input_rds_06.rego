@@ -9,8 +9,8 @@ default rulepass = true
 # API: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html
 
 rulepass = false {
-    # lower(input.Type) == "aws::rds::dbinstance"
-    input.DBInstances[_].AutoMinorVersionUpgrade = false
+    # lower(input.json.Type) == "aws::rds::dbinstance"
+    input.json.DBInstances[_].AutoMinorVersionUpgrade = false
 }
 
 metadata := {
