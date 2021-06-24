@@ -9,8 +9,8 @@ default rulepass = false
 # API Reference : https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStacks.html
 
 rulepass = true {
-    # lower(input.Type) == "aws::cloudformation::stack"
-    count(input.Stacks[_].NotificationARNs) > 0
+    # lower(input.json.Type) == "aws::cloudformation::stack"
+    count(input.json.Stacks[_].NotificationARNs) > 0
 }
 
 metadata := {

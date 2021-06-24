@@ -9,8 +9,8 @@ default rulepass = true
 # API Documentation: https://docs.aws.amazon.com/efs/latest/ug/API_DescribeFileSystems.html
 
 rulepass = false {
-    # lower(input.Type) == "aws::efs::filesystem"
-    input.FileSystems[_].Encrypted == false
+    # lower(input.json.Type) == "aws::efs::filesystem"
+    input.json.FileSystems[_].Encrypted == false
 }
 
 metadata := {

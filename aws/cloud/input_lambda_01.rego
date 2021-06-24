@@ -9,8 +9,8 @@ default rulepass = false
 # API: https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html
 
 rulepass {
-    # lower(input.Type) == "aws::lambda::function"
-    input.Configuration.KMSKeyArn
+    # lower(input.json.Type) == "aws::lambda::function"
+    input.json.Configuration.KMSKeyArn
 }
 
 metadata := {

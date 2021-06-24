@@ -9,8 +9,8 @@ default rulepass = false
 # API: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeParameters.html
 
 rulepass = true {
-    # lower(input.Type) == "aws::ssm::parameter"
-    input.Parameters[_].Type='SecureString'
+    # lower(input.json.Type) == "aws::ssm::parameter"
+    input.json.Parameters[_].Type='SecureString'
 }
 
 metadata := {

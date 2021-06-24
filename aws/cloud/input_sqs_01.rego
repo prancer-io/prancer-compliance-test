@@ -9,9 +9,9 @@ default rulepass = false
 # API: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_GetQueueAttributes.html
 
 rulepass {
-    # lower(input.Type) == "aws::sqs::queue"
-    input.Attributes.RedrivePolicy
-    contains(lower(input.Attributes.RedrivePolicy), "deadlettertargetarn")
+    # lower(input.json.Type) == "aws::sqs::queue"
+    input.json.Attributes.RedrivePolicy
+    contains(lower(input.json.Attributes.RedrivePolicy), "deadlettertargetarn")
 }
 
 metadata := {

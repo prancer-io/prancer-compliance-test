@@ -9,13 +9,13 @@ default rulepass = false
 # API: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLogging.html
 
 rulepass {
-    # lower(input.Type) == "aws::s3::bucket"	
-    not is_null(input.LoggingEnabled.TargetBucket)
+    # lower(input.json.Type) == "aws::s3::bucket"	
+    not is_null(input.json.LoggingEnabled.TargetBucket)
 }
 
 rulepass {
-    # lower(input.Type) == "aws::s3::bucket"
-    not input.LoggingEnabled.TargetPrefix=""
+    # lower(input.json.Type) == "aws::s3::bucket"
+    not input.json.LoggingEnabled.TargetPrefix=""
 }
 
 metadata := {

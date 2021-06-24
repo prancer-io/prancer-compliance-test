@@ -9,16 +9,16 @@ default rulepass = false
 # API: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountPasswordPolicy.html
 
 rulepass = true {
-    # lower(input.Type) == "aws::iam::policy"
-    input.PasswordPolicy.RequireNumbers=true
-    input.PasswordPolicy.RequireSymbols=true
-    input.PasswordPolicy.ExpirePasswords=true
-    input.PasswordPolicy.AllowUsersToChangePassword=true
-    input.PasswordPolicy.RequireLowercaseCharacters=true
-    input.PasswordPolicy.RequireUppercaseCharacters=true
-    input.PasswordPolicy.MaxPasswordAge
-    input.PasswordPolicy.PasswordReusePrevention
-    input.PasswordPolicy.MinimumPasswordLength
+    # lower(input.json.Type) == "aws::iam::policy"
+    input.json.PasswordPolicy.RequireNumbers=true
+    input.json.PasswordPolicy.RequireSymbols=true
+    input.json.PasswordPolicy.ExpirePasswords=true
+    input.json.PasswordPolicy.AllowUsersToChangePassword=true
+    input.json.PasswordPolicy.RequireLowercaseCharacters=true
+    input.json.PasswordPolicy.RequireUppercaseCharacters=true
+    input.json.PasswordPolicy.MaxPasswordAge
+    input.json.PasswordPolicy.PasswordReusePrevention
+    input.json.PasswordPolicy.MinimumPasswordLength
 }
 
 metadata := {

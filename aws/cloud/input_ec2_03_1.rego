@@ -9,13 +9,13 @@ default rulepass = false
 # API Documentation: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVolumes.html
 
 rulepass = true {
-    # lower(input.Type) == "AWS::EC2::Volume"
-    input.Volumes[_].Attachments[_].State="attached"
+    # lower(input.json.Type) == "AWS::EC2::Volume"
+    input.json.Volumes[_].Attachments[_].State="attached"
 }
 
 rulepass = true {
-    # lower(input.Type) == "AWS::EC2::Volume"
-    input.Volumes[_].Attachments[_]
+    # lower(input.json.Type) == "AWS::EC2::Volume"
+    input.json.Volumes[_].Attachments[_]
 }
 
 metadata := {
@@ -30,5 +30,5 @@ metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVolumes.html"
 }
 
-# The value for the key input.Volumes[_].Attachments[_].State is equal to "attached" and the attachment list is not null. As both
+# The value for the key input.json.Volumes[_].Attachments[_].State is equal to "attached" and the attachment list is not null. As both
 # the above conditions are True. Therefore the test will pass.
