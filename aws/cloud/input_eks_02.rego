@@ -9,7 +9,7 @@ default rulepass = false
 # API: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeCluster.html
 
 rulepass = true {
-    lower(input.Type) == "aws::eks::cluster"
+    # lower(input.Type) == "aws::eks::cluster"
     input.cluster.logging.clusterLogging[_].enabled=true
 }
 
