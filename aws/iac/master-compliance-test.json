@@ -16,8 +16,8 @@
                             "id": "PR-AWS-0001-CFR",
                             "eval": "data.rule.acm_wildcard",
                             "message": "data.rule.acm_wildcard_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html",
+                            "remediationFunction": "PR_AWS_0001_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -45,8 +45,8 @@
                             "id": "PR-AWS-0009-CFR",
                             "eval": "data.rule.acm_ct_log",
                             "message": "data.rule.acm_ct_log_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html",
+                            "remediationFunction": "PR_AWS_0009_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -78,8 +78,8 @@
                             "id": "PR-AWS-0002-CFR",
                             "eval": "data.rule.api_gw_cert",
                             "message": "data.rule.api_gw_cert_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html",
+                            "remediationFunction": "PR_AWS_0002_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -110,8 +110,8 @@
                             "id": "gID6",
                             "eval": "data.rule.db_exposed",
                             "message": "data.rule.db_exposed_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html",
+                            "remediationFunction": "PR_AWS_gID6_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -137,8 +137,8 @@
                             "id": "gID1",
                             "eval": "data.rule.aks_monitoring",
                             "message": "data.rule.aks_monitoring_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html",
+                            "remediationFunction": "PR_AWS_gID1_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -167,8 +167,8 @@
                             "id": "gID2",
                             "eval": "data.rule.aks_nodes",
                             "message": "data.rule.aks_nodes_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html",
+                            "remediationFunction": "PR_AWS_gID2_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -197,8 +197,8 @@
                             "id": "PR-AWS-0014-CFR",
                             "eval": "data.rule.cf_sns",
                             "message": "data.rule.cf_sns_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-stack.html",
+                            "remediationFunction": "PR_AWS_0014_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -226,8 +226,8 @@
                             "id": "PR-AWS-0015-CFR",
                             "eval": "data.rule.cf_default_cache",
                             "message": "data.rule.cf_default_cache_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationFunction": "PR_AWS_0015_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -255,8 +255,8 @@
                             "id": "PR-AWS-0016-CFR",
                             "eval": "data.rule.cf_ssl_protocol",
                             "message": "data.rule.cf_ssl_protocol_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationFunction": "PR_AWS_0016_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -284,8 +284,8 @@
                             "id": "PR-AWS-0017-CFR",
                             "eval": "data.rule.cf_logging",
                             "message": "data.rule.cf_logging_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationFunction": "PR_AWS_0017_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -313,8 +313,8 @@
                             "id": "PR-AWS-0018-CFR",
                             "eval": "data.rule.cf_https_only",
                             "message": "data.rule.cf_https_only_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationFunction": "PR_AWS_0018_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -342,8 +342,8 @@
                             "id": "PR-AWS-0019-CFR",
                             "eval": "data.rule.cf_https",
                             "message": "data.rule.cf_https_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationFunction": "PR_AWS_0019_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -371,8 +371,8 @@
                             "id": "PR-AWS-0020-CFR",
                             "eval": "data.rule.cf_min_protocol",
                             "message": "data.rule.cf_min_protocol_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationFunction": "PR_AWS_0020_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -400,8 +400,8 @@
                             "id": "PR-AWS-0021-CFR",
                             "eval": "data.rule.cf_firewall",
                             "message": "data.rule.cf_firewall_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationFunction": "PR_AWS_0021_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -429,8 +429,8 @@
                             "id": "PR-AWS-0022-CFR",
                             "eval": "data.rule.cf_default_ssl",
                             "message": "data.rule.cf_default_ssl_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationFunction": "PR_AWS_0022_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -458,8 +458,8 @@
                             "id": "PR-AWS-0023-CFR",
                             "eval": "data.rule.cf_geo_restriction",
                             "message": "data.rule.cf_geo_restriction_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationFunction": "PR_AWS_0023_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -487,8 +487,8 @@
                             "id": "PR-AWS-0024-CFR",
                             "eval": "data.rule.cf_s3_origin",
                             "message": "data.rule.cf_s3_origin_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationFunction": "PR_AWS_0024_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -516,8 +516,8 @@
                             "id": "PR-AWS-0026-CFR",
                             "eval": "data.rule.ct_regions",
                             "message": "data.rule.ct_regions_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html",
+                            "remediationFunction": "PR_AWS_0026_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -555,8 +555,8 @@
                             "id": "PR-AWS-0027-CFR",
                             "eval": "data.rule.ct_log_validation",
                             "message": "data.rule.ct_log_validation_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html",
+                            "remediationFunction": "PR_AWS_0027_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -593,8 +593,8 @@
                             "id": "PR-AWS-0028-CFR",
                             "eval": "data.rule.ct_master_key",
                             "message": "data.rule.ct_master_key_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html",
+                            "remediationFunction": "PR_AWS_0028_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -630,8 +630,8 @@
                             "id": "PR-AWS-0192-CFR",
                             "eval": "data.rule.ct_cloudwatch",
                             "message": "data.rule.ct_cloudwatch_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html",
+                            "remediationFunction": "PR_AWS_0192_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -668,8 +668,8 @@
                             "id": "PR-AWS-0036-CFR",
                             "eval": "data.rule.dynabodb_encrypt",
                             "message": "data.rule.dynabodb_encrypt_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html",
+                            "remediationFunction": "PR_AWS_0036_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -697,8 +697,8 @@
                             "id": "PR-AWS-0041-CFR",
                             "eval": "data.rule.ebs_encrypt",
                             "message": "data.rule.ebs_encrypt_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volume.html",
+                            "remediationFunction": "PR_AWS_0041_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -733,8 +733,8 @@
                             "id": "PR-AWS-0042-CFR",
                             "eval": "data.rule.ec2_iam_role",
                             "message": "data.rule.ec2_iam_role_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html",
+                            "remediationFunction": "PR_AWS_0042_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -762,8 +762,8 @@
                             "id": "PR-AWS-0047-CFR",
                             "eval": "data.rule.ecs_task_evelated",
                             "message": "data.rule.ecs_task_evelated_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html",
+                            "remediationFunction": "PR_AWS_0047_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -791,8 +791,8 @@
                             "id": "PR-AWS-0048-CFR",
                             "eval": "data.rule.ecs_exec",
                             "message": "data.rule.ecs_exec_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html",
+                            "remediationFunction": "PR_AWS_0048_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -820,8 +820,8 @@
                             "id": "PR-AWS-0049-CFR",
                             "eval": "data.rule.ecs_root_user",
                             "message": "data.rule.ecs_root_user_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html",
+                            "remediationFunction": "PR_AWS_0049_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -849,8 +849,8 @@
                             "id": "PR-AWS-0060-CFR",
                             "eval": "data.rule.efs_kms",
                             "message": "data.rule.efs_kms_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-filesystem.html",
+                            "remediationFunction": "PR_AWS_0060_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -878,8 +878,8 @@
                             "id": "PR-AWS-0061-CFR",
                             "eval": "data.rule.efs_encrypt",
                             "message": "data.rule.efs_encrypt_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-filesystem.html",
+                            "remediationFunction": "PR_AWS_0061_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -907,8 +907,8 @@
                             "id": "PR-AWS-0050-CFR",
                             "eval": "data.rule.eks_multiple_sg",
                             "message": "data.rule.eks_multiple_sg_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html",
+                            "remediationFunction": "PR_AWS_0050_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -936,8 +936,8 @@
                             "id": "PR-AWS-0055-CFR",
                             "eval": "data.rule.cache_failover",
                             "message": "data.rule.cache_failover_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html",
+                            "remediationFunction": "PR_AWS_0055_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -965,8 +965,8 @@
                             "id": "PR-AWS-0056-CFR",
                             "eval": "data.rule.cache_redis_auth",
                             "message": "data.rule.cache_redis_auth_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html",
+                            "remediationFunction": "PR_AWS_0056_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -994,8 +994,8 @@
                             "id": "PR-AWS-0057-CFR",
                             "eval": "data.rule.cache_redis_encrypt",
                             "message": "data.rule.cache_redis_encrypt_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html",
+                            "remediationFunction": "PR_AWS_0057_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1023,8 +1023,8 @@
                             "id": "PR-AWS-0058-CFR",
                             "eval": "data.rule.cache_encrypt",
                             "message": "data.rule.cache_encrypt_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html",
+                            "remediationFunction": "PR_AWS_0058_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1052,8 +1052,8 @@
                             "id": "PR-AWS-0074-CFR",
                             "eval": "data.rule.esearch_vpc",
                             "message": "data.rule.esearch_vpc_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html",
+                            "remediationFunction": "PR_AWS_0074_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1079,8 +1079,8 @@
                             "id": "PR-AWS-0076-CFR",
                             "eval": "data.rule.esearch_encrypt",
                             "message": "data.rule.esearch_encrypt_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html",
+                            "remediationFunction": "PR_AWS_0076_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1111,8 +1111,8 @@
                             "id": "PR-AWS-0077-CFR",
                             "eval": "data.rule.esearch_master",
                             "message": "data.rule.esearch_master_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html",
+                            "remediationFunction": "PR_AWS_0077_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1138,8 +1138,8 @@
                             "id": "PR-AWS-0078-CFR",
                             "eval": "data.rule.esearch_index_slow_log",
                             "message": "data.rule.esearch_index_slow_log_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html",
+                            "remediationFunction": "PR_AWS_0078_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1169,8 +1169,8 @@
                             "id": "PR-AWS-0079-CFR",
                             "eval": "data.rule.esearch_search_slow_log",
                             "message": "data.rule.esearch_search_slow_log_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html",
+                            "remediationFunction": "PR_AWS_0079_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1200,8 +1200,8 @@
                             "id": "PR-AWS-0080-CFR",
                             "eval": "data.rule.esearch_zone_awareness",
                             "message": "data.rule.esearch_zone_awareness_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html",
+                            "remediationFunction": "PR_AWS_0080_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1230,8 +1230,8 @@
                             "id": "PR-AWS-0062-CFR",
                             "eval": "data.rule.elb_insecure_cipher",
                             "message": "data.rule.elb_insecure_cipher_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationFunction": "PR_AWS_0062_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1259,8 +1259,8 @@
                             "id": "PR-AWS-0063-CFR",
                             "eval": "data.rule.elb_insecure_protocol",
                             "message": "data.rule.elb_insecure_protocol_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationFunction": "PR_AWS_0063_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1288,8 +1288,8 @@
                             "id": "PR-AWS-0064-CFR",
                             "eval": "data.rule.elb_access_log",
                             "message": "data.rule.elb_access_log_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationFunction": "PR_AWS_0064_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1317,8 +1317,8 @@
                             "id": "PR-AWS-0065-CFR",
                             "eval": "data.rule.elb_conn_drain",
                             "message": "data.rule.elb_conn_drain_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationFunction": "PR_AWS_0065_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1346,8 +1346,8 @@
                             "id": "PR-AWS-0066-CFR",
                             "eval": "data.rule.elb_crosszone",
                             "message": "data.rule.elb_crosszone_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationFunction": "PR_AWS_0066_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1375,8 +1375,8 @@
                             "id": "PR-AWS-0068-CFR",
                             "eval": "data.rule.elb_sec_group",
                             "message": "data.rule.elb_sec_group_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationFunction": "PR_AWS_0068_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1404,8 +1404,8 @@
                             "id": "PR-AWS-0069-CFR",
                             "eval": "data.rule.elb_not_in_use",
                             "message": "data.rule.elb_not_in_use_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationFunction": "PR_AWS_0069_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1435,8 +1435,8 @@
                             "id": "PR-AWS-0072-CFR",
                             "eval": "data.rule.elb_alb_logs",
                             "message": "data.rule.elb_alb_logs_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationFunction": "PR_AWS_0072_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1464,8 +1464,8 @@
                             "id": "PR-AWS-0073-CFR",
                             "eval": "data.rule.elb_listener_ssl",
                             "message": "data.rule.elb_listener_ssl_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationFunction": "PR_AWS_0073_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1501,8 +1501,8 @@
                             "id": "PR-AWS-0006-CFR",
                             "eval": "data.rule.elb_over_https",
                             "message": "data.rule.elb_over_https_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationFunction": "PR_AWS_0006_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1530,8 +1530,8 @@
                             "id": "PR-AWS-0105-CFR",
                             "eval": "data.rule.lambda_env",
                             "message": "data.rule.lambda_env_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html",
+                            "remediationFunction": "PR_AWS_0105_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1559,8 +1559,8 @@
                             "id": "PR-AWS-0106-CFR",
                             "eval": "data.rule.lambda_vpc",
                             "message": "data.rule.lambda_vpc_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html",
+                            "remediationFunction": "PR_AWS_0106_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1588,8 +1588,8 @@
                             "id": "PR-AWS-0107-CFR",
                             "eval": "data.rule.lambda_tracing",
                             "message": "data.rule.lambda_tracing_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html",
+                            "remediationFunction": "PR_AWS_0107_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1620,8 +1620,8 @@
                             "id": "PR-AWS-0119-CFR",
                             "eval": "data.rule.rds_cluster_encrypt",
                             "message": "data.rule.rds_cluster_encrypt_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html",
+                            "remediationFunction": "PR_AWS_0119_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1649,8 +1649,8 @@
                             "id": "PR-AWS-0121-CFR",
                             "eval": "data.rule.rds_public",
                             "message": "data.rule.rds_public_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html",
+                            "remediationFunction": "PR_AWS_0121_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1683,8 +1683,8 @@
                             "id": "PR-AWS-0125-CFR",
                             "eval": "data.rule.rds_encrypt",
                             "message": "data.rule.rds_encrypt_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html",
+                            "remediationFunction": "PR_AWS_0125_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1721,8 +1721,8 @@
                             "id": "PR-AWS-0127-CFR",
                             "eval": "data.rule.rds_multiaz",
                             "message": "data.rule.rds_multiaz_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html",
+                            "remediationFunction": "PR_AWS_0127_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1750,8 +1750,8 @@
                             "id": "PR-AWS-0128-CFR",
                             "eval": "data.rule.rds_snapshot",
                             "message": "data.rule.rds_snapshot_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html",
+                            "remediationFunction": "PR_AWS_0128_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1779,8 +1779,8 @@
                             "id": "PR-AWS-0129-CFR",
                             "eval": "data.rule.rds_backup",
                             "message": "data.rule.rds_backup_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html",
+                            "remediationFunction": "PR_AWS_0129_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1808,8 +1808,8 @@
                             "id": "PR-AWS-0130-CFR",
                             "eval": "data.rule.rds_upgrade",
                             "message": "data.rule.rds_upgrade_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html",
+                            "remediationFunction": "PR_AWS_0130_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1837,8 +1837,8 @@
                             "id": "PR-AWS-0131-CFR",
                             "eval": "data.rule.rds_retention",
                             "message": "data.rule.rds_retention_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html",
+                            "remediationFunction": "PR_AWS_0131_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1866,8 +1866,8 @@
                             "id": "PR-AWS-0133-CFR",
                             "eval": "data.rule.redshift_encrypt_key",
                             "message": "data.rule.redshift_encrypt_key_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html",
+                            "remediationFunction": "PR_AWS_0133_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1895,8 +1895,8 @@
                             "id": "PR-AWS-0134-CFR",
                             "eval": "data.rule.redshift_public",
                             "message": "data.rule.redshift_public_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html",
+                            "remediationFunction": "PR_AWS_0134_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1931,8 +1931,8 @@
                             "id": "PR-AWS-0135-CFR",
                             "eval": "data.rule.redshift_audit",
                             "message": "data.rule.redshift_audit_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html",
+                            "remediationFunction": "PR_AWS_0135_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1967,8 +1967,8 @@
                             "id": "PR-AWS-0136-CFR",
                             "eval": "data.rule.redshift_require_ssl",
                             "message": "data.rule.redshift_require_ssl_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html",
+                            "remediationFunction": "PR_AWS_0136_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2002,8 +2002,8 @@
                             "id": "PR-AWS-0137-CFR",
                             "eval": "data.rule.redshift_encrypt",
                             "message": "data.rule.redshift_encrypt_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html",
+                            "remediationFunction": "PR_AWS_0137_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2039,8 +2039,8 @@
                             "id": "PR-AWS-0004-CFR",
                             "eval": "data.rule.s3_accesslog",
                             "message": "data.rule.s3_accesslog_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html",
+                            "remediationFunction": "PR_AWS_0004_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2075,8 +2075,8 @@
                             "id": "PR-AWS-0140-CFR",
                             "eval": "data.rule.s3_acl_delete",
                             "message": "data.rule.s3_acl_delete_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html",
+                            "remediationFunction": "PR_AWS_0140_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2104,8 +2104,8 @@
                             "id": "PR-AWS-0141-CFR",
                             "eval": "data.rule.s3_acl_get",
                             "message": "data.rule.s3_acl_get_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html",
+                            "remediationFunction": "PR_AWS_0141_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2133,8 +2133,8 @@
                             "id": "PR-AWS-0142-CFR",
                             "eval": "data.rule.s3_acl_list",
                             "message": "data.rule.s3_acl_list_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html",
+                            "remediationFunction": "PR_AWS_0142_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2162,8 +2162,8 @@
                             "id": "PR-AWS-0143-CFR",
                             "eval": "data.rule.s3_acl_put",
                             "message": "data.rule.s3_acl_put_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html",
+                            "remediationFunction": "PR_AWS_0143_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2191,8 +2191,8 @@
                             "id": "PR-AWS-0145-CFR",
                             "eval": "data.rule.s3_versioning",
                             "message": "data.rule.s3_versioning_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html",
+                            "remediationFunction": "PR_AWS_0145_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2220,8 +2220,8 @@
                             "id": "PR-AWS-0148-CFR",
                             "eval": "data.rule.s3_transport",
                             "message": "data.rule.s3_transport_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html",
+                            "remediationFunction": "PR_AWS_0148_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2249,8 +2249,8 @@
                             "id": "PR-AWS-0196-CFR",
                             "eval": "data.rule.s3_website",
                             "message": "data.rule.s3_website_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html",
+                            "remediationFunction": "PR_AWS_0196_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2280,8 +2280,8 @@
                             "id": "PR-AWS-0175-CFR",
                             "eval": "data.rule.port_135",
                             "message": "data.rule.port_135_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0175_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2307,8 +2307,8 @@
                             "id": "PR-AWS-0165-CFR",
                             "eval": "data.rule.port_137",
                             "message": "data.rule.port_137_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0165_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2334,8 +2334,8 @@
                             "id": "PR-AWS-0166-CFR",
                             "eval": "data.rule.port_138",
                             "message": "data.rule.port_138_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0166_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2361,8 +2361,8 @@
                             "id": "PR-AWS-0170-CFR",
                             "eval": "data.rule.port_1433",
                             "message": "data.rule.port_1433_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0170_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2388,8 +2388,8 @@
                             "id": "PR-AWS-0171-CFR",
                             "eval": "data.rule.port_1434",
                             "message": "data.rule.port_1434_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0171_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2415,8 +2415,8 @@
                             "id": "PR-AWS-0162-CFR",
                             "eval": "data.rule.port_20",
                             "message": "data.rule.port_20_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0162_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2442,8 +2442,8 @@
                             "id": "PR-AWS-0161-CFR",
                             "eval": "data.rule.port_21",
                             "message": "data.rule.port_21_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0161_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2469,8 +2469,8 @@
                             "id": "PR-AWS-0176-CFR",
                             "eval": "data.rule.port_22",
                             "message": "data.rule.port_22_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0176_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2506,8 +2506,8 @@
                             "id": "PR-AWS-0172-CFR",
                             "eval": "data.rule.port_23",
                             "message": "data.rule.port_23_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0172_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2533,8 +2533,8 @@
                             "id": "PR-AWS-0169-CFR",
                             "eval": "data.rule.port_25",
                             "message": "data.rule.port_25_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0169_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2560,8 +2560,8 @@
                             "id": "PR-AWS-0164-CFR",
                             "eval": "data.rule.port_3306",
                             "message": "data.rule.port_3306_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0164_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2587,8 +2587,8 @@
                             "id": "PR-AWS-0168-CFR",
                             "eval": "data.rule.port_3389",
                             "message": "data.rule.port_3389_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0168_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2624,8 +2624,8 @@
                             "id": "PR-AWS-0163-CFR",
                             "eval": "data.rule.port_4333",
                             "message": "data.rule.port_4333_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0163_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2651,8 +2651,8 @@
                             "id": "PR-AWS-0159-CFR",
                             "eval": "data.rule.port_445",
                             "message": "data.rule.port_445_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0159_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2678,8 +2678,8 @@
                             "id": "PR-AWS-0160-CFR",
                             "eval": "data.rule.port_53",
                             "message": "data.rule.port_53_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0160_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2705,8 +2705,8 @@
                             "id": "PR-AWS-0167-CFR",
                             "eval": "data.rule.port_5432",
                             "message": "data.rule.port_5432_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0167_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2732,8 +2732,8 @@
                             "id": "PR-AWS-0173-CFR",
                             "eval": "data.rule.port_5500",
                             "message": "data.rule.port_5500_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0173_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2759,8 +2759,8 @@
                             "id": "PR-AWS-0174-CFR",
                             "eval": "data.rule.port_5900",
                             "message": "data.rule.port_5900_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0174_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2786,8 +2786,8 @@
                             "id": "PR-AWS-0035-CFR",
                             "eval": "data.rule.port_all",
                             "message": "data.rule.port_all_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0035_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2821,8 +2821,8 @@
                             "id": "PR-AWS-0178-CFR",
                             "eval": "data.rule.port_proto_all",
                             "message": "data.rule.port_proto_all_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0178_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2848,8 +2848,8 @@
                             "id": "PR-AWS-0152-CFR",
                             "eval": "data.rule.sns_protocol",
                             "message": "data.rule.sns_protocol_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html",
+                            "remediationFunction": "PR_AWS_0152_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2877,8 +2877,8 @@
                             "id": "PR-AWS-0153-CFR",
                             "eval": "data.rule.sns_encrypt_key",
                             "message": "data.rule.sns_encrypt_key_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html",
+                            "remediationFunction": "PR_AWS_0153_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2906,8 +2906,8 @@
                             "id": "PR-AWS-0154-CFR",
                             "eval": "data.rule.sns_encrypt",
                             "message": "data.rule.sns_encrypt_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html",
+                            "remediationFunction": "PR_AWS_0154_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2935,8 +2935,8 @@
                             "id": "PR-AWS-0155-CFR",
                             "eval": "data.rule.sqs_deadletter",
                             "message": "data.rule.sqs_deadletter_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html",
+                            "remediationFunction": "PR_AWS_0155_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2964,8 +2964,8 @@
                             "id": "PR-AWS-0156-CFR",
                             "eval": "data.rule.sqs_encrypt_key",
                             "message": "data.rule.sqs_encrypt_key_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html",
+                            "remediationFunction": "PR_AWS_0156_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2993,8 +2993,8 @@
                             "id": "PR-AWS-0157-CFR",
                             "eval": "data.rule.sqs_encrypt",
                             "message": "data.rule.sqs_encrypt_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html",
+                            "remediationFunction": "PR_AWS_0157_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3022,8 +3022,8 @@
                             "id": "PR-AWS-0158-CFR",
                             "eval": "data.rule.ssm_secure",
                             "message": "data.rule.ssm_secure_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-parameter.html",
+                            "remediationFunction": "PR_AWS_0158_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3051,8 +3051,8 @@
                             "id": "PR-AWS-0184-CFR",
                             "eval": "data.rule.vpc_subnet_autoip",
                             "message": "data.rule.vpc_subnet_autoip_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-subnet.html",
+                            "remediationFunction": "PR_AWS_0184_CFR.py"
                         }
                     ],
                     "severity": "Medium",
