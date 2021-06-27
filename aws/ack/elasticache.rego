@@ -1,6 +1,6 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html
+# https://github.com/aws-controllers-k8s/elasticache-controller
 
 #
 # PR-AWS-0055-ACK
