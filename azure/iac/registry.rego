@@ -1,7 +1,8 @@
 package rule
 
-# https://docs.microsoft.com/en-us/rest/api/containerregistry/registries/get
-# PR_AZR_0104.rego
+# https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries
+
+# registry.rego
 
 default adminUserEnabled = null
 azure_issue ["adminUserEnabled"] {
