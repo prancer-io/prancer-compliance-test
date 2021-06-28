@@ -324,6 +324,45 @@ s3_acl_put_metadata := {
 }
 
 #
+# PR-AWS-0144-CFR
+#
+
+default s3_cloudtrail = null
+
+aws_issue["s3_cloudtrail"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    contains(lower(statement.Principal.Service), "cloudtrail.amazonaws.com")
+    statement.logging.enabled != true
+}
+
+s3_cloudtrail {
+    lower(input.Resources[i].Type) == "aws::s3::bucketpolicy"
+    not aws_issue["s3_cloudtrail"]
+}
+
+s3_cloudtrail = false {
+    aws_issue["s3_cloudtrail"]
+}
+
+s3_cloudtrail_err = "AWS S3 CloudTrail buckets for which access logging is disabled." {
+    aws_issue["s3_cloudtrail"]
+}
+
+s3_cloudtrail_metadata := {
+    "Policy Code": "PR-AWS-0144-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS S3 CloudTrail buckets for which access logging is disabled.",
+    "Policy Description": "This policy identifies S3 CloudTrail buckets for which access is disabled.S3 Bucket access logging generates access records for each request made to your S3 bucket. An access log record contains information such as the request type, the resources specified in the request worked, and the time and date the request was processed. It is recommended that bucket access logging be enabled on the CloudTrail S3 bucket",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
+}
+
+#
 # PR-AWS-0145-CFR
 #
 
@@ -376,6 +415,43 @@ s3_versioning_metadata := {
 }
 
 #
+# PR-AWS-0147-CFR
+#
+
+default s3_public_acl = null
+
+aws_issue["s3_public_acl"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    resource.Properties.AccessControl == "PublicRead"
+}
+
+s3_public_acl {
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
+    not aws_issue["s3_public_acl"]
+}
+
+s3_public_acl = false {
+    aws_issue["s3_public_acl"]
+}
+
+s3_public_acl_err = "AWS S3 bucket has global view ACL permissions enabled." {
+    aws_issue["s3_public_acl"]
+}
+
+s3_public_acl_metadata := {
+    "Policy Code": "PR-AWS-0147-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS S3 bucket has global view ACL permissions enabled.",
+    "Policy Description": "This policy determines if any S3 bucket(s) has Global View ACL permissions enabled for the All Users group. These permissions allow external resources to see the permission settings associated to the object.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
+}
+
+#
 # PR-AWS-0148-CFR
 #
 
@@ -422,6 +498,123 @@ s3_transport_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS S3 bucket not configured with secure data transport policy",
     "Policy Description": "This policy identifies S3 buckets which are not configured with secure data transport policy. AWS S3 buckets should enforce encryption of data over the network using Secure Sockets Layer (SSL). It is recommended to add a bucket policy that explicitly denies (Effect: Deny) all access (Action: s3:*) from anybody who browses (Principal: *) to Amazon S3 objects within an Amazon S3 bucket if they are not accessed through HTTPS (aws:SecureTransport: false).",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
+}
+
+#
+# PR-AWS-0149-CFR
+#
+
+default s3_auth_acl = null
+
+aws_issue["s3_auth_acl"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    resource.Properties.AccessControl == "AuthenticatedRead"
+}
+
+s3_auth_acl {
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
+    not aws_issue["s3_auth_acl"]
+}
+
+s3_auth_acl = false {
+    aws_issue["s3_auth_acl"]
+}
+
+s3_auth_acl_err = "AWS S3 buckets are accessible to any authenticated user." {
+    aws_issue["s3_auth_acl"]
+}
+
+s3_auth_acl_metadata := {
+    "Policy Code": "PR-AWS-0149-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS S3 buckets are accessible to any authenticated user.",
+    "Policy Description": "This policy identifies S3 buckets accessible to any authenticated AWS users. Amazon S3 allows customer to store and retrieve any type of content from anywhere in the web. Often, customers have legitimate reasons to expose the S3 bucket to public, for example to host website content. However, these buckets often contain highly sensitive enterprise data which if left accessible to anyone with valid AWS credentials, may result in sensitive data leaks.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
+}
+
+#
+# PR-AWS-0150-CFR
+#
+
+default s3_public_access = null
+
+aws_issue["s3_public_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    resource.Properties.AccessControl == "PublicRead"
+}
+
+aws_issue["s3_public_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    resource.Properties.AccessControl == "PublicReadWrite"
+}
+
+s3_public_access {
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
+    not aws_issue["s3_public_access"]
+}
+
+s3_public_access = false {
+    aws_issue["s3_public_access"]
+}
+
+s3_public_access_err = "AWS S3 buckets are accessible to public" {
+    aws_issue["s3_public_access"]
+}
+
+s3_public_access_metadata := {
+    "Policy Code": "PR-AWS-0150-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS S3 buckets are accessible to public",
+    "Policy Description": "This policy identifies S3 buckets which are publicly accessible. Amazon S3 allows customers to store and retrieve any type of content from anywhere in the web. Often, customers have legitimate reasons to expose the S3 bucket to public, for example, to host website content. However, these buckets often contain highly sensitive enterprise data which if left open to public may result in sensitive data leaks.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
+}
+
+#
+# PR-AWS-0151-CFR
+#
+
+default s3_encryption = null
+
+aws_issue["s3_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration
+}
+
+s3_encryption {
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
+    not aws_issue["s3_encryption"]
+}
+
+s3_encryption = false {
+    aws_issue["s3_encryption"]
+}
+
+s3_encryption_err = "AWS S3 buckets do not have server side encryption" {
+    aws_issue["s3_encryption"]
+}
+
+s3_encryption_metadata := {
+    "Policy Code": "PR-AWS-0151-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS S3 buckets do not have server side encryption.",
+    "Policy Description": "Customers can protect the data in S3 buckets using the AWS server-side encryption. If the server-side encryption is not turned on for S3 buckets with sensitive data, in the event of a data breach, malicious users can gain access to the data.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
