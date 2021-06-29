@@ -2,7 +2,7 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries
 
-# registry.rego
+# PR-AZR-0104-ARM
 
 default adminUserEnabled = null
 azure_issue ["adminUserEnabled"] {

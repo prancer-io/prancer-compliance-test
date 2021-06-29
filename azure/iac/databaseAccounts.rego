@@ -2,7 +2,7 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.documentdb/databaseaccounts
 
-# registry.rego
+# PR-AZR-0105-ARM
 
 default tagsLength = null
 azure_issue ["tagsLength"] {
