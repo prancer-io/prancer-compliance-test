@@ -20,7 +20,7 @@ adminUserEnabled = false {
 }
 
 
-adminUserEnabled_err = "" {
+adminUserEnabled_err = "ENSURE THAT ADMIN USER IS DISABLED FOR CONTAINER REGISTRY" {
     azure_issue["adminUserEnabled"]
 }
 
