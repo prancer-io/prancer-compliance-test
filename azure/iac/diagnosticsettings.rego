@@ -40,7 +40,7 @@ log_keyvault_err = "Azure Key Vault audit logging is disabled" {
     azure_issue["log_keyvault"]
 }
 
-log_keyvault_err = "Diagnostics attribute logs missing in the resource" {
+log_keyvault_miss_err = "Diagnostics attribute logs missing in the resource" {
     azure_attribute_absence["log_keyvault"]
 }
 
@@ -98,7 +98,7 @@ log_lbs_err = "Azure storage account logging for queues is disabled" {
     azure_issue["log_lbs"]
 }
 
-log_lbs_err = "Azure Load Balancer diagnostics logs are disabled" {
+log_lbs_miss_err = "Azure Load Balancer diagnostics logs are disabled" {
     azure_attribute_absence["log_lbs"]
 }
 
@@ -176,7 +176,7 @@ log_storage_retention_err = "Azure Storage Account with Auditing Retention less 
     azure_issue["log_storage_retention"]
 }
 
-log_storage_retention_err = "Diagnostics attribute logs missing in the resource" {
+log_storage_retention_miss_err = "Diagnostics attribute logs missing in the resource" {
     azure_attribute_absence["log_storage_retention"]
 }
 
@@ -234,7 +234,7 @@ log_blob_err = "Azure storage account logging for blobs is disabled" {
     azure_issue["log_blob"]
 }
 
-log_blob_err = "Diagnostics attribute logs missing in the resource" {
+log_blob_miss_err = "Diagnostics attribute logs missing in the resource" {
     azure_attribute_absence["log_blob"]
 }
 
@@ -293,7 +293,7 @@ log_queue_err = "Azure storage account logging for queues is disabled" {
     azure_issue["log_queue"]
 }
 
-log_queue_err = "Diagnostics attribute logs missing in the resource" {
+log_queue_miss_err = "Diagnostics attribute logs missing in the resource" {
     azure_attribute_absence["log_queue"]
 }
 
@@ -352,7 +352,7 @@ log_table_err = "Azure storage account logging for tables is disabled" {
     azure_issue["log_table"]
 }
 
-log_table_err = "Diagnostics attribute logs missing in the resource" {
+log_table_miss_err = "Diagnostics attribute logs missing in the resource" {
     azure_attribute_absence["log_table"]
 }
 

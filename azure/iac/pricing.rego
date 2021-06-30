@@ -38,7 +38,7 @@ pricing_err = "Standard pricing tier is not selected in Security Center" {
     azure_issue["pricing"]
 }
 
-pricing_err = "Pricing attribute pricingTier missing in the resource" {
+pricing_miss_err = "Pricing attribute pricingTier missing in the resource" {
     azure_attribute_absence["pricing"]
 }
 

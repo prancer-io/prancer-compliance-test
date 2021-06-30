@@ -38,7 +38,7 @@ vm_protection_err = "Azure Virtual Machine does not have endpoint protection ins
     azure_issue["vm_protection"]
 }
 
-vm_protection_err = "VM extension attribute type missing in the resource" {
+vm_protection_miss_err = "VM extension attribute type missing in the resource" {
     azure_attribute_absence["vm_protection"]
 }
 

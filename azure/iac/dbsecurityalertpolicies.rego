@@ -44,7 +44,7 @@ dbsec_threat_retention_err = "Azure SQL DB with Threat Retention less than 91 da
     azure_issue["dbsec_threat_retention"]
 }
 
-dbsec_threat_retention_err = "DB policy attribute state missing in the resource" {
+dbsec_threat_retention_miss_err = "DB policy attribute state missing in the resource" {
     azure_attribute_absence["dbsec_threat_retention"]
 }
 
@@ -108,7 +108,7 @@ dbsec_threat_email_err = "Azure SQL DB with disabled Email service and co-admini
     azure_issue["dbsec_threat_email"]
 }
 
-dbsec_threat_email_err = "DB policy attribute state missing in the resource" {
+dbsec_threat_email_miss_err = "DB policy attribute state missing in the resource" {
     azure_attribute_absence["dbsec_threat_email"]
 }
 
@@ -167,7 +167,7 @@ dbsec_threat_alert_err = "Azure SQL Server threat detection alerts not enabled f
     azure_issue["dbsec_threat_alert"]
 }
 
-dbsec_threat_alert_err = "DB policy attribute state missing in the resource" {
+dbsec_threat_alert_miss_err = "DB policy attribute state missing in the resource" {
     azure_attribute_absence["dbsec_threat_alert"]
 }
 
@@ -231,7 +231,7 @@ sql_alert_err = "Send alerts on field value on SQL Databases is misconfigured" {
     azure_issue["sql_alert"]
 }
 
-sql_alert_err = "DB policy attribute state missing in the resource" {
+sql_alert_miss_err = "DB policy attribute state missing in the resource" {
     azure_attribute_absence["sql_alert"]
 }
 
@@ -284,7 +284,7 @@ dbsec_threat_off_err = "Threat Detection on SQL databases is set to Off" {
     azure_issue["dbsec_threat_off"]
 }
 
-dbsec_threat_off_err = "DB policy attribute state missing in the resource" {
+dbsec_threat_off_miss_err = "DB policy attribute state missing in the resource" {
     azure_attribute_absence["dbsec_threat_off"]
 }
 
