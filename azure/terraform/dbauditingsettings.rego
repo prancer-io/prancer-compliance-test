@@ -38,7 +38,7 @@ mssql_log_retention_err = "Azure SQL Server audit log retention is less than 91 
     azure_attribute_absence["mssql_log_retention"]
 }
 
-mssql_log_retention_err = "Auditing settings attribute retention_in_days missing in the resource" {
+mssql_log_retention_miss_err = "Auditing settings attribute retention_in_days missing in the resource" {
     azure_attribute_absence["mssql_log_retention"]
 }
 

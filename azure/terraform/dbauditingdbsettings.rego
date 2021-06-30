@@ -43,7 +43,7 @@ mssql_db_log_audit_err = "Auditing for SQL database should be set to On" {
     azure_issue["mssql_db_log_audit"]
 }
 
-mssql_db_log_audit_err = "Auditing for SQL database should be set to On" {
+mssql_db_log_audit_miss_err = "Auditing for SQL database should be set to On" {
     azure_attribute_absence["mssql_db_log_audit"]
 }
 
@@ -95,7 +95,7 @@ mssql_db_log_retention_err = "Azure SQL Database with Auditing Retention less th
     azure_issue["mssql_db_log_retention"]
 }
 
-mssql_db_log_retention_err = "Auditing settings attribute retention_in_days missing in the resource" {
+mssql_db_log_retention_miss_err = "Auditing settings attribute retention_in_days missing in the resource" {
     azure_attribute_absence["mssql_db_log_retention"]
 }
 

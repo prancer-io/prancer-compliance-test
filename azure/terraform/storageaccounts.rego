@@ -79,7 +79,7 @@ storage_acl_err = "Storage Accounts without their firewalls enabled" {
     azure_issue["storage_acl"]
 }
 
-storage_acl_err = "Storage Account attribute default_action missing in the resource" {
+storage_acl_miss_err = "Storage Account attribute default_action missing in the resource" {
     azure_attribute_absence["storage_acl"]
 }
 
