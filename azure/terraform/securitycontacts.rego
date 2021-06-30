@@ -38,7 +38,7 @@ securitycontacts_err = "Security contact emails is not set in Security Center" {
     azure_issue["securitycontacts"]
 }
 
-securitycontacts_err = "Security Contacts attribute mail missing in the resource" {
+securitycontacts_miss_err = "Security Contacts attribute mail missing in the resource" {
     azure_attribute_absence["securitycontacts"]
 }
 

@@ -39,7 +39,7 @@ gw_tls_err = "Azure Application Gateway allows TLSv1.1 or lower" {
     azure_issue["gw_tls"]
 }
 
-gw_tls_err = "App gateway attribute min_protocol_version missing in the resource" {
+gw_tls_miss_err = "App gateway attribute min_protocol_version missing in the resource" {
     azure_attribute_absence["gw_tls"]
 }
 
@@ -91,7 +91,7 @@ gw_waf_err = "Azure Application Gateway does not have the WAF enabled" {
     azure_issue["gw_waf"]
 }
 
-gw_waf_err = "App gateway attribute waf_configuration missing in the resource" {
+gw_waf_miss_err = "App gateway attribute waf_configuration missing in the resource" {
     azure_attribute_absence["gw_waf"]
 }
 

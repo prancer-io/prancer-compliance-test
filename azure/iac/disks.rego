@@ -48,7 +48,7 @@ disk_encrypt_err = "Azure disk for VM operating system is not encrypted at rest 
     azure_issue["disk_encrypt"]
 }
 
-disk_encrypt_err = "Disk attribute encryptionSettings missing in the resource" {
+disk_encrypt_miss_err = "Disk attribute encryptionSettings missing in the resource" {
     azure_attribute_absence["disk_encrypt"]
 }
 

@@ -40,7 +40,7 @@ vpn_encrypt_err = "VPN is not configured with cryptographic algorithm" {
     azure_issue["vpn_encrypt"]
 }
 
-vpn_encrypt_err = "VPN connections or ipsec policies attributes are missing in the resource" {
+vpn_encrypt_miss_err = "VPN connections or ipsec policies attributes are missing in the resource" {
     azure_attribute_absence["vpn_encrypt"]
 }
 

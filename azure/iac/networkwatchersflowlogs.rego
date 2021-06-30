@@ -44,7 +44,7 @@ netwatch_logs_err = "Azure Network Watcher NSG flow logs are disabled" {
     azure_issue["netwatch_logs"]
 }
 
-netwatch_logs_err = "NetWatcher FlowLog extension attribute retentionPolicy missing in the resource" {
+netwatch_logs_miss_err = "NetWatcher FlowLog extension attribute retentionPolicy missing in the resource" {
     azure_attribute_absence["netwatch_logs"]
 }
 
@@ -102,7 +102,7 @@ netwatch_log_retention_err = "Azure Network Watcher NSG flow logs retention is l
     azure_issue["netwatch_log_retention"]
 }
 
-netwatch_log_retention_err = "NetWatcher FlowLog extension attribute retentionPolicy missing in the resource" {
+netwatch_log_retention_miss_err = "NetWatcher FlowLog extension attribute retentionPolicy missing in the resource" {
     azure_attribute_absence["netwatch_log_retention"]
 }
 

@@ -39,7 +39,7 @@ rg_locks_err = "Azure Resource Group does not have a resource lock" {
     azure_issue["rg_locks"]
 }
 
-rg_locks_err = "Lock attribute level missing in the resource" {
+rg_locks_miss_err = "Lock attribute level missing in the resource" {
     azure_attribute_absence["rg_locks"]
 }
 

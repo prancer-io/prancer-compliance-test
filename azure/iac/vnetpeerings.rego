@@ -38,7 +38,7 @@ vnet_peer_err = "Azure virtual network peer is disconnected" {
     azure_issue["vnet_peer"]
 }
 
-vnet_peer_err = "Attribute peeringState missing in the resource" {
+vnet_peer_miss_err = "Attribute peeringState missing in the resource" {
     azure_attribute_absence["vnet_peer"]
 }
 
