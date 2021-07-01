@@ -33,6 +33,10 @@ ec2_iam_role_err = "AWS EC2 Instance IAM Role not enabled" {
     aws_issue["ec2_iam_role"]
 }
 
+ec2_iam_role_miss_err = "EC2 instance attribute IamInstanceProfile missing in the resource" {
+    aws_attribute_absence["ec2_iam_role"]
+}
+
 ec2_iam_role_metadata := {
     "Policy Code": "PR-AWS-0042-CFR",
     "Type": "IaC",

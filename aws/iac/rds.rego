@@ -265,7 +265,7 @@ rds_multiaz_err = "AWS RDS instance with Multi-Availability Zone disabled" {
     aws_issue["rds_multiaz"]
 }
 
-rds_multiaz_err = "RDS dbcluster attribute Engine missing in the resource" {
+rds_multiaz_miss_err = "RDS dbcluster attribute Engine missing in the resource" {
     aws_attribute_absence["rds_multiaz"]
 }
 
@@ -354,7 +354,7 @@ rds_backup_err = "AWS RDS instance without Automatic Backup setting" {
     aws_issue["rds_backup"]
 }
 
-rds_backup_err = "RDS attribute BackupRetentionPeriod missing in the resource" {
+rds_backup_miss_err = "RDS attribute BackupRetentionPeriod missing in the resource" {
     aws_attribute_absence["rds_backup"]
 }
 
@@ -443,7 +443,7 @@ rds_retention_err = "AWS RDS retention policy less than 7 days" {
     aws_issue["rds_retention"]
 }
 
-rds_retention_err = "RDS attribute BackupRetentionPeriod missing in the resource" {
+rds_retention_miss_err = "RDS attribute BackupRetentionPeriod missing in the resource" {
     aws_attribute_absence["rds_retention"]
 }
 

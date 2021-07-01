@@ -38,7 +38,7 @@ api_gw_cert_err = "AWS API Gateway endpoints without client certificate authenti
     aws_issue["api_gw_cert"]
 }
 
-api_gw_cert_err = "API Gateway attribute ClientCertificateId missing in the resource" {
+api_gw_cert_miss_err = "API Gateway attribute ClientCertificateId missing in the resource" {
     aws_attribute_absence["api_gw_cert"]
 }
 

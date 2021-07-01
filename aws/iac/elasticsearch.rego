@@ -38,7 +38,7 @@ esearch_vpc_err = "AWS ElasticSearch cluster not in a VPC" {
     aws_issue["esearch_vpc"]
 }
 
-esearch_vpc_err = "Elasticsearch attribute VPCOptions.SubnetIds missing in the resource" {
+esearch_vpc_miss_err = "Elasticsearch attribute VPCOptions.SubnetIds missing in the resource" {
     aws_attribute_absence["esearch_vpc"]
 }
 
@@ -176,7 +176,7 @@ esearch_index_slow_log_err = "AWS Elasticsearch domain has Index slow logs set t
     aws_issue["esearch_index_slow_log"]
 }
 
-esearch_index_slow_log_err = "Elasticsearch attribute LogPublishingOptions missing in the resource" {
+esearch_index_slow_log_miss_err = "Elasticsearch attribute LogPublishingOptions missing in the resource" {
     aws_attribute_absence["esearch_index_slow_log"]
 }
 
@@ -240,7 +240,7 @@ esearch_search_slow_log_err = "AWS Elasticsearch domain has Search slow logs set
     aws_issue["esearch_search_slow_log"]
 }
 
-esearch_search_slow_log_err = "Elasticsearch attribute LogPublishingOptions missing in the resource" {
+esearch_search_slow_log_miss_err = "Elasticsearch attribute LogPublishingOptions missing in the resource" {
     aws_attribute_absence["esearch_search_slow_log"]
 }
 
