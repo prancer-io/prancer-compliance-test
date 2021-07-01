@@ -81,7 +81,7 @@ lbs_quic_err = "GCP Load balancer HTTPS target proxy is not configured with QUIC
     gc_issue["lbs_quic"]
 }
 
-lbs_quic_err = "GCP Load balancer attribute quicOverride missing in the resource" {
+lbs_quic_miss_err = "GCP Load balancer attribute quicOverride missing in the resource" {
     gc_attribute_absence["lbs_quic"]
 }
 

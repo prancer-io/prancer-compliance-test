@@ -61,7 +61,7 @@ firewall_default_err = "Default Firewall rule should not have any rules (except 
     gc_issue["firewall_default"]
 }
 
-firewall_default_err = "GCP vm firewall attribute name missing in the resource" {
+firewall_default_miss_err = "GCP vm firewall attribute name missing in the resource" {
     gc_attribute_absence["firewall_default"]
 }
 

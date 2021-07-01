@@ -38,7 +38,7 @@ storage_encrypt_err = "GCP Storage bucket encrypted using default KMS key instea
     gc_issue["storage_encrypt"]
 }
 
-storage_encrypt_err = "GCP Storage bucket attribute encryption missing in the resource" {
+storage_encrypt_miss_err = "GCP Storage bucket attribute encryption missing in the resource" {
     gc_attribute_absence["storage_encrypt"]
 }
 
@@ -91,7 +91,7 @@ storage_versioning_err = "GCP Storage log buckets have object versioning disable
     gc_issue["storage_versioning"]
 }
 
-storage_versioning_err = "GCP Storage attribute versioning missing in the resource" {
+storage_versioning_miss_err = "GCP Storage attribute versioning missing in the resource" {
     gc_attribute_absence["storage_versioning"]
 }
 
@@ -144,7 +144,7 @@ storage_stack_logging_err = "Logging on the Stackdriver exported Bucket is disab
     gc_issue["storage_stack_logging"]
 }
 
-storage_stack_logging_err = "GCP Storage attribute logging missing in the resource" {
+storage_stack_logging_miss_err = "GCP Storage attribute logging missing in the resource" {
     gc_attribute_absence["storage_stack_logging"]
 }
 
@@ -243,7 +243,7 @@ storage_public_logs_err = "Storage Buckets with publicly accessible Stackdriver 
     gc_issue["storage_public_logs"]
 }
 
-storage_public_logs_err = "GCP Storage attribute acl missing in the resource" {
+storage_public_logs_miss_err = "GCP Storage attribute acl missing in the resource" {
     gc_attribute_absence["storage_public_logs"]
 }
 
