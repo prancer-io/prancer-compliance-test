@@ -44,7 +44,7 @@ acm_wildcard_err = "AWS ACM Certificate with wildcard domain name" {
     aws_issue["acm_wildcard"]
 }
 
-acm_wildcard_err = "Certificate manager attribute domain_name missing in the resource" {
+acm_wildcard_miss_err = "Certificate manager attribute domain_name missing in the resource" {
     aws_attribute_absence["acm_wildcard"]
 }
 
@@ -96,7 +96,7 @@ acm_ct_log_err = "AWS Certificate Manager (ACM) has certificates with Certificat
     aws_issue["acm_ct_log"]
 }
 
-acm_ct_log_err = "Certificate manager attribute certificate_transparency_logging_preference missing in the resource" {
+acm_ct_log_miss_err = "Certificate manager attribute certificate_transparency_logging_preference missing in the resource" {
     aws_attribute_absence["acm_ct_log"]
 }
 

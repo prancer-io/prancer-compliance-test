@@ -52,7 +52,7 @@ lambda_env_err = "AWS Lambda environment Variables not encrypted at-rest using C
     aws_issue["lambda_env"]
 }
 
-lambda_env_err = "Lambda function attribute kms_key_arn/environment missing in the resource" {
+lambda_env_miss_err = "Lambda function attribute kms_key_arn/environment missing in the resource" {
     aws_attribute_absence["lambda_env"]
 }
 
@@ -104,7 +104,7 @@ lambda_vpc_err = "AWS Lambda Function is not assigned to access within VPC" {
     aws_issue["lambda_vpc"]
 }
 
-lambda_vpc_err = "Lambda function attribute vpc_config.subnet_ids missing in the resource" {
+lambda_vpc_miss_err = "Lambda function attribute vpc_config.subnet_ids missing in the resource" {
     aws_attribute_absence["lambda_vpc"]
 }
 
@@ -156,7 +156,7 @@ lambda_tracing_err = "AWS Lambda functions with tracing not enabled" {
     aws_issue["lambda_tracing"]
 }
 
-lambda_tracing_err = "Lambda function attribute tracing_config.mode missing in the resource" {
+lambda_tracing_miss_err = "Lambda function attribute tracing_config.mode missing in the resource" {
     aws_attribute_absence["lambda_tracing"]
 }
 

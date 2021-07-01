@@ -38,7 +38,7 @@ ssm_secure_err = "AWS SSM Parameter is not encrypted" {
     aws_issue["ssm_secure"]
 }
 
-ssm_secure_err = "SSM attribute Type missing in the resource" {
+ssm_secure_miss_err = "SSM attribute Type missing in the resource" {
     aws_attribute_absence["ssm_secure"]
 }
 

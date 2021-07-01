@@ -75,7 +75,7 @@ sqs_encrypt_key_err = "AWS SQS queue encryption using default KMS key instead of
     aws_issue["sqs_encrypt_key"]
 }
 
-sqs_encrypt_key_err = "SQS Queue attribute kms_master_key_id missing in the resource" {
+sqs_encrypt_key_miss_err = "SQS Queue attribute kms_master_key_id missing in the resource" {
     aws_attribute_absence["sqs_encrypt_key"]
 }
 
@@ -127,7 +127,7 @@ sqs_encrypt_err = "AWS SQS server side encryption not enabled" {
     aws_issue["sqs_encrypt"]
 }
 
-sqs_encrypt_err = "SQS Queue attribute kms_master_key_id missing in the resource" {
+sqs_encrypt_miss_err = "SQS Queue attribute kms_master_key_id missing in the resource" {
     aws_attribute_absence["sqs_encrypt"]
 }
 

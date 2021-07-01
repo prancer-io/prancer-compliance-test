@@ -38,7 +38,7 @@ cf_sns_err = "AWS CloudFormation stack configured without SNS topic" {
     aws_issue["cf_sns"]
 }
 
-cf_sns_err = "CloudFormation attribute NotificationARNs missing in the resource" {
+cf_sns_miss_err = "CloudFormation attribute NotificationARNs missing in the resource" {
     aws_attribute_absence["cf_sns"]
 }
 

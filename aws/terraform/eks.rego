@@ -38,7 +38,7 @@ eks_multiple_sg_err = "AWS EKS cluster control plane assigned multiple security 
     aws_issue["eks_multiple_sg"]
 }
 
-eks_multiple_sg_err = "EKS cluster attribute security_group_ids missing in the resource" {
+eks_multiple_sg_miss_err = "EKS cluster attribute security_group_ids missing in the resource" {
     aws_attribute_absence["eks_multiple_sg"]
 }
 
