@@ -61,7 +61,7 @@ rds_public = false {
     aws_issue["rds_public"]
 }
 
-rds_public_err = "AWS RDS DB cluster encryption is disabled" {
+rds_public_err = "AWS RDS database instance is publicly accessible" {
     aws_issue["rds_public"]
 }
 
@@ -73,6 +73,119 @@ rds_public_metadata := {
     "Policy Title": "AWS RDS database instance is publicly accessible",
     "Policy Description": "This policy identifies RDS database instances which are publicly accessible.DB instances should not be publicly accessible to protect the integrety of data.Public accessibility of DB instances can be modified by turning on or off the Public accessibility parameter.",
     "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
+}
+
+#
+# PR-AWS-0122-CFR
+#
+
+default rds_encrypt_key = null
+
+aws_issue["rds_encrypt_key"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    not resource.Properties.KmsKeyId
+}
+
+rds_encrypt_key {
+    lower(input.Resources[i].Type) == "aws::rds::dbinstance"
+    not aws_issue["rds_encrypt_key"]
+}
+
+rds_encrypt_key = false {
+    aws_issue["rds_encrypt_key"]
+}
+
+rds_encrypt_key_err = "AWS RDS database not encrypted using Customer Managed Key" {
+    aws_issue["rds_encrypt_key"]
+}
+
+rds_encrypt_key_metadata := {
+    "Policy Code": "PR-AWS-0122-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS RDS database not encrypted using Customer Managed Key",
+    "Policy Description": "This policy identifies RDS databases that are encrypted with default KMS keys and not with customer managed keys. As a best practice, use customer managed keys to encrypt the data on your RDS databases and maintain control of your keys and data on sensitive workloads.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
+}
+
+#
+# PR-AWS-0123-CFR
+#
+
+default rds_instance_event = null
+
+aws_issue["rds_instance_event"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::eventsubscription"
+    resource.Properties.Enabled == false
+    resource.Properties.SourceType == "db-instance"
+}
+
+rds_instance_event {
+    lower(input.Resources[i].Type) == "aws::rds::eventsubscription"
+    not aws_issue["rds_instance_event"]
+}
+
+rds_instance_event = false {
+    aws_issue["rds_instance_event"]
+}
+
+rds_instance_event_err = "AWS RDS event subscription disabled for DB instance" {
+    aws_issue["rds_instance_event"]
+}
+
+rds_instance_event_metadata := {
+    "Policy Code": "PR-AWS-0123-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS RDS event subscription disabled for DB instance",
+    "Policy Description": "This policy identifies RDS event subscriptions for which DB instance event subscription is disabled. You can create an Amazon RDS event notification subscription so that you can be notified when an event occurs for a given DB instance.",
+    "Resource Type": "aws::rds::eventsubscription",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
+}
+
+#
+# PR-AWS-0124-CFR
+#
+
+default rds_secgroup_event = null
+
+aws_issue["rds_secgroup_event"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::eventsubscription"
+    resource.Properties.Enabled == false
+    resource.Properties.SourceType == "db-security-group"
+}
+
+rds_secgroup_event {
+    lower(input.Resources[i].Type) == "aws::rds::eventsubscription"
+    not aws_issue["rds_secgroup_event"]
+}
+
+rds_secgroup_event = false {
+    aws_issue["rds_secgroup_event"]
+}
+
+rds_secgroup_event_err = "AWS RDS event subscription disabled for DB security groups" {
+    aws_issue["rds_secgroup_event"]
+}
+
+rds_secgroup_event_metadata := {
+    "Policy Code": "PR-AWS-0124-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS RDS event subscription disabled for DB security groups",
+    "Policy Description": "This policy identifies RDS event subscriptions for which DB security groups event subscription is disabled. You can create an Amazon RDS event notification subscription so that you can be notified when an event occurs for given DB security groups.",
+    "Resource Type": "aws::rds::eventsubscription",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
 }
@@ -109,7 +222,7 @@ rds_encrypt_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS RDS instance is not encrypted",
     "Policy Description": "This policy identifies AWS RDS instances which are not encrypted. Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up and manage databases. Amazon allows customers to turn on encryption for RDS which is recommended for compliance and security reasons.",
-    "Resource Type": "",
+    "Resource Type": "aws::rds::dbinstance",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
 }
@@ -163,7 +276,7 @@ rds_multiaz_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS RDS instance with Multi-Availability Zone disabled",
     "Policy Description": "This policy identifies RDS instances which have Multi-Availability Zone(Multi-AZ) disabled. When RDS DB instance is enabled with Multi-AZ, RDS automatically creates a primary DB Instance and synchronously replicates the data to a standby instance in a different availability zone. These Multi-AZ deployments will improve primary node reachability by providing read replica in case of network connectivity loss or loss of availability in the primaryâ€™s availability zone for read/write operations, so by making them the best fit for production database workloads.",
-    "Resource Type": "",
+    "Resource Type": "aws::rds::dbinstance",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
 }
@@ -200,7 +313,7 @@ rds_snapshot_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS RDS instance with copy tags to snapshots disabled",
     "Policy Description": "This policy identifies RDS instances which have copy tags to snapshots disabled. Copy tags to snapshots copies all the user-defined tags from the DB instance to snapshots. Copying tags allow you to add metadata and apply access policies to your Amazon RDS resources.",
-    "Resource Type": "",
+    "Resource Type": "aws::rds::dbinstance",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
 }
