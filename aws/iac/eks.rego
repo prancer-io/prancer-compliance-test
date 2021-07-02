@@ -33,10 +33,6 @@ eks_multiple_sg_err = "AWS EKS cluster control plane assigned multiple security 
     aws_issue["eks_multiple_sg"]
 }
 
-eks_multiple_sg_miss_err = "EKS cluster attribute SecurityGroupIds missing in the resource" {
-    aws_attribute_absence["eks_multiple_sg"]
-}
-
 eks_multiple_sg_metadata := {
     "Policy Code": "PR-AWS-0050-CFR",
     "Type": "IaC",
