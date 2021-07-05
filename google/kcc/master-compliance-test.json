@@ -28,7 +28,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeDisk"
+                                "kcc"
                             ]
                         }
                     ]
@@ -57,7 +57,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -86,7 +86,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -115,7 +115,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -144,7 +144,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -173,7 +173,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -202,7 +202,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -231,7 +231,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -260,7 +260,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -289,7 +289,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -318,7 +318,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -347,7 +347,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -376,7 +376,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -405,7 +405,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -434,7 +434,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -463,7 +463,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -492,7 +492,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -521,7 +521,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -550,7 +550,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -579,7 +579,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -608,7 +608,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -637,7 +637,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -666,7 +666,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -695,7 +695,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeFirewall"
+                                "kcc"
                             ]
                         }
                     ]
@@ -724,7 +724,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeInstance"
+                                "kcc"
                             ]
                         }
                     ]
@@ -753,7 +753,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeInstance"
+                                "kcc"
                             ]
                         }
                     ]
@@ -782,7 +782,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeInstance"
+                                "kcc"
                             ]
                         }
                     ]
@@ -811,7 +811,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeInstance"
+                                "kcc"
                             ]
                         }
                     ]
@@ -840,7 +840,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeInstance"
+                                "kcc"
                             ]
                         }
                     ]
@@ -869,7 +869,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeInstance"
+                                "kcc"
                             ]
                         }
                     ]
@@ -898,7 +898,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeInstance"
+                                "kcc"
                             ]
                         }
                     ]
@@ -927,7 +927,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeNetwork"
+                                "kcc"
                             ]
                         }
                     ]
@@ -956,7 +956,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeNetwork"
+                                "kcc"
                             ]
                         }
                     ]
@@ -985,7 +985,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ComputeSubnetwork"
+                                "kcc"
                             ]
                         }
                     ]
@@ -1014,7 +1014,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ContainerCluster"
+                                "kcc"
                             ]
                         }
                     ]
@@ -1043,7 +1043,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ContainerCluster"
+                                "kcc"
                             ]
                         }
                     ]
@@ -1071,7 +1071,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["ContainerCluster"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1098,7 +1100,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["ContainerCluster"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1125,7 +1129,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["ContainerCluster"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1152,7 +1158,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["ContainerCluster"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1179,7 +1187,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["ContainerCluster"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1206,7 +1216,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["ContainerCluster"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1233,7 +1245,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["ContainerCluster"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1260,7 +1274,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["ContainerCluster"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1287,7 +1303,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["ContainerNodePool"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1314,7 +1332,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["ContainerNodePool"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1341,7 +1361,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["ContainerNodePool"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1368,7 +1390,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["ContainerNodePool"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1395,7 +1419,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["DNSManagedZone"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1422,7 +1448,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["DNSManagedZone"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1449,7 +1477,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["IAMPolicy"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1476,7 +1506,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["IAMPolicy"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1503,7 +1535,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["IAMPolicy"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1530,7 +1564,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["IAMServiceAccountKey"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1557,7 +1593,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["KMSCryptoKey"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1584,7 +1622,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["SQLInstance"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1611,7 +1651,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["SQLInstance"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1638,7 +1680,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["SQLInstance"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1665,7 +1709,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["StorageBucket"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1692,7 +1738,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["StorageBucket"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1719,7 +1767,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["StorageBucket"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1746,7 +1796,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["StorageBucket"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 },
@@ -1773,7 +1825,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["StorageBucket"]
+                            "service": [
+                                "kcc"
+                            ]
                         }
                     ]
                 }

@@ -28,7 +28,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "acm"
+                                "terraform"
                             ]
                         }
                     ]
@@ -61,7 +61,7 @@
                                 "NIST 800"
                             ],
                             "service": [
-                                "acm"
+                                "terraform"
                             ]
                         }
                     ]
@@ -90,7 +90,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudfront"
+                                "terraform"
                             ]
                         }
                     ]
@@ -119,7 +119,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudfront"
+                                "terraform"
                             ]
                         }
                     ]
@@ -148,7 +148,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudfront"
+                                "terraform"
                             ]
                         }
                     ]
@@ -177,7 +177,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudfront"
+                                "terraform"
                             ]
                         }
                     ]
@@ -206,7 +206,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudfront"
+                                "terraform"
                             ]
                         }
                     ]
@@ -235,7 +235,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudfront"
+                                "terraform"
                             ]
                         }
                     ]
@@ -264,7 +264,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudfront"
+                                "terraform"
                             ]
                         }
                     ]
@@ -293,7 +293,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudfront"
+                                "terraform"
                             ]
                         }
                     ]
@@ -322,7 +322,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudfront"
+                                "terraform"
                             ]
                         }
                     ]
@@ -351,7 +351,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudfront"
+                                "terraform"
                             ]
                         }
                     ]
@@ -390,7 +390,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "cloudtrail"
+                                "terraform"
                             ]
                         }
                     ]
@@ -428,7 +428,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "cloudtrail"
+                                "terraform"
                             ]
                         }
                     ]
@@ -465,7 +465,7 @@
                                 "NIST CSF"
                             ],
                             "service": [
-                                "cloudtrail"
+                                "terraform"
                             ]
                         }
                     ]
@@ -503,7 +503,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "cloudtrail"
+                                "terraform"
                             ]
                         }
                     ]
@@ -532,7 +532,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "dynamodb"
+                                "terraform"
                             ]
                         }
                     ]
@@ -569,7 +569,9 @@
                                 "NIST CSF",
                                 "PCI-DSS"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -597,7 +599,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ec2"
+                                "terraform"
                             ]
                         }
                     ]
@@ -626,7 +628,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ecs"
+                                "terraform"
                             ]
                         }
                     ]
@@ -655,7 +657,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "efs"
+                                "terraform"
                             ]
                         }
                     ]
@@ -684,7 +686,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "efs"
+                                "terraform"
                             ]
                         }
                     ]
@@ -713,7 +715,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "eks"
+                                "terraform"
                             ]
                         }
                     ]
@@ -741,7 +743,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -773,7 +777,9 @@
                                 "ISO 27001",
                                 "NIST 800"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -800,7 +806,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -831,7 +839,9 @@
                                 "HITRUST",
                                 "NIST 800"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -862,7 +872,9 @@
                                 "HITRUST",
                                 "NIST 800"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -892,7 +904,9 @@
                                 "CSA-CCM",
                                 "NIST 800"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -920,7 +934,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "elb"
+                                "terraform"
                             ]
                         }
                     ]
@@ -949,7 +963,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "elb"
+                                "terraform"
                             ]
                         }
                     ]
@@ -978,7 +992,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "elb"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1007,7 +1021,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "elb"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1036,7 +1050,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "elb"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1065,7 +1079,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "elb"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1096,7 +1110,7 @@
                                 "ISO 27001"
                             ],
                             "service": [
-                                "elb"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1125,7 +1139,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "elb"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1162,7 +1176,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "elb"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1191,7 +1205,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "elb"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1220,7 +1234,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "lambda"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1249,7 +1263,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "lambda"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1281,7 +1295,7 @@
                                 "NIST 800"
                             ],
                             "service": [
-                                "lambda"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1310,7 +1324,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "rds"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1344,7 +1358,7 @@
                                 "NIST 800"
                             ],
                             "service": [
-                                "rds"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1382,7 +1396,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "rds"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1411,7 +1425,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "rds"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1440,7 +1454,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "rds"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1469,7 +1483,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "rds"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1498,7 +1512,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "rds"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1527,7 +1541,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "rds"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1556,7 +1570,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "redshift"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1592,7 +1606,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "redshift"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1628,7 +1642,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "redshift"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1663,7 +1677,7 @@
                                 "NIST 800"
                             ],
                             "service": [
-                                "redshift"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1700,7 +1714,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "redshift"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1736,7 +1750,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "s3"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1765,7 +1779,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "s3"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1794,7 +1808,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "s3"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1823,7 +1837,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "s3"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1852,7 +1866,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "s3"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1881,7 +1895,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "s3"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1910,7 +1924,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "s3"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1941,7 +1955,7 @@
                                 "ISO 27001"
                             ],
                             "service": [
-                                "s3"
+                                "terraform"
                             ]
                         }
                     ]
@@ -1969,7 +1983,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1996,7 +2012,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -2023,7 +2041,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -2050,7 +2070,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -2077,7 +2099,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -2104,7 +2128,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -2131,7 +2157,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -2168,7 +2196,9 @@
                                 "NIST CSF",
                                 "SOC 2"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -2195,7 +2225,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -2222,7 +2254,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -2249,7 +2283,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -2286,7 +2322,9 @@
                                 "NIST CSF",
                                 "SOC 2"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -2313,7 +2351,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -2340,7 +2380,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -2367,7 +2409,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -2394,7 +2438,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -2421,7 +2467,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -2448,7 +2496,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -2483,7 +2533,9 @@
                                 "NIST CSF",
                                 "SOC 2"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -2510,7 +2562,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -2538,7 +2592,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "sns"
+                                "terraform"
                             ]
                         }
                     ]
@@ -2567,7 +2621,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "sns"
+                                "terraform"
                             ]
                         }
                     ]
@@ -2596,7 +2650,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "sns"
+                                "terraform"
                             ]
                         }
                     ]
@@ -2625,7 +2679,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "sqs"
+                                "terraform"
                             ]
                         }
                     ]
@@ -2654,7 +2708,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "sqs"
+                                "terraform"
                             ]
                         }
                     ]
@@ -2683,7 +2737,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "sqs"
+                                "terraform"
                             ]
                         }
                     ]
@@ -2718,7 +2772,9 @@
                                 "NIST 800",
                                 "NIST CSF"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 }
