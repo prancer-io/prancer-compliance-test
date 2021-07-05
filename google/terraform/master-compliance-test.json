@@ -30,7 +30,9 @@
                                 "CIS",
                                 "ISO 27001"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -63,7 +65,9 @@
                                 "NIST 800",
                                 "PCI-DSS"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -97,7 +101,9 @@
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -131,7 +137,9 @@
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -165,7 +173,9 @@
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -199,7 +209,9 @@
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -233,7 +245,9 @@
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -267,7 +281,9 @@
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -301,7 +317,9 @@
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -335,7 +353,9 @@
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -369,7 +389,9 @@
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -403,7 +425,9 @@
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -438,7 +462,9 @@
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -472,7 +498,9 @@
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -507,7 +535,9 @@
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -541,7 +571,9 @@
                                 "PCI-DSS",
                                 "SOC 2"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -568,7 +600,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -597,7 +631,9 @@
                             "compliance": [
                                 "ISO 27001"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -627,7 +663,9 @@
                                 "CIS",
                                 "ISO 27001"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -657,7 +695,9 @@
                                 "CIS",
                                 "ISO 27001"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -686,7 +726,9 @@
                             "compliance": [
                                 "CIS"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -715,7 +757,9 @@
                             "compliance": [
                                 "ISO 27001"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -746,7 +790,9 @@
                                 "NIST 800",
                                 "PCI-DSS"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -777,7 +823,9 @@
                                 "NIST 800",
                                 "PCI-DSS"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -808,7 +856,9 @@
                                 "NIST 800",
                                 "PCI-DSS"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -838,7 +888,9 @@
                                 "CIS",
                                 "ISO 27001"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -868,7 +920,9 @@
                                 "CIS",
                                 "ISO 27001"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -898,7 +952,9 @@
                                 "CIS",
                                 "ISO 27001"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -931,7 +987,9 @@
                                 "NIST 800",
                                 "PCI-DSS"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -965,7 +1023,9 @@
                                 "NIST 800",
                                 "PCI-DSS"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -996,7 +1056,9 @@
                                 "HIPAA",
                                 "ISO 27001"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1030,7 +1092,9 @@
                                 "NIST 800",
                                 "PCI-DSS"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1063,7 +1127,9 @@
                                 "NIST 800",
                                 "PCI-DSS"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1090,7 +1156,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1119,7 +1187,9 @@
                             "compliance": [
                                 "ISO 27001"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1152,7 +1222,9 @@
                                 "NIST 800",
                                 "PCI-DSS"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1186,7 +1258,9 @@
                                 "NIST 800",
                                 "PCI-DSS"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1220,7 +1294,9 @@
                                 "NIST 800",
                                 "PCI-DSS"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1253,7 +1329,9 @@
                                 "NIST 800",
                                 "PCI-DSS"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1287,7 +1365,9 @@
                                 "NIST 800",
                                 "PCI-DSS"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1314,7 +1394,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1341,7 +1423,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1371,7 +1455,9 @@
                                 "CIS",
                                 "ISO 27001"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1398,7 +1484,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1428,7 +1516,9 @@
                                 "CIS",
                                 "ISO 27001"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1455,7 +1545,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1482,7 +1574,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1509,7 +1603,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1542,7 +1638,9 @@
                                 "NIST 800",
                                 "PCI-DSS"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1569,7 +1667,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1596,7 +1696,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1623,7 +1725,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1650,7 +1754,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1680,7 +1786,9 @@
                                 "CIS",
                                 "ISO 27001"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1710,7 +1818,9 @@
                                 "CIS",
                                 "ISO 27001"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1739,7 +1849,9 @@
                             "compliance": [
                                 "ISO 27001"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1770,7 +1882,9 @@
                                 "NIST 800",
                                 "PCI-DSS"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1797,7 +1911,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1827,7 +1943,9 @@
                                 "CIS",
                                 "ISO 27001"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1861,7 +1979,9 @@
                                 "NIST 800",
                                 "PCI-DSS"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 },
@@ -1894,7 +2014,9 @@
                                 "NIST 800",
                                 "PCI-DSS"
                             ],
-                            "service": []
+                            "service": [
+                                "terraform"
+                            ]
                         }
                     ]
                 }
