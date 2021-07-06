@@ -38,7 +38,7 @@ storage_encrypt_err = "GCP Storage bucket encrypted using default KMS key instea
     gc_issue["storage_encrypt"]
 }
 
-storage_encrypt_err = "GCP Storage bucket attribute encryption missing in the resource" {
+storage_encrypt_miss_err = "GCP Storage bucket attribute encryption missing in the resource" {
     gc_attribute_absence["storage_encrypt"]
 }
 
@@ -90,7 +90,7 @@ storage_versioning_err = "GCP Storage log buckets have object versioning disable
     gc_issue["storage_versioning"]
 }
 
-storage_versioning_err = "GCP Storage attribute versioning missing in the resource" {
+storage_versioning_miss_err = "GCP Storage attribute versioning missing in the resource" {
     gc_attribute_absence["storage_versioning"]
 }
 

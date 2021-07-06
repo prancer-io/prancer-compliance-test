@@ -83,7 +83,7 @@ sql_binary_logs_err = "SQL DB Instance backup Binary logs configuration is not e
     gc_issue["sql_binary_logs"]
 }
 
-sql_binary_logs_err = "GCP DB Instance attribute databaseVersion missing in the resource" {
+sql_binary_logs_miss_err = "GCP DB Instance attribute databaseVersion missing in the resource" {
     gc_attribute_absence["sql_binary_logs"]
 }
 
@@ -136,7 +136,7 @@ sql_backup_err = "SQL DB instance backup configuration is not enabled" {
     gc_issue["sql_backup"]
 }
 
-sql_backup_err = "GCP DB Instance attribute backupConfiguration missing in the resource" {
+sql_backup_miss_err = "GCP DB Instance attribute backupConfiguration missing in the resource" {
     gc_attribute_absence["sql_backup"]
 }
 
@@ -189,7 +189,7 @@ sql_ssl_err = "SQL Instances do not have SSL configured" {
     gc_issue["sql_ssl"]
 }
 
-sql_ssl_err = "GCP DB Instance attribute ip_configuration.requireSsl missing in the resource" {
+sql_ssl_miss_err = "GCP DB Instance attribute ip_configuration.requireSsl missing in the resource" {
     gc_attribute_absence["sql_ssl"]
 }
 
@@ -254,7 +254,7 @@ sql_exposed_err = "SQL Instances with network authorization exposing them to the
     gc_issue["sql_exposed"]
 }
 
-sql_exposed_err = "GCP DB Instance attribute ip_configuration.authorized_networks missing in the resource" {
+sql_exposed_miss_err = "GCP DB Instance attribute ip_configuration.authorized_networks missing in the resource" {
     gc_attribute_absence["sql_exposed"]
 }
 

@@ -306,7 +306,7 @@ elb_sec_group_err = "AWS Elastic Load Balancer (ELB) has security group with no 
 }
 
 elb_sec_group_miss_err = "ELB attribute security_groups missing in the resource" {
-    aws_issue["elb_access_log"]
+    aws_issue["elb_sec_group"]
 }
 
 elb_sec_group_metadata := {

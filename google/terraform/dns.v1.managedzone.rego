@@ -39,7 +39,7 @@ dnssec_state_err = "GCP Cloud DNS has DNSSEC disabled" {
     gc_issue["dnssec_state"]
 }
 
-dnssec_state_err = "GCP Cloud DNS attribute dnssec.state missing in the resource" {
+dnssec_state_miss_err = "GCP Cloud DNS attribute dnssec.state missing in the resource" {
     gc_attribute_absence["dnssec_state"]
 }
 
@@ -94,7 +94,7 @@ dnssec_key_rsasha1_err = "GCP Cloud DNS zones using RSASHA1 algorithm for DNSSEC
     gc_issue["dnssec_key_rsasha1"]
 }
 
-dnssec_key_rsasha1_err = "GCP Cloud DNS attribute dnssec.default_key_specs missing in the resource" {
+dnssec_key_rsasha1_miss_err = "GCP Cloud DNS attribute dnssec.default_key_specs missing in the resource" {
     gc_attribute_absence["dnssec_key_rsasha1"]
 }
 
@@ -149,7 +149,7 @@ dnssec_zone_rsasha1_err = "GCP Cloud DNS zones using RSASHA1 algorithm for DNSSE
     gc_issue["dnssec_zone_rsasha1"]
 }
 
-dnssec_zone_rsasha1_err = "GCP Cloud DNS attribute dnssec.default_key_specs missing in the resource" {
+dnssec_zone_rsasha1_miss_err = "GCP Cloud DNS attribute dnssec.default_key_specs missing in the resource" {
     gc_attribute_absence["dnssec_zone_rsasha1"]
 }
 
