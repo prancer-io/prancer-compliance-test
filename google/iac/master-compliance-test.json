@@ -17,7 +17,7 @@
                             "eval": "data.rule.disk_encrypt",
                             "message": "data.rule.disk_encrypt_err",
                             "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationFunction":"PR_GCP_0069_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -45,8 +45,8 @@
                             "id":"PR-GCP-0002-GDF",
                             "eval": "data.rule.firewall_default",
                             "message": "data.rule.firewall_default_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationFunction":"PR_GCP_0002_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -73,8 +73,8 @@
                             "id":"PR-GCP-0006-GDF",
                             "eval": "data.rule.firewall_port_53",
                             "message": "data.rule.firewall_port_53_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationFunction":"PR_GCP_0006_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -101,8 +101,8 @@
                             "id":"PR-GCP-0007-GDF",
                             "eval": "data.rule.firewall_port_21",
                             "message": "data.rule.firewall_port_21_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationFunction":"PR_GCP_0007_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -129,8 +129,8 @@
                             "id":"PR-GCP-0008-GDF",
                             "eval": "data.rule.firewall_port_80",
                             "message": "data.rule.firewall_port_80_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationFunction":"PR_GCP_0008_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -157,8 +157,8 @@
                             "id":"PR-GCP-0009-GDF",
                             "eval": "data.rule.firewall_port_445",
                             "message": "data.rule.firewall_port_445_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationFunction":"PR_GCP_0009_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -185,8 +185,8 @@
                             "id":"PR-GCP-0010-GDF",
                             "eval": "data.rule.firewall_port_27017",
                             "message": "data.rule.firewall_port_27017_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationFunction":"PR_GCP_0010_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -213,8 +213,8 @@
                             "id":"PR-GCP-0011-GDF",
                             "eval": "data.rule.firewall_port_3306",
                             "message": "data.rule.firewall_port_3306_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationFunction":"PR_GCP_0011_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -241,8 +241,8 @@
                             "id":"PR-GCP-0012-GDF",
                             "eval": "data.rule.firewall_port_139",
                             "message": "data.rule.firewall_port_139_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationFunction":"PR_GCP_0012_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -269,8 +269,8 @@
                             "id":"PR-GCP-0013-GDF",
                             "eval": "data.rule.firewall_port_1521",
                             "message": "data.rule.firewall_port_1521_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationFunction":"PR_GCP_0013_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -297,8 +297,8 @@
                             "id":"PR-GCP-0014-GDF",
                             "eval": "data.rule.firewall_port_110",
                             "message": "data.rule.firewall_port_110_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationFunction":"PR_GCP_0014_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -325,8 +325,8 @@
                             "id":"PR-GCP-0015-GDF",
                             "eval": "data.rule.firewall_port_5432",
                             "message": "data.rule.firewall_port_5432_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationFunction":"PR_GCP_0015_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -353,8 +353,8 @@
                             "id":"PR-GCP-0016-GDF",
                             "eval": "data.rule.firewall_port_3389",
                             "message": "data.rule.firewall_port_3389_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationFunction":"PR_GCP_0016_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -381,8 +381,8 @@
                             "id":"PR-GCP-0017-GDF",
                             "eval": "data.rule.firewall_port_25",
                             "message": "data.rule.firewall_port_25_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationFunction":"PR_GCP_0017_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -409,8 +409,8 @@
                             "id":"PR-GCP-0018-GDF",
                             "eval": "data.rule.firewall_port_22",
                             "message": "data.rule.firewall_port_22_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationFunction":"PR_GCP_0018_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -437,8 +437,8 @@
                             "id":"PR-GCP-0019-GDF",
                             "eval": "data.rule.firewall_port_23",
                             "message": "data.rule.firewall_port_23_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationFunction":"PR_GCP_0019_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -465,8 +465,8 @@
                             "id":"PR-GCP-0020-GDF",
                             "eval": "data.rule.firewall_inbound",
                             "message": "data.rule.firewall_inbound_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationFunction":"PR_GCP_0020_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -493,8 +493,8 @@
                             "id":"PR-GCP-0021-GDF",
                             "eval": "data.rule.firewall_inbound_all",
                             "message": "data.rule.firewall_inbound_all_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationFunction":"PR_GCP_0021_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -521,8 +521,8 @@
                             "id":"PR-GCP-0070-GDF",
                             "eval": "data.rule.vm_ip_forward",
                             "message": "data.rule.vm_ip_forward_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/instances",
+                            "remediationFunction":"PR_GCP_0070_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -549,8 +549,8 @@
                             "id":"PR-GCP-0071-GDF",
                             "eval": "data.rule.vm_block_project_ssh_keys",
                             "message": "data.rule.vm_block_project_ssh_keys_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/instances",
+                            "remediationFunction":"PR_GCP_0071_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -577,8 +577,8 @@
                             "id":"PR-GCP-0072-GDF",
                             "eval": "data.rule.vm_serial_port",
                             "message": "data.rule.vm_serial_port_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/instances",
+                            "remediationFunction":"PR_GCP_0072_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -605,8 +605,8 @@
                             "id":"PR-GCP-0091-GDF",
                             "eval": "data.rule.vm_pre_emptible",
                             "message": "data.rule.vm_pre_emptible_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/instances",
+                            "remediationFunction":"PR_GCP_0091_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -717,8 +717,8 @@
                             "id":"PR-GCP-0076-GDF",
                             "eval": "data.rule.net_legacy",
                             "message": "data.rule.net_legacy_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/networks",
+                            "remediationFunction":"PR_GCP_0076_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -745,8 +745,8 @@
                             "id":"PR-GCP-0077-GDF",
                             "eval": "data.rule.net_default",
                             "message": "data.rule.net_default_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/networks",
+                            "remediationFunction":"PR_GCP_0077_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -773,8 +773,8 @@
                             "id":"PR-GCP-0074-GDF",
                             "eval": "data.rule.vpc_flow_logs",
                             "message": "data.rule.vpc_flow_logs_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/subnetworks",
+                            "remediationFunction":"PR_GCP_0074_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -801,8 +801,8 @@
                             "id":"PR-GCP-0075-GDF",
                             "eval": "data.rule.vpc_private_ip_google",
                             "message": "data.rule.vpc_private_ip_google_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/subnetworks",
+                            "remediationFunction":"PR_GCP_0075_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -829,8 +829,8 @@
                             "id":"PR-GCP-0057-GDF",
                             "eval": "data.rule.lbs_ssl_policy",
                             "message": "data.rule.lbs_ssl_policy_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/targetHttpsProxies",
+                            "remediationFunction":"PR_GCP_0057_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -857,8 +857,8 @@
                             "id":"PR-GCP-0058-GDF",
                             "eval": "data.rule.lbs_quic",
                             "message": "data.rule.lbs_quic_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/targetHttpsProxies",
+                            "remediationFunction":"PR_GCP_0058_GDF.py"
                         }
                     ],
                     "severity": "Medium",
