@@ -15,7 +15,7 @@ aws_issue["sns_encrypt_key"] {
 }
 
 sns_encrypt_key {
-    lower(input.Resources[i].Type) == "aws::sns::topic"
+    lower(input.Resources[i].Type) == "topic"
     not aws_issue["sns_encrypt_key"]
 }
 
@@ -58,7 +58,7 @@ aws_issue["sns_encrypt"] {
 }
 
 sns_encrypt {
-    lower(input.Resources[i].Type) == "aws::sns::topic"
+    lower(input.Resources[i].Type) == "topic"
     not aws_issue["sns_encrypt"]
 }
 
