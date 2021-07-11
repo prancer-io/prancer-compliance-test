@@ -155,3 +155,147 @@ storage_threat_protection_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
 }
+
+
+
+# PR-AZR-0112-ARM
+
+default blobService = null
+
+azure_attribute_absence["blobService"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.encryption.services.blob
+}
+
+azure_issue["blobService"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    resource.properties.encryption.services.blob.enabled != true
+}
+
+blobService {
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    not azure_issue["blobService"]
+    not azure_attribute_absence["blobService"]
+}
+
+blobService = false {
+    azure_issue["blobService"]
+}
+
+blobService = false {
+    azure_attribute_absence["blobService"]
+}
+
+blobService_err = "ENSURE THAT 'STORAGE SERVICE ENCRYPTION' IS ENABLED FOR THE BLOB SERVICE" {
+    azure_issue["blobService"]
+}
+
+blobService_miss_err = "ENSURE THAT 'STORAGE SERVICE ENCRYPTION' IS ENABLED FOR THE BLOB SERVICE" {
+    azure_attribute_absence["blobService"]
+}
+
+blobService_metadata := {
+    "Policy Code": "PR-AZR-0112-ARM",
+    "Type": "IaC",
+    "Product": "",
+    "Language": "ARM template",
+    "Policy Title": "ENSURE THAT 'STORAGE SERVICE ENCRYPTION' IS ENABLED FOR THE BLOB SERVICE",
+    "Policy Description": "Enable data encryption at rest for blobs. Storage service encryption protects your data at rest. Azure Storage encrypts data when it's written, and automatically decrypts it when it is accessed.",
+    "Resource Type": "microsoft.storage/storageaccounts",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
+}
+
+
+# PR-AZR-0113-ARM
+
+default fileService = null
+
+azure_attribute_absence["fileService"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.encryption.services.file
+}
+
+azure_issue["fileService"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    resource.properties.encryption.services.file.enabled != true
+}
+
+fileService {
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    not azure_issue["fileService"]
+    not azure_attribute_absence["fileService"]
+}
+
+fileService = false {
+    azure_issue["fileService"]
+}
+
+fileService = false {
+    azure_attribute_absence["fileService"]
+}
+
+fileService_err = "ENSURE THAT 'STORAGE SERVICE ENCRYPTION' IS ENABLED FOR THE FILE SERVICE" {
+    azure_issue["fileService"]
+}
+
+fileService_miss_err = "ENSURE THAT 'STORAGE SERVICE ENCRYPTION' IS ENABLED FOR THE FILE SERVICE" {
+    azure_attribute_absence["fileService"]
+}
+
+fileService_metadata := {
+    "Policy Code": "PR-AZR-0113-ARM",
+    "Type": "IaC",
+    "Product": "",
+    "Language": "ARM template",
+    "Policy Title": "ENSURE THAT 'STORAGE SERVICE ENCRYPTION' IS ENABLED FOR THE FILE SERVICE",
+    "Policy Description": "Azure Storage encryption protects your data and to help you to meet your organizational security and compliance commitments. Data in Azure Storage is encrypted and decrypted transparently using 256-bit AES encryption, one of the strongest block ciphers available, and is FIPS 140-2 compliant. Azure Storage encryption is similar to BitLocker encryption on Windows.",
+    "Resource Type": "microsoft.storage/storageaccounts",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
+}
+
+
+
+
+# PR-AZR-0114-ARM
+
+default keySource = null
+
+azure_issue["fileService"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    resource.properties.encryption.keySource != "Microsoft.Keyvault"
+}
+
+keySource {
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    not azure_issue["keySource"]
+}
+
+keySource = false {
+    azure_issue["keySource"]
+}
+
+
+keySource_err = "ENSURE STORAGE FOR CRITICAL DATA ARE ENCRYPTED WITH CUSTOMER MANAGED KEY" {
+    azure_issue["keySource"]
+}
+
+
+keySource_metadata := {
+    "Policy Code": "PR-AZR-0114-ARM",
+    "Type": "IaC",
+    "Product": "",
+    "Language": "ARM template",
+    "Policy Title": "ENSURE STORAGE FOR CRITICAL DATA ARE ENCRYPTED WITH CUSTOMER MANAGED KEY",
+    "Policy Description": "By default, data in the storage account is encrypted using Microsoft Managed Keys at rest. All Azure Storage resources are encrypted, including blobs, disks, files, queues, and tables. All object metadata is also encrypted. However, if you want to control and manage this encryption key yourself, you can specify a customer-managed key, that key is used to protect and control access to the key that encrypts your data. You can also choose to automatically update the key version used for Azure Storage encryption whenever a new version is available in the associated Key Vault.",
+    "Resource Type": "microsoft.storage/storageaccounts",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
+}
+
