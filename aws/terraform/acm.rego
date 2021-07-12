@@ -8,10 +8,11 @@ package rule
 
 default acm_wildcard = null
 
-aws_attribute_absence["acm_wildcard"] {
+aws_issue["acm_wildcard"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_acm_certificate"
     not resource.properties.domain_name
+    not resource.properties.private_key
 }
 
 aws_issue["acm_wildcard"] {
@@ -29,23 +30,14 @@ aws_issue["acm_wildcard"] {
 acm_wildcard {
     lower(input.resources[_].type) == "aws_acm_certificate"
     not aws_issue["acm_wildcard"]
-    not aws_attribute_absence["acm_wildcard"]
 }
 
 acm_wildcard = false {
     aws_issue["acm_wildcard"]
-}
-
-acm_wildcard = false {
-    aws_attribute_absence["acm_wildcard"]
 }
 
 acm_wildcard_err = "AWS ACM Certificate with wildcard domain name" {
     aws_issue["acm_wildcard"]
-}
-
-acm_wildcard_miss_err = "Certificate manager attribute domain_name missing in the resource" {
-    aws_attribute_absence["acm_wildcard"]
 }
 
 acm_wildcard_metadata := {
