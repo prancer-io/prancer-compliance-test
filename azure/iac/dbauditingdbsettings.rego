@@ -14,10 +14,23 @@ azure_attribute_absence["sql_db_log_audit"] {
     not resource.properties.state
 }
 
+azure_attribute_absence["sql_log_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
+    not resource.properties.retentionDays
+}
+
 azure_issue["sql_db_log_audit"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
     lower(resource.properties.state) != "enabled"
+}
+
+azure_issue["sql_log_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
+    to_number(resource.properties.retentionDays) < 90
+    to_number(resource.properties.retentionDays) != 0
 }
 
 sql_db_log_audit {

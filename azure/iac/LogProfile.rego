@@ -1,0 +1,90 @@
+package rule
+
+# https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/logprofiles
+
+# PR-AZR-0119-ARM
+
+default LogProfile = null
+
+azure_issue["LogProfile"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/logprofiles"
+    resource.properties.retentionPolicy.enabled != true
+}
+
+azure_issue_2["LogProfile"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/logprofiles"
+    resource.properties.retentionPolicy.days < 365
+}
+
+LogProfile {
+    lower(input.resources[_].type) == "microsoft.insights/logprofiles"
+    not azure_issue["LogProfile"]
+    not azure_issue_2["LogProfile"]
+}
+
+LogProfile = false {
+    azure_issue["LogProfile"]
+}
+
+LogProfile = false {
+    azure_issue_2["LogProfile"]
+}
+
+LogProfile_miss_err = "ENSURE THAT ACTIVITY LOG RETENTION IS SET 365 DAYS OR GREATER" {
+    azure_issue["LogProfile"]
+}
+
+LogProfiles_err = "ENSURE THAT ACTIVITY LOG RETENTION IS SET 365 DAYS OR GREATER" {
+    azure_issue_2["LogProfile"]
+}
+
+LogProfile_metadata := {
+    "Policy Code": "PR-AZR-0119-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "ENSURE THAT ACTIVITY LOG RETENTION IS SET 365 DAYS OR GREATER",
+    "Policy Description": "Replicate Redis Cache server data to another Redis Cache server using geo replication. This feature is only available for Premium tier Redis Cache. From performance point of view, Microsoft recommends that both Redis Caches (Primary and the linked secondary) reside in the same region.",
+    "Resource Type": "microsoft.insights/logprofiles",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/logprofiles"
+}
+
+
+
+# PR-AZR-0120-ARM
+
+default locations = null
+
+azure_issue["locations"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/logprofiles"
+    count(resource.properties.locations) < 65
+}
+
+locations {
+    lower(input.resources[_].type) == "microsoft.insights/logprofiles"
+    not azure_issue["locations"]
+}
+
+locations = false {
+    azure_issue["locations"]
+}
+
+locations_err = "ENSURE THE LOG PROFILE CAPTURES ACTIVITY LOGS FOR ALL REGIONS INCLUDING GLOBAL" {
+    azure_issue["locations"]
+}
+
+locations_metadata := {
+    "Policy Code": "PR-AZR-0120-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "ENSURE THE LOG PROFILE CAPTURES ACTIVITY LOGS FOR ALL REGIONS INCLUDING GLOBAL",
+    "Policy Description": "Configure the log profile to export activities from all Azure supported regions/locations including global. Rationale: A log profile controls how the activity Log is exported. Ensuring that logs are exported from all the Azure supported regions/locations means that logs for potentially unexpected activities occurring in otherwise unused regions are stored and made available for incident response and investigations. Including global region/location in the log profile locations ensures all events from the control/management plane will be exported, as many events in the activity log are global events.",
+    "Resource Type": "microsoft.insights/logprofiles",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/logprofiles"
+}

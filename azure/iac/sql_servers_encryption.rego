@@ -9,7 +9,7 @@ default serverKeyType = null
 azure_issue["serverKeyType"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/encryptionprotector"
-    lower(resource.properties.serverKeyType) != "AzureKeyVault"
+    lower(resource.properties.serverKeyType) != "azurekeyvault"
 }
 
 serverKeyType {

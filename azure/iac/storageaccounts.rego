@@ -199,7 +199,7 @@ blobService_miss_err = "ENSURE THAT 'STORAGE SERVICE ENCRYPTION' IS ENABLED FOR 
 blobService_metadata := {
     "Policy Code": "PR-AZR-0112-ARM",
     "Type": "IaC",
-    "Product": "",
+    "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "ENSURE THAT 'STORAGE SERVICE ENCRYPTION' IS ENABLED FOR THE BLOB SERVICE",
     "Policy Description": "Enable data encryption at rest for blobs. Storage service encryption protects your data at rest. Azure Storage encrypts data when it's written, and automatically decrypts it when it is accessed.",
@@ -250,7 +250,7 @@ fileService_miss_err = "ENSURE THAT 'STORAGE SERVICE ENCRYPTION' IS ENABLED FOR 
 fileService_metadata := {
     "Policy Code": "PR-AZR-0113-ARM",
     "Type": "IaC",
-    "Product": "",
+    "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "ENSURE THAT 'STORAGE SERVICE ENCRYPTION' IS ENABLED FOR THE FILE SERVICE",
     "Policy Description": "Azure Storage encryption protects your data and to help you to meet your organizational security and compliance commitments. Data in Azure Storage is encrypted and decrypted transparently using 256-bit AES encryption, one of the strongest block ciphers available, and is FIPS 140-2 compliant. Azure Storage encryption is similar to BitLocker encryption on Windows.",
@@ -269,7 +269,7 @@ default keySource = null
 azure_issue["fileService"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
-    resource.properties.encryption.keySource != "Microsoft.Keyvault"
+    lower(resource.properties.encryption.keySource) != "microsoft.keyvault"
 }
 
 keySource {
@@ -290,7 +290,7 @@ keySource_err = "ENSURE STORAGE FOR CRITICAL DATA ARE ENCRYPTED WITH CUSTOMER MA
 keySource_metadata := {
     "Policy Code": "PR-AZR-0114-ARM",
     "Type": "IaC",
-    "Product": "",
+    "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "ENSURE STORAGE FOR CRITICAL DATA ARE ENCRYPTED WITH CUSTOMER MANAGED KEY",
     "Policy Description": "By default, data in the storage account is encrypted using Microsoft Managed Keys at rest. All Azure Storage resources are encrypted, including blobs, disks, files, queues, and tables. All object metadata is also encrypted. However, if you want to control and manage this encryption key yourself, you can specify a customer-managed key, that key is used to protect and control access to the key that encrypts your data. You can also choose to automatically update the key version used for Azure Storage encryption whenever a new version is available in the associated Key Vault.",

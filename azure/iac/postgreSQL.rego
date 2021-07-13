@@ -9,7 +9,7 @@ default geoRedundantBackup = null
 azure_issue["geoRedundantBackup"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbforpostgresql/servers"
-    lower(resource.properties.storageProfile.geoRedundantBackup) != "Enabled"
+    lower(resource.properties.storageProfile.geoRedundantBackup) != "enabled"
 }
 
 geoRedundantBackup {
@@ -28,7 +28,7 @@ geoRedundantBackup_err = "ENSURE THAT GEO REDUNDANT BACKUPS IS ENABLED ON POSTGR
 geoRedundantBackup_metadata := {
     "Policy Code": "PR-AZR-0115-ARM",
     "Type": "IaC",
-    "Product": "",
+    "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "ENSURE THAT GEO REDUNDANT BACKUPS IS ENABLED ON POSTGRESQL",
     "Policy Description": "Azure Database for PostgreSQL provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage.",
