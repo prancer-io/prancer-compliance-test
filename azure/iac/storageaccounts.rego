@@ -299,3 +299,40 @@ keySource_metadata := {
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
 }
 
+
+
+# PR-AZR-0122-ARM
+
+default region = null
+
+azure_issue["region"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    lower(resource.location) != "northeurope"
+    lower(resource.location) != "westeurope"
+}
+
+region {
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    not azure_issue["region"]
+}
+
+region = false {
+    azure_issue["region"]
+}
+
+region_err = "STORAGE ACCOUNTS OUTSIDE EUROPE" {
+    azure_issue["region"]
+}
+
+region_metadata := {
+    "Policy Code": "PR-AZR-0122-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "STORAGE ACCOUNTS OUTSIDE EUROPE",
+    "Policy Description": "Identify Storage Accounts outside of the following regions: northeurope, westeurope",
+    "Resource Type": "microsoft.storage/storageaccounts",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
+}
