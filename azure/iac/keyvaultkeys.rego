@@ -49,7 +49,7 @@ kv_expire_keys_metadata := {
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "Azure Key Vault keys have no expiration date",
-    "Policy Description": "PR-AZR-0018-ARM-DESC",
+    "Policy Description": "Ensure that all Keys in Azure Key Vault have an expiry time set.",
     "Resource Type": "microsoft.keyvault/vaults/keys",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/keys"
