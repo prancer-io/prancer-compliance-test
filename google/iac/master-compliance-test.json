@@ -16,7 +16,7 @@
                             "id":"PR-GCP-0069-GDF",
                             "eval": "data.rule.disk_encrypt",
                             "message": "data.rule.disk_encrypt_err",
-                            "remediationDescription":"",
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/compute/docs/reference/rest/v1/disks",
                             "remediationFunction":"PR_GCP_0069_GDF.py"
                         }
                     ],
@@ -633,8 +633,8 @@
                             "id":"PR-GCP-0092-GDF",
                             "eval": "data.rule.vm_metadata",
                             "message": "data.rule.vm_metadata_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/compute/docs/reference/rest/v1/instances",
+                            "remediationFunction":"PR_GCP_0092_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -661,8 +661,8 @@
                             "id":"PR-GCP-0093-GDF",
                             "eval": "data.rule.vm_no_labels",
                             "message": "data.rule.vm_no_labels_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/compute/docs/reference/rest/v1/instances",
+                            "remediationFunction":"PR_GCP_0093_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -689,8 +689,8 @@
                             "id":"PR-GCP-0094-GDF",
                             "eval": "data.rule.vm_info",
                             "message": "data.rule.vm_info_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/compute/docs/reference/rest/v1/instances",
+                            "remediationFunction":"PR_GCP_0094_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -886,8 +886,8 @@
                             "id":"PR-GCP-0030-GDF",
                             "eval": "data.rule.k8s_svc_account",
                             "message": "data.rule.k8s_svc_account_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/compute/docs/reference/rest/v1/disks",
+                            "remediationFunction":"PR_GCP_0030_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -914,8 +914,8 @@
                             "id":"PR-GCP-0031-GDF",
                             "eval": "data.rule.k8s_basicauth",
                             "message": "data.rule.k8s_basicauth_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0031_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -942,8 +942,8 @@
                             "id":"PR-GCP-0032-GDF",
                             "eval": "data.rule.k8s_client_cert",
                             "message": "data.rule.k8s_client_cert_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0032_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -970,8 +970,8 @@
                             "id":"PR-GCP-0033-GDF",
                             "eval": "data.rule.k8s_alias_ip",
                             "message": "data.rule.k8s_alias_ip_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0033_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -998,8 +998,8 @@
                             "id":"PR-GCP-0034-GDF",
                             "eval": "data.rule.k8s_alpha",
                             "message": "data.rule.k8s_alpha_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0034_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1026,8 +1026,8 @@
                             "id":"PR-GCP-0035-GDF",
                             "eval": "data.rule.k8s_http_lbs",
                             "message": "data.rule.k8s_http_lbs_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0035_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1054,8 +1054,8 @@
                             "id":"PR-GCP-0036-GDF",
                             "eval": "data.rule.k8s_legacy_abac",
                             "message": "data.rule.k8s_legacy_abac_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0036_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1082,8 +1082,8 @@
                             "id":"PR-GCP-0037-GDF",
                             "eval": "data.rule.k8s_master_auth_net",
                             "message": "data.rule.k8s_master_auth_net_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0037_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1110,8 +1110,8 @@
                             "id":"PR-GCP-0038-GDF",
                             "eval": "data.rule.k8s_net_policy",
                             "message": "data.rule.k8s_net_policy_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0038_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1138,8 +1138,8 @@
                             "id":"PR-GCP-0039-GDF",
                             "eval": "data.rule.k8s_logging",
                             "message": "data.rule.k8s_logging_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0039_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1166,8 +1166,8 @@
                             "id":"PR-GCP-0040-GDF",
                             "eval": "data.rule.k8s_monitor",
                             "message": "data.rule.k8s_monitor_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0040_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1194,8 +1194,8 @@
                             "id":"PR-GCP-0041-GDF",
                             "eval": "data.rule.k8s_binary_auth",
                             "message": "data.rule.k8s_binary_auth_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0041_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1222,8 +1222,8 @@
                             "id":"PR-GCP-0042-GDF",
                             "eval": "data.rule.k8s_legacy_endpoint",
                             "message": "data.rule.k8s_legacy_endpoint_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0042_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1250,8 +1250,8 @@
                             "id":"PR-GCP-0043-GDF",
                             "eval": "data.rule.k8s_pod_security",
                             "message": "data.rule.k8s_pod_security_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0043_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1278,8 +1278,8 @@
                             "id":"PR-GCP-0045-GDF",
                             "eval": "data.rule.k8s_egress_metering",
                             "message": "data.rule.k8s_egress_metering_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0045_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1306,8 +1306,8 @@
                             "id":"PR-GCP-0046-GDF",
                             "eval": "data.rule.k8s_private",
                             "message": "data.rule.k8s_private_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0046_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1334,8 +1334,8 @@
                             "id":"PR-GCP-0047-GDF",
                             "eval": "data.rule.k8s_private_node",
                             "message": "data.rule.k8s_private_node_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0047_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1362,8 +1362,8 @@
                             "id":"PR-GCP-0048-GDF",
                             "eval": "data.rule.k8s_node_image",
                             "message": "data.rule.k8s_node_image_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0048_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1390,8 +1390,8 @@
                             "id":"PR-GCP-0049-GDF",
                             "eval": "data.rule.k8s_network",
                             "message": "data.rule.k8s_network_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0049_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1418,8 +1418,8 @@
                             "id":"PR-GCP-0050-GDF",
                             "eval": "data.rule.k8s_dashboard",
                             "message": "data.rule.k8s_dashboard_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0050_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1446,8 +1446,8 @@
                             "id":"PR-GCP-0051-GDF",
                             "eval": "data.rule.k8s_labels",
                             "message": "data.rule.k8s_labels_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0051_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1474,8 +1474,8 @@
                             "id":"PR-GCP-0052-GDF",
                             "eval": "data.rule.k8s_db_encrypt",
                             "message": "data.rule.k8s_db_encrypt_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0052_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1502,8 +1502,8 @@
                             "id":"PR-GCP-0053-GDF",
                             "eval": "data.rule.k8s_intra_node",
                             "message": "data.rule.k8s_intra_node_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0053_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1530,8 +1530,8 @@
                             "id":"PR-GCP-0054-GDF",
                             "eval": "data.rule.k8s_istio",
                             "message": "data.rule.k8s_istio_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0054_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1558,8 +1558,8 @@
                             "id":"PR-GCP-0055-GDF",
                             "eval": "data.rule.k8s_zones",
                             "message": "data.rule.k8s_zones_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0055_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1586,8 +1586,8 @@
                             "id":"PR-GCP-0056-GDF",
                             "eval": "data.rule.k8s_auto_upgrade",
                             "message": "data.rule.k8s_auto_upgrade_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationFunction":"PR_GCP_0056_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1614,8 +1614,8 @@
                             "id":"PR-GCP-0003-GDF",
                             "eval": "data.rule.dnssec_state",
                             "message": "data.rule.dnssec_state_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/dns/docs/reference/v1/managedZones",
+                            "remediationFunction":"PR_GCP_0003_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1642,8 +1642,8 @@
                             "id":"PR-GCP-0004-GDF",
                             "eval": "data.rule.dnssec_key_rsasha1",
                             "message": "data.rule.dnssec_key_rsasha1_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/dns/docs/reference/v1/managedZones",
+                            "remediationFunction":"PR_GCP_0004_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1670,8 +1670,8 @@
                             "id":"PR-GCP-0005-GDF",
                             "eval": "data.rule.dnssec_zone_rsasha1",
                             "message": "data.rule.dnssec_zone_rsasha1_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/dns/docs/reference/v1/managedZones",
+                            "remediationFunction":"PR_GCP_0005_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1699,8 +1699,8 @@
                             "id":"PR-GCP-0067-GDF",
                             "eval": "data.rule.svc_account_key",
                             "message": "data.rule.svc_account_key_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/iam/docs/reference/rest/v1/projects.serviceAccounts.keys",
+                            "remediationFunction":"PR_GCP_0067_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1728,8 +1728,8 @@
                             "id":"PR-GCP-0062-GDF",
                             "eval": "data.rule.sql_labels",
                             "message": "data.rule.sql_labels_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances",
+                            "remediationFunction":"PR_GCP_0062_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1756,8 +1756,8 @@
                             "id":"PR-GCP-0080-GDF",
                             "eval": "data.rule.sql_binary_logs",
                             "message": "data.rule.sql_binary_logs_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances",
+                            "remediationFunction":"PR_GCP_0080_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1784,8 +1784,8 @@
                             "id":"PR-GCP-0081-GDF",
                             "eval": "data.rule.sql_backup",
                             "message": "data.rule.sql_backup_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances",
+                            "remediationFunction":"PR_GCP_0081_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1812,8 +1812,8 @@
                             "id":"PR-GCP-0082-GDF",
                             "eval": "data.rule.sql_ssl",
                             "message": "data.rule.sql_ssl_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances",
+                            "remediationFunction":"PR_GCP_0082_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1840,8 +1840,8 @@
                             "id":"PR-GCP-0083-GDF",
                             "eval": "data.rule.sql_exposed",
                             "message": "data.rule.sql_exposed_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances",
+                            "remediationFunction":"PR_GCP_0083_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1868,8 +1868,8 @@
                             "id":"PR-GCP-0063-GDF",
                             "eval": "data.rule.storage_encrypt",
                             "message": "data.rule.storage_encrypt_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/storage/docs/json_api/v1/buckets",
+                            "remediationFunction":"PR_GCP_0063_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1896,8 +1896,8 @@
                             "id":"PR-GCP-0066-GDF",
                             "eval": "data.rule.storage_versioning",
                             "message": "data.rule.storage_versioning_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this URL: https://cloud.google.com/storage/docs/json_api/v1/buckets",
+                            "remediationFunction":"PR_GCP_0066_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1924,8 +1924,8 @@
                             "id":"PR-GCP-0078-GDF",
                             "eval": "data.rule.storage_stack_logging",
                             "message": "data.rule.storage_stack_logging_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/storage/docs/json_api/v1/buckets",
+                            "remediationFunction":"PR_GCP_0078_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1952,8 +1952,8 @@
                             "id":"PR-GCP-0089-GDF",
                             "eval": "data.rule.storage_logging",
                             "message": "data.rule.storage_logging_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/storage/docs/json_api/v1/buckets",
+                            "remediationFunction":"PR_GCP_0089_GDF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1980,8 +1980,8 @@
                             "id":"PR-GCP-0090-GDF",
                             "eval": "data.rule.storage_public_logs",
                             "message": "data.rule.storage_public_logs_err",
-                            "remediationDescription":"",
-                            "remediationFunction":""
+                            "remediationDescription":"make sure you are following the deployment template format at this https://cloud.google.com/storage/docs/json_api/v1/buckets",
+                            "remediationFunction":"PR_GCP_0090_GDF.py"
                         }
                     ],
                     "severity": "Medium",
