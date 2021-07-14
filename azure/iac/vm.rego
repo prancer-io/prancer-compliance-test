@@ -39,3 +39,42 @@ vm_aset_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachinescalesets/virtualmachines"
 }
+
+
+
+
+# PR-AZR-0123-ARM
+
+default availabilitySet = null
+azure_issue ["availabilitySet"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.compute/virtualmachines"
+    not resource.properties.availabilitySet
+}
+
+availabilitySet {
+    lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
+    not azure_issue["availabilitySet"]
+}
+
+availabilitySet = false {
+    azure_issue["availabilitySet"]
+}
+
+
+availabilitySet_err = "ENSURE THAT AZURE VIRTUAL MACHINE IS ASSIGNED TO AN AVAILABILITY SET" {
+    azure_issue["availabilitySet"]
+}
+
+
+availabilitySet_metadata := {
+    "Policy Code": "PR-AZR-0123-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "ENSURE THAT AZURE VIRTUAL MACHINE IS ASSIGNED TO AN AVAILABILITY SET",
+    "Policy Description": "Availability sets ensure that the VMs you deploy on Azure are distributed across multiple isolated hardware clusters. Doing this, ensures that if a hardware or software failure within Azure happens, only a subset of your VMs is impacted and that your overall solution remains available and operational.",
+    "Resource Type": "microsoft.compute/virtualmachines",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines"
+}
