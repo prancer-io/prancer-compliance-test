@@ -139,8 +139,8 @@
                     "evals": [
                         {
                             "id": "gID1",
-                            "eval": "data.rule.aks_monitoring",
-                            "message": "data.rule.aks_monitoring_err",
+                            "eval": "data.rule.bitcoin_ports",
+                            "message": "data.rule.bitcoin_ports_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html",
                             "remediationFunction": "PR_AWS_gID1_CFR.py"
                         }
@@ -171,8 +171,8 @@
                     "evals": [
                         {
                             "id": "gID2",
-                            "eval": "data.rule.aks_nodes",
-                            "message": "data.rule.aks_nodes_err",
+                            "eval": "data.rule.ethereum_ports",
+                            "message": "data.rule.ethereum_ports_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html",
                             "remediationFunction": "PR_AWS_gID2_CFR.py"
                         }
@@ -3641,7 +3641,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_S3_13",
+                    "masterTestId": "TEST_S3_14",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
                     ],
