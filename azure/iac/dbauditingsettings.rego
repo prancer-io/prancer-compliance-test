@@ -89,7 +89,7 @@ auditActionsAndGroups = false {
     not azure_issue["auditActionsAndGroups"]
 }
 
-auditActionsAndGroups_err = "ENSURE THAT 'AUDITACTIONGROUPS' IN 'AUDITING' POLICY FOR A SQL SERVER IS SET PROPERLY" {
+auditActionsAndGroups_err = "Ensure that 'AuditActionGroups' in 'auditing' policy for a SQL server is set properly" {
     lower(input.resources[_].type) == "microsoft.sql/servers/auditingsettings"
     not azure_issue["auditActionsAndGroups"]
 }
@@ -99,7 +99,7 @@ auditActionsAndGroups_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "ENSURE THAT 'AUDITACTIONGROUPS' IN 'AUDITING' POLICY FOR A SQL SERVER IS SET PROPERLY",
+    "Policy Title": "Ensure that 'AuditActionGroups' in 'auditing' policy for a SQL server is set properly",
     "Policy Description": "To capture all critical activities done on SQL Servers and databases within sql servers, auditing should be configured to capture appropriate 'AuditActionGroups'. Property `AuditActionGroup` should contains at least `SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP, FAILED_DATABASE_AUTHENTICATION_GROUP, BATCH_COMPLETED_GROUP` to ensure comprehensive audit logging for SQL servers and SQL databases hosted on SQL Server.",
     "Resource Type": "microsoft.sql/servers/auditingsettings",
     "Policy Help URL": "",

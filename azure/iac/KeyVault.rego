@@ -33,7 +33,7 @@ KeyVault_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "ENSURE THAT KEYVAULT IS IN USE",
+    "Policy Title": "Ensure at least one principal has access to Keyvault",
     "Policy Description": "Use the Azure Key Vault to store secrets within the Microsoft Azure environment. Secrets in Azure Key Vault are octet sequences with a maximum size of 25k bytes each.",
     "Resource Type": "microsoft.keyvault/vaults",
     "Policy Help URL": "",
@@ -61,7 +61,7 @@ enableSoftDelete = false {
 }
 
 
-enableSoftDelete_err = "ENSURE THE KEY VAULT IS RECOVERABLE - ENABLE 'SOFT DELETE' SETTING FOR A KEY VAULT" {
+enableSoftDelete_err = "Ensure the key vault is recoverable - enable 'Soft Delete' setting for a Key Vault" {
     azure_issue["enableSoftDelete"]
 }
 
@@ -71,7 +71,7 @@ enableSoftDelete_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "ENSURE THE KEY VAULT IS RECOVERABLE - ENABLE 'SOFT DELETE' SETTING FOR A KEY VAULT",
+    "Policy Title": "Ensure the key vault is recoverable - enable 'Soft Delete' setting for a Key Vault",
     "Policy Description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation, etc.) supported by the key vault objects. It is recommended the key vault be made recoverable by enabling the 'Do Not Purge' and 'Soft Delete' functions. This is in order to prevent loss of encrypted data including storage accounts, SQL databases, and/or dependent services provided by key vault objects (Keys, Secrets, Certificates) etc., as may happen in the case of accidental deletion by a user or from disruptive activity by a malicious user.",
     "Resource Type": "microsoft.keyvault/vaults",
     "Policy Help URL": "",
@@ -100,7 +100,7 @@ enablePurgeProtection = false {
 }
 
 
-enablePurgeProtection_err = "KEY VAULT SHOULD HAVE PURGE PROTECTION ENABLED" {
+enablePurgeProtection_err = "Key vault should have purge protection enabled" {
     azure_issue["enableSoftDelete"]
 }
 
@@ -110,7 +110,7 @@ enablePurgeProtection_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "KEY VAULT SHOULD HAVE PURGE PROTECTION ENABLED",
+    "Policy Title": "Key vault should have purge protection enabled",
     "Policy Description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation",
     "Resource Type": "microsoft.keyvault/vaults",
     "Policy Help URL": "",

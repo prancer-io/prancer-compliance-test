@@ -188,11 +188,11 @@ blobService = false {
     azure_attribute_absence["blobService"]
 }
 
-blobService_err = "ENSURE THAT 'STORAGE SERVICE ENCRYPTION' IS ENABLED FOR THE BLOB SERVICE" {
+blobService_err = "Ensure that 'Storage service encryption' is enabled for the Blob Service" {
     azure_issue["blobService"]
 }
 
-blobService_miss_err = "ENSURE THAT 'STORAGE SERVICE ENCRYPTION' IS ENABLED FOR THE BLOB SERVICE" {
+blobService_miss_err = "Ensure that 'Storage service encryption' is enabled for the Blob Service" {
     azure_attribute_absence["blobService"]
 }
 
@@ -201,7 +201,7 @@ blobService_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "ENSURE THAT 'STORAGE SERVICE ENCRYPTION' IS ENABLED FOR THE BLOB SERVICE",
+    "Policy Title": "Ensure that 'Storage service encryption' is enabled for the Blob Service",
     "Policy Description": "Enable data encryption at rest for blobs. Storage service encryption protects your data at rest. Azure Storage encrypts data when it's written, and automatically decrypts it when it is accessed.",
     "Resource Type": "microsoft.storage/storageaccounts",
     "Policy Help URL": "",
@@ -239,11 +239,11 @@ fileService = false {
     azure_attribute_absence["fileService"]
 }
 
-fileService_err = "ENSURE THAT 'STORAGE SERVICE ENCRYPTION' IS ENABLED FOR THE FILE SERVICE" {
+fileService_err = "Ensure that 'Storage service encryption' is enabled for the File Service" {
     azure_issue["fileService"]
 }
 
-fileService_miss_err = "ENSURE THAT 'STORAGE SERVICE ENCRYPTION' IS ENABLED FOR THE FILE SERVICE" {
+fileService_miss_err = "Ensure that 'Storage service encryption' is enabled for the File Service" {
     azure_attribute_absence["fileService"]
 }
 
@@ -252,7 +252,7 @@ fileService_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "ENSURE THAT 'STORAGE SERVICE ENCRYPTION' IS ENABLED FOR THE FILE SERVICE",
+    "Policy Title": "Ensure that 'Storage service encryption' is enabled for the File Service",
     "Policy Description": "Azure Storage encryption protects your data and to help you to meet your organizational security and compliance commitments. Data in Azure Storage is encrypted and decrypted transparently using 256-bit AES encryption, one of the strongest block ciphers available, and is FIPS 140-2 compliant. Azure Storage encryption is similar to BitLocker encryption on Windows.",
     "Resource Type": "microsoft.storage/storageaccounts",
     "Policy Help URL": "",
@@ -282,7 +282,7 @@ keySource = false {
 }
 
 
-keySource_err = "ENSURE STORAGE FOR CRITICAL DATA ARE ENCRYPTED WITH CUSTOMER MANAGED KEY" {
+keySource_err = "Ensure storage for critical data are encrypted with Customer Managed Key" {
     azure_issue["keySource"]
 }
 
@@ -292,7 +292,7 @@ keySource_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "ENSURE STORAGE FOR CRITICAL DATA ARE ENCRYPTED WITH CUSTOMER MANAGED KEY",
+    "Policy Title": "Ensure storage for critical data are encrypted with Customer Managed Key",
     "Policy Description": "By default, data in the storage account is encrypted using Microsoft Managed Keys at rest. All Azure Storage resources are encrypted, including blobs, disks, files, queues, and tables. All object metadata is also encrypted. However, if you want to control and manage this encryption key yourself, you can specify a customer-managed key, that key is used to protect and control access to the key that encrypts your data. You can also choose to automatically update the key version used for Azure Storage encryption whenever a new version is available in the associated Key Vault.",
     "Resource Type": "microsoft.storage/storageaccounts",
     "Policy Help URL": "",
@@ -321,7 +321,7 @@ region = false {
     azure_issue["region"]
 }
 
-region_err = "STORAGE ACCOUNTS OUTSIDE EUROPE" {
+region_err = "Storage Accounts outside Europe" {
     azure_issue["region"]
 }
 
@@ -330,7 +330,7 @@ region_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "STORAGE ACCOUNTS OUTSIDE EUROPE",
+    "Policy Title": "Storage Accounts outside Europe",
     "Policy Description": "Identify Storage Accounts outside of the following regions: northeurope, westeurope",
     "Resource Type": "microsoft.storage/storageaccounts",
     "Policy Help URL": "",

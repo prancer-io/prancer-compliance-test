@@ -32,11 +32,11 @@ LogProfile = false {
     azure_issue_2["LogProfile"]
 }
 
-LogProfile_miss_err = "ENSURE THAT ACTIVITY LOG RETENTION IS SET 365 DAYS OR GREATER" {
+LogProfile_miss_err = "Ensure that Activity Log Retention is set 365 days or greater" {
     azure_issue["LogProfile"]
 }
 
-LogProfiles_err = "ENSURE THAT ACTIVITY LOG RETENTION IS SET 365 DAYS OR GREATER" {
+LogProfiles_err = "Ensure that Activity Log Retention is set 365 days or greater" {
     azure_issue_2["LogProfile"]
 }
 
@@ -45,7 +45,7 @@ LogProfile_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "ENSURE THAT ACTIVITY LOG RETENTION IS SET 365 DAYS OR GREATER",
+    "Policy Title": "Ensure that Activity Log Retention is set 365 days or greater",
     "Policy Description": "Replicate Redis Cache server data to another Redis Cache server using geo replication. This feature is only available for Premium tier Redis Cache. From performance point of view, Microsoft recommends that both Redis Caches (Primary and the linked secondary) reside in the same region.",
     "Resource Type": "microsoft.insights/logprofiles",
     "Policy Help URL": "",
@@ -62,6 +62,7 @@ azure_issue["locations"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/logprofiles"
     count(resource.properties.locations) < 65
+    lower(resource.properties.locations) != "global"
 }
 
 locations {
@@ -73,7 +74,7 @@ locations = false {
     azure_issue["locations"]
 }
 
-locations_err = "ENSURE THE LOG PROFILE CAPTURES ACTIVITY LOGS FOR ALL REGIONS INCLUDING GLOBAL" {
+locations_err = "Ensure the log profile captures activity logs for all regions including global" {
     azure_issue["locations"]
 }
 
@@ -82,7 +83,7 @@ locations_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "ENSURE THE LOG PROFILE CAPTURES ACTIVITY LOGS FOR ALL REGIONS INCLUDING GLOBAL",
+    "Policy Title": "Ensure the log profile captures activity logs for all regions including global",
     "Policy Description": "Configure the log profile to export activities from all Azure supported regions/locations including global. Rationale: A log profile controls how the activity Log is exported. Ensuring that logs are exported from all the Azure supported regions/locations means that logs for potentially unexpected activities occurring in otherwise unused regions are stored and made available for incident response and investigations. Including global region/location in the log profile locations ensures all events from the control/management plane will be exported, as many events in the activity log are global events.",
     "Resource Type": "microsoft.insights/logprofiles",
     "Policy Help URL": "",

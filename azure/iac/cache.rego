@@ -21,7 +21,7 @@ enableNonSslPort = false {
 }
 
 
-enableNonSslPort_err = "ENSURE THAT THE REDIS CACHE ACCEPTS ONLY SSL CONNECTIONS" {
+enableNonSslPort_err = "Ensure that the Redis Cache accepts only SSL connections" {
     azure_issue["enableNonSslPort"]
 }
 
@@ -31,7 +31,7 @@ enableNonSslPort_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "ENSURE THAT THE REDIS CACHE ACCEPTS ONLY SSL CONNECTIONS",
+    "Policy Title": "Ensure that the Redis Cache accepts only SSL connections",
     "Policy Description": "It is recommended that Redis Cache should allow only SSL connections. Note: some Redis tools (like redis-cli) do not support SSL. When using such tools plain connection ports should be enabled.",
     "Resource Type": "microsoft.cache/redis",
     "Policy Help URL": "",

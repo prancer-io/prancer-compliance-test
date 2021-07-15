@@ -21,7 +21,7 @@ adminUserEnabled = false {
 }
 
 
-adminUserEnabled_err = "ENSURE THAT ADMIN USER IS DISABLED FOR CONTAINER REGISTRY" {
+adminUserEnabled_err = "Ensure that admin user is disabled for Container Registry" {
     azure_issue["adminUserEnabled"]
 }
 
@@ -31,7 +31,7 @@ adminUserEnabled_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "ENSURE THAT ADMIN USER IS DISABLED FOR CONTAINER REGISTRY",
+    "Policy Title": "Ensure that admin user is disabled for Container Registry",
     "Policy Description": "The value that indicates whether the admin user is enabled. Each container registry includes an admin user account, which is disabled by default. You can enable the admin user and manage its credentials in the Azure portal, or by using the Azure CLI or other Azure tools. All users authenticating with the admin account appear as a single user with push and pull access to the registry. Changing or disabling this account disables registry access for all users who use its credentials.",
     "Resource Type": "microsoft.containerregistry/registries",
     "Policy Help URL": "",

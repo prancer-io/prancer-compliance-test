@@ -62,7 +62,7 @@ availabilitySet = false {
 }
 
 
-availabilitySet_err = "ENSURE THAT AZURE VIRTUAL MACHINE IS ASSIGNED TO AN AVAILABILITY SET" {
+availabilitySet_err = "Ensure that Azure Virtual Machine is assigned to an availability set" {
     azure_issue["availabilitySet"]
 }
 
@@ -72,7 +72,7 @@ availabilitySet_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "ENSURE THAT AZURE VIRTUAL MACHINE IS ASSIGNED TO AN AVAILABILITY SET",
+    "Policy Title": "Ensure that Azure Virtual Machine is assigned to an availability set",
     "Policy Description": "Availability sets ensure that the VMs you deploy on Azure are distributed across multiple isolated hardware clusters. Doing this, ensures that if a hardware or software failure within Azure happens, only a subset of your VMs is impacted and that your overall solution remains available and operational.",
     "Resource Type": "microsoft.compute/virtualmachines",
     "Policy Help URL": "",

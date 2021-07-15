@@ -21,7 +21,7 @@ severRole = false {
     azure_issue["severRole"]
 }
 
-severRole_err = "REDIS CACHE SHOULD HAVE A BACKUP" {
+severRole_err = "" {
     azure_issue["severRole"]
 }
 
@@ -30,7 +30,7 @@ severRole_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "REDIS CACHE SHOULD HAVE A BACKUP",
+    "Policy Title": "Redis cache should have a backup",
     "Policy Description": "Replicate Redis Cache server data to another Redis Cache server using geo replication. This feature is only available for Premium tier Redis Cache. From performance point of view, Microsoft recommends that both Redis Caches (Primary and the linked secondary) reside in the same region.",
     "Resource Type": "microsoft.cache/redis/linkedservers",
     "Policy Help URL": "",
