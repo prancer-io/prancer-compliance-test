@@ -23,7 +23,7 @@ KeyVault = false {
 }
 
 
-KeyVault_err = "ENSURE THAT KEYVAULT IS IN USE" {
+KeyVault_err = "Ensure at least one principal has access to Keyvault" {
     azure_issue["KeyVault"]
 }
 
