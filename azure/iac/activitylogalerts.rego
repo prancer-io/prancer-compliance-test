@@ -34,7 +34,7 @@ alerts = false {
     azure_attribute_absence["alerts"]
 }
 
-alerts_err = "Activity log alerts should be enabled" {
+alerts_err = "Activity log alerts is not enabled" {
     azure_issue["alerts"]
 }
 
