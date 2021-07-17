@@ -106,3 +106,42 @@ gw_waf_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways"
 }
+
+
+
+
+# PR-AZR-0125-ARM
+
+default protocol = null
+azure_issue ["protocol"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    lower(resource.properties.httpListeners.properties.protocol) != "https"
+
+protocol {
+    lower(input.resources[_].type) == "microsoft.network/applicationgateways"
+    not azure_issue["protocol"]
+}
+
+protocol = false {
+    azure_issue["protocol"]
+}
+
+
+protocol_err = "Ensure Application Gateway is using Https protocol" {
+    azure_issue["protocol"]
+}
+
+
+protocol_metadata := {
+    "Policy Code": "PR-AZR-0125-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure Application Gateway is using Https protocol",
+    "Policy Description": "Application Gateway allows to set network protocols Http and Https. It is highly recommended to use Https protocol for secure connections.",
+    "Resource Type": "microsoft.network/applicationgateways",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways
+"
+}
