@@ -8,7 +8,7 @@ package rule
 
 default cf_default_cache = null
 
-aws_attribute_absence["cf_default_cache"] {
+aws_issue["cf_default_cache"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     not resource.properties.default_cache_behavior.field_level_encryption_id
@@ -23,23 +23,14 @@ aws_issue["cf_default_cache"] {
 cf_default_cache {
     lower(input.resources[_].type) == "aws_cloudfront_distribution"
     not aws_issue["cf_default_cache"]
-    not aws_attribute_absence["cf_default_cache"]
 }
 
 cf_default_cache = false {
     aws_issue["cf_default_cache"]
-}
-
-cf_default_cache = false {
-    aws_attribute_absence["cf_default_cache"]
 }
 
 cf_default_cache_err = "AWS CloudFront Distributions with Field-Level Encryption not enabled" {
     aws_issue["cf_default_cache"]
-}
-
-cf_default_cache_miss_err = "Cloudfront attribute DistributionConfig missing in the resource" {
-    aws_attribute_absence["cf_default_cache"]
 }
 
 cf_default_cache_metadata := {

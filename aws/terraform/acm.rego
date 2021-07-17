@@ -64,38 +64,23 @@ acm_wildcard_metadata := {
 
 default acm_ct_log = null
 
-aws_attribute_absence["acm_ct_log"] {
-    resource := input.resources[_]
-    lower(resource.type) == "aws_acm_certificate"
-    not resource.properties.certificate_transparency_logging_preference
-}
-
 aws_issue["acm_ct_log"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_acm_certificate"
-    lower(resource.properties.certificate_transparency_logging_preference) != "enabled"
+    lower(resource.properties.options.certificate_transparency_logging_preference) != "enabled"
 }
 
 acm_ct_log {
     lower(input.resources[_].type) == "aws_acm_certificate"
     not aws_issue["acm_ct_log"]
-    not aws_attribute_absence["acm_ct_log"]
 }
 
 acm_ct_log = false {
     aws_issue["acm_ct_log"]
-}
-
-acm_ct_log = false {
-    aws_attribute_absence["acm_ct_log"]
 }
 
 acm_ct_log_err = "AWS Certificate Manager (ACM) has certificates with Certificate Transparency Logging disabled" {
     aws_issue["acm_ct_log"]
-}
-
-acm_ct_log_miss_err = "Certificate manager attribute certificate_transparency_logging_preference missing in the resource" {
-    aws_attribute_absence["acm_ct_log"]
 }
 
 acm_ct_log_metadata := {
