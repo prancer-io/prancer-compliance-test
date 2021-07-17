@@ -2148,40 +2148,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_ACCOUNTS_3",
-                    "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(storageaccounts.rego)",
-                    "evals": [
-                        {
-                            "id": "",
-                            "eval": "data.rule.storage_acl",
-                            "message": "data.rule.storage_acl_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts",
-                            "remediationFunction": ""
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Advanced Threat Protection should be enabled for all the storage accounts",
-                    "description": "Advanced Threat Protection (ATP) for Azure Storage provides an additional layer of security intelligence that detects unusual and potentially harmful attempts to access or exploit storage accounts. This layer of protection allows you to protect and address concerns about potential threats to your storage accounts as they occur, without needing to be an expert in security.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "CIS",
-                                "HIPAA",
-                                "NIST",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "arm"
-                            ]
-                        }
-                    ]
-                },
-                {
                     "masterTestId": "TEST_STORAGE_BLOB_CONTAINER",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
