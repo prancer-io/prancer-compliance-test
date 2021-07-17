@@ -16,12 +16,12 @@
                             "id": "PR-AZR-0006-TRF",
                             "eval": "data.rule.aks_cni_net",
                             "message": "data.rule.aks_cni_net_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, set network_policy = 'azure' under 'network_profile' block to fix the issue. If 'network_profile' block does not exist please add one. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#network_policy for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure AKS cluster Azure CNI networking not enabled",
+                    "title": "Azure AKS cluster Azure CNI networking should be enabled",
                     "description": "Azure CNI provides the following features over kubenet networking:_x000D__x000D_- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network._x000D_- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB._x000D_- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance._x000D_- Support for Network Policies securing communication between pods._x000D__x000D_This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.",
                     "tags": [
                         {
@@ -45,12 +45,12 @@
                             "id": "PR-AZR-0007-TRF",
                             "eval": "data.rule.aks_http_routing",
                             "message": "data.rule.aks_http_routing_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, disable 'http_application_routing' by setting 'http_application_routing { enabled = false }' under 'addon_profile' block to fix the issue. If 'addon_profile' block does not exist please ignore. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#http_application_routing for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure AKS cluster HTTP application routing enabled",
+                    "title": "Azure AKS cluster HTTP application routing should be disabled",
                     "description": "HTTP application routing configures an Ingress controller in your AKS cluster. As applications are deployed, the solution also creates publicly accessible DNS names for application endpoints. While this makes it easy to access applications that are deployed to your Azure AKS cluster, this add-on is not recommended for production use._x000D__x000D_This policy checks your AKS cluster HTTP application routing add-on setting and alerts if enabled.",
                     "tags": [
                         {
@@ -74,12 +74,12 @@
                             "id": "PR-AZR-0008-TRF",
                             "eval": "data.rule.aks_monitoring",
                             "message": "data.rule.aks_monitoring_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, enable 'oms_agent' by setting 'oms_agent { enabled = true }' under 'addon_profile' block to fix the issue. If 'addon_profile' block does not exist please add one. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#oms_agent for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure AKS cluster monitoring not enabled",
+                    "title": "Azure AKS cluster monitoring should be enabled",
                     "description": "Azure Monitor for containers is a feature designed to monitor the performance of container workloads deployed to either Azure Container Instances or managed Kubernetes clusters hosted on Azure Kubernetes Service (AKS). Monitoring your containers is critical, especially when you're running a production cluster, at scale, with multiple applications._x000D__x000D_This policy checks your AKS cluster monitoring add-on setting and alerts if no configuration is found, or monitoring is disabled.",
                     "tags": [
                         {
@@ -103,13 +103,13 @@
                             "id": "PR-AZR-0009-TRF",
                             "eval": "data.rule.aks_nodes",
                             "message": "data.rule.aks_nodes_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, set node_count = 3 under 'default_node_pool' block to fix the issue. If 'default_node_pool' block does not exist please add one. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#node_count for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure AKS cluster pool profile count contains less than 3 nodes",
-                    "description": "Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)_x000D__x000D_This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.",
+                    "title": "Azure AKS cluster pool profile should have minimum 3 or more nodes",
+                    "description": "Ensure your AKS cluster pool profile contains minimum 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)_x000D__x000D_This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -132,12 +132,12 @@
                             "id": "PR-AZR-0010-TRF",
                             "eval": "data.rule.aks_rbac",
                             "message": "data.rule.aks_rbac_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, set enabled = true under 'role_based_access_control' block to fix the issue. If 'role_based_access_control' block does not exist please add one. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#role_based_access_control for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure AKS enable role-based access control (RBAC) not enforced",
+                    "title": "Azure AKS role-based access control (RBAC) should be enforced",
                     "description": "To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x000D__x000D_This policy checks your AKS cluster RBAC setting and alerts if disabled.",
                     "tags": [
                         {
