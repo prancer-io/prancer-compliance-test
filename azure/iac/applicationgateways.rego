@@ -117,6 +117,7 @@ azure_issue ["protocol"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/applicationgateways"
     lower(resource.properties.httpListeners.properties.protocol) != "https"
+}  
 
 protocol {
     lower(input.resources[_].type) == "microsoft.network/applicationgateways"
