@@ -266,6 +266,12 @@ fileService_metadata := {
 
 default keySource = null
 
+azure_attribute_absence["keySource"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.encryption.keySource
+}
+
 azure_issue["keySource"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
@@ -275,15 +281,23 @@ azure_issue["keySource"] {
 keySource {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
     not azure_issue["keySource"]
+    not azure_attribute_absence["keySource"]
 }
 
 keySource = false {
     azure_issue["keySource"]
 }
 
+keySource = false {
+    azure_attribute_absence["keySource"]
+}
 
 keySource_err = "Ensure storage for critical data are encrypted with Customer Managed Key" {
     azure_issue["keySource"]
+}
+
+keySource_miss_err = "Ensure storage for critical data are encrypted with Customer Managed Key" {
+    azure_attribute_absence["keySource"]
 }
 
 
