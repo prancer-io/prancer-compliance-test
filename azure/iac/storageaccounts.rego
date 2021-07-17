@@ -266,7 +266,7 @@ fileService_metadata := {
 
 default keySource = null
 
-azure_issue["fileService"] {
+azure_issue["keySource"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     lower(resource.properties.encryption.keySource) != "microsoft.keyvault"
