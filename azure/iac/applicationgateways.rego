@@ -113,24 +113,38 @@ gw_waf_metadata := {
 # PR-AZR-0125-ARM
 
 default protocol = null
+azure_attribute_absence ["protocol"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    not resource.properties.httpListeners.properties.protocol
+}  
+
 azure_issue ["protocol"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/applicationgateways"
     lower(resource.properties.httpListeners.properties.protocol) != "https"
-}  
+} 
 
 protocol {
     lower(input.resources[_].type) == "microsoft.network/applicationgateways"
     not azure_issue["protocol"]
+    not azure_attribute_absence["protocol"]
 }
 
 protocol = false {
     azure_issue["protocol"]
 }
 
+protocol = false {
+    azure_attribute_absence["protocol"]
+}
 
 protocol_err = "Ensure Application Gateway is using Https protocol" {
     azure_issue["protocol"]
+}
+
+protocol_miss_err = "Ensure Application Gateway is using Https protocol" {
+    azure_attribute_absence["protocol"]
 }
 
 
