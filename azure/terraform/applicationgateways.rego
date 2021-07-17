@@ -1,6 +1,6 @@
 package rule
 
-# https://docs.microsoft.com/en-us/azure/templates/azurerm_application_gateway
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway
 
 #
 # PR-AZR-0011-TRF
@@ -35,7 +35,7 @@ gw_tls = false {
     azure_attribute_absence["gw_tls"]
 }
 
-gw_tls_err = "Azure Application Gateway allows TLSv1.1 or lower" {
+gw_tls_err = "Azure Application Gateway is not using TLSv1.2 as minimum version or higher" {
     azure_issue["gw_tls"]
 }
 
@@ -48,11 +48,11 @@ gw_tls_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Application Gateway allows TLSv1.1 or lower",
+    "Policy Title": "Azure Application Gateway should use TLSv1.2 as minimum version or higher",
     "Policy Description": "The Application Gateway supports end-to-end SSL encryption using multiple TLS versions and by default, it supports TLS version 1.0 as the minimum version._x005F_x000D_ _x005F_x000D_ This policy identifies the Application Gateway instances that are configured to use TLS versions 1.1 or lower as the minimum protocol version. As a best practice set the MinProtocolVersion to TLSv1.2 (if you use custom SSL policy) or use the predefined â€˜AppGwSslPolicy20170401Sâ€™ policy.",
     "Resource Type": "azurerm_application_gateway",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_application_gateway"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway"
 }
 
 #
@@ -87,7 +87,7 @@ gw_waf = false {
     azure_attribute_absence["gw_waf"]
 }
 
-gw_waf_err = "Azure Application Gateway does not have the WAF enabled" {
+gw_waf_err = "Azure Application Gateway does not have Web application firewall (WAF) enabled" {
     azure_issue["gw_waf"]
 }
 
@@ -100,9 +100,9 @@ gw_waf_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Application Gateway does not have the Web application firewall (WAF) enabled",
+    "Policy Title": "Azure Application Gateway should have Web application firewall (WAF) enabled",
     "Policy Description": "This policy identifies Azure Application Gateways that do not have Web application firewall (WAF) enabled. As a best practice, enable WAF to manage and protect your web applications behind the Application Gateway from common exploits and vulnerabilities.",
     "Resource Type": "azurerm_application_gateway",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_application_gateway"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway"
 }
