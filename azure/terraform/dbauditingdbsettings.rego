@@ -1,6 +1,7 @@
 package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_database_extended_auditing_policy
 
 #
 # PR-AZR-0003-TRF
@@ -39,11 +40,11 @@ mssql_db_log_audit = false {
     azure_attribute_absence["mssql_db_log_audit"]
 }
 
-mssql_db_log_audit_err = "Auditing for SQL database should be set to On" {
+mssql_db_log_audit_err = "Auditing for SQL database is not enabled" {
     azure_issue["mssql_db_log_audit"]
 }
 
-mssql_db_log_audit_miss_err = "Auditing for SQL database should be set to On" {
+mssql_db_log_audit_miss_err = "Audit policy resource is not avialable for SQL database" {
     azure_attribute_absence["mssql_db_log_audit"]
 }
 
@@ -52,11 +53,11 @@ mssql_db_log_audit_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Auditing for SQL database should be set to On",
+    "Policy Title": "Auditing for SQL database should be enabled",
     "Policy Description": "Database events are tracked by the Auditing feature and the events are written to an audit log in your Azure storage account. This process helps you to monitor database activity, and get insight into anomalies that could indicate business concerns or suspected security violations.",
     "Resource Type": "azurerm_mssql_database_extended_auditing_policy",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_database_extended_auditing_policy"
 }
 
 #
@@ -91,11 +92,11 @@ mssql_db_log_retention = false {
     azure_attribute_absence["mssql_db_log_retention"]
 }
 
-mssql_db_log_retention_err = "Azure SQL Database with Auditing Retention less than 90 days" {
+mssql_db_log_retention_err = "Azure SQL Database with Auditing Retention is not equal or more then 90 days" {
     azure_issue["mssql_db_log_retention"]
 }
 
-mssql_db_log_retention_miss_err = "Auditing settings attribute retention_in_days missing in the resource" {
+mssql_db_log_retention_miss_err = "Auditing settings attribute retention_in_days is missing from the resource" {
     azure_attribute_absence["mssql_db_log_retention"]
 }
 
@@ -104,9 +105,9 @@ mssql_db_log_retention_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure SQL Database with Auditing Retention less than 90 days",
+    "Policy Title": "Azure SQL Database with Auditing Retention should have 90 days or more",
     "Policy Description": "This policy identifies SQL Databases which have Auditing Retention less than 90 days. Audit Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days.",
     "Resource Type": "azurerm_mssql_database_extended_auditing_policy",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_database_extended_auditing_policy"
 }
