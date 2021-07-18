@@ -63,6 +63,12 @@ KeyVault_metadata := {
 # PR-AZR-0108-ARM
 
 default enableSoftDelete = null
+azure_attribute_absence ["enableSoftDelete"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    not resource.properties.enableSoftDelete
+}
+
 azure_issue ["enableSoftDelete"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults"
@@ -72,15 +78,24 @@ azure_issue ["enableSoftDelete"] {
 enableSoftDelete {
     lower(input.resources[_].type) == "microsoft.keyvault/vaults"
     not azure_issue["enableSoftDelete"]
+    not azure_attribute_absence["enableSoftDelete"]
 }
 
 enableSoftDelete = false {
     azure_issue["enableSoftDelete"]
 }
 
+enableSoftDelete = false {
+    azure_attribute_absence["enableSoftDelete"]
+}
+
 
 enableSoftDelete_err = "Ensure the key vault is recoverable - enable 'Soft Delete' setting for a Key Vault" {
     azure_issue["enableSoftDelete"]
+}
+
+enableSoftDelete_miss_err = "Ensure the key vault is recoverable - enable 'Soft Delete' setting for a Key Vault" {
+    azure_attribute_absence["enableSoftDelete"]
 }
 
 
@@ -102,24 +117,42 @@ enableSoftDelete_metadata := {
 # PR-AZR-0109-ARM
 
 default enablePurgeProtection = null
+
+azure_attribute_absence ["enablePurgeProtection"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    not resource.properties.enablePurgeProtection
+}
+
+
 azure_issue ["enablePurgeProtection"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults"
     resource.properties.enablePurgeProtection != true
 }
 
+
 enablePurgeProtection {
     lower(input.resources[_].type) == "microsoft.keyvault/vaults"
     not azure_issue["enablePurgeProtection"]
+    not azure_attribute_absence["enablePurgeProtection"]
 }
 
 enablePurgeProtection = false {
     azure_issue["enablePurgeProtection"]
 }
 
+enablePurgeProtection = false {
+    azure_attribute_absence["enablePurgeProtection"]
+}
+
 
 enablePurgeProtection_err = "Key vault should have purge protection enabled" {
     azure_issue["enableSoftDelete"]
+}
+
+enablePurgeProtection_miss_err = "Key vault should have purge protection enabled" {
+    azure_attribute_absence["enableSoftDelete"]
 }
 
 
