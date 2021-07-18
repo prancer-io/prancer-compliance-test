@@ -11,7 +11,6 @@ default kv_expire = null
 azure_attribute_absence["kv_expire"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults/secrets"
-    resource.properties.attributes.enabled != false
     not resource.properties.attributes.exp
 }
 
