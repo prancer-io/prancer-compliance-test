@@ -5,6 +5,13 @@ package rule
 # PR-AZR-0105-ARM
 
 default tagsLength = null
+
+azure_attribute_absence ["tagsLength"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.documentdb/databaseaccounts"
+    not resource.tags
+}
+
 azure_issue ["tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.documentdb/databaseaccounts"
@@ -14,15 +21,24 @@ azure_issue ["tagsLength"] {
 tagsLength {
     lower(input.resources[_].type) == "microsoft.documentdb/databaseaccounts"
     not azure_issue["tagsLength"]
+    not azure_attribute_absence["tagsLength"]
 }
 
 tagsLength = false {
     azure_issue["tagsLength"]
 }
 
+tagsLength = false {
+    azure_attribute_absence["tagsLength"]
+}
+
 
 tagsLength_err = "Ensure that Cosmos DB Account has an associated tag" {
     azure_issue["tagsLength"]
+}
+
+tagsLength_miss_err = "Ensure that Cosmos DB Account has an associated tag" {
+    azure_attribute_absence["tagsLength"]
 }
 
 

@@ -72,16 +72,23 @@ sql_log_retention_metadata := {
 
 default auditActionsAndGroups = null
 
+azure_attribute_absence["auditActionsAndGroups"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/auditingsettings"
+    resource.properties.auditActionsAndGroups[_]
+}
+
 azure_issue["auditActionsAndGroups"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/auditingsettings"
-    lower(resource.properties.auditActionsAndGroups) == "successful_database_authentication_group"
-    lower(resource.properties.auditActionsAndGroups) == "failed_database_authentication_group"
-    lower(resource.properties.auditActionsAndGroups) == "batch_completed_group"
+    lower(resource.properties.auditActionsAndGroups[_]) == "successful_database_authentication_group"
+    lower(resource.properties.auditActionsAndGroups[_]) == "failed_database_authentication_group"
+    lower(resource.properties.auditActionsAndGroups[_]) == "batch_completed_group"
 }
 
 auditActionsAndGroups {
     azure_issue["auditActionsAndGroups"]
+    azure_attribute_absence["auditActionsAndGroups"]
 }
 
 auditActionsAndGroups = false {
@@ -89,9 +96,19 @@ auditActionsAndGroups = false {
     not azure_issue["auditActionsAndGroups"]
 }
 
+auditActionsAndGroups = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers/auditingsettings"
+    not azure_attribute_absence["auditActionsAndGroups"]
+}
+
 auditActionsAndGroups_err = "Ensure that 'AuditActionGroups' in 'auditing' policy for a SQL server is set properly" {
     lower(input.resources[_].type) == "microsoft.sql/servers/auditingsettings"
     not azure_issue["auditActionsAndGroups"]
+}
+
+auditActionsAndGroups_miss_err = "Ensure that 'AuditActionGroups' in 'auditing' policy for a SQL server is set properly" {
+    lower(input.resources[_].type) == "microsoft.sql/servers/auditingsettings"
+    not azure_attribute_absence["auditActionsAndGroups"]
 }
 
 auditActionsAndGroups_metadata := {

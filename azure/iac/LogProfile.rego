@@ -9,35 +9,22 @@ default LogProfile = null
 azure_issue["LogProfile"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/logprofiles"
-    resource.properties.retentionPolicy.enabled != true
-}
-
-azure_issue_2["LogProfile"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.insights/logprofiles"
-    resource.properties.retentionPolicy.days < 365
+    resource.properties.retentionPolicy.enabled == true
+    resource.properties.retentionPolicy.days >= 365
 }
 
 LogProfile {
+    azure_issue["LogProfile"]
+}
+
+LogProfile = false {
     lower(input.resources[_].type) == "microsoft.insights/logprofiles"
     not azure_issue["LogProfile"]
-    not azure_issue_2["LogProfile"]
-}
-
-LogProfile = false {
-    azure_issue["LogProfile"]
-}
-
-LogProfile = false {
-    azure_issue_2["LogProfile"]
-}
-
-LogProfile_miss_err = "Ensure that Activity Log Retention is set 365 days or greater" {
-    azure_issue["LogProfile"]
 }
 
 LogProfiles_err = "Ensure that Activity Log Retention is set 365 days or greater" {
-    azure_issue_2["LogProfile"]
+    lower(input.resources[_].type) == "microsoft.insights/logprofiles"
+    not azure_issue["LogProfile"]
 }
 
 LogProfile_metadata := {
