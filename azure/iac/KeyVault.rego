@@ -6,7 +6,7 @@ package rule
 
 default KeyVault = null
 
-azure_attribute_absence ["KeyVault"] {
+azure_attribute_absence["KeyVault"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults"
     not resource.properties.accessPolicies[_].permissions.keys
@@ -15,7 +15,7 @@ azure_attribute_absence ["KeyVault"] {
 }
 
 
-azure_issue ["KeyVault"] {
+azure_issue["KeyVault"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults"
     count(resource.properties.accessPolicies[_].permissions.keys) == 0
@@ -26,7 +26,7 @@ azure_issue ["KeyVault"] {
 KeyVault {
     lower(input.resources[_].type) == "microsoft.keyvault/vaults"
     not azure_issue["KeyVault"]
-    not azure_attribute_absence ["KeyVault"]
+    not azure_attribute_absence["KeyVault"]
 }
 
 KeyVault = false {
