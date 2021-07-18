@@ -5,28 +5,46 @@ package rule
 # PR-AZR-0107-ARM
 
 default KeyVault = null
+
+azure_attribute_absence ["KeyVault"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    not resource.properties.accessPolicies[_].permissions.keys
+    not resource.properties.accessPolicies[_].permissions.secrets
+    not resource.properties.accessPolicies[_].permissions.certificates
+}
+
+
 azure_issue ["KeyVault"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults"
-    count(resource.properties.accessPolicies.permissions.keys) == 0
-    count(resource.properties.accessPolicies.permissions.secrets) == 0
-    count(resource.properties.accessPolicies.permissions.certificates) == 0
+    count(resource.properties.accessPolicies[_].permissions.keys) == 0
+    count(resource.properties.accessPolicies[_].permissions.secrets) == 0
+    count(resource.properties.accessPolicies[_].permissions.certificates) == 0
 }
 
 KeyVault {
     lower(input.resources[_].type) == "microsoft.keyvault/vaults"
     not azure_issue["KeyVault"]
+    not azure_attribute_absence ["KeyVault"]
 }
 
 KeyVault = false {
     azure_issue["KeyVault"]
 }
 
+KeyVault = false {
+    azure_attribute_absence["KeyVault"]
+}
 
 KeyVault_err = "Ensure at least one principal has access to Keyvault" {
     azure_issue["KeyVault"]
 }
 
+
+KeyVault_miss_err = "Ensure at least one principal has access to Keyvault" {
+    azure_attribute_absence["KeyVault"]
+}
 
 KeyVault_metadata := {
     "Policy Code": "PR-AZR-0107-ARM",
