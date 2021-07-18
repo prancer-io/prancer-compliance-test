@@ -3056,6 +3056,37 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterTestId": "TEST_APPLICATION_GATEWAYS_3",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(applicationgateways.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0125-ARM",
+                            "eval": "data.rule.protocol",
+                            "message": "data.rule.protocol_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_0125_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Application Gateway is using Https protocol",
+                    "description": "Application Gateway allows to set network protocols Http and Https. It is highly recommended to use Https protocol for secure connections.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
                 }
             ]
         }
