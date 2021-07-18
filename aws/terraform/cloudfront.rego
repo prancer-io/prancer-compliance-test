@@ -52,10 +52,11 @@ cf_default_cache_metadata := {
 
 default cf_ssl_protocol = null
 
-aws_attribute_absence["cf_ssl_protocol"] {
+
+aws_issue["cf_ssl_protocol"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    not resource.properties.origin.custom_origin_config.origin_ssl_protocols
+    lower(resource.properties.viewer_certificate.minimum_protocol_version) == "sslv3"
 }
 
 aws_issue["cf_ssl_protocol"] {
@@ -67,23 +68,14 @@ aws_issue["cf_ssl_protocol"] {
 cf_ssl_protocol {
     lower(input.resources[_].type) == "aws_cloudfront_distribution"
     not aws_issue["cf_ssl_protocol"]
-    not aws_attribute_absence["cf_ssl_protocol"]
 }
 
 cf_ssl_protocol = false {
     aws_issue["cf_ssl_protocol"]
-}
-
-cf_ssl_protocol = false {
-    aws_attribute_absence["cf_ssl_protocol"]
 }
 
 cf_ssl_protocol_err = "AWS CloudFront distribution is using insecure SSL protocols for HTTPS communication" {
     aws_issue["cf_ssl_protocol"]
-}
-
-cf_ssl_protocol_miss_err = "Cloudfront attribute origin_ssl_protocols missing in the resource" {
-    aws_attribute_absence["cf_ssl_protocol"]
 }
 
 cf_ssl_protocol_metadata := {
@@ -157,38 +149,31 @@ cf_logging_metadata := {
 
 default cf_https_only = null
 
-aws_attribute_absence["cf_https_only"] {
+aws_issue["cf_https_only"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    not resource.properties.default_cache_behavior.viewer_protocol_policy
+    resource.properties.origin
+    not resource.properties.origin.s3_origin_config
+    not resource.properties.origin.custom_origin_config
 }
 
 aws_issue["cf_https_only"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    lower(resource.properties.default_cache_behavior.viewer_protocol_policy) != "https-only"
+    lower(resource.properties.origin.custom_origin_config.origin_protocol_policy) != "https-only"
 }
 
 cf_https_only {
     lower(input.resources[_].type) == "aws_cloudfront_distribution"
     not aws_issue["cf_https_only"]
-    not aws_attribute_absence["cf_https_only"]
 }
 
 cf_https_only = false {
     aws_issue["cf_https_only"]
-}
-
-cf_https_only = false {
-    aws_attribute_absence["cf_https_only"]
 }
 
 cf_https_only_err = "AWS CloudFront origin protocol policy does not enforce HTTPS-only" {
     aws_issue["cf_https_only"]
-}
-
-cf_https_only_miss_err = "Cloudfront attribute viewer_protocol_policy missing in the resource" {
-    aws_attribute_absence["cf_https_only"]
 }
 
 cf_https_only_metadata := {
@@ -210,12 +195,6 @@ cf_https_only_metadata := {
 
 default cf_https = null
 
-aws_attribute_absence["cf_https"] {
-    resource := input.resources[_]
-    lower(resource.type) == "aws_cloudfront_distribution"
-    not resource.properties.default_cache_behavior.viewer_protocol_policy
-}
-
 aws_issue["cf_https"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
@@ -227,23 +206,14 @@ aws_issue["cf_https"] {
 cf_https {
     lower(input.resources[_].type) == "aws_cloudfront_distribution"
     not aws_issue["cf_https"]
-    not aws_attribute_absence["cf_https"]
 }
 
 cf_https = false {
     aws_issue["cf_https"]
-}
-
-cf_https = false {
-    aws_attribute_absence["cf_https"]
 }
 
 cf_https_err = "AWS CloudFront viewer protocol policy is not configured with HTTPS" {
     aws_issue["cf_https"]
-}
-
-cf_https_miss_err = "Cloudfront attribute viewer_protocol_policy missing in the resource" {
-    aws_attribute_absence["cf_https"]
 }
 
 cf_https_metadata := {
