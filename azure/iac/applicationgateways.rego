@@ -116,13 +116,15 @@ default protocol = null
 azure_attribute_absence ["protocol"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/applicationgateways"
-    not resource.properties.httpListeners[_].properties.protocol
+    httpListener := resource.properties.httpListeners[_]
+    not httpListener.properties.protocol
 }  
 
 azure_issue ["protocol"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/applicationgateways"
-    lower(resource.properties.httpListeners[_].properties.protocol) != "https"
+    httpListener := resource.properties.httpListeners[_]
+    lower(httpListener.properties.protocol) != "https"
 } 
 
 protocol {

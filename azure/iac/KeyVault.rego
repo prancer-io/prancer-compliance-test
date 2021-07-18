@@ -9,18 +9,20 @@ default KeyVault = null
 azure_attribute_absence["KeyVault"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults"
-    not resource.properties.accessPolicies[_].permissions.keys
-    not resource.properties.accessPolicies[_].permissions.secrets
-    not resource.properties.accessPolicies[_].permissions.certificates
+    accessPolicie := resource.properties.accessPolicies[_]
+    not accessPolicie.permissions.keys
+    not accessPolicie.permissions.secrets
+    not accessPolicie.permissions.certificates
 }
 
 
 azure_issue["KeyVault"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults"
-    count(resource.properties.accessPolicies[_].permissions.keys) == 0
-    count(resource.properties.accessPolicies[_].permissions.secrets) == 0
-    count(resource.properties.accessPolicies[_].permissions.certificates) == 0
+    accessPolicie := resource.properties.accessPolicies[_]
+    count(accessPolicie.permissions.keys) == 0
+    count(accessPolicie.permissions.secrets) == 0
+    count(accessPolicie.permissions.certificates) == 0
 }
 
 KeyVault {
