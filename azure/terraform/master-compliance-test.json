@@ -251,14 +251,14 @@
                     "evals": [
                         {
                             "id": "PR-AZR-0003-TRF",
-                            "eval": "data.rule.mssql_db_log_auditt",
+                            "eval": "data.rule.mssql_db_log_audit",
                             "message": "data.rule.mssql_db_log_audit_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_mssql_database_extended_auditing_policy' resource, set the 'database_id' from associated 'azurerm_mssql_database' resource's terraform deployment output. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_database_extended_auditing_policy#database_id for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Auditing for SQL database should be set to On",
+                    "title": "Auditing for SQL database should be enabled",
                     "description": "Database events are tracked by the Auditing feature and the events are written to an audit log in your Azure storage account. This process helps you to monitor database activity, and get insight into anomalies that could indicate business concerns or suspected security violations.",
                     "tags": [
                         {
@@ -289,12 +289,12 @@
                             "id": "PR-AZR-0053-TRF",
                             "eval": "data.rule.mssql_db_log_retention",
                             "message": "data.rule.mssql_db_log_retention_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_mssql_database_extended_auditing_policy' resource, set the 'retention_in_days = 90'. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_database_extended_auditing_policy#retention_in_days for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Database with Auditing Retention less than 90 days",
+                    "title": "Azure SQL Database with Auditing Retention should have 90 days or more",
                     "description": "This policy identifies SQL Databases which have Auditing Retention less than 90 days. Audit Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days.",
                     "tags": [
                         {
