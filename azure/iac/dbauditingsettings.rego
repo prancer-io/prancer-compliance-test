@@ -29,7 +29,8 @@ azure_issue["sql_log_retention"] {
 azure_issue["sql_log_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/auditingsettings"
-    to_number(resource.properties.retentionDays) <= 90
+    to_number(resource.properties.retentionDays) < 90
+    to_number(resource.properties.retentionDays) != 0
 }
 
 sql_log_retention {
@@ -64,4 +65,60 @@ sql_log_retention_metadata := {
     "Resource Type": "microsoft.sql/servers/auditingsettings",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/auditingsettings"
+}
+
+
+# PR-AZR-0121-ARM
+
+default auditActionsAndGroups = null
+
+azure_attribute_absence["auditActionsAndGroups"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/auditingsettings"
+    resource.properties.auditActionsAndGroups[_]
+}
+
+azure_issue["auditActionsAndGroups"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/auditingsettings"
+    lower(resource.properties.auditActionsAndGroups[_]) == "successful_database_authentication_group"
+    lower(resource.properties.auditActionsAndGroups[_]) == "failed_database_authentication_group"
+    lower(resource.properties.auditActionsAndGroups[_]) == "batch_completed_group"
+}
+
+auditActionsAndGroups {
+    azure_issue["auditActionsAndGroups"]
+    azure_attribute_absence["auditActionsAndGroups"]
+}
+
+auditActionsAndGroups = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers/auditingsettings"
+    not azure_issue["auditActionsAndGroups"]
+}
+
+auditActionsAndGroups = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers/auditingsettings"
+    not azure_attribute_absence["auditActionsAndGroups"]
+}
+
+auditActionsAndGroups_err = "Ensure that 'AuditActionGroups' in 'auditing' policy for a SQL server is set properly" {
+    lower(input.resources[_].type) == "microsoft.sql/servers/auditingsettings"
+    not azure_issue["auditActionsAndGroups"]
+}
+
+auditActionsAndGroups_miss_err = "Ensure that 'AuditActionGroups' in 'auditing' policy for a SQL server is set properly" {
+    lower(input.resources[_].type) == "microsoft.sql/servers/auditingsettings"
+    not azure_attribute_absence["auditActionsAndGroups"]
+}
+
+auditActionsAndGroups_metadata := {
+    "Policy Code": "PR-AZR-0121-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure that 'AuditActionGroups' in 'auditing' policy for a SQL server is set properly",
+    "Policy Description": "To capture all critical activities done on SQL Servers and databases within sql servers, auditing should be configured to capture appropriate 'AuditActionGroups'. Property `AuditActionGroup` should contains at least `SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP, FAILED_DATABASE_AUTHENTICATION_GROUP, BATCH_COMPLETED_GROUP` to ensure comprehensive audit logging for SQL servers and SQL databases hosted on SQL Server.",
+    "Resource Type": "microsoft.sql/servers/auditingsettings",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/administrators"
 }

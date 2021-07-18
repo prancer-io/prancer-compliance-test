@@ -155,3 +155,198 @@ storage_threat_protection_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
 }
+
+
+
+# PR-AZR-0112-ARM
+
+default blobService = null
+
+azure_attribute_absence["blobService"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.encryption.services.blob
+}
+
+azure_issue["blobService"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    resource.properties.encryption.services.blob.enabled != true
+}
+
+blobService {
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    not azure_issue["blobService"]
+    not azure_attribute_absence["blobService"]
+}
+
+blobService = false {
+    azure_issue["blobService"]
+}
+
+blobService = false {
+    azure_attribute_absence["blobService"]
+}
+
+blobService_err = "Ensure that 'Storage service encryption' is enabled for the Blob Service" {
+    azure_issue["blobService"]
+}
+
+blobService_miss_err = "Ensure that 'Storage service encryption' is enabled for the Blob Service" {
+    azure_attribute_absence["blobService"]
+}
+
+blobService_metadata := {
+    "Policy Code": "PR-AZR-0112-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure that 'Storage service encryption' is enabled for the Blob Service",
+    "Policy Description": "Enable data encryption at rest for blobs. Storage service encryption protects your data at rest. Azure Storage encrypts data when it's written, and automatically decrypts it when it is accessed.",
+    "Resource Type": "microsoft.storage/storageaccounts",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
+}
+
+
+# PR-AZR-0113-ARM
+
+default fileService = null
+
+azure_attribute_absence["fileService"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.encryption.services.file
+}
+
+azure_issue["fileService"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    resource.properties.encryption.services.file.enabled != true
+}
+
+fileService {
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    not azure_issue["fileService"]
+    not azure_attribute_absence["fileService"]
+}
+
+fileService = false {
+    azure_issue["fileService"]
+}
+
+fileService = false {
+    azure_attribute_absence["fileService"]
+}
+
+fileService_err = "Ensure that 'Storage service encryption' is enabled for the File Service" {
+    azure_issue["fileService"]
+}
+
+fileService_miss_err = "Ensure that 'Storage service encryption' is enabled for the File Service" {
+    azure_attribute_absence["fileService"]
+}
+
+fileService_metadata := {
+    "Policy Code": "PR-AZR-0113-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure that 'Storage service encryption' is enabled for the File Service",
+    "Policy Description": "Azure Storage encryption protects your data and to help you to meet your organizational security and compliance commitments. Data in Azure Storage is encrypted and decrypted transparently using 256-bit AES encryption, one of the strongest block ciphers available, and is FIPS 140-2 compliant. Azure Storage encryption is similar to BitLocker encryption on Windows.",
+    "Resource Type": "microsoft.storage/storageaccounts",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
+}
+
+
+
+
+# PR-AZR-0114-ARM
+
+default keySource = null
+
+azure_attribute_absence["keySource"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.encryption.keySource
+}
+
+azure_issue["keySource"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    lower(resource.properties.encryption.keySource) != "microsoft.keyvault"
+}
+
+keySource {
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    not azure_issue["keySource"]
+    not azure_attribute_absence["keySource"]
+}
+
+keySource = false {
+    azure_issue["keySource"]
+}
+
+keySource = false {
+    azure_attribute_absence["keySource"]
+}
+
+keySource_err = "Ensure storage for critical data are encrypted with Customer Managed Key" {
+    azure_issue["keySource"]
+}
+
+keySource_miss_err = "Ensure storage for critical data are encrypted with Customer Managed Key" {
+    azure_attribute_absence["keySource"]
+}
+
+
+keySource_metadata := {
+    "Policy Code": "PR-AZR-0114-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure storage for critical data are encrypted with Customer Managed Key",
+    "Policy Description": "By default, data in the storage account is encrypted using Microsoft Managed Keys at rest. All Azure Storage resources are encrypted, including blobs, disks, files, queues, and tables. All object metadata is also encrypted. However, if you want to control and manage this encryption key yourself, you can specify a customer-managed key, that key is used to protect and control access to the key that encrypts your data. You can also choose to automatically update the key version used for Azure Storage encryption whenever a new version is available in the associated Key Vault.",
+    "Resource Type": "microsoft.storage/storageaccounts",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
+}
+
+
+
+# PR-AZR-0122-ARM
+
+default region = null
+
+azure_issue["region"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    lower(resource.location) != "northeurope"
+    lower(resource.location) != "westeurope"
+}
+
+region {
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    not azure_issue["region"]
+}
+
+region = false {
+    azure_issue["region"]
+}
+
+region_err = "Storage Accounts outside Europe" {
+    azure_issue["region"]
+}
+
+region_metadata := {
+    "Policy Code": "PR-AZR-0122-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Storage Accounts outside Europe",
+    "Policy Description": "Identify Storage Accounts outside of the following regions: northeurope, westeurope",
+    "Resource Type": "microsoft.storage/storageaccounts",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
+}

@@ -81,7 +81,7 @@ azure_issue["netwatch_log_retention"] {
 azure_issue["netwatch_log_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
-    to_number(resource.properties.retentionPolicy.days) < 90
+    to_number(resource.properties.retentionPolicy.days) <= 90
 }
 
 netwatch_log_retention {
