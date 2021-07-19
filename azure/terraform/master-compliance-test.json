@@ -330,7 +330,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Server audit log retention should be grater then 90 days",
+                    "title": "Azure SQL Server audit log retention should be greater then 90 days",
                     "description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance._x000D__x000D_This policy identifies SQL servers which do not retain audit logs for more than 90 days. As a best practice, configure the audit logs retention time period to be greater than 90 days.",
                     "tags": [
                         {
@@ -359,7 +359,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "SQL Server Firewall rules should not configure to allow everyone get full access",
+                    "title": "SQL Server Firewall rules should not configure to allow full inbound access to everyone",
                     "description": "Firewalls grant access to databases based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with \"0.0.0.0\" represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access.",
                     "tags": [
                         {
