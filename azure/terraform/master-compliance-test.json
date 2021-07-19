@@ -219,7 +219,7 @@
                             "id": "PR-AZR-0085-TRF",
                             "eval": "data.rule.db_ad_admin",
                             "message": "data.rule.db_ad_admin_err",
-                            "remediationDescription": "In 'azurerm_sql_active_directory_administrator' resource, set the 'server_name' from associated 'azurerm_sql_server' resource's 'name' property. more simply make sure 'server_name' of 'azurerm_sql_active_directory_administrator' resource matches with 'name' of associated 'azurerm_sql_server' resource. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_active_directory_administrator#server_name for details.",
+                            "remediationDescription": "In 'azurerm_sql_active_directory_administrator' resource, set the 'server_name' from associated 'azurerm_sql_server' resource's 'name' property to fix the issue. more simply make sure 'server_name' of 'azurerm_sql_active_directory_administrator' resource matches with 'name' of associated 'azurerm_sql_server' resource. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_active_directory_administrator#server_name for details.",
                             "remediationFunction": ""
                         }
                     ],
@@ -253,7 +253,7 @@
                             "id": "PR-AZR-0003-TRF",
                             "eval": "data.rule.mssql_db_log_audit",
                             "message": "data.rule.mssql_db_log_audit_err",
-                            "remediationDescription": "In 'azurerm_mssql_database_extended_auditing_policy' resource, set the 'database_id' from associated 'azurerm_mssql_database' resource's terraform deployment output. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_database_extended_auditing_policy#database_id for details.",
+                            "remediationDescription": "In 'azurerm_mssql_database_extended_auditing_policy' resource, set the 'database_id' from associated 'azurerm_mssql_database' resource's terraform deployment output to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_database_extended_auditing_policy#database_id for details.",
                             "remediationFunction": ""
                         }
                     ],
@@ -289,7 +289,7 @@
                             "id": "PR-AZR-0053-TRF",
                             "eval": "data.rule.mssql_db_log_retention",
                             "message": "data.rule.mssql_db_log_retention_err",
-                            "remediationDescription": "In 'azurerm_mssql_database_extended_auditing_policy' resource, set the 'retention_in_days = 90'. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_database_extended_auditing_policy#retention_in_days for details.",
+                            "remediationDescription": "In 'azurerm_mssql_database_extended_auditing_policy' resource, set the 'retention_in_days = 90' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_database_extended_auditing_policy#retention_in_days for details.",
                             "remediationFunction": ""
                         }
                     ],
@@ -325,7 +325,7 @@
                             "id": "PR-AZR-0059-TRF",
                             "eval": "data.rule.mssql_log_retention",
                             "message": "data.rule.mssql_log_retention_err",
-                            "remediationDescription": "In 'azurerm_mssql_server_extended_auditing_policy' resource, set the 'retention_in_days = 91'. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_extended_auditing_policy#retention_in_days for details.",
+                            "remediationDescription": "In 'azurerm_mssql_server_extended_auditing_policy' resource, set the 'retention_in_days = 91' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_extended_auditing_policy#retention_in_days for details.",
                             "remediationFunction": ""
                         }
                     ],
@@ -354,12 +354,12 @@
                             "id": "PR-AZR-0082-TRF",
                             "eval": "data.rule.db_firewall",
                             "message": "data.rule.db_firewall_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_sql_firewall_rule' resource, set valid ip range other then '0.0.0.0' between 'start_ip_address' and 'end_ip_address' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_firewall_rule for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "SQL Server Firewall rules allow access to any Azure internal resources",
+                    "title": "SQL Server Firewall rules should not configure to allow everyone get full access",
                     "description": "Firewalls grant access to databases based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with \"0.0.0.0\" represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access.",
                     "tags": [
                         {

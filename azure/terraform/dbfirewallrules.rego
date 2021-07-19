@@ -1,7 +1,7 @@
 package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2015-05-01-preview/servers/firewallrules
-
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_firewall_rule
 #
 # PR-AZR-0082-TRF
 #
@@ -46,11 +46,11 @@ db_firewall = false {
     azure_attribute_absence["db_firewall"]
 }
 
-db_firewall_err = "SQL Server Firewall rules allow access to any Azure internal resources" {
+db_firewall_err = "SQL Server Firewall rules configuration currently allowing everyone get full access" {
     azure_issue["db_firewall"]
 }
 
-db_firewall_miss_err = "Firewall rule attribute start_ip_address/end_ip_address missing in the resource" {
+db_firewall_miss_err = "Firewall rule attribute start_ip_address/end_ip_address is missing in the resource" {
     azure_attribute_absence["db_firewall"]
 }
 
@@ -59,9 +59,9 @@ db_firewall_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "SQL Server Firewall rules allow access to any Azure internal resources",
+    "Policy Title": "SQL Server Firewall rules should not configure to allow everyone get full access",
     "Policy Description": "Firewalls grant access to databases based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with 0.0.0.0 represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access.",
     "Resource Type": "azurerm_sql_firewall_rule",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2015-05-01-preview/servers/firewallrules"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_firewall_rule"
 }
