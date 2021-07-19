@@ -34,7 +34,7 @@ mssql_log_retention = false {
     azure_attribute_absence["mssql_log_retention"]
 }
 
-mssql_log_retention_err = "Azure SQL Server audit log retention is not grater then 90 days" {
+mssql_log_retention_err = "Azure SQL Server audit log retention is not greater then 90 days" {
     azure_attribute_absence["mssql_log_retention"]
 }
 
