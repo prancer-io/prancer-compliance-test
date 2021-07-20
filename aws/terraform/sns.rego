@@ -64,6 +64,7 @@ default sns_encrypt_key = null
 aws_issue["sns_encrypt_key"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_sns_topic"
+    resource.properties.kms_master_key_id
     contains(lower(resource.properties.kms_master_key_id), "alias/aws/sns")
 }
 
