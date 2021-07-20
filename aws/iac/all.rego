@@ -8,7 +8,7 @@ package rule
 
 default api_gw_cert = null
 
-aws_attribute_absence["api_gw_cert"] {
+aws_issue["api_gw_cert"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::apigateway::stage"
     not resource.Properties.ClientCertificateId
@@ -17,29 +17,20 @@ aws_attribute_absence["api_gw_cert"] {
 aws_issue["api_gw_cert"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::apigateway::stage"
-    lower(resource.Properties.ClientCertificateId) == "none"
+    count(resource.Properties.ClientCertificateId) == 0
 }
 
 api_gw_cert {
     lower(input.Resources[i].Type) == "aws::apigateway::stage"
     not aws_issue["api_gw_cert"]
-    not aws_attribute_absence["api_gw_cert"]
 }
 
 api_gw_cert = false {
     aws_issue["api_gw_cert"]
-}
-
-api_gw_cert = false {
-    aws_attribute_absence["api_gw_cert"]
 }
 
 api_gw_cert_err = "AWS API Gateway endpoints without client certificate authentication" {
     aws_issue["api_gw_cert"]
-}
-
-api_gw_cert_miss_err = "API Gateway attribute ClientCertificateId missing in the resource" {
-    aws_attribute_absence["api_gw_cert"]
 }
 
 api_gw_cert_metadata := {
