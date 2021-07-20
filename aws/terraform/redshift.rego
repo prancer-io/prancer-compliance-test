@@ -113,7 +113,7 @@ aws_attribute_absence["redshift_audit"] {
 aws_issue["redshift_audit"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_redshift_cluster"
-    resource.properties.logging.bucket_name
+    resource.properties.logging.bucket_name != null
     count(resource.properties.logging.bucket_name) == 0
 }
 

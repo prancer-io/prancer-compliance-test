@@ -31,7 +31,7 @@ aws_issue["lambda_env"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_lambda_function"
     resource.properties.environment
-    resource.properties.kms_key_arn
+    resource.properties.kms_key_arn != null
     not startswith(lower(resource.properties.kms_key_arn), "arn:")
 }
 
