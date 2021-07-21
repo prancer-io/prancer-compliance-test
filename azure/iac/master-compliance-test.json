@@ -1984,7 +1984,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_REGISTRIES_LIST",
+                    "masterTestId": "TEST_REGISTRIES_LIST_1",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
@@ -2418,12 +2418,12 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_REGISTRY",
+                    "masterTestId": "TEST_REGISTRIES_LIST_2",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(registry.rego)",
+                    "rule": "file(registrieslist.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-0104-ARM",
