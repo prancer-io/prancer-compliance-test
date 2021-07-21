@@ -82,15 +82,15 @@ aks_http_routing = false {
     azure_issue["aks_http_routing"]
 }
 
-aks_http_routing = false {
+aks_http_routing {
     azure_attribute_absence["aks_http_routing"]
 }
 
-aks_http_routing_err = "Azure AKS cluster HTTP application routing enabled" {
+aks_http_routing_err = "Azure AKS cluster HTTP application routing is currently enabled. Please disable it." {
     azure_issue["aks_http_routing"]
 }
 
-aks_http_routing_miss_err = "AKS cluster attribute addonProfiles.httpApplicationRouting missing in the resource" {
+aks_http_routing_miss_err = "AKS cluster attribute addonProfiles.httpApplicationRouting is missing from the resource. Which is fine." {
     azure_attribute_absence["aks_http_routing"]
 }
 
@@ -99,7 +99,7 @@ aks_http_routing_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure AKS cluster HTTP application routing enabled",
+    "Policy Title": "Azure AKS cluster HTTP application routing should be disabled",
     "Policy Description": "HTTP application routing configures an Ingress controller in your AKS cluster. As applications are deployed, the solution also creates publicly accessible DNS names for application endpoints. While this makes it easy to access applications that are deployed to your Azure AKS cluster, this add-on is not recommended for production use._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster HTTP application routing add-on setting and alerts if enabled.",
     "Resource Type": "microsoft.containerservice/managedclusters",
     "Policy Help URL": "",
