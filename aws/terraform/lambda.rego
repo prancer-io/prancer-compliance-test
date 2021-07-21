@@ -78,13 +78,15 @@ default lambda_vpc = null
 aws_attribute_absence["lambda_vpc"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_lambda_function"
-    not resource.properties.vpc_config.subnet_ids
+    resource.properties.vpc_config != null
+    not resource.properties.vpc_config[_].subnet_ids
 }
 
 aws_issue["lambda_vpc"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_lambda_function"
-    count(resource.properties.vpc_config.subnet_ids) == 0
+    resource.properties.vpc_config != null
+    count(resource.properties.vpc_config[_].subnet_ids) == 0
 }
 
 lambda_vpc {
@@ -130,13 +132,15 @@ default lambda_tracing = null
 aws_attribute_absence["lambda_tracing"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_lambda_function"
-    not resource.properties.tracing_config.mode
+    resource.properties.tracing_config != null
+    not resource.properties.tracing_config[_].mode
 }
 
 aws_issue["lambda_tracing"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_lambda_function"
-    lower(resource.properties.tracing_config.mode) == "passthrough"
+    resource.properties.tracing_config != null
+    lower(resource.properties.tracing_config[_].mode) == "passthrough"
 }
 
 lambda_tracing {

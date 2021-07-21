@@ -122,7 +122,8 @@ default vm_pre_emptible = null
 gc_issue["vm_pre_emptible"] {
     resource := input.resources[_]
     lower(resource.type) == "google_compute_instance"
-    resource.properties.scheduling.preemptible == true
+    resource.properties.scheduling != null
+    resource.properties.scheduling[_].preemptible == true
 }
 
 vm_pre_emptible {

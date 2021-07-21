@@ -11,14 +11,16 @@ default gw_tls = null
 azure_attribute_absence["gw_tls"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
-    not resource.properties.ssl_policy.min_protocol_version
+    resource.properties.ssl_policy != null
+    not resource.properties.ssl_policy[_].min_protocol_version
 }
 
 azure_issue["gw_tls"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
-    lower(resource.properties.ssl_policy.min_protocol_version) != "tlsv1_2"
-    lower(resource.properties.ssl_policy.min_protocol_version) != "tlsv1_3"
+    resource.properties.ssl_policy != null
+    lower(resource.properties.ssl_policy[_].min_protocol_version) != "tlsv1_2"
+    lower(resource.properties.ssl_policy[_].min_protocol_version) != "tlsv1_3"
 }
 
 gw_tls {
@@ -64,13 +66,15 @@ default gw_waf = null
 azure_attribute_absence["gw_waf"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
-    not resource.properties.waf_configuration.enabled
+    resource.properties.waf_configuration != null
+    not resource.properties.waf_configuration[_].enabled
 }
 
 azure_issue["gw_waf"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
-    resource.properties.waf_configuration.enabled != true
+    resource.properties.waf_configuration != null
+    resource.properties.waf_configuration[_].enabled != true
 }
 
 gw_waf {

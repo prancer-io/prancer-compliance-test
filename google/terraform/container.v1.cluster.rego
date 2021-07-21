@@ -17,13 +17,15 @@ gc_attribute_absence["k8s_svc_account"] {
 gc_issue["k8s_svc_account"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_node_pool"
-    not resource.properties.node_config.service_account
+    resource.properties.node_config != null
+    not resource.properties.node_config[_].service_account
 }
 
 gc_issue["k8s_svc_account"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_node_pool"
-    is_null(resource.properties.node_config.service_account)
+    resource.properties.node_config != null
+    is_null(resource.properties.node_config[_].service_account)
 }
 
 k8s_svc_account {
@@ -69,13 +71,15 @@ default k8s_basicauth = null
 gc_issue["k8s_basicauth"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_cluster"
-    count(resource.properties.master_auth.username) > 0
+    resource.properties.master_auth != null
+    count(resource.properties.master_auth[_].username) > 0
 }
 
 gc_issue["k8s_basicauth"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_cluster"
-    count(resource.properties.master_auth.password) > 0
+    resource.properties.master_auth != null
+    count(resource.properties.master_auth[_].password) > 0
 }
 
 k8s_basicauth {
@@ -112,13 +116,15 @@ default k8s_client_cert = null
 gc_issue["k8s_client_cert"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_cluster"
-    not resource.properties.master_auth.client_certificate_config
+    resource.properties.master_auth != null
+    not resource.properties.master_auth[_].client_certificate_config
 }
 
 gc_issue["k8s_client_cert"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_cluster"
-    not resource.properties.master_auth.client_certificate_config.issue_client_certificate
+    resource.properties.master_auth != null
+    not resource.properties.master_auth[_].client_certificate_config[_].issue_client_certificate
 }
 
 k8s_client_cert {
@@ -229,7 +235,8 @@ default k8s_http_lbs = null
 gc_issue["k8s_http_lbs"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_cluster"
-    resource.properties.addons_config.http_load_balancing.disabled
+    resource.properties.addons_config != null
+    resource.properties.addons_config[_].http_load_balancing.disabled
 }
 
 k8s_http_lbs {
@@ -340,7 +347,8 @@ default k8s_net_policy = null
 gc_issue["k8s_net_policy"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_cluster"
-    not resource.properties.network_policy.enabled
+    resource.properties.network_policy != null
+    not resource.properties.network_policy[_].enabled
 }
 
 k8s_net_policy {
@@ -518,13 +526,15 @@ default k8s_legacy_endpoint = null
 gc_issue["k8s_legacy_endpoint"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_node_pool"
-    resource.properties.node_config.metadata["disable-legacy-endpoints"] == "false"
+    resource.properties.node_config != null
+    resource.properties.node_config[_].metadata["disable-legacy-endpoints"] == "false"
 }
 
 gc_issue["k8s_legacy_endpoint"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_node_pool"
-    resource.properties.node_config.metadata["disable-legacy-endpoints"] == false
+    resource.properties.node_config != null
+    resource.properties.node_config[_].metadata["disable-legacy-endpoints"] == false
 }
 
 k8s_legacy_endpoint {
@@ -561,7 +571,8 @@ default k8s_pod_security = null
 gc_issue["k8s_pod_security"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_cluster"
-    not resource.properties.pod_security_policy_config.enabled
+    resource.properties.pod_security_policy_config != null
+    not resource.properties.pod_security_policy_config[_].enabled
 }
 
 k8s_pod_security {
@@ -598,7 +609,8 @@ default k8s_egress_metering = null
 gc_issue["k8s_egress_metering"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_cluster"
-    not resource.properties.resource_usage_export_config.enable_network_egress_metering
+    resource.properties.resource_usage_export_config != null
+    not resource.properties.resource_usage_export_config[_].enable_network_egress_metering
 }
 
 k8s_egress_metering {
@@ -660,7 +672,8 @@ default k8s_private_node = null
 gc_issue["k8s_private_node"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_cluster"
-    not resource.properties.private_cluster_config.enable_private_nodes
+    resource.properties.private_cluster_config != null
+    not resource.properties.private_cluster_config[_].enable_private_nodes
 }
 
 k8s_private_node {
@@ -709,13 +722,15 @@ default k8s_node_image = null
 gc_attribute_absence["k8s_node_image"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_node_pool"
-    not resource.properties.node_config.image_type
+    resource.properties.node_config != null
+    not resource.properties.node_config[_].image_type
 }
 
 gc_issue["k8s_node_image"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_node_pool"
-    not startswith(lower(resource.properties.node_config.image_type), "cos")
+    resource.properties.node_config != null
+    not startswith(lower(resource.properties.node_config[_].image_type), "cos")
 }
 
 gc_issue["k8s_node_image"] {
@@ -955,7 +970,8 @@ default k8s_istio = null
 gc_issue["k8s_istio"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_cluster"
-    resource.properties.addons_config.istio_config.disabled == false
+    resource.properties.addons_config != null
+    resource.properties.addons_config[_].istio_config[_].disabled == false
 }
 
 k8s_istio {

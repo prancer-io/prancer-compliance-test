@@ -63,7 +63,8 @@ default aks_http_routing = null
 azure_issue["aks_http_routing"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    resource.properties.http_application_routing.enabled == true
+    resource.properties.http_application_routing != null
+    resource.properties.http_application_routing[_].enabled == true
 }
 
 aks_http_routing {
@@ -100,13 +101,15 @@ default aks_monitoring = null
 azure_attribute_absence["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    not resource.properties.oms_agent.enabled
+    resource.properties.oms_agent != null
+    not resource.properties.oms_agent[_].enabled
 }
 
 azure_issue["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    input.properties.oms_agent.enabled != true
+    input.resource.properties.oms_agent != null
+    input.properties.oms_agent[_].enabled != true
 }
 
 aks_monitoring {
@@ -152,13 +155,15 @@ default aks_nodes = null
 azure_attribute_absence["aks_nodes"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    not resource.properties.default_node_pool.node_count
+    resource.properties.default_node_pool != null
+    not resource.properties.default_node_pool[_].node_count
 }
 
 azure_issue["aks_nodes"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    to_number(resource.properties.default_node_pool.node_count) < 3
+    resource.properties.default_node_pool != null
+    to_number(resource.properties.default_node_pool[_].node_count) < 3
 }
 
 aks_nodes {
@@ -204,13 +209,15 @@ default aks_rbac = null
 azure_attribute_absence["aks_rbac"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    not resource.properties.role_based_access_control.enabled
+    resource.properties.role_based_access_control != null
+    not resource.properties.role_based_access_control[_].enabled
 }
 
 azure_issue["aks_rbac"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    resource.properties.role_based_access_control.enabled != true
+    resource.properties.role_based_access_control != null
+    resource.properties.role_based_access_control[_].enabled != true
 }
 
 aks_rbac {

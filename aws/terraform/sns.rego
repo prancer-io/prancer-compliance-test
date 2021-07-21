@@ -113,8 +113,8 @@ aws_issue["sns_encrypt"] {
 
 sns_encrypt {
     lower(input.resources[_].type) == "aws_sns_topic"
-    not aws_issue["sns_encrypt"]
     not aws_attribute_absence["sns_encrypt"]
+    not aws_issue["sns_encrypt"]
 }
 
 sns_encrypt = false {

@@ -11,13 +11,15 @@ default storage_encrypt = null
 gc_attribute_absence["storage_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket"
-    not resource.properties.encryption.default_kms_key_name
+    resource.properties.encryption != null
+    not resource.properties.encryption[_].default_kms_key_name
 }
 
 gc_issue["storage_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket"
-    count(resource.properties.encryption.default_kms_key_name) == 0
+    resource.properties.encryption != null
+    count(resource.properties.encryption[_].default_kms_key_name) == 0
 }
 
 storage_encrypt {
@@ -69,7 +71,8 @@ gc_attribute_absence["storage_versioning"] {
 gc_issue["storage_versioning"] {
     resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket"
-    resource.properties.versioning.enabled != true
+    resource.properties.versioning != null
+    resource.properties.versioning[_].enabled != true
 }
 
 storage_versioning {
@@ -115,7 +118,8 @@ default storage_logging = null
 gc_issue["storage_logging"] {
     resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket"
-    not resource.properties.logging.log_bucket
+    resource.properties.logging != null
+    not resource.properties.logging[_].log_bucket
 }
 
 storage_logging {

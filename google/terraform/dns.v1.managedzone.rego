@@ -12,13 +12,15 @@ default dnssec_state = null
 gc_attribute_absence["dnssec_state"] {
     resource := input.resources[_]
     lower(resource.type) == "google_dns_managed_zone"
-    not resource.properties.dnssec_config.state
+    resource.properties.dnssec_config != null
+    not resource.properties.dnssec_config[_].state
 }
 
 gc_issue["dnssec_state"] {
     resource := input.resources[_]
     lower(resource.type) == "google_dns_managed_zone"
-    lower(resource.properties.dnssec_config.state) == "off"
+    resource.properties.dnssec_config != null
+    lower(resource.properties.dnssec_config[_].state) == "off"
 }
 
 dnssec_state {
@@ -65,13 +67,15 @@ default dnssec_key_rsasha1 = null
 gc_attribute_absence["dnssec_key_rsasha1"] {
     resource := input.resources[_]
     lower(resource.type) == "google_dns_managed_zone"
-    not resource.properties.dnssec_config.default_key_specs
+    resource.properties.dnssec_config != null
+    not resource.properties.dnssec_config[_].default_key_specs
 }
 
 gc_issue["dnssec_key_rsasha1"] {
     resource := input.resources[_]
     lower(resource.type) == "google_dns_managed_zone"
-    key := resource.properties.dnssec_config.default_key_specs[_]
+    resource.properties.dnssec_config != null
+    key := resource.properties.dnssec_config[_].default_key_specs[_]
     contains(lower(key.key_type), "keysigning")
     contains(lower(key.algorithm), "rsasha1")
 }
@@ -120,13 +124,15 @@ default dnssec_zone_rsasha1 = null
 gc_attribute_absence["dnssec_zone_rsasha1"] {
     resource := input.resources[_]
     lower(resource.type) == "google_dns_managed_zone"
-    not resource.properties.dnssec_config.default_key_specs
+    resource.properties.dnssec_config != null
+    not resource.properties.dnssec_config[_].default_key_specs
 }
 
 gc_issue["dnssec_zone_rsasha1"] {
     resource := input.resources[_]
     lower(resource.type) == "google_dns_managed_zone"
-    key := resource.properties.dnssec_config.default_key_specs[_]
+    resource.properties.dnssec_config != null
+    key := resource.properties.dnssec_config[_].default_key_specs[_]
     contains(lower(key.key_type), "zonesigning")
     contains(lower(key.algorithm), "rsasha1")
 }

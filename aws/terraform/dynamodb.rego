@@ -17,7 +17,8 @@ aws_attribute_absence["dynabodb_encrypt"] {
 aws_issue["dynabodb_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_dynamodb_table"
-    not resource.properties.server_side_encryption.enabled
+    resource.properties.server_side_encryption != null
+    not resource.properties.server_side_encryption[_].enabled
 }
 
 dynabodb_encrypt {
