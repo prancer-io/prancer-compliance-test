@@ -69,13 +69,13 @@ default acm_ct_log = null
 aws_attribute_absence["acm_ct_log"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_acm_certificate"
-    not resource.properties.certificate_transparency_logging_preference
+    not resource.properties.options[_].certificate_transparency_logging_preference
 }
 
 aws_issue["acm_ct_log"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_acm_certificate"
-    lower(resource.properties.certificate_transparency_logging_preference) != "enabled"
+    lower(resource.properties.options[_].certificate_transparency_logging_preference) != "enabled"
 }
 
 acm_ct_log {

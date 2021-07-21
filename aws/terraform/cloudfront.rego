@@ -11,13 +11,13 @@ default cf_default_cache = null
 aws_attribute_absence["cf_default_cache"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    not resource.properties.default_cache_behavior.field_level_encryption_id
+    not resource.properties.default_cache_behavior[_].field_level_encryption_id
 }
 
 aws_issue["cf_default_cache"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    count(resource.properties.default_cache_behavior.field_level_encryption_id) == 0
+    count(resource.properties.default_cache_behavior[_].field_level_encryption_id) == 0
 }
 
 cf_default_cache {
@@ -64,13 +64,13 @@ default cf_ssl_protocol = null
 aws_attribute_absence["cf_ssl_protocol"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    not resource.properties.origin.custom_origin_config.origin_ssl_protocols
+    not resource.properties.origin[_].custom_origin_config[_].origin_ssl_protocols
 }
 
 aws_issue["cf_ssl_protocol"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    lower(resource.properties.origin.custom_origin_config.origin_ssl_protocols[_]) == "sslv3"
+    lower(resource.properties.origin[_].custom_origin_config[_].origin_ssl_protocols[_]) == "sslv3"
 }
 
 cf_ssl_protocol {
@@ -117,13 +117,13 @@ default cf_logging = null
 aws_attribute_absence["cf_logging"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    not resource.properties.logging_config.bucket
+    not resource.properties.logging_config[_].bucket
 }
 
 aws_issue["cf_logging"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    count(resource.properties.logging_config.bucket) == 0
+    count(resource.properties.logging_config[_].bucket) == 0
 }
 
 cf_logging {
@@ -169,13 +169,13 @@ default cf_https_only = null
 aws_attribute_absence["cf_https_only"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    not resource.properties.default_cache_behavior.viewer_protocol_policy
+    not resource.properties.default_cache_behavior[_].viewer_protocol_policy
 }
 
 aws_issue["cf_https_only"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    lower(resource.properties.default_cache_behavior.viewer_protocol_policy) != "https-only"
+    lower(resource.properties.default_cache_behavior[_].viewer_protocol_policy) != "https-only"
 }
 
 cf_https_only {
@@ -222,13 +222,13 @@ default cf_https = null
 aws_attribute_absence["cf_https"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    not resource.properties.default_cache_behavior.viewer_protocol_policy
+    not resource.properties.default_cache_behavior[_].viewer_protocol_policy
 }
 
 aws_issue["cf_https"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    cache := resource.properties.default_cache_behavior
+    cache := resource.properties.default_cache_behavior[_]
     lower(cache.viewer_protocol_policy) != "https-only"
     lower(cache.viewer_protocol_policy) != "redirect-to-https"
 }
@@ -276,19 +276,19 @@ default cf_min_protocol = null
 aws_attribute_absence["cf_min_protocol"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    not resource.properties.viewer_certificate.minimum_protocol_version
+    not resource.properties.viewer_certificate[_].minimum_protocol_version
 }
 
 aws_issue["cf_min_protocol"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    lower(resource.properties.viewer_certificate.minimum_protocol_version) == "tlsv1"
+    lower(resource.properties.viewer_certificate[_].minimum_protocol_version) == "tlsv1"
 }
 
 aws_issue["cf_min_protocol"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    lower(resource.properties.viewer_certificate.minimum_protocol_version) == "tlsv1_2016"
+    lower(resource.properties.viewer_certificate[_].minimum_protocol_version) == "tlsv1_2016"
 }
 
 cf_min_protocol {
@@ -386,7 +386,7 @@ default cf_default_ssl = null
 aws_issue["cf_default_ssl"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    resource.properties.viewer_certificate.cloudfront_default_certificate
+    resource.properties.viewer_certificate[_].cloudfront_default_certificate
 }
 
 cf_default_ssl {
@@ -423,13 +423,13 @@ default cf_geo_restriction = null
 aws_attribute_absence["cf_geo_restriction"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    not resource.properties.restrictions.geo_restriction.restriction_type
+    not resource.properties.restrictions[_].geo_restriction[_].restriction_type
 }
 
 aws_issue["cf_geo_restriction"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    lower(resource.properties.restrictions.geo_restriction.restriction_type) == "none"
+    lower(resource.properties.restrictions[_].geo_restriction[_].restriction_type) == "none"
 }
 
 cf_geo_restriction {
@@ -481,7 +481,7 @@ aws_attribute_absence["cf_s3_origin"] {
 aws_issue["cf_s3_origin"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    count(resource.properties.origin.s3_origin_config.origin_access_identity) == 0
+    count(resource.properties.origin[_].s3_origin_config[_].origin_access_identity) == 0
 }
 
 cf_s3_origin {

@@ -11,13 +11,13 @@ default sql_labels = null
 gc_issue["sql_labels"] {
     resource := input.resources[_]
     lower(resource.type) == "google_sql_database_instance"
-    not resource.properties.settings.userLabels
+    not resource.properties.settings[_].userLabels
 }
 
 gc_issue["sql_labels"] {
     resource := input.resources[_]
     lower(resource.type) == "google_sql_database_instance"
-    count(resource.properties.settings.userLabels) == 0
+    count(resource.properties.settings[_].userLabels) == 0
 }
 
 sql_labels {
@@ -62,7 +62,7 @@ gc_issue["sql_binary_logs"] {
     resource := input.resources[_]
     lower(resource.type) == "google_sql_database_instance"
     contains(lower(resource.properties.databaseVersion), "mysql")
-    not resource.properties.settings.backupConfiguration.binaryLogEnabled
+    not resource.properties.settings[_].backup_configuration[_].binary_log_enabled
 }
 
 sql_binary_logs {
@@ -109,13 +109,13 @@ default sql_backup = null
 gc_attribute_absence["sql_backup"] {
     resource := input.resources[_]
     lower(resource.type) == "google_sql_database_instance"
-    not resource.properties.settings.backupConfiguration
+    not resource.properties.settings[_].backup_configuration
 }
 
 gc_issue["sql_backup"] {
     resource := input.resources[_]
     lower(resource.type) == "google_sql_database_instance"
-    not resource.properties.settings.backupConfiguration.enabled
+    not resource.properties.settings[_].backup_configuration[_].enabled
 }
 
 sql_backup {
@@ -162,13 +162,13 @@ default sql_ssl = null
 gc_attribute_absence["sql_ssl"] {
     resource := input.resources[_]
     lower(resource.type) == "google_sql_database_instance"
-    not resource.properties.settings.ip_configuration.requireSsl
+    not resource.properties.settings[_].ip_configuration[_].require_ssl
 }
 
 gc_issue["sql_ssl"] {
     resource := input.resources[_]
     lower(resource.type) == "google_sql_database_instance"
-    resource.properties.settings.ip_configuration.requireSsl != true
+    resource.properties.settings[_].ip_configuration[_].require_ssl != true
 }
 
 sql_ssl {

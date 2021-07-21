@@ -11,13 +11,13 @@ default eks_multiple_sg = null
 aws_attribute_absence["eks_multiple_sg"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_eks_cluster"
-    not resource.properties.vpc_config.security_group_ids
+    not resource.properties.vpc_config[_].security_group_ids
 }
 
 aws_issue["eks_multiple_sg"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_eks_cluster"
-    count(resource.properties.vpc_config.security_group_ids) > 1
+    count(resource.properties.vpc_config[_].security_group_ids) > 1
 }
 
 eks_multiple_sg {

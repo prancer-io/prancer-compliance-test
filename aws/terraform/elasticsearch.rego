@@ -63,7 +63,7 @@ default esearch_encrypt = null
 aws_issue["esearch_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_elasticsearch_domain"
-    not resource.properties.encrypt_at_rest.enabled
+    not resource.properties.encrypt_at_rest[_].enabled
 }
 
 esearch_encrypt {
@@ -100,7 +100,7 @@ default esearch_master = null
 aws_issue["esearch_master"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_elasticsearch_domain"
-    not resource.properties.cluster_config.dedicated_master_enabled
+    not resource.properties.cluster_config[_].dedicated_master_enabled
 }
 
 esearch_master {
