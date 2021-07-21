@@ -2423,7 +2423,7 @@
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(registryrego)",
+                    "rule": "file(registry.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-0104-ARM",
