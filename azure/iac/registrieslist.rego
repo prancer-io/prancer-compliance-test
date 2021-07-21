@@ -70,7 +70,7 @@ azure_attribute_absence["adminUserEnabled"] {
 azure_issue["adminUserEnabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries"
-    resource.properties.adminUserEnabled == true
+    resource.properties.adminUserEnabled = true
 }
 
 adminUserEnabled {
