@@ -5,13 +5,13 @@ package rule
 # PR-AZR-0104-ARM
 
 default adminUserEnabled = null
-azure_attribute_absence ["adminUserEnabled"] {
+azure_attribute_absence["adminUserEnabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries"
     not resource.properties.adminUserEnabled
 }
 
-azure_issue ["adminUserEnabled"] {
+azure_issue["adminUserEnabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries"
     resource.properties.adminUserEnabled != false
