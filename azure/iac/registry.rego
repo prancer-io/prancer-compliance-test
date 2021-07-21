@@ -8,7 +8,7 @@ default adminUserEnabled = null
 azure_attribute_absence["adminUserEnabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries"
-    not resource.properties.adminUserEnabled
+    resource.properties.adminUserEnabled
 }
 
 azure_issue["adminUserEnabled"] {
@@ -18,25 +18,28 @@ azure_issue["adminUserEnabled"] {
 }
 
 adminUserEnabled {
+    azure_issue["adminUserEnabled"]
+    azure_attribute_absence["adminUserEnabled"]
+}
+
+adminUserEnabled = false {
     lower(input.resources[_].type) == "microsoft.containerregistry/registries"
     not azure_issue["adminUserEnabled"]
+}
+
+adminUserEnabled = false {
+    lower(input.resources[_].type) == "microsoft.containerregistry/registries"
     not azure_attribute_absence["adminUserEnabled"]
 }
 
-adminUserEnabled = false {
-    azure_issue["adminUserEnabled"]
-}
-
-adminUserEnabled = false {
-    azure_attribute_absence["adminUserEnabled"]
-}
-
 adminUserEnabled_err = "Ensure that admin user is disabled for Container Registry" {
-    azure_issue["adminUserEnabled"]
+    lower(input.resources[_].type) == "microsoft.containerregistry/registries"
+    not azure_issue["adminUserEnabled"]
 }
 
 adminUserEnabled_miss_err = "Ensure that admin user is disabled for Container Registry" {
-    azure_attribute_absence["adminUserEnabled"]
+    lower(input.resources[_].type) == "microsoft.containerregistry/registries"
+    not azure_attribute_absence["adminUserEnabled"]
 }
 
 
