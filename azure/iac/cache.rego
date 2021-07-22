@@ -6,7 +6,7 @@ package rule
 
 default enableNonSslPort = null
 
-azure_attribute_absence["enableNonSslPort"] {
+azure_attribute_absence ["enableNonSslPort"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.cache/redis"
     not resource.properties.enableNonSslPort
