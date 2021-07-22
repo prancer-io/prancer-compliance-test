@@ -12,20 +12,33 @@ default rds_cluster_encrypt = null
 aws_issue["rds_cluster_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbcluster"
+    lower(resource.Properties.StorageEncrypted) == "false"
+}
+
+aws_bool_issue["rds_cluster_encrypt"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbcluster"
     not resource.Properties.StorageEncrypted
 }
 
 rds_cluster_encrypt {
     lower(input.Resources[i].Type) == "aws::rds::dbcluster"
     not aws_issue["rds_cluster_encrypt"]
+    not aws_bool_issue["rds_cluster_encrypt"]
 }
 
 rds_cluster_encrypt = false {
     aws_issue["rds_cluster_encrypt"]
 }
 
+rds_cluster_encrypt = false {
+    aws_bool_issue["rds_cluster_encrypt"]
+}
+
 rds_cluster_encrypt_err = "AWS RDS DB cluster encryption is disabled" {
     aws_issue["rds_cluster_encrypt"]
+} else = "AWS RDS DB cluster encryption is disabled" {
+    aws_bool_issue["rds_cluster_encrypt"]
 }
 
 rds_cluster_encrypt_metadata := {
@@ -49,20 +62,33 @@ default rds_public = null
 aws_issue["rds_public"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbinstance"
+    lower(resource.Properties.PubliclyAccessible) == "true"
+}
+
+aws_bool_issue["rds_public"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
     resource.Properties.PubliclyAccessible
 }
 
 rds_public {
     lower(input.Resources[i].Type) == "aws::rds::dbinstance"
     not aws_issue["rds_public"]
+    not aws_bool_issue["rds_public"]
 }
 
 rds_public = false {
     aws_issue["rds_public"]
 }
 
+rds_public = false {
+    aws_bool_issue["rds_public"]
+}
+
 rds_public_err = "AWS RDS database instance is publicly accessible" {
     aws_issue["rds_public"]
+} else = "AWS RDS database instance is publicly accessible" {
+    aws_bool_issue["rds_public"]
 }
 
 rds_public_metadata := {
@@ -123,6 +149,13 @@ default rds_instance_event = null
 aws_issue["rds_instance_event"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::eventsubscription"
+    lower(resource.Properties.Enabled) == "false"
+    resource.Properties.SourceType == "db-instance"
+}
+
+aws_bool_issue["rds_instance_event"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::eventsubscription"
     resource.Properties.Enabled == false
     resource.Properties.SourceType == "db-instance"
 }
@@ -130,14 +163,21 @@ aws_issue["rds_instance_event"] {
 rds_instance_event {
     lower(input.Resources[i].Type) == "aws::rds::eventsubscription"
     not aws_issue["rds_instance_event"]
+    not aws_bool_issue["rds_instance_event"]
 }
 
 rds_instance_event = false {
     aws_issue["rds_instance_event"]
 }
 
+rds_instance_event = false {
+    aws_bool_issue["rds_instance_event"]
+}
+
 rds_instance_event_err = "AWS RDS event subscription disabled for DB instance" {
     aws_issue["rds_instance_event"]
+} else = "AWS RDS event subscription disabled for DB instance" {
+    aws_bool_issue["rds_instance_event"]
 }
 
 rds_instance_event_metadata := {
@@ -161,22 +201,38 @@ default rds_secgroup_event = null
 aws_issue["rds_secgroup_event"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::eventsubscription"
+    lower(resource.Properties.Enabled) == "false"
+    resource.Properties.SourceType == "db-security-group"
+}
+
+aws_bool_issue["rds_secgroup_event"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::eventsubscription"
     resource.Properties.Enabled == false
     resource.Properties.SourceType == "db-security-group"
 }
 
+
 rds_secgroup_event {
     lower(input.Resources[i].Type) == "aws::rds::eventsubscription"
     not aws_issue["rds_secgroup_event"]
+    not aws_bool_issue["rds_secgroup_event"]
 }
 
 rds_secgroup_event = false {
     aws_issue["rds_secgroup_event"]
 }
 
+rds_secgroup_event = false {
+    aws_bool_issue["rds_secgroup_event"]
+}
+
 rds_secgroup_event_err = "AWS RDS event subscription disabled for DB security groups" {
     aws_issue["rds_secgroup_event"]
+} else = "AWS RDS event subscription disabled for DB security groups" {
+    aws_bool_issue["rds_secgroup_event"]
 }
+
 
 rds_secgroup_event_metadata := {
     "Policy Code": "PR-AWS-0124-CFR",
@@ -199,20 +255,33 @@ default rds_encrypt = null
 aws_issue["rds_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbinstance"
+    lower(resource.Properties.StorageEncrypted) == "false"
+}
+
+aws_bool_issue["rds_encrypt"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
     not resource.Properties.StorageEncrypted
 }
 
 rds_encrypt {
     lower(input.Resources[i].Type) == "aws::rds::dbinstance"
     not aws_issue["rds_encrypt"]
+    not aws_bool_issue["rds_encrypt"]
 }
 
 rds_encrypt = false {
     aws_issue["rds_encrypt"]
 }
 
+rds_encrypt = false {
+    aws_bool_issue["rds_encrypt"]
+}
+
 rds_encrypt_err = "AWS RDS instance is not encrypted" {
     aws_issue["rds_encrypt"]
+} else = "AWS RDS instance is not encrypted" {
+    aws_bool_issue["rds_encrypt"]
 }
 
 rds_encrypt_metadata := {
@@ -244,12 +313,21 @@ aws_issue["rds_multiaz"] {
     lower(resource.Type) == "aws::rds::dbinstance"
     lower(resource.Properties.Engine) != "aurora"
     lower(resource.Properties.Engine) != "sqlserver"
+    lower(resource.Properties.MultiAZ) == "false"
+}
+
+aws_bool_issue["rds_multiaz"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    lower(resource.Properties.Engine) != "aurora"
+    lower(resource.Properties.Engine) != "sqlserver"
     not resource.Properties.MultiAZ
 }
 
 rds_multiaz {
     lower(input.Resources[i].Type) == "aws::rds::dbinstance"
     not aws_issue["rds_multiaz"]
+    not aws_bool_issue["rds_multiaz"]
     not aws_attribute_absence["rds_multiaz"]
 }
 
@@ -258,11 +336,17 @@ rds_multiaz = false {
 }
 
 rds_multiaz = false {
+    aws_bool_issue["rds_multiaz"]
+}
+
+rds_multiaz = false {
     aws_attribute_absence["rds_multiaz"]
 }
 
 rds_multiaz_err = "AWS RDS instance with Multi-Availability Zone disabled" {
     aws_issue["rds_multiaz"]
+} else = "AWS RDS instance with Multi-Availability Zone disabled" {
+    aws_bool_issue["rds_multiaz"]
 }
 
 rds_multiaz_miss_err = "RDS dbcluster attribute Engine missing in the resource" {
@@ -290,20 +374,33 @@ default rds_snapshot = null
 aws_issue["rds_snapshot"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbinstance"
+    lower(resource.Properties.CopyTagsToSnapshot) == "false"
+}
+
+aws_bool_issue["rds_snapshot"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
     not resource.Properties.CopyTagsToSnapshot
 }
 
 rds_snapshot {
     lower(input.Resources[i].Type) == "aws::rds::dbinstance"
     not aws_issue["rds_snapshot"]
+    not aws_bool_issue["rds_snapshot"]
 }
 
 rds_snapshot = false {
     aws_issue["rds_snapshot"]
 }
 
+rds_snapshot = false {
+    aws_bool_issue["rds_snapshot"]
+}
+
 rds_snapshot_err = "AWS RDS instance with copy tags to snapshots disabled" {
     aws_issue["rds_snapshot"]
+} else = "AWS RDS instance with copy tags to snapshots disabled" {
+    aws_bool_issue["rds_snapshot"]
 }
 
 rds_snapshot_metadata := {
@@ -379,20 +476,33 @@ default rds_upgrade = null
 aws_issue["rds_upgrade"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbinstance"
+    lower(resource.Properties.AutoMinorVersionUpgrade) == "false"
+}
+
+aws_bool_issue["rds_upgrade"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
     not resource.Properties.AutoMinorVersionUpgrade
 }
 
 rds_upgrade {
     lower(input.Resources[i].Type) == "aws::rds::dbinstance"
     not aws_issue["rds_upgrade"]
+    not aws_bool_issue["rds_upgrade"]
 }
 
 rds_upgrade = false {
     aws_issue["rds_upgrade"]
 }
 
+rds_upgrade = false {
+    aws_bool_issue["rds_upgrade"]
+}
+
 rds_upgrade_err = "AWS RDS minor upgrades not enabled" {
     aws_issue["rds_upgrade"]
+} else = "AWS RDS minor upgrades not enabled" {
+    aws_bool_issue["rds_upgrade"]
 }
 
 rds_upgrade_metadata := {
