@@ -12,29 +12,13 @@ azure_attribute_absence ["enableNonSslPort"] {
     not resource.properties.enableNonSslPort
 }
 
-azure_issue ["enableNonSslPort"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.cache/redis"
-    resource.properties.enableNonSslPort != false
-}
-
 enableNonSslPort {
     lower(input.resources[_].type) == "microsoft.cache/redis"
-    not azure_issue["enableNonSslPort"]
     not azure_attribute_absence["enableNonSslPort"]
 }
 
 enableNonSslPort = false {
     azure_attribute_absence["enableNonSslPort"]
-}
-
-enableNonSslPort = false {
-    azure_issue["enableNonSslPort"]
-}
-
-
-enableNonSslPort_err = "Ensure that the Redis Cache accepts only SSL connections" {
-    azure_issue["enableNonSslPort"]
 }
 
 enableNonSslPort_miss_err = "Ensure that the Redis Cache accepts only SSL connections" {
