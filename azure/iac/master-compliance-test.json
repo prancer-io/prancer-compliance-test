@@ -2682,8 +2682,8 @@
                     "evals": [
                         {
                             "id": "PR-AZR-0110-ARM",
-                            "eval": "data.rule.enableNonSslPort",
-                            "message": "data.rule.enableNonSslPort_err",
+                            "eval": "data.rule.NonSslPort",
+                            "message": "data.rule.NonSslPort_err",
                             "remediationDescription": "",
                             "remediationFunction": "PR-AZR-0110-ARM.py"
                         }
