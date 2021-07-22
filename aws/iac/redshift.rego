@@ -25,6 +25,7 @@ aws_issue["redshift_encrypt_key"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::redshift::cluster"
     lower(resource.Properties.Encrypted) == "true"
+}
 
 aws_bool_issue["redshift_encrypt_key"] {
     resource := input.Resources[i]
