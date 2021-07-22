@@ -37,7 +37,7 @@ cache_failover = false {
 cache_failover_err = "AWS ElastiCache Redis cluster with Multi-AZ Automatic Failover feature set to disabled" {
     aws_issue["cache_failover"]
 } else = "AWS ElastiCache Redis cluster with Multi-AZ Automatic Failover feature set to disabled" {
-    aws_bool_issues["cache_failover"]
+    aws_bool_issue["cache_failover"]
 }
 
 cache_failover_metadata := {
