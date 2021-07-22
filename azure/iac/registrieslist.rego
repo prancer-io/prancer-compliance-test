@@ -62,6 +62,11 @@ acr_classic_metadata := {
 
 default adminUserEnabled = null
 
+azure_attribute_absence["adminUserEnabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerregistry/registries"
+    not resource.properties.adminUserEnabled
+}
 
 azure_issue["adminUserEnabled"] {
     resource := input.resources[_]
@@ -71,13 +76,21 @@ azure_issue["adminUserEnabled"] {
 
 adminUserEnabled {
     lower(input.resources[_].type) == "microsoft.containerregistry/registries"
+    not azure_attribute_absence["adminUserEnabled"]
     not azure_issue["adminUserEnabled"]
+}
+
+adminUserEnabled = false {
+    azure_attribute_absence["adminUserEnabled"]
 }
 
 adminUserEnabled = false {
     azure_issue["adminUserEnabled"]
 }
 
+adminUserEnabled_miss_err = "Ensure that admin user is disabled for Container Registry" {
+    azure_attribute_absence["adminUserEnabled"]
+}
 
 adminUserEnabled_err = "Ensure that admin user is disabled for Container Registry" {
     azure_issue["adminUserEnabled"]
