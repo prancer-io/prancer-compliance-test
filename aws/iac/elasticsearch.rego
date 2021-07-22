@@ -63,21 +63,35 @@ default esearch_encrypt = null
 aws_issue["esearch_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
+    lower(resource.Properties.EncryptionAtRestOptions.Enabled) == "false"
+}
+
+aws_bool_issue["esearch_encrypt"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
     not resource.Properties.EncryptionAtRestOptions.Enabled
 }
 
 esearch_encrypt {
     lower(input.Resources[i].Type) == "aws::elasticsearch::domain"
     not aws_issue["esearch_encrypt"]
+    not aws_bool_issue["esearch_encrypt"]
 }
 
 esearch_encrypt = false {
     aws_issue["esearch_encrypt"]
 }
 
+esearch_encrypt = false {
+    aws_bool_issue["esearch_encrypt"]
+}
+
 esearch_encrypt_err = "AWS Elasticsearch domain Encryption for data at rest is disabled" {
     aws_issue["esearch_encrypt"]
+} else = "AWS Elasticsearch domain Encryption for data at rest is disabled" {
+    aws_bool_issue["esearch_encrypt"]
 }
+
 
 esearch_encrypt_metadata := {
     "Policy Code": "PR-AWS-0076-CFR",

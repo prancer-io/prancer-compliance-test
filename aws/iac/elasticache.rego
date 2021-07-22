@@ -11,21 +11,33 @@ default cache_failover = null
 aws_issue["cache_failover"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticache::replicationgroup"
-    not resource.Properties.AutomaticFailoverEnabled
+    lower(resource.Properties.AutomaticFailoverEnabled) == "false"
+}
+
+aws_bool_issue["cache_failover"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
+    resource.Properties.AutomaticFailoverEnabled == false
 }
 
 cache_failover {
     lower(input.Resources[i].Type) == "aws::elasticache::replicationgroup"
     not aws_issue["cache_failover"]
-    not aws_attribute_absence["cache_failover"]
+    not aws_bool_issue["cache_failover"]
 }
 
 cache_failover = false {
     aws_issue["cache_failover"]
 }
 
+cache_failover = false {
+    aws_bool_issue["cache_failover"]
+}
+
 cache_failover_err = "AWS ElastiCache Redis cluster with Multi-AZ Automatic Failover feature set to disabled" {
     aws_issue["cache_failover"]
+} else = "AWS ElastiCache Redis cluster with Multi-AZ Automatic Failover feature set to disabled" {
+    aws_bool_issues["cache_failover"]
 }
 
 cache_failover_metadata := {
@@ -107,20 +119,33 @@ default cache_redis_encrypt = null
 aws_issue["cache_redis_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticache::replicationgroup"
+    lower(resource.Properties.AtRestEncryptionEnabled) == "false"
+}
+
+aws_bool_issue["cache_redis_encrypt"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
     not resource.Properties.AtRestEncryptionEnabled
 }
 
 cache_redis_encrypt {
     lower(input.Resources[i].Type) == "aws::elasticache::replicationgroup"
     not aws_issue["cache_redis_encrypt"]
+    not aws_bool_issue["cache_redis_encrypt"]
 }
 
 cache_redis_encrypt = false {
     aws_issue["cache_redis_encrypt"]
 }
 
+cache_redis_encrypt = false {
+    aws_bool_issue["cache_redis_encrypt"]
+}
+
 cache_redis_encrypt_err = "AWS ElastiCache Redis cluster with encryption for data at rest disabled" {
     aws_issue["cache_redis_encrypt"]
+} else = "AWS ElastiCache Redis cluster with encryption for data at rest disabled" {
+    aws_bool_issue["cache_redis_encrypt"]
 }
 
 cache_redis_encrypt_metadata := {
@@ -144,20 +169,34 @@ default cache_encrypt = null
 aws_issue["cache_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticache::replicationgroup"
-    not resource.Properties.AtRestEncryptionEnabled
+    lower(resource.Properties.TransitEncryptionEnabled) == "false"
+}
+
+aws_bool_issue["cache_encrypt"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
+    not resource.Properties.TransitEncryptionEnabled
 }
 
 cache_encrypt {
     lower(input.Resources[i].Type) == "aws::elasticache::replicationgroup"
     not aws_issue["cache_encrypt"]
+    not aws_bool_issue["cache_encrypt"]
 }
 
 cache_encrypt = false {
     aws_issue["cache_encrypt"]
 }
 
+cache_encrypt = false {
+    aws_bool_issue["cache_encrypt"]
+}
+
+
 cache_encrypt_err = "AWS ElastiCache Redis cluster with in-transit encryption disabled" {
     aws_issue["cache_encrypt"]
+} else = "AWS ElastiCache Redis cluster with in-transit encryption disabled" {
+    aws_bool_issue["cache_encrypt"]
 }
 
 cache_encrypt_metadata := {

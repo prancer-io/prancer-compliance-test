@@ -75,12 +75,18 @@ aws_attribute_absence["efs_encrypt"] {
 aws_issue["efs_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::efs::filesystem"
+    lower(resource.Properties.Encrypted) != "true"
+}
+aws_bool_issue["efs_encrypt"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::efs::filesystem"
     resource.Properties.Encrypted != true
 }
 
 efs_encrypt {
     lower(input.Resources[i].Type) == "aws::efs::filesystem"
     not aws_issue["efs_encrypt"]
+    not aws_bool_issue["efs_encrypt"]
     not aws_attribute_absence["efs_encrypt"]
 }
 
@@ -89,11 +95,17 @@ efs_encrypt = false {
 }
 
 efs_encrypt = false {
+    aws_bool_issue["efs_encrypt"]
+}
+
+efs_encrypt = false {
     aws_attribute_absence["efs_encrypt"]
 }
 
 efs_encrypt_err = "AWS Elastic File System (EFS) with encryption for data at rest disabled" {
     aws_issue["efs_encrypt"]
+} else = "AWS Elastic File System (EFS) with encryption for data at rest disabled" {
+    aws_bool_issue["efs_encrypt"]
 }
 
 efs_encrypt_miss_err = "EFS attribute Encrypted missing in the resource" {

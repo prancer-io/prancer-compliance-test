@@ -208,20 +208,33 @@ default elb_conn_drain = null
 aws_issue["elb_conn_drain"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
-    not resource.Properties.ConnectionDraining.Enabled
+    lower(resource.Properties.ConnectionDrainingPolicy.Enabled) == "false"
+}
+
+aws_bool_issue["elb_conn_drain"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    not resource.Properties.ConnectionDrainingPolicy.Enabled
 }
 
 elb_conn_drain {
     lower(input.Resources[i].Type) == "aws::elasticloadbalancing::loadbalancer"
     not aws_issue["elb_conn_drain"]
+    not aws_bool_issue["elb_conn_drain"]
 }
 
 elb_conn_drain = false {
     aws_issue["elb_conn_drain"]
 }
 
+elb_conn_drain = false {
+    aws_bool_issue["elb_conn_drain"]
+}
+
 elb_conn_drain_err = "AWS Elastic Load Balancer (Classic) with connection draining disabled" {
     aws_issue["elb_conn_drain"]
+} else = "AWS Elastic Load Balancer (Classic) with connection draining disabled" {
+    aws_bool_issue["elb_conn_drain"]
 }
 
 elb_conn_drain_metadata := {
@@ -245,20 +258,33 @@ default elb_crosszone = null
 aws_issue["elb_crosszone"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    lower(resource.Properties.CrossZone) == "false"
+}
+
+aws_bool_issue["elb_crosszone"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     not resource.Properties.CrossZone
 }
 
 elb_crosszone {
     lower(input.Resources[i].Type) == "aws::elasticloadbalancing::loadbalancer"
     not aws_issue["elb_crosszone"]
+    not aws_bool_issue["elb_crosszone"]
 }
 
 elb_crosszone = false {
     aws_issue["elb_crosszone"]
 }
 
+elb_crosszone = false {
+    aws_bool_issue["elb_crosszone"]
+}
+
 elb_crosszone_err = "AWS Elastic Load Balancer (Classic) with cross-zone load balancing disabled" {
     aws_issue["elb_crosszone"]
+} else = "AWS Elastic Load Balancer (Classic) with cross-zone load balancing disabled" {
+    aws_bool_issue["elb_crosszone"]
 }
 
 elb_crosszone_metadata := {

@@ -70,21 +70,35 @@ default redshift_public = null
 aws_issue["redshift_public"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::redshift::cluster"
+    lower(resource.Properties.PubliclyAccessible) == "true"
+}
+
+aws_bool_issue["redshift_public"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
     resource.Properties.PubliclyAccessible
 }
 
 redshift_public {
     lower(input.Resources[i].Type) == "aws::redshift::cluster"
     not aws_issue["redshift_public"]
+    not aws_bool_issue["redshift_public"]
 }
 
 redshift_public = false {
     aws_issue["redshift_public"]
 }
 
+redshift_public = false {
+    aws_bool_issue["redshift_public"]
+}
+
 redshift_public_err = "AWS Redshift clusters should not be publicly accessible" {
     aws_issue["redshift_public"]
+} error = "AWS Redshift clusters should not be publicly accessible" {
+    aws_bool_issue["redshift_public"]
 }
+
 
 redshift_public_metadata := {
     "Policy Code": "PR-AWS-0134-CFR",
@@ -220,20 +234,35 @@ default redshift_encrypt = null
 aws_issue["redshift_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::redshift::cluster"
+    lower(resource.Properties.Encrypted) == "false"
+}
+
+aws_bool_issue["redshift_encrypt"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
     not resource.Properties.Encrypted
 }
+
 
 redshift_encrypt {
     lower(input.Resources[i].Type) == "aws::redshift::cluster"
     not aws_issue["redshift_encrypt"]
+    not aws_bool_issue["redshift_encrypt"]
 }
+
 
 redshift_encrypt = false {
     aws_issue["redshift_encrypt"]
 }
 
+redshift_encrypt = false {
+    aws_bool_issue["redshift_encrypt"]
+}
+
 redshift_encrypt_err = "AWS Redshift instances are not encrypted" {
     aws_issue["redshift_encrypt"]
+} else = "AWS Redshift instances are not encrypted" {
+    aws_bool_issue["redshift_encrypt"]
 }
 
 redshift_encrypt_metadata := {

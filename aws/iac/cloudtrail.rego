@@ -11,20 +11,31 @@ default ct_regions = null
 aws_issue["ct_regions"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudtrail::trail"
-    not resource.Properties.IsMultiRegionTrail
+    lower(resource.Properties.IsMultiRegionTrail) != "true"
+}
+aws_bool_issue["ct_regions"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudtrail::trail"
+    resource.Properties.IsMultiRegionTrail != true
 }
 
 ct_regions {
     lower(input.Resources[i].Type) == "aws::cloudtrail::trail"
     not aws_issue["ct_regions"]
+    not aws_bool_issue["ct_regions"]
 }
 
 ct_regions = false {
     aws_issue["ct_regions"]
 }
+ct_regions = false {
+    aws_bool_issue["ct_regions"]
+}
 
 ct_regions_err = "AWS CloudTrail is not enabled in all regions" {
     aws_issue["ct_regions"]
+} else = "AWS CloudTrail is not enabled in all regions"{
+    aws_bool_issue["ct_regions"]
 }
 
 ct_regions_metadata := {
@@ -48,20 +59,31 @@ default ct_log_validation = null
 aws_issue["ct_log_validation"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudtrail::trail"
-    not resource.Properties.EnableLogFileValidation
+    lower(resource.Properties.EnableLogFileValidation) != "true"
 }
-
+aws_bool_issue["ct_log_validation"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudtrail::trail"
+    resource.Properties.EnableLogFileValidation != true
+}
 ct_log_validation {
     lower(input.Resources[i].Type) == "aws::cloudtrail::trail"
     not aws_issue["ct_log_validation"]
+    not aws_bool_issue["ct_log_validation"]
 }
 
 ct_log_validation = false {
     aws_issue["ct_log_validation"]
 }
 
+ct_log_validation = false {
+    aws_bool_issue["ct_log_validation"]
+}
+
 ct_log_validation_err = "AWS CloudTrail log validation is not enabled in all regions" {
     aws_issue["ct_log_validation"]
+} else = "AWS CloudTrail log validation is not enabled in all regions" {
+    aws_bool_issue["ct_log_validation"]
 }
 
 ct_log_validation_metadata := {

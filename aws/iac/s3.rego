@@ -466,12 +466,19 @@ aws_attribute_absence["s3_transport"] {
 aws_issue["s3_transport"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
+    lower(resource.Properties.PolicyDocument.Statement[_].Condition.StringLike["aws:SecureTransport"]) != "true"
+}
+
+aws_bool_issue["s3_transport"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
     resource.Properties.PolicyDocument.Statement[_].Condition.StringLike["aws:SecureTransport"] != true
 }
 
 s3_transport {
     lower(input.Resources[i].Type) == "aws::s3::bucketpolicy"
     not aws_issue["s3_transport"]
+    not aws_bool_issue["s3_transport"]
     not aws_attribute_absence["s3_transport"]
 }
 
@@ -480,11 +487,17 @@ s3_transport = false {
 }
 
 s3_transport = false {
+    aws_bool_issue["s3_transport"]
+}
+
+s3_transport = false {
     aws_attribute_absence["s3_transport"]
 }
 
 s3_transport_err = "AWS S3 bucket not configured with secure data transport policy" {
     aws_issue["s3_transport"]
+} else = "AWS S3 bucket not configured with secure data transport policy" {
+    aws_bool_issue["s3_transport"]
 }
 
 s3_transport_miss_err = "S3 Policy attribute Condition SecureTransport missing in the resource" {
