@@ -16,7 +16,7 @@ aws_issue["ct_regions"] {
 aws_bool_issue["ct_regions"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudtrail::trail"
-    resource.Properties.IsMultiRegionTrail != true
+    not resource.Properties.IsMultiRegionTrail
 }
 
 ct_regions {
@@ -64,7 +64,7 @@ aws_issue["ct_log_validation"] {
 aws_bool_issue["ct_log_validation"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudtrail::trail"
-    resource.Properties.EnableLogFileValidation != true
+    not resource.Properties.EnableLogFileValidation
 }
 ct_log_validation {
     lower(input.Resources[i].Type) == "aws::cloudtrail::trail"

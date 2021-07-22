@@ -8,6 +8,7 @@ package rule
 
 default ebs_encrypt = null
 
+
 aws_issue["ebs_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::volume"
@@ -17,7 +18,7 @@ aws_issue["ebs_encrypt"] {
 aws_bool_issue["ebs_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::volume"
-    resource.Properties.Encrypted != true
+    not resource.Properties.Encrypted
 }
 
 ebs_encrypt {
