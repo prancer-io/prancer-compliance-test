@@ -4,34 +4,34 @@ package rule
 
 # PR-AZR-0110-ARM
 
-default NonSslPort = null
+default enableNonSslPort = null
 
-azure_attribute_absence ["NonSslPort"] {
+
+azure_issue ["enableNonSslPort"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.cache/redis"
-    not resource.properties.enableNonSslPort
+    resource.properties.enableNonSslPort != false
 }
 
-
-
-NonSslPort {
+enableNonSslPort {
     lower(input.resources[_].type) == "microsoft.cache/redis"
-    not azure_attribute_absence["NonSslPort"]
-}
-
-NonSslPort = false {
-    azure_attribute_absence["NonSslPort"]
+    not azure_issue["enableNonSslPort"]
 }
 
 
-
-
-NonSslPort_err = "Ensure that the Redis Cache accepts only SSL connections" {
-    azure_attribute_absence["NonSslPort"]
+enableNonSslPort = false {
+    azure_issue["enableNonSslPort"]
 }
 
 
-NonSslPort_metadata := {
+enableNonSslPort_err = "Ensure that the Redis Cache accepts only SSL connections" {
+    azure_issue["enableNonSslPort"]
+}
+
+
+
+
+enableNonSslPort_metadata := {
     "Policy Code": "PR-AZR-0110-ARM",
     "Type": "IaC",
     "Product": "AZR",
