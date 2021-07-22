@@ -435,7 +435,7 @@ aws_bool_issue["elb_alb_logs"] {
     lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
     item := resource.Properties.LoadBalancerAttributes[_]
     lower(item.Key) == "access_logs.s3.enabled"
-    lower(item.Value) != true
+    not item.Value
 }
 
 elb_alb_logs {
