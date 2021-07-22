@@ -68,7 +68,7 @@ aws_issue["rds_public"] {
 aws_bool_issue["rds_public"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbinstance"
-    resource.Properties.PubliclyAccessible
+    resource.Properties.PubliclyAccessible == true
 }
 
 rds_public {
