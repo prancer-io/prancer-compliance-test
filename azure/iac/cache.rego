@@ -6,6 +6,11 @@ package rule
 
 default enableNonSslPort = null
 
+azure_attribute ["enableNonSslPort"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis"
+    not resource.properties.enableNonSslPort
+}
 
 azure_issue ["enableNonSslPort"] {
     resource := input.resources[_]
@@ -16,8 +21,12 @@ azure_issue ["enableNonSslPort"] {
 enableNonSslPort {
     lower(input.resources[_].type) == "microsoft.cache/redis"
     not azure_issue["enableNonSslPort"]
+    not azure_attribute["enableNonSslPort"]
 }
 
+enableNonSslPort = false {
+    azure_attribute["enableNonSslPort"]
+}
 
 enableNonSslPort = false {
     azure_issue["enableNonSslPort"]
@@ -28,7 +37,9 @@ enableNonSslPort_err = "Ensure that the Redis Cache accepts only SSL connections
     azure_issue["enableNonSslPort"]
 }
 
-
+enableNonSslPort_miss_err = "Ensure that the Redis Cache accepts only SSL connections" {
+    azure_attribute["enableNonSslPort"]
+}
 
 
 enableNonSslPort_metadata := {
