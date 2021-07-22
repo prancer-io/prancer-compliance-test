@@ -72,6 +72,7 @@ azure_issue["adminUserEnabled"] {
 adminUserEnabled {
     lower(input.resources[_].type) == "microsoft.containerregistry/registries"
     not azure_issue["adminUserEnabled"]
+}
 
 adminUserEnabled = false {
     azure_issue["adminUserEnabled"]
