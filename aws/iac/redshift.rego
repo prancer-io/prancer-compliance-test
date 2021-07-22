@@ -24,12 +24,18 @@ aws_issue["redshift_encrypt_key"] {
 aws_issue["redshift_encrypt_key"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::redshift::cluster"
+    lower(resource.Properties.Encrypted) == "true"
+
+aws_bool_issue["redshift_encrypt_key"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
     not resource.Properties.Encrypted
 }
 
 redshift_encrypt_key {
     lower(input.Resources[i].Type) == "aws::redshift::cluster"
     not aws_issue["redshift_encrypt_key"]
+    not aws_bool_issue["redshift_encrypt_key"]
     not aws_attribute_absence["redshift_encrypt_key"]
 }
 
@@ -38,11 +44,17 @@ redshift_encrypt_key = false {
 }
 
 redshift_encrypt_key = false {
+    aws_bool_issue["redshift_encrypt_key"]
+}
+
+redshift_encrypt_key = false {
     aws_attribute_absence["redshift_encrypt_key"]
 }
 
 redshift_encrypt_key_err = "AWS Redshift Cluster not encrypted using Customer Managed Key" {
     aws_issue["redshift_encrypt_key"]
+} else = "AWS Redshift Cluster not encrypted using Customer Managed Key" {
+    aws_bool_issue["redshift_encrypt_key"]
 }
 
 redshift_encrypt_key_miss_err = "Redshift attribute KmsKeyId missing in the resource" {

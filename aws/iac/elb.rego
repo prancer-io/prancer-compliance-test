@@ -171,20 +171,33 @@ default elb_access_log = null
 aws_issue["elb_access_log"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    lower(resource.Properties.AccessLoggingPolicy.Enabled) == "false"
+}
+
+aws_bool_issue["elb_access_log"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     not resource.Properties.AccessLoggingPolicy.Enabled
 }
 
 elb_access_log {
     lower(input.Resources[i].Type) == "aws::elasticloadbalancing::loadbalancer"
     not aws_issue["elb_access_log"]
+    not aws_bool_issue["elb_access_log"]
 }
 
 elb_access_log = false {
     aws_issue["elb_access_log"]
 }
 
+elb_access_log = false {
+    aws_bool_issue["elb_access_log"]
+}
+
 elb_access_log_err = "AWS Elastic Load Balancer (Classic) with access log disabled" {
     aws_issue["elb_access_log"]
+} else = "AWS Elastic Load Balancer (Classic) with access log disabled" {
+    aws_bool_issue["elb_access_log"]
 }
 
 elb_access_log_metadata := {
@@ -421,17 +434,32 @@ aws_issue["elb_alb_logs"] {
     lower(item.Value) != "true"
 }
 
+aws_bool_issue["elb_alb_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    item := resource.Properties.LoadBalancerAttributes[_]
+    lower(item.Key) == "access_logs.s3.enabled"
+    lower(item.Value) != true
+}
+
 elb_alb_logs {
     lower(input.Resources[i].Type) == "aws::elasticloadbalancingv2::loadbalancer"
     not aws_issue["elb_alb_logs"]
+    not aws_bool_issue["elb_alb_logs"]
 }
 
 elb_alb_logs = false {
     aws_issue["elb_alb_logs"]
 }
 
+elb_alb_logs = false {
+    aws_bool_issue["elb_alb_logs"]
+}
+
 elb_alb_logs_err = "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balancer (ALB) with access log disabled" {
     aws_issue["elb_alb_logs"]
+} else = "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balancer (ALB) with access log disabled" {
+    aws_bool_issue["elb_alb_logs"]
 }
 
 elb_alb_logs_miss_err = "ELBv2 attribute LoadBalancerAttributes missing in the resource" {
