@@ -17,7 +17,7 @@ aws_issue["vpc_subnet_autoip"] {
 aws_bool_issue["vpc_subnet_autoip"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::subnet"
-    resource.Properties.MapPublicIpOnLaunch
+    resource.Properties.MapPublicIpOnLaunch == true
 }
 
 vpc_subnet_autoip {

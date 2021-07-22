@@ -24,7 +24,7 @@ aws_issue["redshift_encrypt_key"] {
 aws_issue["redshift_encrypt_key"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::redshift::cluster"
-    lower(resource.Properties.Encrypted) == "true"
+    lower(resource.Properties.Encrypted) == "false"
 }
 
 aws_bool_issue["redshift_encrypt_key"] {
@@ -89,7 +89,7 @@ aws_issue["redshift_public"] {
 aws_bool_issue["redshift_public"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::redshift::cluster"
-    resource.Properties.PubliclyAccessible
+    resource.Properties.PubliclyAccessible == true
 }
 
 redshift_public {

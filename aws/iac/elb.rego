@@ -442,6 +442,7 @@ elb_alb_logs {
     lower(input.Resources[i].Type) == "aws::elasticloadbalancingv2::loadbalancer"
     not aws_issue["elb_alb_logs"]
     not aws_bool_issue["elb_alb_logs"]
+    not aws_attribute_absence["elb_alb_logs"]
 }
 
 elb_alb_logs = false {
@@ -450,6 +451,10 @@ elb_alb_logs = false {
 
 elb_alb_logs = false {
     aws_bool_issue["elb_alb_logs"]
+}
+
+elb_alb_logs = false {
+    aws_attribute_absence["elb_alb_logs"]
 }
 
 elb_alb_logs_err = "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balancer (ALB) with access log disabled" {
@@ -459,7 +464,7 @@ elb_alb_logs_err = "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balanc
 }
 
 elb_alb_logs_miss_err = "ELBv2 attribute LoadBalancerAttributes missing in the resource" {
-    aws_issue["elb_alb_logs"]
+    aws_attribute_absence["elb_alb_logs"]
 }
 
 elb_alb_logs_metadata := {
