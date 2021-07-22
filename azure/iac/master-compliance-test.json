@@ -2429,7 +2429,7 @@
                             "id": "PR-AZR-0107-ARM",
                             "eval": "data.rule.KeyVault",
                             "message": "data.rule.KeyVault_err",
-                            "remediationDescription": "Make sure keyVault have (properties.accessPolicies.permissions.keys or properties.accessPolicies.permissions.secrets or properties.accessPolicies.permissions.certificates)",
+                            "remediationDescription": "Make sure keyVault has (properties.accessPolicies.permissions.keys or properties.accessPolicies.permissions.secrets or properties.accessPolicies.permissions.certificates)",
                             "remediationFunction": "PR-AZR-0107-ARM.py"
                         }
                     ],
@@ -2462,7 +2462,7 @@
                             "id": "PR-AZR-0108-ARM",
                             "eval": "data.rule.enableSoftDelete",
                             "message": "data.rule.enableSoftDelete_err",
-                            "remediationDescription": "Make sure keyVault have (properties.enableSoftDelete=true)",
+                            "remediationDescription": "Make sure keyVault has (properties.enableSoftDelete=true)",
                             "remediationFunction": "PR-AZR-0108-ARM.py"
                         }
                     ],
@@ -2493,7 +2493,7 @@
                             "id": "PR-AZR-0109-ARM",
                             "eval": "data.rule.enablePurgeProtection",
                             "message": "data.rule.enablePurgeProtection_err",
-                            "remediationDescription": "Make sure keyVault have (properties.enablePurgeProtection=true)",
+                            "remediationDescription": "Make sure keyVault has (properties.enablePurgeProtection=true)",
                             "remediationFunction": "PR-AZR-0109-ARM.py"
                         }
                     ],
@@ -2524,7 +2524,7 @@
                             "id": "PR-AZR-0125-ARM",
                             "eval": "data.rule.protocol",
                             "message": "data.rule.protocol_err",
-                            "remediationDescription": "Make sure ApplicationGateway have (properties.httpListeners.properties.protocol='Https')",
+                            "remediationDescription": "Make sure ApplicationGateway has (properties.httpListeners.properties.protocol='Https')",
                             "remediationFunction": "PR_AZR_0125_ARM.py"
                         }
                     ],
@@ -2555,7 +2555,7 @@
                             "id": "PR-AZR-0122-ARM",
                             "eval": "data.rule.region",
                             "message": "data.rule.region_err",
-                            "remediationDescription": "Make sure StorageAccount have (location='northeurope' or location='westeurope')",
+                            "remediationDescription": "Make sure StorageAccount has (location='northeurope' or location='westeurope')",
                             "remediationFunction": "PR-AZR-0122-ARM.py"
                         }
                     ],
@@ -2586,7 +2586,7 @@
                             "id": "PR-AZR-PR-AZR-0112-ARM-ARM",
                             "eval": "data.rule.blobService",
                             "message": "data.rule.blobService_err",
-                            "remediationDescription": "Make sure StorageAccount have ( properties.encryption.services with [ name='blob' and enabled=true ] )",
+                            "remediationDescription": "Make sure StorageAccount has ( properties.encryption.services with [ name='blob' and enabled=true ] )",
                             "remediationFunction": "PR-AZR-0112-ARM.py"
                         }
                     ],
@@ -2621,7 +2621,7 @@
                             "id": "PR-AZR-0113-ARM",
                             "eval": "data.rule.fileService",
                             "message": "data.rule.fileService_err",
-                            "remediationDescription": "Make sure StorageAccount have ( properties.encryption.services with [ name='file' and enabled=true ] )",
+                            "remediationDescription": "Make sure StorageAccount has ( properties.encryption.services with [ name='file' and enabled=true ] )",
                             "remediationFunction": "PR-AZR-0113-ARM.py"
                         }
                     ],
@@ -2656,7 +2656,7 @@
                             "id": "PR-AZR-0114-ARM",
                             "eval": "data.rule.keySource",
                             "message": "data.rule.keySource_err",
-                            "remediationDescription": "Make sure StorageAccount have (properties.encryption.keySource='Microsoft.Keyvault')",
+                            "remediationDescription": "Make sure StorageAccount has (properties.encryption.keySource='Microsoft.Keyvault')",
                             "remediationFunction": "PR-AZR-0114-ARM.py"
                         }
                     ],
@@ -2687,7 +2687,7 @@
                             "id": "PR-AZR-0111-ARM",
                             "eval": "data.rule.serverKeyType",
                             "message": "data.rule.serverKeyType_err",
-                            "remediationDescription": "Make sure SQLServer/encryptionProtector have ( properties.serverKeyType ='AzureKeyVault' )",
+                            "remediationDescription": "Make sure SQLServer/encryptionProtector has ( properties.serverKeyType ='AzureKeyVault' )",
                             "remediationFunction": "PR-AZR-0111-ARM.py"
                         }
                     ],
@@ -2718,7 +2718,7 @@
                             "id": "PR-AZR-0115-ARM",
                             "eval": "data.rule.geoRedundantBackup",
                             "message": "data.rule.geoRedundantBackup_err",
-                            "remediationDescription": "Make sure PostgreSQL have ( properties.storageProfile.geoRedundantBackup = 'Enabled' )",
+                            "remediationDescription": "Make sure PostgreSQL has ( properties.storageProfile.geoRedundantBackup = 'Enabled' )",
                             "remediationFunction": "PR-AZR-0115-ARM.py"
                         }
                     ],
@@ -2749,7 +2749,7 @@
                             "id": "PR-AZR-0124-ARM",
                             "eval": "data.rule.sslEnforcement",
                             "message": "data.rule.sslEnforcement_err",
-                            "remediationDescription": "Make sure PostgreSQL have ( properties.sslEnforcement = 'Enabled' )",
+                            "remediationDescription": "Make sure PostgreSQL has ( properties.sslEnforcement = 'Enabled' )",
                             "remediationFunction": "PR-AZR-0124-ARM.py"
                         }
                     ],
@@ -2780,7 +2780,7 @@
                             "id": "PR-AZR-0105-ARM",
                             "eval": "data.rule.tagsLength",
                             "message": "data.rule.tagsLength_err",
-                            "remediationDescription": "Make sure CosmosDbAccount have tags length() > 0",
+                            "remediationDescription": "Make sure CosmosDbAccount has ( tags length() > 0 )",
                             "remediationFunction": "PR-AZR-0105-ARM.py"
                         }
                     ],
