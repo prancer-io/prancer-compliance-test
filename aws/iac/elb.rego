@@ -87,8 +87,8 @@ aws_issue["elb_insecure_cipher"] {
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     policy := resource.Properties.Policies
     attribute := policy.Attributes[_]
-    lower(attribute.AttributeName) == lower(insecure_ciphers[_])
-    lower(attribute.AttributeValue) == "true"
+    lower(attribute.Name) == lower(insecure_ciphers[_])
+    lower(attribute.Value) == "true"
 }
 
 elb_insecure_cipher {
@@ -133,8 +133,8 @@ aws_issue["elb_insecure_protocol"] {
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     policy := resource.Properties.Policies
     attribute := policy.Attributes[_]
-    lower(attribute.AttributeName) == lower(insecure_ssl_protocols[_])
-    lower(attribute.AttributeValue) == "true"
+    lower(attribute.Name) == lower(insecure_ssl_protocols[_])
+    lower(attribute.Value) == "true"
 }
 
 elb_insecure_protocol {
@@ -312,11 +312,7 @@ elb_crosszone_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
 }
 
-#
 # PR-AWS-0067-CFR 
-# PR-AWS-0068-CFR
-#
-
 # There is only reference to security groups, no info about security group rules
 
 default elb_sec_group = null
