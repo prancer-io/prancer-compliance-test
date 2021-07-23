@@ -380,7 +380,7 @@ elb_sec_group_ingress = false {
     aws_ref_absence["elb_sec_group_ingress"]
 }
 
-elb_sec_group_ingress_err = "AWS Elastic Load Balancer (ELB) has security group with no inbound/outbound rules" {
+elb_sec_group_ingress_err = "AWS Elastic Load Balancer (ELB) has security group with no inbound rules" {
     aws_issue["elb_sec_group_ingress"]
 } else = "AWS Elastic Load Balancer (ELB) has security group Reference is missing" {
     aws_ref_absence["elb_sec_group_egress"]
