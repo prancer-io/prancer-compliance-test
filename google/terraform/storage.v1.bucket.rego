@@ -11,15 +11,20 @@ default storage_encrypt = null
 gc_attribute_absence["storage_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket"
-    resource.properties.encryption != null
-    not resource.properties.encryption[_].default_kms_key_name
+    not resource.properties.encryption
+}
+
+gc_attribute_absence["storage_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_storage_bucket"
+    count(resource.properties.encryption) = 0
 }
 
 gc_issue["storage_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket"
-    resource.properties.encryption != null
-    count(resource.properties.encryption[_].default_kms_key_name) == 0
+    encryption := resource.properties.encryption[_]
+    count(encryption.default_kms_key_name) == 0
 }
 
 storage_encrypt {
@@ -68,11 +73,17 @@ gc_attribute_absence["storage_versioning"] {
     not resource.properties.versioning
 }
 
+gc_attribute_absence["storage_versioning"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_storage_bucket"
+    count(resource.properties.versioning) == 0
+}
+
 gc_issue["storage_versioning"] {
     resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket"
-    resource.properties.versioning != null
-    resource.properties.versioning[_].enabled != true
+    versioning := resource.properties.versioning[_]
+    versioning.enabled != true
 }
 
 storage_versioning {
@@ -115,23 +126,34 @@ storage_versioning_metadata := {
 
 default storage_logging = null
 
+gc_attribute_absence["storage_logging"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_storage_bucket"
+    not resource.properties.logging
+}
+
+gc_attribute_absence["storage_logging"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_storage_bucket"
+    count(resource.properties.logging) == 0
+}
+
 gc_issue["storage_logging"] {
     resource := input.resources[_]
     lower(resource.type) == "google_storage_bucket"
-    resource.properties.logging != null
-    not resource.properties.logging[_].log_bucket
+    logging := resource.properties.logging[_]
+    not logging.log_bucket
 }
 
 storage_logging {
     lower(input.resources[_].type) == "google_storage_bucket"
     not gc_issue["storage_logging"]
+    not gc_attribute_absence["storage_logging"]
 }
 
 storage_logging = false {
     gc_issue["storage_logging"]
-}
-
-storage_logging_err = "Storage Bucket does not have Access and Storage Logging enabled" {
+} else = "Storage Bucket does not have Access and Storage Logging enabled" {
     gc_issue["storage_logging"]
 }
 

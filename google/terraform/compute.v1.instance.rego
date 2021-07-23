@@ -119,24 +119,41 @@ vm_serial_port_metadata := {
 
 default vm_pre_emptible = null
 
+gc_attribute_absence["vm_pre_emptible"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_compute_instance"
+    not resource.properties.scheduling
+}
+
+gc_attribute_absence["vm_pre_emptible"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_compute_instance"
+    count(resource.properties.scheduling) == 0
+}
+
 gc_issue["vm_pre_emptible"] {
     resource := input.resources[_]
     lower(resource.type) == "google_compute_instance"
-    resource.properties.scheduling != null
-    resource.properties.scheduling[_].preemptible == true
+    scheduling := resource.properties.scheduling[_]
+    scheduling.preemptible == true
 }
 
 vm_pre_emptible {
     lower(input.resources[_].type) == "google_compute_instance"
     not gc_issue["vm_pre_emptible"]
+    not gc_attribute_absence["vm_pre_emptible"]
 }
 
 vm_pre_emptible = false {
     gc_issue["vm_pre_emptible"]
+} else = false {
+    gc_attribute_absence["vm_pre_emptible"]
 }
 
 vm_pre_emptible_err = "VM Instances enabled with Pre-Emptible termination" {
     gc_issue["vm_pre_emptible"]
+} else = "VM Instances attribute scheduling missing in the resource" {
+    gc_attribute_absence["vm_pre_emptible"]
 }
 
 vm_pre_emptible_metadata := {

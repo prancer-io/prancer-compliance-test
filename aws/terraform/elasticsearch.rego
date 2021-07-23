@@ -60,24 +60,43 @@ esearch_vpc_metadata := {
 
 default esearch_encrypt = null
 
+aws_attribute_absence["esearch_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    not resource.properties.encrypt_at_rest
+}
+
 aws_issue["esearch_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_elasticsearch_domain"
-    resource.properties.encrypt_at_rest != null
-    not resource.properties.encrypt_at_rest[_].enabled
+    count(resource.properties.encrypt_at_rest) == 0
+}
+
+aws_issue["esearch_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    encrypt_at_rest := resource.properties.encrypt_at_rest[_]
+    not encrypt_at_rest.enabled
 }
 
 esearch_encrypt {
     lower(input.resources[_].type) == "aws_elasticsearch_domain"
     not aws_issue["esearch_encrypt"]
+    not aws_attribute_absence["esearch_encrypt"]
 }
 
 esearch_encrypt = false {
     aws_issue["esearch_encrypt"]
 }
 
+esearch_encrypt = false {
+    aws_attribute_absence["esearch_encrypt"]
+}
+
 esearch_encrypt_err = "AWS Elasticsearch domain Encryption for data at rest is disabled" {
     aws_issue["esearch_encrypt"]
+} else = "AWS Elasticsearch domain Encryption for data missing" {
+    aws_attribute_absence["esearch_encrypt"]
 }
 
 esearch_encrypt_metadata := {
@@ -101,8 +120,14 @@ default esearch_master = null
 aws_issue["esearch_master"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_elasticsearch_domain"
-    resource.properties.cluster_config != null
-    not resource.properties.cluster_config[_].dedicated_master_enabled
+    count(resource.properties.cluster_config) == 0
+}
+
+aws_issue["esearch_master"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    cluster_config := resource.properties.cluster_config
+    not cluster_config.dedicated_master_enabled
 }
 
 esearch_master {

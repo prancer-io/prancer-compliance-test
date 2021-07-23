@@ -31,7 +31,6 @@ aws_issue["lambda_env"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_lambda_function"
     resource.properties.environment
-    resource.properties.kms_key_arn != null
     not startswith(lower(resource.properties.kms_key_arn), "arn:")
 }
 
@@ -78,15 +77,20 @@ default lambda_vpc = null
 aws_attribute_absence["lambda_vpc"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_lambda_function"
-    resource.properties.vpc_config != null
-    not resource.properties.vpc_config[_].subnet_ids
+    not resource.properties.vpc_config
+}
+
+aws_attribute_absence["lambda_vpc"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_lambda_function"
+    count(resource.properties.vpc_config) == 0
 }
 
 aws_issue["lambda_vpc"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_lambda_function"
-    resource.properties.vpc_config != null
-    count(resource.properties.vpc_config[_].subnet_ids) == 0
+    vpc_config := resource.properties.vpc_config[_]
+    count(vpc_config.subnet_ids) == 0
 }
 
 lambda_vpc {
@@ -132,15 +136,27 @@ default lambda_tracing = null
 aws_attribute_absence["lambda_tracing"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_lambda_function"
-    resource.properties.tracing_config != null
-    not resource.properties.tracing_config[_].mode
+    not resource.properties.tracing_config
+}
+
+aws_attribute_absence["lambda_tracing"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_lambda_function"
+    count(resource.properties.tracing_config) == 0
+}
+
+aws_attribute_absence["lambda_tracing"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_lambda_function"
+    tracing_config := resource.properties.tracing_config[_]
+    not tracing_config.mode
 }
 
 aws_issue["lambda_tracing"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_lambda_function"
-    resource.properties.tracing_config != null
-    lower(resource.properties.tracing_config[_].mode) == "passthrough"
+    tracing_config := resource.properties.tracing_config[_]
+    lower(tracing_config.mode) == "passthrough"
 }
 
 lambda_tracing {
@@ -159,9 +175,7 @@ lambda_tracing = false {
 
 lambda_tracing_err = "AWS Lambda functions with tracing not enabled" {
     aws_issue["lambda_tracing"]
-}
-
-lambda_tracing_miss_err = "Lambda function attribute tracing_config.mode missing in the resource" {
+} else = "Lambda function attribute tracing_config.mode missing in the resource" {
     aws_attribute_absence["lambda_tracing"]
 }
 

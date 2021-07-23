@@ -11,8 +11,20 @@ default gw_tls = null
 azure_attribute_absence["gw_tls"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
-    resource.properties.ssl_policy != null
-    not resource.properties.ssl_policy[_].min_protocol_version
+    not resource.properties.ssl_policy
+}
+
+azure_attribute_absence["gw_tls"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_application_gateway"
+    count(resource.properties.ssl_policy) == 0
+}
+
+azure_attribute_absence["gw_tls"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_application_gateway"
+    ssl_policy := resource.properties.ssl_policy[_]
+    not ssl_policy.min_protocol_version
 }
 
 azure_issue["gw_tls"] {
@@ -66,15 +78,20 @@ default gw_waf = null
 azure_attribute_absence["gw_waf"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
-    resource.properties.waf_configuration != null
-    not resource.properties.waf_configuration[_].enabled
+    not resource.properties.waf_configuration
+}
+
+azure_attribute_absence["gw_waf"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_application_gateway"
+    count(resource.properties.waf_configuration) == 0
 }
 
 azure_issue["gw_waf"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
-    resource.properties.waf_configuration != null
-    resource.properties.waf_configuration[_].enabled != true
+    waf_configuration := resource.properties.waf_configuration[_]
+    waf_configuration[_].enabled != true
 }
 
 gw_waf {
@@ -85,17 +102,13 @@ gw_waf {
 
 gw_waf = false {
     azure_issue["gw_waf"]
-}
-
-gw_waf = false {
+} else = false {
     azure_attribute_absence["gw_waf"]
 }
 
 gw_waf_err = "Azure Application Gateway does not have the WAF enabled" {
     azure_issue["gw_waf"]
-}
-
-gw_waf_miss_err = "App gateway attribute waf_configuration missing in the resource" {
+} else = "App gateway attribute waf_configuration missing in the resource" {
     azure_attribute_absence["gw_waf"]
 }
 

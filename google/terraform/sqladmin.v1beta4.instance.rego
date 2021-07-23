@@ -53,7 +53,6 @@ sql_labels_metadata := {
 
 default sql_binary_logs = null
 
-
 gc_attribute_absence["sql_binary_logs"] {
     resource := input.resources[_]
     lower(resource.type) == "google_sql_database_instance"
@@ -64,8 +63,9 @@ gc_issue["sql_binary_logs"] {
     resource := input.resources[_]
     lower(resource.type) == "google_sql_database_instance"
     contains(lower(resource.properties.databaseVersion), "mysql")
-    resource.properties.settings != null
-    not resource.properties.settings[_].backup_configuration[_].binary_log_enabled
+    settings := resource.properties.settings[_]
+    backup_configuration := settings.backup_configuration[_]
+    not backup_configuration.binary_log_enabled
 }
 
 sql_binary_logs {
@@ -76,17 +76,13 @@ sql_binary_logs {
 
 sql_binary_logs = false {
     gc_issue["sql_binary_logs"]
-}
-
-sql_binary_logs = false {
+} else = false {
     gc_attribute_absence["sql_binary_logs"]
 }
 
 sql_binary_logs_err = "SQL DB Instance backup Binary logs configuration is not enabled" {
     gc_issue["sql_binary_logs"]
-}
-
-sql_binary_logs_miss_err = "GCP DB Instance attribute databaseVersion missing in the resource" {
+} else = "GCP DB Instance attribute databaseVersion missing in the resource" {
     gc_attribute_absence["sql_binary_logs"]
 }
 
@@ -108,19 +104,31 @@ sql_binary_logs_metadata := {
 
 default sql_backup = null
 
+gc_attribute_absence["sql_backup"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_sql_database_instance"
+    not resource.properties.settings
+}
 
 gc_attribute_absence["sql_backup"] {
     resource := input.resources[_]
     lower(resource.type) == "google_sql_database_instance"
-    resource.properties.settings != null
-    not resource.properties.settings[_].backup_configuration
+    count(resource.properties.settings) = 0
+}
+
+gc_attribute_absence["sql_backup"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_sql_database_instance"
+    settings := resource.properties.settings[_]
+    not settings.backup_configuration
 }
 
 gc_issue["sql_backup"] {
     resource := input.resources[_]
     lower(resource.type) == "google_sql_database_instance"
-    resource.properties.settings != null
-    not resource.properties.settings[_].backup_configuration[_].enabled
+    settings := resource.properties.settings[_]
+    backup_configuration := settings.backup_configuration[_]
+    not backup_configuration.enabled
 }
 
 sql_backup {
@@ -139,9 +147,7 @@ sql_backup = false {
 
 sql_backup_err = "SQL DB instance backup configuration is not enabled" {
     gc_issue["sql_backup"]
-}
-
-sql_backup_miss_err = "GCP DB Instance attribute backupConfiguration missing in the resource" {
+} else = "GCP DB Instance attribute backupConfiguration missing in the resource" {
     gc_attribute_absence["sql_backup"]
 }
 
@@ -163,19 +169,32 @@ sql_backup_metadata := {
 
 default sql_ssl = null
 
+gc_attribute_absence["sql_ssl"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_sql_database_instance"
+    not resource.properties.settings
+}
 
 gc_attribute_absence["sql_ssl"] {
     resource := input.resources[_]
     lower(resource.type) == "google_sql_database_instance"
-    resource.properties.settings != null
-    not resource.properties.settings[_].ip_configuration[_].require_ssl
+    count(resource.properties.settings)
+}
+
+gc_attribute_absence["sql_ssl"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_sql_database_instance"
+    settings := resource.properties.settings[_]
+    ip_configuration := settings.ip_configuration[_]
+    not ip_configuration.require_ssl
 }
 
 gc_issue["sql_ssl"] {
     resource := input.resources[_]
     lower(resource.type) == "google_sql_database_instance"
-    resource.properties.settings != null
-    resource.properties.settings[_].ip_configuration[_].require_ssl != true
+    settings := resource.properties.settings[_]
+    ip_configuration := settings.ip_configuration[_]
+    ip_configuration.require_ssl != true
 }
 
 sql_ssl {
@@ -194,9 +213,7 @@ sql_ssl = false {
 
 sql_ssl_err = "SQL Instances do not have SSL configured" {
     gc_issue["sql_ssl"]
-}
-
-sql_ssl_miss_err = "GCP DB Instance attribute ip_configuration.requireSsl missing in the resource" {
+} else = "GCP DB Instance attribute ip_configuration.requireSsl missing in the resource" {
     gc_attribute_absence["sql_ssl"]
 }
 
