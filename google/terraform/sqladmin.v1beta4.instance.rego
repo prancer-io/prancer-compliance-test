@@ -11,15 +11,15 @@ default sql_labels = null
 gc_issue["sql_labels"] {
     resource := input.resources[_]
     lower(resource.type) == "google_sql_database_instance"
-    resource.properties.settings != null
-    not resource.properties.settings[_].userLabels
+    settings := resource.properties.settings[_]
+    not settings.userLabels
 }
 
 gc_issue["sql_labels"] {
     resource := input.resources[_]
     lower(resource.type) == "google_sql_database_instance"
-    resource.properties.settings != null
-    count(resource.properties.settings[_].userLabels) == 0
+    settings := resource.properties.settings[_]
+    count(settings.userLabels) == 0
 }
 
 sql_labels {

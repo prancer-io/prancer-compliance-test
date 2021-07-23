@@ -107,6 +107,7 @@ aws_attribute_absence["sqs_encrypt"] {
 aws_issue["sqs_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_sqs_queue"
+    resource.properties.kms_master_key_id != null
     count(resource.properties.kms_master_key_id) == 0
 }
 

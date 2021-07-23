@@ -12,29 +12,22 @@ default s3_accesslog = null
 aws_attribute_absence["s3_accesslog"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_s3_bucket"
-    resource.properties.logging != null
-    not resource.properties.logging[_].target_bucket
+    logging := resource.properties.logging[_]
+    not logging.target_bucket
 }
 
 aws_attribute_absence["s3_accesslog"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_s3_bucket"
-    resource.properties.logging != null
-    not resource.properties.logging[_].target_prefix
+    logging := resource.properties.logging[_]
+    not logging.target_prefix
 }
 
 aws_issue["s3_accesslog"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_s3_bucket"
-    resource.properties.logging != null
-    count(resource.properties.logging[_].target_bucket) == 0
-}
-
-aws_issue["s3_accesslog"] {
-    resource := input.resources[_]
-    lower(resource.type) == "aws_s3_bucket"
-    resource.properties.logging != null
-    count(resource.properties.logging[_].target_prefix) == 0
+    logging := resource.properties.logging[_]
+    count(logging.target_bucket) == 0
 }
 
 s3_accesslog {

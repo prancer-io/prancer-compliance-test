@@ -108,6 +108,7 @@ aws_attribute_absence["sns_encrypt"] {
 aws_issue["sns_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_sns_topic"
+    resource.properties.kms_master_key_id != null
     count(resource.properties.kms_master_key_id) == 0
 }
 

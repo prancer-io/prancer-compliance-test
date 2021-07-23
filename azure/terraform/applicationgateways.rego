@@ -30,9 +30,9 @@ azure_attribute_absence["gw_tls"] {
 azure_issue["gw_tls"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
-    resource.properties.ssl_policy != null
-    lower(resource.properties.ssl_policy[_].min_protocol_version) != "tlsv1_2"
-    lower(resource.properties.ssl_policy[_].min_protocol_version) != "tlsv1_3"
+    ssl_policy := resource.properties.ssl_policy[_]
+    lower(ssl_policy.min_protocol_version) != "tlsv1_2"
+    lower(ssl_policy.min_protocol_version) != "tlsv1_3"
 }
 
 gw_tls {

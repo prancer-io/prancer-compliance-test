@@ -555,9 +555,9 @@ aws_attribute_absence["cf_s3_origin"] {
 aws_issue["cf_s3_origin"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    resource.properties.origin != null
-    resource.properties.origin[_].s3_origin_config != null
-    count(resource.properties.origin[_].s3_origin_config[_].origin_access_identity) == 0
+    origin := resource.properties.origin[_]
+    s3_origin_config := origin.s3_origin_config[_]
+    count(s3_origin_config.origin_access_identity) == 0
 }
 
 cf_s3_origin {
