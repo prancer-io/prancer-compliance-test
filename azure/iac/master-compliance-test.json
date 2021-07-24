@@ -2524,7 +2524,7 @@
                             "id": "PR-AZR-0125-ARM",
                             "eval": "data.rule.protocol",
                             "message": "data.rule.protocol_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.Network/applicationGateways\" make sure you have added properties.protocol under properties.httpListeners. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.Network/applicationGateways\" make sure properties.protocol under properties.httpListeners exists and value is set to \"Https\". \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways for details.",
                             "remediationFunction": "PR_AZR_0125_ARM.py"
                         }
                     ],
