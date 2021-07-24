@@ -21,7 +21,7 @@ serverKeyType = false {
     azure_issue["serverKeyType"]
 }
 
-serverKeyType_err = "Ensure SQL server's TDE protector is encrypted with Customer-managed key" {
+serverKeyType_err = "SQL server's TDE protector is not encrypted with Customer-managed key." {
     azure_issue["serverKeyType"]
 }
 

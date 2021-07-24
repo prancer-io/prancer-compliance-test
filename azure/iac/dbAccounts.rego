@@ -20,8 +20,8 @@ azure_issue ["tagsLength"] {
 
 tagsLength {
     lower(input.resources[_].type) == "microsoft.documentdb/databaseaccounts"
-    not azure_issue["tagsLength"]
     not azure_attribute_absence["tagsLength"]
+    not azure_issue["tagsLength"]
 }
 
 tagsLength = false {
@@ -33,11 +33,11 @@ tagsLength = false {
 }
 
 
-tagsLength_err = "Ensure that Cosmos DB Account has an associated tag" {
+tagsLength_err = "Resource 'Cosmos DB Account' does not have any associated tag. Please add one." {
     azure_issue["tagsLength"]
 }
 
-tagsLength_miss_err = "Ensure that Cosmos DB Account has an associated tag" {
+tagsLength_miss_err = "property tags of type Object is absent from resource of type microsoft.documentdb/databaseaccounts" {
     azure_attribute_absence["tagsLength"]
 }
 

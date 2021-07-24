@@ -2429,7 +2429,7 @@
                             "id": "PR-AZR-0107-ARM",
                             "eval": "data.rule.KeyVault",
                             "message": "data.rule.KeyVault_err",
-                            "remediationDescription": "Make sure keyVault has (properties.accessPolicies.permissions.keys or properties.accessPolicies.permissions.secrets or properties.accessPolicies.permissions.certificates)",
+                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure you have added either permissions.keys or permissions.secrets or permissions.certificates under each AccessPolicyEntry of properties.accessPolicies. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json for details.",
                             "remediationFunction": "PR-AZR-0107-ARM.py"
                         }
                     ],
@@ -2462,7 +2462,7 @@
                             "id": "PR-AZR-0108-ARM",
                             "eval": "data.rule.enableSoftDelete",
                             "message": "data.rule.enableSoftDelete_err",
-                            "remediationDescription": "Make sure keyVault has (properties.enableSoftDelete=true)",
+                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure properties.enableSoftDelete exists and its value set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json for details.",
                             "remediationFunction": "PR-AZR-0108-ARM.py"
                         }
                     ],
@@ -2493,7 +2493,7 @@
                             "id": "PR-AZR-0109-ARM",
                             "eval": "data.rule.enablePurgeProtection",
                             "message": "data.rule.enablePurgeProtection_err",
-                            "remediationDescription": "Make sure keyVault has (properties.enablePurgeProtection=true)",
+                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure properties.enablePurgeProtection exists and value is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json for details.",
                             "remediationFunction": "PR-AZR-0109-ARM.py"
                         }
                     ],
@@ -2524,7 +2524,7 @@
                             "id": "PR-AZR-0125-ARM",
                             "eval": "data.rule.protocol",
                             "message": "data.rule.protocol_err",
-                            "remediationDescription": "Make sure ApplicationGateway has (properties.httpListeners.properties.protocol='Https')",
+                            "remediationDescription": "In Resource of type \"Microsoft.Network/applicationGateways\" make sure you have added properties.protocol under properties.httpListeners. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways for details.",
                             "remediationFunction": "PR_AZR_0125_ARM.py"
                         }
                     ],
@@ -2555,7 +2555,7 @@
                             "id": "PR-AZR-0122-ARM",
                             "eval": "data.rule.region",
                             "message": "data.rule.region_err",
-                            "remediationDescription": "Make sure StorageAccount has (location='northeurope' or location='westeurope')",
+                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure location is set to northeurope or westeurope. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts for details.",
                             "remediationFunction": "PR-AZR-0122-ARM.py"
                         }
                     ],
@@ -2586,7 +2586,7 @@
                             "id": "PR-AZR-PR-AZR-0112-ARM-ARM",
                             "eval": "data.rule.blobService",
                             "message": "data.rule.blobService_err",
-                            "remediationDescription": "Make sure StorageAccount has ( properties.encryption.services with [ name='blob' and enabled=true ] )",
+                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure properties.encryption.services.blob exists and blob.enabled is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts for details.",
                             "remediationFunction": "PR-AZR-0112-ARM.py"
                         }
                     ],
@@ -2621,7 +2621,7 @@
                             "id": "PR-AZR-0113-ARM",
                             "eval": "data.rule.fileService",
                             "message": "data.rule.fileService_err",
-                            "remediationDescription": "Make sure StorageAccount has ( properties.encryption.services with [ name='file' and enabled=true ] )",
+                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure properties.encryption.services.file exists and file.enabled is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts for details.",
                             "remediationFunction": "PR-AZR-0113-ARM.py"
                         }
                     ],
@@ -2656,7 +2656,7 @@
                             "id": "PR-AZR-0114-ARM",
                             "eval": "data.rule.keySource",
                             "message": "data.rule.keySource_err",
-                            "remediationDescription": "Make sure StorageAccount has (properties.encryption.keySource='Microsoft.Keyvault')",
+                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure properties.encryption.keySource exists and value is set to \"Microsoft.Keyvault\". \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts for details.",
                             "remediationFunction": "PR-AZR-0114-ARM.py"
                         }
                     ],
@@ -2687,7 +2687,7 @@
                             "id": "PR-AZR-0111-ARM",
                             "eval": "data.rule.serverKeyType",
                             "message": "data.rule.serverKeyType_err",
-                            "remediationDescription": "Make sure SQLServer/encryptionProtector has ( properties.serverKeyType ='AzureKeyVault' )",
+                            "remediationDescription": "In Resource of type \"Microsoft.sql/servers/encryptionprotector\" make sure properties.serverKeyType is set to \"AzureKeyVault\". \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/encryptionprotector for details.",
                             "remediationFunction": "PR-AZR-0111-ARM.py"
                         }
                     ],
@@ -2718,12 +2718,12 @@
                             "id": "PR-AZR-0115-ARM",
                             "eval": "data.rule.geoRedundantBackup",
                             "message": "data.rule.geoRedundantBackup_err",
-                            "remediationDescription": "Make sure PostgreSQL has ( properties.storageProfile.geoRedundantBackup = 'Enabled' )",
+                            "remediationDescription": "In Resource of type \"Microsoft.dbforpostgresql/servers\" make sure properties.storageProfile.geoRedundantBackup exists and value is set to \"Enabled\". \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers for details.",
                             "remediationFunction": "PR-AZR-0115-ARM.py"
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure that Geo Redundant Backups is enabled on PostgreSQL",
+                    "title": "Ensure Geo-redundant backup is enabled on PostgreSQL database server.",
                     "description": "Azure Database for PostgreSQL provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage.",
                     "tags": [
                         {
@@ -2749,12 +2749,12 @@
                             "id": "PR-AZR-0124-ARM",
                             "eval": "data.rule.sslEnforcement",
                             "message": "data.rule.sslEnforcement_err",
-                            "remediationDescription": "Make sure PostgreSQL has ( properties.sslEnforcement = 'Enabled' )",
+                            "remediationDescription": "In Resource of type \"Microsoft.dbforpostgresql/servers\" make sure properties.sslEnforcement exists and value is set to \"Enabled\". \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers for details.",
                             "remediationFunction": "PR-AZR-0124-ARM.py"
                         }
                     ],
                     "severity": "High",
-                    "title": "Ensure 'Enforce SSL connection' is set to 'ENABLED' for PostgreSQL Database Server",
+                    "title": "Ensure ssl enforcement is enabled on PostgreSQL Database Server.",
                     "description": "Enable SSL connection on PostgreSQL Servers. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application.",
                     "tags": [
                         {
@@ -2780,7 +2780,7 @@
                             "id": "PR-AZR-0105-ARM",
                             "eval": "data.rule.tagsLength",
                             "message": "data.rule.tagsLength_err",
-                            "remediationDescription": "Make sure CosmosDbAccount has ( tags length() > 0 )",
+                            "remediationDescription": "In Resource of type \"Microsoft.documentdb/databaseaccounts\" make sure Cosmos DB Account has an associated tag. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.documentdb/databaseaccounts for details.",
                             "remediationFunction": "PR-AZR-0105-ARM.py"
                         }
                     ],

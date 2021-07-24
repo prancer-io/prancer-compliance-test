@@ -32,11 +32,11 @@ geoRedundantBackup = false {
     azure_issue["geoRedundantBackup"]
 }
 
-geoRedundantBackup_err = "Ensure that Geo Redundant Backups is enabled on PostgreSQL" {
+geoRedundantBackup_err = "Either Geo-redundant backup is absent or disabled on PostgreSQL database server." {
     azure_issue["geoRedundantBackup"]
 }
 
-geoRedundantBackup_miss_err = "Ensure that Geo Redundant Backups is enabled on PostgreSQL" {
+geoRedundantBackup_miss_err = "Property geoRedundantBackup of type enum is absent from resource of type \"Microsoft.DBforPostgreSQL/servers\"" {
     azure_attribute_absence["geoRedundantBackup"]
 }
 
@@ -45,7 +45,7 @@ geoRedundantBackup_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Ensure that Geo Redundant Backups is enabled on PostgreSQL",
+    "Policy Title": "Ensure Geo-redundant backup is enabled on PostgreSQL database server.",
     "Policy Description": "Azure Database for PostgreSQL provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage.",
     "Resource Type": "microsoft.dbforpostgresql/servers",
     "Policy Help URL": "",
@@ -73,8 +73,8 @@ azure_issue ["sslEnforcement"] {
 
 sslEnforcement {
     lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
-    not azure_issue["sslEnforcement"]
     not azure_attribute_absence["sslEnforcement"]
+    not azure_issue["sslEnforcement"]
 }
 
 sslEnforcement = false {
@@ -86,11 +86,11 @@ sslEnforcement = false {
 }
 
 
-sslEnforcement_err = "Ensure 'Enforce SSL connection' is set to 'ENABLED' for PostgreSQL Database Server" {
+sslEnforcement_err = "Either ssl enforcement is absent or disabled on PostgreSQL Database Server." {
     azure_issue["sslEnforcement"]
 }
 
-sslEnforcement_miss_err = "Ensure 'Enforce SSL connection' is set to 'ENABLED' for PostgreSQL Database Server" {
+sslEnforcement_miss_err = "Property sslEnforcement of type enum is absent from resource of type \"Microsoft.DBforPostgreSQL/servers\"" {
     azure_attribute_absence["sslEnforcement"]
 }
 
@@ -99,7 +99,7 @@ sslEnforcement_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Ensure 'Enforce SSL connection' is set to 'ENABLED' for PostgreSQL Database Server",
+    "Policy Title": "Ensure ssl enforcement is enabled on PostgreSQL Database Server.",
     "Policy Description": "Enable SSL connection on PostgreSQL Servers. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application.",
     "Resource Type": "microsoft.dbforpostgresql/servers",
     "Policy Help URL": "",
