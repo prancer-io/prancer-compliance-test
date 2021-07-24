@@ -62,7 +62,7 @@ availabilitySet = false {
 }
 
 
-availabilitySet_err = "Ensure that Azure Virtual Machine is assigned to an availability set" {
+availabilitySet_err = "Azure Virtual Machine is not assigned to an availability set" {
     azure_issue["availabilitySet"]
 }
 
