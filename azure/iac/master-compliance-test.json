@@ -2462,7 +2462,7 @@
                             "id": "PR-AZR-0108-ARM",
                             "eval": "data.rule.enableSoftDelete",
                             "message": "data.rule.enableSoftDelete_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure properties.enableSoftDelete exists and its value set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure properties.enableSoftDelete exists and value is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json for details.",
                             "remediationFunction": "PR-AZR-0108-ARM.py"
                         }
                     ],
