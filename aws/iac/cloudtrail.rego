@@ -82,7 +82,7 @@ ct_log_validation_metadata := {
 
 default ct_master_key = null
 
-aws_attribute_absence["ct_master_key"] {
+aws_issue["ct_master_key"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudtrail::trail"
     not resource.Properties.KMSKeyId
@@ -97,23 +97,14 @@ aws_issue["ct_master_key"] {
 ct_master_key {
     lower(input.Resources[i].Type) == "aws::cloudtrail::trail"
     not aws_issue["ct_master_key"]
-    not aws_attribute_absence["ct_master_key"]
 }
 
 ct_master_key = false {
     aws_issue["ct_master_key"]
-}
-
-ct_master_key = false {
-    aws_attribute_absence["ct_master_key"]
 }
 
 ct_master_key_err = "AWS CloudTrail logs are not encrypted using Customer Master Keys (CMKs)" {
     aws_issue["ct_master_key"]
-}
-
-ct_master_key_miss_err = "CloudTrail attribute KMSKeyId missing in the resource" {
-    aws_attribute_absence["ct_master_key"]
 }
 
 ct_master_key_metadata := {
@@ -134,38 +125,31 @@ ct_master_key_metadata := {
 
 default ct_cloudwatch = null
 
-aws_attribute_absence["ct_cloudwatch"] {
+aws_issue["ct_cloudwatch"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudtrail::trail"
     not resource.Properties.CloudWatchLogsRoleArn
+    not resource.Properties.CloudWatchLogsLogGroupArn
 }
 
 aws_issue["ct_cloudwatch"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudtrail::trail"
     count(resource.Properties.CloudWatchLogsRoleArn) == 0
+    count(resource.Properties.CloudWatchLogsLogGroupArn) == 0
 }
 
 ct_cloudwatch {
     lower(input.Resources[i].Type) == "aws::cloudtrail::trail"
     not aws_issue["ct_cloudwatch"]
-    not aws_attribute_absence["ct_cloudwatch"]
 }
 
 ct_cloudwatch = false {
     aws_issue["ct_cloudwatch"]
-}
-
-ct_cloudwatch = false {
-    aws_attribute_absence["ct_cloudwatch"]
 }
 
 ct_cloudwatch_err = "CloudTrail trail is not integrated with CloudWatch Log" {
     aws_issue["ct_cloudwatch"]
-}
-
-ct_cloudwatch_miss_err = "CloudTrail attribute CloudWatchLogsRoleArn missing in the resource" {
-    aws_attribute_absence["ct_cloudwatch"]
 }
 
 ct_cloudwatch_metadata := {
