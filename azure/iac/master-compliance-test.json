@@ -360,6 +360,37 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_DBACCOUNTS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(databaseaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0105-ARM",
+                            "eval": "data.rule.tagsLength",
+                            "message": "data.rule.tagsLength_err",
+                            "remediationDescription": "In Resource of type \"Microsoft.documentdb/databaseaccounts\" make sure Cosmos DB Account has an associated tag. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.documentdb/databaseaccounts for details.",
+                            "remediationFunction": "PR-AZR-0105-ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that Cosmos DB Account has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to Azure Cosmos DB resources to better organize them. They are particularly useful when you have many resources of the same type, which in the case of Azure Cosmos DB, is a database. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag. Two of the key advantages of tagging your Cosmos DB are: Grouping and Filtering and Cost allocation.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_DB_ADMINISTRATORS",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -2872,37 +2903,6 @@
                     "severity": "High",
                     "title": "Ensure ssl enforcement is enabled on PostgreSQL Database Server.",
                     "description": "Enable SSL connection on PostgreSQL Servers. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "Best Practices"
-                            ],
-                            "service": [
-                                "arm"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_DBACCOUNTS",
-                    "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(dbAccounts.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-0105-ARM",
-                            "eval": "data.rule.tagsLength",
-                            "message": "data.rule.tagsLength_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.documentdb/databaseaccounts\" make sure Cosmos DB Account has an associated tag. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.documentdb/databaseaccounts for details.",
-                            "remediationFunction": "PR-AZR-0105-ARM.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure that Cosmos DB Account has an associated tag",
-                    "description": "Tags are key-value pairs that you attach to Azure Cosmos DB resources to better organize them. They are particularly useful when you have many resources of the same type, which in the case of Azure Cosmos DB, is a database. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag. Two of the key advantages of tagging your Cosmos DB are: Grouping and Filtering and Cost allocation.",
                     "tags": [
                         {
                             "cloud": "git",
