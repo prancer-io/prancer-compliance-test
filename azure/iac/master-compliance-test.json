@@ -186,6 +186,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_AKS_6",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-00101-ARM",
+                            "eval": "data.rule.aks_aad_azure_rbac",
+                            "message": "data.rule.aks_aad_azure_rbac_err",
+                            "remediationDescription": "Make sure aadProfile property of type object exist in ARM template with boolean managed = true and enableAzureRBAC = true as child property. Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters?tabs=json#managedclusteraadprofile-object for details.",
+                            "remediationFunction": "PR_AZR_00101_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Managed Azure AD RBAC for AKS cluster should be enabled",
+                    "description": "Azure Kubernetes Service (AKS) can be configured to use Azure Active Directory (AD) for user authentication. In this configuration, you sign in to an AKS cluster using an Azure AD authentication token. You can also configure Kubernetes role-based access control (Kubernetes RBAC) to limit access to cluster resources based a user's identity or group membership. Visit https://docs.microsoft.com/en-us/azure/aks/azure-ad-rbac for details.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_APPLICATION_GATEWAYS_1",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"

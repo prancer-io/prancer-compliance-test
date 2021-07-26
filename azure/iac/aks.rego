@@ -261,3 +261,59 @@ aks_rbac_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
 }
+
+#
+# 
+#
+
+default aks_aad_azure_rbac = null
+
+azure_issue["aks_aad_azure_rbac"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.aadProfile
+}
+
+azure_issue["aks_aad_azure_rbac"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.aadProfile.managed
+}
+
+azure_issue["aks_aad_azure_rbac"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.aadProfile.enableAzureRBAC
+}
+
+azure_issue["aks_aad_azure_rbac"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    resource.properties.aadProfile.managed != true
+    resource.properties.aadProfile.enableAzureRBAC != true
+}
+
+aks_aad_azure_rbac {
+    lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
+    not azure_issue["aks_aad_azure_rbac"]
+}
+
+aks_aad_azure_rbac = false {
+    azure_issue["aks_aad_azure_rbac"]
+}
+
+aks_aad_azure_rbac_err = "Managed Azure AD RBAC for AKS cluster is not enabled." {
+    azure_issue["aks_aad_azure_rbac"]
+}
+
+aks_aad_azure_rbac_metadata := {
+    "Policy Code": "PR-AZR-00101-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Managed Azure AD RBAC for AKS cluster should be enabled",
+    "Policy Description": "Azure Kubernetes Service (AKS) can be configured to use Azure Active Directory (AD) for user authentication. In this configuration, you sign in to an AKS cluster using an Azure AD authentication token. You can also configure Kubernetes role-based access control (Kubernetes RBAC) to limit access to cluster resources based a user's identity or group membership. This policy checks your AKS cluster Azure Active Directory (AD) RBAC setting and alerts if disabled.",
+    "Resource Type": "microsoft.containerservice/managedclusters",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
+}
