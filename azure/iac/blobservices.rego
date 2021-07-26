@@ -77,7 +77,7 @@ storage_blob_container_soft_delete_err = "Soft delete on blob service container 
     azure_issue["storage_blob_container_soft_delete"]
 }
 
-storage_blob_soft_delete_metadata := {
+storage_blob_container_soft_delete_metadata := {
     "Policy Code": "",
     "Type": "IaC",
     "Product": "AZR",
