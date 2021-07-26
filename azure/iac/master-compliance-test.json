@@ -475,7 +475,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Auditing for SQL database should be set to On",
+                    "title": "Auditing for SQL database should be enabled",
                     "description": "Database events are tracked by the Auditing feature and the events are written to an audit log in your Azure storage account. This process helps you to monitor database activity, and get insight into anomalies that could indicate business concerns or suspected security violations.",
                     "tags": [
                         {
@@ -511,7 +511,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Database Auditing Retention should be more than 90 days",
+                    "title": "Azure SQL Database Auditing Retention should be 90 days or more",
                     "description": "This policy identifies SQL Databases which have Auditing Retention less than 90 days. Audit Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days.",
                     "tags": [
                         {
