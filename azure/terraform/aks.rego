@@ -11,13 +11,13 @@ default aks_cni_net = null
 azure_attribute_absence["aks_cni_net"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    not resource.properties.network_policy
+    not resource.properties.network_profile.network_policy
 }
 
 azure_issue["aks_cni_net"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    lower(resource.properties.network_policy) != "azure"
+    lower(resource.properties.network_profile.network_policy) != "azure"
 }
 
 aks_cni_net {
@@ -63,19 +63,19 @@ default aks_http_routing = null
 azure_attribute_absence["aks_http_routing"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    not resource.properties.http_application_routing
+    not resource.properties.addon_profile[_].http_application_routing
 }
 
 azure_attribute_absence["aks_http_routing"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    count(resource.properties.http_application_routing) == 0
+    count(resource.properties.addon_profile[_].http_application_routing) == 0
 }
 
 azure_issue["aks_http_routing"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    http_application_routing := resource.properties.http_application_routing[_]
+    http_application_routing := resource.properties.addon_profile[_].http_application_routing[_]
     http_application_routing.enabled == true
 }
 
@@ -116,19 +116,19 @@ default aks_monitoring = null
 aws_attribute_absence["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    not resource.properties.oms_agent
+    not resource.properties.addon_profile[_].oms_agent
 }
 
 aws_attribute_absence["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    count(resource.properties.oms_agent) == 0
+    count(resource.properties.addon_profile[_].oms_agent) == 0
 }
 
 azure_issue["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    oms_agent := resource.properties.oms_agent[_]
+    oms_agent := resource.properties.addon_profile[_].oms_agent[_]
     oms_agent.enabled != true
 }
 

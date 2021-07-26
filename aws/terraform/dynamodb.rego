@@ -17,13 +17,12 @@ aws_attribute_absence["dynabodb_encrypt"] {
 aws_issue["dynabodb_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_dynamodb_table"
-    count([c | resource.properties.server_side_encryption; c:=1]) == 0
+    count([c | resource.properties.server_side_encryption[_]; c:=1]) == 0
 }
 
 aws_issue["dynabodb_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_dynamodb_table"
-    count([c | resource.properties.server_side_encryption; c:=1]) == 0
     server_side_encryption := resource.properties.server_side_encryption[_]
     not server_side_encryption.enabled
 }

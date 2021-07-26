@@ -456,7 +456,7 @@ aws_issue["cf_default_ssl"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     viewer_certificate := resource.properties.viewer_certificate[_]
-    viewer_certificate.cloudfront_default_certificate
+    viewer_certificate.cloudfront_default_certificate == true
 }
 
 cf_default_ssl = false {
@@ -550,6 +550,13 @@ aws_attribute_absence["cf_s3_origin"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     not resource.properties.origin
+}
+
+aws_attribute_absence["cf_s3_origin"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_cloudfront_distribution"
+    origin := resource.properties.origin[_]
+    not origin.s3_origin_config
 }
 
 aws_issue["cf_s3_origin"] {

@@ -91,7 +91,7 @@ azure_issue["gw_waf"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
     waf_configuration := resource.properties.waf_configuration[_]
-    waf_configuration[_].enabled != true
+    waf_configuration.enabled != true
 }
 
 gw_waf {
