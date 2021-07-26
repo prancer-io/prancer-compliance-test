@@ -547,7 +547,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL databases should have tranparent data encryption enabled",
+                    "title": "Azure SQL databases should have transparent data encryption enabled",
                     "description": "Transparent data encryption protects Azure database against malicious activity. It performs real-time encryption and decryption of the database, related reinforcements, and exchange log records without requiring any changes to the application. It encrypts the storage of the entire database by using a symmetric key called the database encryption key.",
                     "tags": [
                         {
@@ -583,7 +583,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "SQL Server Firewall rules should not allow access to all Azure internal resources",
+                    "title": "SQL Server Firewall rules should not configure to allow full inbound access to everyone",
                     "description": "Firewalls grant access to databases based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with \"0.0.0.0\" represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access.",
                     "tags": [
                         {
