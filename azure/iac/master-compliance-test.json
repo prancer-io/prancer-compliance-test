@@ -459,12 +459,12 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_AUDITING_DB_SETTINGS_1",
+                    "masterTestId": "TEST_DB_AUDITING_SETTINGS_1",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(dbauditingdbsettings.rego)",
+                    "rule": "file(dbauditingsettings.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-0003-ARM",
@@ -495,12 +495,12 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_AUDITING_DB_SETTINGS_2",
+                    "masterTestId": "TEST_DB_AUDITING_SETTINGS_2",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(dbauditingdbsettings.rego)",
+                    "rule": "file(dbauditingsettings.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-0053-ARM",
@@ -524,35 +524,6 @@
                                 "NIST 800",
                                 "PCI-DSS"
                             ],
-                            "service": [
-                                "arm"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_DB_AUDITING_SETTINGS",
-                    "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(dbauditingsettings.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-0059-ARM",
-                            "eval": "data.rule.sql_log_retention",
-                            "message": "data.rule.sql_log_retention_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0059_ARM.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Azure SQL Server audit log retention is less than 91 days",
-                    "description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance._x000D__x000D_This policy identifies SQL servers which do not retain audit logs for more than 90 days. As a best practice, configure the audit logs retention time period to be greater than 90 days.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
                             "service": [
                                 "arm"
                             ]
