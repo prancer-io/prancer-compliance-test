@@ -312,47 +312,182 @@ elb_crosszone_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
 }
 
-# PR-AWS-0067-CFR 
-# There is only reference to security groups, no info about security group rules
+#
+# PR-AWS-0067-CFR
+#
+default elb_sec_group_ingress = null
 
-default elb_sec_group = null
-
-aws_attribute_absence["elb_sec_group"] {
+aws_attribute_absence["elb_sec_group_ingress"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     not resource.Properties.SecurityGroups
 }
 
-aws_issue["elb_sec_group"] {
+aws_issue["elb_sec_group_ingress"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     count(resource.Properties.SecurityGroups) == 0
 }
 
-elb_sec_group {
+aws_ref_absence["elb_sec_group_ingress"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) != 0
+    security_groups := resource.Properties.SecurityGroups[_].Ref
+    count([c | input.Resources[j].Name == security_groups; c := 1]) == 0
+    not input.Parameters[security_groups]
+}
+
+aws_ref_issue["elb_sec_group_ingress"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) != 0
+    security_groups := resource.Properties.SecurityGroups[_].Ref
+    security_groups == input.Resources[j].Name
+    count(input.Resources[j].Properties.SecurityGroupIngress) == 0
+}
+
+aws_ref_issue["elb_sec_group_ingress"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) != 0
+    security_groups := resource.Properties.SecurityGroups[_].Ref
+    security_groups == input.Resources[j].Name
+    not input.Resources[j].Properties.SecurityGroupIngress
+}
+
+elb_sec_group_ingress {
     lower(input.Resources[i].Type) == "aws::elasticloadbalancing::loadbalancer"
-    not aws_issue["elb_sec_group"]
+    not aws_issue["elb_sec_group_ingress"]
+    not aws_ref_issue["elb_sec_group_ingress"]
+    not aws_ref_absence["elb_sec_group_ingress"]
+    not aws_attribute_absence["elb_sec_group_ingress"]
 }
 
-elb_sec_group = false {
-    aws_issue["elb_sec_group"]
+elb_sec_group_ingress = false {
+    aws_issue["elb_sec_group_ingress"]
 }
 
-elb_sec_group_err = "AWS Elastic Load Balancer (ELB) has security group with no inbound/outbound rules" {
-    aws_issue["elb_sec_group"]
+elb_sec_group_ingress = false {
+    aws_attribute_absence["elb_sec_group_ingress"]
 }
 
-elb_sec_group_miss_err = "ELB attribute SecurityGroups missing in the resource" {
-    aws_issue["elb_sec_group"]
+elb_sec_group_ingress = false {
+    aws_ref_issue["elb_sec_group_ingress"]
 }
 
-elb_sec_group_metadata := {
+elb_sec_group_ingress = false {
+    aws_ref_absence["elb_sec_group_ingress"]
+}
+
+elb_sec_group_ingress_err = "AWS Elastic Load Balancer (ELB) has security group with no inbound rules" {
+    aws_issue["elb_sec_group_ingress"]
+} else = "AWS Elastic Load Balancer (ELB) has security group Reference is missing" {
+    aws_ref_absence["elb_sec_group_egress"]
+} else = "ELB attribute SecurityGroups missing in the resource" {
+    aws_attribute_absence["elb_sec_group_ingress"]
+} else = "AWS Elastic Load Balancer (ELB) has security group with no inbound/outbound rules" {
+    aws_ref_issue["elb_sec_group_ingress"]
+}
+
+elb_sec_group_ingress_metadata := {
     "Policy Code": "PR-AWS-0067-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Elastic Load Balancer (ELB) has security group with no inbound rules",
     "Policy Description": "This policy identifies Elastic Load Balancers (ELB) which have security group with no inbound rules. A security group with no inbound rule will deny all incoming requests. ELB security groups should have at least one inbound rule, ELB with no inbound permissions will deny all traffic incoming to ELB; in other words, the ELB is useless without inbound permissions.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
+}
+
+#
+# PR-AWS-0068-CFR
+#
+default elb_sec_group_egress = null
+
+aws_attribute_absence["elb_sec_group_egress"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    not resource.Properties.SecurityGroups
+}
+
+aws_issue["elb_sec_group_egress"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) == 0
+}
+
+aws_ref_absence["elb_sec_group_egress"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) != 0
+    security_groups := resource.Properties.SecurityGroups[_].Ref
+    count([c | input.Resources[j].Name == security_groups; c := 1]) == 0
+    not input.Parameters[security_groups]
+}
+
+aws_ref_issue["elb_sec_group_egress"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) != 0
+    security_groups := resource.Properties.SecurityGroups[_].Ref
+    security_groups == input.Resources[j].Name
+    count(input.Resources[j].Properties.SecurityGroupEgress) == 0
+}
+
+aws_ref_issue["elb_sec_group_egress"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) != 0
+    security_groups := resource.Properties.SecurityGroups[_].Ref
+    security_groups == input.Resources[j].Name
+    not input.Resources[j].Properties.SecurityGroupEgress
+}
+
+elb_sec_group_egress {
+    lower(input.Resources[i].Type) == "aws::elasticloadbalancing::loadbalancer"
+    not aws_issue["elb_sec_group_egress"]
+    not aws_ref_issue["elb_sec_group_egress"]
+    not aws_ref_absence["elb_sec_group_egress"]
+    not aws_attribute_absence["elb_sec_group_egress"]
+}
+
+elb_sec_group_egress = false {
+    aws_issue["elb_sec_group_egress"]
+}
+
+elb_sec_group_egress = false {
+    aws_attribute_absence["elb_sec_group_egress"]
+}
+
+elb_sec_group_egress = false {
+    aws_ref_absence["elb_sec_group_egress"]
+}
+
+elb_sec_group_egress = false {
+    aws_ref_issue["elb_sec_group_egress"]
+}
+
+elb_sec_group_egress_err = "AWS Elastic Load Balancer (ELB) has no security group" {
+    aws_issue["elb_sec_group_egress"]
+} else = "AWS Elastic Load Balancer (ELB) has security group with no outbound rules" {
+    aws_ref_issue["elb_sec_group_egress"]
+} else = "ELB attribute SecurityGroups missing in the resource" {
+    aws_attribute_absence["elb_sec_group_egress"]
+} else = "AWS Elastic Load Balancer (ELB) has no security group" {
+    aws_ref_absence["elb_sec_group_egress"]
+}
+
+
+elb_sec_group_egress_metadata := {
+    "Policy Code": "PR-AWS-0068-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Elastic Load Balancer (ELB) has security group with no outbound rules",
+    "Policy Description": "This policy identifies Elastic Load Balancers (ELB) which have security group with no outbound rules. A security group with no outbound rule will deny all outgoing requests. ELB security groups should have at least one outbound rule, ELB with no outbound permissions will deny all traffic going to any EC2 instances or resources configured behind that ELB; in other words, the ELB is useless without outbound permissions.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
