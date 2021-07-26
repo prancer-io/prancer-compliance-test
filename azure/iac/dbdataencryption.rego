@@ -22,8 +22,8 @@ azure_issue["db_encrypt"] {
 
 db_encrypt {
     lower(input.resources[_].type) == "microsoft.sql/servers/databases/transparentdataencryption"
-    not azure_issue["db_encrypt"]
     not azure_attribute_absence["db_encrypt"]
+    not azure_issue["db_encrypt"]
 }
 
 db_encrypt = false {
@@ -34,11 +34,11 @@ db_encrypt = false {
     azure_attribute_absence["db_encrypt"]
 }
 
-db_encrypt_err = "SQL databases has encryption disabled" {
+db_encrypt_err = "Azure SQL databases currently dont have tranparent data encryption enabled" {
     azure_issue["db_encrypt"]
 }
 
-db_encrypt_miss_err = "DB encryption attribute status missing in the resource" {
+db_encrypt_miss_err = "zure SQL databases tranparent encryption attribute 'status' is missing from the resource" {
     azure_attribute_absence["db_encrypt"]
 }
 
@@ -47,7 +47,7 @@ db_encrypt_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "SQL databases has encryption disabled",
+    "Policy Title": "Azure SQL databases should have tranparent data encryption enabled",
     "Policy Description": "Transparent data encryption protects Azure database against malicious activity. It performs real-time encryption and decryption of the database, related reinforcements, and exchange log records without requiring any changes to the application. It encrypts the storage of the entire database by using a symmetric key called the database encryption key.",
     "Resource Type": "microsoft.sql/servers/databases/transparentdataencryption",
     "Policy Help URL": "",
