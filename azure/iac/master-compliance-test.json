@@ -174,7 +174,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure AKS enable role-based access control (RBAC) should be enforced",
-                    "description": "Azure Kubernetes Service (AKS) can be configured to use Azure Active Directory (AD) for user authentication. In this configuration, you sign in to an AKS cluster using an Azure AD authentication token. You can also configure Kubernetes role-based access control (Kubernetes RBAC) to limit access to cluster resources based a user's identity or group membership. https://docs.microsoft.com/en-us/azure/aks/azure-ad-rbac",
+                    "description": "To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster RBAC setting and alerts if disabled.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -262,6 +262,93 @@
                     "severity": "Medium",
                     "title": "Azure Application Gateway should have the Web application firewall (WAF) enabled",
                     "description": "Azure Web Application Firewall (WAF) on Azure Application Gateway provides centralized protection of your web applications from common exploits and vulnerabilities. Web applications are increasingly targeted by malicious attacks that exploit commonly known vulnerabilities. SQL injection and cross-site scripting are among the most common attacks.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APPLICATION_GATEWAYS_3",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(applicationgateways.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0125-ARM",
+                            "eval": "data.rule.protocol",
+                            "message": "data.rule.protocol_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR-AZR-0125-ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Application Gateway is using Https protocol",
+                    "description": "Application Gateway allows to set network protocols Http and Https. It is highly recommended to use Https protocol for secure connections.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_BLOB_SERVICE_1",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(blobservices.rego)",
+                    "evals": [
+                        {
+                            "id": "",
+                            "eval": "data.rule.storage_blob_soft_delete",
+                            "message": "data.rule.storage_blob_soft_delete_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Soft delete on blob service should be enabled",
+                    "description": "The blob service properties for blob soft delete. It helps to restore removed blob within configured retention days",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_BLOB_SERVICE_2",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(blobservices.rego)",
+                    "evals": [
+                        {
+                            "id": "",
+                            "eval": "data.rule.storage_blob_container_soft_delete",
+                            "message": "data.rule.storage_blob_container_soft_delete_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Soft delete on blob service container should be enabled",
+                    "description": "The blob service properties for container soft delete. It helps to restore removed blob containers within configured retention days.",
                     "tags": [
                         {
                             "cloud": "git",
