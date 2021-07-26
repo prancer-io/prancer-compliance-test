@@ -34,11 +34,11 @@ alerts = false {
     azure_attribute_absence["alerts"]
 }
 
-alerts_err = "Send me emails about alerts is set to OFF in Security Center" {
+alerts_err = "Activity log alerts is not enabled" {
     azure_issue["alerts"]
 }
 
-alerts_miss_err = "Activitylog alerts attribute enabled missing in the resource" {
+alerts_miss_err = "enabled attribute of Activity log alerts is missing" {
     azure_attribute_absence["alerts"]
 }
 
@@ -47,8 +47,8 @@ alerts_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Send me emails about alerts is set to OFF in Security Center",
-    "Policy Description": "Turning on Send me emails about alerts will enable Microsoft to send you emails about any high severity alerts in your environment. This will make sure that you are aware of any security issues and take prompt actions to mitigate the risks.",
+    "Policy Title": "Activity log alerts should be enabled",
+    "Policy Description": "Activity log alerts are alerts that activate when a new activity log event occurs that matches the conditions specified in the alert. Based on the order and volume of the events recorded in Azure activity log, the alert rule will fire. Enabling Activity log alerts will allow Azure to send you emails about any high severity alerts in your environment. This will make sure that you are aware of any security issues and take prompt actions to mitigate the risks.",
     "Resource Type": "microsoft.insights/activitylogalerts",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-04-01/activitylogalerts"

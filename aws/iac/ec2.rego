@@ -92,20 +92,33 @@ default ec2_public_ip = null
 aws_issue["ec2_public_ip"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::instance"
+    lower(resource.Properties.NetworkInterfaces[_].AssociatePublicIpAddress) == "true"
+}
+
+aws_bool_issue["ec2_public_ip"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
     resource.Properties.NetworkInterfaces[_].AssociatePublicIpAddress == true
 }
 
 ec2_public_ip {
     lower(input.Resources[i].Type) == "aws::ec2::instance"
     not aws_issue["ec2_public_ip"]
+    not aws_bool_issue["ec2_public_ip"]
 }
 
 ec2_public_ip = false {
     aws_issue["ec2_public_ip"]
 }
 
+ec2_public_ip = false {
+    aws_bool_issue["ec2_public_ip"]
+}
+
 ec2_public_ip_err = "AWS EC2 instances with Public IP and associated with Security Groups have Internet Access" {
     aws_issue["ec2_public_ip"]
+} else = "AWS EC2 instances with Public IP and associated with Security Groups have Internet Access" {
+    aws_bool_issue["ec2_public_ip"]
 }
 
 ec2_public_ip_metadata := {

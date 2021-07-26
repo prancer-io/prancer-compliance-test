@@ -16,12 +16,12 @@
                             "id": "PR-AZR-0006-TRF",
                             "eval": "data.rule.aks_cni_net",
                             "message": "data.rule.aks_cni_net_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, set network_policy = 'azure' under 'network_profile' block to fix the issue. If 'network_profile' block does not exist please add one. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#network_policy for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure AKS cluster Azure CNI networking not enabled",
+                    "title": "Azure AKS cluster Azure CNI networking should be enabled",
                     "description": "Azure CNI provides the following features over kubenet networking:_x000D__x000D_- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network._x000D_- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB._x000D_- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance._x000D_- Support for Network Policies securing communication between pods._x000D__x000D_This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.",
                     "tags": [
                         {
@@ -45,12 +45,12 @@
                             "id": "PR-AZR-0007-TRF",
                             "eval": "data.rule.aks_http_routing",
                             "message": "data.rule.aks_http_routing_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, disable 'http_application_routing' by setting 'http_application_routing { enabled = false }' under 'addon_profile' block to fix the issue. If 'addon_profile' block does not exist please ignore. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#http_application_routing for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure AKS cluster HTTP application routing enabled",
+                    "title": "Azure AKS cluster HTTP application routing should be disabled",
                     "description": "HTTP application routing configures an Ingress controller in your AKS cluster. As applications are deployed, the solution also creates publicly accessible DNS names for application endpoints. While this makes it easy to access applications that are deployed to your Azure AKS cluster, this add-on is not recommended for production use._x000D__x000D_This policy checks your AKS cluster HTTP application routing add-on setting and alerts if enabled.",
                     "tags": [
                         {
@@ -74,12 +74,12 @@
                             "id": "PR-AZR-0008-TRF",
                             "eval": "data.rule.aks_monitoring",
                             "message": "data.rule.aks_monitoring_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, enable 'oms_agent' by setting 'oms_agent { enabled = true }' under 'addon_profile' block to fix the issue. If 'addon_profile' block does not exist please add one. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#oms_agent for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure AKS cluster monitoring not enabled",
+                    "title": "Azure AKS cluster monitoring should be enabled",
                     "description": "Azure Monitor for containers is a feature designed to monitor the performance of container workloads deployed to either Azure Container Instances or managed Kubernetes clusters hosted on Azure Kubernetes Service (AKS). Monitoring your containers is critical, especially when you're running a production cluster, at scale, with multiple applications._x000D__x000D_This policy checks your AKS cluster monitoring add-on setting and alerts if no configuration is found, or monitoring is disabled.",
                     "tags": [
                         {
@@ -103,13 +103,13 @@
                             "id": "PR-AZR-0009-TRF",
                             "eval": "data.rule.aks_nodes",
                             "message": "data.rule.aks_nodes_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, set node_count = 3 under 'default_node_pool' block to fix the issue. If 'default_node_pool' block does not exist please add one. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#node_count for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure AKS cluster pool profile count contains less than 3 nodes",
-                    "description": "Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)_x000D__x000D_This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.",
+                    "title": "Azure AKS cluster pool profile should have minimum 3 or more nodes",
+                    "description": "Ensure your AKS cluster pool profile contains minimum 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)_x000D__x000D_This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -132,12 +132,12 @@
                             "id": "PR-AZR-0010-TRF",
                             "eval": "data.rule.aks_rbac",
                             "message": "data.rule.aks_rbac_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, set enabled = true under 'role_based_access_control' block to fix the issue. If 'role_based_access_control' block does not exist please add one. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#role_based_access_control for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure AKS enable role-based access control (RBAC) not enforced",
+                    "title": "Azure AKS role-based access control (RBAC) should be enforced",
                     "description": "To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x000D__x000D_This policy checks your AKS cluster RBAC setting and alerts if disabled.",
                     "tags": [
                         {
@@ -161,12 +161,12 @@
                             "id": "PR-AZR-0011-TRF",
                             "eval": "data.rule.gw_tls",
                             "message": "data.rule.gw_tls_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_application_gateway' resource, set 'min_protocol_version = TLSv1_2' under 'ssl_policy' block to fix the issue. If 'ssl_policy' block does not exist please add one. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway#min_protocol_version for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Application Gateway allows TLSv1.1 or lower",
+                    "title": "Azure Application Gateway should use TLSv1.2 as minimum version or higher",
                     "description": "The Application Gateway supports end-to-end SSL encryption using multiple TLS versions and by default, it supports TLS version 1.0 as the minimum version._x000D__x000D_This policy identifies the Application Gateway instances that are configured to use TLS versions 1.1 or lower as the minimum protocol version. As a best practice set the MinProtocolVersion to TLSv1.2 (if you use custom SSL policy) or use the predefined â€˜AppGwSslPolicy20170401Sâ€™ policy.",
                     "tags": [
                         {
@@ -190,12 +190,12 @@
                             "id": "PR-AZR-0012-TRF",
                             "eval": "data.rule.gw_waf",
                             "message": "data.rule.gw_waf_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_application_gateway' resource, set enabled = true under 'waf_configuration' block to fix the issue. If 'waf_configuration' block does not exist please add one. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway#waf_configuration for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Application Gateway does not have the Web application firewall (WAF) enabled",
+                    "title": "Azure Application Gateway should have Web application firewall (WAF) enabled",
                     "description": "This policy identifies Azure Application Gateways that do not have Web application firewall (WAF) enabled. As a best practice, enable WAF to manage and protect your web applications behind the Application Gateway from common exploits and vulnerabilities.",
                     "tags": [
                         {
@@ -219,12 +219,12 @@
                             "id": "PR-AZR-0085-TRF",
                             "eval": "data.rule.db_ad_admin",
                             "message": "data.rule.db_ad_admin_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_sql_active_directory_administrator' resource, set the 'server_name' from associated 'azurerm_sql_server' resource's 'name' property to fix the issue. more simply make sure 'server_name' of 'azurerm_sql_active_directory_administrator' resource matches with 'name' of associated 'azurerm_sql_server' resource. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_active_directory_administrator#server_name for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "SQL servers which do not have Azure Active Directory admin configured",
+                    "title": "SQL servers should have Azure Active Directory admin configured",
                     "description": "Checks to ensure that SQL servers are configured with Active Directory admin authentication. Azure Active Directory authentication is a mechanism of connecting to Microsoft Azure SQL Database and SQL Data Warehouse by using identities in Azure Active Directory (Azure AD). With Azure AD authentication, you can centrally manage the identities of database users and other Microsoft services in one central location.",
                     "tags": [
                         {
@@ -251,14 +251,14 @@
                     "evals": [
                         {
                             "id": "PR-AZR-0003-TRF",
-                            "eval": "data.rule.mssql_db_log_auditt",
+                            "eval": "data.rule.mssql_db_log_audit",
                             "message": "data.rule.mssql_db_log_audit_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_mssql_database_extended_auditing_policy' resource, set the 'database_id' from associated 'azurerm_mssql_database' resource's terraform deployment output to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_database_extended_auditing_policy#database_id for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Auditing for SQL database should be set to On",
+                    "title": "Auditing for SQL database should be enabled",
                     "description": "Database events are tracked by the Auditing feature and the events are written to an audit log in your Azure storage account. This process helps you to monitor database activity, and get insight into anomalies that could indicate business concerns or suspected security violations.",
                     "tags": [
                         {
@@ -289,12 +289,12 @@
                             "id": "PR-AZR-0053-TRF",
                             "eval": "data.rule.mssql_db_log_retention",
                             "message": "data.rule.mssql_db_log_retention_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_mssql_database_extended_auditing_policy' resource, set the 'retention_in_days = 90' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_database_extended_auditing_policy#retention_in_days for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Database with Auditing Retention less than 90 days",
+                    "title": "Azure SQL Database with Auditing Retention should have 90 days or more",
                     "description": "This policy identifies SQL Databases which have Auditing Retention less than 90 days. Audit Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days.",
                     "tags": [
                         {
@@ -325,12 +325,12 @@
                             "id": "PR-AZR-0059-TRF",
                             "eval": "data.rule.mssql_log_retention",
                             "message": "data.rule.mssql_log_retention_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_mssql_server_extended_auditing_policy' resource, set the 'retention_in_days = 91' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_extended_auditing_policy#retention_in_days for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Server audit log retention is less than 91 days",
+                    "title": "Azure SQL Server audit log retention should be greater then 90 days",
                     "description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance._x000D__x000D_This policy identifies SQL servers which do not retain audit logs for more than 90 days. As a best practice, configure the audit logs retention time period to be greater than 90 days.",
                     "tags": [
                         {
@@ -354,12 +354,12 @@
                             "id": "PR-AZR-0082-TRF",
                             "eval": "data.rule.db_firewall",
                             "message": "data.rule.db_firewall_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_sql_firewall_rule' resource, set valid ip range other then '0.0.0.0' between 'start_ip_address' and 'end_ip_address' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_firewall_rule for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "SQL Server Firewall rules allow access to any Azure internal resources",
+                    "title": "SQL Server Firewall rules should not configure to allow full inbound access to everyone",
                     "description": "Firewalls grant access to databases based on the originating IP address of each request and should be within the range of START IP and END IP. Firewall settings with START IP and END IP both with \"0.0.0.0\" represents access to all Azure internal network. This setting needs to be turned-off to remove blanket access.",
                     "tags": [
                         {
@@ -652,12 +652,12 @@
                             "id": "PR-AZR-0018-TRF",
                             "eval": "data.rule.kv_expire",
                             "message": "data.rule.kv_expire_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_key_vault_secret' resource, set valid date other then null in 'expiration_date' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret#expiration_date for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Key Vault secrets have no expiration date",
+                    "title": "Azure Key Vault secrets should have expiration date",
                     "description": "This policy identifies Azure Key Vault secrets that do not have an expiry date. As a best practice, set an expiration date for each secret and rotate the secret regularly._x000D__x000D_Before you activate this policy, ensure that you have added the <compliance-software> Service Principal to each Key Vault: https://docs.paloaltonetworks.com/<compliance-software>/<compliance-software>-admin/connect-your-cloud-platform-to-<compliance-software>/onboard-your-azure-account/set-up-your-azure-account.html_x000D__x000D_Alternatively, run the following command on the Azure cloud shell:_x000D_az keyvault list | jq '.[].name' | xargs -I {} az keyvault set-policy --name {} --certificate-permissions list listissuers --key-permissions list --secret-permissions list --spn <<compliance-software>_app_id>",
                     "tags": [
                         {

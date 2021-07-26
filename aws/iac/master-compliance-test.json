@@ -1395,8 +1395,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-0068-CFR",
-                            "eval": "data.rule.elb_sec_group",
-                            "message": "data.rule.elb_sec_group_err",
+                            "eval": "data.rule.elb_sec_group_egress",
+                            "message": "data.rule.elb_sec_group_egress_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
                             "remediationFunction": "PR_AWS_0068_CFR.py"
                         }
@@ -1530,6 +1530,35 @@
                     "severity": "Medium",
                     "title": "AWS Application Load Balancer (ALB) listener that allow connection requests over HTTP",
                     "description": "This policy identifies Application Load Balancer (ALB) listeners that are configured to accept connection requests over HTTP instead of HTTPS. As a best practice, use the HTTPS protocol to encrypt the communication between the application clients and the application load balancer.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ELB_11",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0067-CFR",
+                            "eval": "data.rule.elb_sec_group_ingress",
+                            "message": "data.rule.elb_sec_group_ingress_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationFunction": "PR_AWS_0067_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Elastic Load Balancer (ELB) has security group with no inbound rules",
+                    "description": "This policy identifies Elastic Load Balancers (ELB) which have security group with no outbound rules. A security group with no outbound rule will deny all outgoing requests. ELB security groups should have at least one outbound rule, ELB with no outbound permissions will deny all traffic going to any EC2 instances or resources configured behind that ELB; in other words, the ELB is useless without outbound permissions.",
                     "tags": [
                         {
                             "cloud": "git",
