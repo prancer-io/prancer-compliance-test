@@ -12,14 +12,14 @@ gc_issue["sql_labels"] {
     resource := input.resources[_]
     lower(resource.type) == "google_sql_database_instance"
     settings := resource.properties.settings[_]
-    not settings.userLabels
+    not settings.user_labels
 }
 
 gc_issue["sql_labels"] {
     resource := input.resources[_]
     lower(resource.type) == "google_sql_database_instance"
     settings := resource.properties.settings[_]
-    count(settings.userLabels) == 0
+    count(settings.user_labels) == 0
 }
 
 sql_labels {

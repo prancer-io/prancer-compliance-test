@@ -12,8 +12,7 @@ default s3_accesslog = null
 aws_attribute_absence["s3_accesslog"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_s3_bucket"
-    logging := resource.properties.logging[_]
-    not logging.target_bucket
+    not resource.properties.logging
 }
 
 aws_attribute_absence["s3_accesslog"] {

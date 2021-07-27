@@ -169,7 +169,7 @@ default elb_access_log = null
 aws_issue["elb_access_log"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_elb"
-    resource.properties.access_logs.enabled == false
+    resource.properties.access_logs[_].enabled == false
 }
 
 elb_access_log {

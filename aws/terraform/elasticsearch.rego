@@ -126,7 +126,7 @@ aws_issue["esearch_master"] {
 aws_issue["esearch_master"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_elasticsearch_domain"
-    cluster_config := resource.properties.cluster_config
+    cluster_config := resource.properties.cluster_config[_]
     not cluster_config.dedicated_master_enabled
 }
 

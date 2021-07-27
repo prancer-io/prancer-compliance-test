@@ -120,7 +120,14 @@ aws_issue["redshift_audit"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_redshift_cluster"
     logging := resource.properties.logging[_]
-    count([c | logging.bucket_name; c:= 1]) == 0
+    count([c | logging.bucket_name != null; c:= 1]) == 0
+}
+
+aws_issue["redshift_audit"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_redshift_cluster"
+    logging := resource.properties.logging[_]
+    count(logging.bucket_name) == 0
 }
 
 redshift_audit {

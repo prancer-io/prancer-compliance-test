@@ -23,6 +23,12 @@ aws_attribute_absence["lambda_env"] {
 aws_issue["lambda_env"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_lambda_function"
+    is_null(resource.properties.kms_key_arn)
+}
+
+aws_issue["lambda_env"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_lambda_function"
     resource.properties.environment
     not resource.properties.kms_key_arn
 }

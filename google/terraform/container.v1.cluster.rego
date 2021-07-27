@@ -292,7 +292,7 @@ gc_issue["k8s_http_lbs"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_cluster"
     addons_config := resource.properties.addons_config[_]
-    addons_config.http_load_balancing.disabled
+    addons_config.http_load_balancing[_].disabled
 }
 
 k8s_http_lbs {
@@ -368,6 +368,18 @@ gc_issue["k8s_master_auth_net"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_cluster"
     not resource.properties.master_authorized_networks_config
+}
+
+gc_issue["k8s_master_auth_net"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_container_cluster"
+    is_null(resource.properties.master_authorized_networks_config)
+}
+
+gc_issue["k8s_master_auth_net"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_container_cluster"
+    count(resource.properties.master_authorized_networks_config) == 0
 }
 
 k8s_master_auth_net {
@@ -749,13 +761,13 @@ k8s_egress_metering {
 k8s_egress_metering = false {
     gc_issue["k8s_egress_metering"]
 } else = false {
-    not gc_attribute_absence["k8s_egress_metering"]
+    gc_attribute_absence["k8s_egress_metering"]
 }
 
 k8s_egress_metering_err = "GCP Kubernetes Engine Clusters not configured with network traffic egress metering" {
     gc_issue["k8s_egress_metering"]
 } else = "GCP Kubernetes Engine Clusters attribut enable_network_egress_metering is missing in the resource." {
-    not gc_attribute_absence["k8s_egress_metering"]
+    gc_attribute_absence["k8s_egress_metering"]
 }
 
 k8s_egress_metering_metadata := {
@@ -782,6 +794,18 @@ gc_issue["k8s_private"] {
     not resource.properties.private_cluster_config
 }
 
+gc_issue["k8s_private"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_container_cluster"
+    is_null(resource.properties.private_cluster_config)
+}
+
+gc_issue["k8s_private"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_container_cluster"
+    count(resource.properties.private_cluster_config) == 0
+}
+
 k8s_private {
     lower(input.resources[_].type) == "google_container_cluster"
     not gc_issue["k8s_private"]
@@ -803,13 +827,19 @@ default k8s_private_node = null
 
 gc_attribute_absence["k8s_private_node"] {
     resource := input.resources[_]
-    lower(resource.type) == "google_container_node_pool"
+    lower(resource.type) == "google_container_cluster"
     not resource.properties.private_cluster_config
+}
+
+gc_issue["k8s_private"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_container_cluster"
+    is_null(resource.properties.private_cluster_config)
 }
 
 gc_attribute_absence["k8s_private_node"] {
     resource := input.resources[_]
-    lower(resource.type) == "google_container_node_pool"
+    lower(resource.type) == "google_container_cluster"
     count(resource.properties.private_cluster_config) == 0
 }
 
