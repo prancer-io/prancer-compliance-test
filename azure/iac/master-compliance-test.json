@@ -747,16 +747,16 @@
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0056-ARM",
-                            "eval": "data.rule.db_ads_mail",
-                            "message": "data.rule.db_ads_mail_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments  Specifies an array of e-mail addresses to which the scan notification is sent.",
-                            "remediationFunction": "PR_AZR_0056_ARM.py"
+                            "id": "PR-AZR-0058-ARM",
+                            "eval": "data.rule.db_ads_scan",
+                            "message": "data.rule.db_ads_scan_err",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments  recurringScans should be enabled",
+                            "remediationFunction": "PR_AZR_0058_ARM.py"
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Server advanced data security should have an email alert recipient",
-                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL Servers that do not have an email address configured for ADS alert notifications. As a best practice, provide one or more email addresses where you want to receive alerts for any anomalous activities detected on SQL Servers.",
+                    "title": "Azure SQL Server advanced data security should be enabled",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -776,16 +776,16 @@
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0057-ARM",
-                            "eval": "data.rule.db_ads_alert",
-                            "message": "data.rule.db_ads_alert_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments  Specifies that the schedule scan notification will be is sent to the subscription administrators.",
-                            "remediationFunction": "PR_AZR_0057_ARM.py"
+                            "id": "PR-AZR-0056-ARM",
+                            "eval": "data.rule.db_ads_mail",
+                            "message": "data.rule.db_ads_mail_err",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments  Specifies an array of e-mail addresses to which the scan notification is sent.",
+                            "remediationFunction": "PR_AZR_0056_ARM.py"
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Server advanced data security should send alerts to subscription administrators",
-                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the subscription admin can receive email alerts when anomalous activities are detected on the SQL Servers.",
+                    "title": "Azure SQL Server advanced data security should have email alert recipient to get scan notification",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL Servers that do not have an email address configured for ADS alert notifications. As a best practice, provide one or more email addresses where you want to receive alerts for any anomalous activities detected on SQL Servers.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -805,16 +805,16 @@
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0058-ARM",
-                            "eval": "data.rule.db_ads_scan",
-                            "message": "data.rule.db_ads_scan_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments  recurringScans should be enabled",
-                            "remediationFunction": "PR_AZR_0058_ARM.py"
+                            "id": "PR-AZR-0057-ARM",
+                            "eval": "data.rule.db_ads_alert",
+                            "message": "data.rule.db_ads_alert_err",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments  Specifies that the schedule scan notification will be is sent to the subscription administrators.",
+                            "remediationFunction": "PR_AZR_0057_ARM.py"
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Server advanced data security should be enabled",
-                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers.",
+                    "title": "Azure SQL Server advanced data security should send alerts to subscription administrators",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the subscription admin can receive email alerts when anomalous activities are detected on the SQL Servers.",
                     "tags": [
                         {
                             "cloud": "git",
