@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/blobservices
 
 #
-# 
+# PR-AZR-0126-ARM
 #
 
 default storage_blob_soft_delete = null
@@ -34,7 +34,7 @@ storage_blob_soft_delete_err = "Soft delete on blob service is not enabled" {
 }
 
 storage_blob_soft_delete_metadata := {
-    "Policy Code": "",
+    "Policy Code": "PR-AZR-0126-ARM",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -47,7 +47,7 @@ storage_blob_soft_delete_metadata := {
 
 
 #
-# 
+# PR-AZR-0127-ARM
 #
 
 default storage_blob_container_soft_delete = null
@@ -78,7 +78,7 @@ storage_blob_container_soft_delete_err = "Soft delete on blob service container 
 }
 
 storage_blob_container_soft_delete_metadata := {
-    "Policy Code": "",
+    "Policy Code": "PR-AZR-0127-ARM",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

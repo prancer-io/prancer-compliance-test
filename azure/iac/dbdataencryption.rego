@@ -38,7 +38,7 @@ db_encrypt_err = "Azure SQL databases currently dont have transparent data encry
     azure_issue["db_encrypt"]
 }
 
-db_encrypt_miss_err = "zure SQL databases transparent encryption attribute 'status' is missing from the resource" {
+db_encrypt_miss_err = "Azure SQL databases transparent encryption attribute 'status' is missing from the resource" {
     azure_attribute_absence["db_encrypt"]
 }
 

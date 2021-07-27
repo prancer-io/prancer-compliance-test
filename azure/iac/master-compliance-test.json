@@ -310,7 +310,7 @@
                     "rule": "file(blobservices.rego)",
                     "evals": [
                         {
-                            "id": "",
+                            "id": "PR-AZR-0126-ARM",
                             "eval": "data.rule.storage_blob_soft_delete",
                             "message": "data.rule.storage_blob_soft_delete_err",
                             "remediationDescription": "",
@@ -339,7 +339,7 @@
                     "rule": "file(blobservices.rego)",
                     "evals": [
                         {
-                            "id": "",
+                            "id": "PR-AZR-0127-ARM",
                             "eval": "data.rule.storage_blob_container_soft_delete",
                             "message": "data.rule.storage_blob_container_soft_delete_err",
                             "remediationDescription": "",
@@ -2621,37 +2621,6 @@
                             "cloud": "git",
                             "compliance": [
                                 "Best Practices "
-                            ],
-                            "service": [
-                                "arm"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_APPLICATION_GATEWAYS_3",
-                    "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(applicationgateways.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-0125-ARM",
-                            "eval": "data.rule.protocol",
-                            "message": "data.rule.protocol_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.Network/applicationGateways\" make sure properties.protocol under properties.httpListeners exists and value is set to \"Https\". \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways for details.",
-                            "remediationFunction": "PR_AZR_0125_ARM.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure Application Gateway is using Https protocol",
-                    "description": "Application Gateway allows to set network protocols Http and Https. It is highly recommended to use Https protocol for secure connections.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "Best Practices"
                             ],
                             "service": [
                                 "arm"
