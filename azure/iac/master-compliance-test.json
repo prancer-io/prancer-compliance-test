@@ -720,7 +720,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Server Security Alert Policy should not disable any type of alerts",
+                    "title": "Azure SQL Server Security Alert Policy should not have any alert types in disabled alerts list",
                     "description": "Ensure that Azure SQL Server Security Alert Policy is not excluding any type of alerts",
                     "tags": [
                         {

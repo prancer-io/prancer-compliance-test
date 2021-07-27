@@ -217,7 +217,7 @@ dbsec_threat_alert_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure SQL Server Security Alert Policy should not disable any type of alerts",
+    "Policy Title": "Azure SQL Server Security Alert Policy should not have any alert types in disabled alerts list",
     "Policy Description": "Ensure that Azure SQL Server Security Alert Policy is not excluding any type of alerts",
     "Resource Type": "microsoft.sql/servers/databases/securityalertpolicies",
     "Policy Help URL": "",
