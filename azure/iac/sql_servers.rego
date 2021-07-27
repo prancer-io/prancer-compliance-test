@@ -4,7 +4,8 @@ package rule
 
 #
 # Always use Private Endpoint for Azure SQL Database and SQL Managed Instance
-#
+
+# PR-AZR-0126-ARM
 
 default sql_public_access = null
 
@@ -28,9 +29,9 @@ sql_public_access_err = "SQL servers with public access detected!" {
 }
 
 sql_public_access_metadata := {
-    "Policy Code": "",
+    "Policy Code": "PR-AZR-0126-ARM",
     "Type": "IaC",
-    "Product": "",
+    "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "SQL servers with public access detected!",
     "Policy Description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance",

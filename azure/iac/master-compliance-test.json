@@ -2827,6 +2827,35 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterTestId": "TEST_SQL_SERVER",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0126-ARM",
+                            "eval": "data.rule.sql_public_access",
+                            "message": "data.rule.sql_public_access_err",
+                            "remediationDescription": "In Resource of type \"Microsoft.Sql/servers\" make sure properties.publicNetworkAccess exists and value is set to \"disabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers for details.",
+                            "remediationFunction": "PR-AZR-0126-ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "SQL servers with public access detected!",
+                    "description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
                 }
             ]
         }
