@@ -8,7 +8,7 @@ package rule
 
 default efs_kms = null
 
-aws_attribute_absence["efs_kms"] {
+aws_issue["efs_kms"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::efs::filesystem"
     not resource.Properties.KmsKeyId
@@ -29,23 +29,14 @@ aws_issue["efs_kms"] {
 efs_kms {
     lower(input.Resources[i].Type) == "aws::efs::filesystem"
     not aws_issue["efs_kms"]
-    not aws_attribute_absence["efs_kms"]
 }
 
 efs_kms = false {
     aws_issue["efs_kms"]
-}
-
-efs_kms = false {
-    aws_attribute_absence["efs_kms"]
 }
 
 efs_kms_err = "AWS Elastic File System (EFS) not encrypted using Customer Managed Key" {
     aws_issue["efs_kms"]
-}
-
-efs_kms_miss_err = "EFS attribute KmsKeyId missing in the resource" {
-    aws_attribute_absence["efs_kms"]
 }
 
 efs_kms_metadata := {
@@ -66,7 +57,7 @@ efs_kms_metadata := {
 
 default efs_encrypt = null
 
-aws_attribute_absence["efs_encrypt"] {
+aws_issue["efs_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::efs::filesystem"
     not resource.Properties.Encrypted
@@ -81,23 +72,14 @@ aws_issue["efs_encrypt"] {
 efs_encrypt {
     lower(input.Resources[i].Type) == "aws::efs::filesystem"
     not aws_issue["efs_encrypt"]
-    not aws_attribute_absence["efs_encrypt"]
 }
 
 efs_encrypt = false {
     aws_issue["efs_encrypt"]
-}
-
-efs_encrypt = false {
-    aws_attribute_absence["efs_encrypt"]
 }
 
 efs_encrypt_err = "AWS Elastic File System (EFS) with encryption for data at rest disabled" {
     aws_issue["efs_encrypt"]
-}
-
-efs_encrypt_miss_err = "EFS attribute Encrypted missing in the resource" {
-    aws_attribute_absence["efs_encrypt"]
 }
 
 efs_encrypt_metadata := {
