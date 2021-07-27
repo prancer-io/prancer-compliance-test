@@ -9,6 +9,12 @@ package rule
 
 default sql_public_access = null
 
+azure_attribute_absence["sql_public_access"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    not resource.properties.publicNetworkAccess
+}
+
 azure_issue["sql_public_access"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
@@ -17,10 +23,19 @@ azure_issue["sql_public_access"] {
 
 sql_public_access {
     lower(input.resources[_].type) == "microsoft.sql/servers"
+    not azure_attribute_absence["sql_public_access"]
     not azure_issue["sql_public_access"]
 }
 
 sql_public_access = false {
+    azure_attribute_absence["sql_public_access"]
+}
+
+sql_public_access = false {
+    azure_issue["sql_public_access"]
+}
+
+sql_public_access_miss_err = "SQL servers attribute public access missing in the resource!" {
     azure_issue["sql_public_access"]
 }
 
