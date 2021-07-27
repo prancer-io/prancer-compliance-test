@@ -2356,7 +2356,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SQL_SERVER_ALERT",
+                    "masterTestId": "TEST_SQL_SERVER_ALERT_1",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
@@ -2367,7 +2367,7 @@
                             "id": "PR-AZR-0102-ARM",
                             "eval": "data.rule.sql_server_alert",
                             "message": "data.rule.sql_server_alert_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for vpn gateway from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies",
+                            "remediationDescription": "In Resource of type \"Microsoft.sql/servers/securityalertpolicies\" make sure properties.state exists and value is set to \"Enabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies.",
                             "remediationFunction": "PR_AZR_0102_ARM.py"
                         }
                     ],
@@ -2377,9 +2377,36 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [
-                                "NIST 800"
-                            ],
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SQL_SERVER_ALERT_2",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_alert_policy.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0103-ARM",
+                            "eval": "data.rule.sql_managed_instance_alert",
+                            "message": "data.rule.sql_managed_instance_alert_err",
+                            "remediationDescription": "In Resource of type \"Microsoft.sql/managedinstances/securityalertpolicies\" make sure properties.state exists and value is set to \"Enabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/securityalertpolicies.",
+                            "remediationFunction": "PR_AZR_0103_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Advanced data security should be enabled on your SQL managed instance.",
+                    "description": "Advanced data security should be enabled on your SQL managed instance.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
                             "service": [
                                 "arm"
                             ]
