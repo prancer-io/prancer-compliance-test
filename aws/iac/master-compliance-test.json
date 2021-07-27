@@ -3670,35 +3670,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_S3_14",
-                    "masterSnapshotId": [
-                        "CFR_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(s3.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-0151-CFR",
-                            "eval": "data.rule.s3_encryption",
-                            "message": "data.rule.s3_encryption_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html",
-                            "remediationFunction": "PR_AWS_0151_CFR.py"
-                        }
-                    ],
-                    "severity": "low",
-                    "title": "AWS S3 buckets do not have server side encryption.",
-                    "description": "Customers can protect the data in S3 buckets using the AWS server-side encryption. If the server-side encryption is not turned on for S3 buckets with sensitive data, in the event of a data breach, malicious users can gain access to the data.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "s3"
-                            ]
-                        }
-                    ]
-                },
-                {
                     "masterTestId": "TEST_EC2_2",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
