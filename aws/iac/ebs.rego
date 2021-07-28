@@ -12,6 +12,7 @@ aws_issue["ebs_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::volume"
     resource.Properties.Encrypted != true
+    resource.Properties.Encrypted != "true"
 }
 
 ebs_encrypt {
