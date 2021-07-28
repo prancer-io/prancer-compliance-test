@@ -24,6 +24,7 @@ aws_issue["dynamodb_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::dynamodb::table"
     resource.Properties.SSESpecification.SSEEnabled != true
+    resource.Properties.SSESpecification.SSEEnabled != "true"
 }
 
 dynamodb_encrypt {
