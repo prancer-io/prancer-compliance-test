@@ -900,7 +900,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Auditing Retention should be enabled for Azure Storage Account for more than 90 days",
+                    "title": "Azure Storage Account auditing retention should be 90 days or more",
                     "description": "This policy identifies Storage Accounts which have Auditing Retentions less than 90 days. Audit Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access. It is recommended to configure Storage Account Audit Log Retention to be greater than or equal to 90 days.",
                     "tags": [
                         {
@@ -929,7 +929,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure storage account logging for blobs should be enabled",
+                    "title": "Azure storage account blob services diagnostic logs should be enabled",
                     "description": "Storage Logging records details of requests (read, write, and delete operations) against your Azure blobs. The logs include additional information such as:_x000D_- Timing and server latency._x000D_- Success or failure, and HTTP status code._x000D_- Authentication details_x000D__x000D_This policy identifies Azure storage accounts that do not have logging enabled for blobs. As a best practice, enable logging for read, write, and delete request types on blobs.",
                     "tags": [
                         {
@@ -958,7 +958,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure storage account logging for queues should be enabled",
+                    "title": "Azure storage account queue services diagnostic logs should be enabled",
                     "description": "Queue logging cannot be enabled for Storage Accounts with 'kind' of BlobStorage **_x000D__x000D_Storage Logging records details of requests (read, write, and delete operations) against your Azure queues. The logs include additional information such as:_x000D_- Timing and server latency._x000D_- Success or failure, and HTTP status code._x000D_- Authentication details_x000D__x000D_This policy identifies Azure storage accounts that do not have logging enabled for queues. As a best practice, enable logging for read, write, and delete request types on queues.",
                     "tags": [
                         {
@@ -987,8 +987,8 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure storage account logging for tables should be enabled",
-                    "description": "** MODIFICATION OF DEFAULT RULE - As of 12-APR-2019, Table logging cannot be enabled for Storage Accounts with 'kind' of BlobStorage **_x000D__x000D_Storage Logging records details of requests (read, write, and delete operations) against your Azure tables. The logs include additional information such as:_x000D_- Timing and server latency._x000D_- Success or failure, and HTTP status code._x000D_- Authentication details_x000D__x000D_This policy identifies Azure storage accounts that do not have logging enabled for tables. As a best practice, enable logging for read, write, and delete request types on tables.",
+                    "title": "Azure storage account table services diagnostic logs should be enabled",
+                    "description": "Storage Logging records details of requests (read, write, and delete operations) against your Azure queues. The logs include additional information such as:_x005F_x000D_ - Timing and server latency._x005F_x000D_ - Success or failure, and HTTP status code._x005F_x000D_ - Authentication details_x005F_x000D_ _x005F_x000D_ This policy identifies Azure storage accounts that do not have logging enabled for tables. As a best practice, enable logging for read, write, and delete request types on tables.",
                     "tags": [
                         {
                             "cloud": "git",
