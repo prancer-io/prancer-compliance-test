@@ -185,8 +185,7 @@ aws_issue["cf_https"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudfront::distribution"
     cache := resource.Properties.DistributionConfig.DefaultCacheBehavior
-    lower(cache.ViewerProtocolPolicy) != "https-only"
-    lower(cache.ViewerProtocolPolicy) != "redirect-to-https"
+    lower(cache.ViewerProtocolPolicy) == "allow-all"
 }
 
 cf_https {

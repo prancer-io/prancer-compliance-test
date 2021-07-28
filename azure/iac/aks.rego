@@ -82,15 +82,15 @@ aks_http_routing = false {
     azure_issue["aks_http_routing"]
 }
 
-aks_http_routing = false {
+aks_http_routing {
     azure_attribute_absence["aks_http_routing"]
 }
 
-aks_http_routing_err = "Azure AKS cluster HTTP application routing enabled" {
+aks_http_routing_err = "Azure AKS cluster HTTP application routing is currently enabled. Please disable it." {
     azure_issue["aks_http_routing"]
 }
 
-aks_http_routing_miss_err = "AKS cluster attribute addonProfiles.httpApplicationRouting missing in the resource" {
+aks_http_routing_miss_err = "AKS cluster attribute addonProfiles.httpApplicationRouting is missing from the resource. Which is fine." {
     azure_attribute_absence["aks_http_routing"]
 }
 
@@ -99,7 +99,7 @@ aks_http_routing_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure AKS cluster HTTP application routing enabled",
+    "Policy Title": "Azure AKS cluster HTTP application routing should be disabled",
     "Policy Description": "HTTP application routing configures an Ingress controller in your AKS cluster. As applications are deployed, the solution also creates publicly accessible DNS names for application endpoints. While this makes it easy to access applications that are deployed to your Azure AKS cluster, this add-on is not recommended for production use._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster HTTP application routing add-on setting and alerts if enabled.",
     "Resource Type": "microsoft.containerservice/managedclusters",
     "Policy Help URL": "",
@@ -257,6 +257,62 @@ aks_rbac_metadata := {
     "Language": "ARM template",
     "Policy Title": "Azure AKS enable role-based access control (RBAC) not enforced",
     "Policy Description": "To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster RBAC setting and alerts if disabled.",
+    "Resource Type": "microsoft.containerservice/managedclusters",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
+}
+
+#
+# 
+#
+
+default aks_aad_azure_rbac = null
+
+azure_issue["aks_aad_azure_rbac"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.aadProfile
+}
+
+azure_issue["aks_aad_azure_rbac"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.aadProfile.managed
+}
+
+azure_issue["aks_aad_azure_rbac"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.aadProfile.enableAzureRBAC
+}
+
+azure_issue["aks_aad_azure_rbac"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    resource.properties.aadProfile.managed != true
+    resource.properties.aadProfile.enableAzureRBAC != true
+}
+
+aks_aad_azure_rbac {
+    lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
+    not azure_issue["aks_aad_azure_rbac"]
+}
+
+aks_aad_azure_rbac = false {
+    azure_issue["aks_aad_azure_rbac"]
+}
+
+aks_aad_azure_rbac_err = "Managed Azure AD RBAC for AKS cluster is not enabled." {
+    azure_issue["aks_aad_azure_rbac"]
+}
+
+aks_aad_azure_rbac_metadata := {
+    "Policy Code": "PR-AZR-00101-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Managed Azure AD RBAC for AKS cluster should be enabled",
+    "Policy Description": "Azure Kubernetes Service (AKS) can be configured to use Azure Active Directory (AD) for user authentication. In this configuration, you sign in to an AKS cluster using an Azure AD authentication token. You can also configure Kubernetes role-based access control (Kubernetes RBAC) to limit access to cluster resources based a user's identity or group membership. This policy checks your AKS cluster Azure Active Directory (AD) RBAC setting and alerts if disabled.",
     "Resource Type": "microsoft.containerservice/managedclusters",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"

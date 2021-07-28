@@ -54,20 +54,33 @@ default eks_public_access = null
 aws_issue["eks_public_access"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::eks::cluster"
+    lower(resource.Properties.ResourcesVpcConfig.EndpointPublicAccess) == "true"
+}
+
+aws_bool_issue["eks_public_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
     resource.Properties.ResourcesVpcConfig.EndpointPublicAccess == true
 }
 
 eks_public_access {
     lower(input.Resources[i].Type) == "aws::eks::cluster"
     not aws_issue["eks_public_access"]
+    not aws_bool_issue["eks_public_access"]
 }
 
 eks_public_access = false {
     aws_issue["eks_public_access"]
 }
 
+eks_public_access = false {
+    aws_bool_issue["eks_public_access"]
+}
+
 eks_public_access_err = "AWS EKS cluster endpoint access publicly enabled" {
     aws_issue["eks_public_access"]
+} else = "AWS EKS cluster control plane assigned multiple security groups" {
+    aws_bool_issue["eks_public_access"]
 }
 
 eks_public_access_metadata := {

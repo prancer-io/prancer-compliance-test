@@ -87,8 +87,8 @@ aws_issue["elb_insecure_cipher"] {
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     policy := resource.Properties.Policies
     attribute := policy.Attributes[_]
-    lower(attribute.AttributeName) == lower(insecure_ciphers[_])
-    lower(attribute.AttributeValue) == "true"
+    lower(attribute.Name) == lower(insecure_ciphers[_])
+    lower(attribute.Value) == "true"
 }
 
 elb_insecure_cipher {
@@ -133,8 +133,8 @@ aws_issue["elb_insecure_protocol"] {
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     policy := resource.Properties.Policies
     attribute := policy.Attributes[_]
-    lower(attribute.AttributeName) == lower(insecure_ssl_protocols[_])
-    lower(attribute.AttributeValue) == "true"
+    lower(attribute.Name) == lower(insecure_ssl_protocols[_])
+    lower(attribute.Value) == "true"
 }
 
 elb_insecure_protocol {
@@ -171,20 +171,33 @@ default elb_access_log = null
 aws_issue["elb_access_log"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    lower(resource.Properties.AccessLoggingPolicy.Enabled) == "false"
+}
+
+aws_bool_issue["elb_access_log"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     not resource.Properties.AccessLoggingPolicy.Enabled
 }
 
 elb_access_log {
     lower(input.Resources[i].Type) == "aws::elasticloadbalancing::loadbalancer"
     not aws_issue["elb_access_log"]
+    not aws_bool_issue["elb_access_log"]
 }
 
 elb_access_log = false {
     aws_issue["elb_access_log"]
 }
 
+elb_access_log = false {
+    aws_bool_issue["elb_access_log"]
+}
+
 elb_access_log_err = "AWS Elastic Load Balancer (Classic) with access log disabled" {
     aws_issue["elb_access_log"]
+} else = "AWS Elastic Load Balancer (Classic) with access log disabled" {
+    aws_bool_issue["elb_access_log"]
 }
 
 elb_access_log_metadata := {
@@ -208,20 +221,33 @@ default elb_conn_drain = null
 aws_issue["elb_conn_drain"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
-    not resource.Properties.ConnectionDraining.Enabled
+    lower(resource.Properties.ConnectionDrainingPolicy.Enabled) == "false"
+}
+
+aws_bool_issue["elb_conn_drain"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    not resource.Properties.ConnectionDrainingPolicy.Enabled
 }
 
 elb_conn_drain {
     lower(input.Resources[i].Type) == "aws::elasticloadbalancing::loadbalancer"
     not aws_issue["elb_conn_drain"]
+    not aws_bool_issue["elb_conn_drain"]
 }
 
 elb_conn_drain = false {
     aws_issue["elb_conn_drain"]
 }
 
+elb_conn_drain = false {
+    aws_bool_issue["elb_conn_drain"]
+}
+
 elb_conn_drain_err = "AWS Elastic Load Balancer (Classic) with connection draining disabled" {
     aws_issue["elb_conn_drain"]
+} else = "AWS Elastic Load Balancer (Classic) with connection draining disabled" {
+    aws_bool_issue["elb_conn_drain"]
 }
 
 elb_conn_drain_metadata := {
@@ -245,20 +271,33 @@ default elb_crosszone = null
 aws_issue["elb_crosszone"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    lower(resource.Properties.CrossZone) == "false"
+}
+
+aws_bool_issue["elb_crosszone"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     not resource.Properties.CrossZone
 }
 
 elb_crosszone {
     lower(input.Resources[i].Type) == "aws::elasticloadbalancing::loadbalancer"
     not aws_issue["elb_crosszone"]
+    not aws_bool_issue["elb_crosszone"]
 }
 
 elb_crosszone = false {
     aws_issue["elb_crosszone"]
 }
 
+elb_crosszone = false {
+    aws_bool_issue["elb_crosszone"]
+}
+
 elb_crosszone_err = "AWS Elastic Load Balancer (Classic) with cross-zone load balancing disabled" {
     aws_issue["elb_crosszone"]
+} else = "AWS Elastic Load Balancer (Classic) with cross-zone load balancing disabled" {
+    aws_bool_issue["elb_crosszone"]
 }
 
 elb_crosszone_metadata := {
@@ -274,50 +313,181 @@ elb_crosszone_metadata := {
 }
 
 #
-# PR-AWS-0067-CFR 
-# PR-AWS-0068-CFR
+# PR-AWS-0067-CFR
 #
+default elb_sec_group_ingress = null
 
-# There is only reference to security groups, no info about security group rules
-
-default elb_sec_group = null
-
-aws_attribute_absence["elb_sec_group"] {
+aws_attribute_absence["elb_sec_group_ingress"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     not resource.Properties.SecurityGroups
 }
 
-aws_issue["elb_sec_group"] {
+aws_issue["elb_sec_group_ingress"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     count(resource.Properties.SecurityGroups) == 0
 }
 
-elb_sec_group {
+aws_ref_absence["elb_sec_group_ingress"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) != 0
+    security_groups := resource.Properties.SecurityGroups[_].Ref
+    count([c | input.Resources[j].Name == security_groups; c := 1]) == 0
+    not input.Parameters[security_groups]
+}
+
+aws_ref_issue["elb_sec_group_ingress"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) != 0
+    security_groups := resource.Properties.SecurityGroups[_].Ref
+    security_groups == input.Resources[j].Name
+    count(input.Resources[j].Properties.SecurityGroupIngress) == 0
+}
+
+aws_ref_issue["elb_sec_group_ingress"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) != 0
+    security_groups := resource.Properties.SecurityGroups[_].Ref
+    security_groups == input.Resources[j].Name
+    not input.Resources[j].Properties.SecurityGroupIngress
+}
+
+elb_sec_group_ingress {
     lower(input.Resources[i].Type) == "aws::elasticloadbalancing::loadbalancer"
-    not aws_issue["elb_sec_group"]
+    not aws_issue["elb_sec_group_ingress"]
+    not aws_ref_issue["elb_sec_group_ingress"]
+    not aws_ref_absence["elb_sec_group_ingress"]
+    not aws_attribute_absence["elb_sec_group_ingress"]
 }
 
-elb_sec_group = false {
-    aws_issue["elb_sec_group"]
+elb_sec_group_ingress = false {
+    aws_issue["elb_sec_group_ingress"]
 }
 
-elb_sec_group_err = "AWS Elastic Load Balancer (ELB) has security group with no inbound/outbound rules" {
-    aws_issue["elb_sec_group"]
+elb_sec_group_ingress = false {
+    aws_attribute_absence["elb_sec_group_ingress"]
 }
 
-elb_sec_group_miss_err = "ELB attribute SecurityGroups missing in the resource" {
-    aws_issue["elb_sec_group"]
+elb_sec_group_ingress = false {
+    aws_ref_issue["elb_sec_group_ingress"]
 }
 
-elb_sec_group_metadata := {
+elb_sec_group_ingress = false {
+    aws_ref_absence["elb_sec_group_ingress"]
+}
+
+elb_sec_group_ingress_err = "AWS Elastic Load Balancer (ELB) has security group with no inbound rules" {
+    aws_issue["elb_sec_group_ingress"]
+} else = "AWS Elastic Load Balancer (ELB) has security group Reference is missing" {
+    aws_ref_absence["elb_sec_group_egress"]
+} else = "ELB attribute SecurityGroups missing in the resource" {
+    aws_attribute_absence["elb_sec_group_ingress"]
+} else = "AWS Elastic Load Balancer (ELB) has security group with no inbound/outbound rules" {
+    aws_ref_issue["elb_sec_group_ingress"]
+}
+
+elb_sec_group_ingress_metadata := {
     "Policy Code": "PR-AWS-0067-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Elastic Load Balancer (ELB) has security group with no inbound rules",
     "Policy Description": "This policy identifies Elastic Load Balancers (ELB) which have security group with no inbound rules. A security group with no inbound rule will deny all incoming requests. ELB security groups should have at least one inbound rule, ELB with no inbound permissions will deny all traffic incoming to ELB; in other words, the ELB is useless without inbound permissions.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
+}
+
+#
+# PR-AWS-0068-CFR
+#
+default elb_sec_group_egress = null
+
+aws_attribute_absence["elb_sec_group_egress"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    not resource.Properties.SecurityGroups
+}
+
+aws_issue["elb_sec_group_egress"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) == 0
+}
+
+aws_ref_absence["elb_sec_group_egress"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) != 0
+    security_groups := resource.Properties.SecurityGroups[_].Ref
+    count([c | input.Resources[j].Name == security_groups; c := 1]) == 0
+    not input.Parameters[security_groups]
+}
+
+aws_ref_issue["elb_sec_group_egress"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) != 0
+    security_groups := resource.Properties.SecurityGroups[_].Ref
+    security_groups == input.Resources[j].Name
+    count(input.Resources[j].Properties.SecurityGroupEgress) == 0
+}
+
+aws_ref_issue["elb_sec_group_egress"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) != 0
+    security_groups := resource.Properties.SecurityGroups[_].Ref
+    security_groups == input.Resources[j].Name
+    not input.Resources[j].Properties.SecurityGroupEgress
+}
+
+elb_sec_group_egress {
+    lower(input.Resources[i].Type) == "aws::elasticloadbalancing::loadbalancer"
+    not aws_issue["elb_sec_group_egress"]
+    not aws_ref_issue["elb_sec_group_egress"]
+    not aws_ref_absence["elb_sec_group_egress"]
+    not aws_attribute_absence["elb_sec_group_egress"]
+}
+
+elb_sec_group_egress = false {
+    aws_issue["elb_sec_group_egress"]
+}
+
+elb_sec_group_egress = false {
+    aws_attribute_absence["elb_sec_group_egress"]
+}
+
+elb_sec_group_egress = false {
+    aws_ref_absence["elb_sec_group_egress"]
+}
+
+elb_sec_group_egress = false {
+    aws_ref_issue["elb_sec_group_egress"]
+}
+
+elb_sec_group_egress_err = "AWS Elastic Load Balancer (ELB) has no security group" {
+    aws_issue["elb_sec_group_egress"]
+} else = "AWS Elastic Load Balancer (ELB) has security group with no outbound rules" {
+    aws_ref_issue["elb_sec_group_egress"]
+} else = "ELB attribute SecurityGroups missing in the resource" {
+    aws_attribute_absence["elb_sec_group_egress"]
+} else = "AWS Elastic Load Balancer (ELB) has no security group" {
+    aws_ref_absence["elb_sec_group_egress"]
+}
+
+
+elb_sec_group_egress_metadata := {
+    "Policy Code": "PR-AWS-0068-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Elastic Load Balancer (ELB) has security group with no outbound rules",
+    "Policy Description": "This policy identifies Elastic Load Balancers (ELB) which have security group with no outbound rules. A security group with no outbound rule will deny all outgoing requests. ELB security groups should have at least one outbound rule, ELB with no outbound permissions will deny all traffic going to any EC2 instances or resources configured behind that ELB; in other words, the ELB is useless without outbound permissions.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
@@ -395,21 +565,41 @@ aws_issue["elb_alb_logs"] {
     lower(item.Value) != "true"
 }
 
+aws_bool_issue["elb_alb_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    item := resource.Properties.LoadBalancerAttributes[_]
+    lower(item.Key) == "access_logs.s3.enabled"
+    not item.Value
+}
+
 elb_alb_logs {
     lower(input.Resources[i].Type) == "aws::elasticloadbalancingv2::loadbalancer"
     not aws_issue["elb_alb_logs"]
+    not aws_bool_issue["elb_alb_logs"]
+    not aws_attribute_absence["elb_alb_logs"]
 }
 
 elb_alb_logs = false {
     aws_issue["elb_alb_logs"]
 }
 
+elb_alb_logs = false {
+    aws_bool_issue["elb_alb_logs"]
+}
+
+elb_alb_logs = false {
+    aws_attribute_absence["elb_alb_logs"]
+}
+
 elb_alb_logs_err = "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balancer (ALB) with access log disabled" {
     aws_issue["elb_alb_logs"]
+} else = "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balancer (ALB) with access log disabled" {
+    aws_bool_issue["elb_alb_logs"]
 }
 
 elb_alb_logs_miss_err = "ELBv2 attribute LoadBalancerAttributes missing in the resource" {
-    aws_issue["elb_alb_logs"]
+    aws_attribute_absence["elb_alb_logs"]
 }
 
 elb_alb_logs_metadata := {

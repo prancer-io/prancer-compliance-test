@@ -15,6 +15,13 @@ aws_issue["ecs_task_evelated"] {
     resource.Properties.ContainerDefinitions[_].Privileged == true
 }
 
+aws_issue["ecs_task_evelated"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    resource.Properties.ContainerDefinitions
+    lower(resource.Properties.ContainerDefinitions[_].Privileged) == "true"
+}
+
 ecs_task_evelated {
     lower(input.Resources[i].Type) == "aws::ecs::taskdefinition"
     not aws_issue["ecs_task_evelated"]

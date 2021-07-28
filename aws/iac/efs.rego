@@ -23,20 +23,33 @@ aws_issue["efs_kms"] {
 aws_issue["efs_kms"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::efs::filesystem"
+    lower(resource.Properties.Encrypted) == "false"
+}
+
+aws_bool_issue["efs_kms"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::efs::filesystem"
     not resource.Properties.Encrypted
 }
 
 efs_kms {
     lower(input.Resources[i].Type) == "aws::efs::filesystem"
     not aws_issue["efs_kms"]
+    not aws_bool_issue["efs_kms"]
 }
 
 efs_kms = false {
     aws_issue["efs_kms"]
 }
 
+efs_kms = false {
+    aws_bool_issue["efs_kms"]
+}
+
 efs_kms_err = "AWS Elastic File System (EFS) not encrypted using Customer Managed Key" {
     aws_issue["efs_kms"]
+} else = "AWS Elastic File System (EFS) not encrypted using Customer Managed Key" {
+    aws_bool_issue["efs_kms"]
 }
 
 efs_kms_metadata := {
@@ -66,20 +79,32 @@ aws_issue["efs_encrypt"] {
 aws_issue["efs_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::efs::filesystem"
-    resource.Properties.Encrypted != true
+    lower(resource.Properties.Encrypted) != "true"
+}
+aws_bool_issue["efs_encrypt"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::efs::filesystem"
+    not resource.Properties.Encrypted
 }
 
 efs_encrypt {
     lower(input.Resources[i].Type) == "aws::efs::filesystem"
     not aws_issue["efs_encrypt"]
+    not aws_bool_issue["efs_encrypt"]
 }
 
 efs_encrypt = false {
     aws_issue["efs_encrypt"]
 }
 
+efs_encrypt = false {
+    aws_bool_issue["efs_encrypt"]
+}
+
 efs_encrypt_err = "AWS Elastic File System (EFS) with encryption for data at rest disabled" {
     aws_issue["efs_encrypt"]
+} else = "AWS Elastic File System (EFS) with encryption for data at rest disabled" {
+    aws_bool_issue["efs_encrypt"]
 }
 
 efs_encrypt_metadata := {

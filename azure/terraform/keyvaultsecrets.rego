@@ -8,7 +8,7 @@ package rule
 
 default kv_expire = null
 
-azure_attribute_absence["kv_expire"] {
+azure_issue["kv_expire"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_key_vault_secret"
     not resource.properties.expiration_date
@@ -17,29 +17,21 @@ azure_attribute_absence["kv_expire"] {
 azure_issue["kv_expire"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_key_vault_secret"
-    count(resource.properties.expiration_date) = 0
+    not regex.match("^[2-9]\\d{3}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]).*",
+        resource.properties.expiration_date)
 }
 
 kv_expire {
     lower(input.resources[_].type) == "azurerm_key_vault_secret"
     not azure_issue["kv_expire"]
-    not azure_attribute_absence["kv_expire"]
 }
 
 kv_expire = false {
     azure_issue["kv_expire"]
-}
-
-kv_expire = false {
-    azure_attribute_absence["kv_expire"]
 }
 
 kv_expire_err = "Azure Key Vault secrets does not have any expiration date" {
     azure_issue["kv_expire"]
-}
-
-kv_expire_miss_err = "Azure Key Vault attribute expiration_date is missing from the resource" {
-    azure_attribute_absence["kv_expire"]
 }
 
 kv_expire_metadata := {
