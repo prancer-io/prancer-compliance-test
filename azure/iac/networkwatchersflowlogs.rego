@@ -14,6 +14,12 @@ azure_attribute_absence["netwatch_logs"] {
     not resource.properties.enabled
 }
 
+azure_attribute_absence["netwatch_logs"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
+    not resource.properties.flowAnalyticsConfiguration.networkWatcherFlowAnalyticsConfiguration.enabled
+}
+
 azure_issue["netwatch_logs"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
@@ -70,6 +76,12 @@ azure_attribute_absence["netwatch_log_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
     not resource.properties.retentionPolicy.enabled
+}
+
+azure_attribute_absence["netwatch_log_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
+    not resource.properties.retentionPolicy.days
 }
 
 azure_issue["netwatch_log_retention"] {
