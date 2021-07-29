@@ -1029,6 +1029,130 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_SECRETS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(secrets.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0001-RGX",
+                            "eval": "data.rule.gl_azure_secrets",
+                            "message": "data.rule.gl_azure_secrets_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR-AZR-0001-RGX.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Secrets are not hardcoded in the ARM template",
+                    "description": "Secrets should not be hardcoded in the ARM Template. Make sure to put those secrets in a vault and access from there.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KeyVault_1",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(KeyVault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0107-ARM",
+                            "eval": "data.rule.KeyVault",
+                            "message": "data.rule.KeyVault_err",
+                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure you have added either permissions.keys or permissions.secrets or permissions.certificates under each AccessPolicyEntry of properties.accessPolicies. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json for details.",
+                            "remediationFunction": "PR-AZR-0107-ARM.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure at least one principal has access to Keyvault",
+                    "description": "Use the Azure Key Vault to store secrets within the Microsoft Azure environment. Secrets in Azure Key Vault are octet sequences with a maximum size of 25k bytes each.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices",
+                                "HIPAA",
+                                "NIST CSF"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KeyVault_2",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(KeyVault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0108-ARM",
+                            "eval": "data.rule.enableSoftDelete",
+                            "message": "data.rule.enableSoftDelete_err",
+                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure properties.enableSoftDelete exists and value is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json for details.",
+                            "remediationFunction": "PR-AZR-0108-ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure the key vault is recoverable - enable 'Soft Delete' setting for a Key Vault",
+                    "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation, etc.) supported by the key vault objects. It is recommended the key vault be made recoverable by enabling the 'Do Not Purge' and 'Soft Delete' functions. This is in order to prevent loss of encrypted data including storage accounts, SQL databases, and/or dependent services provided by key vault objects (Keys, Secrets, Certificates) etc., as may happen in the case of accidental deletion by a user or from disruptive activity by a malicious user.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KeyVault_3",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(KeyVault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0109-ARM",
+                            "eval": "data.rule.enablePurgeProtection",
+                            "message": "data.rule.enablePurgeProtection_err",
+                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure properties.enablePurgeProtection exists and value is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json for details.",
+                            "remediationFunction": "PR-AZR-0109-ARM.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Key vault should have purge protection enabled",
+                    "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices "
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_KEYVAULT_SECRETS",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -1045,8 +1169,8 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Key Vault secrets should have expiration date",
-                    "description": "This policy identifies Azure Key Vault secrets that do not have an expiry date. As a best practice, set an expiration date for each secret and rotate the secret regularly.",
+                    "title": "Azure Key Vault secrets should have an expiration date",
+                    "description": "This policy identifies Azure Key Vault secrets that do not have an expiration date. As a best practice, set an expiration date for each secret and rotate the secret regularly.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2497,130 +2621,6 @@
                             "cloud": "git",
                             "compliance": [
                                 "NIST 800"
-                            ],
-                            "service": [
-                                "arm"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_SECRETS",
-                    "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(secrets.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-0001-RGX",
-                            "eval": "data.rule.gl_azure_secrets",
-                            "message": "data.rule.gl_azure_secrets_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR-AZR-0001-RGX.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure Secrets are not hardcoded in the ARM template",
-                    "description": "Secrets should not be hardcoded in the ARM Template. Make sure to put those secrets in a vault and access from there.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "arm"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_KeyVault_1",
-                    "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(KeyVault.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-0107-ARM",
-                            "eval": "data.rule.KeyVault",
-                            "message": "data.rule.KeyVault_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure you have added either permissions.keys or permissions.secrets or permissions.certificates under each AccessPolicyEntry of properties.accessPolicies. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json for details.",
-                            "remediationFunction": "PR-AZR-0107-ARM.py"
-                        }
-                    ],
-                    "severity": "Low",
-                    "title": "Ensure at least one principal has access to Keyvault",
-                    "description": "Use the Azure Key Vault to store secrets within the Microsoft Azure environment. Secrets in Azure Key Vault are octet sequences with a maximum size of 25k bytes each.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "Best Practices",
-                                "HIPAA",
-                                "NIST CSF"
-                            ],
-                            "service": [
-                                "arm"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_KeyVault_2",
-                    "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(KeyVault.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-0108-ARM",
-                            "eval": "data.rule.enableSoftDelete",
-                            "message": "data.rule.enableSoftDelete_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure properties.enableSoftDelete exists and value is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json for details.",
-                            "remediationFunction": "PR-AZR-0108-ARM.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure the key vault is recoverable - enable 'Soft Delete' setting for a Key Vault",
-                    "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation, etc.) supported by the key vault objects. It is recommended the key vault be made recoverable by enabling the 'Do Not Purge' and 'Soft Delete' functions. This is in order to prevent loss of encrypted data including storage accounts, SQL databases, and/or dependent services provided by key vault objects (Keys, Secrets, Certificates) etc., as may happen in the case of accidental deletion by a user or from disruptive activity by a malicious user.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "Best Practices"
-                            ],
-                            "service": [
-                                "arm"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_KeyVault_3",
-                    "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(KeyVault.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-0109-ARM",
-                            "eval": "data.rule.enablePurgeProtection",
-                            "message": "data.rule.enablePurgeProtection_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure properties.enablePurgeProtection exists and value is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json for details.",
-                            "remediationFunction": "PR-AZR-0109-ARM.py"
-                        }
-                    ],
-                    "severity": "High",
-                    "title": "Key vault should have purge protection enabled",
-                    "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "Best Practices "
                             ],
                             "service": [
                                 "arm"
