@@ -2521,8 +2521,8 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Secrets should be removed from the source code",
-                    "description": "We should not have any secret in the source code. Make sure to put the secrets in a vault",
+                    "title": "Ensure Secrets are not hardcoded in the ARM template",
+                    "description": "Secrets should not be hardcoded in the ARM Template. Make sure to put those secrets in a vault and access from there.",
                     "tags": [
                         {
                             "cloud": "git",

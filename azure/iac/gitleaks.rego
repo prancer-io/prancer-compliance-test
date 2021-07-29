@@ -97,10 +97,15 @@ azure_issue["gl_azure_secrets"] {
 }
 
 gl_azure_secrets = false {
+   not azure_issue["gl_azure_secrets"]
+}
+
+gl_azure_secrets = false {
     azure_issue["gl_azure_secrets"]
 }
 
-gl_azure_secrets_err = "There is a possibility that Azure secret has leaked" {
+
+gl_azure_secrets_err = "Secrets has been found hardcoded in the template. Please remove and put those in a valut and access from there" {
     azure_issue["gl_azure_secrets"]
 }
 
@@ -109,8 +114,8 @@ gl_azure_secrets_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Activity Log Retention should not be set to less than 365 days",
-    "Policy Description": "A Log Profile controls how your Activity Log is exported and retained. Since the average time to detect a breach is over 200 days, it is recommended to retain your activity log for 365 days or more in order to have time to respond to any incidents.",
+    "Policy Title": "Ensure Secrets are not hardcoded in the ARM template",
+    "Policy Description": "Secrets should not be hardcoded in the ARM Template. Make sure to put those secrets in a vault and access from there.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": ""
