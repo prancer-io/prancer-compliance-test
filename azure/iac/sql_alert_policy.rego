@@ -105,7 +105,7 @@ sql_server_alert_2_err = "Security alert is currently not enabled on SQL Server 
     azure_sql_security_alert_disabled["sql_server_alert_2"]
 }
 
-sql_server_alert_metadata := {
+sql_server_alert_2_metadata := {
     "Policy Code": "PR-AZR-0127-ARM",
     "Type": "IaC",
     "Product": "AZR",
@@ -196,29 +196,29 @@ azure_sql_security_alert_disabled["sql_managed_instance_alert_2"] {
     lower(resource.properties.state) == "disabled"
 }
 
-sql_managed_instance_alert {
+sql_managed_instance_alert_2 {
     lower(input.resources[_].type) == "microsoft.sql/managedinstances"
     not azure_attribute_absence["sql_managed_instance_alert_2"]
     not azure_sql_security_alert_disabled["sql_managed_instance_alert_2"]
 }
 
-sql_managed_instance_alert = false {
+sql_managed_instance_alert_2 = false {
     azure_attribute_absence["sql_managed_instance_alert_2"]
 }
 
-sql_managed_instance_alert = false {
+sql_managed_instance_alert_2 = false {
     azure_sql_security_alert_disabled["sql_managed_instance_alert_2"]
 }
 
-sql_managed_instance_miss_alert_err = "securityAlertPolicies property 'state' is missing from the resource" {
+sql_managed_instance_alert_2_miss_err = "securityAlertPolicies property 'state' is missing from the resource" {
     azure_attribute_absence["sql_managed_instance_alert_2"]
 }
 
-sql_managed_instance_alert_err = "Security alert is currently not enabled on SQL managed instance resource." {
+sql_managed_instance_alert_2_err = "Security alert is currently not enabled on SQL managed instance resource." {
     azure_sql_security_alert_disabled["sql_managed_instance_alert_2"]
 }
 
-sql_managed_instance_alert_metadata := {
+sql_managed_instance_alert_2_metadata := {
     "Policy Code": "PR-AZR-0128-ARM",
     "Type": "IaC",
     "Product": "AZR",

@@ -47,7 +47,7 @@ netwatchFlowlogs_err = "Azure Network Watcher NSG flow logs are disabled" {
 }
 
 
-netwatch_logs_metadata := {
+netwatchFlowlogs_metadata := {
     "Policy Code": "PR-AZR-0049-ARM",
     "Type": "IaC",
     "Product": "AZR",
