@@ -63,19 +63,22 @@ default aks_http_routing = null
 azure_attribute_absence["aks_http_routing"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    not resource.properties.addon_profile[_].http_application_routing
+    addon_profile := resource.properties.addon_profile[_]
+    not addon_profile.http_application_routing
 }
 
 azure_attribute_absence["aks_http_routing"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    count(resource.properties.addon_profile[_].http_application_routing) == 0
+    addon_profile := resource.properties.addon_profile[_]
+    count(addon_profile.http_application_routing) == 0
 }
 
 azure_issue["aks_http_routing"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    http_application_routing := resource.properties.addon_profile[_].http_application_routing[_]
+    addon_profile := resource.properties.addon_profile[_]
+    http_application_routing := addon_profile.http_application_routing[_]
     http_application_routing.enabled == true
 }
 
