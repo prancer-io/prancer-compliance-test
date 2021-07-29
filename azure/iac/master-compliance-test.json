@@ -2302,7 +2302,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Container Registry using the deprecated classic registry",
+                    "title": "Azure Container Registry shoud not have deprecated classic SKU configured",
                     "description": "This policy identifies an Azure Container Registry (ACR) that is using the classic SKU. The initial release of the Azure Container Registry (ACR) service that was offered as a classic SKU is being deprecated and will be unavailable after April 2019. As a best practice, upgrade your existing classic registry to a managed registry._x000D__x000D_For more information, visit https://docs.microsoft.com/en-us/azure/container-registry/container-registry-upgrade",
                     "tags": [
                         {
