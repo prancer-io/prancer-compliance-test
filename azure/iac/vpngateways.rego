@@ -13,7 +13,7 @@ azure_attribute_absence["vpn_encrypt"] {
     lower(resource.type) == "microsoft.network/vpngateways"
     count([c | con := resource.properties.connections[_];
                ipsec := con.properties.ipsecPolicies[_]
-               ipsec.ipsecEncryption; c := 4,2]) == 2
+               ipsec.ipsecEncryption; c := 1]) == 0
 }
 
 azure_issue["vpn_encrypt"] {
