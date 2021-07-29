@@ -2192,6 +2192,68 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_postgreSQL_1",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0115-ARM",
+                            "eval": "data.rule.geoRedundantBackup",
+                            "message": "data.rule.geoRedundantBackup_err",
+                            "remediationDescription": "In Resource of type \"Microsoft.dbforpostgresql/servers\" make sure properties.storageProfile.geoRedundantBackup exists and value is set to \"Enabled\". \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers for details.",
+                            "remediationFunction": "PR-AZR-0115-ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Geo-redundant backup is enabled on PostgreSQL database server.",
+                    "description": "Azure Database for PostgreSQL provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_postgreSQL_2",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0124-ARM",
+                            "eval": "data.rule.sslEnforcement",
+                            "message": "data.rule.sslEnforcement_err",
+                            "remediationDescription": "In Resource of type \"Microsoft.dbforpostgresql/servers\" make sure properties.sslEnforcement exists and value is set to \"Enabled\". \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers for details.",
+                            "remediationFunction": "PR-AZR-0124-ARM.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure ssl enforcement is enabled on PostgreSQL Database Server.",
+                    "description": "Enable SSL connection on PostgreSQL Servers. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_PRICING",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -2208,7 +2270,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Standard pricing tier should be selected in Security Center",
+                    "title": "Azure Security Center should have pricing tier configured to 'standard'",
                     "description": "Selecting the standard pricing tier will enable threat detection for networks and virtual systems by providing threat intelligence, anomaly detection, and behavior analytics in Azure Security Center.",
                     "tags": [
                         {
@@ -2779,68 +2841,6 @@
                     "severity": "Medium",
                     "title": "Ensure SQL server's TDE protector is encrypted with Customer-managed key",
                     "description": "Customer-managed key support for Transparent Data Encryption (TDE) allows user control of TDE encryption keys and restricts who can access them and when. Azure Key Vault, Azure’s cloud-based external key management system is the first key management service where TDE has integrated support for Customer-managed keys. With Customer-managed key support, the database encryption key is protected by an asymmetric key stored in the Key Vault. The asymmetric key is set at the server level and inherited by all databases under that server.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "Best Practices"
-                            ],
-                            "service": [
-                                "arm"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_postgreSQL_1",
-                    "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(postgreSQL.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-0115-ARM",
-                            "eval": "data.rule.geoRedundantBackup",
-                            "message": "data.rule.geoRedundantBackup_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.dbforpostgresql/servers\" make sure properties.storageProfile.geoRedundantBackup exists and value is set to \"Enabled\". \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers for details.",
-                            "remediationFunction": "PR-AZR-0115-ARM.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure Geo-redundant backup is enabled on PostgreSQL database server.",
-                    "description": "Azure Database for PostgreSQL provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "Best Practices"
-                            ],
-                            "service": [
-                                "arm"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_postgreSQL_2",
-                    "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(postgreSQL.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-0124-ARM",
-                            "eval": "data.rule.sslEnforcement",
-                            "message": "data.rule.sslEnforcement_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.dbforpostgresql/servers\" make sure properties.sslEnforcement exists and value is set to \"Enabled\". \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers for details.",
-                            "remediationFunction": "PR-AZR-0124-ARM.py"
-                        }
-                    ],
-                    "severity": "High",
-                    "title": "Ensure ssl enforcement is enabled on PostgreSQL Database Server.",
-                    "description": "Enable SSL connection on PostgreSQL Servers. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application.",
                     "tags": [
                         {
                             "cloud": "git",
