@@ -1029,35 +1029,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SECRETS",
-                    "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(secrets.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-0001-RGX",
-                            "eval": "data.rule.gl_azure_secrets",
-                            "message": "data.rule.gl_azure_secrets_err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR-AZR-0001-RGX.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure Secrets are not hardcoded in the ARM template",
-                    "description": "Secrets should not be hardcoded in the ARM Template. Make sure to put those secrets in a vault and access from there.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "arm"
-                            ]
-                        }
-                    ]
-                },
-                {
                     "masterTestId": "TEST_KeyVault_1",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -2333,6 +2304,35 @@
                     "severity": "Medium",
                     "title": "Azure ACR webhook should have HTTPS protocol enabled",
                     "description": "Ensure you send container registry webhooks only to a HTTPS endpoint. This policy checks your container registry webhooks and alerts if it finds a URI with HTTP.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECRETS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(secrets.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0001-RGX",
+                            "eval": "data.rule.gl_azure_secrets",
+                            "message": "data.rule.gl_azure_secrets_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR-AZR-0001-RGX.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Secrets are not hardcoded in the ARM template",
+                    "description": "Secrets should not be hardcoded in the ARM Template. Make sure to put those secrets in a vault and access from there.",
                     "tags": [
                         {
                             "cloud": "git",

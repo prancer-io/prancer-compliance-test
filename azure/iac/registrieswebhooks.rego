@@ -24,7 +24,6 @@ acr_webhooks {
     lower(input.resources[_].type) == "microsoft.containerregistry/registries/webhooks"
     not azure_attribute_absence["acr_webhooks"]
     not azure_issue["acr_webhooks"]
-    
 }
 
 acr_webhooks = false {
