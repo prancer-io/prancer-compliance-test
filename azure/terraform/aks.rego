@@ -119,19 +119,22 @@ default aks_monitoring = null
 aws_attribute_absence["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    not resource.properties.addon_profile[_].oms_agent
+    addon_profile := resource.properties.addon_profile[_]
+    not addon_profile.oms_agent
 }
 
 aws_attribute_absence["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    count(resource.properties.addon_profile[_].oms_agent) == 0
+    addon_profile := resource.properties.addon_profile[_]
+    count(addon_profile.oms_agent) == 0
 }
 
 azure_issue["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    oms_agent := resource.properties.addon_profile[_].oms_agent[_]
+    addon_profile := resource.properties.addon_profile[_]
+    oms_agent := addon_profile.oms_agent[_]
     oms_agent.enabled != true
 }
 

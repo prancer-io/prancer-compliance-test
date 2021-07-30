@@ -30,7 +30,8 @@ aws_issue["acm_wildcard"] {
 aws_issue["acm_wildcard"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_acm_certificate"
-    startswith(resource.properties.DomainValidationOptions[_].domain_name, "*")
+    domain_validation_options := resource.properties.DomainValidationOptions[_]
+    startswith(domain_validation_options.domain_name, "*")
 }
 
 acm_wildcard {

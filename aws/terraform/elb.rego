@@ -169,7 +169,8 @@ default elb_access_log = null
 aws_issue["elb_access_log"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_elb"
-    resource.properties.access_logs[_].enabled == false
+    access_logs := resource.properties.access_logs[_]
+    access_logs.enabled == false
 }
 
 elb_access_log {
@@ -389,7 +390,8 @@ aws_attribute_absence["elb_alb_logs"] {
 aws_issue["elb_alb_logs"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_lb"
-    resource.properties.access_logs[_].enabled != true
+    access_logs := resource.properties.access_logs[_]
+    access_logs.enabled != true
 }
 
 aws_issue["elb_alb_logs"] {
@@ -447,13 +449,15 @@ aws_attribute_absence["elb_listener_ssl"] {
 aws_issue["elb_listener_ssl"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_elb"
-    resource.properties.listeners[_].ssl_certificate_id == ""
+    listeners := resource.properties.listeners[_]
+    listeners.ssl_certificate_id == ""
 }
 
 aws_issue["elb_listener_ssl"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_elb"
-    resource.properties.listeners[_].ssl_certificate_id == null
+    listeners := resource.properties.listeners[_]
+    listeners.ssl_certificate_id == null
 }
 
 aws_issue["elb_listener_ssl"] {
@@ -513,7 +517,8 @@ aws_attribute_absence["elb_over_https"] {
 aws_issue["elb_over_https"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_elb"
-    lower(resource.properties.listener[_].lb_protocol) == "http"
+    listener := resource.properties.listener[_]
+    lower(listener.lb_protocol) == "http"
 }
 
 elb_over_https {
