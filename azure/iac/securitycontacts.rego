@@ -22,8 +22,8 @@ azure_issue["securitycontacts"] {
 
 securitycontacts {
     lower(input.resources[_].type) == "microsoft.security/securitycontacts"
-    not azure_issue["securitycontacts"]
     not azure_attribute_absence["securitycontacts"]
+    not azure_issue["securitycontacts"]
 }
 
 securitycontacts = false {
