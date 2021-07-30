@@ -2380,6 +2380,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_SQL_MANAGED_INSTANCE",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_managedinstance.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0116-ARM",
+                            "eval": "data.rule.sql_mi_public_endpoint_disabled",
+                            "message": "data.rule.sql_mi_public_endpoint_disabled_err",
+                            "remediationDescription": "IN ARM template make sure 'properties.publicDataEndpointEnabled' does not exist or if exist set value 'false' to 'properties.publicDataEndpointEnabled' under resource of type 'microsoft.sql/managedinstances'. Visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances for details.",
+                            "remediationFunction": "PR_AZR_0116_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "SQL Managed Instance should have public endpoint access disabled",
+                    "description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_STORAGE_ACCOUNT_1",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
