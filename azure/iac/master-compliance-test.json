@@ -2331,7 +2331,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure ACR HTTPS should be enabled for webhook",
+                    "title": "Azure ACR webhook should have HTTPS protocol enabled",
                     "description": "Ensure you send container registry webhooks only to a HTTPS endpoint. This policy checks your container registry webhooks and alerts if it finds a URI with HTTP.",
                     "tags": [
                         {
