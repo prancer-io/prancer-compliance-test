@@ -6,6 +6,12 @@ package rule
 
 default serverKeyType = null
 
+azure_attribute_absence["serverKeyType"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/encryptionprotector"
+    not resource.properties.serverKeyType
+}
+
 azure_issue["serverKeyType"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/encryptionprotector"
@@ -14,14 +20,19 @@ azure_issue["serverKeyType"] {
 
 serverKeyType {
     lower(input.resources[_].type) == "microsoft.sql/servers/encryptionprotector"
+    not azure_attribute_absence["serverKeyType"]
     not azure_issue["serverKeyType"]
+}
+
+serverKeyType = false {
+    azure_attribute_absence["serverKeyType"]
 }
 
 serverKeyType = false {
     azure_issue["serverKeyType"]
 }
 
-serverKeyType_err = "SQL server's TDE protector is not encrypted with Customer-managed key." {
+serverKeyType_err = "SQL server's TDE protector is currently not encrypted with Customer-managed key." {
     azure_issue["serverKeyType"]
 }
 
