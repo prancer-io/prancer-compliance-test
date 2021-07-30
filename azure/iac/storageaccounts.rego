@@ -8,7 +8,16 @@ package rule
 
 default storage_secure = null
 
+#in latest API from 2019-04-01, supportsHttpsTrafficOnly is true by default if not exist
 azure_attribute_absence["storage_secure"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    resource.apiVersion >= "2019-04-01"
+    not resource.properties.supportsHttpsTrafficOnly
+}
+
+#in older API before 2019-04-01, supportsHttpsTrafficOnly is false by default if not exist
+azure_issue["storage_secure"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     resource.apiVersion < "2019-04-01"
@@ -23,24 +32,20 @@ azure_issue["storage_secure"] {
 
 storage_secure {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
-    not azure_issue["storage_secure"]
     not azure_attribute_absence["storage_secure"]
+    not azure_issue["storage_secure"]
 }
 
 storage_secure = false {
     azure_issue["storage_secure"]
 }
 
-storage_secure = false {
+storage_secure {
     azure_attribute_absence["storage_secure"]
 }
 
-storage_secure_err = "Storage Accounts without Secure transfer enabled" {
+storage_secure_err = "Storage Accounts https based secure transfer is not enabled" {
     azure_issue["storage_secure"]
-}
-
-storage_secure_miss_err = "Storage Account attribute supportsHttpsTrafficOnly missing in the resource" {
-    azure_attribute_absence["storage_secure"]
 }
 
 storage_secure_metadata := {
@@ -48,7 +53,7 @@ storage_secure_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Storage Accounts without Secure transfer enabled",
+    "Policy Title": "Storage Accounts https based secure transfer should be enabled",
     "Policy Description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPs. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesnâ€™t support HTTPs for custom domain names, this option is not applied when using a custom domain name.",
     "Resource Type": "microsoft.storage/storageaccounts",
     "Policy Help URL": "",
