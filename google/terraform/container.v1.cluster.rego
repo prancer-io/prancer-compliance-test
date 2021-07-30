@@ -694,7 +694,7 @@ gc_issue["k8s_pod_security"] {
     resource := input.resources[_]
     lower(resource.type) == "google_container_cluster"
     pod_security_policy_config := resource.properties.pod_security_policy_config[_]
-    pod_security_policy_config.enabled
+    not pod_security_policy_config.enabled
 }
 
 k8s_pod_security {

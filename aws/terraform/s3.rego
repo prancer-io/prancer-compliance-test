@@ -18,6 +18,12 @@ aws_attribute_absence["s3_accesslog"] {
 aws_attribute_absence["s3_accesslog"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_s3_bucket"
+    count(resource.properties.logging) == 0
+}
+
+aws_attribute_absence["s3_accesslog"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_s3_bucket"
     logging := resource.properties.logging[_]
     not logging.target_prefix
 }

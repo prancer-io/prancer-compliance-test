@@ -166,6 +166,18 @@ elb_insecure_protocol_metadata := {
 
 default elb_access_log = null
 
+aws_attribute_absence["elb_access_log"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_elb"
+    not resource.properties.access_logs
+}
+
+aws_issue["elb_access_log"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_elb"
+    count(resource.properties.access_logs) == 0
+}
+
 aws_issue["elb_access_log"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_elb"
@@ -176,14 +188,19 @@ aws_issue["elb_access_log"] {
 elb_access_log {
     lower(input.resources[_].type) == "aws_elb"
     not aws_issue["elb_access_log"]
+    not aws_attribute_absence["elb_access_log"]
 }
 
 elb_access_log = false {
     aws_issue["elb_access_log"]
+} else = false {
+    aws_attribute_absence["elb_access_log"]
 }
 
 elb_access_log_err = "AWS Elastic Load Balancer (Classic) with access log disabled" {
     aws_issue["elb_access_log"]
+} else = "AWS Elastic Load Balancer (Classic) attribute access_logs is missing in the resource" {
+    aws_attribute_absence["elb_access_log"]
 }
 
 elb_access_log_metadata := {

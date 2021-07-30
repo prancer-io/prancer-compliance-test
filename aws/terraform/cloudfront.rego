@@ -459,12 +459,12 @@ aws_issue["cf_default_ssl"] {
     viewer_certificate.cloudfront_default_certificate == true
 }
 
-cf_default_ssl = false {
+cf_default_ssl {
     lower(input.resources[_].type) == "aws_cloudfront_distribution"
     not aws_issue["cf_default_ssl"]
 }
 
-cf_default_ssl = true {
+cf_default_ssl = false {
     aws_issue["cf_default_ssl"]
 }
 

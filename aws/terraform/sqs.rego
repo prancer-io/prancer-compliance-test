@@ -54,6 +54,12 @@ aws_attribute_absence["sqs_encrypt_key"] {
 aws_issue["sqs_encrypt_key"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_sqs_queue"
+    resource.properties.kms_master_key_id == null
+}
+
+aws_issue["sqs_encrypt_key"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_sqs_queue"
     resource.properties.kms_master_key_id != null
     contains(lower(resource.properties.kms_master_key_id), "alias/aws/sqs")
 }
@@ -102,6 +108,12 @@ aws_attribute_absence["sqs_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_sqs_queue"
     not resource.properties.kms_master_key_id
+}
+
+aws_attribute_absence["sqs_encrypt"] {
+	resource := input.resources[_]
+	lower(resource.type) == "aws_sqs_queue"
+	resource.properties.kms_master_key_id == null
 }
 
 aws_issue["sqs_encrypt"] {
