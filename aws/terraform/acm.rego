@@ -30,7 +30,8 @@ aws_issue["acm_wildcard"] {
 aws_issue["acm_wildcard"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_acm_certificate"
-    startswith(resource.properties.DomainValidationOptions[_].domain_name, "*")
+    domain_validation_options := resource.properties.DomainValidationOptions[_]
+    startswith(domain_validation_options.domain_name, "*")
 }
 
 acm_wildcard {
@@ -67,13 +68,27 @@ default acm_ct_log = null
 aws_attribute_absence["acm_ct_log"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_acm_certificate"
-    not resource.properties.certificate_transparency_logging_preference
+    not resource.properties.options
+}
+
+aws_attribute_absence["acm_ct_log"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_acm_certificate"
+    count(resource.properties.options) == 0
+}
+
+aws_attribute_absence["acm_ct_log"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_acm_certificate"
+    option := resource.properties.options[_]
+    not option.certificate_transparency_logging_preference
 }
 
 aws_issue["acm_ct_log"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_acm_certificate"
-    lower(resource.properties.certificate_transparency_logging_preference) != "enabled"
+    option := resource.properties.options[_]
+    lower(option.certificate_transparency_logging_preference) != "enabled"
 }
 
 acm_ct_log {
