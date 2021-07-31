@@ -107,13 +107,27 @@ default redshift_audit = null
 aws_attribute_absence["redshift_audit"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_redshift_cluster"
-    not resource.properties.logging.bucket_name
+    not resource.properties.logging
 }
 
 aws_issue["redshift_audit"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_redshift_cluster"
-    count(resource.properties.logging.bucket_name) == 0
+    count(resource.properties.logging) == 0
+}
+
+aws_issue["redshift_audit"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_redshift_cluster"
+    logging := resource.properties.logging[_]
+    count([c | logging.bucket_name != null; c:= 1]) == 0
+}
+
+aws_issue["redshift_audit"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_redshift_cluster"
+    logging := resource.properties.logging[_]
+    count(logging.bucket_name) == 0
 }
 
 redshift_audit {
@@ -132,9 +146,7 @@ redshift_audit = false {
 
 redshift_audit_err = "AWS Redshift database does not have audit logging enabled" {
     aws_issue["redshift_audit"]
-}
-
-redshift_audit_miss_err = "Redshift attribute logging.bucket_name missing in the resource" {
+} else = "Redshift attribute logging.bucket_name missing in the resource" {
     aws_attribute_absence["redshift_audit"]
 }
 

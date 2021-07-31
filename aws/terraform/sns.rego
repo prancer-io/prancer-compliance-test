@@ -64,6 +64,7 @@ default sns_encrypt_key = null
 aws_issue["sns_encrypt_key"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_sns_topic"
+    resource.properties.kms_master_key_id != null
     contains(lower(resource.properties.kms_master_key_id), "alias/aws/sns")
 }
 
@@ -107,13 +108,14 @@ aws_attribute_absence["sns_encrypt"] {
 aws_issue["sns_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_sns_topic"
+    resource.properties.kms_master_key_id != null
     count(resource.properties.kms_master_key_id) == 0
 }
 
 sns_encrypt {
     lower(input.resources[_].type) == "aws_sns_topic"
-    not aws_issue["sns_encrypt"]
     not aws_attribute_absence["sns_encrypt"]
+    not aws_issue["sns_encrypt"]
 }
 
 sns_encrypt = false {

@@ -14,6 +14,12 @@ gc_issue["net_legacy"] {
     not resource.properties.auto_create_subnetworks
 }
 
+gc_issue["net_legacy"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_compute_network"
+    resource.properties.auto_create_subnetworks == null
+}
+
 net_legacy {
     lower(input.resources[_].type) == "google_compute_network"
     not gc_issue["net_legacy"]
