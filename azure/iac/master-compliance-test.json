@@ -2394,14 +2394,14 @@
                     "evals": [
                         {
                             "id": "PR-AZR-0102-ARM",
-                            "eval": "data.rule.sql_server_alert",
-                            "message": "data.rule.sql_server_alert_err",
+                            "eval": "data.rule.sql_logical_server_alert",
+                            "message": "data.rule.sql_logical_server_alert_err",
                             "remediationDescription": "In Resource of type \"Microsoft.sql/servers/securityalertpolicies\" make sure properties.state exists and value is set to \"Enabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies.",
                             "remediationFunction": "PR_AZR_0102_ARM.py"
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure Security Alert is enabled on Azure SQL Server",
+                    "title": "Ensure Security Alert is enabled on Azure SQL Logical Server",
                     "description": "Advanced data security should be enabled on your SQL servers.",
                     "tags": [
                         {
@@ -2414,7 +2414,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SQL_SERVER_ALERT_2",
+                    "masterTestId": "TEST_SQL_MANAGED_INSTANCE_ALERT",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
@@ -2436,37 +2436,6 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": [
-                                "arm"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_SQL_MANAGED_INSTANCE_ALERT",
-                    "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(sql_alert_policy.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-0102-ARM",
-                            "eval": "data.rule.sql_managed_instance_alert",
-                            "message": "data.rule.sql_managed_instance_alert_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for vpn gateway from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/securityalertpolicies",
-                            "remediationFunction": "PR_AZR_0102_ARM.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Advanced data security should be enabled on your SQL servers.",
-                    "description": "Advanced data security should be enabled on your SQL servers.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "NIST 800"
-                            ],
                             "service": [
                                 "arm"
                             ]
@@ -2914,7 +2883,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SQL_SERVER_ALERT_3",
+                    "masterTestId": "TEST_SQL_SERVER_ALERT_2",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
@@ -2923,8 +2892,8 @@
                     "evals": [
                         {
                             "id": "PR-AZR-0127-ARM",
-                            "eval": "data.rule.sql_server_alert_2",
-                            "message": "data.rule.sql_server_alert_2_err",
+                            "eval": "data.rule.sql_server_alert",
+                            "message": "data.rule.sql_server_alert_err",
                             "remediationDescription": "In Resource of type \"Microsoft.sql/servers/securityalertpolicies\" make sure properties.state exists and value is set to \"Enabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies.",
                             "remediationFunction": "PR_AZR_0127_ARM.py"
                         }
@@ -2943,28 +2912,30 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SQL_SERVER_ALERT_4",
+                    "masterTestId": "TEST_Registry",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(sql_alert_policy.rego)",
+                    "rule": "file(registry.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0128-ARM",
-                            "eval": "data.rule.sql_managed_instance_alert_2",
-                            "message": "data.rule.sql_managed_instance_alert_2_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.sql/managedinstances/securityalertpolicies\" make sure properties.state exists and value is set to \"Enabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/securityalertpolicies.",
-                            "remediationFunction": "PR_AZR_0128_ARM.py"
+                            "id": "PR-AZR-0104-ARM",
+                            "eval": "data.rule.adminUserDisabled",
+                            "message": "data.rule.adminUserDisabled_err",
+                            "remediationDescription": "In Resource of type \"Microsoft.containerregistry/registries\" make sure properties.adminUserEnabled is set to \"Disabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries for more details.",
+                            "remediationFunction": "PR_AZR_0104_ARM.py"
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure Security Alert is enabled on Azure SQL Managed Instance",
-                    "description": "Advanced data security should be enabled on your SQL managed instance.",
+                    "title": "Ensure that admin user is disabled for Container Registry",
+                    "description": "The value that indicates whether the admin user is enabled. Each container registry includes an admin user account, which is disabled by default. You can enable the admin user and manage its credentials in the Azure portal, or by using the Azure CLI or other Azure tools. All users authenticating with the admin account appear as a single user with push and pull access to the registry. Changing or disabling this account disables registry access for all users who use its credentials.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practices"
+                            ],
                             "service": [
                                 "arm"
                             ]
