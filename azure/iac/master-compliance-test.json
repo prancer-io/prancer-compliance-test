@@ -2568,7 +2568,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_VIRTUAL_MACHINE",
+                    "masterTestId": "TEST_VIRTUAL_MACHINE_EXTENSIONS",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
