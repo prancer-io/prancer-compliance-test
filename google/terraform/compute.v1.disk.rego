@@ -6,12 +6,22 @@ package rule
 # PR-GCP-0069-TRF
 #
 
-default disk_encrypt = null
-
 gc_issue["disk_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "google_compute_disk"
     not resource.properties.disk_encryption_key
+}
+
+gc_issue["disk_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_compute_disk"
+    resource.properties.disk_encryption_key == null
+}
+
+gc_issue["disk_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "google_compute_disk"
+    count(resource.properties.disk_encryption_key) == 0
 }
 
 disk_encrypt {

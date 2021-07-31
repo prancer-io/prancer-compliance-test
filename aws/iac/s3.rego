@@ -331,23 +331,34 @@ default s3_cloudtrail = null
 
 aws_issue["s3_cloudtrail"] {
     resource := input.Resources[i]
-    lower(resource.Type) == "aws::s3::bucketpolicy"
-    statement := resource.Properties.PolicyDocument.Statement[_]
-    contains(lower(statement.Principal.Service), "cloudtrail.amazonaws.com")
-    statement.logging.enabled != true
+    lower(resource.Type) == "aws::cloudtrail::trail"
+    lower(resource.Properties.IsLogging) == "false"
+}
+
+aws_bool_issue["s3_cloudtrail"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudtrail::trail"
+    not resource.Properties.IsLogging
 }
 
 s3_cloudtrail {
-    lower(input.Resources[i].Type) == "aws::s3::bucketpolicy"
+    lower(input.Resources[i].Type) == "aws::cloudtrail::trail"
     not aws_issue["s3_cloudtrail"]
+    not aws_bool_issue["s3_cloudtrail"]
 }
 
 s3_cloudtrail = false {
     aws_issue["s3_cloudtrail"]
 }
 
+s3_cloudtrail = false {
+    aws_bool_issue["s3_cloudtrail"]
+}
+
 s3_cloudtrail_err = "AWS S3 CloudTrail buckets for which access logging is disabled." {
     aws_issue["s3_cloudtrail"]
+} else = "AWS S3 CloudTrail buckets for which access logging is disabled." {
+    aws_bool_issue["s3_cloudtrail"]
 }
 
 s3_cloudtrail_metadata := {

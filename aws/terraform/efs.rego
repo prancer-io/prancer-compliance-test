@@ -17,6 +17,7 @@ aws_attribute_absence["efs_kms"] {
 aws_issue["efs_kms"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_efs_file_system"
+    resource.properties.kms_key_id != null
     not startswith(resource.properties.kms_key_id, "arn:")
 }
 
