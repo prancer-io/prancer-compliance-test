@@ -2510,7 +2510,41 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_ACCOUNTS_3",
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_3",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0094-ARM",
+                            "eval": "data.rule.storage_threat_protection",
+                            "message": "data.rule.storage_threat_protection_err",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts. Also visit https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/microsoft.storage/storage-advanced-threat-protection-create/azuredeploy.json for template reference",
+                            "remediationFunction": "PR_AZR_0093_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Advanced Threat Protection should be enabled for storage account",
+                    "description": "Advanced Threat Protection should be enabled for all the storage accounts",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "HIPAA",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNTS_4",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
@@ -2545,7 +2579,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_ACCOUNTS_4",
+                    "masterTestId": "TEST_STORAGE_ACCOUNTS_5",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
@@ -2580,7 +2614,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_ACCOUNTS_5",
+                    "masterTestId": "TEST_STORAGE_ACCOUNTS_6",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
@@ -2596,7 +2630,7 @@
                         }
                     ],
                     "severity": "High",
-                    "title": "Ensure storage for critical data are encrypted with Customer Managed Key",
+                    "title": "Ensure critical data storage in Storage Account is encrypted with Customer Managed Key",
                     "description": "By default, data in the storage account is encrypted using Microsoft Managed Keys at rest. All Azure Storage resources are encrypted, including blobs, disks, files, queues, and tables. All object metadata is also encrypted. However, if you want to control and manage this encryption key yourself, you can specify a customer-managed key, that key is used to protect and control access to the key that encrypts your data. You can also choose to automatically update the key version used for Azure Storage encryption whenever a new version is available in the associated Key Vault.",
                     "tags": [
                         {
@@ -2611,7 +2645,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_ACCOUNTS_6",
+                    "masterTestId": "TEST_STORAGE_ACCOUNTS_7",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
@@ -2627,7 +2661,7 @@
                         }
                     ],
                     "severity": "High",
-                    "title": "Storage Accounts outside Europe",
+                    "title": "Storage Accounts location configuration should be inside of Europe",
                     "description": "Identify Storage Accounts outside of the following regions: northeurope, westeurope",
                     "tags": [
                         {

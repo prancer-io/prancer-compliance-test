@@ -113,7 +113,7 @@ storage_acl_metadata := {
 }
 
 #
-# Advanced Threat Protection should be enabled for all the storage accounts (unknown)
+# Advanced Threat Protection should be enabled for storage account
 #
 
 default storage_threat_protection = null
@@ -121,19 +121,27 @@ default storage_threat_protection = null
 azure_issue["storage_threat_protection"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
-    nested := resource.resources[_]
-    lower(nested.type) == "providers/advancedthreatprotectionsettings"
-    nested.properties.isEnabled != true
+    #nested := input.resources[_]
+    #lower(nested.type) == "providers/advancedthreatprotectionsettings"
+    #nested.properties.isEnabled != true
+    nested_type := "providers/advancedthreatprotectionsettings"
+    count([ c | lower(resource.resources[_].type) == nested_type; c = 1]) == 0
 }
 
 azure_issue["storage_threat_protection"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
-    nested := input.resources[_]
+    nested := resource.resources[_]
+    lower(nested.type) == "providers/advancedthreatprotectionsettings"
+    not nested.properties.isEnabled
+}
+
+azure_issue["storage_threat_protection"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    nested := resource.resources[_]
     lower(nested.type) == "providers/advancedthreatprotectionsettings"
     nested.properties.isEnabled != true
-    nested_type := "providers/advancedthreatprotectionsettings"
-    count([ c | lower(resource.resources[_].type) == nested_type; c = 1]) == 0
 }
 
 storage_threat_protection {
@@ -145,16 +153,16 @@ storage_threat_protection = false {
     azure_issue["storage_threat_protection"]
 }
 
-storage_threat_protection_err = "Advanced Threat Protection not enabled for all the storage accounts" {
+storage_threat_protection_err = "Advanced Threat Protection is currently not enabled for storage account" {
     azure_issue["storage_threat_protection"]
 }
 
 storage_threat_protection_metadata := {
-    "Policy Code": "",
+    "Policy Code": "PR-AZR-0094-ARM",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Advanced Threat Protection not enabled for all the storage accounts",
+    "Policy Title": "Advanced Threat Protection should be enabled for storage account",
     "Policy Description": "Advanced Threat Protection should be enabled for all the storage accounts",
     "Resource Type": "microsoft.storage/storageaccounts",
     "Policy Help URL": "",
@@ -162,7 +170,7 @@ storage_threat_protection_metadata := {
 }
 
 
-
+# https://azure.microsoft.com/en-us/blog/announcing-default-encryption-for-azure-blobs-files-table-and-queue-storage/
 # PR-AZR-0112-ARM
 
 default blobService = null
@@ -170,7 +178,7 @@ default blobService = null
 azure_attribute_absence["blobService"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
-    not resource.properties.encryption.services.blob
+    not resource.properties.encryption.services.blob.enabled
 }
 
 azure_issue["blobService"] {
@@ -189,7 +197,7 @@ blobService = false {
     azure_issue["blobService"]
 }
 
-blobService = false {
+blobService {
     azure_attribute_absence["blobService"]
 }
 
@@ -221,7 +229,7 @@ default fileService = null
 azure_attribute_absence["fileService"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
-    not resource.properties.encryption.services.file
+    not resource.properties.encryption.services.file.enabled
 }
 
 azure_issue["fileService"] {
@@ -232,15 +240,15 @@ azure_issue["fileService"] {
 
 fileService {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
-    not azure_issue["fileService"]
     not azure_attribute_absence["fileService"]
+    not azure_issue["fileService"]
 }
 
 fileService = false {
     azure_issue["fileService"]
 }
 
-fileService = false {
+fileService {
     azure_attribute_absence["fileService"]
 }
 
@@ -285,8 +293,8 @@ azure_issue["keySource"] {
 
 keySource {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
-    not azure_issue["keySource"]
     not azure_attribute_absence["keySource"]
+    not azure_issue["keySource"]
 }
 
 keySource = false {
@@ -297,11 +305,11 @@ keySource = false {
     azure_attribute_absence["keySource"]
 }
 
-keySource_err = "Ensure storage for critical data are encrypted with Customer Managed Key" {
+keySource_err = "Critical data storage in Storage Account is currently not encrypted with Customer Managed Key" {
     azure_issue["keySource"]
 }
 
-keySource_miss_err = "Ensure storage for critical data are encrypted with Customer Managed Key" {
+keySource_miss_err = "Storage Account encryption property 'keySource' is missing from the resource" {
     azure_attribute_absence["keySource"]
 }
 
@@ -311,7 +319,7 @@ keySource_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Ensure storage for critical data are encrypted with Customer Managed Key",
+    "Policy Title": "Ensure critical data storage in Storage Account is encrypted with Customer Managed Key",
     "Policy Description": "By default, data in the storage account is encrypted using Microsoft Managed Keys at rest. All Azure Storage resources are encrypted, including blobs, disks, files, queues, and tables. All object metadata is also encrypted. However, if you want to control and manage this encryption key yourself, you can specify a customer-managed key, that key is used to protect and control access to the key that encrypts your data. You can also choose to automatically update the key version used for Azure Storage encryption whenever a new version is available in the associated Key Vault.",
     "Resource Type": "microsoft.storage/storageaccounts",
     "Policy Help URL": "",
@@ -319,10 +327,15 @@ keySource_metadata := {
 }
 
 
-
 # PR-AZR-0122-ARM
 
 default region = null
+
+azure_issue["region"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.location
+}
 
 azure_issue["region"] {
     resource := input.resources[_]
@@ -340,7 +353,7 @@ region = false {
     azure_issue["region"]
 }
 
-region_err = "Storage Accounts outside Europe" {
+region_err = "Storage Accounts location configuration is currenly not inside of Europe" {
     azure_issue["region"]
 }
 
@@ -349,7 +362,7 @@ region_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Storage Accounts outside Europe",
+    "Policy Title": "Storage Accounts location configuration should be inside of Europe",
     "Policy Description": "Identify Storage Accounts outside of the following regions: northeurope, westeurope",
     "Resource Type": "microsoft.storage/storageaccounts",
     "Policy Help URL": "",
