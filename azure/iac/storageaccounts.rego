@@ -368,3 +368,45 @@ region_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
 }
+
+
+# PR-AZR-0123-ARM
+
+default blobServicePublicAccessDisabled = null
+
+azure_issue["blobServicePublicAccessDisabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.allowBlobPublicAccess
+}
+
+azure_issue["blobServicePublicAccessDisabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    resource.properties.allowBlobPublicAccess == true
+}
+
+blobServicePublicAccessDisabled {
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    not azure_issue["blobServicePublicAccessDisabled"]
+}
+
+blobServicePublicAccessDisabled = false {
+    azure_issue["blobServicePublicAccessDisabled"]
+}
+
+blobServicePublicAccessDisabled_err = "Storage Account currently allowing public access to all blobs or containers" {
+    azure_issue["blobServicePublicAccessDisabled"]
+}
+
+blobServicePublicAccessDisabled_metadata := {
+    "Policy Code": "PR-AZR-0113-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure that Storage Account should not allow public access to all blobs or containers",
+    "Policy Description": "This policy will identify which Storage Account has public access enabled for all blobs or containers",
+    "Resource Type": "microsoft.storage/storageaccounts",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
+}

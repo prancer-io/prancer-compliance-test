@@ -2676,6 +2676,37 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_STORAGE_ACCOUNTS_8",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0123-ARM",
+                            "eval": "data.rule.blobServicePublicAccessDisabled",
+                            "message": "data.rule.blobServicePublicAccessDisabled_err",
+                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure property allowBlobPublicAccess is not exist or value set to false. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts for details.",
+                            "remediationFunction": "PR-AZR-0123-ARM.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure that Storage Account should not allow public access to all blobs or containers",
+                    "description": "This policy will identify which Storage Account has public access enabled for all blobs or containers",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_STORAGE_BLOB_CONTAINER",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
