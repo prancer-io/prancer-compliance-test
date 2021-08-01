@@ -27,8 +27,8 @@ azure_issue["KeyVault"] {
 
 KeyVault {
     lower(input.resources[_].type) == "microsoft.keyvault/vaults"
-    not azure_issue["KeyVault"]
     not azure_attribute_absence["KeyVault"]
+    not azure_issue["KeyVault"]
 }
 
 KeyVault = false {
@@ -43,7 +43,9 @@ KeyVault_err = "Ensure at least one principal has access to Keyvault" {
     azure_issue["KeyVault"]
 }
 
-
+# Rezoan: This rule is not being used. We should merge this rule with KeyVault_err in a OR logic. Farshid to confirm. 
+# Consider this comment for each every rule that is similar to this one.
+# if we merge, the message should be same for both. Otherwise message should be different based on purpose.
 KeyVault_miss_err = "Ensure at least one principal has access to Keyvault" {
     azure_attribute_absence["KeyVault"]
 }
@@ -79,8 +81,8 @@ azure_issue ["enableSoftDelete"] {
 
 enableSoftDelete {
     lower(input.resources[_].type) == "microsoft.keyvault/vaults"
-    not azure_issue["enableSoftDelete"]
     not azure_attribute_absence["enableSoftDelete"]
+    not azure_issue["enableSoftDelete"]
 }
 
 enableSoftDelete = false {
@@ -92,11 +94,14 @@ enableSoftDelete = false {
 }
 
 
-enableSoftDelete_err = "Ensure the key vault is recoverable - enable 'Soft Delete' setting for a Key Vault" {
+enableSoftDelete_err = "'Soft Delete' setting is currently not enabled for Key Vault" {
     azure_issue["enableSoftDelete"]
 }
 
-enableSoftDelete_miss_err = "Ensure the key vault is recoverable - enable 'Soft Delete' setting for a Key Vault" {
+# Rezoan: This rule is not being used. We should merge this rule with enableSoftDelete_err in a OR logic. Farshid to confirm. 
+# Consider this comment for each every rule that is similar to this one.
+# if we merge, the message should be same for both. Otherwise message should be different based on purpose.
+enableSoftDelete_miss_err = "'Soft Delete' setting is currently not enabled for Key Vault" {
     azure_attribute_absence["enableSoftDelete"]
 }
 
@@ -136,8 +141,8 @@ azure_issue ["enablePurgeProtection"] {
 
 enablePurgeProtection {
     lower(input.resources[_].type) == "microsoft.keyvault/vaults"
-    not azure_issue["enablePurgeProtection"]
     not azure_attribute_absence["enablePurgeProtection"]
+    not azure_issue["enablePurgeProtection"]
 }
 
 enablePurgeProtection = false {
@@ -149,11 +154,14 @@ enablePurgeProtection = false {
 }
 
 
-enablePurgeProtection_err = "Key vault should have purge protection enabled" {
+enablePurgeProtection_err = "Purge protection is currently not enabled on Key vault" {
     azure_issue["enableSoftDelete"]
 }
 
-enablePurgeProtection_miss_err = "Key vault should have purge protection enabled" {
+# Rezoan: This rule is not being used. We should merge this rule with enablePurgeProtection_err in a OR logic. Farshid to confirm. 
+# Consider this comment for each every rules that is similar to this one.
+# if we merge, the message should be same for both. Otherwise message should be different based on purpose.
+enablePurgeProtection_miss_err = "Purge protection is currently not enabled on Key vault" {
     azure_attribute_absence["enableSoftDelete"]
 }
 

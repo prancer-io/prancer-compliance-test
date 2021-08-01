@@ -11,13 +11,13 @@ default aks_cni_net = null
 azure_attribute_absence["aks_cni_net"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    not resource.properties.network_policy
+    not resource.properties.network_profile.network_policy
 }
 
 azure_issue["aks_cni_net"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    lower(resource.properties.network_policy) != "azure"
+    lower(resource.properties.network_profile.network_policy) != "azure"
 }
 
 aks_cni_net {
@@ -60,15 +60,32 @@ aks_cni_net_metadata := {
 
 default aks_http_routing = null
 
+azure_attribute_absence["aks_http_routing"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    addon_profile := resource.properties.addon_profile[_]
+    not addon_profile.http_application_routing
+}
+
+azure_attribute_absence["aks_http_routing"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    addon_profile := resource.properties.addon_profile[_]
+    count(addon_profile.http_application_routing) == 0
+}
+
 azure_issue["aks_http_routing"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    resource.properties.http_application_routing.enabled == true
+    addon_profile := resource.properties.addon_profile[_]
+    http_application_routing := addon_profile.http_application_routing[_]
+    http_application_routing.enabled == true
 }
 
 aks_http_routing {
     lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
     not azure_issue["aks_http_routing"]
+    not azure_attribute_absence["aks_http_routing"]
 }
 
 aks_http_routing = false {
@@ -77,6 +94,8 @@ aks_http_routing = false {
 
 aks_http_routing_err = "Azure AKS cluster HTTP application routing is enabled" {
     azure_issue["aks_http_routing"]
+} else = "Azure AKS cluster HTTP application routing attribute missing in the resource" {
+    azure_attribute_absence["aks_http_routing"]
 }
 
 aks_http_routing_metadata := {
@@ -97,16 +116,26 @@ aks_http_routing_metadata := {
 
 default aks_monitoring = null
 
-azure_attribute_absence["aks_monitoring"] {
+aws_attribute_absence["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    not resource.properties.oms_agent.enabled
+    addon_profile := resource.properties.addon_profile[_]
+    not addon_profile.oms_agent
+}
+
+aws_attribute_absence["aks_monitoring"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    addon_profile := resource.properties.addon_profile[_]
+    count(addon_profile.oms_agent) == 0
 }
 
 azure_issue["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    input.properties.oms_agent.enabled != true
+    addon_profile := resource.properties.addon_profile[_]
+    oms_agent := addon_profile.oms_agent[_]
+    oms_agent.enabled != true
 }
 
 aks_monitoring {
@@ -117,9 +146,7 @@ aks_monitoring {
 
 aks_monitoring = false {
     azure_issue["aks_monitoring"]
-}
-
-aks_monitoring = false {
+} else = false {
     azure_attribute_absence["aks_monitoring"]
 }
 
@@ -152,13 +179,27 @@ default aks_nodes = null
 azure_attribute_absence["aks_nodes"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    not resource.properties.default_node_pool.node_count
+    not resource.properties.default_node_pool
+}
+
+azure_attribute_absence["aks_nodes"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    count(resource.properties.default_node_pool) == 0
+}
+
+azure_attribute_absence["aks_nodes"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    default_node_pool := resource.properties.default_node_pool[_]
+    not default_node_pool.node_count
 }
 
 azure_issue["aks_nodes"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    to_number(resource.properties.default_node_pool.node_count) < 3
+    default_node_pool := resource.properties.default_node_pool[_]
+    to_number(default_node_pool.node_count) < 3
 }
 
 aks_nodes {
@@ -169,9 +210,7 @@ aks_nodes {
 
 aks_nodes = false {
     azure_issue["aks_nodes"]
-}
-
-aks_nodes = false {
+} else = false {
     azure_attribute_absence["aks_nodes"]
 }
 
@@ -204,13 +243,21 @@ default aks_rbac = null
 azure_attribute_absence["aks_rbac"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    not resource.properties.role_based_access_control.enabled
+    not resource.properties.role_based_access_control
+}
+
+
+azure_attribute_absence["aks_rbac"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    count(resource.properties.role_based_access_control) == 0
 }
 
 azure_issue["aks_rbac"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    resource.properties.role_based_access_control.enabled != true
+    role_based_access_control := resource.properties.role_based_access_control[_]
+    role_based_access_control.enabled != true
 }
 
 aks_rbac {
@@ -221,9 +268,7 @@ aks_rbac {
 
 aks_rbac = false {
     azure_issue["aks_rbac"]
-}
-
-aks_rbac = false {
+} else = false {
     azure_attribute_absence["aks_rbac"]
 }
 

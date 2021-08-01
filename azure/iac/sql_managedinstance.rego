@@ -6,33 +6,50 @@ package rule
 # Always use Private Endpoint for Azure SQL Database and SQL Managed Instance
 #
 
-default sql_public_endpoint = null
+#
+# PR-AZR-0116-ARM
+#
 
-azure_issue["sql_public_endpoint"] {
+default sql_mi_public_endpoint_disabled = null
+
+# https://docs.microsoft.com/en-us/powershell/module/az.sql/set-azsqlinstance?view=azps-6.2.1
+# if property does not exist default is false
+azure_attribute_absence["sql_mi_public_endpoint_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/managedinstances"
+    not resource.properties.publicDataEndpointEnabled
+}
+
+azure_issue["sql_mi_public_endpoint_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/managedinstances"
     resource.properties.publicDataEndpointEnabled != false
 }
 
-sql_public_endpoint {
+sql_mi_public_endpoint_disabled {
     lower(input.resources[_].type) == "microsoft.sql/managedinstances"
-    not azure_issue["sql_public_endpoint"]
+    not azure_attribute_absence["sql_mi_public_endpoint_disabled"]
+    not azure_issue["sql_mi_public_endpoint_disabled"]
 }
 
-sql_public_endpoint = false {
-    azure_issue["sql_public_endpoint"]
+sql_mi_public_endpoint_disabled {
+    azure_attribute_absence["sql_mi_public_endpoint_disabled"]
 }
 
-sql_public_endpoint_err = "SQL Managed Instance with enabled public endpoint detected!" {
-    azure_issue["sql_public_endpoint"]
+sql_mi_public_endpoint_disabled = false {
+    azure_issue["sql_mi_public_endpoint_disabled"]
 }
 
-sql_public_endpoint_metadata := {
-    "Policy Code": "",
+sql_mi_public_endpoint_disabled_err = "SQL Managed Instance currently have public endpoint enabled. Please disable" {
+    azure_issue["sql_mi_public_endpoint_disabled"]
+}
+
+sql_mi_public_endpoint_disabled_metadata := {
+    "Policy Code": "PR-AZR-0116-ARM",
     "Type": "IaC",
     "Product": "",
     "Language": "ARM template",
-    "Policy Title": "SQL Managed Instance with enabled public endpoint detected!",
+    "Policy Title": "SQL Managed Instance should have public endpoint access disabled",
     "Policy Description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance",
     "Resource Type": "microsoft.sql/managedinstances",
     "Policy Help URL": "",

@@ -12,25 +12,27 @@ default s3_accesslog = null
 aws_attribute_absence["s3_accesslog"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_s3_bucket"
-    not resource.properties.logging.target_bucket
+    not resource.properties.logging
 }
 
 aws_attribute_absence["s3_accesslog"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_s3_bucket"
-    not resource.properties.logging.target_prefix
+    count(resource.properties.logging) == 0
+}
+
+aws_attribute_absence["s3_accesslog"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_s3_bucket"
+    logging := resource.properties.logging[_]
+    not logging.target_prefix
 }
 
 aws_issue["s3_accesslog"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_s3_bucket"
-    count(resource.properties.logging.target_bucket) == 0
-}
-
-aws_issue["s3_accesslog"] {
-    resource := input.resources[_]
-    lower(resource.type) == "aws_s3_bucket"
-    count(resource.properties.logging.target_prefix) == 0
+    logging := resource.properties.logging[_]
+    count(logging.target_bucket) == 0
 }
 
 s3_accesslog {
@@ -85,7 +87,7 @@ aws_issue["s3_acl_delete"] {
     stat := resource.properties.policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
-    lower(stat.Action[_]) == "s3:*"
+    lower(stat.Action) == "s3:*"
 }
 
 aws_issue["s3_acl_delete"] {
@@ -94,7 +96,7 @@ aws_issue["s3_acl_delete"] {
     stat := resource.properties.policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
-    lower(stat.Action[_]) == "s3:delete"
+    lower(stat.Action) == "s3:delete"
 }
 
 s3_acl_delete {
@@ -149,7 +151,7 @@ aws_issue["s3_acl_get"] {
     stat := resource.properties.policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
-    lower(stat.Action[_]) == "s3:*"
+    lower(stat.Action) == "s3:*"
 }
 
 aws_issue["s3_acl_get"] {
@@ -158,7 +160,7 @@ aws_issue["s3_acl_get"] {
     stat := resource.properties.policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
-    lower(stat.Action[_]) == "s3:get"
+    lower(stat.Action) == "s3:get"
 }
 
 s3_acl_get {
@@ -213,7 +215,7 @@ aws_issue["s3_acl_list"] {
     stat := resource.properties.policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
-    lower(stat.Action[_]) == "s3:*"
+    lower(stat.Action) == "s3:*"
 }
 
 aws_issue["s3_acl_list"] {
@@ -222,7 +224,7 @@ aws_issue["s3_acl_list"] {
     stat := resource.properties.policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
-    lower(stat.Action[_]) == "s3:list"
+    lower(stat.Action) == "s3:list"
 }
 
 s3_acl_list {
@@ -277,7 +279,7 @@ aws_issue["s3_acl_put"] {
     stat := resource.properties.policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
-    lower(stat.Action[_]) == "s3:*"
+    lower(stat.Action) == "s3:*"
 }
 
 aws_issue["s3_acl_put"] {
@@ -286,7 +288,7 @@ aws_issue["s3_acl_put"] {
     stat := resource.properties.policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
-    lower(stat.Action[_]) == "s3:put"
+    lower(stat.Action) == "s3:put"
 }
 
 s3_acl_put {
