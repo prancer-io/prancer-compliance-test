@@ -80,8 +80,8 @@ azure_issue["storage_acl"] {
 
 storage_acl {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
-    not azure_issue["storage_acl"]
     not azure_attribute_absence["storage_acl"]
+    not azure_issue["storage_acl"]
 }
 
 storage_acl = false {
@@ -92,11 +92,11 @@ storage_acl = false {
     azure_attribute_absence["storage_acl"]
 }
 
-storage_acl_err = "Storage Accounts without their firewalls enabled" {
+storage_acl_err = "Storage Accounts firewall rule is currently not enabled" {
     azure_issue["storage_acl"]
 }
 
-storage_acl_miss_err = "Storage Account attribute networkAcls.defaultAction missing in the resource" {
+storage_acl_miss_err = "Storage Account attribute networkAcls.defaultAction is missing from the resource" {
     azure_attribute_absence["storage_acl"]
 }
 
@@ -105,7 +105,7 @@ storage_acl_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Storage Accounts without their firewalls enabled (TJX)",
+    "Policy Title": "Storage Accounts should have firewall rules enabled",
     "Policy Description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on._x005F_x000D_ _x005F_x000D_ You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
     "Resource Type": "microsoft.storage/storageaccounts",
     "Policy Help URL": "",
