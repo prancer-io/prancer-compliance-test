@@ -181,8 +181,8 @@ azure_issue["blobService"] {
 
 blobService {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
-    not azure_issue["blobService"]
     not azure_attribute_absence["blobService"]
+    not azure_issue["blobService"]
 }
 
 blobService = false {
