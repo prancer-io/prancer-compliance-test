@@ -6,12 +6,22 @@ package rule
 
 default adminUserDisabled = null
 
+azure_attribute_absence ["adminUserDisabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerregistry/registries"
+    not resource.properties.adminUserEnabled
+}
 
 azure_issue ["adminUserDisabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries"
     resource.properties.adminUserEnabled != false
 }
+
+adminUserDisabled {
+    azure_attribute_absence["adminUserDisabled"]
+}
+
 
 adminUserDisabled {
     lower(input.resources[_].type) == "microsoft.containerregistry/registries"
