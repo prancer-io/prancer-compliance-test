@@ -22,8 +22,8 @@ azure_issue["vm_protection"] {
 
 vm_protection {
     lower(input.resources[_].type) == "microsoft.compute/virtualmachines/extensions"
-    not azure_issue["vm_protection"]
     not azure_attribute_absence["vm_protection"]
+    not azure_issue["vm_protection"]
 }
 
 vm_protection = false {
@@ -47,7 +47,7 @@ vm_protection_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Virtual Machine does not have endpoint protection installed",
+    "Policy Title": "Azure Virtual Machine should have endpoint protection installed",
     "Policy Description": "This policy identifies Azure Virtual Machines (VMs) that do not have endpoint protection installed. Installing endpoint protection systems (like Antimalware for Azure) provides for real-time protection capability that helps identify and remove viruses, spyware, and other malicious software. As a best practice, install endpoint protection on all VMs and computers to help identify and remove viruses, spyware, and other malicious software.",
     "Resource Type": "microsoft.compute/virtualmachines/extensions",
     "Policy Help URL": "",

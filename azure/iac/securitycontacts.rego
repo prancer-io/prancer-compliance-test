@@ -11,19 +11,19 @@ default securitycontacts = null
 azure_attribute_absence["securitycontacts"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
-    not resource.properties.email
+    not resource.properties.emails
 }
 
 azure_issue["securitycontacts"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
-    re_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", resource.properties.email) == false
+    re_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", resource.properties.emails) == false
 }
 
 securitycontacts {
     lower(input.resources[_].type) == "microsoft.security/securitycontacts"
-    not azure_issue["securitycontacts"]
     not azure_attribute_absence["securitycontacts"]
+    not azure_issue["securitycontacts"]
 }
 
 securitycontacts = false {
@@ -34,11 +34,11 @@ securitycontacts = false {
     azure_attribute_absence["securitycontacts"]
 }
 
-securitycontacts_err = "Security contact emails is not set in Security Center" {
+securitycontacts_err = "Security Center currently dont have any security contact emails configured" {
     azure_issue["securitycontacts"]
 }
 
-securitycontacts_miss_err = "Security Contacts attribute mail missing in the resource" {
+securitycontacts_miss_err = "Security Center security contacts property 'mail' is missing from the resource" {
     azure_attribute_absence["securitycontacts"]
 }
 
@@ -47,7 +47,7 @@ securitycontacts_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Security contact emails is not set in Security Center",
+    "Policy Title": "Security Center shoud have security contact emails configured to get notifications",
     "Policy Description": "Setting a valid email address in Security contact emails will enable Microsoft to contact you if the Microsoft Security Response Center (MSRC) discovers that your data has been accessed by an unlawful or unauthorized party. This will make sure that you are aware of any security issues and take prompt actions to mitigate the risks.",
     "Resource Type": "microsoft.security/securitycontacts",
     "Policy Help URL": "",
