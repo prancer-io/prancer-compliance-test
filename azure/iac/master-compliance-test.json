@@ -1190,11 +1190,11 @@
                     "rule": "file(networkwatchersflowlogs.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0050-ARM",
-                            "eval": "data.rule.netwatch_logs",
-                            "message": "data.rule.netwatch_logs_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for Network Watcher from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs enabled should be true",
-                            "remediationFunction": "PR_AZR_0050_ARM.py"
+                            "id": "PR-AZR-0049-ARM",
+                            "eval": "data.rule.netwatchFlowlogs",
+                            "message": "data.rule.netwatchFlowlogs_err",
+                            "remediationDescription": "In Resource of type \"Microsoft.network/networkwatchers/flowlogs\" make sure properties.enabled exists and value is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs for details.",
+                            "remediationFunction": "PR_AZR_0049_ARM.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1212,6 +1212,35 @@
                 },
                 {
                     "masterTestId": "TEST_NETWORK_WATCHERS_FLOW_LOGS_2",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(networkwatchersflowlogs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0050-ARM",
+                            "eval": "data.rule.netwatch_logs",
+                            "message": "data.rule.netwatch_logs_err",
+                            "remediationDescription": "In Resource of type \"Microsoft.network/networkwatchers/flowlogs\" make sure properties.flowAnalyticsConfiguration.networkWatcherFlowAnalyticsConfiguration.enabled exists and value is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs for details.",
+                            "remediationFunction": "PR_AZR_0050_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Network Watcher Network Security Group (NSG) flow logs should be enabled",
+                    "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs are disabled. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'._x000D__x000D_NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:_x000D_- Outbound and inbound flows on a per-rule basis._x000D_- Network interface to which the flow applies._x000D_- 5-tuple information about the flow (source/destination IP, source/destination port, protocol)._x000D_- Whether the traffic was allowed or denied._x000D__x000D_As a best practice, enable NSG flow logs to improve network visibility.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_NETWORK_WATCHERS_FLOW_LOGS_3",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
@@ -2569,6 +2598,67 @@
                                 "PCI-DSS",
                                 "GDPR",
                                 "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SQL_SERVER_ALERT_1",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_alert_policy.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0102-ARM",
+                            "eval": "data.rule.sql_logical_server_alert",
+                            "message": "data.rule.sql_logical_server_alert_err",
+                            "remediationDescription": "In Resource of type \"Microsoft.sql/servers/securityalertpolicies\" make sure properties.state exists and value is set to \"Enabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies.",
+                            "remediationFunction": "PR_AZR_0102_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Security Alert is enabled on Azure SQL Logical Server",
+                    "description": "Advanced data security should be enabled on your SQL servers.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SQL_MANAGED_INSTANCE_ALERT",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_alert_policy.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0103-ARM",
+                            "eval": "data.rule.sql_managed_instance_alert",
+                            "message": "data.rule.sql_managed_instance_alert_err",
+                            "remediationDescription": "In Resource of type \"Microsoft.sql/managedinstances/securityalertpolicies\" make sure properties.state exists and value is set to \"Enabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/securityalertpolicies.",
+                            "remediationFunction": "PR_AZR_0103_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Security Alert is enabled on Azure SQL Managed Instance",
+                    "description": "Advanced data security should be enabled on your SQL managed instance.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
                                 "HIPAA",
                                 "Best Practices"
                             ],
@@ -2946,8 +3036,96 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterTestId": "TEST_SQL_SERVER",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0126-ARM",
+                            "eval": "data.rule.sql_public_access_disabled",
+                            "message": "data.rule.sql_public_access_disabled_err",
+                            "remediationDescription": "In Resource of type \"Microsoft.Sql/servers\" make sure properties.publicNetworkAccess exists and value is set to \"disabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers for details.",
+                            "remediationFunction": "PR-AZR-0126-ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure SQL servers don't have public network access enabled",
+                    "description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SQL_SERVER_ALERT_2",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_alert_policy.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0127-ARM",
+                            "eval": "data.rule.sql_server_alert",
+                            "message": "data.rule.sql_server_alert_err",
+                            "remediationDescription": "In Resource of type \"Microsoft.sql/servers/securityalertpolicies\" make sure properties.state exists and value is set to \"Enabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies.",
+                            "remediationFunction": "PR_AZR_0127_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Security Alert is enabled on Azure SQL Server",
+                    "description": "Advanced data security should be enabled on your SQL servers.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_Registry",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0104-ARM",
+                            "eval": "data.rule.adminUserDisabled",
+                            "message": "data.rule.adminUserDisabled_err",
+                            "remediationDescription": "In Resource of type \"Microsoft.containerregistry/registries\" make sure properties.adminUserEnabled is set to \"Disabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries for more details.",
+                            "remediationFunction": "PR_AZR_0104_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that admin user is disabled for Container Registry",
+                    "description": "The value that indicates whether the admin user is enabled. Each container registry includes an admin user account, which is disabled by default. You can enable the admin user and manage its credentials in the Azure portal, or by using the Azure CLI or other Azure tools. All users authenticating with the admin account appear as a single user with push and pull access to the registry. Changing or disabling this account disables registry access for all users who use its credentials.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
                 }
- 
             ]
         }
     ]
