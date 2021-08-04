@@ -391,6 +391,68 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_DATABRICKS",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(databricks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0117-ARM",
+                            "eval": "data.rule.databrics_workspace_has_public_ip_disabled",
+                            "message": "data.rule.databrics_workspace_has_public_ip_disabled_err",
+                            "remediationDescription": "In Resource of type \"microsoft.databricks/workspaces\" make sure properties.parameters.enableNoPublicIp exist and its value set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.databricks/workspaces?tabs=json for details.",
+                            "remediationFunction": "PR-AZR-0117-ARM.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure Databricks shoud not use public IP address",
+                    "description": "Azure Databricks is a data analytics platform optimized for the Microsoft Azure cloud services platform. This policy will identify Databricks which does not have public ip disabled and warn.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DATABRICKS_1",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(databricks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0118-ARM",
+                            "eval": "data.rule.databrics_workspace_has_vnet_integration",
+                            "message": "data.rule.databrics_workspace_has_vnet_integration_err",
+                            "remediationDescription": "In Resource of type \"microsoft.databricks/workspaces\" make sure properties.parameters.customVirtualNetworkId exist and its value set to id of existing vnet. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.databricks/workspaces?tabs=json for details.",
+                            "remediationFunction": "PR-AZR-0118-ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Databricks should have vnet integration",
+                    "description": "Azure Databricks is a data analytics platform optimized for the Microsoft Azure cloud services platform. This policy will identify Databricks which does not have vnet integration and warn.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_DB_ADMINISTRATORS",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
