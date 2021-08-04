@@ -314,6 +314,11 @@ azure_issue["aks_aad_rbac_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     resource.properties.role_based_access_control.azure_active_directory.managed != true
+} 
+
+azure_issue["aks_aad_rbac_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
     resource.properties.role_based_access_control.azure_active_directory.azure_rbac_enabled != true
 }
 
