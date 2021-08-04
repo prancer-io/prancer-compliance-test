@@ -150,6 +150,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_AKS_6",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0068-TRF",
+                            "eval": "data.rule.aks_aad_rbac_enabled",
+                            "message": "data.rule.aks_aad_rbac_enabled_err",
+                            "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, set role_based_access_control.azure_active_directory.managed = true to fix the issue. If 'role_based_access_control' block does not exist please add one. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#role_based_access_control for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Managed Azure AD RBAC for AKS cluster should be enabled",
+                    "description": "Azure Kubernetes Service (AKS) can be configured to use Azure Active Directory (AD) for user authentication. In this configuration, you sign in to an AKS cluster using an Azure AD authentication token. You can also configure Kubernetes role-based access control (Kubernetes RBAC) to limit access to cluster resources based a user's identity or group membership. This policy checks your AKS cluster Azure Active Directory (AD) RBAC setting and alerts if disabled.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_APPLICATION_GATEWAYS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
