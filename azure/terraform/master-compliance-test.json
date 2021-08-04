@@ -1764,7 +1764,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Storage Accounts without Secure transfer enabled",
+                    "title": "Storage Accounts Secure transfer should be enabled",
                     "description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPs. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesnâ€™t support HTTPs for custom domain names, this option is not applied when using a custom domain name.",
                     "tags": [
                         {
@@ -1802,6 +1802,40 @@
                     "severity": "Medium",
                     "title": "Storage Accounts without their firewalls enabled (TJX)",
                     "description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on._x000D__x000D_You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "HIPAA",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0069-TRF",
+                            "eval": "data.rule.storage_account_public_access_disabled",
+                            "message": "data.rule.storage_account_public_access_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage Account should not allow public access to all blobs or containers",
+                    "description": "This policy will identify which Storage Account has public access not disabled for all blobs or containers and alert",
                     "tags": [
                         {
                             "cloud": "git",
