@@ -90,17 +90,32 @@ aws_issue["elb_insecure_cipher"] {
     lower(policy.value) == "true"
 }
 
+aws_bool_issue["elb_insecure_cipher"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_load_balancer_policy"
+    policy := resource.properties.policy_attribute[_]
+    lower(policy.name) == lower(insecure_ciphers[_])
+    lower(policy.value) == true
+}
+
 elb_insecure_cipher {
     lower(input.resources[_].type) == "aws_load_balancer_policy"
     not aws_issue["elb_insecure_cipher"]
+    not aws_bool_issue["elb_insecure_cipher"]
 }
 
 elb_insecure_cipher = false {
     aws_issue["elb_insecure_cipher"]
 }
 
+elb_insecure_cipher = false {
+    aws_bool_issue["elb_insecure_cipher"]
+}
+
 elb_insecure_cipher_err = "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with insecure ciphers" {
     aws_issue["elb_insecure_cipher"]
+} else = "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with insecure ciphers" {
+    aws_bool_issue["elb_insecure_cipher"]
 }
 
 elb_insecure_cipher_metadata := {
@@ -135,17 +150,32 @@ aws_issue["elb_insecure_protocol"] {
     lower(policy.value) == "true"
 }
 
+aws_bool_issue["elb_insecure_protocol"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_load_balancer_policy"
+    policy := resource.properties.policy_attribute[_]
+    lower(policy.name) == lower(insecure_ssl_protocols[_])
+    lower(policy.value) == true
+}
+
 elb_insecure_protocol {
     lower(input.resources[_].type) == "aws_load_balancer_policy"
     not aws_issue["elb_insecure_protocol"]
+    not aws_bool_issue["elb_insecure_protocol"]
 }
 
 elb_insecure_protocol = false {
     aws_issue["elb_insecure_protocol"]
 }
 
+elb_insecure_protocol = false {
+    aws_bool_issue["elb_insecure_protocol"]
+}
+
 elb_insecure_protocol_err = "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with vulnerable SSL protocol" {
     aws_issue["elb_insecure_protocol"]
+} else = "AWS Elastic Load Balancer (Classic) SSL negotiation policy configured with vulnerable SSL protocol" {
+    aws_bool_issue["elb_insecure_protocol"]
 }
 
 elb_insecure_protocol_metadata := {
@@ -182,23 +212,35 @@ aws_issue["elb_access_log"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_elb"
     access_logs := resource.properties.access_logs[_]
+    lower(access_logs.enabled) == "false"
+}
+
+aws_bool_issue["elb_access_log"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_elb"
+    access_logs := resource.properties.access_logs[_]
     access_logs.enabled == false
 }
 
 elb_access_log {
     lower(input.resources[_].type) == "aws_elb"
     not aws_issue["elb_access_log"]
+    not aws_bool_issue["elb_access_log"]
     not aws_attribute_absence["elb_access_log"]
 }
 
 elb_access_log = false {
     aws_issue["elb_access_log"]
 } else = false {
+    aws_bool_issue["elb_access_log"]
+} else = false {
     aws_attribute_absence["elb_access_log"]
 }
 
 elb_access_log_err = "AWS Elastic Load Balancer (Classic) with access log disabled" {
     aws_issue["elb_access_log"]
+} else = "AWS Elastic Load Balancer (Classic) with access log disabled" {
+    aws_bool_issue["elb_access_log"]
 } else = "AWS Elastic Load Balancer (Classic) attribute access_logs is missing in the resource" {
     aws_attribute_absence["elb_access_log"]
 }
@@ -224,20 +266,33 @@ default elb_conn_drain = null
 aws_issue["elb_conn_drain"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_elb"
+    lower(resource.properties.connection_draining) == "false"
+}
+
+aws_bool_issue["elb_conn_drain"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_elb"
     not resource.properties.connection_draining
 }
 
 elb_conn_drain {
     lower(input.resources[_].type) == "aws_elb"
     not aws_issue["elb_conn_drain"]
+    not aws_bool_issue["elb_conn_drain"]
 }
 
 elb_conn_drain = false {
     aws_issue["elb_conn_drain"]
 }
 
+elb_conn_drain = false {
+    aws_bool_issue["elb_conn_drain"]
+}
+
 elb_conn_drain_err = "AWS Elastic Load Balancer (Classic) with connection draining disabled" {
     aws_issue["elb_conn_drain"]
+} else = "AWS Elastic Load Balancer (Classic) with connection draining disabled" {
+    aws_bool_issue["elb_conn_drain"]
 }
 
 elb_conn_drain_metadata := {
@@ -261,20 +316,33 @@ default elb_crosszone = null
 aws_issue["elb_crosszone"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_elb"
+    lower(resource.properties.cross_zone_load_balancing) == "false"
+}
+
+aws_bool_issue["elb_crosszone"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_elb"
     resource.properties.cross_zone_load_balancing == false
 }
 
 elb_crosszone {
     lower(input.resources[_].type) == "aws_elb"
     not aws_issue["elb_crosszone"]
+    not aws_bool_issue["elb_crosszone"]
 }
 
 elb_crosszone = false {
     aws_issue["elb_crosszone"]
 }
 
+elb_crosszone = false {
+    aws_bool_issue["elb_crosszone"]
+}
+
 elb_crosszone_err = "AWS Elastic Load Balancer (Classic) with cross-zone load balancing disabled" {
     aws_issue["elb_crosszone"]
+} else = "AWS Elastic Load Balancer (Classic) with cross-zone load balancing disabled" {
+    aws_bool_issue["elb_crosszone"]
 }
 
 elb_crosszone_metadata := {
@@ -321,9 +389,7 @@ elb_sec_group = false {
 
 elb_sec_group_err = "AWS Elastic Load Balancer (ELB) has security group with no inbound/outbound rules" {
     aws_issue["elb_sec_group"]
-}
-
-elb_sec_group_miss_err = "ELB attribute security_groups missing in the resource" {
+} else = "ELB attribute security_groups missing in the resource" {
     aws_issue["elb_sec_group"]
 }
 
@@ -373,9 +439,7 @@ elb_not_in_use = false {
 
 elb_not_in_use_err = "AWS Elastic Load Balancer (ELB) not in use" {
     aws_issue["elb_not_in_use"]
-}
-
-elb_not_in_use_miss_err = "ELB attribute instances missing in the resource" {
+} else = "ELB attribute instances missing in the resource" {
     aws_attribute_absence["elb_not_in_use"]
 }
 
@@ -408,7 +472,14 @@ aws_issue["elb_alb_logs"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_lb"
     access_logs := resource.properties.access_logs[_]
-    access_logs.enabled != true
+    lower(access_logs.enabled) == "false"
+}
+
+aws_bool_issue["elb_alb_logs"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_lb"
+    access_logs := resource.properties.access_logs[_]
+    not access_logs.enabled
 }
 
 aws_issue["elb_alb_logs"] {
@@ -421,10 +492,15 @@ elb_alb_logs {
     lower(input.resources[_].type) == "aws_lb"
     not aws_attribute_absence["elb_alb_logs"]
     not aws_issue["elb_alb_logs"]
+    not aws_bool_issue["elb_alb_logs"]
 }
 
 elb_alb_logs = false {
     aws_issue["elb_alb_logs"]
+}
+
+elb_alb_logs = false {
+    aws_bool_issue["elb_alb_logs"]
 }
 
 elb_alb_logs = false {
@@ -433,9 +509,9 @@ elb_alb_logs = false {
 
 elb_alb_logs_err = "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balancer (ALB) with access log disabled" {
     aws_issue["elb_alb_logs"]
-}
-
-elb_alb_logs_miss_err = "ELBv2 attribute access_logs.enabled missing in the resource" {
+} else = "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balancer (ALB) with access log disabled" {
+    aws_bool_issue["elb_alb_logs"]
+} else = "ELBv2 attribute access_logs.enabled missing in the resource" {
     aws_attribute_absence["elb_alb_logs"]
 }
 
@@ -500,9 +576,7 @@ elb_listener_ssl = false {
 
 elb_listener_ssl_err = "AWS Elastic Load Balancer with listener TLS/SSL disabled" {
     aws_issue["elb_listener_ssl"]
-}
-
-elb_listener_ssl_miss_err = "ELB attribute listeners missing in the resource" {
+} else = "ELB attribute listeners missing in the resource" {
     aws_attribute_absence["elb_listener_ssl"]
 }
 
@@ -554,9 +628,7 @@ elb_over_https = false {
 
 elb_over_https_err = "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balancer (ALB) with access log disabled" {
     aws_issue["elb_over_https"]
-}
-
-elb_over_https_miss_err = "ELBv2 attribute lb_protocol missing in the resource" {
+} else = "ELBv2 attribute lb_protocol missing in the resource" {
     aws_attribute_absence["elb_over_https"]
 }
 

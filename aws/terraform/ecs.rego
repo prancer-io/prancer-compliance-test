@@ -36,9 +36,7 @@ ecs_exec = false {
 
 ecs_exec_err = "AWS ECS/Fargate task definition execution IAM Role not found" {
     aws_issue["ecs_exec"]
-}
-
-ecs_exec_miss_err = "ECS taskdefinition attribute execution_role_arn missing in the resource" {
+} else = "ECS taskdefinition attribute execution_role_arn missing in the resource" {
     aws_attribute_absence["ecs_exec"]
 }
 

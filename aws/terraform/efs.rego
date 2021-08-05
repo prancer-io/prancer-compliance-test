@@ -24,12 +24,20 @@ aws_issue["efs_kms"] {
 aws_issue["efs_kms"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_efs_file_system"
+    lower(resource.properties.encrypted) == "false"
+}
+
+aws_bool_issue["efs_kms"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_efs_file_system"
     not resource.properties.encrypted
 }
+
 
 efs_kms {
     lower(input.resources[_].type) == "aws_efs_file_system"
     not aws_issue["efs_kms"]
+    not aws_bool_issue["efs_kms"]
     not aws_attribute_absence["efs_kms"]
 }
 
@@ -38,14 +46,18 @@ efs_kms = false {
 }
 
 efs_kms = false {
+    aws_bool_issue["efs_kms"]
+}
+
+efs_kms = false {
     aws_attribute_absence["efs_kms"]
 }
 
 efs_kms_err = "AWS Elastic File System (EFS) not encrypted using Customer Managed Key" {
     aws_issue["efs_kms"]
-}
-
-efs_kms_miss_err = "EFS attribute kms_key_id missing in the resource" {
+} else = "AWS Elastic File System (EFS) not encrypted using Customer Managed Key" {
+    aws_bool_issue["efs_kms"]
+} else = "EFS attribute kms_key_id missing in the resource" {
     aws_attribute_absence["efs_kms"]
 }
 
@@ -67,22 +79,22 @@ efs_kms_metadata := {
 
 default efs_encrypt = null
 
-aws_attribute_absence["efs_encrypt"] {
+aws_issue["efs_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_efs_file_system"
+    lower(resource.properties.encrypted) == "false"
+}
+
+aws_bool_issue["efs_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_efs_file_system"
     not resource.properties.encrypted
 }
 
-aws_issue["efs_encrypt"] {
-    resource := input.resources[_]
-    lower(resource.type) == "aws_efs_file_system"
-    resource.properties.encrypted != true
-}
-
 efs_encrypt {
     lower(input.resources[_].type) == "aws_efs_file_system"
     not aws_issue["efs_encrypt"]
-    not aws_attribute_absence["efs_encrypt"]
+    not aws_bool_issue["efs_encrypt"]
 }
 
 efs_encrypt = false {
@@ -90,15 +102,13 @@ efs_encrypt = false {
 }
 
 efs_encrypt = false {
-    aws_attribute_absence["efs_encrypt"]
+    aws_bool_issue["efs_encrypt"]
 }
 
 efs_encrypt_err = "AWS Elastic File System (EFS) with encryption for data at rest disabled" {
     aws_issue["efs_encrypt"]
-}
-
-efs_encrypt_miss_err = "EFS attribute encrypted missing in the resource" {
-    aws_attribute_absence["efs_encrypt"]
+} else = "AWS Elastic File System (EFS) with encryption for data at rest disabled" {
+    aws_bool_issue["efs_encrypt"]
 }
 
 efs_encrypt_metadata := {

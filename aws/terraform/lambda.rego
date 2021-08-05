@@ -56,9 +56,7 @@ lambda_env = false {
 
 lambda_env_err = "AWS Lambda environment Variables not encrypted at-rest using CMK" {
     aws_issue["lambda_env"]
-}
-
-lambda_env_miss_err = "Lambda function attribute kms_key_arn/environment missing in the resource" {
+} else = "Lambda function attribute kms_key_arn/environment missing in the resource" {
     aws_attribute_absence["lambda_env"]
 }
 
@@ -115,9 +113,7 @@ lambda_vpc = false {
 
 lambda_vpc_err = "AWS Lambda Function is not assigned to access within VPC" {
     aws_issue["lambda_vpc"]
-}
-
-lambda_vpc_miss_err = "Lambda function attribute vpc_config.subnet_ids missing in the resource" {
+} else = "Lambda function attribute vpc_config.subnet_ids missing in the resource" {
     aws_attribute_absence["lambda_vpc"]
 }
 
