@@ -291,3 +291,58 @@ aks_rbac_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster"
 }
+
+#
+# PR-AZR-0068-TRF
+#
+
+default aks_aad_rbac_enabled = null
+
+azure_issue["aks_aad_rbac_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    not resource.properties.role_based_access_control.azure_active_directory.managed
+}
+
+azure_issue["aks_aad_rbac_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    not resource.properties.role_based_access_control.azure_active_directory.azure_rbac_enabled
+}
+
+azure_issue["aks_aad_rbac_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    resource.properties.role_based_access_control.azure_active_directory.managed != true
+} 
+
+azure_issue["aks_aad_rbac_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    resource.properties.role_based_access_control.azure_active_directory.azure_rbac_enabled != true
+}
+
+aks_aad_rbac_enabled {
+    lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
+    not azure_issue["aks_aad_rbac_enabled"]
+}
+
+aks_aad_rbac_enabled = false {
+    azure_issue["aks_aad_rbac_enabled"]
+} 
+
+aks_aad_rbac_enabled_err = "Managed Azure AD RBAC for AKS cluster is not enabled" {
+    azure_issue["aks_aad_rbac_enabled"]
+}
+
+aks_rbac_metadata := {
+    "Policy Code": "PR-AZR-0068-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Managed Azure AD RBAC for AKS cluster should be enabled",
+    "Policy Description": "Azure Kubernetes Service (AKS) can be configured to use Azure Active Directory (AD) for user authentication. In this configuration, you sign in to an AKS cluster using an Azure AD authentication token. You can also configure Kubernetes role-based access control (Kubernetes RBAC) to limit access to cluster resources based a user's identity or group membership. This policy checks your AKS cluster Azure Active Directory (AD) RBAC setting and alerts if disabled.",
+    "Resource Type": "azurerm_kubernetes_cluster",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster"
+}

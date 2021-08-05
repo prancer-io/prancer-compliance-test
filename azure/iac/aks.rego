@@ -263,16 +263,10 @@ aks_rbac_metadata := {
 }
 
 #
-# 
+# PR-AZR-00101-ARM
 #
 
 default aks_aad_azure_rbac = null
-
-azure_issue["aks_aad_azure_rbac"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    not resource.properties.aadProfile
-}
 
 azure_issue["aks_aad_azure_rbac"] {
     resource := input.resources[_]
@@ -290,6 +284,11 @@ azure_issue["aks_aad_azure_rbac"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     resource.properties.aadProfile.managed != true
+}
+
+azure_issue["aks_aad_azure_rbac"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
     resource.properties.aadProfile.enableAzureRBAC != true
 }
 
