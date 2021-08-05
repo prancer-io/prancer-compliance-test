@@ -17,27 +17,33 @@ aws_issue["dynamodb_encrypt"] {
 aws_issue["dynamodb_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::dynamodb::table"
-    not resource.Properties.SSESpecification.SSEEnabled
+    resource.Properties.SSESpecification.SSEEnabled != "true"
 }
 
-aws_issue["dynamodb_encrypt"] {
+aws_bool_issue["dynamodb_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::dynamodb::table"
-    resource.Properties.SSESpecification.SSEEnabled != true
-    resource.Properties.SSESpecification.SSEEnabled != "true"
+    not resource.Properties.SSESpecification.SSEEnabled
 }
 
 dynamodb_encrypt {
     lower(input.Resources[i].Type) == "aws::dynamodb::table"
     not aws_issue["dynamodb_encrypt"]
+    not aws_bool_issue["dynamodb_encrypt"]
 }
 
 dynamodb_encrypt = false {
     aws_issue["dynamodb_encrypt"]
 }
 
+dynamodb_encrypt = false {
+    aws_bool_issue["dynamodb_encrypt"]
+}
+
 dynamodb_encrypt_err = "AWS DynamoDB encrypted using AWS owned CMK instead of AWS managed CMK" {
     aws_issue["dynamodb_encrypt"]
+} else = "AWS DynamoDB encrypted using AWS owned CMK instead of AWS managed CMK" {
+    aws_bool_issue["dynamodb_encrypt"]
 }
 
 dynamodb_encrypt_metadata := {

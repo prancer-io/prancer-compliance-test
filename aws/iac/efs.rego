@@ -73,12 +73,6 @@ default efs_encrypt = null
 aws_issue["efs_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::efs::filesystem"
-    not resource.Properties.Encrypted
-}
-
-aws_issue["efs_encrypt"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::efs::filesystem"
     lower(resource.Properties.Encrypted) != "true"
 }
 aws_bool_issue["efs_encrypt"] {
