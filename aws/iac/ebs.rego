@@ -12,7 +12,8 @@ default ebs_encrypt = null
 aws_issue["ebs_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::volume"
-    lower(resource.Properties.Encrypted) != "true"
+    resource.Properties.Encrypted != true
+    resource.Properties.Encrypted != "true"
 } 
 
 aws_bool_issue["ebs_encrypt"] {

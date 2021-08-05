@@ -77,9 +77,9 @@ eks_public_access = false {
     aws_bool_issue["eks_public_access"]
 }
 
-eks_public_access_err = "AWS EKS cluster control plane assigned multiple security groups" {
+eks_public_access_err = "AWS EKS cluster endpoint access publicly enabled" {
     aws_issue["eks_public_access"]
-} else = "AWS EKS cluster control plane assigned multiple security groups"{
+} else = "AWS EKS cluster control plane assigned multiple security groups" {
     aws_bool_issue["eks_public_access"]
 }
 

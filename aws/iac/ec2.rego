@@ -93,12 +93,14 @@ aws_issue["ec2_public_ip"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::instance"
     lower(resource.Properties.NetworkInterfaces[_].AssociatePublicIpAddress) == "true"
+    lower(resource.Properties.SecurityGroups[_]) == "default"
 }
 
 aws_bool_issue["ec2_public_ip"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::instance"
     resource.Properties.NetworkInterfaces[_].AssociatePublicIpAddress == true
+    lower(resource.SecurityGroups[_]) == "default"
 }
 
 ec2_public_ip {
