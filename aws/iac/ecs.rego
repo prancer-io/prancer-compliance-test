@@ -8,7 +8,7 @@ package rule
 
 default ecs_task_evelated = null
 
-aws_issue["ecs_task_evelated"] {
+aws_bool_issue["ecs_task_evelated"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ecs::taskdefinition"
     resource.Properties.ContainerDefinitions
@@ -25,14 +25,21 @@ aws_issue["ecs_task_evelated"] {
 ecs_task_evelated {
     lower(input.Resources[i].Type) == "aws::ecs::taskdefinition"
     not aws_issue["ecs_task_evelated"]
+    not aws_bool_issue["ecs_task_evelated"]
 }
 
 ecs_task_evelated = false {
     aws_issue["ecs_task_evelated"]
 }
 
+ecs_task_evelated = false {
+    aws_bool_issue["ecs_task_evelated"]
+}
+
 ecs_task_evelated_err = "AWS ECS task definition elevated privileges enabled" {
     aws_issue["ecs_task_evelated"]
+} else = "AWS ECS task definition elevated privileges enabled" {
+    aws_bool_issue["ecs_task_evelated"]
 }
 
 ecs_task_evelated_metadata := {
