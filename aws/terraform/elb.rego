@@ -95,7 +95,7 @@ aws_bool_issue["elb_insecure_cipher"] {
     lower(resource.type) == "aws_load_balancer_policy"
     policy := resource.properties.policy_attribute[_]
     lower(policy.name) == lower(insecure_ciphers[_])
-    lower(policy.value) == true
+    policy.value == true
 }
 
 elb_insecure_cipher {
@@ -155,7 +155,7 @@ aws_bool_issue["elb_insecure_protocol"] {
     lower(resource.type) == "aws_load_balancer_policy"
     policy := resource.properties.policy_attribute[_]
     lower(policy.name) == lower(insecure_ssl_protocols[_])
-    lower(policy.value) == true
+    policy.value == true
 }
 
 elb_insecure_protocol {
@@ -352,54 +352,6 @@ elb_crosszone_metadata := {
     "Language": "Terraform",
     "Policy Title": "AWS Elastic Load Balancer (Classic) with cross-zone load balancing disabled",
     "Policy Description": "This policy identifies Classic Elastic Load Balancers which have cross-zone load balancing disabled. When Cross-zone load balancing enabled, classic load balancer distributes requests evenly across the registered instances in all enabled Availability Zones. Cross-zone load balancing reduces the need to maintain equivalent numbers of instances in each enabled Availability Zone, and improves your application's ability to handle the loss of one or more instances.",
-    "Resource Type": "aws_elb",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
-}
-
-#
-# PR-AWS-0067-TRF
-# PR-AWS-0068-TRF
-#
-
-# There is only reference to security groups, no info about security group rules
-
-default elb_sec_group = null
-
-aws_attribute_absence["elb_sec_group"] {
-    resource := input.resources[_]
-    lower(resource.type) == "aws_elb"
-    not resource.properties.security_groups
-}
-
-aws_issue["elb_sec_group"] {
-    resource := input.resources[_]
-    lower(resource.type) == "aws_elb"
-    count(resource.properties.security_groups) == 0
-}
-
-elb_sec_group {
-    lower(input.resources[_].type) == "aws_elb"
-    not aws_issue["elb_sec_group"]
-}
-
-elb_sec_group = false {
-    aws_issue["elb_sec_group"]
-}
-
-elb_sec_group_err = "AWS Elastic Load Balancer (ELB) has security group with no inbound/outbound rules" {
-    aws_issue["elb_sec_group"]
-} else = "ELB attribute security_groups missing in the resource" {
-    aws_issue["elb_sec_group"]
-}
-
-elb_sec_group_metadata := {
-    "Policy Code": "PR-AWS-0067-TRF",
-    "Type": "IaC",
-    "Product": "AWS",
-    "Language": "Terraform",
-    "Policy Title": "AWS Elastic Load Balancer (ELB) has security group with no inbound rules",
-    "Policy Description": "This policy identifies Elastic Load Balancers (ELB) which have security group with no inbound rules. A security group with no inbound rule will deny all incoming requests. ELB security groups should have at least one inbound rule, ELB with no inbound permissions will deny all traffic incoming to ELB; in other words, the ELB is useless without inbound permissions.",
     "Resource Type": "aws_elb",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
