@@ -14,6 +14,12 @@ aws_attribute_absence["esearch_vpc"] {
     not resource.properties.vpc_options
 }
 
+aws_attribute_absence["esearch_vpc"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    count(resource.properties.vpc_options) == 0
+}
+
 aws_issue["esearch_vpc"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_elasticsearch_domain"
