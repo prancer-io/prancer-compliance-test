@@ -11,35 +11,41 @@ default aks_cni_net = null
 azure_attribute_absence["aks_cni_net"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    not resource.properties.network_profile.network_policy
+    not resource.properties.network_profile
+}
+
+azure_attribute_absence["aks_cni_net"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    network_profile := resource.properties.network_profile[_]
+    not network_profile.network_plugin
 }
 
 azure_issue["aks_cni_net"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    lower(resource.properties.network_profile.network_policy) != "azure"
+    network_profile := resource.properties.network_profile[_]
+    lower(network_profile.network_plugin) != "azure"
 }
 
 aks_cni_net {
     lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
-    not azure_issue["aks_cni_net"]
     not azure_attribute_absence["aks_cni_net"]
-}
-
-aks_cni_net = false {
-    azure_issue["aks_cni_net"]
+    not azure_issue["aks_cni_net"]
 }
 
 aks_cni_net = false {
     azure_attribute_absence["aks_cni_net"]
 }
 
-aks_cni_net_err = "Azure AKS cluster Azure CNI networking is not enabled" {
+aks_cni_net = false {
     azure_issue["aks_cni_net"]
 }
 
-aks_cni_net_miss_err = "AKS cluster attribute network_policy is missing in the resource" {
+aks_cni_net_err = "azurerm_kubernetes_cluster property 'network_profile.network_plugin' need to be exist. Currently its missing from the resource. Please set the value to 'azure' after property addition." {
     azure_attribute_absence["aks_cni_net"]
+} else = "Azure AKS cluster CNI networking is currently not enabled." {
+    azure_issue["aks_cni_net"]
 }
 
 aks_cni_net_metadata := {
@@ -47,7 +53,7 @@ aks_cni_net_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure AKS cluster Azure CNI networking should be enabled",
+    "Policy Title": "Azure AKS cluster CNI networking should be enabled",
     "Policy Description": "Azure CNI provides the following features over kubenet networking:_x005F_x000D_ _x005F_x000D_ - Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network._x005F_x000D_ - Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB._x005F_x000D_ - You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance._x005F_x000D_ - Support for Network Policies securing communication between pods._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.",
     "Resource Type": "azurerm_kubernetes_cluster",
     "Policy Help URL": "",
@@ -63,6 +69,12 @@ default aks_http_routing = null
 azure_attribute_absence["aks_http_routing"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
+    not resource.properties.addon_profile
+}
+
+azure_attribute_absence["aks_http_routing"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
     addon_profile := resource.properties.addon_profile[_]
     not addon_profile.http_application_routing
 }
@@ -71,7 +83,8 @@ azure_attribute_absence["aks_http_routing"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     addon_profile := resource.properties.addon_profile[_]
-    count(addon_profile.http_application_routing) == 0
+    http_application_routing := addon_profile.http_application_routing[_]
+    not http_application_routing.enabled
 }
 
 azure_issue["aks_http_routing"] {
@@ -84,18 +97,22 @@ azure_issue["aks_http_routing"] {
 
 aks_http_routing {
     lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
-    not azure_issue["aks_http_routing"]
     not azure_attribute_absence["aks_http_routing"]
+    not azure_issue["aks_http_routing"]
+}
+
+aks_http_routing = false {
+    azure_attribute_absence["aks_http_routing"]
 }
 
 aks_http_routing = false {
     azure_issue["aks_http_routing"]
 }
 
-aks_http_routing_err = "Azure AKS cluster HTTP application routing is enabled" {
-    azure_issue["aks_http_routing"]
-} else = "Azure AKS cluster HTTP application routing attribute missing in the resource" {
+aks_http_routing_err = "azurerm_kubernetes_cluster property 'addon_profile.http_application_routing.enabled' need to be exist. Currently its missing from the resource. Please set the value to false after property addition." {
     azure_attribute_absence["aks_http_routing"]
+} else = "Azure AKS cluster HTTP application routing is currently not disabled."  {
+    azure_issue["aks_http_routing"]
 }
 
 aks_http_routing_metadata := {
@@ -119,6 +136,12 @@ default aks_monitoring = null
 aws_attribute_absence["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
+    not resource.properties.addon_profile
+}
+
+aws_attribute_absence["aks_monitoring"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
     addon_profile := resource.properties.addon_profile[_]
     not addon_profile.oms_agent
 }
@@ -127,7 +150,8 @@ aws_attribute_absence["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     addon_profile := resource.properties.addon_profile[_]
-    count(addon_profile.oms_agent) == 0
+    oms_agent := addon_profile.oms_agent[_]
+    not oms_agent.enabled
 }
 
 azure_issue["aks_monitoring"] {
@@ -140,22 +164,23 @@ azure_issue["aks_monitoring"] {
 
 aks_monitoring {
     lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
-    not azure_issue["aks_monitoring"]
     not azure_attribute_absence["aks_monitoring"]
+    not azure_issue["aks_monitoring"]
+}
+
+aks_monitoring = false {
+    azure_attribute_absence["aks_monitoring"]
 }
 
 aks_monitoring = false {
     azure_issue["aks_monitoring"]
-} else = false {
-    azure_attribute_absence["aks_monitoring"]
-}
+} 
 
-aks_monitoring_err = "Azure AKS cluster monitoring is not enabled" {
+aks_monitoring_err = "azurerm_kubernetes_cluster property 'addon_profile.oms_agent.enabled' need to be exist. Currently its missing from the resource. Please set the value to true after property addition." {
+    azure_attribute_absence["aks_monitoring"]
+    
+} else = "Azure AKS cluster monitoring is currently not enabled." {
     azure_issue["aks_monitoring"]
-}
-
-aks_monitoring_miss_err = "AKS cluster attribute oms_agent is missing in the resource" {
-    azure_attribute_absence["aks_monitoring"]
 }
 
 aks_monitoring_metadata := {
@@ -182,11 +207,11 @@ azure_attribute_absence["aks_nodes"] {
     not resource.properties.default_node_pool
 }
 
-azure_attribute_absence["aks_nodes"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_kubernetes_cluster"
-    count(resource.properties.default_node_pool) == 0
-}
+#azure_attribute_absence["aks_nodes"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_kubernetes_cluster"
+#    count(resource.properties.default_node_pool) == 0
+#}
 
 azure_attribute_absence["aks_nodes"] {
     resource := input.resources[_]
@@ -204,22 +229,22 @@ azure_issue["aks_nodes"] {
 
 aks_nodes {
     lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
-    not azure_issue["aks_nodes"]
     not azure_attribute_absence["aks_nodes"]
+    not azure_issue["aks_nodes"]
+}
+
+aks_nodes = false {
+    azure_attribute_absence["aks_nodes"]
 }
 
 aks_nodes = false {
     azure_issue["aks_nodes"]
-} else = false {
-    azure_attribute_absence["aks_nodes"]
-}
+} 
 
-aks_nodes_err = "Azure AKS cluster pool profile contains less than 3 nodes" {
+aks_nodes_err = "azurerm_kubernetes_cluster property 'default_node_pool.node_count' need to be exist. Currently its missing from the resource. Please set the minimum value as 3 after property addition." {
+    azure_attribute_absence["aks_nodes"]
+} else = "Azure AKS cluster pool profile currenlty does not have minimum 3 or more nodes." {
     azure_issue["aks_nodes"]
-}
-
-aks_nodes_miss_err = "AKS cluster attribute agentPoolProfiles is missing in the resource" {
-    azure_attribute_absence["aks_nodes"]
 }
 
 aks_nodes_metadata := {
@@ -246,11 +271,17 @@ azure_attribute_absence["aks_rbac"] {
     not resource.properties.role_based_access_control
 }
 
+#azure_attribute_absence["aks_rbac"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_kubernetes_cluster"
+#    count(resource.properties.role_based_access_control) == 0
+#}
 
 azure_attribute_absence["aks_rbac"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    count(resource.properties.role_based_access_control) == 0
+    role_based_access_control := resource.properties.role_based_access_control[_]
+    not role_based_access_control.enabled
 }
 
 azure_issue["aks_rbac"] {
@@ -262,22 +293,22 @@ azure_issue["aks_rbac"] {
 
 aks_rbac {
     lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
-    not azure_issue["aks_rbac"]
     not azure_attribute_absence["aks_rbac"]
+    not azure_issue["aks_rbac"]
+}
+
+aks_rbac = false {
+    azure_attribute_absence["aks_rbac"]
 }
 
 aks_rbac = false {
     azure_issue["aks_rbac"]
-} else = false {
-    azure_attribute_absence["aks_rbac"]
-}
+} 
 
-aks_rbac_err = "Azure AKS role-based access control (RBAC) is not enforced" {
+aks_rbac_err = "azurerm_kubernetes_cluster property 'role_based_access_control.enabled' need to be exist. Currently its missing from the resource. Please set the value to true after property addition." {
+    azure_attribute_absence["aks_rbac"]
+} else = "Azure AKS role-based access control (RBAC) is not enforced." {
     azure_issue["aks_rbac"]
-}
-
-aks_rbac_miss_err = "AKS cluster attribute enableRBAC is missing in the resource" {
-    azure_attribute_absence["aks_rbac"]
 }
 
 aks_rbac_metadata := {
