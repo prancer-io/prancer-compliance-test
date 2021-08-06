@@ -196,19 +196,19 @@ default redshift_require_ssl = null
 aws_attribute_absence["redshift_require_ssl"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_redshift_parameter_group"
-    not resource.properties.parameters
+    not resource.properties.parameter
 }
 
 aws_issue["redshift_require_ssl"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_redshift_parameter_group"
-    count([c | lower(resource.properties.parameters[_].name) == "require_ssl"; c := 1]) == 0
+    count([c | lower(resource.properties.parameter[_].name) == "require_ssl"; c := 1]) == 0
 }
 
 aws_issue["redshift_require_ssl"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_redshift_parameter_group"
-    params = resource.properties.parameters[_]
+    params = resource.properties.parameter[_]
     lower(params.name) == "require_ssl"
     lower(params.value) == "false"
 }
@@ -216,7 +216,7 @@ aws_issue["redshift_require_ssl"] {
 aws_bool_issue["redshift_require_ssl"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_redshift_parameter_group"
-    params = resource.properties.parameters[_]
+    params = resource.properties.parameter[_]
     lower(params.name) == "require_ssl"
     not params.value
 }
