@@ -107,9 +107,7 @@ acm_ct_log = false {
 
 acm_ct_log_err = "AWS Certificate Manager (ACM) has certificates with Certificate Transparency Logging disabled" {
     aws_issue["acm_ct_log"]
-}
-
-acm_ct_log_miss_err = "Certificate manager attribute certificate_transparency_logging_preference missing in the resource" {
+} else = "Certificate manager attribute certificate_transparency_logging_preference missing in the resource" {
     aws_attribute_absence["acm_ct_log"]
 }
 
