@@ -4,6 +4,10 @@
 
 Source Repository: https://github.com/Azure/azure-quickstart-templates
 
+Scan engine: Prancer Framework (https://www.prancer.io)
+
+Compliance Database: https://github.com/prancer-io/prancer-compliance-test/tree/master/azure/iac
+
 ## Compliance run Meta Data
 | Title     | Description         |
 |:----------|:--------------------|
