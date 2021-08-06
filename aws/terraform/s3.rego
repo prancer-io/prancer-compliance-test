@@ -387,19 +387,41 @@ default s3_transport = null
 aws_attribute_absence["s3_transport"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_s3_bucket_policy"
-    count([c | resource.properties.policy.Statement[_].Condition.StringLike["aws:SecureTransport"]; c := 1]) == 0
+    statement := resource.properties.policy.Statement[i]
+    count([c | statement.Condition.StringLike["aws:SecureTransport"]; c := 1]) == 0
+    count([c | statement.Condition.Bool["aws:SecureTransport"]; c := 1]) == 0
 }
 
 aws_issue["s3_transport"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_s3_bucket_policy"
-    resource.properties.policy.Statement[_].Condition.StringLike["aws:SecureTransport"] == false
+    statement := resource.properties.policy.Statement[i]
+    statement.Condition.StringLike
+    statement.Condition.StringLike["aws:SecureTransport"] == false
 }
 
 aws_bool_issue["s3_transport"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_s3_bucket_policy"
-    lower(resource.properties.policy.Statement[_].Condition.StringLike["aws:SecureTransport"]) == "false"
+    statement := resource.properties.policy.Statement[i]
+    statement.Condition.StringLike
+    lower(statement.Condition.StringLike["aws:SecureTransport"]) == "false"
+}
+
+aws_issue["s3_transport"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_s3_bucket_policy"
+    statement := resource.properties.policy.Statement[i]
+    statement.Condition.Bool
+    statement.Condition.Bool["aws:SecureTransport"] == false
+}
+
+aws_bool_issue["s3_transport"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_s3_bucket_policy"
+    statement := resource.properties.policy.Statement[i]
+    statement.Condition.Bool
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
 }
 
 s3_transport {
