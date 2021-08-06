@@ -95,7 +95,7 @@ aws_bool_issue["elb_insecure_cipher"] {
     lower(resource.type) == "aws_load_balancer_policy"
     policy := resource.properties.policy_attribute[_]
     lower(policy.name) == lower(insecure_ciphers[_])
-    lower(policy.value) == true
+    policy.value == true
 }
 
 elb_insecure_cipher {
@@ -155,7 +155,7 @@ aws_bool_issue["elb_insecure_protocol"] {
     lower(resource.type) == "aws_load_balancer_policy"
     policy := resource.properties.policy_attribute[_]
     lower(policy.name) == lower(insecure_ssl_protocols[_])
-    lower(policy.value) == true
+    policy.value == true
 }
 
 elb_insecure_protocol {
