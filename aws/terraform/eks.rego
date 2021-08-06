@@ -25,14 +25,7 @@ aws_issue["eks_multiple_sg"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_eks_cluster"
     vpc_config := resource.properties.vpc_config[_]
-    count([c | vpc_config.security_group_ids; c:=1 ]) == 0
-}
-
-aws_issue["eks_multiple_sg"] {
-    resource := input.resources[_]
-    lower(resource.type) == "aws_eks_cluster"
-    vpc_config := resource.properties.vpc_config[_]
-    count([c | vpc_config.security_group_ids; c:=1 ]) > 1
+    count(vpc_config.security_group_ids) != 1
 }
 
 eks_multiple_sg {
