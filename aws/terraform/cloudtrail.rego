@@ -87,7 +87,7 @@ ct_log_validation = false {
 ct_log_validation_err = "AWS CloudTrail log validation is not enabled in all regions" {
     aws_issue["ct_log_validation"]
 } else = "AWS CloudTrail log validation is not enabled in all regions" {
-    aws_issue["ct_log_validation"]
+    aws_bool_issue["ct_log_validation"]
 }
 
 
