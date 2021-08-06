@@ -298,40 +298,70 @@ aks_rbac_metadata := {
 
 default aks_aad_rbac_enabled = null
 
-azure_issue["aks_aad_rbac_enabled"] {
+azure_attribute_absence["aks_aad_rbac_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    not resource.properties.role_based_access_control.azure_active_directory.managed
+    #not resource.properties.role_based_access_control.azure_active_directory.managed
+    not resource.properties.role_based_access_control
+}
+
+azure_attribute_absence["aks_aad_rbac_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    role_based_access_control := resource.properties.role_based_access_control[_]
+    not role_based_access_control.azure_active_directory
+}
+
+azure_attribute_absence["aks_aad_rbac_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    role_based_access_control := resource.properties.role_based_access_control[_]
+    azure_active_directory := role_based_access_control.azure_active_directory[_]
+    not azure_active_directory.managed
+}
+
+azure_attribute_absence["aks_aad_rbac_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    #not resource.properties.role_based_access_control.azure_active_directory.azure_rbac_enabled
+    role_based_access_control := resource.properties.role_based_access_control[_]
+    azure_active_directory := role_based_access_control.azure_active_directory[_]
+    not azure_active_directory.azure_rbac_enabled
 }
 
 azure_issue["aks_aad_rbac_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    not resource.properties.role_based_access_control.azure_active_directory.azure_rbac_enabled
-}
-
-azure_issue["aks_aad_rbac_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_kubernetes_cluster"
-    resource.properties.role_based_access_control.azure_active_directory.managed != true
+    role_based_access_control := resource.properties.role_based_access_control[_]
+    azure_active_directory := role_based_access_control.azure_active_directory[_]
+    azure_active_directory.managed != true
 } 
 
 azure_issue["aks_aad_rbac_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
-    resource.properties.role_based_access_control.azure_active_directory.azure_rbac_enabled != true
+    role_based_access_control := resource.properties.role_based_access_control[_]
+    azure_active_directory := role_based_access_control.azure_active_directory[_]
+    azure_active_directory.azure_rbac_enabled != true
 }
 
 aks_aad_rbac_enabled {
     lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
+    not azure_attribute_absence["aks_aad_rbac_enabled"]
     not azure_issue["aks_aad_rbac_enabled"]
 }
+
+aks_aad_rbac_enabled = false {
+    azure_attribute_absence["aks_aad_rbac_enabled"]
+} 
 
 aks_aad_rbac_enabled = false {
     azure_issue["aks_aad_rbac_enabled"]
 } 
 
-aks_aad_rbac_enabled_err = "Managed Azure AD RBAC for AKS cluster is not enabled" {
+aks_aad_rbac_enabled_err = "azurerm_kubernetes_cluster property 'role_based_access_control.azure_active_directory.managed' and 'role_based_access_control.azure_active_directory.azure_rbac_enabled' need to be exist. those are missing from the resource. Please set the value to 'true' after property addition." {
+    azure_attribute_absence["aks_aad_rbac_enabled"]
+} else = "Managed Azure AD RBAC for AKS cluster is not enabled" {
     azure_issue["aks_aad_rbac_enabled"]
 }
 

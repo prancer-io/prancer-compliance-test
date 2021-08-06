@@ -237,6 +237,64 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_DATABRICKS_1",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(databricks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0070-TRF",
+                            "eval": "data.rule.databrics_workspace_has_public_ip_disabled",
+                            "message": "data.rule.databrics_workspace_has_public_ip_disabled_err",
+                            "remediationDescription": "In 'azurerm_databricks_workspace' resource, set true as the value of 'no_public_ip' under 'custom_parameters' block to fix the issue. If 'custom_parameters' block does not exist please add one. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/databricks_workspace for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Databricks shoud not use public IP address",
+                    "description": "Azure Databricks is a data analytics platform optimized for the Microsoft Azure cloud services platform. This policy will identify Databricks which does not have public ip disabled and warn.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DATABRICKS_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(databricks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0071-TRF",
+                            "eval": "data.rule.databrics_workspace_has_vnet_integration",
+                            "message": "data.rule.databrics_workspace_has_vnet_integration_err",
+                            "remediationDescription": "In 'azurerm_databricks_workspace' resource, set set vnet id as the value of 'virtual_network_id' under 'custom_parameters' block to fix the issue. If 'custom_parameters' block does not exist please add one. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/databricks_workspace for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Databricks should have vnet integration",
+                    "description": "Azure Databricks is a data analytics platform optimized for the Microsoft Azure cloud services platform. This policy will identify Databricks which does not have vnet integration and warn.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_DB_ADMINISTRATORS",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
