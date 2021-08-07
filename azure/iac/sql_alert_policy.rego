@@ -67,7 +67,7 @@ sql_logical_server_alert_metadata := {
 }
 
 
-# PR-AZR-0127-ARM
+# PR-AZR-0129-ARM
 
 default sql_server_alert = null
 
@@ -107,7 +107,7 @@ sql_server_alert_err = "Security alert is currently not enabled on SQL Server re
 }
 
 sql_server_alert_metadata := {
-    "Policy Code": "PR-AZR-0127-ARM",
+    "Policy Code": "PR-AZR-0129-ARM",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
