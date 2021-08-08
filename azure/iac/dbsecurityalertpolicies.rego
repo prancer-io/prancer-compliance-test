@@ -44,12 +44,12 @@ dbsec_threat_off_miss_err = "SQL Databases securityAlertPolicies attribute 'stat
 }
 
 dbsec_threat_off_metadata := {
-    "Policy Code": "PR-AZR-0088-ARM",
+    "Policy Code": "PR-AZR-0096-ARM",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "SQL Databases should have security alert policies enabled",
-    "Policy Description": "Checks to ensure that security alert policy is enabled on SQL databases. The alerts are sent to configured email address when any anomalous activities are detected on SQL databases.",
+    "Policy Description": "SQL Threat Detection provides a new layer of security, which enables customers to detect and respond to potential threats as they occur by providing security alerts on anomalous activities. Users will receive an alert upon suspicious database activities, potential vulnerabilities, and SQL injection attacks, as well as anomalous database access patterns. SQL Threat Detection alerts provide details of suspicious activity and recommend action on how to investigate and mitigate the threat.",
     "Resource Type": "microsoft.sql/servers/databases/securityalertpolicies",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies"
@@ -88,7 +88,7 @@ dbsec_threat_retention = false {
     azure_attribute_absence["dbsec_threat_retention"]
 }
 
-dbsec_threat_retention_err = "Azure SQL Database security alert policies retention is currently not configured for more than 90 days" {
+dbsec_threat_retention_err = "Azure SQL Database security alert policies thread retention is currently not configured for more than 90 days" {
     azure_issue["dbsec_threat_retention"]
 }
 
@@ -101,7 +101,7 @@ dbsec_threat_retention_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure SQL Database security alert policies retention should be configured for more than 90 days",
+    "Policy Title": "Azure SQL Database security alert policies thread retention should be configured for more than 90 days",
     "Policy Description": "This policy identifies SQL Databases which have security alert policies retention set less than or equals to 90 days. Threat Logs can be used to check for anomalies and gives an understanding of suspected breaches or misuse of data and access. It is recommended to configure SQL database Threat Retention to be greater than 90 days.",
     "Resource Type": "microsoft.sql/servers/databases/securityalertpolicies",
     "Policy Help URL": "",
@@ -165,8 +165,8 @@ dbsec_threat_email_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure SQL Databases Security Alert Policy should be configured to send alert to the account administrators via email",
-    "Policy Description": "This policy identifies SQL Databases which has email account admins disabled and there is no email address provided where the alert supposed to be sent.",
+    "Policy Title": "Azure SQL Databases Security Alert Policy should be configured to send alert to the account administrators and configured email addresses",
+    "Policy Description": "Checks to ensure that an valid email address is set for Threat Detection alerts. The alerts are sent to this email address when any anomalous activities are detected on SQL databases.",
     "Resource Type": "microsoft.sql/servers/databases/securityalertpolicies",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies"
@@ -217,8 +217,8 @@ dbsec_threat_alert_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure SQL Server Security Alert Policy should not have any alert types in disabled alerts list",
-    "Policy Description": "Ensure that Azure SQL Server Security Alert Policy is not excluding any type of alerts",
+    "Policy Title": "Azure SQL Server threat detection alerts should be enabled for all threat types",
+    "Policy Description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x005F_x000D_ _x005F_x000D_ This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats.",
     "Resource Type": "microsoft.sql/servers/databases/securityalertpolicies",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies"

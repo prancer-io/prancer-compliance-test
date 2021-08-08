@@ -476,12 +476,12 @@
                             "id": "PR-AZR-0054-TRF",
                             "eval": "data.rule.dbsec_threat_retention",
                             "message": "data.rule.dbsec_threat_retention_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, set 'retention_days = 91' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#retention_days for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Database with Threat Retention less than or equals to 90 days",
+                    "title": "Azure SQL Database security alert policies thread retention should be configured for more than 90 days",
                     "description": "This policy identifies SQL Databases which have Threat Retention less than or equals to 90 days. Threat Logs can be used to check for anomalies and gives an understanding of suspected breaches or misuse of data and access. It is recommended to configure SQL database Threat Retention to be greater than 90 days.",
                     "tags": [
                         {
@@ -512,13 +512,13 @@
                             "id": "PR-AZR-0055-TRF",
                             "eval": "data.rule.dbsec_threat_email",
                             "message": "data.rule.dbsec_threat_email_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, set 'email_account_admins = true' and add some email address who need to get notified about potential thread detection under 'email_addresses' array to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Databases with disabled Email service and co-administrators for Threat Detection",
-                    "description": "This policy identifies SQL Databases which have disabled Email service and co-administrators for Threat Detection. Enable 'Email service and co-administrators' option to receive security alerts of any anomalous activities in SQL database. The alert notifications are sent to service and co-administrator email addresses so that they can mitigate any potential risks.",
+                    "title": "Azure SQL Databases Security Alert Policy should be configured to send alert to the account administrators and configured email addresses",
+                    "description": "Checks to ensure that an valid email address is set for Threat Detection alerts. The alerts are sent to this email address when any anomalous activities are detected on SQL databases.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -544,22 +544,22 @@
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0097-TRF",
+                            "id": "PR-AZR-0061-TRF",
                             "eval": "data.rule.dbsec_threat_alert",
                             "message": "data.rule.dbsec_threat_alert_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, remove 'disabled_alerts' property or remove all the alerts element out of it to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#disabled_alerts for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Threat Detection types on SQL databases is misconfigured",
-                    "description": "Ensure that Threat Detection types is set to All",
+                    "title": "Azure SQL Server threat detection alerts should be enabled for all threat types",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x005F_x000D_ _x005F_x000D_ This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
-                                "CIS",
                                 "CSA-CCM",
+                                "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
                                 "PCI-DSS"
@@ -579,23 +579,22 @@
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0088-TRF",
+                            "id": "PR-AZR-0097-TRF",
                             "eval": "data.rule.sql_alert",
                             "message": "data.rule.sql_alert_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, set 'email_account_admins = true' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#email_account_admins for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Send alerts on field value on SQL Databases is misconfigured",
-                    "description": "Checks to ensure that an valid email address is set for Threat Detection alerts. The alerts are sent to this email address when any anomalous activities are detected on SQL databases.",
+                    "title": "Threat Detection alert should be configured to sent notification to the sql server account administrators",
+                    "description": "Ensure that threat detection alert is configured to sent notification to the sql server account administrators",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
                                 "CIS",
                                 "CSA-CCM",
-                                "HIPAA",
                                 "ISO 27001",
                                 "NIST 800",
                                 "PCI-DSS"
@@ -618,12 +617,12 @@
                             "id": "PR-AZR-0096-TRF",
                             "eval": "data.rule.dbsec_threat_off",
                             "message": "data.rule.dbsec_threat_off_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, set state = 'Enabled' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#state for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Threat Detection on SQL databases is set to Off",
+                    "title": "SQL Databases should have security alert policies enabled",
                     "description": "SQL Threat Detection provides a new layer of security, which enables customers to detect and respond to potential threats as they occur by providing security alerts on anomalous activities. Users will receive an alert upon suspicious database activities, potential vulnerabilities, and SQL injection attacks, as well as anomalous database access patterns. SQL Threat Detection alerts provide details of suspicious activity and recommend action on how to investigate and mitigate the threat.",
                     "tags": [
                         {
