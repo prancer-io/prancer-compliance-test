@@ -21,31 +21,29 @@ azure_issue["mssql_db_log_audit"] {
     lower(resource.type) == "azurerm_mssql_database"
     count([c | r := input.resources[_];
                r.type == "azurerm_mssql_database_extended_auditing_policy";
-               re_match(concat("", ["^.*\\.", resource.name, "\\..*$"]), r.properties.database_id);
+               re_match(concat("", ["^.*\\.", resource.name, "\\..*$"]), r.properties.database_id); # Rezoan: this regex is not correct and need a fix. Snapshot file does not generate database_id out of the tf variable as well at r.properties.database_id
                c := 1]) == 0
     true == false # workaround for inconsistent resource naming
 }
 
 mssql_db_log_audit {
     lower(input.resources[_].type) == "azurerm_mssql_database_extended_auditing_policy"
-    not azure_issue["mssql_db_log_audit"]
     not azure_attribute_absence["mssql_db_log_audit"]
-}
-
-mssql_db_log_audit = false {
-    azure_issue["mssql_db_log_audit"]
+    not azure_issue["mssql_db_log_audit"]
 }
 
 mssql_db_log_audit = false {
     azure_attribute_absence["mssql_db_log_audit"]
 }
 
-mssql_db_log_audit_err = "Auditing for SQL database is not enabled" {
+mssql_db_log_audit = false {
     azure_issue["mssql_db_log_audit"]
 }
 
-mssql_db_log_audit_miss_err = "Audit policy resource is not avialable for SQL database" {
+mssql_db_log_audit_err = "azurerm_mssql_database_extended_auditing_policy resource is missing from the resource" {
     azure_attribute_absence["mssql_db_log_audit"]
+} else = "Auditing for SQL database is not enabled" {
+    azure_issue["mssql_db_log_audit"]
 }
 
 mssql_db_log_audit_metadata := {
@@ -80,24 +78,22 @@ azure_issue["mssql_db_log_retention"] {
 
 mssql_db_log_retention {
     lower(input.resources[_].type) == "azurerm_mssql_database_extended_auditing_policy"
-    not azure_issue["mssql_db_log_retention"]
     not azure_attribute_absence["mssql_db_log_retention"]
-}
-
-mssql_db_log_retention = false {
-    azure_issue["mssql_db_log_retention"]
+    not azure_issue["mssql_db_log_retention"]
 }
 
 mssql_db_log_retention = false {
     azure_attribute_absence["mssql_db_log_retention"]
 }
 
-mssql_db_log_retention_err = "Azure SQL Database with Auditing Retention is not equal or more then 90 days" {
+mssql_db_log_retention = false {
     azure_issue["mssql_db_log_retention"]
 }
 
-mssql_db_log_retention_miss_err = "Auditing settings attribute retention_in_days is missing from the resource" {
+mssql_db_log_retention_err = "azurerm_mssql_database_extended_auditing_policy resource is missing or its property 'retention_in_days' is missing" {
     azure_attribute_absence["mssql_db_log_retention"]
+} else = "Azure SQL Database with Auditing Retention is not equal or more then 90 days" {
+    azure_issue["mssql_db_log_retention"]
 }
 
 mssql_db_log_retention_metadata := {
@@ -105,7 +101,7 @@ mssql_db_log_retention_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure SQL Database with Auditing Retention should have 90 days or more",
+    "Policy Title": "Ensure Azure SQL Database Auditing Retention is minimum 90 days or more",
     "Policy Description": "This policy identifies SQL Databases which have Auditing Retention less than 90 days. Audit Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access. It is recommended to configure SQL database Audit Retention to be greater than or equal to 90 days.",
     "Resource Type": "azurerm_mssql_database_extended_auditing_policy",
     "Policy Help URL": "",
