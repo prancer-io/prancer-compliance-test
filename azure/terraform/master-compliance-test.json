@@ -651,12 +651,12 @@
                             "id": "PR-AZR-0056-TRF",
                             "eval": "data.rule.db_ads_mail",
                             "message": "data.rule.db_ads_mail_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_mssql_server_vulnerability_assessment' resource, specify recipient email addresses into 'emails' array under 'recurring_scans' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_vulnerability_assessment#emails for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Server advanced data security does not have an email alert recipient",
+                    "title": "Azure SQL Server advanced data security should have email alert recipient to get scan notification",
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL Servers that do not have an email address configured for ADS alert notifications. As a best practice, provide one or more email addresses where you want to receive alerts for any anomalous activities detected on SQL Servers.",
                     "tags": [
                         {
@@ -680,12 +680,12 @@
                             "id": "PR-AZR-0057-TRF",
                             "eval": "data.rule.db_ads_alert",
                             "message": "data.rule.db_ads_alert_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_mssql_server_vulnerability_assessment' resource, set 'email_subscription_admins = true' under 'recurring_scans' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_vulnerability_assessment#email_subscription_admins for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Server advanced data security does not send alerts to service and co-administrators",
+                    "title": "Azure SQL Server advanced data security should send alerts to subscription administrators",
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the administratorsâ€”service and co-administratorâ€”can receive email alerts when anomalous activities are detected on the SQL Servers.",
                     "tags": [
                         {
@@ -709,12 +709,12 @@
                             "id": "PR-AZR-0058-TRF",
                             "eval": "data.rule.db_ads_scan",
                             "message": "data.rule.db_ads_scan_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_mssql_server_vulnerability_assessment' resource, set 'enabled = true' under 'recurring_scans' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_vulnerability_assessment#enabled for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Server advanced data security is disabled",
+                    "title": "Azure SQL Server advanced data security should be enabled",
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers.",
                     "tags": [
                         {
