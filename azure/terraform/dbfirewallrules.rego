@@ -34,24 +34,22 @@ azure_issue["db_firewall"] {
 
 db_firewall {
     lower(input.resources[_].type) == "azurerm_sql_firewall_rule"
-    not azure_issue["db_firewall"]
     not azure_attribute_absence["db_firewall"]
-}
-
-db_firewall = false {
-    azure_issue["db_firewall"]
+    not azure_issue["db_firewall"]
 }
 
 db_firewall = false {
     azure_attribute_absence["db_firewall"]
 }
 
-db_firewall_err = "SQL Server Firewall rule configuration allowing full inbound access to everyone" {
+db_firewall = false {
     azure_issue["db_firewall"]
 }
 
-db_firewall_miss_err = "Firewall rule attribute start_ip_address/end_ip_address is missing from the resource" {
+db_firewall_err = "azurerm_sql_firewall_rule property 'start_ip_address' or 'end_ip_address' is missing from the resource" {
     azure_attribute_absence["db_firewall"]
+} else = "SQL Server firewall rule configuration currently allowing full inbound access to everyone" {
+    azure_issue["db_firewall"]
 }
 
 db_firewall_metadata := {
