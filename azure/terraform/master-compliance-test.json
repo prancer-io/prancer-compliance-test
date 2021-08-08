@@ -334,7 +334,7 @@
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(dbauditingdbsettings.rego)",
+                    "rule": "file(dbauditingsettings.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-0003-TRF",
@@ -370,7 +370,7 @@
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(dbauditingdbsettings.rego)",
+                    "rule": "file(dbauditingsettings.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-0053-TRF",
@@ -401,12 +401,12 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_AUDITING_SETTINGS",
+                    "masterTestId": "TEST_DB_SERVER_AUDITING_SETTINGS",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(dbauditingsettings.rego)",
+                    "rule": "file(dbserverauditingsettings.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-0059-TRF",
