@@ -158,7 +158,7 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0068-TRF",
+                            "id": "PR-AZR-0101-TRF",
                             "eval": "data.rule.aks_aad_rbac_enabled",
                             "message": "data.rule.aks_aad_rbac_enabled_err",
                             "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, set role_based_access_control.azure_active_directory.managed = true to fix the issue. If 'role_based_access_control' block does not exist please add one. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#role_based_access_control for details.",
@@ -245,7 +245,7 @@
                     "rule": "file(databricks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0070-TRF",
+                            "id": "PR-AZR-0117-TRF",
                             "eval": "data.rule.databrics_workspace_has_public_ip_disabled",
                             "message": "data.rule.databrics_workspace_has_public_ip_disabled_err",
                             "remediationDescription": "In 'azurerm_databricks_workspace' resource, set true as the value of 'no_public_ip' under 'custom_parameters' block to fix the issue. If 'custom_parameters' block does not exist please add one. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/databricks_workspace for details.",
@@ -274,7 +274,7 @@
                     "rule": "file(databricks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0071-TRF",
+                            "id": "PR-AZR-0118-TRF",
                             "eval": "data.rule.databrics_workspace_has_vnet_integration",
                             "message": "data.rule.databrics_workspace_has_vnet_integration_err",
                             "remediationDescription": "In 'azurerm_databricks_workspace' resource, set set vnet id as the value of 'virtual_network_id' under 'custom_parameters' block to fix the issue. If 'custom_parameters' block does not exist please add one. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/databricks_workspace for details.",

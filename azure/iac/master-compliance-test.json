@@ -194,11 +194,11 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-00101-ARM",
+                            "id": "PR-AZR-0101-ARM",
                             "eval": "data.rule.aks_aad_azure_rbac",
                             "message": "data.rule.aks_aad_azure_rbac_err",
                             "remediationDescription": "Make sure aadProfile property of type object exist in ARM template with boolean managed = true and enableAzureRBAC = true as child property. Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters?tabs=json#managedclusteraadprofile-object for details.",
-                            "remediationFunction": "PR_AZR_00101_ARM.py"
+                            "remediationFunction": "PR_AZR_0101_ARM.py"
                         }
                     ],
                     "severity": "Medium",

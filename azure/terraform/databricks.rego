@@ -3,7 +3,7 @@ package rule
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/databricks_workspace
 
 #
-# PR-AZR-0070-TRF
+# PR-AZR-0117-TRF
 #
 
 default databrics_workspace_has_public_ip_disabled = null
@@ -49,7 +49,7 @@ databrics_workspace_has_public_ip_disabled_err = "azurerm_databricks_workspace p
 }
 
 databrics_workspace_has_public_ip_disabled_metadata := {
-    "Policy Code": "PR-AZR-0070-TRF",
+    "Policy Code": "PR-AZR-0117-TRF",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -61,7 +61,7 @@ databrics_workspace_has_public_ip_disabled_metadata := {
 }
 
 #
-# PR-AZR-0071-TRF
+# PR-AZR-0118-TRF
 #
 
 default databrics_workspace_has_vnet_integration = null
@@ -107,7 +107,7 @@ databrics_workspace_has_vnet_integration_err = "azurerm_databricks_workspace pro
 }
 
 databrics_workspace_has_vnet_integration_metadata := {
-    "Policy Code": "PR-AZR-0071-TRF",
+    "Policy Code": "PR-AZR-0118-TRF",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

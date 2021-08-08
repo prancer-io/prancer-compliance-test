@@ -324,7 +324,7 @@ aks_rbac_metadata := {
 }
 
 #
-# PR-AZR-0068-TRF
+# PR-AZR-0101-TRF
 #
 
 default aks_aad_rbac_enabled = null
@@ -397,7 +397,7 @@ aks_aad_rbac_enabled_err = "azurerm_kubernetes_cluster property 'role_based_acce
 }
 
 aks_rbac_metadata := {
-    "Policy Code": "PR-AZR-0068-TRF",
+    "Policy Code": "PR-AZR-0101-TRF",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

@@ -263,7 +263,7 @@ aks_rbac_metadata := {
 }
 
 #
-# PR-AZR-00101-ARM
+# PR-AZR-0101-ARM
 #
 
 default aks_aad_azure_rbac = null
@@ -306,7 +306,7 @@ aks_aad_azure_rbac_err = "Managed Azure AD RBAC for AKS cluster is not enabled."
 }
 
 aks_aad_azure_rbac_metadata := {
-    "Policy Code": "PR-AZR-00101-ARM",
+    "Policy Code": "PR-AZR-0101-ARM",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
