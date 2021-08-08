@@ -14,11 +14,11 @@ azure_attribute_absence["gw_tls"] {
     not resource.properties.ssl_policy
 }
 
-azure_attribute_absence["gw_tls"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_application_gateway"
-    count(resource.properties.ssl_policy) == 0
-}
+#azure_attribute_absence["gw_tls"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_application_gateway"
+#    count(resource.properties.ssl_policy) == 0
+#}
 
 azure_attribute_absence["gw_tls"] {
     resource := input.resources[_]
@@ -37,24 +37,22 @@ azure_issue["gw_tls"] {
 
 gw_tls {
     lower(input.resources[_].type) == "azurerm_application_gateway"
-    not azure_issue["gw_tls"]
     not azure_attribute_absence["gw_tls"]
-}
-
-gw_tls = false {
-    azure_issue["gw_tls"]
+    not azure_issue["gw_tls"]
 }
 
 gw_tls = false {
     azure_attribute_absence["gw_tls"]
 }
 
-gw_tls_err = "Azure Application Gateway is not using TLSv1.2 as minimum version or higher" {
+gw_tls = false {
     azure_issue["gw_tls"]
 }
 
-gw_tls_miss_err = "App gateway attribute min_protocol_version missing in the resource" {
+gw_tls_err = "azurerm_application_gateway property 'ssl_policy.min_protocol_version' need to be exist. Its missing from the resource. Please set the value to 'tlsv1_2' after property addition." {
     azure_attribute_absence["gw_tls"]
+} else = "Azure Application Gateway is not using TLSv1.2 as minimum version or higher" {
+    azure_issue["gw_tls"]
 }
 
 gw_tls_metadata := {
@@ -81,10 +79,17 @@ azure_attribute_absence["gw_waf"] {
     not resource.properties.waf_configuration
 }
 
+#azure_attribute_absence["gw_waf"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_application_gateway"
+#    count(resource.properties.waf_configuration) == 0
+#}
+
 azure_attribute_absence["gw_waf"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"
-    count(resource.properties.waf_configuration) == 0
+    waf_configuration := resource.properties.waf_configuration[_]
+    not waf_configuration.enabled
 }
 
 azure_issue["gw_waf"] {
@@ -96,20 +101,22 @@ azure_issue["gw_waf"] {
 
 gw_waf {
     lower(input.resources[_].type) == "azurerm_application_gateway"
-    not azure_issue["gw_waf"]
     not azure_attribute_absence["gw_waf"]
+    not azure_issue["gw_waf"]
+}
+
+gw_waf = false {
+    azure_attribute_absence["gw_waf"]
 }
 
 gw_waf = false {
     azure_issue["gw_waf"]
-} else = false {
-    azure_attribute_absence["gw_waf"]
-}
+} 
 
-gw_waf_err = "Azure Application Gateway does not have Web application firewall (WAF) enabled" {
-    azure_issue["gw_waf"]
-} else = "App gateway attribute waf_configuration missing in the resource" {
+gw_waf_err = "azurerm_application_gateway property 'waf_configuration.enabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
     azure_attribute_absence["gw_waf"]
+} else = "Azure Application Gateway does not have Web application firewall (WAF) enabled" {
+    azure_issue["gw_waf"]
 }
 
 gw_waf_metadata := {
