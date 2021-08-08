@@ -57,7 +57,7 @@ sql_server_ad_admin_metadata := {
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/administrators?tabs=json
 
 #
-# 
+# PR-AZR-0086-ARM
 #
 
 default sql_managedinstances_ad_admin = null
@@ -97,7 +97,7 @@ sql_managedinstances_ad_admin_miss_err = "SQL managedInstances administrators at
 }
 
 sql_managedinstances_ad_admin_metadata := {
-    "Policy Code": "",
+    "Policy Code": "PR-AZR-0086-ARM",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

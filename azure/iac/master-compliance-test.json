@@ -453,7 +453,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_ADMINISTRATORS",
+                    "masterTestId": "TEST_DB_ADMINISTRATORS_1",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
@@ -487,7 +487,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_ADMINISTRATORS_1",
+                    "masterTestId": "TEST_DB_ADMINISTRATORS_2",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
@@ -495,7 +495,7 @@
                     "rule": "file(dbadministrators.rego)",
                     "evals": [
                         {
-                            "id": "",
+                            "id": "PR-AZR-0086-ARM",
                             "eval": "data.rule.sql_managedinstances_ad_admin",
                             "message": "data.rule.sql_managedinstances_ad_admin_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for SQL managedInstances from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/administrators?tabs=json  administratorType should be ActiveDirectory",
