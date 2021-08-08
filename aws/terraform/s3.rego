@@ -51,9 +51,7 @@ s3_accesslog = false {
 
 s3_accesslog_err = "AWS Access logging not enabled on S3 buckets" {
     aws_issue["s3_accesslog"]
-}
-
-s3_accesslog_miss_err = "S3 Bucket attribute target_bucket/target_prefix missing in the resource" {
+} else = "S3 Bucket attribute target_bucket/target_prefix missing in the resource" {
     aws_attribute_absence["s3_accesslog"]
 }
 
@@ -115,9 +113,7 @@ s3_acl_delete = false {
 
 s3_acl_delete_err = "AWS S3 Bucket has Global DELETE Permissions enabled via bucket policy" {
     aws_issue["s3_acl_delete"]
-}
-
-s3_acl_delete_miss_err = "S3 Policy attribute policy.Statement missing in the resource" {
+} else = "S3 Policy attribute policy.Statement missing in the resource" {
     aws_attribute_absence["s3_acl_delete"]
 }
 
@@ -179,9 +175,7 @@ s3_acl_get = false {
 
 s3_acl_get_err = "AWS S3 Bucket has Global get Permissions enabled via bucket policy" {
     aws_issue["s3_acl_get"]
-}
-
-s3_acl_get_miss_err = "S3 Policy attribute policy.Statement missing in the resource" {
+} else = "S3 Policy attribute policy.Statement missing in the resource" {
     aws_attribute_absence["s3_acl_get"]
 }
 
@@ -243,9 +237,7 @@ s3_acl_list = false {
 
 s3_acl_list_err = "AWS S3 Bucket has Global list Permissions enabled via bucket policy" {
     aws_issue["s3_acl_list"]
-}
-
-s3_acl_list_miss_err = "S3 Policy attribute policy.Statement missing in the resource" {
+} else = "S3 Policy attribute policy.Statement missing in the resource" {
     aws_attribute_absence["s3_acl_list"]
 }
 
@@ -307,9 +299,7 @@ s3_acl_put = false {
 
 s3_acl_put_err = "AWS S3 Bucket has Global put Permissions enabled via bucket policy" {
     aws_issue["s3_acl_put"]
-}
-
-s3_acl_put_miss_err = "S3 Policy attribute policy.Statement missing in the resource" {
+} else = "S3 Policy attribute policy.Statement missing in the resource" {
     aws_attribute_absence["s3_acl_put"]
 }
 
@@ -340,12 +330,19 @@ aws_attribute_absence["s3_versioning"] {
 aws_issue["s3_versioning"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_s3_bucket"
-    resource.properties.versioning.enabled != true
+    lower(resource.properties.versioning.enabled) == "false"
+}
+
+aws_bool_issue["s3_versioning"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_s3_bucket"
+    resource.properties.versioning.enabled == false
 }
 
 s3_versioning {
     lower(input.resources[_].type) == "aws_s3_bucket"
     not aws_issue["s3_versioning"]
+    not aws_bool_issue["s3_versioning"]
     not aws_attribute_absence["s3_versioning"]
 }
 
@@ -354,14 +351,18 @@ s3_versioning = false {
 }
 
 s3_versioning = false {
+    aws_bool_issue["s3_versioning"]
+}
+
+s3_versioning = false {
     aws_attribute_absence["s3_versioning"]
 }
 
 s3_versioning_err = "AWS S3 Object Versioning is disabled" {
     aws_issue["s3_versioning"]
-}
-
-s3_versioning_miss_err = "S3 Bucket attribute versioning.enabled missing in the resource" {
+} else = "AWS S3 Object Versioning is disabled" {
+    aws_bool_issue["s3_versioning"]
+} else = "S3 Bucket attribute versioning.enabled missing in the resource" {
     aws_attribute_absence["s3_versioning"]
 }
 
@@ -386,18 +387,47 @@ default s3_transport = null
 aws_attribute_absence["s3_transport"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_s3_bucket_policy"
-    count([c | resource.properties.policy.Statement[_].Condition.StringLike["aws:SecureTransport"]; c := 1]) == 0
+    statement := resource.properties.policy.Statement[i]
+    count([c | statement.Condition.StringLike["aws:SecureTransport"]; c := 1]) == 0
+    count([c | statement.Condition.Bool["aws:SecureTransport"]; c := 1]) == 0
 }
 
 aws_issue["s3_transport"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_s3_bucket_policy"
-    resource.properties.policy.Statement[_].Condition.StringLike["aws:SecureTransport"] != true
+    statement := resource.properties.policy.Statement[i]
+    statement.Condition.StringLike
+    statement.Condition.StringLike["aws:SecureTransport"] == false
+}
+
+aws_bool_issue["s3_transport"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_s3_bucket_policy"
+    statement := resource.properties.policy.Statement[i]
+    statement.Condition.StringLike
+    lower(statement.Condition.StringLike["aws:SecureTransport"]) == "false"
+}
+
+aws_issue["s3_transport"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_s3_bucket_policy"
+    statement := resource.properties.policy.Statement[i]
+    statement.Condition.Bool
+    statement.Condition.Bool["aws:SecureTransport"] == false
+}
+
+aws_bool_issue["s3_transport"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_s3_bucket_policy"
+    statement := resource.properties.policy.Statement[i]
+    statement.Condition.Bool
+    lower(statement.Condition.Bool["aws:SecureTransport"]) == "false"
 }
 
 s3_transport {
     lower(input.resources[_].type) == "aws_s3_bucket_policy"
     not aws_issue["s3_transport"]
+    not aws_bool_issue["s3_transport"]
     not aws_attribute_absence["s3_transport"]
 }
 
@@ -406,14 +436,19 @@ s3_transport = false {
 }
 
 s3_transport = false {
+    aws_bool_issue["s3_transport"]
+}
+
+
+s3_transport = false {
     aws_attribute_absence["s3_transport"]
 }
 
 s3_transport_err = "AWS S3 bucket not configured with secure data transport policy" {
     aws_issue["s3_transport"]
-}
-
-s3_transport_miss_err = "S3 Policy attribute Condition SecureTransport missing in the resource" {
+} else = "AWS S3 bucket not configured with secure data transport policy" {
+    aws_bool_issue["s3_transport"]
+} else = "S3 Policy attribute Condition SecureTransport missing in the resource" {
     aws_attribute_absence["s3_transport"]
 }
 

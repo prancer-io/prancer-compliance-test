@@ -57,9 +57,7 @@ cf_default_cache = false {
 
 cf_default_cache_err = "AWS CloudFront Distributions with Field-Level Encryption not enabled" {
     aws_issue["cf_default_cache"]
-}
-
-cf_default_cache_miss_err = "Cloudfront attribute DistributionConfig missing in the resource" {
+} else = "Cloudfront attribute DistributionConfig missing in the resource" {
     aws_attribute_absence["cf_default_cache"]
 }
 
@@ -126,9 +124,7 @@ cf_ssl_protocol = false {
 
 cf_ssl_protocol_err = "AWS CloudFront distribution is using insecure SSL protocols for HTTPS communication" {
     aws_issue["cf_ssl_protocol"]
-}
-
-cf_ssl_protocol_miss_err = "Cloudfront attribute origin_ssl_protocols missing in the resource" {
+} else = "Cloudfront attribute origin_ssl_protocols missing in the resource" {
     aws_attribute_absence["cf_ssl_protocol"]
 }
 
@@ -259,9 +255,7 @@ cf_https_only = false {
 
 cf_https_only_err = "AWS CloudFront origin protocol policy does not enforce HTTPS-only" {
     aws_issue["cf_https_only"]
-}
-
-cf_https_only_miss_err = "Cloudfront attribute viewer_protocol_policy missing in the resource" {
+} else = "Cloudfront attribute viewer_protocol_policy missing in the resource" {
     aws_attribute_absence["cf_https_only"]
 }
 
@@ -315,9 +309,7 @@ cf_https = false {
 
 cf_https_err = "AWS CloudFront viewer protocol policy is not configured with HTTPS" {
     aws_issue["cf_https"]
-}
-
-cf_https_miss_err = "Cloudfront attribute viewer_protocol_policy missing in the resource" {
+} else = "Cloudfront attribute viewer_protocol_policy missing in the resource" {
     aws_attribute_absence["cf_https"]
 }
 
@@ -376,9 +368,7 @@ cf_min_protocol = false {
 
 cf_min_protocol_err = "AWS CloudFront web distribution that allow TLS versions 1.0 or lower" {
     aws_issue["cf_min_protocol"]
-}
-
-cf_min_protocol_miss_err = "Cloudfront attribute minimum_protocol_version missing in the resource" {
+} else = "Cloudfront attribute minimum_protocol_version missing in the resource" {
     aws_attribute_absence["cf_min_protocol"]
 }
 
@@ -428,9 +418,7 @@ cf_firewall = false {
 
 cf_firewall_err = "AWS CloudFront web distribution with AWS Web Application Firewall (AWS WAF) service disabled" {
     aws_issue["cf_firewall"]
-}
-
-cf_firewall_miss_err = "Cloudfront attribute web_acl_id missing in the resource" {
+} else = "Cloudfront attribute web_acl_id missing in the resource" {
     aws_attribute_absence["cf_firewall"]
 }
 
@@ -456,20 +444,34 @@ aws_issue["cf_default_ssl"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
     viewer_certificate := resource.properties.viewer_certificate[_]
+    lower(viewer_certificate.cloudfront_default_certificate) == "true"
+}
+
+aws_bool_issue["cf_default_ssl"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_cloudfront_distribution"
+    viewer_certificate := resource.properties.viewer_certificate[_]
     viewer_certificate.cloudfront_default_certificate == true
 }
 
 cf_default_ssl {
     lower(input.resources[_].type) == "aws_cloudfront_distribution"
     not aws_issue["cf_default_ssl"]
+    not aws_bool_issue["cf_default_ssl"]
 }
 
 cf_default_ssl = false {
     aws_issue["cf_default_ssl"]
 }
 
+cf_default_ssl = false {
+    aws_bool_issue["cf_default_ssl"]
+}
+
 cf_default_ssl_err = "AWS CloudFront web distribution with default SSL certificate (deprecated)" {
     aws_issue["cf_default_ssl"]
+} else = "AWS CloudFront web distribution with default SSL certificate (deprecated)" {
+    aws_bool_issue["cf_default_ssl"]
 }
 
 cf_default_ssl_metadata := {
@@ -522,9 +524,7 @@ cf_geo_restriction = false {
 
 cf_geo_restriction_err = "AWS CloudFront web distribution with geo restriction disabled" {
     aws_issue["cf_geo_restriction"]
-}
-
-cf_geo_restriction_miss_err = "Cloudfront attribute geo restriction_type missing in the resource" {
+} else = "Cloudfront attribute geo restriction_type missing in the resource" {
     aws_attribute_absence["cf_geo_restriction"]
 }
 
@@ -559,6 +559,13 @@ aws_attribute_absence["cf_s3_origin"] {
     not origin.s3_origin_config
 }
 
+aws_attribute_absence["cf_s3_origin"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_cloudfront_distribution"
+    origin := resource.properties.origin[_]
+    count(origin.s3_origin_config) == 0
+}
+
 aws_issue["cf_s3_origin"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
@@ -583,9 +590,7 @@ cf_s3_origin = false {
 
 cf_s3_origin_err = "AWS Cloudfront Distribution with S3 have Origin Access set to disabled" {
     aws_issue["cf_s3_origin"]
-}
-
-cf_s3_origin_miss_err = "Cloudfront attribute origin_access_identity missing in the resource" {
+} else = "Cloudfront attribute origin_access_identity missing in the resource" {
     aws_attribute_absence["cf_s3_origin"]
 }
 

@@ -24,12 +24,20 @@ aws_issue["dynabodb_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_dynamodb_table"
     server_side_encryption := resource.properties.server_side_encryption[_]
+    lower(server_side_encryption.enabled) == "false"
+}
+
+aws_bool_issue["dynabodb_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_dynamodb_table"
+    server_side_encryption := resource.properties.server_side_encryption[_]
     not server_side_encryption.enabled
 }
 
 dynabodb_encrypt {
     lower(input.resources[_].type) == "aws_dynamodb_table"
     not aws_issue["dynabodb_encrypt"]
+    not aws_bool_issue["dynabodb_encrypt"]
     not aws_attribute_absence["dynabodb_encrypt"]
 }
 
@@ -38,11 +46,17 @@ dynabodb_encrypt = false {
 }
 
 dynabodb_encrypt = false {
+    aws_bool_issue["dynabodb_encrypt"]
+}
+
+dynabodb_encrypt = false {
     aws_attribute_absence["dynabodb_encrypt"]
 }
 
 dynabodb_encrypt_err = "AWS DynamoDB encrypted using AWS owned CMK instead of AWS managed CMK" {
     aws_issue["dynabodb_encrypt"]
+} else = "AWS DynamoDB encrypted using AWS owned CMK instead of AWS managed CMK" {
+    aws_bool_issue["dynabodb_encrypt"]
 } else = "DynamoDB attribute server_side_encryption missing in the resource" {
     aws_attribute_absence["dynabodb_encrypt"]
 }

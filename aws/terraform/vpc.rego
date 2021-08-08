@@ -11,20 +11,33 @@ default vpc_subnet_autoip = null
 aws_issue["vpc_subnet_autoip"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_subnet"
+    lower(resource.properties.map_public_ip_on_launch) == "true"
+}
+
+aws_bool_issue["vpc_subnet_autoip"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_subnet"
     resource.properties.map_public_ip_on_launch
 }
 
 vpc_subnet_autoip {
     lower(input.resources[_].type) == "aws_subnet"
     not aws_issue["vpc_subnet_autoip"]
+    not aws_bool_issue["vpc_subnet_autoip"]
 }
 
 vpc_subnet_autoip = false {
     aws_issue["vpc_subnet_autoip"]
 }
 
+vpc_subnet_autoip = false {
+    aws_bool_issue["vpc_subnet_autoip"]
+}
+
 vpc_subnet_autoip_err = "AWS VPC subnets should not allow automatic public IP assignment" {
     aws_issue["vpc_subnet_autoip"]
+} else = "AWS VPC subnets should not allow automatic public IP assignment" {
+    aws_bool_issue["vpc_subnet_autoip"]
 }
 
 vpc_subnet_autoip_metadata := {

@@ -24,12 +24,19 @@ aws_issue["redshift_encrypt_key"] {
 aws_issue["redshift_encrypt_key"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_redshift_cluster"
+    lower(resource.properties.encrypted) == "false"
+}
+
+aws_bool_issue["redshift_encrypt_key"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_redshift_cluster"
     not resource.properties.encrypted
 }
 
 redshift_encrypt_key {
     lower(input.resources[_].type) == "aws_redshift_cluster"
     not aws_issue["redshift_encrypt_key"]
+    not aws_bool_issue["redshift_encrypt_key"]
     not aws_attribute_absence["redshift_encrypt_key"]
 }
 
@@ -38,14 +45,18 @@ redshift_encrypt_key = false {
 }
 
 redshift_encrypt_key = false {
+    aws_bool_issue["redshift_encrypt_key"]
+}
+
+redshift_encrypt_key = false {
     aws_attribute_absence["redshift_encrypt_key"]
 }
 
 redshift_encrypt_key_err = "AWS Redshift Cluster not encrypted using Customer Managed Key" {
     aws_issue["redshift_encrypt_key"]
-}
-
-redshift_encrypt_key_miss_err = "Redshift attribute kms_key_id missing in the resource" {
+} else = "AWS Redshift Cluster not encrypted using Customer Managed Key" {
+    aws_bool_issue["redshift_encrypt_key"]
+} else = "Redshift attribute kms_key_id missing in the resource" {
     aws_attribute_absence["redshift_encrypt_key"]
 }
 
@@ -70,20 +81,33 @@ default redshift_public = null
 aws_issue["redshift_public"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_redshift_cluster"
+    lower(resource.properties.publicly_accessible) == "true"
+}
+
+aws_bool_issue["redshift_public"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_redshift_cluster"
     resource.properties.publicly_accessible
 }
 
 redshift_public {
     lower(input.resources[_].type) == "aws_redshift_cluster"
     not aws_issue["redshift_public"]
+    not aws_bool_issue["redshift_public"]
 }
 
 redshift_public = false {
     aws_issue["redshift_public"]
 }
 
+redshift_public = false {
+    aws_bool_issue["redshift_public"]
+}
+
 redshift_public_err = "AWS Redshift clusters should not be publicly accessible" {
     aws_issue["redshift_public"]
+} else = "AWS Redshift clusters should not be publicly accessible" {
+    aws_bool_issue["redshift_public"]
 }
 
 redshift_public_metadata := {
@@ -172,26 +196,35 @@ default redshift_require_ssl = null
 aws_attribute_absence["redshift_require_ssl"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_redshift_parameter_group"
-    not resource.properties.parameters
+    not resource.properties.parameter
 }
 
 aws_issue["redshift_require_ssl"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_redshift_parameter_group"
-    count([c | lower(resource.properties.parameters[_].name) == "require_ssl"; c := 1]) == 0
+    count([c | lower(resource.properties.parameter[_].name) == "require_ssl"; c := 1]) == 0
 }
 
 aws_issue["redshift_require_ssl"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_redshift_parameter_group"
-    params = resource.properties.parameters[_]
+    params = resource.properties.parameter[_]
     lower(params.name) == "require_ssl"
     lower(params.value) == "false"
+}
+
+aws_bool_issue["redshift_require_ssl"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_redshift_parameter_group"
+    params = resource.properties.parameter[_]
+    lower(params.name) == "require_ssl"
+    not params.value
 }
 
 redshift_require_ssl {
     lower(input.resources[_].type) == "aws_redshift_parameter_group"
     not aws_issue["redshift_require_ssl"]
+    not aws_bool_issue["redshift_require_ssl"]
     not aws_attribute_absence["redshift_require_ssl"]
 }
 
@@ -200,14 +233,18 @@ redshift_require_ssl = false {
 }
 
 redshift_require_ssl = false {
+    aws_bool_issue["redshift_require_ssl"]
+}
+
+redshift_require_ssl = false {
     aws_attribute_absence["redshift_require_ssl"]
 }
 
 redshift_require_ssl_err = "AWS Redshift does not have require_ssl configured" {
     aws_issue["redshift_require_ssl"]
-}
-
-redshift_require_ssl_miss_err = "Redshift attribute properties missing in the resource" {
+} else = "AWS Redshift does not have require_ssl configured" {
+    aws_bool_issue["redshift_require_ssl"]
+} else = "Redshift attribute properties missing in the resource" {
     aws_attribute_absence["redshift_require_ssl"]
 }
 
@@ -232,20 +269,33 @@ default redshift_encrypt = null
 aws_issue["redshift_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_redshift_cluster"
+    lower(resource.properties.encrypted) == "false"
+}
+
+aws_bool_issue["redshift_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_redshift_cluster"
     not resource.properties.encrypted
 }
 
 redshift_encrypt {
     lower(input.resources[_].type) == "aws_redshift_cluster"
     not aws_issue["redshift_encrypt"]
+    not aws_bool_issue["redshift_encrypt"]
 }
 
 redshift_encrypt = false {
     aws_issue["redshift_encrypt"]
 }
 
+redshift_encrypt = false {
+    aws_bool_issue["redshift_encrypt"]
+}
+
 redshift_encrypt_err = "AWS Redshift instances are not encrypted" {
     aws_issue["redshift_encrypt"]
+} else = "AWS Redshift instances are not encrypted" {
+    aws_bool_issue["redshift_encrypt"]
 }
 
 redshift_encrypt_metadata := {
