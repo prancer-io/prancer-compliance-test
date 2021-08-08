@@ -738,7 +738,7 @@
                             "id": "PR-AZR-0018-TRF",
                             "eval": "data.rule.kv_expire",
                             "message": "data.rule.kv_expire_err",
-                            "remediationDescription": "In 'azurerm_key_vault_secret' resource, set valid date other then null in 'expiration_date' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret#expiration_date for details.",
+                            "remediationDescription": "In 'azurerm_key_vault_secret' resource, set valid date other then null in property 'expiration_date' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret#expiration_date for details.",
                             "remediationFunction": ""
                         }
                     ],
