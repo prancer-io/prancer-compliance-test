@@ -1690,12 +1690,12 @@
                             "id": "PR-AZR-0091-TRF",
                             "eval": "data.rule.pricing",
                             "message": "data.rule.pricing_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_security_center_subscription_pricing' resource, set tier = 'standard' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_subscription_pricing#tier for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Standard pricing tier is not AC in Security Center",
+                    "title": "Azure Security Center should have pricing tier configured to 'standard'",
                     "description": "Selecting the standard pricing tier will enable threat detection for networks and virtual systems by providing threat intelligence, anomaly detection, and behavior analytics in Azure Security Center.",
                     "tags": [
                         {
