@@ -142,3 +142,227 @@ ecs_root_user_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html"
 }
+
+#
+# PR-AWS-0209-CFR
+#
+
+default ecs_root_filesystem = null
+
+aws_bool_issue["ecs_root_filesystem"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    container_definition := resource.Properties.ContainerDefinitions[_]
+    not container_definition.ReadonlyRootFilesystem
+}
+
+aws_issue["ecs_root_filesystem"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    container_definition := resource.Properties.ContainerDefinitions[_]
+    lower(container_definition.ReadonlyRootFilesystem) == "false"
+}
+
+ecs_root_filesystem {
+    lower(input.Resources[i].Type) == "aws::ecs::taskdefinition"
+    not aws_issue["ecs_root_filesystem"]
+    not aws_bool_issue["ecs_root_filesystem"]
+}
+
+ecs_root_filesystem = false {
+    aws_issue["ecs_root_filesystem"]
+}
+
+ecs_root_filesystem = false {
+    aws_bool_issue["ecs_root_filesystem"]
+}
+
+ecs_root_filesystem_err = "AWS ECS Task Definition readonlyRootFilesystem Not Enabled" {
+    aws_issue["ecs_root_filesystem"]
+} else = "AWS ECS Task Definition readonlyRootFilesystem Not Enabled" {
+    aws_bool_issue["ecs_root_filesystem"]
+}
+
+ecs_root_filesystem_metadata := {
+    "Policy Code": "PR-AWS-0209-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS ECS Task Definition readonlyRootFilesystem Not Enabled",
+    "Policy Description": "It is recommended that readonlyRootFilesystem is enabled for AWS ECS task definition. Please make sure your 'ContainerDefinitions' template has 'ReadonlyRootFilesystem' and is set to 'true'.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html"
+}
+
+
+#
+# PR-AWS-0210-CFR
+#
+
+default ecs_resource_limit = null
+
+aws_cpu_issue["ecs_resource_limit"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    not resource.Properties.Cpu
+}
+
+aws_cpu_issue["ecs_resource_limit"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    resource.Properties.Cpu == null
+}
+
+aws_cpu_issue["ecs_resource_limit"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    lower(resource.Properties.Cpu) == "0"
+}
+
+aws_cpu_issue["ecs_resource_limit"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    container_definition := resource.Properties.ContainerDefinitions[_]
+    not container_definition.Cpu
+}
+
+aws_cpu_issue["ecs_resource_limit"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    container_definition := resource.Properties.ContainerDefinitions[_]
+    container_definition.Cpu == null
+}
+
+aws_cpu_issue["ecs_resource_limit"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    container_definition := resource.Properties.ContainerDefinitions[_]
+    lower(container_definition.Cpu) == "0"
+}
+
+aws_memory_issue["ecs_resource_limit"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    not resource.Properties.Memory
+}
+
+aws_memory_issue["ecs_resource_limit"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    resource.Properties.Memory == null
+}
+
+aws_memory_issue["ecs_resource_limit"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    lower(resource.Properties.Memory) == "0"
+}
+
+aws_memory_issue["ecs_resource_limit"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    container_definition := resource.Properties.ContainerDefinitions[_]
+    not container_definition.Memory
+}
+
+aws_memory_issue["ecs_resource_limit"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    container_definition := resource.Properties.ContainerDefinitions[_]
+    container_definition.Memory == null
+}
+
+aws_memory_issue["ecs_resource_limit"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    container_definition := resource.Properties.ContainerDefinitions[_]
+    lower(container_definition.Memory) == "0"
+}
+
+
+ecs_resource_limit {
+    lower(input.Resources[i].Type) == "aws::ecs::taskdefinition"
+    not aws_cpu_issue["ecs_resource_limit"]
+    not aws_memory_issue["ecs_resource_limit"]
+}
+
+ecs_resource_limit = false {
+    aws_cpu_issue["ecs_resource_limit"]
+}
+
+ecs_resource_limit = false {
+    aws_memory_issue["ecs_resource_limit"]
+}
+
+ecs_resource_limit_err = "AWS ECS task definition resource limits not set." {
+    aws_cpu_issue["ecs_resource_limit"]
+} else = "AWS ECS task definition resource limits not set." {
+    aws_memory_issue["ecs_resource_limit"]
+}
+
+ecs_resource_limit_metadata := {
+    "Policy Code": "PR-AWS-0210-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS ECS task definition resource limits not set.",
+    "Policy Description": "It is recommended that resource limits are set for AWS ECS task definition. Please make sure attributes 'Cpu' or 'Memory' exists and its value is not set to 0 under 'TaskDefinition' or 'ContainerDefinitions'.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html"
+}
+
+#
+# PR-AWS-0211-CFR
+#
+
+default ecs_logging = null
+
+aws_issue["ecs_logging"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    container_definition := resource.Properties.ContainerDefinitions[_]
+    not container_definition.LogConfiguration.LogDriver
+}
+
+aws_issue["ecs_logging"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    container_definition := resource.Properties.ContainerDefinitions[_]
+    count(container_definition.LogConfiguration.LogDriver) == 0
+}
+
+
+aws_issue["ecs_logging"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    container_definition := resource.Properties.ContainerDefinitions[_]
+    container_definition.LogConfiguration.LogDriver == null
+}
+
+
+ecs_logging {
+    lower(input.Resources[i].Type) == "aws::ecs::taskdefinition"
+    not aws_issue["ecs_logging"]
+}
+
+ecs_logging = false {
+    aws_issue["ecs_logging"]
+}
+
+ecs_logging_err = "AWS ECS task definition logging not enabled." {
+    aws_issue["ecs_logging"]
+}
+
+ecs_logging_metadata := {
+    "Policy Code": "PR-AWS-0211-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS ECS task definition logging not enabled.",
+    "Policy Description": "It is recommended that logging is enabled for AWS ECS task definition. Please make sure your 'TaskDefinition' template has 'LogConfiguration' and 'LogDriver' configured.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html"
+}

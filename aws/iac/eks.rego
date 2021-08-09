@@ -94,3 +94,45 @@ eks_public_access_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html"
 }
+
+#
+# PR-AWS-0212-CFR
+#
+
+default eks_version = null
+
+aws_issue["eks_version"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    startswith(lower(resource.Properties.Version)) == "1.9."
+}
+
+aws_issue["eks_version"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    not resource.Properties.Version
+}
+
+eks_version {
+    lower(input.Resources[i].Type) == "aws::eks::cluster"
+    not aws_issue["eks_version"]
+}
+
+eks_version = false {
+    aws_issue["eks_version"]
+}
+
+eks_version_err = "AWS EKS unsupported Master node version." {
+    aws_issue["eks_version"]
+}
+eks_version_metadata := {
+    "Policy Code": "PR-AWS-0212-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS EKS unsupported Master node version.",
+    "Policy Description": "AWS EKS unsupported Master node version.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html#cfn-eks-cluster-version"
+}

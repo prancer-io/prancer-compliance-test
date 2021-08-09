@@ -345,3 +345,54 @@ esearch_zone_awareness_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
 }
+
+
+#
+# PR-AWS-0215-CFR
+#
+
+default esearch_node_encryption = null
+
+aws_issue["esearch_node_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    lower(resource.Properties.NodeToNodeEncryptionOptions.Enabled) == "false"
+}
+
+aws_bool_issue["esearch_node_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.NodeToNodeEncryptionOptions.Enabled
+}
+
+esearch_node_encryption {
+    lower(input.Resources[i].Type) == "aws::elasticsearch::domain"
+    not aws_issue["esearch_node_encryption"]
+    not aws_bool_issue["esearch_node_encryption"]
+}
+
+esearch_node_encryption = false {
+    aws_issue["esearch_node_encryption"]
+}
+
+esearch_node_encryption = false {
+    aws_bool_issue["esearch_node_encryption"]
+}
+
+esearch_node_encryption_err = "Ensure node-to-node encryption is enabled on each ElasticSearch Domain" {
+    aws_issue["esearch_node_encryption"]
+} else = "Ensure node-to-node encryption is enabled on each ElasticSearch Domain" {
+    aws_bool_issue["esearch_node_encryption"]
+}
+
+esearch_node_encryption_metadata := {
+    "Policy Code": "PR-AWS-0215-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure node-to-node encryption is enabled on each ElasticSearch Domain",
+    "Policy Description": "Ensure node-to-node encryption is enabled on each ElasticSearch Domain",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html#cfn-elasticsearch-domain-nodetonodeencryptionoptions"
+}
