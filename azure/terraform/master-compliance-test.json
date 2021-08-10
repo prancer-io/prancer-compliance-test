@@ -1751,12 +1751,12 @@
                             "id": "PR-AZR-0005-TRF",
                             "eval": "data.rule.acr_webhooks",
                             "message": "data.rule.acr_webhooks_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_container_registry_webhook' resource, set secure http (https) based wekhook url at 'service_uri' property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry_webhook#service_uri for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure ACR HTTPS not enabled for webhook",
+                    "title": "Azure ACR should have HTTPS protocol enabled for webhook",
                     "description": "Ensure you send container registry webhooks only to a HTTPS endpoint. This policy checks your container registry webhooks and alerts if it finds a URI with HTTP.",
                     "tags": [
                         {
