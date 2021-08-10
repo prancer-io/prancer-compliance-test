@@ -77,7 +77,7 @@ serverRole = false {
     azure_issue["serverRole"]
 }
 
-serverRole_err = "Azure Redis Cache server Role isn't set on Secondary currently on the resource" {
+serverRole_err = "Azure Redis Cache linked backup server currently does not have secondary role." {
     azure_issue["serverRole"]
 }
 
