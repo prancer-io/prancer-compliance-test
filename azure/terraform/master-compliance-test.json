@@ -1953,15 +1953,15 @@
                     "rule": "file(storageblobcontainers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0013-TRF",
-                            "eval": "data.rule.storage_public_access",
-                            "message": "data.rule.storage_public_access_err",
-                            "remediationDescription": "",
+                            "id": "PR-AZR-0074-TRF",
+                            "eval": "data.rule.storage_container_public_access_disabled",
+                            "message": "data.rule.storage_container_public_access_disabled_err",
+                            "remediationDescription": "In 'azurerm_storage_container' resource, set 'container_access_type = private' or remove the container_access_type property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container#container_access_type for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Blob container(s) with public access and logging set to less than 180 days (TJX)",
+                    "title": "Azure storage blob container should not have public access enabled",
                     "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature._x000D__x000D_This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB') that also have Audit Log Retention set to less than 180 days._x000D__x000D_As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers.",
                     "tags": [
                         {
