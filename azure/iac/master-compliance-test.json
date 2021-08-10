@@ -194,11 +194,11 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-00101-ARM",
+                            "id": "PR-AZR-0101-ARM",
                             "eval": "data.rule.aks_aad_azure_rbac",
                             "message": "data.rule.aks_aad_azure_rbac_err",
                             "remediationDescription": "Make sure aadProfile property of type object exist in ARM template with boolean managed = true and enableAzureRBAC = true as child property. Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters?tabs=json#managedclusteraadprofile-object for details.",
-                            "remediationFunction": "PR_AZR_00101_ARM.py"
+                            "remediationFunction": "PR_AZR_0101_ARM.py"
                         }
                     ],
                     "severity": "Medium",
@@ -453,7 +453,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_ADMINISTRATORS",
+                    "masterTestId": "TEST_DB_ADMINISTRATORS_1",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
@@ -487,7 +487,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_ADMINISTRATORS_1",
+                    "masterTestId": "TEST_DB_ADMINISTRATORS_2",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
@@ -495,7 +495,7 @@
                     "rule": "file(dbadministrators.rego)",
                     "evals": [
                         {
-                            "id": "",
+                            "id": "PR-AZR-0086-ARM",
                             "eval": "data.rule.sql_managedinstances_ad_admin",
                             "message": "data.rule.sql_managedinstances_ad_admin_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for SQL managedInstances from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/administrators?tabs=json  administratorType should be ActiveDirectory",
@@ -711,7 +711,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Database security alert policies retention should be configured for more than 90 days",
+                    "title": "Azure SQL Database security alert policies thread retention should be configured for more than 90 days",
                     "description": "This policy identifies SQL Databases which have security alert policies retention set less than or equals to 90 days. Threat Logs can be used to check for anomalies and gives an understanding of suspected breaches or misuse of data and access. It is recommended to configure SQL database Threat Retention to be greater than 90 days.",
                     "tags": [
                         {
@@ -747,8 +747,8 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Databases Security Alert Policy should be configured to send alert to the account administrators via email",
-                    "description": "This policy identifies SQL Databases which has email account admins disabled and there is no email address provided where the alert supposed to be sent.",
+                    "title": "Azure SQL Databases Security Alert Policy should be configured to send alert to the account administrators and configured email addresses",
+                    "description": "Checks to ensure that an valid email address is set for Threat Detection alerts. The alerts are sent to this email address when any anomalous activities are detected on SQL databases.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -782,8 +782,8 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Server Security Alert Policy should not have any alert types in disabled alerts list",
-                    "description": "Ensure that Azure SQL Server Security Alert Policy is not excluding any type of alerts",
+                    "title": "Azure SQL Server threat detection alerts should be enabled for all threat types",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x005F_x000D_ _x005F_x000D_ This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats.",
                     "tags": [
                         {
                             "cloud": "git",
