@@ -2,7 +2,7 @@ package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html
 #
-# PR-AWS-0237-CFR
+# PR-AWS-0238-CFR
 #
 default msk_encryption_at_rest = null
 
@@ -27,7 +27,7 @@ msk_encryption_at_rest_err = "Encryption at rest within cluster" {
 
 
 msk_encryption_at_rest_metadata := {
-    "Policy Code": "PR-AWS-0237-CFR",
+    "Policy Code": "PR-AWS-0238-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -40,7 +40,7 @@ msk_encryption_at_rest_metadata := {
 
 
 #
-# PR-AWS-0238-CFR
+# PR-AWS-0239-CFR
 #
 default msk_encryption_at_rest_cmk = null
 
@@ -77,7 +77,7 @@ msk_encryption_at_rest_cmk_err = "Ensure data is encrypted at rest using a custo
 
 
 msk_encryption_at_rest_cmk_metadata := {
-    "Policy Code": "PR-AWS-0238-CFR",
+    "Policy Code": "PR-AWS-0239-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -89,7 +89,7 @@ msk_encryption_at_rest_cmk_metadata := {
 }
 
 #
-# PR-AWS-0239-CFR
+# PR-AWS-0240-CFR
 #
 default msk_in_transit_encryption = null
 
@@ -128,7 +128,7 @@ msk_in_transit_encryption_err = "Ensure data is Encrypted in transit (TLS)" {
 
 
 msk_in_transit_encryption_metadata := {
-    "Policy Code": "PR-AWS-0239-CFR",
+    "Policy Code": "PR-AWS-0240-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -141,7 +141,7 @@ msk_in_transit_encryption_metadata := {
 
 
 #
-# PR-AWS-0240-CFR
+# PR-AWS-0241-CFR
 #
 default msk_in_transit_encryption_tls = null
 
@@ -180,7 +180,7 @@ msk_in_transit_encryption_tls_err = "Ensure client authentication is enabled wit
 
 
 msk_in_transit_encryption_tls_metadata := {
-    "Policy Code": "PR-AWS-0240-CFR",
+    "Policy Code": "PR-AWS-0241-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -193,7 +193,7 @@ msk_in_transit_encryption_tls_metadata := {
 
 
 #
-# PR-AWS-0241-CFR
+# PR-AWS-0242-CFR
 #
 default msk_vpc = null
 
@@ -225,7 +225,7 @@ msk_vpc_err = "Ensure MSK cluster is setup in GS VPC" {
 
 
 msk_vpc_metadata := {
-    "Policy Code": "PR-AWS-0241-CFR",
+    "Policy Code": "PR-AWS-0242-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

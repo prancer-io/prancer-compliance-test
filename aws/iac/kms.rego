@@ -2,7 +2,7 @@ package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html
 #
-# PR-AWS-0234-CFR
+# PR-AWS-0235-CFR
 #
 default kms_key_rotation = null
 
@@ -40,7 +40,7 @@ kms_key_rotation_err = "AWS Customer Master Key (CMK) rotation is not enabled" {
 
 
 kms_key_rotation_metadata := {
-    "Policy Code": "PR-AWS-0234-CFR",
+    "Policy Code": "PR-AWS-0235-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -53,7 +53,7 @@ kms_key_rotation_metadata := {
 
 
 #
-# PR-AWS-0235-CFR
+# PR-AWS-0236-CFR
 #
 default kms_key_state = null
 
@@ -91,7 +91,7 @@ kms_key_state_err = "AWS KMS Customer Managed Key not in use" {
 
 
 kms_key_state_metadata := {
-    "Policy Code": "PR-AWS-0235-CFR",
+    "Policy Code": "PR-AWS-0236-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

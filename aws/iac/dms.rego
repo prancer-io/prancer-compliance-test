@@ -2,7 +2,7 @@ package rule
 
 # https://docs.amazonaws.cn/en_us/AWSCloudFormation/latest/UserGuide/aws-resource-dms-endpoint.html#cfn-dms-endpoint-enginename
 #
-# PR-AWS-0206-CFR
+# PR-AWS-0207-CFR
 #
 
 default dms_endpoint = null
@@ -35,7 +35,7 @@ dms_endpoint = "Ensure DMS endpoint are SSL configured" {
 }
 
 dms_endpoint_metadata := {
-    "Policy Code": "PR-AWS-0206-CFR",
+    "Policy Code": "PR-AWS-0207-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

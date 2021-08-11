@@ -2,7 +2,7 @@ package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#cfn-amazonmq-broker-publiclyaccessible
 #
-# PR-AWS-0236-CFR
+# PR-AWS-0237-CFR
 #
 default mq_publicly_accessible = null
 
@@ -40,7 +40,7 @@ mq_publicly_accessible_err = "AWS MQ is publicly accessible" {
 
 
 mq_publicly_accessible_metadata := {
-    "Policy Code": "PR-AWS-0236-CFR",
+    "Policy Code": "PR-AWS-0237-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

@@ -2,7 +2,7 @@ package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-imagetagmutability
 #
-# PR-AWS-0207-CFR
+# PR-AWS-0208-CFR
 #
 
 default ecr_imagetag = null
@@ -28,7 +28,7 @@ ecr_imagetag = "Ensure no ECR imageTagMutability equals MUTABLE" {
 }
 
 ecr_imagetag_metadata := {
-    "Policy Code": "PR-AWS-0207-CFR",
+    "Policy Code": "PR-AWS-0208-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -40,7 +40,7 @@ ecr_imagetag_metadata := {
 }
 
 #
-# PR-AWS-0208-CFR
+# PR-AWS-0209-CFR
 #
 
 default ecr_encryption = null
@@ -66,7 +66,7 @@ ecr_encryption = "Ensure encryption is enabled for ECR" {
 }
 
 ecr_encryption_metadata := {
-    "Policy Code": "PR-AWS-0208-CFR",
+    "Policy Code": "PR-AWS-0209-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

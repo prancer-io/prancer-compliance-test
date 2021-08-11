@@ -144,7 +144,7 @@ ecs_root_user_metadata := {
 }
 
 #
-# PR-AWS-0209-CFR
+# PR-AWS-0210-CFR
 #
 
 default ecs_root_filesystem = null
@@ -184,7 +184,7 @@ ecs_root_filesystem_err = "AWS ECS Task Definition readonlyRootFilesystem Not En
 }
 
 ecs_root_filesystem_metadata := {
-    "Policy Code": "PR-AWS-0209-CFR",
+    "Policy Code": "PR-AWS-0210-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -197,7 +197,7 @@ ecs_root_filesystem_metadata := {
 
 
 #
-# PR-AWS-0210-CFR
+# PR-AWS-0211-CFR
 #
 
 default ecs_resource_limit = null
@@ -302,7 +302,7 @@ ecs_resource_limit_err = "AWS ECS task definition resource limits not set." {
 }
 
 ecs_resource_limit_metadata := {
-    "Policy Code": "PR-AWS-0210-CFR",
+    "Policy Code": "PR-AWS-0211-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -314,7 +314,7 @@ ecs_resource_limit_metadata := {
 }
 
 #
-# PR-AWS-0211-CFR
+# PR-AWS-0212-CFR
 #
 
 default ecs_logging = null
@@ -356,7 +356,7 @@ ecs_logging_err = "AWS ECS task definition logging not enabled." {
 }
 
 ecs_logging_metadata := {
-    "Policy Code": "PR-AWS-0211-CFR",
+    "Policy Code": "PR-AWS-0212-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

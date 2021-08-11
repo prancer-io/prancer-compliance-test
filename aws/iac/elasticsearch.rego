@@ -348,7 +348,7 @@ esearch_zone_awareness_metadata := {
 
 
 #
-# PR-AWS-0215-CFR
+# PR-AWS-0216-CFR
 #
 
 default esearch_node_encryption = null
@@ -386,7 +386,7 @@ esearch_node_encryption_err = "Ensure node-to-node encryption is enabled on each
 }
 
 esearch_node_encryption_metadata := {
-    "Policy Code": "PR-AWS-0215-CFR",
+    "Policy Code": "PR-AWS-0216-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

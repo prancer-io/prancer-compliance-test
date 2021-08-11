@@ -2,7 +2,7 @@ package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-application.html#cfn-codedeploy-application-computeplatform
 #
-# PR-AWS-0205-CFR
+# PR-AWS-0206-CFR
 #
 
 default deploy_compute_platform = null
@@ -43,7 +43,7 @@ deploy_compute_platform = "Code Pipeline Encryption at rest with customer manage
 
 
 deploy_compute_platform_metadata := {
-    "Policy Code": "PR-AWS-0205-CFR",
+    "Policy Code": "PR-AWS-0206-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

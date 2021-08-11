@@ -2,7 +2,7 @@ package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesis-stream.html
 #
-# PR-AWS-0232-CFR
+# PR-AWS-0233-CFR
 #
 default kinesis_encryption = null
 
@@ -38,7 +38,7 @@ kinesis_encryption_err = "AWS Kinesis streams are not encrypted using Server Sid
 }
 
 kinesis_encryption_metadata := {
-    "Policy Code": "PR-AWS-0232-CFR",
+    "Policy Code": "PR-AWS-0233-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -50,7 +50,7 @@ kinesis_encryption_metadata := {
 }
 
 #
-# PR-AWS-0233-CFR
+# PR-AWS-0234-CFR
 #
 
 default kinesis_encryption_kms = null
@@ -87,7 +87,7 @@ kinesis_encryption_kms_err = "AWS Kinesis streams encryption using default KMS k
 }
 
 kinesis_encryption_kms_metadata := {
-    "Policy Code": "PR-AWS-0233-CFR",
+    "Policy Code": "PR-AWS-0234-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

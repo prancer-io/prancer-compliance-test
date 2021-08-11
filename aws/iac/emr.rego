@@ -2,7 +2,7 @@ package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration
 #
-# PR-AWS-0217-CFR
+# PR-AWS-0218-CFR
 #
 
 default emr_security = null
@@ -39,7 +39,7 @@ emr_security = "Ensure AWS EMR cluster is configured with security configuration
 }
 
 emr_security_metadata := {
-    "Policy Code": "PR-AWS-0217-CFR",
+    "Policy Code": "PR-AWS-0218-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -52,7 +52,7 @@ emr_security_metadata := {
 
 
 #
-# PR-AWS-0218-CFR
+# PR-AWS-0219-CFR
 #
 
 default emr_kerberos = null
@@ -89,7 +89,7 @@ emr_kerberos = "Must use kerberized auth for internal communications within the 
 }
 
 emr_kerberos_metadata := {
-    "Policy Code": "PR-AWS-0218-CFR",
+    "Policy Code": "PR-AWS-0219-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -102,7 +102,7 @@ emr_kerberos_metadata := {
 
 
 #
-# PR-AWS-0219-CFR
+# PR-AWS-0220-CFR
 #
 
 default emr_s3_encryption = null
@@ -133,7 +133,7 @@ emr_s3_encryption_err = "Security configuration used with the cluster should hav
 }
 
 emr_s3_encryption_metadata := {
-    "Policy Code": "PR-AWS-0219-CFR",
+    "Policy Code": "PR-AWS-0220-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -146,7 +146,7 @@ emr_s3_encryption_metadata := {
 
 
 #
-# PR-AWS-0220-CFR
+# PR-AWS-0221-CFR
 #
 
 default emr_local_encryption_cmk = null
@@ -183,7 +183,7 @@ emr_local_encryption_cmk_err = "Ensure AWS EMR cluster is enabled with local dis
 }
 
 emr_local_encryption_cmk_metadata := {
-    "Policy Code": "PR-AWS-0220-CFR",
+    "Policy Code": "PR-AWS-0221-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -196,7 +196,7 @@ emr_local_encryption_cmk_metadata := {
 
 
 #
-# PR-AWS-0221-CFR
+# PR-AWS-0222-CFR
 #
 
 default emr_local_encryption = null
@@ -227,7 +227,7 @@ emr_local_encryption_err = "Ensure AWS EMR cluster is enabled with local disk en
 }
 
 emr_local_encryption_metadata := {
-    "Policy Code": "PR-AWS-0221-CFR",
+    "Policy Code": "PR-AWS-0222-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -240,7 +240,7 @@ emr_local_encryption_metadata := {
 
 
 #
-# PR-AWS-0222-CFR
+# PR-AWS-0223-CFR
 #
 
 default emr_rest_encryption = null
@@ -278,7 +278,7 @@ emr_rest_encryption_err = "Ensure EMR cluster is enabled with data encryption at
 }
 
 emr_rest_encryption_metadata := {
-    "Policy Code": "PR-AWS-0222-CFR",
+    "Policy Code": "PR-AWS-0223-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -292,7 +292,7 @@ emr_rest_encryption_metadata := {
 
 
 #
-# PR-AWS-0223-CFR
+# PR-AWS-0224-CFR
 #
 
 default emr_s3_encryption_sse = null
@@ -330,7 +330,7 @@ emr_s3_encryption_sse_err = "Ensure EMR cluster is configured with SSE KMS for d
 }
 
 emr_s3_encryption_sse_metadata := {
-    "Policy Code": "PR-AWS-0223-CFR",
+    "Policy Code": "PR-AWS-0224-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -343,7 +343,7 @@ emr_s3_encryption_sse_metadata := {
 
 
 #
-# PR-AWS-0224-CFR
+# PR-AWS-0225-CFR
 #
 
 default emr_transit_encryption = null
@@ -381,7 +381,7 @@ emr_transit_encryption_err = "Ensure EMR cluster is enabled with data encryption
 }
 
 emr_transit_encryption_metadata := {
-    "Policy Code": "PR-AWS-0224-CFR",
+    "Policy Code": "PR-AWS-0225-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

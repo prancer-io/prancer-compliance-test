@@ -53,7 +53,7 @@ gateway_private_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS RestApi EndpointConfiguration types not contains private",
-    "Policy Description": "AWS RestApi EndpointConfiguration types not contains private",
+    "Policy Description": "Ensure that the Api endpoint type in api gateway is set to private and Is not exposed to the public internet",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-restapi-endpointconfiguration.html"
@@ -61,7 +61,7 @@ gateway_private_metadata := {
 
 
 #
-# PR-AWS-0202-CFR
+# PR-AWS-0203-CFR
 #
 
 default gateway_validate_parameter = null
@@ -99,7 +99,7 @@ gateway_validate_parameter_err = "AWS API Gateway request parameter is not valid
 }
 
 gateway_validate_parameter_metadata := {
-    "Policy Code": "PR-AWS-0202-CFR",
+    "Policy Code": "PR-AWS-0203-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -112,7 +112,7 @@ gateway_validate_parameter_metadata := {
 
 
 #
-# PR-AWS-0203-CFR
+# PR-AWS-0204-CFR
 #
 
 default gateway_request_authorizer = null
@@ -150,7 +150,7 @@ gateway_request_authorizer_err = "AWS API Gateway Authorizer has not authorized 
 }
 
 gateway_request_authorizer_metadata := {
-    "Policy Code": "PR-AWS-0203-CFR",
+    "Policy Code": "PR-AWS-0204-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

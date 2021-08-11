@@ -2,7 +2,7 @@ package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_IAM.html
 #
-# PR-AWS-0225-CFR
+# PR-AWS-0226-CFR
 #
 default iam_wildcard_resource = null
 
@@ -27,7 +27,7 @@ iam_wildcard_resource_err = "Ensure no wildcards are specified in IAM policy wit
 }
 
 iam_wildcard_resource_metadata := {
-    "Policy Code": "PR-AWS-0225-CFR",
+    "Policy Code": "PR-AWS-0226-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -39,7 +39,7 @@ iam_wildcard_resource_metadata := {
 }
 
 #
-# PR-AWS-0226-CFR
+# PR-AWS-0227-CFR
 #
 default iam_wildcard_action = null
 
@@ -64,7 +64,7 @@ iam_wildcard_action_err = "Ensure no wildcards are specified in IAM policy with 
 }
 
 iam_wildcard_action_metadata := {
-    "Policy Code": "PR-AWS-0226-CFR",
+    "Policy Code": "PR-AWS-0227-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -78,7 +78,7 @@ iam_wildcard_action_metadata := {
 
 
 #
-# PR-AWS-0227-CFR
+# PR-AWS-0228-CFR
 #
 default iam_wildcard_principal = null
 
@@ -103,7 +103,7 @@ iam_wildcard_principal_err = "Ensure no wildcards are specified in IAM trust-rel
 }
 
 iam_wildcard_principal_metadata := {
-    "Policy Code": "PR-AWS-0227-CFR",
+    "Policy Code": "PR-AWS-0228-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -116,7 +116,7 @@ iam_wildcard_principal_metadata := {
 
 
 #
-# PR-AWS-0228-CFR
+# PR-AWS-0229-CFR
 #
 default iam_resource_format = null
 
@@ -156,7 +156,7 @@ iam_resource_format_err = "Ensure no IAM policy has a resource specified in the 
 }
 
 iam_resource_format_metadata := {
-    "Policy Code": "PR-AWS-0228-CFR",
+    "Policy Code": "PR-AWS-0229-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -170,7 +170,7 @@ iam_resource_format_metadata := {
 
 
 #
-# PR-AWS-0229-CFR
+# PR-AWS-0230-CFR
 #
 default iam_assume_permission = null
 
@@ -206,7 +206,7 @@ iam_assume_permission_err = "AWS IAM policy allows assume role permission across
 }
 
 iam_assume_permission_metadata := {
-    "Policy Code": "PR-AWS-0229-CFR",
+    "Policy Code": "PR-AWS-0230-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -218,7 +218,7 @@ iam_assume_permission_metadata := {
 }
 
 #
-# PR-AWS-0230-CFR
+# PR-AWS-0231-CFR
 #
 default iam_all_traffic = null
 
@@ -244,7 +244,7 @@ iam_all_traffic_err = "AWS IAM policy is overly permissive to all traffic via co
 }
 
 iam_all_traffic_metadata := {
-    "Policy Code": "PR-AWS-0230-CFR",
+    "Policy Code": "PR-AWS-0231-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -256,7 +256,7 @@ iam_all_traffic_metadata := {
 }
 
 #
-# PR-AWS-0231-CFR
+# PR-AWS-0232-CFR
 #
 default iam_administrative_privileges = null
 
@@ -283,7 +283,7 @@ iam_administrative_privileges_err = "AWS IAM policy allows full administrative p
 }
 
 iam_administrative_privileges_metadata := {
-    "Policy Code": "PR-AWS-0231-CFR",
+    "Policy Code": "PR-AWS-0232-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

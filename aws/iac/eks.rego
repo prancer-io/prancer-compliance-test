@@ -96,7 +96,7 @@ eks_public_access_metadata := {
 }
 
 #
-# PR-AWS-0212-CFR
+# PR-AWS-0213-CFR
 #
 
 default eks_version = null
@@ -126,7 +126,7 @@ eks_version_err = "AWS EKS unsupported Master node version." {
     aws_issue["eks_version"]
 }
 eks_version_metadata := {
-    "Policy Code": "PR-AWS-0212-CFR",
+    "Policy Code": "PR-AWS-0213-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

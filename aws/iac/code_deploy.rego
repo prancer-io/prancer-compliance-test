@@ -2,7 +2,7 @@ package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-application.html#cfn-codedeploy-application-computeplatform
 #
-# PR-AWS-0204-CFR
+# PR-AWS-0205-CFR
 #
 
 default deploy_compute_platform = null
@@ -36,7 +36,7 @@ deploy_compute_platform = "Compute Platform must be 'ECS' OR 'Lambda'." {
 
 
 deploy_compute_platform_metadata := {
-    "Policy Code": "PR-AWS-0204-CFR",
+    "Policy Code": "PR-AWS-0205-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

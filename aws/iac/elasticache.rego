@@ -226,7 +226,7 @@ cache_encrypt_metadata := {
 
 
 #
-# PR-AWS-0213-CFR
+# PR-AWS-0214-CFR
 #
 
 default cache_ksm_key = null
@@ -257,7 +257,7 @@ cache_ksm_key_err = "Ensure that ElastiCache replication Group (Redis) are encry
 }
 
 cache_ksm_key_metadata := {
-    "Policy Code": "PR-AWS-0213-CFR",
+    "Policy Code": "PR-AWS-0214-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -270,7 +270,7 @@ cache_ksm_key_metadata := {
 
 
 #
-# PR-AWS-0214-CFR
+# PR-AWS-0215-CFR
 #
 
 default cache_default_sg = null
@@ -308,7 +308,7 @@ cache_default_sg_err = "Ensure 'default' value is not used on Security Group set
 }
 
 cache_default_sg_metadata := {
-    "Policy Code": "PR-AWS-0214-CFR",
+    "Policy Code": "PR-AWS-0215-CFR",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
