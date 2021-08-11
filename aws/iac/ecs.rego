@@ -217,7 +217,7 @@ aws_cpu_issue["ecs_resource_limit"] {
 aws_cpu_issue["ecs_resource_limit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ecs::taskdefinition"
-    lower(resource.Properties.Cpu) == "0"
+    to_number(resource.Properties.Cpu) == 0
 }
 
 aws_cpu_issue["ecs_resource_limit"] {
@@ -238,7 +238,7 @@ aws_cpu_issue["ecs_resource_limit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ecs::taskdefinition"
     container_definition := resource.Properties.ContainerDefinitions[_]
-    lower(container_definition.Cpu) == "0"
+    to_number(container_definition.Cpu) == 0
 }
 
 aws_memory_issue["ecs_resource_limit"] {
@@ -256,7 +256,7 @@ aws_memory_issue["ecs_resource_limit"] {
 aws_memory_issue["ecs_resource_limit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ecs::taskdefinition"
-    lower(resource.Properties.Memory) == "0"
+    to_number(resource.Properties.Memory) == 0
 }
 
 aws_memory_issue["ecs_resource_limit"] {
@@ -277,7 +277,7 @@ aws_memory_issue["ecs_resource_limit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ecs::taskdefinition"
     container_definition := resource.Properties.ContainerDefinitions[_]
-    lower(container_definition.Memory) == "0"
+    to_number(container_definition.Memory) == 0
 }
 
 
