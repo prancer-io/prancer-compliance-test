@@ -14,6 +14,12 @@ aws_issue["dms_endpoint"] {
     lower(resource.Properties.SslMode) == "none"
 }
 
+aws_issue["dms_endpoint"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::dms::endpoint"
+    lower(resource.Properties.EngineName) != "s3"
+    not resource.Properties.SslMode
+}
 
 dms_endpoint {
     lower(input.Resources[i].Type) == "aws::dms::endpoint"
