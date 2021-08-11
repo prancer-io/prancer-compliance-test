@@ -11,13 +11,13 @@ default gateway_private = null
 aws_attribute_absence["gateway_private"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::apigateway::restapi"
-    not resource.Properties.EndpointConfiguration.Type
+    not resource.Properties.EndpointConfiguration.Types
 }
 
 aws_issue["gateway_private"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::apigateway::restapi"
-    count(resource.Properties.EndpointConfiguration.Type) == 0
+    count(resource.Properties.EndpointConfiguration.Types) == 0
 }
 
 aws_issue["gateway_private"] {
