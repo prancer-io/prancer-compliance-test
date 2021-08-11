@@ -4,41 +4,41 @@ package rule
 
 # PR-AZR-0131-ARM
 
-default serverRole = null
+default enableSslPort = null
 
-azure_attribute_absence ["serverRole"] {
+azure_attribute_absence ["enableSslPort"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.cache/redis"
     not resource.properties.enableNonSslPort
 }
 
-azure_issue ["serverRole"] {
+azure_issue ["enableSslPort"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.cache/redis"
     resource.properties.enableNonSslPort != false
 }
 
-serverRole {
-    azure_attribute_absence["serverRole"]
+enableSslPort {
+    azure_attribute_absence["enableSslPort"]
 }
 
 
-serverRole {
+enableSslPort {
     lower(input.resources[_].type) == "microsoft.cache/redis"
-    not azure_issue["serverRole"]
+    not azure_issue["servenableSslPorterRole"]
 }
 
 
-serverRole = false {
-    azure_issue["serverRole"]
+enableSslPort = false {
+    azure_issue["enableSslPort"]
 }
 
-serverRole_err = "Azure Redis Cache enableNonSslPort is not false currently on the resource" {
-    azure_issue["serverRole"]
+enableSslPort_err = "Redis cache is currently allowing unsecure connection via a non ssl port opened" {
+    azure_issue["enableSslPort"]
 }
 
 
-serverRole_metadata := {
+enableSslPort_metadata := {
     "Policy Code": "PR-AZR-0131-ARM",
     "Type": "IaC",
     "Product": "AZR",
@@ -60,6 +60,12 @@ serverRole_metadata := {
 default serverRole = null
 
 
+azure_attribute_absence ["serverRole"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis/linkedservers"
+    not resource.properties.serverRole
+}
+
 azure_issue ["serverRole"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.cache/redis/linkedservers"
@@ -69,13 +75,25 @@ azure_issue ["serverRole"] {
 
 serverRole {
     lower(input.resources[_].type) == "microsoft.cache/redis/linkedservers"
+    not azure_attribute_absence["serverRole"]
     not azure_issue["serverRole"]
+}
+
+
+serverRole = false {
+    azure_attribute_absence["serverRole"]
 }
 
 
 serverRole = false {
     azure_issue["serverRole"]
 }
+
+
+serverRole_miss_err = "Azure Redis Cache linked server property 'serverRole' is missing from the resource" {
+    azure_attribute_absence["serverRole"]
+}
+
 
 serverRole_err = "Azure Redis Cache linked backup server currently does not have secondary role." {
     azure_issue["serverRole"]

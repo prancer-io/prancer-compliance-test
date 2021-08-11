@@ -68,6 +68,12 @@ sql_public_access_disabled_metadata := {
 default sql_server_login = null
 
 
+azure_attribute_absence["sql_server_login"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/administrators"
+    resource.properties.login
+
+
 azure_issue["sql_server_login"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/administrators"
@@ -76,9 +82,15 @@ azure_issue["sql_server_login"] {
 }
 
 sql_server_login {
+    azure_attribute_absence["sql_server_login"]
     azure_issue["sql_server_login"]
 }
 
+
+sql_server_login = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers/administrators"
+    not azure_attribute_absence["sql_server_login"]
+}
 
 sql_server_login = false {
     lower(input.resources[_].type) == "microsoft.sql/servers/administrators"
@@ -86,6 +98,10 @@ sql_server_login = false {
 }
 
 
+sql_server_login_miss_err = "Azure SQL Server property 'login' is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.sql/servers/administrators"
+    not azure_issue["sql_server_login"]
+}
 
 sql_server_login_err = "Azure SQL Server login is set to admin or administrator currently on the resource" {
     lower(input.resources[_].type) == "microsoft.sql/servers/administrators"

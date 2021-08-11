@@ -13,12 +13,14 @@ azure_attribute_absence["kv_keys_expire"] {
     lower(resource.type) == "microsoft.keyvault/vaults/keys"
     resource.properties.attributes.enabled != false
     not resource.properties.attributes.exp
+    not resource.properties.rotationPolicy.attributes.expiryTime
 }
 
 azure_issue["kv_keys_expire"] {
     resource := input.resources[_]
     resource.properties.attributes.enabled != false
     to_number(resource.properties.attributes.exp) < 0
+    count(resource.properties.rotationPolicy.attributes.expiryTime) == 0
 }
 
 kv_keys_expire {
@@ -27,11 +29,17 @@ kv_keys_expire {
     not azure_issue["kv_keys_expire"]
 }
 
+
+kv_keys_expire = false {
+    azure_attribute_absence["kv_keys_expire"]
+}
+
 kv_keys_expire = false {
     azure_issue["kv_keys_expire"]
 }
 
-kv_keys_expire = false {
+
+kv_keys_expire_miss_err = "Azure Key Vault attribute 'exp' or 'expiryTime' is missing from the resource" {
     azure_attribute_absence["kv_keys_expire"]
 }
 
@@ -39,9 +47,6 @@ kv_keys_expire_err = "Azure Key Vault keys currently dont have any expiration da
     azure_issue["kv_keys_expire"]
 }
 
-kv_keys_expire_miss_err = "Azure Key Vault attribute 'exp' is missing from the resource" {
-    azure_attribute_absence["kv_keys_expire"]
-}
 
 kv_keys_expire_metadata := {
     "Policy Code": "PR-AZR-0130-ARM",
