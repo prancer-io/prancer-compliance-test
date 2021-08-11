@@ -23,7 +23,7 @@ ecr_imagetag = false {
     aws_issue["ecr_imagetag"]
 }
 
-ecr_imagetag = "Ensure no ECR imageTagMutability equals MUTABLE" {
+ecr_imagetag_err = "Ensure no ECR imageTagMutability equals MUTABLE" {
     aws_issue["ecr_imagetag"]
 }
 
@@ -61,7 +61,7 @@ ecr_encryption = false {
     aws_issue["ecr_encryption"]
 }
 
-ecr_encryption = "Ensure encryption is enabled for ECR" {
+ecr_encryption_err = "Ensure encryption is enabled for ECR" {
     aws_issue["ecr_encryption"]
 }
 

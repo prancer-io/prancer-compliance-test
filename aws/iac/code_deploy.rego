@@ -30,7 +30,7 @@ deploy_compute_platform = false {
     aws_issue["deploy_compute_platform"]
 }
 
-deploy_compute_platform = "Compute Platform must be 'ECS' OR 'Lambda'." {
+deploy_compute_platform_err = "Compute Platform must be 'ECS' OR 'Lambda'." {
     aws_issue["deploy_compute_platform"]
 }
 

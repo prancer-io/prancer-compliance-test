@@ -103,8 +103,8 @@ gateway_validate_parameter_metadata := {
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
-    "Policy Title": "AWS API Gateway request parameter is validated",
-    "Policy Description": "AWS API Gateway request parameter is not validated",
+    "Policy Title": "AWS API gateway request parameter is not validated",
+    "Policy Description": "This policy identifies the AWS API gateways for with the request parameters are not validated. It is recommended to validate the request parameters in the URI, query string, and headers of an incoming request to focus on the validation efforts specific to your application.\n",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-restapi-endpointconfiguration.html"
@@ -143,7 +143,7 @@ gateway_request_authorizer = false {
     aws_attribute_absence["gateway_request_authorizer"]
 }
 
-gateway_request_authorizer_err = "AWS API Gateway Authorizer has not authorized the request" {
+gateway_request_authorizer_err = "AWS API gateway request authorisation is not set" {
     aws_issue["gateway_request_authorizer"]
 } else = "AWS API Gateway Authorizer type is absent" {
     aws_attribute_absence["gateway_request_authorizer"]
@@ -154,8 +154,8 @@ gateway_request_authorizer_metadata := {
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
-    "Policy Title": "AWS API Gateway Authorizer has not authorized the request",
-    "Policy Description": "AWS API Gateway Authorizer has not authorized the request",
+    "Policy Title": "AWS API gateway request authorisation is not set",
+    "Policy Description": "This policy identifies AWS API Gateways of protocol type REST for which the request authorisation is not set. The method request for API gateways takes the client input that is passed to the back end through the integration request. It is recommended to add authorization type to each of the method to add a layer of protection.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-restapi-endpointconfiguration.html"

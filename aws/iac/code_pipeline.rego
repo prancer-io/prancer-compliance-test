@@ -35,7 +35,7 @@ deploy_compute_platform = false {
     aws_attribute_absence["deploy_compute_platform"]
 }
 
-deploy_compute_platform = "Code Pipeline Encryption at rest with customer managed CMK key" {
+deploy_compute_platform_err = "Code Pipeline Encryption at rest with customer managed CMK key" {
     aws_issue["deploy_compute_platform"]
 } else = "Code Pipeline EncryptionKey absent" {
     aws_attribute_absence["deploy_compute_platform"]

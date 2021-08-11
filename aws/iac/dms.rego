@@ -30,7 +30,7 @@ dms_endpoint = false {
     aws_issue["dms_endpoint"]
 }
 
-dms_endpoint = "Ensure DMS endpoint are SSL configured" {
+dms_endpoint_err = "Ensure DMS endpoint are SSL configured" {
     aws_issue["dms_endpoint"]
 }
 
