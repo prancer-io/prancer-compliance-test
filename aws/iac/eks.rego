@@ -131,7 +131,7 @@ eks_version_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS EKS unsupported Master node version.",
-    "Policy Description": "AWS EKS unsupported Master node version.",
+    "Policy Description": "Ensure your EKS Master node version is supported. This policy checks your EKS master node version and generates an alert if the version running is unsupported.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html#cfn-eks-cluster-version"
