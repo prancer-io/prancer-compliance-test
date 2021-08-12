@@ -179,7 +179,7 @@ aws_issue["iam_assume_permission"] {
     lower(resource.Type) == "aws::iam::policy"
     statement := resource.Properties.PolicyDocument.Statement[_]
     lower(statement.Effect) == "allow"
-    contains(lower(statement.Action)) == "sts:assumerole"
+    contains(lower(statement.Action), "sts:assumerole")
     statement.Condition == "*"
 }
 
@@ -188,7 +188,7 @@ aws_issue["iam_assume_permission"] {
     lower(resource.Type) == "aws::iam::policy"
     statement := resource.Properties.PolicyDocument.Statement[_]
     lower(statement.Effect) == "allow"
-    contains(lower(statement.Action)) == "sts:assumerole"
+    contains(lower(statement.Action), "sts:assumerole")
     not statement.Condition
 }
 

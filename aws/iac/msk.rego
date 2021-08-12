@@ -155,7 +155,7 @@ aws_issue["msk_in_transit_encryption_tls"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::msk::cluster"
     lower(resource.Properties.EncryptionInfo.EncryptionInTransit.ClientBroker) != "tls"
-tls
+}
 
 msk_in_transit_encryption_tls {
     lower(input.Resources[i].Type) == "aws::msk::cluster"

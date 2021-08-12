@@ -104,7 +104,7 @@ default eks_version = null
 aws_issue["eks_version"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::eks::cluster"
-    startswith(lower(resource.Properties.Version)) == "1.9."
+    startswith(lower(resource.Properties.Version), "1.9.")
 }
 
 aws_issue["eks_version"] {
