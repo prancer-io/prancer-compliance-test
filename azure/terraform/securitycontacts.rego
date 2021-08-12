@@ -1,7 +1,7 @@
 package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_security_center_contact
-
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_contact
 #
 # PR-AZR-0087-TRF
 #
@@ -22,24 +22,22 @@ azure_issue["securitycontacts"] {
 
 securitycontacts {
     lower(input.resources[_].type) == "azurerm_security_center_contact"
-    not azure_issue["securitycontacts"]
     not azure_attribute_absence["securitycontacts"]
-}
-
-securitycontacts = false {
-    azure_issue["securitycontacts"]
+    not azure_issue["securitycontacts"]
 }
 
 securitycontacts = false {
     azure_attribute_absence["securitycontacts"]
 }
 
-securitycontacts_err = "Security contact emails is not set in Security Center" {
+securitycontacts = false {
     azure_issue["securitycontacts"]
 }
 
-securitycontacts_miss_err = "Security Contacts attribute mail missing in the resource" {
+securitycontacts_err = "azurerm_security_center_contact property 'email' need to be exist. Its missing from the resource. Please set a valid email address as value after property addition." {
     azure_attribute_absence["securitycontacts"]
+} else = "Security Center currently does not have any valid security contact email configured"  {
+    azure_issue["securitycontacts"]
 }
 
 securitycontacts_metadata := {
@@ -47,9 +45,9 @@ securitycontacts_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Security contact emails is not set in Security Center",
+    "Policy Title": "Security Center shoud have security contact email configured to get notifications",
     "Policy Description": "Setting a valid email address in Security contact emails will enable Microsoft to contact you if the Microsoft Security Response Center (MSRC) discovers that your data has been accessed by an unlawful or unauthorized party. This will make sure that you are aware of any security issues and take prompt actions to mitigate the risks.",
     "Resource Type": "azurerm_security_center_contact",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_security_center_contact"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_contact"
 }

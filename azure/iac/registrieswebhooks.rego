@@ -47,7 +47,7 @@ acr_webhooks_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure ACR webhook should have HTTPS protocol enabled",
+    "Policy Title": "Azure ACR should have HTTPS protocol enabled for webhook",
     "Policy Description": "Ensure you send container registry webhooks only to a HTTPS endpoint. This policy checks your container registry webhooks and alerts if it finds a URI with HTTP.",
     "Resource Type": "microsoft.containerregistry/registries/webhooks",
     "Policy Help URL": "",

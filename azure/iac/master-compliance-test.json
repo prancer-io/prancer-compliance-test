@@ -2364,7 +2364,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Container Registry shoud not have deprecated classic SKU configured",
+                    "title": "Azure Container Registry should not use the deprecated classic registry",
                     "description": "This policy identifies an Azure Container Registry (ACR) that is using the classic SKU. The initial release of the Azure Container Registry (ACR) service that was offered as a classic SKU is being deprecated and will be unavailable after April 2019. As a best practice, upgrade your existing classic registry to a managed registry._x000D__x000D_For more information, visit https://docs.microsoft.com/en-us/azure/container-registry/container-registry-upgrade",
                     "tags": [
                         {
@@ -2393,7 +2393,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure ACR webhook should have HTTPS protocol enabled",
+                    "title": "Azure ACR should have HTTPS protocol enabled for webhook",
                     "description": "Ensure you send container registry webhooks only to a HTTPS endpoint. This policy checks your container registry webhooks and alerts if it finds a URI with HTTP.",
                     "tags": [
                         {
@@ -2868,14 +2868,14 @@
                     "evals": [
                         {
                             "id": "PR-AZR-0074-ARM",
-                            "eval": "data.rule.storage_public_access_disabled",
-                            "message": "data.rule.storage_public_access_disabled_err",
+                            "eval": "data.rule.storage_container_public_access_disabled",
+                            "message": "data.rule.storage_container_public_access_disabled_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-06-01/storageaccounts/blobservices/containers",
                             "remediationFunction": "PR_AZR_0074_ARM.py"
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure storage account should not allow public access to the blob container",
+                    "title": "Azure storage blob container should not have public access enabled",
                     "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature._x005F_x000D_ _x005F_x000D_ This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB'). As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers.",
                     "tags": [
                         {

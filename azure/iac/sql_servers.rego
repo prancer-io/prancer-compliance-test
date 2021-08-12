@@ -38,7 +38,7 @@ sql_public_access_disabled_miss_err = "publicNetworkAccess property is missing f
     azure_attribute_absence["sql_public_access_disabled"]
 }
 
-sql_public_access_disabled_err = "Public Network Access is currently not disabled on the resource" {
+sql_public_access_disabled_err = "Public Network Access is currently not disabled on MSSQL Server" {
     azure_issue["sql_public_access_disabled"]
 }
 
