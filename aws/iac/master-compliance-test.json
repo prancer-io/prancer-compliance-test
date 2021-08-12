@@ -3248,7 +3248,8 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ec2networkacl"
+                                "ec2networkacl",
+                                "cloudformation"
                             ]
                         }
                     ],
@@ -3278,7 +3279,8 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ec2networkacl"
+                                "ec2networkacl",
+                                "cloudformation"
                             ]
                         }
                     ],
@@ -3308,7 +3310,8 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ec2networkacl"
+                                "ec2networkacl",
+                                "cloudformation"
                             ]
                         }
                     ],
@@ -3338,7 +3341,8 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ec2networkacl"
+                                "ec2networkacl",
+                                "cloudformation"
                             ]
                         }
                     ],
@@ -3368,7 +3372,8 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ec2networkacl"
+                                "ec2networkacl",
+                                "cloudformation"
                             ]
                         }
                     ],
@@ -3398,7 +3403,8 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ec2networkacl"
+                                "ec2networkacl",
+                                "cloudformation"
                             ]
                         }
                     ],
@@ -3428,7 +3434,8 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "eks"
+                                "eks",
+                                "cloudformation"
                             ]
                         }
                     ],
@@ -3458,7 +3465,8 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "rds"
+                                "rds",
+                                "cloudformation"
                             ]
                         }
                     ],
@@ -3488,7 +3496,8 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "rds"
+                                "rds",
+                                "cloudformation"
                             ]
                         }
                     ],
@@ -3518,7 +3527,8 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "rds"
+                                "rds",
+                                "cloudformation"
                             ]
                         }
                     ],
@@ -3548,7 +3558,8 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "s3"
+                                "s3",
+                                "cloudformation"
                             ]
                         }
                     ]
@@ -3577,7 +3588,8 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "s3"
+                                "s3",
+                                "cloudformation"
                             ]
                         }
                     ]
@@ -3606,7 +3618,8 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "s3"
+                                "s3",
+                                "cloudformation"
                             ]
                         }
                     ]
@@ -3635,7 +3648,8 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "s3"
+                                "s3",
+                                "cloudformation"
                             ]
                         }
                     ]
@@ -3664,7 +3678,8 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "s3"
+                                "s3",
+                                "cloudformation"
                             ]
                         }
                     ]
@@ -3693,7 +3708,8 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ec2"
+                                "ec2",
+                                "cloudformation"
                             ]
                         }
                     ]
@@ -3722,8 +3738,1190 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ec2"
+                                "ec2",
+                                "cloudformation"
                             ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_CONFIG_1",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(config.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0031-CFR",
+                            "eval": "data.rule.config_recorder",
+                            "message": "data.rule.config_recorder_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html",
+                            "remediationFunction": "PR_AWS_0031_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Config Recording is disabled",
+                    "description": "AWS Config is a web service that performs configuration management of supported AWS resources within your account and delivers log files to you. AWS config uses configuration recorder to detect changes in your resource configurations and capture these changes as configuration items. It continuously monitors and records your AWS resource configurations and allows you to automate the evaluation of recorded configurations against desired configurations. This policy generates alerts when AWS Config recorder is not enabled.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": ["CSA-CCM", "GDPR", "HITRUST","ISO 27001", "NIST 800", "NIST CSF", "SOC 2"],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_CONFIG_2",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(config.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0033-CFR",
+                            "eval": "data.rule.config_all_resource",
+                            "message": "data.rule.config_all_resource_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html",
+                            "remediationFunction": "PR_AWS_0033_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Config must record all possible resources",
+                    "description": "This policy identifies resources for which AWS Config recording is enabled but recording for all possible resources are disabled. AWS Config provides an inventory of your AWS resources and a history of configuration changes to these resources. You can use AWS Config to define rules that evaluate these configurations for compliance. Hence, it is important to enable this feature.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": ["CSA-CCM", "GDPR", "HITRUST","ISO 27001", "NIST 800", "NIST CSF", "SOC 2"],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_API_GATEWAY_1",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(api_gateway.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0202-CFR",
+                            "eval": "data.rule.gateway_private",
+                            "message": "data.rule.gateway_private_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-restapi-endpointconfiguration.html",
+                            "remediationFunction": "PR_AWS_0202_CFR.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "AWS RestApi EndpointConfiguration types not contains private",
+                    "description": "Ensure that the Api endpoint type in api gateway is set to private and Is not exposed to the public internet",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": ["CSA-CCM", "HITRUST", "NIST 800", "NIST CSF", "PCI-DSS"],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_API_GATEWAY_2",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(api_gateway.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0203-CFR",
+                            "eval": "data.rule.gateway_validate_parameter",
+                            "message": "data.rule.gateway_validate_parameter_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-restapi-endpointconfiguration.html",
+                            "remediationFunction": "PR_AWS_0203_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS API gateway request parameter is not validated",
+                    "description": "This policy identifies the AWS API gateways for with the request parameters are not validated. It is recommended to validate the request parameters in the URI, query string, and headers of an incoming request to focus on the validation efforts specific to your application.\n",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": ["CSA-CCM", "HITRUST", "NIST 800", "NIST CSF", "PCI-DSS"],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_API_GATEWAY_3",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(api_gateway.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0204-CFR",
+                            "eval": "data.rule.gateway_request_authorizer",
+                            "message": "data.rule.gateway_request_authorizer_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-restapi-endpointconfiguration.html",
+                            "remediationFunction": "PR_AWS_0204_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS API gateway request authorisation is not set",
+                    "description": "This policy identifies AWS API Gateways of protocol type REST for which the request authorisation is not set. The method request for API gateways takes the client input that is passed to the back end through the integration request. It is recommended to add authorization type to each of the method to add a layer of protection.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": ["CSA-CCM", "HITRUST", "NIST 800", "NIST CSF", "PCI-DSS"],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_CODE_DEPLOY_1",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(code_deploy.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0205-CFR",
+                            "eval": "data.rule.deploy_compute_platform",
+                            "message": "data.rule.deploy_compute_platform_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-application.html#cfn-codedeploy-application-computeplatform",
+                            "remediationFunction": "PR_AWS_0205_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Compute Platform must be 'ECS' OR 'Lambda'.",
+                    "description": "Compute Platform must be 'ECS' OR 'Lambda'.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_CODE_PIPELINE_1",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(code_pipeline.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0206-CFR",
+                            "eval": "data.rule.deploy_compute_platform",
+                            "message": "data.rule.deploy_compute_platform_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-application.html#cfn-codedeploy-application-computeplatform",
+                            "remediationFunction": "PR_AWS_0206_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Code Pipeline Encryption at rest with customer managed CMK key",
+                    "description": "Code Pipeline Encryption at rest with customer managed CMK key",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DMS_1",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dms.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0207-CFR",
+                            "eval": "data.rule.dms_endpoint",
+                            "message": "data.rule.dms_endpoint_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.amazonaws.cn/en_us/AWSCloudFormation/latest/UserGuide/aws-resource-dms-endpoint.html#cfn-dms-endpoint-enginename",
+                            "remediationFunction": "PR_AWS_0207_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure DMS endpoint are SSL configured",
+                    "description": "Ensure DMS endpoint are SSL configured",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECR_1",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0208-CFR",
+                            "eval": "data.rule.ecr_imagetag",
+                            "message": "data.rule.ecr_imagetag_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-imagetagmutability",
+                            "remediationFunction": "PR_AWS_0208_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure no ECR imageTagMutability equals MUTABLE",
+                    "description": "Ensure no ECR imageTagMutability equals MUTABLE",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECR_2",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0209-CFR",
+                            "eval": "data.rule.ecr_encryption",
+                            "message": "data.rule.ecr_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-imagetagmutability",
+                            "remediationFunction": "PR_AWS_0209_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure encryption is enabled for ECR",
+                    "description": "Ensure encryption is enabled for ECR",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_4",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0210-CFR",
+                            "eval": "data.rule.ecs_root_filesystem",
+                            "message": "data.rule.ecs_root_filesystem_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html",
+                            "remediationFunction": "PR_AWS_0210_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ECS Task Definition readonlyRootFilesystem Not Enabled",
+                    "description": "It is recommended that readonlyRootFilesystem is enabled for AWS ECS task definition. Please make sure your 'ContainerDefinitions' template has 'ReadonlyRootFilesystem' and is set to 'true'.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_5",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0211-CFR",
+                            "eval": "data.rule.ecs_resource_limit",
+                            "message": "data.rule.ecs_resource_limit_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html",
+                            "remediationFunction": "PR_AWS_0211_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ECS task definition resource limits not set.",
+                    "description": "It is recommended that resource limits are set for AWS ECS task definition. Please make sure attributes 'Cpu' or 'Memory' exists and its value is not set to 0 under 'TaskDefinition' or 'ContainerDefinitions'.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_6",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0212-CFR",
+                            "eval": "data.rule.ecs_logging",
+                            "message": "data.rule.ecs_logging_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html",
+                            "remediationFunction": "PR_AWS_0212_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS ECS task definition logging not enabled.",
+                    "description": "It is recommended that logging is enabled for AWS ECS task definition. Please make sure your 'TaskDefinition' template has 'LogConfiguration' and 'LogDriver' configured.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EKS_3",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0213-CFR",
+                            "eval": "data.rule.eks_version",
+                            "message": "data.rule.eks_version_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html",
+                            "remediationFunction": "PR_AWS_0213_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EKS unsupported Master node version.",
+                    "description": "AWS EKS unsupported Master node version..",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "eks",
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ELASTICACHE_5",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticache.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0214-CFR",
+                            "eval": "data.rule.cache_ksm_key",
+                            "message": "data.rule.cache_ksm_key_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html",
+                            "remediationFunction": "PR_AWS_0214_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that ElastiCache replication Group (Redis) are encrypted at rest with customer managed CMK key",
+                    "description": "This policy identifies ElastiCache Redis clusters which have in-transit encryption disabled. It is highly recommended to implement in-transit encryption in order to protect data from unauthorized access as it travels through the network, between clients and cache servers. Enabling data encryption in-transit helps prevent unauthorized users from reading sensitive data between your Redis clusters and their associated cache storage systems.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ELASTICACHE_6",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticache.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0215-CFR",
+                            "eval": "data.rule.cache_default_sg",
+                            "message": "data.rule.cache_default_sg_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html",
+                            "remediationFunction": "PR_AWS_0215_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure 'default' value is not used on Security Group setting for Redis cache engines",
+                    "description": "Ensure 'default' value is not used on Security Group setting for Redis cache engines",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ELASTIC_SEARCH_7",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticsearch.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0216-CFR",
+                            "eval": "data.rule.esearch_node_encryption",
+                            "message": "data.rule.esearch_node_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html",
+                            "remediationFunction": "PR_AWS_0216_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure node-to-node encryption is enabled on each ElasticSearch Domain",
+                    "description": "Ensure node-to-node encryption is enabled on each ElasticSearch Domain",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ELB_12",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0217-CFR",
+                            "eval": "data.rule.elb_v2_listener_ssl",
+                            "message": "data.rule.elb_v2_listener_ssl_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationFunction": "PR_AWS_0217_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Elastic Load Balancer V2 (ELBV2) with listener TLS/SSL disabled",
+                    "description": "This policy identifies Elastic Load Balancer V2 (ELBV2) which have listener TLS/SSL disabled. As Load Balancers will be handling all incoming requests and routing the traffic accordingly; The listeners on the load balancers should always receive traffic over secure channel with a valid SSL certificate configured.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EMR_1",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0218-CFR",
+                            "eval": "data.rule.emr_security",
+                            "message": "data.rule.emr_security_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration",
+                            "remediationFunction": "PR_AWS_0218_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EMR cluster is not configured with security configuration",
+                    "description": "This policy identifies EMR clusters which are not configured with security configuration. With Amazon EMR release version 4.8.0 or later, you can use security configurations to configure data encryption, Kerberos authentication, and Amazon S3 authorization for EMRFS.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EMR_2",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0219-CFR",
+                            "eval": "data.rule.emr_kerberos",
+                            "message": "data.rule.emr_kerberos_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration",
+                            "remediationFunction": "PR_AWS_0219_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EMR cluster is not configured with Kerberos Authentication",
+                    "description": "This policy identifies EMR clusters which are not configured with Kerberos Authentication. Kerberos uses secret-key cryptography to provide strong authentication so that passwords or other credentials aren't sent over the network in an unencrypted format.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EMR_3",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0220-CFR",
+                            "eval": "data.rule.emr_s3_encryption",
+                            "message": "data.rule.emr_s3_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration",
+                            "remediationFunction": "PR_AWS_0220_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EMR cluster is not configured with CSE CMK for data at rest encryption (Amazon S3 with EMRFS)",
+                    "description": "This policy identifies EMR clusters which are not configured with Client Side Encryption with Customer Master Keys(CSE CMK) for data at rest encryption of Amazon S3 with EMRFS. As a best practice, use Customer Master Keys (CMK) to encrypt the data in your EMR cluster and ensure full control over your data.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EMR_4",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0221-CFR",
+                            "eval": "data.rule.emr_local_encryption_cmk",
+                            "message": "data.rule.emr_local_encryption_cmk_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration",
+                            "remediationFunction": "PR_AWS_0221_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EMR cluster is not enabled with local disk encryption using CMK",
+                    "description": "This policy identifies AWS EMR clusters that are not enabled with local disk encryption using CMK(Customer Managed Key). Applications using the local file system on each cluster instance for intermediate data throughout workloads, where data could be spilled to disk when it overflows memory. With Local disk encryption at place, data at rest can be protected.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EMR_5",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0222-CFR",
+                            "eval": "data.rule.emr_local_encryption",
+                            "message": "data.rule.emr_local_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration",
+                            "remediationFunction": "PR_AWS_0222_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EMR cluster is not enabled with local disk encryption",
+                    "description": "This policy identifies AWS EMR clusters that are not enabled with local disk encryption. Applications using the local file system on each cluster instance for intermediate data throughout workloads, where data could be spilled to disk when it overflows memory. With Local disk encryption at place, data at rest can be protected.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EMR_6",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0223-CFR",
+                            "eval": "data.rule.emr_rest_encryption",
+                            "message": "data.rule.emr_rest_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration",
+                            "remediationFunction": "PR_AWS_0223_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EMR cluster is not enabled with data encryption at rest",
+                    "description": "This policy identifies AWS EMR clusters for which data encryption at rest is not enabled. Encryption of data at rest is required to prevent unauthorized users from accessing the sensitive information available on your  EMR clusters and associated storage systems.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EMR_7",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0224-CFR",
+                            "eval": "data.rule.emr_s3_encryption_sse",
+                            "message": "data.rule.emr_s3_encryption_sse_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration",
+                            "remediationFunction": "PR_AWS_0224_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EMR cluster is not configured with SSE KMS for data at rest encryption (Amazon S3 with EMRFS)",
+                    "description": "This policy identifies EMR clusters which are not configured with Server Side Encryption(SSE KMS) for data at rest encryption of Amazon S3 with EMRFS. As a best practice, use SSE-KMS for server side encryption to encrypt the data in your EMR cluster and ensure full control over your data.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EMR_8",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0225-CFR",
+                            "eval": "data.rule.emr_transit_encryption",
+                            "message": "data.rule.emr_transit_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration",
+                            "remediationFunction": "PR_AWS_0225_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EMR cluster is not enabled with data encryption in transit",
+                    "description": "This policy identifies AWS EMR clusters which are not enabled with data encryption in transit. It is highly recommended to implement in-transit encryption in order to protect data from unauthorized access as it travels through the network, between clients and storage server. Enabling data encryption in-transit helps prevent unauthorized users from reading sensitive data between your EMR clusters and their associated storage systems.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_1",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0226-CFR",
+                            "eval": "data.rule.iam_wildcard_resource",
+                            "message": "data.rule.iam_wildcard_resource_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html",
+                            "remediationFunction": "PR_AWS_0226_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure no wildcards are specified in IAM policy with 'Resource' section",
+                    "description": "Ensure no wildcards are specified in IAM policy with 'Resource' section",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_2",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0227-CFR",
+                            "eval": "data.rule.iam_wildcard_action",
+                            "message": "data.rule.iam_wildcard_action_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html",
+                            "remediationFunction": "PR_AWS_0227_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure no wildcards are specified in IAM policy with 'Action' section",
+                    "description": "Ensure no wildcards are specified in IAM policy with 'Action' section",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_3",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0228-CFR",
+                            "eval": "data.rule.iam_wildcard_principal",
+                            "message": "data.rule.iam_wildcard_principal_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html",
+                            "remediationFunction": "PR_AWS_0228_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section",
+                    "description": "Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_4",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0229-CFR",
+                            "eval": "data.rule.iam_resource_format",
+                            "message": "data.rule.iam_resource_format_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html",
+                            "remediationFunction": "PR_AWS_0229_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure no IAM policy has a resource specified in the following format:'arn:aws:*:*'",
+                    "description": "Ensure no IAM policy has a resource specified in the following format:'arn:aws:*:*'",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_5",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0230-CFR",
+                            "eval": "data.rule.iam_assume_permission",
+                            "message": "data.rule.iam_assume_permission_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html",
+                            "remediationFunction": "PR_AWS_0230_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS IAM policy allows assume role permission across all services",
+                    "description": "This policy identifies AWS IAM policy which allows assume role permission across all services. Typically, AssumeRole is used if you have multiple accounts and need to access resources from each account then you can create long term credentials in one account and then use temporary security credentials to access all the other accounts by assuming roles in those accounts.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_6",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0231-CFR",
+                            "eval": "data.rule.iam_all_traffic",
+                            "message": "data.rule.iam_all_traffic_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html",
+                            "remediationFunction": "PR_AWS_0231_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS IAM policy is overly permissive to all traffic via condition clause",
+                    "description": "This policy identifies IAM policies that have a policy that is overly permissive to all traffic via condition clause. If any IAM policy statement with a condition containing 0.0.0.0/0 or ::/0, it allows all traffic to resources attached to that IAM policy. It is highly recommended to have the least privileged IAM policy to protect the data leakage and unauthorized access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_IAM_7",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(iam.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0232-CFR",
+                            "eval": "data.rule.iam_administrative_privileges",
+                            "message": "data.rule.iam_administrative_privileges_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html",
+                            "remediationFunction": "PR_AWS_0232_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS IAM policy allows full administrative privileges",
+                    "description": "This policy identifies IAM policies with full administrative privileges. IAM policies are the means by which privileges are granted to users, groups, or roles. It is recommended and considered a standard security advice to grant least privilege like granting only the permissions required to perform a task. Determine what users need to do and then craft policies for them that let the users perform only those tasks, instead of allowing full administrative privileges.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KINESIS_1",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(kinesis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0233-CFR",
+                            "eval": "data.rule.kinesis_encryption",
+                            "message": "data.rule.kinesis_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesis-stream.html",
+                            "remediationFunction": "PR_AWS_0233_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Kinesis streams are not encrypted using Server Side Encryption",
+                    "description": "This Policy identifies the AWS Kinesis streams which are not encrypted using Server Side Encryption. Server Side Encryption is used to encrypt your sensitive data before it is written to the Kinesis stream storage layer and decrypted after it is retrieved from storage.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KINESIS_2",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(kinesis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0234-CFR",
+                            "eval": "data.rule.kinesis_encryption_kms",
+                            "message": "data.rule.kinesis_encryption_kms_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesis-stream.html",
+                            "remediationFunction": "PR_AWS_0234_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Kinesis streams encryption using default KMS keys instead of Customer's Managed Master Keys",
+                    "description": "This policy identifies the AWS Kinesis streams which are encrypted with default KMS keys and not with Master Keys managed by Customer. It is a best practice to use customer managed Master Keys to encrypt your Amazon Kinesis streams data. It gives you full control over the encrypted data.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KMS_1",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(kms.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0235-CFR",
+                            "eval": "data.rule.kms_key_rotation",
+                            "message": "data.rule.kms_key_rotation_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html",
+                            "remediationFunction": "PR_AWS_0235_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Customer Master Key (CMK) rotation is not enabled",
+                    "description": "This policy identifies Customer Master Keys (CMKs) that are not enabled with key rotation. AWS KMS (Key Management Service) allows customers to create master keys to encrypt sensitive data in different services. As a security best practice, it is important to rotate the keys periodically so that if the keys are compromised, the data in the underlying service is still secure with the new keys.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KMS_2",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(kms.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0236-CFR",
+                            "eval": "data.rule.kms_key_state",
+                            "message": "data.rule.kms_key_state_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html",
+                            "remediationFunction": "PR_AWS_0236_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS KMS Customer Managed Key not in use",
+                    "description": "This policy identifies KMS Customer Managed Keys(CMKs) which are not usable. When you create a CMK, it is enabled by default. If you disable a CMK or schedule it for deletion makes it unusable, it cannot be used to encrypt or decrypt data and AWS KMS does not rotate the backing keys until you re-enable it.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MQ_1",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(mq.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0237-CFR",
+                            "eval": "data.rule.mq_publicly_accessible",
+                            "message": "data.rule.mq_publicly_accessible_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#cfn-amazonmq-broker-publiclyaccessible",
+                            "remediationFunction": "PR_AWS_0237_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS MQ is publicly accessible",
+                    "description": "This policy identifies the AWS MQ brokers which are publicly accessible. It is advisable to use MQ brokers privately only from within your AWS Virtual Private Cloud (VPC). Ensure that the AWS MQ brokers provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MSK_1",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(msk.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0238-CFR",
+                            "eval": "data.rule.msk_encryption_at_rest",
+                            "message": "data.rule.msk_encryption_at_rest_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html",
+                            "remediationFunction": "PR_AWS_0238_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Encryption at rest within cluster",
+                    "description": "Encryption at rest within cluster",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MSK_2",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(msk.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0239-CFR",
+                            "eval": "data.rule.msk_encryption_at_rest_cmk",
+                            "message": "data.rule.msk_encryption_at_rest_cmk_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html",
+                            "remediationFunction": "PR_AWS_0239_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure data is encrypted at rest using a customer managed CMK",
+                    "description": "Ensure data is encrypted at rest using a customer managed CMK",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MSK_3",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(msk.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0240-CFR",
+                            "eval": "data.rule.msk_in_transit_encryption",
+                            "message": "data.rule.msk_in_transit_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html",
+                            "remediationFunction": "PR_AWS_0240_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure data is Encrypted in transit (TLS)",
+                    "description": "Ensure data is Encrypted in transit (TLS)",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MSK_4",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(msk.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0241-CFR",
+                            "eval": "data.rule.msk_in_transit_encryption_tls",
+                            "message": "data.rule.msk_in_transit_encryption_tls_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html",
+                            "remediationFunction": "PR_AWS_0241_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure client authentication is enabled with TLS (mutual TLS authentication)",
+                    "description": "Ensure client authentication is enabled with TLS (mutual TLS authentication)",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MSK_5",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(msk.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0242-CFR",
+                            "eval": "data.rule.msk_vpc",
+                            "message": "data.rule.msk_vpc_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html",
+                            "remediationFunction": "PR_AWS_0242_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure MSK cluster is setup in GS VPC",
+                    "description": "Ensure MSK cluster is setup in GS VPC",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
                         }
                     ]
                 }
