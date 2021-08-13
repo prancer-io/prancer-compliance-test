@@ -1722,12 +1722,12 @@
                             "id": "PR-AZR-0015-TRF",
                             "eval": "data.rule.acr_classic",
                             "message": "data.rule.acr_classic_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_container_registry' resource, set the value to 'Basic'/'Standard'/'Premimu' other then 'classic' at property 'sku' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry#sku for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Container Registry using the deprecated classic registry",
+                    "title": "Azure Container Registry should not use the deprecated classic registry",
                     "description": "This policy identifies an Azure Container Registry (ACR) that is using the classic SKU. The initial release of the Azure Container Registry (ACR) service that was offered as a classic SKU is being deprecated and will be unavailable after April 2019. As a best practice, upgrade your existing classic registry to a managed registry._x000D__x000D_For more information, visit https://docs.microsoft.com/en-us/azure/container-registry/container-registry-upgrade",
                     "tags": [
                         {
@@ -1751,12 +1751,12 @@
                             "id": "PR-AZR-0005-TRF",
                             "eval": "data.rule.acr_webhooks",
                             "message": "data.rule.acr_webhooks_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_container_registry_webhook' resource, set secure http (https) based wekhook url at 'service_uri' property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry_webhook#service_uri for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure ACR HTTPS not enabled for webhook",
+                    "title": "Azure ACR should have HTTPS protocol enabled for webhook",
                     "description": "Ensure you send container registry webhooks only to a HTTPS endpoint. This policy checks your container registry webhooks and alerts if it finds a URI with HTTP.",
                     "tags": [
                         {
@@ -1780,13 +1780,49 @@
                             "id": "PR-AZR-0087-TRF",
                             "eval": "data.rule.securitycontacts",
                             "message": "data.rule.securitycontacts_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_security_center_contact' resource, set a valid email address at 'email' property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_contact#email for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Security contact emails is not set in Security Center",
+                    "title": "Security Center shoud have security contact email configured to get notifications",
                     "description": "Setting a valid email address in Security contact emails will enable Microsoft to contact you if the Microsoft Security Response Center (MSRC) discovers that your data has been accessed by an unlawful or unauthorized party. This will make sure that you are aware of any security issues and take prompt actions to mitigate the risks.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MSSQL_SERVER",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0126-TRF",
+                            "eval": "data.rule.sql_public_access_disabled",
+                            "message": "data.rule.sql_public_access_disabled_err",
+                            "remediationDescription": "In 'azurerm_mssql_server' resource, set 'public_network_access_enabled = false' to fix the issue. If 'public_network_access_enabled' property does not exist please add it. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server#public_network_access_enabled for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure SQL servers don't have public network access enabled",
+                    "description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1816,12 +1852,12 @@
                             "id": "PR-AZR-0092-TRF",
                             "eval": "data.rule.storage_secure",
                             "message": "data.rule.storage_secure_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_storage_account' resource, set 'enable_https_traffic_only = true' or remove property 'enable_https_traffic_only' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#enable_https_traffic_only for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Storage Accounts Secure transfer should be enabled",
+                    "title": "Storage Accounts https based secure transfer should be enabled",
                     "description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPs. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesnâ€™t support HTTPs for custom domain names, this option is not applied when using a custom domain name.",
                     "tags": [
                         {
@@ -1852,12 +1888,12 @@
                             "id": "PR-AZR-0093-TRF",
                             "eval": "data.rule.storage_acl",
                             "message": "data.rule.storage_acl_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_storage_account_network_rules' resource, set 'default_action = Deny' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules#default_action for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Storage Accounts without their firewalls enabled (TJX)",
+                    "title": "Storage Accounts should have firewall rules enabled",
                     "description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on._x000D__x000D_You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
                     "tags": [
                         {
@@ -1883,15 +1919,15 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0069-TRF",
+                            "id": "PR-AZR-0123-TRF",
                             "eval": "data.rule.storage_account_public_access_disabled",
                             "message": "data.rule.storage_account_public_access_disabled_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_storage_account' resource, set 'allow_blob_public_access = false' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#allow_blob_public_access for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "High",
-                    "title": "Storage Account should not allow public access to all blobs or containers",
+                    "title": "Ensure that Storage Account should not allow public access to all blobs or containers",
                     "description": "This policy will identify which Storage Account has public access not disabled for all blobs or containers and alert",
                     "tags": [
                         {
@@ -1917,15 +1953,15 @@
                     "rule": "file(storageblobcontainers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0013-TRF",
-                            "eval": "data.rule.storage_public_access",
-                            "message": "data.rule.storage_public_access_err",
-                            "remediationDescription": "",
+                            "id": "PR-AZR-0074-TRF",
+                            "eval": "data.rule.storage_container_public_access_disabled",
+                            "message": "data.rule.storage_container_public_access_disabled_err",
+                            "remediationDescription": "In 'azurerm_storage_container' resource, set 'container_access_type = private' or remove the container_access_type property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container#container_access_type for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Blob container(s) with public access and logging set to less than 180 days (TJX)",
+                    "title": "Azure storage blob container should not have public access enabled",
                     "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature._x000D__x000D_This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB') that also have Audit Log Retention set to less than 180 days._x000D__x000D_As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers.",
                     "tags": [
                         {
@@ -1946,16 +1982,16 @@
                     "rule": "file(vnetsubnets.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0067-TRF",
+                            "id": "PR-AZR-0066-TRF",
                             "eval": "data.rule.vnet_subnet_nsg",
                             "message": "data.rule.vnet_subnet_nsg_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_subnet_network_security_group_association' resource, make sure both 'subnet_id' and 'network_security_group_id' property exist and both has id from 'azurerm_subnet' and 'azurerm_network_security_group' resource respectively to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_network_security_group_association#network_security_group_id for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Virtual Network subnet is not configured with a Network Security Group (TJX)",
-                    "description": "** MODIFICATION OF DEFAULT RULE - GatewaySubnets Excluded as of 08 APR 2019, GatewaySubnets do not support the application of NSGs **_x000D__x000D_** AzureFirewallSubnet Excluded as of 08 APR 2019 **_x000D__x000D_This policy identifies Azure Virtual Network (VNet) subnets that are not associated with a Network Security Group (NSG). While binding an NSG to a network interface of a Virtual Machine (VM) enables fine-grained control to the VM, associating a NSG to a subnet enables better control over network traffic to all resources within a subnet. As a best practice, associate an NSG with a subnet so that you can protect your VMs on a subnet-level._x000D__x000D_For more information, see https://blogs.msdn.microsoft.com/igorpag/2016/05/14/azure-network-security-groups-nsg-best-practices-and-lessons-learned/",
+                    "title": "Azure Virtual Network subnet should be configured with Network Security Group",
+                    "description": "This policy identifies Azure Virtual Network (VNet) subnets that are not associated with a Network Security Group (NSG). While binding an NSG to a network interface of a Virtual Machine (VM) enables fine-grained control to the VM, associating a NSG to a subnet enables better control over network traffic to all resources within a subnet. As a best practice, associate an NSG with a subnet so that you can protect your VMs on a subnet-level._x005F_x000D_ _x005F_x000D_ For more information, see https://blogs.msdn.microsoft.com/igorpag/2016/05/14/azure-network-security-groups-nsg-best-practices-and-lessons-learned/",
                     "tags": [
                         {
                             "cloud": "git",

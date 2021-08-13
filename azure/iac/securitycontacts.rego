@@ -34,11 +34,11 @@ securitycontacts = false {
     azure_attribute_absence["securitycontacts"]
 }
 
-securitycontacts_err = "Security Center currently dont have any security contact emails configured" {
+securitycontacts_err = "Security Center currently does not have any valid security contact email configured" {
     azure_issue["securitycontacts"]
 }
 
-securitycontacts_miss_err = "Security Center security contacts property 'mail' is missing from the resource" {
+securitycontacts_miss_err = "Security Center security contacts property 'emails' is missing from the resource" {
     azure_attribute_absence["securitycontacts"]
 }
 
