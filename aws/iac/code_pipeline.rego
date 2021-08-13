@@ -35,7 +35,7 @@ deploy_compute_platform = false {
     aws_attribute_absence["deploy_compute_platform"]
 }
 
-deploy_compute_platform_err = "Code Pipeline Encryption at rest with customer managed CMK key" {
+deploy_compute_platform_err = "Code Pipeline Encryption at rest with customer-managed key (CMK) should be enabled" {
     aws_issue["deploy_compute_platform"]
 } else = "Code Pipeline EncryptionKey absent" {
     aws_attribute_absence["deploy_compute_platform"]
@@ -47,8 +47,8 @@ deploy_compute_platform_metadata := {
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
-    "Policy Title": "Code Pipeline Encryption at rest with customer managed CMK key",
-    "Policy Description": "Code Pipeline Encryption at rest with customer managed CMK key",
+    "Policy Title": "Code Pipeline Encryption at rest with customer-managed key (CMK) should be enabled",
+    "Policy Description": "The type of encryption key When creating or updating a pipeline, the value must be cmk(customer-managed key)",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-application.html#cfn-codedeploy-application-computeplatform"

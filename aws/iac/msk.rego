@@ -21,7 +21,7 @@ msk_encryption_at_rest = false {
     aws_issue["msk_encryption_at_rest"]
 }
 
-msk_encryption_at_rest_err = "Encryption at rest within cluster" {
+msk_encryption_at_rest_err = "Ensure MSK cluster encryption at rest is enabled" {
     aws_issue["msk_encryption_at_rest"]
 }
 
@@ -31,8 +31,8 @@ msk_encryption_at_rest_metadata := {
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
-    "Policy Title": "Encryption at rest within cluster",
-    "Policy Description": "Encryption at rest within cluster",
+    "Policy Title": "Ensure MSK cluster encryption at rest is enabled",
+    "Policy Description": "Amazon MSK integrates with AWS Key Management Service (KMS) for server-side encryption. When you create an MSK cluster, you can specify the AWS KMS CMK for Amazon MSK to use to encrypt your data at rest. If you don't specify a CMK, Amazon MSK creates an AWS managed CMK for you and uses it on your behalf.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo"
@@ -71,7 +71,7 @@ msk_encryption_at_rest_cmk = false {
     aws_issue["msk_encryption_at_rest_cmk"]
 }
 
-msk_encryption_at_rest_cmk_err = "Ensure data is encrypted at rest using a customer managed CMK" {
+msk_encryption_at_rest_cmk_err = "Use KMS Customer Master Keys for AWS MSK Clusters" {
     aws_issue["msk_encryption_at_rest_cmk"]
 }
 
@@ -81,8 +81,8 @@ msk_encryption_at_rest_cmk_metadata := {
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
-    "Policy Title": "Ensure data is encrypted at rest using a customer managed CMK",
-    "Policy Description": "Ensure data is encrypted at rest using a customer managed CMK",
+    "Policy Title": "Use KMS Customer Master Keys for AWS MSK Clusters",
+    "Policy Description": "Ensure that Amazon Managed Streaming for Kafka (MSK) clusters are using AWS KMS Customer Master Keys (CMKs) instead of AWS managed-keys (i.e. default keys) for data encryption, in order to have a fine-grained control over data-at-rest encryption/decryption process and meet compliance requirements. MSK is a fully managed AWS service that enables you to migrate, build and run real-time streaming applications on Apache Kafka.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo"
@@ -185,7 +185,7 @@ msk_in_transit_encryption_tls_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud formation",
     "Policy Title": "Ensure client authentication is enabled with TLS (mutual TLS authentication)",
-    "Policy Description": "Ensure client authentication is enabled with TLS (mutual TLS authentication)",
+    "Policy Description": "Enable TLS by setting EncryptionInfo.EncryptionInTransit.ClientBroker value to 'TLS'. to provide trasport layes security to MSK instance",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo"
@@ -230,7 +230,7 @@ msk_vpc_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud formation",
     "Policy Title": "Ensure MSK cluster is setup in GS VPC",
-    "Policy Description": "Ensure MSK cluster is setup in GS VPC",
+    "Policy Description": "To Add MKS Cluster in gs VPC,Specify exactly two subnets if you are using the US West (N. California) Region. For other Regions where Amazon MSK is available, you can specify either two or three subnets. The subnets that you specify must be in distinct Availability Zones. When you create a cluster, Amazon MSK distributes the broker nodes evenly across the subnets that you specify.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo"

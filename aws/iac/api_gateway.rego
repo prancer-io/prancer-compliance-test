@@ -41,7 +41,7 @@ gateway_private = false {
     aws_attribute_absence["gateway_private"]
 }
 
-gateway_private_err = "AWS RestApi EndpointConfiguration types not contains private" {
+gateway_private_err = "API Gateway should have API Endpoint type as private and not exposed to internet" {
     aws_issue["gateway_private"]
 } else = "AWS RestApi EndpointConfiguration.Type is absent" {
     aws_attribute_absence["gateway_private"]
@@ -52,7 +52,7 @@ gateway_private_metadata := {
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
-    "Policy Title": "AWS RestApi EndpointConfiguration types not contains private",
+    "Policy Title": "API Gateway should have API Endpoint type as private and not exposed to internet",
     "Policy Description": "Ensure that the Api endpoint type in api gateway is set to private and Is not exposed to the public internet",
     "Resource Type": "",
     "Policy Help URL": "",
@@ -143,7 +143,7 @@ gateway_request_authorizer = false {
     aws_attribute_absence["gateway_request_authorizer"]
 }
 
-gateway_request_authorizer_err = "AWS API gateway request authorisation is not set" {
+gateway_request_authorizer_err = "AWS API gateway request authorization is not set" {
     aws_issue["gateway_request_authorizer"]
 } else = "AWS API Gateway Authorizer type is absent" {
     aws_attribute_absence["gateway_request_authorizer"]
@@ -154,7 +154,7 @@ gateway_request_authorizer_metadata := {
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
-    "Policy Title": "AWS API gateway request authorisation is not set",
+    "Policy Title": "AWS API gateway request authorization is not set",
     "Policy Description": "This policy identifies AWS API Gateways of protocol type REST for which the request authorisation is not set. The method request for API gateways takes the client input that is passed to the back end through the integration request. It is recommended to add authorization type to each of the method to add a layer of protection.",
     "Resource Type": "",
     "Policy Help URL": "",

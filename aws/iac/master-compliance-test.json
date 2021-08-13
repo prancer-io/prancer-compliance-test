@@ -3815,7 +3815,7 @@
                         }
                     ],
                     "severity": "High",
-                    "title": "AWS RestApi EndpointConfiguration types not contains private",
+                    "title": "API Gateway should have API Endpoint type as private and not exposed to internet",
                     "description": "Ensure that the Api endpoint type in api gateway is set to private and Is not exposed to the public internet",
                     "tags": [
                         {
@@ -3869,7 +3869,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "AWS API gateway request authorisation is not set",
+                    "title": "AWS API gateway request authorization is not set",
                     "description": "This policy identifies AWS API Gateways of protocol type REST for which the request authorisation is not set. The method request for API gateways takes the client input that is passed to the back end through the integration request. It is recommended to add authorization type to each of the method to add a layer of protection.",
                     "tags": [
                         {
@@ -3896,8 +3896,8 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Compute Platform must be 'ECS' OR 'Lambda'.",
-                    "description": "Compute Platform must be 'ECS' OR 'Lambda'.",
+                    "title": "AWS CodeDeploy application compute platform must be ECS or Lambda",
+                    "description": "AWS CodeDeploy application compute platform must be ECS or Lambda",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3923,8 +3923,8 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Code Pipeline Encryption at rest with customer managed CMK key",
-                    "description": "Code Pipeline Encryption at rest with customer managed CMK key",
+                    "title": "Code Pipeline Encryption at rest with customer-managed key (CMK) should be enabled",
+                    "description": "The type of encryption key When creating or updating a pipeline, the value must be cmk(customer-managed key)",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3950,8 +3950,8 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure DMS endpoint are SSL configured",
-                    "description": "Ensure DMS endpoint are SSL configured",
+                    "title": "Ensure DMS endpoints are supporting SSL configuration",
+                    "description": "This policy identifies Database Migration Service (DMS) endpoints that are not configured with SSL to encrypt connections for source and target endpoints. It is recommended to use SSL connection for source and target endpoints; enforcing SSL connections help protect against 'man in the middle' attacks by encrypting the data stream between endpoint connections.\n\nNOTE: Not all databases use SSL in the same way. An Amazon Redshift endpoint already uses an SSL connection and does not require an SSL connection set up by AWS DMS. So there are some exlcusions included in policy RQL to report only those endpoints which can be configured using DMS SSL feature. \n\nFor more details:\nhttps://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.SSL",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3977,8 +3977,8 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure no ECR imageTagMutability equals MUTABLE",
-                    "description": "Ensure no ECR imageTagMutability equals MUTABLE",
+                    "title": "Ensure ECR image tags are immutable",
+                    "description": "Amazon ECR supports immutable tags, preventing image tags from being overwritten. In the past, ECR tags could have been overwritten, this could be overcome by requiring users to uniquely identify an image using a naming convention.Tag Immutability enables users can rely on the descriptive tags of an image as a mechanism to track and uniquely identify images. By setting an image tag as immutable, developers can use the tag to correlate the deployed image version with the build that produced the image.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -4004,8 +4004,8 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure encryption is enabled for ECR",
-                    "description": "Ensure encryption is enabled for ECR",
+                    "title": "Ensure ECR repositories are encrypted",
+                    "description": "Make sure EncryptionType is present in ECR EncryptionConfiguration To increase control of the encryption and control the management of factors like key rotation",
                     "tags": [
                         {
                             "cloud": "git",
@@ -4207,7 +4207,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure node-to-node encryption is enabled on each ElasticSearch Domain",
-                    "description": "Ensure node-to-node encryption is enabled on each ElasticSearch Domain",
+                    "description": "Ensure that node-to-node encryption feature is enabled for your AWS ElasticSearch domains (clusters) in order to add an extra layer of data protection on top of the existing ES security features such as HTTPS client to cluster encryption and data-at-rest encryption, and meet strict compliance requirements. The ElasticSearch node-to-node encryption capability provides the additional layer of security by implementing Transport Layer Security (TLS) for all communications between the nodes provisioned within the cluster. The feature ensures that any data sent to your AWS ElasticSearch domain over HTTPS remains encrypted in transit while it is being distributed and replicated between the nodes.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -4484,7 +4484,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure no wildcards are specified in IAM policy with 'Resource' section",
-                    "description": "Ensure no wildcards are specified in IAM policy with 'Resource' section",
+                    "description": "Using a wildcard in the Resource element in a role's trust policy would allow any IAM user in an account to access all Resources. This is a significant security gap and can be used to gain access to sensitive data.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -4511,7 +4511,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure no wildcards are specified in IAM policy with 'Action' section",
-                    "description": "Ensure no wildcards are specified in IAM policy with 'Action' section",
+                    "description": "Using a wildcard in the Action element in a role's trust policy would allow any IAM user in an account to Manage all resources and a user can manipulate data. This is a significant security gap and can be used to gain access to sensitive data.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -4538,7 +4538,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section",
-                    "description": "Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section",
+                    "description": "Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -4807,8 +4807,8 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Encryption at rest within cluster",
-                    "description": "Encryption at rest within cluster",
+                    "title": "Ensure MSK cluster encryption at rest is enabled",
+                    "description": "Amazon MSK integrates with AWS Key Management Service (KMS) for server-side encryption. When you create an MSK cluster, you can specify the AWS KMS CMK for Amazon MSK to use to encrypt your data at rest. If you don't specify a CMK, Amazon MSK creates an AWS managed CMK for you and uses it on your behalf.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -4834,8 +4834,8 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure data is encrypted at rest using a customer managed CMK",
-                    "description": "Ensure data is encrypted at rest using a customer managed CMK",
+                    "title": "Use KMS Customer Master Keys for AWS MSK Clusters",
+                    "description": "Ensure that Amazon Managed Streaming for Kafka (MSK) clusters are using AWS KMS Customer Master Keys (CMKs) instead of AWS managed-keys (i.e. default keys) for data encryption, in order to have a fine-grained control over data-at-rest encryption/decryption process and meet compliance requirements. MSK is a fully managed AWS service that enables you to migrate, build and run real-time streaming applications on Apache Kafka.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -4889,7 +4889,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure client authentication is enabled with TLS (mutual TLS authentication)",
-                    "description": "Ensure client authentication is enabled with TLS (mutual TLS authentication)",
+                    "description": "Enable TLS by setting EncryptionInfo.EncryptionInTransit.ClientBroker value to 'TLS'. to provide trasport layes security to MSK instance",
                     "tags": [
                         {
                             "cloud": "git",
@@ -4916,7 +4916,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure MSK cluster is setup in GS VPC",
-                    "description": "Ensure MSK cluster is setup in GS VPC",
+                    "description": "To Add MKS Cluster in gs VPC,Specify exactly two subnets if you are using the US West (N. California) Region. For other Regions where Amazon MSK is available, you can specify either two or three subnets. The subnets that you specify must be in distinct Availability Zones. When you create a cluster, Amazon MSK distributes the broker nodes evenly across the subnets that you specify.",
                     "tags": [
                         {
                             "cloud": "git",

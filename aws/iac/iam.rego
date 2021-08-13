@@ -32,7 +32,7 @@ iam_wildcard_resource_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud formation",
     "Policy Title": "Ensure no wildcards are specified in IAM policy with 'Resource' section",
-    "Policy Description": "Ensure no wildcards are specified in IAM policy with 'Resource' section",
+    "Policy Description": "Using a wildcard in the Resource element in a role's trust policy would allow any IAM user in an account to access all Resources. This is a significant security gap and can be used to gain access to sensitive data.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html"
@@ -69,7 +69,7 @@ iam_wildcard_action_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud formation",
     "Policy Title": "Ensure no wildcards are specified in IAM policy with 'Action' section",
-    "Policy Description": "Ensure no wildcards are specified in IAM policy with 'Action' section",
+    "Policy Description": "Using a wildcard in the Action element in a role's trust policy would allow any IAM user in an account to Manage all resources and a user can manipulate data. This is a significant security gap and can be used to gain access to sensitive data.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html"
@@ -108,7 +108,7 @@ iam_wildcard_principal_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud formation",
     "Policy Title": "Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section",
-    "Policy Description": "Ensure no wildcards are specified in IAM trust-relationship policy with 'Principal' section",
+    "Policy Description": "Using a wildcard in the Principal element in a role's trust policy would allow any IAM user in any account to access the role. This is a significant security gap and can be used to gain access to sensitive data.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html"

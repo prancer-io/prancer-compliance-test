@@ -30,7 +30,7 @@ deploy_compute_platform = false {
     aws_issue["deploy_compute_platform"]
 }
 
-deploy_compute_platform_err = "Compute Platform must be 'ECS' OR 'Lambda'." {
+deploy_compute_platform_err = "AWS CodeDeploy application compute platform must be ECS or Lambda" {
     aws_issue["deploy_compute_platform"]
 }
 
@@ -40,8 +40,8 @@ deploy_compute_platform_metadata := {
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
-    "Policy Title": "Compute Platform must be 'ECS' OR 'Lambda'.",
-    "Policy Description": "Compute Platform must be 'ECS' OR 'Lambda'.",
+    "Policy Title": "AWS CodeDeploy application compute platform must be ECS or Lambda",
+    "Policy Description": "AWS CodeDeploy application compute platform must be ECS or Lambda",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-application.html#cfn-codedeploy-application-computeplatform"
