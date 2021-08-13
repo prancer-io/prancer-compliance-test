@@ -7,7 +7,8 @@ package rule
 #
 
 default alerts = null
-
+# https://docs.microsoft.com/en-us/powershell/module/az.monitor/set-azactivitylogalert?view=azps-6.3.0
+# by default alert get enabled if not exist.
 azure_attribute_absence["alerts"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/activitylogalerts"
@@ -21,25 +22,21 @@ azure_issue["alerts"] {
 }
 
 alerts {
+    azure_attribute_absence["alerts"]
+}
+
+alerts {
     lower(input.resources[_].type) == "microsoft.insights/activitylogalerts"
-    not azure_issue["alerts"]
     not azure_attribute_absence["alerts"]
+    not azure_issue["alerts"]
 }
 
 alerts = false {
     azure_issue["alerts"]
-}
-
-alerts = false {
-    azure_attribute_absence["alerts"]
 }
 
 alerts_err = "Activity log alerts is not enabled" {
     azure_issue["alerts"]
-}
-
-alerts_miss_err = "enabled attribute of Activity log alerts is missing" {
-    azure_attribute_absence["alerts"]
 }
 
 alerts_metadata := {

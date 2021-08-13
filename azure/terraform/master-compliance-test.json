@@ -5,6 +5,35 @@
             "version": "0.1",
             "cases": [
                 {
+                    "masterTestId": "TEST_ACTIVITY_LOG_ALERT",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(activitylogalerts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0090-TRF",
+                            "eval": "data.rule.azure_monitor_activity_log_alert_enabled",
+                            "message": "data.rule.azure_monitor_activity_log_alert_enabled_err",
+                            "remediationDescription": "In 'azurerm_monitor_activity_log_alert' resource, set 'enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_activity_log_alert#enabled for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Activity log alerts should be enabled",
+                    "description": "Activity log alerts are alerts that activate when a new activity log event occurs that matches the conditions specified in the alert. Based on the order and volume of the events recorded in Azure activity log, the alert rule will fire. Enabling Activity log alerts will allow Azure to send you emails about any high severity alerts in your environment. This will make sure that you are aware of any security issues and take prompt actions to mitigate the risks.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_AKS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
