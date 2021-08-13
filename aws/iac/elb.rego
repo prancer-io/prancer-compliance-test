@@ -730,3 +730,75 @@ elb_over_https_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
 }
+
+
+#
+# PR-AWS-0217-CFR
+#
+
+default elb_v2_listener_ssl = null
+
+aws_attribute_absence["elb_v2_listener_ssl"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    not resource.Properties.Certificates
+}
+
+aws_issue["elb_v2_listener_ssl"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    count(resource.Properties.Certificates) == 0
+}
+
+aws_issue["elb_v2_listener_ssl"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    certificate := resource.Properties.Certificates[_]
+    not certificate.CertificateArn
+}
+
+aws_issue["elb_v2_listener_ssl"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    certificate := resource.Properties.Certificates[_]
+    lower(certificate.CertificateArn) == ""
+}
+
+aws_issue["elb_v2_listener_ssl"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    certificate := resource.Properties.Certificates[_]
+    count(certificate.CertificateArn) == 0
+}
+
+elb_v2_listener_ssl {
+    lower(input.Resources[i].Type) == "aws::elasticloadbalancingv2::listener"
+    not aws_issue["elb_v2_listener_ssl"]
+    not aws_attribute_absence["elb_v2_listener_ssl"]
+}
+
+elb_v2_listener_ssl = false {
+    aws_issue["elb_v2_listener_ssl"]
+}
+
+elb_v2_listener_ssl = false {
+    aws_attribute_absence["elb_v2_listener_ssl"]
+}
+
+elb_v2_listener_ssl_err = "AWS Elastic Load Balancer V2 (ELBV2) with listener TLS/SSL disabled" {
+    aws_issue["elb_v2_listener_ssl"]
+} else = "AWS Elastic Load Balancer V2 (ELBV2) with TLS/SSL certificate absent" {
+    aws_attribute_absence["elb_v2_listener_ssl"]
+}
+
+elb_v2_listener_ssl_metadata := {
+    "Policy Code": "PR-AWS-0217-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Elastic Load Balancer V2 (ELBV2) with listener TLS/SSL disabled",
+    "Policy Description": "This policy identifies Elastic Load Balancer V2 (ELBV2) which have listener TLS/SSL disabled. As Load Balancers will be handling all incoming requests and routing the traffic accordingly; The listeners on the load balancers should always receive traffic over secure channel with a valid SSL certificate configured.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html#cfn-elasticloadbalancingv2-listener-certificates"
+}

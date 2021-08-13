@@ -223,3 +223,98 @@ cache_encrypt_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html"
 }
+
+
+#
+# PR-AWS-0214-CFR
+#
+
+default cache_ksm_key = null
+
+aws_issue["cache_ksm_key"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
+    not resource.Properties.KmsKeyId
+}
+
+aws_issue["cache_ksm_key"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
+    not startswith(resource.Properties.KmsKeyId, "arn:")
+}
+
+cache_ksm_key {
+    lower(input.Resources[i].Type) == "aws::elasticache::replicationgroup"
+    not aws_issue["cache_ksm_key"]
+}
+
+cache_ksm_key = false {
+    aws_issue["cache_ksm_key"]
+}
+
+cache_ksm_key_err = "Ensure that ElastiCache replication Group (Redis) are encrypted at rest with customer managed CMK key" {
+    aws_issue["cache_ksm_key"]
+}
+
+cache_ksm_key_metadata := {
+    "Policy Code": "PR-AWS-0214-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure that ElastiCache replication Group (Redis) are encrypted at rest with customer managed CMK key",
+    "Policy Description": "This policy identifies ElastiCache Redis clusters which have in-transit encryption disabled. It is highly recommended to implement in-transit encryption in order to protect data from unauthorized access as it travels through the network, between clients and cache servers. Enabling data encryption in-transit helps prevent unauthorized users from reading sensitive data between your Redis clusters and their associated cache storage systems.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html#cfn-elasticache-replicationgroup-kmskeyid"
+}
+
+
+#
+# PR-AWS-0215-CFR
+#
+
+default cache_default_sg = null
+
+aws_issue["cache_default_sg"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
+    not resource.Properties.CacheSecurityGroupNames
+}
+
+aws_issue["cache_default_sg"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
+    count(resource.Properties.CacheSecurityGroupNames) == 0
+}
+
+aws_issue["cache_default_sg"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
+    cache_sg := resource.Properties.CacheSecurityGroupNames[_]
+    count([c | lower(cache_sg) == "default"; c:=1]) != 0
+}
+
+cache_default_sg {
+    lower(input.Resources[i].Type) == "aws::elasticache::replicationgroup"
+    not aws_issue["cache_default_sg"]
+}
+
+cache_default_sg = false {
+    aws_issue["cache_default_sg"]
+}
+
+cache_default_sg_err = "Ensure 'default' value is not used on Security Group setting for Redis cache engines" {
+    aws_issue["cache_default_sg"]
+}
+
+cache_default_sg_metadata := {
+    "Policy Code": "PR-AWS-0215-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure 'default' value is not used on Security Group setting for Redis cache engines",
+    "Policy Description": "Ensure 'default' value is not used on Security Group setting for Redis cache engines",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html#cfn-elasticache-replicationgroup-cachesubnetgroupname"
+}
