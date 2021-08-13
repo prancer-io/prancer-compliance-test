@@ -266,6 +266,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_APPLICATION_GATEWAYS_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(applicationgateways.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0125-TRF",
+                            "eval": "data.rule.https_protocol",
+                            "message": "data.rule.https_protocol_err",
+                            "remediationDescription": "In 'azurerm_application_gateway' resource, set 'protocol = https' under 'http_listener' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway#protocol for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Application Gateway is using Https protocol",
+                    "description": "Application Gateway allows to set network protocols Http and Https. It is highly recommended to use Https protocol for secure connections.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_DATABRICKS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"

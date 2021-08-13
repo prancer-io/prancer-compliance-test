@@ -141,14 +141,11 @@ protocol = false {
     azure_attribute_absence["protocol"]
 }
 
-protocol_err = "Ensure Application Gateway is using Https protocol" {
+protocol_err = "'httpListeners' property 'protocol' is missing from 'microsoft.network/applicationgateways' resource" {
+    azure_attribute_absence["protocol"]
+} else = "Application Gateway is currently not using Https protocol" {
     azure_issue["protocol"]
 }
-
-protocol_miss_err = "Ensure Application Gateway is using Https protocol" {
-    azure_attribute_absence["protocol"]
-}
-
 
 protocol_metadata := {
     "Policy Code": "PR-AZR-0125-ARM",
