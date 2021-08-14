@@ -418,7 +418,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_AUDITING_DB_SETTINGS_1",
+                    "masterTestId": "TEST_DB_AUDITING_SETTINGS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -454,7 +454,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_AUDITING_DB_SETTINGS_2",
+                    "masterTestId": "TEST_DB_AUDITING_SETTINGS_2",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -490,28 +490,35 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_SERVER_AUDITING_SETTINGS",
+                    "masterTestId": "TEST_DB_ENCRYPTIONS",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(dbserverauditingsettings.rego)",
+                    "rule": "file(dbdataencryption.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0059-TRF",
-                            "eval": "data.rule.mssql_log_retention",
-                            "message": "data.rule.mssql_log_retention_err",
-                            "remediationDescription": "In 'azurerm_mssql_server_extended_auditing_policy' resource, set the 'retention_in_days = 91' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_extended_auditing_policy#retention_in_days for details.",
+                            "id": "PR-AZR-0084-TRF",
+                            "eval": "data.rule.db_encrypt",
+                            "message": "data.rule.db_encrypt_err",
+                            "remediationDescription": "In 'azurerm_mssql_server_transparent_data_encryption' resource, make sure 'server_id' property has id of associated 'azurerm_mssql_database' resource to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption#server_id for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Server audit log retention should be greater then 90 days",
-                    "description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance._x000D__x000D_This policy identifies SQL servers which do not retain audit logs for more than 90 days. As a best practice, configure the audit logs retention time period to be greater than 90 days.",
+                    "title": "Azure SQL databases should have transparent data encryption enabled",
+                    "description": "Transparent data encryption protects Azure database against malicious activity. It performs real-time encryption and decryption of the database, related reinforcements, and exchange log records without requiring any changes to the application. It encrypts the storage of the entire database by using a symmetric key called the database encryption key.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -722,6 +729,35 @@
                                 "NIST 800",
                                 "PCI-DSS"
                             ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DB_SERVER_AUDITING_SETTINGS",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbserverauditingsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0059-TRF",
+                            "eval": "data.rule.mssql_log_retention",
+                            "message": "data.rule.mssql_log_retention_err",
+                            "remediationDescription": "In 'azurerm_mssql_server_extended_auditing_policy' resource, set the 'retention_in_days = 91' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_extended_auditing_policy#retention_in_days for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server audit log retention should be greater then 90 days",
+                    "description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance._x000D__x000D_This policy identifies SQL servers which do not retain audit logs for more than 90 days. As a best practice, configure the audit logs retention time period to be greater than 90 days.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
                             "service": [
                                 "terraform"
                             ]
