@@ -569,6 +569,40 @@
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
                         {
+                            "id": "PR-AZR-0096-TRF",
+                            "eval": "data.rule.dbsec_threat_off",
+                            "message": "data.rule.dbsec_threat_off_err",
+                            "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, set state = 'Enabled' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#state for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "SQL Databases should have security alert policies enabled",
+                    "description": "SQL Threat Detection provides a new layer of security, which enables customers to detect and respond to potential threats as they occur by providing security alerts on anomalous activities. Users will receive an alert upon suspicious database activities, potential vulnerabilities, and SQL injection attacks, as well as anomalous database access patterns. SQL Threat Detection alerts provide details of suspicious activity and recommend action on how to investigate and mitigate the threat.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbsecurityalertpolicies.rego)",
+                    "evals": [
+                        {
                             "id": "PR-AZR-0054-TRF",
                             "eval": "data.rule.dbsec_threat_retention",
                             "message": "data.rule.dbsec_threat_retention_err",
@@ -597,7 +631,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_2",
+                    "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_3",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -632,7 +666,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_3",
+                    "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_4",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -667,7 +701,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_4",
+                    "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_5",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -691,40 +725,6 @@
                             "compliance": [
                                 "CIS",
                                 "CSA-CCM",
-                                "ISO 27001",
-                                "NIST 800",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_DB_SECURITY_ALERTS_POLICIES_5",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(dbsecurityalertpolicies.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-0096-TRF",
-                            "eval": "data.rule.dbsec_threat_off",
-                            "message": "data.rule.dbsec_threat_off_err",
-                            "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, set state = 'Enabled' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#state for details.",
-                            "remediationFunction": ""
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "SQL Databases should have security alert policies enabled",
-                    "description": "SQL Threat Detection provides a new layer of security, which enables customers to detect and respond to potential threats as they occur by providing security alerts on anomalous activities. Users will receive an alert upon suspicious database activities, potential vulnerabilities, and SQL injection attacks, as well as anomalous database access patterns. SQL Threat Detection alerts provide details of suspicious activity and recommend action on how to investigate and mitigate the threat.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "CIS",
                                 "ISO 27001",
                                 "NIST 800",
                                 "PCI-DSS"

@@ -2,6 +2,57 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy
+
+#
+# PR-AZR-0096-TRF
+#
+
+default dbsec_threat_off = null
+
+azure_attribute_absence["dbsec_threat_off"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mssql_server_security_alert_policy"
+    not resource.properties.state
+}
+
+azure_issue["dbsec_threat_off"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mssql_server_security_alert_policy"
+    lower(resource.properties.state) != "enabled"
+}
+
+dbsec_threat_off {
+    lower(input.resources[_].type) == "azurerm_mssql_server_security_alert_policy"
+    not azure_attribute_absence["dbsec_threat_off"]
+    not azure_issue["dbsec_threat_off"]
+}
+
+dbsec_threat_off = false {
+    azure_attribute_absence["dbsec_threat_off"]
+}
+
+dbsec_threat_off = false {
+    azure_issue["dbsec_threat_off"]
+}
+
+dbsec_threat_off_err = "azurerm_mssql_server_security_alert_policy property 'state' is missing from the resource. Set the value to 'Enabled' after property addition." {
+    azure_attribute_absence["dbsec_threat_off"]
+} else = "SQL Databases security alert policy is currently not enabled" {
+    azure_issue["dbsec_threat_off"]
+}
+
+dbsec_threat_off_metadata := {
+    "Policy Code": "PR-AZR-0096-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "SQL Databases should have security alert policies enabled",
+    "Policy Description": "SQL Threat Detection provides a new layer of security, which enables customers to detect and respond to potential threats as they occur by providing security alerts on anomalous activities. Users will receive an alert upon suspicious database activities, potential vulnerabilities, and SQL injection attacks, as well as anomalous database access patterns. SQL Threat Detection alerts provide details of suspicious activity and recommend action on how to investigate and mitigate the threat.",
+    "Resource Type": "azurerm_mssql_server_security_alert_policy",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy"
+}
+
 #
 # PR-AZR-0054-TRF
 #
@@ -196,7 +247,7 @@ sql_alert = false {
 
 sql_alert_err = "azurerm_mssql_server_security_alert_policy property 'email_account_admins' need to be exist. Its missing from the resource." {
     azure_attribute_absence["sql_alert"]
-} else = "Send alerts on field value on SQL Databases is misconfigured" {
+} else = "Threat Detection alert currently is not configured to sent notification to the sql server account administrators" {
     azure_issue["sql_alert"]
 }
 
@@ -207,56 +258,6 @@ sql_alert_metadata := {
     "Language": "Terraform",
     "Policy Title": "Threat Detection alert should be configured to sent notification to the sql server account administrators",
     "Policy Description": "Ensure that threat detection alert is configured to sent notification to the sql server account administrators",
-    "Resource Type": "azurerm_mssql_server_security_alert_policy",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy"
-}
-
-#
-# PR-AZR-0096-TRF
-#
-
-default dbsec_threat_off = null
-
-azure_attribute_absence["dbsec_threat_off"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_mssql_server_security_alert_policy"
-    not resource.properties.state
-}
-
-azure_issue["dbsec_threat_off"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_mssql_server_security_alert_policy"
-    lower(resource.properties.state) != "enabled"
-}
-
-dbsec_threat_off {
-    lower(input.resources[_].type) == "azurerm_mssql_server_security_alert_policy"
-    not azure_attribute_absence["dbsec_threat_off"]
-    not azure_issue["dbsec_threat_off"]
-}
-
-dbsec_threat_off = false {
-    azure_attribute_absence["dbsec_threat_off"]
-}
-
-dbsec_threat_off = false {
-    azure_issue["dbsec_threat_off"]
-}
-
-dbsec_threat_off_err = "azurerm_mssql_server_security_alert_policy property 'state' is missing from the resource. Set the value to 'Enabled' after property addition." {
-    azure_attribute_absence["dbsec_threat_off"]
-} else = "SQL Databases security alert policy is currently not enabled" {
-    azure_issue["dbsec_threat_off"]
-}
-
-dbsec_threat_off_metadata := {
-    "Policy Code": "PR-AZR-0096-TRF",
-    "Type": "IaC",
-    "Product": "AZR",
-    "Language": "Terraform",
-    "Policy Title": "SQL Databases should have security alert policies enabled",
-    "Policy Description": "SQL Threat Detection provides a new layer of security, which enables customers to detect and respond to potential threats as they occur by providing security alerts on anomalous activities. Users will receive an alert upon suspicious database activities, potential vulnerabilities, and SQL injection attacks, as well as anomalous database access patterns. SQL Threat Detection alerts provide details of suspicious activity and recommend action on how to investigate and mitigate the threat.",
     "Resource Type": "azurerm_mssql_server_security_alert_policy",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy"
