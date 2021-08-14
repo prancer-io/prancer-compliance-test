@@ -9,7 +9,7 @@ package rule
 default storage_secure = null
 
 #in latest API from 2019-04-01, supportsHttpsTrafficOnly is true by default if not exist
-azure_attribute_absence["storage_secure"] {
+azure_attribute_absence_new["storage_secure"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     resource.apiVersion >= "2019-04-01"
@@ -17,7 +17,7 @@ azure_attribute_absence["storage_secure"] {
 }
 
 #in older API before 2019-04-01, supportsHttpsTrafficOnly is false by default if not exist
-azure_issue["storage_secure"] {
+azure_attribute_absence_old["storage_secure"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     resource.apiVersion < "2019-04-01"
@@ -32,7 +32,12 @@ azure_issue["storage_secure"] {
 
 storage_secure {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
-    not azure_attribute_absence["storage_secure"]
+    not azure_attribute_absence_old["storage_secure"]
+    not azure_issue["storage_secure"]
+}
+
+storage_secure {
+    azure_attribute_absence_new["storage_secure"]
     not azure_issue["storage_secure"]
 }
 
@@ -40,13 +45,15 @@ storage_secure = false {
     azure_issue["storage_secure"]
 }
 
-storage_secure {
-    azure_attribute_absence["storage_secure"]
+storage_secure = false {
+    azure_attribute_absence_old["storage_secure"]
 }
+
 
 storage_secure_err = "Storage Accounts https based secure transfer is not enabled" {
     azure_issue["storage_secure"]
 }
+
 
 storage_secure_metadata := {
     "Policy Code": "PR-AZR-0092-ARM",

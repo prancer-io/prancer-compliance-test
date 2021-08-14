@@ -91,7 +91,7 @@ databrics_workspace_has_vnet_integration_err = "Azure Databricks currenty does n
     azure_attribute_absence["databrics_workspace_has_vnet_integration"]
 }
 
-databrics_workspace_has_public_ip_disabled_metadata := {
+databrics_workspace_has_vnet_integration_metadata := {
     "Policy Code": "PR-AZR-0118-ARM",
     "Type": "IaC",
     "Product": "AZR",
