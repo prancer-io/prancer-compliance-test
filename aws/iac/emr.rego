@@ -84,7 +84,7 @@ emr_kerberos = false {
     aws_issue["emr_kerberos"]
 }
 
-emr_kerberos = "AWS EMR cluster is not configured with Kerberos Authentication" {
+emr_kerberos_err = "AWS EMR cluster is not configured with Kerberos Authentication" {
     aws_issue["emr_kerberos"]
 }
 
