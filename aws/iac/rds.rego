@@ -568,3 +568,56 @@ rds_retention_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
 }
+
+
+#
+# PR-AWS-0244-CFR
+#
+
+default rds_cluster_retention = null
+
+aws_attribute_absence["rds_cluster_retention"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbcluster"
+    not resource.Properties.BackupRetentionPeriod
+}
+
+aws_issue["rds_cluster_retention"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbcluster"
+    to_number(resource.Properties.BackupRetentionPeriod) < 7
+}
+
+rds_cluster_retention {
+    lower(input.Resources[i].Type) == "aws::rds::dbcluster"
+    not aws_issue["rds_cluster_retention"]
+    not aws_attribute_absence["rds_cluster_retention"]
+}
+
+rds_cluster_retention = false {
+    aws_issue["rds_cluster_retention"]
+}
+
+rds_cluster_retention = false {
+    aws_attribute_absence["rds_cluster_retention"]
+}
+
+rds_cluster_retention_err = "AWS RDS retention policy less than 7 days" {
+    aws_issue["rds_cluster_retention"]
+}
+
+rds_cluster_retention_miss_err = "RDS attribute BackupRetentionPeriod missing in the resource" {
+    aws_attribute_absence["rds_cluster_retention"]
+}
+
+rds_cluster_retention_metadata := {
+    "Policy Code": "PR-AWS-0244-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS RDS cluster retention policy less than 7 days",
+    "Policy Description": "RDS cluster Retention Policies for Backups are an important part of your DR/BCP strategy. Recovering data from catastrophic failures, malicious attacks, or corruption often requires a several day window of potentially good backup material to leverage. As such, the best practice is to ensure your RDS clusters are retaining at least 7 days of backups, if not more (up to a maximum of 35).",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
+}

@@ -3411,37 +3411,6 @@
                     "status": "enable"
                 },
                 {
-                    "masterTestId": "TEST_EKS_2",
-                    "masterSnapshotId": [
-                        "CFR_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(eks.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-0051-CFR",
-                            "eval": "data.rule.eks_public_access",
-                            "message": "data.rule.eks_public_access_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html",
-                            "remediationFunction": "PR_AWS_0051_CFR.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "AWS EKS cluster endpoint access publicly enabled",
-                    "description": "AWS EKS cluster endpoint access publicly enabled.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "eks",
-                                "cloudformation"
-                            ]
-                        }
-                    ],
-                    "status": "enable"
-                },
-                {
                     "masterTestId": "TEST_RDS_9",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -4922,6 +4891,96 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_NETWORKACL_7",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2networkacl.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0243-CFR",
+                            "eval": "data.rule.acl_unrestricted_admin_port",
+                            "message": "data.rule.acl_unrestricted_admin_port_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AWS_00243_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Unrestricted Inbound Traffic on Remote Server Administration Ports",
+                    "description": "Check your Amazon VPC Network Access Control Lists (NACLs) for inbound/ingress rules that allow unrestricted traffic (i.e. 0.0.0.0/0) on TCP ports 22 (SSH) and 3389 (RDP) and limit access to trusted IP addresses or IP ranges only in order to implement the Principle of Least Privilege (POLP) and reduce the attack surface at the subnet level.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "ec2networkacl",
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_RDS_12",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(rds.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0244-CFR",
+                            "eval": "data.rule.rds_cluster_retention",
+                            "message": "data.rule.rds_cluster_retention_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html",
+                            "remediationFunction": "PR_AWS_0244_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS RDS cluster retention policy less than 7 days",
+                    "description": "RDS cluster Retention Policies for Backups are an important part of your DR/BCP strategy. Recovering data from catastrophic failures, malicious attacks, or corruption often requires a several day window of potentially good backup material to leverage. As such, the best practice is to ensure your RDS clusters are retaining at least 7 days of backups, if not more (up to a maximum of 35).",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "rds",
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ROUTE_1",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(route53.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0245-CFR",
+                            "eval": "data.rule.route_healthcheck_disable",
+                            "message": "data.rule.route_healthcheck_disable_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-aliastarget.html",
+                            "remediationFunction": "PR_AWS_0245_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Route53 DNS evaluateTargetHealth is enabled",
+                    "description": "The EvaluateTargetHealth of Route53 is not enabled, an alias record can't inherits the health of the referenced AWS resource, such as an ELB load balancer or another record in the hosted zone.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "route53",
+                                "cloudformation"
+                            ]
                         }
                     ]
                 }
