@@ -345,3 +345,54 @@ esearch_zone_awareness_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
 }
+
+
+#
+# PR-AWS-0216-CFR
+#
+
+default esearch_node_encryption = null
+
+aws_issue["esearch_node_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    lower(resource.Properties.NodeToNodeEncryptionOptions.Enabled) == "false"
+}
+
+aws_bool_issue["esearch_node_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.NodeToNodeEncryptionOptions.Enabled
+}
+
+esearch_node_encryption {
+    lower(input.Resources[i].Type) == "aws::elasticsearch::domain"
+    not aws_issue["esearch_node_encryption"]
+    not aws_bool_issue["esearch_node_encryption"]
+}
+
+esearch_node_encryption = false {
+    aws_issue["esearch_node_encryption"]
+}
+
+esearch_node_encryption = false {
+    aws_bool_issue["esearch_node_encryption"]
+}
+
+esearch_node_encryption_err = "Ensure node-to-node encryption is enabled on each ElasticSearch Domain" {
+    aws_issue["esearch_node_encryption"]
+} else = "Ensure node-to-node encryption is enabled on each ElasticSearch Domain" {
+    aws_bool_issue["esearch_node_encryption"]
+}
+
+esearch_node_encryption_metadata := {
+    "Policy Code": "PR-AWS-0216-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure node-to-node encryption is enabled on each ElasticSearch Domain",
+    "Policy Description": "Ensure that node-to-node encryption feature is enabled for your AWS ElasticSearch domains (clusters) in order to add an extra layer of data protection on top of the existing ES security features such as HTTPS client to cluster encryption and data-at-rest encryption, and meet strict compliance requirements. The ElasticSearch node-to-node encryption capability provides the additional layer of security by implementing Transport Layer Security (TLS) for all communications between the nodes provisioned within the cluster. The feature ensures that any data sent to your AWS ElasticSearch domain over HTTPS remains encrypted in transit while it is being distributed and replicated between the nodes.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html#cfn-elasticsearch-domain-nodetonodeencryptionoptions"
+}
