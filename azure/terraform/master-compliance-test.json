@@ -976,6 +976,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_KEYVAULT_KEYS",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(keyvaultkeys.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0130-TRF",
+                            "eval": "data.rule.kv_keys_expire",
+                            "message": "data.rule.kv_keys_expire_err",
+                            "remediationDescription": "In 'azurerm_key_vault_key' resource, set valid date other then null in property 'expiration_date' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_key#expiration_date for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Key Vault keys should have an expiration date",
+                    "description": "This policy identifies Azure Key Vault secrets that do not have an expiry date. As a best practice, set an expiration date for each secret and rotate the secret regularly._x000D__x000D_Before you activate this policy, ensure that you have added the <compliance-software> Service Principal to each Key Vault: https://docs.paloaltonetworks.com/<compliance-software>/<compliance-software>-admin/connect-your-cloud-platform-to-<compliance-software>/onboard-your-azure-account/set-up-your-azure-account.html_x000D__x000D_Alternatively, run the following command on the Azure cloud shell:_x000D_az keyvault list | jq '.[].name' | xargs -I {} az keyvault set-policy --name {} --certificate-permissions list listissuers --key-permissions list --secret-permissions list --spn <<compliance-software>_app_id>",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_KEYVAULT_SECRETS",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -992,7 +1021,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Key Vault secrets should have expiration date",
+                    "title": "Azure Key Vault secrets should have an expiration date",
                     "description": "This policy identifies Azure Key Vault secrets that do not have an expiry date. As a best practice, set an expiration date for each secret and rotate the secret regularly._x000D__x000D_Before you activate this policy, ensure that you have added the <compliance-software> Service Principal to each Key Vault: https://docs.paloaltonetworks.com/<compliance-software>/<compliance-software>-admin/connect-your-cloud-platform-to-<compliance-software>/onboard-your-azure-account/set-up-your-azure-account.html_x000D__x000D_Alternatively, run the following command on the Azure cloud shell:_x000D_az keyvault list | jq '.[].name' | xargs -I {} az keyvault set-policy --name {} --certificate-permissions list listissuers --key-permissions list --secret-permissions list --spn <<compliance-software>_app_id>",
                     "tags": [
                         {

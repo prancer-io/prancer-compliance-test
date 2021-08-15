@@ -46,7 +46,7 @@ kv_expire_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Key Vault secrets should have expiration date",
+    "Policy Title": "Azure Key Vault secrets should have an expiration date",
     "Policy Description": "This policy identifies Azure Key Vault secrets that do not have an expiration date. As a best practice, set an expiration date for each secret and rotate the secret regularly.",
     "Resource Type": "azurerm_key_vault_secret",
     "Policy Help URL": "",
