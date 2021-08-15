@@ -881,6 +881,101 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_KeyVault_1",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(KeyVault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0107-TRF",
+                            "eval": "data.rule.KeyVault",
+                            "message": "data.rule.KeyVault_err",
+                            "remediationDescription": "In 'azurerm_key_vault' resource, make sure you have added either 'key_permissions' or 'secret_permissions' or 'certificate_permissions' or 'storage_permissions' under access_policy block to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault#access_policy for details.",
+                            "remediationFunction": "PR-AZR-0107-TRF.py"
+                        }
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure at least one principal has access to Keyvault",
+                    "description": "Use the Azure Key Vault to store secrets within the Microsoft Azure environment. Secrets in Azure Key Vault are octet sequences with a maximum size of 25k bytes each.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices",
+                                "HIPAA",
+                                "NIST CSF"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KeyVault_2",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(KeyVault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0108-TRF",
+                            "eval": "data.rule.enableSoftDelete",
+                            "message": "data.rule.enableSoftDelete_err",
+                            "remediationDescription": "In 'azurerm_key_vault' resource, set 'soft_delete_enabled = true' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault for details.",
+                            "remediationFunction": "PR-AZR-0108-TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure the key vault is recoverable - enable 'Soft Delete' setting for a Key Vault",
+                    "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation, etc.) supported by the key vault objects. It is recommended the key vault be made recoverable by enabling the 'Do Not Purge' and 'Soft Delete' functions. This is in order to prevent loss of encrypted data including storage accounts, SQL databases, and/or dependent services provided by key vault objects (Keys, Secrets, Certificates) etc., as may happen in the case of accidental deletion by a user or from disruptive activity by a malicious user.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KeyVault_3",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(KeyVault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0109-TRF",
+                            "eval": "data.rule.enablePurgeProtection",
+                            "message": "data.rule.enablePurgeProtection_err",
+                            "remediationDescription": "In 'azurerm_key_vault' resource, set 'purge_protection_enabled = true' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault#purge_protection_enabled for details.",
+                            "remediationFunction": "PR-AZR-0109-TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Key vault should have purge protection enabled",
+                    "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices "
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_KEYVAULT_SECRETS",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"

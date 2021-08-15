@@ -23,6 +23,7 @@ azure_issue["alerts"] {
 
 alerts {
     azure_attribute_absence["alerts"]
+    not azure_issue["alerts"]
 }
 
 alerts {
