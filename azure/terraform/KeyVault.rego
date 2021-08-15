@@ -44,7 +44,7 @@ KeyVault = false {
 
 KeyVault_err = "access_policy block property 'key_permissions' or 'secret_permissions' or 'certificate_permissions' or 'storage_permissions' is missing from the azurerm_key_vault resource." {
     azure_attribute_absence["KeyVault"]
-} else = "Ensure at least one principal has access to Keyvault" {
+} else = "Currently no principal has access to Keyvault" {
     azure_issue["KeyVault"]
 }
 
