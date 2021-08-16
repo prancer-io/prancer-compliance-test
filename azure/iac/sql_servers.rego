@@ -72,6 +72,7 @@ azure_attribute_absence["sql_server_login"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/administrators"
     resource.properties.login
+}
 
 
 azure_issue["sql_server_login"] {
