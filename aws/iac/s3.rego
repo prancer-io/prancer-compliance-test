@@ -94,7 +94,7 @@ aws_issue["s3_acl_delete"] {
     stat := resource.Properties.PolicyDocument.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
-    lower(stat.Action[_]) == "s3:delete"
+    startswith(lower(stat.Action[_]),"s3:delete")
 }
 
 s3_acl_delete {
@@ -158,7 +158,7 @@ aws_issue["s3_acl_get"] {
     stat := resource.Properties.PolicyDocument.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
-    lower(stat.Action[_]) == "s3:get"
+    startswith(lower(stat.Action[_]),"s3:get")
 }
 
 s3_acl_get {
@@ -222,7 +222,8 @@ aws_issue["s3_acl_list"] {
     stat := resource.Properties.PolicyDocument.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
-    lower(stat.Action[_]) == "s3:list"
+    startswith(lower(stat.Action[_]),"s3:list")
+
 }
 
 s3_acl_list {
@@ -286,7 +287,8 @@ aws_issue["s3_acl_put"] {
     stat := resource.Properties.PolicyDocument.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
-    lower(stat.Action[_]) == "s3:put"
+    startswith(lower(stat.Action[_]),"s3:put")
+
 }
 
 s3_acl_put {
@@ -355,9 +357,9 @@ s3_cloudtrail = false {
     aws_bool_issue["s3_cloudtrail"]
 }
 
-s3_cloudtrail_err = "AWS S3 CloudTrail buckets for which access logging is disabled." {
+s3_cloudtrail_err = "AWS S3 CloudTrail buckets for which access logging is disabled" {
     aws_issue["s3_cloudtrail"]
-} else = "AWS S3 CloudTrail buckets for which access logging is disabled." {
+} else = "AWS S3 CloudTrail buckets for which access logging is disabled" {
     aws_bool_issue["s3_cloudtrail"]
 }
 
@@ -366,7 +368,7 @@ s3_cloudtrail_metadata := {
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
-    "Policy Title": "AWS S3 CloudTrail buckets for which access logging is disabled.",
+    "Policy Title": "AWS S3 CloudTrail buckets for which access logging is disabled",
     "Policy Description": "This policy identifies S3 CloudTrail buckets for which access is disabled.S3 Bucket access logging generates access records for each request made to your S3 bucket. An access log record contains information such as the request type, the resources specified in the request worked, and the time and date the request was processed. It is recommended that bucket access logging be enabled on the CloudTrail S3 bucket",
     "Resource Type": "",
     "Policy Help URL": "",
