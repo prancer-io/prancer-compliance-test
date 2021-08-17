@@ -5084,8 +5084,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-0249-CFR",
-                            "eval": "data.rule.sagemaker_direct_internet_access_enable",
-                            "message": "data.rule.sagemaker_direct_internet_access_enable_err",
+                            "eval": "data.rule.sagemaker_direct_internet_access_enabled",
+                            "message": "data.rule.sagemaker_direct_internet_access_enabled_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html",
                             "remediationFunction": "PR_AWS_0249_CFR.py"
                         }

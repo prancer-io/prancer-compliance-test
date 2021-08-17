@@ -92,7 +92,7 @@ sagemaker_rootaccess_enabled_metadata := {
 # PR-AWS-0249-CFR
 #
 
-default sagemaker_direct_internet_access_enable = null
+default sagemaker_direct_internet_access_enabled = null
 
 aws_issue["sagemaker_direct_internet_access_enabled"] {
     resource := input.Resources[i]
