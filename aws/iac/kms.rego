@@ -9,13 +9,13 @@ default kms_key_rotation = null
 aws_bool_issue["kms_key_rotation"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::kms::key"
-    not resource.Properties.Enabled
+    not resource.Properties.EnableKeyRotation
 }
 
 aws_issue["kms_key_rotation"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::kms::key"
-    lower(resource.Properties.Enabled) == "false"
+    lower(resource.Properties.EnableKeyRotation) == "false"
 }
 
 kms_key_rotation {
@@ -60,13 +60,13 @@ default kms_key_state = null
 aws_bool_issue["kms_key_state"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::kms::key"
-    not resource.Properties.EnableKeyRotation
+    not resource.Properties.Enabled
 }
 
 aws_issue["kms_key_state"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::kms::key"
-    lower(resource.Properties.EnableKeyRotation) == "false"
+    lower(resource.Properties.Enabled) == "false"
 }
 
 kms_key_state {
