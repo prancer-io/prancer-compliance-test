@@ -113,7 +113,7 @@ netwatch_logs_metadata := {
 }
 
 #
-# PR-AZR-0051-ARM
+# PR-AZR-0051-TRF
 #
 
 default netwatch_log_retention = null
