@@ -682,3 +682,43 @@ s3_website_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
 }
+
+
+#
+# PR-AWS-0246-CFR
+#
+
+default s3_cors = null
+
+aws_issue["s3_cors"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    cors_rule := resource.Properties.CorsConfiguration.CorsRules[_]
+    cors_rule.AllowedHeaders[_] == "*"
+    cors_rule.AllowedMethods[_] == "*"
+}
+
+s3_cors {
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
+    not aws_issue["s3_cors"]
+}
+
+s3_cors = false {
+    aws_issue["s3_cors"]
+}
+
+s3_cors_err = "Ensure S3 hosted sites supported hardened CORS" {
+    aws_issue["s3_cors"]
+}
+
+s3_cors_metadata := {
+    "Policy Code": "PR-AWS-0246-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure S3 hosted sites supported hardened CORS",
+    "Policy Description": "Ensure that AllowedOrigins, AllowedMethods should not be set to *. this allows all cross site users to access s3 bucket and they have permission to manipulate data",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket--seealso"
+}
