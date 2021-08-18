@@ -45,7 +45,7 @@ geoRedundantBackup_metadata := {
     "Language": "Terraform",
     "Policy Title": "Ensure Geo-redundant backup is enabled on PostgreSQL database server.",
     "Policy Description": "Azure Database for PostgreSQL provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage.",
-    "Resource Type": "microsoft.dbforpostgresql/servers",
+    "Resource Type": "azurerm_postgresql_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server"
 }
@@ -95,7 +95,7 @@ sslEnforcement_metadata := {
     "Language": "Terraform",
     "Policy Title": "Ensure ssl enforcement is enabled on PostgreSQL Database Server.",
     "Policy Description": "Enable SSL connection on PostgreSQL Servers. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application.",
-    "Resource Type": "microsoft.dbforpostgresql/servers",
+    "Resource Type": "azurerm_postgresql_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server"
 }
