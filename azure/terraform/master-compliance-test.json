@@ -2044,6 +2044,68 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_postgreSQL_1",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0115-TRF",
+                            "eval": "data.rule.geoRedundantBackup",
+                            "message": "data.rule.geoRedundantBackup_err",
+                            "remediationDescription": "In 'azurerm_postgresql_server' resource, set 'geo_redundant_backup_enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server#geo_redundant_backup_enabled for details.",
+                            "remediationFunction": "PR-AZR-0115-TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Geo-redundant backup is enabled on PostgreSQL database server.",
+                    "description": "Azure Database for PostgreSQL provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_postgreSQL_2",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0124-TRF",
+                            "eval": "data.rule.sslEnforcement",
+                            "message": "data.rule.sslEnforcement_err",
+                            "remediationDescription": "In 'azurerm_postgresql_server' resource, set 'ssl_enforcement_enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server#ssl_enforcement_enabled for details.",
+                            "remediationFunction": "PR-AZR-0124-TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure ssl enforcement is enabled on PostgreSQL Database Server.",
+                    "description": "Enable SSL connection on PostgreSQL Servers. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_PRICING",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
