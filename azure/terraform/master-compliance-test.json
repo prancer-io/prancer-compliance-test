@@ -2267,6 +2267,37 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_REGISTRY",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0104-TRF",
+                            "eval": "data.rule.adminUserDisabled",
+                            "message": "data.rule.adminUserDisabled_err",
+                            "remediationDescription": "In 'azurerm_container_registry' resource, set 'admin_enabled = false' or remove 'admin_enabled' property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry#admin_enabled for details.",
+                            "remediationFunction": "PR_AZR_0104_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that admin user is disabled for Container Registry",
+                    "description": "The value that indicates whether the admin user is enabled. Each container registry includes an admin user account, which is disabled by default. You can enable the admin user and manage its credentials in the Azure portal, or by using the Azure CLI or other Azure tools. All users authenticating with the admin account appear as a single user with push and pull access to the registry. Changing or disabling this account disables registry access for all users who use its credentials.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_SECURITY_CONTACTS",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
