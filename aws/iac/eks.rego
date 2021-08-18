@@ -57,11 +57,6 @@ aws_issue["eks_version"] {
     startswith(lower(resource.Properties.Version), "1.9.")
 }
 
-aws_issue["eks_version"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::eks::cluster"
-    not resource.Properties.Version
-}
 
 eks_version {
     lower(input.Resources[i].Type) == "aws::eks::cluster"

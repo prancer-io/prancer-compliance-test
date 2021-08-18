@@ -4996,7 +4996,7 @@
                             "id": "PR-AWS-0246-CFR",
                             "eval": "data.rule.s3_cors",
                             "message": "data.rule.s3_cors_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket--seealso",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket--seealso\nAllowedHeaders should not have default value '*', define value more specific like Content-Type, x-requested-with etc. and AllowedMethods should be 'GET', 'POST', 'PUT', 'PATHCH', 'DELETE' or 'OPTIONS'",
                             "remediationFunction": "PR_AWS_0246_CFR.py"
                         }
                     ],
@@ -5026,7 +5026,7 @@
                             "id": "PR-AWS-0247-CFR",
                             "eval": "data.rule.sagemaker_encryption_kms",
                             "message": "data.rule.sagemaker_encryption_kms_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html\nprovicde KMSKeyId using KMS or CMK or static value starts with 'arn:'",
                             "remediationFunction": "PR_AWS_0247_CFR.py"
                         }
                     ],
@@ -5056,7 +5056,7 @@
                             "id": "PR-AWS-0248-CFR",
                             "eval": "data.rule.sagemaker_rootaccess_enabled",
                             "message": "data.rule.sagemaker_rootaccess_enabled_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html\nRootAccess should be disabled in properties to make sagemaker secure from unrestricted access",
                             "remediationFunction": "PR_AWS_0248_CFR.py"
                         }
                     ],
@@ -5086,7 +5086,7 @@
                             "id": "PR-AWS-0249-CFR",
                             "eval": "data.rule.sagemaker_direct_internet_access_enabled",
                             "message": "data.rule.sagemaker_direct_internet_access_enabled_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html\nDirectInternetAccess should be disabled in properties to restrict direct access from the internet.",
                             "remediationFunction": "PR_AWS_0249_CFR.py"
                         }
                     ],
