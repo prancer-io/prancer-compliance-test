@@ -13,6 +13,13 @@ aws_issue["iam_wildcard_resource"] {
     lower(statement.Resource) == "*"
 }
 
+aws_issue["iam_wildcard_resource"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::policy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Resource) == "*"
+}
+
 iam_wildcard_resource {
     lower(input.Resources[i].Type) == "aws::iam::managedpolicy"
     not aws_issue["iam_wildcard_resource"]
@@ -46,6 +53,13 @@ default iam_wildcard_action = null
 aws_issue["iam_wildcard_action"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::managedpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Action) == "*"
+}
+
+aws_issue["iam_wildcard_action"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::policy"
     statement := resource.Properties.PolicyDocument.Statement[_]
     lower(statement.Action) == "*"
 }

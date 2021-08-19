@@ -302,11 +302,6 @@ rds_encrypt_metadata := {
 
 default rds_multiaz = null
 
-aws_attribute_absence["rds_multiaz"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::rds::dbinstance"
-    not resource.Properties.Engine
-}
 
 aws_issue["rds_multiaz"] {
     resource := input.Resources[i]
@@ -328,7 +323,6 @@ rds_multiaz {
     lower(input.Resources[i].Type) == "aws::rds::dbinstance"
     not aws_issue["rds_multiaz"]
     not aws_bool_issue["rds_multiaz"]
-    not aws_attribute_absence["rds_multiaz"]
 }
 
 rds_multiaz = false {
@@ -337,20 +331,12 @@ rds_multiaz = false {
 
 rds_multiaz = false {
     aws_bool_issue["rds_multiaz"]
-}
-
-rds_multiaz = false {
-    aws_attribute_absence["rds_multiaz"]
 }
 
 rds_multiaz_err = "AWS RDS instance with Multi-Availability Zone disabled" {
     aws_issue["rds_multiaz"]
 } else = "AWS RDS instance with Multi-Availability Zone disabled" {
     aws_bool_issue["rds_multiaz"]
-}
-
-rds_multiaz_miss_err = "RDS dbcluster attribute Engine missing in the resource" {
-    aws_attribute_absence["rds_multiaz"]
 }
 
 rds_multiaz_metadata := {

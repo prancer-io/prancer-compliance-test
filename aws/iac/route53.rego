@@ -10,18 +10,38 @@ default route_healthcheck_disable = null
 
 aws_issue["route_healthcheck_disable"] {
     resource := input.Resources[i]
-    lower(resource.Type) == "AWS::Route53::RecordSetGroup"
+    lower(resource.Type) == "aws::route53::recordsetgroup"
+    record_set := resource.Properties.RecordSets[_]
+    lower(record_set.AliasTarget.EvaluateTargetHealth) == "false"
+}
+
+aws_bool_issue["route_healthcheck_disable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::route53::recordsetgroup"
+    record_set := resource.Properties.RecordSets[_]
+    not record_set.AliasTarget.EvaluateTargetHealth
+}
+
+aws_issue["route_healthcheck_disable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::route53::recordset"
     lower(resource.Properties.AliasTarget.EvaluateTargetHealth) == "false"
 }
 
 aws_bool_issue["route_healthcheck_disable"] {
     resource := input.Resources[i]
-    lower(resource.Type) == "AWS::Route53::RecordSetGroup"
+    lower(resource.Type) == "aws::route53::recordset"
     not resource.Properties.AliasTarget.EvaluateTargetHealth
 }
 
 route_healthcheck_disable {
-    lower(input.Resources[i].Type) == "AWS::Route53::RecordSetGroup"
+    lower(input.Resources[i].Type) == "aws::route53::recordsetgroup"
+    not aws_issue["route_healthcheck_disable"]
+    not aws_bool_issue["route_healthcheck_disable"]
+}
+
+route_healthcheck_disable {
+    lower(input.Resources[i].Type) == "aws::route53::recordset"
     not aws_issue["route_healthcheck_disable"]
     not aws_bool_issue["route_healthcheck_disable"]
 }
