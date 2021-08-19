@@ -883,7 +883,7 @@
                 {
                     "masterTestId": "TEST_KeyVault_1",
                     "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(KeyVault.rego)",
@@ -916,7 +916,7 @@
                 {
                     "masterTestId": "TEST_KeyVault_2",
                     "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(KeyVault.rego)",
@@ -947,7 +947,7 @@
                 {
                     "masterTestId": "TEST_KeyVault_3",
                     "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(KeyVault.rego)",
@@ -1036,7 +1036,7 @@
                 {
                     "masterTestId": "TEST_NETWORK_WATCHERS_FLOW_LOGS_1",
                     "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(networkwatchersflowlogs.rego)",
@@ -1065,7 +1065,7 @@
                 {
                     "masterTestId": "TEST_NETWORK_WATCHERS_FLOW_LOGS_2",
                     "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(networkwatchersflowlogs.rego)",
@@ -1094,7 +1094,7 @@
                 {
                     "masterTestId": "TEST_NETWORK_WATCHERS_FLOW_LOGS_3",
                     "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(networkwatchersflowlogs.rego)",
@@ -2046,7 +2046,7 @@
                 {
                     "masterTestId": "TEST_postgreSQL_1",
                     "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(postgreSQL.rego)",
@@ -2077,7 +2077,7 @@
                 {
                     "masterTestId": "TEST_postgreSQL_2",
                     "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(postgreSQL.rego)",
@@ -2140,7 +2140,7 @@
                 {
                     "masterTestId": "TEST_Redis",
                     "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(Redis.rego)",
@@ -2176,7 +2176,7 @@
                 {
                     "masterTestId": "TEST_Redis_2",
                     "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(Redis.rego)",
@@ -2269,7 +2269,7 @@
                 {
                     "masterTestId": "TEST_REGISTRY",
                     "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(registry.rego)",
@@ -2327,6 +2327,35 @@
                                 "NIST 800",
                                 "PCI-DSS"
                             ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SQL_SERVER_ALERT",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_alert_policy.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0129-TRF",
+                            "eval": "data.rule.sql_server_alert",
+                            "message": "data.rule.sql_server_alert_err",
+                            "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, set state = 'Enabled' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#state for details.",
+                            "remediationFunction": "PR_AZR_0129_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Security Alert is enabled on Azure SQL Server",
+                    "description": "Advanced data security should be enabled on your SQL servers.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
                             "service": [
                                 "terraform"
                             ]

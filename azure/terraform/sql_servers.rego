@@ -3,7 +3,8 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_mssql_server
 
 #
-# Always use Private Endpoint for Azure MSSQL Database and SQL Managed Instance (SQL MI resource is not available for terraform yet. visit: https://github.com/hashicorp/terraform-provider-azurerm/issues/1747)
+# Always use Private Endpoint for Azure MSSQL Database and SQL Managed Instance (SQL MI resource is not available for terraform yet. 
+# visit: https://github.com/hashicorp/terraform-provider-azurerm/issues/1747)
 #
 
 # PR-AZR-0126-TRF
