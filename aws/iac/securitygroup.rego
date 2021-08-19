@@ -4,7 +4,7 @@ package rule
 
 ports = [
     "135", "137", "138", "1433", "1434", "20", "21", "22", "23", "25", "3306", "3389", "4333",
-    "445", "53", "5432", "5500", "5900"
+    "445", "53", "5432", "5500", "5900", "69"
 ]
 
 aws_issue[port] {
@@ -674,6 +674,37 @@ port_proto_all_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups with Inbound rule overly permissive to All Traffic",
     "Policy Description": "This policy identifies AWS Security Groups which do allow inbound traffic on all protocols from public internet. Doing so, may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-0251-CFR
+#
+
+default port_69 = null
+
+port_69 {
+    lower(input.Resources[i].Type) == "aws::ec2::securitygroup"
+    not aws_issue["69"]
+}
+
+port_69 = false {
+    aws_issue["69"]
+}
+
+port_69_err = "AWS Security Groups allow internet traffic from internet to Trivial File Transfer Protocol Port (69)" {
+    aws_issue["69"]
+}
+
+port_69_metadata := {
+    "Policy Code": "PR-AWS-0251-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to Trivial File Transfer Protocol Port (69)",
+    "Policy Description": "This policy identifies the security groups which are exposing Trivial File Transfer Protocol Port (69) to the internet. It is recommended that Global permission to access the well known services Trivial File Transfer Protocol Port (69) should not be allowed in a security group.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"

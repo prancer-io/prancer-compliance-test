@@ -4907,7 +4907,7 @@
                             "eval": "data.rule.acl_unrestricted_admin_port",
                             "message": "data.rule.acl_unrestricted_admin_port_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AWS_00243_CFR.py"
+                            "remediationFunction": "PR_AWS_0243_CFR.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4979,6 +4979,185 @@
                             "compliance": [],
                             "service": [
                                 "route53",
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_S3_14",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(s3.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0246-CFR",
+                            "eval": "data.rule.s3_cors",
+                            "message": "data.rule.s3_cors_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket--seealso\nAllowedHeaders should not have default value '*', define value more specific like Content-Type, x-requested-with etc. and AllowedMethods should be 'GET', 'POST', 'PUT', 'PATHCH', 'DELETE' or 'OPTIONS'",
+                            "remediationFunction": "PR_AWS_0246_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure S3 hosted sites supported hardened CORS",
+                    "description": "Ensure that AllowedOrigins, AllowedMethods should not be set to *. this allows all cross site users to access s3 bucket and they have permission to manipulate data",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "S3",
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SAGEMAKER_1",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sagemaker.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0247-CFR",
+                            "eval": "data.rule.sagemaker_encryption_kms",
+                            "message": "data.rule.sagemaker_encryption_kms_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html\nprovicde KMSKeyId using KMS or CMK or static value starts with 'arn:'",
+                            "remediationFunction": "PR_AWS_0247_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS SageMaker notebook instance not configured with data encryption at rest using KMS key",
+                    "description": "This policy identifies SageMaker notebook instances that are not configured with data encryption at rest using the AWS managed KMS key. It is recommended to implement encryption at rest in order to protect data from unauthorized entities.\n\nFor more details:\nhttps://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "sagemaker",
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SAGEMAKER_2",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sagemaker.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0248-CFR",
+                            "eval": "data.rule.sagemaker_rootaccess_enabled",
+                            "message": "data.rule.sagemaker_rootaccess_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html\nRootAccess should be disabled in properties to make sagemaker secure from unrestricted access",
+                            "remediationFunction": "PR_AWS_0248_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS SageMaker notebook instance with root access enabled",
+                    "description": "This policy identifies the SageMaker notebook instances which are enabled with root access. Root access means having administrator privileges, users with root access can access and edit all files on the compute instance, including system-critical files. Removing root access prevents notebook users from deleting system-level software, installing new software, and modifying essential environment components.\nNOTE: Lifecycle configurations need root access to be able to set up a notebook instance. Because of this, lifecycle configurations associated with a notebook instance always run with root access even if you disable root access for users.\n\nFor more details:\nhttps://docs.aws.amazon.com/sagemaker/latest/dg/nbi-root-access.html",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "sagemaker",
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SAGEMAKER_3",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sagemaker.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0249-CFR",
+                            "eval": "data.rule.sagemaker_direct_internet_access_enabled",
+                            "message": "data.rule.sagemaker_direct_internet_access_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html\nDirectInternetAccess should be disabled in properties to restrict direct access from the internet.",
+                            "remediationFunction": "PR_AWS_0249_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS SageMaker notebook instance configured with direct internet access feature",
+                    "description": "This policy identifies SageMaker notebook instances that are configured with direct internet access feature. If AWS SageMaker notebook instances are configured with direct internet access feature, any machine outside the VPC can establish a connection to these instances, which provides an additional avenue for unauthorized access to data and the opportunity for malicious activity.\n\nFor more details:\nhttps://docs.aws.amazon.com/sagemaker/latest/dg/appendix-notebook-and-internet-access.html",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "sagemaker",
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SAGEMAKER_4",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sagemaker.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0250-CFR",
+                            "eval": "data.rule.sagemaker_vpc",
+                            "message": "data.rule.sagemaker_vpc_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html",
+                            "remediationFunction": "PR_AWS_0250_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS SageMaker notebook instance is not placed in VPC",
+                    "description": "This policy identifies SageMaker notebook instances that are not placed inside a VPC. It is recommended to place your SageMaker inside VPC so that VPC-only resources able to access your SageMaker data, which cannot be accessed outside a VPC network.\n\nFor more details:\nhttps://docs.aws.amazon.com/sagemaker/latest/dg/process-vpc.html",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "sagemaker",
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_21",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0251-CFR",
+                            "eval": "data.rule.port_69",
+                            "message": "data.rule.port_69_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0251_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to Trivial File Transfer Protocol Port (69)",
+                    "description": "This policy identifies the security groups which are exposing Trivial File Transfer Protocol Port (69) to the internet. It is recommended that Global permission to access the well known services Trivial File Transfer Protocol Port (69) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
                                 "cloudformation"
                             ]
                         }
