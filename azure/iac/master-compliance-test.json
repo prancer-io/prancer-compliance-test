@@ -2765,7 +2765,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_sql_servers_encryption",
+                    "masterTestId": "TEST_SQL_SERVER_ENCRYPTION",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
