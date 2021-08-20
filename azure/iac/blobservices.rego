@@ -8,7 +8,7 @@ package rule
 
 default storage_blob_soft_delete = null
 
-azure_issue["storage_blob_soft_delete"] {
+azure_attribute_absence["storage_blob_soft_delete"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts/blobservices"
     not resource.properties.deleteRetentionPolicy.enabled
@@ -22,11 +22,21 @@ azure_issue["storage_blob_soft_delete"] {
 
 storage_blob_soft_delete {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts/blobservices"
+    not azure_attribute_absence["storage_blob_soft_delete"]
     not azure_issue["storage_blob_soft_delete"]
 }
 
 storage_blob_soft_delete = false {
+    azure_attribute_absence["storage_blob_soft_delete"]
+}
+
+storage_blob_soft_delete = false {
     azure_issue["storage_blob_soft_delete"]
+}
+
+
+storage_blob_soft_delete_miss_err = "Soft delete on blob service is not exists" {
+    azure_attribute_absence["storage_blob_soft_delete"]
 }
 
 storage_blob_soft_delete_err = "Soft delete on blob service is not enabled" {
@@ -52,7 +62,7 @@ storage_blob_soft_delete_metadata := {
 
 default storage_blob_container_soft_delete = null
 
-azure_issue["storage_blob_container_soft_delete"] {
+azure_attribute_absence["storage_blob_container_soft_delete"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts/blobservices"
     not resource.properties.containerDeleteRetentionPolicy.enabled
@@ -66,11 +76,21 @@ azure_issue["storage_blob_container_soft_delete"] {
 
 storage_blob_container_soft_delete {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts/blobservices"
+    not azure_attribute_absence["storage_blob_container_soft_delete"]
     not azure_issue["storage_blob_container_soft_delete"]
 }
 
 storage_blob_container_soft_delete = false {
+    azure_attribute_absence["storage_blob_container_soft_delete"]
+}
+
+
+storage_blob_container_soft_delete = false {
     azure_issue["storage_blob_container_soft_delete"]
+}
+
+storage_blob_container_soft_delete_miss_err = "Soft delete on blob service container is not exists" {
+    azure_attribute_absence["storage_blob_container_soft_delete"]
 }
 
 storage_blob_container_soft_delete_err = "Soft delete on blob service container is not enabled" {
