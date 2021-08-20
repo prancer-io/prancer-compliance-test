@@ -35,7 +35,7 @@ storage_blob_soft_delete = false {
 }
 
 
-storage_blob_soft_delete_miss_err = "Soft delete on blob service is not exists" {
+storage_blob_soft_delete_miss_err = "Soft delete on blob service is not exist" {
     azure_attribute_absence["storage_blob_soft_delete"]
 }
 
@@ -89,7 +89,7 @@ storage_blob_container_soft_delete = false {
     azure_issue["storage_blob_container_soft_delete"]
 }
 
-storage_blob_container_soft_delete_miss_err = "Soft delete on blob service container is not exists" {
+storage_blob_container_soft_delete_miss_err = "Soft delete on blob service container is not exist" {
     azure_attribute_absence["storage_blob_container_soft_delete"]
 }
 
