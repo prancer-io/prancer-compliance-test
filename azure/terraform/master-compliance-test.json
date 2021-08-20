@@ -2695,6 +2695,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_VIRTUAL_MACHINE",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(vm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0065-TRF",
+                            "eval": "data.rule.vm_aset",
+                            "message": "data.rule.vm_aset_err",
+                            "remediationDescription": "In 'azurerm_virtual_machine' resource, make sure 'availability_set_id' property exist and its value is set from id of 'azurerm_availability_set' resource to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine#availability_set_id for details.",
+                            "remediationFunction": "PR_AZR_0065_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Virtual Machine should be assigned to an availability set",
+                    "description": "To provide application redundancy during planned or unplanned maintenance events, you can group two or more virtual machines (VMs) in an availability set. An availability set ensures that the VMs are distributed across multiple isolated hardware nodes in a cluster so that only a subset of your VMs are impacted should a hardware or software failure occur on Azure._x000D__x000D_This policy identifies Azure VMs that are not deployed in an availability set. As a high availability (HA) best practice, deploy your VMs in an availability set.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_VNET_PEERINGS",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
