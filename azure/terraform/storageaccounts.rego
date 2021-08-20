@@ -103,7 +103,170 @@ storage_acl_metadata := {
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules"
 }
 
-#
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/advanced_threat_protection
+# Advanced Threat Protection should be enabled for storage account
+# PR-AZR-0094-TRF
+
+default storage_threat_protection = null
+
+azure_attribute_absence["storage_threat_protection"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    count([c | input.resources[_].type == "azurerm_advanced_threat_protection";
+    	   c := 1]) == 0
+}
+
+azure_attribute_absence["storage_threat_protection"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_advanced_threat_protection"
+    not resource.properties.enabled
+}
+
+azure_issue["storage_threat_protection"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_advanced_threat_protection"
+    resource.properties.enabled == false
+}
+
+storage_threat_protection {
+    not azure_attribute_absence["storage_threat_protection"]
+    not azure_issue["storage_threat_protection"]
+}
+
+storage_threat_protection = false {
+    azure_attribute_absence["storage_threat_protection"]
+}
+
+storage_threat_protection = false {
+    azure_issue["storage_threat_protection"]
+}
+
+storage_threat_protection_err = "azurerm_advanced_threat_protection property 'enabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
+    azure_attribute_absence["storage_threat_protection"]
+} else = "Advanced Threat Protection is currently not enabled for storage account" {
+    azure_issue["storage_threat_protection"]
+}
+
+storage_threat_protection_metadata := {
+    "Policy Code": "PR-AZR-0094-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Advanced Threat Protection should be enabled for storage account",
+    "Policy Description": "Advanced Threat Protection should be enabled for all the storage accounts",
+    "Resource Type": "azurerm_advanced_threat_protection",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/advanced_threat_protection"
+}
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_encryption_scope
+# PR-AZR-0114-TRF
+
+default keySource = null
+
+azure_attribute_absence["keySource"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    count([c | input.resources[_].type == "azurerm_storage_encryption_scope";
+    	   c := 1]) == 0
+}
+
+azure_attribute_absence["keySource"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_encryption_scope"
+    not resource.properties.source
+}
+
+azure_issue["keySource"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_encryption_scope"
+    lower(resource.properties.source) != "microsoft.keyvault"
+}
+
+keySource {
+    not azure_attribute_absence["keySource"]
+    not azure_issue["keySource"]
+}
+
+keySource = false {
+    azure_issue["keySource"]
+}
+
+keySource = false {
+    azure_attribute_absence["keySource"]
+}
+
+keySource_err = "azurerm_storage_encryption_scope property 'source' need to be exist. Its missing from the resource. Please set the value to 'Microsoft.KeyVault' after property addition." {
+    azure_attribute_absence["keySource"]
+} else = "Critical data storage in Storage Account is currently not encrypted with Customer Managed Key" {
+    azure_issue["keySource"] 
+}
+
+keySource_metadata := {
+    "Policy Code": "PR-AZR-0114-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure critical data storage in Storage Account is encrypted with Customer Managed Key",
+    "Policy Description": "By default, data in the storage account is encrypted using Microsoft Managed Keys at rest. All Azure Storage resources are encrypted, including blobs, disks, files, queues, and tables. All object metadata is also encrypted. However, if you want to control and manage this encryption key yourself, you can specify a customer-managed key, that key is used to protect and control access to the key that encrypts your data. You can also choose to automatically update the key version used for Azure Storage encryption whenever a new version is available in the associated Key Vault.",
+    "Resource Type": "azurerm_storage_encryption_scope",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_encryption_scope"
+}
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
+# PR-AZR-0122-TRF
+
+default region = null
+
+azure_attribute_absence["region"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    not resource.location
+}
+
+azure_issue["region"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    lower(resource.location) != "northeurope"
+    lower(resource.location) != "westeurope"
+}
+
+region {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    not azure_attribute_absence["region"]
+    not azure_issue["region"]
+}
+
+region = false {
+    azure_attribute_absence["region"]
+}
+
+region = false {
+    azure_issue["region"]
+}
+
+region_err = "azurerm_storage_account property 'location' need to be exist. Its missing from the resource." {
+    azure_attribute_absence["region"]
+} else = "Storage Accounts location configuration is currenly not inside of Europe" {
+    azure_issue["region"] 
+}
+
+region_metadata := {
+    "Policy Code": "PR-AZR-0122-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Storage Accounts location configuration should be inside of Europe",
+    "Policy Description": "Identify Storage Accounts outside of the following regions: northeurope, westeurope",
+    "Resource Type": "azurerm_storage_account",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"
+}
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
 # PR-AZR-0123-TRF
 
 default storage_account_public_access_disabled = null

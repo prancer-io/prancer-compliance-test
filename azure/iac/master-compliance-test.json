@@ -2878,7 +2878,7 @@
                             "eval": "data.rule.storage_threat_protection",
                             "message": "data.rule.storage_threat_protection_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts. Also visit https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/microsoft.storage/storage-advanced-threat-protection-create/azuredeploy.json for template reference",
-                            "remediationFunction": "PR_AZR_0093_ARM.py"
+                            "remediationFunction": "PR_AZR_0094_ARM.py"
                         }
                     ],
                     "severity": "Medium",

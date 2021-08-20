@@ -119,9 +119,9 @@ storage_acl_metadata := {
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
 }
 
-#
+# https://docs.microsoft.com/en-us/azure/templates/microsoft.security/advancedthreatprotectionsettings?tabs=json
 # Advanced Threat Protection should be enabled for storage account
-#
+# PR-AZR-0094-ARM
 
 default storage_threat_protection = null
 
@@ -178,6 +178,7 @@ storage_threat_protection_metadata := {
 
 
 # https://azure.microsoft.com/en-us/blog/announcing-default-encryption-for-azure-blobs-files-table-and-queue-storage/
+# This feature is enabled by default thats why Terraform does not have any property for that
 # PR-AZR-0112-ARM
 
 default blobService = null
@@ -228,7 +229,8 @@ blobService_metadata := {
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
 }
 
-
+# https://azure.microsoft.com/en-us/blog/announcing-default-encryption-for-azure-blobs-files-table-and-queue-storage/
+# This feature is enabled by default thats why Terraform does not have any property for that
 # PR-AZR-0113-ARM
 
 default fileService = null
@@ -281,7 +283,7 @@ fileService_metadata := {
 
 
 
-
+# https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts
 # PR-AZR-0114-ARM
 
 default keySource = null

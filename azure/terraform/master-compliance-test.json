@@ -2544,6 +2544,102 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
+                            "id": "PR-AZR-0094-TRF",
+                            "eval": "data.rule.storage_threat_protection",
+                            "message": "data.rule.storage_threat_protection_err",
+                            "remediationDescription": "In 'azurerm_advanced_threat_protection' resource, set 'enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/advanced_threat_protection#enabled for details.",
+                            "remediationFunction": "PR_AZR_0094_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Advanced Threat Protection should be enabled for storage account",
+                    "description": "Advanced Threat Protection should be enabled for all the storage accounts",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "HIPAA",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNTS_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0114-TRF",
+                            "eval": "data.rule.keySource",
+                            "message": "data.rule.keySource_err",
+                            "remediationDescription": "In 'azurerm_storage_encryption_scope' resource, set 'source = microsoft.keyvault' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_encryption_scope#source for details.",
+                            "remediationFunction": "PR-AZR-0114-TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure critical data storage in Storage Account is encrypted with Customer Managed Key",
+                    "description": "By default, data in the storage account is encrypted using Microsoft Managed Keys at rest. All Azure Storage resources are encrypted, including blobs, disks, files, queues, and tables. All object metadata is also encrypted. However, if you want to control and manage this encryption key yourself, you can specify a customer-managed key, that key is used to protect and control access to the key that encrypts your data. You can also choose to automatically update the key version used for Azure Storage encryption whenever a new version is available in the associated Key Vault.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNTS_5",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0122-TRF",
+                            "eval": "data.rule.region",
+                            "message": "data.rule.region_err",
+                            "remediationDescription": "In 'azurerm_storage_account' resource, set value as 'northeurope' or 'westeurope' in property 'location' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#location for details.",
+                            "remediationFunction": "PR-AZR-0122-TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage Accounts location configuration should be inside of Europe",
+                    "description": "Identify Storage Accounts outside of the following regions: northeurope, westeurope",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "GDPR"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_6",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
                             "id": "PR-AZR-0123-TRF",
                             "eval": "data.rule.storage_account_public_access_disabled",
                             "message": "data.rule.storage_account_public_access_disabled_err",
