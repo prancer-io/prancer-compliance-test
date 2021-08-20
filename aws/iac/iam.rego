@@ -21,7 +21,6 @@ aws_issue["iam_wildcard_resource"] {
 }
 
 iam_wildcard_resource {
-    lower(input.Resources[i].Type) == "aws::iam::managedpolicy"
     not aws_issue["iam_wildcard_resource"]
 }
 
