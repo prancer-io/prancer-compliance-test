@@ -50,38 +50,25 @@ sqs_deadletter_metadata := {
 
 default sqs_encrypt_key = null
 
-aws_attribute_absence["sqs_encrypt_key"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::sqs::queue"
-    not resource.Properties.KmsMasterKeyId
-}
 
 aws_issue["sqs_encrypt_key"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sqs::queue"
+    resource.Properties.KmsMasterKeyId
     contains(lower(resource.Properties.KmsMasterKeyId), "alias/aws/sqs")
 }
 
 sqs_encrypt_key {
     lower(input.Resources[i].Type) == "aws::sqs::queue"
     not aws_issue["sqs_encrypt_key"]
-    not aws_attribute_absence["sqs_encrypt_key"]
 }
 
 sqs_encrypt_key = false {
     aws_issue["sqs_encrypt_key"]
-}
-
-sqs_encrypt_key = false {
-    aws_attribute_absence["sqs_encrypt_key"]
 }
 
 sqs_encrypt_key_err = "AWS SQS queue encryption using default KMS key instead of CMK" {
     aws_issue["sqs_encrypt_key"]
-}
-
-sqs_encrypt_key_miss_err = "SQS Queue attribute KmsMasterKeyId missing in the resource" {
-    aws_attribute_absence["sqs_encrypt_key"]
 }
 
 sqs_encrypt_key_metadata := {
