@@ -2335,7 +2335,7 @@
                     "rule": "file(sql_servers_encryption.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0134-TRF",
+                            "id": "PR-AZR-0140-TRF",
                             "eval": "data.rule.db_server_encrypt",
                             "message": "data.rule.db_server_encrypt_err",
                             "remediationDescription": "In 'azurerm_mssql_server_transparent_data_encryption' resource, make sure 'server_id' property has id of associated 'azurerm_mssql_server' resource to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption#server_id for details.",
