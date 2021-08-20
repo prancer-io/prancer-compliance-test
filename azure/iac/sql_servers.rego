@@ -71,11 +71,10 @@ default sql_server_login = null
 azure_attribute_absence["sql_server_login"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/administrators"
-    resource.properties.login
+    not resource.properties.login
 }
 
-
-azure_issue["sql_server_login"] {
+no_azure_issue["sql_server_login"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/administrators"
     lower(resource.properties.login) != "admin"
@@ -83,30 +82,22 @@ azure_issue["sql_server_login"] {
 }
 
 sql_server_login {
-    azure_attribute_absence["sql_server_login"]
-    azure_issue["sql_server_login"]
-}
-
-
-sql_server_login = false {
-    lower(input.resources[_].type) == "microsoft.sql/servers/administrators"
     not azure_attribute_absence["sql_server_login"]
+    no_azure_issue["sql_server_login"]
 }
 
 sql_server_login = false {
-    lower(input.resources[_].type) == "microsoft.sql/servers/administrators"
-    not azure_issue["sql_server_login"]
+    azure_attribute_absence["sql_server_login"]
 }
 
-
-sql_server_login_miss_err = "Azure SQL Server property 'login' is missing from the resource" {
-    lower(input.resources[_].type) == "microsoft.sql/servers/administrators"
-    not azure_issue["sql_server_login"]
+sql_server_login = false {
+    not no_azure_issue["sql_server_login"]
 }
 
-sql_server_login_err = "Azure SQL Server login is set to admin or administrator currently on the resource" {
-    lower(input.resources[_].type) == "microsoft.sql/servers/administrators"
-    not azure_issue["sql_server_login"]
+sql_server_login_err = "Azure SQL Server property 'login' is missing from the resource" {
+    azure_attribute_absence["sql_server_login"]
+} else = "Azure SQL Server login is currently set to admin or administrator on the resource. Please change the name" {
+    not no_azure_issue["sql_server_login"]
 }
 
 sql_server_login_metadata := {
@@ -114,7 +105,7 @@ sql_server_login_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Avoid using names like 'Admin' for an Azure SQL Server admin account login",
+    "Policy Title": "Ensure SQL Server administrator login does not contains 'Admin/Administrator' as name",
     "Policy Description": "You must designate a Server admin login when you create an Azure SQL server. SQL server creates this account as a login in the master database. Only one such account can exist. This account connects using SQL Server authentication (username and password). It is recommended to avoid using names like 'admin' or 'administrator', which are targeted in brute force dictionary attacks.",
     "Resource Type": "microsoft.sql/servers/administrators",
     "Policy Help URL": "",

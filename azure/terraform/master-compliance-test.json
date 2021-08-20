@@ -2394,7 +2394,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MSSQL_SERVER",
+                    "masterTestId": "TEST_MSSQL_SERVER_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2402,7 +2402,7 @@
                     "rule": "file(sql_servers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0126-TRF",
+                            "id": "PR-AZR-0128-TRF",
                             "eval": "data.rule.sql_public_access_disabled",
                             "message": "data.rule.sql_public_access_disabled_err",
                             "remediationDescription": "In 'azurerm_mssql_server' resource, set 'public_network_access_enabled = false' to fix the issue. If 'public_network_access_enabled' property does not exist please add it. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server#public_network_access_enabled for details.",
@@ -2422,6 +2422,42 @@
                                 "ISO 27001",
                                 "NIST 800",
                                 "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SQL_SERVER_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0133-TRF",
+                            "eval": "data.rule.sql_server_login",
+                            "message": "data.rule.sql_server_login_err",
+                            "remediationDescription": "In 'azurerm_mssql_server' resource, make sure 'administrator_login' does not contains name like 'Admin/Administrator' to fix the issue. If 'administrator_login' property does not exist please add it. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server#administrator_login for details.",
+                            "remediationFunction": "PR_AZR_0133_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure SQL Server administrator login does not contains 'Admin/Administrator' as name",
+                    "description": "You must designate a Server admin login when you create an Azure SQL server. SQL server creates this account as a login in the master database. Only one such account can exist. This account connects using SQL Server authentication (username and password). It is recommended to avoid using names like 'admin' or 'administrator', which are targeted in brute force dictionary attacks.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "PCI-DSS",
+                                "GDPR",
+                                "ISO 27001",
+                                "NIST CSF",
+                                "HIPAA",
+                                "Best Practices"
                             ],
                             "service": [
                                 "terraform"
