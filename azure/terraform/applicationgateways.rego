@@ -130,3 +130,52 @@ gw_waf_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway"
 }
+
+# PR-AZR-0125-TRF
+
+default https_protocol = null
+azure_attribute_absence ["https_protocol"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_application_gateway"
+    http_listener := resource.properties.http_listener[_]
+    not http_listener.protocol
+}  
+
+azure_issue ["https_protocol"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_application_gateway"
+    http_listener := resource.properties.http_listener[_]
+    lower(http_listener.protocol) != "https"
+} 
+
+https_protocol = false {
+    azure_attribute_absence["https_protocol"]
+}
+
+https_protocol {
+    lower(input.resources[_].type) == "azurerm_application_gateway"
+    not azure_attribute_absence["https_protocol"]
+    not azure_issue["https_protocol"]
+}
+
+https_protocol = false {
+    azure_issue["https_protocol"]
+}
+
+https_protocol_err = "azurerm_application_gateway property 'http_listener.protocol' need to be exist. Its missing from the resource. Please set the value to 'https' after property addition." {
+    azure_attribute_absence["https_protocol"]
+} else = "Application Gateway is currently not using Https protocol" {
+    azure_issue["https_protocol"]
+}
+
+https_protocol_metadata := {
+    "Policy Code": "PR-AZR-0125-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Application Gateway is using Https protocol",
+    "Policy Description": "Application Gateway allows to set network protocols Http and Https. It is highly recommended to use Https protocol for secure connections.",
+    "Resource Type": "azurerm_application_gateway",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway"
+}

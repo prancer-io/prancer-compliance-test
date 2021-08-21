@@ -224,4 +224,54 @@ dbsec_threat_alert_metadata := {
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies"
 }
 
+#
+# PR-AZR-0097-ARM
+#
+
+default sql_alert = null
+
+azure_issue["sql_alert"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    not resource.properties.emailAccountAdmins
+}
+
+azure_issue["sql_alert"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    resource.properties.emailAccountAdmins != true
+}
+
+sql_alert = false {
+    azure_attribute_absence["sql_alert"]
+}
+
+sql_alert {
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases/securityalertpolicies"
+    not azure_attribute_absence["sql_alert"]
+    not azure_issue["sql_alert"]
+}
+
+sql_alert = false {
+    azure_issue["sql_alert"]
+}
+
+sql_alert_err = "microsoft.sql/servers/databases/securityalertpolicies property 'emailAccountAdmins' need to be exist. Its missing from the resource." {
+    azure_attribute_absence["sql_alert"]
+} else = "Threat Detection alert currently is not configured to sent notification to the sql server account administrators" {
+    azure_issue["sql_alert"]
+}
+
+sql_alert_metadata := {
+    "Policy Code": "PR-AZR-0097-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Threat Detection alert should be configured to sent notification to the sql server account administrators",
+    "Policy Description": "Ensure that threat detection alert is configured to sent notification to the sql server account administrators",
+    "Resource Type": "microsoft.sql/servers/databases/securityalertpolicies",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies"
+}
+
 

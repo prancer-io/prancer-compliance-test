@@ -5,7 +5,9 @@ package rule
 #
 # PR-AZR-0084-ARM
 #
-
+# This encryption is by default enabled for sql database. Thats why its not available in Terraform.
+# See https://github.com/hashicorp/terraform-provider-azurerm/issues/7187
+# ToDo: We need to make sure its enabled for MSSQL Server
 default db_encrypt = null
 
 azure_attribute_absence["db_encrypt"] {

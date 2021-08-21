@@ -5,7 +5,9 @@ package rule
 #
 # PR-AZR-0126-ARM
 #
-
+# SideNote for Reference: This cannot be done via Terraform. terraform can only change retention days.
+# See the note section at https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#container_delete_retention_policy
+# Note is applicable for delete_retention_policy as well.
 default storage_blob_soft_delete = null
 
 azure_issue["storage_blob_soft_delete"] {
@@ -49,7 +51,8 @@ storage_blob_soft_delete_metadata := {
 #
 # PR-AZR-0127-ARM
 #
-
+# SideNote for Reference: This cannot be done via Terraform. terraform can only change retention days.
+# See the note section at https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#container_delete_retention_policy
 default storage_blob_container_soft_delete = null
 
 azure_issue["storage_blob_container_soft_delete"] {

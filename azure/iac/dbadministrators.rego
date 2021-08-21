@@ -59,7 +59,7 @@ sql_server_ad_admin_metadata := {
 #
 # PR-AZR-0086-ARM
 #
-
+# SQL Managed Instance is not available for Terraform yet. see: https://github.com/hashicorp/terraform-provider-azurerm/issues/1747
 default sql_managedinstances_ad_admin = null
 
 azure_attribute_absence["sql_managedinstances_ad_admin"] {
