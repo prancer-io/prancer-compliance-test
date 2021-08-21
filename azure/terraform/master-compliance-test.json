@@ -2755,6 +2755,35 @@
                 {
                     "masterTestId": "TEST_VNET_PEERINGS",
                     "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(vnetpeerings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0075-TRF",
+                            "eval": "data.rule.vnet_peer",
+                            "message": "data.rule.vnet_peer_err",
+                            "remediationDescription": "In 'azurerm_virtual_network_peering' resource, set 'allow_virtual_network_access = true' or remove 'allow_virtual_network_access' property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering#allow_virtual_network_access for details.",
+                            "remediationFunction": "PR_AZR_0075_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure virtual network peering state should be connected",
+                    "description": "Virtual network peering enables you to connect two Azure virtual networks so that the resources in these networks are directly connected._x000D__x000D_This policy identifies Azure virtual network peers that are disconnected. Typically, the disconnection happens when a peering configuration is deleted on one virtual network, and the other virtual network reports the peering status as disconnected.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_VNET_SUBNETS",
+                    "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
