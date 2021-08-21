@@ -3242,7 +3242,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SQL_SERVER",
+                    "masterTestId": "TEST_MSSQL_SERVER_1",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
@@ -3271,7 +3271,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SQL_SERVER_2",
+                    "masterTestId": "TEST_MSSQL_SERVER_2",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
