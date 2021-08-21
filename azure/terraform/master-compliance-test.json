@@ -998,6 +998,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_LOCKS",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(locks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0052-TRF",
+                            "eval": "data.rule.rg_locks",
+                            "message": "data.rule.rg_locks_err",
+                            "remediationDescription": "In 'azurerm_management_lock' resource, set lock_level = 'CanNotDelete' and make sure 'scope' property has id of target deployment resource group as value to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_lock#lock_level for details.",
+                            "remediationFunction": "PR_AZR_0052_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Deployment Scope Resource Group should have a remove protection resource lock configured",
+                    "description": "Azure Resource Manager locks provide a way to lock down Azure resources from being deleted or modified. The lock level can be set to either 'CanNotDelete' or 'ReadOnly'. When you apply a lock at a parent scope, all resources within the scope inherit the same lock, and the most restrictive lock takes precedence._x000D__x000D_This policy identifies Azure Resource Groups that do not have a lock set. As a best practice, place a lock on important resources to prevent accidental or malicious modification or deletion by unauthorized users.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_NETWORK_WATCHERS_FLOW_LOGS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
