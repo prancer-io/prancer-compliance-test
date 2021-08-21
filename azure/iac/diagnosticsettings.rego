@@ -19,7 +19,7 @@ azure_issue["log_keyvault"] {
     lower(resource.type) == "microsoft.keyvault/vaults/providers/diagnosticsettings"
     logs := resource.properties.logs[_]
     lower(logs.category) == "auditevent"
-    logs.enabled != true
+    logs.enabled == false
 }
 
 log_keyvault {
@@ -116,7 +116,7 @@ log_lbs_metadata := {
 
 #
 # PR-AZR-0063-ARM
-# ** Rezoan: This rule regarding retentionPolicy need to verify from cloud again. there is no template over internet which refer to the retentionPolicy attribute so far under logs with microsoft.storage/storageaccounts/
+#
 
 default log_storage_retention = null
 
@@ -259,7 +259,6 @@ log_blob_metadata := {
 
 #
 # PR-AZR-0070-ARM
-# PR-AZR-0071-ARM
 #
 
 default log_queue = null
@@ -317,8 +316,7 @@ log_queue_metadata := {
 }
 
 #
-# PR-AZR-0072-ARM
-# PR-AZR-0073-ARM
+# PR-AZR-0071-ARM
 #
 
 default log_table = null
@@ -343,8 +341,8 @@ azure_issue["log_table"] {
 
 log_table {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts/tableservices/providers/diagnosticsettings"
-    not azure_issue["log_table"]
     not azure_attribute_absence["log_table"]
+    not azure_issue["log_table"]
 }
 
 log_table = false {

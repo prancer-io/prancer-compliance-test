@@ -1047,11 +1047,11 @@
                     "rule": "file(diagnosticsettings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0071-ARM",
+                            "id": "PR-AZR-0070-ARM",
                             "eval": "data.rule.log_queue",
                             "message": "data.rule.log_queue_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings  should be enabled for queues",
-                            "remediationFunction": "PR_AZR_0071_ARM.py"
+                            "remediationFunction": "PR_AZR_0070_ARM.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1076,11 +1076,11 @@
                     "rule": "file(diagnosticsettings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0073-ARM",
+                            "id": "PR-AZR-0071-ARM",
                             "eval": "data.rule.log_table",
                             "message": "data.rule.log_table_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings  should be enabled for tables",
-                            "remediationFunction": "PR_AZR_0073_ARM.py"
+                            "remediationFunction": "PR_AZR_0071_ARM.py"
                         }
                     ],
                     "severity": "Medium",

@@ -816,6 +816,180 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS_1",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(diagnosticsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0017-TRF",
+                            "eval": "data.rule.log_keyvault",
+                            "message": "data.rule.log_keyvault_err",
+                            "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true' and category = 'auditevent' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
+                            "remediationFunction": "PR_AZR_0017_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Key Vault audit logging should be enabled",
+                    "description": "This policy identifies Azure Key Vault instances for which audit logging is disabled. As a best practice, enable audit event logging for Key Vault instances to monitor how and when your key vaults are accessed, and by whom.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(diagnosticsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0019-TRF",
+                            "eval": "data.rule.log_lbs",
+                            "message": "data.rule.log_lbs_err",
+                            "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true' and category = 'auditevent' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
+                            "remediationFunction": "PR_AZR_0019_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Load Balancer diagnostics logs should be enabled",
+                    "description": "Azure Load Balancers provide different types of logsâ€”alert events, health probe, metricsâ€”to help you manage and troubleshoot issues. This policy identifies Azure Load Balancers that have diagnostics logs disabled. As a best practice, enable diagnostic logs to start collecting the data available through these logs.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(diagnosticsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0063-TRF",
+                            "eval": "data.rule.log_storage_retention",
+                            "message": "data.rule.log_storage_retention_err",
+                            "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true', category = 'auditevent', 'retention_policy.enabled = true' and 'retention_policy.days = 90' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
+                            "remediationFunction": "PR_AZR_0063_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Storage Account auditing retention should be 90 days or more",
+                    "description": "This policy identifies Storage Accounts which have Auditing Retentions less than 90 days. Audit Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access. It is recommended to configure Storage Account Audit Log Retention to be greater than or equal to 90 days.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(diagnosticsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0069-TRF",
+                            "eval": "data.rule.log_blob",
+                            "message": "data.rule.log_blob_err",
+                            "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true' and category = 'auditevent' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
+                            "remediationFunction": "PR_AZR_0069_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure storage account blob services diagnostic logs should be enabled",
+                    "description": "Storage Logging records details of requests (read, write, and delete operations) against your Azure blobs. The logs include additional information such as:_x000D_- Timing and server latency._x000D_- Success or failure, and HTTP status code._x000D_- Authentication details_x000D__x000D_This policy identifies Azure storage accounts that do not have logging enabled for blobs. As a best practice, enable logging for read, write, and delete request types on blobs.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS_5",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(diagnosticsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0070-TRF",
+                            "eval": "data.rule.log_queue",
+                            "message": "data.rule.log_queue_err",
+                            "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true' and category = 'auditevent' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
+                            "remediationFunction": "PR_AZR_0070_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure storage account queue services diagnostic logs should be enabled",
+                    "description": "Queue logging cannot be enabled for Storage Accounts with 'kind' of BlobStorage **_x000D__x000D_Storage Logging records details of requests (read, write, and delete operations) against your Azure queues. The logs include additional information such as:_x000D_- Timing and server latency._x000D_- Success or failure, and HTTP status code._x000D_- Authentication details_x000D__x000D_This policy identifies Azure storage accounts that do not have logging enabled for queues. As a best practice, enable logging for read, write, and delete request types on queues.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS_6",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(diagnosticsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0071-TRF",
+                            "eval": "data.rule.log_table",
+                            "message": "data.rule.log_table_err",
+                            "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true' and category = 'auditevent' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
+                            "remediationFunction": "PR_AZR_0071_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure storage account table services diagnostic logs should be enabled",
+                    "description": "Storage Logging records details of requests (read, write, and delete operations) against your Azure queues. The logs include additional information such as:_x005F_x000D_ - Timing and server latency._x005F_x000D_ - Success or failure, and HTTP status code._x005F_x000D_ - Authentication details_x005F_x000D_ _x005F_x000D_ This policy identifies Azure storage accounts that do not have logging enabled for tables. As a best practice, enable logging for read, write, and delete request types on tables.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_DISKS",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -2400,7 +2574,7 @@
                     "rule": "file(sql_servers_encryption.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0111-ARM",
+                            "id": "PR-AZR-0111-TRF",
                             "eval": "data.rule.serverKeyType",
                             "message": "data.rule.serverKeyType_err",
                             "remediationDescription": "In 'azurerm_mssql_server_transparent_data_encryption' resource, make sure 'key_vault_key_id' property has id of associated 'azurerm_key_vault_key' resource to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption#key_vault_key_id for details.",
