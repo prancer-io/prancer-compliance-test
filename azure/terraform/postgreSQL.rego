@@ -32,7 +32,7 @@ geoRedundantBackup = false {
     azure_issue["geoRedundantBackup"]
 }
 
-geoRedundantBackup_err "azurerm_postgresql_server property 'geo_redundant_backup_enabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
+geoRedundantBackup_err = "azurerm_postgresql_server property 'geo_redundant_backup_enabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
     azure_attribute_absence["geoRedundantBackup"]
 } else = "Geo-redundant backup is currently not enabled on PostgreSQL database server." {
     azure_issue["geoRedundantBackup"]
