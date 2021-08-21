@@ -54,12 +54,19 @@ enableSslPort_metadata := {
 # PR-AZR-0132-TRF
 
 default serverRole = null
-
-azure_attribute_absence ["serverRole"] {
+# as azurerm_redis_linked_server is child resource of microsoft.cache/redis, we need to make sure microsoft.cache/redis exist in the same template first.
+azure_attribute_absence["serverRole"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_redis_linked_server"
-    not resource.properties.server_role
+    lower(resource.type) == "azurerm_redis_cache"
+    count([c | input.resources[_].type == "azurerm_redis_linked_server";
+    	   c := 1]) == 0
 }
+
+#azure_attribute_absence ["serverRole"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_redis_linked_server"
+#    not resource.properties.server_role
+#}
 
 azure_issue ["serverRole"] {
     resource := input.resources[_]
@@ -67,14 +74,14 @@ azure_issue ["serverRole"] {
     lower(resource.properties.server_role) != "secondary"
 }
 
+serverRole = false {
+    azure_attribute_absence["serverRole"]
+}
+
 serverRole {
     lower(input.resources[_].type) == "azurerm_redis_linked_server"
     not azure_attribute_absence["serverRole"]
     not azure_issue["serverRole"]
-}
-
-serverRole = false {
-    azure_attribute_absence["serverRole"]
 }
 
 serverRole = false {
