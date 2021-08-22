@@ -313,7 +313,7 @@
                             "id": "PR-AZR-0126-ARM",
                             "eval": "data.rule.storage_blob_soft_delete",
                             "message": "data.rule.storage_blob_soft_delete_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts/blobservices\" make sure properties.deleteRetentionPolicy.enabled exists and value is set to true . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/blobservices for details.",
+                            "remediationDescription": "For resource type \"Microsoft.storage/storageaccounts/blobservices\" make sure properties.deleteRetentionPolicy.enabled exists and value is set to true . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/blobservices for details.",
                             "remediationFunction": "PR_AZR_0126_ARM.py"
                         }
                     ],
@@ -342,7 +342,7 @@
                             "id": "PR-AZR-0127-ARM",
                             "eval": "data.rule.storage_blob_container_soft_delete",
                             "message": "data.rule.storage_blob_container_soft_delete_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts/blobservices\" make sure properties.containerDeleteRetentionPolicy.enabled exists and value is set to true . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/blobservices for details.",
+                            "remediationDescription": "For resource type \"Microsoft.storage/storageaccounts/blobservices\" make sure properties.containerDeleteRetentionPolicy.enabled exists and value is set to true . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/blobservices for details.",
                             "remediationFunction": "PR_AZR_0127_ARM.py"
                         }
                     ],

@@ -34,12 +34,9 @@ storage_blob_soft_delete = false {
     azure_issue["storage_blob_soft_delete"]
 }
 
-
-storage_blob_soft_delete_miss_err = "Soft delete on blob service is not exist" {
+storage_blob_soft_delete_err = "microsoft.storage/storageaccounts/blobservices resource property deleteRetentionPolicy.enabled is missing." {
     azure_attribute_absence["storage_blob_soft_delete"]
-}
-
-storage_blob_soft_delete_err = "Soft delete on blob service is not enabled" {
+} else = "Soft delete on blob service should be enabled" {
     azure_issue["storage_blob_soft_delete"]
 }
 
@@ -89,11 +86,9 @@ storage_blob_container_soft_delete = false {
     azure_issue["storage_blob_container_soft_delete"]
 }
 
-storage_blob_container_soft_delete_miss_err = "Soft delete on blob service container is not exist" {
+storage_blob_container_soft_delete_err = "microsoft.storage/storageaccounts/blobservices resource property containerDeleteRetentionPolicy.enabled is missing." {
     azure_attribute_absence["storage_blob_container_soft_delete"]
-}
-
-storage_blob_container_soft_delete_err = "Soft delete on blob service container is not enabled" {
+} else = "Soft delete on blob service container should be enabled" {
     azure_issue["storage_blob_container_soft_delete"]
 }
 
