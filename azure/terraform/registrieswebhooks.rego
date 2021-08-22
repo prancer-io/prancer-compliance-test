@@ -34,14 +34,12 @@ acr_webhooks = false {
     azure_issue["acr_webhooks"]
 }
 
-acr_webhooks_miss_err = "azurerm_container_registry_webhook property 'service_uri' need to be exist. Its missing from the resource." {
-    azure_attribute_absence["acr_webhooks"]    
-}
 
-acr_webhooks_err = "Azure ACR currently does not have HTTPS protocol enabled for webhook" {
+acr_webhooks_err = "azurerm_container_registry_webhook property 'service_uri' need to be exist. Its missing from the resource." {
+    azure_attribute_absence["acr_webhooks"]
+} else = "Azure ACR currently does not have HTTPS protocol enabled for webhook" {
     azure_issue["acr_webhooks"]
 }
-
 
 acr_webhooks_metadata := {
     "Policy Code": "PR-AZR-0005-TRF",
