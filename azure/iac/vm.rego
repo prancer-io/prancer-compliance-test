@@ -38,3 +38,45 @@ vm_aset_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines"
 }
+
+
+
+
+# PR-AZR-0136-ARM
+#
+
+default vm_ssh = null
+
+azure_attribute_absence["vm_ssh"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.compute/virtualmachines"
+    publicKey := resource.properties.osProfile.linuxConfiguration.ssh.publicKeys[_]
+    not publicKey.keyData
+}
+
+
+
+vm_ssh {
+    lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
+    not azure_attribute_absence["vm_ssh"]
+}
+
+vm_ssh = false {
+    azure_attribute_absence["vm_ssh"]
+}
+
+vm_ssh_err = "microsoft.compute/virtualmachines resource property ssh.publicKeys.keyData missing in the resource" {
+    azure_attribute_absence["vm_ssh"]
+}
+
+vm_ssh_metadata := {
+    "Policy Code": "PR-AZR-0136-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure Azure Instance does not use basic authentication(Use SSH Key Instead)",
+    "Policy Description": "",
+    "Resource Type": "microsoft.compute/virtualmachines",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines"
+}
