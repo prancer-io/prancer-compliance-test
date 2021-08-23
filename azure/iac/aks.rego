@@ -370,3 +370,57 @@ aks_authorized_Ip_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
 }
+
+
+
+#
+# PR-AZR-0138-ARM
+#
+
+default network_policy = null
+
+azure_attribute_absence["network_policy"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.networkProfile.networkPolicy
+}
+
+azure_issue["network_policy"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    lower(resource.properties.networkProfile.networkPolicy) != "azure"
+    lower(resource.properties.networkProfile.networkPolicy) != "calico"
+}
+
+network_policy {
+    lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
+    not azure_attribute_absence["network_policy"]
+    not azure_issue["network_policy"]
+}
+
+network_policy = false {
+    azure_issue["network_policy"]
+}
+
+network_policy = false {
+    azure_attribute_absence["network_policy"]
+}
+
+network_policy_err = "microsoft.containerservice/managedclusters resource property networkProfile.networkPolicy missing in the resource" {
+    azure_attribute_absence["network_policy"]
+} else = "AKS cluster network policies are not enforced" {
+    azure_issue["network_policy"]
+}
+
+
+network_policy_metadata := {
+    "Policy Code": "PR-AZR-0138-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure AKS cluster network policies are enforced",
+    "Policy Description": "Network policy options in AKS include two ways to implement a network policy. You can choose between Azure Network Policies or Calico Network Policies. In both cases, the underlying controlling layer is based on Linux IPTables to enforce the specified policies. Policies are translated into sets of allowed and disallowed IP pairs. These pairs are then programmed as IPTable rules.",
+    "Resource Type": "microsoft.containerservice/managedclusters",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
+}
