@@ -53,3 +53,56 @@ securitycontacts_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts"
 }
+
+
+
+
+#
+# PR-AZR-0143-ARM
+#
+
+default minimal_severity = null
+
+azure_attribute_absence["minimal_severity"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.security/securitycontacts"
+    not resource.properties.alertNotifications.minimalSeverity
+}
+
+azure_issue["minimal_severity"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.security/securitycontacts"
+    lower(resource.properties.alertNotifications.minimalSeverity) != "high"
+}
+
+minimal_severity {
+    lower(input.resources[_].type) == "microsoft.security/securitycontacts"
+    not azure_attribute_absence["minimal_severity"]
+    not azure_issue["minimal_severity"]
+}
+
+minimal_severity = false {
+    azure_issue["minimal_severity"]
+}
+
+minimal_severity = false {
+    azure_attribute_absence["minimal_severity"]
+}
+
+minimal_severity_err = "microsoft.security/securitycontacts resource property alertNotifications.minimalSeverity missing in the resource" {
+    azure_attribute_absence["securitycontacts"]
+} else = "Send email notification for high severity alerts is not enabled" {
+    azure_issue["minimal_severity"]
+}
+
+minimal_severity_metadata := {
+    "Policy Code": "PR-AZR-0143-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Send email notification for high severity alerts should be enabled",
+    "Policy Description": "Setting the security alert Send email notification for high severity alerts to On ensures that emails are sent from Microsoft if their security team determines a potential security breach has taken place.",
+    "Resource Type": "microsoft.security/securitycontacts",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts"
+}
