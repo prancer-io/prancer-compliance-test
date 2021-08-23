@@ -273,6 +273,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_AKS_9",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0144-ARM",
+                            "eval": "data.rule.aks_kub_dashboard_disabled",
+                            "message": "data.rule.aks_kub_dashboard_disabled_err",
+                            "remediationDescription": "For resource type 'microsoft.containerservice/managedclusters' make sure property 'addonProfiles.kubeDashboard.enabled' exist and its value set to 'false' to fix the issue. Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters?tabs=json for details.",
+                            "remediationFunction": "PR_AZR_0144_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Kubernetes Dashboard is disabled",
+                    "description": "Disable the Kubernetes dashboard on Azure Kubernetes Service",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_APPLICATION_GATEWAYS_1",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"

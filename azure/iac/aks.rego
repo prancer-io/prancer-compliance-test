@@ -63,7 +63,7 @@ default aks_http_routing = null
 azure_attribute_absence["aks_http_routing"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
-    not resource.properties.addonProfiles.httpApplicationRouting
+    not resource.properties.addonProfiles.httpApplicationRouting.enabled
 }
 
 azure_issue["aks_http_routing"] {
@@ -74,8 +74,8 @@ azure_issue["aks_http_routing"] {
 
 aks_http_routing {
     lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
-    not azure_issue["aks_http_routing"]
     not azure_attribute_absence["aks_http_routing"]
+    not azure_issue["aks_http_routing"]
 }
 
 aks_http_routing = false {
@@ -338,22 +338,22 @@ azure_issue["aks_network_policy_configured"] {
 
 aks_network_policy_configured {
     lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
-    not azure_attribute_absence["aks_cni_net"]
-    not azure_issue["aks_cni_net"]
+    not azure_attribute_absence["aks_network_policy_configured"]
+    not azure_issue["aks_network_policy_configured"]
 }
 
 aks_network_policy_configured = false {
-    azure_issue["aks_cni_net"]
+    azure_issue["aks_network_policy_configured"]
 }
 
 aks_network_policy_configured = false {
-    azure_attribute_absence["aks_cni_net"]
+    azure_attribute_absence["aks_network_policy_configured"]
 }
 
 aks_network_policy_configured_err = "'microsoft.containerservice/managedclusters' property 'networkProfile.networkPolicy' is missing from the resource" {
-    azure_attribute_absence["aks_cni_net"]
+    azure_attribute_absence["aks_network_policy_configured"]
 } else = "AKS cluster currently dont have Network Policy configured" {
-    azure_issue["aks_cni_net"]
+    azure_issue["aks_network_policy_configured"]
 }
 
 aks_network_policy_configured_metadata := {
@@ -414,6 +414,57 @@ aks_api_server_authorized_ip_range_enabled_metadata := {
     "Language": "ARM template",
     "Policy Title": "Ensure AKS has an API Server Authorized IP Ranges enabled",
     "Policy Description": "Authorized IP Ranges to kubernetes API server",
+    "Resource Type": "microsoft.containerservice/managedclusters",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
+}
+
+
+# https://www.danielstechblog.io/disable-the-kubernetes-dashboard-on-azure-kubernetes-service/
+# PR-AZR-0144-ARM
+#
+
+default aks_kub_dashboard_disabled = null
+
+azure_attribute_absence["aks_kub_dashboard_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.addonProfiles.kubeDashboard.enabled
+}
+
+azure_issue["aks_kub_dashboard_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    resource.properties.addonProfiles.kubeDashboard.enabled != false
+}
+
+aks_kub_dashboard_disabled {
+    lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
+    not azure_attribute_absence["aks_kub_dashboard_disabled"]
+    not azure_issue["aks_kub_dashboard_disabled"]
+}
+
+aks_kub_dashboard_disabled = false {
+    azure_issue["aks_kub_dashboard_disabled"]
+}
+
+aks_kub_dashboard_disabled = false {
+    azure_attribute_absence["aks_kub_dashboard_disabled"]
+}
+
+aks_kub_dashboard_disabled_err = "'microsoft.containerservice/managedclusters' property 'addonProfiles.kubeDashboard.enabled' is missing from the resource" {
+    azure_attribute_absence["aks_kub_dashboard_disabled"]
+} else = "Kubernetes Dashboard is currently not disabled" {
+    azure_issue["aks_kub_dashboard_disabled"]
+}
+
+aks_kub_dashboard_disabled_metadata := {
+    "Policy Code": "PR-AZR-0144-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure Kubernetes Dashboard is disabled",
+    "Policy Description": "Disable the Kubernetes dashboard on Azure Kubernetes Service",
     "Resource Type": "microsoft.containerservice/managedclusters",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
