@@ -38,3 +38,59 @@ vm_aset_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines"
 }
+
+
+package rule
+
+# https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines
+# https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/microsoft.compute/vm-new-or-existing-conditions/azuredeploy.json
+#
+# PR-AZR-0141-ARM
+#
+
+default vm_linux_disabled_password_auth = null
+
+azure_attribute_absence["vm_linux_disabled_password_auth"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.compute/virtualmachines"
+    not resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication
+}
+
+azure_issue["vm_linux_disabled_password_auth"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.compute/virtualmachines"
+    resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication != true
+}
+
+vm_linux_disabled_password_auth {
+    lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
+    not azure_attribute_absence["vm_linux_disabled_password_auth"]
+    not azure_issue["vm_linux_disabled_password_auth"]
+}
+
+vm_linux_disabled_password_auth = false {
+    azure_attribute_absence["vm_linux_disabled_password_auth"]
+}
+
+vm_linux_disabled_password_auth = false {
+    azure_issue["vm_linux_disabled_password_auth"]
+}
+
+vm_linux_disabled_password_auth_err = "'microsoft.compute/virtualmachines' property 'osProfile.linuxConfiguration.disablePasswordAuthentication' is missing from the resource" {
+    azure_attribute_absence["vm_linux_disabled_password_auth"]
+} else = "Azure Linux Instance currently does not have basic authentication disabled" {
+    azure_issue["vm_linux_disabled_password_auth"]
+}
+
+vm_linux_disabled_password_auth_metadata := {
+    "Policy Code": "PR-AZR-0141-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure Azure Linux Instance does not use basic authentication(Use SSH Key Instead)",
+    "Policy Description": "For security purpose, linux vm password authentication should be disabled. Use SSH Key Instead.",
+    "Resource Type": "microsoft.compute/virtualmachines",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines"
+}
+
