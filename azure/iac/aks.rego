@@ -319,152 +319,105 @@ aks_aad_azure_rbac_metadata := {
 
 
 #
-# PR-AZR-0142-ARM
+# PR-AZR-0137-ARM
 #
 
-default aks_network_policy_configured = null
+default aks_authorized_Ip = null
 
-azure_attribute_absence["aks_network_policy_configured"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    not resource.properties.networkProfile.networkPolicy
-}
-
-azure_issue["aks_network_policy_configured"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.containerservice/managedclusters"
-    lower(resource.properties.networkProfile.networkPolicy) != "azure"
-}
-
-aks_network_policy_configured {
-    lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
-    not azure_attribute_absence["aks_network_policy_configured"]
-    not azure_issue["aks_network_policy_configured"]
-}
-
-aks_network_policy_configured = false {
-    azure_issue["aks_network_policy_configured"]
-}
-
-aks_network_policy_configured = false {
-    azure_attribute_absence["aks_network_policy_configured"]
-}
-
-aks_network_policy_configured_err = "'microsoft.containerservice/managedclusters' property 'networkProfile.networkPolicy' is missing from the resource" {
-    azure_attribute_absence["aks_network_policy_configured"]
-} else = "AKS cluster currently dont have Network Policy configured" {
-    azure_issue["aks_network_policy_configured"]
-}
-
-aks_network_policy_configured_metadata := {
-    "Policy Code": "PR-AZR-0142-ARM",
-    "Type": "IaC",
-    "Product": "AZR",
-    "Language": "ARM template",
-    "Policy Title": "Ensure AKS cluster has Network Policy configured",
-    "Policy Description": "Network policy used for building Kubernetes network. - calico or azure.",
-    "Resource Type": "microsoft.containerservice/managedclusters",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
-}
-
-
-#
-# PR-AZR-0143-ARM
-#
-
-default aks_api_server_authorized_ip_range_enabled = null
-
-azure_attribute_absence["aks_api_server_authorized_ip_range_enabled"] {
+azure_attribute_absence["aks_authorized_Ip"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     not resource.properties.apiServerAccessProfile.authorizedIPRanges
 }
 
-azure_issue["aks_api_server_authorized_ip_range_enabled"] {
+azure_issue["aks_authorized_Ip"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     count(resource.properties.apiServerAccessProfile.authorizedIPRanges) == 0
 }
 
-aks_api_server_authorized_ip_range_enabled {
+aks_authorized_Ip {
     lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
-    not azure_attribute_absence["aks_api_server_authorized_ip_range_enabled"]
-    not azure_issue["aks_api_server_authorized_ip_range_enabled"]
+    not azure_attribute_absence["aks_authorized_Ip"]
+    not azure_issue["aks_authorized_Ip"]
 }
 
-aks_api_server_authorized_ip_range_enabled = false {
-    azure_issue["aks_api_server_authorized_ip_range_enabled"]
+aks_authorized_Ip = false {
+    azure_issue["aks_authorized_Ip"]
 }
 
-aks_api_server_authorized_ip_range_enabled = false {
-    azure_attribute_absence["aks_api_server_authorized_ip_range_enabled"]
+aks_authorized_Ip = false {
+    azure_attribute_absence["aks_authorized_Ip"]
 }
 
-aks_api_server_authorized_ip_range_enabled_err = "'microsoft.containerservice/managedclusters' property 'apiServerAccessProfile.authorizedIPRanges' is missing from the resource" {
-    azure_attribute_absence["aks_api_server_authorized_ip_range_enabled"]
-} else = "AKS cluster currently dont have Authorized IP Ranges enabled" {
-    azure_issue["aks_api_server_authorized_ip_range_enabled"]
+aks_authorized_Ip_err = "microsoft.containerservice/managedclusters resource property apiServerAccessProfile.authorizedIPRanges missing in the resource" {
+    azure_attribute_absence["aks_authorized_Ip"]
+} else = "AKS API server does not define authorized IP ranges" {
+    azure_issue["aks_authorized_Ip"]
 }
 
-aks_api_server_authorized_ip_range_enabled_metadata := {
-    "Policy Code": "PR-AZR-0143-ARM",
+
+aks_authorized_Ip_metadata := {
+    "Policy Code": "PR-AZR-0137-ARM",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Ensure AKS has an API Server Authorized IP Ranges enabled",
-    "Policy Description": "Authorized IP Ranges to kubernetes API server",
+    "Policy Title": "Ensure AKS API server defines authorized IP ranges",
+    "Policy Description": "The AKS API server receives requests to perform actions in the cluster , for example, to create resources, and scale the number of nodes. The API server provides a secure way to manage a cluster.",
     "Resource Type": "microsoft.containerservice/managedclusters",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
 }
 
 
-# https://www.danielstechblog.io/disable-the-kubernetes-dashboard-on-azure-kubernetes-service/
-# PR-AZR-0144-ARM
+
+#
+# PR-AZR-0138-ARM
 #
 
-default aks_kub_dashboard_disabled = null
+default network_policy = null
 
-azure_attribute_absence["aks_kub_dashboard_disabled"] {
+azure_attribute_absence["network_policy"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
-    not resource.properties.addonProfiles.kubeDashboard.enabled
+    not resource.properties.networkProfile.networkPolicy
 }
 
-azure_issue["aks_kub_dashboard_disabled"] {
+azure_issue["network_policy"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
-    resource.properties.addonProfiles.kubeDashboard.enabled != false
+    lower(resource.properties.networkProfile.networkPolicy) != "azure"
+    lower(resource.properties.networkProfile.networkPolicy) != "calico"
 }
 
-aks_kub_dashboard_disabled {
+network_policy {
     lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
-    not azure_attribute_absence["aks_kub_dashboard_disabled"]
-    not azure_issue["aks_kub_dashboard_disabled"]
+    not azure_attribute_absence["network_policy"]
+    not azure_issue["network_policy"]
 }
 
-aks_kub_dashboard_disabled = false {
-    azure_issue["aks_kub_dashboard_disabled"]
+network_policy = false {
+    azure_issue["network_policy"]
 }
 
-aks_kub_dashboard_disabled = false {
-    azure_attribute_absence["aks_kub_dashboard_disabled"]
+network_policy = false {
+    azure_attribute_absence["network_policy"]
 }
 
-aks_kub_dashboard_disabled_err = "'microsoft.containerservice/managedclusters' property 'addonProfiles.kubeDashboard.enabled' is missing from the resource" {
-    azure_attribute_absence["aks_kub_dashboard_disabled"]
-} else = "Kubernetes Dashboard is currently not disabled" {
-    azure_issue["aks_kub_dashboard_disabled"]
+network_policy_err = "microsoft.containerservice/managedclusters resource property networkProfile.networkPolicy missing in the resource" {
+    azure_attribute_absence["network_policy"]
+} else = "AKS cluster network policies are not enforced" {
+    azure_issue["network_policy"]
 }
 
-aks_kub_dashboard_disabled_metadata := {
-    "Policy Code": "PR-AZR-0144-ARM",
+
+network_policy_metadata := {
+    "Policy Code": "PR-AZR-0138-ARM",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Ensure Kubernetes Dashboard is disabled",
-    "Policy Description": "Disable the Kubernetes dashboard on Azure Kubernetes Service",
+    "Policy Title": "Ensure AKS cluster network policies are enforced",
+    "Policy Description": "Network policy options in AKS include two ways to implement a network policy. You can choose between Azure Network Policies or Calico Network Policies. In both cases, the underlying controlling layer is based on Linux IPTables to enforce the specified policies. Policies are translated into sets of allowed and disallowed IP pairs. These pairs are then programmed as IPTable rules.",
     "Resource Type": "microsoft.containerservice/managedclusters",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"

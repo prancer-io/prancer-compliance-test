@@ -40,57 +40,57 @@ vm_aset_metadata := {
 }
 
 
-package rule
 
-# https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines
-# https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/microsoft.compute/vm-new-or-existing-conditions/azuredeploy.json
-#
-# PR-AZR-0141-ARM
+
+# PR-AZR-0136-ARM
 #
 
-default vm_linux_disabled_password_auth = null
+default linux_configuration = null
 
-azure_attribute_absence["vm_linux_disabled_password_auth"] {
+azure_attribute_absence["linux_configuration"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.compute/virtualmachines"
     not resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication
 }
 
-azure_issue["vm_linux_disabled_password_auth"] {
+
+azure_issue["linux_configuration"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.compute/virtualmachines"
     resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication != true
 }
 
-vm_linux_disabled_password_auth {
+
+
+linux_configuration {
     lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
-    not azure_attribute_absence["vm_linux_disabled_password_auth"]
-    not azure_issue["vm_linux_disabled_password_auth"]
+    not azure_attribute_absence["linux_configuration"]
+    not azure_issue["linux_configuration"]
 }
 
-vm_linux_disabled_password_auth = false {
-    azure_attribute_absence["vm_linux_disabled_password_auth"]
+linux_configuration = false {
+    azure_issue["linux_configuration"]
 }
 
-vm_linux_disabled_password_auth = false {
-    azure_issue["vm_linux_disabled_password_auth"]
+
+linux_configuration = false {
+    azure_attribute_absence["linux_configuration"]
 }
 
-vm_linux_disabled_password_auth_err = "'microsoft.compute/virtualmachines' property 'osProfile.linuxConfiguration.disablePasswordAuthentication' is missing from the resource" {
-    azure_attribute_absence["vm_linux_disabled_password_auth"]
-} else = "Azure Linux Instance currently does not have basic authentication disabled" {
-    azure_issue["vm_linux_disabled_password_auth"]
+linux_configuration_err = "microsoft.compute/virtualmachines resource property linuxConfiguration.disablePasswordAuthentication missing in the resource" {
+    azure_attribute_absence["linux_configuration"]
+} else = "Azure instance does not authenticate using SSH keys" {
+    azure_issue["linux_configuration"]
 }
 
-vm_linux_disabled_password_auth_metadata := {
-    "Policy Code": "PR-AZR-0141-ARM",
+linux_configuration_metadata := {
+    "Policy Code": "PR-AZR-0136-ARM",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Ensure Azure Linux Instance does not use basic authentication(Use SSH Key Instead)",
-    "Policy Description": "For security purpose, linux vm password authentication should be disabled. Use SSH Key Instead.",
+    "Policy Title": "Ensure Azure instance authenticates using SSH keys",
+    "Policy Description": "SSH is an encrypted connection protocol that allows secure sign-ins over unsecured connections. SSH is the default connection protocol for Linux VMs hosted in Azure. Using secure shell (SSH) key pair, it is possible to spin up a Linux virtual machine on Azure that defaults to using SSH keys for authentication, eliminating the need for passwords to sign in. We recommend connecting to a VM using SSH keys. Using basic authentication with SSH connections leaves VMs vulnerable to brute-force attacks or guessing of passwords.",
     "Resource Type": "microsoft.compute/virtualmachines",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines"
 }
-
