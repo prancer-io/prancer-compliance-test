@@ -316,3 +316,57 @@ aks_aad_azure_rbac_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
 }
+
+
+#
+# PR-AZR-0137-ARM
+#
+
+default aks_authorized_Ip = null
+
+azure_attribute_absence["aks_authorized_Ip"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    authorizedIPRange := resource.properties.apiServerAccessProfile.authorizedIPRanges[_]
+    not authorizedIPRange
+}
+
+azure_issue["aks_authorized_Ip"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    authorizedIPRange := resource.properties.apiServerAccessProfile.authorizedIPRanges[_]
+    count(authorizedIPRange) == 0
+}
+
+aks_authorized_Ip {
+    lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
+    not azure_attribute_absence["aks_authorized_Ip"]
+    not azure_issue["aks_authorized_Ip"]
+}
+
+aks_authorized_Ip = false {
+    azure_issue["aks_authorized_Ip"]
+}
+
+aks_authorized_Ip = false {
+    azure_attribute_absence["aks_authorized_Ip"]
+}
+
+aks_authorized_Ip_err = "microsoft.containerservice/managedclusters resource property apiServerAccessProfile.authorizedIPRanges missing in the resource" {
+    azure_attribute_absence["aks_authorized_Ip"]
+} else = "AKS API server does not define authorized IP ranges" {
+    azure_issue["aks_authorized_Ip"]
+}
+
+
+aks_authorized_Ip_metadata := {
+    "Policy Code": "PR-AZR-0137-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure AKS API server defines authorized IP ranges",
+    "Policy Description": "The AKS API server receives requests to perform actions in the cluster , for example, to create resources, and scale the number of nodes. The API server provides a secure way to manage a cluster.",
+    "Resource Type": "microsoft.containerservice/managedclusters",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
+}
