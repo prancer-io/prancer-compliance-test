@@ -607,3 +607,54 @@ rds_cluster_retention_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
 }
+
+
+#
+# PR-AWS-0262-CFR
+#
+
+default rds_cluster_deletion_protection = null
+
+aws_issue["rds_cluster_deletion_protection"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbcluster"
+    lower(resource.Properties.DeletionProtection) != "true"
+}
+
+aws_bool_issue["rds_cluster_deletion_protection"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbcluster"
+    not resource.Properties.DeletionProtection
+}
+
+rds_cluster_deletion_protection {
+    lower(input.Resources[i].Type) == "aws::rds::dbcluster"
+    not aws_issue["rds_cluster_deletion_protection"]
+    not aws_bool_issue["rds_cluster_deletion_protection"]
+}
+
+rds_cluster_deletion_protection = false {
+    aws_issue["rds_cluster_deletion_protection"]
+}
+
+rds_cluster_deletion_protection = false {
+    aws_bool_issue["rds_cluster_deletion_protection"]
+}
+
+rds_cluster_deletion_protection_err = "Ensure RDS clusters and instances have deletion protection enabled" {
+    aws_issue["rds_cluster_deletion_protection"]
+} else = "Ensure RDS clusters and instances have deletion protection enabled" {
+    aws_bool_issue["rds_cluster_deletion_protection"]
+}
+
+rds_cluster_deletion_protection_metadata := {
+    "Policy Code": "PR-AWS-0262-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure RDS clusters and instances have deletion protection enabled",
+    "Policy Description": "This rule Checks if an Amazon Relational Database Service (Amazon RDS) cluster has deletion protection enabled",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
+}

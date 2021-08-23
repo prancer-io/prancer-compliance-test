@@ -396,3 +396,123 @@ esearch_node_encryption_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html#cfn-elasticsearch-domain-nodetonodeencryptionoptions"
 }
+
+
+#
+# PR-AWS-0252-CFR
+#
+
+default esearch_enforce_https = null
+
+aws_issue["esearch_enforce_https"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    lower(resource.Properties.DomainEndpointOptions.EnforceHTTPS) == "false"
+}
+
+aws_bool_issue["esearch_enforce_https"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.DomainEndpointOptions.EnforceHTTPS
+}
+
+esearch_enforce_https {
+    lower(input.Resources[i].Type) == "aws::elasticsearch::domain"
+    not aws_issue["esearch_enforce_https"]
+    not aws_bool_issue["esearch_enforce_https"]
+}
+
+esearch_enforce_https = false {
+    aws_issue["esearch_enforce_https"]
+}
+
+esearch_enforce_https = false {
+    aws_bool_issue["esearch_enforce_https"]
+}
+
+esearch_enforce_https_err = "AWS Elasticsearch domain is not configured with HTTPS" {
+    aws_issue["esearch_enforce_https"]
+} else = "AWS Elasticsearch domain is not configured with HTTPS" {
+    aws_bool_issue["esearch_enforce_https"]
+}
+
+esearch_enforce_https_metadata := {
+    "Policy Code": "PR-AWS-0252-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Elasticsearch domain is not configured with HTTPS",
+    "Policy Description": "This policy identifies Elasticsearch domains that are not configured with HTTPS. Amazon Elasticsearch domains allow all traffic to be submitted over HTTPS, ensuring all communications between application and domain are encrypted. It is recommended to enable HTTPS so that all communication between the application and all data access goes across an encrypted communication channel to eliminate man-in-the-middle attacks",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-domainendpointoptions.html#cfn-elasticsearch-domain-domainendpointoptions-enforcehttps"
+}
+
+
+#
+# PR-AWS-0253-CFR
+#
+
+default esearch_encrypt_kms = null
+
+aws_issue["esearch_encrypt_kms"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    lower(resource.Properties.EncryptionAtRestOptions.Enabled) == "true"
+    not resource.Properties.EncryptionAtRestOptions.KmsKeyId
+}
+
+aws_issue["esearch_encrypt_kms"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    lower(resource.Properties.EncryptionAtRestOptions.Enabled) == "true"
+    lower(resource.Properties.EncryptionAtRestOptions.KmsKeyId) == ""
+}
+
+aws_bool_issue["esearch_encrypt_kms"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    resource.Properties.EncryptionAtRestOptions.Enabled
+    not resource.Properties.EncryptionAtRestOptions.KmsKeyId
+}
+
+aws_bool_issue["esearch_encrypt_kms"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    resource.Properties.EncryptionAtRestOptions.Enabled
+    lower(resource.Properties.EncryptionAtRestOptions.KmsKeyId) == ""
+}
+
+
+esearch_encrypt_kms {
+    lower(input.Resources[i].Type) == "aws::elasticsearch::domain"
+    not aws_issue["esearch_encrypt_kms"]
+    not aws_bool_issue["esearch_encrypt_kms"]
+}
+
+esearch_encrypt_kms = false {
+    aws_issue["esearch_encrypt_kms"]
+}
+
+esearch_encrypt_kms = false {
+    aws_bool_issue["esearch_encrypt_kms"]
+}
+
+esearch_encrypt_kms_err = "Elasticsearch Domain should not have Encrytion using AWS Managed Keys" {
+    aws_issue["esearch_encrypt_kms"]
+} else = "Elasticsearch Domain should not have Encrytion using AWS Managed Keys" {
+    aws_bool_issue["esearch_encrypt_kms"]
+}
+
+
+esearch_encrypt_kms_metadata := {
+    "Policy Code": "PR-AWS-0253-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Elasticsearch Domain should not have Encrytion using AWS Managed Keys",
+    "Policy Description": "Ensure that your Amazon ElasticSearch (ES) domains are encrypted with KMS Customer Master Keys (CMKs) instead of AWS managed-keys (default keys used by the ES service when there are no customer keys defined) in order to have more granular control over the data-at-rest encryption/decryption process and to meet compliance requirements.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html"
+}

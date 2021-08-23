@@ -289,3 +289,56 @@ redshift_encrypt_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
 }
+
+
+#
+# PR-AWS-0261-CFR
+#
+
+default redshift_allow_version_upgrade = null
+
+aws_issue["redshift_allow_version_upgrade"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    lower(resource.Properties.AllowVersionUpgrade) == "false"
+}
+
+aws_bool_issue["redshift_allow_version_upgrade"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    not resource.Properties.AllowVersionUpgrade
+}
+
+
+redshift_allow_version_upgrade {
+    lower(input.Resources[i].Type) == "aws::redshift::cluster"
+    not aws_issue["redshift_allow_version_upgrade"]
+    not aws_bool_issue["redshift_allow_version_upgrade"]
+}
+
+
+redshift_allow_version_upgrade = false {
+    aws_issue["redshift_allow_version_upgrade"]
+}
+
+redshift_allow_version_upgrade = false {
+    aws_bool_issue["redshift_allow_version_upgrade"]
+}
+
+redshift_allow_version_upgrade_err = "Ensure Redshift cluster allow version upgrade by default" {
+    aws_issue["redshift_allow_version_upgrade"]
+} else = "Ensure Redshift cluster allow version upgrade by default" {
+    aws_bool_issue["redshift_allow_version_upgrade"]
+}
+
+redshift_allow_version_upgrade_metadata := {
+    "Policy Code": "PR-AWS-0261-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Redshift cluster allow version upgrade by default",
+    "Policy Description": "This policy identifies AWS Redshift instances which has not enabled AllowVersionUpgrade. major version upgrades can be applied during the maintenance window to the Amazon Redshift engine that is running on the cluster. When a new major version of the Amazon Redshift engine is released, you can request that the service automatically apply upgrades during the maintenance window to the Amazon Redshift engine that is running on your cluster.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html#cfn-redshift-cluster-allowversionupgrade"
+}
