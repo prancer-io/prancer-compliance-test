@@ -244,6 +244,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_AKS_8",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0143-ARM",
+                            "eval": "data.rule.aks_api_server_authorized_ip_range_enabled",
+                            "message": "data.rule.aks_api_server_authorized_ip_range_enabled_err",
+                            "remediationDescription": "For resource type 'microsoft.containerservice/managedclusters' make sure property 'apiServerAccessProfile.authorizedIPRanges' exist and its value has valid ip range to fix the issue. Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters?tabs=json for details.",
+                            "remediationFunction": "PR_AZR_0143_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AKS has an API Server Authorized IP Ranges enabled",
+                    "description": "Authorized IP Ranges to kubernetes API server",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_APPLICATION_GATEWAYS_1",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"

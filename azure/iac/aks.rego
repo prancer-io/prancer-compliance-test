@@ -338,8 +338,8 @@ azure_issue["aks_network_policy_configured"] {
 
 aks_network_policy_configured {
     lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
-    not azure_issue["aks_cni_net"]
     not azure_attribute_absence["aks_cni_net"]
+    not azure_issue["aks_cni_net"]
 }
 
 aks_network_policy_configured = false {
@@ -363,6 +363,57 @@ aks_network_policy_configured_metadata := {
     "Language": "ARM template",
     "Policy Title": "Ensure AKS cluster has Network Policy configured",
     "Policy Description": "Network policy used for building Kubernetes network. - calico or azure.",
+    "Resource Type": "microsoft.containerservice/managedclusters",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
+}
+
+
+#
+# PR-AZR-0143-ARM
+#
+
+default aks_api_server_authorized_ip_range_enabled = null
+
+azure_attribute_absence["aks_api_server_authorized_ip_range_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.apiServerAccessProfile.authorizedIPRanges
+}
+
+azure_issue["aks_api_server_authorized_ip_range_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    count(resource.properties.apiServerAccessProfile.authorizedIPRanges) == 0
+}
+
+aks_api_server_authorized_ip_range_enabled {
+    lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
+    not azure_attribute_absence["aks_api_server_authorized_ip_range_enabled"]
+    not azure_issue["aks_api_server_authorized_ip_range_enabled"]
+}
+
+aks_api_server_authorized_ip_range_enabled = false {
+    azure_issue["aks_api_server_authorized_ip_range_enabled"]
+}
+
+aks_api_server_authorized_ip_range_enabled = false {
+    azure_attribute_absence["aks_api_server_authorized_ip_range_enabled"]
+}
+
+aks_api_server_authorized_ip_range_enabled_err = "'microsoft.containerservice/managedclusters' property 'apiServerAccessProfile.authorizedIPRanges' is missing from the resource" {
+    azure_attribute_absence["aks_api_server_authorized_ip_range_enabled"]
+} else = "AKS cluster currently dont have Authorized IP Ranges enabled" {
+    azure_issue["aks_api_server_authorized_ip_range_enabled"]
+}
+
+aks_api_server_authorized_ip_range_enabled_metadata := {
+    "Policy Code": "PR-AZR-0143-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure AKS has an API Server Authorized IP Ranges enabled",
+    "Policy Description": "Authorized IP Ranges to kubernetes API server",
     "Resource Type": "microsoft.containerservice/managedclusters",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
