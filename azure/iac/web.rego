@@ -155,3 +155,56 @@ client_cert_enabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
 }
+
+
+
+
+
+# PR-AZR-0142-ARM
+
+default http_20_enabled = null
+
+azure_attribute_absence ["http_20_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.http20Enabled
+}
+
+azure_issue ["http_20_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.http20Enabled != true
+}
+
+
+http_20_enabled {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["http_20_enabled"]
+    not azure_issue["http_20_enabled"]
+}
+
+http_20_enabled = false {
+    azure_attribute_absence["http_20_enabled"]
+}
+
+http_20_enabled = false {
+    azure_issue["http_20_enabled"]
+}
+
+http_20_enabled_err = "microsoft.web/sites resource property http20Enabled missing in the resource" {
+    azure_attribute_absence["http_20_enabled"]
+} else = "Web App does not use the latest version of HTTP" {
+    azure_issue["http_20_enabled"]
+}
+
+http_20_enabled_metadata := {
+    "Policy Code": "PR-AZR-0142-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Web App should uses the latest version of HTTP",
+    "Policy Description": "We recommend you use the latest HTTP version for web apps and take advantage of any security fixes and new functionalities featured. With each software installation you can determine if a given update meets your organization's requirements. Organizations should verify the compatibility and support provided for any additional software, assessing the current version against the update revision being considered.",
+    "Resource Type": "microsoft.web/sites",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
+}
