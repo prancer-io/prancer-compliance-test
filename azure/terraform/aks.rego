@@ -396,7 +396,7 @@ aks_aad_rbac_enabled_err = "azurerm_kubernetes_cluster property 'role_based_acce
     azure_issue["aks_aad_rbac_enabled"]
 }
 
-aks_rbac_metadata := {
+aks_aad_rbac_enabled_metadata := {
     "Policy Code": "PR-AZR-0101-TRF",
     "Type": "IaC",
     "Product": "AZR",

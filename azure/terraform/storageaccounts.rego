@@ -29,6 +29,7 @@ storage_secure {
 
 storage_secure {
     azure_attribute_absence["storage_secure"]
+    not azure_issue["storage_secure"]
 }
 
 storage_secure = false {
