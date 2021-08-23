@@ -327,15 +327,13 @@ default aks_authorized_Ip = null
 azure_attribute_absence["aks_authorized_Ip"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
-    authorizedIPRange := resource.properties.apiServerAccessProfile.authorizedIPRanges[_]
-    not authorizedIPRange
+    not resource.properties.apiServerAccessProfile.authorizedIPRanges
 }
 
 azure_issue["aks_authorized_Ip"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
-    authorizedIPRange := resource.properties.apiServerAccessProfile.authorizedIPRanges[_]
-    count(authorizedIPRange) == 0
+    count(resource.properties.apiServerAccessProfile.authorizedIPRanges) == 0
 }
 
 aks_authorized_Ip {
