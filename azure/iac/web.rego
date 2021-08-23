@@ -103,3 +103,55 @@ min_tls_version_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
 }
+
+
+
+
+# PR-AZR-0141-ARM
+
+default client_cert_enabled = null
+
+azure_attribute_absence ["client_cert_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.clientCertEnabled
+}
+
+azure_issue ["client_cert_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.clientCertEnabled != true
+}
+
+
+client_cert_enabled {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["client_cert_enabled"]
+    not azure_issue["client_cert_enabled"]
+}
+
+client_cert_enabled = false {
+    azure_attribute_absence["client_cert_enabled"]
+}
+
+client_cert_enabled = false {
+    azure_issue["client_cert_enabled"]
+}
+
+client_cert_enabled_err = "microsoft.web/sites resource property clientCertEnabled missing in the resource" {
+    azure_attribute_absence["client_cert_enabled"]
+} else = "Web App does not have incoming client certificates enabled" {
+    azure_issue["client_cert_enabled"]
+}
+
+client_cert_enabled_metadata := {
+    "Policy Code": "PR-AZR-0141-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Web App should has incoming client certificates enabled",
+    "Policy Description": "Client certificates allow the Web App to require a certificate for incoming requests. Only clients that have a valid certificate will be able to reach the app. The TLS mutual authentication technique in enterprise environments ensures the authenticity of clients to the server. If incoming client certificates are enabled only an authenticated client with valid certificates can access the app.",
+    "Resource Type": "microsoft.web/sites",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
+}
