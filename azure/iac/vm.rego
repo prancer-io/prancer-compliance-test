@@ -45,37 +45,51 @@ vm_aset_metadata := {
 # PR-AZR-0136-ARM
 #
 
-default vm_ssh = null
+default linux_configuration = null
 
-azure_attribute_absence["vm_ssh"] {
+azure_attribute_absence["linux_configuration"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.compute/virtualmachines"
-    publicKey := resource.properties.osProfile.linuxConfiguration.ssh.publicKeys[_]
-    not publicKey.keyData
+    not resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication
+}
+
+
+azure_issue["linux_configuration"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.compute/virtualmachines"
+    resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication != true
 }
 
 
 
-vm_ssh {
+linux_configuration {
     lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
-    not azure_attribute_absence["vm_ssh"]
+    not azure_attribute_absence["linux_configuration"]
+    not azure_issue["linux_configuration"]
 }
 
-vm_ssh = false {
-    azure_attribute_absence["vm_ssh"]
+linux_configuration = false {
+    azure_issue["linux_configuration"]
 }
 
-vm_ssh_err = "microsoft.compute/virtualmachines resource property ssh.publicKeys.keyData missing in the resource" {
-    azure_attribute_absence["vm_ssh"]
+
+linux_configuration = false {
+    azure_attribute_absence["linux_configuration"]
 }
 
-vm_ssh_metadata := {
+linux_configuration_err = "microsoft.compute/virtualmachines resource property linuxConfiguration.disablePasswordAuthentication missing in the resource" {
+    azure_attribute_absence["linux_configuration"]
+} else = "Azure instance does not authenticate using SSH keys" {
+    azure_issue["linux_configuration"]
+}
+
+linux_configuration_metadata := {
     "Policy Code": "PR-AZR-0136-ARM",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Ensure Azure Instance does not use basic authentication(Use SSH Key Instead)",
-    "Policy Description": "",
+    "Policy Title": "Ensure Azure instance authenticates using SSH keys",
+    "Policy Description": "SSH is an encrypted connection protocol that allows secure sign-ins over unsecured connections. SSH is the default connection protocol for Linux VMs hosted in Azure. Using secure shell (SSH) key pair, it is possible to spin up a Linux virtual machine on Azure that defaults to using SSH keys for authentication, eliminating the need for passwords to sign in. We recommend connecting to a VM using SSH keys. Using basic authentication with SSH connections leaves VMs vulnerable to brute-force attacks or guessing of passwords.",
     "Resource Type": "microsoft.compute/virtualmachines",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines"
