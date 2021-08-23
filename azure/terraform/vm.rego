@@ -51,3 +51,59 @@ vm_aset_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine"
 }
+
+
+# https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/microsoft.compute/vm-new-or-existing-conditions/azuredeploy.json
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine
+# PR-AZR-0136-TRF
+#
+
+default vm_linux_disabled_password_auth = null
+
+azure_attribute_absence["vm_linux_disabled_password_auth"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_virtual_machine"
+    os_profile_linux_config := resource.properties.os_profile_linux_config[_]
+    not os_profile_linux_config.disable_password_authentication
+}
+
+azure_issue["vm_linux_disabled_password_auth"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_virtual_machine"
+    os_profile_linux_config := resource.properties.os_profile_linux_config[_]
+    os_profile_linux_config.disable_password_authentication == false
+}
+
+vm_linux_disabled_password_auth {
+    lower(input.resources[_].type) == "azurerm_virtual_machine"
+    not azure_attribute_absence["vm_linux_disabled_password_auth"]
+    not azure_issue["vm_linux_disabled_password_auth"]
+}
+
+vm_linux_disabled_password_auth = false {
+    azure_attribute_absence["vm_linux_disabled_password_auth"]
+}
+
+vm_linux_disabled_password_auth = false {
+    azure_issue["vm_linux_disabled_password_auth"]
+}
+
+vm_linux_disabled_password_auth_err = "azurerm_virtual_machine property 'os_profile_linux_config.disable_password_authentication' is missing from the resource" {
+    azure_attribute_absence["vm_linux_disabled_password_auth"]
+} else = "Azure Linux Instance currently does not have basic authentication disabled" {
+    azure_issue["vm_linux_disabled_password_auth"]
+}
+
+vm_linux_disabled_password_auth_metadata := {
+    "Policy Code": "PR-AZR-0136-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Linux Instance should not use basic authentication(Use SSH Key Instead)",
+    "Policy Description": "For security purpose, linux vm password authentication should be disabled. Use SSH Key Instead.",
+    "Resource Type": "azurerm_virtual_machine",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines"
+}
+
+

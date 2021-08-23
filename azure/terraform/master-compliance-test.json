@@ -208,6 +208,93 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_AKS_7",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0138-TRF",
+                            "eval": "data.rule.aks_network_policy_configured",
+                            "message": "data.rule.aks_network_policy_configured_err",
+                            "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, set network_policy = 'azure' under 'network_profile' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#network_policy for details.",
+                            "remediationFunction": "PR_AZR_0138_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AKS cluster shoud have Network Policy configured",
+                    "description": "Network policy used for building Kubernetes network. - calico or azure.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_AKS_8",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0137-TRF",
+                            "eval": "data.rule.aks_api_server_authorized_ip_range_enabled",
+                            "message": "data.rule.aks_api_server_authorized_ip_range_enabled_err",
+                            "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, make sure property 'api_server_authorized_ip_ranges' exist and its value has valid ip range to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#api_server_authorized_ip_ranges for details.",
+                            "remediationFunction": "PR_AZR_0137_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AKS shoud have an API Server Authorized IP Ranges enabled",
+                    "description": "Authorized IP Ranges to kubernetes API server",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_AKS_9",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0144-TRF",
+                            "eval": "data.rule.aks_kub_dashboard_disabled",
+                            "message": "data.rule.aks_kub_dashboard_disabled_err",
+                            "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, set 'kube_dashboard.enabled = true' under 'addon_profile' block to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#kube_dashboard for details.",
+                            "remediationFunction": "PR_AZR_0144_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Kubernetes Dashboard shoud be disabled",
+                    "description": "Disable the Kubernetes dashboard on Azure Kubernetes Service",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_APPLICATION_GATEWAYS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -2898,7 +2985,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_VIRTUAL_MACHINE",
+                    "masterTestId": "TEST_VIRTUAL_MACHINE_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2916,6 +3003,35 @@
                     "severity": "Medium",
                     "title": "Azure Virtual Machine should be assigned to an availability set",
                     "description": "To provide application redundancy during planned or unplanned maintenance events, you can group two or more virtual machines (VMs) in an availability set. An availability set ensures that the VMs are distributed across multiple isolated hardware nodes in a cluster so that only a subset of your VMs are impacted should a hardware or software failure occur on Azure._x000D__x000D_This policy identifies Azure VMs that are not deployed in an availability set. As a high availability (HA) best practice, deploy your VMs in an availability set.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_VIRTUAL_MACHINE_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(vm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0136-TRF",
+                            "eval": "data.rule.vm_linux_disabled_password_auth",
+                            "message": "data.rule.vm_linux_disabled_password_auth_err",
+                            "remediationDescription": "In 'azurerm_virtual_machine' resource, make sure to set 'disable_password_authentication = true' under 'os_profile_linux_config' block to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine#disable_password_authentication for details.",
+                            "remediationFunction": "PR-AZR-0136-TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Linux Instance should not use basic authentication(Use SSH Key Instead)",
+                    "description": "For security purpose, linux vm password authentication should be disabled. Use SSH Key Instead.",
                     "tags": [
                         {
                             "cloud": "git",
