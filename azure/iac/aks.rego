@@ -316,3 +316,54 @@ aks_aad_azure_rbac_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
 }
+
+
+#
+# PR-AZR-0142-ARM
+#
+
+default aks_network_policy_configured = null
+
+azure_attribute_absence["aks_network_policy_configured"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.networkProfile.networkPolicy
+}
+
+azure_issue["aks_network_policy_configured"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    lower(resource.properties.networkProfile.networkPolicy) != "azure"
+}
+
+aks_network_policy_configured {
+    lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
+    not azure_issue["aks_cni_net"]
+    not azure_attribute_absence["aks_cni_net"]
+}
+
+aks_network_policy_configured = false {
+    azure_issue["aks_cni_net"]
+}
+
+aks_network_policy_configured = false {
+    azure_attribute_absence["aks_cni_net"]
+}
+
+aks_network_policy_configured_err = "'microsoft.containerservice/managedclusters' property 'networkProfile.networkPolicy' is missing from the resource" {
+    azure_attribute_absence["aks_cni_net"]
+} else = "AKS cluster currently dont have Network Policy configured" {
+    azure_issue["aks_cni_net"]
+}
+
+aks_network_policy_configured_metadata := {
+    "Policy Code": "PR-AZR-0142-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure AKS cluster has Network Policy configured",
+    "Policy Description": "Network policy used for building Kubernetes network. - calico or azure.",
+    "Resource Type": "microsoft.containerservice/managedclusters",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
+}
