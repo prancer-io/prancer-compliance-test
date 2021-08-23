@@ -1,0 +1,18 @@
+{
+    "snapshots": [
+        {
+            "type": "filesystem",
+            "connectorUser": "USER_1",
+            "nodes": [
+                {
+                    "masterSnapshotId": "ACK_TEMPLATE_SNAPSHOT",
+                    "type": "ack",
+                    "collection": "acktemplate",
+                    "paths": [
+                        "/"
+                    ]
+                }
+            ]
+        }
+    ]
+}
