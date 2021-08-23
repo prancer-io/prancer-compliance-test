@@ -3026,7 +3026,36 @@
                             "eval": "data.rule.vm_linux_disabled_password_auth",
                             "message": "data.rule.vm_linux_disabled_password_auth_err",
                             "remediationDescription": "In 'azurerm_virtual_machine' resource, make sure to set 'disable_password_authentication = true' under 'os_profile_linux_config' block to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine#disable_password_authentication for details.",
-                            "remediationFunction": "PR-AZR-0136-TRF.py"
+                            "remediationFunction": "PR_AZR_0136_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Linux Instance should not use basic authentication(Use SSH Key Instead)",
+                    "description": "For security purpose, linux vm password authentication should be disabled. Use SSH Key Instead.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_VIRTUAL_MACHINE_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(vm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-145-TRF",
+                            "eval": "data.rule.vm_type_linux_disabled_password_auth",
+                            "message": "data.rule.vm_type_linux_disabled_password_auth_err",
+                            "remediationDescription": "In 'azurerm_linux_virtual_machine' resource, make sure to set 'disable_password_authentication = true' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#disable_password_authentication for details.",
+                            "remediationFunction": "PR_AZR_145_TRF.py"
                         }
                     ],
                     "severity": "Medium",
