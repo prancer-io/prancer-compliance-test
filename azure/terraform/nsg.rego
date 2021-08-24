@@ -478,34 +478,34 @@ inbound_insecure_port_metadata := {
 }
 
 #
-# gID5
+# PR-AZR-0021-TRF
 #
 
-default inbound_port_11211 = null
+default inbound_port_3389 = null
 
-azure_issue["inbound_port_11211"] {
-    to_number(nsg_inbound[_]) == 11211
+azure_issue["inbound_port_3389"] {
+    to_number(nsg_inbound[_]) == 3389
 }
 
-inbound_port_11211 {
+inbound_port_3389 {
     lower(input.resources[_].type) == "azurerm_network_security_rule"
-    not azure_issue["inbound_port_11211"]
+    not azure_issue["inbound_port_3389"]
 }
 
-inbound_port_11211 = false {
-    azure_issue["inbound_port_11211"]
+inbound_port_3389 = false {
+    azure_issue["inbound_port_3389"]
 }
 
-inbound_port_11211_err = "Memcached DDoS attack attempted" {
-    azure_issue["inbound_port_11211"]
+inbound_port_3389_err = "Memcached DDoS attack attempted" {
+    azure_issue["inbound_port_3389"]
 }
 
-inbound_port_11211_metadata := {
+inbound_port_3389_metadata := {
     "Policy Code": "PR-AZR-0021-TRF",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group (NSG) allows traffic from internet on port 3389",
+    "Policy Title": "Azure Network Security Group (NSG) should not allows traffic from internet on port 3389",
     "Policy Description": "Blocking RDP port 3389 will protect users from attacks like account compromise, Denial of service and ransomware.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",

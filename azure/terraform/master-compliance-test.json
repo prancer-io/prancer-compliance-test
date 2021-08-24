@@ -1804,12 +1804,12 @@
                             "id": "PR-AZR-0021-TRF",
                             "eval": "data.rule.inbound_port_3389",
                             "message": "data.rule.inbound_port_3389_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_network_security_rule' resource, make sure property 'destination_port_range' dont have port '3389' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#destination_port_range for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Network Security Group (NSG) allows traffic from internet on port 3389",
+                    "title": "Azure Network Security Group (NSG) should not allows traffic from internet on port 3389",
                     "description": "Blocking RDP port 3389 will protect users from attacks like account compromise, Denial of service and ransomware.",
                     "tags": [
                         {
