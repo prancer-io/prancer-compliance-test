@@ -1288,6 +1288,37 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_MariaDB",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(mariadb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0145-TRF",
+                            "eval": "data.rule.maria_ingress_from_any_ip_disabled",
+                            "message": "data.rule.maria_ingress_from_any_ip_disabled_err",
+                            "remediationDescription": "In 'azurerm_mariadb_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_firewall_rule#start_ip_address for details.",
+                            "remediationFunction": "PR_AZR_0145_TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "MariaDB should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
+                    "description": "This policy will identify MariaDB firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_NETWORK_WATCHERS_FLOW_LOGS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -2401,7 +2432,7 @@
                             "eval": "data.rule.pg_ingress_from_any_ip_disabled",
                             "message": "data.rule.pg_ingress_from_any_ip_disabled_err",
                             "remediationDescription": "In 'azurerm_postgresql_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_firewall_rule#start_ip_address for details.",
-                            "remediationFunction": "PR-AZR-0146-TRF.py"
+                            "remediationFunction": "PR_AZR_0146_TRF.py"
                         }
                     ],
                     "severity": "High",
