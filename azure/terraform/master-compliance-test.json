@@ -1769,12 +1769,12 @@
                             "id": "PR-AZR-0020-TRF",
                             "eval": "data.rule.inbound_port_22",
                             "message": "data.rule.inbound_port_22_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_network_security_rule' resource, make sure property 'destination_port_range' dont have port '22' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#destination_port_range for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Network Security Group (NSG) allows SSH traffic from internet on port 22",
+                    "title": "Azure Network Security Group should not allow SSH traffic from internet on port 22",
                     "description": "Blocking SSH port 22 will protect users from attacks like Account compromise.",
                     "tags": [
                         {

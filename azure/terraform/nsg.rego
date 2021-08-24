@@ -653,20 +653,20 @@ inbound_port_22 = false {
     azure_issue["inbound_port_22"]
 }
 
-inbound_port_22_err = "Azure NSG allows SSH traffic from internet on port 22" {
+inbound_port_22_err = "Azure NSG currently allowing SSH traffic from internet on port 22" {
     azure_issue["inbound_port_22"]
 }
 
 inbound_port_22_metadata := {
-    "Policy Code": "PR-AZR-0030-TRF",
+    "Policy Code": "PR-AZR-0020-TRF",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group allows DNS (TCP Port 53)",
-    "Policy Description": "This policy detects any NSG rule that allows DNS traffic on TCP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group should not allow SSH traffic from internet on port 22",
+    "Policy Description": "Blocking SSH port 22 will protect users from attacks like Account compromise.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule"
 }
 
 #
