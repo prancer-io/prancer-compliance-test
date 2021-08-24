@@ -2847,6 +2847,37 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_MSSQL_SERVER_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0147-TRF",
+                            "eval": "data.rule.mssql_ingress_from_any_ip_disabled",
+                            "message": "data.rule.mssql_ingress_from_any_ip_disabled_err",
+                            "remediationDescription": "In 'azurerm_mssql_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_firewall_rule#start_ip_address for details.",
+                            "remediationFunction": "PR_AZR_0147_TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "MSSQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
+                    "description": "This policy will identify PostgreSQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_STORAGE_ACCOUNT_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
