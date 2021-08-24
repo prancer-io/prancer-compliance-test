@@ -9,16 +9,24 @@ default log_keyvault = null
 
 azure_attribute_absence["log_keyvault"] {
     resource := input.resources[_]
+    lower(resource.type) == "azurerm_key_vault"
+    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
+    	   c := 1]) == 0
+}
+
+azure_attribute_absence["log_keyvault"] {
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_monitor_diagnostic_setting"
     not resource.properties.log
 }
 
 # providers/Microsoft.KeyVault
-azure_issue["log_keyvault"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-    not contains(lower(resource.properties.target_resource_id), "microsoft.keyvault/vaults") 
-}
+#azure_issue["log_keyvault"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
+#    count(resource.properties.target_resource_id) == 0
+    #not contains(lower(resource.properties.target_resource_id), "microsoft.keyvault/vaults") 
+#}
 
 azure_issue["log_keyvault"] {
     resource := input.resources[_]
@@ -28,8 +36,11 @@ azure_issue["log_keyvault"] {
     log.enabled == false
 }
 
+log_keyvault = false {
+    azure_attribute_absence["log_keyvault"]
+}
+
 log_keyvault {
-    lower(input.resources[_].type) == "azurerm_monitor_diagnostic_setting"
     not azure_attribute_absence["log_keyvault"]
     not azure_issue["log_keyvault"]
 }
@@ -38,11 +49,8 @@ log_keyvault = false {
     azure_issue["log_keyvault"]
 }
 
-log_keyvault = false {
-    azure_attribute_absence["log_keyvault"]
-}
 
-log_keyvault_err = "azurerm_monitor_diagnostic_setting property block 'log' need to be exist. its currently missing from the resource." {
+log_keyvault_err = "azurerm_key_vault's azurerm_monitor_diagnostic_setting property block 'log' need to be exist. its currently missing from the resource." {
     azure_attribute_absence["log_keyvault"]
 } else = "Azure Key Vault audit logging is currently not enabled" {
     azure_issue["log_keyvault"] 
@@ -69,15 +77,22 @@ default log_lbs = null
 
 azure_attribute_absence["log_lbs"] {
     resource := input.resources[_]
+    lower(resource.type) == "azurerm_lb"
+    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
+    	   c := 1]) == 0
+}
+
+azure_attribute_absence["log_lbs"] {
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_monitor_diagnostic_setting"
     not resource.properties.log
 }
 
-azure_issue["log_lbs"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-    not contains(lower(resource.properties.target_resource_id), "microsoft.network/loadbalancers") 
-}
+#azure_issue["log_lbs"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
+#    not contains(lower(resource.properties.target_resource_id), "microsoft.network/loadbalancers") 
+#}
 
 azure_issue["log_lbs"] {
     resource := input.resources[_]
@@ -88,7 +103,6 @@ azure_issue["log_lbs"] {
 }
 
 log_lbs {
-    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
     not azure_attribute_absence["log_lbs"]
     not azure_issue["log_lbs"]
 }
@@ -101,7 +115,7 @@ log_lbs = false {
     azure_attribute_absence["log_lbs"]
 }
 
-log_lbs_err = "azurerm_monitor_diagnostic_setting property block 'log' need to be exist. its currently missing from the resource." {
+log_lbs_err = "azurerm_lb's azurerm_monitor_diagnostic_setting property block 'log' need to be exist. its currently missing from the resource." {
     azure_attribute_absence["log_lbs"]
 } else = "Azure Load Balancer diagnostics logging is currently not enabled" {
     azure_issue["log_lbs"] 
@@ -128,15 +142,22 @@ default log_storage_retention = null
 
 azure_attribute_absence["log_storage_retention"] {
     resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
+    	   c := 1]) == 0
+}
+
+azure_attribute_absence["log_storage_retention"] {
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_monitor_diagnostic_setting"
     not resource.properties.log
 }
 
-azure_issue["log_storage_retention"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-    not contains(lower(resource.properties.target_resource_id), "microsoft.storage/storageaccounts") 
-}
+#azure_issue["log_storage_retention"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
+#    not contains(lower(resource.properties.target_resource_id), "microsoft.storage/storageaccounts") 
+#}
 
 azure_issue["log_storage_retention"] {
     resource := input.resources[_]
@@ -165,7 +186,6 @@ azure_issue["log_storage_retention"] {
 }
 
 log_storage_retention {
-    lower(input.resources[_].type) == "azurerm_monitor_diagnostic_setting"
     not azure_attribute_absence["log_storage_retention"]
     not azure_issue["log_storage_retention"]
 }
@@ -178,7 +198,7 @@ log_storage_retention = false {
     azure_attribute_absence["log_storage_retention"]
 }
 
-log_storage_retention_err = "azurerm_monitor_diagnostic_setting property block 'log' and 'log.retention_policy' need to be exist. one or both are currently missing from the resource." {
+log_storage_retention_err = "azurerm_storage_account's azurerm_monitor_diagnostic_setting property block 'log' and 'log.retention_policy' need to be exist. one or both are currently missing from the resource." {
     azure_attribute_absence["log_storage_retention"]
 } else = "Azure Storage Account with Auditing Retention is currently less than 90 days. Its need to be 90 days or more" {
     azure_issue["log_storage_retention"]
@@ -204,15 +224,22 @@ default log_blob = null
 
 azure_attribute_absence["log_blob"] {
     resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_blob"
+    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
+    	   c := 1]) == 0
+}
+
+azure_attribute_absence["log_blob"] {
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_monitor_diagnostic_setting"
     not resource.properties.log
 }
 
-azure_issue["log_blob"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-    not contains(lower(resource.properties.target_resource_id), "microsoft.storage/storageaccounts/blobservices") 
-}
+#azure_issue["log_blob"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
+#    not contains(lower(resource.properties.target_resource_id), "microsoft.storage/storageaccounts/blobservices") 
+#}
 
 azure_issue["log_blob"] {
     resource := input.resources[_]
@@ -223,7 +250,6 @@ azure_issue["log_blob"] {
 }
 
 log_blob {
-    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
     not azure_attribute_absence["log_blob"]
     not azure_issue["log_blob"]
 }
@@ -236,7 +262,7 @@ log_blob = false {
     azure_attribute_absence["log_blob"]
 }
 
-log_blob_err = "azurerm_monitor_diagnostic_setting property block 'log' need to be exist. Its currently missing from the resource." {
+log_blob_err = "azurerm_storage_blob's azurerm_monitor_diagnostic_setting property block 'log' need to be exist. Its currently missing from the resource." {
     azure_issue["log_blob"]
 } else = "Azure storage account blob services diagnostic logs is currently not enabled" {
     azure_issue["log_blob"]
@@ -262,15 +288,22 @@ default log_queue = null
 
 azure_attribute_absence["log_queue"] {
     resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_queue"
+    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
+    	   c := 1]) == 0
+}
+
+azure_attribute_absence["log_queue"] {
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_monitor_diagnostic_setting"
     not resource.properties.log
 }
 
-azure_issue["log_queue"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-    not contains(lower(resource.properties.target_resource_id), "microsoft.storage/storageaccounts/queueservices") 
-}
+#azure_issue["log_queue"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
+#    not contains(lower(resource.properties.target_resource_id), "microsoft.storage/storageaccounts/queueservices") 
+#}
 
 azure_issue["log_queue"] {
     resource := input.resources[_]
@@ -281,7 +314,6 @@ azure_issue["log_queue"] {
 }
 
 log_queue {
-    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
     not azure_attribute_absence["log_queue"]
     not azure_issue["log_queue"]
 }
@@ -294,7 +326,7 @@ log_queue = false {
     azure_attribute_absence["log_queue"]
 }
 
-log_queue_err = "azurerm_monitor_diagnostic_setting property block 'log' need to be exist. Its currently missing from the resource." {
+log_queue_err = "azurerm_storage_queue's azurerm_monitor_diagnostic_setting property block 'log' need to be exist. Its currently missing from the resource." {
     azure_attribute_absence["log_queue"]
 } else = "Azure storage account queue services diagnostic logs is currently not enabled" {
     azure_issue["log_queue"]
@@ -320,15 +352,22 @@ default log_table = null
 
 azure_attribute_absence["log_table"] {
     resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_table"
+    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
+    	   c := 1]) == 0
+}
+
+azure_attribute_absence["log_table"] {
+    resource := input.resources[_]
     lower(resource.type) == "azurerm_monitor_diagnostic_setting"
     not resource.properties.log
 }
 
-azure_issue["log_table"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-    not contains(lower(resource.properties.target_resource_id), "microsoft.storage/storageaccounts/tableservices") 
-}
+#azure_issue["log_table"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
+#    not contains(lower(resource.properties.target_resource_id), "microsoft.storage/storageaccounts/tableservices") 
+#}
 
 azure_issue["log_table"] {
     resource := input.resources[_]
@@ -339,7 +378,6 @@ azure_issue["log_table"] {
 }
 
 log_table {
-    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
     not azure_attribute_absence["log_table"]
     not azure_issue["log_table"]
 }
@@ -352,7 +390,7 @@ log_table = false {
     azure_attribute_absence["log_table"]
 }
 
-log_table_err = "azurerm_monitor_diagnostic_setting property block 'log' need to be exist. Its currently missing from the resource." {
+log_table_err = "azurerm_storage_table's azurerm_monitor_diagnostic_setting property block 'log' need to be exist. Its currently missing from the resource." {
     azure_attribute_absence["log_table"]
 } else = "Azure storage account table services diagnostic logs is currently not enabled" {
     azure_issue["log_table"]
