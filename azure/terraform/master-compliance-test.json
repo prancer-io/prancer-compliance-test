@@ -1868,12 +1868,12 @@
                             "id": "PR-AZR-0031-TRF",
                             "eval": "data.rule.inbound_port_53",
                             "message": "data.rule.inbound_port_53_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_network_security_rule' resource, make sure property 'destination_port_range' dont have port '53' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#destination_port_range for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Network Security Group allows DNS (UDP Port 53)",
+                    "title": "Azure Network Security Group should not allows DNS (UDP Port 53)",
                     "description": "This policy detects any NSG rule that allows DNS traffic on UDP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {

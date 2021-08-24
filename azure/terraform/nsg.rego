@@ -496,7 +496,7 @@ inbound_port_3389 = false {
     azure_issue["inbound_port_3389"]
 }
 
-inbound_port_3389_err = "Memcached DDoS attack attempted" {
+inbound_port_3389_err = "Azure Network Security Group (NSG) currently allowing traffic from internet on port 3389" {
     azure_issue["inbound_port_3389"]
 }
 
@@ -509,7 +509,7 @@ inbound_port_3389_metadata := {
     "Policy Description": "Blocking RDP port 3389 will protect users from attacks like account compromise, Denial of service and ransomware.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule"
 }
 
 #
@@ -670,38 +670,38 @@ inbound_port_22_metadata := {
 }
 
 #
-# PR-AZR-0021-TRF
+# PR-AZR-0031-TRF
 #
 
-default inbound_port_3389 = null
+default inbound_port_53 = null
 
-azure_issue["inbound_port_3389"] {
-    to_number(nsg_inbound[_]) == 3389
+azure_issue["inbound_port_53"] {
+    to_number(nsg_inbound[_]) == 53
 }
 
-inbound_port_3389 {
+inbound_port_53 {
     lower(input.resources[_].type) == "azurerm_network_security_rule"
-    not azure_issue["inbound_port_3389"]
+    not azure_issue["inbound_port_53"]
 }
 
-inbound_port_3389 = false {
-    azure_issue["inbound_port_3389"]
+inbound_port_53 = false {
+    azure_issue["inbound_port_53"]
 }
 
-inbound_port_3389_err = "Azure NSG allows traffic from internet on port 3389" {
-    azure_issue["inbound_port_3389"]
+inbound_port_53_err = "Azure NSG currently allowing traffic from internet on port 53" {
+    azure_issue["inbound_port_53"]
 }
 
-inbound_port_3389_metadata := {
+inbound_port_53_metadata := {
     "Policy Code": "PR-AZR-0031-TRF",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group allows DNS (UDP Port 53)",
+    "Policy Title": "Azure Network Security Group should not allows DNS (UDP Port 53)",
     "Policy Description": "This policy detects any NSG rule that allows DNS traffic on UDP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule"
 }
 
 #
