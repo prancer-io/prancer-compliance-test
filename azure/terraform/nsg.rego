@@ -745,39 +745,38 @@ inbound_port_445_metadata := {
 }
 
 #
-# PR-AZR-0030-TRF
-# PR-AZR-0031-TRF
+# PR-AZR-0035-TRF
 #
 
-default inbound_port_53 = null
+default inbound_port_4333 = null
 
-azure_issue["inbound_port_53"] {
-    to_number(nsg_inbound[_]) == 53
+azure_issue["inbound_port_4333"] {
+    to_number(nsg_inbound[_]) == 4333
 }
 
-inbound_port_53 {
+inbound_port_4333 {
     lower(input.resources[_].type) == "azurerm_network_security_rule"
-    not azure_issue["inbound_port_53"]
+    not azure_issue["inbound_port_4333"]
 }
 
-inbound_port_53 = false {
-    azure_issue["inbound_port_53"]
+inbound_port_4333 = false {
+    azure_issue["inbound_port_4333"]
 }
 
-inbound_port_53_err = "Azure Network Security Group allows DNS" {
-    azure_issue["inbound_port_53"]
+inbound_port_4333_err = "Azure Network Security Group currently allowing mSQL (TCP Port 4333)" {
+    azure_issue["inbound_port_4333"]
 }
 
-inbound_port_53_metadata := {
+inbound_port_4333_metadata := {
     "Policy Code": "PR-AZR-0035-TRF",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group allows MSQL (TCP Port 4333)",
-    "Policy Description": "This policy detects any NSG rule that allows MSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group should not allow mSQL (TCP Port 4333)",
+    "Policy Description": "This policy detects any NSG rule that allows mSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule"
 }
 
 #
