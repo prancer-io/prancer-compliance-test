@@ -513,7 +513,7 @@ inbound_port_3389_metadata := {
 }
 
 #
-# gID7
+# PR-AZR-0029-TRF
 #
 
 default inbound_port_6379 = null
@@ -531,7 +531,7 @@ inbound_port_6379 = false {
     azure_issue["inbound_port_6379"]
 }
 
-inbound_port_6379_err = "RedisWannaMine vulnerable instances with active network traffic" {
+inbound_port_6379_err = "RedisWannaMine vulnerable instances currently allowing network traffic on port 6379" {
     azure_issue["inbound_port_6379"]
 }
 
@@ -540,11 +540,11 @@ inbound_port_6379_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group allows CIFS (UDP Port 445)",
-    "Policy Description": "This policy detects any NSG rule that allows CIFS traffic on UDP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict CIFS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "RedisWannaMine vulnerable instances should not allow network traffic on port 6379",
+    "Policy Description": "RedisWannaMine is cryptojacking attack which aims at both database servers and application servers via remote code execution, exploiting an Apache Struts vulnerability. To inject cryptocurrency mining malware, RedWannaMine uses a transmission control protocol (TCP) scanner to check open port 445 of SMB and scans vulnerable Redis server database over port 6379(tcp), so that it can use EternalBlue to spread further.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule"
 }
 
 #

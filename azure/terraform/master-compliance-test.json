@@ -1708,15 +1708,15 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "gID7",
+                            "id": "PR-AZR-0029-TRF",
                             "eval": "data.rule.inbound_port_6379",
                             "message": "data.rule.inbound_port_6379_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_network_security_rule' resource, make sure property 'destination_port_range' dont have port '6379' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#destination_port_range for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "RedisWannaMine vulnerable instances with active network traffic",
+                    "title": "RedisWannaMine vulnerable instances should not allow network traffic on port 6379",
                     "description": "RedisWannaMine is cryptojacking attack which aims at both database servers and application servers via remote code execution, exploiting an Apache Struts vulnerability. To inject cryptocurrency mining malware, RedWannaMine uses a transmission control protocol (TCP) scanner to check open port 445 of SMB and scans vulnerable Redis server database over port 6379(tcp), so that it can use EternalBlue to spread further.",
                     "tags": [
                         {
