@@ -45,7 +45,7 @@ https_only_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure App Service Web App should only accept HTTPS connection",
+    "Policy Title": "Ensure Azure App Service Web App enforce https connection",
     "Policy Description": "Azure Web Apps by default allows sites to run under both HTTP and HTTPS, and can be accessed by anyone using non-secure HTTP links. Non-secure HTTP requests can be restricted and all HTTP requests redirected to the secure HTTPS port. We recommend you enforce HTTPS-only traffic to increase security. This will redirect all non-secure HTTP requests to HTTPS ports. HTTPS uses the SSL/TLS protocol to provide a secure connection, which is both encrypted and authenticated.",
     "Resource Type": "microsoft.web/sites",
     "Policy Help URL": "",
