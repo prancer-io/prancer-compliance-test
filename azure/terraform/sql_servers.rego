@@ -200,7 +200,7 @@ mssql_ingress_from_any_ip_disabled_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "MSSQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
-    "Policy Description": "This policy will identify PostgreSQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
+    "Policy Description": "This policy will identify MSSQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
     "Resource Type": "azurerm_mssql_firewall_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_firewall_rule"
