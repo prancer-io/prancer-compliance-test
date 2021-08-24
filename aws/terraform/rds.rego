@@ -105,6 +105,150 @@ rds_public_metadata := {
 }
 
 #
+# PR-AWS-0122-TRF
+#
+
+default rds_encrypt_key = null
+
+aws_issue["rds_encrypt_key"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_db_instance"
+    not resource.properties.kms_key_id
+}
+
+rds_encrypt_key {
+    lower(input.resources[i].type) == "aws_db_instance"
+    not aws_issue["rds_encrypt_key"]
+}
+
+rds_encrypt_key = false {
+    aws_issue["rds_encrypt_key"]
+}
+
+rds_encrypt_key_err = "AWS RDS database not encrypted using Customer Managed Key" {
+    aws_issue["rds_encrypt_key"]
+}
+
+rds_encrypt_key_metadata := {
+    "Policy Code": "PR-AWS-0122-TRF",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS RDS database not encrypted using Customer Managed Key",
+    "Policy Description": "This policy identifies RDS databases that are encrypted with default KMS keys and not with customer managed keys. As a best practice, use customer managed keys to encrypt the data on your RDS databases and maintain control of your keys and data on sensitive workloads.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
+}
+
+#
+# PR-AWS-0123-TRF
+#
+
+default rds_instance_event = null
+
+aws_issue["rds_instance_event"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_db_event_subscription"
+    lower(resource.properties.enabled) == "false"
+    resource.properties.source_type == "db-instance"
+}
+
+aws_bool_issue["rds_instance_event"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_db_event_subscription"
+    resource.properties.enabled == false
+    resource.properties.source_type == "db-instance"
+}
+
+rds_instance_event {
+    lower(input.resources[i].type) == "aws_db_event_subscription"
+    not aws_issue["rds_instance_event"]
+    not aws_bool_issue["rds_instance_event"]
+}
+
+rds_instance_event = false {
+    aws_issue["rds_instance_event"]
+}
+
+rds_instance_event = false {
+    aws_bool_issue["rds_instance_event"]
+}
+
+rds_instance_event_err = "AWS RDS event subscription disabled for DB instance" {
+    aws_issue["rds_instance_event"]
+} else = "AWS RDS event subscription disabled for DB instance" {
+    aws_bool_issue["rds_instance_event"]
+}
+
+rds_instance_event_metadata := {
+    "Policy Code": "PR-AWS-0123-TRF",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS RDS event subscription disabled for DB instance",
+    "Policy Description": "This policy identifies RDS event subscriptions for which DB instance event subscription is disabled. You can create an Amazon RDS event notification subscription so that you can be notified when an event occurs for a given DB instance.",
+    "Resource Type": "aws_db_event_subscription",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
+}
+
+#
+# PR-AWS-0124-TRF
+#
+
+default rds_secgroup_event = null
+
+aws_issue["rds_secgroup_event"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_db_event_subscription"
+    lower(resource.properties.enabled) == "false"
+    resource.properties.source_type == "db-security-group"
+}
+
+aws_bool_issue["rds_secgroup_event"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_db_event_subscription"
+    resource.properties.enabled == false
+    resource.properties.source_type == "db-security-group"
+}
+
+
+rds_secgroup_event {
+    lower(input.resources[i].type) == "aws_db_event_subscription"
+    not aws_issue["rds_secgroup_event"]
+    not aws_bool_issue["rds_secgroup_event"]
+}
+
+rds_secgroup_event = false {
+    aws_issue["rds_secgroup_event"]
+}
+
+rds_secgroup_event = false {
+    aws_bool_issue["rds_secgroup_event"]
+}
+
+rds_secgroup_event_err = "AWS RDS event subscription disabled for DB security groups" {
+    aws_issue["rds_secgroup_event"]
+} else = "AWS RDS event subscription disabled for DB security groups" {
+    aws_bool_issue["rds_secgroup_event"]
+}
+
+
+rds_secgroup_event_metadata := {
+    "Policy Code": "PR-AWS-0124-TRF",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS RDS event subscription disabled for DB security groups",
+    "Policy Description": "This policy identifies RDS event subscriptions for which DB security groups event subscription is disabled. You can create an Amazon RDS event notification subscription so that you can be notified when an event occurs for given DB security groups.",
+    "Resource Type": "aws_db_event_subscription",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
+}
+
+
+#
 # PR-AWS-0125-TRF
 #
 

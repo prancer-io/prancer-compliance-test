@@ -484,35 +484,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CLOUD_FRONT_10",
-                    "masterSnapshotId": [
-                        "CFR_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(cloudfront.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-0024-CFR",
-                            "eval": "data.rule.cf_s3_origin",
-                            "message": "data.rule.cf_s3_origin_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
-                            "remediationFunction": "PR_AWS_0024_CFR.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "AWS CloudTrail S3 buckets have not enabled MFA Delete",
-                    "description": "This policy identifies the S3 buckets which do not have Multi-Factor Authentication enabled for CloudTrails. For encryption of log files, CloudTrail defaults to use of S3 server-side encryption (SSE). We recommend adding an additional layer of security by adding MFA Delete to your S3 bucket. This will help to prevent deletion of CloudTrail logs without your explicit authorization. We also encourage you to use a bucket policy that places restrictions on which of your identity access management (IAM) users are allowed to delete S3 objects.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "cloudformation"
-                            ]
-                        }
-                    ]
-                },
-                {
                     "masterTestId": "TEST_CLOUD_TRAIL_1",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
