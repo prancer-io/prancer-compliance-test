@@ -2298,6 +2298,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_32",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0037-TRF",
+                            "eval": "data.rule.inbound_port_137",
+                            "message": "data.rule.inbound_port_137_err",
+                            "remediationDescription": "In 'azurerm_network_security_rule' resource, make sure property 'destination_port_range' dont have port '137' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#destination_port_range for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group should not allow NetBIOS (UDP Port 137)",
+                    "description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_postgreSQL_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"

@@ -815,39 +815,39 @@ inbound_port_20_metadata := {
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
 }
 
-#
-# PR-AZR-0035-TRF
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule
+# PR-AZR-0037-TRF
 #
 
-default inbound_port_4333 = null
+default inbound_port_137 = null
 
-azure_issue["inbound_port_4333"] {
-    to_number(nsg_inbound[_]) == 4333
+azure_issue["inbound_port_137"] {
+    to_number(nsg_inbound[_]) == 137
 }
 
-inbound_port_4333 {
+inbound_port_137 {
     lower(input.resources[_].type) == "azurerm_network_security_rule"
-    not azure_issue["inbound_port_4333"]
+    not azure_issue["inbound_port_137"]
 }
 
-inbound_port_4333 = false {
-    azure_issue["inbound_port_4333"]
+inbound_port_137 = false {
+    azure_issue["inbound_port_137"]
 }
 
-inbound_port_4333_err = "Azure Network Security Group allows MSQL" {
-    azure_issue["inbound_port_4333"]
+inbound_port_137_err = "Azure Network Security Group currently allowing NetBIOS (UDP Port 137)" {
+    azure_issue["inbound_port_137"]
 }
 
-inbound_port_4333_metadata := {
+inbound_port_137_metadata := {
     "Policy Code": "PR-AZR-0037-TRF",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group allows NetBIOS (UDP Port 137)",
+    "Policy Title": "Azure Network Security Group should not allow NetBIOS (UDP Port 137)",
     "Policy Description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule"
 }
 
 #
