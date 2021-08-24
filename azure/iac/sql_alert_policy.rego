@@ -173,51 +173,51 @@ sql_managed_instance_alert_metadata := {
 
 # PR-AZR-0147-ARM
 
-default sql_logical_server_email_account_admins = null
+default sql_server_db_email_account_admins = null
 
-azure_attribute_absence["sql_logical_server_email_account_admins"] {
+azure_attribute_absence["sql_server_db_email_account_admins"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers"
+    lower(resource.type) == "microsoft.sql/servers/databases"
     sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     not sql_resources.properties.emailAccountAdmins
 }
 
 
-azure_issue["sql_logical_server_email_account_admins"] {
+azure_issue["sql_server_db_email_account_admins"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers"
+    lower(resource.type) == "microsoft.sql/servers/databases"
     sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     sql_resources.properties.emailAccountAdmins != true 
 }
 
 
-sql_logical_server_email_account_admins {
-    lower(input.resources[_].type) == "microsoft.sql/servers"
+sql_server_db_email_account_admins {
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases"
     resource := input.resources[_]
     sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
-    not azure_attribute_absence["sql_logical_server_email_account_admins"]
-    not azure_issue["sql_logical_server_email_account_admins"]
+    not azure_attribute_absence["sql_server_db_email_account_admins"]
+    not azure_issue["sql_server_db_email_account_admins"]
 }
 
-sql_logical_server_email_account_admins = false {
-    azure_attribute_absence["sql_logical_server_email_account_admins"]
+sql_server_db_email_account_admins = false {
+    azure_attribute_absence["sql_server_db_email_account_admins"]
 }
 
-sql_logical_server_email_account_admins = false {
-    azure_issue["sql_logical_server_email_account_admins"]
+sql_server_db_email_account_admins = false {
+    azure_issue["sql_server_db_email_account_admins"]
 }
 
 
-sql_logical_server_email_account_admins_err = "microsoft.sql/servers/securityalertpolicies resource property 'emailAccountAdmins' missing in the resource" {
-    azure_attribute_absence["sql_logical_server_email_account_admins"]
+sql_server_db_email_account_admins_err = "microsoft.sql/servers/databases/securityalertpolicies resource property 'emailAccountAdmins' missing in the resource" {
+    azure_attribute_absence["sql_server_db_email_account_admins"]
 } else = "SQL servers do not have email service and co-administrators enabled" {
-    azure_issue["sql_logical_server_email_account_admins"]
+    azure_issue["sql_server_db_email_account_admins"]
 }
 
-sql_logical_server_email_account_admins_metadata := {
+sql_server_db_email_account_admins_metadata := {
     "Policy Code": "PR-AZR-0147-ARM",
     "Type": "IaC",
     "Product": "AZR",
@@ -226,57 +226,8 @@ sql_logical_server_email_account_admins_metadata := {
     "Policy Description": "Enable Service and Co-administrators to receive security alerts from the SQL server. We recommended providing the email address to receive alerts ensures that any detection of anomalous activities reported",
     "Resource Type": "securityalertpolicies",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies"
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/databases/securityalertpolicies"
 }
 
 
 
-
-# PR-AZR-0148-ARM
-
-default sql_server_email_account_admins = null
-
-azure_attribute_absence["sql_server_email_account_admins"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    not resource.properties.emailAccountAdmins
-}
-
-
-azure_issue["sql_server_email_account_admins"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    resource.properties.emailAccountAdmins != true
-}
-
-sql_server_email_account_admins {
-    lower(input.resources[_].type) == "microsoft.sql/servers/securityalertpolicies"
-    not azure_attribute_absence["sql_server_email_account_admins"]
-    not azure_sql_security_alert_disabled["sql_server_email_account_admins"]
-}
-
-sql_server_email_account_admins = false {
-    azure_attribute_absence["sql_server_email_account_admins"]
-}
-
-sql_server_email_account_admins = false {
-    azure_sql_security_alert_disabled["sql_server_email_account_admins"]
-}
-
-sql_server_email_account_admins_err = "microsoft.sql/servers/securityalertpolicies resource property 'emailAccountAdmins' missing in the resource" {
-    azure_attribute_absence["sql_server_email_account_admins"]
-} else = "SQL servers do not have email service and co-administrators enabled" {
-    azure_issue["sql_server_email_account_admins"]
-}
-
-sql_server_email_account_admins_metadata := {
-    "Policy Code": "PR-AZR-0148-ARM",
-    "Type": "IaC",
-    "Product": "AZR",
-    "Language": "ARM template",
-    "Policy Title": "SQL servers should have email service and co-administrators enabled",
-    "Policy Description": "Enable Service and Co-administrators to receive security alerts from the SQL server. We recommended providing the email address to receive alerts ensures that any detection of anomalous activities reported",
-    "Resource Type": "microsoft.sql/servers/securityalertpolicies",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies"
-}
