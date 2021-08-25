@@ -77,3 +77,55 @@ ecr_encryption_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-imagetagmutability"
 }
 
+
+#
+# PR-AWS-0255-CFR
+#
+
+default ecr_scan = null
+
+aws_bool_issue["ecr_scan"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecr::repository"
+    not resource.Properties.ImageScanningConfiguration.ScanOnPush
+}
+
+aws_issue["ecr_scan"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecr::repository"
+    lower(resource.Properties.ImageScanningConfiguration.ScanOnPush) != "true"
+}
+
+
+ecr_scan {
+    lower(input.Resources[i].Type) == "aws::ecr::repository"
+    not aws_issue["ecr_scan"]
+    not aws_bool_issue["ecr_scan"]
+}
+
+ecr_scan = false {
+    aws_issue["ecr_scan"]
+}
+
+ecr_scan = false {
+    aws_bool_issue["ecr_scan"]
+}
+
+ecr_scan_err = "Ensure ECR image scan on push is enabled" {
+    aws_issue["ecr_scan"]
+} else = "Ensure ECR image scan on push is enabled" {
+    aws_bool_issue["ecr_scan"]
+}
+
+ecr_scan_metadata := {
+    "Policy Code": "PR-AWS-0255-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure ECR image scan on push is enabled",
+    "Policy Description": "Amazon ECR is a fully managed container registry used to store, manage and deploy container images. ECR Image Scanning assesses and identifies operating system vulnerabilities. Using automated image scans you can ensure container image vulnerabilities are found before getting pushed to production. ECR APIs notify if vulnerabilities were found when a scan completes",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecr-repository-imagescanningconfiguration.html#cfn-ecr-repository-imagescanningconfiguration-scanonpush"
+}
+

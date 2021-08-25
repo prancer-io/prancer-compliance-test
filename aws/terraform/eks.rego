@@ -59,3 +59,41 @@ eks_multiple_sg_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html"
 }
+
+
+#
+# PR-AWS-0213-TRF
+#
+
+default eks_version = null
+
+aws_issue["eks_version"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_eks_cluster"
+    startswith(lower(resource.properties.version), "1.9.")
+}
+
+
+eks_version {
+    lower(input.resources[i].type) == "aws_eks_cluster"
+    not aws_issue["eks_version"]
+}
+
+eks_version = false {
+    aws_issue["eks_version"]
+}
+
+eks_version_err = "AWS EKS unsupported Master node version." {
+    aws_issue["eks_version"]
+}
+eks_version_metadata := {
+    "Policy Code": "PR-AWS-0213-TRF",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS EKS unsupported Master node version.",
+    "Policy Description": "Ensure your EKS Master node version is supported. This policy checks your EKS master node version and generates an alert if the version running is unsupported.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html#cfn-eks-cluster-version"
+}

@@ -484,35 +484,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_CLOUD_FRONT_10",
-                    "masterSnapshotId": [
-                        "CFR_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(cloudfront.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-0024-CFR",
-                            "eval": "data.rule.cf_s3_origin",
-                            "message": "data.rule.cf_s3_origin_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
-                            "remediationFunction": "PR_AWS_0024_CFR.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "AWS CloudTrail S3 buckets have not enabled MFA Delete",
-                    "description": "This policy identifies the S3 buckets which do not have Multi-Factor Authentication enabled for CloudTrails. For encryption of log files, CloudTrail defaults to use of S3 server-side encryption (SSE). We recommend adding an additional layer of security by adding MFA Delete to your S3 bucket. This will help to prevent deletion of CloudTrail logs without your explicit authorization. We also encourage you to use a bucket policy that places restrictions on which of your identity access management (IAM) users are allowed to delete S3 objects.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "cloudformation"
-                            ]
-                        }
-                    ]
-                },
-                {
                     "masterTestId": "TEST_CLOUD_TRAIL_1",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -665,7 +636,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DYNAMO_DB",
+                    "masterTestId": "TEST_DYNAMO_DB_1",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
                     ],
@@ -5153,6 +5124,321 @@
                     "severity": "Medium",
                     "title": "AWS Security Groups allow internet traffic from internet to Trivial File Transfer Protocol Port (69)",
                     "description": "This policy identifies the security groups which are exposing Trivial File Transfer Protocol Port (69) to the internet. It is recommended that Global permission to access the well known services Trivial File Transfer Protocol Port (69) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ELASTIC_SEARCH_8",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticsearch.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0252-CFR",
+                            "eval": "data.rule.esearch_enforce_https",
+                            "message": "data.rule.esearch_enforce_https_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-domainendpointoptions.html#cfn-elasticsearch-domain-domainendpointoptions-enforcehttps and define EnforceHTTPS value of DomainEndpointOptions true.",
+                            "remediationFunction": "PR_AWS_0252_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Elasticsearch domain is not configured with HTTPS",
+                    "description": "This policy identifies Elasticsearch domains that are not configured with HTTPS. Amazon Elasticsearch domains allow all traffic to be submitted over HTTPS, ensuring all communications between application and domain are encrypted. It is recommended to enable HTTPS so that all communication between the application and all data access goes across an encrypted communication channel to eliminate man-in-the-middle attacks",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ELASTIC_SEARCH_9",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elasticsearch.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0253-CFR",
+                            "eval": "data.rule.esearch_encrypt_kms",
+                            "message": "data.rule.esearch_encrypt_kms_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-encryptionatrestoptions.html#cfn-elasticsearch-domain-encryptionatrestoptions-kmskeyid and define the value of KmsKeyId in EncryptionAtRestOptions of the elasticsearch domain",
+                            "remediationFunction": "PR_AWS_0253_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Elasticsearch Domain should not have Encrytion using AWS Managed Keys",
+                    "description": "Ensure that your Amazon ElasticSearch (ES) domains are encrypted with KMS Customer Master Keys (CMKs) instead of AWS managed-keys (default keys used by the ES service when there are no customer keys defined) in order to have more granular control over the data-at-rest encryption/decryption process and to meet compliance requirements.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_7",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0254-CFR",
+                            "eval": "data.rule.ecs_transit_enabled",
+                            "message": "data.rule.ecs_transit_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-efsvolumeconfiguration.html#cfn-ecs-taskdefinition-efsvolumeconfiguration-transitencryption and enable TransitEncryption in the volume.EFSVolumeConfiguration",
+                            "remediationFunction": "PR_AWS_0254_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure EFS volumes in ECS task definitions have encryption in transit enabled",
+                    "description": "ECS task definitions that have volumes using EFS configuration should explicitly enable in transit encryption to prevent the risk of data loss due to interception.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECR_3",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0255-CFR",
+                            "eval": "data.rule.ecr_scan",
+                            "message": "data.rule.ecr_scan_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecr-repository-imagescanningconfiguration.html#cfn-ecr-repository-imagescanningconfiguration-scanonpush and enable ScanOnPush from ImageScanningConfiguration.",
+                            "remediationFunction": "PR_AWS_0255_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure ECR image scan on push is enabled",
+                    "description": "Amazon ECR is a fully managed container registry used to store, manage and deploy container images. ECR Image Scanning assesses and identifies operating system vulnerabilities. Using automated image scans you can ensure container image vulnerabilities are found before getting pushed to production. ECR APIs notify if vulnerabilities were found when a scan completes",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_AUTOSCALING_1",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(autoscaling.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0256-CFR",
+                            "eval": "data.rule.as_volume_encrypted",
+                            "message": "data.rule.as_volume_encrypted_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig-blockdev-template.html#cfn-as-launchconfig-blockdev-template-encrypted and none of the BlockDeviceMappings should desable Encrypted of Ebs",
+                            "remediationFunction": "PR_AWS_0256_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure EBS volumes have encrypted launch configurations",
+                    "description": "Amazon Elastic Block Store (EBS) volumes allow you to create encrypted launch configurations when creating EC2 instances and auto scaling. When the entire EBS volume is encrypted, data stored at rest on the volume, disk I/O, snapshots created from the volume, and data in-transit between EBS and EC2 are all encrypted.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": ["cloudformation"]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ALL_5",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0257-CFR",
+                            "eval": "data.rule.dax_encrypt",
+                            "message": "data.rule.dax_encrypt_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dax-cluster-ssespecification.html and encryption at rest should be enabled by setting value of SSEEnabled true in SSESpecification",
+                            "remediationFunction": "PR_AWS_0257_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IEnsure DAX is securely encrypted at rest",
+                    "description": "Amazon DynamoDB Accelerator (DAX) encryption at rest provides an additional layer of data protection, helping secure your data from unauthorized access to underlying storage. With encryption at rest the data persisted by DAX on disk is encrypted using 256-bit Advanced Encryption Standard (AES-256). DAX writes data to disk as part of propagating changes from the primary node to read replicas. DAX encryption at rest automatically integrates with AWS KMS for managing the single service default key used to encrypt clusters.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DYNAMO_DB_2",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dynamodb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0258-CFR",
+                            "eval": "data.rule.dynamodb_PITR_enable",
+                            "message": "data.rule.dynamodb_PITR_enable_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html, enable PointInTimeRecoveryEnabled in PointInTimeRecoverySpecification to provide continues backup",
+                            "remediationFunction": "PR_AWS_0258_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS DynamoDB encrypted using AWS owned CMK instead of AWS managed CMK",
+                    "description": "DynamoDB Point-In-Time Recovery (PITR) is an automatic backup service for DynamoDB table data that helps protect your DynamoDB tables from accidental write or delete operations. Once enabled, PITR provides continuous backups that can be controlled using various programmatic parameters. PITR can also be used to restore table data from any point in time during the last 35 days, as well as any incremental backups of DynamoDB tables",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ALL_6",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0259-CFR",
+                            "eval": "data.rule.qldb_permission_mode",
+                            "message": "data.rule.qldb_permission_mode_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-qldb-ledger.html#cfn-qldb-ledger-permissionsmode, and provide PermissionsMode value 'STANDARD'",
+                            "remediationFunction": "PR_AWS_0259_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure QLDB ledger permissions mode is set to STANDARD",
+                    "description": "In Amazon Quantum Ledger Database define PermissionsMode value to STANDARD permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_22",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0260-CFR",
+                            "eval": "data.rule.sg_tag",
+                            "message": "data.rule.sg_tag_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#cfn-ec2-securitygroup-tags, provide security group tags",
+                            "remediationFunction": "PR_AWS_0260_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS resources that support tags have Tags",
+                    "description": "Many different types of AWS resources support tags. Tags allow you to add metadata to a resource to help identify ownership, perform cost / billing analysis, and to enrich a resource with other valuable information, such as descriptions and environment names. While there are many ways that tags can be used, we recommend you follow a tagging practice.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_RED_SHIFT_6",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(redshift.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0261-CFR",
+                            "eval": "data.rule.redshift_allow_version_upgrade",
+                            "message": "data.rule.redshift_allow_version_upgrade_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html#cfn-redshift-cluster-allowversionupgrade, set value of AllowVersionUpgrade to when new version of redshift engine released then you can easily request that service apply upgrade during maintainace window.",
+                            "remediationFunction": "PR_AWS_0261_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Redshift cluster allow version upgrade by default",
+                    "description": "This policy identifies AWS Redshift instances which has not enabled AllowVersionUpgrade. major version upgrades can be applied during the maintenance window to the Amazon Redshift engine that is running on the cluster. When a new major version of the Amazon Redshift engine is released, you can request that the service automatically apply upgrades during the maintenance window to the Amazon Redshift engine that is running on your cluster.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_RDS_13",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(rds.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0262-CFR",
+                            "eval": "data.rule.rds_cluster_deletion_protection",
+                            "message": "data.rule.rds_cluster_deletion_protection_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#cfn-rds-dbcluster-deletionprotection, also enable DeletionProtection to prevent accidental deletion of the resource.",
+                            "remediationFunction": "PR_AWS_0262_CFR.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure RDS clusters and instances have deletion protection enabled",
+                    "description": "This rule Checks if an Amazon Relational Database Service (Amazon RDS) cluster has deletion protection enabled",
                     "tags": [
                         {
                             "cloud": "git",

@@ -366,3 +366,50 @@ ecs_logging_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html"
 }
+
+
+#
+# PR-AWS-0254-CFR
+#
+
+default ecs_transit_enabled = null
+
+aws_issue["ecs_transit_enabled"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    volume := resource.Properties.Volumes[_]
+    not volume.EFSVolumeConfiguration.TransitEncryption
+}
+
+aws_issue["ecs_transit_enabled"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::taskdefinition"
+    volume := resource.Properties.Volumes[_]
+    lower(volume.EFSVolumeConfiguration.TransitEncryption) != "enabled"
+}
+
+ecs_transit_enabled {
+    lower(input.Resources[i].Type) == "aws::ecs::taskdefinition"
+    not aws_issue["ecs_transit_enabled"]
+}
+
+ecs_transit_enabled = false {
+    aws_issue["ecs_transit_enabled"]
+}
+
+
+ecs_transit_enabled_err = "Ensure EFS volumes in ECS task definitions have encryption in transit enabled" {
+    aws_issue["ecs_transit_enabled"]
+}
+
+ecs_transit_enabled_metadata := {
+    "Policy Code": "PR-AWS-0254-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure EFS volumes in ECS task definitions have encryption in transit enabled",
+    "Policy Description": "ECS task definitions that have volumes using EFS configuration should explicitly enable in transit encryption to prevent the risk of data loss due to interception.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-efsvolumeconfiguration.html#cfn-ecs-taskdefinition-efsvolumeconfiguration-transitencryption"
+}
