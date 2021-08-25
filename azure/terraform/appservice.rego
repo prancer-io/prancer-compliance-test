@@ -216,3 +216,54 @@ app_service_aad_auth_enabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
 }
+
+
+#
+# PR-AZR-0153-TRF
+#
+
+default app_service_client_cert_enabled = null
+#default is false
+azure_attribute_absence["app_service_client_cert_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.client_cert_enabled
+}
+
+azure_issue["app_service_client_cert_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    resource.properties.client_cert_enabled != true
+}
+
+app_service_client_cert_enabled {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_client_cert_enabled"]
+    not azure_issue["app_service_client_cert_enabled"]
+}
+
+app_service_client_cert_enabled = false {
+    azure_attribute_absence["app_service_client_cert_enabled"]
+}
+
+app_service_client_cert_enabled = false {
+    azure_issue["app_service_client_cert_enabled"]
+}
+
+app_service_client_cert_enabled_err = "azurerm_app_service property 'client_cert_enabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
+    azure_attribute_absence["app_service_client_cert_enabled"]
+} else = "Azure App Service currently can be accessed via HTTP. Please change it to HTTPS only" {
+    azure_issue["app_service_client_cert_enabled"]
+}
+
+app_service_client_cert_enabled_metadata := {
+    "Policy Code": "PR-AZR-0153-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Azure App Service require client certificates for incoming requests",
+    "Policy Description": "This policy will identify the Azure app service which has missing configuration about requiring client certificates for incoming requests and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}

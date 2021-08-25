@@ -498,6 +498,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_APP_SERVICE_5",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0153-TRF",
+                            "eval": "data.rule.app_service_client_cert_enabled",
+                            "message": "data.rule.app_service_client_cert_enabled_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, set 'client_cert_enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#client_cert_enabled for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure App Service require client certificates for incoming requests",
+                    "description": "This policy will identify the Azure app service which has missing configuration about requiring client certificates for incoming requests and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_DATABASEACCOUNTS",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
