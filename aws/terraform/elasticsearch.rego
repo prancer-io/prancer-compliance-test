@@ -345,13 +345,15 @@ default esearch_zone_awareness = null
 aws_issue["esearch_zone_awareness"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_elasticsearch_domain"
-    lower(resource.properties.cluster_config.zone_awareness_enabled) == "false"
+    cluster_config := resource.properties.cluster_config[_]
+    lower(cluster_config.zone_awareness_enabled) == "false"
 }
 
 aws_bool_issue["esearch_zone_awareness"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_elasticsearch_domain"
-    not resource.properties.cluster_config.zone_awareness_enabled
+    cluster_config := resource.properties.cluster_config[_]
+    not cluster_config.zone_awareness_enabled
 }
 
 esearch_zone_awareness {
@@ -396,13 +398,15 @@ default esearch_node_encryption = null
 aws_issue["esearch_node_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    lower(resource.properties.node_to_node_encryption.enabled) == "false"
+    node_to_node_encryption := resource.properties.node_to_node_encryption[_]
+    lower(node_to_node_encryption.enabled) == "false"
 }
 
 aws_bool_issue["esearch_node_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    not resource.properties.node_to_node_encryption.enabled
+    node_to_node_encryption := resource.properties.node_to_node_encryption[_]
+    not node_to_node_encryption.enabled
 }
 
 esearch_node_encryption {
@@ -447,13 +451,15 @@ default esearch_enforce_https = null
 aws_issue["esearch_enforce_https"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    lower(resource.properties.domain_endpoint_options.enforce_https) == "false"
+    domain_endpoint_options := resource.properties.domain_endpoint_options[_]
+    lower(domain_endpoint_options.enforce_https) == "false"
 }
 
 aws_bool_issue["esearch_enforce_https"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    not resource.properties.domain_endpoint_options.enforce_https
+    domain_endpoint_options := resource.properties.domain_endpoint_options[_]
+    not domain_endpoint_options.enforce_https
 }
 
 esearch_enforce_https {
@@ -498,29 +504,33 @@ default esearch_encrypt_kms = null
 aws_issue["esearch_encrypt_kms"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    lower(resource.properties.encrypt_at_rest.enabled) == "true"
-    not resource.properties.encrypt_at_rest.kms_key_id
+    encrypt_at_rest := resource.properties.encrypt_at_rest[_]
+    lower(encrypt_at_rest.enabled) == "true"
+    not encrypt_at_rest.kms_key_id
 }
 
 aws_issue["esearch_encrypt_kms"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    lower(resource.properties.encrypt_at_rest.enabled) == "true"
-    lower(resource.properties.encrypt_at_rest.kms_key_id) == ""
+    encrypt_at_rest := resource.properties.encrypt_at_rest[_]
+    lower(encrypt_at_rest.enabled) == "true"
+    lower(encrypt_at_rest.kms_key_id) == ""
 }
 
 aws_bool_issue["esearch_encrypt_kms"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    resource.properties.encrypt_at_rest.enabled
-    not resource.properties.encrypt_at_rest.kms_key_id
+    encrypt_at_rest := resource.properties.encrypt_at_rest[_]
+    encrypt_at_rest.enabled
+    not encrypt_at_rest.kms_key_id
 }
 
 aws_bool_issue["esearch_encrypt_kms"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    resource.properties.encrypt_at_rest.enabled
-    lower(resource.properties.encrypt_at_rest.kms_key_id) == ""
+    encrypt_at_rest := resource.properties.encrypt_at_rest[_]
+    encrypt_at_rest.enabled
+    lower(encrypt_at_rest.kms_key_id) == ""
 }
 
 

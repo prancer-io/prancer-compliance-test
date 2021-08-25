@@ -11,15 +11,15 @@ default ecs_task_evelated = null
 aws_bool_issue["ecs_task_evelated"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
-    resource.properties.container_definitions
-    resource.properties.container_definitions[_].privileged == true
+    container_definitions := resource.properties.container_definitions[_]
+    container_definitions.privileged == true
 }
 
 aws_issue["ecs_task_evelated"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
-    resource.properties.container_definitions
-    lower(resource.properties.container_definitions[_].privileged) == "true"
+    container_definitions := resource.properties.container_definitions[_]
+    lower(container_definitions[_].privileged) == "true"
 }
 
 ecs_task_evelated {
@@ -113,7 +113,8 @@ default ecs_root_user = null
 aws_issue["ecs_root_user"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
-    lower(resource.properties.container_definitions[_].user) == "root"
+    container_definitions := resource.properties.container_definitions[_]
+    lower(container_definitions.user) == "root"
 }
 
 ecs_root_user {
@@ -375,14 +376,14 @@ default ecs_transit_enabled = null
 aws_issue["ecs_transit_enabled"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
-    volume := resource.properties.Volumes[_]
+    volume := resource.properties.volume[_]
     not volume.efs_volume_configuration.transit_encryption
 }
 
 aws_issue["ecs_transit_enabled"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
-    volume := resource.properties.Volumes[_]
+    volume := resource.properties.volume[_]
     lower(volume.efs_volume_configuration.transit_encryption) != "enabled"
 }
 

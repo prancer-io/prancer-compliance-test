@@ -17,17 +17,17 @@ aws_issue["config_recorder"] {
 aws_issue["config_recorder"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_config_configuration_recorder"
-    resource.properties.recording_group
-    lower(resource.properties.recording_group.all_supported) == "false"
-    count(resource.properties.recording_group.resource_types) == 0
+    recording_group := resource.properties.recording_group[_]
+    lower(recording_group.all_supported) == "false"
+    count(recording_group.resource_types) == 0
 }
 
 aws_bool_issue["config_recorder"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_config_configuration_recorder"
-    resource.properties.recording_group
-    not resource.properties.recording_group.all_supported
-    count(resource.properties.recording_group.resource_types) == 0
+    recording_group := resource.properties.recording_group[_]
+    not recording_group.all_supported
+    count(recording_group.resource_types) == 0
 }
 
 config_recorder {
@@ -79,29 +79,29 @@ aws_issue["config_all_resource"] {
 aws_issue["config_all_resource"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_config_configuration_recorder"
-    resource.properties.recording_group
-    lower(resource.properties.recording_group.all_supported) == "false"
+    recording_group := resource.properties.recording_group[_]
+    lower(recording_group.all_supported) == "false"
 }
 
 aws_issue["config_all_resource"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_config_configuration_recorder"
-    resource.properties.recording_group
-    lower(resource.properties.recording_group.include_global_resource_types) == "false"
+    recording_group := resource.properties.recording_group[_]
+    lower(recording_group.include_global_resource_types) == "false"
 }
 
 aws_bool_issue["config_all_resource"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_config_configuration_recorder"
-    resource.properties.recording_group
-    not resource.properties.recording_group.all_supported
+    recording_group := resource.properties.recording_group[_]
+    not recording_group.all_supported
 }
 
 aws_bool_issue["config_all_resource"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_config_configuration_recorder"
-    resource.properties.recording_group
-    not resource.properties.recording_group.include_global_resource_types
+    recording_group := resource.properties.recording_group[_]
+    not recording_group.include_global_resource_types
 }
 
 

@@ -63,7 +63,8 @@ aws_issue["ec2_no_vpc"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_instance"
     not resource.properties.subnet_id
-    count([c | resource.properties.network_interface[_].subnet_id; c := 1]) == 0
+    network_interface := resource.properties.network_interface[_]
+    count([c | network_interface.subnet_id; c := 1]) == 0
 }
 
 ec2_no_vpc {
@@ -101,14 +102,16 @@ default ec2_public_ip = null
 aws_issue["ec2_public_ip"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_instance"
-    lower(resource.properties.network_interface[_].associate_public_ip_address) == "true"
+    network_interface := resource.properties.network_interface[_]
+    lower(network_interface.associate_public_ip_address) == "true"
     lower(resource.properties.security_groups[_]) == "default"
 }
 
 aws_bool_issue["ec2_public_ip"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_instance"
-    resource.properties.network_interface[_].associate_public_ip_address == true
+    network_interface := resource.properties.network_interface[_]
+    network_interface.associate_public_ip_address == true
     lower(resource.properties.security_groups[_]) == "default"
 }
 

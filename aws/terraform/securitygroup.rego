@@ -76,7 +76,7 @@ aws_issue[port] {
 aws_issue["all"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_security_group"
-    lower(resource.properties.GroupName) == "default"
+    lower(resource.properties.name) == "default"
     ingress := resource.properties.ingress[_]
     ingress.ipv6_cidr_blocks[_] == "::/0"
 }
@@ -84,7 +84,7 @@ aws_issue["all"] {
 aws_issue["all"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_security_group_rule"
-    lower(resource.properties.GroupName) == "default"
+    lower(resource.properties.name) == "default"
     ingress := resource.properties.ingress[_]
     ingress.ipv6_cidr_blocks[_] == "::/0"
 }
@@ -92,7 +92,7 @@ aws_issue["all"] {
 aws_issue["all"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_security_group"
-    lower(resource.properties.GroupName) == "default"
+    lower(resource.properties.name) == "default"
     ingress := resource.properties.ingress[_]
     ingress.cidr_blocks[_] == "0.0.0.0/0"
 }
@@ -100,7 +100,7 @@ aws_issue["all"] {
 aws_issue["all"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_security_group_rule"
-    lower(resource.properties.GroupName) == "default"
+    lower(resource.properties.name) == "default"
     ingress := resource.properties.ingress[_]
     ingress.cidr_blocks[_] == "0.0.0.0/0"
 }

@@ -375,19 +375,22 @@ default s3_versioning = null
 aws_attribute_absence["s3_versioning"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_s3_bucket"
-    not resource.properties.versioning.enabled
+    versioning := resource.properties.versioning[_]
+    not versioning.enabled
 }
 
 aws_issue["s3_versioning"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_s3_bucket"
-    lower(resource.properties.versioning.enabled) == "false"
+    versioning := resource.properties.versioning[_]
+    lower(versioning.enabled) == "false"
 }
 
 aws_bool_issue["s3_versioning"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_s3_bucket"
-    resource.properties.versioning.enabled == false
+    versioning := resource.properties.versioning[_]
+    versioning.enabled == false
 }
 
 s3_versioning {
