@@ -521,7 +521,7 @@ aws_bool_issue["esearch_encrypt_kms"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
     encrypt_at_rest := resource.properties.encrypt_at_rest[_]
-    encrypt_at_rest.enabled
+    encrypt_at_rest.enabled == true
     not encrypt_at_rest.kms_key_id
 }
 
@@ -529,7 +529,7 @@ aws_bool_issue["esearch_encrypt_kms"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
     encrypt_at_rest := resource.properties.encrypt_at_rest[_]
-    encrypt_at_rest.enabled
+    encrypt_at_rest.enabled == true
     lower(encrypt_at_rest.kms_key_id) == ""
 }
 
