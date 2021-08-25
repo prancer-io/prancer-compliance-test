@@ -101,6 +101,99 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_ALL_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-gID6-TRF",
+                            "eval": "data.rule.db_exposed",
+                            "message": "data.rule.db_exposed_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html",
+                            "remediationFunction": "PR_AWS_gID6_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Publicly exposed DB Ports",
+                    "description": "DB Servers contain sensitive data and should not be exposed to any direct traffic from internet. This policy checks for the network traffic from internet hitting the DB Servers on their default ports. The DB servers monitored on the default ports are : Microsoft SQL Server (1433), Oracle (1521), MySQL (3306), Sybase (5000), Postgresql (5432), CouchDB (5984), Redis (6379, 6380), RethinkDB (8080,28015, 29015), CassandraDB (9042), Memcached (11211), MongoDB (27017), DB2 (50000).",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ALL_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-gID1-TRF",
+                            "eval": "data.rule.bitcoin_ports",
+                            "message": "data.rule.bitcoin_ports_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html",
+                            "remediationFunction": "PR_AWS_gID1_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Instance is communicating with ports known to mine Bitcoin",
+                    "description": "Identifies traffic from internal workloads to internet IPs on ports 8332,8333 that are known to mine Bitcoins. Unless this traffic is part of authorized applications and processes, your instances may have been compromised.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "HIPAA",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ALL_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-gID2-TRF",
+                            "eval": "data.rule.ethereum_ports",
+                            "message": "data.rule.ethereum_ports_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html",
+                            "remediationFunction": "PR_AWS_gID2_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Instance is communicating with ports known to mine Ethereum",
+                    "description": "Identifies traffic from internal workloads to internet IPs on ports 8545,30303 that are known to mine Ethereum. Unless this traffic is part of authorized applications and processes, your instances may have been compromised.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "HIPAA",
+                                "NIST 800"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_CLOUD_FORMATION",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -3039,7 +3132,6 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ec2networkacl",
                                 "terraform"
                             ]
                         }
@@ -3070,7 +3162,6 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ec2networkacl",
                                 "terraform"
                             ]
                         }
@@ -3101,7 +3192,6 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ec2networkacl",
                                 "terraform"
                             ]
                         }
@@ -3132,7 +3222,6 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ec2networkacl",
                                 "terraform"
                             ]
                         }
@@ -3163,7 +3252,6 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ec2networkacl",
                                 "terraform"
                             ]
                         }
@@ -3194,7 +3282,6 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ec2networkacl",
                                 "terraform"
                             ]
                         }
@@ -3225,7 +3312,6 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "rds",
                                 "terraform"
                             ]
                         }
@@ -3256,7 +3342,6 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "rds",
                                 "terraform"
                             ]
                         }
@@ -3287,7 +3372,6 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "rds",
                                 "terraform"
                             ]
                         }
@@ -3318,7 +3402,6 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "s3",
                                 "terraform"
                             ]
                         }
@@ -3348,7 +3431,6 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "s3",
                                 "terraform"
                             ]
                         }
@@ -3378,7 +3460,6 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "s3",
                                 "terraform"
                             ]
                         }
@@ -3408,7 +3489,6 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "s3",
                                 "terraform"
                             ]
                         }
@@ -3438,7 +3518,6 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "s3",
                                 "terraform"
                             ]
                         }
@@ -3468,7 +3547,6 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ec2",
                                 "terraform"
                             ]
                         }
@@ -3498,7 +3576,6 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ec2",
                                 "terraform"
                             ]
                         }
@@ -3939,7 +4016,6 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "eks",
                                 "terraform"
                             ]
                         }
@@ -4500,6 +4576,267 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_KINESIS_1",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(kinesis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0233-TRF",
+                            "eval": "data.rule.kinesis_encryption",
+                            "message": "data.rule.kinesis_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesis-stream.html",
+                            "remediationFunction": "PR_AWS_0233_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Kinesis streams are not encrypted using Server Side Encryption",
+                    "description": "This Policy identifies the AWS Kinesis streams which are not encrypted using Server Side Encryption. Server Side Encryption is used to encrypt your sensitive data before it is written to the Kinesis stream storage layer and decrypted after it is retrieved from storage.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KINESIS_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(kinesis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0234-TRF",
+                            "eval": "data.rule.kinesis_encryption_kms",
+                            "message": "data.rule.kinesis_encryption_kms_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesis-stream.html",
+                            "remediationFunction": "PR_AWS_0234_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Kinesis streams encryption using default KMS keys instead of Customer's Managed Master Keys",
+                    "description": "This policy identifies the AWS Kinesis streams which are encrypted with default KMS keys and not with Master Keys managed by Customer. It is a best practice to use customer managed Master Keys to encrypt your Amazon Kinesis streams data. It gives you full control over the encrypted data.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KMS_1",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(kms.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0235-TRF",
+                            "eval": "data.rule.kms_key_rotation",
+                            "message": "data.rule.kms_key_rotation_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html",
+                            "remediationFunction": "PR_AWS_0235_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Customer Master Key (CMK) rotation is not enabled",
+                    "description": "This policy identifies Customer Master Keys (CMKs) that are not enabled with key rotation. AWS KMS (Key Management Service) allows customers to create master keys to encrypt sensitive data in different services. As a security best practice, it is important to rotate the keys periodically so that if the keys are compromised, the data in the underlying service is still secure with the new keys.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KMS_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(kms.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0236-TRF",
+                            "eval": "data.rule.kms_key_state",
+                            "message": "data.rule.kms_key_state_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html",
+                            "remediationFunction": "PR_AWS_0236_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS KMS Customer Managed Key not in use",
+                    "description": "This policy identifies KMS Customer Managed Keys(CMKs) which are not usable. When you create a CMK, it is enabled by default. If you disable a CMK or schedule it for deletion makes it unusable, it cannot be used to encrypt or decrypt data and AWS KMS does not rotate the backing keys until you re-enable it.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MQ_1",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(mq.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0237-TRF",
+                            "eval": "data.rule.mq_publicly_accessible",
+                            "message": "data.rule.mq_publicly_accessible_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#cfn-amazonmq-broker-publiclyaccessible",
+                            "remediationFunction": "PR_AWS_0237_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS MQ is publicly accessible",
+                    "description": "This policy identifies the AWS MQ brokers which are publicly accessible. It is advisable to use MQ brokers privately only from within your AWS Virtual Private Cloud (VPC). Ensure that the AWS MQ brokers provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MSK_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(msk.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0239-TRF",
+                            "eval": "data.rule.msk_encryption_at_rest_cmk",
+                            "message": "data.rule.msk_encryption_at_rest_cmk_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html",
+                            "remediationFunction": "PR_AWS_0239_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Use KMS Customer Master Keys for AWS MSK Clusters",
+                    "description": "Ensure that Amazon Managed Streaming for Kafka (MSK) clusters are using AWS KMS Customer Master Keys (CMKs) instead of AWS managed-keys (i.e. default keys) for data encryption, in order to have a fine-grained control over data-at-rest encryption/decryption process and meet compliance requirements. MSK is a fully managed AWS service that enables you to migrate, build and run real-time streaming applications on Apache Kafka.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MSK_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(msk.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0240-TRF",
+                            "eval": "data.rule.msk_in_transit_encryption",
+                            "message": "data.rule.msk_in_transit_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html",
+                            "remediationFunction": "PR_AWS_0240_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure data is Encrypted in transit (TLS)",
+                    "description": "Ensure data is Encrypted in transit (TLS)",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MSK_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(msk.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0241-TRF",
+                            "eval": "data.rule.msk_in_transit_encryption_tls",
+                            "message": "data.rule.msk_in_transit_encryption_tls_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html",
+                            "remediationFunction": "PR_AWS_0241_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure client authentication is enabled with TLS (mutual TLS authentication)",
+                    "description": "Enable TLS by setting EncryptionInfo.EncryptionInTransit.ClientBroker value to 'TLS'. to provide trasport layes security to MSK instance",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MSK_5",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(msk.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0242-TRF",
+                            "eval": "data.rule.msk_vpc",
+                            "message": "data.rule.msk_vpc_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html",
+                            "remediationFunction": "PR_AWS_0242_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure MSK cluster is setup in GS VPC",
+                    "description": "To Add MKS Cluster in gs VPC,Specify exactly two subnets if you are using the US West (N. California) Region. For other Regions where Amazon MSK is available, you can specify either two or three subnets. The subnets that you specify must be in distinct Availability Zones. When you create a cluster, Amazon MSK distributes the broker nodes evenly across the subnets that you specify.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_NETWORKACL_7",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -4523,7 +4860,238 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "ec2networkacl",
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_RDS_12",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(rds.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0244-TRF",
+                            "eval": "data.rule.rds_cluster_retention",
+                            "message": "data.rule.rds_cluster_retention_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html , https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html",
+                            "remediationFunction": "PR_AWS_0244_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS RDS cluster retention policy less than 7 days",
+                    "description": "RDS cluster Retention Policies for Backups are an important part of your DR/BCP strategy. Recovering data from catastrophic failures, malicious attacks, or corruption often requires a several day window of potentially good backup material to leverage. As such, the best practice is to ensure your RDS clusters are retaining at least 7 days of backups, if not more (up to a maximum of 35).",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ROUTE_1",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(route53.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0245-TRF",
+                            "eval": "data.rule.route_healthcheck_disable",
+                            "message": "data.rule.route_healthcheck_disable_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-aliastarget.html",
+                            "remediationFunction": "PR_AWS_0245_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Route53 DNS evaluateTargetHealth is enabled",
+                    "description": "The EvaluateTargetHealth of Route53 is not enabled, an alias record can't inherits the health of the referenced AWS resource, such as an ELB load balancer or another record in the hosted zone.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_S3_14",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(s3.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0246-TRF",
+                            "eval": "data.rule.s3_cors",
+                            "message": "data.rule.s3_cors_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket--seealso\nAllowedHeaders should not have default value '*', define value more specific like Content-Type, x-requested-with etc. and AllowedMethods should be 'GET', 'POST', 'PUT', 'PATHCH', 'DELETE' or 'OPTIONS'",
+                            "remediationFunction": "PR_AWS_0246_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure S3 hosted sites supported hardened CORS",
+                    "description": "Ensure that AllowedOrigins, AllowedMethods should not be set to *. this allows all cross site users to access s3 bucket and they have permission to manipulate data",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SAGEMAKER_1",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sagemaker.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0247-TRF",
+                            "eval": "data.rule.sagemaker_encryption_kms",
+                            "message": "data.rule.sagemaker_encryption_kms_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html\nprovicde KMSKeyId using KMS or CMK or static value starts with 'arn:'",
+                            "remediationFunction": "PR_AWS_0247_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS SageMaker notebook instance not configured with data encryption at rest using KMS key",
+                    "description": "This policy identifies SageMaker notebook instances that are not configured with data encryption at rest using the AWS managed KMS key. It is recommended to implement encryption at rest in order to protect data from unauthorized entities.\n\nFor more details:\nhttps://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SAGEMAKER_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sagemaker.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0248-TRF",
+                            "eval": "data.rule.sagemaker_rootaccess_enabled",
+                            "message": "data.rule.sagemaker_rootaccess_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html\nRootAccess should be disabled in properties to make sagemaker secure from unrestricted access",
+                            "remediationFunction": "PR_AWS_0248_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS SageMaker notebook instance with root access enabled",
+                    "description": "This policy identifies the SageMaker notebook instances which are enabled with root access. Root access means having administrator privileges, users with root access can access and edit all files on the compute instance, including system-critical files. Removing root access prevents notebook users from deleting system-level software, installing new software, and modifying essential environment components.\nNOTE: Lifecycle configurations need root access to be able to set up a notebook instance. Because of this, lifecycle configurations associated with a notebook instance always run with root access even if you disable root access for users.\n\nFor more details:\nhttps://docs.aws.amazon.com/sagemaker/latest/dg/nbi-root-access.html",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SAGEMAKER_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sagemaker.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0249-TRF",
+                            "eval": "data.rule.sagemaker_direct_internet_access_enabled",
+                            "message": "data.rule.sagemaker_direct_internet_access_enabled_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html\nDirectInternetAccess should be disabled in properties to restrict direct access from the internet.",
+                            "remediationFunction": "PR_AWS_0249_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS SageMaker notebook instance configured with direct internet access feature",
+                    "description": "This policy identifies SageMaker notebook instances that are configured with direct internet access feature. If AWS SageMaker notebook instances are configured with direct internet access feature, any machine outside the VPC can establish a connection to these instances, which provides an additional avenue for unauthorized access to data and the opportunity for malicious activity.\n\nFor more details:\nhttps://docs.aws.amazon.com/sagemaker/latest/dg/appendix-notebook-and-internet-access.html",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SAGEMAKER_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sagemaker.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0250-TRF",
+                            "eval": "data.rule.sagemaker_vpc",
+                            "message": "data.rule.sagemaker_vpc_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html",
+                            "remediationFunction": "PR_AWS_0250_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS SageMaker notebook instance is not placed in VPC",
+                    "description": "This policy identifies SageMaker notebook instances that are not placed inside a VPC. It is recommended to place your SageMaker inside VPC so that VPC-only resources able to access your SageMaker data, which cannot be accessed outside a VPC network.\n\nFor more details:\nhttps://docs.aws.amazon.com/sagemaker/latest/dg/process-vpc.html",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_21",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0251-TRF",
+                            "eval": "data.rule.port_69",
+                            "message": "data.rule.port_69_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationFunction": "PR_AWS_0251_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Security Groups allow internet traffic from internet to Trivial File Transfer Protocol Port (69)",
+                    "description": "This policy identifies the security groups which are exposing Trivial File Transfer Protocol Port (69) to the internet. It is recommended that Global permission to access the well known services Trivial File Transfer Protocol Port (69) should not be allowed in a security group.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
                                 "terraform"
                             ]
                         }
@@ -4635,6 +5203,209 @@
                     "severity": "Medium",
                     "title": "Ensure ECR image scan on push is enabled",
                     "description": "Amazon ECR is a fully managed container registry used to store, manage and deploy container images. ECR Image Scanning assesses and identifies operating system vulnerabilities. Using automated image scans you can ensure container image vulnerabilities are found before getting pushed to production. ECR APIs notify if vulnerabilities were found when a scan completes",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_AUTOSCALING_1",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(autoscaling.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0256-TRF",
+                            "eval": "data.rule.as_volume_encrypted",
+                            "message": "data.rule.as_volume_encrypted_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig-blockdev-template.html#cfn-as-launchconfig-blockdev-template-encrypted and none of the BlockDeviceMappings should desable Encrypted of Ebs",
+                            "remediationFunction": "PR_AWS_0256_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure EBS volumes have encrypted launch configurations",
+                    "description": "Amazon Elastic Block Store (EBS) volumes allow you to create encrypted launch configurations when creating EC2 instances and auto scaling. When the entire EBS volume is encrypted, data stored at rest on the volume, disk I/O, snapshots created from the volume, and data in-transit between EBS and EC2 are all encrypted.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ALL_5",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0257-TRF",
+                            "eval": "data.rule.dax_encrypt",
+                            "message": "data.rule.dax_encrypt_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dax-cluster-ssespecification.html and encryption at rest should be enabled by setting value of SSEEnabled true in SSESpecification",
+                            "remediationFunction": "PR_AWS_0257_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "IEnsure DAX is securely encrypted at rest",
+                    "description": "Amazon DynamoDB Accelerator (DAX) encryption at rest provides an additional layer of data protection, helping secure your data from unauthorized access to underlying storage. With encryption at rest the data persisted by DAX on disk is encrypted using 256-bit Advanced Encryption Standard (AES-256). DAX writes data to disk as part of propagating changes from the primary node to read replicas. DAX encryption at rest automatically integrates with AWS KMS for managing the single service default key used to encrypt clusters.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DYNAMO_DB_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dynamodb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0258-TRF",
+                            "eval": "data.rule.dynamodb_PITR_enable",
+                            "message": "data.rule.dynamodb_PITR_enable_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html, enable PointInTimeRecoveryEnabled in PointInTimeRecoverySpecification to provide continues backup",
+                            "remediationFunction": "PR_AWS_0258_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS DynamoDB encrypted using AWS owned CMK instead of AWS managed CMK",
+                    "description": "DynamoDB Point-In-Time Recovery (PITR) is an automatic backup service for DynamoDB table data that helps protect your DynamoDB tables from accidental write or delete operations. Once enabled, PITR provides continuous backups that can be controlled using various programmatic parameters. PITR can also be used to restore table data from any point in time during the last 35 days, as well as any incremental backups of DynamoDB tables",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ALL_6",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(all.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0259-TRF",
+                            "eval": "data.rule.qldb_permission_mode",
+                            "message": "data.rule.qldb_permission_mode_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-qldb-ledger.html#cfn-qldb-ledger-permissionsmode, and provide PermissionsMode value 'STANDARD'",
+                            "remediationFunction": "PR_AWS_0259_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure QLDB ledger permissions mode is set to STANDARD",
+                    "description": "In Amazon Quantum Ledger Database define PermissionsMode value to STANDARD permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_22",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0260-TRF",
+                            "eval": "data.rule.sg_tag",
+                            "message": "data.rule.sg_tag_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#cfn-ec2-securitygroup-tags, provide security group tags",
+                            "remediationFunction": "PR_AWS_0260_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS resources that support tags have Tags",
+                    "description": "Many different types of AWS resources support tags. Tags allow you to add metadata to a resource to help identify ownership, perform cost / billing analysis, and to enrich a resource with other valuable information, such as descriptions and environment names. While there are many ways that tags can be used, we recommend you follow a tagging practice.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_RED_SHIFT_6",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(redshift.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0261-TRF",
+                            "eval": "data.rule.redshift_allow_version_upgrade",
+                            "message": "data.rule.redshift_allow_version_upgrade_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html#cfn-redshift-cluster-allowversionupgrade, set value of AllowVersionUpgrade to when new version of redshift engine released then you can easily request that service apply upgrade during maintainace window.",
+                            "remediationFunction": "PR_AWS_0261_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Redshift cluster allow version upgrade by default",
+                    "description": "This policy identifies AWS Redshift instances which has not enabled AllowVersionUpgrade. major version upgrades can be applied during the maintenance window to the Amazon Redshift engine that is running on the cluster. When a new major version of the Amazon Redshift engine is released, you can request that the service automatically apply upgrades during the maintenance window to the Amazon Redshift engine that is running on your cluster.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_RDS_13",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(rds.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0262-TRF",
+                            "eval": "data.rule.rds_cluster_deletion_protection",
+                            "message": "data.rule.rds_cluster_deletion_protection_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#cfn-rds-dbcluster-deletionprotection, also enable DeletionProtection to prevent accidental deletion of the resource.",
+                            "remediationFunction": "PR_AWS_0262_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure RDS clusters and instances have deletion protection enabled",
+                    "description": "This rule Checks if an Amazon Relational Database Service (Amazon RDS) cluster has deletion protection enabled",
                     "tags": [
                         {
                             "cloud": "git",

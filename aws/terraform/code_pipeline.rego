@@ -10,14 +10,18 @@ default deploy_compute_platform = null
 aws_attribute_absence["deploy_compute_platform"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_codepipeline"
-    not resource.properties.artifact_store.encryption_key.id
+    artifact_store := resource.properties.artifact_store[_]
+    encryption_key  := artifact_store.encryption_key[_]
+    not encryption_key.id
 }
 
 aws_issue["deploy_compute_platform"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_codepipeline"
-    resource.properties.artifact_store.encryption_key.id
-    lower(resource.properties.artifact_store.encryption_key.type) != "cmk"
+    artifact_store := resource.properties.artifact_store[_]
+    encryption_key  := artifact_store.encryption_key[_]
+    encryption_key.id
+    lower(encryption_key.type) != "cmk"
 }
 
 

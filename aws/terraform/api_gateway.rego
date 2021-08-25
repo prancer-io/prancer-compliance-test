@@ -11,19 +11,22 @@ default gateway_private = null
 aws_attribute_absence["gateway_private"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_api_gateway_rest_api"
-    not resource.properties.endpoint_configuration.types
+    endpoint_configuration := resource.properties.endpoint_configuration[_]
+    not endpoint_configuration.types
 }
 
 aws_issue["gateway_private"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_api_gateway_rest_api"
-    count(resource.properties.endpoint_configuration.types) == 0
+    endpoint_configuration := resource.properties.endpoint_configuration[_]
+    count(endpoint_configuration.types) == 0
 }
 
 aws_issue["gateway_private"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_api_gateway_rest_api"
-    type := resource.properties.endpoint_configuration.types[_]
+    endpoint_configuration := resource.properties.endpoint_configuration[_]
+    type := endpoint_configuration.types[_]
     count([c | lower(type)== "private"; c:=1]) == 0
 }
 

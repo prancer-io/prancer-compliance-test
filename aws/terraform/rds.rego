@@ -564,3 +564,105 @@ rds_retention_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
 }
+
+#
+# PR-AWS-0244-TRF
+#
+
+default rds_cluster_retention = null
+
+aws_attribute_absence["rds_cluster_retention"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_rds_cluster"
+    not resource.properties.backup_retention_period
+}
+
+aws_issue["rds_cluster_retention"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_rds_cluster"
+    to_number(resource.properties.backup_retention_period) < 7
+}
+
+rds_cluster_retention {
+    lower(input.resources[i].type) == "aws_rds_cluster"
+    not aws_issue["rds_cluster_retention"]
+    not aws_attribute_absence["rds_cluster_retention"]
+}
+
+rds_cluster_retention = false {
+    aws_issue["rds_cluster_retention"]
+}
+
+rds_cluster_retention = false {
+    aws_attribute_absence["rds_cluster_retention"]
+}
+
+rds_cluster_retention_err = "AWS RDS retention policy less than 7 days" {
+    aws_issue["rds_cluster_retention"]
+}
+
+rds_cluster_retention_miss_err = "RDS attribute BackupRetentionPeriod missing in the resource" {
+    aws_attribute_absence["rds_cluster_retention"]
+}
+
+rds_cluster_retention_metadata := {
+    "Policy Code": "PR-AWS-0244-TRF",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS RDS cluster retention policy less than 7 days",
+    "Policy Description": "RDS cluster Retention Policies for Backups are an important part of your DR/BCP strategy. Recovering data from catastrophic failures, malicious attacks, or corruption often requires a several day window of potentially good backup material to leverage. As such, the best practice is to ensure your RDS clusters are retaining at least 7 days of backups, if not more (up to a maximum of 35).",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
+}
+
+#
+# PR-AWS-0262-TRF
+#
+
+default rds_cluster_deletion_protection = null
+
+aws_issue["rds_cluster_deletion_protection"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_rds_cluster"
+    lower(resource.properties.deletion_protection) != "true"
+}
+
+aws_bool_issue["rds_cluster_deletion_protection"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_rds_cluster"
+    not resource.properties.deletion_protection
+}
+
+rds_cluster_deletion_protection {
+    lower(input.resources[i].type) == "aws_rds_cluster"
+    not aws_issue["rds_cluster_deletion_protection"]
+    not aws_bool_issue["rds_cluster_deletion_protection"]
+}
+
+rds_cluster_deletion_protection = false {
+    aws_issue["rds_cluster_deletion_protection"]
+}
+
+rds_cluster_deletion_protection = false {
+    aws_bool_issue["rds_cluster_deletion_protection"]
+}
+
+rds_cluster_deletion_protection_err = "Ensure RDS clusters and instances have deletion protection enabled" {
+    aws_issue["rds_cluster_deletion_protection"]
+} else = "Ensure RDS clusters and instances have deletion protection enabled" {
+    aws_bool_issue["rds_cluster_deletion_protection"]
+}
+
+rds_cluster_deletion_protection_metadata := {
+    "Policy Code": "PR-AWS-0262-TRF",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure RDS clusters and instances have deletion protection enabled",
+    "Policy Description": "This rule Checks if an Amazon Relational Database Service (Amazon RDS) cluster has deletion protection enabled",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
+}

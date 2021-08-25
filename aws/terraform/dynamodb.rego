@@ -72,3 +72,56 @@ dynabodb_encrypt_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html"
 }
+
+
+#
+# PR-AWS-0258-TRF
+#
+
+default dynamodb_PITR_enable = null
+
+aws_issue["dynamodb_PITR_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_dynamodb_table"
+    point_in_time_recovery := resource.properties.point_in_time_recovery[_]
+    lower(point_in_time_recovery.enabled) != "true"
+}
+
+aws_bool_issue["dynamodb_PITR_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_dynamodb_table"
+    point_in_time_recovery := resource.properties.point_in_time_recovery[_]
+    not point_in_time_recovery.enabled
+}
+
+dynamodb_PITR_enable {
+    lower(input.resources[i].type) == "aws_dynamodb_table"
+    not aws_issue["dynamodb_PITR_enable"]
+    not aws_bool_issue["dynamodb_PITR_enable"]
+}
+
+dynamodb_PITR_enable = false {
+    aws_issue["dynamodb_PITR_enable"]
+}
+
+dynamodb_PITR_enable = false {
+    aws_bool_issue["dynamodb_PITR_enable"]
+}
+
+dynamodb_PITR_enable_err = "Ensure DynamoDB PITR is enabled" {
+    aws_issue["dynamodb_PITR_enable"]
+} else = "Ensure DynamoDB PITR is enabled" {
+    aws_bool_issue["dynamodb_PITR_enable"]
+}
+
+dynamodb_PITR_enable_metadata := {
+    "Policy Code": "PR-AWS-0258-TRF",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure DynamoDB PITR is enabled",
+    "Policy Description": "DynamoDB Point-In-Time Recovery (PITR) is an automatic backup service for DynamoDB table data that helps protect your DynamoDB tables from accidental write or delete operations. Once enabled, PITR provides continuous backups that can be controlled using various programmatic parameters. PITR can also be used to restore table data from any point in time during the last 35 days, as well as any incremental backups of DynamoDB tables",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html"
+}

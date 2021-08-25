@@ -48,7 +48,8 @@ default ecr_encryption = null
 aws_issue["ecr_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecr_repository"
-    not resource.properties.encryption_configuration.encryption_type
+    encryption_configuration := resource.properties.encryption_configuration[_]
+    not encryption_configuration.encryption_type
 }
 
 
@@ -87,13 +88,15 @@ default ecr_scan = null
 aws_bool_issue["ecr_scan"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecr_repository"
-    not resource.properties.image_scanning_configuration.scan_on_push
+    image_scanning_configuration := resource.properties.image_scanning_configuration[_]
+    not image_scanning_configuration.scan_on_push
 }
 
 aws_issue["ecr_scan"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecr_repository"
-    lower(resource.properties.image_scanning_configuration.scan_on_push) != "true"
+    image_scanning_configuration := resource.properties.image_scanning_configuration[_]
+    lower(image_scanning_configuration.scan_on_push) != "true"
 }
 
 
