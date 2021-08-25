@@ -419,3 +419,54 @@ blobServicePublicAccessDisabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
 }
+
+
+
+ # PR-AZR-0148-ARM
+
+default storage_acount_by_pass = null
+
+azure_attribute_absence["storage_acount_by_pass"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.networkAcls.bypass
+}
+
+azure_issue["storage_acount_by_pass"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    lower(resource.properties.networkAcls.bypass) != "azureservices"
+}
+
+storage_acount_by_pass {
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    not azure_attribute_absence["storage_acount_by_pass"]
+    not azure_issue["storage_acount_by_pass"]
+}
+
+storage_acount_by_pass = false {
+    azure_issue["storage_acount_by_pass"]
+}
+
+storage_acount_by_pass = false {
+    azure_attribute_absence["storage_acount_by_pass"]
+}
+
+storage_acount_by_pass_err = "microsoft.storage/storageaccounts resource property networkAcls.bypass missing in the resource" {
+    azure_attribute_absence["storage_acount_by_pass"]
+} else = "Azure Storage Account Trusted Microsoft Services access is not enabled" {
+    azure_issue["storage_acount_by_pass"]
+}
+
+
+storage_acount_by_pass_metadata := {
+    "Policy Code": "PR-AZR-0148-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Storage Account Trusted Microsoft Services access should be enabled",
+    "Policy Description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging, Metrics, AzureServices (For example, 'Logging, Metrics'), or None to bypass none of those traffics. - None, Logging, Metrics, AzureServices.",
+    "Resource Type": "microsoft.storage/storageaccounts",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
+}
