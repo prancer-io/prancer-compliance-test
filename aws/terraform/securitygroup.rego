@@ -785,3 +785,78 @@ port_proto_all_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
 }
+
+#
+# PR-AWS-0251-TRF
+#
+
+default port_69 = null
+
+port_69 {
+    lower(input.resources[i].type) == "aws_security_group_rule"
+    not aws_issue["69"]
+}
+
+port_69 = false {
+    aws_issue["69"]
+}
+
+port_69_err = "AWS Security Groups allow internet traffic from internet to Trivial File Transfer Protocol Port (69)" {
+    aws_issue["69"]
+}
+
+port_69_metadata := {
+    "Policy Code": "PR-AWS-0251-TRF",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to Trivial File Transfer Protocol Port (69)",
+    "Policy Description": "This policy identifies the security groups which are exposing Trivial File Transfer Protocol Port (69) to the internet. It is recommended that Global permission to access the well known services Trivial File Transfer Protocol Port (69) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+
+#
+# PR-AWS-0260-TRF
+#
+
+default sg_tag = null
+
+aws_issue["sg_tag"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_security_group"
+    count(resource.properties.tags) == 0
+}
+
+aws_issue["sg_tag"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_security_group"
+    not resource.properties.tags
+}
+
+sg_tag {
+    lower(input.resources[i].type) == "aws_security_group"
+    not aws_issue["sg_tag"]
+}
+
+sg_tag = false {
+    aws_issue["sg_tag"]
+}
+
+sg_tag_err = "Ensure AWS resources that support tags have Tags" {
+    aws_issue["sg_tag"]
+}
+
+sg_tag_metadata := {
+    "Policy Code": "PR-AWS-0260-TRF",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS resources that support tags have Tags",
+    "Policy Description": "Many different types of AWS resources support tags. Tags allow you to add metadata to a resource to help identify ownership, perform cost / billing analysis, and to enrich a resource with other valuable information, such as descriptions and environment names. While there are many ways that tags can be used, we recommend you follow a tagging practice.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#cfn-ec2-securitygroup-tags"
+}
