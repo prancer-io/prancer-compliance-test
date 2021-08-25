@@ -36,7 +36,7 @@ mssql_log_retention = false {
 
 mssql_log_retention_err = "azurerm_mssql_server_extended_auditing_policy resource is missing or its property 'retention_in_days' is missing" {
     azure_attribute_absence["mssql_log_retention"]
-} else = "Azure SQL Server audit log retention is not greater then 90 days" {
+} else = "Azure MSSQL Server audit log retention is not greater then 90 days" {
     azure_attribute_absence["mssql_log_retention"]
 }
 
@@ -45,11 +45,70 @@ mssql_log_retention_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure SQL Server audit log retention should be greater then 90 days",
+    "Policy Title": "Azure MSSQL Server audit log retention should be greater then 90 days",
     "Policy Description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance._x005F_x000D_ _x005F_x000D_ This policy identifies SQL servers which do not retain audit logs for more than 90 days. As a best practice, configure the audit logs retention time period to be greater than 90 days.",
     "Resource Type": "azurerm_mssql_server_extended_auditing_policy",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_extended_auditing_policy"
+}
+
+
+#
+# PR-AZR-0160-TRF
+#
+
+default sql_log_retention = null
+
+azure_attribute_absence["sql_log_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_sql_server"
+    not resource.properties.extended_auditing_policy
+}
+
+azure_attribute_absence["sql_log_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_sql_server"
+    extended_auditing_policy := resource.properties.extended_auditing_policy[_]
+    not extended_auditing_policy.retention_in_days
+}
+
+azure_issue["mssql_log_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_sql_server"
+    extended_auditing_policy := resource.properties.extended_auditing_policy[_]
+    to_number(extended_auditing_policy.retention_in_days) < 91
+}
+
+sql_log_retention {
+    lower(input.resources[_].type) == "azurerm_mssql_server_extended_auditing_policy"
+    not azure_attribute_absence["sql_log_retention"]
+    not azure_issue["sql_log_retention"]
+}
+
+sql_log_retention = false {
+    azure_attribute_absence["sql_log_retention"]
+}
+
+sql_log_retention = false {
+    azure_issue["sql_log_retention"]
+}
+
+sql_log_retention_err = "azurerm_sql_server's resource block 'extended_auditing_policy' is missing or its property 'retention_in_days' is missing" {
+    azure_attribute_absence["sql_log_retention"]
+} else = "Azure SQL Server audit log retention is not greater then 90 days" {
+    azure_attribute_absence["sql_log_retention"]
+}
+
+sql_log_retention_metadata := {
+    "Policy Code": "PR-AZR-0160-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure SQL Server audit log retention should be greater then 90 days",
+    "Policy Description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance._x005F_x000D_ _x005F_x000D_ This policy identifies SQL servers which do not retain audit logs for more than 90 days. As a best practice, configure the audit logs retention time period to be greater than 90 days.",
+    "Resource Type": "azurerm_sql_server",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_server"
 }
 
 
