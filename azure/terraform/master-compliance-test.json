@@ -2848,7 +2848,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SECURITY_CONTACTS",
+                    "masterTestId": "TEST_SECURITY_CONTACTS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2866,6 +2866,114 @@
                     "severity": "Medium",
                     "title": "Security Center shoud have security contact email configured to get notifications",
                     "description": "Setting a valid email address in Security contact emails will enable Microsoft to contact you if the Microsoft Security Response Center (MSRC) discovers that your data has been accessed by an unlawful or unauthorized party. This will make sure that you are aware of any security issues and take prompt actions to mitigate the risks.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_CONTACTS_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitycontacts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0155-TRF",
+                            "eval": "data.rule.securitycontacts_phone",
+                            "message": "data.rule.securitycontacts_phone_err",
+                            "remediationDescription": "In 'azurerm_security_center_contact' resource, set a valid phone number at 'phone' property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_contact#phone for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Security Center shoud have security contact phone number configured to get notifications",
+                    "description": "Setting a valid phone number in Security contact phone will enable Microsoft to contact you if the Microsoft Security Response Center (MSRC) discovers that your data has been accessed by an unlawful or unauthorized party. This will make sure that you are aware of any security issues and take prompt actions to mitigate the risks.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_CONTACTS_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitycontacts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0156-TRF",
+                            "eval": "data.rule.securitycontacts_alert_notifications_enabled",
+                            "message": "data.rule.securitycontacts_alert_notifications_enabled_err",
+                            "remediationDescription": "In 'azurerm_security_center_contact' resource, set 'alert_notifications = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_contact#alert_notifications for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Security Center shoud send security alerts notifications to the security contact",
+                    "description": "This policy will identify security centers which dont have configuration enabled to send security alerts notifications to the security contact and alert if missing.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_CONTACTS_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitycontacts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0157-TRF",
+                            "eval": "data.rule.securitycontacts_alerts_to_admins_enabled",
+                            "message": "data.rule.securitycontacts_alerts_to_admins_enabled_err",
+                            "remediationDescription": "In 'azurerm_security_center_contact' resource, set 'alerts_to_admins = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_contact#alerts_to_admins for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Security Center shoud send security alerts notifications to subscription admins",
+                    "description": "This policy will identify security centers which dont have configuration enabled to send security alerts notifications to subscription admins and alert if missing.",
                     "tags": [
                         {
                             "cloud": "git",
