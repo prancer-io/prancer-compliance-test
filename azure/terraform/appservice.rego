@@ -110,3 +110,63 @@ app_service_https_only_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
 }
+
+
+#
+# PR-AZR-0151-TRF
+#
+
+default app_service_latest_tls_configured = null
+
+azure_attribute_absence["app_service_latest_tls_configured"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.site_config
+}
+
+#default to 1.2
+azure_attribute_absence["app_service_latest_tls_configured"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    not site_config.min_tls_version
+}
+
+azure_issue["app_service_latest_tls_configured"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    site_config.min_tls_version != "1.2"
+}
+
+app_service_latest_tls_configured {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_latest_tls_configured"]
+    not azure_issue["app_service_latest_tls_configured"]
+}
+
+app_service_latest_tls_configured {
+    azure_attribute_absence["app_service_latest_tls_configured"]
+}
+
+app_service_latest_tls_configured = false {
+    azure_issue["app_service_latest_tls_configured"]
+}
+
+app_service_latest_tls_configured_err = "azurerm_app_service property 'auth_settings.enabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
+    azure_attribute_absence["app_service_latest_tls_configured"]
+} else = "Azure App Service currently dont have latest version of tls configured" {
+    azure_issue["app_service_latest_tls_configured"]
+}
+
+app_service_latest_tls_configured_metadata := {
+    "Policy Code": "PR-AZR-0151-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Azure App Service has latest version of tls configured",
+    "Policy Description": "This policy will identify the Azure app service which dont have latest version of tls configured and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}

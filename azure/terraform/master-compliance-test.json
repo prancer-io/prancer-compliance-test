@@ -440,6 +440,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_APP_SERVICE_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0151-TRF",
+                            "eval": "data.rule.app_service_latest_tls_configured",
+                            "message": "data.rule.app_service_latest_tls_configured_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, either remove property 'min_tls_version' or set min_tls_version = '1.2' under 'site_config' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#min_tls_version for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure App Service has latest version of tls configured",
+                    "description": "This policy will identify the Azure app service which dont have latest version of tls configured and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_DATABASEACCOUNTS",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
