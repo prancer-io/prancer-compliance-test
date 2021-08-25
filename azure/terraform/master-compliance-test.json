@@ -961,7 +961,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_SERVER_AUDITING_SETTINGS",
+                    "masterTestId": "TEST_DB_SERVER_AUDITING_SETTINGS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -979,6 +979,64 @@
                     "severity": "Medium",
                     "title": "Azure SQL Server audit log retention should be greater then 90 days",
                     "description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance._x000D__x000D_This policy identifies SQL servers which do not retain audit logs for more than 90 days. As a best practice, configure the audit logs retention time period to be greater than 90 days.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DB_SERVER_AUDITING_SETTINGS_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbserverauditingsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0158-TRF",
+                            "eval": "data.rule.mssql_auditing_enabled",
+                            "message": "data.rule.mssql_auditing_enabled_err",
+                            "remediationDescription": "In 'azurerm_mssql_server' resource, make sure 'extended_auditing_policy' block exist to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server#extended_auditing_policy for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure MSSQL Server audit log should be enabled",
+                    "description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance._x005F_x000D_ _x005F_x000D_ This policy identifies SQL servers which do not have audit log enabled.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DB_SERVER_AUDITING_SETTINGS_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbserverauditingsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0159-TRF",
+                            "eval": "data.rule.sql_auditing_enabled",
+                            "message": "data.rule.sql_auditing_enabled_err",
+                            "remediationDescription": "In 'azurerm_sql_server' resource, make sure 'extended_auditing_policy' block exist to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_server#extended_auditing_policy for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server audit log should be enabled",
+                    "description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance._x005F_x000D_ _x005F_x000D_ This policy identifies SQL servers which do not have audit log enabled.",
                     "tags": [
                         {
                             "cloud": "git",
