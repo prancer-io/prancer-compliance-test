@@ -411,6 +411,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_APP_SERVICE_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0150-TRF",
+                            "eval": "data.rule.app_service_https_only",
+                            "message": "data.rule.app_service_https_only_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, set 'https_only = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#https_only for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure App Service only be accessed via HTTPS",
+                    "description": "This policy will identify the Azure app service which dont have a configuration to allow access only over HTTPS protocol and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_DATABASEACCOUNTS",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"

@@ -59,3 +59,54 @@ app_service_auth_enabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
 }
+
+
+#
+# PR-AZR-0150-TRF
+#
+
+default app_service_https_only = null
+#default is false
+azure_attribute_absence["app_service_https_only"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.https_only
+}
+
+azure_issue["app_service_https_only"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    resource.properties.https_only != true
+}
+
+app_service_https_only {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_https_only"]
+    not azure_issue["app_service_https_only"]
+}
+
+app_service_https_only = false {
+    azure_attribute_absence["app_service_https_only"]
+}
+
+app_service_https_only = false {
+    azure_issue["app_service_https_only"]
+}
+
+app_service_https_only_err = "azurerm_app_service property 'https_only' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
+    azure_attribute_absence["app_service_https_only"]
+} else = "Azure App Service currently can be accessed via HTTP. Please change it to HTTPS only" {
+    azure_issue["app_service_https_only"]
+}
+
+app_service_https_only_metadata := {
+    "Policy Code": "PR-AZR-0150-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Azure App Service only be accessed via HTTPS",
+    "Policy Description": "This policy will identify the Azure app service which dont have a configuration to allow access only over HTTPS protocol and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}
