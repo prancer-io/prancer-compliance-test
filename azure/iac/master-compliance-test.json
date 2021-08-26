@@ -360,12 +360,12 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DATABASEACCOUNTS",
+                    "masterTestId": "TEST_TAGS_1",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(databaseaccounts.rego)",
+                    "rule": "file(tags.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-0105-ARM",
@@ -3815,7 +3815,7 @@
                             "id": "PR-AZR-0151-ARM",
                             "eval": "data.rule.mysql_ingress_from_any_ip_disabled",
                             "message": "data.rule.mysql_ingress_from_any_ip_disabled_err",
-                            "remediationDescription": "For Resource type 'microsoft.dbformariadb/servers/firewallrules' make sure startIpAddress and endIpAddress exists and do not allow ingress from all Azure-internal IP addresses (0.0.0.0/0).<br>Please click <a href='' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.dbformariadb/servers/firewallrules' make sure startIpAddress and endIpAddress exists and do not allow ingress from all Azure-internal IP addresses (0.0.0.0/0).<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers/firewallrules' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_0151_ARM.py"
                         }
                     ],
@@ -3844,7 +3844,7 @@
                             "id": "PR-AZR-0153-ARM",
                             "eval": "data.rule.my_logical_sql_ingress_from_any_ip_disabled",
                             "message": "data.rule.my_logical_sql_ingress_from_any_ip_disabled_err",
-                            "remediationDescription": "For Resource type 'microsoft.dbformariadb/servers/firewallrules' make sure startIpAddress and endIpAddress exists and do not allow ingress from all Azure-internal IP addresses (0.0.0.0/0).<br>Please click <a href='' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.dbformariadb/servers/firewallrules' make sure startIpAddress and endIpAddress exists and do not allow ingress from all Azure-internal IP addresses (0.0.0.0/0).<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers/firewallrules' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_0153_ARM.py"
                         }
                     ],
@@ -3891,24 +3891,662 @@
                     ]
                 },
                 {
-                    "masterTestId": "",
+                    "masterTestId": "TEST_TAGS_2",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(.rego)",
+                    "rule": "file(tags.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR--ARM",
-                            "eval": "data.rule.",
-                            "message": "data.rule._err",
-                            "remediationDescription": "For Resource type '' make sure <br>Please click <a href='' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR__ARM.py"
+                            "id": "PR-AZR-0160-ARM",
+                            "eval": "data.rule.app_gw_tagsLength",
+                            "message": "data.rule.app_gw_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.network/applicationgateways' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0160_ARM.py"
                         }
                     ],
-                    "severity": "",
-                    "title": "",
-                    "description": "",
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.network/applicationgateways has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to Application Gateways resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_3",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0161-ARM",
+                            "eval": "data.rule.log_alert_tagsLength",
+                            "message": "data.rule.log_alert_tagsLength_err",
+                            "remediationDescription": "For Resource type 'log_alert_tagsLength' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/activitylogalerts' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0161_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.insights/activitylogalerts has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to Activity Log Alerts resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_4",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0162-ARM",
+                            "eval": "data.rule.acr_mc_tagsLength",
+                            "message": "data.rule.acr_mc_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.containerservice/managedclusters' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0162_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.containerservice/managedclusters has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to Managed Clusters resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_5",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0163-ARM",
+                            "eval": "data.rule.databrick_workspaces_tagsLength",
+                            "message": "data.rule.databrick_workspaces_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.databricks/workspaces' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.databricks/workspaces' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0163_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.databricks/workspaces has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to Databricks Workspaces resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_6",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0164-ARM",
+                            "eval": "data.rule.db_my_sql_tagsLength",
+                            "message": "data.rule.db_my_sql_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.dbformysql/servers' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0164_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.dbformysql/servers has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to My SQL servers resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_7",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0165-ARM",
+                            "eval": "data.rule.disks_tagsLength",
+                            "message": "data.rule.disks_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.compute/disks' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/disks' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0165_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.compute/disks has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to Compute Disks resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_8",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0166-ARM",
+                            "eval": "data.rule.kv_tagsLength",
+                            "message": "data.rule.kv_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.keyvault/vaults' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0166_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.keyvault/vaults has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to KeyVault resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_9",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0167-ARM",
+                            "eval": "data.rule.kv_keys_tagsLength",
+                            "message": "data.rule.kv_keys_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.keyvault/vaults/keys' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/keys' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0167_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.keyvault/vaults/keys has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to KeyVault Keys resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_10",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0168-ARM",
+                            "eval": "data.rule.kv_secrets_tagsLength",
+                            "message": "data.rule.kv_secrets_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.keyvault/vaults/secrets' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/secrets' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0168_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.keyvault/vaults/secrets has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to KeyVault Secrets resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_11",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0169-ARM",
+                            "eval": "data.rule.insights_log_profile_tagsLength",
+                            "message": "data.rule.insights_log_profile_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.insights/logprofiles' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/Microsoft.Insights/logprofiles' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0169_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.insights/logprofiles has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to Insights Log Profiles resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_12",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0170-ARM",
+                            "eval": "data.rule.network_watchers_tagsLength",
+                            "message": "data.rule.network_watchers_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.network/networkwatchers/flowlogs' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0170_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.network/networkwatchers/flowlogs has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to Network Watchers Flowlogs resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_13",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0171-ARM",
+                            "eval": "data.rule.nsg_tagsLength",
+                            "message": "data.rule.nsg_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.network/networksecuritygroups' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0171_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.network/networksecuritygroups has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to Network Security Groups resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_14",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0172-ARM",
+                            "eval": "data.rule.db_postgresql_tagsLength",
+                            "message": "data.rule.db_postgresql_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.dbforpostgresql/servers' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0172_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.dbforpostgresql/servers has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to DB for PostgreSQL Servers resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_15",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0173-ARM",
+                            "eval": "data.rule.cache_redis_tagsLength",
+                            "message": "data.rule.cache_redis_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.cache/redis' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/Microsoft.Cache/redis' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0173_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.cache/redis has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to Cache Redis resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_16",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0174-ARM",
+                            "eval": "data.rule.acr_tagsLength",
+                            "message": "data.rule.acr_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.containerregistry/registries' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0174_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.containerregistry/registries has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to Container Registry resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_17",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0175-ARM",
+                            "eval": "data.rule.acr_webhooks_tagsLength",
+                            "message": "data.rule.acr_webhooks_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.containerregistry/registries/webhooks' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries/webhooks' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0175_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.containerregistry/registries/webhooks has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to Container Registry Webhooks resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_18",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0176-ARM",
+                            "eval": "data.rule.sql_managed_instances_tagsLength",
+                            "message": "data.rule.sql_managed_instances_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.sql/managedinstances' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0176_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.sql/managedinstances has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to SQL Managed Instances resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_19",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0177-ARM",
+                            "eval": "data.rule.storage_accounts_tagsLength",
+                            "message": "data.rule.storage_accounts_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.storage/storageaccounts' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0177_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.storage/storageaccounts has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to Storage Accounts resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_20",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0178-ARM",
+                            "eval": "data.rule.vm_tagsLength",
+                            "message": "data.rule.vm_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.compute/virtualmachines' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0178_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that vm_tagsLength has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to Virtual Machines resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_21",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0179-ARM",
+                            "eval": "data.rule.vm_extensions_tagsLength",
+                            "message": "data.rule.vm_extensions_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.compute/virtualmachines/extensions' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines/extensions' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0179_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.compute/virtualmachines/extensions has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to Virtual Machines Extensions resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_22",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0180-ARM",
+                            "eval": "data.rule.vnet_tagsLength",
+                            "message": "data.rule.vnet_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.network/virtualnetworks/subnets' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/subnets' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0180_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.network/virtualnetworks/subnets has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to Virtual Networks Subnets resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_23",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0181-ARM",
+                            "eval": "data.rule.vnet_vpn_gw_tagsLength",
+                            "message": "data.rule.vnet_vpn_gw_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.network/vpngateways' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/vpngateways' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0181_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.network/vpngateways has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to Network VPN Gateways resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_TAGS_24",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(tags.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0182-ARM",
+                            "eval": "data.rule.web_sites_tagsLength",
+                            "message": "data.rule.web_sites_tagsLength_err",
+                            "remediationDescription": "For Resource type 'microsoft.web/sites' make sure has an associated tag.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0182_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that microsoft.web/sites has an associated tag",
+                    "description": "Tags are key-value pairs that you attach to Web Sites resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag.",
                     "tags": [
                         {
                             "cloud": "git",
