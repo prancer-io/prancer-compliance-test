@@ -166,9 +166,9 @@ dbsec_threat_email = false {
 
 dbsec_threat_email_err = "Azure SQL Databases security alert policy attribute 'emailAccountAdmins' or 'emailAddresses' is missing from the resource" {
     azure_attribute_absence["dbsec_threat_email"]
-} else = "Azure SQL Databases security alert policy is currently not configured to sent alert to the account administrators via email" [
+} else = "Azure SQL Databases security alert policy is currently not configured to sent alert to the account administrators via email" {
     azure_issue["dbsec_threat_email"]
-]
+}
 
 
 dbsec_threat_email_metadata := {
