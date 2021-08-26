@@ -39,7 +39,7 @@ deploy_compute_platform_metadata := {
     "Policy Code": "PR-AWS-0205-TRF",
     "Type": "IaC",
     "Product": "AWS",
-    "Language": "AWS Cloud formation",
+    "Language": "Terraform",
     "Policy Title": "AWS CodeDeploy application compute platform must be ECS or Lambda",
     "Policy Description": "AWS CodeDeploy application compute platform must be ECS or Lambda",
     "Resource Type": "",

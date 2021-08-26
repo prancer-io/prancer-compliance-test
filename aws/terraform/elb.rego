@@ -633,7 +633,7 @@ elb_v2_listener_ssl_metadata := {
     "Policy Code": "PR-AWS-0217-TRF",
     "Type": "IaC",
     "Product": "AWS",
-    "Language": "AWS Cloud formation",
+    "Language": "Terraform",
     "Policy Title": "AWS Elastic Load Balancer V2 (ELBV2) with listener TLS/SSL disabled",
     "Policy Description": "This policy identifies Elastic Load Balancer V2 (ELBV2) which have listener TLS/SSL disabled. As Load Balancers will be handling all incoming requests and routing the traffic accordingly; The listeners on the load balancers should always receive traffic over secure channel with a valid SSL certificate configured.",
     "Resource Type": "",
