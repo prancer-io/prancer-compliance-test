@@ -63,7 +63,7 @@ default aks_http_routing = null
 azure_attribute_absence["aks_http_routing"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
-    not resource.properties.addonProfiles.httpApplicationRouting
+    not resource.properties.addonProfiles.httpApplicationRouting.enabled
 }
 
 azure_issue["aks_http_routing"] {
@@ -74,8 +74,8 @@ azure_issue["aks_http_routing"] {
 
 aks_http_routing {
     lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
-    not azure_issue["aks_http_routing"]
     not azure_attribute_absence["aks_http_routing"]
+    not azure_issue["aks_http_routing"]
 }
 
 aks_http_routing = false {
@@ -418,6 +418,57 @@ network_policy_metadata := {
     "Language": "ARM template",
     "Policy Title": "Ensure AKS cluster network policies are enforced",
     "Policy Description": "Network policy options in AKS include two ways to implement a network policy. You can choose between Azure Network Policies or Calico Network Policies. In both cases, the underlying controlling layer is based on Linux IPTables to enforce the specified policies. Policies are translated into sets of allowed and disallowed IP pairs. These pairs are then programmed as IPTable rules.",
+    "Resource Type": "microsoft.containerservice/managedclusters",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
+}
+
+
+# https://www.danielstechblog.io/disable-the-kubernetes-dashboard-on-azure-kubernetes-service/
+# PR-AZR-0144-ARM
+#
+
+default aks_kub_dashboard_disabled = null
+
+azure_attribute_absence["aks_kub_dashboard_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.addonProfiles.kubeDashboard.enabled
+}
+
+azure_issue["aks_kub_dashboard_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    resource.properties.addonProfiles.kubeDashboard.enabled != false
+}
+
+aks_kub_dashboard_disabled {
+    lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
+    not azure_attribute_absence["aks_kub_dashboard_disabled"]
+    not azure_issue["aks_kub_dashboard_disabled"]
+}
+
+aks_kub_dashboard_disabled = false {
+    azure_issue["aks_kub_dashboard_disabled"]
+}
+
+aks_kub_dashboard_disabled = false {
+    azure_attribute_absence["aks_kub_dashboard_disabled"]
+}
+
+aks_kub_dashboard_disabled_err = "'microsoft.containerservice/managedclusters' property 'addonProfiles.kubeDashboard.enabled' is missing from the resource" {
+    azure_attribute_absence["aks_kub_dashboard_disabled"]
+} else = "Kubernetes Dashboard is currently not disabled" {
+    azure_issue["aks_kub_dashboard_disabled"]
+}
+
+aks_kub_dashboard_disabled_metadata := {
+    "Policy Code": "PR-AZR-0144-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure Kubernetes Dashboard is disabled",
+    "Policy Description": "Disable the Kubernetes dashboard on Azure Kubernetes Service",
     "Resource Type": "microsoft.containerservice/managedclusters",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"

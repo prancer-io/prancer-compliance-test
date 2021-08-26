@@ -208,6 +208,93 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_AKS_7",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0138-TRF",
+                            "eval": "data.rule.aks_network_policy_configured",
+                            "message": "data.rule.aks_network_policy_configured_err",
+                            "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, set network_policy = 'azure' under 'network_profile' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#network_policy for details.",
+                            "remediationFunction": "PR_AZR_0138_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AKS cluster shoud have Network Policy configured",
+                    "description": "Network policy used for building Kubernetes network. - calico or azure.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_AKS_8",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0137-TRF",
+                            "eval": "data.rule.aks_api_server_authorized_ip_range_enabled",
+                            "message": "data.rule.aks_api_server_authorized_ip_range_enabled_err",
+                            "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, make sure property 'api_server_authorized_ip_ranges' exist and its value has valid ip range to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#api_server_authorized_ip_ranges for details.",
+                            "remediationFunction": "PR_AZR_0137_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AKS shoud have an API Server Authorized IP Ranges enabled",
+                    "description": "Authorized IP Ranges to kubernetes API server",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_AKS_9",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0144-TRF",
+                            "eval": "data.rule.aks_kub_dashboard_disabled",
+                            "message": "data.rule.aks_kub_dashboard_disabled_err",
+                            "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, set 'kube_dashboard.enabled = true' under 'addon_profile' block to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#kube_dashboard for details.",
+                            "remediationFunction": "PR_AZR_0144_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Kubernetes Dashboard shoud be disabled",
+                    "description": "Disable the Kubernetes dashboard on Azure Kubernetes Service",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_APPLICATION_GATEWAYS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -284,6 +371,180 @@
                     "severity": "Medium",
                     "title": "Ensure Application Gateway is using Https protocol",
                     "description": "Application Gateway allows to set network protocols Http and Https. It is highly recommended to use Https protocol for secure connections.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APP_SERVICE_1",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0149-TRF",
+                            "eval": "data.rule.app_service_auth_enabled",
+                            "message": "data.rule.app_service_auth_enabled_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, set 'enabled = true' under 'auth_settings' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#enabled for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure App Service Authentication is enabled",
+                    "description": "This policy will identify the Azure app service which dont have authentication enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APP_SERVICE_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0150-TRF",
+                            "eval": "data.rule.app_service_https_only",
+                            "message": "data.rule.app_service_https_only_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, set 'https_only = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#https_only for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure App Service only be accessed via HTTPS",
+                    "description": "This policy will identify the Azure app service which dont have a configuration to allow access only over HTTPS protocol and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APP_SERVICE_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0151-TRF",
+                            "eval": "data.rule.app_service_latest_tls_configured",
+                            "message": "data.rule.app_service_latest_tls_configured_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, either remove property 'min_tls_version' or set min_tls_version = '1.2' under 'site_config' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#min_tls_version for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure App Service has latest version of tls configured",
+                    "description": "This policy will identify the Azure app service which dont have latest version of tls configured and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APP_SERVICE_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0152-TRF",
+                            "eval": "data.rule.app_service_aad_auth_enabled",
+                            "message": "data.rule.app_service_aad_auth_enabled_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, make sure 'active_directory' block exist with proper configuration properties under 'auth_settings' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#active_directory for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure App Service AAD authentication is enabled",
+                    "description": "This policy will identify the Azure app service which dont have AAD authentication enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APP_SERVICE_5",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0153-TRF",
+                            "eval": "data.rule.app_service_client_cert_enabled",
+                            "message": "data.rule.app_service_client_cert_enabled_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, set 'client_cert_enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#client_cert_enabled for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure App Service require client certificates for incoming requests",
+                    "description": "This policy will identify the Azure app service which has missing configuration about requiring client certificates for incoming requests and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APP_SERVICE_6",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0154-TRF",
+                            "eval": "data.rule.app_service_uses_http_two",
+                            "message": "data.rule.app_service_uses_http_two_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, set 'http2_enabled = true' under 'site_config' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#http2_enabled for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure App Service has latest http2 protocol enabled",
+                    "description": "This policy will identify the Azure app service which dont have latest http2 protocol enabled and give alert",
                     "tags": [
                         {
                             "cloud": "git",
@@ -700,7 +961,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DB_SERVER_AUDITING_SETTINGS",
+                    "masterTestId": "TEST_DB_SERVER_AUDITING_SETTINGS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -716,8 +977,95 @@
                         }
                     ],
                     "severity": "Medium",
+                    "title": "Azure MSSQL Server audit log retention should be greater then 90 days",
+                    "description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance._x000D__x000D_This policy identifies SQL servers which do not retain audit logs for more than 90 days. As a best practice, configure the audit logs retention time period to be greater than 90 days.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DB_SERVER_AUDITING_SETTINGS_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbserverauditingsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0160-TRF",
+                            "eval": "data.rule.sql_log_retention",
+                            "message": "data.rule.sql_log_retention_err",
+                            "remediationDescription": "In 'azurerm_sql_server' resource, set the 'retention_in_days = 91' under 'extended_auditing_policy' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_server#retention_in_days for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
                     "title": "Azure SQL Server audit log retention should be greater then 90 days",
                     "description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance._x000D__x000D_This policy identifies SQL servers which do not retain audit logs for more than 90 days. As a best practice, configure the audit logs retention time period to be greater than 90 days.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DB_SERVER_AUDITING_SETTINGS_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbserverauditingsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0158-TRF",
+                            "eval": "data.rule.mssql_auditing_enabled",
+                            "message": "data.rule.mssql_auditing_enabled_err",
+                            "remediationDescription": "In 'azurerm_mssql_server' resource, make sure 'extended_auditing_policy' block exist to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server#extended_auditing_policy for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure MSSQL Server audit log should be enabled",
+                    "description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance._x005F_x000D_ _x005F_x000D_ This policy identifies SQL servers which do not have audit log enabled.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DB_SERVER_AUDITING_SETTINGS_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbserverauditingsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0159-TRF",
+                            "eval": "data.rule.sql_auditing_enabled",
+                            "message": "data.rule.sql_auditing_enabled_err",
+                            "remediationDescription": "In 'azurerm_sql_server' resource, make sure 'extended_auditing_policy' block exist to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_server#extended_auditing_policy for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure SQL Server audit log should be enabled",
+                    "description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance._x005F_x000D_ _x005F_x000D_ This policy identifies SQL servers which do not have audit log enabled.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -805,6 +1153,180 @@
                     "severity": "Medium",
                     "title": "Azure SQL Server advanced data security should be enabled",
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS_1",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(diagnosticsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0017-TRF",
+                            "eval": "data.rule.log_keyvault",
+                            "message": "data.rule.log_keyvault_err",
+                            "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true' and category = 'auditevent' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
+                            "remediationFunction": "PR_AZR_0017_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Key Vault audit logging should be enabled",
+                    "description": "This policy identifies Azure Key Vault instances for which audit logging is disabled. As a best practice, enable audit event logging for Key Vault instances to monitor how and when your key vaults are accessed, and by whom.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(diagnosticsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0019-TRF",
+                            "eval": "data.rule.log_lbs",
+                            "message": "data.rule.log_lbs_err",
+                            "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true' and category = 'auditevent' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
+                            "remediationFunction": "PR_AZR_0019_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Load Balancer diagnostics logs should be enabled",
+                    "description": "Azure Load Balancers provide different types of logsâ€”alert events, health probe, metricsâ€”to help you manage and troubleshoot issues. This policy identifies Azure Load Balancers that have diagnostics logs disabled. As a best practice, enable diagnostic logs to start collecting the data available through these logs.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(diagnosticsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0063-TRF",
+                            "eval": "data.rule.log_storage_retention",
+                            "message": "data.rule.log_storage_retention_err",
+                            "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true', category = 'auditevent', 'retention_policy.enabled = true' and 'retention_policy.days = 90' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
+                            "remediationFunction": "PR_AZR_0063_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Storage Account auditing retention should be 90 days or more",
+                    "description": "This policy identifies Storage Accounts which have Auditing Retentions less than 90 days. Audit Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access. It is recommended to configure Storage Account Audit Log Retention to be greater than or equal to 90 days.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(diagnosticsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0069-TRF",
+                            "eval": "data.rule.log_blob",
+                            "message": "data.rule.log_blob_err",
+                            "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true' and category = 'auditevent' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
+                            "remediationFunction": "PR_AZR_0069_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure storage account blob services diagnostic logs should be enabled",
+                    "description": "Storage Logging records details of requests (read, write, and delete operations) against your Azure blobs. The logs include additional information such as:_x000D_- Timing and server latency._x000D_- Success or failure, and HTTP status code._x000D_- Authentication details_x000D__x000D_This policy identifies Azure storage accounts that do not have logging enabled for blobs. As a best practice, enable logging for read, write, and delete request types on blobs.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS_5",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(diagnosticsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0070-TRF",
+                            "eval": "data.rule.log_queue",
+                            "message": "data.rule.log_queue_err",
+                            "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true' and category = 'auditevent' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
+                            "remediationFunction": "PR_AZR_0070_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure storage account queue services diagnostic logs should be enabled",
+                    "description": "Queue logging cannot be enabled for Storage Accounts with 'kind' of BlobStorage **_x000D__x000D_Storage Logging records details of requests (read, write, and delete operations) against your Azure queues. The logs include additional information such as:_x000D_- Timing and server latency._x000D_- Success or failure, and HTTP status code._x000D_- Authentication details_x000D__x000D_This policy identifies Azure storage accounts that do not have logging enabled for queues. As a best practice, enable logging for read, write, and delete request types on queues.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS_6",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(diagnosticsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0071-TRF",
+                            "eval": "data.rule.log_table",
+                            "message": "data.rule.log_table_err",
+                            "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true' and category = 'auditevent' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
+                            "remediationFunction": "PR_AZR_0071_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure storage account table services diagnostic logs should be enabled",
+                    "description": "Storage Logging records details of requests (read, write, and delete operations) against your Azure queues. The logs include additional information such as:_x005F_x000D_ - Timing and server latency._x005F_x000D_ - Success or failure, and HTTP status code._x005F_x000D_ - Authentication details_x005F_x000D_ _x005F_x000D_ This policy identifies Azure storage accounts that do not have logging enabled for tables. As a best practice, enable logging for read, write, and delete request types on tables.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1027,6 +1549,68 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_MariaDB",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(mariadb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0145-TRF",
+                            "eval": "data.rule.maria_ingress_from_any_ip_disabled",
+                            "message": "data.rule.maria_ingress_from_any_ip_disabled_err",
+                            "remediationDescription": "In 'azurerm_mariadb_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_firewall_rule#start_ip_address for details.",
+                            "remediationFunction": "PR_AZR_0145_TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "MariaDB should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
+                    "description": "This policy will identify MariaDB firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MySQL_SERVER",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(mysql_server.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0148-TRF",
+                            "eval": "data.rule.mysql_ingress_from_any_ip_disabled",
+                            "message": "data.rule.mysql_ingress_from_any_ip_disabled_err",
+                            "remediationDescription": "In 'azurerm_mysql_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_firewall_rule#start_ip_address for details.",
+                            "remediationFunction": "PR_AZR_0148_TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
+                    "description": "This policy will identify MySQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_NETWORK_WATCHERS_FLOW_LOGS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1096,13 +1680,13 @@
                             "id": "PR-AZR-0051-TRF",
                             "eval": "data.rule.netwatch_log_retention",
                             "message": "data.rule.netwatch_log_retention_err",
-                            "remediationDescription": "In 'azurerm_network_watcher_flow_log' resource, set 'enabled = true' and 'days = 90' under 'retention_policy' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_watcher_flow_log#enabled for details.",
+                            "remediationDescription": "In 'azurerm_network_watcher_flow_log' resource, set 'enabled = true' and 'days = 91' under 'retention_policy' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_watcher_flow_log#enabled for details.",
                             "remediationFunction": "PR_AZR_0051_TRF.py"
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Network Watcher Network Security Group (NSG) flow logs retention should be equal or greater than 90 days",
-                    "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs retention period is 90 days or less. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'._x000D__x000D_NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:_x000D_- Outbound and inbound flows on a per-rule basis._x000D_- Network interface to which the flow applies._x000D_- 5-tuple information about the flow (source/destination IP, source/destination port, protocol)._x000D_- Whether the traffic was allowed or denied._x000D__x000D_As a best practice, enable NSG flow logs and set the log retention period to at least 90 days.",
+                    "title": "Azure Network Watcher Network Security Group (NSG) flow logs retention should be greater than 90 days",
+                    "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs retention period is 90 days or less. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'._x000D__x000D_NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:_x000D_- Outbound and inbound flows on a per-rule basis._x000D_- Network interface to which the flow applies._x000D_- 5-tuple information about the flow (source/destination IP, source/destination port, protocol)._x000D_- Whether the traffic was allowed or denied._x000D__x000D_As a best practice, enable NSG flow logs and set the log retention period to at least 91 days.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1447,15 +2031,15 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "gID7",
+                            "id": "PR-AZR-0029-TRF",
                             "eval": "data.rule.inbound_port_6379",
                             "message": "data.rule.inbound_port_6379_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_network_security_rule' resource, make sure property 'destination_port_range' dont have port '6379' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#destination_port_range for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "RedisWannaMine vulnerable instances with active network traffic",
+                    "title": "RedisWannaMine vulnerable instances should not allow network traffic on port 6379",
                     "description": "RedisWannaMine is cryptojacking attack which aims at both database servers and application servers via remote code execution, exploiting an Apache Struts vulnerability. To inject cryptocurrency mining malware, RedWannaMine uses a transmission control protocol (TCP) scanner to check open port 445 of SMB and scans vulnerable Redis server database over port 6379(tcp), so that it can use EternalBlue to spread further.",
                     "tags": [
                         {
@@ -1508,12 +2092,12 @@
                             "id": "PR-AZR-0020-TRF",
                             "eval": "data.rule.inbound_port_22",
                             "message": "data.rule.inbound_port_22_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_network_security_rule' resource, make sure property 'destination_port_range' dont have port '22' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#destination_port_range for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Network Security Group (NSG) allows SSH traffic from internet on port 22",
+                    "title": "Azure Network Security Group should not allow SSH traffic from internet on port 22",
                     "description": "Blocking SSH port 22 will protect users from attacks like Account compromise.",
                     "tags": [
                         {
@@ -1543,12 +2127,12 @@
                             "id": "PR-AZR-0021-TRF",
                             "eval": "data.rule.inbound_port_3389",
                             "message": "data.rule.inbound_port_3389_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_network_security_rule' resource, make sure property 'destination_port_range' dont have port '3389' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#destination_port_range for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Network Security Group (NSG) allows traffic from internet on port 3389",
+                    "title": "Azure Network Security Group (NSG) should not allows traffic from internet on port 3389",
                     "description": "Blocking RDP port 3389 will protect users from attacks like account compromise, Denial of service and ransomware.",
                     "tags": [
                         {
@@ -1607,12 +2191,12 @@
                             "id": "PR-AZR-0031-TRF",
                             "eval": "data.rule.inbound_port_53",
                             "message": "data.rule.inbound_port_53_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_network_security_rule' resource, make sure property 'destination_port_range' dont have port '53' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#destination_port_range for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Network Security Group allows DNS (UDP Port 53)",
+                    "title": "Azure Network Security Group should not allows DNS (UDP Port 53)",
                     "description": "This policy detects any NSG rule that allows DNS traffic on UDP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
@@ -1665,13 +2249,13 @@
                             "id": "PR-AZR-0035-TRF",
                             "eval": "data.rule.inbound_port_4333",
                             "message": "data.rule.inbound_port_4333_err",
-                            "remediationDescription": "",
+                            "remediationDescription": "In 'azurerm_network_security_rule' resource, make sure property 'destination_port_range' dont have port '4333' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#destination_port_range for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure Network Security Group allows MSQL (TCP Port 4333)",
-                    "description": "This policy detects any NSG rule that allows MSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "title": "Azure Network Security Group should not allow mSQL (TCP Port 4333)",
+                    "description": "This policy detects any NSG rule that allows mSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2037,6 +2621,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_32",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0037-TRF",
+                            "eval": "data.rule.inbound_port_137",
+                            "message": "data.rule.inbound_port_137_err",
+                            "remediationDescription": "In 'azurerm_network_security_rule' resource, make sure property 'destination_port_range' dont have port '137' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#destination_port_range for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Network Security Group should not allow NetBIOS (UDP Port 137)",
+                    "description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_postgreSQL_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -2086,6 +2699,37 @@
                     "severity": "High",
                     "title": "Ensure ssl enforcement is enabled on PostgreSQL Database Server.",
                     "description": "Enable SSL connection on PostgreSQL Servers. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_postgreSQL_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0146-TRF",
+                            "eval": "data.rule.pg_ingress_from_any_ip_disabled",
+                            "message": "data.rule.pg_ingress_from_any_ip_disabled_err",
+                            "remediationDescription": "In 'azurerm_postgresql_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_firewall_rule#start_ip_address for details.",
+                            "remediationFunction": "PR_AZR_0146_TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "PostgreSQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
+                    "description": "This policy will identify PostgreSQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2291,7 +2935,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SECURITY_CONTACTS",
+                    "masterTestId": "TEST_SECURITY_CONTACTS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2309,6 +2953,114 @@
                     "severity": "Medium",
                     "title": "Security Center shoud have security contact email configured to get notifications",
                     "description": "Setting a valid email address in Security contact emails will enable Microsoft to contact you if the Microsoft Security Response Center (MSRC) discovers that your data has been accessed by an unlawful or unauthorized party. This will make sure that you are aware of any security issues and take prompt actions to mitigate the risks.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_CONTACTS_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitycontacts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0155-TRF",
+                            "eval": "data.rule.securitycontacts_phone",
+                            "message": "data.rule.securitycontacts_phone_err",
+                            "remediationDescription": "In 'azurerm_security_center_contact' resource, set a valid phone number at 'phone' property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_contact#phone for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Security Center shoud have security contact phone number configured to get notifications",
+                    "description": "Setting a valid phone number in Security contact phone will enable Microsoft to contact you if the Microsoft Security Response Center (MSRC) discovers that your data has been accessed by an unlawful or unauthorized party. This will make sure that you are aware of any security issues and take prompt actions to mitigate the risks.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_CONTACTS_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitycontacts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0156-TRF",
+                            "eval": "data.rule.securitycontacts_alert_notifications_enabled",
+                            "message": "data.rule.securitycontacts_alert_notifications_enabled_err",
+                            "remediationDescription": "In 'azurerm_security_center_contact' resource, set 'alert_notifications = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_contact#alert_notifications for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Security Center shoud send security alerts notifications to the security contact",
+                    "description": "This policy will identify security centers which dont have configuration enabled to send security alerts notifications to the security contact and alert if missing.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_CONTACTS_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitycontacts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0157-TRF",
+                            "eval": "data.rule.securitycontacts_alerts_to_admins_enabled",
+                            "message": "data.rule.securitycontacts_alerts_to_admins_enabled_err",
+                            "remediationDescription": "In 'azurerm_security_center_contact' resource, set 'alerts_to_admins = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_contact#alerts_to_admins for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Security Center shoud send security alerts notifications to subscription admins",
+                    "description": "This policy will identify security centers which dont have configuration enabled to send security alerts notifications to subscription admins and alert if missing.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2400,7 +3152,7 @@
                     "rule": "file(sql_servers_encryption.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0111-ARM",
+                            "id": "PR-AZR-0111-TRF",
                             "eval": "data.rule.serverKeyType",
                             "message": "data.rule.serverKeyType_err",
                             "remediationDescription": "In 'azurerm_mssql_server_transparent_data_encryption' resource, make sure 'key_vault_key_id' property has id of associated 'azurerm_key_vault_key' resource to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption#key_vault_key_id for details.",
@@ -2486,6 +3238,37 @@
                                 "ISO 27001",
                                 "NIST CSF",
                                 "HIPAA",
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MSSQL_SERVER_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0147-TRF",
+                            "eval": "data.rule.mssql_ingress_from_any_ip_disabled",
+                            "message": "data.rule.mssql_ingress_from_any_ip_disabled_err",
+                            "remediationDescription": "In 'azurerm_mssql_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_firewall_rule#start_ip_address for details.",
+                            "remediationFunction": "PR_AZR_0147_TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "MSSQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
+                    "description": "This policy will identify MSSQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
                                 "Best Practices"
                             ],
                             "service": [
@@ -2724,7 +3507,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_VIRTUAL_MACHINE",
+                    "masterTestId": "TEST_VIRTUAL_MACHINE_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -2742,6 +3525,64 @@
                     "severity": "Medium",
                     "title": "Azure Virtual Machine should be assigned to an availability set",
                     "description": "To provide application redundancy during planned or unplanned maintenance events, you can group two or more virtual machines (VMs) in an availability set. An availability set ensures that the VMs are distributed across multiple isolated hardware nodes in a cluster so that only a subset of your VMs are impacted should a hardware or software failure occur on Azure._x000D__x000D_This policy identifies Azure VMs that are not deployed in an availability set. As a high availability (HA) best practice, deploy your VMs in an availability set.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_VIRTUAL_MACHINE_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(vm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0136-TRF",
+                            "eval": "data.rule.vm_linux_disabled_password_auth",
+                            "message": "data.rule.vm_linux_disabled_password_auth_err",
+                            "remediationDescription": "In 'azurerm_virtual_machine' resource, make sure to set 'disable_password_authentication = true' under 'os_profile_linux_config' block to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine#disable_password_authentication for details.",
+                            "remediationFunction": "PR_AZR_0136_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Linux Instance should not use basic authentication(Use SSH Key Instead)",
+                    "description": "For security purpose, linux vm password authentication should be disabled. Use SSH Key Instead.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_VIRTUAL_MACHINE_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(vm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-145-TRF",
+                            "eval": "data.rule.vm_type_linux_disabled_password_auth",
+                            "message": "data.rule.vm_type_linux_disabled_password_auth_err",
+                            "remediationDescription": "In 'azurerm_linux_virtual_machine' resource, make sure to set 'disable_password_authentication = true' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#disable_password_authentication for details.",
+                            "remediationFunction": "PR_AZR_145_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Linux Instance should not use basic authentication(Use SSH Key Instead)",
+                    "description": "For security purpose, linux vm password authentication should be disabled. Use SSH Key Instead.",
                     "tags": [
                         {
                             "cloud": "git",

@@ -407,3 +407,161 @@ aks_aad_rbac_enabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster"
 }
+
+#
+# PR-AZR-0138-TRF
+#
+
+default aks_network_policy_configured = null
+
+azure_attribute_absence["aks_network_policy_configured"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    network_profile := resource.properties.network_profile[_]
+    not network_profile.network_policy
+}
+
+azure_issue["aks_network_policy_configured"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    network_profile := resource.properties.network_profile[_]
+    lower(network_profile.network_policy) != "azure"
+}
+
+aks_network_policy_configured {
+    lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
+    not azure_attribute_absence["aks_network_policy_configured"]
+    not azure_issue["aks_network_policy_configured"]
+}
+
+aks_network_policy_configured = false {
+    azure_issue["aks_network_policy_configured"]
+}
+
+aks_network_policy_configured = false {
+    azure_attribute_absence["aks_network_policy_configured"]
+}
+
+aks_network_policy_configured_err = "azurerm_kubernetes_cluster property 'network_profile.network_policy' is missing from the resource" {
+    azure_attribute_absence["aks_network_policy_configured"]
+} else = "AKS cluster currently dont have Network Policy configured" {
+    azure_issue["aks_network_policy_configured"]
+}
+
+aks_network_policy_configured_metadata := {
+    "Policy Code": "PR-AZR-0138-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "AKS cluster shoud have Network Policy configured",
+    "Policy Description": "Network policy used for building Kubernetes network. - calico or azure.",
+    "Resource Type": "azurerm_kubernetes_cluster",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster"
+}
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/1.43.0/docs/data-sources/kubernetes_cluster
+# PR-AZR-0137-TRF
+#
+
+default aks_api_server_authorized_ip_range_enabled = null
+
+azure_attribute_absence["aks_api_server_authorized_ip_range_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    not resource.properties.api_server_authorized_ip_ranges
+}
+
+azure_issue["aks_api_server_authorized_ip_range_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    count(resource.properties.api_server_authorized_ip_ranges) == 0
+}
+
+aks_api_server_authorized_ip_range_enabled {
+    lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
+    not azure_attribute_absence["aks_api_server_authorized_ip_range_enabled"]
+    not azure_issue["aks_api_server_authorized_ip_range_enabled"]
+}
+
+aks_api_server_authorized_ip_range_enabled = false {
+    azure_issue["aks_api_server_authorized_ip_range_enabled"]
+}
+
+aks_api_server_authorized_ip_range_enabled = false {
+    azure_attribute_absence["aks_api_server_authorized_ip_range_enabled"]
+}
+
+aks_api_server_authorized_ip_range_enabled_err = "azurerm_kubernetes_cluster property 'api_server_authorized_ip_ranges' is missing from the resource" {
+    azure_attribute_absence["aks_api_server_authorized_ip_range_enabled"]
+} else = "AKS cluster currently dont have Authorized IP Ranges enabled" {
+    azure_issue["aks_api_server_authorized_ip_range_enabled"]
+}
+
+aks_api_server_authorized_ip_range_enabled_metadata := {
+    "Policy Code": "PR-AZR-0137-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "AKS shoud have an API Server Authorized IP Ranges enabled",
+    "Policy Description": "Authorized IP Ranges to kubernetes API server",
+    "Resource Type": "azurerm_kubernetes_cluster",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster"
+}
+
+
+# https://www.danielstechblog.io/disable-the-kubernetes-dashboard-on-azure-kubernetes-service/
+# PR-AZR-0144-TRF
+#
+
+default aks_kub_dashboard_disabled = null
+
+azure_attribute_absence["aks_kub_dashboard_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    addon_profile := resource.properties.addon_profile[_]
+    kube_dashboard := addon_profile.kube_dashboard[_]
+    not kube_dashboard.enabled
+}
+
+azure_issue["aks_kub_dashboard_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    addon_profile := resource.properties.addon_profile[_]
+    kube_dashboard := addon_profile.kube_dashboard[_]
+    kube_dashboard.enabled == true
+}
+
+aks_kub_dashboard_disabled {
+    lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
+    not azure_attribute_absence["aks_kub_dashboard_disabled"]
+    not azure_issue["aks_kub_dashboard_disabled"]
+}
+
+aks_kub_dashboard_disabled = false {
+    azure_issue["aks_kub_dashboard_disabled"]
+}
+
+aks_kub_dashboard_disabled = false {
+    azure_attribute_absence["aks_kub_dashboard_disabled"]
+}
+
+aks_kub_dashboard_disabled_err = "azurerm_kubernetes_cluster property 'addon_profile.kube_dashboard.enabled' is missing from the resource" {
+    azure_attribute_absence["aks_kub_dashboard_disabled"]
+} else = "Kubernetes Dashboard is currently not disabled" {
+    azure_issue["aks_kub_dashboard_disabled"]
+}
+
+aks_kub_dashboard_disabled_metadata := {
+    "Policy Code": "PR-AZR-0144-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Kubernetes Dashboard shoud be disabled",
+    "Policy Description": "Disable the Kubernetes dashboard on Azure Kubernetes Service",
+    "Resource Type": "azurerm_kubernetes_cluster",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster"
+}

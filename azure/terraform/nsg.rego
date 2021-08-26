@@ -478,42 +478,42 @@ inbound_insecure_port_metadata := {
 }
 
 #
-# gID5
+# PR-AZR-0021-TRF
 #
 
-default inbound_port_11211 = null
+default inbound_port_3389 = null
 
-azure_issue["inbound_port_11211"] {
-    to_number(nsg_inbound[_]) == 11211
+azure_issue["inbound_port_3389"] {
+    to_number(nsg_inbound[_]) == 3389
 }
 
-inbound_port_11211 {
+inbound_port_3389 {
     lower(input.resources[_].type) == "azurerm_network_security_rule"
-    not azure_issue["inbound_port_11211"]
+    not azure_issue["inbound_port_3389"]
 }
 
-inbound_port_11211 = false {
-    azure_issue["inbound_port_11211"]
+inbound_port_3389 = false {
+    azure_issue["inbound_port_3389"]
 }
 
-inbound_port_11211_err = "Memcached DDoS attack attempted" {
-    azure_issue["inbound_port_11211"]
+inbound_port_3389_err = "Azure Network Security Group (NSG) currently allowing traffic from internet on port 3389" {
+    azure_issue["inbound_port_3389"]
 }
 
-inbound_port_11211_metadata := {
+inbound_port_3389_metadata := {
     "Policy Code": "PR-AZR-0021-TRF",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group (NSG) allows traffic from internet on port 3389",
+    "Policy Title": "Azure Network Security Group (NSG) should not allows traffic from internet on port 3389",
     "Policy Description": "Blocking RDP port 3389 will protect users from attacks like account compromise, Denial of service and ransomware.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule"
 }
 
 #
-# gID7
+# PR-AZR-0029-TRF
 #
 
 default inbound_port_6379 = null
@@ -531,7 +531,7 @@ inbound_port_6379 = false {
     azure_issue["inbound_port_6379"]
 }
 
-inbound_port_6379_err = "RedisWannaMine vulnerable instances with active network traffic" {
+inbound_port_6379_err = "RedisWannaMine vulnerable instances currently allowing network traffic on port 6379" {
     azure_issue["inbound_port_6379"]
 }
 
@@ -540,11 +540,11 @@ inbound_port_6379_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group allows CIFS (UDP Port 445)",
-    "Policy Description": "This policy detects any NSG rule that allows CIFS traffic on UDP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict CIFS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "RedisWannaMine vulnerable instances should not allow network traffic on port 6379",
+    "Policy Description": "RedisWannaMine is cryptojacking attack which aims at both database servers and application servers via remote code execution, exploiting an Apache Struts vulnerability. To inject cryptocurrency mining malware, RedWannaMine uses a transmission control protocol (TCP) scanner to check open port 445 of SMB and scans vulnerable Redis server database over port 6379(tcp), so that it can use EternalBlue to spread further.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule"
 }
 
 #
@@ -653,55 +653,55 @@ inbound_port_22 = false {
     azure_issue["inbound_port_22"]
 }
 
-inbound_port_22_err = "Azure NSG allows SSH traffic from internet on port 22" {
+inbound_port_22_err = "Azure NSG currently allowing SSH traffic from internet on port 22" {
     azure_issue["inbound_port_22"]
 }
 
 inbound_port_22_metadata := {
-    "Policy Code": "PR-AZR-0030-TRF",
+    "Policy Code": "PR-AZR-0020-TRF",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group allows DNS (TCP Port 53)",
-    "Policy Description": "This policy detects any NSG rule that allows DNS traffic on TCP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group should not allow SSH traffic from internet on port 22",
+    "Policy Description": "Blocking SSH port 22 will protect users from attacks like Account compromise.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule"
 }
 
 #
-# PR-AZR-0021-TRF
+# PR-AZR-0031-TRF
 #
 
-default inbound_port_3389 = null
+default inbound_port_53 = null
 
-azure_issue["inbound_port_3389"] {
-    to_number(nsg_inbound[_]) == 3389
+azure_issue["inbound_port_53"] {
+    to_number(nsg_inbound[_]) == 53
 }
 
-inbound_port_3389 {
+inbound_port_53 {
     lower(input.resources[_].type) == "azurerm_network_security_rule"
-    not azure_issue["inbound_port_3389"]
+    not azure_issue["inbound_port_53"]
 }
 
-inbound_port_3389 = false {
-    azure_issue["inbound_port_3389"]
+inbound_port_53 = false {
+    azure_issue["inbound_port_53"]
 }
 
-inbound_port_3389_err = "Azure NSG allows traffic from internet on port 3389" {
-    azure_issue["inbound_port_3389"]
+inbound_port_53_err = "Azure NSG currently allowing traffic from internet on port 53" {
+    azure_issue["inbound_port_53"]
 }
 
-inbound_port_3389_metadata := {
+inbound_port_53_metadata := {
     "Policy Code": "PR-AZR-0031-TRF",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group allows DNS (UDP Port 53)",
+    "Policy Title": "Azure Network Security Group should not allows DNS (UDP Port 53)",
     "Policy Description": "This policy detects any NSG rule that allows DNS traffic on UDP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule"
 }
 
 #
@@ -745,39 +745,38 @@ inbound_port_445_metadata := {
 }
 
 #
-# PR-AZR-0030-TRF
-# PR-AZR-0031-TRF
+# PR-AZR-0035-TRF
 #
 
-default inbound_port_53 = null
+default inbound_port_4333 = null
 
-azure_issue["inbound_port_53"] {
-    to_number(nsg_inbound[_]) == 53
+azure_issue["inbound_port_4333"] {
+    to_number(nsg_inbound[_]) == 4333
 }
 
-inbound_port_53 {
+inbound_port_4333 {
     lower(input.resources[_].type) == "azurerm_network_security_rule"
-    not azure_issue["inbound_port_53"]
+    not azure_issue["inbound_port_4333"]
 }
 
-inbound_port_53 = false {
-    azure_issue["inbound_port_53"]
+inbound_port_4333 = false {
+    azure_issue["inbound_port_4333"]
 }
 
-inbound_port_53_err = "Azure Network Security Group allows DNS" {
-    azure_issue["inbound_port_53"]
+inbound_port_4333_err = "Azure Network Security Group currently allowing mSQL (TCP Port 4333)" {
+    azure_issue["inbound_port_4333"]
 }
 
-inbound_port_53_metadata := {
+inbound_port_4333_metadata := {
     "Policy Code": "PR-AZR-0035-TRF",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group allows MSQL (TCP Port 4333)",
-    "Policy Description": "This policy detects any NSG rule that allows MSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group should not allow mSQL (TCP Port 4333)",
+    "Policy Description": "This policy detects any NSG rule that allows mSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule"
 }
 
 #
@@ -815,39 +814,39 @@ inbound_port_20_metadata := {
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
 }
 
-#
-# PR-AZR-0035-TRF
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule
+# PR-AZR-0037-TRF
 #
 
-default inbound_port_4333 = null
+default inbound_port_137 = null
 
-azure_issue["inbound_port_4333"] {
-    to_number(nsg_inbound[_]) == 4333
+azure_issue["inbound_port_137"] {
+    to_number(nsg_inbound[_]) == 137
 }
 
-inbound_port_4333 {
+inbound_port_137 {
     lower(input.resources[_].type) == "azurerm_network_security_rule"
-    not azure_issue["inbound_port_4333"]
+    not azure_issue["inbound_port_137"]
 }
 
-inbound_port_4333 = false {
-    azure_issue["inbound_port_4333"]
+inbound_port_137 = false {
+    azure_issue["inbound_port_137"]
 }
 
-inbound_port_4333_err = "Azure Network Security Group allows MSQL" {
-    azure_issue["inbound_port_4333"]
+inbound_port_137_err = "Azure Network Security Group currently allowing NetBIOS (UDP Port 137)" {
+    azure_issue["inbound_port_137"]
 }
 
-inbound_port_4333_metadata := {
+inbound_port_137_metadata := {
     "Policy Code": "PR-AZR-0037-TRF",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group allows NetBIOS (UDP Port 137)",
+    "Policy Title": "Azure Network Security Group should not allow NetBIOS (UDP Port 137)",
     "Policy Description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule"
 }
 
 #
