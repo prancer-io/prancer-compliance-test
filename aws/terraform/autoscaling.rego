@@ -52,7 +52,7 @@ as_volume_encrypted_metadata := {
     "Policy Code": "PR-AWS-0256-TRF",
     "Type": "IaC",
     "Product": "AWS",
-    "Language": "AWS Cloud formation",
+    "Language": "Terraform",
     "Policy Title": "Ensure EBS volumes have encrypted launch configurations",
     "Policy Description": "Amazon Elastic Block Store (EBS) volumes allow you to create encrypted launch configurations when creating EC2 instances and auto scaling. When the entire EBS volume is encrypted, data stored at rest on the volume, disk I/O, snapshots created from the volume, and data in-transit between EBS and EC2 are all encrypted.",
     "Resource Type": "",

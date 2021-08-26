@@ -90,7 +90,7 @@ eks_version_metadata := {
     "Policy Code": "PR-AWS-0213-TRF",
     "Type": "IaC",
     "Product": "AWS",
-    "Language": "AWS Cloud formation",
+    "Language": "Terraform",
     "Policy Title": "AWS EKS unsupported Master node version.",
     "Policy Description": "Ensure your EKS Master node version is supported. This policy checks your EKS master node version and generates an alert if the version running is unsupported.",
     "Resource Type": "",

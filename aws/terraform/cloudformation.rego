@@ -37,7 +37,7 @@ cf_sns_metadata := {
     "Policy Code": "PR-AWS-0014-TRF",
     "Type": "IaC",
     "Product": "AWS",
-    "Language": "AWS Cloud formation",
+    "Language": "Terraform",
     "Policy Title": "AWS CloudFormation stack configured without SNS topic",
     "Policy Description": "This policy identifies CloudFormation stacks which are configured without SNS topic. It is recommended to configure Simple Notification Service (SNS) topic to be notified of CloudFormation stack status and changes.",
     "Resource Type": "",

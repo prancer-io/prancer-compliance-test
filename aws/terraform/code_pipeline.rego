@@ -50,7 +50,7 @@ deploy_compute_platform_metadata := {
     "Policy Code": "PR-AWS-0206-TRF",
     "Type": "IaC",
     "Product": "AWS",
-    "Language": "AWS Cloud formation",
+    "Language": "Terraform",
     "Policy Title": "Code Pipeline Encryption at rest with customer-managed key (CMK) should be enabled",
     "Policy Description": "The type of encryption key When creating or updating a pipeline, the value must be cmk(customer-managed key)",
     "Resource Type": "",

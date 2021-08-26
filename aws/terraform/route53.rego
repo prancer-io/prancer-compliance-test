@@ -46,7 +46,7 @@ route_healthcheck_disable_metadata := {
     "Policy Code": "PR-AWS-0245-TRF",
     "Type": "IaC",
     "Product": "AWS",
-    "Language": "AWS Cloud formation",
+    "Language": "Terraform",
     "Policy Title": "Ensure Route53 DNS evaluateTargetHealth is enabled",
     "Policy Description": "The EvaluateTargetHealth of Route53 is not enabled, an alias record can't inherits the health of the referenced AWS resource, such as an ELB load balancer or another record in the hosted zone.",
     "Resource Type": "",
