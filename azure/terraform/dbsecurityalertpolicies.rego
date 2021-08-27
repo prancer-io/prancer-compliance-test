@@ -112,19 +112,7 @@ default dbsec_threat_email = null
 azure_attribute_absence["dbsec_threat_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_mssql_server_security_alert_policy"
-    not resource.properties.email_account_admins
-}
-
-azure_attribute_absence["dbsec_threat_retention"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_mssql_server_security_alert_policy"
     not resource.properties.email_addresses
-}
-
-azure_issue["dbsec_threat_email"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_mssql_server_security_alert_policy"
-    resource.properties.email_account_admins != true
 }
 
 azure_issue["dbsec_threat_email"] {
@@ -147,9 +135,9 @@ dbsec_threat_email = false {
     azure_issue["dbsec_threat_email"]
 }
 
-dbsec_threat_email_err = "azurerm_mssql_server_security_alert_policy property 'email_account_admins' and 'email_addresses' need to be exist. Those are missing from the resource." {
+dbsec_threat_email_err = "azurerm_mssql_server_security_alert_policy property 'email_addresses' need to be exist. Those are missing from the resource." {
     azure_attribute_absence["dbsec_threat_email"]
-} else = "Azure SQL Databases security alert policy is currently not configured to sent alert to the account administrators via email" {
+} else = "Azure SQL Databases security alert policy is currently not configured to sent alert to the configured email addresses" {
     azure_issue["dbsec_threat_email"]
 }
 
@@ -158,7 +146,7 @@ dbsec_threat_email_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure SQL Databases Security Alert Policy should be configured to send alert to the account administrators and configured email addresses",
+    "Policy Title": "Azure SQL Databases Security Alert Policy should be configured to send alert to the configured email addresses",
     "Policy Description": "Checks to ensure that an valid email address is set for Threat Detection alerts. The alerts are sent to this email address when any anomalous activities are detected on SQL databases.",
     "Resource Type": "azurerm_mssql_server_security_alert_policy",
     "Policy Help URL": "",

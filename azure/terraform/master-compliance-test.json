@@ -867,12 +867,12 @@
                             "id": "PR-AZR-0055-TRF",
                             "eval": "data.rule.dbsec_threat_email",
                             "message": "data.rule.dbsec_threat_email_err",
-                            "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, set 'email_account_admins = true' and add some email address who need to get notified about potential thread detection under 'email_addresses' array to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy for details.",
+                            "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, add some email address who need to get notified about potential thread detection under 'email_addresses' array to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#email_addresses for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Databases Security Alert Policy should be configured to send alert to the account administrators and configured email addresses",
+                    "title": "Azure SQL Databases Security Alert Policy should be configured to send alert to the configured email addresses",
                     "description": "Checks to ensure that an valid email address is set for Threat Detection alerts. The alerts are sent to this email address when any anomalous activities are detected on SQL databases.",
                     "tags": [
                         {
