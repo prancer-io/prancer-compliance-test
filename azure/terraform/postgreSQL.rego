@@ -234,3 +234,40 @@ azurerm_postgresql_configuration_log_connections_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration"
 }
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration
+# PR-AZR-0187-TRF
+
+default azurerm_postgresql_configuration_connection_throttling = null
+azure_issue ["azurerm_postgresql_configuration_connection_throttling"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_postgresql_configuration"
+    lower(resource.properties.name) == "connection_throttling"
+    lower(resource.properties.value) == "off"
+}
+
+azurerm_postgresql_configuration_connection_throttling {
+    lower(input.resources[_].type) == "azurerm_postgresql_configuration"
+    not azure_issue["azurerm_postgresql_configuration_connection_throttling"]
+}
+
+azurerm_postgresql_configuration_connection_throttling = false {
+    azure_issue["azurerm_postgresql_configuration_connection_throttling"]
+}
+
+azurerm_postgresql_configuration_connection_throttling_err = "connection_throttling is currently not enabled on PostgreSQL database server." {
+    azure_issue["azurerm_postgresql_configuration_connection_throttling"]
+}
+
+azurerm_postgresql_configuration_connection_throttling_metadata := {
+    "Policy Code": "PR-AZR-0187-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "PostgreSQL Database Server should have connection_throttling enabled",
+    "Policy Description": "Enabling connection_throttling allows the PostgreSQL Database to set the verbosity of logged messages which in turn generates query and error logs with respect to concurrent connections, that could lead to a successful Denial of Service (DoS) attack by exhausting connection resources.",
+    "Resource Type": "azurerm_postgresql_configuration",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration"
+}

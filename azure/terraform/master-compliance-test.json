@@ -2836,6 +2836,37 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_postgreSQL_6",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0187-TRF",
+                            "eval": "data.rule.azurerm_postgresql_configuration_connection_throttling",
+                            "message": "data.rule.azurerm_postgresql_configuration_connection_throttling_err",
+                            "remediationDescription": "In 'azurerm_postgresql_configuration' resource, set name = 'connection_throttling' and value = 'on' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration for details.",
+                            "remediationFunction": "PR_AZR_0187_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "PostgreSQL Database Server should have connection_throttling enabled",
+                    "description": "Enabling connection_throttling allows the PostgreSQL Database to set the verbosity of logged messages which in turn generates query and error logs with respect to concurrent connections, that could lead to a successful Denial of Service (DoS) attack by exhausting connection resources.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_PRICING",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
