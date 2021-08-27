@@ -160,3 +160,77 @@ pg_ingress_from_any_ip_disabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_firewall_rule"
 }
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration
+# PR-AZR-0185-TRF
+
+default azurerm_postgresql_configuration_log_checkpoints = null
+azure_issue ["azurerm_postgresql_configuration_log_checkpoints"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_postgresql_configuration"
+    lower(resource.properties.name) == "log_checkpoints"
+    lower(resource.properties.value) == "off"
+}
+
+azurerm_postgresql_configuration_log_checkpoints {
+    lower(input.resources[_].type) == "azurerm_postgresql_configuration"
+    not azure_issue["azurerm_postgresql_configuration_log_checkpoints"]
+}
+
+azurerm_postgresql_configuration_log_checkpoints = false {
+    azure_issue["azurerm_postgresql_configuration_log_checkpoints"]
+}
+
+azurerm_postgresql_configuration_log_checkpoints_err = "log_checkpoints is currently not enabled on PostgreSQL database server." {
+    azure_issue["azurerm_postgresql_configuration_log_checkpoints"]
+}
+
+azurerm_postgresql_configuration_log_checkpoints_metadata := {
+    "Policy Code": "PR-AZR-0185-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "PostgreSQL Database Server should have log_checkpoints enabled",
+    "Policy Description": "A checkpoint is a point in the transaction log sequence at which all data files have been updated to reflect the information in the log. All data files will be flushed to disk. Refer to Section 29.4 for more details about what happens during a checkpoint. this policy will identify Postgresql DB Server which dont have checkpoint log enabled and alert.",
+    "Resource Type": "azurerm_postgresql_configuration",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration"
+}
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration
+# PR-AZR-0186-TRF
+
+default azurerm_postgresql_configuration_log_connections = null
+azure_issue ["azurerm_postgresql_configuration_log_connections"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_postgresql_configuration"
+    lower(resource.properties.name) == "log_connections"
+    lower(resource.properties.value) == "off"
+}
+
+azurerm_postgresql_configuration_log_connections {
+    lower(input.resources[_].type) == "azurerm_postgresql_configuration"
+    not azure_issue["azurerm_postgresql_configuration_log_connections"]
+}
+
+azurerm_postgresql_configuration_log_connections = false {
+    azure_issue["azurerm_postgresql_configuration_log_connections"]
+}
+
+azurerm_postgresql_configuration_log_connections_err = "log_connections is currently not enabled on PostgreSQL database server." {
+    azure_issue["azurerm_postgresql_configuration_log_connections"]
+}
+
+azurerm_postgresql_configuration_log_connections_metadata := {
+    "Policy Code": "PR-AZR-0186-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "PostgreSQL Database Server should have log_connections enabled",
+    "Policy Description": "Causes each attempted connection to the server to be logged, as well as successful completion of client authentication. Only superusers can change this parameter at session start, and it cannot be changed at all within a session. this policy will identify Postgresql DB Server which dont have log_connections enabled and alert.",
+    "Resource Type": "azurerm_postgresql_configuration",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration"
+}

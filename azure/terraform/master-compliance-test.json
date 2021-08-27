@@ -2774,6 +2774,68 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_postgreSQL_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0185-TRF",
+                            "eval": "data.rule.azurerm_postgresql_configuration_log_checkpoints",
+                            "message": "data.rule.azurerm_postgresql_configuration_log_checkpoints_err",
+                            "remediationDescription": "In 'azurerm_postgresql_configuration' resource, set name = 'log_checkpoints' and value = 'on' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration for details.",
+                            "remediationFunction": "PR_AZR_0185_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "PostgreSQL Database Server should have log_checkpoints enabled",
+                    "description": "A checkpoint is a point in the transaction log sequence at which all data files have been updated to reflect the information in the log. All data files will be flushed to disk. Refer to Section 29.4 for more details about what happens during a checkpoint. this policy will identify Postgresql DB Server which dont have checkpoint log enabled and alert.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_postgreSQL_5",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0186-TRF",
+                            "eval": "data.rule.azurerm_postgresql_configuration_log_connections",
+                            "message": "data.rule.azurerm_postgresql_configuration_log_connections_err",
+                            "remediationDescription": "In 'azurerm_postgresql_configuration' resource, set name = 'log_connections' and value = 'on' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration for details.",
+                            "remediationFunction": "PR_AZR_0186_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "PostgreSQL Database Server should have log_connections enabled",
+                    "description": "Causes each attempted connection to the server to be logged, as well as successful completion of client authentication. Only superusers can change this parameter at session start, and it cannot be changed at all within a session. this policy will identify Postgresql DB Server which dont have log_connections enabled and alert.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_PRICING",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
