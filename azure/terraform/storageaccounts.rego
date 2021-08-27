@@ -314,3 +314,66 @@ storage_account_public_access_disabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"
 }
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
+#
+# PR-AZR-0188-TRF
+#
+
+default storage_account_queue_logging_enabled_for_all_operation = null
+
+azure_attribute_absence["storage_account_queue_logging_enabled_for_all_operation"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    not resource.properties.queue_properties
+}
+
+azure_attribute_absence["storage_account_queue_logging_enabled_for_all_operation"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    queue_properties := resource.properties.queue_properties[_]
+    not queue_properties.logging
+}
+
+azure_issue["storage_account_queue_logging_enabled_for_all_operation"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    queue_properties := resource.properties.queue_properties[_]
+    logging := queue_properties.logging[_]
+    logging.read != true
+    logging.write != true
+    logging.delete != true
+}
+
+storage_account_queue_logging_enabled_for_all_operation {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    not azure_attribute_absence["storage_account_queue_logging_enabled_for_all_operation"]
+    not azure_issue["storage_account_queue_logging_enabled_for_all_operation"]
+}
+
+storage_account_queue_logging_enabled_for_all_operation = false {
+    azure_attribute_absence["storage_account_queue_logging_enabled_for_all_operation"]
+}
+
+storage_account_queue_logging_enabled_for_all_operation = false {
+    azure_issue["storage_account_queue_logging_enabled_for_all_operation"]
+}
+
+storage_account_queue_logging_enabled_for_all_operation_err = "azurerm_storage_account property block 'queue_properties.logging' need to be exist with child property 'read', 'write' and 'delete'. one or all are missing from the resource." {
+    azure_attribute_absence["storage_account_queue_logging_enabled_for_all_operation"]
+} else = "Storage Accounts queue service logging is currently not enabled" {
+    azure_issue["storage_secure"]
+}
+
+storage_account_queue_logging_enabled_for_all_operation_metadata := {
+    "Policy Code": "PR-AZR-0188-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Storage Accounts queue service logging should be enabled",
+    "Policy Description": "The Azure Storage Queue service logging records details for both successful and failed requests made to the queues, as well as end-to-end latency, server latency, and authentication information.",
+    "Resource Type": "azurerm_storage_account",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"
+}

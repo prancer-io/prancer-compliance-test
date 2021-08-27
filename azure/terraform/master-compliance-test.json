@@ -3602,6 +3602,40 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_7",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0188-TRF",
+                            "eval": "data.rule.storage_account_queue_logging_enabled_for_all_operation",
+                            "message": "data.rule.storage_account_queue_logging_enabled_for_all_operation_err",
+                            "remediationDescription": "In 'azurerm_storage_account' resource, set 'read = true', 'write = true', 'delete = true' under 'logging' block which exist under 'queue_properties' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#logging for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage Accounts queue service logging should be enabled",
+                    "description": "The Azure Storage Queue service logging records details for both successful and failed requests made to the queues, as well as end-to-end latency, server latency, and authentication information.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "HIPAA",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_STORAGE_BLOB_CONTAINER",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
