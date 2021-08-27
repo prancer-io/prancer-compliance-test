@@ -1580,7 +1580,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MySQL_SERVER",
+                    "masterTestId": "TEST_MySQL_SERVER_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1598,6 +1598,37 @@
                     "severity": "High",
                     "title": "MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
                     "description": "This policy will identify MySQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MySQL_SERVER_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(mysql_server.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0184-TRF",
+                            "eval": "data.rule.mysql_server_ssl_enforcement_enabled",
+                            "message": "data.rule.mysql_server_ssl_enforcement_enabled_err",
+                            "remediationDescription": "In 'azurerm_mysql_server' resource, set 'ssl_enforcement_enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server#ssl_enforcement_enabled for details.",
+                            "remediationFunction": "PR_AZR_0184_TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure MySQL Database Server accepts only SSL connections",
+                    "description": "This policy will identify MySQL Database Server which are not enforcing all the incoming connection over SSL and alert if found.",
                     "tags": [
                         {
                             "cloud": "git",
