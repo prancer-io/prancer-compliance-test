@@ -181,24 +181,38 @@ cf_https_only_metadata := {
 
 default cf_https = null
 
+aws_attribute_absence["cf_https"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudfront::distribution"
+    not resource.Properties.DistributionConfig.DefaultCacheBehavior.ViewerProtocolPolicy
+}
+
 aws_issue["cf_https"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudfront::distribution"
     cache := resource.Properties.DistributionConfig.DefaultCacheBehavior
-    lower(cache.ViewerProtocolPolicy) == "allow-all"
+    lower(cache.ViewerProtocolPolicy) != "https-only"
+    lower(cache.ViewerProtocolPolicy) != "redirect-to-https"
 }
 
 cf_https {
     lower(input.Resources[i].Type) == "aws::cloudfront::distribution"
     not aws_issue["cf_https"]
+    not aws_attribute_absence["cf_https"]
 }
 
 cf_https = false {
     aws_issue["cf_https"]
 }
 
+cf_https = false {
+    aws_attribute_absence["cf_https"]
+}
+
 cf_https_err = "AWS CloudFront viewer protocol policy is not configured with HTTPS" {
     aws_issue["cf_https"]
+} else = "AWS CloudFront viewer protocol policy is not configured with HTTPS" {
+    aws_attribute_absence["cf_https"]
 }
 
 cf_https_metadata := {
