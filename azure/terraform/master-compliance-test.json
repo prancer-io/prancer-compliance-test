@@ -3792,7 +3792,7 @@
                             "id": "PR-AZR-0075-TRF",
                             "eval": "data.rule.vnet_peer",
                             "message": "data.rule.vnet_peer_err",
-                            "remediationDescription": "In 'azurerm_virtual_network_peering' resource, set 'allow_virtual_network_access = true' or remove 'allow_virtual_network_access' property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering#allow_virtual_network_access for details.",
+                            "remediationDescription": "Make sure resource 'azurerm_virtual_network' and 'azurerm_virtual_network_peering' exist and in 'azurerm_virtual_network_peering' resource, set 'allow_virtual_network_access = true' or remove 'allow_virtual_network_access' property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering#allow_virtual_network_access for details.",
                             "remediationFunction": "PR_AZR_0075_TRF.py"
                         }
                     ],
