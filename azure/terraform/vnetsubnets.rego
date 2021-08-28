@@ -35,13 +35,14 @@ default vnet_subnet_nsg = null
 #    true == false # workaround for inconsistent resource naming
 #}
 
-azure_attribute_absence["vnet_subnet_nsg"] {
-    count([c | input.resources[_].type == "azurerm_subnet"; c := 1]) != count([c | input.resources[_].type == "azurerm_subnet_network_security_group_association"; c := 1])
-}
+# this check is not necessary as azurerm_subnet and azurerm_network_security_group can be created without azurerm_subnet_network_security_group_association
+#azure_attribute_absence["vnet_subnet_nsg"] {
+#    count([c | input.resources[_].type == "azurerm_subnet"; c := 1]) != count([c | input.resources[_].type == "azurerm_subnet_network_security_group_association"; c := 1])
+#}
 
-azure_attribute_absence["vnet_subnet_nsg"] {
-    count([c | input.resources[_].type == "azurerm_network_security_group"; c := 1]) != count([c | input.resources[_].type == "azurerm_subnet_network_security_group_association"; c := 1])
-}
+#azure_attribute_absence["vnet_subnet_nsg"] {
+#    count([c | input.resources[_].type == "azurerm_network_security_group"; c := 1]) != count([c | input.resources[_].type == "azurerm_subnet_network_security_group_association"; c := 1])
+#}
 
 azure_attribute_absence["vnet_subnet_nsg"] {
     resource := input.resources[_]
@@ -68,7 +69,7 @@ azure_issue["vnet_subnet_nsg"] {
 }
 
 vnet_subnet_nsg {
-    lower(input.resources[_].type) == "azurerm_subnet"
+    lower(input.resources[_].type) == "azurerm_subnet_network_security_group_association"
     not azure_attribute_absence["vnet_subnet_nsg"]
     not azure_issue["vnet_subnet_nsg"]
 }
@@ -81,7 +82,7 @@ vnet_subnet_nsg = false {
     azure_issue["vnet_subnet_nsg"]
 }
 
-vnet_subnet_nsg_err = "Resource azurerm_subnet, azurerm_network_security_group and azurerm_subnet_network_security_group_association need to be exist and property 'subnet_id' and 'network_security_group_id' both need to be exist under azurerm_subnet_network_security_group_association. one or all are missing from the resource." {
+vnet_subnet_nsg_err = "azurerm_subnet_network_security_group_association resource property 'subnet_id' and 'network_security_group_id' both need to be exist. one or both are missing from the resource." {
     azure_attribute_absence["vnet_subnet_nsg"]
 } else = "Azure Virtual Network subnet is not configured with a Network Security Group" {
     azure_issue["vnet_subnet_nsg"]
