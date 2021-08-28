@@ -65,6 +65,10 @@ db_server_encrypt_metadata := {
 default serverKeyType = null
 
 azure_attribute_absence["serverKeyType"] {
+    count([c | input.resources[_].type == "azurerm_mssql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_mssql_server_transparent_data_encryption"; c := 1])
+}
+
+azure_attribute_absence["serverKeyType"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_mssql_server_transparent_data_encryption"
     not resource.properties.key_vault_key_id
@@ -90,7 +94,9 @@ serverKeyType = false {
     azure_issue["serverKeyType"]
 }
 
-serverKeyType_err = "SQL server's TDE protector is currently not encrypted with Customer-managed key." {
+serverKeyType_err = "Make sure resource azurerm_mssql_server and azurerm_mssql_server_transparent_data_encryption both exist and property 'key_vault_key_id' exist under azurerm_mssql_server_transparent_data_encryption as well." {
+    azure_attribute_absence["serverKeyType"]
+} else = "SQL server's TDE protector is currently not encrypted with Customer-managed key." {
     azure_issue["serverKeyType"]
 }
 

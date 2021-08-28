@@ -3279,7 +3279,7 @@
                             "id": "PR-AZR-0111-TRF",
                             "eval": "data.rule.serverKeyType",
                             "message": "data.rule.serverKeyType_err",
-                            "remediationDescription": "In 'azurerm_mssql_server_transparent_data_encryption' resource, make sure 'key_vault_key_id' property has id of associated 'azurerm_key_vault_key' resource to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption#key_vault_key_id for details.",
+                            "remediationDescription": "Make sure resource 'azurerm_mssql_server' and 'azurerm_mssql_server_transparent_data_encryption' both exist and in 'azurerm_mssql_server_transparent_data_encryption' resource, make sure 'key_vault_key_id' property has id of associated 'azurerm_key_vault_key' resource to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption#key_vault_key_id for details.",
                             "remediationFunction": "PR-AZR-0111-TRF.py"
                         }
                     ],
