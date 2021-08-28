@@ -9,6 +9,12 @@ package rule
 default vpn_encrypt = null
 # default to false
 # if use_policy_based_traffic_selectors is set to true then ipsec_policy block is required.
+
+azure_attribute_absence["vpn_encrypt"] {
+    resource := input.resources[_]
+    count([c | input.resources[_].type == "azurerm_virtual_network_gateway"; c := 1]) != count([c | input.resources[_].type == "azurerm_virtual_network_gateway_connection"; c := 1])
+}
+
 azure_attribute_absence["vpn_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_virtual_network_gateway_connection"
@@ -48,7 +54,7 @@ vpn_encrypt = false {
     azure_attribute_absence["vpn_encrypt"]
 }
 
-vpn_encrypt_err = "azurerm_virtual_network_gateway_connection property 'use_policy_based_traffic_selectors' and 'ipsec_policy' need to be exist. one or both are missing from the resource." {
+vpn_encrypt_err = "Resource azurerm_virtual_network_gateway and azurerm_virtual_network_gateway_connection need to be exist and property 'use_policy_based_traffic_selectors' and 'ipsec_policy' block need to be exist under azurerm_virtual_network_gateway_connection as well. one or all are missing from the resource." {
     azure_attribute_absence["vpn_encrypt"]
 } else = "VPN gateways is currently not configured with cryptographic algorithm" {
     azure_issue["vpn_encrypt"]
