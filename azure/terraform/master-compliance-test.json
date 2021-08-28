@@ -3821,7 +3821,7 @@
                             "id": "PR-AZR-0066-TRF",
                             "eval": "data.rule.vnet_subnet_nsg",
                             "message": "data.rule.vnet_subnet_nsg_err",
-                            "remediationDescription": "In 'azurerm_subnet_network_security_group_association' resource, make sure both 'subnet_id' and 'network_security_group_id' property exist and both has id from 'azurerm_subnet' and 'azurerm_network_security_group' resource respectively to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_network_security_group_association#network_security_group_id for details.",
+                            "remediationDescription": "Make sure 'resource azurerm_subnet', 'azurerm_network_security_group' and 'azurerm_subnet_network_security_group_association' exist and in 'azurerm_subnet_network_security_group_association' resource, make sure both 'subnet_id' and 'network_security_group_id' property exist and both has id from 'azurerm_subnet' and 'azurerm_network_security_group' resource respectively to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_network_security_group_association#network_security_group_id for details.",
                             "remediationFunction": ""
                         }
                     ],

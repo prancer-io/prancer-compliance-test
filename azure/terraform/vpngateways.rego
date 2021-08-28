@@ -11,7 +11,6 @@ default vpn_encrypt = null
 # if use_policy_based_traffic_selectors is set to true then ipsec_policy block is required.
 
 azure_attribute_absence["vpn_encrypt"] {
-    resource := input.resources[_]
     count([c | input.resources[_].type == "azurerm_virtual_network_gateway"; c := 1]) != count([c | input.resources[_].type == "azurerm_virtual_network_gateway_connection"; c := 1])
 }
 
