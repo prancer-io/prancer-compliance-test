@@ -170,6 +170,11 @@ pg_ingress_from_any_ip_disabled_metadata := {
 # PR-AZR-0185-TRF
 
 default azurerm_postgresql_configuration_log_checkpoints = null
+
+azure_attribute_absence ["azurerm_postgresql_configuration_log_checkpoints"] {
+    count([c | input.resources[_].type == "azurerm_postgresql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_postgresql_configuration"; c := 1])
+}
+
 azure_issue ["azurerm_postgresql_configuration_log_checkpoints"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_postgresql_configuration"
@@ -179,14 +184,21 @@ azure_issue ["azurerm_postgresql_configuration_log_checkpoints"] {
 
 azurerm_postgresql_configuration_log_checkpoints {
     lower(input.resources[_].type) == "azurerm_postgresql_configuration"
+    not azure_attribute_absence["azurerm_postgresql_configuration_log_checkpoints"]
     not azure_issue["azurerm_postgresql_configuration_log_checkpoints"]
+}
+
+azurerm_postgresql_configuration_log_checkpoints = false {
+    azure_attribute_absence["azurerm_postgresql_configuration_log_checkpoints"]
 }
 
 azurerm_postgresql_configuration_log_checkpoints = false {
     azure_issue["azurerm_postgresql_configuration_log_checkpoints"]
 }
 
-azurerm_postgresql_configuration_log_checkpoints_err = "log_checkpoints is currently not enabled on PostgreSQL database server." {
+azurerm_postgresql_configuration_log_checkpoints_err = "Resource azurerm_postgresql_server and azurerm_postgresql_configuration need to be exist." {
+    azure_attribute_absence["azurerm_postgresql_configuration_log_checkpoints"]
+} else = "log_checkpoints is currently not enabled on PostgreSQL database server." {
     azure_issue["azurerm_postgresql_configuration_log_checkpoints"]
 }
 
@@ -207,6 +219,11 @@ azurerm_postgresql_configuration_log_checkpoints_metadata := {
 # PR-AZR-0186-TRF
 
 default azurerm_postgresql_configuration_log_connections = null
+
+azure_attribute_absence ["azurerm_postgresql_configuration_log_connections"] {
+    count([c | input.resources[_].type == "azurerm_postgresql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_postgresql_configuration"; c := 1])
+}
+
 azure_issue ["azurerm_postgresql_configuration_log_connections"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_postgresql_configuration"
@@ -216,14 +233,21 @@ azure_issue ["azurerm_postgresql_configuration_log_connections"] {
 
 azurerm_postgresql_configuration_log_connections {
     lower(input.resources[_].type) == "azurerm_postgresql_configuration"
+    not azure_attribute_absence["azurerm_postgresql_configuration_log_connections"]
     not azure_issue["azurerm_postgresql_configuration_log_connections"]
+}
+
+azurerm_postgresql_configuration_log_connections = false {
+    azure_attribute_absence["azurerm_postgresql_configuration_log_connections"]
 }
 
 azurerm_postgresql_configuration_log_connections = false {
     azure_issue["azurerm_postgresql_configuration_log_connections"]
 }
 
-azurerm_postgresql_configuration_log_connections_err = "log_connections is currently not enabled on PostgreSQL database server." {
+azurerm_postgresql_configuration_log_connections_err = "Resource azurerm_postgresql_server and azurerm_postgresql_configuration need to be exist." {
+    azure_attribute_absence["azurerm_postgresql_configuration_log_connections"]
+} else = "log_connections is currently not enabled on PostgreSQL database server."{
     azure_issue["azurerm_postgresql_configuration_log_connections"]
 }
 
@@ -244,6 +268,11 @@ azurerm_postgresql_configuration_log_connections_metadata := {
 # PR-AZR-0187-TRF
 
 default azurerm_postgresql_configuration_connection_throttling = null
+
+azure_attribute_absence ["azurerm_postgresql_configuration_connection_throttling"] {
+    count([c | input.resources[_].type == "azurerm_postgresql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_postgresql_configuration"; c := 1])
+}
+
 azure_issue ["azurerm_postgresql_configuration_connection_throttling"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_postgresql_configuration"
@@ -253,14 +282,21 @@ azure_issue ["azurerm_postgresql_configuration_connection_throttling"] {
 
 azurerm_postgresql_configuration_connection_throttling {
     lower(input.resources[_].type) == "azurerm_postgresql_configuration"
+    not azure_attribute_absence["azurerm_postgresql_configuration_connection_throttling"]
     not azure_issue["azurerm_postgresql_configuration_connection_throttling"]
+}
+
+azurerm_postgresql_configuration_connection_throttling = false {
+    azure_attribute_absence["azurerm_postgresql_configuration_connection_throttling"]
 }
 
 azurerm_postgresql_configuration_connection_throttling = false {
     azure_issue["azurerm_postgresql_configuration_connection_throttling"]
 }
 
-azurerm_postgresql_configuration_connection_throttling_err = "connection_throttling is currently not enabled on PostgreSQL database server." {
+azurerm_postgresql_configuration_connection_throttling_err = "Resource azurerm_postgresql_server and azurerm_postgresql_configuration need to be exist." {
+    azure_attribute_absence["azurerm_postgresql_configuration_connection_throttling"]
+} else = "connection_throttling is currently not enabled on PostgreSQL database server." {
     azure_issue["azurerm_postgresql_configuration_connection_throttling"]
 }
 
