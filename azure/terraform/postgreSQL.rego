@@ -104,6 +104,11 @@ sslEnforcement_metadata := {
 # PR-AZR-0146-TRF
 
 default pg_ingress_from_any_ip_disabled = null
+
+azure_attribute_absence ["pg_ingress_from_any_ip_disabled"] {
+    count([c | input.resources[_].type == "azurerm_postgresql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_postgresql_firewall_rule"; c := 1])
+}
+
 azure_attribute_absence ["pg_ingress_from_any_ip_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_postgresql_firewall_rule"
@@ -142,8 +147,7 @@ pg_ingress_from_any_ip_disabled = false {
     azure_attribute_absence["pg_ingress_from_any_ip_disabled"]
 }
 
-
-pg_ingress_from_any_ip_disabled_err = "azurerm_postgresql_server property 'start_ip_address' and 'end_ip_address' need to be exist. one or both are missing from the resource." {
+pg_ingress_from_any_ip_disabled_err = "Resource azurerm_postgresql_server and azurerm_postgresql_firewall_rule need to be exist and property 'start_ip_address' and 'end_ip_address' need to be exist under azurerm_postgresql_firewall_rule as well. one or all are missing from the resource." {
     azure_attribute_absence["pg_ingress_from_any_ip_disabled"]
 } else = "PostgreSQL Database Server currently allowing ingress from all Azure-internal IP addresses" {
     azure_issue["pg_ingress_from_any_ip_disabled"]
