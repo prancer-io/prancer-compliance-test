@@ -324,26 +324,33 @@ default cf_default_ssl = null
 aws_issue["cf_default_ssl"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudfront::distribution"
-    resource.Properties.DistributionConfig.viewerCertificate.CloudFrontDefaultCertificate
+    lower(resource.Properties.DistributionConfig.ViewerCertificate.CloudFrontDefaultCertificate) == "true"
 }
 
-aws_issue["cf_default_ssl"] {
+aws_bool_issue["cf_default_ssl"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudfront::distribution"
-    resource.Properties.DistributionConfig.viewerCertificate.CloudFrontDefaultCertificate == true
+    resource.Properties.DistributionConfig.ViewerCertificate.CloudFrontDefaultCertificate == true
 }
 
 cf_default_ssl {
     lower(input.Resources[i].Type) == "aws::cloudfront::distribution"
     not aws_issue["cf_default_ssl"]
+    not aws_bool_issue["cf_default_ssl"]
 }
 
 cf_default_ssl = false {
     aws_issue["cf_default_ssl"]
 }
 
+cf_default_ssl = false {
+    aws_bool_issue["cf_default_ssl"]
+}
+
 cf_default_ssl_err = "AWS CloudFront web distribution with default SSL certificate (deprecated)" {
     aws_issue["cf_default_ssl"]
+} else = "AWS CloudFront web distribution with default SSL certificate (deprecated)" {
+    aws_bool_issue["cf_default_ssl"]
 }
 
 cf_default_ssl_metadata := {
