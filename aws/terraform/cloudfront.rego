@@ -221,22 +221,17 @@ default cf_https_only = null
 aws_attribute_absence["cf_https_only"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    default_cache_behavior := resource.properties.default_cache_behavior[_]
-    not default_cache_behavior.viewer_protocol_policy
-}
-
-aws_attribute_absence["cf_https_only"] {
-    resource := input.resources[_]
-    lower(resource.type) == "aws_cloudfront_distribution"
-    default_cache_behavior := resource.properties.default_cache_behavior[_]
-    not default_cache_behavior.viewer_protocol_policy
+    origin := resource.properties.origin[_]
+    custom_origin_config := origin.custom_origin_config[_]
+    not custom_origin_config.origin_protocol_policy
 }
 
 aws_issue["cf_https_only"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    default_cache_behavior := resource.properties.default_cache_behavior[_]
-    lower(default_cache_behavior.viewer_protocol_policy) != "https-only"
+    origin := resource.properties.origin[_]
+    custom_origin_config := origin.custom_origin_config[_]
+    custom_origin_config.origin_protocol_policy != "https-only"
 }
 
 cf_https_only {
