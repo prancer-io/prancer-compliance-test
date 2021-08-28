@@ -21,7 +21,7 @@ aws_issue["deploy_compute_platform"] {
     artifact_store := resource.properties.artifact_store[_]
     encryption_key  := artifact_store.encryption_key[_]
     encryption_key.id
-    lower(encryption_key.type) != "cmk"
+    lower(encryption_key.type) != "kms"
 }
 
 

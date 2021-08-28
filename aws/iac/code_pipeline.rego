@@ -17,7 +17,7 @@ aws_issue["deploy_compute_platform"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::codepipeline::pipeline"
     resource.Properties.ArtifactStore.EncryptionKey.Id
-    lower(resource.Properties.ArtifactStore.EncryptionKey.Type) != "cmk"
+    lower(resource.Properties.ArtifactStore.EncryptionKey.Type) != "kms"
 }
 
 
