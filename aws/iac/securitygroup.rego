@@ -46,16 +46,16 @@ aws_issue["all"] {
 aws_issue["proto_all"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
-    ingress := resource.Properties.SecurityGroupIngress[_]
-    ingress.IpProtocol == "-1"
+    lower(resource.Properties.GroupName) == "default"
+    ingress := resource.Properties.SecurityGroupEgress[_]
     ingress.CidrIp == "0.0.0.0/0"
 }
 
 aws_issue["proto_all"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
-    ingress := resource.Properties.SecurityGroupIngress[_]
-    ingress.IpProtocol == "-1"
+    lower(resource.Properties.GroupName) == "default"
+    ingress := resource.Properties.SecurityGroupEgress[_]
     ingress.CidrIpv6 == "::/0"
 }
 

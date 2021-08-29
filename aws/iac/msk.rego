@@ -56,12 +56,6 @@ aws_issue["msk_encryption_at_rest_cmk"] {
     count(resource.Properties.EncryptionInfo.EncryptionAtRest.DataVolumeKMSKeyId) == 0
 }
 
-aws_issue["msk_encryption_at_rest_cmk"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::msk::cluster"
-    resource.Properties.EncryptionInfo.EncryptionAtRest.DataVolumeKMSKeyId == null
-}
-
 msk_encryption_at_rest_cmk {
     lower(input.Resources[i].Type) == "aws::msk::cluster"
     not aws_issue["msk_encryption_at_rest_cmk"]

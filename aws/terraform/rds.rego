@@ -116,6 +116,12 @@ aws_issue["rds_encrypt_key"] {
     not resource.properties.kms_key_id
 }
 
+aws_issue["rds_encrypt_key"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_db_instance"
+    count(resource.properties.kms_key_id) == 0
+}
+
 rds_encrypt_key {
     lower(input.resources[i].type) == "aws_db_instance"
     not aws_issue["rds_encrypt_key"]
