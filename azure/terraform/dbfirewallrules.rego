@@ -8,6 +8,11 @@ package rule
 
 default db_firewall = null
 
+
+azure_attribute_absence ["db_firewall"] {
+    count([c | input.resources[_].type == "azurerm_sql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_sql_firewall_rule"; c := 1])
+}
+
 azure_attribute_absence["db_firewall"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_sql_firewall_rule"

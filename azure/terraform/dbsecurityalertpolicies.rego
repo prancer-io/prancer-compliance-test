@@ -10,6 +10,10 @@ package rule
 default dbsec_threat_off = null
 
 azure_attribute_absence["dbsec_threat_off"] {
+    count([c | input.resources[_].type == "azurerm_mssql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_mssql_server_security_alert_policy"; c := 1])
+}
+
+azure_attribute_absence["dbsec_threat_off"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_mssql_server_security_alert_policy"
     not resource.properties.state
@@ -58,6 +62,10 @@ dbsec_threat_off_metadata := {
 #
 
 default dbsec_threat_retention = null
+
+azure_attribute_absence["dbsec_threat_retention"] {
+    count([c | input.resources[_].type == "azurerm_mssql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_mssql_server_security_alert_policy"; c := 1])
+}
 
 azure_attribute_absence["dbsec_threat_retention"] {
     resource := input.resources[_]
@@ -109,7 +117,11 @@ dbsec_threat_retention_metadata := {
 
 default dbsec_threat_email = null
 
-azure_attribute_absence["dbsec_threat_retention"] {
+azure_attribute_absence["dbsec_threat_email"] {
+    count([c | input.resources[_].type == "azurerm_mssql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_mssql_server_security_alert_policy"; c := 1])
+}
+
+azure_attribute_absence["dbsec_threat_email"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_mssql_server_security_alert_policy"
     not resource.properties.email_addresses
@@ -159,7 +171,11 @@ dbsec_threat_email_metadata := {
 
 default dbsec_threat_alert = null
 
-azure_attribute_absence["dbsec_threat_retention"] {
+azure_attribute_absence["dbsec_threat_alert"] {
+    count([c | input.resources[_].type == "azurerm_mssql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_mssql_server_security_alert_policy"; c := 1])
+}
+
+azure_attribute_absence["dbsec_threat_alert"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_mssql_server_security_alert_policy"
     not resource.properties.disabled_alerts
@@ -206,6 +222,10 @@ dbsec_threat_alert_metadata := {
 #
 
 default sql_alert = null
+
+azure_attribute_absence["sql_alert"] {
+    count([c | input.resources[_].type == "azurerm_mssql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_mssql_server_security_alert_policy"; c := 1])
+}
 
 azure_issue["sql_alert"] {
     resource := input.resources[_]

@@ -1175,7 +1175,7 @@
                             "id": "PR-AZR-0017-TRF",
                             "eval": "data.rule.log_keyvault",
                             "message": "data.rule.log_keyvault_err",
-                            "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true' and category = 'auditevent' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
+                            "remediationDescription": "Make sure resource 'azurerm_key_vault' and 'azurerm_monitor_diagnostic_setting' both exist and in 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true' and category = 'auditevent' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
                             "remediationFunction": "PR_AZR_0017_TRF.py"
                         }
                     ],
@@ -1204,7 +1204,7 @@
                             "id": "PR-AZR-0019-TRF",
                             "eval": "data.rule.log_lbs",
                             "message": "data.rule.log_lbs_err",
-                            "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true' and category = 'auditevent' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
+                            "remediationDescription": "Make sure 'azurerm_lb' and 'azurerm_monitor_diagnostic_setting' both exist and in 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true' and category = 'auditevent' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
                             "remediationFunction": "PR_AZR_0019_TRF.py"
                         }
                     ],
