@@ -104,6 +104,11 @@ sslEnforcement_metadata := {
 # PR-AZR-0146-TRF
 
 default pg_ingress_from_any_ip_disabled = null
+
+azure_attribute_absence ["pg_ingress_from_any_ip_disabled"] {
+    count([c | input.resources[_].type == "azurerm_postgresql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_postgresql_firewall_rule"; c := 1])
+}
+
 azure_attribute_absence ["pg_ingress_from_any_ip_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_postgresql_firewall_rule"
@@ -142,8 +147,7 @@ pg_ingress_from_any_ip_disabled = false {
     azure_attribute_absence["pg_ingress_from_any_ip_disabled"]
 }
 
-
-pg_ingress_from_any_ip_disabled_err = "azurerm_postgresql_server property 'start_ip_address' and 'end_ip_address' need to be exist. one or both are missing from the resource." {
+pg_ingress_from_any_ip_disabled_err = "Resource azurerm_postgresql_server and azurerm_postgresql_firewall_rule need to be exist and property 'start_ip_address' and 'end_ip_address' need to be exist under azurerm_postgresql_firewall_rule as well. one or all are missing from the resource." {
     azure_attribute_absence["pg_ingress_from_any_ip_disabled"]
 } else = "PostgreSQL Database Server currently allowing ingress from all Azure-internal IP addresses" {
     azure_issue["pg_ingress_from_any_ip_disabled"]
@@ -159,4 +163,151 @@ pg_ingress_from_any_ip_disabled_metadata := {
     "Resource Type": "azurerm_postgresql_firewall_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_firewall_rule"
+}
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration
+# PR-AZR-0185-TRF
+
+default azurerm_postgresql_configuration_log_checkpoints = null
+
+azure_attribute_absence ["azurerm_postgresql_configuration_log_checkpoints"] {
+    count([c | input.resources[_].type == "azurerm_postgresql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_postgresql_configuration"; c := 1])
+}
+
+azure_issue ["azurerm_postgresql_configuration_log_checkpoints"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_postgresql_configuration"
+    lower(resource.properties.name) == "log_checkpoints"
+    lower(resource.properties.value) == "off"
+}
+
+azurerm_postgresql_configuration_log_checkpoints {
+    lower(input.resources[_].type) == "azurerm_postgresql_configuration"
+    not azure_attribute_absence["azurerm_postgresql_configuration_log_checkpoints"]
+    not azure_issue["azurerm_postgresql_configuration_log_checkpoints"]
+}
+
+azurerm_postgresql_configuration_log_checkpoints = false {
+    azure_attribute_absence["azurerm_postgresql_configuration_log_checkpoints"]
+}
+
+azurerm_postgresql_configuration_log_checkpoints = false {
+    azure_issue["azurerm_postgresql_configuration_log_checkpoints"]
+}
+
+azurerm_postgresql_configuration_log_checkpoints_err = "Resource azurerm_postgresql_server and azurerm_postgresql_configuration need to be exist." {
+    azure_attribute_absence["azurerm_postgresql_configuration_log_checkpoints"]
+} else = "log_checkpoints is currently not enabled on PostgreSQL database server." {
+    azure_issue["azurerm_postgresql_configuration_log_checkpoints"]
+}
+
+azurerm_postgresql_configuration_log_checkpoints_metadata := {
+    "Policy Code": "PR-AZR-0185-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "PostgreSQL Database Server should have log_checkpoints enabled",
+    "Policy Description": "A checkpoint is a point in the transaction log sequence at which all data files have been updated to reflect the information in the log. All data files will be flushed to disk. Refer to Section 29.4 for more details about what happens during a checkpoint. this policy will identify Postgresql DB Server which dont have checkpoint log enabled and alert.",
+    "Resource Type": "azurerm_postgresql_configuration",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration"
+}
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration
+# PR-AZR-0186-TRF
+
+default azurerm_postgresql_configuration_log_connections = null
+
+azure_attribute_absence ["azurerm_postgresql_configuration_log_connections"] {
+    count([c | input.resources[_].type == "azurerm_postgresql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_postgresql_configuration"; c := 1])
+}
+
+azure_issue ["azurerm_postgresql_configuration_log_connections"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_postgresql_configuration"
+    lower(resource.properties.name) == "log_connections"
+    lower(resource.properties.value) == "off"
+}
+
+azurerm_postgresql_configuration_log_connections {
+    lower(input.resources[_].type) == "azurerm_postgresql_configuration"
+    not azure_attribute_absence["azurerm_postgresql_configuration_log_connections"]
+    not azure_issue["azurerm_postgresql_configuration_log_connections"]
+}
+
+azurerm_postgresql_configuration_log_connections = false {
+    azure_attribute_absence["azurerm_postgresql_configuration_log_connections"]
+}
+
+azurerm_postgresql_configuration_log_connections = false {
+    azure_issue["azurerm_postgresql_configuration_log_connections"]
+}
+
+azurerm_postgresql_configuration_log_connections_err = "Resource azurerm_postgresql_server and azurerm_postgresql_configuration need to be exist." {
+    azure_attribute_absence["azurerm_postgresql_configuration_log_connections"]
+} else = "log_connections is currently not enabled on PostgreSQL database server."{
+    azure_issue["azurerm_postgresql_configuration_log_connections"]
+}
+
+azurerm_postgresql_configuration_log_connections_metadata := {
+    "Policy Code": "PR-AZR-0186-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "PostgreSQL Database Server should have log_connections enabled",
+    "Policy Description": "Causes each attempted connection to the server to be logged, as well as successful completion of client authentication. Only superusers can change this parameter at session start, and it cannot be changed at all within a session. this policy will identify Postgresql DB Server which dont have log_connections enabled and alert.",
+    "Resource Type": "azurerm_postgresql_configuration",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration"
+}
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration
+# PR-AZR-0187-TRF
+
+default azurerm_postgresql_configuration_connection_throttling = null
+
+azure_attribute_absence ["azurerm_postgresql_configuration_connection_throttling"] {
+    count([c | input.resources[_].type == "azurerm_postgresql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_postgresql_configuration"; c := 1])
+}
+
+azure_issue ["azurerm_postgresql_configuration_connection_throttling"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_postgresql_configuration"
+    lower(resource.properties.name) == "connection_throttling"
+    lower(resource.properties.value) == "off"
+}
+
+azurerm_postgresql_configuration_connection_throttling {
+    lower(input.resources[_].type) == "azurerm_postgresql_configuration"
+    not azure_attribute_absence["azurerm_postgresql_configuration_connection_throttling"]
+    not azure_issue["azurerm_postgresql_configuration_connection_throttling"]
+}
+
+azurerm_postgresql_configuration_connection_throttling = false {
+    azure_attribute_absence["azurerm_postgresql_configuration_connection_throttling"]
+}
+
+azurerm_postgresql_configuration_connection_throttling = false {
+    azure_issue["azurerm_postgresql_configuration_connection_throttling"]
+}
+
+azurerm_postgresql_configuration_connection_throttling_err = "Resource azurerm_postgresql_server and azurerm_postgresql_configuration need to be exist." {
+    azure_attribute_absence["azurerm_postgresql_configuration_connection_throttling"]
+} else = "connection_throttling is currently not enabled on PostgreSQL database server." {
+    azure_issue["azurerm_postgresql_configuration_connection_throttling"]
+}
+
+azurerm_postgresql_configuration_connection_throttling_metadata := {
+    "Policy Code": "PR-AZR-0187-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "PostgreSQL Database Server should have connection_throttling enabled",
+    "Policy Description": "Enabling connection_throttling allows the PostgreSQL Database to set the verbosity of logged messages which in turn generates query and error logs with respect to concurrent connections, that could lead to a successful Denial of Service (DoS) attack by exhausting connection resources.",
+    "Resource Type": "azurerm_postgresql_configuration",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration"
 }

@@ -5,7 +5,7 @@ package rule
 # PR-AZR-0104-TRF
 
 default adminUserDisabled = null
-
+# default is false
 azure_attribute_absence ["adminUserDisabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_container_registry"
@@ -20,10 +20,12 @@ azure_issue ["adminUserDisabled"] {
 
 adminUserDisabled {
     azure_attribute_absence["adminUserDisabled"]
+    not azure_issue["adminUserDisabled"]
 }
 
 adminUserDisabled {
     lower(input.resources[_].type) == "azurerm_container_registry"
+    not azure_attribute_absence["adminUserDisabled"]
     not azure_issue["adminUserDisabled"]
 }
 

@@ -7,6 +7,10 @@ package rule
 #
 
 default vnet_peer = null
+# this checking is not necessary here as azurerm_virtual_network can be created without azurerm_virtual_network_peering
+#azure_attribute_absence["vnet_peer"] {
+#    count([c | input.resources[_].type == "azurerm_virtual_network"; c := 1]) != count([c | input.resources[_].type == "azurerm_virtual_network_peering"; c := 1])
+#}
 
 # Defaults to true.
 azure_attribute_absence["vnet_peer"] {
@@ -18,7 +22,7 @@ azure_attribute_absence["vnet_peer"] {
 azure_issue["vnet_peer"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_virtual_network_peering"
-    resource.properties.allow_virtual_network_access == false
+    resource.properties.allow_virtual_network_access != true
 }
 
 vnet_peer {
@@ -35,6 +39,12 @@ vnet_peer {
 vnet_peer = false {
     azure_issue["vnet_peer"]
 }
+
+#vnet_peer_err = "Resource azurerm_virtual_network and azurerm_virtual_network_peering need to be exist. one or both are missing from the resource." {
+#    azure_attribute_absence["vnet_peer"]
+#} else = "Azure virtual network peering state is currently not connected"  {
+#    azure_issue["vnet_peer"]
+#}
 
 vnet_peer_err = "Azure virtual network peering state is currently not connected" {
     azure_issue["vnet_peer"]

@@ -573,7 +573,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure that Cosmos DB Account has an associated tag",
-                    "description": "Tags are key-value pairs that you attach to Azure Cosmos DB resources to better organize them. They are particularly useful when you have many resources of the same type, which in the case of Azure Cosmos DB, is a database. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag. Two of the key advantages of tagging your Cosmos DB are: Grouping and Filtering and Cost allocation.",
+                    "description": "Tags are key-value pairs that you attach to resources to better organize them. They are particularly useful when you have many resources of the same type. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag. Some of the key advantages of tagging is Grouping, Filtering and Cost allocation.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -867,12 +867,12 @@
                             "id": "PR-AZR-0055-TRF",
                             "eval": "data.rule.dbsec_threat_email",
                             "message": "data.rule.dbsec_threat_email_err",
-                            "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, set 'email_account_admins = true' and add some email address who need to get notified about potential thread detection under 'email_addresses' array to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy for details.",
+                            "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, add some email address who need to get notified about potential thread detection under 'email_addresses' array to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#email_addresses for details.",
                             "remediationFunction": ""
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Databases Security Alert Policy should be configured to send alert to the account administrators and configured email addresses",
+                    "title": "Azure SQL Databases Security Alert Policy should be configured to send alert to the configured email addresses",
                     "description": "Checks to ensure that an valid email address is set for Threat Detection alerts. The alerts are sent to this email address when any anomalous activities are detected on SQL databases.",
                     "tags": [
                         {
@@ -1560,7 +1560,7 @@
                             "id": "PR-AZR-0145-TRF",
                             "eval": "data.rule.maria_ingress_from_any_ip_disabled",
                             "message": "data.rule.maria_ingress_from_any_ip_disabled_err",
-                            "remediationDescription": "In 'azurerm_mariadb_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_firewall_rule#start_ip_address for details.",
+                            "remediationDescription": "Make sure resource 'azurerm_mariadb_server' and 'azurerm_mariadb_firewall_rule' both exist and in 'azurerm_mariadb_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_firewall_rule#start_ip_address for details.",
                             "remediationFunction": "PR_AZR_0145_TRF.py"
                         }
                     ],
@@ -1580,7 +1580,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MySQL_SERVER",
+                    "masterTestId": "TEST_MySQL_SERVER_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1591,13 +1591,44 @@
                             "id": "PR-AZR-0148-TRF",
                             "eval": "data.rule.mysql_ingress_from_any_ip_disabled",
                             "message": "data.rule.mysql_ingress_from_any_ip_disabled_err",
-                            "remediationDescription": "In 'azurerm_mysql_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_firewall_rule#start_ip_address for details.",
+                            "remediationDescription": "Make sure resource 'azurerm_mysql_server' and 'azurerm_mysql_firewall_rule' exist and in 'azurerm_mysql_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_firewall_rule#start_ip_address for details.",
                             "remediationFunction": "PR_AZR_0148_TRF.py"
                         }
                     ],
                     "severity": "High",
                     "title": "MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
                     "description": "This policy will identify MySQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MySQL_SERVER_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(mysql_server.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0184-TRF",
+                            "eval": "data.rule.mysql_server_ssl_enforcement_enabled",
+                            "message": "data.rule.mysql_server_ssl_enforcement_enabled_err",
+                            "remediationDescription": "In 'azurerm_mysql_server' resource, set 'ssl_enforcement_enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server#ssl_enforcement_enabled for details.",
+                            "remediationFunction": "PR_AZR_0184_TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure MySQL Database Server accepts only SSL connections",
+                    "description": "This policy will identify MySQL Database Server which are not enforcing all the incoming connection over SSL and alert if found.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2723,13 +2754,106 @@
                             "id": "PR-AZR-0146-TRF",
                             "eval": "data.rule.pg_ingress_from_any_ip_disabled",
                             "message": "data.rule.pg_ingress_from_any_ip_disabled_err",
-                            "remediationDescription": "In 'azurerm_postgresql_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_firewall_rule#start_ip_address for details.",
+                            "remediationDescription": "Make sure resource 'azurerm_postgresql_server' and 'azurerm_postgresql_firewall_rule' both exist and in 'azurerm_postgresql_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_firewall_rule#start_ip_address for details.",
                             "remediationFunction": "PR_AZR_0146_TRF.py"
                         }
                     ],
                     "severity": "High",
                     "title": "PostgreSQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
                     "description": "This policy will identify PostgreSQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_postgreSQL_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0185-TRF",
+                            "eval": "data.rule.azurerm_postgresql_configuration_log_checkpoints",
+                            "message": "data.rule.azurerm_postgresql_configuration_log_checkpoints_err",
+                            "remediationDescription": "In 'azurerm_postgresql_configuration' resource, set name = 'log_checkpoints' and value = 'on' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration for details.",
+                            "remediationFunction": "PR_AZR_0185_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "PostgreSQL Database Server should have log_checkpoints enabled",
+                    "description": "A checkpoint is a point in the transaction log sequence at which all data files have been updated to reflect the information in the log. All data files will be flushed to disk. Refer to Section 29.4 for more details about what happens during a checkpoint. this policy will identify Postgresql DB Server which dont have checkpoint log enabled and alert.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_postgreSQL_5",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0186-TRF",
+                            "eval": "data.rule.azurerm_postgresql_configuration_log_connections",
+                            "message": "data.rule.azurerm_postgresql_configuration_log_connections_err",
+                            "remediationDescription": "In 'azurerm_postgresql_configuration' resource, set name = 'log_connections' and value = 'on' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration for details.",
+                            "remediationFunction": "PR_AZR_0186_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "PostgreSQL Database Server should have log_connections enabled",
+                    "description": "Causes each attempted connection to the server to be logged, as well as successful completion of client authentication. Only superusers can change this parameter at session start, and it cannot be changed at all within a session. this policy will identify Postgresql DB Server which dont have log_connections enabled and alert.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_postgreSQL_6",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0187-TRF",
+                            "eval": "data.rule.azurerm_postgresql_configuration_connection_throttling",
+                            "message": "data.rule.azurerm_postgresql_configuration_connection_throttling_err",
+                            "remediationDescription": "In 'azurerm_postgresql_configuration' resource, set name = 'connection_throttling' and value = 'on' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration for details.",
+                            "remediationFunction": "PR_AZR_0187_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "PostgreSQL Database Server should have connection_throttling enabled",
+                    "description": "Enabling connection_throttling allows the PostgreSQL Database to set the verbosity of logged messages which in turn generates query and error logs with respect to concurrent connections, that could lead to a successful Denial of Service (DoS) attack by exhausting connection resources.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3090,7 +3214,7 @@
                             "id": "PR-AZR-0129-TRF",
                             "eval": "data.rule.sql_server_alert",
                             "message": "data.rule.sql_server_alert_err",
-                            "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, set state = 'Enabled' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#state for details.",
+                            "remediationDescription": "Make sure resource 'azurerm_mssql_server' and 'azurerm_mssql_server_security_alert_policy' both exist and in 'azurerm_mssql_server_security_alert_policy' resource, set state = 'Enabled' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#state for details.",
                             "remediationFunction": "PR_AZR_0129_TRF.py"
                         }
                     ],
@@ -3155,7 +3279,7 @@
                             "id": "PR-AZR-0111-TRF",
                             "eval": "data.rule.serverKeyType",
                             "message": "data.rule.serverKeyType_err",
-                            "remediationDescription": "In 'azurerm_mssql_server_transparent_data_encryption' resource, make sure 'key_vault_key_id' property has id of associated 'azurerm_key_vault_key' resource to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption#key_vault_key_id for details.",
+                            "remediationDescription": "Make sure resource 'azurerm_mssql_server' and 'azurerm_mssql_server_transparent_data_encryption' both exist and in 'azurerm_mssql_server_transparent_data_encryption' resource, make sure 'key_vault_key_id' property has id of associated 'azurerm_key_vault_key' resource to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption#key_vault_key_id for details.",
                             "remediationFunction": "PR-AZR-0111-TRF.py"
                         }
                     ],
@@ -3258,7 +3382,7 @@
                             "id": "PR-AZR-0147-TRF",
                             "eval": "data.rule.mssql_ingress_from_any_ip_disabled",
                             "message": "data.rule.mssql_ingress_from_any_ip_disabled_err",
-                            "remediationDescription": "In 'azurerm_mssql_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_firewall_rule#start_ip_address for details.",
+                            "remediationDescription": "Make sure resource 'azurerm_mssql_server' and 'azurerm_mssql_firewall_rule' exist and in 'azurerm_mssql_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_firewall_rule#start_ip_address for details.",
                             "remediationFunction": "PR_AZR_0147_TRF.py"
                         }
                     ],
@@ -3462,6 +3586,40 @@
                     "severity": "High",
                     "title": "Ensure that Storage Account should not allow public access to all blobs or containers",
                     "description": "This policy will identify which Storage Account has public access not disabled for all blobs or containers and alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "HIPAA",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_7",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0188-TRF",
+                            "eval": "data.rule.storage_account_queue_logging_enabled_for_all_operation",
+                            "message": "data.rule.storage_account_queue_logging_enabled_for_all_operation_err",
+                            "remediationDescription": "In 'azurerm_storage_account' resource, set 'read = true', 'write = true', 'delete = true' under 'logging' block which exist under 'queue_properties' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#logging for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage Accounts queue service logging should be enabled",
+                    "description": "The Azure Storage Queue service logging records details for both successful and failed requests made to the queues, as well as end-to-end latency, server latency, and authentication information.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3692,7 +3850,7 @@
                             "id": "PR-AZR-0098-TRF",
                             "eval": "data.rule.vpn_encrypt",
                             "message": "data.rule.vpn_encrypt_err",
-                            "remediationDescription": "In 'azurerm_virtual_network_gateway_connection' resource, set 'use_policy_based_traffic_selectors = true' and make sure 'ipsec_policy' block exist with 'ipsec_encryption' property with value set other than 'none' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_gateway_connection#ipsec_encryption for details.",
+                            "remediationDescription": "Make sure resource 'azurerm_virtual_network_gateway' and 'azurerm_virtual_network_gateway_connection' exist and in 'azurerm_virtual_network_gateway_connection' resource, set 'use_policy_based_traffic_selectors = true' and make sure 'ipsec_policy' block exist with 'ipsec_encryption' property with value set other than 'none' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_gateway_connection#ipsec_encryption for details.",
                             "remediationFunction": "PR_AZR_0098_TRF.py"
                         }
                     ],

@@ -7,6 +7,10 @@ package rule
 default sql_server_alert = null
 
 azure_attribute_absence["sql_server_alert"] {
+    count([c | input.resources[_].type == "azurerm_mssql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_mssql_server_security_alert_policy"; c := 1])
+}
+
+azure_attribute_absence["sql_server_alert"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_mssql_server_security_alert_policy"
     not resource.properties.state
@@ -32,7 +36,7 @@ sql_server_alert = false {
     azure_sql_security_alert_disabled["sql_server_alert"]
 }
 
-sql_server_alert_err = "azurerm_mssql_server_security_alert_policy property 'state' need to be exist. Its missing from the resource. Please set the value to 'Enabled' after property addition." {
+sql_server_alert_err = "Make sure resource azurerm_mssql_server and azurerm_mssql_server_security_alert_policy both exist and property 'state' exist under azurerm_mssql_server_security_alert_policy. Its missing from the resource. Please set the value to 'Enabled' after property 'state' addition." {
     azure_attribute_absence["sql_server_alert"]
 } else = "Security alert is currently not enabled on SQL Server" {
     azure_sql_security_alert_disabled["sql_server_alert"]
