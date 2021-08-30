@@ -290,10 +290,10 @@ sql_server_email_account_metadata := {
 # PR-AZR-0194-ARM
 #
 
-default sql_logical_server_email_addressess = null
+default sql_logical_server_retention_days = null
 
 
-azure_attribute_absence["sql_logical_server_email_addressess"] {
+azure_attribute_absence["sql_logical_server_retention_days"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
     sql_resources := resource.resources[_]
@@ -301,7 +301,7 @@ azure_attribute_absence["sql_logical_server_email_addressess"] {
     not sql_resources.properties.emailAddresses
 }
 
-azure_issue["sql_logical_server_email_addressess"] {
+azure_issue["sql_logical_server_retention_days"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
     sql_resources := resource.resources[_]
@@ -309,34 +309,34 @@ azure_issue["sql_logical_server_email_addressess"] {
     count(sql_resources.properties.emailAddresses) == 0  
 }
 
-sql_logical_server_email_addressess {
+sql_logical_server_retention_days {
     lower(input.resources[_].type) == "microsoft.sql/servers"
     resource := input.resources[_]
     sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
-    not azure_attribute_absence["sql_logical_server_email_addressess"]
-    not azure_issue["sql_logical_server_email_addressess"]
+    not azure_attribute_absence["sql_logical_server_retention_days"]
+    not azure_issue["sql_logical_server_retention_days"]
 }
 
 
-sql_logical_server_email_addressess = false {
-    azure_attribute_absence["sql_logical_server_email_addressess"]
+sql_logical_server_retention_days = false {
+    azure_attribute_absence["sql_logical_server_retention_days"]
 }
 
 
-sql_logical_server_email_addressess = false {
-    azure_issue["sql_logical_server_email_addressess"]
+sql_logical_server_retention_days = false {
+    azure_issue["sql_logical_server_retention_days"]
 }
 
 
-sql_logical_server_email_addressess_err = "Azure SQL security alert policy attribute 'emailAccountAdmins' or 'emailAddresses' is missing from the resource" {
-    azure_attribute_absence["sql_logical_server_email_addressess"]
+sql_logical_server_retention_days_err = "Azure SQL security alert policy attribute 'emailAccountAdmins' or 'emailAddresses' is missing from the resource" {
+    azure_attribute_absence["sql_logical_server_retention_days"]
 } else = "Azure SQL security alert policy is currently not configured to sent alert to the account administrators via email" {
-    azure_issue["sql_logical_server_email_addressess"]
+    azure_issue["sql_logical_server_retention_days"]
 }
 
 
-sql_logical_server_email_addressess_metadata := {
+sql_logical_server_retention_days_metadata := {
     "Policy Code": "PR-AZR-0194-ARM",
     "Type": "IaC",
     "Product": "AZR",
@@ -409,6 +409,153 @@ sql_server_email_addressess_metadata := {
     "Language": "ARM template",
     "Policy Title": "Azure SQL Security Alert Policy should be configured to send alert to the account administrators and configured email addresses",
     "Policy Description": "Provide the email address where alerts will be sent when anomalous activities are detected on SQL servers.",
+    "Resource Type": "microsoft.sql/servers/securityalertpolicies",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies"
+}
+
+
+
+
+
+# PR-AZR-0196-ARM
+#
+
+default sql_logical_server_retention_days = null
+
+
+azure_attribute_absence["sql_logical_server_retention_days"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[_]
+    lower(sql_resources.type) == "securityalertpolicies"
+    not sql_resources.properties.retentionDays
+}
+
+azure_issue["sql_logical_server_retention_days"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[_]
+    lower(sql_resources.type) == "securityalertpolicies"
+    to_number(sql_resources.properties.retentionDays) == 0  
+}
+
+
+azure_issue["sql_logical_server_retention_days"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[_]
+    lower(sql_resources.type) == "securityalertpolicies"
+    to_number(sql_resources.properties.retentionDays) >= 90 
+}
+
+
+sql_logical_server_retention_days {
+    not azure_attribute_absence["sql_logical_server_retention_days"]
+    azure_issue["sql_logical_server_retention_days"]
+}
+
+
+sql_logical_server_retention_days = false {
+    azure_attribute_absence["sql_logical_server_retention_days"]
+}
+
+
+sql_logical_server_retention_days = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    resource := input.resources[_]
+    sql_resources := resource.resources[_]
+    lower(sql_resources.type) == "securityalertpolicies"
+    not azure_issue["sql_logical_server_retention_days"]
+}
+
+
+sql_logical_server_retention_days_err = "Azure SQL security alert policy attribute 'retentionDays' is missing from the resource" {
+    azure_attribute_absence["sql_logical_server_retention_days"]
+} else = "SQL Server security alert policy Retention Days are not greater than 90 days" {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    resource := input.resources[_]
+    sql_resources := resource.resources[_]
+    lower(sql_resources.type) == "securityalertpolicies"
+    not azure_issue["sql_logical_server_retention_days"]
+}
+
+
+sql_logical_server_retention_days_metadata := {
+    "Policy Code": "PR-AZR-0196-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure SQL Server Threat Detection is Enabled and Retention Logs are greater than 90 days",
+    "Policy Description": "Azure SQL Database Threat Detection is a security intelligence feature built into the Azure SQL Database service. Working around the clock to learn, profile and detect anomalous database activities, Azure SQL Database Threat Detection identifies potential threats to the database. Security officers or other designated administrators can get an immediate notification about suspicious database activities as they occur. Each notification provides details of the suspicious activity and recommends how to further investigate and mitigate the threat.",
+    "Resource Type": "microsoft.sql/servers/securityalertpolicies",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies"
+}
+
+
+
+
+
+
+# PR-AZR-0197-ARM
+#
+
+default sql_server_retention_days = null
+
+
+azure_attribute_absence["sql_server_retention_days"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
+    not sql_resources.properties.retentionDays
+}
+
+azure_issue["sql_server_retention_days"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
+    to_number(sql_resources.properties.retentionDays) == 0  
+}
+
+
+azure_issue["sql_server_retention_days"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
+    to_number(sql_resources.properties.retentionDays) >= 90 
+}
+
+
+sql_server_retention_days {
+    not azure_attribute_absence["sql_server_retention_days"]
+    azure_issue["sql_server_retention_days"]
+}
+
+
+sql_server_retention_days = false {
+    azure_attribute_absence["sql_server_retention_days"]
+}
+
+
+sql_server_retention_days = false {
+    lower(input.resources[_].type) == "microsoft.sql/servers/securityalertpolicies"
+    not azure_issue["sql_server_retention_days"]
+}
+
+
+sql_server_retention_days_err = "Azure SQL security alert policy attribute 'retentionDays' is missing from the resource" {
+    azure_attribute_absence["sql_server_retention_days"]
+} else = "SQL Server security alert policy Retention Days are not greater than 90 days" {
+    lower(input.resources[_].type) == "microsoft.sql/servers/securityalertpolicies"
+    not azure_issue["sql_server_retention_days"]
+}
+
+
+sql_server_retention_days_metadata := {
+    "Policy Code": "PR-AZR-0197-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure SQL Server Threat Detection is Enabled and Retention Logs are greater than 90 days",
+    "Policy Description": "Azure SQL Database Threat Detection is a security intelligence feature built into the Azure SQL Database service. Working around the clock to learn, profile and detect anomalous database activities, Azure SQL Database Threat Detection identifies potential threats to the database. Security officers or other designated administrators can get an immediate notification about suspicious database activities as they occur. Each notification provides details of the suspicious activity and recommends how to further investigate and mitigate the threat.",
     "Resource Type": "microsoft.sql/servers/securityalertpolicies",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies"
