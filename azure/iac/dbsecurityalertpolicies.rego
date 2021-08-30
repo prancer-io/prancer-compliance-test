@@ -223,9 +223,7 @@ dbsec_threat_alert = false {
     azure_issue["dbsec_threat_alert"]
 }
 
-dbsec_threat_alert_err = "Azure SQL Server Security Alert Policy attribute 'disabledAlerts' is missing from the resource. Which is fine" {
-    azure_attribute_absence["dbsec_threat_alert"]
-} else = "Azure SQL Server Security Alert Policy currently have one or more alert type in disabled alerts list" {
+dbsec_threat_alert_err = "Azure SQL Server Security Alert Policy currently have one or more alert type in disabled alerts list" {
     azure_issue["dbsec_threat_alert"]
 }
 
