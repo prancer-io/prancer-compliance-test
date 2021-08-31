@@ -9,13 +9,13 @@ default kinesis_encryption = null
 aws_issue["kinesis_encryption"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::kinesis::stream"
-    not resource.Properties.StreamEncryption.EncryptionType
+    not resource.Properties.StreamEncryption
 }
 
 aws_issue["kinesis_encryption"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::kinesis::stream"
-    count(resource.Properties.StreamEncryption.EncryptionType) == 0
+    count(resource.Properties.StreamEncryption) == 0
 }
 
 kinesis_encryption {

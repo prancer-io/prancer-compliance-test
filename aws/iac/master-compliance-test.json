@@ -3237,7 +3237,7 @@
                     "rule": "file(ec2networkacl.rego)",
                     "evals": [
                         {
-                            "id": "PPR-AWS-0115-CFR",
+                            "id": "PR-AWS-0115-CFR",
                             "eval": "data.rule.acl_all_traffic",
                             "message": "data.rule.acl_all_traffic_err",
                             "remediationDescription": "",
@@ -3677,8 +3677,18 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA-CCM", "GDPR", "HITRUST","ISO 27001", "NIST 800", "NIST CSF", "SOC 2"],
-                            "service": ["cloudformation"]
+                            "compliance": [
+                                "CSA-CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -3704,8 +3714,18 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA-CCM", "GDPR", "HITRUST","ISO 27001", "NIST 800", "NIST CSF", "SOC 2"],
-                            "service": ["cloudformation"]
+                            "compliance": [
+                                "CSA-CCM",
+                                "GDPR",
+                                "HITRUST",
+                                "ISO 27001",
+                                "NIST 800",
+                                "NIST CSF",
+                                "SOC 2"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -3731,8 +3751,16 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA-CCM", "HITRUST", "NIST 800", "NIST CSF", "PCI-DSS"],
-                            "service": ["cloudformation"]
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -3758,8 +3786,16 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA-CCM", "HITRUST", "NIST 800", "NIST CSF", "PCI-DSS"],
-                            "service": ["cloudformation"]
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -3785,8 +3821,16 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": ["CSA-CCM", "HITRUST", "NIST 800", "NIST CSF", "PCI-DSS"],
-                            "service": ["cloudformation"]
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -3813,7 +3857,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -3840,7 +3886,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -3867,7 +3915,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -3894,7 +3944,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -3921,7 +3973,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4184,7 +4238,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4211,7 +4267,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4238,7 +4296,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4265,7 +4325,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4292,7 +4354,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4319,34 +4383,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_EMR_7",
-                    "masterSnapshotId": [
-                        "CFR_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(emr.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-0224-CFR",
-                            "eval": "data.rule.emr_s3_encryption_sse",
-                            "message": "data.rule.emr_s3_encryption_sse_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration",
-                            "remediationFunction": "PR_AWS_0224_CFR.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "AWS EMR cluster is not configured with SSE KMS for data at rest encryption (Amazon S3 with EMRFS)",
-                    "description": "This policy identifies EMR clusters which are not configured with Server Side Encryption(SSE KMS) for data at rest encryption of Amazon S3 with EMRFS. As a best practice, use SSE-KMS for server side encryption to encrypt the data in your EMR cluster and ensure full control over your data.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4373,7 +4412,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4400,7 +4441,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4427,7 +4470,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4454,7 +4499,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4481,7 +4528,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4508,7 +4557,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4535,7 +4586,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4562,7 +4615,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4589,7 +4644,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4616,7 +4673,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4643,7 +4702,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4670,7 +4731,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4697,34 +4760,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_MSK_1",
-                    "masterSnapshotId": [
-                        "CFR_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(msk.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-0238-CFR",
-                            "eval": "data.rule.msk_encryption_at_rest",
-                            "message": "data.rule.msk_encryption_at_rest_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html",
-                            "remediationFunction": "PR_AWS_0238_CFR.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure MSK cluster encryption at rest is enabled",
-                    "description": "Amazon MSK integrates with AWS Key Management Service (KMS) for server-side encryption. When you create an MSK cluster, you can specify the AWS KMS CMK for Amazon MSK to use to encrypt your data at rest. If you don't specify a CMK, Amazon MSK creates an AWS managed CMK for you and uses it on your behalf.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4751,7 +4789,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4778,7 +4818,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4805,7 +4847,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -4832,7 +4876,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -5215,7 +5261,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },
@@ -5242,7 +5290,9 @@
                         {
                             "cloud": "git",
                             "compliance": [],
-                            "service": ["cloudformation"]
+                            "service": [
+                                "cloudformation"
+                            ]
                         }
                     ]
                 },

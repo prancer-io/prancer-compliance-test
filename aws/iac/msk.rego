@@ -4,39 +4,39 @@ package rule
 #
 # PR-AWS-0238-CFR
 #
-default msk_encryption_at_rest = null
+# default msk_encryption_at_rest = null
 
-aws_issue["msk_encryption_at_rest"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::msk::cluster"
-    not resource.Properties.EncryptionInfo.EncryptionAtRest
-}
+# aws_issue["msk_encryption_at_rest"] {
+#     resource := input.Resources[i]
+#     lower(resource.Type) == "aws::msk::cluster"
+#     not resource.Properties.EncryptionInfo.EncryptionAtRest
+# }
 
-msk_encryption_at_rest {
-    lower(input.Resources[i].Type) == "aws::msk::cluster"
-    not aws_issue["msk_encryption_at_rest"]
-}
+# msk_encryption_at_rest {
+#     lower(input.Resources[i].Type) == "aws::msk::cluster"
+#     not aws_issue["msk_encryption_at_rest"]
+# }
 
-msk_encryption_at_rest = false {
-    aws_issue["msk_encryption_at_rest"]
-}
+# msk_encryption_at_rest = false {
+#     aws_issue["msk_encryption_at_rest"]
+# }
 
-msk_encryption_at_rest_err = "Ensure MSK cluster encryption at rest is enabled" {
-    aws_issue["msk_encryption_at_rest"]
-}
+# msk_encryption_at_rest_err = "Ensure MSK cluster encryption at rest is enabled" {
+#     aws_issue["msk_encryption_at_rest"]
+# }
 
 
-msk_encryption_at_rest_metadata := {
-    "Policy Code": "PR-AWS-0238-CFR",
-    "Type": "IaC",
-    "Product": "AWS",
-    "Language": "AWS Cloud formation",
-    "Policy Title": "Ensure MSK cluster encryption at rest is enabled",
-    "Policy Description": "Amazon MSK integrates with AWS Key Management Service (KMS) for server-side encryption. When you create an MSK cluster, you can specify the AWS KMS CMK for Amazon MSK to use to encrypt your data at rest. If you don't specify a CMK, Amazon MSK creates an AWS managed CMK for you and uses it on your behalf.",
-    "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo"
-}
+# msk_encryption_at_rest_metadata := {
+#     "Policy Code": "PR-AWS-0238-CFR",
+#     "Type": "IaC",
+#     "Product": "AWS",
+#     "Language": "AWS Cloud formation",
+#     "Policy Title": "Ensure MSK cluster encryption at rest is enabled",
+#     "Policy Description": "Amazon MSK integrates with AWS Key Management Service (KMS) for server-side encryption. When you create an MSK cluster, you can specify the AWS KMS CMK for Amazon MSK to use to encrypt your data at rest. If you don't specify a CMK, Amazon MSK creates an AWS managed CMK for you and uses it on your behalf.",
+#     "Resource Type": "",
+#     "Policy Help URL": "",
+#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo"
+# }
 
 
 #

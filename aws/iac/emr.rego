@@ -192,13 +192,13 @@ default emr_local_encryption = null
 aws_issue["emr_local_encryption"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::emr::securityconfiguration"
-    not resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration.EncryptionKeyProviderType
+    not resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration
 }
 
 aws_issue["emr_local_encryption"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::emr::securityconfiguration"
-    count(resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration.EncryptionKeyProviderType) == 0
+    count(resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration) == 0
 }
 
 emr_local_encryption {
@@ -279,55 +279,56 @@ emr_rest_encryption_metadata := {
 
 
 
-#
-# PR-AWS-0224-CFR
-#
+# #
+# # PR-AWS-0224-CFR
+# #
 
-default emr_s3_encryption_sse = null
+# default emr_s3_encryption_sse = null
 
-aws_issue["emr_s3_encryption_sse"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::emr::securityconfiguration"
-    not resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode
-}
+# aws_issue["emr_s3_encryption_sse"] {
+#     resource := input.Resources[i]
+#     lower(resource.Type) == "aws::emr::securityconfiguration"
+#     not resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode
+# }
 
-aws_issue["emr_s3_encryption_sse"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::emr::securityconfiguration"
-    count(resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode) == 0
-}
+# aws_issue["emr_s3_encryption_sse"] {
+#     resource := input.Resources[i]
+#     lower(resource.Type) == "aws::emr::securityconfiguration"
+#     count(resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode) == 0
+# }
 
-aws_issue["emr_s3_encryption_sse"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::emr::securityconfiguration"
-    resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode
-    lower(resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode) != "sse-kms"
-}
+# aws_issue["emr_s3_encryption_sse"] {
+#     resource := input.Resources[i]
+#     lower(resource.Type) == "aws::emr::securityconfiguration"
+#     resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode
+#     lower(resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode) != "sse-kms"
+#     lower(resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode) != "cse-kms"
+# }
 
-emr_s3_encryption_sse {
-    lower(input.Resources[i].Type) == "aws::emr::securityconfiguration"
-    not aws_issue["emr_s3_encryption_sse"]
-}
+# emr_s3_encryption_sse {
+#     lower(input.Resources[i].Type) == "aws::emr::securityconfiguration"
+#     not aws_issue["emr_s3_encryption_sse"]
+# }
 
-emr_s3_encryption_sse = false {
-    aws_issue["emr_s3_encryption_sse"]
-}
+# emr_s3_encryption_sse = false {
+#     aws_issue["emr_s3_encryption_sse"]
+# }
 
-emr_s3_encryption_sse_err = "AWS EMR cluster is not configured with SSE KMS for data at rest encryption (Amazon S3 with EMRFS)" {
-    aws_issue["emr_s3_encryption_sse"]
-}
+# emr_s3_encryption_sse_err = "AWS EMR cluster is not configured with SSE KMS for data at rest encryption (Amazon S3 with EMRFS)" {
+#     aws_issue["emr_s3_encryption_sse"]
+# }
 
-emr_s3_encryption_sse_metadata := {
-    "Policy Code": "PR-AWS-0224-CFR",
-    "Type": "IaC",
-    "Product": "AWS",
-    "Language": "AWS Cloud formation",
-    "Policy Title": "AWS EMR cluster is not configured with SSE KMS for data at rest encryption (Amazon S3 with EMRFS)",
-    "Policy Description": "This policy identifies EMR clusters which are not configured with Server Side Encryption(SSE KMS) for data at rest encryption of Amazon S3 with EMRFS. As a best practice, use SSE-KMS for server side encryption to encrypt the data in your EMR cluster and ensure full control over your data.",
-    "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration"
-}
+# emr_s3_encryption_sse_metadata := {
+#     "Policy Code": "PR-AWS-0224-CFR",
+#     "Type": "IaC",
+#     "Product": "AWS",
+#     "Language": "AWS Cloud formation",
+#     "Policy Title": "AWS EMR cluster is not configured with SSE KMS for data at rest encryption (Amazon S3 with EMRFS)",
+#     "Policy Description": "This policy identifies EMR clusters which are not configured with Server Side Encryption(SSE KMS) for data at rest encryption of Amazon S3 with EMRFS. As a best practice, use SSE-KMS for server side encryption to encrypt the data in your EMR cluster and ensure full control over your data.",
+#     "Resource Type": "",
+#     "Policy Help URL": "",
+#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration"
+# }
 
 
 #
