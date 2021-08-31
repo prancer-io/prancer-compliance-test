@@ -19,12 +19,6 @@ aws_issue["emr_security"] {
     count(resource.Properties.SecurityConfiguration) == 0
 }
 
-aws_issue["emr_security"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::emr::cluster"
-    resource.Properties.SecurityConfiguration == null
-}
-
 emr_security {
     lower(input.Resources[i].Type) == "aws::emr::cluster"
     not aws_issue["emr_security"]
@@ -61,12 +55,6 @@ aws_issue["emr_kerberos"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::emr::cluster"
     not resource.Properties.KerberosAttributes.Realm
-}
-
-aws_issue["emr_kerberos"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::emr::cluster"
-    resource.Properties.KerberosAttributes.Realm == null
 }
 
 aws_issue["emr_kerberos"] {

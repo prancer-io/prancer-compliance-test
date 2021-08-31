@@ -15,12 +15,6 @@ aws_issue["kinesis_encryption"] {
 aws_issue["kinesis_encryption"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::kinesis::stream"
-    resource.Properties.StreamEncryption.EncryptionType == null
-}
-
-aws_issue["kinesis_encryption"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::kinesis::stream"
     count(resource.Properties.StreamEncryption.EncryptionType) == 0
 }
 
@@ -59,12 +53,6 @@ aws_issue["kinesis_encryption_kms"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::kinesis::stream"
     not resource.Properties.StreamEncryption.EncryptionType
-}
-
-aws_issue["kinesis_encryption_kms"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::kinesis::stream"
-    resource.Properties.StreamEncryption.EncryptionType == null
 }
 
 aws_issue["kinesis_encryption_kms"] {
