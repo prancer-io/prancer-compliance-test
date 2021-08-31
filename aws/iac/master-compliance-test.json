@@ -3073,35 +3073,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SSM",
-                    "masterSnapshotId": [
-                        "CFR_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(ssm.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-0158-CFR",
-                            "eval": "data.rule.ssm_secure",
-                            "message": "data.rule.ssm_secure_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-parameter.html",
-                            "remediationFunction": "PR_AWS_0158_CFR.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "AWS SSM Parameter is not encrypted",
-                    "description": "This policy identifies the AWS SSM Parameters which are not encrypted. AWS Systems Manager (SSM) parameters that store sensitive data, for example, passwords, database strings, and permit codes are encrypted so as to meet security and compliance prerequisites. An encrypted SSM parameter is any sensitive information that should be kept and referenced in a protected way.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "cloudformation"
-                            ]
-                        }
-                    ]
-                },
-                {
                     "masterTestId": "TEST_VPC",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
