@@ -8,42 +8,46 @@ package rule
 
 default db_ad_admin = null
 
-azure_attribute_absence["db_ad_admin"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_sql_server"
-    count([c | input.resources[_].type == "azurerm_sql_active_directory_administrator"; 
-           c := 1]) == 0
-}
+#azure_attribute_absence["db_ad_admin"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_sql_server"
+#    count([c | input.resources[_].type == "azurerm_sql_active_directory_administrator"; 
+#           c := 1]) == 0
+#}
 
-azure_issue["db_ad_admin"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_sql_server"
-    count([c | r := input.resources[_];
-               r.type == "azurerm_sql_active_directory_administrator";
-               re_match(concat("", ["^.*\\.", resource.name, "\\..*$"]), r.properties.server_name); # Rezoan: this regex is not correct and need a fix. Snapshot file does not generate server_name out of the tf variable as well at r.properties.server_name
-               c := 1]) == 0
-    true == false # workaround for inconsistent resource naming (Note from Rezoan: need to investigate if this can be ignored/removed)
+#azure_issue["db_ad_admin"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_sql_server"
+#    count([c | r := input.resources[_];
+#               r.type == "azurerm_sql_active_directory_administrator";
+#               re_match(concat("", ["^.*\\.", resource.name, "\\..*$"]), r.properties.server_name); # Rezoan: this regex is not correct and need a fix. Snapshot file does not generate server_name out of the tf variable as well at r.properties.server_name
+#               c := 1]) == 0
+#    true == false # workaround for inconsistent resource naming (Note from Rezoan: need to investigate if this can be ignored/removed)
+#}
+
+azure_attribute_absence ["db_ad_admin"] {
+    count([c | input.resources[_].type == "azurerm_sql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_sql_active_directory_administrator"; c := 1])
 }
 
 db_ad_admin {
-    lower(input.resources[_].type) == "azurerm_sql_server"
+    #lower(input.resources[_].type) == "azurerm_sql_server"
     not azure_attribute_absence["db_ad_admin"]
-    not azure_issue["db_ad_admin"]
+    #not azure_issue["db_ad_admin"]
 }
 
 db_ad_admin = false {
     azure_attribute_absence["db_ad_admin"]
 }
 
-db_ad_admin = false {
-    azure_issue["db_ad_admin"]
-}
+#db_ad_admin = false {
+#    azure_issue["db_ad_admin"]
+#}
 
-db_ad_admin_err = "sql_active_directory_administrator resource is missing from the resource" {
+db_ad_admin_err = "sql_active_directory_administrator resource is missing from template" {
     azure_attribute_absence["db_ad_admin"]
-} else = "SQL servers does not have Azure Active Directory admin configured" {
-    azure_issue["db_ad_admin"]
-}
+} #else = "SQL servers does not have Azure Active Directory admin configured" {
+  #  azure_issue["db_ad_admin"]
+#}
 
 db_ad_admin_metadata := {
     "Policy Code": "PR-AZR-0085-TRF",

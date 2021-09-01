@@ -134,6 +134,13 @@ gw_waf_metadata := {
 # PR-AZR-0125-TRF
 
 default https_protocol = null
+
+azure_attribute_absence ["https_protocol"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_application_gateway"
+    not resource.properties.http_listener
+} 
+
 azure_attribute_absence ["https_protocol"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"

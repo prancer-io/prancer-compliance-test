@@ -7,12 +7,16 @@ package rule
 
 default log_keyvault = null
 
-azure_attribute_absence["log_keyvault"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_key_vault"
-    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
-    	   c := 1]) == 0
+azure_attribute_absence ["log_keyvault"] {
+    count([c | input.resources[_].type == "azurerm_key_vault"; c := 1]) != count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1])
 }
+
+#azure_attribute_absence["log_keyvault"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_key_vault"
+#    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
+#    	   c := 1]) == 0
+#}
 
 azure_attribute_absence["log_keyvault"] {
     resource := input.resources[_]
@@ -75,12 +79,16 @@ log_keyvault_metadata := {
 
 default log_lbs = null
 
-azure_attribute_absence["log_lbs"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_lb"
-    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
-    	   c := 1]) == 0
+azure_attribute_absence ["log_lbs"] {
+    count([c | input.resources[_].type == "azurerm_lb"; c := 1]) != count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1])
 }
+
+#azure_attribute_absence["log_lbs"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_lb"
+#    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
+#    	   c := 1]) == 0
+#}
 
 azure_attribute_absence["log_lbs"] {
     resource := input.resources[_]
@@ -134,18 +142,22 @@ log_lbs_metadata := {
 }
 
 
-#
+# https://github.com/hashicorp/terraform-provider-azurerm/issues/8275
 # PR-AZR-0063-TRF
 #
 
 default log_storage_retention = null
 
-azure_attribute_absence["log_storage_retention"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_storage_account"
-    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
-    	   c := 1]) == 0
+azure_attribute_absence ["log_storage_retention"] {
+    count([c | input.resources[_].type == "azurerm_storage_account"; c := 1]) != count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1])
 }
+
+#azure_attribute_absence["log_storage_retention"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_storage_account"
+#    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
+#    	   c := 1]) == 0
+#}
 
 azure_attribute_absence["log_storage_retention"] {
     resource := input.resources[_]
@@ -216,18 +228,22 @@ log_storage_retention_metadata := {
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting"
 }
 
-#
+# https://github.com/hashicorp/terraform-provider-azurerm/issues/8275
 # PR-AZR-0069-TRF
 #
 
 default log_blob = null
 
-azure_attribute_absence["log_blob"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_storage_blob"
-    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
-    	   c := 1]) == 0
+azure_attribute_absence ["log_blob"] {
+    count([c | input.resources[_].type == "azurerm_storage_blob"; c := 1]) != count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1])
 }
+
+#azure_attribute_absence["log_blob"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_storage_blob"
+#    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
+#    	   c := 1]) == 0
+#}
 
 azure_attribute_absence["log_blob"] {
     resource := input.resources[_]
@@ -280,18 +296,22 @@ log_blob_metadata := {
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting"
 }
 
-#
+# https://github.com/hashicorp/terraform-provider-azurerm/issues/8275
 # PR-AZR-0070-TRF
 #
 
 default log_queue = null
 
-azure_attribute_absence["log_queue"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_storage_queue"
-    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
-    	   c := 1]) == 0
+azure_attribute_absence ["log_queue"] {
+    count([c | input.resources[_].type == "azurerm_storage_queue"; c := 1]) != count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1])
 }
+
+#azure_attribute_absence["log_queue"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_storage_queue"
+#    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
+#    	   c := 1]) == 0
+#}
 
 azure_attribute_absence["log_queue"] {
     resource := input.resources[_]
@@ -344,18 +364,22 @@ log_queue_metadata := {
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting"
 }
 
-#
+# https://github.com/hashicorp/terraform-provider-azurerm/issues/8275
 # PR-AZR-0071-TRF
 #
 
 default log_table = null
 
-azure_attribute_absence["log_table"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_storage_table"
-    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
-    	   c := 1]) == 0
+azure_attribute_absence ["log_table"] {
+    count([c | input.resources[_].type == "azurerm_storage_table"; c := 1]) != count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1])
 }
+
+#azure_attribute_absence["log_table"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_storage_table"
+#    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
+#    	   c := 1]) == 0
+#}
 
 azure_attribute_absence["log_table"] {
     resource := input.resources[_]

@@ -9,42 +9,46 @@ package rule
 
 default mssql_db_log_audit = null
 
-azure_attribute_absence["mssql_db_log_audit"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_mssql_database"
-    count([c | input.resources[_].type == "azurerm_mssql_database_extended_auditing_policy"; 
-           c := 1]) == 0
-}
+#azure_attribute_absence["mssql_db_log_audit"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_mssql_database"
+#    count([c | input.resources[_].type == "azurerm_mssql_database_extended_auditing_policy"; 
+#           c := 1]) == 0
+#}
 
-azure_issue["mssql_db_log_audit"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_mssql_database"
-    count([c | r := input.resources[_];
-               r.type == "azurerm_mssql_database_extended_auditing_policy";
-               re_match(concat("", ["^.*\\.", resource.name, "\\..*$"]), r.properties.database_id); # Rezoan: this regex is not correct and need a fix. Snapshot file does not generate database_id out of the tf variable as well at r.properties.database_id
-               c := 1]) == 0
-    true == false # workaround for inconsistent resource naming
+#azure_issue["mssql_db_log_audit"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_mssql_database"
+#    count([c | r := input.resources[_];
+#               r.type == "azurerm_mssql_database_extended_auditing_policy";
+#               re_match(concat("", ["^.*\\.", resource.name, "\\..*$"]), r.properties.database_id); # Rezoan: this regex is not correct and need a fix. Snapshot file does not generate database_id out of the tf variable as well at r.properties.database_id
+#               c := 1]) == 0
+#    true == false # workaround for inconsistent resource naming
+#}
+
+azure_attribute_absence ["mssql_db_log_audit"] {
+    count([c | input.resources[_].type == "azurerm_mssql_database"; c := 1]) != count([c | input.resources[_].type == "azurerm_mssql_database_extended_auditing_policy"; c := 1])
 }
 
 mssql_db_log_audit {
-    lower(input.resources[_].type) == "azurerm_mssql_database_extended_auditing_policy"
+    #lower(input.resources[_].type) == "azurerm_mssql_database_extended_auditing_policy"
     not azure_attribute_absence["mssql_db_log_audit"]
-    not azure_issue["mssql_db_log_audit"]
+    #not azure_issue["mssql_db_log_audit"]
 }
 
 mssql_db_log_audit = false {
     azure_attribute_absence["mssql_db_log_audit"]
 }
 
-mssql_db_log_audit = false {
-    azure_issue["mssql_db_log_audit"]
-}
+#mssql_db_log_audit = false {
+#    azure_issue["mssql_db_log_audit"]
+#}
 
-mssql_db_log_audit_err = "azurerm_mssql_database_extended_auditing_policy resource is missing from the resource" {
+mssql_db_log_audit_err = "azurerm_mssql_database_extended_auditing_policy resource is missing from template" {
     azure_attribute_absence["mssql_db_log_audit"]
-} else = "Auditing for SQL database is not enabled" {
-    azure_issue["mssql_db_log_audit"]
-}
+} #else = "Auditing for SQL database is not enabled" {
+  #  azure_issue["mssql_db_log_audit"]
+#}
 
 mssql_db_log_audit_metadata := {
     "Policy Code": "PR-AZR-0003-TRF",
@@ -63,6 +67,10 @@ mssql_db_log_audit_metadata := {
 #
 
 default mssql_db_log_retention = null
+
+azure_attribute_absence ["mssql_db_log_retention"] {
+    count([c | input.resources[_].type == "azurerm_mssql_database"; c := 1]) != count([c | input.resources[_].type == "azurerm_mssql_database_extended_auditing_policy"; c := 1])
+}
 
 azure_attribute_absence["mssql_db_log_retention"] {
     resource := input.resources[_]
