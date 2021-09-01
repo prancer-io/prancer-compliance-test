@@ -2,65 +2,65 @@ package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html
 
-#
-# PR-AWS-0031-TRF
-#
+# #
+# # PR-AWS-0031-TRF
+# #
 
-default config_recorder = null
+# default config_recorder = null
 
-aws_issue["config_recorder"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_config_configuration_recorder"
-    not resource.properties.recording_group
-}
+# aws_issue["config_recorder"] {
+#     resource := input.resources[i]
+#     lower(resource.type) == "aws_config_configuration_recorder"
+#     not resource.properties.recording_group
+# }
 
-aws_issue["config_recorder"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_config_configuration_recorder"
-    recording_group := resource.properties.recording_group[_]
-    lower(recording_group.all_supported) == "false"
-    count(recording_group.resource_types) == 0
-}
+# aws_issue["config_recorder"] {
+#     resource := input.resources[i]
+#     lower(resource.type) == "aws_config_configuration_recorder"
+#     recording_group := resource.properties.recording_group[_]
+#     lower(recording_group.all_supported) == "false"
+#     count(recording_group.resource_types) == 0
+# }
 
-aws_bool_issue["config_recorder"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_config_configuration_recorder"
-    recording_group := resource.properties.recording_group[_]
-    not recording_group.all_supported
-    count(recording_group.resource_types) == 0
-}
+# aws_bool_issue["config_recorder"] {
+#     resource := input.resources[i]
+#     lower(resource.type) == "aws_config_configuration_recorder"
+#     recording_group := resource.properties.recording_group[_]
+#     not recording_group.all_supported
+#     count(recording_group.resource_types) == 0
+# }
 
-config_recorder {
-    lower(input.resources[i].type) == "aws_config_configuration_recorder"
-    not aws_issue["config_recorder"]
-    not aws_bool_issue["config_recorder"]
-}
+# config_recorder {
+#     lower(input.resources[i].type) == "aws_config_configuration_recorder"
+#     not aws_issue["config_recorder"]
+#     not aws_bool_issue["config_recorder"]
+# }
 
-config_recorder = false {
-    aws_issue["config_recorder"]
-}
+# config_recorder = false {
+#     aws_issue["config_recorder"]
+# }
 
-config_recorder = false {
-    aws_bool_issue["config_recorder"]
-}
+# config_recorder = false {
+#     aws_bool_issue["config_recorder"]
+# }
 
-config_recorder_err = "AWS Config Recording is disabled" {
-    aws_issue["config_recorder"]
-} else = "AWS Config Recording is disabled" {
-    aws_bool_issue["config_recorder"]
-}
+# config_recorder_err = "AWS Config Recording is disabled" {
+#     aws_issue["config_recorder"]
+# } else = "AWS Config Recording is disabled" {
+#     aws_bool_issue["config_recorder"]
+# }
 
-config_recorder_metadata := {
-    "Policy Code": "PR-AWS-0031-TRF",
-    "Type": "IaC",
-    "Product": "AWS",
-    "Language": "Terraform",
-    "Policy Title": "AWS Config Recording is disabled",
-    "Policy Description": "AWS Config is a web service that performs configuration management of supported AWS resources within your account and delivers log files to you. AWS config uses configuration recorder to detect changes in your resource configurations and capture these changes as configuration items. It continuously monitors and records your AWS resource configurations and allows you to automate the evaluation of recorded configurations against desired configurations. This policy generates alerts when AWS Config recorder is not enabled.",
-    "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html"
-}
+# config_recorder_metadata := {
+#     "Policy Code": "PR-AWS-0031-TRF",
+#     "Type": "IaC",
+#     "Product": "AWS",
+#     "Language": "Terraform",
+#     "Policy Title": "AWS Config Recording is disabled",
+#     "Policy Description": "AWS Config is a web service that performs configuration management of supported AWS resources within your account and delivers log files to you. AWS config uses configuration recorder to detect changes in your resource configurations and capture these changes as configuration items. It continuously monitors and records your AWS resource configurations and allows you to automate the evaluation of recorded configurations against desired configurations. This policy generates alerts when AWS Config recorder is not enabled.",
+#     "Resource Type": "",
+#     "Policy Help URL": "",
+#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html"
+# }
 
 
 

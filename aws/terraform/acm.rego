@@ -12,7 +12,6 @@ aws_issue["acm_wildcard"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_acm_certificate"
     not resource.properties.domain_name
-    not resource.properties.private_key
 }
 
 aws_issue["acm_wildcard"] {
