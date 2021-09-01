@@ -470,29 +470,50 @@ s3_public_acl_metadata := {
 
 default s3_transport = null
 
-aws_attribute_absence["s3_transport"] {
+aws_issue["s3_transport"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
-    count([c | resource.Properties.PolicyDocument.Statement[_].Condition.StringLike["aws:SecureTransport"]; c := 1]) == 0
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    not statement.Condition.StringLike
+    not statement.Condition.Bool
 }
 
 aws_issue["s3_transport"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
-    lower(resource.Properties.PolicyDocument.Statement[_].Condition.StringLike["aws:SecureTransport"]) != "true"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    statement.Condition.StringLike
+    lower(statement.Condition.StringLike["aws:SecureTransport"]) != "true"
+}
+
+aws_issue["s3_transport"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    statement.Condition.Bool
+    lower(statement.Condition.Bool["aws:SecureTransport"]) != "true"
 }
 
 aws_bool_issue["s3_transport"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
-    resource.Properties.PolicyDocument.Statement[_].Condition.StringLike["aws:SecureTransport"] != true
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    statement.Condition.StringLike
+    not statement.Condition.StringLike["aws:SecureTransport"]
+}
+
+aws_bool_issue["s3_transport"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    statement.Condition.Bool
+    not statement.Condition.Bool["aws:SecureTransport"]
 }
 
 s3_transport {
     lower(input.Resources[i].Type) == "aws::s3::bucketpolicy"
     not aws_issue["s3_transport"]
     not aws_bool_issue["s3_transport"]
-    not aws_attribute_absence["s3_transport"]
 }
 
 s3_transport = false {
@@ -503,18 +524,11 @@ s3_transport = false {
     aws_bool_issue["s3_transport"]
 }
 
-s3_transport = false {
-    aws_attribute_absence["s3_transport"]
-}
 
 s3_transport_err = "AWS S3 bucket not configured with secure data transport policy" {
     aws_issue["s3_transport"]
 } else = "AWS S3 bucket not configured with secure data transport policy" {
     aws_bool_issue["s3_transport"]
-}
-
-s3_transport_miss_err = "S3 Policy attribute Condition SecureTransport missing in the resource" {
-    aws_attribute_absence["s3_transport"]
 }
 
 s3_transport_metadata := {
