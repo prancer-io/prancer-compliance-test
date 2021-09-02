@@ -126,7 +126,7 @@ sql_server_login_metadata := {
 
 
 
- PR-AZR-0200-ARM
+# PR-AZR-0200-ARM
 
 default sql_logical_server_login = null
 
