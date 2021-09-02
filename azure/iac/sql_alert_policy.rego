@@ -240,13 +240,13 @@ default sql_server_email_account = null
 azure_issue["sql_server_email_account"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    not sql_resources.properties.emailAccountAdmins
+    not resource.properties.emailAccountAdmins
 }
 
 azure_issue["sql_server_email_account"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    sql_resources.properties.emailAccountAdmins != true
+    resource.properties.emailAccountAdmins != true
 }
 
 
@@ -290,10 +290,10 @@ sql_server_email_account_metadata := {
 # PR-AZR-0194-ARM
 #
 
-default sql_logical_server_retention_days = null
+default sql_logical_server_email_addressess = null
 
 
-azure_attribute_absence["sql_logical_server_retention_days"] {
+azure_attribute_absence["sql_logical_server_email_addressess"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
     sql_resources := resource.resources[_]
@@ -301,7 +301,7 @@ azure_attribute_absence["sql_logical_server_retention_days"] {
     not sql_resources.properties.emailAddresses
 }
 
-azure_issue["sql_logical_server_retention_days"] {
+azure_issue["sql_logical_server_email_addressess"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
     sql_resources := resource.resources[_]
@@ -309,34 +309,34 @@ azure_issue["sql_logical_server_retention_days"] {
     count(sql_resources.properties.emailAddresses) == 0  
 }
 
-sql_logical_server_retention_days {
+sql_logical_server_email_addressess {
     lower(input.resources[_].type) == "microsoft.sql/servers"
     resource := input.resources[_]
     sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
-    not azure_attribute_absence["sql_logical_server_retention_days"]
-    not azure_issue["sql_logical_server_retention_days"]
+    not azure_attribute_absence["sql_logical_server_email_addressess"]
+    not azure_issue["sql_logical_server_email_addressess"]
 }
 
 
-sql_logical_server_retention_days = false {
-    azure_attribute_absence["sql_logical_server_retention_days"]
+sql_logical_server_email_addressess = false {
+    azure_attribute_absence["sql_logical_server_email_addressess"]
 }
 
 
-sql_logical_server_retention_days = false {
-    azure_issue["sql_logical_server_retention_days"]
+sql_logical_server_email_addressess = false {
+    azure_issue["sql_logical_server_email_addressess"]
 }
 
 
-sql_logical_server_retention_days_err = "Azure SQL security alert policy attribute 'emailAccountAdmins' or 'emailAddresses' is missing from the resource" {
-    azure_attribute_absence["sql_logical_server_retention_days"]
+sql_logical_server_email_addressess_err = "Azure SQL security alert policy attribute 'emailAddresses' is missing from the resource" {
+    azure_attribute_absence["sql_logical_server_email_addressess"]
 } else = "Azure SQL security alert policy is currently not configured to sent alert to the account administrators via email" {
-    azure_issue["sql_logical_server_retention_days"]
+    azure_issue["sql_logical_server_email_addressess"]
 }
 
 
-sql_logical_server_retention_days_metadata := {
+sql_logical_server_email_addressess_metadata := {
     "Policy Code": "PR-AZR-0194-ARM",
     "Type": "IaC",
     "Product": "AZR",
@@ -361,25 +361,18 @@ default sql_server_email_addressess = null
 
 azure_attribute_absence["sql_server_email_addressess"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[_]
-    lower(sql_resources.type) == "securityalertpolicies"
-    not sql_resources.properties.emailAddresses
+    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
+    not resource.properties.emailAddresses
 }
 
 azure_issue["sql_server_email_addressess"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers"
-    sql_resources := resource.resources[_]
-    lower(sql_resources.type) == "securityalertpolicies"
-    count(sql_resources.properties.emailAddresses) == 0  
+    lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
+    count(resource.properties.emailAddresses) == 0  
 }
 
 sql_server_email_addressess {
-    lower(input.resources[_].type) == "microsoft.sql/servers"
-    resource := input.resources[_]
-    sql_resources := resource.resources[_]
-    lower(sql_resources.type) == "securityalertpolicies"
+    lower(input.resources[_].type) == "microsoft.sql/servers/securityalertpolicies"
     not azure_attribute_absence["sql_server_email_addressess"]
     not azure_issue["sql_server_email_addressess"]
 }
@@ -395,7 +388,7 @@ sql_server_email_addressess = false {
 }
 
 
-sql_server_email_addressess_err = "Azure SQL security alert policy attribute 'emailAccountAdmins' or 'emailAddresses' is missing from the resource" {
+sql_server_email_addressess_err = "Azure SQL security alert policy attribute 'emailAddresses' is missing from the resource" {
     azure_attribute_absence["sql_server_email_addressess"]
 } else = "Azure SQL security alert policy is currently not configured to sent alert to the account administrators via email" {
     azure_issue["sql_server_email_addressess"]
@@ -507,20 +500,20 @@ default sql_server_retention_days = null
 azure_attribute_absence["sql_server_retention_days"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    not sql_resources.properties.retentionDays
+    not resource.properties.retentionDays
 }
 
 azure_issue["sql_server_retention_days"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    to_number(sql_resources.properties.retentionDays) == 0  
+    to_number(resource.properties.retentionDays) == 0  
 }
 
 
 azure_issue["sql_server_retention_days"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    to_number(sql_resources.properties.retentionDays) >= 90 
+    to_number(resource.properties.retentionDays) >= 90 
 }
 
 
@@ -631,17 +624,16 @@ default sql_server_disabled_alerts = null
 azure_attribute_absence["sql_server_disabled_alerts"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    not sql_resources.properties.disabledAlerts
+    not resource.properties.disabledAlerts
 }
 
 azure_issue["sql_server_disabled_alerts"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
-    count(sql_resources.properties.disabledAlerts) > 0
+    count(resource.properties.disabledAlerts) > 0
 }
 
 sql_server_disabled_alerts {
-    resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
     not azure_attribute_absence["sql_server_disabled_alerts"]
     not azure_issue["sql_server_disabled_alerts"]
