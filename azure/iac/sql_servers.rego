@@ -125,6 +125,64 @@ sql_server_login_metadata := {
 }
 
 
+
+ PR-AZR-0200-ARM
+
+default sql_logical_server_login = null
+
+
+azure_attribute_absence["sql_logical_server_login"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/administrators"
+    not resource.properties.login
+}
+
+no_azure_issue["sql_logical_server_login"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/administrators"
+    lower(resource.properties.login) != "admin"
+    lower(resource.properties.login) != "administrator"
+}
+
+sql_logical_server_login {
+    not azure_attribute_absence["sql_logical_server_login"]
+    no_azure_issue["sql_logical_server_login"]
+}
+
+sql_logical_server_login = false {
+    azure_attribute_absence["sql_logical_server_login"]
+}
+
+sql_logical_server_login = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/administrators"
+    not no_azure_issue["sql_logical_server_login"]
+}
+
+sql_logical_server_login_err = "Azure SQL Server property 'login' is missing from the resource" {
+    azure_attribute_absence["sql_logical_server_login"]
+} else = "Azure SQL Server login is currently set to admin or administrator on the resource. Please change the name" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/administrators"
+    not no_azure_issue["sql_logical_server_login"]
+}
+
+sql_logical_server_login_metadata := {
+    "Policy Code": "PR-AZR-0200-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure SQL Server administrator login does not contains 'Admin/Administrator' as name",
+    "Policy Description": "You must designate a Server admin login when you create an Azure SQL server. SQL server creates this account as a login in the master database. Only one such account can exist. This account connects using SQL Server authentication (username and password). It is recommended to avoid using names like 'admin' or 'administrator', which are targeted in brute force dictionary attacks.",
+    "Resource Type": "microsoft.sql/servers/administrators",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/administrators"
+}
+
+
+
+
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/failovergroups
 
 # PR-AZR-0190-ARM
