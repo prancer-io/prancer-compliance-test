@@ -67,6 +67,22 @@ aws_issue["ec2_no_vpc"] {
     count([c | network_interface.subnet_id; c := 1]) == 0
 }
 
+aws_issue["ec2_no_vpc"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    count(resource.properties.subnet_id) == 0
+    network_interface := resource.properties.network_interface[_]
+    count([c | network_interface.subnet_id; c := 1]) == 0
+}
+
+aws_issue["ec2_no_vpc"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    resource.properties.subnet_id == null
+    network_interface := resource.properties.network_interface[_]
+    count([c | network_interface.subnet_id; c := 1]) == 0
+}
+
 ec2_no_vpc {
     lower(input.resources[i].type) == "aws_instance"
     not aws_issue["ec2_no_vpc"]
