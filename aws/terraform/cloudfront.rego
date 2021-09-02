@@ -83,18 +83,6 @@ default cf_ssl_protocol = null
 aws_attribute_absence["cf_ssl_protocol"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    not resource.properties.origin
-}
-
-aws_attribute_absence["cf_ssl_protocol"] {
-    resource := input.resources[_]
-    lower(resource.type) == "aws_cloudfront_distribution"
-    count(resource.properties.origin) == 0
-}
-
-aws_attribute_absence["cf_ssl_protocol"] {
-    resource := input.resources[_]
-    lower(resource.type) == "aws_cloudfront_distribution"
     origin := resource.properties.origin[_]
     custom_origin_config := origin.custom_origin_config[_]
     not custom_origin_config.origin_ssl_protocols
