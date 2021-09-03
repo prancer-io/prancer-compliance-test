@@ -101,7 +101,7 @@ mairadb_ssl_enforcement_enabled = false {
 
 mairadb_ssl_enforcement_enabled_err = "azurerm_mariadb_server property 'ssl_enforcement_enabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
     azure_attribute_absence["mairadb_ssl_enforcement_enabled"]
-} else = "ssl enforcement is currently not enabled on MariaDB erver." {
+} else = "ssl enforcement is currently not enabled on MariaDB server." {
     azure_issue["mairadb_ssl_enforcement_enabled"]
 }
 

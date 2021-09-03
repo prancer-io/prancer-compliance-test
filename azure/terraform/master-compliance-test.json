@@ -1549,7 +1549,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MariaDB",
+                    "masterTestId": "TEST_MariaDB_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1567,6 +1567,99 @@
                     "severity": "High",
                     "title": "MariaDB should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
                     "description": "This policy will identify MariaDB firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MariaDB_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(mariadb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0189-TRF",
+                            "eval": "data.rule.mairadb_ssl_enforcement_enabled",
+                            "message": "data.rule.mairadb_ssl_enforcement_enabled_err",
+                            "remediationDescription": "In 'azurerm_mariadb_server' resource, set 'ssl_enforcement_enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server#ssl_enforcement_enabled for details.",
+                            "remediationFunction": "PR_AZR_0189_TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure ssl enforcement is enabled on MariaDB Server.",
+                    "description": "Enable SSL connection on MariaDB Servers. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MariaDB_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(mariadb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0190-TRF",
+                            "eval": "data.rule.mairadb_public_access_disabled",
+                            "message": "data.rule.mairadb_public_access_disabled_err",
+                            "remediationDescription": "In 'azurerm_mariadb_server' resource, set 'public_network_access_enabled = false' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server#public_network_access_enabled for details.",
+                            "remediationFunction": "PR_AZR_0190_TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure MariaDB servers don't have public network access enabled",
+                    "description": "Always use Private Endpoint for MariaDB Server",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MariaDB_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(mariadb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0191-TRF",
+                            "eval": "data.rule.mariadb_geo_redundant_backup_enabled",
+                            "message": "data.rule.mariadb_geo_redundant_backup_enabled_err",
+                            "remediationDescription": "In 'azurerm_mariadb_server' resource, set 'geo_redundant_backup_enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server#geo_redundant_backup_enabled for details.",
+                            "remediationFunction": "PR_AZR_0191_TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Geo-redundant backup is enabled on MariaDB server.",
+                    "description": "Azure Database for MariaDB provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2854,6 +2947,37 @@
                     "severity": "Medium",
                     "title": "PostgreSQL Database Server should have connection_throttling enabled",
                     "description": "Enabling connection_throttling allows the PostgreSQL Database to set the verbosity of logged messages which in turn generates query and error logs with respect to concurrent connections, that could lead to a successful Denial of Service (DoS) attack by exhausting connection resources.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_postgreSQL_7",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0192-TRF",
+                            "eval": "data.rule.postgresql_public_access_disabled",
+                            "message": "data.rule.postgresql_public_access_disabled_err",
+                            "remediationDescription": "In 'azurerm_postgresql_server' resource, set 'public_network_access_enabled = false' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server#public_network_access_enabled for details.",
+                            "remediationFunction": "PR_AZR_0192_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure PostgreSQL servers don't have public network access enabled",
+                    "description": "Always use Private Endpoint for PostgreSQL Server",
                     "tags": [
                         {
                             "cloud": "git",
