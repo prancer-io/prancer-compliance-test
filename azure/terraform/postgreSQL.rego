@@ -84,7 +84,7 @@ sslEnforcement = false {
 
 sslEnforcement_err = "azurerm_postgresql_server property 'ssl_enforcement_enabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
     azure_attribute_absence["sslEnforcement"]
-} else = "Geo-redundant backup is currently not enabled on PostgreSQL database server." {
+} else = "ssl enforcement is currently not enabled on PostgreSQL database server." {
     azure_issue["sslEnforcement"]
 }
 

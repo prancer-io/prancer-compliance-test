@@ -66,3 +66,53 @@ maria_ingress_from_any_ip_disabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_firewall_rule"
 }
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server
+# PR-AZR-0189-TRF
+
+default mairadb_ssl_enforcement_enabled = null
+azure_attribute_absence ["mairadb_ssl_enforcement_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mariadb_server"
+    not resource.properties.ssl_enforcement_enabled
+}
+
+azure_issue ["mairadb_ssl_enforcement_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mariadb_server"
+    resource.properties.ssl_enforcement_enabled == false
+}
+
+mairadb_ssl_enforcement_enabled {
+    lower(input.resources[_].type) == "azurerm_mariadb_server"
+    not azure_attribute_absence["mairadb_ssl_enforcement_enabled"]
+    not azure_issue["mairadb_ssl_enforcement_enabled"]
+}
+
+mairadb_ssl_enforcement_enabled = false {
+    azure_issue["mairadb_ssl_enforcement_enabled"]
+}
+
+mairadb_ssl_enforcement_enabled = false {
+    azure_attribute_absence["mairadb_ssl_enforcement_enabled"]
+}
+
+
+mairadb_ssl_enforcement_enabled_err = "azurerm_mariadb_server property 'ssl_enforcement_enabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
+    azure_attribute_absence["mairadb_ssl_enforcement_enabled"]
+} else = "ssl enforcement is currently not enabled on MariaDB erver." {
+    azure_issue["mairadb_ssl_enforcement_enabled"]
+}
+
+mairadb_ssl_enforcement_enabled_metadata := {
+    "Policy Code": "PR-AZR-0189-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure ssl enforcement is enabled on MariaDB Server.",
+    "Policy Description": "Enable SSL connection on MariaDB Servers. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application.",
+    "Resource Type": "azurerm_mariadb_server",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server"
+}
