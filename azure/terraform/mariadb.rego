@@ -162,7 +162,7 @@ mairadb_public_access_disabled_metadata := {
     "Language": "Terraform",
     "Policy Title": "Ensure MariaDB servers don't have public network access enabled",
     "Policy Description": "Always use Private Endpoint for MariaDB Server",
-    "Resource Type": "azurerm_mssql_server",
+    "Resource Type": "azurerm_mariadb_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server"
 }

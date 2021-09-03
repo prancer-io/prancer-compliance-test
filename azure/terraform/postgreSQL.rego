@@ -311,3 +311,53 @@ azurerm_postgresql_configuration_connection_throttling_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration"
 }
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server
+# PR-AZR-0192-TRF
+
+default postgresql_public_access_disabled = null
+#  Defaults to true
+azure_attribute_absence["postgresql_public_access_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_postgresql_server"
+    not resource.properties.public_network_access_enabled
+}
+
+azure_issue["postgresql_public_access_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_postgresql_server"
+    resource.properties.public_network_access_enabled == true
+}
+
+postgresql_public_access_disabled {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    not azure_attribute_absence["postgresql_public_access_disabled"]
+    not azure_issue["postgresql_public_access_disabled"]
+}
+
+postgresql_public_access_disabled = false {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    azure_attribute_absence["postgresql_public_access_disabled"]
+    azure_issue["postgresql_public_access_disabled"]
+}
+
+postgresql_public_access_disabled = false {
+    azure_issue["postgresql_public_access_disabled"]
+}
+
+postgresql_public_access_disabled_err = "Public Network Access is currently not disabled on PostgreSQL Server." {
+    azure_issue["postgresql_public_access_disabled"]
+}
+
+postgresql_public_access_disabled_metadata := {
+    "Policy Code": "PR-AZR-0192-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure PostgreSQL servers don't have public network access enabled",
+    "Policy Description": "Always use Private Endpoint for PostgreSQL Server",
+    "Resource Type": "azurerm_postgresql_server",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server"
+}
