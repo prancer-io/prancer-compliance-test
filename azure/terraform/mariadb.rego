@@ -166,3 +166,53 @@ mairadb_public_access_disabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server"
 }
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server
+# PR-AZR-0191-TRF
+
+default mariadb_geo_redundant_backup_enabled = null
+
+azure_attribute_absence["mariadb_geo_redundant_backup_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mariadb_server"
+    not resource.properties.geo_redundant_backup_enabled
+}
+
+azure_issue["mariadb_geo_redundant_backup_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mariadb_server"
+    resource.properties.geo_redundant_backup_enabled == false
+}
+
+mariadb_geo_redundant_backup_enabled {
+    lower(input.resources[_].type) == "azurerm_mariadb_server"
+    not azure_attribute_absence["mariadb_geo_redundant_backup_enabled"]
+    not azure_issue["mariadb_geo_redundant_backup_enabled"]
+}
+
+mariadb_geo_redundant_backup_enabled = false {
+    azure_attribute_absence["mariadb_geo_redundant_backup_enabled"]
+}
+
+mariadb_geo_redundant_backup_enabled = false {
+    azure_issue["mariadb_geo_redundant_backup_enabled"]
+}
+
+mariadb_geo_redundant_backup_enabled_err = "azurerm_postgresql_server property 'geo_redundant_backup_enabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
+    azure_attribute_absence["mariadb_geo_redundant_backup_enabled"]
+} else = "Geo-redundant backup is currently not enabled on MariaDB server." {
+    azure_issue["mariadb_geo_redundant_backup_enabled"]
+}
+
+mariadb_geo_redundant_backup_enabled_metadata := {
+    "Policy Code": "PR-AZR-0191-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Geo-redundant backup is enabled on MariaDB server.",
+    "Policy Description": "Azure Database for MariaDB provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage.",
+    "Resource Type": "azurerm_mariadb_server",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server"
+}
