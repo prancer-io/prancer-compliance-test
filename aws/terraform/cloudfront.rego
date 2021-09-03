@@ -83,9 +83,8 @@ default cf_ssl_protocol = null
 aws_attribute_absence["cf_ssl_protocol"] {
     resource := input.resources[_]
     lower(resource.type) == "aws_cloudfront_distribution"
-    origin := resource.properties.origin[_]
-    custom_origin_config := origin.custom_origin_config[_]
-    not custom_origin_config.origin_ssl_protocols
+    viewer_certificate := resource.properties.viewer_certificate[_]
+    lower(viewer_certificate.minimum_protocol_version) == "sslv3"
 }
 
 aws_issue["cf_ssl_protocol"] {

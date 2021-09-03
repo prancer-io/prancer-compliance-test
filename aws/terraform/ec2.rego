@@ -118,17 +118,29 @@ default ec2_public_ip = null
 aws_issue["ec2_public_ip"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_instance"
-    network_interface := resource.properties.network_interface[_]
-    lower(network_interface.associate_public_ip_address) == "true"
+    lower(resource.properties.associate_public_ip_address) == "true"
+    lower(resource.properties.security_groups[_]) == "default"
+}
+
+aws_issue["ec2_public_ip"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    lower(resource.properties.associate_public_ip_address) == "true"
+    lower(resource.properties.vpc_security_group_ids[_]) == "default"
+}
+
+aws_bool_issue["ec2_public_ip"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    resource.properties.associate_public_ip_address == true
     lower(resource.properties.security_groups[_]) == "default"
 }
 
 aws_bool_issue["ec2_public_ip"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_instance"
-    network_interface := resource.properties.network_interface[_]
-    network_interface.associate_public_ip_address == true
-    lower(resource.properties.security_groups[_]) == "default"
+    resource.properties.associate_public_ip_address == true
+    lower(resource.properties.vpc_security_group_ids[_]) == "default"
 }
 
 ec2_public_ip {
