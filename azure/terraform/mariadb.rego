@@ -116,3 +116,53 @@ mairadb_ssl_enforcement_enabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server"
 }
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server
+# PR-AZR-0190-TRF
+
+default mairadb_public_access_disabled = null
+#  Defaults to true
+azure_attribute_absence["mairadb_public_access_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mariadb_server"
+    not resource.properties.public_network_access_enabled
+}
+
+azure_issue["mairadb_public_access_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mariadb_server"
+    resource.properties.public_network_access_enabled == true
+}
+
+mairadb_public_access_disabled {
+    lower(input.resources[_].type) == "azurerm_mariadb_server"
+    not azure_attribute_absence["mairadb_public_access_disabled"]
+    not azure_issue["mairadb_public_access_disabled"]
+}
+
+mairadb_public_access_disabled = false {
+    lower(input.resources[_].type) == "azurerm_mariadb_server"
+    azure_attribute_absence["mairadb_public_access_disabled"]
+    azure_issue["mairadb_public_access_disabled"]
+}
+
+mairadb_public_access_disabled = false {
+    azure_issue["mairadb_public_access_disabled"]
+}
+
+mairadb_public_access_disabled_err = "Public Network Access is currently not disabled on MariaDB Server." {
+    azure_issue["sql_public_access_disabled"]
+}
+
+mairadb_public_access_disabled_metadata := {
+    "Policy Code": "PR-AZR-0190-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure MariaDB servers don't have public network access enabled",
+    "Policy Description": "Always use Private Endpoint for MariaDB Server",
+    "Resource Type": "azurerm_mssql_server",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server"
+}
