@@ -389,37 +389,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DATABASEACCOUNTS",
-                    "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(databaseaccounts.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-0105-ARM",
-                            "eval": "data.rule.tagsLength",
-                            "message": "data.rule.tagsLength_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.documentdb/databaseaccounts\" make sure Cosmos DB Account has an associated tag. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.documentdb/databaseaccounts for details.",
-                            "remediationFunction": "PR-AZR-0105-ARM.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure that Cosmos DB Account has an associated tag",
-                    "description": "Tags are key-value pairs that you attach to Azure Cosmos DB resources to better organize them. They are particularly useful when you have many resources of the same type, which in the case of Azure Cosmos DB, is a database. By using tags, customers with hundreds of cloud resources, can easily access and analyze a specific set by filtering on those that contain the same tag. Two of the key advantages of tagging your Cosmos DB are: Grouping and Filtering and Cost allocation.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "Best Practices"
-                            ],
-                            "service": [
-                                "arm"
-                            ]
-                        }
-                    ]
-                },
-                {
                     "masterTestId": "TEST_DATABRICKS",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -3746,7 +3715,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_LOG_PROFILE",
+                    "masterTestId": "TEST_LOG_PROFILE_1",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
@@ -3764,6 +3733,151 @@
                     "severity": "High",
                     "title": "activity log retention should be set to 365 days or greater",
                     "description": "Specifies the retention policy for the log. We recommend you set activity log retention for 365 days or greater. (A value of 0 will retain the events indefinitely.)",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DB_FOR_MARIA_DB_1",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbforMariaDB.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0150-ARM",
+                            "eval": "data.rule.maria_ingress_from_any_ip_disabled",
+                            "message": "data.rule.maria_ingress_from_any_ip_disabled_err",
+                            "remediationDescription": "For Resource type 'microsoft.dbformariadb/servers/firewallrules' make sure startIpAddress and endIpAddress exists and do not allow ingress from all Azure-internal IP addresses (0.0.0.0/0).<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformariadb/2018-06-01/servers/firewallrules' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0150_ARM.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "MariaDB should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
+                    "description": "This policy will identify MariaDB firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DB_FOR_MARIA_DB_2",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbforMariaDB.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0154-ARM",
+                            "eval": "data.rule.dbmaria_ingress_from_any_ip_disabled",
+                            "message": "data.rule.dbmaria_ingress_from_any_ip_disabled_err",
+                            "remediationDescription": "For Resource type 'microsoft.dbformariadb/servers/firewallrules' make sure startIpAddress and endIpAddress exists and do not allow ingress from all Azure-internal IP addresses (0.0.0.0/0).<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformariadb/2018-06-01/servers/firewallrules' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0154_ARM.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "MariaDB should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
+                    "description": "This policy will identify MariaDB firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DB_FOR_MY_SQL_FIREWALLRULES_1",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbforMySQL_firewallrules.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0151-ARM",
+                            "eval": "data.rule.mysql_ingress_from_any_ip_disabled",
+                            "message": "data.rule.mysql_ingress_from_any_ip_disabled_err",
+                            "remediationDescription": "For Resource type 'microsoft.dbformariadb/servers/firewallrules' make sure startIpAddress and endIpAddress exists and do not allow ingress from all Azure-internal IP addresses (0.0.0.0/0).<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers/firewallrules' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0151_ARM.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "MariaDB should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
+                    "description": "This policy will identify MariaDB firewall rule that are currently allowing ingress from all Azure-internal IP addresses.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DB_FOR_MY_SQL_FIREWALLRULES_2",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbforMySQL_firewallrules.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0153-ARM",
+                            "eval": "data.rule.my_logical_sql_ingress_from_any_ip_disabled",
+                            "message": "data.rule.my_logical_sql_ingress_from_any_ip_disabled_err",
+                            "remediationDescription": "For Resource type 'microsoft.dbformariadb/servers/firewallrules' make sure startIpAddress and endIpAddress exists and do not allow ingress from all Azure-internal IP addresses (0.0.0.0/0).<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers/firewallrules' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0153_ARM.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "MariaDB should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
+                    "description": "This policy will identify MariaDB firewall rule that are currently allowing ingress from all Azure-internal IP addresses.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_LOG_PROFILE_2",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(logProfile.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0152-ARM",
+                            "eval": "data.rule.log_profile_category",
+                            "message": "data.rule.log_profile_category_err",
+                            "remediationDescription": "For Resource type 'microsoft.insights/logprofiles' make sure categories exists and contains 'Write', 'Action' and 'Delete' <br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/Microsoft.Insights/logprofiles' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_0152_ARM.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "log profile should be configured to capture all activities",
+                    "description": "the categories of the logs. These categories are created as is convenient to the user. Some values are: 'Write', 'Delete', and/or 'Action.' We recommend you configure the log profile to export all activities from the control/management plane.",
                     "tags": [
                         {
                             "cloud": "git",

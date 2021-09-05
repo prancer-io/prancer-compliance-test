@@ -70,15 +70,19 @@ default sql_server_login = null
 
 azure_attribute_absence["sql_server_login"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/administrators"
-    not resource.properties.login
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[_]
+    lower(sql_resources.type) == "administrators"
+    not sql_resources.properties.login
 }
 
 no_azure_issue["sql_server_login"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/administrators"
-    lower(resource.properties.login) != "admin"
-    lower(resource.properties.login) != "administrator"
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[_]
+    lower(sql_resources.type) == "administrators"
+    lower(sql_resources.properties.login) != "admin"
+    lower(sql_resources.properties.login) != "administrator"
 }
 
 sql_server_login {
@@ -91,12 +95,20 @@ sql_server_login = false {
 }
 
 sql_server_login = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[_]
+    lower(sql_resources.type) == "administrators"
     not no_azure_issue["sql_server_login"]
 }
 
 sql_server_login_err = "Azure SQL Server property 'login' is missing from the resource" {
     azure_attribute_absence["sql_server_login"]
 } else = "Azure SQL Server login is currently set to admin or administrator on the resource. Please change the name" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[_]
+    lower(sql_resources.type) == "administrators"
     not no_azure_issue["sql_server_login"]
 }
 
@@ -110,4 +122,166 @@ sql_server_login_metadata := {
     "Resource Type": "microsoft.sql/servers/administrators",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/administrators"
+}
+
+
+
+ PR-AZR-0200-ARM
+
+default sql_logical_server_login = null
+
+
+azure_attribute_absence["sql_logical_server_login"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/administrators"
+    not resource.properties.login
+}
+
+no_azure_issue["sql_logical_server_login"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/administrators"
+    lower(resource.properties.login) != "admin"
+    lower(resource.properties.login) != "administrator"
+}
+
+sql_logical_server_login {
+    not azure_attribute_absence["sql_logical_server_login"]
+    no_azure_issue["sql_logical_server_login"]
+}
+
+sql_logical_server_login = false {
+    azure_attribute_absence["sql_logical_server_login"]
+}
+
+sql_logical_server_login = false {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/administrators"
+    not no_azure_issue["sql_logical_server_login"]
+}
+
+sql_logical_server_login_err = "Azure SQL Server property 'login' is missing from the resource" {
+    azure_attribute_absence["sql_logical_server_login"]
+} else = "Azure SQL Server login is currently set to admin or administrator on the resource. Please change the name" {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/administrators"
+    not no_azure_issue["sql_logical_server_login"]
+}
+
+sql_logical_server_login_metadata := {
+    "Policy Code": "PR-AZR-0200-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure SQL Server administrator login does not contains 'Admin/Administrator' as name",
+    "Policy Description": "You must designate a Server admin login when you create an Azure SQL server. SQL server creates this account as a login in the master database. Only one such account can exist. This account connects using SQL Server authentication (username and password). It is recommended to avoid using names like 'admin' or 'administrator', which are targeted in brute force dictionary attacks.",
+    "Resource Type": "microsoft.sql/servers/administrators",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/administrators"
+}
+
+
+
+
+
+# https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/failovergroups
+
+# PR-AZR-0190-ARM
+
+default fail_over_groups = null
+
+azure_issue["fail_over_groups"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[_]
+    lower(sql_resources.type) != "failovergroups"
+}
+
+
+fail_over_groups {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    not azure_issue["fail_over_groups"]
+}
+
+
+fail_over_groups = false {
+    azure_issue["fail_over_groups"]
+}
+
+
+fail_over_groups_err = "Microsoft.sql/servers resource property type.failoverGroups missing in the resource" {
+    azure_issue["fail_over_groups"]
+}
+
+fail_over_groups_metadata := {
+    "Policy Code": "PR-AZR-0190-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure Azure SQL Server data replication with Fail Over groups",
+    "Policy Description": "SQL Server data should be replicated to avoid loss of unreplicated data.",
+    "Resource Type": "microsoft.sql/servers",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/failovergroups"
+}
+
+
+
+
+# https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators
+
+# PR-AZR-0191-ARM
+
+default sql_server_administrators = null
+
+
+azure_attribute_absence["sql_server_administrators"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[_]
+    lower(sql_resources.type) == "administrators"
+    not sql_resources.name
+}
+
+azure_issue["sql_server_administrators"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[_]
+    lower(sql_resources.type) == "administrators"
+    lower(sql_resources.name) != "activedirectory"
+}
+
+
+sql_server_administrators {
+    lower(input.resources[_].type) == "microsoft.sql/servers"
+    not azure_attribute_absence["sql_server_administrators"]
+    not azure_issue["sql_server_administrators"]
+}
+
+
+sql_server_administrators = false {
+    azure_attribute_absence["sql_server_administrators"]
+}
+
+
+sql_server_administrators = false {
+    azure_issue["sql_server_administrators"]
+}
+
+
+sql_server_administrators_err = "Microsoft.sql/servers/administrators resource property name missing in the resource" {
+    azure_attribute_absence["sql_server_administrators"]
+} else = "Azure Active Directory Admin is not configured for SQL Server" {
+    azure_issue["sql_server_administrators"]
+}
+
+sql_server_administrators_metadata := {
+    "Policy Code": "PR-AZR-0191-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure that Azure Active Directory Admin is configured for SQL Server",
+    "Policy Description": "Use Azure Active Directory Authentication for authentication with SQL Databases. Azure Active Directory authentication is a mechanism of connecting Microsoft Azure SQL Databases and SQL Data Warehouses using identities in an Azure Active Directory (Azure AD). With Azure AD authentication, you can centrally manage the identities of database users and other Microsoft services in one central location.",
+    "Resource Type": "microsoft.sql/servers",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators"
 }

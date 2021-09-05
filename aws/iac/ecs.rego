@@ -211,12 +211,6 @@ aws_cpu_issue["ecs_resource_limit"] {
 aws_cpu_issue["ecs_resource_limit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ecs::taskdefinition"
-    resource.Properties.Cpu == null
-}
-
-aws_cpu_issue["ecs_resource_limit"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::ecs::taskdefinition"
     to_number(resource.Properties.Cpu) == 0
 }
 
@@ -227,12 +221,6 @@ aws_cpu_issue["ecs_resource_limit"] {
     not container_definition.Cpu
 }
 
-aws_cpu_issue["ecs_resource_limit"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::ecs::taskdefinition"
-    container_definition := resource.Properties.ContainerDefinitions[_]
-    container_definition.Cpu == null
-}
 
 aws_cpu_issue["ecs_resource_limit"] {
     resource := input.Resources[i]
@@ -250,12 +238,6 @@ aws_memory_issue["ecs_resource_limit"] {
 aws_memory_issue["ecs_resource_limit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ecs::taskdefinition"
-    resource.Properties.Memory == null
-}
-
-aws_memory_issue["ecs_resource_limit"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::ecs::taskdefinition"
     to_number(resource.Properties.Memory) == 0
 }
 
@@ -264,13 +246,6 @@ aws_memory_issue["ecs_resource_limit"] {
     lower(resource.Type) == "aws::ecs::taskdefinition"
     container_definition := resource.Properties.ContainerDefinitions[_]
     not container_definition.Memory
-}
-
-aws_memory_issue["ecs_resource_limit"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::ecs::taskdefinition"
-    container_definition := resource.Properties.ContainerDefinitions[_]
-    container_definition.Memory == null
 }
 
 aws_memory_issue["ecs_resource_limit"] {
@@ -332,15 +307,6 @@ aws_issue["ecs_logging"] {
     container_definition := resource.Properties.ContainerDefinitions[_]
     count(container_definition.LogConfiguration.LogDriver) == 0
 }
-
-
-aws_issue["ecs_logging"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::ecs::taskdefinition"
-    container_definition := resource.Properties.ContainerDefinitions[_]
-    container_definition.LogConfiguration.LogDriver == null
-}
-
 
 ecs_logging {
     lower(input.Resources[i].Type) == "aws::ecs::taskdefinition"
