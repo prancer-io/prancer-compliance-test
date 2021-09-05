@@ -207,3 +207,109 @@ vm_type_linux_scale_set_disabled_password_auth_metadata := {
 }
 
 
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine
+# PR-AZR-0002-TRF
+#
+
+default vm_type_linux_disabled_extension_operation = null
+# default is true which is wrong in the compute API. default should be false. When there will be a fix in the compute API we need to update the rule accordingly.
+# https://github.com/hashicorp/terraform-provider-azurerm/issues/7986
+# https://github.com/hashicorp/terraform-provider-azurerm/pull/7996
+
+azure_attribute_absence["vm_type_linux_disabled_extension_operation"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_linux_virtual_machine"
+    not resource.properties.allow_extension_operations
+}
+
+azure_issue["vm_type_linux_disabled_extension_operation"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_linux_virtual_machine"
+    resource.properties.allow_extension_operations != false
+}
+
+vm_type_linux_disabled_extension_operation {
+    lower(input.resources[_].type) == "azurerm_linux_virtual_machine"
+    not azure_attribute_absence["vm_type_linux_disabled_extension_operation"]
+    not azure_issue["vm_type_linux_disabled_extension_operation"]
+}
+
+vm_type_linux_disabled_extension_operation = false {
+    azure_attribute_absence["vm_type_linux_disabled_extension_operation"]
+}
+
+vm_type_linux_disabled_extension_operation = false {
+    azure_issue["vm_type_linux_disabled_extension_operation"]
+}
+
+vm_type_linux_disabled_extension_operation_err = "azurerm_linux_virtual_machine property 'allow_extension_operations' need to be exist. Its missing from the resource." {
+    azure_attribute_absence["vm_type_linux_disabled_extension_operation"]
+} else = "Azure Linux Instance currently allowing extension operation" {
+    azure_issue["vm_type_linux_disabled_extension_operation"]
+}
+
+vm_type_linux_disabled_extension_operation_metadata := {
+    "Policy Code": "PR-AZR-0002-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Linux Instance should not allow extension operation",
+    "Policy Description": "For security purpose, linux vm extension operation should be disabled.",
+    "Resource Type": "azurerm_linux_virtual_machine",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine"
+}
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/windows_virtual_machine
+# PR-AZR-0004-TRF
+#
+
+default vm_type_windows_disabled_extension_operation = null
+# default is true which is wrong in the compute API. default should be false. When there will be a fix in the compute API we need to update the rule accordingly.
+# https://github.com/hashicorp/terraform-provider-azurerm/issues/7986
+# https://github.com/hashicorp/terraform-provider-azurerm/pull/7996
+
+azure_attribute_absence["vm_type_windows_disabled_extension_operation"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_windows_virtual_machine"
+    not resource.properties.allow_extension_operations
+}
+
+azure_issue["vm_type_windows_disabled_extension_operation"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_windows_virtual_machine"
+    resource.properties.allow_extension_operations != false
+}
+
+vm_type_windows_disabled_extension_operation {
+    lower(input.resources[_].type) == "azurerm_windows_virtual_machine"
+    not azure_attribute_absence["vm_type_windows_disabled_extension_operation"]
+    not azure_issue["vm_type_windows_disabled_extension_operation"]
+}
+
+vm_type_windows_disabled_extension_operation = false {
+    azure_attribute_absence["vm_type_windows_disabled_extension_operation"]
+}
+
+vm_type_windows_disabled_extension_operation = false {
+    azure_issue["vm_type_windows_disabled_extension_operation"]
+}
+
+vm_type_windows_disabled_extension_operation_err = "azurerm_windows_virtual_machine property 'allow_extension_operations' need to be exist. Its missing from the resource." {
+    azure_attribute_absence["vm_type_windows_disabled_extension_operation"]
+} else = "Azure Windows Instance currently allowing extension operation" {
+    azure_issue["vm_type_windows_disabled_extension_operation"]
+}
+
+vm_type_windows_disabled_extension_operation_metadata := {
+    "Policy Code": "PR-AZR-0004-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Windows Instance should not allow extension operation",
+    "Policy Description": "For security purpose, Windows vm extension operation should be disabled.",
+    "Resource Type": "azurerm_windows_virtual_machine",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/windows_virtual_machine"
+}
