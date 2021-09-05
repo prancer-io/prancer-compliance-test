@@ -5,6 +5,35 @@
             "version": "0.1",
             "cases": [
                 {
+                    "masterTestId": "TEST_ROLE",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(roles.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0001-TRF",
+                            "eval": "data.rule.no_custom_subs_owner_role_created",
+                            "message": "data.rule.no_custom_subs_owner_role_created_err",
+                            "remediationDescription": "In 'azurerm_role_definition' resource, make sure 'permissions' blocks 'actions' array dont have '*' as entry to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_definition#actions for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Custom Role Definition should not create subscription owner role",
+                    "description": "Manages a custom Role Definition, used to assign Roles to Users/Principals. This policy will identify custom role definition which has action permission set to subscription owner and alert if exist.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_ACTIVITY_LOG_ALERT_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
