@@ -212,3 +212,56 @@ mssql_ingress_from_any_ip_disabled_metadata := {
 }
 
 
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server
+# PR-AZR-0016-TRF
+# Once minimum_tls_version is set it is not possible to remove this setting and must be given a valid value for any further updates to the resource.
+
+default mssql_server_latest_tls_configured = null
+
+# no default
+azure_attribute_absence["mssql_server_latest_tls_configured"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mssql_server"
+    not resource.properties.min_tls_version
+}
+
+azure_issue["mssql_server_latest_tls_configured"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mssql_server"
+    to_number(resource.properties.min_tls_version) != 1.2
+}
+
+mssql_server_latest_tls_configured {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
+    not azure_attribute_absence["mssql_server_latest_tls_configured"]
+    not azure_issue["mssql_server_latest_tls_configured"]
+}
+
+mssql_server_latest_tls_configured = false {
+    azure_attribute_absence["mssql_server_latest_tls_configured"]
+}
+
+mssql_server_latest_tls_configured = false {
+    azure_issue["mssql_server_latest_tls_configured"]
+}
+
+mssql_server_latest_tls_configured_err = "azurerm_mssql_server property 'min_tls_version' need to be exist. Its missing from the resource. Please set the value to 'TLS1_2' after property addition." {
+    azure_attribute_absence["mssql_server_latest_tls_configured"]
+} else = "Azure MSSQL Server currently dont have latest version of tls configured" {
+    azure_issue["mssql_server_latest_tls_configured"]
+}
+
+mssql_server_latest_tls_configured_metadata := {
+    "Policy Code": "PR-AZR-0016-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Azure MSSQL Server has latest version of tls configured",
+    "Policy Description": "This policy will identify the Azure MSSQL Server which dont have latest version of tls configured and give alert",
+    "Resource Type": "azurerm_mssql_server",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server"
+}
+
+
+
