@@ -1851,6 +1851,37 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_MySQL_SERVER_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(mysql_server.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0030-TRF",
+                            "eval": "data.rule.mysql_public_access_disabled",
+                            "message": "data.rule.mysql_public_access_disabled_err",
+                            "remediationDescription": "In 'azurerm_mysql_server' resource, set 'public_network_access_enabled = false' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server#public_network_access_enabled for details.",
+                            "remediationFunction": "PR_AZR_0030_TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure MySQL servers don't have public network access enabled",
+                    "description": "Always use Private Endpoint for Azure MySQL Database Server",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_NETWORK_WATCHERS_FLOW_LOGS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -3556,7 +3587,7 @@
                     ],
                     "severity": "High",
                     "title": "Ensure SQL servers don't have public network access enabled",
-                    "description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance",
+                    "description": "Always use Private Endpoint for Azure SQL Database Server and SQL Managed Instance",
                     "tags": [
                         {
                             "cloud": "git",

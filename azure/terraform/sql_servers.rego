@@ -10,37 +10,24 @@ package rule
 # PR-AZR-0128-TRF
 
 default sql_public_access_disabled = null
-#  Defaults to true
-azure_attribute_absence["sql_public_access_disabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_mssql_server"
-    not resource.properties.public_network_access_enabled
-}
-
-azure_issue["sql_public_access_disabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_mssql_server"
-    resource.properties.public_network_access_enabled == true
+# public_network_access_enabled Defaults to true if not exist
+no_azure_issue(resource_type) {
+    count([c | input.resources[_].type == resource_type; c := 1]) == count([c | r := input.resources[_];
+               r.type == resource_type;
+               r.properties.public_network_access_enabled == false; # this is not same as not r.properties.public_network_access_enabled. not will give you correct result if property does not exist
+               c := 1])
+} else = false {
+	true
 }
 
 sql_public_access_disabled {
-    lower(input.resources[_].type) == "azurerm_mssql_server"
-    not azure_attribute_absence["sql_public_access_disabled"]
-    not azure_issue["sql_public_access_disabled"]
-}
-
-sql_public_access_disabled = false {
-    lower(input.resources[_].type) == "azurerm_mssql_server"
-    azure_attribute_absence["sql_public_access_disabled"]
-    azure_issue["sql_public_access_disabled"]
-}
-
-sql_public_access_disabled = false {
-    azure_issue["sql_public_access_disabled"]
+    no_azure_issue("azurerm_mssql_server")
+} else = false {
+	true
 }
 
 sql_public_access_disabled_err = "Public Network Access is currently not disabled on MSSQL Server." {
-    azure_issue["sql_public_access_disabled"]
+    not no_azure_issue("azurerm_mssql_server")
 }
 
 sql_public_access_disabled_metadata := {
@@ -49,7 +36,7 @@ sql_public_access_disabled_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Ensure SQL servers don't have public network access enabled",
-    "Policy Description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance",
+    "Policy Description": "Always use Private Endpoint for Azure SQL Database Server and SQL Managed Instance",
     "Resource Type": "azurerm_mssql_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server"
