@@ -59,6 +59,10 @@ storage_secure_metadata := {
 
 default storage_acl = null
 
+azure_attribute_absence ["storage_acl"] {
+    count([c | input.resources[_].type == "azurerm_storage_account"; c := 1]) != count([c | input.resources[_].type == "azurerm_storage_account_network_rules"; c := 1])
+}
+
 azure_attribute_absence["storage_acl"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_storage_account_network_rules"
@@ -373,6 +377,181 @@ storage_account_queue_logging_enabled_for_all_operation_metadata := {
     "Language": "Terraform",
     "Policy Title": "Storage Accounts queue service logging should be enabled",
     "Policy Description": "The Azure Storage Queue service logging records details for both successful and failed requests made to the queues, as well as end-to-end latency, server latency, and authentication information.",
+    "Resource Type": "azurerm_storage_account",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"
+}
+
+
+#
+# PR-AZR-0193-TRF
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
+
+default storage_acr_firewall_enabled = null
+
+azure_attribute_absence["storage_acr_firewall_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    not resource.properties.network_rules
+}
+
+azure_attribute_absence["storage_acr_firewall_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    network_rules := resource.properties.network_rules[_]
+    not network_rules.default_action
+}
+
+azure_issue["storage_acr_firewall_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    network_rules := resource.properties.network_rules[_]
+    lower(network_rules.default_action) != "deny"
+}
+
+storage_acr_firewall_enabled {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    not azure_attribute_absence["storage_acr_firewall_enabled"]
+    not azure_issue["storage_acr_firewall_enabled"]
+}
+
+storage_acr_firewall_enabled = false {
+    azure_attribute_absence["storage_acr_firewall_enabled"]
+}
+
+storage_acr_firewall_enabled = false {
+    azure_issue["storage_acr_firewall_enabled"]
+}
+
+storage_acr_firewall_enabled_err = "azurerm_storage_account property 'network_rules.default_action' need to be exist. Its missing from the resource. Please set the value to 'deny' after property addition." {
+    azure_attribute_absence["storage_acl"]
+} else = "Storage Accounts firewall rule is currently not enabled" {
+    azure_issue["storage_acl"]
+}
+
+storage_acr_firewall_enabled_metadata := {
+    "Policy Code": "PR-AZR-0193-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Storage Accounts should have firewall rules enabled",
+    "Policy Description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on._x005F_x000D_ _x005F_x000D_ You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
+    "Resource Type": "azurerm_storage_account",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"
+}
+
+
+#
+# PR-AZR-0194-TRF
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules
+
+default storage_nr_allow_trusted_azure_services = null
+
+azure_attribute_absence ["storage_nr_allow_trusted_azure_services"] {
+    count([c | input.resources[_].type == "azurerm_storage_account"; c := 1]) != count([c | input.resources[_].type == "azurerm_storage_account_network_rules"; c := 1])
+}
+
+azure_attribute_absence["storage_nr_allow_trusted_azure_services"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account_network_rules"
+    not resource.properties.bypass
+}
+
+azure_issue["storage_nr_allow_trusted_azure_services"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account_network_rules"
+    #lower(resource.properties.bypass[_]) != "azureservices"
+    count([c | lower(resource.properties.bypass[_]) == "azureservices"; c := 1]) == 0
+}
+
+storage_nr_allow_trusted_azure_services {
+    lower(input.resources[_].type) == "azurerm_storage_account_network_rules"
+    not azure_attribute_absence["storage_nr_allow_trusted_azure_services"]
+    not azure_issue["storage_nr_allow_trusted_azure_services"]
+}
+
+storage_nr_allow_trusted_azure_services = false {
+    azure_attribute_absence["storage_nr_allow_trusted_azure_services"]
+}
+
+storage_nr_allow_trusted_azure_services = false {
+    azure_issue["storage_nr_allow_trusted_azure_services"]
+}
+
+
+storage_nr_allow_trusted_azure_services_err = "azurerm_storage_account_network_rules property 'bypass' need to be exist. Its missing from the resource. Please add 'AzureServices' in the array element after property addition." {
+    azure_attribute_absence["storage_nr_allow_trusted_azure_services"]
+} else = "Storage Accounts is not currently allowing trusted Microsoft services" {
+    azure_issue["storage_nr_allow_trusted_azure_services"]
+}
+
+storage_nr_allow_trusted_azure_services_metadata := {
+    "Policy Code": "PR-AZR-0194-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Storage Accounts access should be allowed for trusted Microsoft services",
+    "Policy Description": "Ensure that 'Allow trusted Microsoft services to access this storage account' exception is enabled within your Azure Storage account configuration settings to grant access to trusted cloud services.",
+    "Resource Type": "azurerm_storage_account_network_rules",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules"
+}
+
+
+#
+# PR-AZR-0195-TRF
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
+
+default storage_allow_trusted_azure_services = null
+
+azure_attribute_absence["storage_allow_trusted_azure_services"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    not resource.properties.network_rules
+}
+
+azure_attribute_absence["storage_allow_trusted_azure_services"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    network_rules := resource.properties.network_rules[_]
+    not network_rules.bypass
+}
+
+azure_issue["storage_allow_trusted_azure_services"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    network_rules := resource.properties.network_rules[_]
+    count([c | lower(network_rules.bypass[_]) == "azureservices"; c := 1]) == 0
+}
+
+storage_allow_trusted_azure_services {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    not azure_attribute_absence["storage_allow_trusted_azure_services"]
+    not azure_issue["storage_allow_trusted_azure_services"]
+}
+
+storage_allow_trusted_azure_services = false {
+    azure_attribute_absence["storage_allow_trusted_azure_services"]
+}
+
+storage_allow_trusted_azure_services = false {
+    azure_issue["storage_allow_trusted_azure_services"]
+}
+
+storage_allow_trusted_azure_services_err = "azurerm_storage_account_network_rules property 'bypass' need to be exist. Its missing from the resource. Please add 'AzureServices' in the array element after property addition." {
+    azure_attribute_absence["storage_allow_trusted_azure_services"]
+} else = "Storage Accounts is not currently allowing trusted Microsoft services" {
+    azure_issue["storage_allow_trusted_azure_services"]
+}
+
+storage_allow_trusted_azure_services_metadata := {
+    "Policy Code": "PR-AZR-0195-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Storage Accounts access should be allowed for trusted Microsoft services",
+    "Policy Description": "Ensure that 'Allow trusted Microsoft services to access this storage account' exception is enabled within your Azure Storage account configuration settings to grant access to trusted cloud services.",
     "Resource Type": "azurerm_storage_account",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"

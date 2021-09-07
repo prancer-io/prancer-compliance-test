@@ -71,7 +71,7 @@ azure_issue["vm_linux_disabled_password_auth"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_virtual_machine"
     os_profile_linux_config := resource.properties.os_profile_linux_config[_]
-    os_profile_linux_config.disable_password_authentication == false
+    os_profile_linux_config.disable_password_authentication != true
 }
 
 vm_linux_disabled_password_auth {
@@ -80,17 +80,16 @@ vm_linux_disabled_password_auth {
     not azure_issue["vm_linux_disabled_password_auth"]
 }
 
-vm_linux_disabled_password_auth = false {
+vm_linux_disabled_password_auth {
     azure_attribute_absence["vm_linux_disabled_password_auth"]
+    not azure_issue["vm_linux_disabled_password_auth"]
 }
 
 vm_linux_disabled_password_auth = false {
     azure_issue["vm_linux_disabled_password_auth"]
 }
 
-vm_linux_disabled_password_auth_err = "azurerm_virtual_machine property 'os_profile_linux_config.disable_password_authentication' is missing from the resource" {
-    azure_attribute_absence["vm_linux_disabled_password_auth"]
-} else = "Azure Linux Instance currently does not have basic authentication disabled" {
+vm_linux_disabled_password_auth_err = "Azure Linux Instance currently does not have basic authentication disabled" {
     azure_issue["vm_linux_disabled_password_auth"]
 }
 
@@ -108,8 +107,8 @@ vm_linux_disabled_password_auth_metadata := {
 
 
 # https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/microsoft.compute/vm-new-or-existing-conditions/azuredeploy.json
-# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine
-# PR-AZR-0145-TRF
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine
+# PR-AZR-0134-TRF
 #
 
 default vm_type_linux_disabled_password_auth = null
@@ -123,7 +122,7 @@ azure_attribute_absence["vm_type_linux_disabled_password_auth"] {
 azure_issue["vm_type_linux_disabled_password_auth"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_linux_virtual_machine"
-    resource.properties.disable_password_authentication == false
+    resource.properties.disable_password_authentication != true
 }
 
 vm_type_linux_disabled_password_auth {
@@ -132,22 +131,21 @@ vm_type_linux_disabled_password_auth {
     not azure_issue["vm_type_linux_disabled_password_auth"]
 }
 
-vm_type_linux_disabled_password_auth = false {
+vm_type_linux_disabled_password_auth {
     azure_attribute_absence["vm_type_linux_disabled_password_auth"]
+    not azure_issue["vm_type_linux_disabled_password_auth"]
 }
 
 vm_type_linux_disabled_password_auth = false {
     azure_issue["vm_type_linux_disabled_password_auth"]
 }
 
-vm_type_linux_disabled_password_auth_err = "azurerm_linux_virtual_machine property 'disable_password_authentication' is missing from the resource" {
-    azure_attribute_absence["vm_type_linux_disabled_password_auth"]
-} else = "Azure Linux Instance currently does not have basic authentication disabled" {
+vm_type_linux_disabled_password_auth_err = "Azure Linux Instance currently does not have basic authentication disabled" {
     azure_issue["vm_type_linux_disabled_password_auth"]
 }
 
 vm_type_linux_disabled_password_auth_metadata := {
-    "Policy Code": "PR-AZR-0145-TRF",
+    "Policy Code": "PR-AZR-0134-TRF",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -155,7 +153,163 @@ vm_type_linux_disabled_password_auth_metadata := {
     "Policy Description": "For security purpose, linux vm password authentication should be disabled. Use SSH Key Instead.",
     "Resource Type": "azurerm_linux_virtual_machine",
     "Policy Help URL": "",
-    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine"
 }
 
 
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine_scale_set
+# PR-AZR-0135-TRF
+#
+
+default vm_type_linux_scale_set_disabled_password_auth = null
+
+azure_attribute_absence["vm_type_linux_scale_set_disabled_password_auth"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_linux_virtual_machine_scale_set"
+    not resource.properties.disable_password_authentication
+}
+
+azure_issue["vm_type_linux_scale_set_disabled_password_auth"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_linux_virtual_machine_scale_set"
+    resource.properties.disable_password_authentication != true
+}
+
+vm_type_linux_scale_set_disabled_password_auth {
+    lower(input.resources[_].type) == "azurerm_linux_virtual_machine_scale_set"
+    not azure_attribute_absence["vm_type_linux_scale_set_disabled_password_auth"]
+    not azure_issue["vm_type_linux_scale_set_disabled_password_auth"]
+}
+
+vm_type_linux_scale_set_disabled_password_auth {
+    azure_attribute_absence["vm_type_linux_scale_set_disabled_password_auth"]
+    not azure_issue["vm_type_linux_scale_set_disabled_password_auth"]
+}
+
+vm_type_linux_scale_set_disabled_password_auth = false {
+    azure_issue["vm_type_linux_scale_set_disabled_password_auth"]
+}
+
+vm_type_linux_scale_set_disabled_password_auth_err = "Azure Linux scale set currently does not have basic authentication disabled" {
+    azure_issue["vm_type_linux_scale_set_disabled_password_auth"]
+}
+
+vm_type_linux_scale_set_disabled_password_auth_metadata := {
+    "Policy Code": "PR-AZR-0135-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Linux scale set should not use basic authentication(Use SSH Key Instead)",
+    "Policy Description": "For security purpose, linux scale set password authentication should be disabled. Use SSH Key Instead.",
+    "Resource Type": "azurerm_linux_virtual_machine_scale_set",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine_scale_set"
+}
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine
+# PR-AZR-0002-TRF
+#
+
+default vm_type_linux_disabled_extension_operation = null
+# default is true which is wrong in the compute API. default should be false. When there will be a fix in the compute API we need to update the rule accordingly.
+# https://github.com/hashicorp/terraform-provider-azurerm/issues/7986
+# https://github.com/hashicorp/terraform-provider-azurerm/pull/7996
+
+azure_attribute_absence["vm_type_linux_disabled_extension_operation"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_linux_virtual_machine"
+    not resource.properties.allow_extension_operations
+}
+
+azure_issue["vm_type_linux_disabled_extension_operation"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_linux_virtual_machine"
+    resource.properties.allow_extension_operations != false
+}
+
+vm_type_linux_disabled_extension_operation {
+    lower(input.resources[_].type) == "azurerm_linux_virtual_machine"
+    not azure_attribute_absence["vm_type_linux_disabled_extension_operation"]
+    not azure_issue["vm_type_linux_disabled_extension_operation"]
+}
+
+vm_type_linux_disabled_extension_operation = false {
+    azure_attribute_absence["vm_type_linux_disabled_extension_operation"]
+}
+
+vm_type_linux_disabled_extension_operation = false {
+    azure_issue["vm_type_linux_disabled_extension_operation"]
+}
+
+vm_type_linux_disabled_extension_operation_err = "azurerm_linux_virtual_machine property 'allow_extension_operations' need to be exist. Its missing from the resource." {
+    azure_attribute_absence["vm_type_linux_disabled_extension_operation"]
+} else = "Azure Linux Instance currently allowing extension operation" {
+    azure_issue["vm_type_linux_disabled_extension_operation"]
+}
+
+vm_type_linux_disabled_extension_operation_metadata := {
+    "Policy Code": "PR-AZR-0002-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Linux Instance should not allow extension operation",
+    "Policy Description": "For security purpose, linux vm extension operation should be disabled.",
+    "Resource Type": "azurerm_linux_virtual_machine",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine"
+}
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/windows_virtual_machine
+# PR-AZR-0004-TRF
+#
+
+default vm_type_windows_disabled_extension_operation = null
+# default is true which is wrong in the compute API. default should be false. When there will be a fix in the compute API we need to update the rule accordingly.
+# https://github.com/hashicorp/terraform-provider-azurerm/issues/7986
+# https://github.com/hashicorp/terraform-provider-azurerm/pull/7996
+
+azure_attribute_absence["vm_type_windows_disabled_extension_operation"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_windows_virtual_machine"
+    not resource.properties.allow_extension_operations
+}
+
+azure_issue["vm_type_windows_disabled_extension_operation"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_windows_virtual_machine"
+    resource.properties.allow_extension_operations != false
+}
+
+vm_type_windows_disabled_extension_operation {
+    lower(input.resources[_].type) == "azurerm_windows_virtual_machine"
+    not azure_attribute_absence["vm_type_windows_disabled_extension_operation"]
+    not azure_issue["vm_type_windows_disabled_extension_operation"]
+}
+
+vm_type_windows_disabled_extension_operation = false {
+    azure_attribute_absence["vm_type_windows_disabled_extension_operation"]
+}
+
+vm_type_windows_disabled_extension_operation = false {
+    azure_issue["vm_type_windows_disabled_extension_operation"]
+}
+
+vm_type_windows_disabled_extension_operation_err = "azurerm_windows_virtual_machine property 'allow_extension_operations' need to be exist. Its missing from the resource." {
+    azure_attribute_absence["vm_type_windows_disabled_extension_operation"]
+} else = "Azure Windows Instance currently allowing extension operation" {
+    azure_issue["vm_type_windows_disabled_extension_operation"]
+}
+
+vm_type_windows_disabled_extension_operation_metadata := {
+    "Policy Code": "PR-AZR-0004-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Windows Instance should not allow extension operation",
+    "Policy Description": "For security purpose, Windows vm extension operation should be disabled.",
+    "Resource Type": "azurerm_windows_virtual_machine",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/windows_virtual_machine"
+}
