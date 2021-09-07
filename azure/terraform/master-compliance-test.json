@@ -3978,6 +3978,74 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_11",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0013-TRF",
+                            "eval": "data.rule.storage_correct_naming_convention",
+                            "message": "data.rule.storage_correct_naming_convention_err",
+                            "remediationDescription": "In 'azurerm_storage_account' resource, property 'name' must be between 3 and 24 characters in length and may contain numbers and lowercase letters only to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#name for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Storage Account naming rules are correct",
+                    "description": "Storage account names must be between 3 and 24 characters in length and may contain numbers and lowercase letters only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "HIPAA",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_12",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0014-TRF",
+                            "eval": "data.rule.storage_account_latest_tls_configured",
+                            "message": "data.rule.storage_account_latest_tls_configured_err",
+                            "remediationDescription": "In 'azurerm_storage_account' resource, set min_tls_version = 'TLS1_2' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#min_tls_version for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Storage Account has latest version of tls configured",
+                    "description": "This policy will identify the Azure Storage Account which dont have latest version of tls configured and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "HIPAA",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_STORAGE_BLOB_CONTAINER",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
