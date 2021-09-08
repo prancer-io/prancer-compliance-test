@@ -5,7 +5,36 @@
             "version": "0.1",
             "cases": [
                 {
-                    "masterTestId": "TEST_ACTIVITY_LOG_ALERT",
+                    "masterTestId": "TEST_ROLE",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(roles.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0001-TRF",
+                            "eval": "data.rule.no_custom_subs_owner_role_created",
+                            "message": "data.rule.no_custom_subs_owner_role_created_err",
+                            "remediationDescription": "In 'azurerm_role_definition' resource, make sure 'permissions' blocks 'actions' array dont have '*' as entry to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_definition#actions for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Custom Role Definition should not create subscription owner role",
+                    "description": "Manages a custom Role Definition, used to assign Roles to Users/Principals. This policy will identify custom role definition which has action permission set to subscription owner and alert if exist.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ACTIVITY_LOG_ALERT_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -23,6 +52,93 @@
                     "severity": "Medium",
                     "title": "Activity log alerts should be enabled",
                     "description": "Activity log alerts are alerts that activate when a new activity log event occurs that matches the conditions specified in the alert. Based on the order and volume of the events recorded in Azure activity log, the alert rule will fire. Enabling Activity log alerts will allow Azure to send you emails about any high severity alerts in your environment. This will make sure that you are aware of any security issues and take prompt actions to mitigate the risks.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ACTIVITY_LOG_ALERT_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(activitylogalerts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0196-TRF",
+                            "eval": "data.rule.azure_monitor_log_profile_retention",
+                            "message": "data.rule.azure_monitor_log_profile_retention_err",
+                            "remediationDescription": "In 'azurerm_monitor_log_profile' resource, set days = '365' under 'retention_policy' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_log_profile#days for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Activity log profile retention is set to 365 days or greater",
+                    "description": "This policy identifies azurerm_monitor_log_profile which have log retention less than 365 days. Activity Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ACTIVITY_LOG_ALERT_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(activitylogalerts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0197-TRF",
+                            "eval": "data.rule.azure_monitor_log_profile_retention_enabled",
+                            "message": "data.rule.azure_monitor_log_profile_retention_enabled_err",
+                            "remediationDescription": "In 'azurerm_monitor_log_profile' resource, set 'enabled = true' under 'retention_policy' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_log_profile#enabled for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Activity log profile retention should be enabled",
+                    "description": "This policy identifies azurerm_monitor_log_profile which dont have log retention enabled. Activity Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ACTIVITY_LOG_ALERT_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(activitylogalerts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0198-TRF",
+                            "eval": "data.rule.azure_monitor_log_profile_capture_all_activities",
+                            "message": "data.rule.azure_monitor_log_profile_capture_all_activities_err",
+                            "remediationDescription": "In 'azurerm_monitor_log_profile' resource, make sure 'categories' array exist and contains at least ['Action','Delete','Write'] as value to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_log_profile#categories for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Activity log audit profile should configure to capture all the activities",
+                    "description": "This policy identifies azurerm_monitor_log_profile which dont capture all type of activities. Activity Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1549,7 +1665,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MariaDB",
+                    "masterTestId": "TEST_MariaDB_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -1567,6 +1683,99 @@
                     "severity": "High",
                     "title": "MariaDB should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
                     "description": "This policy will identify MariaDB firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MariaDB_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(mariadb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0189-TRF",
+                            "eval": "data.rule.mairadb_ssl_enforcement_enabled",
+                            "message": "data.rule.mairadb_ssl_enforcement_enabled_err",
+                            "remediationDescription": "In 'azurerm_mariadb_server' resource, set 'ssl_enforcement_enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server#ssl_enforcement_enabled for details.",
+                            "remediationFunction": "PR_AZR_0189_TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure ssl enforcement is enabled on MariaDB Server.",
+                    "description": "Enable SSL connection on MariaDB Servers. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MariaDB_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(mariadb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0190-TRF",
+                            "eval": "data.rule.mairadb_public_access_disabled",
+                            "message": "data.rule.mairadb_public_access_disabled_err",
+                            "remediationDescription": "In 'azurerm_mariadb_server' resource, set 'public_network_access_enabled = false' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server#public_network_access_enabled for details.",
+                            "remediationFunction": "PR_AZR_0190_TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure MariaDB servers don't have public network access enabled",
+                    "description": "Always use Private Endpoint for MariaDB Server",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MariaDB_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(mariadb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0191-TRF",
+                            "eval": "data.rule.mariadb_geo_redundant_backup_enabled",
+                            "message": "data.rule.mariadb_geo_redundant_backup_enabled_err",
+                            "remediationDescription": "In 'azurerm_mariadb_server' resource, set 'geo_redundant_backup_enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server#geo_redundant_backup_enabled for details.",
+                            "remediationFunction": "PR_AZR_0191_TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Geo-redundant backup is enabled on MariaDB server.",
+                    "description": "Azure Database for MariaDB provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2867,6 +3076,37 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_postgreSQL_7",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0192-TRF",
+                            "eval": "data.rule.postgresql_public_access_disabled",
+                            "message": "data.rule.postgresql_public_access_disabled_err",
+                            "remediationDescription": "In 'azurerm_postgresql_server' resource, set 'public_network_access_enabled = false' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server#public_network_access_enabled for details.",
+                            "remediationFunction": "PR_AZR_0192_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure PostgreSQL servers don't have public network access enabled",
+                    "description": "Always use Private Endpoint for PostgreSQL Server",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_PRICING",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -3636,6 +3876,108 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_8",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0193-TRF",
+                            "eval": "data.rule.storage_acr_firewall_enabled",
+                            "message": "data.rule.storage_acr_firewall_enabled_err",
+                            "remediationDescription": "In 'azurerm_storage_account' resource, set default_action = 'deny' under 'network_rules' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#default_action for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Storage Accounts should have firewall rules enabled",
+                    "description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on._x005F_x000D_ _x005F_x000D_ You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "HIPAA",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_9",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0194-TRF",
+                            "eval": "data.rule.storage_nr_allow_trusted_azure_services",
+                            "message": "data.rule.storage_nr_allow_trusted_azure_services_err",
+                            "remediationDescription": "Make sure both 'azurerm_storage_account' and 'azurerm_storage_account_network_rules' exist and in 'azurerm_storage_account_network_rules' resource, add 'AzureServices' value under 'bypass' array property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules#bypass for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Storage Accounts access should be allowed for trusted Microsoft services",
+                    "description": "Ensure that 'Allow trusted Microsoft services to access this storage account' exception is enabled within your Azure Storage account configuration settings to grant access to trusted cloud services.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "HIPAA",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_10",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0195-TRF",
+                            "eval": "data.rule.storage_allow_trusted_azure_services",
+                            "message": "data.rule.storage_allow_trusted_azure_services_err",
+                            "remediationDescription": "In 'azurerm_storage_account' resource, add 'AzureServices' value under 'bypass' array property which exist under 'network_rules' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#bypass for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Storage Accounts access should be allowed for trusted Microsoft services",
+                    "description": "Ensure that 'Allow trusted Microsoft services to access this storage account' exception is enabled within your Azure Storage account configuration settings to grant access to trusted cloud services.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "HIPAA",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_STORAGE_BLOB_CONTAINER",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -3731,16 +4073,103 @@
                     "rule": "file(vm.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-145-TRF",
+                            "id": "PR-AZR-0134-TRF",
                             "eval": "data.rule.vm_type_linux_disabled_password_auth",
                             "message": "data.rule.vm_type_linux_disabled_password_auth_err",
                             "remediationDescription": "In 'azurerm_linux_virtual_machine' resource, make sure to set 'disable_password_authentication = true' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#disable_password_authentication for details.",
-                            "remediationFunction": "PR_AZR_145_TRF.py"
+                            "remediationFunction": "PR_AZR_0134_TRF.py"
                         }
                     ],
                     "severity": "Medium",
                     "title": "Azure Linux Instance should not use basic authentication(Use SSH Key Instead)",
                     "description": "For security purpose, linux vm password authentication should be disabled. Use SSH Key Instead.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_VIRTUAL_MACHINE_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(vm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0135-TRF",
+                            "eval": "data.rule.vm_type_linux_scale_set_disabled_password_auth",
+                            "message": "data.rule.vm_type_linux_scale_set_disabled_password_auth_err",
+                            "remediationDescription": "In 'azurerm_linux_virtual_machine_scale_set' resource, make sure to set 'disable_password_authentication = true' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine_scale_set#disable_password_authentication for details.",
+                            "remediationFunction": "PR_AZR_0135_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Linux scale set should not use basic authentication(Use SSH Key Instead)",
+                    "description": "For security purpose, linux scale set password authentication should be disabled. Use SSH Key Instead.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_VIRTUAL_MACHINE_5",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(vm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0002-TRF",
+                            "eval": "data.rule.vm_type_linux_disabled_extension_operation",
+                            "message": "data.rule.vm_type_linux_disabled_extension_operation_err",
+                            "remediationDescription": "In 'azurerm_linux_virtual_machine' resource, make sure to set 'allow_extension_operations = false' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#allow_extension_operations for details.",
+                            "remediationFunction": "PR_AZR_0002_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Linux Instance should not allow extension operation",
+                    "description": "For security purpose, linux vm extension operation should be disabled.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_VIRTUAL_MACHINE_6",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(vm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0004-TRF",
+                            "eval": "data.rule.vm_type_windows_disabled_extension_operation",
+                            "message": "data.rule.vm_type_windows_disabled_extension_operation_err",
+                            "remediationDescription": "In 'azurerm_windows_virtual_machine' resource, make sure to set 'allow_extension_operations = false' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/windows_virtual_machine#allow_extension_operations for details.",
+                            "remediationFunction": "PR_AZR_0004_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Windows Instance should not allow extension operation",
+                    "description": "For security purpose, windows vm extension operation should be disabled.",
                     "tags": [
                         {
                             "cloud": "git",
