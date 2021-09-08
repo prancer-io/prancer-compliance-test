@@ -122,37 +122,26 @@ mairadb_ssl_enforcement_enabled_metadata := {
 # PR-AZR-0190-TRF
 
 default mairadb_public_access_disabled = null
-#  Defaults to true
-azure_attribute_absence["mairadb_public_access_disabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_mariadb_server"
-    not resource.properties.public_network_access_enabled
-}
 
-azure_issue["mairadb_public_access_disabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_mariadb_server"
-    resource.properties.public_network_access_enabled == true
+# public_network_access_enabled Defaults to true if not exist. This was an issue because we need to fail if property not exist and also need to passed if property has value false.
+# if property does not exist it has false value in OPA, and explicitly setting false value will be treated as property not exist as well. so we need to implement a comparison like below.
+no_azure_issue(resource_type) {
+    count([c | input.resources[_].type == resource_type; c := 1]) == count([c | r := input.resources[_];
+               r.type == resource_type;
+               r.properties.public_network_access_enabled == false; # this is not same as not r.properties.public_network_access_enabled. not will give you correct result if property does not exist
+               c := 1])
+} else = false {
+	true
 }
 
 mairadb_public_access_disabled {
-    lower(input.resources[_].type) == "azurerm_mariadb_server"
-    not azure_attribute_absence["mairadb_public_access_disabled"]
-    not azure_issue["mairadb_public_access_disabled"]
-}
-
-mairadb_public_access_disabled = false {
-    lower(input.resources[_].type) == "azurerm_mariadb_server"
-    azure_attribute_absence["mairadb_public_access_disabled"]
-    azure_issue["mairadb_public_access_disabled"]
-}
-
-mairadb_public_access_disabled = false {
-    azure_issue["mairadb_public_access_disabled"]
+    no_azure_issue("azurerm_mariadb_server")
+} else = false {
+	true
 }
 
 mairadb_public_access_disabled_err = "Public Network Access is currently not disabled on MariaDB Server." {
-    azure_issue["sql_public_access_disabled"]
+     not no_azure_issue("azurerm_mariadb_server")
 }
 
 mairadb_public_access_disabled_metadata := {

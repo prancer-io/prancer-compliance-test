@@ -1882,6 +1882,37 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_MySQL_SERVER_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(mysql_server.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0041-TRF",
+                            "eval": "data.rule.mysql_server_latest_tls_configured",
+                            "message": "data.rule.mysql_server_latest_tls_configured_err",
+                            "remediationDescription": "In 'azurerm_mysql_server' resource, set ssl_minimal_tls_version_enforced = 'TLS1_2' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server#ssl_minimal_tls_version_enforced for details.",
+                            "remediationFunction": "PR_AZR_0041_TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Azure MySQL Server has latest version of tls configured",
+                    "description": "This policy will identify the Azure MySQL Server which dont have latest version of tls configured and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_NETWORK_WATCHERS_FLOW_LOGS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
