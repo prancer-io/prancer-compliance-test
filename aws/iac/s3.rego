@@ -94,6 +94,15 @@ aws_issue["s3_acl_delete"] {
     stat := resource.Properties.PolicyDocument.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
+    startswith(lower(stat.Action),"s3:delete")
+}
+
+aws_issue["s3_acl_delete"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[_]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
     startswith(lower(stat.Action[_]),"s3:delete")
 }
 
@@ -158,6 +167,15 @@ aws_issue["s3_acl_get"] {
     stat := resource.Properties.PolicyDocument.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
+    startswith(lower(stat.Action),"s3:get")
+}
+
+aws_issue["s3_acl_get"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[_]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
     startswith(lower(stat.Action[_]),"s3:get")
 }
 
@@ -214,6 +232,16 @@ aws_issue["s3_acl_list"] {
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
     lower(stat.Action[_]) == "s3:*"
+}
+
+aws_issue["s3_acl_list"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[_]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    startswith(lower(stat.Action),"s3:list")
+
 }
 
 aws_issue["s3_acl_list"] {
@@ -287,8 +315,17 @@ aws_issue["s3_acl_put"] {
     stat := resource.Properties.PolicyDocument.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
-    startswith(lower(stat.Action[_]),"s3:put")
+    startswith(lower(stat.Action),"s3:put")
 
+}
+
+aws_issue["s3_acl_put"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[_]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    startswith(lower(stat.Action[_]),"s3:put")
 }
 
 s3_acl_put {

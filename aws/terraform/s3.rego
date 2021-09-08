@@ -94,7 +94,16 @@ aws_issue["s3_acl_delete"] {
     stat := resource.properties.policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
-    lower(stat.Action) == "s3:delete"
+    startswith(lower(stat.Action),"s3:delete")
+}
+
+aws_issue["s3_acl_delete"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_s3_bucket_policy"
+    stat := resource.properties.policy.Statement[_]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    startswith(lower(stat.Action[_]),"s3:delete")
 }
 
 s3_acl_delete {
@@ -156,7 +165,16 @@ aws_issue["s3_acl_get"] {
     stat := resource.properties.policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
-    lower(stat.Action) == "s3:get"
+    startswith(lower(stat.Action),"s3:get")
+}
+
+aws_issue["s3_acl_get"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_s3_bucket_policy"
+    stat := resource.properties.policy.Statement[_]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    startswith(lower(stat.Action[_]),"s3:get")
 }
 
 s3_acl_get {
@@ -218,7 +236,16 @@ aws_issue["s3_acl_list"] {
     stat := resource.properties.policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
-    lower(stat.Action) == "s3:list"
+    startswith(lower(stat.Action),"s3:list")
+}
+
+aws_issue["s3_acl_list"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_s3_bucket_policy"
+    stat := resource.properties.policy.Statement[_]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    startswith(lower(stat.Action[_]),"s3:list")
 }
 
 s3_acl_list {
@@ -280,7 +307,16 @@ aws_issue["s3_acl_put"] {
     stat := resource.properties.policy.Statement[_]
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
-    lower(stat.Action) == "s3:put"
+    startswith(lower(stat.Action),"s3:put")
+}
+
+aws_issue["s3_acl_put"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_s3_bucket_policy"
+    stat := resource.properties.policy.Statement[_]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    startswith(lower(stat.Action[_]),"s3:put")
 }
 
 s3_acl_put {
