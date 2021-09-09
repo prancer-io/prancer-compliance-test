@@ -1483,6 +1483,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_FUNCTION_APP",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(functionapp.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0062-TRF",
+                            "eval": "data.rule.functionapp_authentication_enabled",
+                            "message": "data.rule.functionapp_authentication_enabled_err",
+                            "remediationDescription": "In 'azurerm_function_app' resource, set 'enabled = true' under 'auth_settings' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/function_app#enabled for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Function apps Authentication should be enabled",
+                    "description": "Azure Function app provides built-in authentication and authorization capabilities (sometimes referred to as 'Easy Auth'), so you can sign in users and access data by writing minimal or no code in your web app, RESTful API, and mobile back end, and also Azure Functions",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_KeyVault_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
