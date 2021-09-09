@@ -334,3 +334,74 @@ app_service_uses_http_two_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
 }
+
+
+#
+# PR-AZR-0067-TRF
+#
+
+default app_service_cors_not_allowing_all = null
+
+contains(array, element) = true {
+  lower(array[_]) == element
+} else = false { true }
+
+azure_attribute_absence["app_service_cors_not_allowing_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.site_config
+}
+
+azure_attribute_absence["app_service_cors_not_allowing_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    not site_config.cors
+}
+
+azure_attribute_absence["app_service_cors_not_allowing_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    cors := site_config.cors[_]
+    not cors.allowed_origins 
+}
+
+azure_issue["app_service_cors_not_allowing_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    cors := site_config.cors[_]
+    contains(cors.allowed_origins, "*") 
+}
+
+app_service_cors_not_allowing_all {
+    azure_attribute_absence["app_service_uses_http_two"]
+    not azure_issue["app_service_uses_http_two"]
+}
+
+app_service_cors_not_allowing_all {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_uses_http_two"]
+    not azure_issue["app_service_uses_http_two"]
+}
+
+app_service_cors_not_allowing_all = false {
+    azure_issue["app_service_uses_http_two"]
+}
+
+app_service_cors_not_allowing_all_err = "CORS configuration is currently allowing every resources to access Azure App Service" {
+    azure_issue["app_service_uses_http_two"]
+}
+
+app_service_cors_not_allowing_all_metadata := {
+    "Policy Code": "PR-AZR-0067-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure CORS configuration is not allowing every resources to access Azure App Service",
+    "Policy Description": "This policy will identify CORS configuration which are allowing every resoruces to access Azure app service and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}
