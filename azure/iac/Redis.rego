@@ -24,7 +24,7 @@ enableSslPort {
 
 enableSslPort {
     lower(input.resources[_].type) == "microsoft.cache/redis"
-    not azure_issue["servenableSslPorterRole"]
+    not azure_issue["enableSslPort"]
 }
 
 enableSslPort = false {
