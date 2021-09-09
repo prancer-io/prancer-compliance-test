@@ -367,7 +367,7 @@ storage_account_queue_logging_enabled_for_all_operation = false {
 storage_account_queue_logging_enabled_for_all_operation_err = "azurerm_storage_account property block 'queue_properties.logging' need to be exist with child property 'read', 'write' and 'delete'. one or all are missing from the resource." {
     azure_attribute_absence["storage_account_queue_logging_enabled_for_all_operation"]
 } else = "Storage Accounts queue service logging is currently not enabled" {
-    azure_issue["storage_secure"]
+    azure_issue["storage_account_queue_logging_enabled_for_all_operation"]
 }
 
 storage_account_queue_logging_enabled_for_all_operation_metadata := {
