@@ -447,3 +447,63 @@ app_service_http_logging_enabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
 }
+
+
+#
+# PR-AZR-0073-TRF
+#
+
+default app_service_detaild_error_message_enabled = null
+
+azure_attribute_absence["app_service_detaild_error_message_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.logs
+}
+
+#default to false
+azure_attribute_absence["app_service_detaild_error_message_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    logs := resource.properties.logs[_]
+    not logs.detailed_error_messages_enabled
+}
+
+azure_issue["app_service_detaild_error_message_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    logs := resource.properties.logs[_]
+    logs.detailed_error_messages_enabled != true
+}
+
+app_service_detaild_error_message_enabled {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_detaild_error_message_enabled"]
+    not azure_issue["app_service_detaild_error_message_enabled"]
+}
+
+app_service_detaild_error_message_enabled = false {
+    azure_attribute_absence["app_service_detaild_error_message_enabled"]
+}
+
+app_service_detaild_error_message_enabled = false {
+    azure_issue["app_service_detaild_error_message_enabled"]
+}
+
+app_service_detaild_error_message_enabled_err = "azurerm_app_service property 'logs.detailed_error_messages_enabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
+    azure_attribute_absence["app_service_detaild_error_message_enabled"]
+} else = "Azure App Service detaild error message currently not enabled" {
+    azure_issue["app_service_detaild_error_message_enabled"]
+}
+
+app_service_detaild_error_message_enabled_metadata := {
+    "Policy Code": "PR-AZR-0073-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure App Service detaild error message should be enabled",
+    "Policy Description": "This policy will identify the Azure app service which dont have detaild error message enabled and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}

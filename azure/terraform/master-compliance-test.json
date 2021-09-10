@@ -730,6 +730,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_APP_SERVICE_9",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0073-TRF",
+                            "eval": "data.rule.app_service_detaild_error_message_enabled",
+                            "message": "data.rule.app_service_detaild_error_message_enabled_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, set 'detailed_error_messages_enabled = true' under 'logs' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#detailed_error_messages_enabled for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure App Service detaild error message should be enabled",
+                    "description": "This policy will identify the Azure app service which dont have detaild error message enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_DATABASEACCOUNTS",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
