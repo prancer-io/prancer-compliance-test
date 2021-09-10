@@ -507,3 +507,63 @@ app_service_detaild_error_message_enabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
 }
+
+
+#
+# PR-AZR-0076-TRF
+#
+
+default app_service_failed_request_tracing_enabled = null
+
+azure_attribute_absence["app_service_failed_request_tracing_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.logs
+}
+
+#default to false
+azure_attribute_absence["app_service_failed_request_tracing_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    logs := resource.properties.logs[_]
+    not logs.failed_request_tracing_enabled
+}
+
+azure_issue["app_service_failed_request_tracing_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    logs := resource.properties.logs[_]
+    logs.failed_request_tracing_enabled != true
+}
+
+app_service_failed_request_tracing_enabled {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_failed_request_tracing_enabled"]
+    not azure_issue["app_service_failed_request_tracing_enabled"]
+}
+
+app_service_failed_request_tracing_enabled = false {
+    azure_attribute_absence["app_service_failed_request_tracing_enabled"]
+}
+
+app_service_failed_request_tracing_enabled = false {
+    azure_issue["app_service_failed_request_tracing_enabled"]
+}
+
+app_service_failed_request_tracing_enabled_err = "azurerm_app_service property 'logs.app_service_failed_request_tracing_enabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
+    azure_attribute_absence["app_service_failed_request_tracing_enabled"]
+} else = "Azure App Service Failed request tracing currently not enabled" {
+    azure_issue["app_service_failed_request_tracing_enabled"]
+}
+
+app_service_failed_request_tracing_enabled_metadata := {
+    "Policy Code": "PR-AZR-0076-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure App Service Failed request tracing should be enabled",
+    "Policy Description": "This policy will identify the Azure app service which dont have Failed request tracing enabled and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}
