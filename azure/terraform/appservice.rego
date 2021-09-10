@@ -609,3 +609,62 @@ app_service_managed_identity_provider_enabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
 }
+
+
+#
+# PR-AZR-0078-TRF
+#
+
+default app_service_remote_debugging_disabled = null
+
+azure_attribute_absence["app_service_remote_debugging_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.site_config
+}
+
+#default to false
+azure_attribute_absence["app_service_remote_debugging_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    not site_config.remote_debugging_enabled
+}
+
+azure_issue["app_service_remote_debugging_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    site_config.remote_debugging_enabled == true
+}
+
+app_service_remote_debugging_disabled {
+    azure_attribute_absence["app_service_remote_debugging_disabled"]
+    not azure_issue["app_service_remote_debugging_disabled"]
+}
+
+app_service_remote_debugging_disabled {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_remote_debugging_disabled"]
+    not azure_issue["app_service_remote_debugging_disabled"]
+}
+
+app_service_remote_debugging_disabled = false {
+    azure_issue["app_service_remote_debugging_disabled"]
+}
+
+app_service_remote_debugging_disabled_err = "Azure App Service remote debugging currently not disabled" {
+    azure_issue["app_service_remote_debugging_disabled"]
+}
+
+app_service_remote_debugging_disabled_metadata := {
+    "Policy Code": "PR-AZR-0078-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure App Service remote debugging should be disabled",
+    "Policy Description": "This policy will identify the Azure app service which have remote debugging enabled and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}
