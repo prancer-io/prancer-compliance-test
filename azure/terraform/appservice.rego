@@ -405,3 +405,45 @@ app_service_cors_not_allowing_all_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
 }
+
+
+#
+# PR-AZR-0072-TRF
+#
+
+default app_service_http_logging_enabled = null
+
+azure_attribute_absence["app_service_http_logging_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.logs
+}
+
+azure_attribute_absence["app_service_http_logging_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    logs := resource.properties.logs[_]
+    not logs.http_logs
+}
+
+app_service_http_logging_enabled = false {
+    azure_attribute_absence["app_service_http_logging_enabled"]
+} else = true {
+	true
+}
+
+app_service_http_logging_enabled_err = "azurerm_app_service property 'logs.http_logs' need to be exist. Its missing from the resource." {
+    azure_attribute_absence["app_service_http_logging_enabled"]
+}
+
+app_service_http_logging_enabled_metadata := {
+    "Policy Code": "PR-AZR-0072-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure App Service http logging should be enabled",
+    "Policy Description": "This policy will identify the Azure app service which dont have http logging enabled and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}
