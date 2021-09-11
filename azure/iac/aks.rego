@@ -442,9 +442,13 @@ azure_issue["aks_kub_dashboard_disabled"] {
     resource.properties.addonProfiles.kubeDashboard.enabled != false
 }
 
+
 aks_kub_dashboard_disabled {
-    lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
-    not azure_attribute_absence["aks_kub_dashboard_disabled"]
+    azure_attribute_absence["aks_kub_dashboard_disabled"]
+}
+
+aks_kub_dashboard_disabled {
+    azure_attribute_absence["aks_kub_dashboard_disabled"]
     not azure_issue["aks_kub_dashboard_disabled"]
 }
 
@@ -452,13 +456,7 @@ aks_kub_dashboard_disabled = false {
     azure_issue["aks_kub_dashboard_disabled"]
 }
 
-aks_kub_dashboard_disabled = false {
-    azure_attribute_absence["aks_kub_dashboard_disabled"]
-}
-
-aks_kub_dashboard_disabled_err = "'microsoft.containerservice/managedclusters' property 'addonProfiles.kubeDashboard.enabled' is missing from the resource" {
-    azure_attribute_absence["aks_kub_dashboard_disabled"]
-} else = "Kubernetes Dashboard is currently not disabled" {
+aks_kub_dashboard_disabled_err = "Kubernetes Dashboard is currently not disabled" {
     azure_issue["aks_kub_dashboard_disabled"]
 }
 
