@@ -668,3 +668,63 @@ app_service_remote_debugging_disabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
 }
+
+
+#
+# PR-AZR-0079-TRF
+#
+
+default app_service_ftp_deployment_disabled = null
+
+azure_attribute_absence["app_service_ftp_deployment_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.site_config
+}
+
+azure_attribute_absence["app_service_ftp_deployment_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    not site_config.ftps_state
+}
+
+azure_issue["app_service_ftp_deployment_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    lower(site_config.ftps_state) != "disabled"
+    lower(site_config.ftps_state) != "ftpsonly"
+}
+
+app_service_ftp_deployment_disabled = false {
+    azure_attribute_absence["app_service_ftp_deployment_disabled"]
+}
+
+app_service_ftp_deployment_disabled {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_ftp_deployment_disabled"]
+    not azure_issue["app_service_ftp_deployment_disabled"]
+}
+
+app_service_ftp_deployment_disabled = false {
+    azure_issue["app_service_ftp_deployment_disabled"]
+}
+
+app_service_ftp_deployment_disabled_err = "azurerm_app_service property 'site_config.ftps_state' need to be exist. Its missing from the resource." {
+    azure_attribute_absence["app_service_ftp_deployment_disabled"]
+} else = "Azure App Service FTP deployment is currently not disabled" {
+    azure_issue["app_service_ftp_deployment_disabled"]
+}
+
+app_service_ftp_deployment_disabled_metadata := {
+    "Policy Code": "PR-AZR-0079-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure App Service FTP deployments should be disabled",
+    "Policy Description": "This policy will identify the Azure app service which have FTP deployment enabled and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}

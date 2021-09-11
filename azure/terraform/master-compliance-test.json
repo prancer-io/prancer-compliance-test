@@ -846,6 +846,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_APP_SERVICE_13",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0079-TRF",
+                            "eval": "data.rule.app_service_ftp_deployment_disabled",
+                            "message": "data.rule.app_service_ftp_deployment_disabled_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, make sure property 'ftps_state' has value either 'Disabled' or 'FtpsOnly' under 'site_config' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#ftps_state for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure App Service FTP deployments should be disabled",
+                    "description": "This policy will identify the Azure app service which have FTP deployment enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_DATABASEACCOUNTS",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
