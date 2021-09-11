@@ -728,3 +728,63 @@ app_service_ftp_deployment_disabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
 }
+
+
+#
+# PR-AZR-0080-TRF
+#
+
+default app_service_dot_net_framework_latest = null
+
+azure_attribute_absence["app_service_dot_net_framework_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.site_config
+}
+
+#Defaults to v4.0
+azure_attribute_absence["app_service_dot_net_framework_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    not site_config.dotnet_framework_version
+}
+
+azure_issue["app_service_dot_net_framework_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    lower(site_config.dotnet_framework_version) != "v6.0"
+}
+
+app_service_dot_net_framework_latest = false {
+    azure_attribute_absence["app_service_dot_net_framework_latest"]
+}
+
+app_service_dot_net_framework_latest {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_dot_net_framework_latest"]
+    not azure_issue["app_service_dot_net_framework_latest"]
+}
+
+app_service_dot_net_framework_latest = false {
+    azure_issue["app_service_dot_net_framework_latest"]
+}
+
+app_service_dot_net_framework_latest_err = "azurerm_app_service property 'site_config.dotnet_framework_version' need to be exist. Its missing from the resource." {
+    azure_attribute_absence["app_service_dot_net_framework_latest"]
+} else = "Azure App Service currently dont have latest version of Dot Net Framework" {
+    azure_issue["app_service_dot_net_framework_latest"]
+}
+
+app_service_dot_net_framework_latest_metadata := {
+    "Policy Code": "PR-AZR-0080-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure App Service Dot Net Framework should be latest",
+    "Policy Description": "This policy will identify the Azure app service which dont have latest version of Dot Net Framework and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}

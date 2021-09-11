@@ -875,6 +875,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_APP_SERVICE_14",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0080-TRF",
+                            "eval": "data.rule.app_service_dot_net_framework_latest",
+                            "message": "data.rule.app_service_dot_net_framework_latest_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, set dotnet_framework_version = 'v6.0' under 'site_config' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#dotnet_framework_version for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure App Service Dot Net Framework should be latest",
+                    "description": "This policy will identify the Azure app service which dont have latest version of Dot Net Framework and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_DATABASEACCOUNTS",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
