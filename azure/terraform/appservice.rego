@@ -788,3 +788,62 @@ app_service_dot_net_framework_latest_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
 }
+
+
+#
+# PR-AZR-0081-TRF
+#
+
+default app_service_php_version_latest = null
+
+azure_attribute_absence["app_service_php_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.site_config
+}
+
+azure_attribute_absence["app_service_php_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    not site_config.php_version
+}
+
+azure_issue["app_service_php_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    lower(site_config.php_version) != "7.4"
+}
+
+app_service_php_version_latest = false {
+    azure_attribute_absence["app_service_php_version_latest"]
+}
+
+app_service_php_version_latest {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_php_version_latest"]
+    not azure_issue["app_service_php_version_latest"]
+}
+
+app_service_php_version_latest = false {
+    azure_issue["app_service_php_version_latest"]
+}
+
+app_service_php_version_latest_err = "azurerm_app_service property 'site_config.php_version' need to be exist. Its missing from the resource." {
+    azure_attribute_absence["app_service_php_version_latest"]
+} else = "Azure App Service currently dont have latest version of PHP" {
+    azure_issue["app_service_php_version_latest"]
+}
+
+app_service_php_version_latest_metadata := {
+    "Policy Code": "PR-AZR-0081-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure App Service PHP version should be latest",
+    "Policy Description": "This policy will identify the Azure app service which dont have latest version of PHP and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}
