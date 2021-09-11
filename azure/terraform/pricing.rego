@@ -51,3 +51,67 @@ pricing_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_subscription_pricing"
 }
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_subscription_pricing
+#
+# PR-AZR-0060-TRF
+#
+
+default security_center_azure_defender_is_on_for_servers = null
+
+azure_attribute_absence["security_center_azure_defender_is_on_for_servers"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_security_center_subscription_pricing"
+    not resource.properties.tier
+}
+
+azure_attribute_absence["security_center_azure_defender_is_on_for_servers"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_security_center_subscription_pricing"
+    not resource.properties.resource_type
+}
+
+no_azure_issue["security_center_azure_defender_is_on_for_servers"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_security_center_subscription_pricing"
+    lower(resource.properties.tier) == "standard"
+}
+
+no_azure_issue["security_center_azure_defender_is_on_for_servers"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_security_center_subscription_pricing"
+    lower(resource.properties.resource_type) != "virtualmachines"
+}
+
+security_center_azure_defender_is_on_for_servers {
+    lower(input.resources[_].type) == "azurerm_security_center_subscription_pricing"
+    not azure_attribute_absence["security_center_azure_defender_is_on_for_servers"]
+    no_azure_issue["security_center_azure_defender_is_on_for_servers"]
+}
+
+security_center_azure_defender_is_on_for_servers = false {
+    azure_attribute_absence["security_center_azure_defender_is_on_for_servers"]
+}
+
+security_center_azure_defender_is_on_for_servers = false {
+    not no_azure_issue["security_center_azure_defender_is_on_for_servers"]
+}
+
+security_center_azure_defender_is_on_for_servers_err = "azurerm_security_center_subscription_pricing property 'tier' and 'resource_type' both need to be exist. one or both are missing from the resource. Please either set tier = 'standard' or dont set 'VirtualMachines' as resource_type after property addition." {
+    azure_attribute_absence["security_center_azure_defender_is_on_for_servers"]
+} else = "Azure Security Center Defender is currently not enabled for Servers" {
+    not no_azure_issue["security_center_azure_defender_is_on_for_servers"]
+}
+
+security_center_azure_defender_is_on_for_servers_metadata := {
+    "Policy Code": "PR-AZR-0060-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Security Center Defender should be enabled for Servers",
+    "Policy Description": "Azure Defender provides security alerts and advanced threat protection for virtual machines, SQL databases, containers, web applications, your network, and more.",
+    "Resource Type": "azurerm_security_center_subscription_pricing",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_subscription_pricing"
+}
