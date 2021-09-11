@@ -55,18 +55,18 @@ enableSslPort_metadata := {
 
 default serverRole = null
 # as linkedservers is child resource of microsoft.cache/redis, we need to make sure microsoft.cache/redis exist in the same template first.
-azure_attribute_absence["serverRole"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.cache/redis"
-    count([c | input.resources[_].type == "microsoft.cache/redis/linkedservers";
-    	   c := 1]) == 0
-}
+# azure_attribute_absence["serverRole"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "microsoft.cache/redis"
+#     count([c | input.resources[_].type == "microsoft.cache/redis/linkedservers";
+#     	   c := 1]) == 0
+# }
 
-#azure_attribute_absence ["serverRole"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "microsoft.cache/redis/linkedservers"
-#    not resource.properties.serverRole
-#}
+azure_attribute_absence ["serverRole"] {
+   resource := input.resources[_]
+   lower(resource.type) == "microsoft.cache/redis/linkedservers"
+   not resource.properties.serverRole
+}
 
 azure_issue ["serverRole"] {
     resource := input.resources[_]
@@ -74,15 +74,18 @@ azure_issue ["serverRole"] {
     lower(resource.properties.serverRole) != "secondary"
 }
 
-serverRole = false {
-    azure_attribute_absence["serverRole"]
-}
 
 serverRole {
     lower(input.resources[_].type) == "microsoft.cache/redis/linkedservers"
     not azure_attribute_absence["serverRole"]
     not azure_issue["serverRole"]
 }
+
+
+serverRole = false {
+    azure_attribute_absence["serverRole"]
+}
+
 
 serverRole = false {
     azure_issue["serverRole"]
