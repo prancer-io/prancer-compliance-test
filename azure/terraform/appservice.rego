@@ -966,3 +966,62 @@ app_service_java_version_latest_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
 }
+
+
+#
+# PR-AZR-0086-TRF
+#
+
+default app_service_storage_account_type_azurefile = null
+
+azure_attribute_absence["app_service_storage_account_type_azurefile"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.storage_account
+}
+
+azure_attribute_absence["app_service_storage_account_type_azurefile"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    storage_account := resource.properties.storage_account[_]
+    not storage_account.type
+}
+
+azure_issue["app_service_storage_account_type_azurefile"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    storage_account := resource.properties.storage_account[_]
+    lower(storage_account.type) != "azurefiles"
+}
+
+app_service_storage_account_type_azurefile = false {
+    azure_attribute_absence["app_service_storage_account_type_azurefile"]
+}
+
+app_service_storage_account_type_azurefile {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_storage_account_type_azurefile"]
+    not azure_issue["app_service_storage_account_type_azurefile"]
+}
+
+app_service_storage_account_type_azurefile = false {
+    azure_issue["app_service_storage_account_type_azurefile"]
+}
+
+app_service_storage_account_type_azurefile_err = "azurerm_app_service property 'storage_account.type' need to be exist. Its missing from the resource." {
+    azure_attribute_absence["app_service_storage_account_type_azurefile"]
+} else = "Azure App Service storage account type is currently not AzureFiles" {
+    azure_issue["app_service_storage_account_type_azurefile"]
+}
+
+app_service_storage_account_type_azurefile_metadata := {
+    "Policy Code": "PR-AZR-0086-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure App Service storage account type should be AzureFiles",
+    "Policy Description": "This policy will identify the Azure app service which dont have storage account type AzureFiles and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}
