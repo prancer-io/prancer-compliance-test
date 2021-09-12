@@ -933,6 +933,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_APP_SERVICE_16",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0083-TRF",
+                            "eval": "data.rule.app_service_python_version_latest",
+                            "message": "data.rule.app_service_python_version_latest_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, set python_version = '3.4' under 'site_config' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#python_version for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure App Service Pyhton version should be latest",
+                    "description": "This policy will identify the Azure app service which dont have latest version of Pyhton and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_DATABASEACCOUNTS",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
