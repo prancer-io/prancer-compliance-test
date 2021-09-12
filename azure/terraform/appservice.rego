@@ -906,3 +906,63 @@ app_service_python_version_latest_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
 }
+
+
+#
+# PR-AZR-0084-TRF
+#
+
+default app_service_java_version_latest = null
+
+azure_attribute_absence["app_service_java_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.site_config
+}
+
+azure_attribute_absence["app_service_java_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    not site_config.java_version
+}
+
+# valid values are 1.7.0_80, 1.8.0_181, 11
+azure_issue["app_service_java_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    site_config.java_version != "11"
+}
+
+# we need to make it pass if property is missing, as azurerm_app_service may not need java
+app_service_java_version_latest {
+    azure_attribute_absence["app_service_java_version_latest"]
+    not azure_issue["app_service_java_version_latest"]
+}
+
+app_service_java_version_latest {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_java_version_latest"]
+    not azure_issue["app_service_java_version_latest"]
+}
+
+app_service_java_version_latest = false {
+    azure_issue["app_service_java_version_latest"]
+}
+
+app_service_java_version_latest_err = "Azure App Service currently dont have latest version of Java" {
+    azure_issue["app_service_java_version_latest"]
+}
+
+app_service_java_version_latest_metadata := {
+    "Policy Code": "PR-AZR-0084-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure App Service Java version should be latest",
+    "Policy Description": "This policy will identify the Azure app service which dont have latest version of Java and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}
