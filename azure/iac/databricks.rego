@@ -11,13 +11,13 @@ default databrics_workspace_has_public_ip_disabled = null
 azure_attribute_absence["databrics_workspace_has_public_ip_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.databricks/workspaces"
-    not resource.properties.parameters.enableNoPublicIp
+    not resource.properties.parameters.enableNoPublicIp.value
 }
 
 azure_issue["databrics_workspace_has_public_ip_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.databricks/workspaces"
-    resource.properties.parameters.enableNoPublicIp != true
+    resource.properties.parameters.enableNoPublicIp.value != true
 }
 
 databrics_workspace_has_public_ip_disabled {
