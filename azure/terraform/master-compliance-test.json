@@ -3546,7 +3546,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_PRICING_1",
+                    "masterTestId": "TEST_PRICING",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3576,39 +3576,7 @@
                             ]
                         }
                     ]
-                },
-                {
-                    "masterTestId": "TEST_PRICING_2",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(pricing.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-0060-TRF",
-                            "eval": "data.rule.security_center_azure_defender_is_on_for_servers",
-                            "message": "data.rule.security_center_azure_defender_is_on_for_servers_err",
-                            "remediationDescription": "In 'azurerm_security_center_subscription_pricing' resource, either set tier = 'standard' or dont set 'VirtualMachines' as resource_type to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_subscription_pricing#resource_type for details.",
-                            "remediationFunction": ""
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Azure Security Center Defender should be enabled for Servers",
-                    "description": "Azure Defender provides security alerts and advanced threat protection for virtual machines, SQL databases, containers, web applications, your network, and more.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "CIS",
-                                "ISO 27001"
-                            ],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ]
-                },
+                }
                 {
                     "masterTestId": "TEST_Redis",
                     "masterSnapshotId": [
