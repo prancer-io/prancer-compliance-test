@@ -99,7 +99,7 @@ sql_logical_server_ad_admin_err = "SQL servers currently does not have Azure Act
     azure_issue["sql_logical_server_ad_admin"]
 }
 
-sql_server_ad_admin_metadata := {
+sql_logical_server_ad_admin_metadata := {
     "Policy Code": "PR-AZR-0088-ARM",
     "Type": "IaC",
     "Product": "AZR",
