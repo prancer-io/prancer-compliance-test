@@ -445,10 +445,13 @@ azure_issue["aks_kub_dashboard_disabled"] {
 
 aks_kub_dashboard_disabled {
     azure_attribute_absence["aks_kub_dashboard_disabled"]
+    not azure_issue["aks_kub_dashboard_disabled"]
 }
 
 aks_kub_dashboard_disabled {
-    azure_attribute_absence["aks_kub_dashboard_disabled"]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not azure_attribute_absence["aks_kub_dashboard_disabled"]
     not azure_issue["aks_kub_dashboard_disabled"]
 }
 
