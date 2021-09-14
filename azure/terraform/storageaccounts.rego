@@ -367,7 +367,7 @@ storage_account_queue_logging_enabled_for_all_operation = false {
 storage_account_queue_logging_enabled_for_all_operation_err = "azurerm_storage_account property block 'queue_properties.logging' need to be exist with child property 'read', 'write' and 'delete'. one or all are missing from the resource." {
     azure_attribute_absence["storage_account_queue_logging_enabled_for_all_operation"]
 } else = "Storage Accounts queue service logging is currently not enabled" {
-    azure_issue["storage_secure"]
+    azure_issue["storage_account_queue_logging_enabled_for_all_operation"]
 }
 
 storage_account_queue_logging_enabled_for_all_operation_metadata := {
@@ -552,6 +552,111 @@ storage_allow_trusted_azure_services_metadata := {
     "Language": "Terraform",
     "Policy Title": "Storage Accounts access should be allowed for trusted Microsoft services",
     "Policy Description": "Ensure that 'Allow trusted Microsoft services to access this storage account' exception is enabled within your Azure Storage account configuration settings to grant access to trusted cloud services.",
+    "Resource Type": "azurerm_storage_account",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"
+}
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
+#
+# PR-AZR-0013-TRF
+#
+
+default storage_correct_naming_convention = null
+
+azure_attribute_absence["storage_correct_naming_convention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    not resource.properties.name
+}
+
+azure_issue["storage_correct_naming_convention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    not regex.match("^[a-z0-9]{3,24}$",
+        resource.properties.name)
+}
+
+storage_correct_naming_convention {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    not azure_attribute_absence["storage_correct_naming_convention"]
+    not azure_issue["storage_correct_naming_convention"]
+}
+
+storage_correct_naming_convention = false {
+    azure_attribute_absence["storage_correct_naming_convention"]
+}
+
+storage_correct_naming_convention = false {
+    azure_issue["storage_correct_naming_convention"]
+}
+
+storage_correct_naming_convention_err = "azurerm_storage_account property 'name' need to be exist. Its missing from the resource." {
+    azure_attribute_absence["storage_correct_naming_convention"]
+} else = "Storage Account naming convention is not correct" {
+    azure_issue["storage_correct_naming_convention"]
+}
+
+storage_correct_naming_convention_metadata := {
+    "Policy Code": "PR-AZR-0013-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Storage Account naming rules are correct",
+    "Policy Description": "Storage account names must be between 3 and 24 characters in length and may contain numbers and lowercase letters only.",
+    "Resource Type": "azurerm_storage_account",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"
+}
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
+# PR-AZR-0014-TRF
+#
+
+default storage_account_latest_tls_configured = null
+
+#default to TLS1_0
+azure_attribute_absence["storage_account_latest_tls_configured"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    not resource.properties.min_tls_version
+}
+
+azure_issue["storage_account_latest_tls_configured"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    lower(resource.properties.min_tls_version) != "tls1_2"
+}
+
+storage_account_latest_tls_configured {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    not azure_attribute_absence["storage_account_latest_tls_configured"]
+    not azure_issue["storage_account_latest_tls_configured"]
+}
+
+storage_account_latest_tls_configured = false {
+    azure_attribute_absence["storage_account_latest_tls_configured"]
+}
+
+storage_account_latest_tls_configured = false {
+    azure_issue["storage_account_latest_tls_configured"]
+}
+
+storage_account_latest_tls_configured_err = "azurerm_storage_account property 'min_tls_version' need to be exist. Its missing from the resource. Please set the value to 'TLS1_2' after property addition." {
+    azure_attribute_absence["storage_account_latest_tls_configured"]
+} else = "Azure Storage Account currently dont have latest version of tls configured" {
+    azure_issue["storage_account_latest_tls_configured"]
+}
+
+storage_account_latest_tls_configured_metadata := {
+    "Policy Code": "PR-AZR-0014-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Azure Storage Account has latest version of tls configured",
+    "Policy Description": "This policy will identify the Azure Storage Account which dont have latest version of tls configured and give alert",
     "Resource Type": "azurerm_storage_account",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"

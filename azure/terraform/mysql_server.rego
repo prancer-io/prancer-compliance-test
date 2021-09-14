@@ -117,3 +117,94 @@ mysql_server_ssl_enforcement_enabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server"
 }
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server
+
+# PR-AZR-0030-TRF
+
+default mysql_public_access_disabled = null
+# public_network_access_enabled Defaults to true if not exist. This was an issue because we need to fail if property not exist and also need to passed if property has value false.
+# if property does not exist it has false value in OPA, and explicitly setting false value will be treated as property not exist as well. so we need to implement a comparison like below.
+no_azure_issue(resource_type) {
+    count([c | input.resources[_].type == resource_type; c := 1]) == count([c | r := input.resources[_];
+               r.type == resource_type;
+               r.properties.public_network_access_enabled == false; # this is not same as not r.properties.public_network_access_enabled. not will give you correct result if property does not exist
+               c := 1])
+} else = false {
+	true
+}
+
+mysql_public_access_disabled {
+    no_azure_issue("azurerm_mysql_server")
+} else = false {
+	true
+}
+
+mysql_public_access_disabled_err = "Public Network Access is currently not disabled on MySQL Server." {
+    not no_azure_issue("azurerm_mysql_server")
+}
+
+mysql_public_access_disabled_metadata := {
+    "Policy Code": "PR-AZR-0030-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure MySQL servers don't have public network access enabled",
+    "Policy Description": "Always use Private Endpoint for Azure MySQL Database Server",
+    "Resource Type": "azurerm_mysql_server",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server"
+}
+
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server
+# PR-AZR-0041-TRF
+#
+
+default mysql_server_latest_tls_configured = null
+
+#default to TLSEnforcementDisabled
+azure_attribute_absence["mysql_server_latest_tls_configured"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mysql_server"
+    not resource.properties.ssl_minimal_tls_version_enforced
+}
+
+azure_issue["mysql_server_latest_tls_configured"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mysql_server"
+    lower(resource.properties.ssl_minimal_tls_version_enforced) != "tls1_2"
+}
+
+mysql_server_latest_tls_configured {
+    lower(input.resources[_].type) == "azurerm_mysql_server"
+    not azure_attribute_absence["mysql_server_latest_tls_configured"]
+    not azure_issue["mysql_server_latest_tls_configured"]
+}
+
+mysql_server_latest_tls_configured = false {
+    azure_attribute_absence["mysql_server_latest_tls_configured"]
+}
+
+mysql_server_latest_tls_configured = false {
+    azure_issue["mysql_server_latest_tls_configured"]
+}
+
+mysql_server_latest_tls_configured_err = "azurerm_mysql_server property 'ssl_minimal_tls_version_enforced' need to be exist. Its missing from the resource. Please set the value to 'TLS1_2' after property addition." {
+    azure_attribute_absence["mysql_server_latest_tls_configured"]
+} else = "Azure MySQL Server currently dont have latest version of tls configured" {
+    azure_issue["mysql_server_latest_tls_configured"]
+}
+
+storage_account_latest_tls_configured_metadata := {
+    "Policy Code": "PR-AZR-0041-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Azure MySQL Server has latest version of tls configured",
+    "Policy Description": "This policy will identify the Azure MySQL Server which dont have latest version of tls configured and give alert",
+    "Resource Type": "azurerm_mysql_server",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"
+}

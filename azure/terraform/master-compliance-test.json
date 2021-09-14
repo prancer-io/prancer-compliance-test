@@ -672,6 +672,180 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_APP_SERVICE_7",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0067-TRF",
+                            "eval": "data.rule.app_service_cors_not_allowing_all",
+                            "message": "data.rule.app_service_cors_not_allowing_all_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, dont set '*' as value to 'allowed_origins' under 'cors' block which exists under 'site_config' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#allowed_origins for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure CORS configuration is not allowing every resources to access Azure App Service",
+                    "description": "This policy will identify CORS configuration which are allowing every resoruces to access Azure app service and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APP_SERVICE_8",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0072-TRF",
+                            "eval": "data.rule.app_service_cors_not_allowing_all",
+                            "message": "data.rule.app_service_cors_not_allowing_all_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, make sure 'http_logs' block exist under 'logs' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#http_logs for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure App Service http logging should be enabled",
+                    "description": "This policy will identify the Azure app service which dont have http logging enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APP_SERVICE_9",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0073-TRF",
+                            "eval": "data.rule.app_service_detaild_error_message_enabled",
+                            "message": "data.rule.app_service_detaild_error_message_enabled_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, set 'detailed_error_messages_enabled = true' under 'logs' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#detailed_error_messages_enabled for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure App Service detaild error message should be enabled",
+                    "description": "This policy will identify the Azure app service which dont have detaild error message enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APP_SERVICE_10",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0076-TRF",
+                            "eval": "data.rule.app_service_failed_request_tracing_enabled",
+                            "message": "data.rule.app_service_failed_request_tracing_enabled_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, set 'app_service_failed_request_tracing_enabled = true' under 'logs' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#failed_request_tracing_enabled for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure App Service Failed request tracing should be enabled",
+                    "description": "This policy will identify the Azure app service which dont have Failed request tracing enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APP_SERVICE_11",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0077-TRF",
+                            "eval": "data.rule.app_service_managed_identity_provider_enabled",
+                            "message": "data.rule.app_service_managed_identity_provider_enabled_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, make sure property 'type' exist under 'identity' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#identity for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure App Service Managed Identity provider should be enabled",
+                    "description": "This policy will identify the Azure app service which dont have Managed Identity provider enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APP_SERVICE_12",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0078-TRF",
+                            "eval": "data.rule.app_service_remote_debugging_disabled",
+                            "message": "data.rule.app_service_remote_debugging_disabled_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, make sure property 'remote_debugging_enabled' does not exist under 'site_config' block or if exist set the value to 'false' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#remote_debugging_enabled for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure App Service remote debugging should be disabled",
+                    "description": "This policy will identify the Azure app service which have remote debugging enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_DATABASEACCOUNTS",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1483,6 +1657,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_FUNCTION_APP",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(functionapp.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0062-TRF",
+                            "eval": "data.rule.functionapp_authentication_enabled",
+                            "message": "data.rule.functionapp_authentication_enabled_err",
+                            "remediationDescription": "In 'azurerm_function_app' resource, set 'enabled = true' under 'auth_settings' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/function_app#enabled for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Function apps Authentication should be enabled",
+                    "description": "Azure Function app provides built-in authentication and authorization capabilities (sometimes referred to as 'Easy Auth'), so you can sign in users and access data by writing minimal or no code in your web app, RESTful API, and mobile back end, and also Azure Functions",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_KeyVault_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1838,6 +2041,68 @@
                     "severity": "High",
                     "title": "Ensure MySQL Database Server accepts only SSL connections",
                     "description": "This policy will identify MySQL Database Server which are not enforcing all the incoming connection over SSL and alert if found.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MySQL_SERVER_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(mysql_server.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0030-TRF",
+                            "eval": "data.rule.mysql_public_access_disabled",
+                            "message": "data.rule.mysql_public_access_disabled_err",
+                            "remediationDescription": "In 'azurerm_mysql_server' resource, set 'public_network_access_enabled = false' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server#public_network_access_enabled for details.",
+                            "remediationFunction": "PR_AZR_0030_TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure MySQL servers don't have public network access enabled",
+                    "description": "Always use Private Endpoint for Azure MySQL Database Server",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MySQL_SERVER_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(mysql_server.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0041-TRF",
+                            "eval": "data.rule.mysql_server_latest_tls_configured",
+                            "message": "data.rule.mysql_server_latest_tls_configured_err",
+                            "remediationDescription": "In 'azurerm_mysql_server' resource, set ssl_minimal_tls_version_enforced = 'TLS1_2' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server#ssl_minimal_tls_version_enforced for details.",
+                            "remediationFunction": "PR_AZR_0041_TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Azure MySQL Server has latest version of tls configured",
+                    "description": "This policy will identify the Azure MySQL Server which dont have latest version of tls configured and give alert",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3107,7 +3372,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_PRICING",
+                    "masterTestId": "TEST_PRICING_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3125,6 +3390,38 @@
                     "severity": "Medium",
                     "title": "Azure Security Center should have pricing tier configured to 'standard'",
                     "description": "Selecting the standard pricing tier will enable threat detection for networks and virtual systems by providing threat intelligence, anomaly detection, and behavior analytics in Azure Security Center.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "ISO 27001"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_PRICING_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(pricing.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0060-TRF",
+                            "eval": "data.rule.security_center_azure_defender_is_on_for_servers",
+                            "message": "data.rule.security_center_azure_defender_is_on_for_servers_err",
+                            "remediationDescription": "In 'azurerm_security_center_subscription_pricing' resource, either set tier = 'standard' or dont set 'VirtualMachines' as resource_type to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_subscription_pricing#resource_type for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Security Center Defender should be enabled for Servers",
+                    "description": "Azure Defender provides security alerts and advanced threat protection for virtual machines, SQL databases, containers, web applications, your network, and more.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3556,7 +3853,7 @@
                     ],
                     "severity": "High",
                     "title": "Ensure SQL servers don't have public network access enabled",
-                    "description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance",
+                    "description": "Always use Private Endpoint for Azure SQL Database Server and SQL Managed Instance",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3629,6 +3926,37 @@
                     "severity": "High",
                     "title": "MSSQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
                     "description": "This policy will identify MSSQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MSSQL_SERVER_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0016-TRF",
+                            "eval": "data.rule.mssql_server_latest_tls_configured",
+                            "message": "data.rule.mssql_server_latest_tls_configured_err",
+                            "remediationDescription": "In 'azurerm_mssql_server' resource, set 'min_tls_version = 1.2' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server#minimum_tls_version for details.",
+                            "remediationFunction": "PR_AZR_0016_TRF.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Azure MSSQL Server has latest version of tls configured",
+                    "description": "This policy will identify the Azure MSSQL Server which dont have latest version of tls configured and give alert",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3962,6 +4290,74 @@
                     "severity": "Medium",
                     "title": "Storage Accounts access should be allowed for trusted Microsoft services",
                     "description": "Ensure that 'Allow trusted Microsoft services to access this storage account' exception is enabled within your Azure Storage account configuration settings to grant access to trusted cloud services.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "HIPAA",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_11",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0013-TRF",
+                            "eval": "data.rule.storage_correct_naming_convention",
+                            "message": "data.rule.storage_correct_naming_convention_err",
+                            "remediationDescription": "In 'azurerm_storage_account' resource, property 'name' must be between 3 and 24 characters in length and may contain numbers and lowercase letters only to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#name for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Storage Account naming rules are correct",
+                    "description": "Storage account names must be between 3 and 24 characters in length and may contain numbers and lowercase letters only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "HIPAA",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_12",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0014-TRF",
+                            "eval": "data.rule.storage_account_latest_tls_configured",
+                            "message": "data.rule.storage_account_latest_tls_configured_err",
+                            "remediationDescription": "In 'azurerm_storage_account' resource, set min_tls_version = 'TLS1_2' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#min_tls_version for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure Storage Account has latest version of tls configured",
+                    "description": "This policy will identify the Azure Storage Account which dont have latest version of tls configured and give alert",
                     "tags": [
                         {
                             "cloud": "git",

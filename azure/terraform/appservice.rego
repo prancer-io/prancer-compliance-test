@@ -334,3 +334,337 @@ app_service_uses_http_two_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
 }
+
+
+#
+# PR-AZR-0067-TRF
+#
+
+default app_service_cors_not_allowing_all = null
+
+contains(array, element) = true {
+  lower(array[_]) == element
+} else = false { true }
+
+azure_attribute_absence["app_service_cors_not_allowing_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.site_config
+}
+
+azure_attribute_absence["app_service_cors_not_allowing_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    not site_config.cors
+}
+
+azure_attribute_absence["app_service_cors_not_allowing_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    cors := site_config.cors[_]
+    not cors.allowed_origins 
+}
+
+azure_issue["app_service_cors_not_allowing_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    cors := site_config.cors[_]
+    contains(cors.allowed_origins, "*") 
+}
+
+app_service_cors_not_allowing_all {
+    azure_attribute_absence["app_service_uses_http_two"]
+    not azure_issue["app_service_uses_http_two"]
+}
+
+app_service_cors_not_allowing_all {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_uses_http_two"]
+    not azure_issue["app_service_uses_http_two"]
+}
+
+app_service_cors_not_allowing_all = false {
+    azure_issue["app_service_uses_http_two"]
+}
+
+app_service_cors_not_allowing_all_err = "CORS configuration is currently allowing every resources to access Azure App Service" {
+    azure_issue["app_service_uses_http_two"]
+}
+
+app_service_cors_not_allowing_all_metadata := {
+    "Policy Code": "PR-AZR-0067-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Ensure CORS configuration is not allowing every resources to access Azure App Service",
+    "Policy Description": "This policy will identify CORS configuration which are allowing every resoruces to access Azure app service and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}
+
+
+#
+# PR-AZR-0072-TRF
+#
+
+default app_service_http_logging_enabled = null
+
+azure_attribute_absence["app_service_http_logging_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.logs
+}
+
+azure_attribute_absence["app_service_http_logging_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    logs := resource.properties.logs[_]
+    not logs.http_logs
+}
+
+app_service_http_logging_enabled = false {
+    azure_attribute_absence["app_service_http_logging_enabled"]
+} else = true {
+	true
+}
+
+app_service_http_logging_enabled_err = "azurerm_app_service property 'logs.http_logs' need to be exist. Its missing from the resource." {
+    azure_attribute_absence["app_service_http_logging_enabled"]
+}
+
+app_service_http_logging_enabled_metadata := {
+    "Policy Code": "PR-AZR-0072-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure App Service http logging should be enabled",
+    "Policy Description": "This policy will identify the Azure app service which dont have http logging enabled and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}
+
+
+#
+# PR-AZR-0073-TRF
+#
+
+default app_service_detaild_error_message_enabled = null
+
+azure_attribute_absence["app_service_detaild_error_message_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.logs
+}
+
+#default to false
+azure_attribute_absence["app_service_detaild_error_message_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    logs := resource.properties.logs[_]
+    not logs.detailed_error_messages_enabled
+}
+
+azure_issue["app_service_detaild_error_message_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    logs := resource.properties.logs[_]
+    logs.detailed_error_messages_enabled != true
+}
+
+app_service_detaild_error_message_enabled {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_detaild_error_message_enabled"]
+    not azure_issue["app_service_detaild_error_message_enabled"]
+}
+
+app_service_detaild_error_message_enabled = false {
+    azure_attribute_absence["app_service_detaild_error_message_enabled"]
+}
+
+app_service_detaild_error_message_enabled = false {
+    azure_issue["app_service_detaild_error_message_enabled"]
+}
+
+app_service_detaild_error_message_enabled_err = "azurerm_app_service property 'logs.detailed_error_messages_enabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
+    azure_attribute_absence["app_service_detaild_error_message_enabled"]
+} else = "Azure App Service detaild error message currently not enabled" {
+    azure_issue["app_service_detaild_error_message_enabled"]
+}
+
+app_service_detaild_error_message_enabled_metadata := {
+    "Policy Code": "PR-AZR-0073-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure App Service detaild error message should be enabled",
+    "Policy Description": "This policy will identify the Azure app service which dont have detaild error message enabled and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}
+
+
+#
+# PR-AZR-0076-TRF
+#
+
+default app_service_failed_request_tracing_enabled = null
+
+azure_attribute_absence["app_service_failed_request_tracing_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.logs
+}
+
+#default to false
+azure_attribute_absence["app_service_failed_request_tracing_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    logs := resource.properties.logs[_]
+    not logs.failed_request_tracing_enabled
+}
+
+azure_issue["app_service_failed_request_tracing_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    logs := resource.properties.logs[_]
+    logs.failed_request_tracing_enabled != true
+}
+
+app_service_failed_request_tracing_enabled {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_failed_request_tracing_enabled"]
+    not azure_issue["app_service_failed_request_tracing_enabled"]
+}
+
+app_service_failed_request_tracing_enabled = false {
+    azure_attribute_absence["app_service_failed_request_tracing_enabled"]
+}
+
+app_service_failed_request_tracing_enabled = false {
+    azure_issue["app_service_failed_request_tracing_enabled"]
+}
+
+app_service_failed_request_tracing_enabled_err = "azurerm_app_service property 'logs.app_service_failed_request_tracing_enabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
+    azure_attribute_absence["app_service_failed_request_tracing_enabled"]
+} else = "Azure App Service Failed request tracing currently not enabled" {
+    azure_issue["app_service_failed_request_tracing_enabled"]
+}
+
+app_service_failed_request_tracing_enabled_metadata := {
+    "Policy Code": "PR-AZR-0076-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure App Service Failed request tracing should be enabled",
+    "Policy Description": "This policy will identify the Azure app service which dont have Failed request tracing enabled and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}
+
+
+#
+# PR-AZR-0077-TRF
+#
+
+default app_service_managed_identity_provider_enabled = null
+
+azure_attribute_absence["app_service_managed_identity_provider_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.identity
+}
+
+azure_attribute_absence["app_service_managed_identity_provider_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    identity := resource.properties.identity[_]
+    not identity.type
+}
+
+app_service_managed_identity_provider_enabled = false {
+    azure_attribute_absence["app_service_managed_identity_provider_enabled"]
+} else = true {
+    true
+}
+
+app_service_managed_identity_provider_enabled_err = "azurerm_app_service property 'identity.type' need to be exist. Its missing from the resource." {
+    azure_attribute_absence["app_service_managed_identity_provider_enabled"]
+}
+
+app_service_managed_identity_provider_enabled_metadata := {
+    "Policy Code": "PR-AZR-0077-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure App Service Managed Identity provider should be enabled",
+    "Policy Description": "This policy will identify the Azure app service which dont have Managed Identity provider enabled and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}
+
+
+#
+# PR-AZR-0078-TRF
+#
+
+default app_service_remote_debugging_disabled = null
+
+azure_attribute_absence["app_service_remote_debugging_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.site_config
+}
+
+#default to false
+azure_attribute_absence["app_service_remote_debugging_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    not site_config.remote_debugging_enabled
+}
+
+azure_issue["app_service_remote_debugging_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    site_config.remote_debugging_enabled == true
+}
+
+app_service_remote_debugging_disabled {
+    azure_attribute_absence["app_service_remote_debugging_disabled"]
+    not azure_issue["app_service_remote_debugging_disabled"]
+}
+
+app_service_remote_debugging_disabled {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_remote_debugging_disabled"]
+    not azure_issue["app_service_remote_debugging_disabled"]
+}
+
+app_service_remote_debugging_disabled = false {
+    azure_issue["app_service_remote_debugging_disabled"]
+}
+
+app_service_remote_debugging_disabled_err = "Azure App Service remote debugging currently not disabled" {
+    azure_issue["app_service_remote_debugging_disabled"]
+}
+
+app_service_remote_debugging_disabled_metadata := {
+    "Policy Code": "PR-AZR-0078-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure App Service remote debugging should be disabled",
+    "Policy Description": "This policy will identify the Azure app service which have remote debugging enabled and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}
