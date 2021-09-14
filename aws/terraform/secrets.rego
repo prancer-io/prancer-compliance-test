@@ -8,6 +8,13 @@ default gl_aws_secrets = null
 aws_issue["gl_aws_secrets"] {
     [path, value] := walk(input)
     regexp := "^[A-Za-z0-9/\\+=]{40}$"
+    regex.match(regexp, format_int(value, 10))
+    regex.match("^(?i)aws_?(secret)?_?(access)?_?key$", path[_])
+}
+
+aws_issue["gl_aws_secrets"] {
+    [path, value] := walk(input)
+    regexp := "^[A-Za-z0-9/\\+=]{40}$"
     regex.match(regexp, value)
     regex.match("^(?i)aws_?(secret)?_?(access)?_?key$", path[_])
 }
@@ -41,8 +48,13 @@ default gl_aws_account = null
 aws_issue["gl_aws_account"] {
     [path, value] := walk(input)
     regexp := "^[0-9]{12}$"
+    regex.match(regexp, format_int(value, 10))
+}
+
+aws_issue["gl_aws_account"] {
+    [path, value] := walk(input)
+    regexp := "^[0-9]{12}$"
     regex.match(regexp, value)
-    regex.match("^(?i)aws_?(account)_?(id)$", path[_])
 }
 
 gl_aws_account = false {
