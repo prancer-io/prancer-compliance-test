@@ -5378,6 +5378,64 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterTestId": "TEST_SECRET_1",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(secret.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0028-RGX",
+                            "eval": "data.rule.gl_aws_secrets",
+                            "message": "data.rule.gl_aws_secrets_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Secrets should be removed from the source code",
+                    "description": "We should not have any secret in the source code. Make sure to put the secrets in a vault",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECRET_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(secret.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0029-RGX",
+                            "eval": "data.rule.gl_aws_account",
+                            "message": "data.rule.gl_aws_account_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Secrets should be removed from the source code",
+                    "description": "We should not have any secret in the source code. Make sure to put the secrets in a vault",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
                 }
             ]
         }
