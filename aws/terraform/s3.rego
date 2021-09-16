@@ -740,8 +740,8 @@ s3_website_metadata := {
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
-    "Policy Title": "",
-    "Policy Description": "",
+    "Policy Title": "S3 buckets with configurations set to host websites",
+    "Policy Description": "To host a website on AWS S3 you should configure a bucket as a website. This policy identifies all the S3 buckets that are configured to host websites. By frequently surveying these S3 buckets you can ensure that only authorized buckets are enabled to host websites. Make sure to disable static website hosting for unauthorized S3 buckets.",
     "Resource Type": "aws_s3_bucket_policy",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"

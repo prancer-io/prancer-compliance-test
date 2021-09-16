@@ -777,7 +777,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "AWS ECS/ Fargate task definition execution IAM Role not found",
+                    "title": "AWS ECS/Fargate task definition execution IAM Role not found",
                     "description": "The execution IAM Role is required by tasks to pull container images and publish container logs to Amazon CloudWatch on your behalf. This policy generates an alert if a task execution role is not found in your task definition.",
                     "tags": [
                         {
@@ -3124,9 +3124,9 @@
                             "remediationFunction": ""
                         }
                     ],
-                    "severity": "Medium",
-                    "title": "Secrets should be removed from the source code",
-                    "description": "We should not have any secret in the source code. Make sure to put the secrets in a vault",
+                    "severity": "High",
+                    "title": "There is a possibility that AWS secret access key has leaked",
+                    "description": "There is a possibility that AWS secret access key has leaked, template should not have any secret in it. Make sure to put the secrets in a vault",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3153,9 +3153,67 @@
                             "remediationFunction": ""
                         }
                     ],
-                    "severity": "Medium",
-                    "title": "Secrets should be removed from the source code",
-                    "description": "We should not have any secret in the source code. Make sure to put the secrets in a vault",
+                    "severity": "High",
+                    "title": "There is a possibility that AWS account ID has leaked",
+                    "description": "There is a possibility that AWS account ID has leaked, template should not have any secret in it. Make sure to put the secrets in a vault",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECRETS_3",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(secrets.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0030-RGX",
+                            "eval": "data.rule.al_access_key_id",
+                            "message": "data.rule.al_access_key_id_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "There is a possibility that Aws access key id is exposed",
+                    "description": "There is a possibility that Aws access key id is exposed, template should not have any secret in it. Make sure to put the secrets in a vault",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECRETS_4",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(secrets.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0031-RGX",
+                            "eval": "data.rule.al_mws",
+                            "message": "data.rule.al_mws_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "There is a possibility that Amazon Marketplace Web Service secret key is exposed",
+                    "description": "There is a possibility that Amazon Marketplace Web Service secret key is exposed. template should not have any secret in it. Make sure to put the secrets in a vault",
                     "tags": [
                         {
                             "cloud": "git",

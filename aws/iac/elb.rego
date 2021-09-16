@@ -85,7 +85,7 @@ insecure_ciphers := [
 aws_issue["elb_insecure_cipher"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
-    policy := resource.Properties.Policies
+    policy := resource.Properties.Policies[_]
     attribute := policy.Attributes[_]
     lower(attribute.Name) == lower(insecure_ciphers[_])
     lower(attribute.Value) == "true"
@@ -131,7 +131,7 @@ insecure_ssl_protocols := [
 aws_issue["elb_insecure_protocol"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
-    policy := resource.Properties.Policies
+    policy := resource.Properties.Policies[_]
     attribute := policy.Attributes[_]
     lower(attribute.Name) == lower(insecure_ssl_protocols[_])
     lower(attribute.Value) == "true"
