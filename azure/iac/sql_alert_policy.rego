@@ -634,6 +634,7 @@ azure_issue["sql_server_disabled_alerts"] {
 }
 
 sql_server_disabled_alerts {
+    resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/securityalertpolicies"
     not azure_attribute_absence["sql_server_disabled_alerts"]
     not azure_issue["sql_server_disabled_alerts"]
