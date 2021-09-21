@@ -806,7 +806,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "AWS ECS/ Fargate task definition execution IAM Role not found",
+                    "title": "AWS ECS/Fargate task definition execution IAM Role not found",
                     "description": "The execution IAM Role is required by tasks to pull container images and publish container logs to Amazon CloudWatch on your behalf. This policy generates an alert if a task execution role is not found in your task definition.",
                     "tags": [
                         {
@@ -5369,6 +5369,93 @@
                     "severity": "Medium",
                     "title": "Ensure RDS clusters and instances have deletion protection enabled",
                     "description": "This rule Checks if an Amazon Relational Database Service (Amazon RDS) cluster has deletion protection enabled",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECRETS_1",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(secrets.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0028-RGX",
+                            "eval": "data.rule.gl_aws_secrets",
+                            "message": "data.rule.gl_aws_secrets_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "There is a possibility that AWS secret access key has leaked",
+                    "description": "There is a possibility that AWS secret access key has leaked, template should not have any secret in it. Make sure to put the secrets in a vault",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECRETS_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(secrets.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0029-RGX",
+                            "eval": "data.rule.gl_aws_account",
+                            "message": "data.rule.gl_aws_account_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "There is a possibility that AWS account ID has leaked",
+                    "description": "There is a possibility that AWS account ID has leaked, template should not have any secret in it. Make sure to put the secrets in a vault",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECRETS_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(secrets.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0030-RGX",
+                            "eval": "data.rule.al_access_key_id",
+                            "message": "data.rule.al_access_key_id_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "There is a possibility that Aws access key id is exposed",
+                    "description": "There is a possibility that Aws access key id is exposed, template should not have any secret in it. Make sure to put the secrets in a vault",
                     "tags": [
                         {
                             "cloud": "git",

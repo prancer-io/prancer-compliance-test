@@ -34,7 +34,7 @@ emr_security = false {
     aws_issue["emr_security"]
 }
 
-emr_security = "AWS EMR cluster is not configured with security configuration" {
+emr_security_err = "AWS EMR cluster is not configured with security configuration" {
     aws_issue["emr_security"]
 }
 

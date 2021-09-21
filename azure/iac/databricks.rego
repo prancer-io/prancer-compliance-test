@@ -11,13 +11,13 @@ default databrics_workspace_has_public_ip_disabled = null
 azure_attribute_absence["databrics_workspace_has_public_ip_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.databricks/workspaces"
-    not resource.properties.parameters.enableNoPublicIp
+    not resource.properties.parameters.enableNoPublicIp.value
 }
 
 azure_issue["databrics_workspace_has_public_ip_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.databricks/workspaces"
-    resource.properties.parameters.enableNoPublicIp != true
+    resource.properties.parameters.enableNoPublicIp.value != true
 }
 
 databrics_workspace_has_public_ip_disabled {
@@ -62,13 +62,13 @@ default databrics_workspace_has_vnet_integration = null
 azure_attribute_absence["databrics_workspace_has_vnet_integration"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.databricks/workspaces"
-    not resource.properties.parameters.customVirtualNetworkId
+    not resource.properties.parameters.customVirtualNetworkId.value
 }
 
 azure_issue["databrics_workspace_has_vnet_integration"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.databricks/workspaces"
-    contains(lower(resource.properties.parameters.customVirtualNetworkId), "microsoft.network/virtualnetworks") != true
+    not contains(lower(resource.properties.parameters.customVirtualNetworkId.value), "microsoft.network/virtualnetworks")
 }
 
 databrics_workspace_has_vnet_integration {
