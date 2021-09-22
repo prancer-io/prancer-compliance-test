@@ -736,6 +736,8 @@ app_service_ftp_deployment_disabled_metadata := {
 
 default app_service_dot_net_framework_latest = null
 
+latest_dotnet_framework_version := "v6.0"
+
 azure_attribute_absence["app_service_dot_net_framework_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_app_service"
@@ -754,7 +756,7 @@ azure_issue["app_service_dot_net_framework_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_app_service"
     site_config := resource.properties.site_config[_]
-    lower(site_config.dotnet_framework_version) != "v6.0"
+    lower(site_config.dotnet_framework_version) != latest_dotnet_framework_version
 }
 
 # we need to make it pass if property is missing, as azurerm_app_service may not need dot net framework
@@ -796,6 +798,8 @@ app_service_dot_net_framework_latest_metadata := {
 
 default app_service_php_version_latest = null
 
+latest_php_version = 7.4
+
 azure_attribute_absence["app_service_php_version_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_app_service"
@@ -813,7 +817,7 @@ azure_issue["app_service_php_version_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_app_service"
     site_config := resource.properties.site_config[_]
-    to_number(site_config.php_version) != 7.4
+    to_number(site_config.php_version) != latest_php_version
 }
 
 # we need to make it pass if property is missing, as azurerm_app_service may not need php
@@ -855,6 +859,8 @@ app_service_php_version_latest_metadata := {
 
 default app_service_python_version_latest = null
 
+latest_python_version = 3.4
+
 azure_attribute_absence["app_service_python_version_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_app_service"
@@ -872,7 +878,7 @@ azure_issue["app_service_python_version_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_app_service"
     site_config := resource.properties.site_config[_]
-    to_number(site_config.python_version) != 3.4
+    to_number(site_config.python_version) != latest_python_version
 }
 
 # we need to make it pass if property is missing, as azurerm_app_service may not need python
@@ -914,6 +920,9 @@ app_service_python_version_latest_metadata := {
 
 default app_service_java_version_latest = null
 
+# valid values are 1.7.0_80, 1.8.0_181, 11
+latest_java_version = "11"
+
 azure_attribute_absence["app_service_java_version_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_app_service"
@@ -932,7 +941,7 @@ azure_issue["app_service_java_version_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_app_service"
     site_config := resource.properties.site_config[_]
-    site_config.java_version != "11"
+    site_config.java_version != latest_java_version
 }
 
 # we need to make it pass if property is missing, as azurerm_app_service may not need java
