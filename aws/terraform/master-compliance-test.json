@@ -5384,13 +5384,13 @@
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
-                    "type": "rego",
-                    "rule": "file(secrets.rego)",
+                    "type": "python",
+                    "rule": "file(secret_tf.py)",
                     "evals": [
                         {
                             "id": "PR-AWS-0028-RGX",
-                            "eval": "data.rule.gl_aws_secrets",
-                            "message": "data.rule.gl_aws_secrets_err",
+                            "eval": "gl_aws_secrets",
+                            "message": "gl_aws_secrets_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }
@@ -5413,13 +5413,13 @@
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
-                    "type": "rego",
-                    "rule": "file(secrets.rego)",
+                    "type": "python",
+                    "rule": "file(secret_tf.py)",
                     "evals": [
                         {
                             "id": "PR-AWS-0029-RGX",
-                            "eval": "data.rule.gl_aws_account",
-                            "message": "data.rule.gl_aws_account_err",
+                            "eval": "gl_aws_account",
+                            "message": "gl_aws_account_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }
@@ -5442,13 +5442,13 @@
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
-                    "type": "rego",
-                    "rule": "file(secrets.rego)",
+                    "type": "python",
+                    "rule": "file(secret_tf.py)",
                     "evals": [
                         {
                             "id": "PR-AWS-0030-RGX",
-                            "eval": "data.rule.al_access_key_id",
-                            "message": "data.rule.al_access_key_id_err",
+                            "eval": "al_access_key_id",
+                            "message": "al_access_key_id_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }
@@ -5456,6 +5456,93 @@
                     "severity": "High",
                     "title": "There is a possibility that Aws access key id is exposed",
                     "description": "There is a possibility that Aws access key id is exposed, template should not have any secret in it. Make sure to put the secrets in a vault",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECRETS_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "python",
+                    "rule": "file(secret_tf.py)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0030-RGX",
+                            "eval": "al_mws",
+                            "message": "al_mws_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "There is a possibility that aws marketplace web service id is exposed",
+                    "description": "There is a possibility that aws marketplace web service id is exposed, template should not have any secret in it. Make sure to put the secrets in a vault",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECRETS_5",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "python",
+                    "rule": "file(secret_tf.py)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0031-RGX",
+                            "eval": "aws_password_leak",
+                            "message": "aws_password_leak_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "There is a possibility that password is exposed",
+                    "description": "There is a possibility that password is exposed, template should not have any secret in it. Make sure to put the secrets in a vault",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECRETS_6",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "python",
+                    "rule": "file(secret_tf.py)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-0032-RGX",
+                            "eval": "entropy_password",
+                            "message": "entropy_password_err",
+                            "remediationDescription": "",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "There is a possibility that password is exposed",
+                    "description": "There is a possibility that password is exposed, template should not have any secret in it. Make sure to put the secrets in a vault",
                     "tags": [
                         {
                             "cloud": "git",
