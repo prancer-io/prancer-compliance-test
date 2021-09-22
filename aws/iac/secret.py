@@ -1,5 +1,4 @@
 import json
-from base_compliance import secret_finder
 import re
 import collections
 import traceback
