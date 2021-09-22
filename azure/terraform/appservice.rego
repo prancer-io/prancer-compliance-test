@@ -798,7 +798,7 @@ app_service_dot_net_framework_latest_metadata := {
 
 default app_service_php_version_latest = null
 
-latest_php_version = 7.4
+latest_php_version := 7.4
 
 azure_attribute_absence["app_service_php_version_latest"] {
     resource := input.resources[_]
@@ -859,7 +859,7 @@ app_service_php_version_latest_metadata := {
 
 default app_service_python_version_latest = null
 
-latest_python_version = 3.4
+latest_python_version := 3.4
 
 azure_attribute_absence["app_service_python_version_latest"] {
     resource := input.resources[_]
@@ -921,7 +921,7 @@ app_service_python_version_latest_metadata := {
 default app_service_java_version_latest = null
 
 # valid values are 1.7.0_80, 1.8.0_181, 11
-latest_java_version = "11"
+latest_java_version := "11"
 
 azure_attribute_absence["app_service_java_version_latest"] {
     resource := input.resources[_]
