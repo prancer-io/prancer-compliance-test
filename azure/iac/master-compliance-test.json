@@ -3963,7 +3963,7 @@
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(.rego)",
+                    "rule": "file(sql_servers.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-0191-ARM",
@@ -4243,11 +4243,11 @@
                     "rule": "file(sql_servers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0133-ARM",
+                            "id": "PR-AZR-0200-ARM",
                             "eval": "data.rule.sql_logical_server_login",
                             "message": "data.rule.sql_logical_server_login_err",
                             "remediationDescription": "In Resource of type \"Microsoft.Sql/servers/administrators\" make sure properties.login exists and the value isn't set to 'admin' or 'administrator'.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/administrators' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0133_ARM.py"
+                            "remediationFunction": "PR_AZR_0200_ARM.py"
                         }
                     ],
                     "severity": "Medium",
