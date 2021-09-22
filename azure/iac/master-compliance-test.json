@@ -3613,15 +3613,15 @@
                     "evals": [
                         {
                             "id": "PR-AZR-0143-ARM",
-                            "eval": "data.rule.",
-                            "message": "data.rule._err",
-                            "remediationDescription": "For Resource type 'microsoft.security/securitycontacts' make sure alertNotifications.minimalSeverity exists and the value is set to 'High'.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts' target='_blank'>here</a> for more details.",
+                            "eval": "data.rule.alert_notifications",
+                            "message": "data.rule.alert_notifications_err",
+                            "remediationDescription": "For Resource type 'microsoft.security/securitycontacts' make sure alertNotifications exists and the value is set to 'On'.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_0143_ARM.py"
                         }
                     ],
                     "severity": "Low",
-                    "title": "Send email notification for high severity alerts should be enabled",
-                    "description": "Setting the security alert Send email notification for high severity alerts to On ensures that emails are sent from Microsoft if their security team determines a potential security breach has taken place.",
+                    "title": "Send email notification should be enabled",
+                    "description": "Setting the security alert Send email notification for alerts to On ensures that emails are sent from Microsoft if their security team determines a potential security breach has taken place.",
                     "tags": [
                         {
                             "cloud": "git",
