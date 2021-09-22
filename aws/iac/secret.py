@@ -120,7 +120,8 @@ def entropy_password(generated_snapshot: dict) -> dict:
         "(?=^([a-zA-Z0-9]+\-+[a-zA-Z0-9]+\-[a-zA-Z0-9]+)(?![A-Za-z0-9])$)",
         "(?=^([a-zA-Z0-9]+\.+[a-zA-Z0-9]*)$)",
         "(?=^(\/+\w{0,}){0,}$)",
-        "(?=^([a-zA-Z]*_[a-zA-Z]*)$)"
+        "(?=^([a-zA-Z0-9]*_[a-zA-Z0-9]*)$)",
+        "(?=^([a-zA-Z0-9]*-[a-zA-Z0-9]*)$)",
     ]
     EXCLUDE_STARTSWITH = [
         "arn:"
