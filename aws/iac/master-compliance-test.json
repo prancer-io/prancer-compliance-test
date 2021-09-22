@@ -645,8 +645,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-0036-CFR",
-                            "eval": "data.rule.dynabodb_encrypt",
-                            "message": "data.rule.dynabodb_encrypt_err",
+                            "eval": "data.rule.dynamodb_encrypt",
+                            "message": "data.rule.dynamodb_encrypt_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html",
                             "remediationFunction": "PR_AWS_0036_CFR.py"
                         }
