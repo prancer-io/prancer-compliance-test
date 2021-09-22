@@ -92,7 +92,7 @@ def secret_finder(snapshot, PASSWORD_VALUE_RE, PASSWORD_KEY_RE=None, EXCLUDE_RE=
 def azure_password_leak(generated_snapshot: dict) -> dict:
 
     PASSWORD_KEY_RE = r".*(?i)(password|securevalue|secret|privatekey|primarykey|secondarykey).*"
-    PASSWORD_VALUE_RE = r'^(?=^(?!\$\{.*\}$))(?=(?=.*[a-z][A-Z])|(?=.*[A-Z][a-z])|(?=.*[a-z][0-9])|(?=.*[0-9][a-z])|(?=.*[0-9][A-Z])|(?=.*[A-Z][0-9]))(.*[\^$*.\[\]{}\(\)?\-"!@\#%&\/,><\’:;|_~`]?)\S{8,99}$'
+    PASSWORD_VALUE_RE = r'^(?!.*\$\{.*\}.*)(?=(?=.*[a-z][A-Z])|(?=.*[A-Z][a-z])|(?=.*[a-z][0-9])|(?=.*[0-9][a-z])|(?=.*[0-9][A-Z])|(?=.*[A-Z][0-9]))(.*[\^$*.\[\]{}\(\)?\-"!@\#%&\/,><\’:;|_~`]?)\S{8,99}$'
     EXCLUDE_REGEX = r'(?=.*([\[{(<]){1,})((\(.*\)){0,})((\[.*\]){0,})((\{.*\}){0,})((\<.*\>){0,})'
     
     output = secret_finder(
@@ -112,7 +112,7 @@ def azure_password_leak(generated_snapshot: dict) -> dict:
 
 def entropy_password(generated_snapshot: dict) -> dict:
 
-    PASSWORD_VALUE_RE = r'^(?=^(?!\$\{.*\}$))(?=(?=.*[a-z][A-Z])|(?=.*[A-Z][a-z])|(?=.*[a-z][0-9])|(?=.*[0-9][a-z])|(?=.*[0-9][A-Z])|(?=.*[A-Z][0-9]))(?=.*[^A-Za-z0-9])\S{8,99}$'
+    PASSWORD_VALUE_RE = r'^(?!.*\$\{.*\}.*)(?=(?=.*[a-z][A-Z])|(?=.*[A-Z][a-z])|(?=.*[a-z][0-9])|(?=.*[0-9][a-z])|(?=.*[0-9][A-Z])|(?=.*[A-Z][0-9]))(?=.*[^A-Za-z0-9])\S{8,99}$'
     EXCLUDE_CONTAINS = ['API', 'AAD', 'Add', 'Advisor', 'AKS', 'Analysis', 'Analytics', 'Analyzer', 'API', 'App', 'Authorization', 'Automation', 'Azure', 'Batch', 'BI', 'Billing', 'Blockchain', 'Blueprints', 'Bot', 'Bus', 'Cache', 'CDN', 'Central', 'Certificate', 'Change', 'Cloud', 'Cognitive', 'Communication', 'Compute', 'Configuration', 'Consumption', 'Container', 'Cosmos', 'Custom', 'Customer', 'Data', 'Databricks', 'DB', 'Dedicated', 'Deployment', 'Device', 'DevOps', 'DevTest', 'Digital', 'DNS', 'Domain', 'Door', 'Event', 'Fabric', 'Factory', 'FarmBeats', 'for', 'Front', 'Graph', 'Grid', 'Hat', 'HDInsight', 'HSMs/', 'Hub', 'Hubs', 'Identity', 'Insights', 'Instance', 'IoT', 'Key', 'Kusto',
                         'Labs', 'Lake', 'Learning', 'Logic', 'Machine', 'Maintenance', 'Managed', 'Management', 'Manager', 'Maps', 'MariaDB', 'Media', 'Migrate', 'Migration', 'MySQL', 'NetApp', 'Network', 'Notification', 'Ons', 'OpenShift', 'Operational', 'Operations', 'Peering', 'Policy', 'Portal', 'PostgreSQL', 'Power', 'Providers', 'Provisioning', 'Recovery', 'Red', 'Registration', 'Registry', 'Relay', 'Resource', 'Resources', 'Scheduler', 'Search', 'Security', 'Series', 'Service', 'Services', 'Share', 'SignalR', 'Spring', 'SQL', 'Stack', 'Storage', 'Store', 'StorSimple', 'Stream', 'Subscription', 'Synapse', 'Sync', 'Time', 'Traffic', 'Twins', 'Update', 'Vault', 'Vaults', 'versions', 'Video', 'Virtual', 'Web']
     EXCLUDE_REGEX = [
@@ -122,6 +122,7 @@ def entropy_password(generated_snapshot: dict) -> dict:
         "(?=^([a-zA-Z0-9]+\-+[a-zA-Z0-9]+\-[a-zA-Z0-9]+)(?![A-Za-z0-9])$)",
         "(?=^([a-zA-Z0-9]+\.+[a-zA-Z0-9]*)$)",
         "(?=^(\/+\w{0,}){0,}$)",
+        "(?=^([a-zA-Z]*_[a-zA-Z]*)$)"
     ]
     EXCLUDE_STARTSWITH = [
         "arn:"

@@ -92,7 +92,7 @@ def secret_finder(snapshot, PASSWORD_VALUE_RE, PASSWORD_KEY_RE=None, EXCLUDE_RE=
 def aws_password_leak(generated_snapshot: dict) -> dict:
 
     PASSWORD_KEY_RE = r".*(?i)password"
-    PASSWORD_VALUE_RE = r'^(?=^(?!\$\{.*\}$))(?=(?=.*[a-z][A-Z])|(?=.*[A-Z][a-z])|(?=.*[a-z][0-9])|(?=.*[0-9][a-z])|(?=.*[0-9][A-Z])|(?=.*[A-Z][0-9]))(.*[\^$*.\[\]{}\(\)?\-"!@\#%&\/,><\’:;|_~`]?)\S{8,99}$'
+    PASSWORD_VALUE_RE = r'^(?!.*\$\{.*\}.*)(?=(?=.*[a-z][A-Z])|(?=.*[A-Z][a-z])|(?=.*[a-z][0-9])|(?=.*[0-9][a-z])|(?=.*[0-9][A-Z])|(?=.*[A-Z][0-9]))(.*[\^$*.\[\]{}\(\)?\-"!@\#%&\/,><\’:;|_~`]?)\S{8,99}$'
     output = secret_finder(
         generated_snapshot, PASSWORD_VALUE_RE, PASSWORD_KEY_RE)
 
@@ -110,7 +110,7 @@ def aws_password_leak(generated_snapshot: dict) -> dict:
 
 def entropy_password(generated_snapshot: dict) -> dict:
 
-    PASSWORD_VALUE_RE = r'^(?=^(?!\$\{.*\}$))(?=(?=.*[a-z][A-Z])|(?=.*[A-Z][a-z])|(?=.*[a-z][0-9])|(?=.*[0-9][a-z])|(?=.*[0-9][A-Z])|(?=.*[A-Z][0-9]))(?=.*[^A-Za-z0-9])\S{8,99}$'
+    PASSWORD_VALUE_RE = r'^(?!.*\$\{.*\}.*)(?=(?=.*[a-z][A-Z])|(?=.*[A-Z][a-z])|(?=.*[a-z][0-9])|(?=.*[0-9][a-z])|(?=.*[0-9][A-Z])|(?=.*[A-Z][0-9]))(?=.*[^A-Za-z0-9])\S{8,99}$'
     EXCLUDE_CONTAINS = ['aad', 'access', 'acl', 'acm', 'amazon', 'ami', 'ami-', 'analytics', 'and', 'application', 'appspec', 'arn', 'aurora', 'authority', 'autonomous', 'aws', 'billing', 'block', 'border', 'bucket', 'cdn', 'certificate', 'cli', 'cloud', 'cloudhub', 'cmk', 'cofig', 'command', 'compute', 'conditional', 'config', 'console', 'container', 'control', 'dashboard', 'default', 'description', 'device', 'directory', 'dns', 'ebs', 'ec2', 'ecr', 'ecs', 'ecu', 'efs', 'eib', 'elastic', 'email', 'emr', 'endpoint', 'envelope', 'ephemeral', 'etl', 'example', 'exbibyte', 'farm', 'fbl', 'federated', 'federation', 'feedback', 'file', 'fim', 'firehose', 'format', 'forums', 'function', 'gateway', 'gib', 'gibibyte', 'group', 'hub', 'iam', 'identifiers', 'identity', 'idp', 'image', 'interface', 'isp', 'key', 'kib', 'kibibyte', 'kms', 'language',
                         'line', 'list', 'logloop', 'mail', 'management', 'manager', 'marker', 'mebibyte', 'member', 'mfa', 'mib', 'mime', 'mobile', 'mta', 'name', 'notification', 'number', 'object', 'origin', 'parameter', 'path', 'pca', 'pebibyte', 'period', 'pib', 'policy', 'prefix', 'private', 'properties', 'protocol', 'rds', 'recipe', 'registry', 'representational', 'resource', 'resources', 'return', 'role', 's3', 'scp', 'security', 'service', 'services', 'ses', 'sign-on', 'simple', 'sims', 'simulator', 'single', 'sns', 'sqs', 'sse', 'sso', 'state', 'storage', 'store', 'streams', 'sts', 'sts:', 'subnet', 'swf', 'system', 'tag', 'tebibyte', 'tib', 'tls', 'token', 'transfer', 'unit', 'user', 'validation', 'variable', 'version', 'vgw', 'virtual', 'virtualization', 'vpc', 'vpn', 'wam', 'web', 'workflow', 'workspaces', 'yib', 'yobibyte', 'zebibyte', 'zib']
     EXCLUDE_REGEX = [
@@ -120,6 +120,7 @@ def entropy_password(generated_snapshot: dict) -> dict:
         "(?=^([a-zA-Z0-9]+\-+[a-zA-Z0-9]+\-[a-zA-Z0-9]+)(?![A-Za-z0-9])$)",
         "(?=^([a-zA-Z0-9]+\.+[a-zA-Z0-9]*)$)",
         "(?=^(\/+\w{0,}){0,}$)",
+        "(?=^([a-zA-Z]*_[a-zA-Z]*)$)"
     ]
     EXCLUDE_STARTSWITH = [
         "arn:"
