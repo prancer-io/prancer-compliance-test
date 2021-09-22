@@ -11,13 +11,13 @@ default securitycontacts = null
 azure_attribute_absence["securitycontacts"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
-    not resource.properties.emails
+    not resource.properties.email
 }
 
 azure_issue["securitycontacts"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
-    re_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", resource.properties.emails) == false
+    re_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", resource.properties.email) == false
 }
 
 securitycontacts {
@@ -38,7 +38,7 @@ securitycontacts_err = "Security Center currently does not have any valid securi
     azure_issue["securitycontacts"]
 }
 
-securitycontacts_miss_err = "Security Center security contacts property 'emails' is missing from the resource" {
+securitycontacts_miss_err = "Security Center security contacts property 'email' is missing from the resource" {
     azure_attribute_absence["securitycontacts"]
 }
 
