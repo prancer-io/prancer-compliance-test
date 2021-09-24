@@ -1996,6 +1996,62 @@
                             ]
                         }
                     ]
+                },{
+                    "masterTestId": "TEST_SECRETS_1",
+                    "masterSnapshotId": [
+                        "GDF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "python",
+                    "rule": "file(secret_gcp_iac.py)",
+                    "evals": [
+                        {
+                            "id":"PR-AWS-0001-RGX",
+                            "eval": "google_password_leak",
+                            "message": "google_password_leak_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "There is a possibility that secure password is exposed",
+                    "description": "There is a possibility that secure password is exposed",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "deploymentmanager"
+                            ]
+                        }
+                    ]
+                },{
+                    "masterTestId": "TEST_SECRETS_2",
+                    "masterSnapshotId": [
+                        "GDF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "python",
+                    "rule": "file(secret_gcp_iac.py)",
+                    "evals": [
+                        {
+                            "id":"PR-AWS-0001-RGX",
+                            "eval": "entropy_password",
+                            "message": "entropy_password_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "There is a possibility that secure password is exposed",
+                    "description": "There is a possibility that secure password is exposed",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "deploymentmanager"
+                            ]
+                        }
+                    ]
                 }
             ]
         }
