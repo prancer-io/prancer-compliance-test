@@ -4732,12 +4732,12 @@
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "python",
-                    "rule": "file(secret_azure_tf.py)",
+                    "rule": "file(secret_tf.py)",
                     "evals": [
                         {
                             "id": "PR-AZR-0002-RGX",
-                            "eval": "azure_password_leak",
-                            "message": "azure_password_leak_err",
+                            "eval": "password_leak",
+                            "message": "password_leak_err",
                             "remediationDescription": "",
                             "remediationFunction": "PR-AZR-0002-RGX.py"
                         }
@@ -4761,7 +4761,7 @@
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "python",
-                    "rule": "file(secret_azure_tf.py)",
+                    "rule": "file(secret_tf.py)",
                     "evals": [
                         {
                             "id": "PR-AZR-0003-RGX",

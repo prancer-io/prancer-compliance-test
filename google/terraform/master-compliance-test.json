@@ -2026,12 +2026,12 @@
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "python",
-                    "rule": "file(secret_gcp_tf.py)",
+                    "rule": "file(secret_tf.py)",
                     "evals": [
                         {
                             "id":"PR-AWS-0001-RGX",
-                            "eval": "google_password_leak",
-                            "message": "google_password_leak_err",
+                            "eval": "password_leak",
+                            "message": "password_leak_err",
                             "remediationDescription":"",
                             "remediationFunction":""
                         }
@@ -2055,7 +2055,7 @@
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "python",
-                    "rule": "file(secret_gcp_tf.py)",
+                    "rule": "file(secret_tf.py)",
                     "evals": [
                         {
                             "id":"PR-AWS-0001-RGX",

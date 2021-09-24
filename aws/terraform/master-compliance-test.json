@@ -5385,7 +5385,7 @@
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "python",
-                    "rule": "file(secret_aws_tf.py)",
+                    "rule": "file(secret_tf.py)",
                     "evals": [
                         {
                             "id": "PR-AWS-0028-RGX",
@@ -5414,7 +5414,7 @@
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "python",
-                    "rule": "file(secret_aws_tf.py)",
+                    "rule": "file(secret_tf.py)",
                     "evals": [
                         {
                             "id": "PR-AWS-0029-RGX",
@@ -5443,7 +5443,7 @@
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "python",
-                    "rule": "file(secret_aws_tf.py)",
+                    "rule": "file(secret_tf.py)",
                     "evals": [
                         {
                             "id": "PR-AWS-0030-RGX",
@@ -5472,7 +5472,7 @@
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "python",
-                    "rule": "file(secret_aws_tf.py)",
+                    "rule": "file(secret_tf.py)",
                     "evals": [
                         {
                             "id": "PR-AWS-0030-RGX",
@@ -5501,12 +5501,12 @@
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "python",
-                    "rule": "file(secret_aws_tf.py)",
+                    "rule": "file(secret_tf.py)",
                     "evals": [
                         {
                             "id": "PR-AWS-0031-RGX",
-                            "eval": "aws_password_leak",
-                            "message": "aws_password_leak_err",
+                            "eval": "password_leak",
+                            "message": "password_leak_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }
@@ -5530,7 +5530,7 @@
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "python",
-                    "rule": "file(secret_aws_tf.py)",
+                    "rule": "file(secret_tf.py)",
                     "evals": [
                         {
                             "id": "PR-AWS-0032-RGX",
