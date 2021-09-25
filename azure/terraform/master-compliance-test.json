@@ -846,6 +846,180 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_APP_SERVICE_13",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0079-TRF",
+                            "eval": "data.rule.app_service_ftp_deployment_disabled",
+                            "message": "data.rule.app_service_ftp_deployment_disabled_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, make sure property 'ftps_state' has value either 'Disabled' or 'FtpsOnly' under 'site_config' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#ftps_state for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure App Service FTP deployments should be disabled",
+                    "description": "This policy will identify the Azure app service which have FTP deployment enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APP_SERVICE_14",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0080-TRF",
+                            "eval": "data.rule.app_service_dot_net_framework_latest",
+                            "message": "data.rule.app_service_dot_net_framework_latest_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, set dotnet_framework_version = 'v6.0' under 'site_config' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#dotnet_framework_version for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure App Service Dot Net Framework should be latest",
+                    "description": "This policy will identify the Azure app service which dont have latest version of Dot Net Framework and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APP_SERVICE_15",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0081-TRF",
+                            "eval": "data.rule.app_service_php_version_latest",
+                            "message": "data.rule.app_service_php_version_latest_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, set php_version = '7.4' under 'site_config' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#php_version for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure App Service PHP version should be latest",
+                    "description": "This policy will identify the Azure app service which dont have latest version of PHP and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APP_SERVICE_16",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0083-TRF",
+                            "eval": "data.rule.app_service_python_version_latest",
+                            "message": "data.rule.app_service_python_version_latest_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, set python_version = '3.4' under 'site_config' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#python_version for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure App Service Pyhton version should be latest",
+                    "description": "This policy will identify the Azure app service which dont have latest version of Pyhton and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APP_SERVICE_17",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0084-TRF",
+                            "eval": "data.rule.app_service_java_version_latest",
+                            "message": "data.rule.app_service_java_version_latest_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, set java_version = '11' under 'site_config' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#java_version for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure App Service Java version should be latest",
+                    "description": "This policy will identify the Azure app service which dont have latest version of Java and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APP_SERVICE_18",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(appservice.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0086-TRF",
+                            "eval": "data.rule.app_service_storage_account_type_azurefile",
+                            "message": "data.rule.app_service_storage_account_type_azurefile_err",
+                            "remediationDescription": "In 'azurerm_app_service' resource, set type = 'AzureFiles' under 'storage_account' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#storage_account for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure App Service storage account type should be AzureFiles",
+                    "description": "This policy will identify the Azure app service which dont have storage account type AzureFiles and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_DATABASEACCOUNTS",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -3372,7 +3546,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_PRICING_1",
+                    "masterTestId": "TEST_PRICING",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -3402,39 +3576,7 @@
                             ]
                         }
                     ]
-                },
-                {
-                    "masterTestId": "TEST_PRICING_2",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(pricing.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-0060-TRF",
-                            "eval": "data.rule.security_center_azure_defender_is_on_for_servers",
-                            "message": "data.rule.security_center_azure_defender_is_on_for_servers_err",
-                            "remediationDescription": "In 'azurerm_security_center_subscription_pricing' resource, either set tier = 'standard' or dont set 'VirtualMachines' as resource_type to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_subscription_pricing#resource_type for details.",
-                            "remediationFunction": ""
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Azure Security Center Defender should be enabled for Servers",
-                    "description": "Azure Defender provides security alerts and advanced threat protection for virtual machines, SQL databases, containers, web applications, your network, and more.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "CIS",
-                                "ISO 27001"
-                            ],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ]
-                },
+                }
                 {
                     "masterTestId": "TEST_Redis",
                     "masterSnapshotId": [

@@ -131,15 +131,13 @@ azure_attribute_absence["mssql_auditing_enabled"] {
 
 mssql_auditing_enabled = false {
     azure_attribute_absence["mssql_auditing_enabled"]
-}
+} 
 
 mssql_auditing_enabled {
-    azure_attribute_absence["mssql_auditing_enabled"]
+    not azure_attribute_absence["mssql_auditing_enabled"]
 }
 
-mssql_auditing_enabled_err = "azurerm_mssql_server's resource block 'extended_auditing_policy' is missing" {
-    azure_attribute_absence["mssql_auditing_enabled"]
-} else = "Azure MSSQL Server audit log is currently not enabled" {
+mssql_auditing_enabled_err = "Azure MSSQL Server audit log is currently not enabled" {
     azure_attribute_absence["mssql_auditing_enabled"]
 }
 
@@ -172,15 +170,13 @@ azure_attribute_absence["sql_auditing_enabled"] {
 
 sql_auditing_enabled = false {
     azure_attribute_absence["sql_auditing_enabled"]
-}
+} 
 
 sql_auditing_enabled {
-    azure_attribute_absence["sql_auditing_enabled"]
+    not azure_attribute_absence["sql_auditing_enabled"]
 }
 
-sql_auditing_enabled_err = "azurerm_sql_server's resource block 'extended_auditing_policy' is missing" {
-    azure_attribute_absence["sql_auditing_enabled"]
-} else = "Azure SQL Server audit log is currently not enabled" {
+sql_auditing_enabled_err = "Azure SQL Server audit log is currently not enabled" {
     azure_attribute_absence["sql_auditing_enabled"]
 }
 

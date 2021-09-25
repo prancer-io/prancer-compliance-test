@@ -668,3 +668,369 @@ app_service_remote_debugging_disabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
 }
+
+
+#
+# PR-AZR-0079-TRF
+#
+
+default app_service_ftp_deployment_disabled = null
+
+azure_attribute_absence["app_service_ftp_deployment_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.site_config
+}
+
+azure_attribute_absence["app_service_ftp_deployment_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    not site_config.ftps_state
+}
+
+azure_issue["app_service_ftp_deployment_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    lower(site_config.ftps_state) != "disabled"
+    lower(site_config.ftps_state) != "ftpsonly"
+}
+
+app_service_ftp_deployment_disabled = false {
+    azure_attribute_absence["app_service_ftp_deployment_disabled"]
+}
+
+app_service_ftp_deployment_disabled {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_ftp_deployment_disabled"]
+    not azure_issue["app_service_ftp_deployment_disabled"]
+}
+
+app_service_ftp_deployment_disabled = false {
+    azure_issue["app_service_ftp_deployment_disabled"]
+}
+
+app_service_ftp_deployment_disabled_err = "azurerm_app_service property 'site_config.ftps_state' need to be exist. Its missing from the resource." {
+    azure_attribute_absence["app_service_ftp_deployment_disabled"]
+} else = "Azure App Service FTP deployment is currently not disabled" {
+    azure_issue["app_service_ftp_deployment_disabled"]
+}
+
+app_service_ftp_deployment_disabled_metadata := {
+    "Policy Code": "PR-AZR-0079-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure App Service FTP deployments should be disabled",
+    "Policy Description": "This policy will identify the Azure app service which have FTP deployment enabled and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}
+
+
+#
+# PR-AZR-0080-TRF
+#
+
+default app_service_dot_net_framework_latest = null
+
+latest_dotnet_framework_version := "v6.0"
+
+azure_attribute_absence["app_service_dot_net_framework_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.site_config
+}
+
+#Defaults to v4.0
+azure_attribute_absence["app_service_dot_net_framework_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    not site_config.dotnet_framework_version
+}
+
+azure_issue["app_service_dot_net_framework_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    lower(site_config.dotnet_framework_version) != latest_dotnet_framework_version
+}
+
+# we need to make it pass if property is missing, as azurerm_app_service may not need dot net framework
+app_service_dot_net_framework_latest {
+    azure_attribute_absence["app_service_dot_net_framework_latest"]
+    not azure_issue["app_service_dot_net_framework_latest"]
+}
+
+app_service_dot_net_framework_latest {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_dot_net_framework_latest"]
+    not azure_issue["app_service_dot_net_framework_latest"]
+}
+
+app_service_dot_net_framework_latest = false {
+    azure_issue["app_service_dot_net_framework_latest"]
+}
+
+app_service_dot_net_framework_latest_err = "Azure App Service currently dont have latest version of Dot Net Framework" {
+    azure_issue["app_service_dot_net_framework_latest"]
+}
+
+app_service_dot_net_framework_latest_metadata := {
+    "Policy Code": "PR-AZR-0080-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure App Service Dot Net Framework should be latest",
+    "Policy Description": "This policy will identify the Azure app service which dont have latest version of Dot Net Framework and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}
+
+
+#
+# PR-AZR-0081-TRF
+#
+
+default app_service_php_version_latest = null
+
+latest_php_version := 7.4
+
+azure_attribute_absence["app_service_php_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.site_config
+}
+
+azure_attribute_absence["app_service_php_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    not site_config.php_version
+}
+
+azure_issue["app_service_php_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    to_number(site_config.php_version) != latest_php_version
+}
+
+# we need to make it pass if property is missing, as azurerm_app_service may not need php
+app_service_php_version_latest {
+    azure_attribute_absence["app_service_php_version_latest"]
+    not azure_issue["app_service_php_version_latest"]
+}
+
+app_service_php_version_latest {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_php_version_latest"]
+    not azure_issue["app_service_php_version_latest"]
+}
+
+app_service_php_version_latest = false {
+    azure_issue["app_service_php_version_latest"]
+}
+
+app_service_php_version_latest_err = "Azure App Service currently dont have latest version of PHP" {
+    azure_issue["app_service_php_version_latest"]
+}
+
+app_service_php_version_latest_metadata := {
+    "Policy Code": "PR-AZR-0081-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure App Service PHP version should be latest",
+    "Policy Description": "This policy will identify the Azure app service which dont have latest version of PHP and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}
+
+
+#
+# PR-AZR-0083-TRF
+#
+
+default app_service_python_version_latest = null
+
+latest_python_version := 3.4
+
+azure_attribute_absence["app_service_python_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.site_config
+}
+
+azure_attribute_absence["app_service_python_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    not site_config.python_version
+}
+
+azure_issue["app_service_python_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    to_number(site_config.python_version) != latest_python_version
+}
+
+# we need to make it pass if property is missing, as azurerm_app_service may not need python
+app_service_python_version_latest {
+    azure_attribute_absence["app_service_python_version_latest"]
+    not azure_issue["app_service_python_version_latest"]
+}
+
+app_service_python_version_latest {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_python_version_latest"]
+    not azure_issue["app_service_python_version_latest"]
+}
+
+app_service_python_version_latest = false {
+    azure_issue["app_service_python_version_latest"]
+}
+
+app_service_python_version_latest_err = "Azure App Service currently dont have latest version of Python" {
+    azure_issue["app_service_python_version_latest"]
+}
+
+app_service_python_version_latest_metadata := {
+    "Policy Code": "PR-AZR-0083-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure App Service Pyhton version should be latest",
+    "Policy Description": "This policy will identify the Azure app service which dont have latest version of Pyhton and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}
+
+
+#
+# PR-AZR-0084-TRF
+#
+
+default app_service_java_version_latest = null
+
+# valid values are 1.7.0_80, 1.8.0_181, 11
+latest_java_version := "11"
+
+azure_attribute_absence["app_service_java_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.site_config
+}
+
+azure_attribute_absence["app_service_java_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    not site_config.java_version
+}
+
+# valid values are 1.7.0_80, 1.8.0_181, 11
+azure_issue["app_service_java_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    site_config.java_version != latest_java_version
+}
+
+# we need to make it pass if property is missing, as azurerm_app_service may not need java
+app_service_java_version_latest {
+    azure_attribute_absence["app_service_java_version_latest"]
+    not azure_issue["app_service_java_version_latest"]
+}
+
+app_service_java_version_latest {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_java_version_latest"]
+    not azure_issue["app_service_java_version_latest"]
+}
+
+app_service_java_version_latest = false {
+    azure_issue["app_service_java_version_latest"]
+}
+
+app_service_java_version_latest_err = "Azure App Service currently dont have latest version of Java" {
+    azure_issue["app_service_java_version_latest"]
+}
+
+app_service_java_version_latest_metadata := {
+    "Policy Code": "PR-AZR-0084-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure App Service Java version should be latest",
+    "Policy Description": "This policy will identify the Azure app service which dont have latest version of Java and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}
+
+
+#
+# PR-AZR-0086-TRF
+#
+
+default app_service_storage_account_type_azurefile = null
+
+azure_attribute_absence["app_service_storage_account_type_azurefile"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    not resource.properties.storage_account
+}
+
+azure_attribute_absence["app_service_storage_account_type_azurefile"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    storage_account := resource.properties.storage_account[_]
+    not storage_account.type
+}
+
+azure_issue["app_service_storage_account_type_azurefile"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    storage_account := resource.properties.storage_account[_]
+    lower(storage_account.type) != "azurefiles"
+}
+
+app_service_storage_account_type_azurefile = false {
+    azure_attribute_absence["app_service_storage_account_type_azurefile"]
+}
+
+app_service_storage_account_type_azurefile {
+    lower(input.resources[_].type) == "azurerm_app_service"
+    not azure_attribute_absence["app_service_storage_account_type_azurefile"]
+    not azure_issue["app_service_storage_account_type_azurefile"]
+}
+
+app_service_storage_account_type_azurefile = false {
+    azure_issue["app_service_storage_account_type_azurefile"]
+}
+
+app_service_storage_account_type_azurefile_err = "azurerm_app_service property 'storage_account.type' need to be exist. Its missing from the resource." {
+    azure_attribute_absence["app_service_storage_account_type_azurefile"]
+} else = "Azure App Service storage account type is currently not AzureFiles" {
+    azure_issue["app_service_storage_account_type_azurefile"]
+}
+
+app_service_storage_account_type_azurefile_metadata := {
+    "Policy Code": "PR-AZR-0086-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure App Service storage account type should be AzureFiles",
+    "Policy Description": "This policy will identify the Azure app service which dont have storage account type AzureFiles and give alert",
+    "Resource Type": "azurerm_app_service",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service"
+}

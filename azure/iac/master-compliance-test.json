@@ -3470,7 +3470,7 @@
                             "id": "PR-AZR-0138-ARM",
                             "eval": "data.rule.network_policy",
                             "message": "data.rule.network_policy_err",
-                            "remediationDescription": "For Resource type 'microsoft.containerservice/managedclusters' make sure networkProfile.networkPolicy exists and the value is set to `azure` or 'calico`.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.containerservice/managedclusters' make sure networkProfile.networkPolicy exists and the value is set to `azure`.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_0138_ARM.py"
                         }
                     ],

@@ -11,7 +11,7 @@ package rule
 
 default sql_public_access_disabled = null
 # public_network_access_enabled Defaults to true if not exist
-no_azure_issue(resource_type) {
+is_public_access_disabled(resource_type) {
     count([c | input.resources[_].type == resource_type; c := 1]) == count([c | r := input.resources[_];
                r.type == resource_type;
                r.properties.public_network_access_enabled == false; # this is not same as not r.properties.public_network_access_enabled. not will give you correct result if property does not exist
@@ -21,13 +21,13 @@ no_azure_issue(resource_type) {
 }
 
 sql_public_access_disabled {
-    no_azure_issue("azurerm_mssql_server")
+    is_public_access_disabled("azurerm_mssql_server")
 } else = false {
 	true
 }
 
 sql_public_access_disabled_err = "Public Network Access is currently not disabled on MSSQL Server." {
-    not no_azure_issue("azurerm_mssql_server")
+    not is_public_access_disabled("azurerm_mssql_server")
 }
 
 sql_public_access_disabled_metadata := {
