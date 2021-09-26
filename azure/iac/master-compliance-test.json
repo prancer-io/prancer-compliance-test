@@ -20,7 +20,7 @@
                             "remediationFunction": "PR_AZR_0090_ARM.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Activity log alerts settings should be enabled",
                     "description": "Activity log alerts are alerts that activate when a new activity log event occurs that matches the conditions specified in the alert. Based on the order and volume of the events recorded in Azure activity log, the alert rule will fire. Activity log alert rules are Azure resources, so they can be created by using an Azure Resource Manager template. ",
                     "tags": [
@@ -85,13 +85,20 @@
                             "remediationFunction": "PR_AZR_0007_ARM.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure AKS cluster HTTP application routing should be disabled",
                     "description": "The HTTP application routing add-on is designed to let you quickly create an ingress controller and access your applications. This add-on is not currently designed for use in a production environment and is not recommended for production use. For production-ready ingress deployments that include multiple replicas and TLS support, see Create an HTTPS ingress controller.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -172,13 +179,20 @@
                             "remediationFunction": "PR_AZR_0010_ARM.py"
                         }
                     ],
-                    "severity": "Low",
+                    "severity": "High",
                     "title": "Azure AKS enable role-based access control (RBAC) should be enforced",
                     "description": "To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster RBAC setting and alerts if disabled.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -265,7 +279,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -2572,7 +2593,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -3509,7 +3537,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -3538,7 +3573,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -3567,7 +3609,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -3596,7 +3645,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
