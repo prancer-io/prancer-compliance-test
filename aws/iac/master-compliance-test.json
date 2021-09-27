@@ -5463,35 +5463,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SECRETS_4",
-                    "masterSnapshotId": [
-                        "CFR_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "python",
-                    "rule": "file(secret_aws_iac.py)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-0030-RGX",
-                            "eval": "al_mws",
-                            "message": "al_mws_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
-                        }
-                    ],
-                    "severity": "High",
-                    "title": "There is a possibility that aws marketplace web service id is exposed",
-                    "description": "There is a possibility that aws marketplace web service id is exposed, template should not have any secret in it. Make sure to put the secrets in a vault",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "cloudformation"
-                            ]
-                        }
-                    ]
-                },
-                {
                     "masterTestId": "TEST_SECRETS_5",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
