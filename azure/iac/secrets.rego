@@ -96,7 +96,7 @@ azure_issue["gl_azure_secrets"] {
     regex.match(regexp, value)
 }
 
-gl_azure_secrets = false {
+gl_azure_secrets {
    not azure_issue["gl_azure_secrets"]
 }
 
