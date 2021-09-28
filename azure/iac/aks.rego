@@ -387,7 +387,6 @@ azure_issue["network_policy"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     lower(resource.properties.networkProfile.networkPolicy) != "azure"
-    lower(resource.properties.networkProfile.networkPolicy) != "calico"
 }
 
 network_policy {
