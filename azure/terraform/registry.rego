@@ -19,6 +19,7 @@ azure_issue["adminUserDisabled"] {
 }
 
 adminUserDisabled {
+    lower(input.resources[_].type) == "azurerm_container_registry"
     azure_attribute_absence["adminUserDisabled"]
     not azure_issue["adminUserDisabled"]
 }

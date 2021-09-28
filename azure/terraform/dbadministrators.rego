@@ -30,7 +30,7 @@ azure_attribute_absence ["db_ad_admin"] {
 }
 
 db_ad_admin {
-    #lower(input.resources[_].type) == "azurerm_sql_server"
+    lower(input.resources[_].type) == "azurerm_sql_server"
     not azure_attribute_absence["db_ad_admin"]
     #not azure_issue["db_ad_admin"]
 }

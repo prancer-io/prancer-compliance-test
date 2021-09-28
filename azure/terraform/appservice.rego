@@ -207,10 +207,8 @@ app_service_aad_auth_enabled {
     not azure_attribute_absence["app_service_aad_auth_enabled"]
 }
 
-app_service_aad_auth_enabled_err = "azurerm_app_service property block 'auth_settings.active_directory' need to be exist. Its missing from the resource." {
+app_service_aad_auth_enabled_err = "Azure App Service AAD authentication is currently not enabled" {
     azure_attribute_absence["app_service_aad_auth_enabled"]
-} else = "Azure App Service AAD authentication is currently not enabled" {
-    azure_issue["app_service_aad_auth_enabled"]
 }
 
 app_service_aad_auth_enabled_metadata := {

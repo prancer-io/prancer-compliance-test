@@ -81,6 +81,7 @@ vm_linux_disabled_password_auth {
 }
 
 vm_linux_disabled_password_auth {
+    lower(input.resources[_].type) == "azurerm_virtual_machine"
     azure_attribute_absence["vm_linux_disabled_password_auth"]
     not azure_issue["vm_linux_disabled_password_auth"]
 }
@@ -132,6 +133,7 @@ vm_type_linux_disabled_password_auth {
 }
 
 vm_type_linux_disabled_password_auth {
+    lower(input.resources[_].type) == "azurerm_linux_virtual_machine"
     azure_attribute_absence["vm_type_linux_disabled_password_auth"]
     not azure_issue["vm_type_linux_disabled_password_auth"]
 }
@@ -182,6 +184,7 @@ vm_type_linux_scale_set_disabled_password_auth {
 }
 
 vm_type_linux_scale_set_disabled_password_auth {
+    lower(input.resources[_].type) == "azurerm_linux_virtual_machine_scale_set"
     azure_attribute_absence["vm_type_linux_scale_set_disabled_password_auth"]
     not azure_issue["vm_type_linux_scale_set_disabled_password_auth"]
 }

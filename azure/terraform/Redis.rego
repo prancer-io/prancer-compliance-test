@@ -19,12 +19,15 @@ azure_issue ["enableSslPort"] {
 }
 
 enableSslPort {
+    lower(input.resources[_].type) == "azurerm_redis_cache"
     azure_attribute_absence["enableSslPort"]
+    not azure_issue["enableSslPort"]
 }
 
 enableSslPort {
     lower(input.resources[_].type) == "azurerm_redis_cache"
-    not azure_issue["servenableSslPorterRole"]
+    not azure_attribute_absence["enableSslPort"]
+    not azure_issue["enableSslPort"]
 }
 
 enableSslPort = false {

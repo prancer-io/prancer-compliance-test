@@ -28,6 +28,7 @@ storage_secure {
 }
 
 storage_secure {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_attribute_absence["storage_secure"]
     not azure_issue["storage_secure"]
 }
@@ -76,7 +77,7 @@ azure_issue["storage_acl"] {
 }
 
 storage_acl {
-    lower(input.resources[_].type) == "azurerm_storage_account_network_rules"
+    lower(input.resources[_].type) == "azurerm_storage_account"
     not azure_attribute_absence["storage_acl"]
     not azure_issue["storage_acl"]
 }
@@ -190,7 +191,7 @@ azure_issue["keySource"] {
 }
 
 keySource {
-    lower(input.resources[_].type) == "azurerm_storage_encryption_scope"
+    lower(input.resources[_].type) == "azurerm_storage_account"
     not azure_attribute_absence["keySource"]
     not azure_issue["keySource"]
 }
@@ -298,7 +299,9 @@ storage_account_public_access_disabled {
 }
 
 storage_account_public_access_disabled {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_attribute_absence["storage_account_public_access_disabled"]
+    not azure_issue["storage_account_public_access_disabled"]
 }
 
 storage_account_public_access_disabled = false {
@@ -468,7 +471,7 @@ azure_issue["storage_nr_allow_trusted_azure_services"] {
 }
 
 storage_nr_allow_trusted_azure_services {
-    lower(input.resources[_].type) == "azurerm_storage_account_network_rules"
+    lower(input.resources[_].type) == "azurerm_storage_account"
     not azure_attribute_absence["storage_nr_allow_trusted_azure_services"]
     not azure_issue["storage_nr_allow_trusted_azure_services"]
 }
