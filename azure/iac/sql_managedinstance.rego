@@ -23,7 +23,7 @@ azure_attribute_absence["sql_mi_public_endpoint_disabled"] {
 azure_issue["sql_mi_public_endpoint_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/managedinstances"
-    resource.properties.publicDataEndpointEnabled != false
+    resource.properties.publicDataEndpointEnabled != "false"
 }
 
 sql_mi_public_endpoint_disabled {

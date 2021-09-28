@@ -3354,6 +3354,35 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_STORAGE_BLOB_CONTAINER_2",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageblobcontainers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0073-ARM",
+                            "eval": "data.rule.storage__logical_container_public_access_disabled",
+                            "message": "data.rule.storage__logical_container_public_access_disabled_err",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-06-01/storageaccounts/blobservices/containers",
+                            "remediationFunction": "PR_AZR_0073_ARM.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure storage blob container should not have public access enabled",
+                    "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature._x005F_x000D_ _x005F_x000D_ This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB'). As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
                     "masterTestId": "TEST_VIRTUAL_MACHINE_1",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -3843,15 +3872,15 @@
                     "evals": [
                         {
                             "id": "PR-AZR-0143-ARM",
-                            "eval": "data.rule.",
-                            "message": "data.rule._err",
-                            "remediationDescription": "For Resource type 'microsoft.security/securitycontacts' make sure alertNotifications.minimalSeverity exists and the value is set to 'High'.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts' target='_blank'>here</a> for more details.",
+                            "eval": "data.rule.alert_notifications",
+                            "message": "data.rule.alert_notifications_err",
+                            "remediationDescription": "For Resource type 'microsoft.security/securitycontacts' make sure alertNotifications exists and the value is set to 'On'.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_0143_ARM.py"
                         }
                     ],
                     "severity": "Low",
-                    "title": "Send email notification for high severity alerts should be enabled",
-                    "description": "Setting the security alert Send email notification for high severity alerts to On ensures that emails are sent from Microsoft if their security team determines a potential security breach has taken place.",
+                    "title": "Send email notification should be enabled",
+                    "description": "Setting the security alert Send email notification for alerts to On ensures that emails are sent from Microsoft if their security team determines a potential security breach has taken place.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -4193,7 +4222,7 @@
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(.rego)",
+                    "rule": "file(sql_servers.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-0191-ARM",
@@ -4473,11 +4502,11 @@
                     "rule": "file(sql_servers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0133-ARM",
+                            "id": "PR-AZR-0200-ARM",
                             "eval": "data.rule.sql_logical_server_login",
                             "message": "data.rule.sql_logical_server_login_err",
                             "remediationDescription": "In Resource of type \"Microsoft.Sql/servers/administrators\" make sure properties.login exists and the value isn't set to 'admin' or 'administrator'.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/administrators' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0133_ARM.py"
+                            "remediationFunction": "PR_AZR_0200_ARM.py"
                         }
                     ],
                     "severity": "Medium",
