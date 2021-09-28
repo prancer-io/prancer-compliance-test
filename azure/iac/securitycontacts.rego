@@ -11,13 +11,13 @@ default securitycontacts = null
 azure_attribute_absence["securitycontacts"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
-    not resource.properties.emails
+    not resource.properties.email
 }
 
 azure_issue["securitycontacts"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
-    re_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", resource.properties.emails) == false
+    re_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", resource.properties.email) == false
 }
 
 securitycontacts {
@@ -38,7 +38,7 @@ securitycontacts_err = "Security Center currently does not have any valid securi
     azure_issue["securitycontacts"]
 }
 
-securitycontacts_miss_err = "Security Center security contacts property 'emails' is missing from the resource" {
+securitycontacts_miss_err = "Security Center security contacts property 'email' is missing from the resource" {
     azure_attribute_absence["securitycontacts"]
 }
 
@@ -61,47 +61,47 @@ securitycontacts_metadata := {
 # PR-AZR-0143-ARM
 #
 
-default minimal_severity = null
+default alert_notifications = null
 
-azure_attribute_absence["minimal_severity"] {
+azure_attribute_absence["alert_notifications"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
-    not resource.properties.alertNotifications.minimalSeverity
+    not resource.properties.alertNotifications
 }
 
-azure_issue["minimal_severity"] {
+azure_issue["alert_notifications"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
-    lower(resource.properties.alertNotifications.minimalSeverity) != "high"
+    lower(resource.properties.alertNotifications) != "on"
 }
 
-minimal_severity {
+alert_notifications {
     lower(input.resources[_].type) == "microsoft.security/securitycontacts"
-    not azure_attribute_absence["minimal_severity"]
-    not azure_issue["minimal_severity"]
+    not azure_attribute_absence["alert_notifications"]
+    not azure_issue["alert_notifications"]
 }
 
-minimal_severity = false {
-    azure_issue["minimal_severity"]
+alert_notifications = false {
+    azure_issue["alert_notifications"]
 }
 
-minimal_severity = false {
-    azure_attribute_absence["minimal_severity"]
+alert_notifications = false {
+    azure_attribute_absence["alert_notifications"]
 }
 
-minimal_severity_err = "microsoft.security/securitycontacts resource property alertNotifications.minimalSeverity missing in the resource" {
+alert_notifications_err = "microsoft.security/securitycontacts resource property alertNotifications missing in the resource" {
     azure_attribute_absence["securitycontacts"]
-} else = "Send email notification for high severity alerts is not enabled" {
-    azure_issue["minimal_severity"]
+} else = "Send email notification for alerts is not enabled" {
+    azure_issue["alert_notifications"]
 }
 
-minimal_severity_metadata := {
+alert_notifications_metadata := {
     "Policy Code": "PR-AZR-0143-ARM",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Send email notification for high severity alerts should be enabled",
-    "Policy Description": "Setting the security alert Send email notification for high severity alerts to On ensures that emails are sent from Microsoft if their security team determines a potential security breach has taken place.",
+    "Policy Title": "Send email notification should be enabled",
+    "Policy Description": "Setting the security alert Send email notification for alerts to On ensures that emails are sent from Microsoft if their security team determines a potential security breach has taken place.",
     "Resource Type": "microsoft.security/securitycontacts",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts"

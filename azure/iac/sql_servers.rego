@@ -193,23 +193,26 @@ azure_issue["fail_over_groups"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
     sql_resources := resource.resources[_]
-    lower(sql_resources.type) != "failovergroups"
+    lower(sql_resources.type) == "failovergroups"
 }
 
 
 fail_over_groups {
-    lower(input.resources[_].type) == "microsoft.sql/servers"
-    not azure_issue["fail_over_groups"]
+	azure_issue["fail_over_groups"]
 }
 
 
 fail_over_groups = false {
-    azure_issue["fail_over_groups"]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    not azure_issue["fail_over_groups"]
 }
 
 
 fail_over_groups_err = "Microsoft.sql/servers resource property type.failoverGroups missing in the resource" {
-    azure_issue["fail_over_groups"]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    not azure_issue["fail_over_groups"]
 }
 
 fail_over_groups_metadata := {
@@ -252,7 +255,10 @@ azure_issue["sql_server_administrators"] {
 
 
 sql_server_administrators {
-    lower(input.resources[_].type) == "microsoft.sql/servers"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[_]
+    lower(sql_resources.type) == "administrators"
     not azure_attribute_absence["sql_server_administrators"]
     not azure_issue["sql_server_administrators"]
 }
