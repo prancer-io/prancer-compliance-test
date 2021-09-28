@@ -17,7 +17,6 @@ azure_attribute_absence["rg_locks"] {
 azure_issue["rg_locks"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.authorization/locks"
-    contains(lower(resource.id), "resourcegroups")
     lower(resource.properties.level) != "cannotdelete"
 }
 
