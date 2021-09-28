@@ -21,6 +21,14 @@ aws_issue["iam_wildcard_resource"] {
 }
 
 iam_wildcard_resource {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::managedpolicy"
+    not aws_issue["iam_wildcard_resource"]
+}
+
+iam_wildcard_resource {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::policy"
     not aws_issue["iam_wildcard_resource"]
 }
 

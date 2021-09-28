@@ -135,13 +135,15 @@ no_azure_issue(resource_type) {
 }
 
 mairadb_public_access_disabled {
+    lower(input.resources[_].type) == "azurerm_mariadb_server"
     no_azure_issue("azurerm_mariadb_server")
 } else = false {
-	true
+	lower(input.resources[_].type) == "azurerm_mariadb_server"
 }
 
 mairadb_public_access_disabled_err = "Public Network Access is currently not disabled on MariaDB Server." {
-     not no_azure_issue("azurerm_mariadb_server")
+    lower(input.resources[_].type) == "azurerm_mariadb_server"
+    not no_azure_issue("azurerm_mariadb_server")
 }
 
 mairadb_public_access_disabled_metadata := {

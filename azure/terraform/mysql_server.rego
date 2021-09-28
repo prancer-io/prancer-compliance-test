@@ -136,12 +136,14 @@ no_azure_issue(resource_type) {
 }
 
 mysql_public_access_disabled {
+    lower(input.resources[_].type) == "azurerm_mysql_server"
     no_azure_issue("azurerm_mysql_server")
 } else = false {
-	true
+	lower(input.resources[_].type) == "azurerm_mysql_server"
 }
 
 mysql_public_access_disabled_err = "Public Network Access is currently not disabled on MySQL Server." {
+    lower(input.resources[_].type) == "azurerm_mysql_server"
     not no_azure_issue("azurerm_mysql_server")
 }
 

@@ -134,6 +134,7 @@ mssql_auditing_enabled = false {
 } 
 
 mssql_auditing_enabled {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     not azure_attribute_absence["mssql_auditing_enabled"]
 }
 
@@ -173,6 +174,7 @@ sql_auditing_enabled = false {
 } 
 
 sql_auditing_enabled {
+    lower(input.resources[_].type) == "azurerm_sql_server"
     not azure_attribute_absence["sql_auditing_enabled"]
 }
 

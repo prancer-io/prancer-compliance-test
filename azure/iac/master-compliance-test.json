@@ -38,6 +38,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.insights/activitylogalerts"
                     ]
                 },
                 {
@@ -67,6 +70,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.containerservice/managedclusters"
                     ]
                 },
                 {
@@ -96,6 +102,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.containerservice/managedclusters"
                     ]
                 },
                 {
@@ -125,6 +134,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.containerservice/managedclusters"
                     ]
                 },
                 {
@@ -154,6 +166,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.containerservice/managedclusters"
                     ]
                 },
                 {
@@ -183,6 +198,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.containerservice/managedclusters"
                     ]
                 },
                 {
@@ -212,6 +230,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.containerservice/managedclusters"
                     ]
                 },
                 {
@@ -241,6 +262,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.containerservice/managedclusters"
                     ]
                 },
                 {
@@ -270,6 +294,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/applicationgateways"
                     ]
                 },
                 {
@@ -299,6 +326,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/applicationgateways"
                     ]
                 },
                 {
@@ -328,6 +358,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/applicationgateways"
                     ]
                 },
                 {
@@ -357,6 +390,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts/blobservices"
                     ]
                 },
                 {
@@ -386,6 +422,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts/blobservices"
                     ]
                 },
                 {
@@ -417,6 +456,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.databricks/workspaces"
                     ]
                 },
                 {
@@ -448,6 +490,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.databricks/workspaces"
                     ]
                 },
                 {
@@ -482,6 +527,11 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/managedinstances/administrators",
+                        "microsoft.sql/servers/administrators"
                     ]
                 },
                 {
@@ -516,6 +566,11 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/managedinstances/administrators",
+                        "microsoft.sql/servers/administrators"
                     ]
                 },
                 {
@@ -550,6 +605,11 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/managedinstances/administrators",
+                        "microsoft.sql/servers/administrators"
                     ]
                 },
                 {
@@ -586,6 +646,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers/databases/auditingsettings"
                     ]
                 },
                 {
@@ -622,6 +685,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers/databases/auditingsettings"
                     ]
                 },
                 {
@@ -658,6 +724,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers/databases/transparentdataencryption"
                     ]
                 },
                 {
@@ -693,6 +762,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers/firewallrules"
                     ]
                 },
                 {
@@ -724,6 +796,9 @@
                                 "PCI-DSS"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers/databases"
                     ]
                 },
                 {
@@ -760,6 +835,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers/databases"
                     ]
                 },
                 {
@@ -795,6 +873,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers/databases"
                     ]
                 },
                 {
@@ -830,6 +911,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers/databases"
                     ]
                 },
                 {
@@ -865,6 +949,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers/databases"
                     ]
                 },
                 {
@@ -894,6 +981,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers/databases/vulnerabilityassessments"
                     ]
                 },
                 {
@@ -923,6 +1013,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers/databases/vulnerabilityassessments"
                     ]
                 },
                 {
@@ -952,6 +1045,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers/databases/vulnerabilityassessments"
                     ]
                 },
                 {
@@ -981,6 +1077,14 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts/providers/diagnosticsettings",
+                        "microsoft.storage/storageaccounts/queueservices/providers/diagnosticsettings",
+                        "microsoft.storage/storageaccounts/tableservices/providers/diagnosticsettings",
+                        "microsoft.storage/storageaccounts/blobservices/providers/diagnosticsettings",
+                        "microsoft.network/loadbalancers/providers/diagnosticsettings",
+                        "microsoft.keyvault/vaults/providers/diagnosticsettings"
                     ]
                 },
                 {
@@ -1001,7 +1105,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Load Balancer diagnostics logs should be enabled",
-                    "description": "Azure Load Balancers provide different types of logsâ€”alert events, health probe, metricsâ€”to help you manage and troubleshoot issues. This policy identifies Azure Load Balancers that have diagnostics logs disabled. As a best practice, enable diagnostic logs to start collecting the data available through these logs.",
+                    "description": "Azure Load Balancers provide different types of logs alert events, health probe, metrics to help you manage and troubleshoot issues. This policy identifies Azure Load Balancers that have diagnostics logs disabled. As a best practice, enable diagnostic logs to start collecting the data available through these logs.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1010,6 +1114,14 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts/providers/diagnosticsettings",
+                        "microsoft.storage/storageaccounts/queueservices/providers/diagnosticsettings",
+                        "microsoft.storage/storageaccounts/tableservices/providers/diagnosticsettings",
+                        "microsoft.storage/storageaccounts/blobservices/providers/diagnosticsettings",
+                        "microsoft.network/loadbalancers/providers/diagnosticsettings",
+                        "microsoft.keyvault/vaults/providers/diagnosticsettings"
                     ]
                 },
                 {
@@ -1039,6 +1151,14 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts/providers/diagnosticsettings",
+                        "microsoft.storage/storageaccounts/queueservices/providers/diagnosticsettings",
+                        "microsoft.storage/storageaccounts/tableservices/providers/diagnosticsettings",
+                        "microsoft.storage/storageaccounts/blobservices/providers/diagnosticsettings",
+                        "microsoft.network/loadbalancers/providers/diagnosticsettings",
+                        "microsoft.keyvault/vaults/providers/diagnosticsettings"
                     ]
                 },
                 {
@@ -1068,6 +1188,14 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts/providers/diagnosticsettings",
+                        "microsoft.storage/storageaccounts/queueservices/providers/diagnosticsettings",
+                        "microsoft.storage/storageaccounts/tableservices/providers/diagnosticsettings",
+                        "microsoft.storage/storageaccounts/blobservices/providers/diagnosticsettings",
+                        "microsoft.network/loadbalancers/providers/diagnosticsettings",
+                        "microsoft.keyvault/vaults/providers/diagnosticsettings"
                     ]
                 },
                 {
@@ -1097,6 +1225,14 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts/providers/diagnosticsettings",
+                        "microsoft.storage/storageaccounts/queueservices/providers/diagnosticsettings",
+                        "microsoft.storage/storageaccounts/tableservices/providers/diagnosticsettings",
+                        "microsoft.storage/storageaccounts/blobservices/providers/diagnosticsettings",
+                        "microsoft.network/loadbalancers/providers/diagnosticsettings",
+                        "microsoft.keyvault/vaults/providers/diagnosticsettings"
                     ]
                 },
                 {
@@ -1126,6 +1262,14 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts/providers/diagnosticsettings",
+                        "microsoft.storage/storageaccounts/queueservices/providers/diagnosticsettings",
+                        "microsoft.storage/storageaccounts/tableservices/providers/diagnosticsettings",
+                        "microsoft.storage/storageaccounts/blobservices/providers/diagnosticsettings",
+                        "microsoft.network/loadbalancers/providers/diagnosticsettings",
+                        "microsoft.keyvault/vaults/providers/diagnosticsettings"
                     ]
                 },
                 {
@@ -1155,6 +1299,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.compute/disks"
                     ]
                 },
                 {
@@ -1188,6 +1335,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.keyvault/vaults"
                     ]
                 },
                 {
@@ -1219,6 +1369,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.keyvault/vaults"
                     ]
                 },
                 {
@@ -1250,6 +1403,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.keyvault/vaults"
                     ]
                 },
                 {
@@ -1286,6 +1442,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.keyvault/vaults/keys"
                     ]
                 },
                 {
@@ -1315,6 +1474,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.keyvault/vaults/secrets"
                     ]
                 },
                 {
@@ -1344,6 +1506,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.authorization/locks"
                     ]
                 },
                 {
@@ -1373,6 +1538,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networkwatchers/flowlogs"
                     ]
                 },
                 {
@@ -1402,6 +1570,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networkwatchers/flowlogs"
                     ]
                 },
                 {
@@ -1431,6 +1602,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networkwatchers/flowlogs"
                     ]
                 },
                 {
@@ -1460,6 +1634,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -1489,6 +1666,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -1518,6 +1698,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -1547,6 +1730,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -1576,6 +1762,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -1605,6 +1794,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -1634,6 +1826,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -1663,6 +1858,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -1692,6 +1890,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -1727,6 +1928,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -1756,6 +1960,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -1785,6 +1992,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -1814,6 +2024,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -1849,6 +2062,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -1884,6 +2100,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -1913,6 +2132,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -1942,6 +2164,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -1971,6 +2196,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -2000,6 +2228,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -2029,6 +2260,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -2058,6 +2292,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -2087,6 +2324,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -2116,6 +2356,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -2145,6 +2388,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -2174,6 +2420,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -2203,6 +2452,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -2232,6 +2484,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -2261,6 +2516,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -2290,6 +2548,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -2322,6 +2583,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -2354,6 +2618,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
                     ]
                 },
                 {
@@ -2385,6 +2652,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.dbforpostgresql/servers"
                     ]
                 },
                 {
@@ -2416,6 +2686,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.dbforpostgresql/servers"
                     ]
                 },
                 {
@@ -2448,6 +2721,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.security/pricings"
                     ]
                 },
                 {
@@ -2484,6 +2760,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.cache/redis/linkedservers",
+                        "microsoft.cache/redis"
                     ]
                 },
                 {
@@ -2519,6 +2799,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.cache/redis/linkedservers",
+                        "microsoft.cache/redis"
                     ]
                 },
                 {
@@ -2548,6 +2832,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.containerregistry/registries"
                     ]
                 },
                 {
@@ -2577,6 +2864,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.containerregistry/registries/webhooks"
                     ]
                 },
                 {
@@ -2608,6 +2898,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.containerregistry/registries"
                     ]
                 },
                 {
@@ -2637,7 +2930,8 @@
                                 "arm"
                             ]
                         }
-                    ]
+                    ],
+                    "resourceTypes": []
                 },
                 {
                     "masterTestId": "TEST_SECURITY_CONTACTS_1",
@@ -2673,6 +2967,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.security/securitycontacts"
                     ]
                 },
                 {
@@ -2704,6 +3001,11 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/managedinstances/securityalertpolicies",
+                        "microsoft.sql/servers/securityalertpolicies"
                     ]
                 },
                 {
@@ -2733,6 +3035,11 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/managedinstances/securityalertpolicies",
+                        "microsoft.sql/servers/securityalertpolicies"
                     ]
                 },
                 {
@@ -2765,6 +3072,11 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/managedinstances/securityalertpolicies",
+                        "microsoft.sql/servers/securityalertpolicies"
                     ]
                 },
                 {
@@ -2794,6 +3106,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/managedinstances"
                     ]
                 },
                 {
@@ -2814,7 +3129,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure SQL server's TDE protector is encrypted with Customer-managed key",
-                    "description": "Customer-managed key support for Transparent Data Encryption (TDE) allows user control of TDE encryption keys and restricts who can access them and when. Azure Key Vault, Azure’s cloud-based external key management system is the first key management service where TDE has integrated support for Customer-managed keys. With Customer-managed key support, the database encryption key is protected by an asymmetric key stored in the Key Vault. The asymmetric key is set at the server level and inherited by all databases under that server.",
+                    "description": "Customer-managed key support for Transparent Data Encryption (TDE) allows user control of TDE encryption keys and restricts who can access them and when. Azure Key Vault, Azure's cloud-based external key management system is the first key management service where TDE has integrated support for Customer-managed keys. With Customer-managed key support, the database encryption key is protected by an asymmetric key stored in the Key Vault. The asymmetric key is set at the server level and inherited by all databases under that server.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2825,6 +3140,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers/encryptionprotector"
                     ]
                 },
                 {
@@ -2845,7 +3163,7 @@
                     ],
                     "severity": "High",
                     "title": "Storage Accounts https based secure transfer should be enabled",
-                    "description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPs. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesnâ€™t support HTTPs for custom domain names, this option is not applied when using a custom domain name.",
+                    "description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPs. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesn't support HTTPs for custom domain names, this option is not applied when using a custom domain name.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2861,6 +3179,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts"
                     ]
                 },
                 {
@@ -2895,6 +3216,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts"
                     ]
                 },
                 {
@@ -2929,6 +3253,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts"
                     ]
                 },
                 {
@@ -2964,6 +3291,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts"
                     ]
                 },
                 {
@@ -2999,6 +3329,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts"
                     ]
                 },
                 {
@@ -3030,6 +3363,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts"
                     ]
                 },
                 {
@@ -3061,6 +3397,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts"
                     ]
                 },
                 {
@@ -3092,6 +3431,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts"
                     ]
                 },
                 {
@@ -3121,6 +3463,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts/blobservices/containers"
                     ]
                 },
                 {
@@ -3150,6 +3495,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.compute/virtualmachines"
                     ]
                 },
                 {
@@ -3179,6 +3527,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.compute/virtualmachines/extensions"
                     ]
                 },
                 {
@@ -3208,6 +3559,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/virtualnetworks/virtualnetworkpeerings"
                     ]
                 },
                 {
@@ -3237,6 +3591,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/virtualnetworks/subnets"
                     ]
                 },
                 {
@@ -3271,6 +3628,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/vpngateways"
                     ]
                 },
                 {
@@ -3300,6 +3660,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/servers/administrators"
                     ]
                 },
                 {
@@ -3336,6 +3700,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/servers/administrators"
                     ]
                 },
                 {
@@ -3367,6 +3735,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/servers/auditingsettings"
                     ]
                 },
                 {
@@ -3398,6 +3770,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/servers/auditingsettings"
                     ]
                 },
                 {
@@ -3427,6 +3803,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.compute/virtualmachines"
                     ]
                 },
                 {
@@ -3456,6 +3835,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.containerservice/managedclusters"
                     ]
                 },
                 {
@@ -3485,6 +3867,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.containerservice/managedclusters"
                     ]
                 },
                 {
@@ -3514,6 +3899,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
                     ]
                 },
                 {
@@ -3543,6 +3931,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
                     ]
                 },
                 {
@@ -3572,6 +3963,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
                     ]
                 },
                 {
@@ -3601,6 +3995,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
                     ]
                 },
                 {
@@ -3630,6 +4027,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.security/securitycontacts"
                     ]
                 },
                 {
@@ -3659,6 +4059,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/servers/auditingsettings"
                     ]
                 },
                 {
@@ -3688,6 +4092,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/servers/auditingsettings"
                     ]
                 },
                 {
@@ -3717,6 +4125,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.dbformysql/servers"
                     ]
                 },
                 {
@@ -3746,6 +4157,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts"
                     ]
                 },
                 {
@@ -3775,6 +4189,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.insights/logprofiles"
                     ]
                 },
                 {
@@ -3804,6 +4221,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.dbformariadb/servers",
+                        "microsoft.dbformariadb/servers/firewallrules"
                     ]
                 },
                 {
@@ -3833,6 +4254,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.dbformariadb/servers",
+                        "microsoft.dbformariadb/servers/firewallrules"
                     ]
                 },
                 {
@@ -3862,6 +4287,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.dbformysql/servers",
+                        "microsoft.dbformysql/servers/firewallrules"
                     ]
                 },
                 {
@@ -3891,6 +4320,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.dbformysql/servers",
+                        "microsoft.dbformysql/servers/firewallrules"
                     ]
                 },
                 {
@@ -3920,6 +4353,9 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.insights/logprofiles"
                     ]
                 },
                 {
@@ -3955,6 +4391,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/servers/administrators"
                     ]
                 },
                 {
@@ -3963,7 +4403,7 @@
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(.rego)",
+                    "rule": "file(sql_servers.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-0191-ARM",
@@ -3986,6 +4426,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/servers/administrators"
                     ]
                 },
                 {
@@ -4017,6 +4461,11 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/managedinstances/securityalertpolicies",
+                        "microsoft.sql/servers/securityalertpolicies"
                     ]
                 },
                 {
@@ -4048,6 +4497,11 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/managedinstances/securityalertpolicies",
+                        "microsoft.sql/servers/securityalertpolicies"
                     ]
                 },
                 {
@@ -4080,6 +4534,11 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/managedinstances/securityalertpolicies",
+                        "microsoft.sql/servers/securityalertpolicies"
                     ]
                 },
                 {
@@ -4112,6 +4571,11 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/managedinstances/securityalertpolicies",
+                        "microsoft.sql/servers/securityalertpolicies"
                     ]
                 },
                 {
@@ -4143,6 +4607,11 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/managedinstances/securityalertpolicies",
+                        "microsoft.sql/servers/securityalertpolicies"
                     ]
                 },
                 {
@@ -4174,6 +4643,11 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/managedinstances/securityalertpolicies",
+                        "microsoft.sql/servers/securityalertpolicies"
                     ]
                 },
                 {
@@ -4203,6 +4677,11 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/managedinstances/securityalertpolicies",
+                        "microsoft.sql/servers/securityalertpolicies"
                     ]
                 },
                 {
@@ -4232,6 +4711,11 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/managedinstances/securityalertpolicies",
+                        "microsoft.sql/servers/securityalertpolicies"
                     ]
                 },
                 {
@@ -4268,6 +4752,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/servers/administrators"
                     ]
                 }
             ]

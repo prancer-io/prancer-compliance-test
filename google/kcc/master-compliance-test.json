@@ -31,6 +31,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computedisk"
                     ]
                 },
                 {
@@ -60,6 +63,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -89,6 +95,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -118,6 +127,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -147,6 +159,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -176,6 +191,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -205,6 +223,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -234,6 +255,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -263,6 +287,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -292,6 +319,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -321,6 +351,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -350,6 +383,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -379,6 +415,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -408,6 +447,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -437,6 +479,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -466,6 +511,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -495,6 +543,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -524,6 +575,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -553,6 +607,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -582,6 +639,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -611,6 +671,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -640,6 +703,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -669,6 +735,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -698,6 +767,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computefirewall"
                     ]
                 },
                 {
@@ -727,6 +799,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computeinstance"
                     ]
                 },
                 {
@@ -756,6 +831,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computeinstance"
                     ]
                 },
                 {
@@ -785,6 +863,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computeinstance"
                     ]
                 },
                 {
@@ -814,6 +895,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computeinstance"
                     ]
                 },
                 {
@@ -843,6 +927,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computeinstance"
                     ]
                 },
                 {
@@ -872,6 +959,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computeinstance"
                     ]
                 },
                 {
@@ -901,6 +991,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computeinstance"
                     ]
                 },
                 {
@@ -930,6 +1023,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computenetwork"
                     ]
                 },
                 {
@@ -959,6 +1055,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computenetwork"
                     ]
                 },
                 {
@@ -988,6 +1087,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "computesubnetwork"
                     ]
                 },
                 {
@@ -1017,6 +1119,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "containercluster"
                     ]
                 },
                 {
@@ -1046,6 +1151,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "containercluster"
                     ]
                 },
                 {
@@ -1075,6 +1183,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "containercluster"
                     ]
                 },
                 {
@@ -1104,6 +1215,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "containercluster"
                     ]
                 },
                 {
@@ -1133,6 +1247,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "containercluster"
                     ]
                 },
                 {
@@ -1162,6 +1279,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "containercluster"
                     ]
                 },
                 {
@@ -1191,6 +1311,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "containercluster"
                     ]
                 },
                 {
@@ -1220,6 +1343,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "containercluster"
                     ]
                 },
                 {
@@ -1249,6 +1375,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "containercluster"
                     ]
                 },
                 {
@@ -1278,6 +1407,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "containercluster"
                     ]
                 },
                 {
@@ -1307,6 +1439,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "containernodepool"
                     ]
                 },
                 {
@@ -1336,6 +1471,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "containernodepool"
                     ]
                 },
                 {
@@ -1365,6 +1503,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "containernodepool"
                     ]
                 },
                 {
@@ -1394,6 +1535,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "containernodepool"
                     ]
                 },
                 {
@@ -1423,6 +1567,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "dnsmanagedzone"
                     ]
                 },
                 {
@@ -1452,6 +1599,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "dnsmanagedzone"
                     ]
                 },
                 {
@@ -1481,6 +1631,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "iampolicy"
                     ]
                 },
                 {
@@ -1489,7 +1642,7 @@
                         "KCC_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(IAMPolicy.rego)",
+                    "rule": "file(IAMpolicy.rego)",
                     "evals": [
                         {
                             "id": "PR-GCP-0052-KCC",
@@ -1510,6 +1663,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "iampolicy"
                     ]
                 },
                 {
@@ -1518,7 +1674,7 @@
                         "KCC_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(IAMPolicy.rego)",
+                    "rule": "file(IAMpolicy.rego)",
                     "evals": [
                         {
                             "id": "PR-GCP-0053-KCC",
@@ -1539,6 +1695,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "iampolicy"
                     ]
                 },
                 {
@@ -1568,6 +1727,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "iamserviceaccountkey"
                     ]
                 },
                 {
@@ -1597,6 +1759,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "kmscryptokey"
                     ]
                 },
                 {
@@ -1626,6 +1791,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "sqlinstance"
                     ]
                 },
                 {
@@ -1655,6 +1823,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "sqlinstance"
                     ]
                 },
                 {
@@ -1684,6 +1855,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "sqlinstance"
                     ]
                 },
                 {
@@ -1713,6 +1887,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "storagebucket"
                     ]
                 },
                 {
@@ -1742,6 +1919,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "storagebucket"
                     ]
                 },
                 {
@@ -1771,6 +1951,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "storagebucket"
                     ]
                 },
                 {
@@ -1800,6 +1983,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "storagebucket"
                     ]
                 },
                 {
@@ -1829,6 +2015,9 @@
                                 "kcc"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "storagebucket"
                     ]
                 }
             ]

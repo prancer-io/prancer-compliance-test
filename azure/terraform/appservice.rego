@@ -203,6 +203,7 @@ app_service_aad_auth_enabled = false {
 }
 
 app_service_aad_auth_enabled {
+    lower(input.resources[_].type) == "azurerm_app_service"
     not azure_attribute_absence["app_service_aad_auth_enabled"]
 }
 
@@ -591,7 +592,7 @@ azure_attribute_absence["app_service_managed_identity_provider_enabled"] {
 app_service_managed_identity_provider_enabled = false {
     azure_attribute_absence["app_service_managed_identity_provider_enabled"]
 } else = true {
-    true
+    lower(input.resources[_].type) == "azurerm_app_service"
 }
 
 app_service_managed_identity_provider_enabled_err = "azurerm_app_service property 'identity.type' need to be exist. Its missing from the resource." {
