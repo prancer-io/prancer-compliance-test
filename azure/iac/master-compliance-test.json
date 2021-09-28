@@ -1074,7 +1074,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -1103,7 +1110,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -1132,7 +1146,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -1190,7 +1211,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -1380,13 +1408,20 @@
                             "remediationFunction": "PR_AZR_0052_ARM.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Deployment Scope Resource Group should have a remove protection resource lock configured",
                     "description": "Azure Resource Manager locks provide a way to lock down Azure resources from being deleted or modified. The lock level can be set to either 'CanNotDelete' or 'ReadOnly'. When you apply a lock at a parent scope, all resources within the scope inherit the same lock, and the most restrictive lock takes precedence._x000D__x000D_This policy identifies Azure Resource Groups that do not have a lock set. As a best practice, place a lock on important resources to prevent accidental or malicious modification or deletion by unauthorized users.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -1449,7 +1484,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -1478,7 +1519,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -2613,7 +2660,11 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "arm"
@@ -2637,14 +2688,19 @@
                             "remediationFunction": "PR-AZR-0124-ARM.py"
                         }
                     ],
-                    "severity": "High",
+                    "severity": "Medium",
                     "title": "Ensure ssl enforcement is enabled on PostgreSQL Database Server.",
                     "description": "Enable SSL connection on PostgreSQL Servers. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application.",
                     "tags": [
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "arm"
@@ -2945,7 +3001,11 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "NIST 800"
+                                "CIS",
+                                "CSA-CCM",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "arm"
@@ -2975,7 +3035,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -3005,8 +3071,11 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "HIPAA",
-                                "Best Practices"
+                                "CIS",
+                                "CSA-CCM",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "arm"
@@ -3066,7 +3135,12 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "arm"
@@ -3134,8 +3208,10 @@
                             "cloud": "git",
                             "compliance": [
                                 "CIS",
-                                "HIPAA",
+                                "CSA CCM",
+                                "HITRUST",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS"
                             ],
                             "service": [
@@ -3168,10 +3244,12 @@
                             "cloud": "git",
                             "compliance": [
                                 "CIS",
-                                "HIPAA",
+                                "CSA CCM",
+                                "HITRUST",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS"
-                            ],
+                           ],
                             "service": [
                                 "arm"
                             ]
@@ -3333,7 +3411,12 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "GDPR"
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "arm"
@@ -3363,7 +3446,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -3392,7 +3481,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                           ],
                             "service": [
                                 "arm"
                             ]
@@ -3479,7 +3575,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -3608,7 +3710,12 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "arm"
@@ -3639,7 +3746,12 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "arm"
@@ -3929,7 +4041,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -3958,7 +4077,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -4300,7 +4426,11 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "CIS",
+                                "CSA-CCM",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "arm"
@@ -4331,7 +4461,11 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "CIS",
+                                "CSA-CCM",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "arm"
@@ -4362,8 +4496,11 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "ISO 27001",
-                                "Best Practices"
+                                "CIS",
+                                "CSA-CCM",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "arm"
@@ -4394,8 +4531,11 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "ISO 27001",
-                                "Best Practices"
+                                "CIS",
+                                "CSA-CCM",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "arm"
@@ -4426,7 +4566,11 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "CIS",
+                                "CSA-CCM",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "arm"
@@ -4457,7 +4601,11 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "CIS",
+                                "CSA-CCM",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "arm"
@@ -4487,7 +4635,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -4516,7 +4670,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
