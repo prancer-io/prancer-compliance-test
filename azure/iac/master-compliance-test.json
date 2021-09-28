@@ -648,6 +648,7 @@
                         }
                     ],
                     "resourceTypes": [
+                        "microsoft.sql/servers/databases",
                         "microsoft.sql/servers/databases/auditingsettings"
                     ]
                 },
@@ -687,6 +688,7 @@
                         }
                     ],
                     "resourceTypes": [
+                        "microsoft.sql/servers/databases",
                         "microsoft.sql/servers/databases/auditingsettings"
                     ]
                 },
@@ -724,6 +726,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers/databases",
+                        "microsoft.sql/servers/databases/auditingsettings"
                     ]
                 },
                 {
@@ -760,6 +766,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers/databases",
+                        "microsoft.sql/servers/databases/auditingsettings"
                     ]
                 },
                 {
@@ -798,6 +808,7 @@
                         }
                     ],
                     "resourceTypes": [
+                        "microsoft.sql/servers/databases",
                         "microsoft.sql/servers/databases/transparentdataencryption"
                     ]
                 },
@@ -835,6 +846,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers/databases",
+                        "microsoft.sql/servers/databases/transparentdataencryption"
                     ]
                 },
                 {
@@ -870,6 +885,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/servers/firewallrules"
                     ]
                 },
                 {
@@ -907,6 +926,7 @@
                         }
                     ],
                     "resourceTypes": [
+                        "microsoft.sql/servers",
                         "microsoft.sql/servers/firewallrules"
                     ]
                 },
@@ -1126,6 +1146,7 @@
                         }
                     ],
                     "resourceTypes": [
+                        "microsoft.sql/servers/databases",
                         "microsoft.sql/servers/databases/vulnerabilityassessments"
                     ]
                 },
@@ -1156,6 +1177,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers/databases",
+                        "microsoft.sql/servers/databases/vulnerabilityassessments"
                     ]
                 },
                 {
@@ -1187,6 +1212,7 @@
                         }
                     ],
                     "resourceTypes": [
+                        "microsoft.sql/servers/databases",
                         "microsoft.sql/servers/databases/vulnerabilityassessments"
                     ]
                 },
@@ -1217,6 +1243,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers/databases",
+                        "microsoft.sql/servers/databases/vulnerabilityassessments"
                     ]
                 },
                 {
@@ -1248,6 +1278,7 @@
                         }
                     ],
                     "resourceTypes": [
+                        "microsoft.sql/servers/databases",
                         "microsoft.sql/servers/databases/vulnerabilityassessments"
                     ]
                 },
@@ -1278,6 +1309,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers/databases",
+                        "microsoft.sql/servers/databases/vulnerabilityassessments"
                     ]
                 },
                 {
@@ -3695,6 +3730,7 @@
                         }
                     ],
                     "resourceTypes": [
+                        "microsoft.storage/storageaccounts",
                         "microsoft.storage/storageaccounts/blobservices/containers"
                     ]
                 },
@@ -3725,6 +3761,10 @@
                                 "arm"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts",
+                        "microsoft.storage/storageaccounts/blobservices/containers"
                     ]
                 },
                 {
