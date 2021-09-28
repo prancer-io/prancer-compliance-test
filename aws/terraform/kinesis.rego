@@ -8,7 +8,7 @@ default kinesis_encryption = null
 
 aws_issue["kinesis_encryption"] {
     resource := input.resources[i]
-    lower(resource.yype) == "aws_kinesis_stream"
+    lower(resource.type) == "aws_kinesis_stream"
     not resource.properties.encryption_type
 }
 
