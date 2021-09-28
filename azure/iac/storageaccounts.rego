@@ -205,7 +205,7 @@ blobService = false {
     azure_issue["blobService"]
 }
 
-blobService {
+blobService = false {
     azure_attribute_absence["blobService"]
 }
 
