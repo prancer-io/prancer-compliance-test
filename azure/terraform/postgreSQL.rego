@@ -332,7 +332,8 @@ no_azure_issue(resource_type) {
 postgresql_public_access_disabled {
     no_azure_issue("azurerm_postgresql_server")
 } else = false {
-	true
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+	#true
 }
 
 postgresql_public_access_disabled_err = "Public Network Access is currently not disabled on PostgreSQL Server." {

@@ -198,6 +198,7 @@ azure_issue["log_storage_retention"] {
 }
 
 log_storage_retention {
+    lower(input.resources[_].type) == "azurerm_monitor_diagnostic_setting"
     not azure_attribute_absence["log_storage_retention"]
     not azure_issue["log_storage_retention"]
 }

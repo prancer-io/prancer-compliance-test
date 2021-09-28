@@ -134,6 +134,7 @@ azure_issue["storage_threat_protection"] {
 }
 
 storage_threat_protection {
+    lower(input.resources[_].type) == "azurerm_advanced_threat_protection"
     not azure_attribute_absence["storage_threat_protection"]
     not azure_issue["storage_threat_protection"]
 }
@@ -189,6 +190,7 @@ azure_issue["keySource"] {
 }
 
 keySource {
+    lower(input.resources[_].type) == "azurerm_storage_encryption_scope"
     not azure_attribute_absence["keySource"]
     not azure_issue["keySource"]
 }

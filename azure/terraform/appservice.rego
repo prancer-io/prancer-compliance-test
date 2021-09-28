@@ -203,6 +203,7 @@ app_service_aad_auth_enabled = false {
 }
 
 app_service_aad_auth_enabled {
+    lower(input.resources[_].type) == "azurerm_app_service"
     not azure_attribute_absence["app_service_aad_auth_enabled"]
 }
 
@@ -376,6 +377,7 @@ azure_issue["app_service_cors_not_allowing_all"] {
 }
 
 app_service_cors_not_allowing_all {
+    lower(input.resources[_].type) == "azurerm_app_service"
     azure_attribute_absence["app_service_uses_http_two"]
     not azure_issue["app_service_uses_http_two"]
 }
@@ -429,7 +431,8 @@ azure_attribute_absence["app_service_http_logging_enabled"] {
 app_service_http_logging_enabled = false {
     azure_attribute_absence["app_service_http_logging_enabled"]
 } else = true {
-	true
+    lower(input.resources[_].type) == "azurerm_app_service"
+	#true
 }
 
 app_service_http_logging_enabled_err = "azurerm_app_service property 'logs.http_logs' need to be exist. Its missing from the resource." {
@@ -591,7 +594,8 @@ azure_attribute_absence["app_service_managed_identity_provider_enabled"] {
 app_service_managed_identity_provider_enabled = false {
     azure_attribute_absence["app_service_managed_identity_provider_enabled"]
 } else = true {
-    true
+    lower(input.resources[_].type) == "azurerm_app_service"
+    #true
 }
 
 app_service_managed_identity_provider_enabled_err = "azurerm_app_service property 'identity.type' need to be exist. Its missing from the resource." {
@@ -639,6 +643,7 @@ azure_issue["app_service_remote_debugging_disabled"] {
 }
 
 app_service_remote_debugging_disabled {
+    lower(input.resources[_].type) == "azurerm_app_service"
     azure_attribute_absence["app_service_remote_debugging_disabled"]
     not azure_issue["app_service_remote_debugging_disabled"]
 }
@@ -761,6 +766,7 @@ azure_issue["app_service_dot_net_framework_latest"] {
 
 # we need to make it pass if property is missing, as azurerm_app_service may not need dot net framework
 app_service_dot_net_framework_latest {
+    lower(input.resources[_].type) == "azurerm_app_service"
     azure_attribute_absence["app_service_dot_net_framework_latest"]
     not azure_issue["app_service_dot_net_framework_latest"]
 }
@@ -822,6 +828,7 @@ azure_issue["app_service_php_version_latest"] {
 
 # we need to make it pass if property is missing, as azurerm_app_service may not need php
 app_service_php_version_latest {
+    lower(input.resources[_].type) == "azurerm_app_service"
     azure_attribute_absence["app_service_php_version_latest"]
     not azure_issue["app_service_php_version_latest"]
 }
@@ -883,6 +890,7 @@ azure_issue["app_service_python_version_latest"] {
 
 # we need to make it pass if property is missing, as azurerm_app_service may not need python
 app_service_python_version_latest {
+    lower(input.resources[_].type) == "azurerm_app_service"
     azure_attribute_absence["app_service_python_version_latest"]
     not azure_issue["app_service_python_version_latest"]
 }
@@ -946,6 +954,7 @@ azure_issue["app_service_java_version_latest"] {
 
 # we need to make it pass if property is missing, as azurerm_app_service may not need java
 app_service_java_version_latest {
+    lower(input.resources[_].type) == "azurerm_app_service"
     azure_attribute_absence["app_service_java_version_latest"]
     not azure_issue["app_service_java_version_latest"]
 }
