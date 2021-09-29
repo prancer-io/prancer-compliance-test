@@ -1369,9 +1369,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws::elasticloadbalancingv2::loadbalancer",
-                        "aws::elasticloadbalancing::loadbalancer",
-                        "aws::elasticloadbalancingv2::listener"
+                        "aws::elasticloadbalancing::loadbalancer"
                     ]
                 },
                 {
@@ -1403,9 +1401,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws::elasticloadbalancingv2::loadbalancer",
-                        "aws::elasticloadbalancing::loadbalancer",
-                        "aws::elasticloadbalancingv2::listener"
+                        "aws::elasticloadbalancing::loadbalancer"
                     ]
                 },
                 {
@@ -1437,9 +1433,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws::elasticloadbalancingv2::loadbalancer",
-                        "aws::elasticloadbalancing::loadbalancer",
-                        "aws::elasticloadbalancingv2::listener"
+                        "aws::elasticloadbalancing::loadbalancer"
                     ]
                 },
                 {
@@ -1471,9 +1465,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws::elasticloadbalancingv2::loadbalancer",
-                        "aws::elasticloadbalancing::loadbalancer",
-                        "aws::elasticloadbalancingv2::listener"
+                        "aws::elasticloadbalancing::loadbalancer"
                     ]
                 },
                 {
@@ -1505,9 +1497,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws::elasticloadbalancingv2::loadbalancer",
-                        "aws::elasticloadbalancing::loadbalancer",
-                        "aws::elasticloadbalancingv2::listener"
+                        "aws::elasticloadbalancing::loadbalancer"
                     ]
                 },
                 {
@@ -1539,9 +1529,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws::elasticloadbalancingv2::loadbalancer",
-                        "aws::elasticloadbalancing::loadbalancer",
-                        "aws::elasticloadbalancingv2::listener"
+                        "aws::elasticloadbalancing::loadbalancer"
                     ]
                 },
                 {
@@ -1575,9 +1563,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws::elasticloadbalancingv2::loadbalancer",
-                        "aws::elasticloadbalancing::loadbalancer",
-                        "aws::elasticloadbalancingv2::listener"
+                        "aws::elasticloadbalancing::loadbalancer"
                     ]
                 },
                 {
@@ -1609,9 +1595,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws::elasticloadbalancingv2::loadbalancer",
-                        "aws::elasticloadbalancing::loadbalancer",
-                        "aws::elasticloadbalancingv2::listener"
+                        "aws::elasticloadbalancingv2::loadbalancer"
                     ]
                 },
                 {
@@ -1651,9 +1635,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws::elasticloadbalancingv2::loadbalancer",
-                        "aws::elasticloadbalancing::loadbalancer",
-                        "aws::elasticloadbalancingv2::listener"
+                        "aws::elasticloadbalancing::loadbalancer"
                     ]
                 },
                 {
@@ -1685,8 +1667,6 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws::elasticloadbalancingv2::loadbalancer",
-                        "aws::elasticloadbalancing::loadbalancer",
                         "aws::elasticloadbalancingv2::listener"
                     ]
                 },
@@ -1719,9 +1699,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws::elasticloadbalancingv2::loadbalancer",
-                        "aws::elasticloadbalancing::loadbalancer",
-                        "aws::elasticloadbalancingv2::listener"
+                        "aws::elasticloadbalancing::loadbalancer"
                     ]
                 },
                 {
@@ -4615,8 +4593,6 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws::elasticloadbalancingv2::loadbalancer",
-                        "aws::elasticloadbalancing::loadbalancer",
                         "aws::elasticloadbalancingv2::listener"
                     ]
                 },
@@ -4880,9 +4856,6 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws::iam::user",
-                        "aws::iam::role",
-                        "aws::iam::group",
                         "aws::iam::policy",
                         "aws::iam::managedpolicy"
                     ]
@@ -4916,9 +4889,6 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws::iam::user",
-                        "aws::iam::role",
-                        "aws::iam::group",
                         "aws::iam::policy",
                         "aws::iam::managedpolicy"
                     ]
@@ -4952,11 +4922,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws::iam::user",
-                        "aws::iam::role",
-                        "aws::iam::group",
-                        "aws::iam::policy",
-                        "aws::iam::managedpolicy"
+                        "aws::iam::role"
                     ]
                 },
                 {
@@ -4988,11 +4954,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws::iam::user",
-                        "aws::iam::role",
-                        "aws::iam::group",
-                        "aws::iam::policy",
-                        "aws::iam::managedpolicy"
+                        "aws::iam::policy"
                     ]
                 },
                 {
@@ -5060,11 +5022,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws::iam::user",
-                        "aws::iam::role",
-                        "aws::iam::group",
-                        "aws::iam::policy",
-                        "aws::iam::managedpolicy"
+                        "aws::iam::policy"
                     ]
                 },
                 {
@@ -5096,11 +5054,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws::iam::user",
-                        "aws::iam::role",
-                        "aws::iam::group",
-                        "aws::iam::policy",
-                        "aws::iam::managedpolicy"
+                        "aws::iam::policy"
                     ]
                 },
                 {
