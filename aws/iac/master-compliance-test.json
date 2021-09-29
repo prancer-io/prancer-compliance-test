@@ -5858,7 +5858,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "AWS DynamoDB encrypted using AWS owned CMK instead of AWS managed CMK",
+                    "title": "Ensure DynamoDB PITR is enabled",
                     "description": "DynamoDB Point-In-Time Recovery (PITR) is an automatic backup service for DynamoDB table data that helps protect your DynamoDB tables from accidental write or delete operations. Once enabled, PITR provides continuous backups that can be controlled using various programmatic parameters. PITR can also be used to restore table data from any point in time during the last 35 days, as well as any incremental backups of DynamoDB tables",
                     "tags": [
                         {
