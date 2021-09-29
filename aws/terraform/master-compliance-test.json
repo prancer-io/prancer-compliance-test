@@ -674,8 +674,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-0036-TRF",
-                            "eval": "data.rule.dynabodb_encrypt",
-                            "message": "data.rule.dynabodb_encrypt_err",
+                            "eval": "data.rule.dynamodb_encrypt",
+                            "message": "data.rule.dynamodb_encrypt_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html",
                             "remediationFunction": "PR_AWS_0036_TRF.py"
                         }
@@ -5467,35 +5467,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SECRETS_4",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "python",
-                    "rule": "file(secret_tf.py)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-0030-RGX",
-                            "eval": "al_mws",
-                            "message": "al_mws_err",
-                            "remediationDescription": "",
-                            "remediationFunction": ""
-                        }
-                    ],
-                    "severity": "High",
-                    "title": "There is a possibility that aws marketplace web service id is exposed",
-                    "description": "There is a possibility that aws marketplace web service id is exposed, template should not have any secret in it. Make sure to put the secrets in a vault",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ]
-                },
-                {
                     "masterTestId": "TEST_SECRETS_5",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -5505,8 +5476,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-0031-RGX",
-                            "eval": "aws_password_leak",
-                            "message": "aws_password_leak_err",
+                            "eval": "password_leak",
+                            "message": "password_leak_err",
                             "remediationDescription": "",
                             "remediationFunction": ""
                         }

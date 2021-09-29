@@ -2019,6 +2019,64 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterTestId": "TEST_SECRETS_1",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "python",
+                    "rule": "file(secret_tf.py)",
+                    "evals": [
+                        {
+                            "id":"PR-AWS-0001-RGX",
+                            "eval": "password_leak",
+                            "message": "password_leak_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "There is a possibility that secure password is exposed",
+                    "description": "There is a possibility that secure password is exposed",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECRETS_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "python",
+                    "rule": "file(secret_tf.py)",
+                    "evals": [
+                        {
+                            "id":"PR-AWS-0001-RGX",
+                            "eval": "entropy_password",
+                            "message": "entropy_password_err",
+                            "remediationDescription":"",
+                            "remediationFunction":""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "There is a possibility that secure password is exposed",
+                    "description": "There is a possibility that secure password is exposed",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
                 }
             ]
         }
