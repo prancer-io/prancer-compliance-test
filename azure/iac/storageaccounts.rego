@@ -201,21 +201,20 @@ blobService {
     not azure_issue["blobService"]
 }
 
+blobService  {
+    azure_attribute_absence["blobService"]
+    not azure_issue["blobService"]
+}
+
 blobService = false {
     azure_issue["blobService"]
 }
 
-blobService {
-    azure_attribute_absence["blobService"]
-}
 
 blobService_err = "Ensure that 'Storage service encryption' is enabled for the Blob Service" {
     azure_issue["blobService"]
 }
 
-blobService_miss_err = "Ensure that 'Storage service encryption' is enabled for the Blob Service" {
-    azure_attribute_absence["blobService"]
-}
 
 blobService_metadata := {
     "Policy Code": "PR-AZR-0112-ARM",
@@ -253,21 +252,20 @@ fileService {
     not azure_issue["fileService"]
 }
 
+fileService {
+    azure_attribute_absence["fileService"]
+    not azure_issue["fileService"]
+}
+
 fileService = false {
     azure_issue["fileService"]
 }
 
-fileService {
-    azure_attribute_absence["fileService"]
-}
 
 fileService_err = "Ensure that 'Storage service encryption' is enabled for the File Service" {
     azure_issue["fileService"]
 }
 
-fileService_miss_err = "Ensure that 'Storage service encryption' is enabled for the File Service" {
-    azure_attribute_absence["fileService"]
-}
 
 fileService_metadata := {
     "Policy Code": "PR-AZR-0113-ARM",
