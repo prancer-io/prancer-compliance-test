@@ -26,6 +26,7 @@ azure_issue["vnet_peer"] {
 }
 
 vnet_peer {
+    lower(input.resources[_].type) == "azurerm_virtual_network_peering"
     azure_attribute_absence["vnet_peer"]
     not azure_issue["vnet_peer"]
 }

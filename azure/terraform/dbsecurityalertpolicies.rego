@@ -26,7 +26,7 @@ azure_issue["dbsec_threat_off"] {
 }
 
 dbsec_threat_off {
-    lower(input.resources[_].type) == "azurerm_mssql_server_security_alert_policy"
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     not azure_attribute_absence["dbsec_threat_off"]
     not azure_issue["dbsec_threat_off"]
 }
@@ -41,7 +41,7 @@ dbsec_threat_off = false {
 
 dbsec_threat_off_err = "azurerm_mssql_server_security_alert_policy property 'state' is missing from the resource. Set the value to 'Enabled' after property addition." {
     azure_attribute_absence["dbsec_threat_off"]
-} else = "SQL Databases security alert policy is currently not enabled" {
+} else = "SQL Database Server security alert policy is currently not enabled" {
     azure_issue["dbsec_threat_off"]
 }
 
@@ -50,7 +50,7 @@ dbsec_threat_off_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "SQL Databases should have security alert policies enabled",
+    "Policy Title": "SQL Database Server should have security alert policies enabled",
     "Policy Description": "SQL Threat Detection provides a new layer of security, which enables customers to detect and respond to potential threats as they occur by providing security alerts on anomalous activities. Users will receive an alert upon suspicious database activities, potential vulnerabilities, and SQL injection attacks, as well as anomalous database access patterns. SQL Threat Detection alerts provide details of suspicious activity and recommend action on how to investigate and mitigate the threat.",
     "Resource Type": "azurerm_mssql_server_security_alert_policy",
     "Policy Help URL": "",
@@ -80,7 +80,7 @@ azure_issue["dbsec_threat_retention"] {
 }
 
 dbsec_threat_retention {
-    lower(input.resources[_].type) == "azurerm_mssql_server_security_alert_policy"
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     not azure_attribute_absence["dbsec_threat_retention"]
     not azure_issue["dbsec_threat_retention"]
 }
@@ -95,7 +95,7 @@ dbsec_threat_retention = false {
 
 dbsec_threat_retention_err = "azurerm_mssql_server_security_alert_policy property 'retention_days' need to be exist. Its missing from the resource. Please set the value to '91' after property addition." {
     azure_attribute_absence["dbsec_threat_retention"]
-} else = "Azure SQL Database security alert policies thread retention is currently not configured for more than 90 days" {
+} else = "Azure SQL Database Server security alert policies thread retention is currently not configured for more than 90 days" {
     azure_issue["dbsec_threat_retention"]
 }
 
@@ -104,7 +104,7 @@ dbsec_threat_retention_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure SQL Database security alert policies thread retention should be configured for more than 90 days",
+    "Policy Title": "Azure SQL Database Server security alert policies thread retention should be configured for more than 90 days",
     "Policy Description": "This policy identifies SQL Databases which have Threat Retention less than or equals to 90 days. Threat Logs can be used to check for anomalies and gives an understanding of suspected breaches or misuse of data and access. It is recommended to configure SQL database Threat Retention to be greater than 90 days.",
     "Resource Type": "azurerm_mssql_server_security_alert_policy",
     "Policy Help URL": "",
@@ -134,7 +134,7 @@ azure_issue["dbsec_threat_email"] {
 }
 
 dbsec_threat_email {
-    lower(input.resources[_].type) == "azurerm_mssql_server_security_alert_policy"
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     not azure_attribute_absence["dbsec_threat_email"]
     not azure_issue["dbsec_threat_email"]
 }
@@ -149,7 +149,7 @@ dbsec_threat_email = false {
 
 dbsec_threat_email_err = "azurerm_mssql_server_security_alert_policy property 'email_addresses' need to be exist. Those are missing from the resource." {
     azure_attribute_absence["dbsec_threat_email"]
-} else = "Azure SQL Databases security alert policy is currently not configured to sent alert to the configured email addresses" {
+} else = "Azure SQL Database Server security alert policy is currently not configured to sent alert to the configured email addresses" {
     azure_issue["dbsec_threat_email"]
 }
 
@@ -158,7 +158,7 @@ dbsec_threat_email_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure SQL Databases Security Alert Policy should be configured to send alert to the configured email addresses",
+    "Policy Title": "Azure SQL Database Server Security Alert Policy should be configured to send alert to the configured email addresses",
     "Policy Description": "Checks to ensure that an valid email address is set for Threat Detection alerts. The alerts are sent to this email address when any anomalous activities are detected on SQL databases.",
     "Resource Type": "azurerm_mssql_server_security_alert_policy",
     "Policy Help URL": "",
@@ -188,13 +188,15 @@ azure_issue["dbsec_threat_alert"] {
 }
 
 dbsec_threat_alert {
-    lower(input.resources[_].type) == "azurerm_mssql_server_security_alert_policy"
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     not azure_attribute_absence["dbsec_threat_alert"]
     not azure_issue["dbsec_threat_alert"]
 }
 
 dbsec_threat_alert {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_attribute_absence["dbsec_threat_alert"]
+    not azure_issue["dbsec_threat_alert"]
 }
 
 dbsec_threat_alert = false {
@@ -240,7 +242,7 @@ azure_issue["sql_alert"] {
 }
 
 sql_alert {
-    lower(input.resources[_].type) == "azurerm_mssql_server_security_alert_policy"
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     not azure_attribute_absence["sql_alert"]
     not azure_issue["sql_alert"]
 }

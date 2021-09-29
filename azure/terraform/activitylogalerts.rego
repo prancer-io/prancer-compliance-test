@@ -22,6 +22,7 @@ azure_issue["azure_monitor_activity_log_alert_enabled"] {
 }
 
 azure_monitor_activity_log_alert_enabled {
+    lower(input.resources[_].type) == "azurerm_monitor_activity_log_alert"
     azure_attribute_absence["azure_monitor_activity_log_alert_enabled"]
     not azure_issue["azure_monitor_activity_log_alert_enabled"]
 }

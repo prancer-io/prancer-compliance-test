@@ -1266,7 +1266,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "SQL Databases should have security alert policies enabled",
+                    "title": "SQL Database Server should have security alert policies enabled",
                     "description": "SQL Threat Detection provides a new layer of security, which enables customers to detect and respond to potential threats as they occur by providing security alerts on anomalous activities. Users will receive an alert upon suspicious database activities, potential vulnerabilities, and SQL injection attacks, as well as anomalous database access patterns. SQL Threat Detection alerts provide details of suspicious activity and recommend action on how to investigate and mitigate the threat.",
                     "tags": [
                         {
@@ -1300,7 +1300,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Database security alert policies thread retention should be configured for more than 90 days",
+                    "title": "Azure SQL Database Server security alert policies thread retention should be configured for more than 90 days",
                     "description": "This policy identifies SQL Databases which have Threat Retention less than or equals to 90 days. Threat Logs can be used to check for anomalies and gives an understanding of suspected breaches or misuse of data and access. It is recommended to configure SQL database Threat Retention to be greater than 90 days.",
                     "tags": [
                         {

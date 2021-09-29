@@ -31,6 +31,7 @@ azure_issue["no_custom_subs_owner_role_created"] {
 }
 
 no_custom_subs_owner_role_created {
+    lower(input.resources[_].type) == "azurerm_role_definition"
     azure_attribute_absence["no_custom_subs_owner_role_created"]
     not azure_issue["no_custom_subs_owner_role_created"]
 }

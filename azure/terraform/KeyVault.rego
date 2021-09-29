@@ -90,6 +90,7 @@ enableSoftDelete = false {
 }
 
 enableSoftDelete {
+    lower(input.resources[_].type) == "azurerm_key_vault"
     azure_attribute_absence["enableSoftDelete"]
     not azure_issue["enableSoftDelete"]
 }

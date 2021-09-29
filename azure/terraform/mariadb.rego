@@ -35,7 +35,7 @@ azure_issue ["maria_ingress_from_any_ip_disabled"] {
 }
 
 maria_ingress_from_any_ip_disabled {
-    lower(input.resources[_].type) == "azurerm_mariadb_firewall_rule"
+    lower(input.resources[_].type) == "azurerm_mariadb_server"
     not azure_attribute_absence["maria_ingress_from_any_ip_disabled"]
     not azure_issue["maria_ingress_from_any_ip_disabled"]
 }
@@ -135,9 +135,11 @@ no_azure_issue(resource_type) {
 }
 
 mairadb_public_access_disabled {
+    lower(input.resources[_].type) == "azurerm_mariadb_server"
     no_azure_issue("azurerm_mariadb_server")
 } else = false {
-	true
+    lower(input.resources[_].type) == "azurerm_mariadb_server"
+	#true
 }
 
 mairadb_public_access_disabled_err = "Public Network Access is currently not disabled on MariaDB Server." {

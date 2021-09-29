@@ -35,7 +35,7 @@ azure_issue ["mysql_ingress_from_any_ip_disabled"] {
 }
 
 mysql_ingress_from_any_ip_disabled {
-    lower(input.resources[_].type) == "azurerm_mysql_firewall_rule"
+    lower(input.resources[_].type) == "azurerm_mysql_server"
     not azure_attribute_absence["mysql_ingress_from_any_ip_disabled"]
     not azure_issue["mysql_ingress_from_any_ip_disabled"]
 }
@@ -136,9 +136,11 @@ no_azure_issue(resource_type) {
 }
 
 mysql_public_access_disabled {
+    lower(input.resources[_].type) == "azurerm_mysql_server"
     no_azure_issue("azurerm_mysql_server")
 } else = false {
-	true
+    lower(input.resources[_].type) == "azurerm_mysql_server"
+	#true
 }
 
 mysql_public_access_disabled_err = "Public Network Access is currently not disabled on MySQL Server." {

@@ -38,7 +38,7 @@ azure_issue["db_firewall"] {
 }
 
 db_firewall {
-    lower(input.resources[_].type) == "azurerm_sql_firewall_rule"
+    lower(input.resources[_].type) == "azurerm_sql_server"
     not azure_attribute_absence["db_firewall"]
     not azure_issue["db_firewall"]
 }
