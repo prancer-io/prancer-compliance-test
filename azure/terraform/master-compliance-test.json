@@ -5434,6 +5434,93 @@
                     "resourceTypes": [
                         "azurerm_virtual_network_gateway_connection"
                     ]
+                },
+                {
+                    "masterTestId": "TEST_SECRETS_1",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(secrets.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0001-RGX",
+                            "eval": "data.rule.gl_azure_secrets",
+                            "message": "data.rule.gl_azure_secrets_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR-AZR-0001-RGX.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Secrets are not hardcoded in the ARM template",
+                    "description": "Secrets should not be hardcoded in the ARM Template. Make sure to put those secrets in a vault and access from there.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECRET_2",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "python",
+                    "rule": "file(secret_tf.py)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0002-RGX",
+                            "eval": "password_leak",
+                            "message": "password_leak_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR-AZR-0002-RGX.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "There is a possibility that secure password is exposed",
+                    "description": "There is a possibility that secure password is exposed. Make sure to put those secrets in a vault and access from there.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECRET_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "python",
+                    "rule": "file(secret_tf.py)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0003-RGX",
+                            "eval": "entropy_password",
+                            "message": "entropy_password_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR-AZR-0003-RGX.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "There is a possibility that secure password is exposed",
+                    "description": "There is a possibility that secure password is exposed. Make sure to put those secrets in a vault and access from there.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ]
                 }
             ]
         }

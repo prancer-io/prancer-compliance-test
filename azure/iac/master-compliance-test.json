@@ -3472,7 +3472,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_SECRETS",
+                    "masterTestId": "TEST_SECRETS_1",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
@@ -3500,6 +3500,64 @@
                         }
                     ],
                     "resourceTypes": []
+                },
+                {
+                    "masterTestId": "TEST_SECRET_2",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "python",
+                    "rule": "file(secret_azure_iac.py)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0002-RGX",
+                            "eval": "azure_password_leak",
+                            "message": "azure_password_leak_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR-AZR-0002-RGX.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "There is a possibility that secure password is exposed",
+                    "description": "There is a possibility that secure password is exposed. Make sure to put those secrets in a vault and access from there.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECRET_3",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "python",
+                    "rule": "file(secret_azure_iac.py)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0003-RGX",
+                            "eval": "entropy_password",
+                            "message": "entropy_password_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR-AZR-0003-RGX.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "There is a possibility that secure password is exposed",
+                    "description": "There is a possibility that secure password is exposed. Make sure to put those secrets in a vault and access from there.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ]
                 },
                 {
                     "masterTestId": "TEST_SECURITY_CONTACTS_1",
