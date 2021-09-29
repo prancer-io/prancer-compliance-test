@@ -45,7 +45,7 @@ log_keyvault = false {
 }
 
 log_keyvault {
-    lower(input.resources[_].type) == "azurerm_monitor_diagnostic_setting"
+    lower(input.resources[_].type) == "azurerm_key_vault"
     not azure_attribute_absence["log_keyvault"]
     not azure_issue["log_keyvault"]
 }
@@ -112,7 +112,7 @@ azure_issue["log_lbs"] {
 }
 
 log_lbs {
-    lower(input.resources[_].type) == "azurerm_monitor_diagnostic_setting"
+    lower(input.resources[_].type) == "azurerm_lb"
     not azure_attribute_absence["log_lbs"]
     not azure_issue["log_lbs"]
 }
@@ -200,7 +200,7 @@ azure_issue["log_storage_retention"] {
 }
 
 log_storage_retention {
-    lower(input.resources[_].type) == "azurerm_monitor_diagnostic_setting"
+    lower(input.resources[_].type) == "azurerm_storage_account"
     not azure_attribute_absence["log_storage_retention"]
     not azure_issue["log_storage_retention"]
 }
@@ -269,7 +269,7 @@ azure_issue["log_blob"] {
 }
 
 log_blob {
-    lower(input.resources[_].type) == "azurerm_monitor_diagnostic_setting"
+    lower(input.resources[_].type) == "azurerm_storage_blob"
     not azure_attribute_absence["log_blob"]
     not azure_issue["log_blob"]
 }
@@ -338,7 +338,7 @@ azure_issue["log_queue"] {
 }
 
 log_queue {
-    lower(input.resources[_].type) == "azurerm_monitor_diagnostic_setting"
+    lower(input.resources[_].type) == "azurerm_storage_queue"
     not azure_attribute_absence["log_queue"]
     not azure_issue["log_queue"]
 }
@@ -407,10 +407,7 @@ azure_issue["log_table"] {
 }
 
 log_table {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-    log := resource.properties.log[_]
-    lower(log.category) == "auditevent"
+    lower(input.resources[_].type) == "azurerm_storage_table"
     not azure_attribute_absence["log_table"]
     not azure_issue["log_table"]
 }

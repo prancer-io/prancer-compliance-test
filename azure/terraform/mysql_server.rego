@@ -35,7 +35,7 @@ azure_issue ["mysql_ingress_from_any_ip_disabled"] {
 }
 
 mysql_ingress_from_any_ip_disabled {
-    lower(input.resources[_].type) == "azurerm_mysql_firewall_rule"
+    lower(input.resources[_].type) == "azurerm_mysql_server"
     not azure_attribute_absence["mysql_ingress_from_any_ip_disabled"]
     not azure_issue["mysql_ingress_from_any_ip_disabled"]
 }

@@ -28,7 +28,9 @@ storage_container_public_access_disabled {
 }
 
 storage_container_public_access_disabled {
+    lower(input.resources[_].type) == "azurerm_storage_container"
     azure_attribute_absence["storage_container_public_access_disabled"]
+    not azure_issue["storage_container_public_access_disabled"]
 }
 
 storage_container_public_access_disabled = false {

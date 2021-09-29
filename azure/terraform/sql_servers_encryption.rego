@@ -81,7 +81,7 @@ azure_issue["serverKeyType"] {
 }
 
 serverKeyType {
-    lower(input.resources[_].type) == "azurerm_mssql_server_transparent_data_encryption"
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     not azure_attribute_absence["serverKeyType"]
     not azure_issue["serverKeyType"]
 }

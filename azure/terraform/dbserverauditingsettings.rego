@@ -25,7 +25,7 @@ azure_issue["mssql_log_retention"] {
 }
 
 mssql_log_retention {
-    lower(input.resources[_].type) == "azurerm_mssql_server_extended_auditing_policy"
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     not azure_attribute_absence["mssql_log_retention"]
     not azure_issue["mssql_log_retention"]
 }
@@ -84,7 +84,7 @@ azure_issue["mssql_log_retention"] {
 }
 
 sql_log_retention {
-    lower(input.resources[_].type) == "azurerm_mssql_server_extended_auditing_policy"
+    lower(input.resources[_].type) == "azurerm_sql_server"
     not azure_attribute_absence["sql_log_retention"]
     not azure_issue["sql_log_retention"]
 }

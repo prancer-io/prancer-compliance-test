@@ -35,7 +35,7 @@ azure_issue ["maria_ingress_from_any_ip_disabled"] {
 }
 
 maria_ingress_from_any_ip_disabled {
-    lower(input.resources[_].type) == "azurerm_mariadb_firewall_rule"
+    lower(input.resources[_].type) == "azurerm_mariadb_server"
     not azure_attribute_absence["maria_ingress_from_any_ip_disabled"]
     not azure_issue["maria_ingress_from_any_ip_disabled"]
 }

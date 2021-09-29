@@ -23,7 +23,7 @@ azure_sql_security_alert_disabled["sql_server_alert"] {
 }
 
 sql_server_alert {
-    lower(input.resources[_].type) == "azurerm_mssql_server_security_alert_policy"
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     not azure_attribute_absence["sql_server_alert"]
     not azure_sql_security_alert_disabled["sql_server_alert"]
 }

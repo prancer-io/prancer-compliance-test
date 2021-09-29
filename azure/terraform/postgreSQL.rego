@@ -134,7 +134,7 @@ azure_issue ["pg_ingress_from_any_ip_disabled"] {
 }
 
 pg_ingress_from_any_ip_disabled {
-    lower(input.resources[_].type) == "azurerm_postgresql_firewall_rule"
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
     not azure_attribute_absence["pg_ingress_from_any_ip_disabled"]
     not azure_issue["pg_ingress_from_any_ip_disabled"]
 }
@@ -183,7 +183,7 @@ azure_issue ["azurerm_postgresql_configuration_log_checkpoints"] {
 }
 
 azurerm_postgresql_configuration_log_checkpoints {
-    lower(input.resources[_].type) == "azurerm_postgresql_configuration"
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
     not azure_attribute_absence["azurerm_postgresql_configuration_log_checkpoints"]
     not azure_issue["azurerm_postgresql_configuration_log_checkpoints"]
 }
@@ -232,7 +232,7 @@ azure_issue ["azurerm_postgresql_configuration_log_connections"] {
 }
 
 azurerm_postgresql_configuration_log_connections {
-    lower(input.resources[_].type) == "azurerm_postgresql_configuration"
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
     not azure_attribute_absence["azurerm_postgresql_configuration_log_connections"]
     not azure_issue["azurerm_postgresql_configuration_log_connections"]
 }
@@ -281,7 +281,7 @@ azure_issue ["azurerm_postgresql_configuration_connection_throttling"] {
 }
 
 azurerm_postgresql_configuration_connection_throttling {
-    lower(input.resources[_].type) == "azurerm_postgresql_configuration"
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
     not azure_attribute_absence["azurerm_postgresql_configuration_connection_throttling"]
     not azure_issue["azurerm_postgresql_configuration_connection_throttling"]
 }

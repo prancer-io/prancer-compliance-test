@@ -85,7 +85,7 @@ azure_issue["mssql_db_log_retention"] {
 }
 
 mssql_db_log_retention {
-    lower(input.resources[_].type) == "azurerm_mssql_database_extended_auditing_policy"
+    lower(input.resources[_].type) == "azurerm_mssql_database"
     not azure_attribute_absence["mssql_db_log_retention"]
     not azure_issue["mssql_db_log_retention"]
 }

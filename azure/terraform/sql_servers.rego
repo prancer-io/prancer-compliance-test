@@ -23,12 +23,12 @@ sql_public_access_disabled {
 
 sql_public_access_disabled = false {
     lower(input.resources[_].type) == "azurerm_mssql_server"
-    not azure_issue["sql_public_access_disabled"]
+    not azure_secure["sql_public_access_disabled"]
 }
 
 sql_public_access_disabled_err = "Public Network Access is currently not disabled on MSSQL Server." {
     lower(input.resources[_].type) == "azurerm_mssql_server"
-    not azure_issue["sql_public_access_disabled"]
+    not azure_secure["sql_public_access_disabled"]
 }
 
 sql_public_access_disabled_metadata := {
@@ -170,7 +170,7 @@ azure_issue ["mssql_ingress_from_any_ip_disabled"] {
 }
 
 mssql_ingress_from_any_ip_disabled {
-    lower(input.resources[_].type) == "azurerm_mssql_firewall_rule"
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     not azure_attribute_absence["mssql_ingress_from_any_ip_disabled"]
     not azure_issue["mssql_ingress_from_any_ip_disabled"]
 }
