@@ -10,26 +10,25 @@ package rule
 # PR-AZR-0128-TRF
 
 default sql_public_access_disabled = null
-# public_network_access_enabled Defaults to true if not exist
-is_public_access_disabled(resource_type) {
-    count([c | input.resources[_].type == resource_type; c := 1]) == count([c | r := input.resources[_];
-               r.type == resource_type;
-               r.properties.public_network_access_enabled == false; # this is not same as not r.properties.public_network_access_enabled. not will give you correct result if property does not exist
-               c := 1])
-} else = false {
-	true
+
+azure_secure["sql_public_access_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mssql_server"
+    resource.properties.public_network_access_enabled == false
 }
 
 sql_public_access_disabled {
+    azure_secure["sql_public_access_disabled"]
+}
+
+sql_public_access_disabled = false {
     lower(input.resources[_].type) == "azurerm_mssql_server"
-    is_public_access_disabled("azurerm_mssql_server")
-} else = false {
-	lower(input.resources[_].type) == "azurerm_mssql_server"
-    #true
+    not azure_secure["sql_public_access_disabled"]
 }
 
 sql_public_access_disabled_err = "Public Network Access is currently not disabled on MSSQL Server." {
-    not is_public_access_disabled("azurerm_mssql_server")
+    lower(input.resources[_].type) == "azurerm_mssql_server"
+    not azure_secure["sql_public_access_disabled"]
 }
 
 sql_public_access_disabled_metadata := {
@@ -122,6 +121,7 @@ sql_server_login = false {
 sql_server_login_err = "azurerm_mssql_server property 'administrator_login' need to be exist. Its missing from the resource." {
     azure_attribute_absence["sql_server_login"]
 } else = "Azure SQL Server login is currently set to admin or administrator on the resource. Please change the name" {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     not no_azure_issue["sql_server_login"]
 }
 

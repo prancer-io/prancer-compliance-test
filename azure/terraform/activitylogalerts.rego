@@ -225,12 +225,14 @@ azure_monitor_log_profile_capture_all_activities {
 }
 
 azure_monitor_log_profile_capture_all_activities = false {
+    lower(input.resources[_].type) == "azurerm_monitor_log_profile"
     not no_azure_issue["azure_monitor_log_profile_capture_all_activities"]
 }
 
 azure_monitor_log_profile_capture_all_activities_err = "azurerm_monitor_log_profile property 'categories' is missing from the resource." {
     azure_attribute_absence["azure_monitor_log_profile_capture_all_activities"]
 } else = "Activity log audit profile currently not configured to capture all the activities" {
+    lower(input.resources[_].type) == "azurerm_monitor_log_profile"
     not no_azure_issue["azure_monitor_log_profile_capture_all_activities"]
 }
 

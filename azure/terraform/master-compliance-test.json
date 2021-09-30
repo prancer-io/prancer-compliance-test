@@ -31,6 +31,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_role_definition"
                     ]
                 },
                 {
@@ -60,6 +63,10 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_monitor_activity_log_alert",
+                        "azurerm_monitor_log_profile"
                     ]
                 },
                 {
@@ -89,6 +96,10 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_monitor_activity_log_alert",
+                        "azurerm_monitor_log_profile"
                     ]
                 },
                 {
@@ -118,6 +129,10 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_monitor_activity_log_alert",
+                        "azurerm_monitor_log_profile"
                     ]
                 },
                 {
@@ -147,6 +162,10 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_monitor_activity_log_alert",
+                        "azurerm_monitor_log_profile"
                     ]
                 },
                 {
@@ -176,6 +195,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_kubernetes_cluster"
                     ]
                 },
                 {
@@ -205,6 +227,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_kubernetes_cluster"
                     ]
                 },
                 {
@@ -234,6 +259,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_kubernetes_cluster"
                     ]
                 },
                 {
@@ -263,6 +291,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_kubernetes_cluster"
                     ]
                 },
                 {
@@ -292,6 +323,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_kubernetes_cluster"
                     ]
                 },
                 {
@@ -321,6 +355,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_kubernetes_cluster"
                     ]
                 },
                 {
@@ -350,6 +387,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_kubernetes_cluster"
                     ]
                 },
                 {
@@ -379,6 +419,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_kubernetes_cluster"
                     ]
                 },
                 {
@@ -408,6 +451,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_kubernetes_cluster"
                     ]
                 },
                 {
@@ -428,7 +474,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Application Gateway should use TLSv1.2 as minimum version or higher",
-                    "description": "The Application Gateway supports end-to-end SSL encryption using multiple TLS versions and by default, it supports TLS version 1.0 as the minimum version._x000D__x000D_This policy identifies the Application Gateway instances that are configured to use TLS versions 1.1 or lower as the minimum protocol version. As a best practice set the MinProtocolVersion to TLSv1.2 (if you use custom SSL policy) or use the predefined â€˜AppGwSslPolicy20170401Sâ€™ policy.",
+                    "description": "The Application Gateway supports end-to-end SSL encryption using multiple TLS versions and by default, it supports TLS version 1.0 as the minimum version._x000D__x000D_This policy identifies the Application Gateway instances that are configured to use TLS versions 1.1 or lower as the minimum protocol version. As a best practice set the MinProtocolVersion to TLSv1.2 (if you use custom SSL policy) or use the predefined AppGwSslPolicy20170401S policy.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -437,6 +483,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_application_gateway"
                     ]
                 },
                 {
@@ -466,6 +515,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_application_gateway"
                     ]
                 },
                 {
@@ -495,6 +547,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_application_gateway"
                     ]
                 },
                 {
@@ -524,6 +579,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_app_service"
                     ]
                 },
                 {
@@ -553,6 +611,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_app_service"
                     ]
                 },
                 {
@@ -582,6 +643,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_app_service"
                     ]
                 },
                 {
@@ -611,6 +675,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_app_service"
                     ]
                 },
                 {
@@ -640,6 +707,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_app_service"
                     ]
                 },
                 {
@@ -669,6 +739,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_app_service"
                     ]
                 },
                 {
@@ -698,6 +771,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_app_service"
                     ]
                 },
                 {
@@ -727,6 +803,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_app_service"
                     ]
                 },
                 {
@@ -756,6 +835,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_app_service"
                     ]
                 },
                 {
@@ -785,6 +867,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_app_service"
                     ]
                 },
                 {
@@ -814,6 +899,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_app_service"
                     ]
                 },
                 {
@@ -843,6 +931,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_app_service"
                     ]
                 },
                 {
@@ -1048,6 +1139,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_cosmosdb_account"
                     ]
                 },
                 {
@@ -1077,6 +1171,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_databricks_workspace"
                     ]
                 },
                 {
@@ -1106,6 +1203,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_databricks_workspace"
                     ]
                 },
                 {
@@ -1140,6 +1240,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_sql_server"
                     ]
                 },
                 {
@@ -1176,6 +1279,10 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_database",
+                        "azurerm_mssql_database_extended_auditing_policy"
                     ]
                 },
                 {
@@ -1212,6 +1319,10 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_database",
+                        "azurerm_mssql_database_extended_auditing_policy"
                     ]
                 },
                 {
@@ -1220,7 +1331,7 @@
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(dbauditingdbsettings.rego)",
+                    "rule": "file(dbfirewallrules.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-0082-TRF",
@@ -1247,6 +1358,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_sql_firewall_rule"
                     ]
                 },
                 {
@@ -1281,6 +1395,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server_security_alert_policy"
                     ]
                 },
                 {
@@ -1317,6 +1434,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server_security_alert_policy"
                     ]
                 },
                 {
@@ -1352,6 +1472,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server_security_alert_policy"
                     ]
                 },
                 {
@@ -1387,6 +1510,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server_security_alert_policy"
                     ]
                 },
                 {
@@ -1422,6 +1548,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server_security_alert_policy"
                     ]
                 },
                 {
@@ -1451,6 +1580,11 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server_extended_auditing_policy",
+                        "azurerm_mssql_server",
+                        "azurerm_sql_server"
                     ]
                 },
                 {
@@ -1480,6 +1614,11 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server_extended_auditing_policy",
+                        "azurerm_mssql_server",
+                        "azurerm_sql_server"
                     ]
                 },
                 {
@@ -1509,6 +1648,11 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server_extended_auditing_policy",
+                        "azurerm_mssql_server",
+                        "azurerm_sql_server"
                     ]
                 },
                 {
@@ -1538,6 +1682,11 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server_extended_auditing_policy",
+                        "azurerm_mssql_server",
+                        "azurerm_sql_server"
                     ]
                 },
                 {
@@ -1567,6 +1716,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server_vulnerability_assessment"
                     ]
                 },
                 {
@@ -1587,7 +1739,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure SQL Server advanced data security should send alerts to subscription administrators",
-                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the administratorsâ€”service and co-administratorâ€”can receive email alerts when anomalous activities are detected on the SQL Servers.",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the administrators service and co-administrator can receive email alerts when anomalous activities are detected on the SQL Servers.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1596,6 +1748,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server_vulnerability_assessment"
                     ]
                 },
                 {
@@ -1625,6 +1780,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server_vulnerability_assessment"
                     ]
                 },
                 {
@@ -1654,6 +1812,15 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_storage_queue",
+                        "azurerm_monitor_diagnostic_setting",
+                        "azurerm_lb",
+                        "azurerm_storage_table",
+                        "azurerm_storage_blob",
+                        "azurerm_storage_account",
+                        "azurerm_key_vault"
                     ]
                 },
                 {
@@ -1674,7 +1841,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Load Balancer diagnostics logs should be enabled",
-                    "description": "Azure Load Balancers provide different types of logsâ€”alert events, health probe, metricsâ€”to help you manage and troubleshoot issues. This policy identifies Azure Load Balancers that have diagnostics logs disabled. As a best practice, enable diagnostic logs to start collecting the data available through these logs.",
+                    "description": "Azure Load Balancers provide different types of logs alert events, health probe, metrics to help you manage and troubleshoot issues. This policy identifies Azure Load Balancers that have diagnostics logs disabled. As a best practice, enable diagnostic logs to start collecting the data available through these logs.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1683,6 +1850,15 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_storage_queue",
+                        "azurerm_monitor_diagnostic_setting",
+                        "azurerm_lb",
+                        "azurerm_storage_table",
+                        "azurerm_storage_blob",
+                        "azurerm_storage_account",
+                        "azurerm_key_vault"
                     ]
                 },
                 {
@@ -1712,6 +1888,15 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_storage_queue",
+                        "azurerm_monitor_diagnostic_setting",
+                        "azurerm_lb",
+                        "azurerm_storage_table",
+                        "azurerm_storage_blob",
+                        "azurerm_storage_account",
+                        "azurerm_key_vault"
                     ]
                 },
                 {
@@ -1741,6 +1926,15 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_storage_queue",
+                        "azurerm_monitor_diagnostic_setting",
+                        "azurerm_lb",
+                        "azurerm_storage_table",
+                        "azurerm_storage_blob",
+                        "azurerm_storage_account",
+                        "azurerm_key_vault"
                     ]
                 },
                 {
@@ -1770,6 +1964,15 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_storage_queue",
+                        "azurerm_monitor_diagnostic_setting",
+                        "azurerm_lb",
+                        "azurerm_storage_table",
+                        "azurerm_storage_blob",
+                        "azurerm_storage_account",
+                        "azurerm_key_vault"
                     ]
                 },
                 {
@@ -1799,6 +2002,15 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_storage_queue",
+                        "azurerm_monitor_diagnostic_setting",
+                        "azurerm_lb",
+                        "azurerm_storage_table",
+                        "azurerm_storage_blob",
+                        "azurerm_storage_account",
+                        "azurerm_key_vault"
                     ]
                 },
                 {
@@ -1828,6 +2040,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_managed_disk"
                     ]
                 },
                 {
@@ -1857,6 +2072,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_function_app"
                     ]
                 },
                 {
@@ -1890,6 +2108,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_key_vault"
                     ]
                 },
                 {
@@ -1921,6 +2142,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_key_vault"
                     ]
                 },
                 {
@@ -1952,6 +2176,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_key_vault"
                     ]
                 },
                 {
@@ -1981,6 +2208,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_key_vault_key"
                     ]
                 },
                 {
@@ -2010,6 +2240,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_key_vault_secret"
                     ]
                 },
                 {
@@ -2039,6 +2272,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_management_lock"
                     ]
                 },
                 {
@@ -2070,6 +2306,10 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mariadb_firewall_rule",
+                        "azurerm_mariadb_server"
                     ]
                 },
                 {
@@ -2101,6 +2341,10 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mariadb_firewall_rule",
+                        "azurerm_mariadb_server"
                     ]
                 },
                 {
@@ -2132,6 +2376,10 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mariadb_firewall_rule",
+                        "azurerm_mariadb_server"
                     ]
                 },
                 {
@@ -2163,6 +2411,10 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mariadb_firewall_rule",
+                        "azurerm_mariadb_server"
                     ]
                 },
                 {
@@ -2194,6 +2446,10 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mysql_firewall_rule",
+                        "azurerm_mysql_server"
                     ]
                 },
                 {
@@ -2225,6 +2481,10 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mysql_firewall_rule",
+                        "azurerm_mysql_server"
                     ]
                 },
                 {
@@ -2256,6 +2516,10 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mysql_firewall_rule",
+                        "azurerm_mysql_server"
                     ]
                 },
                 {
@@ -2287,6 +2551,10 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mysql_firewall_rule",
+                        "azurerm_mysql_server"
                     ]
                 },
                 {
@@ -2316,6 +2584,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_watcher_flow_log"
                     ]
                 },
                 {
@@ -2345,6 +2616,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_watcher_flow_log"
                     ]
                 },
                 {
@@ -2374,6 +2648,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_watcher_flow_log"
                     ]
                 },
                 {
@@ -2403,6 +2680,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -2432,6 +2712,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -2461,6 +2744,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -2490,6 +2776,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -2519,6 +2808,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -2548,6 +2840,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -2577,6 +2872,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -2606,6 +2904,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -2635,6 +2936,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -2670,6 +2974,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -2699,6 +3006,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -2728,6 +3038,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -2757,6 +3070,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -2792,6 +3108,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -2827,6 +3146,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -2856,6 +3178,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -2885,6 +3210,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -2914,6 +3242,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -2943,6 +3274,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -2972,6 +3306,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -3001,6 +3338,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -3030,6 +3370,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -3059,6 +3402,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -3088,6 +3434,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -3117,6 +3466,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -3146,6 +3498,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -3175,6 +3530,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -3204,6 +3562,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -3233,6 +3594,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -3265,6 +3629,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -3297,6 +3664,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -3326,6 +3696,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
                     ]
                 },
                 {
@@ -3357,6 +3730,11 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_postgresql_configuration",
+                        "azurerm_postgresql_server",
+                        "azurerm_postgresql_firewall_rule"
                     ]
                 },
                 {
@@ -3388,6 +3766,11 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_postgresql_configuration",
+                        "azurerm_postgresql_server",
+                        "azurerm_postgresql_firewall_rule"
                     ]
                 },
                 {
@@ -3419,6 +3802,11 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_postgresql_configuration",
+                        "azurerm_postgresql_server",
+                        "azurerm_postgresql_firewall_rule"
                     ]
                 },
                 {
@@ -3450,6 +3838,11 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_postgresql_configuration",
+                        "azurerm_postgresql_server",
+                        "azurerm_postgresql_firewall_rule"
                     ]
                 },
                 {
@@ -3481,6 +3874,11 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_postgresql_configuration",
+                        "azurerm_postgresql_server",
+                        "azurerm_postgresql_firewall_rule"
                     ]
                 },
                 {
@@ -3512,6 +3910,11 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_postgresql_configuration",
+                        "azurerm_postgresql_server",
+                        "azurerm_postgresql_firewall_rule"
                     ]
                 },
                 {
@@ -3543,6 +3946,11 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_postgresql_configuration",
+                        "azurerm_postgresql_server",
+                        "azurerm_postgresql_firewall_rule"
                     ]
                 },
                 {
@@ -3575,6 +3983,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_security_center_subscription_pricing"
                     ]
                 },
                 {
@@ -3611,6 +4022,10 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_redis_linked_server",
+                        "azurerm_redis_cache"
                     ]
                 },
                 {
@@ -3646,6 +4061,10 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_redis_linked_server",
+                        "azurerm_redis_cache"
                     ]
                 },
                 {
@@ -3675,6 +4094,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_container_registry"
                     ]
                 },
                 {
@@ -3704,6 +4126,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_container_registry_webhook"
                     ]
                 },
                 {
@@ -3735,6 +4160,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_container_registry"
                     ]
                 },
                 {
@@ -3771,6 +4199,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_security_center_contact"
                     ]
                 },
                 {
@@ -3807,6 +4238,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_security_center_contact"
                     ]
                 },
                 {
@@ -3843,6 +4277,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_security_center_contact"
                     ]
                 },
                 {
@@ -3879,6 +4316,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_security_center_contact"
                     ]
                 },
                 {
@@ -3908,6 +4348,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server_security_alert_policy"
                     ]
                 },
                 {
@@ -3944,6 +4387,10 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server",
+                        "azurerm_mssql_server_transparent_data_encryption"
                     ]
                 },
                 {
@@ -3964,7 +4411,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure SQL server's TDE protector is encrypted with Customer-managed key",
-                    "description": "Customer-managed key support for Transparent Data Encryption (TDE) allows user control of TDE encryption keys and restricts who can access them and when. Azure Key Vault, Azure’s cloud-based external key management system is the first key management service where TDE has integrated support for Customer-managed keys. With Customer-managed key support, the database encryption key is protected by an asymmetric key stored in the Key Vault. The asymmetric key is set at the server level and inherited by all databases under that server.",
+                    "description": "Customer-managed key support for Transparent Data Encryption (TDE) allows user control of TDE encryption keys and restricts who can access them and when. Azure Key Vault, Azure cloud-based external key management system is the first key management service where TDE has integrated support for Customer-managed keys. With Customer-managed key support, the database encryption key is protected by an asymmetric key stored in the Key Vault. The asymmetric key is set at the server level and inherited by all databases under that server.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3975,6 +4422,10 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server",
+                        "azurerm_mssql_server_transparent_data_encryption"
                     ]
                 },
                 {
@@ -4011,6 +4462,11 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server",
+                        "azurerm_mssql_firewall_rule",
+                        "azurerm_sql_server"
                     ]
                 },
                 {
@@ -4047,6 +4503,11 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server",
+                        "azurerm_mssql_firewall_rule",
+                        "azurerm_sql_server"
                     ]
                 },
                 {
@@ -4078,6 +4539,11 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server",
+                        "azurerm_mssql_firewall_rule",
+                        "azurerm_sql_server"
                     ]
                 },
                 {
@@ -4109,6 +4575,11 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mssql_server",
+                        "azurerm_mssql_firewall_rule",
+                        "azurerm_sql_server"
                     ]
                 },
                 {
@@ -4129,7 +4600,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Storage Accounts https based secure transfer should be enabled",
-                    "description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPs. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesnâ€™t support HTTPs for custom domain names, this option is not applied when using a custom domain name.",
+                    "description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPs. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesn't support HTTPs for custom domain names, this option is not applied when using a custom domain name.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -4145,6 +4616,12 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_advanced_threat_protection",
+                        "azurerm_storage_encryption_scope",
+                        "azurerm_storage_account_network_rules",
+                        "azurerm_storage_account"
                     ]
                 },
                 {
@@ -4179,6 +4656,12 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_advanced_threat_protection",
+                        "azurerm_storage_encryption_scope",
+                        "azurerm_storage_account_network_rules",
+                        "azurerm_storage_account"
                     ]
                 },
                 {
@@ -4213,6 +4696,12 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_advanced_threat_protection",
+                        "azurerm_storage_encryption_scope",
+                        "azurerm_storage_account_network_rules",
+                        "azurerm_storage_account"
                     ]
                 },
                 {
@@ -4244,6 +4733,12 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_advanced_threat_protection",
+                        "azurerm_storage_encryption_scope",
+                        "azurerm_storage_account_network_rules",
+                        "azurerm_storage_account"
                     ]
                 },
                 {
@@ -4275,6 +4770,12 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_advanced_threat_protection",
+                        "azurerm_storage_encryption_scope",
+                        "azurerm_storage_account_network_rules",
+                        "azurerm_storage_account"
                     ]
                 },
                 {
@@ -4309,6 +4810,12 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_advanced_threat_protection",
+                        "azurerm_storage_encryption_scope",
+                        "azurerm_storage_account_network_rules",
+                        "azurerm_storage_account"
                     ]
                 },
                 {
@@ -4343,6 +4850,12 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_advanced_threat_protection",
+                        "azurerm_storage_encryption_scope",
+                        "azurerm_storage_account_network_rules",
+                        "azurerm_storage_account"
                     ]
                 },
                 {
@@ -4377,6 +4890,12 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_advanced_threat_protection",
+                        "azurerm_storage_encryption_scope",
+                        "azurerm_storage_account_network_rules",
+                        "azurerm_storage_account"
                     ]
                 },
                 {
@@ -4411,6 +4930,12 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_advanced_threat_protection",
+                        "azurerm_storage_encryption_scope",
+                        "azurerm_storage_account_network_rules",
+                        "azurerm_storage_account"
                     ]
                 },
                 {
@@ -4445,6 +4970,12 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_advanced_threat_protection",
+                        "azurerm_storage_encryption_scope",
+                        "azurerm_storage_account_network_rules",
+                        "azurerm_storage_account"
                     ]
                 },
                 {
@@ -4479,6 +5010,12 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_advanced_threat_protection",
+                        "azurerm_storage_encryption_scope",
+                        "azurerm_storage_account_network_rules",
+                        "azurerm_storage_account"
                     ]
                 },
                 {
@@ -4513,6 +5050,12 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_advanced_threat_protection",
+                        "azurerm_storage_encryption_scope",
+                        "azurerm_storage_account_network_rules",
+                        "azurerm_storage_account"
                     ]
                 },
                 {
@@ -4542,6 +5085,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_storage_container"
                     ]
                 },
                 {
@@ -4571,6 +5117,12 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_virtual_machine",
+                        "azurerm_windows_virtual_machine",
+                        "azurerm_linux_virtual_machine_scale_set",
+                        "azurerm_linux_virtual_machine"
                     ]
                 },
                 {
@@ -4600,6 +5152,12 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_virtual_machine",
+                        "azurerm_windows_virtual_machine",
+                        "azurerm_linux_virtual_machine_scale_set",
+                        "azurerm_linux_virtual_machine"
                     ]
                 },
                 {
@@ -4629,6 +5187,12 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_virtual_machine",
+                        "azurerm_windows_virtual_machine",
+                        "azurerm_linux_virtual_machine_scale_set",
+                        "azurerm_linux_virtual_machine"
                     ]
                 },
                 {
@@ -4658,6 +5222,12 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_virtual_machine",
+                        "azurerm_windows_virtual_machine",
+                        "azurerm_linux_virtual_machine_scale_set",
+                        "azurerm_linux_virtual_machine"
                     ]
                 },
                 {
@@ -4687,6 +5257,12 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_virtual_machine",
+                        "azurerm_windows_virtual_machine",
+                        "azurerm_linux_virtual_machine_scale_set",
+                        "azurerm_linux_virtual_machine"
                     ]
                 },
                 {
@@ -4716,6 +5292,12 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_virtual_machine",
+                        "azurerm_windows_virtual_machine",
+                        "azurerm_linux_virtual_machine_scale_set",
+                        "azurerm_linux_virtual_machine"
                     ]
                 },
                 {
@@ -4745,6 +5327,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_virtual_machine_extension"
                     ]
                 },
                 {
@@ -4774,6 +5359,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_virtual_network_peering"
                     ]
                 },
                 {
@@ -4803,6 +5391,11 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_subnet_network_security_group_association",
+                        "azurerm_network_security_group",
+                        "azurerm_subnet"
                     ]
                 },
                 {
@@ -4837,6 +5430,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_virtual_network_gateway_connection"
                     ]
                 },
                 {
