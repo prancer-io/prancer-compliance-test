@@ -1,4 +1,5 @@
 package rule
+default metadata = {}
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html
@@ -19,6 +20,27 @@ aws_issue["sns_protocol"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::subscription"
     lower(resource.Properties.Protocol) == "http"
+}
+
+aws_path[{"sns_protocol": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::subscription"
+    not resource.Properties.Protocol
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "Protocol"]],
+        "value": null,
+        "function": "absent"
+    }
+}
+
+aws_path[{"sns_protocol": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::subscription"
+    lower(resource.Properties.Protocol) == "http"
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "Protocol"]],
+        "value": resource.Properties.Protocol,
+    }
 }
 
 sns_protocol {
@@ -67,6 +89,16 @@ aws_issue["sns_encrypt_key"] {
     contains(lower(resource.Properties.KmsMasterKeyId), "alias/aws/sns")
 }
 
+aws_path[{"sns_encrypt_key": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topic"
+    contains(lower(resource.Properties.KmsMasterKeyId), "alias/aws/sns")
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "KmsMasterKeyId"]],
+        "value": resource.Properties.KmsMasterKeyId,
+    }
+}
+
 sns_encrypt_key {
     lower(input.Resources[i].Type) == "aws::sns::topic"
     not aws_issue["sns_encrypt_key"]
@@ -108,6 +140,28 @@ aws_issue["sns_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topic"
     count(resource.Properties.KmsMasterKeyId) == 0
+}
+
+aws_path[{"sns_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topic"
+    not resource.Properties.KmsMasterKeyId
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "KmsMasterKeyId"]],
+        "value": null,
+        "function": "absent"
+    }
+}
+
+aws_path[{"sns_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topic"
+    count(resource.Properties.KmsMasterKeyId) == 0
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "KmsMasterKeyId"]],
+        "value": count(resource.Properties.KmsMasterKeyId),
+        "function": "count"
+    }
 }
 
 sns_encrypt {
