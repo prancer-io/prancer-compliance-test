@@ -158,3 +158,126 @@ protocol_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways"
 }
+
+
+# PR-AZR-0060-ARM
+
+default frontendPublicIPConfigurationsDisabled = null
+azure_attribute_absence ["frontendPublicIPConfigurationsDisabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    frontendIPConfigurations := resource.properties.frontendIPConfigurations[_]
+    not frontendIPConfigurations.properties.publicIPAddress
+}  
+
+frontendPublicIPConfigurationsDisabled {
+    azure_attribute_absence["frontendPublicIPConfigurationsDisabled"]
+} 
+
+frontendPublicIPConfigurationsDisabled = false {
+    lower(input.resources[_].type) == "microsoft.network/applicationgateways"
+    not azure_attribute_absence["frontendPublicIPConfigurationsDisabled"]
+}
+
+frontendPublicIPConfigurationsDisabled_err = "Application Gateway is currently allowing public ip address in frontend IP Configurations" {
+    lower(input.resources[_].type) == "microsoft.network/applicationgateways"
+    not azure_attribute_absence["frontendPublicIPConfigurationsDisabled"]
+}
+
+frontendPublicIPConfigurationsDisabled_metadata := {
+    "Policy Code": "PR-AZR-0060-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure Application Gateway frontendIPConfigurations does not have public ip configured",
+    "Policy Description": "Application Gateway allows to set public or private ip in frontendIPConfigurations. It is highly recommended to only configure private ip in frontendIPConfigurations.",
+    "Resource Type": "microsoft.network/applicationgateways",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways"
+}
+
+
+# PR-AZR-0095-ARM
+
+default backend_https_protocol_enabled = null
+azure_attribute_absence ["backend_https_protocol_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    backendHttpSettingsCollection := resource.properties.backendHttpSettingsCollection[_]
+    not backendHttpSettingsCollection.properties.protocol
+}  
+
+azure_issue ["backend_https_protocol_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    backendHttpSettingsCollection := resource.properties.backendHttpSettingsCollection[_]
+    lower(backendHttpSettingsCollection.properties.protocol) != "https"
+} 
+
+backend_https_protocol_enabled {
+    lower(input.resources[_].type) == "microsoft.network/applicationgateways"
+    not azure_attribute_absence["protocol"]
+    not azure_issue["protocol"]
+}
+
+backend_https_protocol_enabled = false {
+    azure_issue["backend_https_protocol_enabled"]
+}
+
+backend_https_protocol_enabled = false {
+    azure_attribute_absence["backend_https_protocol_enabled"]
+}
+
+backend_https_protocol_enabled_err = "'backendHttpSettingsCollection' property 'protocol' is missing from 'microsoft.network/applicationgateways' resource" {
+    azure_attribute_absence["backend_https_protocol_enabled"]
+} else = "Application Gateway backend is currently not using Https protocol" {
+    azure_issue["backend_https_protocol_enabled"]
+}
+
+backend_https_protocol_enabled_metadata := {
+    "Policy Code": "PR-AZR-0095-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure Application Gateway Backend is using Https protocol",
+    "Policy Description": "Application Gateway allows to set backend network protocols Http and Https. It is highly recommended to use Https protocol for secure connections.",
+    "Resource Type": "microsoft.network/applicationgateways",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways"
+}
+
+
+# PR-AZR-0099-ARM
+
+default secret_certificate_is_in_keyvalut = null
+azure_attribute_absence ["secret_certificate_is_in_keyvalut"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    sslCertificates := resource.properties.sslCertificates[_]
+    not sslCertificates.properties.keyVaultSecretId
+}  
+
+secret_certificate_is_in_keyvalut {
+    lower(input.resources[_].type) == "microsoft.network/applicationgateways"
+    not azure_attribute_absence["secret_certificate_is_in_keyvalut"]
+}
+
+secret_certificate_is_in_keyvalut = false {
+    azure_attribute_absence["secret_certificate_is_in_keyvalut"]
+} 
+
+secret_certificate_is_in_keyvalut_err = "Application Gateway is currently not storing ssl certificates in keyvalut" {
+    azure_attribute_absence["secret_certificate_is_in_keyvalut"]
+}
+
+secret_certificate_is_in_keyvalut_metadata := {
+    "Policy Code": "PR-AZR-0099-ARM",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure Application Gateway secret certificates stores in keyvault",
+    "Policy Description": "This policy will identify application gateways which dont have ssl certificates stored in keyvalut and alert",
+    "Resource Type": "microsoft.network/applicationgateways",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways"
+}
