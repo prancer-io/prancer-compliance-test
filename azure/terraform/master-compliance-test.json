@@ -963,6 +963,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_app_service"
                     ]
                 },
                 {
@@ -992,6 +995,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_app_service"
                     ]
                 },
                 {
@@ -1021,6 +1027,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_app_service"
                     ]
                 },
                 {
@@ -1050,6 +1059,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_app_service"
                     ]
                 },
                 {
@@ -1079,6 +1091,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_app_service"
                     ]
                 },
                 {
@@ -1108,6 +1123,9 @@
                                 "terraform"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_app_service"
                     ]
                 },
                 {
