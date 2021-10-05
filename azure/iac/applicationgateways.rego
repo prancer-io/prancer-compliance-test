@@ -216,8 +216,8 @@ azure_issue ["backend_https_protocol_enabled"] {
 
 backend_https_protocol_enabled {
     lower(input.resources[_].type) == "microsoft.network/applicationgateways"
-    not azure_attribute_absence["protocol"]
-    not azure_issue["protocol"]
+    not azure_attribute_absence["backend_https_protocol_enabled"]
+    not azure_issue["backend_https_protocol_enabled"]
 }
 
 backend_https_protocol_enabled = false {
