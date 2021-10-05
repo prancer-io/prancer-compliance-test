@@ -1230,3 +1230,176 @@ s3_cors_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket--seealso"
 }
+
+
+#
+# PR-AWS-0301-CFR
+#
+
+default bucket_kms_encryption = null
+
+
+aws_issue["bucket_kms_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    count(resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration) == 0
+}
+
+aws_issue["bucket_kms_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration
+}
+
+aws_issue["bucket_kms_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[_]
+    not ServerSideEncryptionConfiguration.BucketKeyEnabled
+}
+
+aws_issue["bucket_kms_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[_]
+    lower(ServerSideEncryptionConfiguration.BucketKeyEnabled) == "false"
+}
+
+aws_issue["bucket_kms_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[_]
+    lower(ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.SSEAlgorithm) != "aws:kms"
+}
+
+aws_issue["bucket_kms_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[_]
+    lower(ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.SSEAlgorithm) == "aws:kms"
+    not ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.KMSMasterKeyID
+}
+
+aws_issue["bucket_kms_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[_]
+    lower(ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.SSEAlgorithm) == "aws:kms"
+    count(ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.KMSMasterKeyID) == 0
+}
+
+
+bucket_kms_encryption {
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
+    not aws_issue["bucket_kms_encryption"]
+}
+
+bucket_kms_encryption = false {
+    aws_issue["bucket_kms_encryption"]
+}
+
+
+bucket_kms_encryption_err = "Ensure S3 bucket is encrypted using KMS" {
+    aws_issue["bucket_kms_encryption"]
+}
+
+bucket_kms_encryption_metadata := {
+    "Policy Code": "PR-AWS-0301-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure S3 bucket is encrypted using KMS",
+    "Policy Description": "Ensure that your AWS S3 buckets are configured to use Server-Side Encryption with customer managed CMKs instead of S3-Managed Keys (SSE-S3) in order to obtain a fine-grained control over Amazon S3 data-at-rest encryption and decryption process",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-serversideencryptionbydefault.html#cfn-s3-bucket-serversideencryptionbydefault-ssealgorithm"
+}
+
+
+#
+# PR-AWS-0309-CFR
+#
+
+default s3_object_lock_enable = null
+
+aws_issue["s3_object_lock_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.ObjectLockEnabled
+}
+
+aws_issue["s3_object_lock_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    lower(resource.Properties.ObjectLockEnabled) != "true"
+}
+
+s3_object_lock_enable {
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
+    not aws_issue["s3_object_lock_enable"]
+}
+
+s3_object_lock_enable = false {
+    aws_issue["s3_object_lock_enable"]
+}
+
+s3_object_lock_enable_err = "Ensure S3 bucket has enabled lock configuration" {
+    aws_issue["s3_object_lock_enable"]
+}
+
+s3_object_lock_enable_metadata := {
+    "Policy Code": "PR-AWS-0309-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure S3 bucket has enabled lock configuration",
+    "Policy Description": "Indicates whether this bucket has an Object Lock configuration enabled. Enable ObjectLockEnabled when you apply ObjectLockConfiguration to a bucket.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#cfn-s3-bucket-objectlockenabled"
+}
+
+
+#
+# PR-AWS-0310-CFR
+#
+
+default s3_cross_region_replica = null
+
+aws_issue["s3_cross_region_replica"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    Rules := resource.Properties.ReplicationConfiguration.Rules[j]
+    not Rules.Destination
+}
+
+aws_issue["s3_cross_region_replica"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.ReplicationConfiguration
+}
+
+s3_cross_region_replica {
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
+    not aws_issue["s3_cross_region_replica"]
+}
+
+s3_cross_region_replica = false {
+    aws_issue["s3_cross_region_replica"]
+}
+
+s3_cross_region_replica_err = "Ensure S3 bucket has enabled lock configuration" {
+    aws_issue["s3_cross_region_replica"]
+}
+
+s3_cross_region_replica_metadata := {
+    "Policy Code": "PR-AWS-0310-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure S3 bucket has enabled lock configuration",
+    "Policy Description": "Cross-region replication enables automatic, asynchronous copying of objects across S3 buckets. By default, replication supports copying new S3 objects after it is enabled",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-replicationconfiguration-rules.html#cfn-s3-bucket-replicationconfiguration-rules-destination"
+}

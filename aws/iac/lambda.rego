@@ -171,3 +171,80 @@ lambda_tracing_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html"
 }
+
+
+#
+# PR-AWS-305-CFR
+#
+
+default lambda_concurrent_execution = null
+
+aws_issue["lambda_concurrent_execution"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    not resource.Properties.ReservedConcurrentExecutions
+}
+
+lambda_concurrent_execution {
+    lower(input.Resources[i].Type) == "aws::lambda::function"
+    not aws_issue["lambda_concurrent_execution"]
+}
+
+lambda_concurrent_execution = false {
+    aws_issue["lambda_concurrent_execution"]
+}
+
+lambda_concurrent_execution_err = "Ensure AWS Lambda function is configured for function-level concurrent execution limit" {
+    aws_issue["lambda_concurrent_execution"]
+}
+
+lambda_concurrent_execution_metadata := {
+    "Policy Code": "PR-AWS-305-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS Lambda function is configured for function-level concurrent execution limit",
+    "Policy Description": "Concurrency is the number of requests that your function is serving at any given time. When your function is invoked, Lambda allocates an instance of it to process the event",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-reservedconcurrentexecutions"
+}
+
+
+
+#
+# PR-AWS-306-CFR
+#
+
+default lambda_dlq = null
+
+aws_issue["lambda_dlq"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    not resource.Properties.DeadLetterConfig.TargetArn
+}
+
+lambda_dlq {
+    lower(input.Resources[i].Type) == "aws::lambda::function"
+    not aws_issue["lambda_dlq"]
+}
+
+lambda_dlq = false {
+    aws_issue["lambda_dlq"]
+}
+
+lambda_dlq_err = "Ensure AWS Lambda function is configured for a DLQ" {
+    aws_issue["lambda_dlq"]
+}
+
+lambda_dlq_metadata := {
+    "Policy Code": "PR-AWS-306-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS Lambda function is configured for a DLQ",
+    "Policy Description": "A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. it is required to get all items which is been not processed for some reason",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig"
+}

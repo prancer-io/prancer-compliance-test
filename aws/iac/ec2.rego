@@ -134,3 +134,46 @@ ec2_public_ip_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html"
 }
+
+#
+# PR-AWS-0298-CFR
+#
+
+default ec2_ebs_optimized = null
+
+aws_issue["ec2_ebs_optimized"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    not resource.Properties.EbsOptimized
+}
+
+aws_issue["ec2_ebs_optimized"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    lower(resource.Properties.EbsOptimized) == "false"
+}
+
+ec2_ebs_optimized {
+    lower(input.Resources[i].Type) == "aws::ec2::instance"
+    not aws_issue["ec2_ebs_optimized"]
+}
+
+ec2_ebs_optimized = false {
+    aws_issue["ec2_ebs_optimized"]
+}
+
+ec2_ebs_optimized_err = "Ensure that EC2 instace is EBS Optimized" {
+    aws_issue["ec2_ebs_optimized"]
+}
+
+ec2_ebs_optimized_metadata := {
+    "Policy Code": "PR-AWS-0297-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure that EC2 instace is EBS Optimized",
+    "Policy Description": "Enable EbsOptimized provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal Amazon EBS I/O performance",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-ebsoptimized"
+}
