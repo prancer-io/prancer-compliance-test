@@ -878,34 +878,34 @@ backup_public_access_disable_metadata := {
 # PR-AWS-0328-CFR
 #
 
-default docdb_cluster_logs = null
+default neptune_cluster_logs = null
 
-aws_issue["docdb_cluster_logs"] {
+aws_issue["neptune_cluster_logs"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::neptune::dbcluster"
     not resource.Properties.EnableCloudwatchLogsExports
 }
 
-aws_issue["docdb_cluster_logs"] {
+aws_issue["neptune_cluster_logs"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::neptune::dbcluster"
     count(resource.Properties.EnableCloudwatchLogsExports) == 0
 }
 
-docdb_cluster_logs {
+neptune_cluster_logs {
     lower(input.Resources[i].Type) == "aws::neptune::dbcluster"
-    not aws_issue["docdb_cluster_logs"]
+    not aws_issue["neptune_cluster_logs"]
 }
 
-docdb_cluster_logs = false {
-    aws_issue["docdb_cluster_logs"]
+neptune_cluster_logs = false {
+    aws_issue["neptune_cluster_logs"]
 }
 
-docdb_cluster_logs_err = "Ensure Neptune logging is enabled" {
-    aws_issue["docdb_cluster_logs"]
+neptune_cluster_logs_err = "Ensure Neptune logging is enabled" {
+    aws_issue["neptune_cluster_logs"]
 }
 
-docdb_cluster_logs_metadata := {
+neptune_cluster_logs_metadata := {
     "Policy Code": "PR-AWS-0328-CFR",
     "Type": "IaC",
     "Product": "AWS",
