@@ -377,14 +377,16 @@ aws_issue["ecs_transit_enabled"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
     volume := resource.properties.volume[_]
-    not volume.efs_volume_configuration.transit_encryption
+    efs_volume_configuration := volume.efs_volume_configuration[_]
+    not efs_volume_configuration.transit_encryption
 }
 
 aws_issue["ecs_transit_enabled"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
     volume := resource.properties.volume[_]
-    lower(volume.efs_volume_configuration.transit_encryption) != "enabled"
+    efs_volume_configuration := volume.efs_volume_configuration[_]
+    lower(efs_volume_configuration.transit_encryption) != "enabled"
 }
 
 ecs_transit_enabled {
