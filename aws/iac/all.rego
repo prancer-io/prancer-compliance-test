@@ -816,3 +816,147 @@ glue_security_config_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-encryptionconfiguration.html#cfn-glue-securityconfiguration-encryptionconfiguration-s3encryptions"
 }
+
+#
+# PR-AWS-0319-CFR
+#
+
+default backup_public_access_disable = null
+
+aws_issue["backup_public_access_disable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::backup::backupvault"
+    statement := resource.Properties.AccessPolicy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+}
+
+aws_issue["backup_public_access_disable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::backup::backupvault"
+    statement := resource.Properties.AccessPolicy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+}
+
+aws_issue["backup_public_access_disable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::backup::backupvault"
+    statement := resource.Properties.AccessPolicy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+}
+
+
+backup_public_access_disable {
+    lower(input.Resources[i].Type) == "aws::backup::backupvault"
+    not aws_issue["backup_public_access_disable"]
+}
+
+backup_public_access_disable = false {
+    aws_issue["backup_public_access_disable"]
+}
+
+backup_public_access_disable_err = "Ensure Glacier Backup policy is not publicly accessible" {
+    aws_issue["backup_public_access_disable"]
+}
+
+backup_public_access_disable_metadata := {
+    "Policy Code": "PR-AWS-0319-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Glacier Backup policy is not publicly accessible",
+    "Policy Description": "Public Glacier backup potentially expose existing interfaces to unwanted 3rd parties that can tap into an existing data stream, resulting in data leak to an unwanted party.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-backup-backupvault.html#cfn-backup-backupvault-accesspolicy"
+}
+
+
+#
+# PR-AWS-0328-CFR
+#
+
+default docdb_cluster_logs = null
+
+aws_issue["docdb_cluster_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::neptune::dbcluster"
+    not resource.Properties.EnableCloudwatchLogsExports
+}
+
+aws_issue["docdb_cluster_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::neptune::dbcluster"
+    count(resource.Properties.EnableCloudwatchLogsExports) == 0
+}
+
+docdb_cluster_logs {
+    lower(input.Resources[i].Type) == "aws::neptune::dbcluster"
+    not aws_issue["docdb_cluster_logs"]
+}
+
+docdb_cluster_logs = false {
+    aws_issue["docdb_cluster_logs"]
+}
+
+docdb_cluster_logs_err = "Ensure Neptune logging is enabled" {
+    aws_issue["docdb_cluster_logs"]
+}
+
+docdb_cluster_logs_metadata := {
+    "Policy Code": "PR-AWS-0328-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Neptune logging is enabled",
+    "Policy Description": "These access logs can be used to analyze traffic patterns and troubleshoot security and operational issues.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-neptune-dbcluster.html#cfn-neptune-dbcluster-enablecloudwatchlogsexports"
+}
+
+
+#
+# PR-AWS-0329-CFR
+#
+
+default docdb_cluster_logs = null
+
+aws_issue["docdb_cluster_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbcluster"
+    not resource.Properties.EnableCloudwatchLogsExports
+}
+
+aws_issue["docdb_cluster_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbcluster"
+    count(resource.Properties.EnableCloudwatchLogsExports) == 0
+}
+
+docdb_cluster_logs {
+    lower(input.Resources[i].Type) == "aws::docdb::dbcluster"
+    not aws_issue["docdb_cluster_logs"]
+}
+
+docdb_cluster_logs = false {
+    aws_issue["docdb_cluster_logs"]
+}
+
+docdb_cluster_logs_err = "Ensure AWS DocumentDB logging is enabled" {
+    aws_issue["docdb_cluster_logs"]
+}
+
+docdb_cluster_logs_metadata := {
+    "Policy Code": "PR-AWS-0329-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS DocumentDB logging is enabled",
+    "Policy Description": "The events recorded by the AWS DocumentDB audit logs include: successful and failed authentication attempts, creating indexes or dropping a collection in a database within the DocumentDB cluster.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#cfn-docdb-dbcluster-enablecloudwatchlogsexports"
+}

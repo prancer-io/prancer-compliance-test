@@ -858,3 +858,86 @@ db_instance_iam_authenticate_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-enableiamdatabaseauthentication"
 }
+
+
+#
+# PR-AWS-0320-CFR
+#
+
+default db_instance_cloudwatch_logs = null
+
+aws_issue["db_instance_cloudwatch_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    count(resource.Properties.EnableCloudwatchLogsExports) == 0
+}
+
+aws_issue["db_instance_cloudwatch_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    not resource.Properties.EnableCloudwatchLogsExports
+}
+
+db_instance_cloudwatch_logs {
+    lower(input.Resources[i].Type) == "aws::rds::dbinstance"
+    not aws_issue["db_instance_cloudwatch_logs"]
+}
+
+db_instance_cloudwatch_logs = false {
+    aws_issue["db_instance_cloudwatch_logs"]
+}
+
+db_instance_cloudwatch_logs_err = "Ensure respective logs of Amazon RDS instance are enabled" {
+    aws_issue["db_instance_cloudwatch_logs"]
+}
+
+db_instance_cloudwatch_logs_metadata := {
+    "Policy Code": "PR-AWS-0320-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure respective logs of Amazon RDS instance are enabled",
+    "Policy Description": "Use CloudWatch logging types for Amazon Relational Database Service (Amazon RDS) instances",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-enablecloudwatchlogsexports"
+}
+
+
+
+#
+# PR-AWS-0321-CFR
+#
+
+default db_instance_monitor = null
+
+aws_issue["db_instance_monitor"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    not resource.Properties.MonitoringInterval
+}
+
+db_instance_monitor {
+    lower(input.Resources[i].Type) == "aws::rds::dbinstance"
+    not aws_issue["db_instance_monitor"]
+}
+
+db_instance_monitor = false {
+    aws_issue["db_instance_monitor"]
+}
+
+db_instance_monitor_err = "Enhanced monitoring for Amazon RDS instances is enabled" {
+    aws_issue["db_instance_monitor"]
+}
+
+db_instance_monitor_metadata := {
+    "Policy Code": "PR-AWS-0321-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Enhanced monitoring for Amazon RDS instances is enabled",
+    "Policy Description": "This New Relic integration allows you to monitor and alert on RDS Enhanced Monitoring. You can use integration data and alerts to monitor the DB processes and identify potential trouble spots as well as to profile the DB allowing you to improve and optimize their response and cost",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-monitoringinterval"
+}
