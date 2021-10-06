@@ -177,3 +177,47 @@ ec2_ebs_optimized_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-ebsoptimized"
 }
+
+
+#
+# PR-AWS-0332-CFR
+#
+
+default ec2_monitoring = null
+
+aws_issue["ec2_monitoring"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    not resource.Properties.Monitoring
+}
+
+aws_issue["ec2_monitoring"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    lower(resource.Properties.Monitoring) == "false"
+}
+
+ec2_monitoring {
+    lower(input.Resources[i].Type) == "aws::ec2::instance"
+    not aws_issue["ec2_monitoring"]
+}
+
+ec2_monitoring = false {
+    aws_issue["ec2_monitoring"]
+}
+
+ec2_monitoring_err = "Ensure detailed monitoring is enabled for EC2 instances" {
+    aws_issue["ec2_monitoring"]
+}
+
+ec2_monitoring_metadata := {
+    "Policy Code": "PR-AWS-0332-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure detailed monitoring is enabled for EC2 instances",
+    "Policy Description": "Ensure that detailed monitoring is enabled for your Amazon EC2 instances in order to have enough monitoring data to help you make better decisions on architecting and managing compute resources within your AWS account",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-monitoring"
+}

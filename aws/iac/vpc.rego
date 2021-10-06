@@ -51,3 +51,57 @@ vpc_subnet_autoip_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-subnet.html"
 }
+
+
+#
+# PR-AWS-0339-CFR
+#
+
+default eip_instance_link = null
+
+aws_issue["eip_instance_link"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::eip"
+    lower(resource.Properties.Domain) == "vpc"
+    not resource.Properties.InstanceId
+}
+
+aws_issue["eip_instance_link"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::eip"
+    lower(resource.Properties.Domain) == "vpc"
+    count(resource.Properties.InstanceId) == 0
+}
+
+
+aws_issue["eip_instance_link"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::eip"
+    lower(resource.Properties.Domain) == "vpc"
+    resource.Properties.InstanceId == null
+}
+
+eip_instance_link {
+    lower(input.Resources[i].Type) == "aws::ec2::eip"
+    not aws_issue["eip_instance_link"]
+}
+
+eip_instance_link = false {
+    aws_issue["eip_instance_link"]
+}
+
+eip_instance_link_err = "Ensure all EIP addresses allocated to a VPC are attached related EC2 instances" {
+    aws_issue["eip_instance_link"]
+}
+
+eip_instance_link_metadata := {
+    "Policy Code": "PR-AWS-0339-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure all EIP addresses allocated to a VPC are attached related EC2 instances",
+    "Policy Description": "Ensure that a managed Config rule for AWS Elastic IPs (EIPs) attached to EC2 instances launched inside a VPC is created. Config service tracks changes within your AWS resources configuration and saves the recorded data for security and compliance audits",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html"
+}

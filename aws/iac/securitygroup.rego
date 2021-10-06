@@ -4,7 +4,7 @@ package rule
 
 ports = [
     "135", "137", "138", "1433", "1434", "20", "21", "22", "23", "25", "3306", "3389", "4333",
-    "445", "53", "5432", "5500", "5900", "69"
+    "445", "53", "5432", "5500", "5900", "69", "9300", "5601"
 ]
 
 aws_issue[port] {
@@ -752,4 +752,146 @@ sg_tag_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#cfn-ec2-securitygroup-tags"
+}
+
+
+#
+# PR-AWS-0335-CFR
+#
+
+default sg_description_absent = null
+
+aws_issue["sg_description_absent"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[_]
+    not ingress.description
+}
+
+aws_issue["sg_description_absent"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[_]
+    count(ingress.description) == 0
+}
+
+sg_description_absent {
+    lower(input.Resources[i].Type) == "aws::ec2::securitygroup"
+    not aws_issue["sg_description_absent"]
+}
+
+sg_description_absent = false {
+    aws_issue["sg_description_absent"]
+}
+
+sg_description_absent_err = "Ensure every Security Group rule contains a description" {
+    aws_issue["sg_description_absent"]
+}
+
+sg_description_absent_metadata := {
+    "Policy Code": "PR-AWS-0335-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure every Security Group rule contains a description",
+    "Policy Description": "We recommend you add descriptive text to each of your Security Group Rules clarifying each rule's goals, this helps prevent developer errors.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-rule-1.html#cfn-ec2-security-group-rule-description"
+}
+
+
+#
+# PR-AWS-0336-CFR
+#
+
+default port_9300 = null
+
+port_9300 {
+    lower(input.Resources[i].Type) == "aws::ec2::securitygroup"
+    not aws_issue["9300"]
+}
+
+port_9300 = false {
+    aws_issue["9300"]
+}
+
+port_9300_err = "AWS Security Groups allow internet traffic from internet to ElasticSearch Protocol Port (9300)" {
+    aws_issue["9300"]
+}
+
+port_9300_metadata := {
+    "Policy Code": "PR-AWS-0336-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to ElasticSearch Protocol Port (9300)",
+    "Policy Description": "This policy identifies the security groups which are exposing ElasticSearch Protocol Port (9300) to the internet. It is recommended that Global permission to access the well known services ElasticSearch Protocol Port (9300) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+
+#
+# PR-AWS-0337-CFR
+#
+
+default port_5601 = null
+
+port_5601 {
+    lower(input.Resources[i].Type) == "aws::ec2::securitygroup"
+    not aws_issue["5601"]
+}
+
+port_5601 = false {
+    aws_issue["5601"]
+}
+
+port_5601_err = "AWS Security Groups allow internet traffic from internet to Kibana Protocol Port (5601)" {
+    aws_issue["5601"]
+}
+
+port_5601_metadata := {
+    "Policy Code": "PR-AWS-0337-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to Kibana Protocol Port (5601)",
+    "Policy Description": "This policy identifies the security groups which are exposing Kibana Protocol Port (5601) to the internet. It is recommended that Global permission to access the well known services Kibana Protocol Port (5601) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+
+#
+# PR-AWS-0338-CFR
+#
+
+default port_2379 = null
+
+port_2379 {
+    lower(input.Resources[i].Type) == "aws::ec2::securitygroup"
+    not aws_issue["2379"]
+}
+
+port_2379 = false {
+    aws_issue["2379"]
+}
+
+port_2379_err = "AWS Security Groups allow internet traffic from internet to etcd-client Protocol Port (2379)" {
+    aws_issue["2379"]
+}
+
+port_2379_metadata := {
+    "Policy Code": "PR-AWS-0338-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to etcd-client Protocol Port (2379)",
+    "Policy Description": "This policy identifies the security groups which are exposing etcd-client Protocol Port (2379) to the internet. It is recommended that Global permission to access the well known services etcd-client Protocol Port (2379) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
 }
