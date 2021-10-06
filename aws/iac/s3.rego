@@ -22,8 +22,6 @@ aws_path[{"s3_accesslog": metadata}] {
     not resource.Properties.LoggingConfiguration.DestinationBucketName
     metadata := {
         "resource_path": [["Resources", i, "Properties", "LoggingConfiguration", "DestinationBucketName"]],
-        "value": null,
-        "functions": "absent"
     }
 }
 
@@ -39,8 +37,6 @@ aws_path[{"s3_accesslog": metadata}] {
     not resource.Properties.LoggingConfiguration.LogFilePrefix
     metadata := {
         "resource_path": [["Resources", i, "Properties", "LoggingConfiguration", "LogFilePrefix"]],
-        "value": null,
-        "functions": "absent"
     }
 }
 
@@ -56,8 +52,6 @@ aws_path[{"s3_accesslog": metadata}] {
     count(resource.Properties.LoggingConfiguration.DestinationBucketName) == 0
     metadata := {
         "resource_path": [["Resources", i, "Properties", "LoggingConfiguration", "DestinationBucketName"]],
-        "value": count(resource.Properties.LoggingConfiguration.DestinationBucketName),
-        "functions": "count"
     }
 }
 
@@ -73,8 +67,6 @@ aws_path[{"s3_accesslog": metadata}] {
     count(resource.Properties.LoggingConfiguration.LogFilePrefix) == 0
     metadata := {
         "resource_path": [["Resources", i, "Properties", "LoggingConfiguration", "LogFilePrefix"]],
-        "value": count(resource.Properties.LoggingConfiguration.LogFilePrefix),
-        "functions": "count"
     }
 }
 
@@ -158,8 +150,6 @@ aws_path[{"s3_acl_delete": metadata}] {
     not resource.Properties.PolicyDocument.Statement
     metadata := {
         "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement"]],
-        "value": null,
-        "functions": "absent"
     }
 }
 
@@ -172,7 +162,6 @@ aws_path[{"s3_acl_delete": metadata}] {
     lower(stat.Action[k]) == "s3:*"
     metadata := {
         "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action", k]],
-        "value": stat.Action[k],
     }
 }
 
@@ -185,7 +174,6 @@ aws_path[{"s3_acl_delete": metadata}] {
     startswith(lower(stat.Action),"s3:delete")
     metadata := {
         "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action"]],
-        "value": stat.Action,
     }
 }
 
@@ -198,7 +186,6 @@ aws_path[{"s3_acl_delete": metadata}] {
     startswith(lower(stat.Action[k]),"s3:delete")
     metadata := {
         "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action", k]],
-        "value": stat.Action[k],
     }
 }
 
@@ -283,8 +270,6 @@ aws_path[{"s3_acl_get": metadata}] {
     not resource.Properties.PolicyDocument.Statement
     metadata := {
         "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement"]],
-        "value": null,
-        "functions": "absent"
     }
 }
 
@@ -297,7 +282,6 @@ aws_path[{"s3_acl_get": metadata}] {
     lower(stat.Action[k]) == "s3:*"
     metadata := {
         "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action", k]],
-        "value": stat.Action[k],
     }
 }
 
@@ -310,7 +294,6 @@ aws_path[{"s3_acl_get": metadata}] {
     startswith(lower(stat.Action),"s3:get")
     metadata := {
         "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action"]],
-        "value": stat.Action,
     }
 }
 
@@ -323,7 +306,6 @@ aws_path[{"s3_acl_get": metadata}] {
     startswith(lower(stat.Action[k]),"s3:get")
     metadata := {
         "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action", k]],
-        "value": stat.Action[k],
     }
 }
 
@@ -408,8 +390,6 @@ aws_path[{"s3_acl_list": metadata}] {
     not resource.Properties.PolicyDocument.Statement
     metadata := {
         "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement"]],
-        "value": null,
-        "functions": "absent"
     }
 }
 
@@ -422,7 +402,6 @@ aws_path[{"s3_acl_list": metadata}] {
     lower(stat.Action[k]) == "s3:*"
     metadata := {
         "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action", k]],
-        "value": stat.Action[k],
     }
 }
 
@@ -435,7 +414,6 @@ aws_path[{"s3_acl_list": metadata}] {
     startswith(lower(stat.Action),"s3:list")
     metadata := {
         "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action"]],
-        "value": stat.Action,
     }
 
 }
@@ -449,7 +427,6 @@ aws_path[{"s3_acl_list": metadata}] {
     startswith(lower(stat.Action[k]),"s3:list")
     metadata := {
         "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action", k]],
-        "value": stat.Action[k],
     }
 
 }
@@ -534,8 +511,6 @@ aws_path[{"s3_acl_put": metadata}] {
     not resource.Properties.PolicyDocument.Statement
     metadata := {
         "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement"]],
-        "value": null,
-        "functions": "absent"
     }
 }
 
@@ -548,7 +523,6 @@ aws_path[{"s3_acl_put": metadata}] {
     lower(stat.Action[k]) == "s3:*"
     metadata := {
         "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action", k]],
-        "value": stat.Action[k],
     }
 }
 
@@ -561,7 +535,6 @@ aws_path[{"s3_acl_put": metadata}] {
     startswith(lower(stat.Action),"s3:put")
     metadata := {
         "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action"]],
-        "value": stat.Action,
     }
 
 }
@@ -575,7 +548,6 @@ aws_path[{"s3_acl_put": metadata}] {
     startswith(lower(stat.Action[k]),"s3:put")
     metadata := {
         "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action", k]],
-        "value": stat.Action[k],
     }
 }
 
@@ -639,7 +611,6 @@ aws_path[{"s3_cloudtrail": metadata}] {
         "resource_path": [
             ["Resources", i, "Properties", "IsLogging"],
         ],
-        "value": resource.Properties.IsLogging,
     }
 }
 
@@ -651,7 +622,6 @@ aws_path[{"s3_cloudtrail": metadata}] {
         "resource_path": [
             ["Resources", i, "Properties", "IsLogging"],
         ],
-        "value": null,
         "function": "absent"
     }
 }
@@ -712,8 +682,6 @@ aws_path[{"s3_versioning": metadata}] {
     not resource.Properties.VersioningConfiguration.Status
     metadata := {
         "resource_path": [["Resources", i, "Properties", "VersioningConfiguration", "Status"]],
-        "value": null,
-        "functions": "absent"
     }
 }
 
@@ -723,7 +691,6 @@ aws_path[{"s3_versioning": metadata}] {
     lower(resource.Properties.VersioningConfiguration.Status) != "enabled"
     metadata := {
         "resource_path": [["Resources", i, "Properties", "VersioningConfiguration", "Status"]],
-        "value": resource.Properties.VersioningConfiguration.Status,
     }
 }
 
@@ -779,8 +746,6 @@ aws_path[{"s3_public_acl": metadata}] {
     lower(resource.Properties.AccessControl) == "publicread"
     metadata := {
         "resource_path": [["Resources", i, "Properties", "AccessControl"]],
-        "value": resource.Properties.AccessControl,
-        "functions": "absent"
     }
 }
 
@@ -867,8 +832,6 @@ aws_path[{"s3_transport": metadata}] {
             ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "StringLike"],
             ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Bool"]
         ],
-        "value": null,
-        "functions": "absent"
     }
 }
 
@@ -882,7 +845,6 @@ aws_path[{"s3_transport": metadata}] {
         "resource_path": [
             ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "StringLike", "aws:SecureTransport"],
         ],
-        "value": statement.Condition.StringLike["aws:SecureTransport"]
     }
 }
 
@@ -896,7 +858,6 @@ aws_path[{"s3_transport": metadata}] {
         "resource_path": [
             ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Bool", "aws:SecureTransport"],
         ],
-        "value": statement.Condition.Bool["aws:SecureTransport"]
     }
 }
 
@@ -910,7 +871,6 @@ aws_path[{"s3_transport": metadata}] {
         "resource_path": [
             ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "StringLike", "aws:SecureTransport"],
         ],
-        "value": null,
         "function": "absent"
     }
 }
@@ -925,7 +885,6 @@ aws_path[{"s3_transport": metadata}] {
         "resource_path": [
             ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Bool", "aws:SecureTransport"],
         ],
-        "value": null,
         "function": "absent"
     }
 }
@@ -983,7 +942,6 @@ aws_path[{"s3_auth_acl": metadata}] {
         "resource_path": [
             ["Resources", i, "Properties", "AccessControl"],
         ],
-        "value": resource.Properties.AccessControl,
     }
 }
 
@@ -1038,7 +996,6 @@ aws_path[{"s3_public_access": metadata}] {
         "resource_path": [
             ["Resources", i, "Properties", "AccessControl"],
         ],
-        "value": resource.Properties.AccessControl,
     }
 }
 
@@ -1050,7 +1007,6 @@ aws_path[{"s3_public_access": metadata}] {
         "resource_path": [
             ["Resources", i, "Properties", "AccessControl"],
         ],
-        "value": resource.Properties.AccessControl,
     }
 }
 
@@ -1098,7 +1054,6 @@ aws_path["s3_encryption"] {
         "resource_path": [
             ["Resources", i, "Properties", "BucketEncryption", "ServerSideEncryptionConfiguration"],
         ],
-        "value": resource.Properties.AccessControl,
     }
 }
 
@@ -1147,7 +1102,6 @@ aws_path[{"s3_website": metadata}] {
         "resource_path": [
             ["Resources", i, "Properties", "WebsiteConfiguration"],
         ],
-        "value": resource.Properties.WebsiteConfiguration,
     }
 }
 
@@ -1202,7 +1156,6 @@ aws_path[{"s3_cors": metadata}] {
             ["Resources", i, "Properties", "CorsConfiguration", "CorsRules", j, "AllowedHeaders", k],
             ["Resources", i, "Properties", "CorsConfiguration", "CorsRules", j, "AllowedHeaders", l]
         ],
-        "value": "*",
     }
 }
 

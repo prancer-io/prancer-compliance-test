@@ -28,8 +28,6 @@ aws_path[{"sns_protocol": metadata}] {
     not resource.Properties.Protocol
     metadata := {
         "resource_path": [["Resources", i, "Properties", "Protocol"]],
-        "value": null,
-        "function": "absent"
     }
 }
 
@@ -39,7 +37,6 @@ aws_path[{"sns_protocol": metadata}] {
     lower(resource.Properties.Protocol) == "http"
     metadata := {
         "resource_path": [["Resources", i, "Properties", "Protocol"]],
-        "value": resource.Properties.Protocol,
     }
 }
 
@@ -95,7 +92,6 @@ aws_path[{"sns_encrypt_key": metadata}] {
     contains(lower(resource.Properties.KmsMasterKeyId), "alias/aws/sns")
     metadata := {
         "resource_path": [["Resources", i, "Properties", "KmsMasterKeyId"]],
-        "value": resource.Properties.KmsMasterKeyId,
     }
 }
 
@@ -148,8 +144,6 @@ aws_path[{"sns_encrypt": metadata}] {
     not resource.Properties.KmsMasterKeyId
     metadata := {
         "resource_path": [["Resources", i, "Properties", "KmsMasterKeyId"]],
-        "value": null,
-        "function": "absent"
     }
 }
 
@@ -159,8 +153,6 @@ aws_path[{"sns_encrypt": metadata}] {
     count(resource.Properties.KmsMasterKeyId) == 0
     metadata := {
         "resource_path": [["Resources", i, "Properties", "KmsMasterKeyId"]],
-        "value": count(resource.Properties.KmsMasterKeyId),
-        "function": "count"
     }
 }
 
