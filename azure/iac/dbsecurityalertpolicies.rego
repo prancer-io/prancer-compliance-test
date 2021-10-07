@@ -17,12 +17,34 @@ azure_attribute_absence["dbsec_threat_off"] {
     not sql_resources.properties.state
 }
 
+source_path[{"dbsec_threat_off":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[j]
+    lower(sql_resources.type) == "securityalertpolicies"
+    not sql_resources.properties.state
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","state"]]
+    }
+}
+
 azure_issue["dbsec_threat_off"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases"
     sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     lower(sql_resources.properties.state) != "enabled"
+}
+
+source_path[{"dbsec_threat_off":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[j]
+    lower(sql_resources.type) == "securityalertpolicies"
+    lower(sql_resources.properties.state) != "enabled"
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","state"]]
+    }
 }
 
 dbsec_threat_off {
@@ -76,12 +98,36 @@ azure_attribute_absence["dbsec_threat_retention"] {
     not sql_resources.properties.retentionDays
 }
 
+source_path[{"dbsec_threat_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[j]
+    lower(sql_resources.type) == "securityalertpolicies"
+    not sql_resources.properties.retentionDays
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","retentionDays"]]
+    }
+}
+
+
 azure_issue["dbsec_threat_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases"
     sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     to_number(sql_resources.properties.retentionDays) <= 90
+}
+
+
+source_path[{"dbsec_threat_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[j]
+    lower(sql_resources.type) == "securityalertpolicies"
+    to_number(sql_resources.properties.retentionDays) <= 90
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","retentionDays"]]
+    }
 }
 
 dbsec_threat_retention {
@@ -136,12 +182,34 @@ azure_attribute_absence["dbsec_threat_email"] {
     not sql_resources.properties.emailAddresses
 }
 
+source_path[{"dbsec_threat_email":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[j]
+    lower(sql_resources.type) == "securityalertpolicies"
+    not sql_resources.properties.emailAddresses
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","emailAddresses"]]
+    }
+}
+
 azure_issue["dbsec_threat_email"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases"
     sql_resources := resource.resources[_]
     lower(sql_resources.type) == "securityalertpolicies"
     count(sql_resources.properties.emailAddresses) == 0  
+}
+
+source_path[{"dbsec_threat_email":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[j]
+    lower(sql_resources.type) == "securityalertpolicies"
+    count(sql_resources.properties.emailAddresses) == 0  
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","emailAddresses"]]
+    }
 }
 
 dbsec_threat_email {
@@ -197,6 +265,17 @@ azure_attribute_absence["dbsec_threat_alert"] {
     not sql_resources.properties.disabledAlerts
 }
 
+source_path[{"dbsec_threat_email":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[j]
+    lower(sql_resources.type) == "securityalertpolicies"
+    not sql_resources.properties.disabledAlerts
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","disabledAlerts"]]
+    }
+}
+
 azure_issue["dbsec_threat_alert"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases"
@@ -204,6 +283,18 @@ azure_issue["dbsec_threat_alert"] {
     lower(sql_resources.type) == "securityalertpolicies"
     count(sql_resources.properties.disabledAlerts) > 0
 }
+
+source_path[{"dbsec_threat_email":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[j]
+    lower(sql_resources.type) == "securityalertpolicies"
+    count(sql_resources.properties.disabledAlerts) > 0
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","disabledAlerts"]]
+    }
+}
+
 
 dbsec_threat_alert {
     resource := input.resources[_]
@@ -254,6 +345,17 @@ azure_issue["sql_alert"] {
     not sql_resources.properties.emailAccountAdmins
 }
 
+source_path[{"sql_alert":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[j]
+    lower(sql_resources.type) == "securityalertpolicies"
+    not sql_resources.properties.emailAccountAdmins
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","emailAccountAdmins"]]
+    }
+}
+
 azure_issue["sql_alert"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases"
@@ -262,6 +364,17 @@ azure_issue["sql_alert"] {
     sql_resources.properties.emailAccountAdmins != true
 }
 
+
+source_path[{"sql_alert":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_resources := resource.resources[j]
+    lower(sql_resources.type) == "securityalertpolicies"
+    not sql_resources.properties.emailAccountAdmins
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","emailAccountAdmins"]]
+    }
+}
 
 sql_alert {
     resource := input.resources[_]

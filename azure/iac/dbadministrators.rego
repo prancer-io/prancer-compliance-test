@@ -14,10 +14,28 @@ azure_attribute_absence["sql_server_ad_admin"] {
     not resource.properties.administratorType
 }
 
+source_path[{"sql_server_ad_admin":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/administrators"
+    not resource.properties.administratorType
+    metadata:= {
+        "resource_path": [["resources",i,"properties","administratorType"]]
+    }
+}
+
 azure_issue["sql_server_ad_admin"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/administrators"
     lower(resource.properties.administratorType) != "activedirectory"
+}
+
+source_path[{"sql_server_ad_admin":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/administrators"
+    lower(resource.properties.administratorType) != "activedirectory"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","administratorType"]]
+    }
 }
 
 sql_server_ad_admin {
@@ -68,12 +86,34 @@ azure_attribute_absence["sql_logical_server_ad_admin"] {
     not sql_resource.properties.administratorType
 }
 
+source_path[{"sql_logical_server_ad_admin":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resource := resource.resources[j]
+    lower(sql_resource.type) == "administrators"
+    not sql_resource.properties.administratorType
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","administratorType"]]
+    }
+}
+
 azure_issue["sql_logical_server_ad_admin"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
     sql_resource := resource.resources[_]
     lower(sql_resource.type) == "administrators"
     lower(sql_resource.properties.administratorType) != "activedirectory"
+}
+
+source_path[{"sql_logical_server_ad_admin":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resource := resource.resources[j]
+    lower(sql_resource.type) == "administrators"
+    lower(sql_resource.properties.administratorType) != "activedirectory"
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","administratorType"]]
+    }
 }
 
 sql_logical_server_ad_admin {
@@ -125,10 +165,29 @@ azure_attribute_absence["sql_managedinstances_ad_admin"] {
     not resource.properties.administratorType
 }
 
+source_path[{"sql_server_ad_admin":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/managedinstances/administrators"
+    not resource.properties.administratorType
+    metadata:= {
+        "resource_path": [["resources",i,"properties","administratorType"]]
+    }
+}
+
+
 azure_issue["sql_managedinstances_ad_admin"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/managedinstances/administrators"
     lower(resource.properties.administratorType) != "activedirectory"
+}
+
+source_path[{"sql_server_ad_admin":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/managedinstances/administrators"
+    lower(resource.properties.administratorType) != "activedirectory"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","administratorType"]]
+    }
 }
 
 sql_managedinstances_ad_admin {

@@ -11,10 +11,28 @@ azure_attribute_absence ["ssl_enforcement"] {
     not resource.properties.sslEnforcement
 }
 
+source_path[{"ssl_enforcement":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    not resource.properties.sslEnforcement
+    metadata:= {
+        "resource_path": [["resources",i,"properties","sslEnforcement"]]
+    }
+}
+
 azure_issue ["ssl_enforcement"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbformysql/servers"
     lower(resource.properties.sslEnforcement) != "enabled"
+}
+
+source_path[{"ssl_enforcement":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    lower(resource.properties.sslEnforcement) != "enabled"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","sslEnforcement"]]
+    }
 }
 
 ssl_enforcement {
