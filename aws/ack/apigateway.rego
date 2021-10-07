@@ -9,19 +9,17 @@ package rule
 default api_gw_cert = null
 
 aws_issue["api_gw_cert"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "stage"
-    not resource.spec.clientCertificateID
+    lower(input.kind) == "stage"
+    not input.spec.clientCertificateID
 }
 
 aws_issue["api_gw_cert"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "stage"
-    lower(resource.spec.clientCertificateID) == "none"
+    lower(input.kind) == "stage"
+    lower(input.spec.clientCertificateID) == "none"
 }
 
 api_gw_cert {
-    lower(input.Resources[i].Type) == "stage"
+    lower(input.kind) == "stage"
     not aws_issue["api_gw_cert"]
 }
 

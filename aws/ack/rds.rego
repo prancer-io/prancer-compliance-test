@@ -9,13 +9,12 @@ package rule
 default rds_public = null
 
 aws_issue["rds_public"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "dbinstance"
-    resource.spec.publiclyAccessible
+    lower(input.kind) == "dbinstance"
+    input.spec.publiclyAccessible
 }
 
 rds_public {
-    lower(input.Resources[i].kind) == "dbinstance"
+    lower(input.kind) == "dbinstance"
     not aws_issue["rds_public"]
 }
 
@@ -46,13 +45,12 @@ rds_public_metadata := {
 default rds_encrypt = null
 
 aws_issue["rds_encrypt"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "dbinstance"
-    not resource.spec.storageEncrypted
+    lower(input.kind) == "dbinstance"
+    not input.spec.storageEncrypted
 }
 
 rds_encrypt {
-    lower(input.Resources[i].kind) == "dbinstance"
+    lower(input.kind) == "dbinstance"
     not aws_issue["rds_encrypt"]
 }
 
@@ -83,21 +81,19 @@ rds_encrypt_metadata := {
 default rds_multiaz = null
 
 aws_issue["rds_multiaz"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "dbinstance"
-    not resource.spec.engine
+    lower(input.kind) == "dbinstance"
+    not input.spec.engine
 }
 
 aws_issue["rds_multiaz"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "dbinstance"
-    lower(resource.spec.engine) != "aurora"
-    lower(resource.spec.engine) != "sqlserver"
-    not resource.spec.multiAZ
+    lower(input.kind) == "dbinstance"
+    lower(input.spec.engine) != "aurora"
+    lower(input.spec.engine) != "sqlserver"
+    not input.spec.multiAZ
 }
 
 rds_multiaz {
-    lower(input.Resources[i].kind) == "dbinstance"
+    lower(input.kind) == "dbinstance"
     not aws_issue["rds_multiaz"]
 }
 
@@ -128,13 +124,12 @@ rds_multiaz_metadata := {
 default rds_snapshot = null
 
 aws_issue["rds_snapshot"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "dbinstance"
-    not resource.spec.copyTagsToSnapshot
+    lower(input.kind) == "dbinstance"
+    not input.spec.copyTagsToSnapshot
 }
 
 rds_snapshot {
-    lower(input.Resources[i].kind) == "dbinstance"
+    lower(input.kind) == "dbinstance"
     not aws_issue["rds_snapshot"]
 }
 
@@ -165,19 +160,17 @@ rds_snapshot_metadata := {
 default rds_backup = null
 
 aws_issue["rds_backup"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "dbinstance"
-    not resource.spec.backupRetentionPeriod
+    lower(input.kind) == "dbinstance"
+    not input.spec.backupRetentionPeriod
 }
 
 aws_issue["rds_backup"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "dbinstance"
-    to_number(resource.spec.backupRetentionPeriod) == 0
+    lower(input.kind) == "dbinstance"
+    to_number(input.spec.backupRetentionPeriod) == 0
 }
 
 rds_backup {
-    lower(input.Resources[i].kind) == "dbinstance"
+    lower(input.kind) == "dbinstance"
     not aws_issue["rds_backup"]
 }
 
@@ -208,13 +201,12 @@ rds_backup_metadata := {
 default rds_upgrade = null
 
 aws_issue["rds_upgrade"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "dbinstance"
-    resource.spec.autoMinorVersionUpgrade == false
+    lower(input.kind) == "dbinstance"
+    input.spec.autoMinorVersionUpgrade == false
 }
 
 rds_upgrade {
-    lower(input.Resources[i].kind) == "dbinstance"
+    lower(input.kind) == "dbinstance"
     not aws_issue["rds_upgrade"]
 }
 
@@ -245,19 +237,17 @@ rds_upgrade_metadata := {
 default rds_retention = null
 
 aws_issue["rds_retention"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "dbinstance"
-    not resource.spec.backupRetentionPeriod
+    lower(input.kind) == "dbinstance"
+    not input.spec.backupRetentionPeriod
 }
 
 aws_issue["rds_retention"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "dbinstance"
-    to_number(resource.spec.backupRetentionPeriod) < 7
+    lower(input.kind) == "dbinstance"
+    to_number(input.spec.backupRetentionPeriod) < 7
 }
 
 rds_retention {
-    lower(input.Resources[i].kind) == "dbinstance"
+    lower(input.kind) == "dbinstance"
     not aws_issue["rds_retention"]
 }
 

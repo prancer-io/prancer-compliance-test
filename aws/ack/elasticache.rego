@@ -132,13 +132,12 @@ cache_redis_encrypt_metadata := {
 default cache_encrypt = null
 
 aws_issue["cache_encrypt"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "replicationgroup"
-    not resource.spec.atRestEncryptionEnabled
+    lower(input.kind) == "replicationgroup"
+    not input.spec.atRestEncryptionEnabled
 }
 
 cache_encrypt {
-    lower(input.Resources[i].kind) == "replicationgroup"
+    lower(input.kind) == "replicationgroup"
     not aws_issue["cache_encrypt"]
 }
 
