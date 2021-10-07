@@ -4,7 +4,7 @@ package rule
 
 ports = [
     "135", "137", "138", "1433", "1434", "20", "21", "22", "23", "25", "3306", "3389", "4333",
-    "445", "53", "5432", "5500", "5900", "69", "9300", "5601"
+    "445", "53", "5432", "5500", "5900", "69", "9300", "5601", "2379", "5986", "5985", "1270"
 ]
 
 aws_issue[port] {
@@ -891,6 +891,101 @@ port_2379_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups allow internet traffic from internet to etcd-client Protocol Port (2379)",
     "Policy Description": "This policy identifies the security groups which are exposing etcd-client Protocol Port (2379) to the internet. It is recommended that Global permission to access the well known services etcd-client Protocol Port (2379) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-0340-CFR
+#
+
+default port_5986 = null
+
+port_5986 {
+    lower(input.Resources[i].Type) == "aws::ec2::securitygroup"
+    not aws_issue["5986"]
+}
+
+port_5986 = false {
+    aws_issue["5986"]
+}
+
+port_5986_err = "AWS Security Groups allow internet traffic from internet to WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5986)" {
+    aws_issue["5986"]
+}
+
+port_5986_metadata := {
+    "Policy Code": "PR-AWS-0340-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5986)",
+    "Policy Description": "This policy identifies the security groups which are exposing WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5986) to the internet. It is recommended that Global permission to access the well known services WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5986) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+
+#
+# PR-AWS-0341-CFR
+#
+
+default port_5985 = null
+
+port_5985 {
+    lower(input.Resources[i].Type) == "aws::ec2::securitygroup"
+    not aws_issue["5985"]
+}
+
+port_5985 = false {
+    aws_issue["5985"]
+}
+
+port_5985_err = "AWS Security Groups allow internet traffic from internet to WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985)" {
+    aws_issue["5985"]
+}
+
+port_5985_metadata := {
+    "Policy Code": "PR-AWS-0341-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985)",
+    "Policy Description": "This policy identifies the security groups which are exposing WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985) to the internet. It is recommended that Global permission to access the well known services WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+
+#
+# PR-AWS-0342-CFR
+#
+
+default port_1270 = null
+
+port_1270 {
+    lower(input.Resources[i].Type) == "aws::ec2::securitygroup"
+    not aws_issue["1270"]
+}
+
+port_1270 = false {
+    aws_issue["1270"]
+}
+
+port_1270_err = "AWS Security Groups allow internet traffic from internet to Microsoft Operations Manager Protocol Port (1270)" {
+    aws_issue["1270"]
+}
+
+port_1270_metadata := {
+    "Policy Code": "PR-AWS-0342-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to Microsoft Operations Manager Protocol Port (1270)",
+    "Policy Description": "This policy identifies the security groups which are exposing Microsoft Operations Manager Protocol Port (1270) to the internet. It is recommended that Global permission to access the well known services Microsoft Operations Manager Protocol Port (1270) should not be allowed in a security group.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
