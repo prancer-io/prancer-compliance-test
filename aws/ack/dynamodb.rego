@@ -9,13 +9,12 @@ package rule
 default dynamodb_encrypt = null
 
 aws_issue["dynamodb_encrypt"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "table"
-    lower(resource.spec.sseSpecification.sseType) == "aes256"
+    lower(input.kind) == "table"
+    lower(input.spec.sseSpecification.sseType) == "aes256"
 }
 
 dynamodb_encrypt {
-    lower(input.Resources[i].kind) == "table"
+    lower(input.kind) == "table"
     not aws_issue["dynamodb_encrypt"]
 }
 
