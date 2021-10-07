@@ -105,3 +105,47 @@ eip_instance_link_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html"
 }
+
+
+#
+# PR-AWS-0345-CFR
+#
+
+default vpc_endpoint_manual_acceptance = null
+
+aws_issue["vpc_endpoint_manual_acceptance"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::vpcendpointservice"
+    lower(resource.Properties.AcceptanceRequired) != "true"
+}
+
+aws_issue["vpc_endpoint_manual_acceptance"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::vpcendpointservice"
+    not resource.Properties.AcceptanceRequired
+}
+
+vpc_endpoint_manual_acceptance {
+    lower(input.Resources[i].Type) == "aws::ec2::vpcendpointservice"
+    not aws_issue["vpc_endpoint_manual_acceptance"]
+}
+
+vpc_endpoint_manual_acceptance = false {
+    aws_issue["vpc_endpoint_manual_acceptance"]
+}
+
+vpc_endpoint_manual_acceptance_err = "Ensure VPC endpoint service is configured for manual acceptance" {
+    aws_issue["vpc_endpoint_manual_acceptance"]
+}
+
+vpc_endpoint_manual_acceptance_metadata := {
+    "Policy Code": "PR-AWS-0345-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure VPC endpoint service is configured for manual acceptance",
+    "Policy Description": "AcceptanceRequired Indicates whether requests from service consumers to create an endpoint to your service must be accepted, we recommend you to enable this feature",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpcendpointservice.html#cfn-ec2-vpcendpointservice-acceptancerequired"
+}

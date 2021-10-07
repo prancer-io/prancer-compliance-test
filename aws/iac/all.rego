@@ -649,7 +649,7 @@ aws_issue["timestream_database_encryption"] {
 }
 
 timestream_database_encryption {
-    lower(input.Resources[i].Type) == "aws::logs::loggroup"
+    lower(input.Resources[i].Type) == "aws::timestream::database"
     not aws_issue["timestream_database_encryption"]
 }
 
@@ -959,4 +959,136 @@ docdb_cluster_logs_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#cfn-docdb-dbcluster-enablecloudwatchlogsexports"
+}
+
+#
+# PR-AWS-0343-CFR
+#
+
+default docdb_parameter_group_tls_enable = null
+
+aws_issue["docdb_parameter_group_tls_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
+    not resource.Properties.Parameters.tls
+}
+
+aws_issue["docdb_parameter_group_tls_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
+    lower(resource.Properties.Parameters.tls) != "enabled"
+    not resource.Properties.Parameters.Value
+}
+
+docdb_parameter_group_tls_enable {
+    lower(input.Resources[i].Type) == "aws::docdb::dbclusterparametergroup"
+    not aws_issue["docdb_parameter_group_tls_enable"]
+}
+
+docdb_parameter_group_tls_enable = false {
+    aws_issue["docdb_parameter_group_tls_enable"]
+}
+
+docdb_parameter_group_tls_enable_err = "Ensure DocDB ParameterGroup has TLS enable" {
+    aws_issue["docdb_parameter_group_tls_enable"]
+}
+
+docdb_parameter_group_tls_enable_metadata := {
+    "Policy Code": "PR-AWS-0343-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure DocDB ParameterGroup has TLS enable",
+    "Policy Description": "TLS can be used to encrypt the connection between an application and a DocDB cluster. By default, encryption in transit is enabled for newly created clusters. It can optionally be disabled when the cluster is created, or at a later time. When enabled, secure connections using TLS are required to connect to the cluster.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbclusterparametergroup.html#cfn-docdb-dbclusterparametergroup-parameters"
+}
+
+
+#
+# PR-AWS-0344-CFR
+#
+
+default transer_server_public_expose = null
+
+aws_issue["transer_server_public_expose"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::transfer::server"
+    not resource.Properties.EndpointType
+}
+
+aws_issue["transer_server_public_expose"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::transfer::server"
+    lower(resource.Properties.EndpointType) != "vpc"
+}
+
+
+transer_server_public_expose {
+    lower(input.Resources[i].Type) == "aws::transfer::server"
+    not aws_issue["transer_server_public_expose"]
+}
+
+transer_server_public_expose = false {
+    aws_issue["transer_server_public_expose"]
+}
+
+transer_server_public_expose_err = "Ensure Transfer Server is not publicly exposed" {
+    aws_issue["transer_server_public_expose"]
+}
+
+transer_server_public_expose_metadata := {
+    "Policy Code": "PR-AWS-0344-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Transfer Server is not publicly exposed",
+    "Policy Description": "It is recommended that you use VPC as the EndpointType. With this endpoint type, you have the option to directly associate up to three Elastic IPv4 addresses (BYO IP included) with your server's endpoint and use VPC security groups to restrict traffic by the client's public IP address. This is not possible with EndpointType set to VPC_ENDPOINT.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-transfer-server.html#cfn-transfer-server-endpointdetails"
+}
+
+#
+# PR-AWS-0354-CFR
+#
+
+default docdb_parameter_group_audit_logs = null
+
+aws_issue["docdb_parameter_group_audit_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
+    not resource.Properties.Parameters.audit_logs
+}
+
+aws_issue["docdb_parameter_group_audit_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
+    lower(resource.Properties.Parameters.audit_logs) != "enabled"
+}
+
+docdb_parameter_group_audit_logs {
+    lower(input.Resources[i].Type) == "aws::docdb::dbclusterparametergroup"
+    not aws_issue["docdb_parameter_group_audit_logs"]
+}
+
+docdb_parameter_group_audit_logs = false {
+    aws_issue["docdb_parameter_group_audit_logs"]
+}
+
+docdb_parameter_group_audit_logs_err = "Ensure DocDB has audit logs enabled" {
+    aws_issue["docdb_parameter_group_audit_logs"]
+}
+
+docdb_parameter_group_audit_logs_metadata := {
+    "Policy Code": "PR-AWS-0354-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure DocDB has audit logs enabled",
+    "Policy Description": "Ensure DocDB has audit logs enabled, this will export logs in docdb",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbclusterparametergroup.html#aws-resource-docdb-dbclusterparametergroup--examples"
 }

@@ -255,3 +255,77 @@ gateway_tracing_enable_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html"
 }
+
+
+#
+# PR-AWS-0349-CFR
+#
+
+default gateway_method_public_access = null
+
+aws_issue["gateway_method_public_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::method"
+    not resource.Properties.AuthorizationType
+    not resource.Properties.ApiKeyRequired
+}
+
+aws_issue["gateway_method_public_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::method"
+    lower(resource.Properties.AuthorizationType) == "none"
+    not resource.Properties.ApiKeyRequired
+}
+
+aws_issue["gateway_method_public_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::method"
+    resource.Properties.AuthorizationType == null
+    not resource.Properties.ApiKeyRequired
+}
+
+aws_issue["gateway_method_public_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::method"
+    not resource.Properties.AuthorizationType
+    lower(resource.Properties.ApiKeyRequired) != "true"
+}
+
+aws_issue["gateway_method_public_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::method"
+    lower(resource.Properties.AuthorizationType) == "none"
+    lower(resource.Properties.ApiKeyRequired) != "true"
+}
+
+aws_issue["gateway_method_public_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::method"
+    resource.Properties.AuthorizationType == null
+    lower(resource.Properties.ApiKeyRequired) != "true"
+}
+
+gateway_method_public_access {
+    lower(input.Resources[i].Type) == "aws::apigateway::method"
+    not aws_issue["gateway_method_public_access"]
+}
+
+gateway_method_public_access = false {
+    aws_issue["gateway_method_public_access"]
+}
+
+gateway_method_public_access_err = "Ensure API gateway methods are not publicly accessible" {
+    aws_issue["gateway_method_public_access"]
+}
+
+gateway_method_public_access_metadata := {
+    "Policy Code": "PR-AWS-0349-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure API gateway methods are not publicly accessible",
+    "Policy Description": "We recommend you configure a custom authorizer OR an API key for every method in the API Gateway.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-method.html#cfn-apigateway-method-authorizationtype"
+}

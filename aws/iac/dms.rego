@@ -45,3 +45,54 @@ dms_endpoint_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.amazonaws.cn/en_us/AWSCloudFormation/latest/UserGuide/aws-resource-dms-endpoint.html#cfn-dms-endpoint-enginename"
 }
+
+
+#
+# PR-AWS-0350-CFR
+#
+
+default dms_public_access = null
+
+aws_issue["dms_public_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::dms::replicationinstance"
+    lower(resource.Properties.PubliclyAccessible) != "false"
+}
+
+aws_bool_issue["dms_public_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::dms::replicationinstance"
+    resource.Properties.PubliclyAccessible == true
+}
+
+dms_public_access {
+    lower(input.Resources[i].Type) == "aws::dms::replicationinstance"
+    not aws_issue["dms_public_access"]
+    not aws_bool_issue["dms_public_access"]
+}
+
+dms_public_access = false {
+    aws_issue["dms_public_access"]
+}
+
+dms_public_access = false {
+    aws_bool_issue["dms_public_access"]
+}
+
+dms_public_access_err = "Ensure DMS replication instance is not publicly accessible" {
+    aws_issue["dms_public_access"]
+} else = "Ensure DMS replication instance is not publicly accessible" {
+    aws_bool_issue["dms_public_access"]
+}
+
+dms_public_access_metadata := {
+    "Policy Code": "PR-AWS-0350-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure DMS replication instance is not publicly accessible",
+    "Policy Description": "Ensure DMS replication instance is not publicly accessible, this might cause sensitive data leak.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-replicationinstance.html#cfn-dms-replicationinstance-publiclyaccessible"
+}

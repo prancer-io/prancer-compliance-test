@@ -1403,3 +1403,180 @@ s3_cross_region_replica_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-replicationconfiguration-rules.html#cfn-s3-bucket-replicationconfiguration-rules-destination"
 }
+
+
+#
+# PR-AWS-0346-CFR
+#
+
+default s3_public_access_block = null
+
+aws_issue["s3_public_access_block"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.PublicAccessBlockConfiguration.BlockPublicAcls
+}
+
+aws_issue["s3_public_access_block"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    lower(resource.Properties.PublicAccessBlockConfiguration.BlockPublicAcls) != "true"
+}
+
+s3_public_access_block {
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
+    not aws_issue["s3_public_access_block"]
+}
+
+s3_public_access_block = false {
+    aws_issue["s3_public_access_block"]
+}
+
+s3_public_access_block_err = "Ensure S3 Bucket has public access blocks" {
+    aws_issue["s3_public_access_block"]
+}
+
+s3_public_access_block_metadata := {
+    "Policy Code": "PR-AWS-0346-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure S3 Bucket has public access blocks",
+    "Policy Description": "We recommend you ensure S3 bucket has public access blocks. If the public access block is not attached it defaults to False",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html#cfn-s3-bucket-publicaccessblockconfiguration-blockpublicpolicy"
+}
+
+
+#
+# PR-AWS-0351-CFR
+#
+
+default s3_restrict_public_bucket = null
+
+aws_issue["s3_restrict_public_bucket"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.PublicAccessBlockConfiguration.RestrictPublicBuckets
+}
+
+aws_issue["s3_restrict_public_bucket"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    lower(resource.Properties.PublicAccessBlockConfiguration.RestrictPublicBuckets) != "true"
+}
+
+s3_restrict_public_bucket {
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
+    not aws_issue["s3_restrict_public_bucket"]
+}
+
+s3_restrict_public_bucket = false {
+    aws_issue["s3_restrict_public_bucket"]
+}
+
+s3_restrict_public_bucket_err = "Ensure S3 bucket RestrictPublicBucket is enabled" {
+    aws_issue["s3_restrict_public_bucket"]
+}
+
+s3_restrict_public_bucket_metadata := {
+    "Policy Code": "PR-AWS-0351-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure S3 bucket RestrictPublicBucket is enabled",
+    "Policy Description": "Enabling this setting does not affect previously stored bucket policies. Public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html#cfn-s3-bucket-publicaccessblockconfiguration-restrictpublicbuckets"
+}
+
+
+#
+# PR-AWS-0352-CFR
+#
+
+default s3_ignore_public_acl = null
+
+aws_issue["s3_ignore_public_acl"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.PublicAccessBlockConfiguration.IgnorePublicAcls
+}
+
+aws_issue["s3_ignore_public_acl"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    lower(resource.Properties.PublicAccessBlockConfiguration.IgnorePublicAcls) != "true"
+}
+
+s3_ignore_public_acl {
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
+    not aws_issue["s3_ignore_public_acl"]
+}
+
+s3_ignore_public_acl = false {
+    aws_issue["s3_ignore_public_acl"]
+}
+
+s3_ignore_public_acl_err = "Ensure S3 bucket IgnorePublicAcls is enabled" {
+    aws_issue["s3_ignore_public_acl"]
+}
+
+s3_ignore_public_acl_metadata := {
+    "Policy Code": "PR-AWS-0352-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure S3 bucket IgnorePublicAcls is enabled",
+    "Policy Description": "This will block public access granted by ACLs while still allowing PUT Object calls that include a public ACL",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html#cfn-s3-bucket-publicaccessblockconfiguration-ignorepublicacls"
+}
+
+
+
+#
+# PR-AWS-0353-CFR
+#
+
+default s3_block_public_policy = null
+
+aws_issue["s3_block_public_policy"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.PublicAccessBlockConfiguration.BlockPublicPolicy
+}
+
+aws_issue["s3_block_public_policy"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    lower(resource.Properties.PublicAccessBlockConfiguration.BlockPublicPolicy) != "true"
+}
+
+s3_block_public_policy {
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
+    not aws_issue["s3_block_public_policy"]
+}
+
+s3_block_public_policy = false {
+    aws_issue["s3_block_public_policy"]
+}
+
+s3_block_public_policy_err = "Ensure S3 Bucket BlockPublicPolicy is enabled" {
+    aws_issue["s3_block_public_policy"]
+}
+
+s3_block_public_policy_metadata := {
+    "Policy Code": "PR-AWS-0353-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure S3 Bucket BlockPublicPolicy is enabled",
+    "Policy Description": "If an AWS account is used to host a data lake or another business application, blocking public access will serve as an account-level guard against accidental public exposure.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html#cfn-s3-bucket-publicaccessblockconfiguration-blockpublicpolicy"
+}
