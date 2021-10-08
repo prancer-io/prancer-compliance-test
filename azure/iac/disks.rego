@@ -23,11 +23,29 @@ azure_attribute_absence["disk_encrypt"] {
     not resource.properties.encryptionSettingsCollection.enabled
 }
 
+source_path[{"disk_encrypt":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.compute/disks"
+    not resource.properties.encryptionSettingsCollection.enabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","encryptionSettingsCollection","enabled"]]
+    }
+}
+
 azure_issue["disk_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.compute/disks"
     #resource.properties.osType
     resource.properties.encryptionSettingsCollection.enabled != true
+}
+
+source_path[{"disk_encrypt":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.compute/disks"
+    resource.properties.encryptionSettingsCollection.enabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","encryptionSettingsCollection","enabled"]]
+    }
 }
 
 disk_encrypt = false {

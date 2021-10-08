@@ -16,11 +16,29 @@ azure_attribute_absence["netwatchFlowlogs"] {
     not resource.properties.enabled
 }
 
+source_path[{"netwatchFlowlogs":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
+    not resource.properties.enabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","enabled"]]
+    }
+}
+
 
 azure_issue["netwatchFlowlogs"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
     resource.properties.enabled != true
+}
+
+source_path[{"netwatchFlowlogs":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
+    resource.properties.enabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","enabled"]]
+    }
 }
 
 netwatchFlowlogs {
@@ -71,11 +89,30 @@ azure_attribute_absence["netwatch_logs"] {
     not resource.properties.flowAnalyticsConfiguration.networkWatcherFlowAnalyticsConfiguration.enabled
 }
 
+source_path[{"netwatch_logs":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
+    not resource.properties.flowAnalyticsConfiguration.networkWatcherFlowAnalyticsConfiguration.enabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","flowAnalyticsConfiguration","networkWatcherFlowAnalyticsConfiguration","enabled"]]
+    }
+}
+
 azure_issue["netwatch_logs"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
     resource.properties.flowAnalyticsConfiguration.networkWatcherFlowAnalyticsConfiguration.enabled == false
 }
+
+source_path[{"netwatch_logs":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
+    resource.properties.flowAnalyticsConfiguration.networkWatcherFlowAnalyticsConfiguration.enabled == false
+    metadata:= {
+        "resource_path": [["resources",i,"properties","flowAnalyticsConfiguration","networkWatcherFlowAnalyticsConfiguration","enabled"]]
+    }
+}
+
 
 netwatch_logs {
     lower(input.resources[_].type) == "microsoft.network/networkwatchers/flowlogs"
@@ -125,10 +162,29 @@ azure_attribute_absence["netwatch_log_retention"] {
     not resource.properties.retentionPolicy.enabled
 }
 
+source_path[{"netwatch_log_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
+    not resource.properties.retentionPolicy.enabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","retentionPolicy","enabled"]]
+    }
+}
+
+
 azure_attribute_absence["netwatch_log_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
     not resource.properties.retentionPolicy.days
+}
+
+source_path[{"netwatch_log_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
+    not resource.properties.retentionPolicy.days
+    metadata:= {
+        "resource_path": [["resources",i,"properties","retentionPolicy","days"]]
+    }
 }
 
 azure_issue["netwatch_log_retention"] {
@@ -137,10 +193,28 @@ azure_issue["netwatch_log_retention"] {
     resource.properties.retentionPolicy.enabled != true
 }
 
+source_path[{"netwatch_log_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
+    resource.properties.retentionPolicy.enabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","retentionPolicy","enabled"]]
+    }
+}
+
 azure_issue["netwatch_log_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
     to_number(resource.properties.retentionPolicy.days) < 90
+}
+
+source_path[{"netwatch_log_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
+    to_number(resource.properties.retentionPolicy.days) < 90
+    metadata:= {
+        "resource_path": [["resources",i,"properties","retentionPolicy","days"]]
+    }
 }
 
 netwatch_log_retention {

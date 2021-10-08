@@ -14,10 +14,28 @@ azure_attribute_absence["acr_webhooks"] {
     not resource.properties.serviceUri
 }
 
+source_path[{"acr_webhooks":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerregistry/registries/webhooks"
+    not resource.properties.serviceUri
+    metadata:= {
+        "resource_path": [["resources",i,"properties","serviceUri"]]
+    }
+}
+
 azure_issue["acr_webhooks"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries/webhooks"
     substring(lower(resource.properties.serviceUri), 0, 6) != "https:"
+}
+
+source_path[{"acr_webhooks":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerregistry/registries/webhooks"
+    substring(lower(resource.properties.serviceUri), 0, 6) != "https:"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","serviceUri"]]
+    }
 }
 
 acr_webhooks {

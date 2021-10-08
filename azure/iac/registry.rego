@@ -12,10 +12,28 @@ azure_attribute_absence ["adminUserDisabled"] {
     not resource.properties.adminUserEnabled
 }
 
+source_path[{"adminUserDisabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerregistry/registries"
+    not resource.properties.adminUserEnabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","adminUserEnabled"]]
+    }
+}
+
 azure_issue ["adminUserDisabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries"
     resource.properties.adminUserEnabled != false
+}
+
+source_path[{"adminUserDisabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerregistry/registries"
+    resource.properties.adminUserEnabled != false
+    metadata:= {
+        "resource_path": [["resources",i,"properties","adminUserEnabled"]]
+    }
 }
 
 adminUserDisabled {
@@ -61,11 +79,31 @@ azure_attribute_absence["acr_classic"] {
     not resource.sku.name
 }
 
+
+source_path[{"acr_classic":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerregistry/registries"
+    not resource.sku.name
+    metadata:= {
+        "resource_path": [["resources",i,"sku","name"]]
+    }
+}
+
 azure_issue["acr_classic"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries"
     lower(resource.sku.name) == "classic"
 }
+
+source_path[{"acr_classic":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerregistry/registries"
+    lower(resource.sku.name) == "classic"
+    metadata:= {
+        "resource_path": [["resources",i,"sku","name"]]
+    }
+}
+
 
 acr_classic {
     lower(input.resources[_].type) == "microsoft.containerregistry/registries"

@@ -16,6 +16,19 @@ azure_attribute_absence["KeyVault"] {
     not accessPolicy.permissions.storage
 }
 
+source_path[{"KeyVault":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    accessPolicy := resource.properties.accessPolicies[j]
+    not accessPolicy.permissions.keys
+    not accessPolicy.permissions.secrets
+    not accessPolicy.permissions.certificates
+    not accessPolicy.permissions.storage
+    metadata:= {
+        "resource_path": [["resources",i,"properties","accessPolicies",j,"permissions"]]
+    }
+}
+
 
 azure_issue["KeyVault"] {
     resource := input.resources[_]
@@ -25,6 +38,19 @@ azure_issue["KeyVault"] {
     count(accessPolicy.permissions.secrets) == 0
     count(accessPolicy.permissions.certificates) == 0
     count(accessPolicy.permissions.storage) == 0
+}
+
+source_path[{"KeyVault":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    accessPolicy := resource.properties.accessPolicies[j]
+    count(accessPolicy.permissions.keys) == 0
+    count(accessPolicy.permissions.secrets) == 0
+    count(accessPolicy.permissions.certificates) == 0
+    count(accessPolicy.permissions.storage) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","accessPolicies",j,"permissions"]]
+    }
 }
 
 KeyVault {
@@ -70,10 +96,28 @@ azure_attribute_absence ["enableSoftDelete"] {
     not resource.properties.enableSoftDelete
 }
 
+source_path[{"enableSoftDelete":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    not resource.properties.enableSoftDelete
+    metadata:= {
+        "resource_path": [["resources",i,"properties","enableSoftDelete"]]
+    }
+}
+
 azure_issue ["enableSoftDelete"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults"
     resource.properties.enableSoftDelete != true
+}
+
+source_path[{"enableSoftDelete":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    resource.properties.enableSoftDelete != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","enableSoftDelete"]]
+    }
 }
 
 enableSoftDelete {
@@ -119,10 +163,28 @@ azure_attribute_absence ["enablePurgeProtection"] {
     not resource.properties.enablePurgeProtection
 }
 
+source_path[{"enablePurgeProtection":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    not resource.properties.enablePurgeProtection
+    metadata:= {
+        "resource_path": [["resources",i,"properties","enablePurgeProtection"]]
+    }
+}
+
 azure_issue ["enablePurgeProtection"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults"
     resource.properties.enablePurgeProtection != true
+}
+
+source_path[{"enablePurgeProtection":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    resource.properties.enablePurgeProtection != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","enablePurgeProtection"]]
+    }
 }
 
 enablePurgeProtection {
