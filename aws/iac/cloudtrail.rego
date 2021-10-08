@@ -26,7 +26,6 @@ aws_path[{"ct_regions": metadata}] {
     lower(resource.Properties.IsMultiRegionTrail) != "true"
     metadata := {
         "resource_path": [["Resources", i, "Properties", "IsMultiRegionTrail"]],
-        "value": resource.Properties.IsMultiRegionTrail,
     }
 }
 aws_path[{"ct_regions": metadata}] {
@@ -35,8 +34,6 @@ aws_path[{"ct_regions": metadata}] {
     not resource.Properties.IsMultiRegionTrail
     metadata := {
         "resource_path": [["Resources", i, "Properties", "IsMultiRegionTrail"]],
-        "value": null,
-        "function": "absent"
     }
 }
 
@@ -94,7 +91,6 @@ aws_path[{"ct_log_validation": metadata}] {
     lower(resource.Properties.EnableLogFileValidation) != "true"
     metadata := {
         "resource_path": [["Resources", i, "Properties", "EnableLogFileValidation"]],
-        "value": resource.Properties.EnableLogFileValidation,
     }
 }
 aws_path[{"ct_log_validation": metadata}] {
@@ -103,8 +99,6 @@ aws_path[{"ct_log_validation": metadata}] {
     not resource.Properties.EnableLogFileValidation
     metadata := {
         "resource_path": [["Resources", i, "Properties", "EnableLogFileValidation"]],
-        "value": null,
-        "function": "absent"
     }
 }
 
@@ -164,8 +158,6 @@ aws_path[{"ct_master_key": metadata}] {
     not resource.Properties.KMSKeyId
     metadata := {
         "resource_path": [["Resources", i, "Properties", "KMSKeyId"]],
-        "value": null,
-        "function": "absent"
     }
 }
 
@@ -175,8 +167,6 @@ aws_path[{"ct_master_key": metadata}] {
     count(resource.Properties.KMSKeyId) == 0
     metadata := {
         "resource_path": [["Resources", i, "Properties", "KMSKeyId"]],
-        "value": count(resource.Properties.KMSKeyId),
-        "function": "count"
     }
 }
 
@@ -236,8 +226,6 @@ aws_path[{"ct_cloudwatch": metadata}] {
             ["Resources", i, "Properties", "CloudWatchLogsRoleArn"],
             ["Resources", i, "Properties", "CloudWatchLogsLogGroupArn"]
         ],
-        "value": null,
-        "function": "absent"
     }
 }
 
@@ -252,8 +240,6 @@ aws_path[{"ct_cloudwatch": metadata}] {
             ["Resources", i, "Properties", "CloudWatchLogsRoleArn"],
             ["Resources", i, "Properties", "CloudWatchLogsLogGroupArn"]
         ],
-        "value": 0,
-        "function": "count"
     }
 }
 
