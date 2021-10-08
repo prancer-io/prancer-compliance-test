@@ -189,3 +189,60 @@ sns_encrypt_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html"
 }
+
+
+#
+# PR-AWS-0318-CFR
+#
+
+default sns_policy_public = null
+
+aws_issue["sns_policy_public"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+}
+
+aws_issue["sns_policy_public"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+}
+
+aws_issue["sns_policy_public"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+}
+
+
+sns_policy_public {
+    lower(input.Resources[i].Type) == "aws::sns::topicpolicy"
+    not aws_issue["sns_policy_public"]
+}
+
+sns_policy_public = false {
+    aws_issue["sns_policy_public"]
+}
+
+sns_policy_public_err = "Ensure SQS queue policy is not publicly accessible" {
+    aws_issue["sns_policy_public"]
+}
+
+sns_policy_public_metadata := {
+    "Policy Code": "PR-AWS-0318-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure SNS Topic policy is not publicly accessible",
+    "Policy Description": "Public SNS Topic potentially expose existing interfaces to unwanted 3rd parties that can tap into an existing data stream, resulting in data leak to an unwanted party.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html"
+}

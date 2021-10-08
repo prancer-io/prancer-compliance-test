@@ -51,3 +51,62 @@ mq_publicly_accessible_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#cfn-amazonmq-broker-publiclyaccessible"
 }
 
+
+#
+# PR-AWS-0325-CFR
+#
+default mq_logging_enable = null
+
+aws_issue["mq_logging_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::amazonmq::broker"
+    not resource.Properties.Logs
+}
+
+aws_issue["mq_logging_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::amazonmq::broker"
+    count(resource.Properties.Logs) == 0
+}
+
+aws_issue["mq_logging_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::amazonmq::broker"
+    Logs := resource.Properties.Logs[_]
+    not Logs.General
+}
+
+aws_issue["mq_logging_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::amazonmq::broker"
+    Logs := resource.Properties.Logs[_]
+    lower(Logs.General) == "false"
+}
+
+mq_logging_enable {
+    lower(input.Resources[i].Type) == "aws::amazonmq::broker"
+    not aws_issue["mq_logging_enable"]
+}
+
+mq_logging_enable = false {
+    aws_issue["mq_logging_enable"]
+}
+
+
+mq_logging_enable_err = "AWS MQ is publicly accessible" {
+    aws_issue["mq_logging_enable"]
+}
+
+
+mq_logging_enable_metadata := {
+    "Policy Code": "PR-AWS-0325-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS MQ is publicly accessible",
+    "Policy Description": "This policy identifies the AWS MQ brokers which are publicly accessible. It is advisable to use MQ brokers privately only from within your AWS Virtual Private Cloud (VPC). Ensure that the AWS MQ brokers provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#cfn-amazonmq-broker-publiclyaccessible"
+}
+

@@ -129,3 +129,59 @@ ecr_scan_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecr-repository-imagescanningconfiguration.html#cfn-ecr-repository-imagescanningconfiguration-scanonpush"
 }
 
+
+#
+# PR-AWS-0348-CFR
+#
+
+default ecr_public_access_disable = null
+
+aws_issue["ecr_public_access_disable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecr::repository"
+    statement := resource.Properties.RepositoryPolicyText.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+}
+
+aws_issue["ecr_public_access_disable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecr::repository"
+    statement := resource.Properties.RepositoryPolicyText.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+}
+
+aws_issue["ecr_public_access_disable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecr::repository"
+    statement := resource.Properties.RepositoryPolicyText.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+}
+
+
+ecr_public_access_disable {
+    lower(input.Resources[i].Type) == "aws::ecr::repository"
+    not aws_issue["ecr_public_access_disable"]
+}
+
+ecr_public_access_disable = false {
+    aws_issue["ecr_public_access_disable"]
+}
+
+ecr_public_access_disable_err = "Ensure AWS ECR Repository is not publicly accessible" {
+    aws_issue["ecr_public_access_disable"]
+}
+
+ecr_public_access_disable_metadata := {
+    "Policy Code": "PR-AWS-0348-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS ECR Repository is not publicly accessible",
+    "Policy Description": "Public AWS ECR Repository potentially expose existing interfaces to unwanted 3rd parties that can tap into an existing data stream, resulting in data leak to an unwanted party.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecr-repository-imagescanningconfiguration.html#cfn-ecr-repository-imagescanningconfiguration-scanonpush"
+}

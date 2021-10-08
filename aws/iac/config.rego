@@ -136,3 +136,47 @@ config_all_resource_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html"
 }
 
+
+#
+# PR-AWS-0326-CFR
+#
+
+default aws_config_configuration_aggregator = null
+
+aws_issue["aws_config_configuration_aggregator"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::config::configurationaggregator"
+    not resource.Properties.AccountAggregationSources.AllAwsRegions
+}
+
+aws_issue["aws_config_configuration_aggregator"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::config::configurationaggregator"
+    lower(resource.Properties.AccountAggregationSources.AllAwsRegions) != "true"
+}
+
+aws_config_configuration_aggregator {
+    lower(input.Resources[i].Type) == "aws::config::configurationaggregator"
+    not aws_issue["aws_config_configuration_aggregator"]
+}
+
+aws_config_configuration_aggregator = false {
+    aws_issue["aws_config_configuration_aggregator"]
+}
+
+aws_config_configuration_aggregator_err = "Ensure AWS config is enabled in all regions" {
+    aws_issue["aws_config_configuration_aggregator"]
+}
+
+aws_config_configuration_aggregator_metadata := {
+    "Policy Code": "PR-AWS-0326-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS config is enabled in all regions",
+    "Policy Description": "AWS Config is a web service that performs the configuration management of supported AWS resources within your account and delivers log files to you.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-config-configurationaggregator-accountaggregationsource.html#cfn-config-configurationaggregator-accountaggregationsource-allawsregions"
+}
+

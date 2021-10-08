@@ -622,7 +622,6 @@ aws_path[{"s3_cloudtrail": metadata}] {
         "resource_path": [
             ["Resources", i, "Properties", "IsLogging"],
         ],
-        "function": "absent"
     }
 }
 
@@ -871,7 +870,6 @@ aws_path[{"s3_transport": metadata}] {
         "resource_path": [
             ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "StringLike", "aws:SecureTransport"],
         ],
-        "function": "absent"
     }
 }
 
@@ -885,7 +883,6 @@ aws_path[{"s3_transport": metadata}] {
         "resource_path": [
             ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Bool", "aws:SecureTransport"],
         ],
-        "function": "absent"
     }
 }
 
@@ -1182,4 +1179,354 @@ s3_cors_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket--seealso"
+}
+
+
+#
+# PR-AWS-0301-CFR
+#
+
+default bucket_kms_encryption = null
+
+
+aws_issue["bucket_kms_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    count(resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration) == 0
+}
+
+aws_issue["bucket_kms_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration
+}
+
+aws_issue["bucket_kms_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[_]
+    not ServerSideEncryptionConfiguration.BucketKeyEnabled
+}
+
+aws_issue["bucket_kms_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[_]
+    lower(ServerSideEncryptionConfiguration.BucketKeyEnabled) == "false"
+}
+
+aws_issue["bucket_kms_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[_]
+    lower(ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.SSEAlgorithm) != "aws:kms"
+}
+
+aws_issue["bucket_kms_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[_]
+    lower(ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.SSEAlgorithm) == "aws:kms"
+    not ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.KMSMasterKeyID
+}
+
+aws_issue["bucket_kms_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[_]
+    lower(ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.SSEAlgorithm) == "aws:kms"
+    count(ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.KMSMasterKeyID) == 0
+}
+
+
+bucket_kms_encryption {
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
+    not aws_issue["bucket_kms_encryption"]
+}
+
+bucket_kms_encryption = false {
+    aws_issue["bucket_kms_encryption"]
+}
+
+
+bucket_kms_encryption_err = "Ensure S3 bucket is encrypted using KMS" {
+    aws_issue["bucket_kms_encryption"]
+}
+
+bucket_kms_encryption_metadata := {
+    "Policy Code": "PR-AWS-0301-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure S3 bucket is encrypted using KMS",
+    "Policy Description": "Ensure that your AWS S3 buckets are configured to use Server-Side Encryption with customer managed CMKs instead of S3-Managed Keys (SSE-S3) in order to obtain a fine-grained control over Amazon S3 data-at-rest encryption and decryption process",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-serversideencryptionbydefault.html#cfn-s3-bucket-serversideencryptionbydefault-ssealgorithm"
+}
+
+
+#
+# PR-AWS-0309-CFR
+#
+
+default s3_object_lock_enable = null
+
+aws_issue["s3_object_lock_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.ObjectLockEnabled
+}
+
+aws_issue["s3_object_lock_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    lower(resource.Properties.ObjectLockEnabled) != "true"
+}
+
+s3_object_lock_enable {
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
+    not aws_issue["s3_object_lock_enable"]
+}
+
+s3_object_lock_enable = false {
+    aws_issue["s3_object_lock_enable"]
+}
+
+s3_object_lock_enable_err = "Ensure S3 bucket has enabled lock configuration" {
+    aws_issue["s3_object_lock_enable"]
+}
+
+s3_object_lock_enable_metadata := {
+    "Policy Code": "PR-AWS-0309-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure S3 bucket has enabled lock configuration",
+    "Policy Description": "Indicates whether this bucket has an Object Lock configuration enabled. Enable ObjectLockEnabled when you apply ObjectLockConfiguration to a bucket.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#cfn-s3-bucket-objectlockenabled"
+}
+
+
+#
+# PR-AWS-0310-CFR
+#
+
+default s3_cross_region_replica = null
+
+aws_issue["s3_cross_region_replica"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    Rules := resource.Properties.ReplicationConfiguration.Rules[j]
+    not Rules.Destination
+}
+
+aws_issue["s3_cross_region_replica"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.ReplicationConfiguration
+}
+
+s3_cross_region_replica {
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
+    not aws_issue["s3_cross_region_replica"]
+}
+
+s3_cross_region_replica = false {
+    aws_issue["s3_cross_region_replica"]
+}
+
+s3_cross_region_replica_err = "Ensure S3 bucket has enabled lock configuration" {
+    aws_issue["s3_cross_region_replica"]
+}
+
+s3_cross_region_replica_metadata := {
+    "Policy Code": "PR-AWS-0310-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure S3 bucket has enabled lock configuration",
+    "Policy Description": "Cross-region replication enables automatic, asynchronous copying of objects across S3 buckets. By default, replication supports copying new S3 objects after it is enabled",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-replicationconfiguration-rules.html#cfn-s3-bucket-replicationconfiguration-rules-destination"
+}
+
+
+#
+# PR-AWS-0346-CFR
+#
+
+default s3_public_access_block = null
+
+aws_issue["s3_public_access_block"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.PublicAccessBlockConfiguration.BlockPublicAcls
+}
+
+aws_issue["s3_public_access_block"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    lower(resource.Properties.PublicAccessBlockConfiguration.BlockPublicAcls) != "true"
+}
+
+s3_public_access_block {
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
+    not aws_issue["s3_public_access_block"]
+}
+
+s3_public_access_block = false {
+    aws_issue["s3_public_access_block"]
+}
+
+s3_public_access_block_err = "Ensure S3 Bucket has public access blocks" {
+    aws_issue["s3_public_access_block"]
+}
+
+s3_public_access_block_metadata := {
+    "Policy Code": "PR-AWS-0346-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure S3 Bucket has public access blocks",
+    "Policy Description": "We recommend you ensure S3 bucket has public access blocks. If the public access block is not attached it defaults to False",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html#cfn-s3-bucket-publicaccessblockconfiguration-blockpublicpolicy"
+}
+
+
+#
+# PR-AWS-0351-CFR
+#
+
+default s3_restrict_public_bucket = null
+
+aws_issue["s3_restrict_public_bucket"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.PublicAccessBlockConfiguration.RestrictPublicBuckets
+}
+
+aws_issue["s3_restrict_public_bucket"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    lower(resource.Properties.PublicAccessBlockConfiguration.RestrictPublicBuckets) != "true"
+}
+
+s3_restrict_public_bucket {
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
+    not aws_issue["s3_restrict_public_bucket"]
+}
+
+s3_restrict_public_bucket = false {
+    aws_issue["s3_restrict_public_bucket"]
+}
+
+s3_restrict_public_bucket_err = "Ensure S3 bucket RestrictPublicBucket is enabled" {
+    aws_issue["s3_restrict_public_bucket"]
+}
+
+s3_restrict_public_bucket_metadata := {
+    "Policy Code": "PR-AWS-0351-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure S3 bucket RestrictPublicBucket is enabled",
+    "Policy Description": "Enabling this setting does not affect previously stored bucket policies. Public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html#cfn-s3-bucket-publicaccessblockconfiguration-restrictpublicbuckets"
+}
+
+
+#
+# PR-AWS-0352-CFR
+#
+
+default s3_ignore_public_acl = null
+
+aws_issue["s3_ignore_public_acl"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.PublicAccessBlockConfiguration.IgnorePublicAcls
+}
+
+aws_issue["s3_ignore_public_acl"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    lower(resource.Properties.PublicAccessBlockConfiguration.IgnorePublicAcls) != "true"
+}
+
+s3_ignore_public_acl {
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
+    not aws_issue["s3_ignore_public_acl"]
+}
+
+s3_ignore_public_acl = false {
+    aws_issue["s3_ignore_public_acl"]
+}
+
+s3_ignore_public_acl_err = "Ensure S3 bucket IgnorePublicAcls is enabled" {
+    aws_issue["s3_ignore_public_acl"]
+}
+
+s3_ignore_public_acl_metadata := {
+    "Policy Code": "PR-AWS-0352-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure S3 bucket IgnorePublicAcls is enabled",
+    "Policy Description": "This will block public access granted by ACLs while still allowing PUT Object calls that include a public ACL",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html#cfn-s3-bucket-publicaccessblockconfiguration-ignorepublicacls"
+}
+
+
+
+#
+# PR-AWS-0353-CFR
+#
+
+default s3_block_public_policy = null
+
+aws_issue["s3_block_public_policy"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.PublicAccessBlockConfiguration.BlockPublicPolicy
+}
+
+aws_issue["s3_block_public_policy"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    lower(resource.Properties.PublicAccessBlockConfiguration.BlockPublicPolicy) != "true"
+}
+
+s3_block_public_policy {
+    lower(input.Resources[i].Type) == "aws::s3::bucket"
+    not aws_issue["s3_block_public_policy"]
+}
+
+s3_block_public_policy = false {
+    aws_issue["s3_block_public_policy"]
+}
+
+s3_block_public_policy_err = "Ensure S3 Bucket BlockPublicPolicy is enabled" {
+    aws_issue["s3_block_public_policy"]
+}
+
+s3_block_public_policy_metadata := {
+    "Policy Code": "PR-AWS-0353-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure S3 Bucket BlockPublicPolicy is enabled",
+    "Policy Description": "If an AWS account is used to host a data lake or another business application, blocking public access will serve as an account-level guard against accidental public exposure.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html#cfn-s3-bucket-publicaccessblockconfiguration-blockpublicpolicy"
 }
