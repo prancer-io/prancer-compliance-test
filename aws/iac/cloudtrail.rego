@@ -1,4 +1,5 @@
 package rule
+default metadata = {}
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html
 
@@ -17,6 +18,23 @@ aws_bool_issue["ct_regions"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudtrail::trail"
     not resource.Properties.IsMultiRegionTrail
+}
+
+aws_path[{"ct_regions": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudtrail::trail"
+    lower(resource.Properties.IsMultiRegionTrail) != "true"
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "IsMultiRegionTrail"]],
+    }
+}
+aws_path[{"ct_regions": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudtrail::trail"
+    not resource.Properties.IsMultiRegionTrail
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "IsMultiRegionTrail"]],
+    }
 }
 
 ct_regions {
@@ -66,6 +84,24 @@ aws_bool_issue["ct_log_validation"] {
     lower(resource.Type) == "aws::cloudtrail::trail"
     not resource.Properties.EnableLogFileValidation
 }
+
+aws_path[{"ct_log_validation": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudtrail::trail"
+    lower(resource.Properties.EnableLogFileValidation) != "true"
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "EnableLogFileValidation"]],
+    }
+}
+aws_path[{"ct_log_validation": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudtrail::trail"
+    not resource.Properties.EnableLogFileValidation
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "EnableLogFileValidation"]],
+    }
+}
+
 ct_log_validation {
     lower(input.Resources[i].Type) == "aws::cloudtrail::trail"
     not aws_issue["ct_log_validation"]
@@ -116,6 +152,24 @@ aws_issue["ct_master_key"] {
     count(resource.Properties.KMSKeyId) == 0
 }
 
+aws_path[{"ct_master_key": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudtrail::trail"
+    not resource.Properties.KMSKeyId
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "KMSKeyId"]],
+    }
+}
+
+aws_path[{"ct_master_key": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudtrail::trail"
+    count(resource.Properties.KMSKeyId) == 0
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "KMSKeyId"]],
+    }
+}
+
 ct_master_key {
     lower(input.Resources[i].Type) == "aws::cloudtrail::trail"
     not aws_issue["ct_master_key"]
@@ -159,6 +213,34 @@ aws_issue["ct_cloudwatch"] {
     lower(resource.Type) == "aws::cloudtrail::trail"
     count(resource.Properties.CloudWatchLogsRoleArn) == 0
     count(resource.Properties.CloudWatchLogsLogGroupArn) == 0
+}
+
+aws_path[{"ct_cloudwatch": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudtrail::trail"
+    not resource.Properties.CloudWatchLogsRoleArn
+    not resource.Properties.CloudWatchLogsLogGroupArn
+
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CloudWatchLogsRoleArn"],
+            ["Resources", i, "Properties", "CloudWatchLogsLogGroupArn"]
+        ],
+    }
+}
+
+aws_path[{"ct_cloudwatch": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudtrail::trail"
+    count(resource.Properties.CloudWatchLogsRoleArn) == 0
+    count(resource.Properties.CloudWatchLogsLogGroupArn) == 0
+
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CloudWatchLogsRoleArn"],
+            ["Resources", i, "Properties", "CloudWatchLogsLogGroupArn"]
+        ],
+    }
 }
 
 ct_cloudwatch {

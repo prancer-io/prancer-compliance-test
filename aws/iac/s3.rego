@@ -1,4 +1,5 @@
 package rule
+default metadata = {}
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html
@@ -15,10 +16,28 @@ aws_attribute_absence["s3_accesslog"] {
     not resource.Properties.LoggingConfiguration.DestinationBucketName
 }
 
+aws_path[{"s3_accesslog": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.LoggingConfiguration.DestinationBucketName
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "LoggingConfiguration", "DestinationBucketName"]],
+    }
+}
+
 aws_attribute_absence["s3_accesslog"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     not resource.Properties.LoggingConfiguration.LogFilePrefix
+}
+
+aws_path[{"s3_accesslog": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.LoggingConfiguration.LogFilePrefix
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "LoggingConfiguration", "LogFilePrefix"]],
+    }
 }
 
 aws_issue["s3_accesslog"] {
@@ -27,10 +46,28 @@ aws_issue["s3_accesslog"] {
     count(resource.Properties.LoggingConfiguration.DestinationBucketName) == 0
 }
 
+aws_path[{"s3_accesslog": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    count(resource.Properties.LoggingConfiguration.DestinationBucketName) == 0
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "LoggingConfiguration", "DestinationBucketName"]],
+    }
+}
+
 aws_issue["s3_accesslog"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     count(resource.Properties.LoggingConfiguration.LogFilePrefix) == 0
+}
+
+aws_path[{"s3_accesslog": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    count(resource.Properties.LoggingConfiguration.LogFilePrefix) == 0
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "LoggingConfiguration", "LogFilePrefix"]],
+    }
 }
 
 s3_accesslog {
@@ -66,6 +103,7 @@ s3_accesslog_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
 }
+
 
 #
 # PR-AWS-0140-CFR
@@ -105,6 +143,52 @@ aws_issue["s3_acl_delete"] {
     stat.Principal == "*"
     startswith(lower(stat.Action[_]),"s3:delete")
 }
+
+aws_path[{"s3_acl_delete": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    not resource.Properties.PolicyDocument.Statement
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement"]],
+    }
+}
+
+aws_path[{"s3_acl_delete": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[j]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    lower(stat.Action[k]) == "s3:*"
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action", k]],
+    }
+}
+
+aws_path[{"s3_acl_delete": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[j]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    startswith(lower(stat.Action),"s3:delete")
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action"]],
+    }
+}
+
+aws_path[{"s3_acl_delete": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[j]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    startswith(lower(stat.Action[k]),"s3:delete")
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action", k]],
+    }
+}
+
 
 s3_acl_delete {
     lower(input.Resources[i].Type) == "aws::s3::bucketpolicy"
@@ -177,6 +261,52 @@ aws_issue["s3_acl_get"] {
     lower(stat.Effect) == "allow"
     stat.Principal == "*"
     startswith(lower(stat.Action[_]),"s3:get")
+}
+
+
+aws_path[{"s3_acl_get": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    not resource.Properties.PolicyDocument.Statement
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement"]],
+    }
+}
+
+aws_path[{"s3_acl_get": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[j]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    lower(stat.Action[k]) == "s3:*"
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action", k]],
+    }
+}
+
+aws_path[{"s3_acl_get": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[j]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    startswith(lower(stat.Action),"s3:get")
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action"]],
+    }
+}
+
+aws_path[{"s3_acl_get": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[j]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    startswith(lower(stat.Action[k]),"s3:get")
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action", k]],
+    }
 }
 
 s3_acl_get {
@@ -254,6 +384,53 @@ aws_issue["s3_acl_list"] {
 
 }
 
+aws_path[{"s3_acl_list": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    not resource.Properties.PolicyDocument.Statement
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement"]],
+    }
+}
+
+aws_path[{"s3_acl_list": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[j]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    lower(stat.Action[k]) == "s3:*"
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action", k]],
+    }
+}
+
+aws_path[{"s3_acl_list": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[j]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    startswith(lower(stat.Action),"s3:list")
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action"]],
+    }
+
+}
+
+aws_path[{"s3_acl_list": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[j]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    startswith(lower(stat.Action[k]),"s3:list")
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action", k]],
+    }
+
+}
+
 s3_acl_list {
     lower(input.Resources[i].Type) == "aws::s3::bucketpolicy"
     not aws_issue["s3_acl_list"]
@@ -328,6 +505,52 @@ aws_issue["s3_acl_put"] {
     startswith(lower(stat.Action[_]),"s3:put")
 }
 
+aws_path[{"s3_acl_put": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    not resource.Properties.PolicyDocument.Statement
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement"]],
+    }
+}
+
+aws_path[{"s3_acl_put": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[j]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    lower(stat.Action[k]) == "s3:*"
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action", k]],
+    }
+}
+
+aws_path[{"s3_acl_put": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[j]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    startswith(lower(stat.Action),"s3:put")
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action"]],
+    }
+
+}
+
+aws_path[{"s3_acl_put": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    stat := resource.Properties.PolicyDocument.Statement[j]
+    lower(stat.Effect) == "allow"
+    stat.Principal == "*"
+    startswith(lower(stat.Action[k]),"s3:put")
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action", k]],
+    }
+}
+
 s3_acl_put {
     lower(input.Resources[i].Type) == "aws::s3::bucketpolicy"
     not aws_issue["s3_acl_put"]
@@ -380,6 +603,29 @@ aws_bool_issue["s3_cloudtrail"] {
     not resource.Properties.IsLogging
 }
 
+aws_path[{"s3_cloudtrail": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudtrail::trail"
+    lower(resource.Properties.IsLogging) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "IsLogging"],
+        ],
+    }
+}
+
+aws_path[{"s3_cloudtrail": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudtrail::trail"
+    not resource.Properties.IsLogging
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "IsLogging"],
+        ],
+        "function": "absent"
+    }
+}
+
 s3_cloudtrail {
     lower(input.Resources[i].Type) == "aws::cloudtrail::trail"
     not aws_issue["s3_cloudtrail"]
@@ -430,6 +676,24 @@ aws_issue["s3_versioning"] {
     lower(resource.Properties.VersioningConfiguration.Status) != "enabled"
 }
 
+aws_path[{"s3_versioning": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.VersioningConfiguration.Status
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "VersioningConfiguration", "Status"]],
+    }
+}
+
+aws_path[{"s3_versioning": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    lower(resource.Properties.VersioningConfiguration.Status) != "enabled"
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "VersioningConfiguration", "Status"]],
+    }
+}
+
 s3_versioning {
     lower(input.Resources[i].Type) == "aws::s3::bucket"
     not aws_issue["s3_versioning"]
@@ -474,6 +738,15 @@ aws_issue["s3_public_acl"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     resource.Properties.AccessControl == "PublicRead"
+}
+
+aws_path[{"s3_public_acl": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    lower(resource.Properties.AccessControl) == "publicread"
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "AccessControl"]],
+    }
 }
 
 s3_public_acl {
@@ -547,6 +820,75 @@ aws_bool_issue["s3_transport"] {
     not statement.Condition.Bool["aws:SecureTransport"]
 }
 
+aws_path[{"s3_transport": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    not statement.Condition.StringLike
+    not statement.Condition.Bool
+    
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "StringLike"],
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Bool"]
+        ],
+    }
+}
+
+aws_path[{"s3_transport": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    statement.Condition.StringLike
+    lower(statement.Condition.StringLike["aws:SecureTransport"]) != "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "StringLike", "aws:SecureTransport"],
+        ],
+    }
+}
+
+aws_path[{"s3_transport": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    statement.Condition.Bool
+    lower(statement.Condition.Bool["aws:SecureTransport"]) != "true"
+     metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Bool", "aws:SecureTransport"],
+        ],
+    }
+}
+
+aws_path[{"s3_transport": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    statement.Condition.StringLike
+    not statement.Condition.StringLike["aws:SecureTransport"]
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "StringLike", "aws:SecureTransport"],
+        ],
+        "function": "absent"
+    }
+}
+
+aws_path[{"s3_transport": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucketpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    statement.Condition.Bool
+    not statement.Condition.Bool["aws:SecureTransport"]
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Bool", "aws:SecureTransport"],
+        ],
+        "function": "absent"
+    }
+}
+
 s3_transport {
     lower(input.Resources[i].Type) == "aws::s3::bucketpolicy"
     not aws_issue["s3_transport"]
@@ -592,6 +934,17 @@ aws_issue["s3_auth_acl"] {
     resource.Properties.AccessControl == "AuthenticatedRead"
 }
 
+aws_path[{"s3_auth_acl": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    lower(resource.Properties.AccessControl) == "authenticatedread"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AccessControl"],
+        ],
+    }
+}
+
 s3_auth_acl {
     lower(input.Resources[i].Type) == "aws::s3::bucket"
     not aws_issue["s3_auth_acl"]
@@ -635,6 +988,28 @@ aws_issue["s3_public_access"] {
     resource.Properties.AccessControl == "PublicReadWrite"
 }
 
+aws_path[{"s3_public_access": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    lower(resource.Properties.AccessControl) == "publicread"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AccessControl"],
+        ],
+    }
+}
+
+aws_path[{"s3_public_access": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    lower(resource.Properties.AccessControl) == "publicreadwrite"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AccessControl"],
+        ],
+    }
+}
+
 s3_public_access {
     lower(input.Resources[i].Type) == "aws::s3::bucket"
     not aws_issue["s3_public_access"]
@@ -672,6 +1047,16 @@ aws_issue["s3_encryption"] {
     not resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration
 }
 
+aws_path["s3_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "BucketEncryption", "ServerSideEncryptionConfiguration"],
+        ],
+    }
+}
+
 s3_encryption {
     lower(input.Resources[i].Type) == "aws::s3::bucket"
     not aws_issue["s3_encryption"]
@@ -707,6 +1092,17 @@ aws_issue["s3_website"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     resource.Properties.WebsiteConfiguration
+}
+
+aws_path[{"s3_website": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    resource.Properties.WebsiteConfiguration
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "WebsiteConfiguration"],
+        ],
+    }
 }
 
 s3_website {
@@ -747,6 +1143,20 @@ aws_issue["s3_cors"] {
     cors_rule := resource.Properties.CorsConfiguration.CorsRules[_]
     cors_rule.AllowedHeaders[_] == "*"
     cors_rule.AllowedMethods[_] == "*"
+}
+
+aws_path[{"s3_cors": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    cors_rule := resource.Properties.CorsConfiguration.CorsRules[j]
+    cors_rule.AllowedHeaders[k] == "*"
+    cors_rule.AllowedMethods[l] == "*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CorsConfiguration", "CorsRules", j, "AllowedHeaders", k],
+            ["Resources", i, "Properties", "CorsConfiguration", "CorsRules", j, "AllowedHeaders", l]
+        ],
+    }
 }
 
 s3_cors {
