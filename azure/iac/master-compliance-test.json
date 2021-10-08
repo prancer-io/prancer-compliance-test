@@ -2562,11 +2562,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0047-ARM",
+                            "id": "PR-AZR-0029-ARM",
                             "eval": "data.rule.inbound_port_445",
                             "message": "data.rule.inbound_port_445_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_0047_ARM.py"
+                            "remediationFunction": "PR_AZR_0029_ARM.py"
                         }
                     ],
                     "severity": "High",
@@ -2757,16 +2757,16 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0038-ARM",
+                            "id": "PR-AZR-0037-ARM",
                             "eval": "data.rule.inbound_port_netbios",
                             "message": "data.rule.inbound_port_netbios_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_0038_ARM.py"
+                            "remediationFunction": "PR_AZR_0037_ARM.py"
                         }
                     ],
                     "severity": "High",
-                    "title": "Azure Network Security Group should not allow NetBIOS (UDP Port 138)",
-                    "description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "title": "Azure Network Security Group allows NetBIOS (UDP Port 137)",
+                    "description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2874,16 +2874,16 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0042-ARM",
+                            "id": "PR-AZR-0041-ARM",
                             "eval": "data.rule.inbound_port_sqlserver",
                             "message": "data.rule.inbound_port_sqlserver_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_0042_ARM.py"
+                            "remediationFunction": "PR_AZR_0041_ARM.py"
                         }
                     ],
                     "severity": "High",
-                    "title": "Azure Network Security Group should not allow SqlServer (TCP Port 1433)",
-                    "description": "This policy detects any NSG rule that allows SqlServer traffic on TCP port 1433 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict SqlServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "title": "Azure Network Security Group allows SQLServer (UDP Port 1434)",
+                    "description": "This policy detects any NSG rule that allows SQLServer traffic on UDP port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3160,6 +3160,116 @@
                                 "HIPAA",
                                 "NIST CSF"
                             ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_32",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0042-ARM",
+                            "eval": "data.rule.inbound_port_sqlserver_2",
+                            "message": "data.rule.inbound_port_sqlserver_2_err",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0042_ARM.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure Network Security Group should not allow SqlServer (TCP Port 1433)",
+                    "description": "This policy detects any NSG rule that allows SqlServer traffic on TCP port 1433 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict SqlServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_33",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0038-ARM",
+                            "eval": "data.rule.inbound_port_netbios_2",
+                            "message": "data.rule.inbound_port_netbios_2_err",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0038_ARM.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure Network Security Group allows NetBIOS (UDP Port 138)",
+                    "description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/networksecuritygroups"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_34",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0030-ARM",
+                            "eval": "data.rule.inbound_insecure_omi_port",
+                            "message": "data.rule.inbound_insecure_omi_port_err",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationFunction": "PR_AZR_0030_ARM.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure Network Security Group (NSG) should protect OMIGOD attack from internet",
+                    "description": "Blocking OMI port 5985, 5986, 1270 will protect vnet/subnet/vms from OMIGOD attacks from internet.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
                             "service": [
                                 "arm"
                             ]
