@@ -342,3 +342,48 @@ redshift_allow_version_upgrade_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html#cfn-redshift-cluster-allowversionupgrade"
 }
+
+
+#
+# PR-AWS-333-CFR
+#
+
+default redshift_deploy_vpc = null
+
+aws_issue["redshift_deploy_vpc"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    count(resource.Properties.ClusterSubnetGroupName) == 0
+}
+
+aws_issue["redshift_deploy_vpc"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    not resource.Properties.ClusterSubnetGroupName
+}
+
+redshift_deploy_vpc {
+    lower(input.Resources[i].Type) == "aws::redshift::cluster"
+    not aws_issue["redshift_deploy_vpc"]
+}
+
+redshift_deploy_vpc = false {
+    aws_issue["redshift_deploy_vpc"]
+}
+
+
+redshift_deploy_vpc_err = "Ensure Redshift is not deployed outside of a VPC" {
+    aws_issue["redshift_deploy_vpc"]
+}
+
+redshift_deploy_vpc_metadata := {
+    "Policy Code": "PR-AWS-0333-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Redshift is not deployed outside of a VPC",
+    "Policy Description": "Ensure that your Redshift clusters are provisioned within the AWS EC2-VPC platform instead of EC2-Classic platform (outdated) for better flexibility and control over clusters security, traffic routing, availability and more.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html#cfn-redshift-cluster-clustersubnetgroupname"
+}

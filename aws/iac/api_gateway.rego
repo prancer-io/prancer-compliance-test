@@ -160,3 +160,172 @@ gateway_request_authorizer_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-restapi-endpointconfiguration.html"
 }
+
+
+#
+# PR-AWS-0324-CFR
+#
+
+default gateway_logging_enable = null
+
+aws_issue["gateway_logging_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::stage"
+    not resource.Properties.AccessLogSetting.DestinationArn
+}
+
+aws_issue["gateway_logging_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::stage"
+    count(resource.Properties.AccessLogSetting.DestinationArn) == 0
+}
+
+aws_issue["gateway_logging_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::stage"
+    resource.Properties.AccessLogSetting.DestinationArn == null
+}
+
+gateway_logging_enable {
+    lower(input.Resources[i].Type) == "aws::apigateway::stage"
+    not aws_issue["gateway_logging_enable"]
+}
+
+gateway_logging_enable = false {
+    aws_issue["gateway_logging_enable"]
+}
+
+gateway_logging_enable_err = "Ensure that API Gateway has enabled access logging" {
+    aws_issue["gateway_logging_enable"]
+}
+
+gateway_logging_enable_metadata := {
+    "Policy Code": "PR-AWS-0324-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure that API Gateway has enabled access logging",
+    "Policy Description": "Enabling the custom access logging option in API Gateway allows delivery of custom logs to CloudWatch Logs, which can be analyzed using CloudWatch Logs Insights. Using custom domain names in Amazon API Gateway allows insights into requests sent to each custom domain name.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html"
+}
+
+
+
+#
+# PR-AWS-0327-CFR
+#
+
+default gateway_tracing_enable = null
+
+aws_issue["gateway_tracing_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::stage"
+    not resource.Properties.TracingEnabled
+}
+
+aws_issue["gateway_tracing_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::stage"
+    lower(resource.Properties.TracingEnabled) != "true"
+}
+
+gateway_tracing_enable {
+    lower(input.Resources[i].Type) == "aws::apigateway::stage"
+    not aws_issue["gateway_tracing_enable"]
+}
+
+gateway_tracing_enable = false {
+    aws_issue["gateway_tracing_enable"]
+}
+
+gateway_tracing_enable_err = "Ensure API Gateway has tracing enabled" {
+    aws_issue["gateway_tracing_enable"]
+}
+
+gateway_tracing_enable_metadata := {
+    "Policy Code": "PR-AWS-0327-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure API Gateway has tracing enabled",
+    "Policy Description": "With tracing enabled X-Ray can provide an end-to-end view of an entire HTTP request. You can use this to analyze latencies in APIs and their backend services",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html"
+}
+
+
+#
+# PR-AWS-0349-CFR
+#
+
+default gateway_method_public_access = null
+
+aws_issue["gateway_method_public_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::method"
+    not resource.Properties.AuthorizationType
+    not resource.Properties.ApiKeyRequired
+}
+
+aws_issue["gateway_method_public_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::method"
+    lower(resource.Properties.AuthorizationType) == "none"
+    not resource.Properties.ApiKeyRequired
+}
+
+aws_issue["gateway_method_public_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::method"
+    resource.Properties.AuthorizationType == null
+    not resource.Properties.ApiKeyRequired
+}
+
+aws_issue["gateway_method_public_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::method"
+    not resource.Properties.AuthorizationType
+    lower(resource.Properties.ApiKeyRequired) != "true"
+}
+
+aws_issue["gateway_method_public_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::method"
+    lower(resource.Properties.AuthorizationType) == "none"
+    lower(resource.Properties.ApiKeyRequired) != "true"
+}
+
+aws_issue["gateway_method_public_access"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::method"
+    resource.Properties.AuthorizationType == null
+    lower(resource.Properties.ApiKeyRequired) != "true"
+}
+
+gateway_method_public_access {
+    lower(input.Resources[i].Type) == "aws::apigateway::method"
+    not aws_issue["gateway_method_public_access"]
+}
+
+gateway_method_public_access = false {
+    aws_issue["gateway_method_public_access"]
+}
+
+gateway_method_public_access_err = "Ensure API gateway methods are not publicly accessible" {
+    aws_issue["gateway_method_public_access"]
+}
+
+gateway_method_public_access_metadata := {
+    "Policy Code": "PR-AWS-0349-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure API gateway methods are not publicly accessible",
+    "Policy Description": "We recommend you configure a custom authorizer OR an API key for every method in the API Gateway.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-method.html#cfn-apigateway-method-authorizationtype"
+}

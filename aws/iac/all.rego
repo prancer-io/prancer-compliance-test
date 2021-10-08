@@ -304,3 +304,791 @@ qldb_permission_mode_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-qldb-ledger.html#cfn-qldb-ledger-permissionsmode"
 }
+
+
+#
+# PR-AWS-0293-CFR
+#
+
+default secret_manager_kms = null
+
+aws_issue["secret_manager_kms"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::secretsmanager::secret"
+    not resource.Properties.KmsKeyId
+}
+
+aws_issue["secret_manager_kms"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::secretsmanager::secret"
+    count(resource.Properties.KmsKeyId) == 0
+}
+
+secret_manager_kms {
+    lower(input.Resources[i].Type) == "aws::secretsmanager::secret"
+    not aws_issue["secret_manager_kms"]
+}
+
+secret_manager_kms = false {
+    aws_issue["secret_manager_kms"]
+}
+
+secret_manager_kms_err = "Ensure that Secrets Manager secret is encrypted using KMS" {
+    aws_issue["secret_manager_kms"]
+}
+
+secret_manager_kms_metadata := {
+    "Policy Code": "PR-AWS-0293-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure that Secrets Manager secret is encrypted using KMS",
+    "Policy Description": "Ensure that your Amazon Secrets Manager secrets (i.e. database credentials, API keys, OAuth tokens, etc) are encrypted with Amazon KMS Customer Master Keys instead of default encryption keys that Secrets Manager service creates for you, in order to have a more control over secret data encryption and decryption process",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-secretsmanager-secret.html"
+}
+
+#
+# PR-AWS-0294-CFR
+#
+
+default glue_catalog_encryption = null
+
+aws_issue["glue_catalog_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::glue::datacatalogencryptionsettings"
+    not resource.Properties.DataCatalogEncryptionSettings.ConnectionPasswordEncryption.ReturnConnectionPasswordEncrypted
+}
+
+aws_issue["glue_catalog_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::glue::datacatalogencryptionsettings"
+    lower(resource.Properties.DataCatalogEncryptionSettings.ConnectionPasswordEncryption.ReturnConnectionPasswordEncrypted) == "false"
+}
+
+aws_issue["glue_catalog_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::glue::datacatalogencryptionsettings"
+    not resource.Properties.DataCatalogEncryptionSettings.EncryptionAtRest.CatalogEncryptionMode
+}
+
+aws_issue["glue_catalog_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::glue::datacatalogencryptionsettings"
+    lower(resource.Properties.DataCatalogEncryptionSettings.EncryptionAtRest.CatalogEncryptionMode) != "sse-kms"
+}
+
+glue_catalog_encryption {
+    lower(input.Resources[i].Type) == "aws::glue::datacatalogencryptionsettings"
+    not aws_issue["glue_catalog_encryption"]
+}
+
+glue_catalog_encryption = false {
+    aws_issue["glue_catalog_encryption"]
+}
+
+glue_catalog_encryption_err = "Ensure Glue Data Catalog encryption is enabled" {
+    aws_issue["glue_catalog_encryption"]
+}
+
+glue_catalog_encryption_metadata := {
+    "Policy Code": "PR-AWS-0294-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Glue Data Catalog encryption is enabled",
+    "Policy Description": "Ensure that encryption at rest is enabled for your Amazon Glue Data Catalogs in order to meet regulatory requirements and prevent unauthorized users from getting access to sensitive data",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-datacatalogencryptionsettings-encryptionatrest.html"
+}
+
+
+#
+# PR-AWS-0295-CFR
+#
+
+default codebuild_encryption = null
+
+aws_issue["codebuild_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::codebuild::project"
+    not resource.Properties.EncryptionKey
+}
+
+aws_issue["codebuild_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::codebuild::project"
+    count(resource.Properties.EncryptionKey) == 0
+}
+
+codebuild_encryption {
+    lower(input.Resources[i].Type) == "aws::codebuild::project"
+    not aws_issue["codebuild_encryption"]
+}
+
+codebuild_encryption = false {
+    aws_issue["codebuild_encryption"]
+}
+
+codebuild_encryption_err = "Ensure that CodeBuild projects are encrypted using CMK" {
+    aws_issue["codebuild_encryption"]
+}
+
+codebuild_encryption_metadata := {
+    "Policy Code": "PR-AWS-0295-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure that CodeBuild projects are encrypted using CMK",
+    "Policy Description": "The AWS Key Management Service customer master key (CMK) to be used for encrypting the build output artifacts",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codebuild-project.html#cfn-codebuild-project-encryptionkey"
+}
+
+
+#
+# PR-AWS-0296-CFR
+#
+
+default docdb_cluster_encrypt = null
+
+aws_issue["docdb_cluster_encrypt"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbcluster"
+    not resource.Properties.StorageEncrypted
+}
+
+aws_issue["docdb_cluster_encrypt"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbcluster"
+    lower(resource.Properties.StorageEncrypted) == "false"
+}
+
+docdb_cluster_encrypt {
+    lower(input.Resources[i].Type) == "aws::docdb::dbcluster"
+    not aws_issue["docdb_cluster_encrypt"]
+}
+
+docdb_cluster_encrypt = false {
+    aws_issue["docdb_cluster_encrypt"]
+}
+
+docdb_cluster_encrypt_err = "Ensure DocumentDB cluster is encrypted at rest" {
+    aws_issue["docdb_cluster_encrypt"]
+}
+
+docdb_cluster_encrypt_metadata := {
+    "Policy Code": "PR-AWS-0296-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure DocumentDB cluster is encrypted at rest",
+    "Policy Description": "Ensure that encryption is enabled for your AWS DocumentDB (with MongoDB compatibility) clusters for additional data security and in order to meet compliance requirements for data-at-rest encryption",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#cfn-docdb-dbcluster-storageencrypted"
+}
+
+
+#
+# PR-AWS-0297-CFR
+#
+
+default athena_encryption_disabling_prevent = null
+
+aws_issue["athena_encryption_disabling_prevent"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::athena::workgroup"
+    not resource.Properties.WorkGroupConfiguration.EnforceWorkGroupConfiguration
+}
+
+aws_issue["athena_encryption_disabling_prevent"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::athena::workgroup"
+    lower(resource.Properties.WorkGroupConfiguration.EnforceWorkGroupConfiguration) == "false"
+}
+
+athena_encryption_disabling_prevent {
+    lower(input.Resources[i].Type) == "aws::athena::workgroup"
+    not aws_issue["athena_encryption_disabling_prevent"]
+}
+
+athena_encryption_disabling_prevent = false {
+    aws_issue["athena_encryption_disabling_prevent"]
+}
+
+athena_encryption_disabling_prevent_err = "Ensure to enable EnforceWorkGroupConfiguration for athena workgroup" {
+    aws_issue["athena_encryption_disabling_prevent"]
+}
+
+athena_encryption_disabling_prevent_metadata := {
+    "Policy Code": "PR-AWS-0297-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure to enable EnforceWorkGroupConfiguration for athena workgroup",
+    "Policy Description": "Athena workgroups support the ability for clients to override configuration options, including encryption requirements. This setting should be disabled to enforce encryption mandates",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#cfn-docdb-dbcluster-storageencrypted"
+}
+
+
+#
+# PR-AWS-302-CFR
+#
+
+default log_group_encryption = null
+
+aws_issue["log_group_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::logs::loggroup"
+    not resource.Properties.KmsKeyId
+}
+
+aws_issue["log_group_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::logs::loggroup"
+    count(resource.Properties.KmsKeyId) == 0
+}
+
+aws_issue["log_group_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::logs::loggroup"
+    resource.Properties.KmsKeyId == null
+}
+
+log_group_encryption {
+    lower(input.Resources[i].Type) == "aws::logs::loggroup"
+    not aws_issue["log_group_encryption"]
+}
+
+log_group_encryption = false {
+    aws_issue["log_group_encryption"]
+}
+
+log_group_encryption_err = "Ensure CloudWatch log groups are encrypted with KMS CMKs" {
+    aws_issue["log_group_encryption"]
+}
+
+log_group_encryption_metadata := {
+    "Policy Code": "PR-AWS-302-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure CloudWatch log groups are encrypted with KMS CMKs",
+    "Policy Description": "CloudWatch log groups are encrypted by default. However, utilizing KMS CMKs gives you more control over key rotation and provides auditing visibility into key usage.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html"
+}
+
+#
+# PR-AWS-303-CFR
+#
+
+default log_group_retention = null
+
+aws_issue["log_group_retention"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::logs::loggroup"
+    not resource.Properties.RetentionInDays
+}
+
+log_group_retention {
+    lower(input.Resources[i].Type) == "aws::logs::loggroup"
+    not aws_issue["log_group_retention"]
+}
+
+log_group_retention = false {
+    aws_issue["log_group_retention"]
+}
+
+log_group_retention_err = "Ensure CloudWatch log groups has retention days defined" {
+    aws_issue["log_group_retention"]
+}
+
+log_group_retention_metadata := {
+    "Policy Code": "PR-AWS-303-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure CloudWatch log groups has retention days defined",
+    "Policy Description": "Ensure that your web-tier CloudWatch log group has the retention period feature configured in order to establish how long log events are kept in AWS CloudWatch Logs",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html"
+}
+
+
+#
+# PR-AWS-304-CFR
+#
+
+default timestream_database_encryption = null
+
+aws_issue["timestream_database_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::timestream::database"
+    not resource.Properties.KmsKeyId
+}
+
+aws_issue["timestream_database_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::timestream::database"
+    count(resource.Properties.KmsKeyId) == 0
+}
+
+aws_issue["timestream_database_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::timestream::database"
+    resource.Properties.KmsKeyId == null
+}
+
+timestream_database_encryption {
+    lower(input.Resources[i].Type) == "aws::timestream::database"
+    not aws_issue["timestream_database_encryption"]
+}
+
+timestream_database_encryption = false {
+    aws_issue["timestream_database_encryption"]
+}
+
+timestream_database_encryption_err = "Ensure Timestream database is encrypted using KMS" {
+    aws_issue["timestream_database_encryption"]
+}
+
+timestream_database_encryption_metadata := {
+    "Policy Code": "PR-AWS-304-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Timestream database is encrypted using KMS",
+    "Policy Description": "The timestream databases must be secured with KMS instead of default kms.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-timestream-database.html#cfn-timestream-database-kmskeyid"
+}
+
+
+#
+# PR-AWS-0307-CFR
+#
+
+default workspace_volume_encrypt = null
+
+aws_issue["workspace_volume_encrypt"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::workspaces::workspace"
+    not resource.Properties.UserVolumeEncryptionEnabled
+}
+
+aws_issue["workspace_volume_encrypt"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::workspaces::workspace"
+    lower(resource.Properties.UserVolumeEncryptionEnabled) == "false"
+}
+
+workspace_volume_encrypt {
+    lower(input.Resources[i].Type) == "aws::workspaces::workspace"
+    not aws_issue["workspace_volume_encrypt"]
+}
+
+workspace_volume_encrypt = false {
+    aws_issue["workspace_volume_encrypt"]
+}
+
+workspace_volume_encrypt_err = "Ensure that Workspace user volumes is encrypted" {
+    aws_issue["workspace_volume_encrypt"]
+}
+
+workspace_volume_encrypt_metadata := {
+    "Policy Code": "PR-AWS-0307-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure that Workspace user volumes is encrypted",
+    "Policy Description": "Ensure that your Amazon WorkSpaces storage volumes are encrypted in order to meet security and compliance requirements. Your data is transparently encrypted while being written and transparently decrypted while being read from your storage volumes, therefore the encryption process does not require any additional action from you",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-workspaces-workspace.html"
+}
+
+
+#
+# PR-AWS-0308-CFR
+#
+
+default codebuild_encryption_disable = null
+
+aws_issue["codebuild_encryption_disable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::codebuild::project"
+    resource.Properties.Artifacts.EncryptionDisabled == true
+}
+
+aws_issue["codebuild_encryption_disable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::codebuild::project"
+    lower(resource.Properties.Artifacts.EncryptionDisabled) == "true"
+}
+
+codebuild_encryption_disable {
+    lower(input.Resources[i].Type) == "aws::codebuild::project"
+    not aws_issue["codebuild_encryption_disable"]
+}
+
+codebuild_encryption_disable = false {
+    aws_issue["codebuild_encryption_disable"]
+}
+
+codebuild_encryption_disable_err = "Ensure CodeBuild project Artifact encryption is not disabled" {
+    aws_issue["codebuild_encryption_disable"]
+}
+
+codebuild_encryption_disable_metadata := {
+    "Policy Code": "PR-AWS-0308-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure CodeBuild project Artifact encryption is not disabled",
+    "Policy Description": "AWS CodeBuild is a fully managed build service in the cloud. CodeBuild compiles your source code, runs unit tests, and produces artifacts that are ready to deploy. Build artifacts, such as a cache, logs, exported raw test report data files, and build results, are encrypted by default using CMKs for Amazon S3 that are managed by the AWS Key Management Service. If you do not want to use these CMKs, you must create and configure a customer-managed CMK.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-artifacts.html#cfn-codebuild-project-artifacts-encryptiondisabled"
+}
+
+
+#
+# PR-AWS-0311-CFR
+#
+
+default glue_security_config = null
+
+aws_issue["glue_security_config_disable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::glue::securityconfiguration"
+    not resource.Properties.EncryptionConfiguration
+}
+
+aws_issue["glue_security_config_disable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::glue::securityconfiguration"
+    lower(resource.Properties.EncryptionConfiguration.CloudWatchEncryption.CloudWatchEncryptionMode) != "SSE-KMS"
+}
+
+aws_issue["glue_security_config_disable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::glue::securityconfiguration"
+    lower(resource.Properties.EncryptionConfiguration.JobBookmarksEncryption.JobBookmarksEncryptionMode) != "SSE-KMS"
+}
+
+aws_issue["glue_security_config_disable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::glue::securityconfiguration"
+    lower(resource.Properties.EncryptionConfiguration.S3Encryptions.S3EncryptionMode) != "SSE-KMS"
+}
+
+glue_security_config {
+    lower(input.Resources[i].Type) == "aws::glue::securityconfiguration"
+    not aws_issue["glue_security_config"]
+}
+
+glue_security_config = false {
+    aws_issue["glue_security_config"]
+}
+
+glue_security_config_err = "Ensure AWS Glue security configuration encryption is enabled" {
+    aws_issue["glue_security_config"]
+}
+
+glue_security_config_metadata := {
+    "Policy Code": "PR-AWS-0311-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS Glue security configuration encryption is enabled",
+    "Policy Description": "Ensure AWS Glue security configuration encryption is enabled",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-securityconfiguration-encryptionconfiguration.html#cfn-glue-securityconfiguration-encryptionconfiguration-s3encryptions"
+}
+
+#
+# PR-AWS-0319-CFR
+#
+
+default backup_public_access_disable = null
+
+aws_issue["backup_public_access_disable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::backup::backupvault"
+    statement := resource.Properties.AccessPolicy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+}
+
+aws_issue["backup_public_access_disable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::backup::backupvault"
+    statement := resource.Properties.AccessPolicy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+}
+
+aws_issue["backup_public_access_disable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::backup::backupvault"
+    statement := resource.Properties.AccessPolicy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+}
+
+
+backup_public_access_disable {
+    lower(input.Resources[i].Type) == "aws::backup::backupvault"
+    not aws_issue["backup_public_access_disable"]
+}
+
+backup_public_access_disable = false {
+    aws_issue["backup_public_access_disable"]
+}
+
+backup_public_access_disable_err = "Ensure Glacier Backup policy is not publicly accessible" {
+    aws_issue["backup_public_access_disable"]
+}
+
+backup_public_access_disable_metadata := {
+    "Policy Code": "PR-AWS-0319-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Glacier Backup policy is not publicly accessible",
+    "Policy Description": "Public Glacier backup potentially expose existing interfaces to unwanted 3rd parties that can tap into an existing data stream, resulting in data leak to an unwanted party.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-backup-backupvault.html#cfn-backup-backupvault-accesspolicy"
+}
+
+
+#
+# PR-AWS-0328-CFR
+#
+
+default neptune_cluster_logs = null
+
+aws_issue["neptune_cluster_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::neptune::dbcluster"
+    not resource.Properties.EnableCloudwatchLogsExports
+}
+
+aws_issue["neptune_cluster_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::neptune::dbcluster"
+    count(resource.Properties.EnableCloudwatchLogsExports) == 0
+}
+
+neptune_cluster_logs {
+    lower(input.Resources[i].Type) == "aws::neptune::dbcluster"
+    not aws_issue["neptune_cluster_logs"]
+}
+
+neptune_cluster_logs = false {
+    aws_issue["neptune_cluster_logs"]
+}
+
+neptune_cluster_logs_err = "Ensure Neptune logging is enabled" {
+    aws_issue["neptune_cluster_logs"]
+}
+
+neptune_cluster_logs_metadata := {
+    "Policy Code": "PR-AWS-0328-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Neptune logging is enabled",
+    "Policy Description": "These access logs can be used to analyze traffic patterns and troubleshoot security and operational issues.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-neptune-dbcluster.html#cfn-neptune-dbcluster-enablecloudwatchlogsexports"
+}
+
+
+#
+# PR-AWS-0329-CFR
+#
+
+default docdb_cluster_logs = null
+
+aws_issue["docdb_cluster_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbcluster"
+    not resource.Properties.EnableCloudwatchLogsExports
+}
+
+aws_issue["docdb_cluster_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbcluster"
+    count(resource.Properties.EnableCloudwatchLogsExports) == 0
+}
+
+docdb_cluster_logs {
+    lower(input.Resources[i].Type) == "aws::docdb::dbcluster"
+    not aws_issue["docdb_cluster_logs"]
+}
+
+docdb_cluster_logs = false {
+    aws_issue["docdb_cluster_logs"]
+}
+
+docdb_cluster_logs_err = "Ensure AWS DocumentDB logging is enabled" {
+    aws_issue["docdb_cluster_logs"]
+}
+
+docdb_cluster_logs_metadata := {
+    "Policy Code": "PR-AWS-0329-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS DocumentDB logging is enabled",
+    "Policy Description": "The events recorded by the AWS DocumentDB audit logs include: successful and failed authentication attempts, creating indexes or dropping a collection in a database within the DocumentDB cluster.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbcluster.html#cfn-docdb-dbcluster-enablecloudwatchlogsexports"
+}
+
+#
+# PR-AWS-0343-CFR
+#
+
+default docdb_parameter_group_tls_enable = null
+
+aws_issue["docdb_parameter_group_tls_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
+    not resource.Properties.Parameters.tls
+}
+
+aws_issue["docdb_parameter_group_tls_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
+    lower(resource.Properties.Parameters.tls) != "enabled"
+    not resource.Properties.Parameters.Value
+}
+
+docdb_parameter_group_tls_enable {
+    lower(input.Resources[i].Type) == "aws::docdb::dbclusterparametergroup"
+    not aws_issue["docdb_parameter_group_tls_enable"]
+}
+
+docdb_parameter_group_tls_enable = false {
+    aws_issue["docdb_parameter_group_tls_enable"]
+}
+
+docdb_parameter_group_tls_enable_err = "Ensure DocDB ParameterGroup has TLS enable" {
+    aws_issue["docdb_parameter_group_tls_enable"]
+}
+
+docdb_parameter_group_tls_enable_metadata := {
+    "Policy Code": "PR-AWS-0343-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure DocDB ParameterGroup has TLS enable",
+    "Policy Description": "TLS can be used to encrypt the connection between an application and a DocDB cluster. By default, encryption in transit is enabled for newly created clusters. It can optionally be disabled when the cluster is created, or at a later time. When enabled, secure connections using TLS are required to connect to the cluster.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbclusterparametergroup.html#cfn-docdb-dbclusterparametergroup-parameters"
+}
+
+
+#
+# PR-AWS-0344-CFR
+#
+
+default transer_server_public_expose = null
+
+aws_issue["transer_server_public_expose"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::transfer::server"
+    not resource.Properties.EndpointType
+}
+
+aws_issue["transer_server_public_expose"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::transfer::server"
+    lower(resource.Properties.EndpointType) != "vpc"
+}
+
+
+transer_server_public_expose {
+    lower(input.Resources[i].Type) == "aws::transfer::server"
+    not aws_issue["transer_server_public_expose"]
+}
+
+transer_server_public_expose = false {
+    aws_issue["transer_server_public_expose"]
+}
+
+transer_server_public_expose_err = "Ensure Transfer Server is not publicly exposed" {
+    aws_issue["transer_server_public_expose"]
+}
+
+transer_server_public_expose_metadata := {
+    "Policy Code": "PR-AWS-0344-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Transfer Server is not publicly exposed",
+    "Policy Description": "It is recommended that you use VPC as the EndpointType. With this endpoint type, you have the option to directly associate up to three Elastic IPv4 addresses (BYO IP included) with your server's endpoint and use VPC security groups to restrict traffic by the client's public IP address. This is not possible with EndpointType set to VPC_ENDPOINT.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-transfer-server.html#cfn-transfer-server-endpointdetails"
+}
+
+#
+# PR-AWS-0354-CFR
+#
+
+default docdb_parameter_group_audit_logs = null
+
+aws_issue["docdb_parameter_group_audit_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
+    not resource.Properties.Parameters.audit_logs
+}
+
+aws_issue["docdb_parameter_group_audit_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
+    lower(resource.Properties.Parameters.audit_logs) != "enabled"
+}
+
+docdb_parameter_group_audit_logs {
+    lower(input.Resources[i].Type) == "aws::docdb::dbclusterparametergroup"
+    not aws_issue["docdb_parameter_group_audit_logs"]
+}
+
+docdb_parameter_group_audit_logs = false {
+    aws_issue["docdb_parameter_group_audit_logs"]
+}
+
+docdb_parameter_group_audit_logs_err = "Ensure DocDB has audit logs enabled" {
+    aws_issue["docdb_parameter_group_audit_logs"]
+}
+
+docdb_parameter_group_audit_logs_metadata := {
+    "Policy Code": "PR-AWS-0354-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure DocDB has audit logs enabled",
+    "Policy Description": "Ensure DocDB has audit logs enabled, this will export logs in docdb",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-docdb-dbclusterparametergroup.html#aws-resource-docdb-dbclusterparametergroup--examples"
+}

@@ -229,3 +229,40 @@ msk_vpc_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo"
 }
+
+#
+# PR-AWS-0331-CFR
+#
+default msk_cluster_logging_enable = null
+
+aws_issue["msk_cluster_logging_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    not resource.Properties.LoggingInfo.BrokerLogs
+}
+
+msk_cluster_logging_enable {
+    lower(input.Resources[i].Type) == "aws::msk::cluster"
+    not aws_issue["msk_cluster_logging_enable"]
+}
+
+msk_cluster_logging_enable = false {
+    aws_issue["msk_cluster_logging_enable"]
+}
+
+msk_cluster_logging_enable_err = "Ensure Amazon MSK cluster has logging enabled" {
+    aws_issue["msk_cluster_logging_enable"]
+}
+
+
+msk_cluster_logging_enable_metadata := {
+    "Policy Code": "PR-AWS-0331-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Amazon MSK cluster has logging enabled",
+    "Policy Description": "Consistent cluster logging helps you determine if a request was made with root or AWS Identity and Access Management (IAM) user credentials and whether the request was made with temporary security credentials for a role or federated user.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-brokerlogs.html#cfn-msk-cluster-brokerlogs-cloudwatchlogs"
+}

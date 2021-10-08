@@ -314,3 +314,46 @@ iam_administrative_privileges_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html"
 }
+
+
+#
+# PR-AWS-0315-CFR
+#
+default iam_user_group_attach = null
+
+aws_issue["iam_user_group_attach"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::usertogroupaddition"
+    not resource.Properties.Users
+}
+
+aws_issue["iam_user_group_attach"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::usertogroupaddition"
+    count(resource.Properties.Users) < 1
+}
+
+iam_user_group_attach {
+    lower(input.Resources[i].Type) == "aws::iam::usertogroupaddition"
+    not aws_issue["iam_user_group_attach"]
+}
+
+iam_user_group_attach = false {
+    aws_issue["iam_user_group_attach"]
+}
+
+iam_user_group_attach_err = "Ensure IAM groups contains at least one IAM user" {
+    aws_issue["iam_user_group_attach"]
+}
+
+iam_user_group_attach_metadata := {
+    "Policy Code": "PR-AWS-0315-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure IAM groups contains at least one IAM user",
+    "Policy Description": "Ensure that your Amazon Identity and Access Management (IAM) users are members of at least one IAM group in order to adhere to IAM security best practices",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html"
+}

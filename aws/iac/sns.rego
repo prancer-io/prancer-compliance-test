@@ -1,4 +1,5 @@
 package rule
+default metadata = {}
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html
@@ -19,6 +20,24 @@ aws_issue["sns_protocol"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::subscription"
     lower(resource.Properties.Protocol) == "http"
+}
+
+aws_path[{"sns_protocol": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::subscription"
+    not resource.Properties.Protocol
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "Protocol"]],
+    }
+}
+
+aws_path[{"sns_protocol": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::subscription"
+    lower(resource.Properties.Protocol) == "http"
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "Protocol"]],
+    }
 }
 
 sns_protocol {
@@ -67,6 +86,15 @@ aws_issue["sns_encrypt_key"] {
     contains(lower(resource.Properties.KmsMasterKeyId), "alias/aws/sns")
 }
 
+aws_path[{"sns_encrypt_key": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topic"
+    contains(lower(resource.Properties.KmsMasterKeyId), "alias/aws/sns")
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "KmsMasterKeyId"]],
+    }
+}
+
 sns_encrypt_key {
     lower(input.Resources[i].Type) == "aws::sns::topic"
     not aws_issue["sns_encrypt_key"]
@@ -110,6 +138,24 @@ aws_issue["sns_encrypt"] {
     count(resource.Properties.KmsMasterKeyId) == 0
 }
 
+aws_path[{"sns_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topic"
+    not resource.Properties.KmsMasterKeyId
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "KmsMasterKeyId"]],
+    }
+}
+
+aws_path[{"sns_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topic"
+    count(resource.Properties.KmsMasterKeyId) == 0
+    metadata := {
+        "resource_path": [["Resources", i, "Properties", "KmsMasterKeyId"]],
+    }
+}
+
 sns_encrypt {
     lower(input.Resources[i].Type) == "aws::sns::topic"
     not aws_issue["sns_encrypt"]
@@ -142,4 +188,61 @@ sns_encrypt_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html"
+}
+
+
+#
+# PR-AWS-0318-CFR
+#
+
+default sns_policy_public = null
+
+aws_issue["sns_policy_public"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+}
+
+aws_issue["sns_policy_public"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+}
+
+aws_issue["sns_policy_public"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sns::topicpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+}
+
+
+sns_policy_public {
+    lower(input.Resources[i].Type) == "aws::sns::topicpolicy"
+    not aws_issue["sns_policy_public"]
+}
+
+sns_policy_public = false {
+    aws_issue["sns_policy_public"]
+}
+
+sns_policy_public_err = "Ensure SQS queue policy is not publicly accessible" {
+    aws_issue["sns_policy_public"]
+}
+
+sns_policy_public_metadata := {
+    "Policy Code": "PR-AWS-0318-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure SNS Topic policy is not publicly accessible",
+    "Policy Description": "Public SNS Topic potentially expose existing interfaces to unwanted 3rd parties that can tap into an existing data stream, resulting in data leak to an unwanted party.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html"
 }

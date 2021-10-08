@@ -9,19 +9,17 @@ package rule
 default esearch_vpc = null
 
 aws_issue["esearch_vpc"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "elasticsearchdomain"
-    not resource.spec.vpcOptions.subnetIDs
+    lower(input.kind) == "elasticsearchdomain"
+    not input.spec.vpcOptions.subnetIDs
 }
 
 aws_issue["esearch_vpc"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "elasticsearchdomain"
-    count(resource.spec.vpcOptions.subnetIDs) == 0
+    lower(input.kind) == "elasticsearchdomain"
+    count(input.spec.vpcOptions.subnetIDs) == 0
 }
 
 esearch_vpc {
-    lower(input.Resources[i].kind) == "elasticsearchdomain"
+    lower(input.kind) == "elasticsearchdomain"
     not aws_issue["esearch_vpc"]
 }
 
@@ -52,13 +50,12 @@ esearch_vpc_metadata := {
 default esearch_encrypt = null
 
 aws_issue["esearch_encrypt"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "elasticsearchdomain"
-    not resource.spec.encryptionAtRestOptions.enabled
+    lower(input.kind) == "elasticsearchdomain"
+    not input.spec.encryptionAtRestOptions.enabled
 }
 
 esearch_encrypt {
-    lower(input.Resources[i].kind) == "elasticsearchdomain"
+    lower(input.kind) == "elasticsearchdomain"
     not aws_issue["esearch_encrypt"]
 }
 
@@ -89,13 +86,12 @@ esearch_encrypt_metadata := {
 default esearch_master = null
 
 aws_issue["esearch_master"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "elasticsearchdomain"
-    not resource.spec.elasticsearchClusterConfig.dedicatedMasterEnabled
+    lower(input.kind) == "elasticsearchdomain"
+    not input.spec.elasticsearchClusterConfig.dedicatedMasterEnabled
 }
 
 esearch_master {
-    lower(input.Resources[i].kind) == "elasticsearchdomain"
+    lower(input.kind) == "elasticsearchdomain"
     not aws_issue["esearch_master"]
 }
 
@@ -126,13 +122,12 @@ esearch_master_metadata := {
 default esearch_zone_awareness = null
 
 aws_issue["esearch_zone_awareness"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "elasticsearchdomain"
-    not resource.spec.elasticsearchClusterConfig.zoneAwarenessEnabled
+    lower(input.kind) == "elasticsearchdomain"
+    not input.spec.elasticsearchClusterConfig.zoneAwarenessEnabled
 }
 
 esearch_zone_awareness {
-    lower(input.Resources[i].kind) == "elasticsearchdomain"
+    lower(input.kind) == "elasticsearchdomain"
     not aws_issue["esearch_zone_awareness"]
 }
 

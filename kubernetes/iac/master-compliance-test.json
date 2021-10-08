@@ -33,6 +33,9 @@
                                 "kubernetesObjectFiles"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "networkpolicy"
                     ]
                 },
                 {
@@ -64,6 +67,11 @@
                                 "kubernetesObjectFiles"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "daemonset",
+                        "statefulset",
+                        "deployment"
                     ]
                 },
                 {
@@ -95,6 +103,11 @@
                                 "kubernetesObjectFiles"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "daemonset",
+                        "statefulset",
+                        "deployment"
                     ]
                 },
                 {
@@ -126,6 +139,11 @@
                                 "kubernetesObjectFiles"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "daemonset",
+                        "statefulset",
+                        "deployment"
                     ]
                 },
                 {
@@ -146,7 +164,7 @@
                     ],
                     "severity": "Medium",
                     "title": " Ensure pods outside of kube-system do not have access to node volume",
-                    "description": " A hostPath volume mounts a file or directory from the host node’s filesystem into your Pod. This is not something that most Pods will need, but it offers a powerful escape hatch for some applications. It is important to watch out when using this type of volume because; when Kubernetes adds resource-aware scheduling, as is planned, it will not be able to account for resource used by a hostPath.",
+                    "description": " A hostPath volume mounts a file or directory from the host node's filesystem into your Pod. This is not something that most Pods will need, but it offers a powerful escape hatch for some applications. It is important to watch out when using this type of volume because; when Kubernetes adds resource-aware scheduling, as is planned, it will not be able to account for resource used by a hostPath.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -157,6 +175,11 @@
                                 "kubernetesObjectFiles"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "daemonset",
+                        "statefulset",
+                        "deployment"
                     ]
                 },
                 {
@@ -188,6 +211,11 @@
                                 "kubernetesObjectFiles"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "daemonset",
+                        "statefulset",
+                        "deployment"
                     ]
                 },
                 {
@@ -219,6 +247,9 @@
                                 "kubernetesObjectFiles"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "podsecuritypolicy"
                     ]
                 },
                 {
@@ -250,6 +281,9 @@
                                 "kubernetesObjectFiles"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "podsecuritypolicy"
                     ]
                 },
                 {
@@ -281,6 +315,9 @@
                                 "kubernetesObjectFiles"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "podsecuritypolicy"
                     ]
                 },
                 {
@@ -312,6 +349,9 @@
                                 "kubernetesObjectFiles"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "podsecuritypolicy"
                     ]
                 },
                 {
@@ -343,6 +383,9 @@
                                 "kubernetesObjectFiles"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "podsecuritypolicy"
                     ]
                 },
                 {
@@ -374,6 +417,9 @@
                                 "kubernetesObjectFiles"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "podsecuritypolicy"
                     ]
                 },
                 {
@@ -405,6 +451,9 @@
                                 "kubernetesObjectFiles"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "podsecuritypolicy"
                     ]
                 },
                 {
@@ -436,6 +485,10 @@
                                 "kubernetesObjectFiles"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "role",
+                        "clusterrole"
                     ]
                 },
                 {
@@ -467,6 +520,10 @@
                                 "kubernetesObjectFiles"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "role",
+                        "clusterrole"
                     ]
                 },
                 {
@@ -498,6 +555,10 @@
                                 "kubernetesObjectFiles"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "rolebinding",
+                        "clusterrolebinding"
                     ]
                 },
                 {
@@ -529,6 +590,10 @@
                                 "kubernetesObjectFiles"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "rolebinding",
+                        "clusterrolebinding"
                     ]
                 },
                 {
@@ -560,6 +625,9 @@
                                 "kubernetesObjectFiles"
                             ]
                         }
+                    ],
+                    "resourceTypes": [
+                        "serviceaccount"
                     ]
                 }
             ]
