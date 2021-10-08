@@ -3834,6 +3834,38 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_33",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0100-TRF",
+                            "eval": "data.rule.inbound_insecure_omi_port",
+                            "message": "data.rule.inbound_insecure_omi_port_err",
+                            "remediationDescription": "In 'azurerm_network_security_rule' resource, make sure property 'destination_port_range' dont have port '5985', '5986' and '1270' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#destination_port_range for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure Network Security Group (NSG) should protect OMIGOD attack from internet",
+                    "description": "Blocking OMI port 5985, 5986, 1270 will protect vnet/subnet/vms from OMIGOD attacks from internet.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_postgreSQL_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"

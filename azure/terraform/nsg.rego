@@ -1356,3 +1356,47 @@ outbound_port_ethereum_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
 }
+
+
+#
+# PR-AZR-0100-TRF
+#
+
+default inbound_insecure_omi_port = null
+
+azure_issue["inbound_insecure_omi_port"] {
+    to_number(nsg_inbound[_]) == 5985
+}
+
+azure_issue["inbound_insecure_omi_port"] {
+    to_number(nsg_inbound[_]) == 5986
+}
+
+azure_issue["inbound_insecure_omi_port"] {
+    to_number(nsg_inbound[_]) == 1270
+}
+
+inbound_insecure_omi_port {
+    azure_issue["inbound_insecure_omi_port"]
+}
+
+inbound_insecure_omi_port = false {
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
+    not azure_issue["inbound_insecure_omi_port"]
+}
+
+inbound_insecure_omi_port_err = "Azure Network Security Group (NSG) currently not protecting OMIGOD attack from internet" {
+    azure_issue["inbound_insecure_omi_port"]
+}
+
+inbound_insecure_omi_port_metadata := {
+    "Policy Code": "PR-AZR-0100-TRF",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Network Security Group (NSG) should protect OMIGOD attack from internet",
+    "Policy Description": "Blocking OMI port 5985, 5986, 1270 will protect vnet/subnet/vms from OMIGOD attacks from internet.",
+    "Resource Type": "azurerm_network_security_rule",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule"
+}
