@@ -12,10 +12,28 @@ azure_attribute_absence["serverKeyType"] {
     not resource.properties.serverKeyType
 }
 
+source_path[{"serverKeyType":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/encryptionprotector"
+    not resource.properties.serverKeyType
+    metadata:= {
+        "resource_path": [["resources",i,"properties","serverKeyType"]]
+    }
+}
+
 azure_issue["serverKeyType"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/encryptionprotector"
     lower(resource.properties.serverKeyType) != "azurekeyvault"
+}
+
+source_path[{"serverKeyType":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/encryptionprotector"
+    lower(resource.properties.serverKeyType) != "azurekeyvault"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","serverKeyType"]]
+    }
 }
 
 serverKeyType {

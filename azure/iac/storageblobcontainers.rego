@@ -14,16 +14,43 @@ azure_attribute_absence["storage_container_public_access_disabled"] {
     not resource.properties.publicAccess
 }
 
+source_path[{"storage_container_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/containers"
+    not resource.properties.publicAccess
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicAccess"]]
+    }
+}
+
 azure_issue["storage_container_public_access_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/containers"
     lower(resource.properties.publicAccess) == "container"
 }
 
+source_path[{"storage_container_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/containers"
+    lower(resource.properties.publicAccess) == "container"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicAccess"]]
+    }
+}
+
 azure_issue["storage_container_public_access_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/containers"
     lower(resource.properties.publicAccess) == "blob"
+}
+
+source_path[{"storage_container_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/containers"
+    lower(resource.properties.publicAccess) == "blob"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicAccess"]]
+    }
 }
 
 storage_container_public_access_disabled {
@@ -73,6 +100,17 @@ azure_attribute_absence["storage__logical_container_public_access_disabled"] {
     not storage_resources.properties.publicAccess
 }
 
+source_path[{"storage__logical_container_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    storage_resources := resource.resources[j]
+    lower(storage_resources.type) == "blobservices/containers"
+    not storage_resources.properties.publicAccess
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","publicAccess"]]
+    }
+}
+
 azure_issue["storage__logical_container_public_access_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
@@ -81,12 +119,34 @@ azure_issue["storage__logical_container_public_access_disabled"] {
     lower(storage_resources.properties.publicAccess) == "container"
 }
 
+source_path[{"storage__logical_container_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    storage_resources := resource.resources[j]
+    lower(storage_resources.type) == "blobservices/containers"
+    lower(storage_resources.properties.publicAccess) == "container"
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","publicAccess"]]
+    }
+}
+
 azure_issue["storage__logical_container_public_access_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     storage_resources := resource.resources[_]
     lower(storage_resources.type) == "blobservices/containers"
     lower(storage_resources.properties.publicAccess) == "blob"
+}
+
+source_path[{"storage__logical_container_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    storage_resources := resource.resources[j]
+    lower(storage_resources.type) == "blobservices/containers"
+    lower(storage_resources.properties.publicAccess) == "blob"
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","publicAccess"]]
+    }
 }
 
 storage__logical_container_public_access_disabled {

@@ -15,11 +15,21 @@ default vnet_subnet_nsg = null
 #    count([c | resource.properties.networkSecurityGroup.id; c := 1]) == 0
 #}
 
-azure_issue["vnet_peer"] {
+azure_issue["vnet_subnet_nsg"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/virtualnetworks/subnets"
     not resource.properties.networkSecurityGroup
 }
+
+source_path[{"vnet_subnet_nsg":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/virtualnetworks/subnets"
+    not resource.properties.networkSecurityGroup
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkSecurityGroup"]]
+    }
+}
+
 
 vnet_subnet_nsg {
     lower(input.resources[_].type) == "microsoft.network/virtualnetworks/subnets"

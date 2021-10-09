@@ -20,10 +20,28 @@ azure_attribute_absence["sql_mi_public_endpoint_disabled"] {
     not resource.properties.publicDataEndpointEnabled
 }
 
+source_path[{"sql_mi_public_endpoint_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/managedinstances"
+    not resource.properties.publicDataEndpointEnabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicDataEndpointEnabled"]]
+    }
+}
+
 azure_issue["sql_mi_public_endpoint_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/managedinstances"
     resource.properties.publicDataEndpointEnabled != "false"
+}
+
+source_path[{"sql_mi_public_endpoint_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/managedinstances"
+    resource.properties.publicDataEndpointEnabled != "false"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicDataEndpointEnabled"]]
+    }
 }
 
 sql_mi_public_endpoint_disabled {
