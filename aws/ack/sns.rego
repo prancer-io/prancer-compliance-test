@@ -49,7 +49,7 @@ aws_issue["sns_encrypt"] {
     not input.spec.KmsMasterKeyId
 }
 
-aws_issue["sns_encrypt"] {]
+aws_issue["sns_encrypt"] {
     lower(input.kind) == "topic"
     count(input.spec.KmsMasterKeyId) == 0
 }
