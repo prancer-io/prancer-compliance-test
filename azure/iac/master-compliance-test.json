@@ -2765,8 +2765,8 @@
                         }
                     ],
                     "severity": "High",
-                    "title": "Azure Network Security Group allows NetBIOS (UDP Port 137)",
-                    "description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "title": "Azure Network Security Group allows NetBIOS (UDP Port 137 and 138)",
+                    "description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 and 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2882,8 +2882,8 @@
                         }
                     ],
                     "severity": "High",
-                    "title": "Azure Network Security Group allows SQLServer (UDP Port 1434)",
-                    "description": "This policy detects any NSG rule that allows SQLServer traffic on UDP port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "title": "Azure Network Security Group allows SQLServer (TCP Port 1433 and UDP Port 1434)",
+                    "description": "This policy detects any NSG rule that allows SQLServer traffic on TCP Port 1433 and UDP Port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3171,84 +3171,6 @@
                 },
                 {
                     "masterTestId": "TEST_NETWORK_SECURITY_GROUP_32",
-                    "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(nsg.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-0042-ARM",
-                            "eval": "data.rule.inbound_port_sqlserver_2",
-                            "message": "data.rule.inbound_port_sqlserver_2_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_0042_ARM.py"
-                        }
-                    ],
-                    "severity": "High",
-                    "title": "Azure Network Security Group should not allow SqlServer (TCP Port 1433)",
-                    "description": "This policy detects any NSG rule that allows SqlServer traffic on TCP port 1433 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict SqlServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "HITRUST",
-                                "NIST 800",
-                                "NIST CSF",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "arm"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "microsoft.network/networksecuritygroups"
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_33",
-                    "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(nsg.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-0038-ARM",
-                            "eval": "data.rule.inbound_port_netbios_2",
-                            "message": "data.rule.inbound_port_netbios_2_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_0038_ARM.py"
-                        }
-                    ],
-                    "severity": "High",
-                    "title": "Azure Network Security Group allows NetBIOS (UDP Port 138)",
-                    "description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "HITRUST",
-                                "NIST 800",
-                                "NIST CSF",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "arm"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "microsoft.network/networksecuritygroups"
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_34",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],

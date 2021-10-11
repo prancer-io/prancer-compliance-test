@@ -949,6 +949,10 @@ azure_issue["inbound_port_netbios"] {
     to_number(nsg_inbound[_]) == 137
 }
 
+azure_issue["inbound_port_netbios"] {
+    to_number(nsg_inbound[_]) == 138
+}
+
 inbound_port_netbios {
     lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_port_netbios"]
@@ -967,43 +971,8 @@ inbound_port_netbios_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group allows NetBIOS (UDP Port 137)",
-    "Policy Description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-    "Resource Type": "microsoft.network/networksecuritygroups",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
-}
-
-# PR-AZR-0038-ARM
-#
-
-default inbound_port_netbios_2 = null
-
-
-azure_issue["inbound_port_netbios_2"] {
-    to_number(nsg_inbound[_]) == 138
-}
-
-inbound_port_netbios_2 {
-    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
-    not azure_issue["inbound_port_netbios_2"]
-}
-
-inbound_port_netbios_2 = false {
-    azure_issue["inbound_port_netbios_2"]
-}
-
-inbound_port_netbios_2_err = "Azure Network Security Group allows NetBIOS" {
-    azure_issue["inbound_port_netbios_2"]
-}
-
-inbound_port_netbios_2_metadata := {
-    "Policy Code": "PR-AZR-0038-ARM",
-    "Type": "IaC",
-    "Product": "AZR",
-    "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group allows NetBIOS (UDP Port 138)",
-    "Policy Description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group allows NetBIOS (UDP Port 137 and 138)",
+    "Policy Description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 and 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
@@ -1086,6 +1055,11 @@ default inbound_port_sqlserver = null
 
 
 azure_issue["inbound_port_sqlserver"] {
+    to_number(nsg_inbound[_]) == 1433
+}
+
+
+azure_issue["inbound_port_sqlserver"] {
     to_number(nsg_inbound[_]) == 1434
 }
 
@@ -1107,47 +1081,13 @@ inbound_port_sqlserver_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group allows SQLServer (UDP Port 1434)",
-    "Policy Description": "This policy detects any NSG rule that allows SQLServer traffic on UDP port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group allows SQLServer (TCP Port 1433 and UDP Port 1434)",
+    "Policy Description": "This policy detects any NSG rule that allows SQLServer traffic on TCP Port 1433 and UDP port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
-# PR-AZR-0042-ARM
-#
-
-default inbound_port_sqlserver_2 = null
-
-azure_issue["inbound_port_sqlserver_2"] {
-    to_number(nsg_inbound[_]) == 1433
-}
-
-
-inbound_port_sqlserver_2 {
-    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
-    not azure_issue["inbound_port_sqlserver_2"]
-}
-
-inbound_port_sqlserver_2 = false {
-    azure_issue["inbound_port_sqlserver_2"]
-}
-
-inbound_port_sqlserver_2_err = "Azure Network Security Group allows SQLServer" {
-    azure_issue["inbound_port_sqlserver_2"]
-}
-
-inbound_port_sqlserver_2_metadata := {
-    "Policy Code": "PR-AZR-0042-ARM",
-    "Type": "IaC",
-    "Product": "AZR",
-    "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group allows SqlServer (TCP Port 1433)",
-    "Policy Description": "This policy detects any NSG rule that allows SqlServer traffic on TCP port 1433 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict SqlServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
-    "Resource Type": "microsoft.network/networksecuritygroups",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
-}
 
 #
 # PR-AZR-0043-ARM
