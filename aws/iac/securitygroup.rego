@@ -60,7 +60,7 @@ aws_issue["proto_all"] {
 }
 
 #
-# PR-AWS-0175-CFR
+# PR-AWS-CFR-SG-001
 #
 
 default port_135 = null
@@ -79,7 +79,7 @@ port_135_err = "AWS Security Groups allow internet traffic from internet to Wind
 }
 
 port_135_metadata := {
-    "Policy Code": "PR-AWS-0175-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -91,7 +91,7 @@ port_135_metadata := {
 }
 
 #
-# PR-AWS-0165-CFR
+# PR-AWS-CFR-SG-002
 #
 
 default port_137 = null
@@ -110,7 +110,7 @@ port_137_err = "AWS Security Groups allow internet traffic from internet to NetB
 }
 
 port_137_metadata := {
-    "Policy Code": "PR-AWS-0165-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -122,7 +122,7 @@ port_137_metadata := {
 }
 
 #
-# PR-AWS-0166-CFR
+# PR-AWS-CFR-SG-003
 #
 
 default port_138 = null
@@ -141,7 +141,7 @@ port_138_err = "AWS Security Groups allow internet traffic from internet to NetB
 }
 
 port_138_metadata := {
-    "Policy Code": "PR-AWS-0166-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -153,7 +153,7 @@ port_138_metadata := {
 }
 
 #
-# PR-AWS-0170-CFR
+# PR-AWS-CFR-SG-004
 #
 
 default port_1433 = null
@@ -172,7 +172,7 @@ port_1433_err = "AWS Security Groups allow internet traffic from internet to SQL
 }
 
 port_1433_metadata := {
-    "Policy Code": "PR-AWS-0170-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -184,7 +184,7 @@ port_1433_metadata := {
 }
 
 #
-# PR-AWS-0171-CFR
+# PR-AWS-CFR-SG-005
 #
 
 default port_1434 = null
@@ -203,7 +203,7 @@ port_1434_err = "AWS Security Groups allow internet traffic from internet to SQL
 }
 
 port_1434_metadata := {
-    "Policy Code": "PR-AWS-0171-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -215,7 +215,7 @@ port_1434_metadata := {
 }
 
 #
-# PR-AWS-0162-CFR
+# PR-AWS-CFR-SG-006
 #
 
 default port_20 = null
@@ -234,7 +234,7 @@ port_20_err = "AWS Security Groups allow internet traffic from internet to FTP-D
 }
 
 port_20_metadata := {
-    "Policy Code": "PR-AWS-0162-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-006",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -246,7 +246,7 @@ port_20_metadata := {
 }
 
 #
-# PR-AWS-0161-CFR
+# PR-AWS-CFR-SG-007
 #
 
 default port_21 = null
@@ -265,7 +265,7 @@ port_21_err = "AWS Security Groups allow internet traffic from internet to FTP p
 }
 
 port_21_metadata := {
-    "Policy Code": "PR-AWS-0161-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-007",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -277,7 +277,7 @@ port_21_metadata := {
 }
 
 #
-# PR-AWS-0176-CFR
+# PR-AWS-CFR-SG-008
 #
 
 default port_22 = null
@@ -296,7 +296,7 @@ port_22_err = "AWS Security Groups allow internet traffic to SSH port (22)" {
 }
 
 port_22_metadata := {
-    "Policy Code": "PR-AWS-0176-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-008",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -308,7 +308,7 @@ port_22_metadata := {
 }
 
 #
-# PR-AWS-0172-CFR
+# PR-AWS-CFR-SG-009
 #
 
 default port_23 = null
@@ -327,7 +327,7 @@ port_23_err = "AWS Security Groups allow internet traffic from internet to Telne
 }
 
 port_23_metadata := {
-    "Policy Code": "PR-AWS-0172-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-009",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -339,7 +339,7 @@ port_23_metadata := {
 }
 
 #
-# PR-AWS-0169-CFR
+# PR-AWS-CFR-SG-010
 #
 
 default port_25 = null
@@ -358,7 +358,7 @@ port_25_err = "AWS Security Groups allow internet traffic from internet to SMTP 
 }
 
 port_25_metadata := {
-    "Policy Code": "PR-AWS-0169-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-010",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -370,7 +370,7 @@ port_25_metadata := {
 }
 
 #
-# PR-AWS-0164-CFR
+# PR-AWS-CFR-SG-011
 #
 
 default port_3306 = null
@@ -389,7 +389,7 @@ port_3306_err = "AWS Security Groups allow internet traffic from internet to MYS
 }
 
 port_3306_metadata := {
-    "Policy Code": "PR-AWS-0164-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-011",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -401,7 +401,7 @@ port_3306_metadata := {
 }
 
 #
-# PR-AWS-0168-CFR
+# PR-AWS-CFR-SG-012
 #
 
 default port_3389 = null
@@ -420,7 +420,7 @@ port_3389_err = "AWS Security Groups allow internet traffic from internet to RDP
 }
 
 port_3389_metadata := {
-    "Policy Code": "PR-AWS-0168-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-012",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -432,7 +432,7 @@ port_3389_metadata := {
 }
 
 #
-# PR-AWS-0163-CFR
+# PR-AWS-CFR-SG-013
 #
 
 default port_4333 = null
@@ -451,7 +451,7 @@ port_4333_err = "AWS Security Groups allow internet traffic from internet to MSQ
 }
 
 port_4333_metadata := {
-    "Policy Code": "PR-AWS-0163-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-013",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -463,7 +463,7 @@ port_4333_metadata := {
 }
 
 #
-# PR-AWS-0159-CFR
+# PR-AWS-CFR-SG-014
 #
 
 default port_445 = null
@@ -482,7 +482,7 @@ port_445_err = "AWS Security Groups allow internet traffic from internet to CIFS
 }
 
 port_445_metadata := {
-    "Policy Code": "PR-AWS-0159-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-014",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -494,7 +494,7 @@ port_445_metadata := {
 }
 
 #
-# PR-AWS-0160-CFR
+# PR-AWS-CFR-SG-015
 #
 
 default port_53 = null
@@ -513,7 +513,7 @@ port_53_err = "AWS Security Groups allow internet traffic from internet to DNS p
 }
 
 port_53_metadata := {
-    "Policy Code": "PR-AWS-0160-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-015",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -525,7 +525,7 @@ port_53_metadata := {
 }
 
 #
-# PR-AWS-0167-CFR
+# PR-AWS-CFR-SG-016
 #
 
 default port_5432 = null
@@ -544,7 +544,7 @@ port_5432_err = "AWS Security Groups allow internet traffic from internet to Pos
 }
 
 port_5432_metadata := {
-    "Policy Code": "PR-AWS-0167-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-016",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -556,7 +556,7 @@ port_5432_metadata := {
 }
 
 #
-# PR-AWS-0173-CFR
+# PR-AWS-CFR-SG-017
 #
 
 default port_5500 = null
@@ -575,7 +575,7 @@ port_5500_err = "AWS Security Groups allow internet traffic from internet to VNC
 }
 
 port_5500_metadata := {
-    "Policy Code": "PR-AWS-0173-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-017",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -587,7 +587,7 @@ port_5500_metadata := {
 }
 
 #
-# PR-AWS-0174-CFR
+# PR-AWS-CFR-SG-018
 #
 
 default port_5900 = null
@@ -606,7 +606,7 @@ port_5900_err = "AWS Security Groups allow internet traffic from internet to VNC
 }
 
 port_5900_metadata := {
-    "Policy Code": "PR-AWS-0174-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-018",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -618,7 +618,7 @@ port_5900_metadata := {
 }
 
 #
-# PR-AWS-0035-CFR
+# PR-AWS-CFR-SG-019
 #
 
 default port_all = null
@@ -637,7 +637,7 @@ port_all_err = "AWS Default Security Group does not restrict all traffic" {
 }
 
 port_all_metadata := {
-    "Policy Code": "PR-AWS-0035-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-019",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -649,7 +649,7 @@ port_all_metadata := {
 }
 
 #
-# PR-AWS-0178-CFR
+# PR-AWS-CFR-SG-020
 #
 
 default port_proto_all = null
@@ -668,7 +668,7 @@ port_proto_all_err = "AWS Security Groups with Inbound rule overly permissive to
 }
 
 port_proto_all_metadata := {
-    "Policy Code": "PR-AWS-0178-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-020",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -680,7 +680,7 @@ port_proto_all_metadata := {
 }
 
 #
-# PR-AWS-0251-CFR
+# PR-AWS-CFR-SG-021
 #
 
 default port_69 = null
@@ -699,7 +699,7 @@ port_69_err = "AWS Security Groups allow internet traffic from internet to Trivi
 }
 
 port_69_metadata := {
-    "Policy Code": "PR-AWS-0251-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-021",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -712,7 +712,7 @@ port_69_metadata := {
 
 
 #
-# PR-AWS-0260-CFR
+# PR-AWS-CFR-SG-022
 #
 
 default sg_tag = null
@@ -743,7 +743,7 @@ sg_tag_err = "Ensure AWS resources that support tags have Tags" {
 }
 
 sg_tag_metadata := {
-    "Policy Code": "PR-AWS-0260-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-022",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -756,7 +756,7 @@ sg_tag_metadata := {
 
 
 #
-# PR-AWS-0335-CFR
+# PR-AWS-CFR-SG-023
 #
 
 default sg_description_absent = null
@@ -789,7 +789,7 @@ sg_description_absent_err = "Ensure every Security Group rule contains a descrip
 }
 
 sg_description_absent_metadata := {
-    "Policy Code": "PR-AWS-0335-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-023",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -802,7 +802,7 @@ sg_description_absent_metadata := {
 
 
 #
-# PR-AWS-0336-CFR
+# PR-AWS-CFR-SG-024
 #
 
 default port_9300 = null
@@ -821,7 +821,7 @@ port_9300_err = "AWS Security Groups allow internet traffic from internet to Ela
 }
 
 port_9300_metadata := {
-    "Policy Code": "PR-AWS-0336-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-024",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -834,7 +834,7 @@ port_9300_metadata := {
 
 
 #
-# PR-AWS-0337-CFR
+# PR-AWS-CFR-SG-025
 #
 
 default port_5601 = null
@@ -853,7 +853,7 @@ port_5601_err = "AWS Security Groups allow internet traffic from internet to Kib
 }
 
 port_5601_metadata := {
-    "Policy Code": "PR-AWS-0337-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-025",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -866,7 +866,7 @@ port_5601_metadata := {
 
 
 #
-# PR-AWS-0338-CFR
+# PR-AWS-CFR-SG-026
 #
 
 default port_2379 = null
@@ -885,7 +885,7 @@ port_2379_err = "AWS Security Groups allow internet traffic from internet to etc
 }
 
 port_2379_metadata := {
-    "Policy Code": "PR-AWS-0338-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-026",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -897,7 +897,7 @@ port_2379_metadata := {
 }
 
 #
-# PR-AWS-0340-CFR
+# PR-AWS-CFR-SG-027
 #
 
 default port_5986 = null
@@ -916,7 +916,7 @@ port_5986_err = "AWS Security Groups allow internet traffic from internet to Win
 }
 
 port_5986_metadata := {
-    "Policy Code": "PR-AWS-0340-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-027",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -929,7 +929,7 @@ port_5986_metadata := {
 
 
 #
-# PR-AWS-0341-CFR
+# PR-AWS-CFR-SG-028
 #
 
 default port_5985 = null
@@ -948,7 +948,7 @@ port_5985_err = "AWS Security Groups allow internet traffic from internet to Win
 }
 
 port_5985_metadata := {
-    "Policy Code": "PR-AWS-0341-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-028",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -961,7 +961,7 @@ port_5985_metadata := {
 
 
 #
-# PR-AWS-0342-CFR
+# PR-AWS-CFR-SG-029
 #
 
 default port_1270 = null
@@ -980,12 +980,177 @@ port_1270_err = "AWS Security Groups allow internet traffic from internet to Mic
 }
 
 port_1270_metadata := {
-    "Policy Code": "PR-AWS-0342-CFR",
+    "Policy Code": "PR-AWS-CFR-SG-029",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Security Groups allow internet traffic from internet to Microsoft Operations Manager Protocol Port (1270)",
     "Policy Description": "This policy identifies the security groups which are exposing Microsoft Operations Manager Protocol Port (1270) to the internet. It is recommended that Global permission to access the well known services Microsoft Operations Manager Protocol Port (1270) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-030
+#
+
+default db_exposed = null
+
+db_ports := [
+    1433, 1521, 3306, 5000, 5432, 5984, 6379, 6380, 8080, 9042, 11211, 27017, 28015, 29015, 50000
+]
+
+aws_issue["db_exposed"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[_]
+    port := db_ports[_]
+    ingress.CidrIp == "0.0.0.0/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+}
+
+aws_issue["db_exposed"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[_]
+    port := db_ports[_]
+    ingress.CidrIpv6="::/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+}
+
+db_exposed {
+    lower(input.Resources[i].Type) == "aws::ec2::securitygroup"
+    not aws_issue["db_exposed"]
+}
+
+db_exposed = false {
+    aws_issue["db_exposed"]
+}
+
+db_exposed_err = "Publicly exposed DB Ports" {
+    aws_issue["db_exposed"]
+}
+
+db_exposed_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-030",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Publicly exposed DB Ports",
+    "Policy Description": "DB Servers contain sensitive data and should not be exposed to any direct traffic from internet. This policy checks for the network traffic from internet hitting the DB Servers on their default ports. The DB servers monitored on the default ports are : Microsoft SQL Server (1433), Oracle (1521), MySQL (3306), Sybase (5000), Postgresql (5432), CouchDB (5984), Redis (6379, 6380), RethinkDB (8080,28015, 29015), CassandraDB (9042), Memcached (11211), MongoDB (27017), DB2 (50000).",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-031
+#
+
+default bitcoin_ports = null
+
+bc_ports := [
+    8332, 8333
+]
+
+aws_issue["bitcoin_ports"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[_]
+    port := bc_ports[_]
+    ingress.CidrIp == "0.0.0.0/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+}
+
+aws_issue["bitcoin_ports"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[_]
+    port := bc_ports[_]
+    ingress.CidrIpv6="::/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+}
+
+bitcoin_ports {
+    lower(input.Resources[i].Type) == "aws::ec2::securitygroup"
+    not aws_issue["bitcoin_ports"]
+}
+
+bitcoin_ports = false {
+    aws_issue["bitcoin_ports"]
+}
+
+bitcoin_ports_err = "Instance is communicating with ports known to mine Bitcoin" {
+    aws_issue["bitcoin_ports"]
+}
+
+bitcoin_ports_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-031",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Instance is communicating with ports known to mine Bitcoin",
+    "Policy Description": "Identifies traffic from internal workloads to internet IPs on ports 8332,8333 that are known to mine Bitcoins. Unless this traffic is part of authorized applications and processes, your instances may have been compromised.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
+}
+
+#
+# PR-AWS-CFR-SG-032
+#
+
+default ethereum_ports = null
+
+eth_ports := [
+    8545, 30303
+]
+
+aws_issue["ethereum_ports"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[_]
+    port := eth_ports[_]
+    ingress.CidrIp == "0.0.0.0/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+}
+
+aws_issue["ethereum_ports"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[_]
+    port := eth_ports[_]
+    ingress.CidrIpv6="::/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+}
+
+ethereum_ports {
+    lower(input.Resources[i].Type) == "aws::ec2::securitygroup"
+    not aws_issue["ethereum_ports"]
+}
+
+ethereum_ports = false {
+    aws_issue["ethereum_ports"]
+}
+
+ethereum_ports_err = "Instance is communicating with ports known to mine Ethereum" {
+    aws_issue["ethereum_ports"]
+}
+
+ethereum_ports_metadata := {
+    "Policy Code": "PR-AWS-CFR-SG-032",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Instance is communicating with ports known to mine Ethereum",
+    "Policy Description": "Ethereum Identifies traffic from internal workloads to internet IPs on ports 8545,30303 that are known to mine Ethereum. Unless this traffic is part of authorized applications and processes, your instances may have been compromised.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"

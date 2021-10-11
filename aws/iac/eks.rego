@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html
 
 #
-# PR-AWS-0050-CFR
+# PR-AWS-CFR-EKS-001
 #
 
 default eks_multiple_sg = null
@@ -34,7 +34,7 @@ eks_multiple_sg_err = "AWS EKS cluster control plane assigned multiple security 
 }
 
 eks_multiple_sg_metadata := {
-    "Policy Code": "PR-AWS-0050-CFR",
+    "Policy Code": "PR-AWS-CFR-EKS-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -46,7 +46,7 @@ eks_multiple_sg_metadata := {
 }
 
 #
-# PR-AWS-0213-CFR
+# PR-AWS-CFR-EKS-002
 #
 
 default eks_version = null
@@ -71,7 +71,7 @@ eks_version_err = "AWS EKS unsupported Master node version." {
     aws_issue["eks_version"]
 }
 eks_version_metadata := {
-    "Policy Code": "PR-AWS-0213-CFR",
+    "Policy Code": "PR-AWS-CFR-EKS-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -84,7 +84,7 @@ eks_version_metadata := {
 
 
 #
-# PR-AWS-0322-CFR
+# PR-AWS-CFR-EKS-003
 #
 
 default eks_encryption_resources = null
@@ -117,7 +117,7 @@ eks_encryption_resources_err = "Ensure AWS EKS cluster has secrets encryption en
     aws_issue["eks_encryption_resources"]
 }
 eks_encryption_resources_metadata := {
-    "Policy Code": "PR-AWS-0322-CFR",
+    "Policy Code": "PR-AWS-CFR-EKS-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -131,7 +131,7 @@ eks_encryption_resources_metadata := {
 
 
 #
-# PR-AWS-0323-CFR
+# PR-AWS-CFR-EKS-004
 #
 
 default eks_encryption_kms = null
@@ -164,7 +164,7 @@ eks_encryption_kms_err = "Ensure Kubernetes secrets are encrypted using CMKs man
     aws_issue["eks_encryption_kms"]
 }
 eks_encryption_kms_metadata := {
-    "Policy Code": "PR-AWS-0323-CFR",
+    "Policy Code": "PR-AWS-CFR-EKS-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

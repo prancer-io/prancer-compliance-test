@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html
 
 #
-# PR-AWS-0155-CFR
+# PR-AWS-CFR-SQS-001
 #
 
 default sqs_deadletter = null
@@ -33,7 +33,7 @@ sqs_deadletter_err = "AWS SQS does not have a dead letter queue configured" {
 }
 
 sqs_deadletter_metadata := {
-    "Policy Code": "PR-AWS-0155-CFR",
+    "Policy Code": "PR-AWS-CFR-SQS-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -45,7 +45,7 @@ sqs_deadletter_metadata := {
 }
 
 #
-# PR-AWS-0156-CFR
+# PR-AWS-CFR-SQS-002
 #
 
 default sqs_encrypt_key = null
@@ -72,7 +72,7 @@ sqs_encrypt_key_err = "AWS SQS queue encryption using default KMS key instead of
 }
 
 sqs_encrypt_key_metadata := {
-    "Policy Code": "PR-AWS-0156-CFR",
+    "Policy Code": "PR-AWS-CFR-SQS-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -84,7 +84,7 @@ sqs_encrypt_key_metadata := {
 }
 
 #
-# PR-AWS-0157-CFR
+# PR-AWS-CFR-SQS-003
 #
 
 default sqs_encrypt = null
@@ -124,7 +124,7 @@ sqs_encrypt_miss_err = "SQS Queue attribute KmsMasterKeyId missing in the resour
 }
 
 sqs_encrypt_metadata := {
-    "Policy Code": "PR-AWS-0157-CFR",
+    "Policy Code": "PR-AWS-CFR-SQS-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -136,7 +136,7 @@ sqs_encrypt_metadata := {
 }
 
 #
-# PR-AWS-0316-CFR
+# PR-AWS-CFR-SQS-004
 #
 
 default sqs_policy_public = null
@@ -180,7 +180,7 @@ sqs_policy_public_err = "Ensure SQS queue policy is not publicly accessible" {
 }
 
 sqs_policy_public_metadata := {
-    "Policy Code": "PR-AWS-0316-CFR",
+    "Policy Code": "PR-AWS-CFR-SQS-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -193,7 +193,7 @@ sqs_policy_public_metadata := {
 
 
 #
-# PR-AWS-0317-CFR
+# PR-AWS-CFR-SQS-005
 #
 
 default sqs_policy_action = null
@@ -228,7 +228,7 @@ sqs_policy_action_err = "Ensure SQS policy documents do not allow all actions" {
 }
 
 sqs_policy_action_metadata := {
-    "Policy Code": "PR-AWS-0317-CFR",
+    "Policy Code": "PR-AWS-CFR-SQS-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

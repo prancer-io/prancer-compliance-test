@@ -4,7 +4,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html
 
 #
-# PR-AWS-0133-CFR
+# PR-AWS-CFR-RSH-001
 #
 
 default redshift_encrypt_key = null
@@ -63,7 +63,7 @@ redshift_encrypt_key_miss_err = "Redshift attribute KmsKeyId missing in the reso
 }
 
 redshift_encrypt_key_metadata := {
-    "Policy Code": "PR-AWS-0133-CFR",
+    "Policy Code": "PR-AWS-CFR-RSH-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -75,7 +75,7 @@ redshift_encrypt_key_metadata := {
 }
 
 #
-# PR-AWS-0134-CFR
+# PR-AWS-CFR-RSH-002
 #
 
 default redshift_public = null
@@ -114,7 +114,7 @@ redshift_public_err = "AWS Redshift clusters should not be publicly accessible" 
 
 
 redshift_public_metadata := {
-    "Policy Code": "PR-AWS-0134-CFR",
+    "Policy Code": "PR-AWS-CFR-RSH-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -126,60 +126,7 @@ redshift_public_metadata := {
 }
 
 #
-# PR-AWS-0135-CFR
-#
-
-default redshift_audit = null
-
-aws_attribute_absence["redshift_audit"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::redshift::cluster"
-    not resource.Properties.LoggingProperties.BucketName
-}
-
-aws_issue["redshift_audit"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::redshift::cluster"
-    count(resource.Properties.LoggingProperties.BucketName) == 0
-}
-
-redshift_audit {
-    lower(input.Resources[i].Type) == "aws::redshift::cluster"
-    not aws_issue["redshift_audit"]
-    not aws_attribute_absence["redshift_audit"]
-}
-
-redshift_audit = false {
-    aws_issue["redshift_audit"]
-}
-
-redshift_audit = false {
-    aws_attribute_absence["redshift_audit"]
-}
-
-redshift_audit_err = "AWS Redshift database does not have audit logging enabled" {
-    aws_issue["redshift_audit"]
-}
-
-redshift_audit_miss_err = "Redshift attribute LoggingProperties.BucketName missing in the resource" {
-    aws_attribute_absence["redshift_audit"]
-}
-
-redshift_audit_metadata := {
-    "Policy Code": "PR-AWS-0135-CFR",
-    "Type": "IaC",
-    "Product": "AWS",
-    "Language": "AWS Cloud formation",
-    "Policy Title": "AWS Redshift database does not have audit logging enabled",
-    "Policy Description": "Audit logging is not enabled by default in Amazon Redshift. When you enable logging on your cluster, Amazon Redshift creates and uploads logs to Amazon S3 that capture data from the creation of the cluster to the present time.",
-    "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
-}
-
-
-#
-# PR-AWS-0136-CFR
+# PR-AWS-CFR-RSH-003
 #
 
 default redshift_require_ssl = null
@@ -227,7 +174,7 @@ redshift_require_ssl_miss_err = "Redshift attribute Properties missing in the re
 }
 
 redshift_require_ssl_metadata := {
-    "Policy Code": "PR-AWS-0136-CFR",
+    "Policy Code": "PR-AWS-CFR-RSH-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -239,7 +186,7 @@ redshift_require_ssl_metadata := {
 }
 
 #
-# PR-AWS-0137-CFR
+# PR-AWS-CFR-RSH-004
 #
 
 default redshift_encrypt = null
@@ -279,7 +226,7 @@ redshift_encrypt_err = "AWS Redshift instances are not encrypted" {
 }
 
 redshift_encrypt_metadata := {
-    "Policy Code": "PR-AWS-0137-CFR",
+    "Policy Code": "PR-AWS-CFR-RSH-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -292,7 +239,7 @@ redshift_encrypt_metadata := {
 
 
 #
-# PR-AWS-0261-CFR
+# PR-AWS-CFR-RSH-005
 #
 
 default redshift_allow_version_upgrade = null
@@ -332,7 +279,7 @@ redshift_allow_version_upgrade_err = "Ensure Redshift cluster allow version upgr
 }
 
 redshift_allow_version_upgrade_metadata := {
-    "Policy Code": "PR-AWS-0261-CFR",
+    "Policy Code": "PR-AWS-CFR-RSH-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -345,7 +292,7 @@ redshift_allow_version_upgrade_metadata := {
 
 
 #
-# PR-AWS-333-CFR
+# PR-AWS-CFR-RSH-006
 #
 
 default redshift_deploy_vpc = null
@@ -377,7 +324,7 @@ redshift_deploy_vpc_err = "Ensure Redshift is not deployed outside of a VPC" {
 }
 
 redshift_deploy_vpc_metadata := {
-    "Policy Code": "PR-AWS-0333-CFR",
+    "Policy Code": "PR-AWS-CFR-RSH-006",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -386,4 +333,57 @@ redshift_deploy_vpc_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html#cfn-redshift-cluster-clustersubnetgroupname"
+}
+
+
+#
+# PR-AWS-CFR-RSH-007
+#
+
+default redshift_audit = null
+
+aws_attribute_absence["redshift_audit"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    not resource.Properties.LoggingProperties.BucketName
+}
+
+aws_issue["redshift_audit"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    count(resource.Properties.LoggingProperties.BucketName) == 0
+}
+
+redshift_audit {
+    lower(input.Resources[i].Type) == "aws::redshift::cluster"
+    not aws_issue["redshift_audit"]
+    not aws_attribute_absence["redshift_audit"]
+}
+
+redshift_audit = false {
+    aws_issue["redshift_audit"]
+}
+
+redshift_audit = false {
+    aws_attribute_absence["redshift_audit"]
+}
+
+redshift_audit_err = "AWS Redshift database does not have audit logging enabled" {
+    aws_issue["redshift_audit"]
+}
+
+redshift_audit_miss_err = "Redshift attribute LoggingProperties.BucketName missing in the resource" {
+    aws_attribute_absence["redshift_audit"]
+}
+
+redshift_audit_metadata := {
+    "Policy Code": "PR-AWS-CFR-RSH-007",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Redshift database does not have audit logging enabled",
+    "Policy Description": "Audit logging is not enabled by default in Amazon Redshift. When you enable logging on your cluster, Amazon Redshift creates and uploads logs to Amazon S3 that capture data from the creation of the cluster to the present time.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
 }

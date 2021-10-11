@@ -5,7 +5,7 @@ default metadata = {}
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html
 
 #
-# PR-AWS-0152-CFR
+# PR-AWS-CFR-SNS-001
 #
 
 default sns_protocol = null
@@ -63,7 +63,7 @@ sns_protocol_miss_err = "SNS attribute Protocol missing in the resource" {
 }
 
 sns_protocol_metadata := {
-    "Policy Code": "PR-AWS-0152-CFR",
+    "Policy Code": "PR-AWS-CFR-SNS-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -75,7 +75,7 @@ sns_protocol_metadata := {
 }
 
 #
-# PR-AWS-0153-CFR
+# PR-AWS-CFR-SNS-002
 #
 
 default sns_encrypt_key = null
@@ -109,7 +109,7 @@ sns_encrypt_key_err = "AWS SNS topic encrypted using default KMS key instead of 
 }
 
 sns_encrypt_key_metadata := {
-    "Policy Code": "PR-AWS-0153-CFR",
+    "Policy Code": "PR-AWS-CFR-SNS-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -121,7 +121,7 @@ sns_encrypt_key_metadata := {
 }
 
 #
-# PR-AWS-0154-CFR
+# PR-AWS-CFR-SNS-003
 #
 
 default sns_encrypt = null
@@ -179,7 +179,7 @@ sns_encrypt_miss_err = "SNS attribute KmsMasterKeyId missing in the resource" {
 }
 
 sns_encrypt_metadata := {
-    "Policy Code": "PR-AWS-0154-CFR",
+    "Policy Code": "PR-AWS-CFR-SNS-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -192,7 +192,7 @@ sns_encrypt_metadata := {
 
 
 #
-# PR-AWS-0318-CFR
+# PR-AWS-CFR-SNS-004
 #
 
 default sns_policy_public = null
@@ -236,7 +236,7 @@ sns_policy_public_err = "Ensure SQS queue policy is not publicly accessible" {
 }
 
 sns_policy_public_metadata := {
-    "Policy Code": "PR-AWS-0318-CFR",
+    "Policy Code": "PR-AWS-CFR-SNS-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

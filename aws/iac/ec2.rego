@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
 
 #
-# PR-AWS-0042-CFR
+# PR-AWS-CFR-EC2-001
 #
 
 default ec2_iam_role = null
@@ -34,7 +34,7 @@ ec2_iam_role_err = "AWS EC2 Instance IAM Role not enabled" {
 }
 
 ec2_iam_role_metadata := {
-    "Policy Code": "PR-AWS-0042-CFR",
+    "Policy Code": "PR-AWS-CFR-EC2-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -46,7 +46,7 @@ ec2_iam_role_metadata := {
 }
 
 #
-# PR-AWS-0045-CFR
+# PR-AWS-CFR-EC2-002
 #
 
 default ec2_no_vpc = null
@@ -72,7 +72,7 @@ ec2_no_vpc_err = "AWS EC2 instance is not configured with VPC" {
 }
 
 ec2_no_vpc_metadata := {
-    "Policy Code": "PR-AWS-0045-CFR",
+    "Policy Code": "PR-AWS-CFR-EC2-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -84,7 +84,7 @@ ec2_no_vpc_metadata := {
 }
 
 #
-# PR-AWS-0046-CFR
+# PR-AWS-CFR-EC2-003
 #
 
 default ec2_public_ip = null
@@ -124,7 +124,7 @@ ec2_public_ip_err = "AWS EC2 instances with Public IP and associated with Securi
 }
 
 ec2_public_ip_metadata := {
-    "Policy Code": "PR-AWS-0046-CFR",
+    "Policy Code": "PR-AWS-CFR-EC2-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -136,7 +136,7 @@ ec2_public_ip_metadata := {
 }
 
 #
-# PR-AWS-0298-CFR
+# PR-AWS-CFR-EC2-004
 #
 
 default ec2_ebs_optimized = null
@@ -167,7 +167,7 @@ ec2_ebs_optimized_err = "Ensure that EC2 instace is EBS Optimized" {
 }
 
 ec2_ebs_optimized_metadata := {
-    "Policy Code": "PR-AWS-0297-CFR",
+    "Policy Code": "PR-AWS-CFR-EC2-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -180,7 +180,7 @@ ec2_ebs_optimized_metadata := {
 
 
 #
-# PR-AWS-0332-CFR
+# PR-AWS-CFR-EC2-005
 #
 
 default ec2_monitoring = null
@@ -211,7 +211,7 @@ ec2_monitoring_err = "Ensure detailed monitoring is enabled for EC2 instances" {
 }
 
 ec2_monitoring_metadata := {
-    "Policy Code": "PR-AWS-0332-CFR",
+    "Policy Code": "PR-AWS-CFR-EC2-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

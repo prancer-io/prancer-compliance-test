@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html
 
 #
-# PR-AWS-0074-CFR
+# PR-AWS-CFR-ES-001
 #
 
 default esearch_vpc = null
@@ -43,7 +43,7 @@ esearch_vpc_miss_err = "Elasticsearch attribute VPCOptions.SubnetIds missing in 
 }
 
 esearch_vpc_metadata := {
-    "Policy Code": "PR-AWS-0074-CFR",
+    "Policy Code": "PR-AWS-CFR-ES-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -55,7 +55,7 @@ esearch_vpc_metadata := {
 }
 
 #
-# PR-AWS-0076-CFR
+# PR-AWS-CFR-ES-002
 #
 
 default esearch_encrypt = null
@@ -94,7 +94,7 @@ esearch_encrypt_err = "AWS Elasticsearch domain Encryption for data at rest is d
 
 
 esearch_encrypt_metadata := {
-    "Policy Code": "PR-AWS-0076-CFR",
+    "Policy Code": "PR-AWS-CFR-ES-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -106,7 +106,7 @@ esearch_encrypt_metadata := {
 }
 
 #
-# PR-AWS-0077-CFR
+# PR-AWS-CFR-ES-003
 #
 
 default esearch_master = null
@@ -131,7 +131,7 @@ esearch_master_err = "AWS Elasticsearch domain has Dedicated master set to disab
 }
 
 esearch_master_metadata := {
-    "Policy Code": "PR-AWS-0077-CFR",
+    "Policy Code": "PR-AWS-CFR-ES-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -143,7 +143,7 @@ esearch_master_metadata := {
 }
 
 #
-# PR-AWS-0078-CFR
+# PR-AWS-CFR-ES-004
 #
 
 default esearch_index_slow_log = null
@@ -208,7 +208,7 @@ esearch_index_slow_log_miss_err = "Elasticsearch attribute LogPublishingOptions 
 }
 
 esearch_index_slow_log_metadata := {
-    "Policy Code": "PR-AWS-0078-CFR",
+    "Policy Code": "PR-AWS-CFR-ES-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -220,7 +220,7 @@ esearch_index_slow_log_metadata := {
 }
 
 #
-# PR-AWS-0079-CFR
+# PR-AWS-CFR-ES-005
 #
 
 default esearch_search_slow_log = null
@@ -285,7 +285,7 @@ esearch_search_slow_log_miss_err = "Elasticsearch attribute LogPublishingOptions
 }
 
 esearch_search_slow_log_metadata := {
-    "Policy Code": "PR-AWS-0079-CFR",
+    "Policy Code": "PR-AWS-CFR-ES-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -297,7 +297,7 @@ esearch_search_slow_log_metadata := {
 }
 
 #
-# PR-AWS-0080-CFR
+# PR-AWS-CFR-ES-006
 #
 
 default esearch_zone_awareness = null
@@ -335,7 +335,7 @@ esearch_zone_awareness_err = "AWS Elasticsearch domain has Zone Awareness set to
 }
 
 esearch_zone_awareness_metadata := {
-    "Policy Code": "PR-AWS-0080-CFR",
+    "Policy Code": "PR-AWS-CFR-ES-006",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -348,7 +348,7 @@ esearch_zone_awareness_metadata := {
 
 
 #
-# PR-AWS-0216-CFR
+# PR-AWS-CFR-ES-007
 #
 
 default esearch_node_encryption = null
@@ -386,7 +386,7 @@ esearch_node_encryption_err = "Ensure node-to-node encryption is enabled on each
 }
 
 esearch_node_encryption_metadata := {
-    "Policy Code": "PR-AWS-0216-CFR",
+    "Policy Code": "PR-AWS-CFR-ES-007",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -399,7 +399,7 @@ esearch_node_encryption_metadata := {
 
 
 #
-# PR-AWS-0252-CFR
+# PR-AWS-CFR-ES-008
 #
 
 default esearch_enforce_https = null
@@ -437,7 +437,7 @@ esearch_enforce_https_err = "AWS Elasticsearch domain is not configured with HTT
 }
 
 esearch_enforce_https_metadata := {
-    "Policy Code": "PR-AWS-0252-CFR",
+    "Policy Code": "PR-AWS-CFR-ES-008",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -450,7 +450,7 @@ esearch_enforce_https_metadata := {
 
 
 #
-# PR-AWS-0253-CFR
+# PR-AWS-CFR-ES-009
 #
 
 default esearch_encrypt_kms = null
@@ -506,7 +506,7 @@ esearch_encrypt_kms_err = "Elasticsearch Domain should not have Encrytion using 
 
 
 esearch_encrypt_kms_metadata := {
-    "Policy Code": "PR-AWS-0253-CFR",
+    "Policy Code": "PR-AWS-CFR-ES-009",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

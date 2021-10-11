@@ -2,7 +2,7 @@ package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html
 #
-# PR-AWS-0235-CFR
+# PR-AWS-CFR-KMS-001
 #
 default kms_key_rotation = null
 
@@ -40,7 +40,7 @@ kms_key_rotation_err = "AWS Customer Master Key (CMK) rotation is not enabled" {
 
 
 kms_key_rotation_metadata := {
-    "Policy Code": "PR-AWS-0235-CFR",
+    "Policy Code": "PR-AWS-CFR-KMS-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -53,7 +53,7 @@ kms_key_rotation_metadata := {
 
 
 #
-# PR-AWS-0236-CFR
+# PR-AWS-CFR-KMS-002
 #
 default kms_key_state = null
 
@@ -91,7 +91,7 @@ kms_key_state_err = "AWS KMS Customer Managed Key not in use" {
 
 
 kms_key_state_metadata := {
-    "Policy Code": "PR-AWS-0236-CFR",
+    "Policy Code": "PR-AWS-CFR-KMS-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -104,40 +104,40 @@ kms_key_state_metadata := {
 
 
 #
-# PR-AWS-0313-CFR
+# PR-AWS-CFR-KMS-003
 #
-default kms_key_state = null
+default kms_key_allow_all_principal = null
 
-aws_issue["kms_key_state"] {
+aws_issue["kms_key_allow_all_principal"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::kms::key"
     Statement := resource.Properties.KeyPolicy.Statement[_]
     Statement.Principal == "*"
 }
 
-aws_issue["kms_key_state"] {
+aws_issue["kms_key_allow_all_principal"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::kms::key"
     Statement := resource.Properties.KeyPolicy.Statement[_]
     Statement.Principal["AWS"] == "*"
 }
 
-kms_key_state {
+kms_key_allow_all_principal {
     lower(input.Resources[i].Type) == "aws::kms::key"
-    not aws_issue["kms_key_state"]
+    not aws_issue["kms_key_allow_all_principal"]
 }
 
-kms_key_state = false {
-    aws_issue["kms_key_state"]
+kms_key_allow_all_principal = false {
+    aws_issue["kms_key_allow_all_principal"]
 }
 
-kms_key_state_err = "Ensure no KMS key policy contain wildcard (*) principal" {
-    aws_issue["kms_key_state"]
+kms_key_allow_all_principal_err = "Ensure no KMS key policy contain wildcard (*) principal" {
+    aws_issue["kms_key_allow_all_principal"]
 }
 
 
-kms_key_state_metadata := {
-    "Policy Code": "PR-AWS-0313-CFR",
+kms_key_allow_all_principal_metadata := {
+    "Policy Code": "PR-AWS-CFR-KMS-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

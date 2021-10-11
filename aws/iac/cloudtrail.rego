@@ -4,7 +4,7 @@ default metadata = {}
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html
 
 #
-# PR-AWS-0026-CFR
+# PR-AWS-CFR-CT-001
 #
 
 default ct_regions = null
@@ -57,19 +57,19 @@ ct_regions_err = "AWS CloudTrail is not enabled in all regions" {
 }
 
 ct_regions_metadata := {
-    "Policy Code": "PR-AWS-0026-CFR",
+    "Policy Code": "PR-AWS-CFR-CT-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS CloudTrail is not enabled in all regions",
-    "Policy Description": "Checks to ensure that CloudTrail is enabled across all regions. AWS CloudTrail is a service that enables governance, compliance, operational PR-AWS-0026-CFR-DESC risk auditing of the AWS account. It is a compliance and security best practice to turn on CloudTrail across different regions to get a complete audit trail of activities across various services.",
+    "Policy Description": "Checks to ensure that CloudTrail is enabled across all regions. AWS CloudTrail is a service that enables governance, compliance, operational risk auditing of the AWS account. It is a compliance and security best practice to turn on CloudTrail across different regions to get a complete audit trail of activities across various services.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html"
 }
 
 #
-# PR-AWS-0027-CFR
+# PR-AWS-CFR-CT-002
 #
 
 default ct_log_validation = null
@@ -123,7 +123,7 @@ ct_log_validation_err = "AWS CloudTrail log validation is not enabled in all reg
 }
 
 ct_log_validation_metadata := {
-    "Policy Code": "PR-AWS-0027-CFR",
+    "Policy Code": "PR-AWS-CFR-CT-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -135,7 +135,7 @@ ct_log_validation_metadata := {
 }
 
 #
-# PR-AWS-0028-CFR
+# PR-AWS-CFR-CT-003
 #
 
 default ct_master_key = null
@@ -184,19 +184,19 @@ ct_master_key_err = "AWS CloudTrail logs are not encrypted using Customer Master
 }
 
 ct_master_key_metadata := {
-    "Policy Code": "PR-AWS-0028-CFR",
+    "Policy Code": "PR-AWS-CFR-CT-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS CloudTrail logs are not encrypted using Customer Master Keys (CMKs)",
-    "Policy Description": "Checks to ensure that CloudTrail logs are encrypted. AWS CloudTrail is a service that enables governance, compliance, operational PR-AWS-0028-CFR-DESC risk auditing of the AWS account. It is a compliance and security best practice to encrypt the CloudTrail data since it may contain sensitive information.",
+    "Policy Description": "Checks to ensure that CloudTrail logs are encrypted. AWS CloudTrail is a service that enables governance, compliance, operational risk auditing of the AWS account. It is a compliance and security best practice to encrypt the CloudTrail data since it may contain sensitive information.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html"
 }
 
 #
-# PR-AWS-0192-CFR
+# PR-AWS-CFR-CT-004
 #
 
 default ct_cloudwatch = null
@@ -257,7 +257,7 @@ ct_cloudwatch_err = "CloudTrail trail is not integrated with CloudWatch Log" {
 }
 
 ct_cloudwatch_metadata := {
-    "Policy Code": "PR-AWS-0192-CFR",
+    "Policy Code": "PR-AWS-CFR-CT-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

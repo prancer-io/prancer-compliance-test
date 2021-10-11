@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-restapi-endpointconfiguration.html
 
 #
-# PR-AWS-0202-CFR
+# PR-AWS-CFR-AG-001
 #
 
 default gateway_private = null
@@ -48,7 +48,7 @@ gateway_private_err = "API Gateway should have API Endpoint type as private and 
 }
 
 gateway_private_metadata := {
-    "Policy Code": "PR-AWS-0202-CFR",
+    "Policy Code": "PR-AWS-CFR-AG-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -61,7 +61,7 @@ gateway_private_metadata := {
 
 
 #
-# PR-AWS-0203-CFR
+# PR-AWS-CFR-AG-002
 #
 
 default gateway_validate_parameter = null
@@ -99,7 +99,7 @@ gateway_validate_parameter_err = "AWS API Gateway request parameter is not valid
 }
 
 gateway_validate_parameter_metadata := {
-    "Policy Code": "PR-AWS-0203-CFR",
+    "Policy Code": "PR-AWS-CFR-AG-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -112,7 +112,7 @@ gateway_validate_parameter_metadata := {
 
 
 #
-# PR-AWS-0204-CFR
+# PR-AWS-CFR-AG-003
 #
 
 default gateway_request_authorizer = null
@@ -150,7 +150,7 @@ gateway_request_authorizer_err = "AWS API gateway request authorization is not s
 }
 
 gateway_request_authorizer_metadata := {
-    "Policy Code": "PR-AWS-0204-CFR",
+    "Policy Code": "PR-AWS-CFR-AG-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -163,7 +163,7 @@ gateway_request_authorizer_metadata := {
 
 
 #
-# PR-AWS-0324-CFR
+# PR-AWS-CFR-AG-004
 #
 
 default gateway_logging_enable = null
@@ -200,7 +200,7 @@ gateway_logging_enable_err = "Ensure that API Gateway has enabled access logging
 }
 
 gateway_logging_enable_metadata := {
-    "Policy Code": "PR-AWS-0324-CFR",
+    "Policy Code": "PR-AWS-CFR-AG-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -214,7 +214,7 @@ gateway_logging_enable_metadata := {
 
 
 #
-# PR-AWS-0327-CFR
+# PR-AWS-CFR-AG-005
 #
 
 default gateway_tracing_enable = null
@@ -245,7 +245,7 @@ gateway_tracing_enable_err = "Ensure API Gateway has tracing enabled" {
 }
 
 gateway_tracing_enable_metadata := {
-    "Policy Code": "PR-AWS-0327-CFR",
+    "Policy Code": "PR-AWS-CFR-AG-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -258,7 +258,7 @@ gateway_tracing_enable_metadata := {
 
 
 #
-# PR-AWS-0349-CFR
+# PR-AWS-CFR-AG-006
 #
 
 default gateway_method_public_access = null
@@ -319,7 +319,7 @@ gateway_method_public_access_err = "Ensure API gateway methods are not publicly 
 }
 
 gateway_method_public_access_metadata := {
-    "Policy Code": "PR-AWS-0349-CFR",
+    "Policy Code": "PR-AWS-CFR-AG-006",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -328,4 +328,47 @@ gateway_method_public_access_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-method.html#cfn-apigateway-method-authorizationtype"
+}
+
+#
+# PR-AWS-CFR-AG-007
+#
+
+default api_gw_cert = null
+
+aws_issue["api_gw_cert"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::stage"
+    not resource.Properties.ClientCertificateId
+}
+
+aws_issue["api_gw_cert"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::stage"
+    count(resource.Properties.ClientCertificateId) == 0
+}
+
+api_gw_cert {
+    lower(input.Resources[i].Type) == "aws::apigateway::stage"
+    not aws_issue["api_gw_cert"]
+}
+
+api_gw_cert = false {
+    aws_issue["api_gw_cert"]
+}
+
+api_gw_cert_err = "AWS API Gateway endpoints without client certificate authentication" {
+    aws_issue["api_gw_cert"]
+}
+
+api_gw_cert_metadata := {
+    "Policy Code": "PR-AWS-CFR-AG-007",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS API Gateway endpoints without client certificate authentication",
+    "Policy Description": "API Gateway can generate an SSL certificate and use its public key in the backend to verify that HTTP requests to your backend system are from API Gateway. This allows your HTTP backend to control and accept only requests originating from Amazon API Gateway, even if the backend is publicly accessible._x005F_x000D_ _x005F_x000D_ Note: Some backend servers may not support SSL client authentication as API Gateway does and could return an SSL certificate error. For a list of incompatible backend servers, see Known Issues. https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-known-issues.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html"
 }

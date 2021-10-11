@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html
 
 #
-# PR-AWS-0047-CFR
+# PR-AWS-CFR-ECS-001
 #
 
 default ecs_task_evelated = null
@@ -43,7 +43,7 @@ ecs_task_evelated_err = "AWS ECS task definition elevated privileges enabled" {
 }
 
 ecs_task_evelated_metadata := {
-    "Policy Code": "PR-AWS-0047-CFR",
+    "Policy Code": "PR-AWS-CFR-ECS-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -55,7 +55,7 @@ ecs_task_evelated_metadata := {
 }
 
 #
-# PR-AWS-0048-CFR
+# PR-AWS-CFR-ECS-002
 #
 
 default ecs_exec = null
@@ -95,7 +95,7 @@ ecs_exec_err = "AWS ECS/Fargate task definition execution IAM Role not found" {
 }
 
 ecs_exec_metadata := {
-    "Policy Code": "PR-AWS-0048-CFR",
+    "Policy Code": "PR-AWS-CFR-ECS-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -107,7 +107,7 @@ ecs_exec_metadata := {
 }
 
 #
-# PR-AWS-0049-CFR
+# PR-AWS-CFR-ECS-003
 #
 
 default ecs_root_user = null
@@ -132,7 +132,7 @@ ecs_root_user_err = "AWS ECS/Fargate task definition root user found" {
 }
 
 ecs_root_user_metadata := {
-    "Policy Code": "PR-AWS-0049-CFR",
+    "Policy Code": "PR-AWS-CFR-ECS-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -144,7 +144,7 @@ ecs_root_user_metadata := {
 }
 
 #
-# PR-AWS-0210-CFR
+# PR-AWS-CFR-ECS-004
 #
 
 default ecs_root_filesystem = null
@@ -184,7 +184,7 @@ ecs_root_filesystem_err = "AWS ECS Task Definition readonlyRootFilesystem Not En
 }
 
 ecs_root_filesystem_metadata := {
-    "Policy Code": "PR-AWS-0210-CFR",
+    "Policy Code": "PR-AWS-CFR-ECS-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -197,24 +197,24 @@ ecs_root_filesystem_metadata := {
 
 
 #
-# PR-AWS-0211-CFR
+# PR-AWS-CFR-ECS-005
 #
 
 default ecs_resource_limit = null
 
-aws_cpu_issue["ecs_resource_limit"] {
+aws_issue["ecs_resource_limit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ecs::taskdefinition"
     not resource.Properties.Cpu
 }
 
-aws_cpu_issue["ecs_resource_limit"] {
+aws_issue["ecs_resource_limit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ecs::taskdefinition"
     to_number(resource.Properties.Cpu) == 0
 }
 
-aws_cpu_issue["ecs_resource_limit"] {
+aws_issue["ecs_resource_limit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ecs::taskdefinition"
     container_definition := resource.Properties.ContainerDefinitions[_]
@@ -222,33 +222,33 @@ aws_cpu_issue["ecs_resource_limit"] {
 }
 
 
-aws_cpu_issue["ecs_resource_limit"] {
+aws_issue["ecs_resource_limit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ecs::taskdefinition"
     container_definition := resource.Properties.ContainerDefinitions[_]
     to_number(container_definition.Cpu) == 0
 }
 
-aws_memory_issue["ecs_resource_limit"] {
+aws_issue["ecs_resource_limit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ecs::taskdefinition"
     not resource.Properties.Memory
 }
 
-aws_memory_issue["ecs_resource_limit"] {
+aws_issue["ecs_resource_limit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ecs::taskdefinition"
     to_number(resource.Properties.Memory) == 0
 }
 
-aws_memory_issue["ecs_resource_limit"] {
+aws_issue["ecs_resource_limit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ecs::taskdefinition"
     container_definition := resource.Properties.ContainerDefinitions[_]
     not container_definition.Memory
 }
 
-aws_memory_issue["ecs_resource_limit"] {
+aws_issue["ecs_resource_limit"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ecs::taskdefinition"
     container_definition := resource.Properties.ContainerDefinitions[_]
@@ -258,26 +258,19 @@ aws_memory_issue["ecs_resource_limit"] {
 
 ecs_resource_limit {
     lower(input.Resources[i].Type) == "aws::ecs::taskdefinition"
-    not aws_cpu_issue["ecs_resource_limit"]
-    not aws_memory_issue["ecs_resource_limit"]
+    not aws_issue["ecs_resource_limit"]
 }
 
 ecs_resource_limit = false {
-    aws_cpu_issue["ecs_resource_limit"]
-}
-
-ecs_resource_limit = false {
-    aws_memory_issue["ecs_resource_limit"]
+    aws_issue["ecs_resource_limit"]
 }
 
 ecs_resource_limit_err = "AWS ECS task definition resource limits not set." {
-    aws_cpu_issue["ecs_resource_limit"]
-} else = "AWS ECS task definition resource limits not set." {
-    aws_memory_issue["ecs_resource_limit"]
+    aws_issue["ecs_resource_limit"]
 }
 
 ecs_resource_limit_metadata := {
-    "Policy Code": "PR-AWS-0211-CFR",
+    "Policy Code": "PR-AWS-CFR-ECS-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -288,8 +281,9 @@ ecs_resource_limit_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html"
 }
 
+
 #
-# PR-AWS-0212-CFR
+# PR-AWS-CFR-ECS-006
 #
 
 default ecs_logging = null
@@ -322,7 +316,7 @@ ecs_logging_err = "AWS ECS task definition logging not enabled." {
 }
 
 ecs_logging_metadata := {
-    "Policy Code": "PR-AWS-0212-CFR",
+    "Policy Code": "PR-AWS-CFR-ECS-006",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -335,7 +329,7 @@ ecs_logging_metadata := {
 
 
 #
-# PR-AWS-0254-CFR
+# PR-AWS-CFR-ECS-007
 #
 
 default ecs_transit_enabled = null
@@ -369,7 +363,7 @@ ecs_transit_enabled_err = "Ensure EFS volumes in ECS task definitions have encry
 }
 
 ecs_transit_enabled_metadata := {
-    "Policy Code": "PR-AWS-0254-CFR",
+    "Policy Code": "PR-AWS-CFR-ECS-007",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -382,7 +376,7 @@ ecs_transit_enabled_metadata := {
 
 
 #
-# PR-AWS-0330-CFR
+# PR-AWS-CFR-ECS-008
 #
 
 default ecs_container_insight_enable = null
@@ -423,7 +417,7 @@ ecs_container_insight_enable_err = "Ensure container insights are enabled on ECS
 }
 
 ecs_container_insight_enable_metadata := {
-    "Policy Code": "PR-AWS-0330-CFR",
+    "Policy Code": "PR-AWS-CFR-ECS-008",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

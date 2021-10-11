@@ -2,7 +2,7 @@ package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-imagetagmutability
 #
-# PR-AWS-0208-CFR
+# PR-AWS-CFR-ECR-001
 #
 
 default ecr_imagetag = null
@@ -28,7 +28,7 @@ ecr_imagetag_err = "Ensure ECR image tags are immutable" {
 }
 
 ecr_imagetag_metadata := {
-    "Policy Code": "PR-AWS-0208-CFR",
+    "Policy Code": "PR-AWS-CFR-ECR-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -40,7 +40,7 @@ ecr_imagetag_metadata := {
 }
 
 #
-# PR-AWS-0209-CFR
+# PR-AWS-CFR-ECR-002
 #
 
 default ecr_encryption = null
@@ -66,7 +66,7 @@ ecr_encryption_err = "Ensure ECR repositories are encrypted" {
 }
 
 ecr_encryption_metadata := {
-    "Policy Code": "PR-AWS-0209-CFR",
+    "Policy Code": "PR-AWS-CFR-ECR-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -79,7 +79,7 @@ ecr_encryption_metadata := {
 
 
 #
-# PR-AWS-0255-CFR
+# PR-AWS-CFR-ECR-003
 #
 
 default ecr_scan = null
@@ -118,7 +118,7 @@ ecr_scan_err = "Ensure ECR image scan on push is enabled" {
 }
 
 ecr_scan_metadata := {
-    "Policy Code": "PR-AWS-0255-CFR",
+    "Policy Code": "PR-AWS-CFR-ECR-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -131,7 +131,7 @@ ecr_scan_metadata := {
 
 
 #
-# PR-AWS-0348-CFR
+# PR-AWS-CFR-ECR-004
 #
 
 default ecr_public_access_disable = null
@@ -175,7 +175,7 @@ ecr_public_access_disable_err = "Ensure AWS ECR Repository is not publicly acces
 }
 
 ecr_public_access_disable_metadata := {
-    "Policy Code": "PR-AWS-0348-CFR",
+    "Policy Code": "PR-AWS-CFR-ECR-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html
 
 #
-# PR-AWS-0001-CFR
+# PR-AWS-CFR-ACM-001
 #
 
 default acm_wildcard = null
@@ -46,7 +46,7 @@ acm_wildcard_err = "AWS ACM Certificate with wildcard domain name" {
 }
 
 acm_wildcard_metadata := {
-    "Policy Code": "PR-AWS-0001-CFR",
+    "Policy Code": "PR-AWS-CFR-ACM-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -57,8 +57,9 @@ acm_wildcard_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html"
 }
 
+
 #
-# PR-AWS-0009-CFR
+# PR-AWS-CFR-ACM-002
 #
 
 default acm_ct_log = null
@@ -83,7 +84,7 @@ acm_ct_log_err = "AWS Certificate Manager (ACM) has certificates with Certificat
 }
 
 acm_ct_log_metadata := {
-    "Policy Code": "PR-AWS-0009-CFR",
+    "Policy Code": "PR-AWS-CFR-ACM-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
