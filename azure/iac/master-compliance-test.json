@@ -371,12 +371,126 @@
                             "eval": "data.rule.protocol",
                             "message": "data.rule.protocol_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR-AZR-0125-ARM.py"
+                            "remediationFunction": "PR_AZR_0125_ARM.py"
                         }
                     ],
                     "severity": "Medium",
                     "title": "Ensure Application Gateway is using Https protocol",
                     "description": "Application Gateway allows to set network protocols Http and Https. It is highly recommended to use Https protocol for secure connections.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/applicationgateways"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APPLICATION_GATEWAYS_4",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(applicationgateways.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0060-ARM",
+                            "eval": "data.rule.frontendPublicIPConfigurationsDisabled",
+                            "message": "data.rule.frontendPublicIPConfigurationsDisabled_err",
+                            "remediationDescription": "For resource type 'microsoft.network/applicationgateways' make sure 'properties.publicIPAddress' does not exist under 'frontendIPConfigurations' to fix the issue. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways?tabs=json#applicationgatewayfrontendipconfiguration for details.",
+                            "remediationFunction": "PR_AZR_0060_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Application Gateway frontendIPConfigurations does not have public ip configured",
+                    "description": "Application Gateway allows to set public or private ip in frontendIPConfigurations. It is highly recommended to only configure private ip in frontendIPConfigurations.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/applicationgateways"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APPLICATION_GATEWAYS_5",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(applicationgateways.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0095-ARM",
+                            "eval": "data.rule.backend_https_protocol_enabled",
+                            "message": "data.rule.backend_https_protocol_enabled_err",
+                            "remediationDescription": "For resource type 'microsoft.network/applicationgateways' make sure 'properties.protocol' has value 'https' under 'backendHttpSettingsCollection' to fix the issue. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways?tabs=json#applicationgatewaybackendhttpsettings for details.",
+                            "remediationFunction": "PR_AZR_0095_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Application Gateway Backend is using Https protocol",
+                    "description": "Application Gateway allows to set backend network protocols Http and Https. It is highly recommended to use Https protocol for secure connections.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.network/applicationgateways"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APPLICATION_GATEWAYS_6",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(applicationgateways.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0099-ARM",
+                            "eval": "data.rule.secret_certificate_is_in_keyvalut",
+                            "message": "data.rule.secret_certificate_is_in_keyvalut_err",
+                            "remediationDescription": "For resource type 'microsoft.network/applicationgateways' make sure 'properties.keyVaultSecretId' has target key vault id under 'sslCertificates' to fix the issue. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways?tabs=json#applicationgatewaysslcertificate for details.",
+                            "remediationFunction": "PR_AZR_0099_ARM.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Application Gateway secret certificates stores in keyvault",
+                    "description": "This policy will identify application gateways which dont have ssl certificates stored in keyvalut and alert",
                     "tags": [
                         {
                             "cloud": "git",

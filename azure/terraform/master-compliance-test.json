@@ -553,6 +553,120 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_APPLICATION_GATEWAYS_4",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(applicationgateways.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0060-TRF",
+                            "eval": "data.rule.frontendPublicIPConfigurationsDisabled",
+                            "message": "data.rule.frontendPublicIPConfigurationsDisabled_err",
+                            "remediationDescription": "For resource type 'azurerm_application_gateway' make sure 'public_ip_address_id' does not exist under 'frontend_ip_configuration' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway#frontend_ip_configuration for details.",
+                            "remediationFunction": "PR_AZR_0060_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Application Gateway frontendIPConfigurations does not have public ip configured",
+                    "description": "Application Gateway allows to set public or private ip in frontendIPConfigurations. It is highly recommended to only configure private ip in frontendIPConfigurations.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_application_gateway"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APPLICATION_GATEWAYS_5",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(applicationgateways.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0095-TRF",
+                            "eval": "data.rule.backend_https_protocol_enabled",
+                            "message": "data.rule.backend_https_protocol_enabled_err",
+                            "remediationDescription": "For resource type 'azurerm_application_gateway' make sure 'protocol' has value 'https' under 'backend_http_settings' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway#backend_http_settings for details.",
+                            "remediationFunction": "PR_AZR_0095_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Application Gateway Backend is using Https protocol",
+                    "description": "Application Gateway allows to set backend network protocols Http and Https. It is highly recommended to use Https protocol for secure connections.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_application_gateway"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_APPLICATION_GATEWAYS_6",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(applicationgateways.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0099-TRF",
+                            "eval": "data.rule.secret_certificate_is_in_keyvalut",
+                            "message": "data.rule.secret_certificate_is_in_keyvalut_err",
+                            "remediationDescription": "For resource type 'azurerm_application_gateway' make sure 'key_vault_secret_id' has target key vault id under 'ssl_certificate' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway#key_vault_secret_id for details.",
+                            "remediationFunction": "PR_AZR_0099_TRF.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Application Gateway secret certificates stores in keyvault",
+                    "description": "This policy will identify application gateways which dont have ssl certificates stored in keyvalut and alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_application_gateway"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_APP_SERVICE_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -3706,6 +3820,38 @@
                     "severity": "Medium",
                     "title": "Azure Network Security Group should not allow NetBIOS (UDP Port 137)",
                     "description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_network_security_rule"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_NETWORK_SECURITY_GROUP_33",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(nsg.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-0100-TRF",
+                            "eval": "data.rule.inbound_insecure_omi_port",
+                            "message": "data.rule.inbound_insecure_omi_port_err",
+                            "remediationDescription": "In 'azurerm_network_security_rule' resource, make sure property 'destination_port_range' dont have port '5985', '5986' and '1270' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#destination_port_range for details.",
+                            "remediationFunction": ""
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure Network Security Group (NSG) should protect OMIGOD attack from internet",
+                    "description": "Blocking OMI port 5985, 5986, 1270 will protect vnet/subnet/vms from OMIGOD attacks from internet.",
                     "tags": [
                         {
                             "cloud": "git",
