@@ -675,7 +675,7 @@ default rds_pgaudit_enable = null
 aws_issue["rds_pgaudit_enable"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbparametergroup"
-    count([c | resource.Properties.Parameters["pgaudit.role"] == "rds_pgaudit" ; c := 1]) == 0
+    count([c | lower(resource.Properties.Parameters["pgaudit.role"]) == "rds_pgaudit" ; c := 1]) == 0
 }
 
 aws_issue["rds_pgaudit_enable"] {
@@ -1142,7 +1142,6 @@ aws_issue["docdb_parameter_group_tls_enable"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
     lower(resource.Properties.Parameters.tls) != "enabled"
-    not resource.Properties.Parameters.Value
 }
 
 docdb_parameter_group_tls_enable {

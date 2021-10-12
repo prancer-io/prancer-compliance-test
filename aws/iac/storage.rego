@@ -1338,7 +1338,7 @@ s3_cross_region_replica = false {
     aws_issue["s3_cross_region_replica"]
 }
 
-s3_cross_region_replica_err = "Ensure S3 bucket has enabled lock configuration" {
+s3_cross_region_replica_err = "Ensure S3 bucket cross-region replication is enabled" {
     aws_issue["s3_cross_region_replica"]
 }
 
@@ -1347,7 +1347,7 @@ s3_cross_region_replica_metadata := {
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
-    "Policy Title": "Ensure S3 bucket has enabled lock configuration",
+    "Policy Title": "Ensure S3 bucket cross-region replication is enabled",
     "Policy Description": "Cross-region replication enables automatic, asynchronous copying of objects across S3 buckets. By default, replication supports copying new S3 objects after it is enabled",
     "Resource Type": "",
     "Policy Help URL": "",

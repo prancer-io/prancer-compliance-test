@@ -231,7 +231,7 @@ sns_policy_public = false {
     aws_issue["sns_policy_public"]
 }
 
-sns_policy_public_err = "Ensure SQS queue policy is not publicly accessible" {
+sns_policy_public_err = "Ensure SNS Topic policy is not publicly accessible" {
     aws_issue["sns_policy_public"]
 }
 
