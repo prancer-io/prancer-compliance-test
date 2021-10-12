@@ -4,7 +4,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html
 
 #
-# PR-AWS-0062-CFR
+# PR-AWS-CFR-ELB-001
 #
 
 default elb_insecure_cipher = null
@@ -105,7 +105,7 @@ elb_insecure_cipher_err = "AWS Elastic Load Balancer (Classic) SSL negotiation p
 }
 
 elb_insecure_cipher_metadata := {
-    "Policy Code": "PR-AWS-0062-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -117,7 +117,7 @@ elb_insecure_cipher_metadata := {
 }
 
 #
-# PR-AWS-0063-CFR
+# PR-AWS-CFR-ELB-002
 #
 
 default elb_insecure_protocol = null
@@ -151,7 +151,7 @@ elb_insecure_protocol_err = "AWS Elastic Load Balancer (Classic) SSL negotiation
 }
 
 elb_insecure_protocol_metadata := {
-    "Policy Code": "PR-AWS-0063-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -163,7 +163,7 @@ elb_insecure_protocol_metadata := {
 }
 
 #
-# PR-AWS-0064-CFR
+# PR-AWS-CFR-ELB-003
 #
 
 default elb_access_log = null
@@ -201,7 +201,7 @@ elb_access_log_err = "AWS Elastic Load Balancer (Classic) with access log disabl
 }
 
 elb_access_log_metadata := {
-    "Policy Code": "PR-AWS-0064-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -213,7 +213,7 @@ elb_access_log_metadata := {
 }
 
 #
-# PR-AWS-0065-CFR
+# PR-AWS-CFR-ELB-004
 #
 
 default elb_conn_drain = null
@@ -251,7 +251,7 @@ elb_conn_drain_err = "AWS Elastic Load Balancer (Classic) with connection draini
 }
 
 elb_conn_drain_metadata := {
-    "Policy Code": "PR-AWS-0065-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -263,7 +263,7 @@ elb_conn_drain_metadata := {
 }
 
 #
-# PR-AWS-0066-CFR
+# PR-AWS-CFR-ELB-005
 #
 
 default elb_crosszone = null
@@ -301,7 +301,7 @@ elb_crosszone_err = "AWS Elastic Load Balancer (Classic) with cross-zone load ba
 }
 
 elb_crosszone_metadata := {
-    "Policy Code": "PR-AWS-0066-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -313,7 +313,7 @@ elb_crosszone_metadata := {
 }
 
 #
-# PR-AWS-0067-CFR
+# PR-AWS-CFR-ELB-006
 #
 default elb_sec_group_ingress = null
 
@@ -391,7 +391,7 @@ elb_sec_group_ingress_err = "AWS Elastic Load Balancer (ELB) has security group 
 }
 
 elb_sec_group_ingress_metadata := {
-    "Policy Code": "PR-AWS-0067-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-006",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -403,7 +403,7 @@ elb_sec_group_ingress_metadata := {
 }
 
 #
-# PR-AWS-0068-CFR
+# PR-AWS-CFR-ELB-007
 #
 default elb_sec_group_egress = null
 
@@ -482,7 +482,7 @@ elb_sec_group_egress_err = "AWS Elastic Load Balancer (ELB) has no security grou
 
 
 elb_sec_group_egress_metadata := {
-    "Policy Code": "PR-AWS-0068-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-007",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -494,7 +494,7 @@ elb_sec_group_egress_metadata := {
 }
 
 #
-# PR-AWS-0069-CFR
+# PR-AWS-CFR-ELB-008
 #
 
 default elb_not_in_use = null
@@ -534,7 +534,7 @@ elb_not_in_use_miss_err = "ELB attribute Instances missing in the resource" {
 }
 
 elb_not_in_use_metadata := {
-    "Policy Code": "PR-AWS-0069-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-008",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -546,7 +546,7 @@ elb_not_in_use_metadata := {
 }
 
 #
-# PR-AWS-0072-CFR
+# PR-AWS-CFR-ELB-009
 #
 
 default elb_alb_logs = null
@@ -603,7 +603,7 @@ elb_alb_logs_miss_err = "ELBv2 attribute LoadBalancerAttributes missing in the r
 }
 
 elb_alb_logs_metadata := {
-    "Policy Code": "PR-AWS-0072-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-009",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -615,7 +615,7 @@ elb_alb_logs_metadata := {
 }
 
 #
-# PR-AWS-0073-CFR
+# PR-AWS-CFR-ELB-010
 #
 
 default elb_listener_ssl = null
@@ -668,7 +668,7 @@ elb_listener_ssl_miss_err = "ELB attribute Listeners missing in the resource" {
 }
 
 elb_listener_ssl_metadata := {
-    "Policy Code": "PR-AWS-0073-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-010",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -680,7 +680,7 @@ elb_listener_ssl_metadata := {
 }
 
 #
-# PR-AWS-0006-CFR
+# PR-AWS-CFR-ELB-011
 #
 
 default elb_over_https = null
@@ -720,7 +720,7 @@ elb_over_https_miss_err = "ELBv2 attribute Protocol missing in the resource" {
 }
 
 elb_over_https_metadata := {
-    "Policy Code": "PR-AWS-0006-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-011",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -733,7 +733,7 @@ elb_over_https_metadata := {
 
 
 #
-# PR-AWS-0217-CFR
+# PR-AWS-CFR-ELB-012
 #
 
 default elb_v2_listener_ssl = null
@@ -792,7 +792,7 @@ elb_v2_listener_ssl_err = "AWS Elastic Load Balancer V2 (ELBV2) with listener TL
 }
 
 elb_v2_listener_ssl_metadata := {
-    "Policy Code": "PR-AWS-0217-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-012",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -805,7 +805,7 @@ elb_v2_listener_ssl_metadata := {
 
 
 #
-# PR-AWS-0334-CFR
+# PR-AWS-CFR-ELB-013
 #
 
 default elb_drop_invalid_header = null
@@ -858,7 +858,7 @@ elb_drop_invalid_header_err = "Ensure that Application Load Balancer drops HTTP 
 }
 
 elb_drop_invalid_header_metadata := {
-    "Policy Code": "PR-AWS-0334-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-013",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

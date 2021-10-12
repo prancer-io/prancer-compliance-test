@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html
 
 #
-# PR-AWS-0105-CFR
+# PR-AWS-CFR-LMD-001
 #
 
 default lambda_env = null
@@ -57,7 +57,7 @@ lambda_env_miss_err = "Lambda function attribute KmsKeyArn/Environment missing i
 }
 
 lambda_env_metadata := {
-    "Policy Code": "PR-AWS-0105-CFR",
+    "Policy Code": "PR-AWS-CFR-LMD-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -69,7 +69,7 @@ lambda_env_metadata := {
 }
 
 #
-# PR-AWS-0106-CFR
+# PR-AWS-CFR-LMD-002
 #
 
 default lambda_vpc = null
@@ -109,7 +109,7 @@ lambda_vpc_miss_err = "Lambda function attribute VpcConfig.SubnetIds missing in 
 }
 
 lambda_vpc_metadata := {
-    "Policy Code": "PR-AWS-0106-CFR",
+    "Policy Code": "PR-AWS-CFR-LMD-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -121,7 +121,7 @@ lambda_vpc_metadata := {
 }
 
 #
-# PR-AWS-0107-CFR
+# PR-AWS-CFR-LMD-003
 #
 
 default lambda_tracing = null
@@ -161,7 +161,7 @@ lambda_tracing_miss_err = "Lambda function attribute TracingConfig.Mode missing 
 }
 
 lambda_tracing_metadata := {
-    "Policy Code": "PR-AWS-0107-CFR",
+    "Policy Code": "PR-AWS-CFR-LMD-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -174,7 +174,7 @@ lambda_tracing_metadata := {
 
 
 #
-# PR-AWS-305-CFR
+# PR-AWS-CFR-LMD-004
 #
 
 default lambda_concurrent_execution = null
@@ -199,7 +199,7 @@ lambda_concurrent_execution_err = "Ensure AWS Lambda function is configured for 
 }
 
 lambda_concurrent_execution_metadata := {
-    "Policy Code": "PR-AWS-305-CFR",
+    "Policy Code": "PR-AWS-CFR-LMD-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -213,7 +213,7 @@ lambda_concurrent_execution_metadata := {
 
 
 #
-# PR-AWS-306-CFR
+# PR-AWS-CFR-LMD-005
 #
 
 default lambda_dlq = null
@@ -238,7 +238,7 @@ lambda_dlq_err = "Ensure AWS Lambda function is configured for a DLQ" {
 }
 
 lambda_dlq_metadata := {
-    "Policy Code": "PR-AWS-306-CFR",
+    "Policy Code": "PR-AWS-CFR-LMD-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

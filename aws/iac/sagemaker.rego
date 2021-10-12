@@ -2,7 +2,7 @@ package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html
 #
-# PR-AWS-0247-CFR
+# PR-AWS-CFR-SGM-001
 #
 
 default sagemaker_encryption_kms = null
@@ -33,7 +33,7 @@ sagemaker_encryption_kms_err = "AWS SageMaker notebook instance not configured w
 }
 
 sagemaker_encryption_kms_metadata := {
-    "Policy Code": "PR-AWS-0247-CFR",
+    "Policy Code": "PR-AWS-CFR-SGM-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -45,7 +45,7 @@ sagemaker_encryption_kms_metadata := {
 }
 
 #
-# PR-AWS-0248-CFR
+# PR-AWS-CFR-SGM-002
 #
 
 default sagemaker_rootaccess_enabled = null
@@ -76,7 +76,7 @@ sagemaker_rootaccess_enabled_err = "AWS SageMaker notebook instance with root ac
 }
 
 sagemaker_rootaccess_enabled_metadata := {
-    "Policy Code": "PR-AWS-0248-CFR",
+    "Policy Code": "PR-AWS-CFR-SGM-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -89,7 +89,7 @@ sagemaker_rootaccess_enabled_metadata := {
 
 
 #
-# PR-AWS-0249-CFR
+# PR-AWS-CFR-SGM-003
 #
 
 default sagemaker_direct_internet_access_enabled = null
@@ -120,7 +120,7 @@ sagemaker_direct_internet_access_enabled_err = "AWS SageMaker notebook instance 
 }
 
 sagemaker_direct_internet_access_enabled_metadata := {
-    "Policy Code": "PR-AWS-0249-CFR",
+    "Policy Code": "PR-AWS-CFR-SGM-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -133,7 +133,7 @@ sagemaker_direct_internet_access_enabled_metadata := {
 
 
 #
-# PR-AWS-0250-CFR
+# PR-AWS-CFR-SGM-004
 #
 
 default sagemaker_vpc = null
@@ -164,7 +164,7 @@ sagemaker_vpc_err = "AWS SageMaker notebook instance is not placed in VPC" {
 }
 
 sagemaker_vpc_metadata := {
-    "Policy Code": "PR-AWS-0250-CFR",
+    "Policy Code": "PR-AWS-CFR-SGM-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

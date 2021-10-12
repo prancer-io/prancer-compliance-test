@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-subnet.html
 
 #
-# PR-AWS-0184-CFR
+# PR-AWS-CFR-VPC-001
 #
 
 default vpc_subnet_autoip = null
@@ -41,7 +41,7 @@ vpc_subnet_autoip_err = "AWS VPC subnets should not allow automatic public IP as
 }
 
 vpc_subnet_autoip_metadata := {
-    "Policy Code": "PR-AWS-0184-CFR",
+    "Policy Code": "PR-AWS-CFR-VPC-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -54,7 +54,7 @@ vpc_subnet_autoip_metadata := {
 
 
 #
-# PR-AWS-0339-CFR
+# PR-AWS-CFR-VPC-002
 #
 
 default eip_instance_link = null
@@ -95,7 +95,7 @@ eip_instance_link_err = "Ensure all EIP addresses allocated to a VPC are attache
 }
 
 eip_instance_link_metadata := {
-    "Policy Code": "PR-AWS-0339-CFR",
+    "Policy Code": "PR-AWS-CFR-VPC-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -108,7 +108,7 @@ eip_instance_link_metadata := {
 
 
 #
-# PR-AWS-0345-CFR
+# PR-AWS-CFR-VPC-003
 #
 
 default vpc_endpoint_manual_acceptance = null
@@ -139,7 +139,7 @@ vpc_endpoint_manual_acceptance_err = "Ensure VPC endpoint service is configured 
 }
 
 vpc_endpoint_manual_acceptance_metadata := {
-    "Policy Code": "PR-AWS-0345-CFR",
+    "Policy Code": "PR-AWS-CFR-VPC-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

@@ -2,7 +2,7 @@ package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration
 #
-# PR-AWS-0218-CFR
+# PR-AWS-CFR-EMR-001
 #
 
 default emr_security = null
@@ -33,7 +33,7 @@ emr_security = "AWS EMR cluster is not configured with security configuration" {
 }
 
 emr_security_metadata := {
-    "Policy Code": "PR-AWS-0218-CFR",
+    "Policy Code": "PR-AWS-CFR-EMR-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -46,7 +46,7 @@ emr_security_metadata := {
 
 
 #
-# PR-AWS-0219-CFR
+# PR-AWS-CFR-EMR-002
 #
 
 default emr_kerberos = null
@@ -77,7 +77,7 @@ emr_kerberos_err = "AWS EMR cluster is not configured with Kerberos Authenticati
 }
 
 emr_kerberos_metadata := {
-    "Policy Code": "PR-AWS-0219-CFR",
+    "Policy Code": "PR-AWS-CFR-EMR-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -90,7 +90,7 @@ emr_kerberos_metadata := {
 
 
 #
-# PR-AWS-0220-CFR
+# PR-AWS-CFR-EMR-003
 #
 
 default emr_s3_encryption = null
@@ -121,7 +121,7 @@ emr_s3_encryption_err = "AWS EMR cluster is not configured with CSE CMK for data
 }
 
 emr_s3_encryption_metadata := {
-    "Policy Code": "PR-AWS-0220-CFR",
+    "Policy Code": "PR-AWS-CFR-EMR-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -134,7 +134,7 @@ emr_s3_encryption_metadata := {
 
 
 #
-# PR-AWS-0221-CFR
+# PR-AWS-CFR-EMR-004
 #
 
 default emr_local_encryption_cmk = null
@@ -171,7 +171,7 @@ emr_local_encryption_cmk_err = "AWS EMR cluster is not enabled with local disk e
 }
 
 emr_local_encryption_cmk_metadata := {
-    "Policy Code": "PR-AWS-0221-CFR",
+    "Policy Code": "PR-AWS-CFR-EMR-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -184,7 +184,7 @@ emr_local_encryption_cmk_metadata := {
 
 
 #
-# PR-AWS-0222-CFR
+# PR-AWS-CFR-EMR-005
 #
 
 default emr_local_encryption = null
@@ -215,7 +215,7 @@ emr_local_encryption_err = "AWS EMR cluster is not enabled with local disk encry
 }
 
 emr_local_encryption_metadata := {
-    "Policy Code": "PR-AWS-0222-CFR",
+    "Policy Code": "PR-AWS-CFR-EMR-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -228,7 +228,7 @@ emr_local_encryption_metadata := {
 
 
 #
-# PR-AWS-0223-CFR
+# PR-AWS-CFR-EMR-006
 #
 
 default emr_rest_encryption = null
@@ -266,7 +266,7 @@ emr_rest_encryption_err = "AWS EMR cluster is not enabled with data encryption a
 }
 
 emr_rest_encryption_metadata := {
-    "Policy Code": "PR-AWS-0223-CFR",
+    "Policy Code": "PR-AWS-CFR-EMR-006",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -277,62 +277,8 @@ emr_rest_encryption_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration"
 }
 
-
-
-# #
-# # PR-AWS-0224-CFR
-# #
-
-# default emr_s3_encryption_sse = null
-
-# aws_issue["emr_s3_encryption_sse"] {
-#     resource := input.Resources[i]
-#     lower(resource.Type) == "aws::emr::securityconfiguration"
-#     not resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode
-# }
-
-# aws_issue["emr_s3_encryption_sse"] {
-#     resource := input.Resources[i]
-#     lower(resource.Type) == "aws::emr::securityconfiguration"
-#     count(resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode) == 0
-# }
-
-# aws_issue["emr_s3_encryption_sse"] {
-#     resource := input.Resources[i]
-#     lower(resource.Type) == "aws::emr::securityconfiguration"
-#     resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode
-#     lower(resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode) != "sse-kms"
-#     lower(resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode) != "cse-kms"
-# }
-
-# emr_s3_encryption_sse {
-#     lower(input.Resources[i].Type) == "aws::emr::securityconfiguration"
-#     not aws_issue["emr_s3_encryption_sse"]
-# }
-
-# emr_s3_encryption_sse = false {
-#     aws_issue["emr_s3_encryption_sse"]
-# }
-
-# emr_s3_encryption_sse_err = "AWS EMR cluster is not configured with SSE KMS for data at rest encryption (Amazon S3 with EMRFS)" {
-#     aws_issue["emr_s3_encryption_sse"]
-# }
-
-# emr_s3_encryption_sse_metadata := {
-#     "Policy Code": "PR-AWS-0224-CFR",
-#     "Type": "IaC",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud formation",
-#     "Policy Title": "AWS EMR cluster is not configured with SSE KMS for data at rest encryption (Amazon S3 with EMRFS)",
-#     "Policy Description": "This policy identifies EMR clusters which are not configured with Server Side Encryption(SSE KMS) for data at rest encryption of Amazon S3 with EMRFS. As a best practice, use SSE-KMS for server side encryption to encrypt the data in your EMR cluster and ensure full control over your data.",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration"
-# }
-
-
 #
-# PR-AWS-0225-CFR
+# PR-AWS-CFR-EMR-007
 #
 
 default emr_transit_encryption = null
@@ -370,7 +316,7 @@ emr_transit_encryption_err = "AWS EMR cluster is not enabled with data encryptio
 }
 
 emr_transit_encryption_metadata := {
-    "Policy Code": "PR-AWS-0225-CFR",
+    "Policy Code": "PR-AWS-CFR-EMR-007",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

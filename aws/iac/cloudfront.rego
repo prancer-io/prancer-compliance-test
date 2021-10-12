@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html
 
 #
-# PR-AWS-0015-CFR
+# PR-AWS-CFR-CF-001
 #
 
 default cf_default_cache = null
@@ -34,7 +34,7 @@ cf_default_cache_err = "AWS CloudFront Distributions with Field-Level Encryption
 }
 
 cf_default_cache_metadata := {
-    "Policy Code": "PR-AWS-0015-CFR",
+    "Policy Code": "PR-AWS-CFR-CF-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -47,7 +47,7 @@ cf_default_cache_metadata := {
 
 
 #
-# PR-AWS-0016-CFR
+# PR-AWS-CFR-CF-002
 #
 
 default cf_ssl_protocol = null
@@ -80,7 +80,7 @@ cf_ssl_protocol_err = "AWS CloudFront distribution is using insecure SSL protoco
 }
 
 cf_ssl_protocol_metadata := {
-    "Policy Code": "PR-AWS-0016-CFR",
+    "Policy Code": "PR-AWS-CFR-CF-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -93,7 +93,7 @@ cf_ssl_protocol_metadata := {
 
 
 #
-# PR-AWS-0017-CFR
+# PR-AWS-CFR-CF-003
 #
 
 default cf_logging = null
@@ -124,7 +124,7 @@ cf_logging_err = "AWS CloudFront distribution with access logging disabled" {
 }
 
 cf_logging_metadata := {
-    "Policy Code": "PR-AWS-0017-CFR",
+    "Policy Code": "PR-AWS-CFR-CF-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -136,7 +136,7 @@ cf_logging_metadata := {
 }
 
 #
-# PR-AWS-0018-CFR
+# PR-AWS-CFR-CF-004
 #
 
 default cf_https_only = null
@@ -163,7 +163,7 @@ cf_https_only_err = "AWS CloudFront origin protocol policy does not enforce HTTP
 }
 
 cf_https_only_metadata := {
-    "Policy Code": "PR-AWS-0018-CFR",
+    "Policy Code": "PR-AWS-CFR-CF-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -176,7 +176,7 @@ cf_https_only_metadata := {
 
 
 #
-# PR-AWS-0019-CFR
+# PR-AWS-CFR-CF-005
 #
 
 default cf_https = null
@@ -216,7 +216,7 @@ cf_https_err = "AWS CloudFront viewer protocol policy is not configured with HTT
 }
 
 cf_https_metadata := {
-    "Policy Code": "PR-AWS-0019-CFR",
+    "Policy Code": "PR-AWS-CFR-CF-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -228,7 +228,7 @@ cf_https_metadata := {
 }
 
 #
-# PR-AWS-0020-CFR
+# PR-AWS-CFR-CF-006
 #
 
 default cf_min_protocol = null
@@ -261,7 +261,7 @@ cf_min_protocol_err = "AWS CloudFront web distribution that allow TLS versions 1
 }
 
 cf_min_protocol_metadata := {
-    "Policy Code": "PR-AWS-0020-CFR",
+    "Policy Code": "PR-AWS-CFR-CF-006",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -273,7 +273,7 @@ cf_min_protocol_metadata := {
 }
 
 #
-# PR-AWS-0021-CFR
+# PR-AWS-CFR-CF-007
 #
 
 default cf_firewall = null
@@ -304,7 +304,7 @@ cf_firewall_err = "AWS CloudFront web distribution with AWS Web Application Fire
 }
 
 cf_firewall_metadata := {
-    "Policy Code": "PR-AWS-0021-CFR",
+    "Policy Code": "PR-AWS-CFR-CF-007",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -316,7 +316,7 @@ cf_firewall_metadata := {
 }
 
 #
-# PR-AWS-0022-CFR
+# PR-AWS-CFR-CF-008
 #
 
 default cf_default_ssl = null
@@ -354,7 +354,7 @@ cf_default_ssl_err = "AWS CloudFront web distribution with default SSL certifica
 }
 
 cf_default_ssl_metadata := {
-    "Policy Code": "PR-AWS-0022-CFR",
+    "Policy Code": "PR-AWS-CFR-CF-008",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -366,7 +366,7 @@ cf_default_ssl_metadata := {
 }
 
 #
-# PR-AWS-0023-CFR
+# PR-AWS-CFR-CF-009
 #
 
 default cf_geo_restriction = null
@@ -397,7 +397,7 @@ cf_geo_restriction_err = "AWS CloudFront web distribution with geo restriction d
 }
 
 cf_geo_restriction_metadata := {
-    "Policy Code": "PR-AWS-0023-CFR",
+    "Policy Code": "PR-AWS-CFR-CF-009",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

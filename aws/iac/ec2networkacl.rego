@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html
 
 #
-# PR-AWS-0113-CFR
+# PR-AWS-CFR-NACL-001
 #
 
 default acl_all_icmp_ipv4 = null
@@ -65,7 +65,7 @@ acl_all_icmp_ipv4_err = "AWS Network ACLs with Outbound rule to allow All ICMP I
 }
 
 acl_all_icmp_ipv4_metadata := {
-    "Policy Code": "PR-AWS-0113-CFR",
+    "Policy Code": "PR-AWS-CFR-NACL-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -77,7 +77,7 @@ acl_all_icmp_ipv4_metadata := {
 }
 
 #
-# PR-AWS-0114-CFR
+# PR-AWS-CFR-NACL-002
 #
 
 default acl_all_icmp_ipv6 = null
@@ -139,7 +139,7 @@ acl_all_icmp_ipv6_err = "AWS Network ACLs with Inbound rule to allow All ICMP IP
 }
 
 acl_all_icmp_ipv6_metadata := {
-    "Policy Code": "PR-AWS-0114-CFR",
+    "Policy Code": "PR-AWS-CFR-NACL-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -151,7 +151,7 @@ acl_all_icmp_ipv6_metadata := {
 }
 
 #
-# PR-AWS-0115-CFR
+# PR-AWS-CFR-NACL-003
 #
 
 default acl_all_traffic = null
@@ -196,7 +196,7 @@ acl_all_traffic_err = "AWS Network ACLs with Inbound rule to allow All Traffic" 
 }
 
 acl_all_traffic_metadata := {
-    "Policy Code": "PR-AWS-0115-CFR",
+    "Policy Code": "PR-AWS-CFR-NACL-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -208,7 +208,7 @@ acl_all_traffic_metadata := {
 }
 
 #
-# PR-AWS-0116-CFR
+# PR-AWS-CFR-NACL-004
 #
 
 default acl_all_icmp_ipv4_out = null
@@ -270,7 +270,7 @@ acl_all_icmp_ipv4_out_err = "AWS Network ACLs with Outbound rule to allow All IC
 }
 
 acl_all_icmp_ipv4_out_metadata := {
-    "Policy Code": "PR-AWS-0116-CFR",
+    "Policy Code": "PR-AWS-CFR-NACL-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -282,7 +282,7 @@ acl_all_icmp_ipv4_out_metadata := {
 }
 
 #
-# PR-AWS-0117-CFR
+# PR-AWS-CFR-NACL-005
 #
 
 default acl_all_icmp_ipv6_out = null
@@ -344,7 +344,7 @@ acl_all_icmp_ipv6_out_err = "AWS Network ACLs with Outbound rule to allow All IC
 }
 
 acl_all_icmp_ipv6_out_metadata := {
-    "Policy Code": "PR-AWS-0117-CFR",
+    "Policy Code": "PR-AWS-CFR-NACL-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -356,7 +356,7 @@ acl_all_icmp_ipv6_out_metadata := {
 }
 
 #
-# PR-AWS-0118-CFR
+# PR-AWS-CFR-NACL-006
 #
 
 default acl_all_traffic_out = null
@@ -400,7 +400,7 @@ acl_all_traffic_out_err = "AWS Network ACLs with Outbound rule to allow All Traf
 }
 
 acl_all_traffic_out_metadata := {
-    "Policy Code": "PR-AWS-0118-CFR",
+    "Policy Code": "PR-AWS-CFR-NACL-006",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -413,7 +413,7 @@ acl_all_traffic_out_metadata := {
 
 
 #
-# PR-AWS-0243-CFR
+# PR-AWS-CFR-NACL-007
 #
 
 default acl_unrestricted_admin_port = null
@@ -521,7 +521,7 @@ acl_unrestricted_admin_port_err = "Unrestricted Inbound Traffic on Remote Server
 }
 
 acl_unrestricted_admin_port_metadata := {
-    "Policy Code": "PR-AWS-0243-CFR",
+    "Policy Code": "PR-AWS-CFR-NACL-007",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
