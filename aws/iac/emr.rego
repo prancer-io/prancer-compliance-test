@@ -13,10 +13,32 @@ aws_issue["emr_security"] {
     not resource.Properties.SecurityConfiguration
 }
 
+source_path[{"emr_security": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::emr::cluster"
+    not resource.Properties.SecurityConfiguration
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityConfiguration"]
+        ],
+    }
+}
+
 aws_issue["emr_security"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::emr::cluster"
     count(resource.Properties.SecurityConfiguration) == 0
+}
+
+source_path[{"emr_security": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::emr::cluster"
+    count(resource.Properties.SecurityConfiguration) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityConfiguration"]
+        ],
+    }
 }
 
 emr_security {
@@ -57,10 +79,32 @@ aws_issue["emr_kerberos"] {
     not resource.Properties.KerberosAttributes.Realm
 }
 
+source_path[{"emr_security": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::emr::cluster"
+    not resource.Properties.KerberosAttributes.Realm
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KerberosAttributes", "Realm"]
+        ],
+    }
+}
+
 aws_issue["emr_kerberos"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::emr::cluster"
     count(resource.Properties.KerberosAttributes.Realm) == 0
+}
+
+source_path[{"emr_security": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::emr::cluster"
+    count(resource.Properties.KerberosAttributes.Realm) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KerberosAttributes", "Realm"]
+        ],
+    }
 }
 
 emr_kerberos {
@@ -101,10 +145,32 @@ aws_issue["emr_s3_encryption"] {
     not resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode
 }
 
+source_path[{"emr_s3_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::emr::securityconfiguration"
+    not resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityConfiguration", "EncryptionConfiguration", "AtRestEncryptionConfiguration", "S3EncryptionConfiguration", "EncryptionMode"]
+        ],
+    }
+}
+
 aws_issue["emr_s3_encryption"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::emr::securityconfiguration"
     count(resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode) == 0
+}
+
+source_path[{"emr_s3_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::emr::securityconfiguration"
+    count(resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.S3EncryptionConfiguration.EncryptionMode) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityConfiguration", "EncryptionConfiguration", "AtRestEncryptionConfiguration", "S3EncryptionConfiguration", "EncryptionMode"]
+        ],
+    }
 }
 
 emr_s3_encryption {
@@ -145,16 +211,49 @@ aws_issue["emr_local_encryption_cmk"] {
     not resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration.EncryptionKeyProviderType
 }
 
+source_path[{"emr_local_encryption_cmk": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::emr::securityconfiguration"
+    not resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration.EncryptionKeyProviderType
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityConfiguration", "EncryptionConfiguration", "AtRestEncryptionConfiguration", "LocalDiskEncryptionConfiguration", "EncryptionKeyProviderType"]
+        ],
+    }
+}
+
 aws_issue["emr_local_encryption_cmk"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::emr::securityconfiguration"
     count(resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration.EncryptionKeyProviderType) == 0
 }
 
+source_path[{"emr_local_encryption_cmk": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::emr::securityconfiguration"
+    count(resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration.EncryptionKeyProviderType) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityConfiguration", "EncryptionConfiguration", "AtRestEncryptionConfiguration", "LocalDiskEncryptionConfiguration", "EncryptionKeyProviderType"]
+        ],
+    }
+}
+
 aws_issue["emr_local_encryption_cmk"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::emr::securityconfiguration"
     lower(resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration.EncryptionKeyProviderType) != "awskms"
+}
+
+source_path[{"emr_local_encryption_cmk": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::emr::securityconfiguration"
+    lower(resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration.EncryptionKeyProviderType) != "awskms"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityConfiguration", "EncryptionConfiguration", "AtRestEncryptionConfiguration", "LocalDiskEncryptionConfiguration", "EncryptionKeyProviderType"]
+        ],
+    }
 }
 
 emr_local_encryption_cmk {
@@ -195,10 +294,32 @@ aws_issue["emr_local_encryption"] {
     not resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration
 }
 
+source_path[{"emr_local_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::emr::securityconfiguration"
+    not resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityConfiguration", "EncryptionConfiguration", "AtRestEncryptionConfiguration", "LocalDiskEncryptionConfiguration"]
+        ],
+    }
+}
+
 aws_issue["emr_local_encryption"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::emr::securityconfiguration"
     count(resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration) == 0
+}
+
+source_path[{"emr_local_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::emr::securityconfiguration"
+    count(resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityConfiguration", "EncryptionConfiguration", "AtRestEncryptionConfiguration", "LocalDiskEncryptionConfiguration"]
+        ],
+    }
 }
 
 emr_local_encryption {
@@ -239,10 +360,32 @@ aws_issue["emr_rest_encryption"] {
     lower(resource.Properties.SecurityConfiguration.EncryptionConfiguration.EnableAtRestEncryption) == "false"
 }
 
+source_path[{"emr_local_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::emr::securityconfiguration"
+    lower(resource.Properties.SecurityConfiguration.EncryptionConfiguration.EnableAtRestEncryption) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityConfiguration", "EncryptionConfiguration", "EnableAtRestEncryption"]
+        ],
+    }
+}
+
 aws_bool_issue["emr_rest_encryption"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::emr::securityconfiguration"
     not resource.Properties.SecurityConfiguration.EncryptionConfiguration.EnableAtRestEncryption
+}
+
+source_path[{"emr_local_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::emr::securityconfiguration"
+    not resource.Properties.SecurityConfiguration.EncryptionConfiguration.EnableAtRestEncryption
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityConfiguration", "EncryptionConfiguration", "EnableAtRestEncryption"]
+        ],
+    }
 }
 
 emr_rest_encryption {
@@ -289,10 +432,32 @@ aws_issue["emr_transit_encryption"] {
     lower(resource.Properties.SecurityConfiguration.EncryptionConfiguration.EnableInTransitEncryption) == "false"
 }
 
+source_path[{"emr_transit_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::emr::securityconfiguration"
+    lower(resource.Properties.SecurityConfiguration.EncryptionConfiguration.EnableInTransitEncryption) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityConfiguration", "EncryptionConfiguration", "EnableInTransitEncryption"]
+        ],
+    }
+}
+
 aws_bool_issue["emr_transit_encryption"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::emr::securityconfiguration"
     not resource.Properties.SecurityConfiguration.EncryptionConfiguration.EnableInTransitEncryption
+}
+
+source_path[{"emr_transit_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::emr::securityconfiguration"
+    not resource.Properties.SecurityConfiguration.EncryptionConfiguration.EnableInTransitEncryption
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityConfiguration", "EncryptionConfiguration", "EnableInTransitEncryption"]
+        ],
+    }
 }
 
 emr_transit_encryption {

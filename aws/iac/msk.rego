@@ -13,10 +13,32 @@ aws_issue["msk_encryption_at_rest_cmk"] {
     not resource.Properties.EncryptionInfo.EncryptionAtRest.DataVolumeKMSKeyId
 }
 
+source_path[{"msk_encryption_at_rest_cmk": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    not resource.Properties.EncryptionInfo.EncryptionAtRest.DataVolumeKMSKeyId
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionInfo", "EncryptionAtRest", "DataVolumeKMSKeyId"]
+        ],
+    }
+}
+
 aws_issue["msk_encryption_at_rest_cmk"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::msk::cluster"
     count(resource.Properties.EncryptionInfo.EncryptionAtRest.DataVolumeKMSKeyId) == 0
+}
+
+source_path[{"msk_encryption_at_rest_cmk": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    count(resource.Properties.EncryptionInfo.EncryptionAtRest.DataVolumeKMSKeyId) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionInfo", "EncryptionAtRest", "DataVolumeKMSKeyId"]
+        ],
+    }
 }
 
 msk_encryption_at_rest_cmk {
@@ -56,10 +78,32 @@ aws_bool_issue["msk_in_transit_encryption"] {
     not resource.Properties.EncryptionInfo.EncryptionInTransit.InCluster
 }
 
+source_path[{"msk_in_transit_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    not resource.Properties.EncryptionInfo.EncryptionInTransit.InCluster
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionInfo", "EncryptionInTransit", "InCluster"]
+        ],
+    }
+}
+
 aws_issue["msk_in_transit_encryption"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::msk::cluster"
     lower(resource.Properties.EncryptionInfo.EncryptionInTransit.InCluster) == "false"
+}
+
+source_path[{"msk_in_transit_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    lower(resource.Properties.EncryptionInfo.EncryptionInTransit.InCluster) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionInfo", "EncryptionInTransit", "InCluster"]
+        ],
+    }
 }
 
 msk_in_transit_encryption {
@@ -108,10 +152,32 @@ aws_bool_issue["msk_in_transit_encryption_tls"] {
     not resource.Properties.EncryptionInfo.EncryptionInTransit.ClientBroker
 }
 
+source_path[{"msk_in_transit_encryption_tls": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    not resource.Properties.EncryptionInfo.EncryptionInTransit.ClientBroker
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionInfo", "EncryptionInTransit", "ClientBroker"]
+        ],
+    }
+}
+
 aws_issue["msk_in_transit_encryption_tls"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::msk::cluster"
     lower(resource.Properties.EncryptionInfo.EncryptionInTransit.ClientBroker) != "tls"
+}
+
+source_path[{"msk_in_transit_encryption_tls": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    lower(resource.Properties.EncryptionInfo.EncryptionInTransit.ClientBroker) != "tls"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionInfo", "EncryptionInTransit", "ClientBroker"]
+        ],
+    }
 }
 
 msk_in_transit_encryption_tls {
@@ -160,10 +226,32 @@ aws_issue["msk_vpc"] {
     not resource.Properties.BrokerNodeGroupInfo.ClientSubnets
 }
 
+source_path[{"msk_vpc": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    not resource.Properties.BrokerNodeGroupInfo.ClientSubnets
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "BrokerNodeGroupInfo", "ClientSubnets"]
+        ],
+    }
+}
+
 aws_issue["msk_vpc"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::msk::cluster"
     count(resource.Properties.BrokerNodeGroupInfo.ClientSubnets) == 0
+}
+
+source_path[{"msk_vpc": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    count(resource.Properties.BrokerNodeGroupInfo.ClientSubnets) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "BrokerNodeGroupInfo", "ClientSubnets"]
+        ],
+    }
 }
 
 msk_vpc {
@@ -202,6 +290,17 @@ aws_issue["msk_cluster_logging_enable"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::msk::cluster"
     not resource.Properties.LoggingInfo.BrokerLogs
+}
+
+source_path[{"msk_cluster_logging_enable": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    not resource.Properties.LoggingInfo.BrokerLogs
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LoggingInfo", "BrokerLogs"]
+        ],
+    }
 }
 
 msk_cluster_logging_enable {

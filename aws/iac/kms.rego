@@ -12,10 +12,32 @@ aws_bool_issue["kms_key_rotation"] {
     not resource.Properties.EnableKeyRotation
 }
 
+source_path[{"kms_key_rotation": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::kms::key"
+    not resource.Properties.EnableKeyRotation
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EnableKeyRotation"]
+        ],
+    }
+}
+
 aws_issue["kms_key_rotation"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::kms::key"
     lower(resource.Properties.EnableKeyRotation) == "false"
+}
+
+source_path[{"kms_key_rotation": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::kms::key"
+    lower(resource.Properties.EnableKeyRotation) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EnableKeyRotation"]
+        ],
+    }
 }
 
 kms_key_rotation {
@@ -63,10 +85,32 @@ aws_bool_issue["kms_key_state"] {
     not resource.Properties.Enabled
 }
 
+source_path[{"kms_key_state": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::kms::key"
+    not resource.Properties.Enabled
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Enabled"]
+        ],
+    }
+}
+
 aws_issue["kms_key_state"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::kms::key"
     lower(resource.Properties.Enabled) == "false"
+}
+
+source_path[{"kms_key_state": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::kms::key"
+    lower(resource.Properties.Enabled) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Enabled"]
+        ],
+    }
 }
 
 kms_key_state {
@@ -111,15 +155,39 @@ default kms_key_allow_all_principal = null
 aws_issue["kms_key_allow_all_principal"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::kms::key"
-    Statement := resource.Properties.KeyPolicy.Statement[_]
+    Statement := resource.Properties.KeyPolicy.Statement[j]
     Statement.Principal == "*"
+}
+
+source_path[{"kms_key_allow_all_principal": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::kms::key"
+    Statement := resource.Properties.KeyPolicy.Statement[j]
+    Statement.Principal == "*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KeyPolicy", "Statement", j, "Principal"]
+        ],
+    }
 }
 
 aws_issue["kms_key_allow_all_principal"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::kms::key"
-    Statement := resource.Properties.KeyPolicy.Statement[_]
+    Statement := resource.Properties.KeyPolicy.Statement[j]
     Statement.Principal["AWS"] == "*"
+}
+
+source_path[{"kms_key_allow_all_principal": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::kms::key"
+    Statement := resource.Properties.KeyPolicy.Statement[j]
+    Statement.Principal["AWS"] == "*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KeyPolicy", "Statement", j, "Principal", "AWS"]
+        ],
+    }
 }
 
 kms_key_allow_all_principal {

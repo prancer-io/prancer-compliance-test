@@ -9,15 +9,39 @@ default iam_wildcard_resource = null
 aws_issue["iam_wildcard_resource"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::managedpolicy"
-    statement := resource.Properties.PolicyDocument.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Resource) == "*"
+}
+
+source_path[{"iam_wildcard_resource": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::managedpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    lower(statement.Resource) == "*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Resource"]
+        ],
+    }
 }
 
 aws_issue["iam_wildcard_resource"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::policy"
-    statement := resource.Properties.PolicyDocument.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Resource) == "*"
+}
+
+source_path[{"iam_wildcard_resource": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::policy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    lower(statement.Resource) == "*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Resource"]
+        ],
+    }
 }
 
 iam_wildcard_resource {
@@ -60,15 +84,39 @@ default iam_wildcard_action = null
 aws_issue["iam_wildcard_action"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::managedpolicy"
-    statement := resource.Properties.PolicyDocument.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Action) == "*"
+}
+
+source_path[{"iam_wildcard_action": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::managedpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    lower(statement.Action) == "*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action"]
+        ],
+    }
 }
 
 aws_issue["iam_wildcard_action"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::policy"
-    statement := resource.Properties.PolicyDocument.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Action) == "*"
+}
+
+source_path[{"iam_wildcard_action": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::policy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    lower(statement.Action) == "*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action"]
+        ],
+    }
 }
 
 iam_wildcard_action {
@@ -106,8 +154,20 @@ default iam_wildcard_principal = null
 aws_issue["iam_wildcard_principal"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
-    statement := resource.Properties.AssumeRolePolicyDocument.Statement[_]
+    statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
     lower(statement.Principal) == "*"
+}
+
+source_path[{"iam_wildcard_principal": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::role"
+    statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
+    lower(statement.Principal) == "*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Principal"]
+        ],
+    }
 }
 
 iam_wildcard_principal {
@@ -144,25 +204,64 @@ default iam_resource_format = null
 aws_issue["iam_resource_format"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::role"
-    statement := resource.Properties.AssumeRolePolicyDocument.Statement[_]
+    statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
     lower(statement.Resource) == "arn:aws:*:*"
+}
+
+source_path[{"iam_resource_format": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::role"
+    statement := resource.Properties.AssumeRolePolicyDocument.Statement[j]
+    lower(statement.Resource) == "arn:aws:*:*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AssumeRolePolicyDocument", "Statement", j, "Resource"]
+        ],
+    }
 }
 
 aws_issue["iam_resource_format"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::user"
     policy := resource.Properties.Policies[_]
-    statement := policy.PolicyDocument.Statement[_]
+    statement := policy.PolicyDocument.Statement[j]
     lower(statement.Resource) == "arn:aws:*:*"
+}
+
+source_path[{"iam_resource_format": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::user"
+    policy := resource.Properties.Policies[_]
+    statement := policy.PolicyDocument.Statement[j]
+    lower(statement.Resource) == "arn:aws:*:*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Resource"]
+        ],
+    }
 }
 
 aws_issue["iam_resource_format"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::group"
     policy := resource.Properties.Policies[_]
-    statement := policy.PolicyDocument.Statement[_]
+    statement := policy.PolicyDocument.Statement[j]
     lower(statement.Resource) == "arn:aws:*:*"
 }
+
+source_path[{"iam_resource_format": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::group"
+    policy := resource.Properties.Policies[_]
+    statement := policy.PolicyDocument.Statement[j]
+    lower(statement.Resource) == "arn:aws:*:*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Resource"]
+        ],
+    }
+}
+
 iam_resource_format {
     lower(input.Resources[i].Type) == "aws::iam::managedpolicy"
     not aws_issue["iam_resource_format"]
@@ -198,19 +297,47 @@ default iam_assume_permission = null
 aws_issue["iam_assume_permission"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::policy"
-    statement := resource.Properties.PolicyDocument.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "allow"
     contains(lower(statement.Action), "sts:assumerole")
     statement.Condition == "*"
 }
 
+source_path[{"iam_assume_permission": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::policy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    lower(statement.Effect) == "allow"
+    contains(lower(statement.Action), "sts:assumerole")
+    statement.Condition == "*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Condition"]
+        ],
+    }
+}
+
 aws_issue["iam_assume_permission"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::policy"
-    statement := resource.Properties.PolicyDocument.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "allow"
     contains(lower(statement.Action), "sts:assumerole")
     not statement.Condition
+}
+
+source_path[{"iam_assume_permission": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::policy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    lower(statement.Effect) == "allow"
+    contains(lower(statement.Action), "sts:assumerole")
+    not statement.Condition
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Condition"]
+        ],
+    }
 }
 
 iam_assume_permission {
@@ -246,9 +373,22 @@ default iam_all_traffic = null
 aws_issue["iam_all_traffic"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::policy"
-    statement := resource.Properties.PolicyDocument.Statement[_]
-    source_ip := statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"][_]
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    source_ip := statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"][k]
     lower(source_ip) == "0.0.0.0/0"
+}
+
+source_path[{"iam_all_traffic": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::policy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    source_ip := statement.Condition["ForAnyValue:IpAddress"]["aws:SourceIp"][k]
+    lower(source_ip) == "0.0.0.0/0"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Condition", "ForAnyValue:IpAddress", "aws:SourceIp", k]
+        ],
+    }
 }
 
 iam_all_traffic {
@@ -284,10 +424,24 @@ default iam_administrative_privileges = null
 aws_issue["iam_administrative_privileges"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::policy"
-    statement := resource.Properties.PolicyDocument.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     statement.Action == "*"
     statement.Resource == "*"
     lower(statement.Effect) == "allow"
+}
+
+source_path[{"iam_administrative_privileges": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::policy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    statement.Action == "*"
+    statement.Resource == "*"
+    lower(statement.Effect) == "allow"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Effect"]
+        ],
+    }
 }
 
 iam_administrative_privileges {
@@ -327,10 +481,32 @@ aws_issue["iam_user_group_attach"] {
     not resource.Properties.Users
 }
 
+source_path[{"iam_user_group_attach": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::usertogroupaddition"
+    not resource.Properties.Users
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Users"]
+        ],
+    }
+}
+
 aws_issue["iam_user_group_attach"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::usertogroupaddition"
     count(resource.Properties.Users) < 1
+}
+
+source_path[{"iam_user_group_attach": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::usertogroupaddition"
+    count(resource.Properties.Users) < 1
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Users"]
+        ],
+    }
 }
 
 iam_user_group_attach {

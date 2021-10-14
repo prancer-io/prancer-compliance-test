@@ -14,10 +14,32 @@ aws_attribute_absence["lambda_env"] {
     not resource.Properties.KmsKeyArn
 }
 
+source_path[{"lambda_env": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    not resource.Properties.KmsKeyArn
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsKeyArn"]
+        ],
+    }
+}
+
 aws_attribute_absence["lambda_env"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::lambda::function"
     not resource.Properties.Environment
+}
+
+source_path[{"lambda_env": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    not resource.Properties.Environment
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Environment"]
+        ],
+    }
 }
 
 aws_issue["lambda_env"] {
@@ -27,11 +49,35 @@ aws_issue["lambda_env"] {
     not resource.Properties.KmsKeyArn
 }
 
+source_path[{"lambda_env": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    resource.Properties.Environment
+    not resource.Properties.KmsKeyArn
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsKeyArn"]
+        ],
+    }
+}
+
 aws_issue["lambda_env"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::lambda::function"
     resource.Properties.Environment
     not startswith(lower(resource.Properties.KmsKeyArn), "arn:")
+}
+
+source_path[{"lambda_env": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    resource.Properties.Environment
+    not startswith(lower(resource.Properties.KmsKeyArn), "arn:")
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsKeyArn"]
+        ],
+    }
 }
 
 lambda_env {
@@ -80,10 +126,32 @@ aws_attribute_absence["lambda_vpc"] {
     not resource.Properties.VpcConfig.SubnetIds
 }
 
+source_path[{"lambda_vpc": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    not resource.Properties.VpcConfig.SubnetIds
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "VpcConfig", "SubnetIds"]
+        ],
+    }
+}
+
 aws_issue["lambda_vpc"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::lambda::function"
     count(resource.Properties.VpcConfig.SubnetIds) == 0
+}
+
+source_path[{"lambda_vpc": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    count(resource.Properties.VpcConfig.SubnetIds) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "VpcConfig", "SubnetIds"]
+        ],
+    }
 }
 
 lambda_vpc {
@@ -132,10 +200,32 @@ aws_attribute_absence["lambda_tracing"] {
     not resource.Properties.TracingConfig.Mode
 }
 
+source_path[{"lambda_tracing": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    not resource.Properties.TracingConfig.Mode
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "TracingConfig", "Mode"]
+        ],
+    }
+}
+
 aws_issue["lambda_tracing"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::lambda::function"
     lower(resource.Properties.TracingConfig.Mode) == "passthrough"
+}
+
+source_path[{"lambda_tracing": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    lower(resource.Properties.TracingConfig.Mode) == "passthrough"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "TracingConfig", "Mode"]
+        ],
+    }
 }
 
 lambda_tracing {
@@ -185,6 +275,17 @@ aws_issue["lambda_concurrent_execution"] {
     not resource.Properties.ReservedConcurrentExecutions
 }
 
+source_path[{"lambda_concurrent_execution": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    not resource.Properties.ReservedConcurrentExecutions
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ReservedConcurrentExecutions"]
+        ],
+    }
+}
+
 lambda_concurrent_execution {
     lower(input.Resources[i].Type) == "aws::lambda::function"
     not aws_issue["lambda_concurrent_execution"]
@@ -222,6 +323,17 @@ aws_issue["lambda_dlq"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::lambda::function"
     not resource.Properties.DeadLetterConfig.TargetArn
+}
+
+source_path[{"lambda_dlq": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    not resource.Properties.DeadLetterConfig.TargetArn
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DeadLetterConfig", "TargetArn"]
+        ],
+    }
 }
 
 lambda_dlq {
