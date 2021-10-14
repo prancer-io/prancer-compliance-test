@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2019-06-01-preview/servers/administrators
 
 #
-# PR-AZR-0085-ARM
+# PR-AZR-ARM-SQL-001
 #
 
 default sql_server_ad_admin = null
@@ -43,7 +43,7 @@ sql_server_ad_admin_miss_err = "SQL servers administrators attribute administrat
 }
 
 sql_server_ad_admin_metadata := {
-    "Policy Code": "PR-AZR-0085-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -55,7 +55,7 @@ sql_server_ad_admin_metadata := {
 }
 
 
-# PR-AZR-0088-ARM
+# PR-AZR-ARM-SQL-002
 #
 
 default sql_logical_server_ad_admin = null
@@ -100,7 +100,7 @@ sql_logical_server_ad_admin_err = "SQL servers currently does not have Azure Act
 }
 
 sql_logical_server_ad_admin_metadata := {
-    "Policy Code": "PR-AZR-0088-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -114,7 +114,7 @@ sql_logical_server_ad_admin_metadata := {
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/administrators?tabs=json
 
 #
-# PR-AZR-0086-ARM
+# PR-AZR-ARM-SQL-003
 #
 # SQL Managed Instance is not available for Terraform yet. see: https://github.com/hashicorp/terraform-provider-azurerm/issues/1747
 default sql_managedinstances_ad_admin = null
@@ -154,7 +154,7 @@ sql_managedinstances_ad_admin_miss_err = "SQL managedInstances administrators at
 }
 
 sql_managedinstances_ad_admin_metadata := {
-    "Policy Code": "PR-AZR-0086-ARM",
+    "PR-AZR-ARM-SQL-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
