@@ -5,7 +5,7 @@ package rule
 #
 
 
-# PR-AZR-0049-ARM
+# PR-AZR-ARM-NTW-001
 #
 
 default netwatchFlowlogs = null
@@ -48,7 +48,7 @@ netwatchFlowlogs_err = "Azure Network Watcher NSG flow log is currently not enab
 
 
 netwatchFlowlogs_metadata := {
-    "Policy Code": "PR-AZR-0049-ARM",
+    "Policy Code": "PR-AZR-ARM-NTW-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -59,7 +59,7 @@ netwatchFlowlogs_metadata := {
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs"
 }
 
-# PR-AZR-0050-ARM
+# PR-AZR-ARM-NTW-002
 #
 
 default netwatch_logs = null
@@ -102,7 +102,7 @@ netwatch_logs_err = "Azure Network Watcher NSG traffic analytics is currently no
 
 
 netwatch_logs_metadata := {
-    "Policy Code": "PR-AZR-0050-ARM",
+    "Policy Code": "PR-AZR-ARM-NTW-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -114,7 +114,7 @@ netwatch_logs_metadata := {
 }
 
 #
-# PR-AZR-0051-ARM
+# PR-AZR-ARM-NTW-003
 #
 
 default netwatch_log_retention = null
@@ -167,7 +167,7 @@ netwatch_log_retention_err = "Azure Network Watcher NSG flow logs retention is c
 
 
 netwatch_log_retention_metadata := {
-    "Policy Code": "PR-AZR-0051-ARM",
+    "Policy Code": "PR-AZR-ARM-NTW-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
