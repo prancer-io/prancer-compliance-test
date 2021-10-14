@@ -242,7 +242,7 @@ azure_attribute_absence["sql_server_administrators"] {
     lower(resource.type) == "microsoft.sql/servers"
     sql_resources := resource.resources[_]
     lower(sql_resources.type) == "administrators"
-    not sql_resources.name
+    not sql_resources.properties.administratorType
 }
 
 azure_issue["sql_server_administrators"] {
@@ -250,7 +250,7 @@ azure_issue["sql_server_administrators"] {
     lower(resource.type) == "microsoft.sql/servers"
     sql_resources := resource.resources[_]
     lower(sql_resources.type) == "administrators"
-    lower(sql_resources.name) != "activedirectory"
+    lower(sql_resources.properties.administratorType) != "activedirectory"
 }
 
 
