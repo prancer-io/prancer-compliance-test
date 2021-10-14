@@ -12,10 +12,32 @@ aws_issue["codebuild_encryption_disable"] {
     resource.Properties.Artifacts.EncryptionDisabled == true
 }
 
+source_path[{"codebuild_encryption_disable": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::codebuild::project"
+    resource.Properties.Artifacts.EncryptionDisabled == true
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Artifacts", "EncryptionDisabled"]
+        ],
+    }
+}
+
 aws_issue["codebuild_encryption_disable"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::codebuild::project"
     lower(resource.Properties.Artifacts.EncryptionDisabled) == "true"
+}
+
+source_path[{"codebuild_encryption_disable": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::codebuild::project"
+    lower(resource.Properties.Artifacts.EncryptionDisabled) == "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Artifacts", "EncryptionDisabled"]
+        ],
+    }
 }
 
 codebuild_encryption_disable {
@@ -56,10 +78,32 @@ aws_issue["codebuild_encryption"] {
     not resource.Properties.EncryptionKey
 }
 
+source_path[{"codebuild_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::codebuild::project"
+    not resource.Properties.EncryptionKey
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionKey"]
+        ],
+    }
+}
+
 aws_issue["codebuild_encryption"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::codebuild::project"
     count(resource.Properties.EncryptionKey) == 0
+}
+
+source_path[{"codebuild_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::codebuild::project"
+    count(resource.Properties.EncryptionKey) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionKey"]
+        ],
+    }
 }
 
 codebuild_encryption {
@@ -100,6 +144,17 @@ aws_attribute_absence["cp_artifact_encrypt"] {
     not resource.Properties.ArtifactStore.EncryptionKey.Id
 }
 
+source_path[{"cp_artifact_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::codepipeline::pipeline"
+    not resource.Properties.ArtifactStore.EncryptionKey.Id
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ArtifactStore", "EncryptionKey", "Id"]
+        ],
+    }
+}
+
 aws_issue["cp_artifact_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::codepipeline::pipeline"
@@ -107,6 +162,17 @@ aws_issue["cp_artifact_encrypt"] {
     lower(resource.Properties.ArtifactStore.EncryptionKey.Type) != "kms"
 }
 
+source_path[{"cp_artifact_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::codepipeline::pipeline"
+    resource.Properties.ArtifactStore.EncryptionKey.Id
+    lower(resource.Properties.ArtifactStore.EncryptionKey.Type) != "kms"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ArtifactStore", "EncryptionKey", "Type"]
+        ],
+    }
+}
 
 cp_artifact_encrypt {
     lower(input.Resources[i].Type) == "aws::codepipeline::pipeline"
@@ -153,6 +219,17 @@ aws_issue["deploy_compute_platform"] {
     not resource.Properties.ComputePlatform
 }
 
+source_path[{"deploy_compute_platform": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::codedeploy::application"
+    not resource.Properties.ComputePlatform
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ComputePlatform"]
+        ],
+    }
+}
+
 aws_issue["deploy_compute_platform"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::codedeploy::application"
@@ -160,6 +237,17 @@ aws_issue["deploy_compute_platform"] {
     lower(resource.Properties.ComputePlatform) != "lambda"
 }
 
+source_path[{"deploy_compute_platform": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::codedeploy::application"
+    lower(resource.Properties.ComputePlatform) != "ecs"
+    lower(resource.Properties.ComputePlatform) != "lambda"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ComputePlatform"]
+        ],
+    }
+}
 
 deploy_compute_platform {
     lower(input.Resources[i].Type) == "aws::codedeploy::application"

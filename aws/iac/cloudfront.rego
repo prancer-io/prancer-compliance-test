@@ -14,10 +14,32 @@ aws_issue["cf_default_cache"] {
     not resource.Properties.DistributionConfig.DefaultCacheBehavior.FieldLevelEncryptionId
 }
 
+source_path[{"cf_default_cache": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudfront::distribution"
+    not resource.Properties.DistributionConfig.DefaultCacheBehavior.FieldLevelEncryptionId
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DistributionConfig", "DefaultCacheBehavior", "FieldLevelEncryptionId"]
+        ],
+    }
+}
+
 aws_issue["cf_default_cache"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudfront::distribution"
     count(resource.Properties.DistributionConfig.DefaultCacheBehavior.FieldLevelEncryptionId) == 0
+}
+
+source_path[{"cf_default_cache": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudfront::distribution"
+    count(resource.Properties.DistributionConfig.DefaultCacheBehavior.FieldLevelEncryptionId) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DistributionConfig", "DefaultCacheBehavior", "FieldLevelEncryptionId"]
+        ],
+    }
 }
 
 cf_default_cache {
@@ -59,11 +81,35 @@ aws_issue["cf_ssl_protocol"] {
     lower(cert.MinimumProtocolVersion) == "sslv3"
 }
 
+source_path[{"cf_ssl_protocol": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudfront::distribution"
+    cert := resource.Properties.DistributionConfig.ViewerCertificate
+    lower(cert.MinimumProtocolVersion) == "sslv3"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DistributionConfig", "ViewerCertificate", "MinimumProtocolVersion"]
+        ],
+    }
+}
+
 aws_issue["cf_ssl_protocol"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudfront::distribution"
-    origins := resource.Properties.DistributionConfig.Origins[_]
-    lower(origins.CustomOriginConfig.OriginSSLProtocols[_]) == "sslv3"
+    origins := resource.Properties.DistributionConfig.Origins[j]
+    lower(origins.CustomOriginConfig.OriginSSLProtocols[k]) == "sslv3"
+}
+
+source_path[{"cf_ssl_protocol": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudfront::distribution"
+    origins := resource.Properties.DistributionConfig.Origins[j]
+    lower(origins.CustomOriginConfig.OriginSSLProtocols[k]) == "sslv3"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DistributionConfig", "Origins", j, "CustomOriginConfig", "OriginSSLProtocols", k]
+        ],
+    }
 }
 
 cf_ssl_protocol {
@@ -104,10 +150,32 @@ aws_issue["cf_logging"] {
     not resource.Properties.DistributionConfig.Logging.Bucket
 }
 
+source_path[{"cf_logging": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudfront::distribution"
+    not resource.Properties.DistributionConfig.Logging.Bucket
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DistributionConfig", "Logging", "Bucket"]
+        ],
+    }
+}
+
 aws_issue["cf_logging"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudfront::distribution"
     count(resource.Properties.DistributionConfig.Logging.Bucket) == 0
+}
+
+source_path[{"cf_logging": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudfront::distribution"
+    count(resource.Properties.DistributionConfig.Logging.Bucket) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DistributionConfig", "Logging", "Bucket"]
+        ],
+    }
 }
 
 cf_logging {
@@ -149,6 +217,18 @@ aws_issue["cf_https_only"] {
     ]) > 0
 }
 
+source_path[{"cf_https_only": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudfront::distribution"
+    origin := resource.Properties.DistributionConfig.Origins[j]
+    lower(origin.CustomOriginConfig.OriginProtocolPolicy) != "https-only"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DistributionConfig", "Origins", j, "CustomOriginConfig", "OriginProtocolPolicy"]
+        ],
+    }
+}
+
 cf_https_only {
     lower(input.Resources[i].Type) == "aws::cloudfront::distribution"
     not aws_issue["cf_https_only"]
@@ -187,12 +267,36 @@ aws_attribute_absence["cf_https"] {
     not resource.Properties.DistributionConfig.DefaultCacheBehavior.ViewerProtocolPolicy
 }
 
+source_path[{"cf_https": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudfront::distribution"
+    not resource.Properties.DistributionConfig.DefaultCacheBehavior.ViewerProtocolPolicy
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DistributionConfig", "DefaultCacheBehavior", "ViewerProtocolPolicy"]
+        ],
+    }
+}
+
 aws_issue["cf_https"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudfront::distribution"
     cache := resource.Properties.DistributionConfig.DefaultCacheBehavior
     lower(cache.ViewerProtocolPolicy) != "https-only"
     lower(cache.ViewerProtocolPolicy) != "redirect-to-https"
+}
+
+source_path[{"cf_https": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudfront::distribution"
+    cache := resource.Properties.DistributionConfig.DefaultCacheBehavior
+    lower(cache.ViewerProtocolPolicy) != "https-only"
+    lower(cache.ViewerProtocolPolicy) != "redirect-to-https"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DistributionConfig", "DefaultCacheBehavior", "ViewerProtocolPolicy"]
+        ],
+    }
 }
 
 cf_https {
@@ -240,11 +344,35 @@ aws_issue["cf_min_protocol"] {
     lower(cert.MinimumProtocolVersion) == "tlsv1"
 }
 
+source_path[{"cf_min_protocol": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudfront::distribution"
+    cert := resource.Properties.DistributionConfig.ViewerCertificate
+    lower(cert.MinimumProtocolVersion) == "tlsv1"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DistributionConfig", "ViewerCertificate", "MinimumProtocolVersion"]
+        ],
+    }
+}
+
 aws_issue["cf_min_protocol"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudfront::distribution"
     cert := resource.Properties.DistributionConfig.ViewerCertificate
     lower(cert.MinimumProtocolVersion) == "tlsv1_2016"
+}
+
+source_path[{"cf_min_protocol": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudfront::distribution"
+    cert := resource.Properties.DistributionConfig.ViewerCertificate
+    lower(cert.MinimumProtocolVersion) == "tlsv1_2016"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DistributionConfig", "ViewerCertificate", "MinimumProtocolVersion"]
+        ],
+    }
 }
 
 cf_min_protocol {
@@ -284,10 +412,32 @@ aws_issue["cf_firewall"] {
     not resource.Properties.DistributionConfig.WebACLId
 }
 
+source_path[{"cf_firewall": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudfront::distribution"
+    not resource.Properties.DistributionConfig.WebACLId
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DistributionConfig", "WebACLId"]
+        ],
+    }
+}
+
 aws_issue["cf_firewall"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudfront::distribution"
     count(resource.Properties.DistributionConfig.WebACLId) == 0
+}
+
+source_path[{"cf_firewall": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudfront::distribution"
+    count(resource.Properties.DistributionConfig.WebACLId) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DistributionConfig", "WebACLId"]
+        ],
+    }
 }
 
 cf_firewall {
@@ -327,10 +477,32 @@ aws_issue["cf_default_ssl"] {
     lower(resource.Properties.DistributionConfig.ViewerCertificate.CloudFrontDefaultCertificate) == "true"
 }
 
+source_path[{"cf_default_ssl": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudfront::distribution"
+    lower(resource.Properties.DistributionConfig.ViewerCertificate.CloudFrontDefaultCertificate) == "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DistributionConfig", "ViewerCertificate", "CloudFrontDefaultCertificate"]
+        ],
+    }
+}
+
 aws_bool_issue["cf_default_ssl"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudfront::distribution"
     resource.Properties.DistributionConfig.ViewerCertificate.CloudFrontDefaultCertificate == true
+}
+
+source_path[{"cf_default_ssl": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudfront::distribution"
+    resource.Properties.DistributionConfig.ViewerCertificate.CloudFrontDefaultCertificate == true
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DistributionConfig", "ViewerCertificate", "CloudFrontDefaultCertificate"]
+        ],
+    }
 }
 
 cf_default_ssl {
@@ -377,10 +549,32 @@ aws_issue["cf_geo_restriction"] {
     not resource.Properties.DistributionConfig.Restrictions
 }
 
+source_path[{"cf_geo_restriction": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudfront::distribution"
+    not resource.Properties.DistributionConfig.Restrictions
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DistributionConfig", "Restrictions"]
+        ],
+    }
+}
+
 aws_issue["cf_geo_restriction"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudfront::distribution"
     lower(resource.Properties.DistributionConfig.Restrictions.GeoRestriction.RestrictionType) == "none"
+}
+
+source_path[{"cf_geo_restriction": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::cloudfront::distribution"
+    lower(resource.Properties.DistributionConfig.Restrictions.GeoRestriction.RestrictionType) == "none"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DistributionConfig", "Restrictions", "GeoRestriction", "RestrictionType"]
+        ],
+    }
 }
 
 cf_geo_restriction {
