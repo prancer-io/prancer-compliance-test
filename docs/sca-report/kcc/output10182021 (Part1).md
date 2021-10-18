@@ -10,12 +10,12 @@ Scan engine: **Prancer Framework** (https://www.prancer.io)
 Compliance Database: https://github.com/prancer-io/prancer-compliance-test/tree/master/google/kcc
 
 ## Compliance run Meta Data
-| Title     | Description                |
-|:----------|:---------------------------|
-| timestamp | 1634201533099              |
-| snapshot  | master-snapshot_gen        |
-| container | scenario-google-kcc        |
-| test      | master-test.json           |
+| Title     | Description         |
+|:----------|:--------------------|
+| timestamp | 1634201533099       |
+| snapshot  | master-snapshot_gen |
+| container | scenario-GCP-KCC    |
+| test      | master-test.json    |
 
 ## Results
 
@@ -34,7 +34,7 @@ Description : Disks on this VM are not encrypted with CMEK or CSEC.\
 | id            | KCC_TEMPLATE_SNAPSHOT92                                                                                                                                                          |
 | structure     | filesystem                                                                                                                                                                       |
 | reference     | master                                                                                                                                                                           |
-| source        | gitConnectorGoogleKcc                                                                                                                                                            |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                             |
 | collection    | kcctemplate                                                                                                                                                                      |
 | type          | kcc                                                                                                                                                                              |
 | region        |                                                                                                                                                                                  |
@@ -71,7 +71,7 @@ Description : Disks on this VM are not encrypted with CMEK or CSEC.\
 | id            | KCC_TEMPLATE_SNAPSHOT93                                                                                                                                                          |
 | structure     | filesystem                                                                                                                                                                       |
 | reference     | master                                                                                                                                                                           |
-| source        | gitConnectorGoogleKcc                                                                                                                                                            |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                             |
 | collection    | kcctemplate                                                                                                                                                                      |
 | type          | kcc                                                                                                                                                                              |
 | region        |                                                                                                                                                                                  |
@@ -108,7 +108,7 @@ Description : Disks on this VM are not encrypted with CMEK or CSEC.\
 | id            | KCC_TEMPLATE_SNAPSHOT95                                                                                                                                       |
 | structure     | filesystem                                                                                                                                                    |
 | reference     | master                                                                                                                                                        |
-| source        | gitConnectorGoogleKcc                                                                                                                                         |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                          |
 | collection    | kcctemplate                                                                                                                                                   |
 | type          | kcc                                                                                                                                                           |
 | region        |                                                                                                                                                               |
@@ -145,7 +145,7 @@ Description : Disks on this VM are not encrypted with CMEK or CSEC.\
 | id            | KCC_TEMPLATE_SNAPSHOT130                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -182,7 +182,7 @@ Description : Disks on this VM are not encrypted with CMEK or CSEC.\
 | id            | KCC_TEMPLATE_SNAPSHOT133                                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                                            |
 | reference     | master                                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                                   |
 | region        |                                                                                                                                                                                       |
@@ -219,7 +219,7 @@ Description : Disks on this VM are not encrypted with CMEK or CSEC.\
 | id            | KCC_TEMPLATE_SNAPSHOT134                                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                                            |
 | reference     | master                                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                                   |
 | region        |                                                                                                                                                                                       |
@@ -256,7 +256,7 @@ Description : Disks on this VM are not encrypted with CMEK or CSEC.\
 | id            | KCC_TEMPLATE_SNAPSHOT140                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -293,7 +293,7 @@ Description : Disks on this VM are not encrypted with CMEK or CSEC.\
 | id            | KCC_TEMPLATE_SNAPSHOT145                                                                                                                                               |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -330,7 +330,7 @@ Description : Disks on this VM are not encrypted with CMEK or CSEC.\
 | id            | KCC_TEMPLATE_SNAPSHOT166                                                                                                                               |
 | structure     | filesystem                                                                                                                                             |
 | reference     | master                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                            |
 | type          | kcc                                                                                                                                                    |
 | region        |                                                                                                                                                        |
@@ -367,7 +367,7 @@ Description : Disks on this VM are not encrypted with CMEK or CSEC.\
 | id            | KCC_TEMPLATE_SNAPSHOT228                                                                                                                       |
 | structure     | filesystem                                                                                                                                     |
 | reference     | master                                                                                                                                         |
-| source        | gitConnectorGoogleKcc                                                                                                                          |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                           |
 | collection    | kcctemplate                                                                                                                                    |
 | type          | kcc                                                                                                                                            |
 | region        |                                                                                                                                                |
@@ -404,7 +404,7 @@ Description : An egress deny rule is not set on a firewall.\
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -441,7 +441,7 @@ Description : An egress deny rule is not set on a firewall.\
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -478,7 +478,7 @@ Description : Firewall rule logging is disabled.\
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -515,7 +515,7 @@ Description : Firewall rule logging is disabled.\
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -552,7 +552,7 @@ Description : A firewall is configured to have an open CASSANDRA port that allow
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -589,7 +589,7 @@ Description : A firewall is configured to have an open CASSANDRA port that allow
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -626,7 +626,7 @@ Description : A firewall is configured to have an open CISCOSECURE_WEBSM port th
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -663,7 +663,7 @@ Description : A firewall is configured to have an open CISCOSECURE_WEBSM port th
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -700,7 +700,7 @@ Description : A firewall is configured to have an open DIRECTORY_SERVICES port t
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -737,7 +737,7 @@ Description : A firewall is configured to have an open DIRECTORY_SERVICES port t
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -774,7 +774,7 @@ Description : A firewall is configured to have an open DNS port that allows gene
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -811,7 +811,7 @@ Description : A firewall is configured to have an open DNS port that allows gene
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -848,7 +848,7 @@ Description : A firewall is configured to have an open ELASTICSEARCH port that a
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -885,7 +885,7 @@ Description : A firewall is configured to have an open ELASTICSEARCH port that a
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -922,7 +922,7 @@ Description : A firewall is configured to be open to public access.\
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -959,7 +959,7 @@ Description : A firewall is configured to be open to public access.\
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -996,7 +996,7 @@ Description : A firewall is configured to have an open FTP port that allows gene
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -1033,7 +1033,7 @@ Description : A firewall is configured to have an open FTP port that allows gene
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -1070,7 +1070,7 @@ Description : A firewall is configured to have an open HTTP port that allows gen
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -1107,7 +1107,7 @@ Description : A firewall is configured to have an open HTTP port that allows gen
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -1144,7 +1144,7 @@ Description : A firewall is configured to have an open LDAP port that allows gen
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -1181,7 +1181,7 @@ Description : A firewall is configured to have an open LDAP port that allows gen
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -1218,7 +1218,7 @@ Description : A firewall is configured to have an open MEMCACHED port that allow
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -1255,7 +1255,7 @@ Description : A firewall is configured to have an open MEMCACHED port that allow
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -1292,7 +1292,7 @@ Description : A firewall is configured to have an open MONGODB port that allows 
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -1329,7 +1329,7 @@ Description : A firewall is configured to have an open MONGODB port that allows 
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -1366,7 +1366,7 @@ Description : A firewall is configured to have an open MySQL port that allows ge
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -1403,7 +1403,7 @@ Description : A firewall is configured to have an open MySQL port that allows ge
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -1440,7 +1440,7 @@ Description : A firewall is configured to have an open NETBIOS port that allows 
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -1477,7 +1477,7 @@ Description : A firewall is configured to have an open NETBIOS port that allows 
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -1514,7 +1514,7 @@ Description : A firewall is configured to have an open ORACLEDB port that allows
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -1551,7 +1551,7 @@ Description : A firewall is configured to have an open ORACLEDB port that allows
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -1588,7 +1588,7 @@ Description : A firewall is configured to have an open POP3 port that allows gen
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -1625,7 +1625,7 @@ Description : A firewall is configured to have an open POP3 port that allows gen
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -1662,7 +1662,7 @@ Description : A firewall is configured to have an open POSTGRESQL port that allo
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -1699,7 +1699,7 @@ Description : A firewall is configured to have an open POSTGRESQL port that allo
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -1736,7 +1736,7 @@ Description : A firewall is configured to have an open RDP port that allows gene
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -1773,7 +1773,7 @@ Description : A firewall is configured to have an open RDP port that allows gene
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -1810,7 +1810,7 @@ Description : A firewall is configured to have an open REDIS port that allows ge
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -1847,7 +1847,7 @@ Description : A firewall is configured to have an open REDIS port that allows ge
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -1884,7 +1884,7 @@ Description : A firewall is configured to have an open SMTP port that allows gen
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -1921,7 +1921,7 @@ Description : A firewall is configured to have an open SMTP port that allows gen
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -1958,7 +1958,7 @@ Description : A firewall is configured to have an open SSH port that allows gene
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -1995,7 +1995,7 @@ Description : A firewall is configured to have an open SSH port that allows gene
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -2032,7 +2032,7 @@ Description : A firewall is configured to have an open TELNET port that allows g
 | id            | KCC_TEMPLATE_SNAPSHOT98                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                             |
 | reference     | master                                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                                            |
 | type          | kcc                                                                                                                                                                    |
 | region        |                                                                                                                                                                        |
@@ -2069,7 +2069,7 @@ Description : A firewall is configured to have an open TELNET port that allows g
 | id            | KCC_TEMPLATE_SNAPSHOT100                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -2106,7 +2106,7 @@ Description : This Shielded VM does not have Secure Boot enabled.\
 | id            | KCC_TEMPLATE_SNAPSHOT135                                                                                                                                                  |
 | structure     | filesystem                                                                                                                                                                |
 | reference     | master                                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                                               |
 | type          | kcc                                                                                                                                                                       |
 | region        |                                                                                                                                                                           |
@@ -2143,7 +2143,7 @@ Description : This Shielded VM does not have Secure Boot enabled.\
 | id            | KCC_TEMPLATE_SNAPSHOT141                                                                                                                                                  |
 | structure     | filesystem                                                                                                                                                                |
 | reference     | master                                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                                               |
 | type          | kcc                                                                                                                                                                       |
 | region        |                                                                                                                                                                           |
@@ -2180,7 +2180,7 @@ Description : This Shielded VM does not have Secure Boot enabled.\
 | id            | KCC_TEMPLATE_SNAPSHOT146                                                                                                                                                   |
 | structure     | filesystem                                                                                                                                                                 |
 | reference     | master                                                                                                                                                                     |
-| source        | gitConnectorGoogleKcc                                                                                                                                                      |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                       |
 | collection    | kcctemplate                                                                                                                                                                |
 | type          | kcc                                                                                                                                                                        |
 | region        |                                                                                                                                                                            |
@@ -2217,7 +2217,7 @@ Description : This Shielded VM does not have Secure Boot enabled.\
 | id            | KCC_TEMPLATE_SNAPSHOT150                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                              |
 | reference     | master                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                     |
 | region        |                                                                                                                                                                         |
@@ -2254,7 +2254,7 @@ Description : This Shielded VM does not have Secure Boot enabled.\
 | id            | KCC_TEMPLATE_SNAPSHOT151                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                              |
 | reference     | master                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                     |
 | region        |                                                                                                                                                                         |
@@ -2291,7 +2291,7 @@ Description : This Shielded VM does not have Secure Boot enabled.\
 | id            | KCC_TEMPLATE_SNAPSHOT251                                                                                                                                 |
 | structure     | filesystem                                                                                                                                               |
 | reference     | master                                                                                                                                                   |
-| source        | gitConnectorGoogleKcc                                                                                                                                    |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                     |
 | collection    | kcctemplate                                                                                                                                              |
 | type          | kcc                                                                                                                                                      |
 | region        |                                                                                                                                                          |
@@ -2328,7 +2328,7 @@ Description : This Shielded VM does not have Secure Boot enabled.\
 | id            | KCC_TEMPLATE_SNAPSHOT256                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -2365,7 +2365,7 @@ Description : This Shielded VM does not have Secure Boot enabled.\
 | id            | KCC_TEMPLATE_SNAPSHOT257                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -2402,7 +2402,7 @@ Description : This Shielded VM does not have Secure Boot enabled.\
 | id            | KCC_TEMPLATE_SNAPSHOT258                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -2439,7 +2439,7 @@ Description : This Shielded VM does not have Secure Boot enabled.\
 | id            | KCC_TEMPLATE_SNAPSHOT259                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -2476,7 +2476,7 @@ Description : Serial ports are enabled for an instance, allowing connections to 
 | id            | KCC_TEMPLATE_SNAPSHOT135                                                                                                                                                  |
 | structure     | filesystem                                                                                                                                                                |
 | reference     | master                                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                                               |
 | type          | kcc                                                                                                                                                                       |
 | region        |                                                                                                                                                                           |
@@ -2513,7 +2513,7 @@ Description : Serial ports are enabled for an instance, allowing connections to 
 | id            | KCC_TEMPLATE_SNAPSHOT141                                                                                                                                                  |
 | structure     | filesystem                                                                                                                                                                |
 | reference     | master                                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                                               |
 | type          | kcc                                                                                                                                                                       |
 | region        |                                                                                                                                                                           |
@@ -2550,7 +2550,7 @@ Description : Serial ports are enabled for an instance, allowing connections to 
 | id            | KCC_TEMPLATE_SNAPSHOT146                                                                                                                                                   |
 | structure     | filesystem                                                                                                                                                                 |
 | reference     | master                                                                                                                                                                     |
-| source        | gitConnectorGoogleKcc                                                                                                                                                      |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                       |
 | collection    | kcctemplate                                                                                                                                                                |
 | type          | kcc                                                                                                                                                                        |
 | region        |                                                                                                                                                                            |
@@ -2587,7 +2587,7 @@ Description : Serial ports are enabled for an instance, allowing connections to 
 | id            | KCC_TEMPLATE_SNAPSHOT150                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                              |
 | reference     | master                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                     |
 | region        |                                                                                                                                                                         |
@@ -2624,7 +2624,7 @@ Description : Serial ports are enabled for an instance, allowing connections to 
 | id            | KCC_TEMPLATE_SNAPSHOT151                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                              |
 | reference     | master                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                     |
 | region        |                                                                                                                                                                         |
@@ -2661,7 +2661,7 @@ Description : Serial ports are enabled for an instance, allowing connections to 
 | id            | KCC_TEMPLATE_SNAPSHOT251                                                                                                                                 |
 | structure     | filesystem                                                                                                                                               |
 | reference     | master                                                                                                                                                   |
-| source        | gitConnectorGoogleKcc                                                                                                                                    |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                     |
 | collection    | kcctemplate                                                                                                                                              |
 | type          | kcc                                                                                                                                                      |
 | region        |                                                                                                                                                          |
@@ -2698,7 +2698,7 @@ Description : Serial ports are enabled for an instance, allowing connections to 
 | id            | KCC_TEMPLATE_SNAPSHOT256                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -2735,7 +2735,7 @@ Description : Serial ports are enabled for an instance, allowing connections to 
 | id            | KCC_TEMPLATE_SNAPSHOT257                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -2772,7 +2772,7 @@ Description : Serial ports are enabled for an instance, allowing connections to 
 | id            | KCC_TEMPLATE_SNAPSHOT258                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -2809,7 +2809,7 @@ Description : Serial ports are enabled for an instance, allowing connections to 
 | id            | KCC_TEMPLATE_SNAPSHOT259                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -2846,7 +2846,7 @@ Description : IP forwarding is enabled on instances.\
 | id            | KCC_TEMPLATE_SNAPSHOT135                                                                                                                                                  |
 | structure     | filesystem                                                                                                                                                                |
 | reference     | master                                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                                               |
 | type          | kcc                                                                                                                                                                       |
 | region        |                                                                                                                                                                           |
@@ -2883,7 +2883,7 @@ Description : IP forwarding is enabled on instances.\
 | id            | KCC_TEMPLATE_SNAPSHOT141                                                                                                                                                  |
 | structure     | filesystem                                                                                                                                                                |
 | reference     | master                                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                                               |
 | type          | kcc                                                                                                                                                                       |
 | region        |                                                                                                                                                                           |
@@ -2920,7 +2920,7 @@ Description : IP forwarding is enabled on instances.\
 | id            | KCC_TEMPLATE_SNAPSHOT146                                                                                                                                                   |
 | structure     | filesystem                                                                                                                                                                 |
 | reference     | master                                                                                                                                                                     |
-| source        | gitConnectorGoogleKcc                                                                                                                                                      |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                       |
 | collection    | kcctemplate                                                                                                                                                                |
 | type          | kcc                                                                                                                                                                        |
 | region        |                                                                                                                                                                            |
@@ -2957,7 +2957,7 @@ Description : IP forwarding is enabled on instances.\
 | id            | KCC_TEMPLATE_SNAPSHOT150                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                              |
 | reference     | master                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                     |
 | region        |                                                                                                                                                                         |
@@ -2994,7 +2994,7 @@ Description : IP forwarding is enabled on instances.\
 | id            | KCC_TEMPLATE_SNAPSHOT151                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                              |
 | reference     | master                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                     |
 | region        |                                                                                                                                                                         |
@@ -3031,7 +3031,7 @@ Description : IP forwarding is enabled on instances.\
 | id            | KCC_TEMPLATE_SNAPSHOT251                                                                                                                                 |
 | structure     | filesystem                                                                                                                                               |
 | reference     | master                                                                                                                                                   |
-| source        | gitConnectorGoogleKcc                                                                                                                                    |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                     |
 | collection    | kcctemplate                                                                                                                                              |
 | type          | kcc                                                                                                                                                      |
 | region        |                                                                                                                                                          |
@@ -3068,7 +3068,7 @@ Description : IP forwarding is enabled on instances.\
 | id            | KCC_TEMPLATE_SNAPSHOT256                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -3105,7 +3105,7 @@ Description : IP forwarding is enabled on instances.\
 | id            | KCC_TEMPLATE_SNAPSHOT257                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -3142,7 +3142,7 @@ Description : IP forwarding is enabled on instances.\
 | id            | KCC_TEMPLATE_SNAPSHOT258                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -3179,7 +3179,7 @@ Description : IP forwarding is enabled on instances.\
 | id            | KCC_TEMPLATE_SNAPSHOT259                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -3216,7 +3216,7 @@ Description : OS Login is disabled on this instance.\
 | id            | KCC_TEMPLATE_SNAPSHOT135                                                                                                                                                  |
 | structure     | filesystem                                                                                                                                                                |
 | reference     | master                                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                                               |
 | type          | kcc                                                                                                                                                                       |
 | region        |                                                                                                                                                                           |
@@ -3253,7 +3253,7 @@ Description : OS Login is disabled on this instance.\
 | id            | KCC_TEMPLATE_SNAPSHOT141                                                                                                                                                  |
 | structure     | filesystem                                                                                                                                                                |
 | reference     | master                                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                                               |
 | type          | kcc                                                                                                                                                                       |
 | region        |                                                                                                                                                                           |
@@ -3290,7 +3290,7 @@ Description : OS Login is disabled on this instance.\
 | id            | KCC_TEMPLATE_SNAPSHOT146                                                                                                                                                   |
 | structure     | filesystem                                                                                                                                                                 |
 | reference     | master                                                                                                                                                                     |
-| source        | gitConnectorGoogleKcc                                                                                                                                                      |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                       |
 | collection    | kcctemplate                                                                                                                                                                |
 | type          | kcc                                                                                                                                                                        |
 | region        |                                                                                                                                                                            |
@@ -3327,7 +3327,7 @@ Description : OS Login is disabled on this instance.\
 | id            | KCC_TEMPLATE_SNAPSHOT150                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                              |
 | reference     | master                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                     |
 | region        |                                                                                                                                                                         |
@@ -3364,7 +3364,7 @@ Description : OS Login is disabled on this instance.\
 | id            | KCC_TEMPLATE_SNAPSHOT151                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                              |
 | reference     | master                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                     |
 | region        |                                                                                                                                                                         |
@@ -3401,7 +3401,7 @@ Description : OS Login is disabled on this instance.\
 | id            | KCC_TEMPLATE_SNAPSHOT251                                                                                                                                 |
 | structure     | filesystem                                                                                                                                               |
 | reference     | master                                                                                                                                                   |
-| source        | gitConnectorGoogleKcc                                                                                                                                    |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                     |
 | collection    | kcctemplate                                                                                                                                              |
 | type          | kcc                                                                                                                                                      |
 | region        |                                                                                                                                                          |
@@ -3438,7 +3438,7 @@ Description : OS Login is disabled on this instance.\
 | id            | KCC_TEMPLATE_SNAPSHOT256                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -3475,7 +3475,7 @@ Description : OS Login is disabled on this instance.\
 | id            | KCC_TEMPLATE_SNAPSHOT257                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -3512,7 +3512,7 @@ Description : OS Login is disabled on this instance.\
 | id            | KCC_TEMPLATE_SNAPSHOT258                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -3549,7 +3549,7 @@ Description : OS Login is disabled on this instance.\
 | id            | KCC_TEMPLATE_SNAPSHOT259                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -3586,7 +3586,7 @@ Description : An instance has a public IP address.\
 | id            | KCC_TEMPLATE_SNAPSHOT135                                                                                                                                                  |
 | structure     | filesystem                                                                                                                                                                |
 | reference     | master                                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                                               |
 | type          | kcc                                                                                                                                                                       |
 | region        |                                                                                                                                                                           |
@@ -3623,7 +3623,7 @@ Description : An instance has a public IP address.\
 | id            | KCC_TEMPLATE_SNAPSHOT141                                                                                                                                                  |
 | structure     | filesystem                                                                                                                                                                |
 | reference     | master                                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                                               |
 | type          | kcc                                                                                                                                                                       |
 | region        |                                                                                                                                                                           |
@@ -3660,7 +3660,7 @@ Description : An instance has a public IP address.\
 | id            | KCC_TEMPLATE_SNAPSHOT146                                                                                                                                                   |
 | structure     | filesystem                                                                                                                                                                 |
 | reference     | master                                                                                                                                                                     |
-| source        | gitConnectorGoogleKcc                                                                                                                                                      |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                       |
 | collection    | kcctemplate                                                                                                                                                                |
 | type          | kcc                                                                                                                                                                        |
 | region        |                                                                                                                                                                            |
@@ -3697,7 +3697,7 @@ Description : An instance has a public IP address.\
 | id            | KCC_TEMPLATE_SNAPSHOT150                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                              |
 | reference     | master                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                     |
 | region        |                                                                                                                                                                         |
@@ -3734,7 +3734,7 @@ Description : An instance has a public IP address.\
 | id            | KCC_TEMPLATE_SNAPSHOT151                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                              |
 | reference     | master                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                     |
 | region        |                                                                                                                                                                         |
@@ -3771,7 +3771,7 @@ Description : An instance has a public IP address.\
 | id            | KCC_TEMPLATE_SNAPSHOT251                                                                                                                                 |
 | structure     | filesystem                                                                                                                                               |
 | reference     | master                                                                                                                                                   |
-| source        | gitConnectorGoogleKcc                                                                                                                                    |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                     |
 | collection    | kcctemplate                                                                                                                                              |
 | type          | kcc                                                                                                                                                      |
 | region        |                                                                                                                                                          |
@@ -3808,7 +3808,7 @@ Description : An instance has a public IP address.\
 | id            | KCC_TEMPLATE_SNAPSHOT256                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -3845,7 +3845,7 @@ Description : An instance has a public IP address.\
 | id            | KCC_TEMPLATE_SNAPSHOT257                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -3882,7 +3882,7 @@ Description : An instance has a public IP address.\
 | id            | KCC_TEMPLATE_SNAPSHOT258                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -3919,7 +3919,7 @@ Description : An instance has a public IP address.\
 | id            | KCC_TEMPLATE_SNAPSHOT259                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -3956,7 +3956,7 @@ Description : Shielded VM is disabled on this instance.\
 | id            | KCC_TEMPLATE_SNAPSHOT135                                                                                                                                                  |
 | structure     | filesystem                                                                                                                                                                |
 | reference     | master                                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                                               |
 | type          | kcc                                                                                                                                                                       |
 | region        |                                                                                                                                                                           |
@@ -3993,7 +3993,7 @@ Description : Shielded VM is disabled on this instance.\
 | id            | KCC_TEMPLATE_SNAPSHOT141                                                                                                                                                  |
 | structure     | filesystem                                                                                                                                                                |
 | reference     | master                                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                                               |
 | type          | kcc                                                                                                                                                                       |
 | region        |                                                                                                                                                                           |
@@ -4030,7 +4030,7 @@ Description : Shielded VM is disabled on this instance.\
 | id            | KCC_TEMPLATE_SNAPSHOT146                                                                                                                                                   |
 | structure     | filesystem                                                                                                                                                                 |
 | reference     | master                                                                                                                                                                     |
-| source        | gitConnectorGoogleKcc                                                                                                                                                      |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                       |
 | collection    | kcctemplate                                                                                                                                                                |
 | type          | kcc                                                                                                                                                                        |
 | region        |                                                                                                                                                                            |
@@ -4067,7 +4067,7 @@ Description : Shielded VM is disabled on this instance.\
 | id            | KCC_TEMPLATE_SNAPSHOT150                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                              |
 | reference     | master                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                     |
 | region        |                                                                                                                                                                         |
@@ -4104,7 +4104,7 @@ Description : Shielded VM is disabled on this instance.\
 | id            | KCC_TEMPLATE_SNAPSHOT151                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                              |
 | reference     | master                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                     |
 | region        |                                                                                                                                                                         |
@@ -4141,7 +4141,7 @@ Description : Shielded VM is disabled on this instance.\
 | id            | KCC_TEMPLATE_SNAPSHOT251                                                                                                                                 |
 | structure     | filesystem                                                                                                                                               |
 | reference     | master                                                                                                                                                   |
-| source        | gitConnectorGoogleKcc                                                                                                                                    |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                     |
 | collection    | kcctemplate                                                                                                                                              |
 | type          | kcc                                                                                                                                                      |
 | region        |                                                                                                                                                          |
@@ -4178,7 +4178,7 @@ Description : Shielded VM is disabled on this instance.\
 | id            | KCC_TEMPLATE_SNAPSHOT256                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -4215,7 +4215,7 @@ Description : Shielded VM is disabled on this instance.\
 | id            | KCC_TEMPLATE_SNAPSHOT257                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -4252,7 +4252,7 @@ Description : Shielded VM is disabled on this instance.\
 | id            | KCC_TEMPLATE_SNAPSHOT258                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -4289,7 +4289,7 @@ Description : Shielded VM is disabled on this instance.\
 | id            | KCC_TEMPLATE_SNAPSHOT259                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -4326,7 +4326,7 @@ Description : A Compute Engine resource is out of compliance with the constraint
 | id            | KCC_TEMPLATE_SNAPSHOT135                                                                                                                                                  |
 | structure     | filesystem                                                                                                                                                                |
 | reference     | master                                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                                               |
 | type          | kcc                                                                                                                                                                       |
 | region        |                                                                                                                                                                           |
@@ -4363,7 +4363,7 @@ Description : A Compute Engine resource is out of compliance with the constraint
 | id            | KCC_TEMPLATE_SNAPSHOT141                                                                                                                                                  |
 | structure     | filesystem                                                                                                                                                                |
 | reference     | master                                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                                               |
 | type          | kcc                                                                                                                                                                       |
 | region        |                                                                                                                                                                           |
@@ -4400,7 +4400,7 @@ Description : A Compute Engine resource is out of compliance with the constraint
 | id            | KCC_TEMPLATE_SNAPSHOT146                                                                                                                                                   |
 | structure     | filesystem                                                                                                                                                                 |
 | reference     | master                                                                                                                                                                     |
-| source        | gitConnectorGoogleKcc                                                                                                                                                      |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                       |
 | collection    | kcctemplate                                                                                                                                                                |
 | type          | kcc                                                                                                                                                                        |
 | region        |                                                                                                                                                                            |
@@ -4437,7 +4437,7 @@ Description : A Compute Engine resource is out of compliance with the constraint
 | id            | KCC_TEMPLATE_SNAPSHOT150                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                              |
 | reference     | master                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                     |
 | region        |                                                                                                                                                                         |
@@ -4474,7 +4474,7 @@ Description : A Compute Engine resource is out of compliance with the constraint
 | id            | KCC_TEMPLATE_SNAPSHOT151                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                              |
 | reference     | master                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                     |
 | region        |                                                                                                                                                                         |
@@ -4511,7 +4511,7 @@ Description : A Compute Engine resource is out of compliance with the constraint
 | id            | KCC_TEMPLATE_SNAPSHOT251                                                                                                                                 |
 | structure     | filesystem                                                                                                                                               |
 | reference     | master                                                                                                                                                   |
-| source        | gitConnectorGoogleKcc                                                                                                                                    |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                     |
 | collection    | kcctemplate                                                                                                                                              |
 | type          | kcc                                                                                                                                                      |
 | region        |                                                                                                                                                          |
@@ -4548,7 +4548,7 @@ Description : A Compute Engine resource is out of compliance with the constraint
 | id            | KCC_TEMPLATE_SNAPSHOT256                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -4585,7 +4585,7 @@ Description : A Compute Engine resource is out of compliance with the constraint
 | id            | KCC_TEMPLATE_SNAPSHOT257                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -4622,7 +4622,7 @@ Description : A Compute Engine resource is out of compliance with the constraint
 | id            | KCC_TEMPLATE_SNAPSHOT258                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -4659,7 +4659,7 @@ Description : A Compute Engine resource is out of compliance with the constraint
 | id            | KCC_TEMPLATE_SNAPSHOT259                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -4696,7 +4696,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT73                                                                                                                                                 |
 | structure     | filesystem                                                                                                                                                              |
 | reference     | master                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                     |
 | region        |                                                                                                                                                                         |
@@ -4733,7 +4733,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT75                                                                                                                                                   |
 | structure     | filesystem                                                                                                                                                                |
 | reference     | master                                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                                               |
 | type          | kcc                                                                                                                                                                       |
 | region        |                                                                                                                                                                           |
@@ -4770,7 +4770,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT84                                                                                                                                                                         |
 | structure     | filesystem                                                                                                                                                                                      |
 | reference     | master                                                                                                                                                                                          |
-| source        | gitConnectorGoogleKcc                                                                                                                                                                           |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                                            |
 | collection    | kcctemplate                                                                                                                                                                                     |
 | type          | kcc                                                                                                                                                                                             |
 | region        |                                                                                                                                                                                                 |
@@ -4807,7 +4807,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT91                                                                                                                                                                                 |
 | structure     | filesystem                                                                                                                                                                                              |
 | reference     | master                                                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                                                     |
 | region        |                                                                                                                                                                                                         |
@@ -4844,7 +4844,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT99                                                                                                                                               |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -4881,7 +4881,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT101                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -4918,7 +4918,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT124                                                                                                                                                         |
 | structure     | filesystem                                                                                                                                                                       |
 | reference     | master                                                                                                                                                                           |
-| source        | gitConnectorGoogleKcc                                                                                                                                                            |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                             |
 | collection    | kcctemplate                                                                                                                                                                      |
 | type          | kcc                                                                                                                                                                              |
 | region        |                                                                                                                                                                                  |
@@ -4955,7 +4955,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT136                                                                                                                                                 |
 | structure     | filesystem                                                                                                                                                               |
 | reference     | master                                                                                                                                                                   |
-| source        | gitConnectorGoogleKcc                                                                                                                                                    |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                     |
 | collection    | kcctemplate                                                                                                                                                              |
 | type          | kcc                                                                                                                                                                      |
 | region        |                                                                                                                                                                          |
@@ -4992,7 +4992,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT143                                                                                                                                                 |
 | structure     | filesystem                                                                                                                                                               |
 | reference     | master                                                                                                                                                                   |
-| source        | gitConnectorGoogleKcc                                                                                                                                                    |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                     |
 | collection    | kcctemplate                                                                                                                                                              |
 | type          | kcc                                                                                                                                                                      |
 | region        |                                                                                                                                                                          |
@@ -5029,7 +5029,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT147                                                                                                                                                  |
 | structure     | filesystem                                                                                                                                                                |
 | reference     | master                                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                                               |
 | type          | kcc                                                                                                                                                                       |
 | region        |                                                                                                                                                                           |
@@ -5066,7 +5066,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT154                                                                                                                               |
 | structure     | filesystem                                                                                                                                             |
 | reference     | master                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                            |
 | type          | kcc                                                                                                                                                    |
 | region        |                                                                                                                                                        |
@@ -5103,7 +5103,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT159                                                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                                                            |
 | reference     | master                                                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                                                   |
 | region        |                                                                                                                                                                                                       |
@@ -5140,7 +5140,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT164                                                                                                                                                                           |
 | structure     | filesystem                                                                                                                                                                                         |
 | reference     | master                                                                                                                                                                                             |
-| source        | gitConnectorGoogleKcc                                                                                                                                                                              |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                                               |
 | collection    | kcctemplate                                                                                                                                                                                        |
 | type          | kcc                                                                                                                                                                                                |
 | region        |                                                                                                                                                                                                    |
@@ -5177,7 +5177,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT169                                                                                                                                  |
 | structure     | filesystem                                                                                                                                                |
 | reference     | master                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                               |
 | type          | kcc                                                                                                                                                       |
 | region        |                                                                                                                                                           |
@@ -5214,7 +5214,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT173                                                                                                                                        |
 | structure     | filesystem                                                                                                                                                      |
 | reference     | master                                                                                                                                                          |
-| source        | gitConnectorGoogleKcc                                                                                                                                           |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                            |
 | collection    | kcctemplate                                                                                                                                                     |
 | type          | kcc                                                                                                                                                             |
 | region        |                                                                                                                                                                 |
@@ -5251,7 +5251,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT175                                                                                                                         |
 | structure     | filesystem                                                                                                                                       |
 | reference     | master                                                                                                                                           |
-| source        | gitConnectorGoogleKcc                                                                                                                            |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                             |
 | collection    | kcctemplate                                                                                                                                      |
 | type          | kcc                                                                                                                                              |
 | region        |                                                                                                                                                  |
@@ -5288,7 +5288,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT176                                                                                                                                      |
 | structure     | filesystem                                                                                                                                                    |
 | reference     | master                                                                                                                                                        |
-| source        | gitConnectorGoogleKcc                                                                                                                                         |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                          |
 | collection    | kcctemplate                                                                                                                                                   |
 | type          | kcc                                                                                                                                                           |
 | region        |                                                                                                                                                               |
@@ -5325,7 +5325,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT179                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                              |
 | reference     | master                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                     |
 | region        |                                                                                                                                                                         |
@@ -5362,7 +5362,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT180                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                              |
 | reference     | master                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                     |
 | region        |                                                                                                                                                                         |
@@ -5399,7 +5399,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT193                                                                                                                       |
 | structure     | filesystem                                                                                                                                     |
 | reference     | master                                                                                                                                         |
-| source        | gitConnectorGoogleKcc                                                                                                                          |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                           |
 | collection    | kcctemplate                                                                                                                                    |
 | type          | kcc                                                                                                                                            |
 | region        |                                                                                                                                                |
@@ -5436,7 +5436,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT195                                                                                                                        |
 | structure     | filesystem                                                                                                                                      |
 | reference     | master                                                                                                                                          |
-| source        | gitConnectorGoogleKcc                                                                                                                           |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                            |
 | collection    | kcctemplate                                                                                                                                     |
 | type          | kcc                                                                                                                                             |
 | region        |                                                                                                                                                 |
@@ -5473,7 +5473,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT201                                                                                                                                 |
 | structure     | filesystem                                                                                                                                               |
 | reference     | master                                                                                                                                                   |
-| source        | gitConnectorGoogleKcc                                                                                                                                    |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                     |
 | collection    | kcctemplate                                                                                                                                              |
 | type          | kcc                                                                                                                                                      |
 | region        |                                                                                                                                                          |
@@ -5510,7 +5510,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT207                                                                                                                                                      |
 | structure     | filesystem                                                                                                                                                                    |
 | reference     | master                                                                                                                                                                        |
-| source        | gitConnectorGoogleKcc                                                                                                                                                         |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                          |
 | collection    | kcctemplate                                                                                                                                                                   |
 | type          | kcc                                                                                                                                                                           |
 | region        |                                                                                                                                                                               |
@@ -5547,7 +5547,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT210                                                                                                                                                          |
 | structure     | filesystem                                                                                                                                                                        |
 | reference     | master                                                                                                                                                                            |
-| source        | gitConnectorGoogleKcc                                                                                                                                                             |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                              |
 | collection    | kcctemplate                                                                                                                                                                       |
 | type          | kcc                                                                                                                                                                               |
 | region        |                                                                                                                                                                                   |
@@ -5584,7 +5584,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT215                                                                                                                                                          |
 | structure     | filesystem                                                                                                                                                                        |
 | reference     | master                                                                                                                                                                            |
-| source        | gitConnectorGoogleKcc                                                                                                                                                             |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                              |
 | collection    | kcctemplate                                                                                                                                                                       |
 | type          | kcc                                                                                                                                                                               |
 | region        |                                                                                                                                                                                   |
@@ -5621,7 +5621,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT218                                                                                                                            |
 | structure     | filesystem                                                                                                                                          |
 | reference     | master                                                                                                                                              |
-| source        | gitConnectorGoogleKcc                                                                                                                               |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                |
 | collection    | kcctemplate                                                                                                                                         |
 | type          | kcc                                                                                                                                                 |
 | region        |                                                                                                                                                     |
@@ -5658,7 +5658,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT235                                                                                                                            |
 | structure     | filesystem                                                                                                                                          |
 | reference     | master                                                                                                                                              |
-| source        | gitConnectorGoogleKcc                                                                                                                               |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                |
 | collection    | kcctemplate                                                                                                                                         |
 | type          | kcc                                                                                                                                                 |
 | region        |                                                                                                                                                     |
@@ -5695,7 +5695,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT252                                                                                                                                |
 | structure     | filesystem                                                                                                                                              |
 | reference     | master                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                             |
 | type          | kcc                                                                                                                                                     |
 | region        |                                                                                                                                                         |
@@ -5732,7 +5732,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT261                                                                                                                            |
 | structure     | filesystem                                                                                                                                          |
 | reference     | master                                                                                                                                              |
-| source        | gitConnectorGoogleKcc                                                                                                                               |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                |
 | collection    | kcctemplate                                                                                                                                         |
 | type          | kcc                                                                                                                                                 |
 | region        |                                                                                                                                                     |
@@ -5769,7 +5769,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT274                                                                                                                                  |
 | structure     | filesystem                                                                                                                                                |
 | reference     | master                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                               |
 | type          | kcc                                                                                                                                                       |
 | region        |                                                                                                                                                           |
@@ -5806,7 +5806,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT286                                                                                                                            |
 | structure     | filesystem                                                                                                                                          |
 | reference     | master                                                                                                                                              |
-| source        | gitConnectorGoogleKcc                                                                                                                               |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                |
 | collection    | kcctemplate                                                                                                                                         |
 | type          | kcc                                                                                                                                                 |
 | region        |                                                                                                                                                     |
@@ -5843,7 +5843,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT292                                                                                                                           |
 | structure     | filesystem                                                                                                                                         |
 | reference     | master                                                                                                                                             |
-| source        | gitConnectorGoogleKcc                                                                                                                              |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                               |
 | collection    | kcctemplate                                                                                                                                        |
 | type          | kcc                                                                                                                                                |
 | region        |                                                                                                                                                    |
@@ -5880,7 +5880,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT298                                                                                                                                                        |
 | structure     | filesystem                                                                                                                                                                      |
 | reference     | master                                                                                                                                                                          |
-| source        | gitConnectorGoogleKcc                                                                                                                                                           |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                            |
 | collection    | kcctemplate                                                                                                                                                                     |
 | type          | kcc                                                                                                                                                                             |
 | region        |                                                                                                                                                                                 |
@@ -5917,7 +5917,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT319                                                                                                                             |
 | structure     | filesystem                                                                                                                                           |
 | reference     | master                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                          |
 | type          | kcc                                                                                                                                                  |
 | region        |                                                                                                                                                      |
@@ -5954,7 +5954,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT328                                                                                                                         |
 | structure     | filesystem                                                                                                                                       |
 | reference     | master                                                                                                                                           |
-| source        | gitConnectorGoogleKcc                                                                                                                            |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                             |
 | collection    | kcctemplate                                                                                                                                      |
 | type          | kcc                                                                                                                                              |
 | region        |                                                                                                                                                  |
@@ -5991,7 +5991,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT330                                                                                                                    |
 | structure     | filesystem                                                                                                                                  |
 | reference     | master                                                                                                                                      |
-| source        | gitConnectorGoogleKcc                                                                                                                       |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                        |
 | collection    | kcctemplate                                                                                                                                 |
 | type          | kcc                                                                                                                                         |
 | region        |                                                                                                                                             |
@@ -6028,7 +6028,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT458                                                                                                                           |
 | structure     | filesystem                                                                                                                                         |
 | reference     | master                                                                                                                                             |
-| source        | gitConnectorGoogleKcc                                                                                                                              |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                               |
 | collection    | kcctemplate                                                                                                                                        |
 | type          | kcc                                                                                                                                                |
 | region        |                                                                                                                                                    |
@@ -6065,7 +6065,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT504                                                                                                                                      |
 | structure     | filesystem                                                                                                                                                    |
 | reference     | master                                                                                                                                                        |
-| source        | gitConnectorGoogleKcc                                                                                                                                         |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                          |
 | collection    | kcctemplate                                                                                                                                                   |
 | type          | kcc                                                                                                                                                           |
 | region        |                                                                                                                                                               |
@@ -6102,7 +6102,7 @@ Description : The default network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT520                                                                                                                                          |
 | structure     | filesystem                                                                                                                                                        |
 | reference     | master                                                                                                                                                            |
-| source        | gitConnectorGoogleKcc                                                                                                                                             |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                              |
 | collection    | kcctemplate                                                                                                                                                       |
 | type          | kcc                                                                                                                                                               |
 | region        |                                                                                                                                                                   |
@@ -6139,7 +6139,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT73                                                                                                                                                 |
 | structure     | filesystem                                                                                                                                                              |
 | reference     | master                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                     |
 | region        |                                                                                                                                                                         |
@@ -6176,7 +6176,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT75                                                                                                                                                   |
 | structure     | filesystem                                                                                                                                                                |
 | reference     | master                                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                                               |
 | type          | kcc                                                                                                                                                                       |
 | region        |                                                                                                                                                                           |
@@ -6213,7 +6213,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT84                                                                                                                                                                         |
 | structure     | filesystem                                                                                                                                                                                      |
 | reference     | master                                                                                                                                                                                          |
-| source        | gitConnectorGoogleKcc                                                                                                                                                                           |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                                            |
 | collection    | kcctemplate                                                                                                                                                                                     |
 | type          | kcc                                                                                                                                                                                             |
 | region        |                                                                                                                                                                                                 |
@@ -6250,7 +6250,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT91                                                                                                                                                                                 |
 | structure     | filesystem                                                                                                                                                                                              |
 | reference     | master                                                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                                                     |
 | region        |                                                                                                                                                                                                         |
@@ -6287,7 +6287,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT99                                                                                                                                               |
 | structure     | filesystem                                                                                                                                                            |
 | reference     | master                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                   |
 | region        |                                                                                                                                                                       |
@@ -6324,7 +6324,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT101                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                           |
 | reference     | master                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                  |
 | region        |                                                                                                                                                                      |
@@ -6361,7 +6361,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT124                                                                                                                                                         |
 | structure     | filesystem                                                                                                                                                                       |
 | reference     | master                                                                                                                                                                           |
-| source        | gitConnectorGoogleKcc                                                                                                                                                            |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                             |
 | collection    | kcctemplate                                                                                                                                                                      |
 | type          | kcc                                                                                                                                                                              |
 | region        |                                                                                                                                                                                  |
@@ -6398,7 +6398,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT136                                                                                                                                                 |
 | structure     | filesystem                                                                                                                                                               |
 | reference     | master                                                                                                                                                                   |
-| source        | gitConnectorGoogleKcc                                                                                                                                                    |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                     |
 | collection    | kcctemplate                                                                                                                                                              |
 | type          | kcc                                                                                                                                                                      |
 | region        |                                                                                                                                                                          |
@@ -6435,7 +6435,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT143                                                                                                                                                 |
 | structure     | filesystem                                                                                                                                                               |
 | reference     | master                                                                                                                                                                   |
-| source        | gitConnectorGoogleKcc                                                                                                                                                    |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                     |
 | collection    | kcctemplate                                                                                                                                                              |
 | type          | kcc                                                                                                                                                                      |
 | region        |                                                                                                                                                                          |
@@ -6472,7 +6472,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT147                                                                                                                                                  |
 | structure     | filesystem                                                                                                                                                                |
 | reference     | master                                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                                               |
 | type          | kcc                                                                                                                                                                       |
 | region        |                                                                                                                                                                           |
@@ -6509,7 +6509,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT154                                                                                                                               |
 | structure     | filesystem                                                                                                                                             |
 | reference     | master                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                            |
 | type          | kcc                                                                                                                                                    |
 | region        |                                                                                                                                                        |
@@ -6546,7 +6546,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT159                                                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                                                            |
 | reference     | master                                                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                                                   |
 | region        |                                                                                                                                                                                                       |
@@ -6583,7 +6583,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT164                                                                                                                                                                           |
 | structure     | filesystem                                                                                                                                                                                         |
 | reference     | master                                                                                                                                                                                             |
-| source        | gitConnectorGoogleKcc                                                                                                                                                                              |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                                               |
 | collection    | kcctemplate                                                                                                                                                                                        |
 | type          | kcc                                                                                                                                                                                                |
 | region        |                                                                                                                                                                                                    |
@@ -6620,7 +6620,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT169                                                                                                                                  |
 | structure     | filesystem                                                                                                                                                |
 | reference     | master                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                               |
 | type          | kcc                                                                                                                                                       |
 | region        |                                                                                                                                                           |
@@ -6657,7 +6657,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT173                                                                                                                                        |
 | structure     | filesystem                                                                                                                                                      |
 | reference     | master                                                                                                                                                          |
-| source        | gitConnectorGoogleKcc                                                                                                                                           |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                            |
 | collection    | kcctemplate                                                                                                                                                     |
 | type          | kcc                                                                                                                                                             |
 | region        |                                                                                                                                                                 |
@@ -6694,7 +6694,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT175                                                                                                                         |
 | structure     | filesystem                                                                                                                                       |
 | reference     | master                                                                                                                                           |
-| source        | gitConnectorGoogleKcc                                                                                                                            |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                             |
 | collection    | kcctemplate                                                                                                                                      |
 | type          | kcc                                                                                                                                              |
 | region        |                                                                                                                                                  |
@@ -6731,7 +6731,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT176                                                                                                                                      |
 | structure     | filesystem                                                                                                                                                    |
 | reference     | master                                                                                                                                                        |
-| source        | gitConnectorGoogleKcc                                                                                                                                         |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                          |
 | collection    | kcctemplate                                                                                                                                                   |
 | type          | kcc                                                                                                                                                           |
 | region        |                                                                                                                                                               |
@@ -6768,7 +6768,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT179                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                              |
 | reference     | master                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                     |
 | region        |                                                                                                                                                                         |
@@ -6805,7 +6805,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT180                                                                                                                                                |
 | structure     | filesystem                                                                                                                                                              |
 | reference     | master                                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                                             |
 | type          | kcc                                                                                                                                                                     |
 | region        |                                                                                                                                                                         |
@@ -6842,7 +6842,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT193                                                                                                                       |
 | structure     | filesystem                                                                                                                                     |
 | reference     | master                                                                                                                                         |
-| source        | gitConnectorGoogleKcc                                                                                                                          |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                           |
 | collection    | kcctemplate                                                                                                                                    |
 | type          | kcc                                                                                                                                            |
 | region        |                                                                                                                                                |
@@ -6879,7 +6879,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT195                                                                                                                        |
 | structure     | filesystem                                                                                                                                      |
 | reference     | master                                                                                                                                          |
-| source        | gitConnectorGoogleKcc                                                                                                                           |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                            |
 | collection    | kcctemplate                                                                                                                                     |
 | type          | kcc                                                                                                                                             |
 | region        |                                                                                                                                                 |
@@ -6916,7 +6916,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT201                                                                                                                                 |
 | structure     | filesystem                                                                                                                                               |
 | reference     | master                                                                                                                                                   |
-| source        | gitConnectorGoogleKcc                                                                                                                                    |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                     |
 | collection    | kcctemplate                                                                                                                                              |
 | type          | kcc                                                                                                                                                      |
 | region        |                                                                                                                                                          |
@@ -6953,7 +6953,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT207                                                                                                                                                      |
 | structure     | filesystem                                                                                                                                                                    |
 | reference     | master                                                                                                                                                                        |
-| source        | gitConnectorGoogleKcc                                                                                                                                                         |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                          |
 | collection    | kcctemplate                                                                                                                                                                   |
 | type          | kcc                                                                                                                                                                           |
 | region        |                                                                                                                                                                               |
@@ -6990,7 +6990,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT210                                                                                                                                                          |
 | structure     | filesystem                                                                                                                                                                        |
 | reference     | master                                                                                                                                                                            |
-| source        | gitConnectorGoogleKcc                                                                                                                                                             |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                              |
 | collection    | kcctemplate                                                                                                                                                                       |
 | type          | kcc                                                                                                                                                                               |
 | region        |                                                                                                                                                                                   |
@@ -7027,7 +7027,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT215                                                                                                                                                          |
 | structure     | filesystem                                                                                                                                                                        |
 | reference     | master                                                                                                                                                                            |
-| source        | gitConnectorGoogleKcc                                                                                                                                                             |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                              |
 | collection    | kcctemplate                                                                                                                                                                       |
 | type          | kcc                                                                                                                                                                               |
 | region        |                                                                                                                                                                                   |
@@ -7064,7 +7064,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT218                                                                                                                            |
 | structure     | filesystem                                                                                                                                          |
 | reference     | master                                                                                                                                              |
-| source        | gitConnectorGoogleKcc                                                                                                                               |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                |
 | collection    | kcctemplate                                                                                                                                         |
 | type          | kcc                                                                                                                                                 |
 | region        |                                                                                                                                                     |
@@ -7101,7 +7101,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT235                                                                                                                            |
 | structure     | filesystem                                                                                                                                          |
 | reference     | master                                                                                                                                              |
-| source        | gitConnectorGoogleKcc                                                                                                                               |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                |
 | collection    | kcctemplate                                                                                                                                         |
 | type          | kcc                                                                                                                                                 |
 | region        |                                                                                                                                                     |
@@ -7138,7 +7138,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT252                                                                                                                                |
 | structure     | filesystem                                                                                                                                              |
 | reference     | master                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                             |
 | type          | kcc                                                                                                                                                     |
 | region        |                                                                                                                                                         |
@@ -7175,7 +7175,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT261                                                                                                                            |
 | structure     | filesystem                                                                                                                                          |
 | reference     | master                                                                                                                                              |
-| source        | gitConnectorGoogleKcc                                                                                                                               |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                |
 | collection    | kcctemplate                                                                                                                                         |
 | type          | kcc                                                                                                                                                 |
 | region        |                                                                                                                                                     |
@@ -7212,7 +7212,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT274                                                                                                                                  |
 | structure     | filesystem                                                                                                                                                |
 | reference     | master                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                               |
 | type          | kcc                                                                                                                                                       |
 | region        |                                                                                                                                                           |
@@ -7249,7 +7249,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT286                                                                                                                            |
 | structure     | filesystem                                                                                                                                          |
 | reference     | master                                                                                                                                              |
-| source        | gitConnectorGoogleKcc                                                                                                                               |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                |
 | collection    | kcctemplate                                                                                                                                         |
 | type          | kcc                                                                                                                                                 |
 | region        |                                                                                                                                                     |
@@ -7286,7 +7286,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT292                                                                                                                           |
 | structure     | filesystem                                                                                                                                         |
 | reference     | master                                                                                                                                             |
-| source        | gitConnectorGoogleKcc                                                                                                                              |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                               |
 | collection    | kcctemplate                                                                                                                                        |
 | type          | kcc                                                                                                                                                |
 | region        |                                                                                                                                                    |
@@ -7323,7 +7323,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT298                                                                                                                                                        |
 | structure     | filesystem                                                                                                                                                                      |
 | reference     | master                                                                                                                                                                          |
-| source        | gitConnectorGoogleKcc                                                                                                                                                           |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                            |
 | collection    | kcctemplate                                                                                                                                                                     |
 | type          | kcc                                                                                                                                                                             |
 | region        |                                                                                                                                                                                 |
@@ -7360,7 +7360,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT319                                                                                                                             |
 | structure     | filesystem                                                                                                                                           |
 | reference     | master                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                          |
 | type          | kcc                                                                                                                                                  |
 | region        |                                                                                                                                                      |
@@ -7397,7 +7397,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT328                                                                                                                         |
 | structure     | filesystem                                                                                                                                       |
 | reference     | master                                                                                                                                           |
-| source        | gitConnectorGoogleKcc                                                                                                                            |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                             |
 | collection    | kcctemplate                                                                                                                                      |
 | type          | kcc                                                                                                                                              |
 | region        |                                                                                                                                                  |
@@ -7434,7 +7434,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT330                                                                                                                    |
 | structure     | filesystem                                                                                                                                  |
 | reference     | master                                                                                                                                      |
-| source        | gitConnectorGoogleKcc                                                                                                                       |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                        |
 | collection    | kcctemplate                                                                                                                                 |
 | type          | kcc                                                                                                                                         |
 | region        |                                                                                                                                             |
@@ -7471,7 +7471,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT458                                                                                                                           |
 | structure     | filesystem                                                                                                                                         |
 | reference     | master                                                                                                                                             |
-| source        | gitConnectorGoogleKcc                                                                                                                              |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                               |
 | collection    | kcctemplate                                                                                                                                        |
 | type          | kcc                                                                                                                                                |
 | region        |                                                                                                                                                    |
@@ -7508,7 +7508,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT504                                                                                                                                      |
 | structure     | filesystem                                                                                                                                                    |
 | reference     | master                                                                                                                                                        |
-| source        | gitConnectorGoogleKcc                                                                                                                                         |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                          |
 | collection    | kcctemplate                                                                                                                                                   |
 | type          | kcc                                                                                                                                                           |
 | region        |                                                                                                                                                               |
@@ -7545,7 +7545,7 @@ Description : A legacy network exists in a project.\
 | id            | KCC_TEMPLATE_SNAPSHOT520                                                                                                                                          |
 | structure     | filesystem                                                                                                                                                        |
 | reference     | master                                                                                                                                                            |
-| source        | gitConnectorGoogleKcc                                                                                                                                             |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                              |
 | collection    | kcctemplate                                                                                                                                                       |
 | type          | kcc                                                                                                                                                               |
 | region        |                                                                                                                                                                   |
@@ -7582,7 +7582,7 @@ Description : There are private subnetworks without access to Google public APIs
 | id            | KCC_TEMPLATE_SNAPSHOT76                                                                                                                                                      |
 | structure     | filesystem                                                                                                                                                                   |
 | reference     | master                                                                                                                                                                       |
-| source        | gitConnectorGoogleKcc                                                                                                                                                        |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                         |
 | collection    | kcctemplate                                                                                                                                                                  |
 | type          | kcc                                                                                                                                                                          |
 | region        |                                                                                                                                                                              |
@@ -7619,7 +7619,7 @@ Description : There are private subnetworks without access to Google public APIs
 | id            | KCC_TEMPLATE_SNAPSHOT87                                                                                                                                                                            |
 | structure     | filesystem                                                                                                                                                                                         |
 | reference     | master                                                                                                                                                                                             |
-| source        | gitConnectorGoogleKcc                                                                                                                                                                              |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                                               |
 | collection    | kcctemplate                                                                                                                                                                                        |
 | type          | kcc                                                                                                                                                                                                |
 | region        |                                                                                                                                                                                                    |
@@ -7656,7 +7656,7 @@ Description : There are private subnetworks without access to Google public APIs
 | id            | KCC_TEMPLATE_SNAPSHOT137                                                                                                                                                    |
 | structure     | filesystem                                                                                                                                                                  |
 | reference     | master                                                                                                                                                                      |
-| source        | gitConnectorGoogleKcc                                                                                                                                                       |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                        |
 | collection    | kcctemplate                                                                                                                                                                 |
 | type          | kcc                                                                                                                                                                         |
 | region        |                                                                                                                                                                             |
@@ -7693,7 +7693,7 @@ Description : There are private subnetworks without access to Google public APIs
 | id            | KCC_TEMPLATE_SNAPSHOT148                                                                                                                                                     |
 | structure     | filesystem                                                                                                                                                                   |
 | reference     | master                                                                                                                                                                       |
-| source        | gitConnectorGoogleKcc                                                                                                                                                        |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                         |
 | collection    | kcctemplate                                                                                                                                                                  |
 | type          | kcc                                                                                                                                                                          |
 | region        |                                                                                                                                                                              |
@@ -7730,7 +7730,7 @@ Description : There are private subnetworks without access to Google public APIs
 | id            | KCC_TEMPLATE_SNAPSHOT155                                                                                                                                  |
 | structure     | filesystem                                                                                                                                                |
 | reference     | master                                                                                                                                                    |
-| source        | gitConnectorGoogleKcc                                                                                                                                     |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                      |
 | collection    | kcctemplate                                                                                                                                               |
 | type          | kcc                                                                                                                                                       |
 | region        |                                                                                                                                                           |
@@ -7767,7 +7767,7 @@ Description : There are private subnetworks without access to Google public APIs
 | id            | KCC_TEMPLATE_SNAPSHOT160                                                                                                                                                                                 |
 | structure     | filesystem                                                                                                                                                                                               |
 | reference     | master                                                                                                                                                                                                   |
-| source        | gitConnectorGoogleKcc                                                                                                                                                                                    |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                                                     |
 | collection    | kcctemplate                                                                                                                                                                                              |
 | type          | kcc                                                                                                                                                                                                      |
 | region        |                                                                                                                                                                                                          |
@@ -7804,7 +7804,7 @@ Description : There are private subnetworks without access to Google public APIs
 | id            | KCC_TEMPLATE_SNAPSHOT165                                                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                                                            |
 | reference     | master                                                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                                                   |
 | region        |                                                                                                                                                                                                       |
@@ -7841,7 +7841,7 @@ Description : There are private subnetworks without access to Google public APIs
 | id            | KCC_TEMPLATE_SNAPSHOT170                                                                                                                                     |
 | structure     | filesystem                                                                                                                                                   |
 | reference     | master                                                                                                                                                       |
-| source        | gitConnectorGoogleKcc                                                                                                                                        |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                         |
 | collection    | kcctemplate                                                                                                                                                  |
 | type          | kcc                                                                                                                                                          |
 | region        |                                                                                                                                                              |
@@ -7878,7 +7878,7 @@ Description : There are private subnetworks without access to Google public APIs
 | id            | KCC_TEMPLATE_SNAPSHOT178                                                                                                                                         |
 | structure     | filesystem                                                                                                                                                       |
 | reference     | master                                                                                                                                                           |
-| source        | gitConnectorGoogleKcc                                                                                                                                            |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                             |
 | collection    | kcctemplate                                                                                                                                                      |
 | type          | kcc                                                                                                                                                              |
 | region        |                                                                                                                                                                  |
@@ -7915,7 +7915,7 @@ Description : There are private subnetworks without access to Google public APIs
 | id            | KCC_TEMPLATE_SNAPSHOT213                                                                                                                                                             |
 | structure     | filesystem                                                                                                                                                                           |
 | reference     | master                                                                                                                                                                               |
-| source        | gitConnectorGoogleKcc                                                                                                                                                                |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                                 |
 | collection    | kcctemplate                                                                                                                                                                          |
 | type          | kcc                                                                                                                                                                                  |
 | region        |                                                                                                                                                                                      |
@@ -7952,7 +7952,7 @@ Description : There are private subnetworks without access to Google public APIs
 | id            | KCC_TEMPLATE_SNAPSHOT236                                                                                                                               |
 | structure     | filesystem                                                                                                                                             |
 | reference     | master                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                            |
 | type          | kcc                                                                                                                                                    |
 | region        |                                                                                                                                                        |
@@ -7989,7 +7989,7 @@ Description : There are private subnetworks without access to Google public APIs
 | id            | KCC_TEMPLATE_SNAPSHOT253                                                                                                                                   |
 | structure     | filesystem                                                                                                                                                 |
 | reference     | master                                                                                                                                                     |
-| source        | gitConnectorGoogleKcc                                                                                                                                      |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                       |
 | collection    | kcctemplate                                                                                                                                                |
 | type          | kcc                                                                                                                                                        |
 | region        |                                                                                                                                                            |
@@ -8026,7 +8026,7 @@ Description : There are private subnetworks without access to Google public APIs
 | id            | KCC_TEMPLATE_SNAPSHOT262                                                                                                                               |
 | structure     | filesystem                                                                                                                                             |
 | reference     | master                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                            |
 | type          | kcc                                                                                                                                                    |
 | region        |                                                                                                                                                        |
@@ -8063,7 +8063,7 @@ Description : There are private subnetworks without access to Google public APIs
 | id            | KCC_TEMPLATE_SNAPSHOT299                                                                                                                                                           |
 | structure     | filesystem                                                                                                                                                                         |
 | reference     | master                                                                                                                                                                             |
-| source        | gitConnectorGoogleKcc                                                                                                                                                              |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                               |
 | collection    | kcctemplate                                                                                                                                                                        |
 | type          | kcc                                                                                                                                                                                |
 | region        |                                                                                                                                                                                    |
@@ -8100,7 +8100,7 @@ Description : Logging isn't enabled for a GKE cluster.\
 | id            | KCC_TEMPLATE_SNAPSHOT297                                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                                            |
 | reference     | master                                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                                   |
 | region        |                                                                                                                                                                                       |
@@ -8137,7 +8137,7 @@ Description : Logging isn't enabled for a GKE cluster.\
 | id            | KCC_TEMPLATE_SNAPSHOT300                                                                                                                                                            |
 | structure     | filesystem                                                                                                                                                                          |
 | reference     | master                                                                                                                                                                              |
-| source        | gitConnectorGoogleKcc                                                                                                                                                               |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                                |
 | collection    | kcctemplate                                                                                                                                                                         |
 | type          | kcc                                                                                                                                                                                 |
 | region        |                                                                                                                                                                                     |
@@ -8174,7 +8174,7 @@ Description : Logging isn't enabled for a GKE cluster.\
 | id            | KCC_TEMPLATE_SNAPSHOT302                                                                                                                                |
 | structure     | filesystem                                                                                                                                              |
 | reference     | master                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                             |
 | type          | kcc                                                                                                                                                     |
 | region        |                                                                                                                                                         |
@@ -8211,7 +8211,7 @@ Description : Logging isn't enabled for a GKE cluster.\
 | id            | KCC_TEMPLATE_SNAPSHOT362                                                                                                                                                          |
 | structure     | filesystem                                                                                                                                                                        |
 | reference     | master                                                                                                                                                                            |
-| source        | gitConnectorGoogleKcc                                                                                                                                                             |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                              |
 | collection    | kcctemplate                                                                                                                                                                       |
 | type          | kcc                                                                                                                                                                               |
 | region        |                                                                                                                                                                                   |
@@ -8248,7 +8248,7 @@ Description : Logging isn't enabled for a GKE cluster.\
 | id            | KCC_TEMPLATE_SNAPSHOT374                                                                                                                                      |
 | structure     | filesystem                                                                                                                                                    |
 | reference     | master                                                                                                                                                        |
-| source        | gitConnectorGoogleKcc                                                                                                                                         |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                          |
 | collection    | kcctemplate                                                                                                                                                   |
 | type          | kcc                                                                                                                                                           |
 | region        |                                                                                                                                                               |
@@ -8285,7 +8285,7 @@ Description : Logging isn't enabled for a GKE cluster.\
 | id            | KCC_TEMPLATE_SNAPSHOT382                                                                                                                               |
 | structure     | filesystem                                                                                                                                             |
 | reference     | master                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                            |
 | type          | kcc                                                                                                                                                    |
 | region        |                                                                                                                                                        |
@@ -8322,7 +8322,7 @@ Description : Monitoring is disabled on GKE clusters.\
 | id            | KCC_TEMPLATE_SNAPSHOT297                                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                                            |
 | reference     | master                                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                                   |
 | region        |                                                                                                                                                                                       |
@@ -8359,7 +8359,7 @@ Description : Monitoring is disabled on GKE clusters.\
 | id            | KCC_TEMPLATE_SNAPSHOT300                                                                                                                                                            |
 | structure     | filesystem                                                                                                                                                                          |
 | reference     | master                                                                                                                                                                              |
-| source        | gitConnectorGoogleKcc                                                                                                                                                               |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                                |
 | collection    | kcctemplate                                                                                                                                                                         |
 | type          | kcc                                                                                                                                                                                 |
 | region        |                                                                                                                                                                                     |
@@ -8396,7 +8396,7 @@ Description : Monitoring is disabled on GKE clusters.\
 | id            | KCC_TEMPLATE_SNAPSHOT302                                                                                                                                |
 | structure     | filesystem                                                                                                                                              |
 | reference     | master                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                             |
 | type          | kcc                                                                                                                                                     |
 | region        |                                                                                                                                                         |
@@ -8433,7 +8433,7 @@ Description : Monitoring is disabled on GKE clusters.\
 | id            | KCC_TEMPLATE_SNAPSHOT362                                                                                                                                                          |
 | structure     | filesystem                                                                                                                                                                        |
 | reference     | master                                                                                                                                                                            |
-| source        | gitConnectorGoogleKcc                                                                                                                                                             |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                              |
 | collection    | kcctemplate                                                                                                                                                                       |
 | type          | kcc                                                                                                                                                                               |
 | region        |                                                                                                                                                                                   |
@@ -8470,7 +8470,7 @@ Description : Monitoring is disabled on GKE clusters.\
 | id            | KCC_TEMPLATE_SNAPSHOT374                                                                                                                                      |
 | structure     | filesystem                                                                                                                                                    |
 | reference     | master                                                                                                                                                        |
-| source        | gitConnectorGoogleKcc                                                                                                                                         |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                          |
 | collection    | kcctemplate                                                                                                                                                   |
 | type          | kcc                                                                                                                                                           |
 | region        |                                                                                                                                                               |
@@ -8507,7 +8507,7 @@ Description : Monitoring is disabled on GKE clusters.\
 | id            | KCC_TEMPLATE_SNAPSHOT382                                                                                                                               |
 | structure     | filesystem                                                                                                                                             |
 | reference     | master                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                  |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                   |
 | collection    | kcctemplate                                                                                                                                            |
 | type          | kcc                                                                                                                                                    |
 | region        |                                                                                                                                                        |
@@ -8544,7 +8544,7 @@ Description : Compute Engine VMs aren't using the Container-Optimized OS that is
 | id            | KCC_TEMPLATE_SNAPSHOT297                                                                                                                                                              |
 | structure     | filesystem                                                                                                                                                                            |
 | reference     | master                                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                                 |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                                  |
 | collection    | kcctemplate                                                                                                                                                                           |
 | type          | kcc                                                                                                                                                                                   |
 | region        |                                                                                                                                                                                       |
@@ -8581,7 +8581,7 @@ Description : Compute Engine VMs aren't using the Container-Optimized OS that is
 | id            | KCC_TEMPLATE_SNAPSHOT300                                                                                                                                                            |
 | structure     | filesystem                                                                                                                                                                          |
 | reference     | master                                                                                                                                                                              |
-| source        | gitConnectorGoogleKcc                                                                                                                                                               |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                                |
 | collection    | kcctemplate                                                                                                                                                                         |
 | type          | kcc                                                                                                                                                                                 |
 | region        |                                                                                                                                                                                     |
@@ -8618,7 +8618,7 @@ Description : Compute Engine VMs aren't using the Container-Optimized OS that is
 | id            | KCC_TEMPLATE_SNAPSHOT302                                                                                                                                |
 | structure     | filesystem                                                                                                                                              |
 | reference     | master                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                   |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                    |
 | collection    | kcctemplate                                                                                                                                             |
 | type          | kcc                                                                                                                                                     |
 | region        |                                                                                                                                                         |
@@ -8655,7 +8655,7 @@ Description : Compute Engine VMs aren't using the Container-Optimized OS that is
 | id            | KCC_TEMPLATE_SNAPSHOT362                                                                                                                                                          |
 | structure     | filesystem                                                                                                                                                                        |
 | reference     | master                                                                                                                                                                            |
-| source        | gitConnectorGoogleKcc                                                                                                                                                             |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                                              |
 | collection    | kcctemplate                                                                                                                                                                       |
 | type          | kcc                                                                                                                                                                               |
 | region        |                                                                                                                                                                                   |
@@ -8692,7 +8692,7 @@ Description : Compute Engine VMs aren't using the Container-Optimized OS that is
 | id            | KCC_TEMPLATE_SNAPSHOT374                                                                                                                                      |
 | structure     | filesystem                                                                                                                                                    |
 | reference     | master                                                                                                                                                        |
-| source        | gitConnectorGoogleKcc                                                                                                                                         |
+| source        | gitConnectorGoogleK8sConfigConnector                                                                                                                          |
 | collection    | kcctemplate                                                                                                                                                   |
 | type          | kcc                                                                                                                                                           |
 | region        |                                                                                                                                                               |
@@ -8700,413 +8700,6 @@ Description : Compute Engine VMs aren't using the Container-Optimized OS that is
 | paths         | ['https://github.com/GoogleCloudPlatform/k8s-config-connector/blob/master/samples/resources/gkehubfeaturemembership/container_v1beta1_containercluster.yaml'] |
 
 - masterTestId: TEST_ContainerCluster_3
-- masterSnapshotId: ['KCC_TEMPLATE_SNAPSHOT']
-- type: rego
-- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/google/kcc/ContainerCluster.rego)
-- severity: Medium
-
-tags
-| Title      | Description   |
-|:-----------|:--------------|
-| cloud      | git           |
-| compliance | []            |
-| service    | ['kcc']       |
-----------------------------------------------------------------
-
-
-### Test ID - PR-GCP-0037-KCC
-Title: COS Not Used\
-Test Result: **passed**\
-Description : Compute Engine VMs aren't using the Container-Optimized OS that is designed for running Docker containers on Google Cloud securely.\
-
-#### Test Details
-- eval: data.rule.cos_not_used
-- id : PR-GCP-0037-KCC
-
-#### Snapshots
-| Title         | Description                                                                                                                                            |
-|:--------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id            | KCC_TEMPLATE_SNAPSHOT382                                                                                                                               |
-| structure     | filesystem                                                                                                                                             |
-| reference     | master                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                  |
-| collection    | kcctemplate                                                                                                                                            |
-| type          | kcc                                                                                                                                                    |
-| region        |                                                                                                                                                        |
-| resourceTypes | ['containercluster']                                                                                                                                   |
-| paths         | ['https://github.com/GoogleCloudPlatform/k8s-config-connector/blob/master/samples/resources/gkehubmembership/container_v1beta1_containercluster.yaml'] |
-
-- masterTestId: TEST_ContainerCluster_3
-- masterSnapshotId: ['KCC_TEMPLATE_SNAPSHOT']
-- type: rego
-- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/google/kcc/ContainerCluster.rego)
-- severity: Medium
-
-tags
-| Title      | Description   |
-|:-----------|:--------------|
-| cloud      | git           |
-| compliance | []            |
-| service    | ['kcc']       |
-----------------------------------------------------------------
-
-
-### Test ID - PR-GCP-0038-KCC
-Title: Legacy Authorization Enabled\
-Test Result: **passed**\
-Description : Legacy Authorization is enabled on GKE clusters.\
-
-#### Test Details
-- eval: data.rule.legacy_authorization_enabled
-- id : PR-GCP-0038-KCC
-
-#### Snapshots
-| Title         | Description                                                                                                                                                                           |
-|:--------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id            | KCC_TEMPLATE_SNAPSHOT297                                                                                                                                                              |
-| structure     | filesystem                                                                                                                                                                            |
-| reference     | master                                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                                 |
-| collection    | kcctemplate                                                                                                                                                                           |
-| type          | kcc                                                                                                                                                                                   |
-| region        |                                                                                                                                                                                       |
-| resourceTypes | ['containercluster']                                                                                                                                                                  |
-| paths         | ['https://github.com/GoogleCloudPlatform/k8s-config-connector/blob/master/samples/resources/containercluster/routes-based-container-cluster/container_v1beta1_containercluster.yaml'] |
-
-- masterTestId: TEST_ContainerCluster_4
-- masterSnapshotId: ['KCC_TEMPLATE_SNAPSHOT']
-- type: rego
-- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/google/kcc/ContainerCluster.rego)
-- severity: Medium
-
-tags
-| Title      | Description   |
-|:-----------|:--------------|
-| cloud      | git           |
-| compliance | []            |
-| service    | ['kcc']       |
-----------------------------------------------------------------
-
-
-### Test ID - PR-GCP-0038-KCC
-Title: Legacy Authorization Enabled\
-Test Result: **passed**\
-Description : Legacy Authorization is enabled on GKE clusters.\
-
-#### Test Details
-- eval: data.rule.legacy_authorization_enabled
-- id : PR-GCP-0038-KCC
-
-#### Snapshots
-| Title         | Description                                                                                                                                                                         |
-|:--------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id            | KCC_TEMPLATE_SNAPSHOT300                                                                                                                                                            |
-| structure     | filesystem                                                                                                                                                                          |
-| reference     | master                                                                                                                                                                              |
-| source        | gitConnectorGoogleKcc                                                                                                                                                               |
-| collection    | kcctemplate                                                                                                                                                                         |
-| type          | kcc                                                                                                                                                                                 |
-| region        |                                                                                                                                                                                     |
-| resourceTypes | ['containercluster']                                                                                                                                                                |
-| paths         | ['https://github.com/GoogleCloudPlatform/k8s-config-connector/blob/master/samples/resources/containercluster/vpc-native-container-cluster/container_v1beta1_containercluster.yaml'] |
-
-- masterTestId: TEST_ContainerCluster_4
-- masterSnapshotId: ['KCC_TEMPLATE_SNAPSHOT']
-- type: rego
-- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/google/kcc/ContainerCluster.rego)
-- severity: Medium
-
-tags
-| Title      | Description   |
-|:-----------|:--------------|
-| cloud      | git           |
-| compliance | []            |
-| service    | ['kcc']       |
-----------------------------------------------------------------
-
-
-### Test ID - PR-GCP-0038-KCC
-Title: Legacy Authorization Enabled\
-Test Result: **passed**\
-Description : Legacy Authorization is enabled on GKE clusters.\
-
-#### Test Details
-- eval: data.rule.legacy_authorization_enabled
-- id : PR-GCP-0038-KCC
-
-#### Snapshots
-| Title         | Description                                                                                                                                             |
-|:--------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id            | KCC_TEMPLATE_SNAPSHOT302                                                                                                                                |
-| structure     | filesystem                                                                                                                                              |
-| reference     | master                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                   |
-| collection    | kcctemplate                                                                                                                                             |
-| type          | kcc                                                                                                                                                     |
-| region        |                                                                                                                                                         |
-| resourceTypes | ['containercluster']                                                                                                                                    |
-| paths         | ['https://github.com/GoogleCloudPlatform/k8s-config-connector/blob/master/samples/resources/containernodepool/container_v1beta1_containercluster.yaml'] |
-
-- masterTestId: TEST_ContainerCluster_4
-- masterSnapshotId: ['KCC_TEMPLATE_SNAPSHOT']
-- type: rego
-- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/google/kcc/ContainerCluster.rego)
-- severity: Medium
-
-tags
-| Title      | Description   |
-|:-----------|:--------------|
-| cloud      | git           |
-| compliance | []            |
-| service    | ['kcc']       |
-----------------------------------------------------------------
-
-
-### Test ID - PR-GCP-0038-KCC
-Title: Legacy Authorization Enabled\
-Test Result: **passed**\
-Description : Legacy Authorization is enabled on GKE clusters.\
-
-#### Test Details
-- eval: data.rule.legacy_authorization_enabled
-- id : PR-GCP-0038-KCC
-
-#### Snapshots
-| Title         | Description                                                                                                                                                                       |
-|:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id            | KCC_TEMPLATE_SNAPSHOT362                                                                                                                                                          |
-| structure     | filesystem                                                                                                                                                                        |
-| reference     | master                                                                                                                                                                            |
-| source        | gitConnectorGoogleKcc                                                                                                                                                             |
-| collection    | kcctemplate                                                                                                                                                                       |
-| type          | kcc                                                                                                                                                                               |
-| region        |                                                                                                                                                                                   |
-| resourceTypes | ['containercluster']                                                                                                                                                              |
-| paths         | ['https://github.com/GoogleCloudPlatform/k8s-config-connector/blob/master/samples/resources/gkehubfeature/multi-cluster-ingress-feature/container_v1beta1_containercluster.yaml'] |
-
-- masterTestId: TEST_ContainerCluster_4
-- masterSnapshotId: ['KCC_TEMPLATE_SNAPSHOT']
-- type: rego
-- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/google/kcc/ContainerCluster.rego)
-- severity: Medium
-
-tags
-| Title      | Description   |
-|:-----------|:--------------|
-| cloud      | git           |
-| compliance | []            |
-| service    | ['kcc']       |
-----------------------------------------------------------------
-
-
-### Test ID - PR-GCP-0038-KCC
-Title: Legacy Authorization Enabled\
-Test Result: **passed**\
-Description : Legacy Authorization is enabled on GKE clusters.\
-
-#### Test Details
-- eval: data.rule.legacy_authorization_enabled
-- id : PR-GCP-0038-KCC
-
-#### Snapshots
-| Title         | Description                                                                                                                                                   |
-|:--------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id            | KCC_TEMPLATE_SNAPSHOT374                                                                                                                                      |
-| structure     | filesystem                                                                                                                                                    |
-| reference     | master                                                                                                                                                        |
-| source        | gitConnectorGoogleKcc                                                                                                                                         |
-| collection    | kcctemplate                                                                                                                                                   |
-| type          | kcc                                                                                                                                                           |
-| region        |                                                                                                                                                               |
-| resourceTypes | ['containercluster']                                                                                                                                          |
-| paths         | ['https://github.com/GoogleCloudPlatform/k8s-config-connector/blob/master/samples/resources/gkehubfeaturemembership/container_v1beta1_containercluster.yaml'] |
-
-- masterTestId: TEST_ContainerCluster_4
-- masterSnapshotId: ['KCC_TEMPLATE_SNAPSHOT']
-- type: rego
-- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/google/kcc/ContainerCluster.rego)
-- severity: Medium
-
-tags
-| Title      | Description   |
-|:-----------|:--------------|
-| cloud      | git           |
-| compliance | []            |
-| service    | ['kcc']       |
-----------------------------------------------------------------
-
-
-### Test ID - PR-GCP-0038-KCC
-Title: Legacy Authorization Enabled\
-Test Result: **passed**\
-Description : Legacy Authorization is enabled on GKE clusters.\
-
-#### Test Details
-- eval: data.rule.legacy_authorization_enabled
-- id : PR-GCP-0038-KCC
-
-#### Snapshots
-| Title         | Description                                                                                                                                            |
-|:--------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id            | KCC_TEMPLATE_SNAPSHOT382                                                                                                                               |
-| structure     | filesystem                                                                                                                                             |
-| reference     | master                                                                                                                                                 |
-| source        | gitConnectorGoogleKcc                                                                                                                                  |
-| collection    | kcctemplate                                                                                                                                            |
-| type          | kcc                                                                                                                                                    |
-| region        |                                                                                                                                                        |
-| resourceTypes | ['containercluster']                                                                                                                                   |
-| paths         | ['https://github.com/GoogleCloudPlatform/k8s-config-connector/blob/master/samples/resources/gkehubmembership/container_v1beta1_containercluster.yaml'] |
-
-- masterTestId: TEST_ContainerCluster_4
-- masterSnapshotId: ['KCC_TEMPLATE_SNAPSHOT']
-- type: rego
-- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/google/kcc/ContainerCluster.rego)
-- severity: Medium
-
-tags
-| Title      | Description   |
-|:-----------|:--------------|
-| cloud      | git           |
-| compliance | []            |
-| service    | ['kcc']       |
-----------------------------------------------------------------
-
-
-### Test ID - PR-GCP-0039-KCC
-Title: Master Authorized Networks Disabled\
-Test Result: **passed**\
-Description : Master Authorized Networks is not enabled on GKE clusters.\
-
-#### Test Details
-- eval: data.rule.master_authorized_networks_disabled
-- id : PR-GCP-0039-KCC
-
-#### Snapshots
-| Title         | Description                                                                                                                                                                           |
-|:--------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id            | KCC_TEMPLATE_SNAPSHOT297                                                                                                                                                              |
-| structure     | filesystem                                                                                                                                                                            |
-| reference     | master                                                                                                                                                                                |
-| source        | gitConnectorGoogleKcc                                                                                                                                                                 |
-| collection    | kcctemplate                                                                                                                                                                           |
-| type          | kcc                                                                                                                                                                                   |
-| region        |                                                                                                                                                                                       |
-| resourceTypes | ['containercluster']                                                                                                                                                                  |
-| paths         | ['https://github.com/GoogleCloudPlatform/k8s-config-connector/blob/master/samples/resources/containercluster/routes-based-container-cluster/container_v1beta1_containercluster.yaml'] |
-
-- masterTestId: TEST_ContainerCluster_5
-- masterSnapshotId: ['KCC_TEMPLATE_SNAPSHOT']
-- type: rego
-- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/google/kcc/ContainerCluster.rego)
-- severity: Medium
-
-tags
-| Title      | Description   |
-|:-----------|:--------------|
-| cloud      | git           |
-| compliance | []            |
-| service    | ['kcc']       |
-----------------------------------------------------------------
-
-
-### Test ID - PR-GCP-0039-KCC
-Title: Master Authorized Networks Disabled\
-Test Result: **failed**\
-Description : Master Authorized Networks is not enabled on GKE clusters.\
-
-#### Test Details
-- eval: data.rule.master_authorized_networks_disabled
-- id : PR-GCP-0039-KCC
-
-#### Snapshots
-| Title         | Description                                                                                                                                                                         |
-|:--------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id            | KCC_TEMPLATE_SNAPSHOT300                                                                                                                                                            |
-| structure     | filesystem                                                                                                                                                                          |
-| reference     | master                                                                                                                                                                              |
-| source        | gitConnectorGoogleKcc                                                                                                                                                               |
-| collection    | kcctemplate                                                                                                                                                                         |
-| type          | kcc                                                                                                                                                                                 |
-| region        |                                                                                                                                                                                     |
-| resourceTypes | ['containercluster']                                                                                                                                                                |
-| paths         | ['https://github.com/GoogleCloudPlatform/k8s-config-connector/blob/master/samples/resources/containercluster/vpc-native-container-cluster/container_v1beta1_containercluster.yaml'] |
-
-- masterTestId: TEST_ContainerCluster_5
-- masterSnapshotId: ['KCC_TEMPLATE_SNAPSHOT']
-- type: rego
-- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/google/kcc/ContainerCluster.rego)
-- severity: Medium
-
-tags
-| Title      | Description   |
-|:-----------|:--------------|
-| cloud      | git           |
-| compliance | []            |
-| service    | ['kcc']       |
-----------------------------------------------------------------
-
-
-### Test ID - PR-GCP-0039-KCC
-Title: Master Authorized Networks Disabled\
-Test Result: **failed**\
-Description : Master Authorized Networks is not enabled on GKE clusters.\
-
-#### Test Details
-- eval: data.rule.master_authorized_networks_disabled
-- id : PR-GCP-0039-KCC
-
-#### Snapshots
-| Title         | Description                                                                                                                                             |
-|:--------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id            | KCC_TEMPLATE_SNAPSHOT302                                                                                                                                |
-| structure     | filesystem                                                                                                                                              |
-| reference     | master                                                                                                                                                  |
-| source        | gitConnectorGoogleKcc                                                                                                                                   |
-| collection    | kcctemplate                                                                                                                                             |
-| type          | kcc                                                                                                                                                     |
-| region        |                                                                                                                                                         |
-| resourceTypes | ['containercluster']                                                                                                                                    |
-| paths         | ['https://github.com/GoogleCloudPlatform/k8s-config-connector/blob/master/samples/resources/containernodepool/container_v1beta1_containercluster.yaml'] |
-
-- masterTestId: TEST_ContainerCluster_5
-- masterSnapshotId: ['KCC_TEMPLATE_SNAPSHOT']
-- type: rego
-- rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/google/kcc/ContainerCluster.rego)
-- severity: Medium
-
-tags
-| Title      | Description   |
-|:-----------|:--------------|
-| cloud      | git           |
-| compliance | []            |
-| service    | ['kcc']       |
-----------------------------------------------------------------
-
-
-### Test ID - PR-GCP-0039-KCC
-Title: Master Authorized Networks Disabled\
-Test Result: **failed**\
-Description : Master Authorized Networks is not enabled on GKE clusters.\
-
-#### Test Details
-- eval: data.rule.master_authorized_networks_disabled
-- id : PR-GCP-0039-KCC
-
-#### Snapshots
-| Title         | Description                                                                                                                                                                       |
-|:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id            | KCC_TEMPLATE_SNAPSHOT362                                                                                                                                                          |
-| structure     | filesystem                                                                                                                                                                        |
-| reference     | master                                                                                                                                                                            |
-| source        | gitConnectorGoogleKcc                                                                                                                                                             |
-| collection    | kcctemplate                                                                                                                                                                       |
-| type          | kcc                                                                                                                                                                               |
-| region        |                                                                                                                                                                                   |
-| resourceTypes | ['containercluster']                                                                                                                                                              |
-| paths         | ['https://github.com/GoogleCloudPlatform/k8s-config-connector/blob/master/samples/resources/gkehubfeature/multi-cluster-ingress-feature/container_v1beta1_containercluster.yaml'] |
-
-- masterTestId: TEST_ContainerCluster_5
 - masterSnapshotId: ['KCC_TEMPLATE_SNAPSHOT']
 - type: rego
 - rule: file(https://github.com/prancer-io/prancer-compliance-test/tree/master/google/kcc/ContainerCluster.rego)
