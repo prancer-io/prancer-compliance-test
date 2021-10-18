@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/virtualnetworkpeerings
 
 #
-# PR-AZR-0075-ARM
+# PR-AZR-ARM-NTW-036
 #
 
 default vnet_peer = null
@@ -43,7 +43,7 @@ vnet_peer_miss_err = "Azure virtual network peering state property 'peeringState
 }
 
 vnet_peer_metadata := {
-    "Policy Code": "PR-AZR-0075-ARM",
+    "Policy Code": "PR-AZR-ARM-NTW-036",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

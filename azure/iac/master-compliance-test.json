@@ -3324,11 +3324,11 @@
                     "rule": "file(postgreSQL.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0115-ARM",
+                            "id": "PR-AZR-ARM-SQL-028",
                             "eval": "data.rule.geoRedundantBackup",
                             "message": "data.rule.geoRedundantBackup_err",
                             "remediationDescription": "In Resource of type \"Microsoft.dbforpostgresql/servers\" make sure properties.storageProfile.geoRedundantBackup exists and value is set to \"Enabled\". \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers for details.",
-                            "remediationFunction": "PR-AZR-0115-ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_028.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3362,11 +3362,11 @@
                     "rule": "file(postgreSQL.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0124-ARM",
+                            "id": "PR-AZR-ARM-SQL-029",
                             "eval": "data.rule.sslEnforcement",
                             "message": "data.rule.sslEnforcement_err",
                             "remediationDescription": "In Resource of type \"Microsoft.dbforpostgresql/servers\" make sure properties.sslEnforcement exists and value is set to \"Enabled\". \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers for details.",
-                            "remediationFunction": "PR-AZR-0124-ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_029.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3401,11 +3401,11 @@
                     "rule": "file(pricing.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0091-ARM",
+                            "id": "PR-AZR-ARM-SCT-001",
                             "eval": "data.rule.pricing",
                             "message": "data.rule.pricing_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for pricing from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.security/pricings",
-                            "remediationFunction": "PR_AZR_0091_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SCT_001.py"
                         }
                     ],
                     "severity": "High",
@@ -3436,11 +3436,11 @@
                     "rule": "file(Redis.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0131-ARM",
+                            "id": "PR-AZR-ARM-CCH-001",
                             "eval": "data.rule.enableSslPort",
                             "message": "data.rule.enableSslPort_err",
                             "remediationDescription": "In Resource of type \"Microsoft.Cache/redis\" make sure properties.enableNonSslPort value is set to false or isn't exist . \n Please visit https://docs.microsoft.com/en-us/azure/templates/Microsoft.Cache/redis for more details.",
-                            "remediationFunction": "PR_AZR_0131_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_CCH_001.py"
                         }
                     ],
                     "severity": "High",
@@ -3476,11 +3476,11 @@
                     "rule": "file(Redis.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0132-ARM",
+                            "id": "PR-AZR-ARM-CCH-002",
                             "eval": "data.rule.serverRole",
                             "message": "data.rule.serverRole_err",
                             "remediationDescription": "In Resource of type \"Microsoft.Cache/redis/linkedServers\" make sure properties.serverRole value is set to Secondary. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis/linkedservers for more details.",
-                            "remediationFunction": "PR_AZR_0132_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_CCH_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3515,11 +3515,11 @@
                     "rule": "file(registrieslist.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0015-ARM",
+                            "id": "PR-AZR-ARM-ACR-003",
                             "eval": "data.rule.acr_classic",
                             "message": "data.rule.acr_classic_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for container registry from this URL : https://docs.microsoft.com/en-us/rest/api/containerregistry/registries/list",
-                            "remediationFunction": "PR_AZR_0015_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_ACR_003.py"
                         }
                     ],
                     "severity": "High",
@@ -3553,11 +3553,11 @@
                     "rule": "file(registrieswebhooks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0005-ARM",
+                            "id": "PR-AZR-ARM-ACR-001",
                             "eval": "data.rule.acr_webhooks",
                             "message": "data.rule.acr_webhooks_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for registry webhook from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries/webhooks",
-                            "remediationFunction": "PR_AZR_0005_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_ACR_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3592,11 +3592,11 @@
                     "rule": "file(registry.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0104-ARM",
+                            "id": "PR-AZR-ARM-ACR-002",
                             "eval": "data.rule.adminUserDisabled",
                             "message": "data.rule.adminUserDisabled_err",
                             "remediationDescription": "In Resource of type \"Microsoft.containerregistry/registries\" make sure properties.adminUserEnabled is set to \"Disabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries for more details.",
-                            "remediationFunction": "PR_AZR_0104_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_ACR_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3626,11 +3626,11 @@
                     "rule": "file(secrets.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0001-RGX",
+                            "id": "PR-AZR-ARM-SEC-001",
                             "eval": "data.rule.gl_azure_secrets",
                             "message": "data.rule.gl_azure_secrets_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR-AZR-0001-RGX.py"
+                            "remediationFunction": "PR_AZR_ARM_SEC_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3656,11 +3656,11 @@
                     "rule": "file(secret_azure_iac.py)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0002-RGX",
+                            "id": "PR-AZR-ARM-SEC-002",
                             "eval": "azure_password_leak",
                             "message": "azure_password_leak_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR-AZR-0002-RGX.py"
+                            "remediationFunction": "PR_AZR_ARM_SEC_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3685,11 +3685,11 @@
                     "rule": "file(secret_azure_iac.py)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0003-RGX",
+                            "id": "PR-AZR-ARM-SEC-003",
                             "eval": "entropy_password",
                             "message": "entropy_password_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR-AZR-0003-RGX.py"
+                            "remediationFunction": "PR_AZR_ARM_SEC_003.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3714,11 +3714,11 @@
                     "rule": "file(securitycontacts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0087-ARM",
+                            "id": "PR-AZR-ARM-SCT-002",
                             "eval": "data.rule.securitycontacts",
                             "message": "data.rule.securitycontacts_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for security center from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts",
-                            "remediationFunction": "PR_AZR_0087_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SCT_002.py"
                         }
                     ],
                     "severity": "Low",
@@ -3753,11 +3753,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0102-ARM",
+                            "id": "PR-AZR-ARM-SQL-030",
                             "eval": "data.rule.sql_logical_server_alert",
                             "message": "data.rule.sql_logical_server_alert_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for vpn gateway from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies",
-                            "remediationFunction": "PR_AZR_0102_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_030.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3793,11 +3793,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0129-ARM",
+                            "id": "PR-AZR-ARM-SQL-031",
                             "eval": "data.rule.sql_server_alert",
                             "message": "data.rule.sql_server_alert_err",
                             "remediationDescription": "In Resource of type \"Microsoft.sql/servers/securityalertpolicies\" make sure properties.state exists and value is set to \"Enabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies.",
-                            "remediationFunction": "PR_AZR_0129_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_031.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3833,11 +3833,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0103-ARM",
+                            "id": "PR-AZR-ARM-SQL-032",
                             "eval": "data.rule.sql_managed_instance_alert",
                             "message": "data.rule.sql_managed_instance_alert_err",
                             "remediationDescription": "In Resource of type \"Microsoft.sql/managedinstances/securityalertpolicies\" make sure properties.state exists and value is set to \"Enabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/securityalertpolicies.",
-                            "remediationFunction": "PR_AZR_0103_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_032.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3873,11 +3873,11 @@
                     "rule": "file(sql_managedinstance.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0116-ARM",
+                            "id": "PR-AZR-ARM-SQL-041",
                             "eval": "data.rule.sql_mi_public_endpoint_disabled",
                             "message": "data.rule.sql_mi_public_endpoint_disabled_err",
                             "remediationDescription": "IN ARM template make sure 'properties.publicDataEndpointEnabled' does not exist or if exist set value 'false' to 'properties.publicDataEndpointEnabled' under resource of type 'microsoft.sql/managedinstances'. Visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances for details.",
-                            "remediationFunction": "PR_AZR_0116_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_041.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3905,11 +3905,11 @@
                     "rule": "file(sql_servers_encryption.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0111-ARM",
+                            "id": "PR-AZR-ARM-SQL-046",
                             "eval": "data.rule.serverKeyType",
                             "message": "data.rule.serverKeyType_err",
                             "remediationDescription": "In Resource of type \"Microsoft.sql/servers/encryptionprotector\" make sure properties.serverKeyType is set to \"AzureKeyVault\". \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/encryptionprotector for details.",
-                            "remediationFunction": "PR-AZR-0111-ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_046.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3944,11 +3944,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0092-ARM",
+                            "id": "PR-AZR-ARM-SAC-003",
                             "eval": "data.rule.storage_secure",
                             "message": "data.rule.storage_secure_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts supportsHttpsTrafficOnly should be true",
-                            "remediationFunction": "PR_AZR_0092_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SAC_003.py"
                         }
                     ],
                     "severity": "High",
@@ -3983,11 +3983,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0093-ARM",
+                            "id": "PR-AZR-ARM-SAC-004",
                             "eval": "data.rule.storage_acl",
                             "message": "data.rule.storage_acl_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts networkAcls should be configured",
-                            "remediationFunction": "PR_AZR_0093_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SAC_004.py"
                         }
                     ],
                     "severity": "High",
@@ -4022,11 +4022,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0094-ARM",
+                            "id": "PR-AZR-ARM-SAC-005",
                             "eval": "data.rule.storage_threat_protection",
                             "message": "data.rule.storage_threat_protection_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts. Also visit https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/microsoft.storage/storage-advanced-threat-protection-create/azuredeploy.json for template reference",
-                            "remediationFunction": "PR_AZR_0094_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SAC_005.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4061,11 +4061,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0112-ARM",
+                            "id": "PR-AZR-ARM-SAC-006",
                             "eval": "data.rule.blobService",
                             "message": "data.rule.blobService_err",
                             "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure properties.encryption.services.blob exists and blob.enabled is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts for details.",
-                            "remediationFunction": "PR-AZR-0112-ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SAC_006.py"
                         }
                     ],
                     "severity": "High",
@@ -4099,11 +4099,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0113-ARM",
+                            "id": "PR-AZR-ARM-SAC-007",
                             "eval": "data.rule.fileService",
                             "message": "data.rule.fileService_err",
                             "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure properties.encryption.services.file exists and file.enabled is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts for details.",
-                            "remediationFunction": "PR-AZR-0113-ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SAC_007.py"
                         }
                     ],
                     "severity": "High",
@@ -4137,11 +4137,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0114-ARM",
+                            "id": "PR-AZR-ARM-SAC-008",
                             "eval": "data.rule.keySource",
                             "message": "data.rule.keySource_err",
                             "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure properties.encryption.keySource exists and value is set to \"Microsoft.Keyvault\". \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts for details.",
-                            "remediationFunction": "PR-AZR-0114-ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SAC_008.py"
                         }
                     ],
                     "severity": "High",
@@ -4171,11 +4171,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0122-ARM",
+                            "id": "PR-AZR-ARM-SAC-009",
                             "eval": "data.rule.region",
                             "message": "data.rule.region_err",
                             "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure location is set to northeurope or westeurope. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts for details.",
-                            "remediationFunction": "PR-AZR-0122-ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SAC_009.py"
                         }
                     ],
                     "severity": "High",
@@ -4205,11 +4205,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0123-ARM",
+                            "id": "PR-AZR-ARM-SAC-010",
                             "eval": "data.rule.blobServicePublicAccessDisabled",
                             "message": "data.rule.blobServicePublicAccessDisabled_err",
                             "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure property allowBlobPublicAccess is not exist or value set to false. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts for details.",
-                            "remediationFunction": "PR-AZR-0123-ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SAC_010.py"
                         }
                     ],
                     "severity": "High",
@@ -4244,11 +4244,11 @@
                     "rule": "file(storageblobcontainers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0074-ARM",
+                            "id": "PR-AZR-ARM-SAC-012",
                             "eval": "data.rule.storage_container_public_access_disabled",
                             "message": "data.rule.storage_container_public_access_disabled_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-06-01/storageaccounts/blobservices/containers",
-                            "remediationFunction": "PR_AZR_0074_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SAC_012.py"
                         }
                     ],
                     "severity": "High",
@@ -4283,11 +4283,11 @@
                     "rule": "file(storageblobcontainers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0073-ARM",
+                            "id": "PR-AZR-ARM-SAC-013",
                             "eval": "data.rule.storage__logical_container_public_access_disabled",
                             "message": "data.rule.storage__logical_container_public_access_disabled_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-06-01/storageaccounts/blobservices/containers",
-                            "remediationFunction": "PR_AZR_0073_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SAC_013.py"
                         }
                     ],
                     "severity": "High",
@@ -4316,11 +4316,11 @@
                     "rule": "file(vm.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0065-ARM",
+                            "id": "PR-AZR-ARM-CMP-002",
                             "eval": "data.rule.vm_aset",
                             "message": "data.rule.vm_aset_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines",
-                            "remediationFunction": "PR_AZR_0065_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_CMP_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4355,11 +4355,11 @@
                     "rule": "file(vmextensions.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0064-ARM",
+                            "id": "PR-AZR-ARM-CMP-004",
                             "eval": "data.rule.vm_protection",
                             "message": "data.rule.vm_protection_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for extensions from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines/extensions",
-                            "remediationFunction": "PR_AZR_0064_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_CMP_004.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4387,11 +4387,11 @@
                     "rule": "file(vnetpeerings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0075-ARM",
+                            "id": "PR-AZR-ARM-NTW-036",
                             "eval": "data.rule.vnet_peer",
                             "message": "data.rule.vnet_peer_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for vnet from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/virtualnetworkpeerings",
-                            "remediationFunction": "PR_AZR_0075_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_NTW_036.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4419,11 +4419,11 @@
                     "rule": "file(vnetsubnets.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0066-ARM",
+                            "id": "PR-AZR-ARM-NTW-037",
                             "eval": "data.rule.vnet_subnet_nsg",
                             "message": "data.rule.vnet_subnet_nsg_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for vnet from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/subnets",
-                            "remediationFunction": "PR_AZR_0066_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_NTW_037.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4457,11 +4457,11 @@
                     "rule": "file(vpngateways.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0098-ARM",
+                            "id": "PR-AZR-ARM-NTW-038",
                             "eval": "data.rule.vpn_encrypt",
                             "message": "data.rule.vpn_encrypt_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for vpn gateway from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/vpngateways",
-                            "remediationFunction": "PR_AZR_0098_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_NTW_038.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4494,11 +4494,11 @@
                     "rule": "file(sql_servers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0128-ARM",
+                            "id": "PR-AZR-ARM-SQL-047",
                             "eval": "data.rule.sql_public_access_disabled",
                             "message": "data.rule.sql_public_access_disabled_err",
                             "remediationDescription": "In Resource of type \"Microsoft.Sql/servers\" make sure properties.publicNetworkAccess exists and value is set to \"disabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers for details.",
-                            "remediationFunction": "PR_AZR_0128_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_047.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4527,11 +4527,11 @@
                     "rule": "file(sql_servers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0133-ARM",
+                            "id": "PR-AZR-ARM-SQL-048",
                             "eval": "data.rule.sql_server_login",
                             "message": "data.rule.sql_server_login_err",
                             "remediationDescription": "In Resource of type \"Microsoft.Sql/servers/administrators\" make sure properties.login value isn't set to \"admin\" or \"administrator\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators for details.",
-                            "remediationFunction": "PR_AZR_0133_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_048.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4567,11 +4567,11 @@
                     "rule": "file(sql_servers_auditing.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0134-ARM",
+                            "id": "PR-AZR-ARM-SQL-042",
                             "eval": "data.rule.sql_server_log_audit",
                             "message": "data.rule.sql_server_log_audit_err",
                             "remediationDescription": "In Resource of type \"Microsoft.Sql/servers/auditingSettings\" make sure properties.state exists and value is set to \"Enabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings for details.",
-                            "remediationFunction": "PR_AZR_0134_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_042.py"
                         }
                     ],
                     "severity": "High",
@@ -4607,11 +4607,11 @@
                     "rule": "file(sql_servers_auditing.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0135-ARM",
+                            "id": "PR-AZR-ARM-SQL-043",
                             "eval": "data.rule.sql_logical_server_log_audit",
                             "message": "data.rule.sql_logical_server_log_audit_err",
                             "remediationDescription": "In Resource of type \"Microsoft.Sql/servers/auditingSettings\" make sure properties.state exists and value is set to \"Enabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings for details.",
-                            "remediationFunction": "PR_AZR_0135_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_043.py"
                         }
                     ],
                     "severity": "High",
@@ -4647,11 +4647,11 @@
                     "rule": "file(vm.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0136-ARM",
+                            "id": "PR-AZR-ARM-CMP-003",
                             "eval": "data.rule.linux_configuration",
                             "message": "data.rule.linux_configuration_err",
                             "remediationDescription": "For Resource type 'microsoft.compute/virtualmachines' make sure osProfile.linuxConfiguration.disablePasswordAuthentication exists and the value is set to true.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0136_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_CMP_003.py"
                         }
                     ],
                     "severity": "High",
@@ -4743,11 +4743,11 @@
                     "rule": "file(web.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0139-ARM",
+                            "id": "PR-AZR-ARM-WEB-001",
                             "eval": "data.rule.https_only",
                             "message": "data.rule.https_only_err",
                             "remediationDescription": "For Resource type 'microsoft.web/sites' make sure httpsOnly exists and the value is set to true.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0139_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_WEB_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4782,11 +4782,11 @@
                     "rule": "file(web.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0140-ARM",
+                            "id": "PR-AZR-ARM-WEB-002",
                             "eval": "data.rule.min_tls_version",
                             "message": "data.rule.min_tls_version_err",
                             "remediationDescription": "For Resource type 'microsoft.web/sites' make sure siteConfig.minTlsVersion exists and the value is set to '1.2'.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0140_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_WEB_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4821,11 +4821,11 @@
                     "rule": "file(web.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0141-ARM",
+                            "id": "PR-AZR-ARM-WEB-003",
                             "eval": "data.rule.client_cert_enabled",
                             "message": "data.rule.client_cert_enabled_err",
                             "remediationDescription": "For Resource type 'microsoft.web/sites' make sure clientCertEnabled exists and the value is set to true.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0141_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_WEB_003.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4860,11 +4860,11 @@
                     "rule": "file(web.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0142-ARM",
+                            "id": "PR-AZR-ARM-WEB-004",
                             "eval": "data.rule.http_20_enabled",
                             "message": "data.rule.http_20_enabled_err",
                             "remediationDescription": "For Resource type 'microsoft.web/sites' make sure siteConfig.http20Enabled exists and the value is set to true.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0142_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_WEB_004.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4899,11 +4899,11 @@
                     "rule": "file(securitycontacts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0143-ARM",
+                            "id": "PR-AZR-ARM-SCT-003",
                             "eval": "data.rule.alert_notifications",
                             "message": "data.rule.alert_notifications_err",
                             "remediationDescription": "For Resource type 'microsoft.security/securitycontacts' make sure alertNotifications exists and the value is set to 'On'.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0143_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SCT_003.py"
                         }
                     ],
                     "severity": "Low",
@@ -4931,11 +4931,11 @@
                     "rule": "file(sql_servers_auditing.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0145-ARM",
+                            "id": "PR-AZR-ARM-SQL-044",
                             "eval": "data.rule.sql_server_audit_log_retention",
                             "message": "data.rule.sql_server_audit_log_retention_err",
                             "remediationDescription": "For Resource type 'microsoft.sql/servers/auditingsettings' make sure retentionDays exists and greater than 91 days.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0145_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_044.py"
                         }
                     ],
                     "severity": "High",
@@ -4971,11 +4971,11 @@
                     "rule": "file(sql_servers_auditing.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-SQL-016",
+                            "id": "PR-AZR-ARM-SQL-045",
                             "eval": "data.rule.sql_logial_server_audit_log_retention",
                             "message": "data.rule.sql_logial_server_audit_log_retention_err",
                             "remediationDescription": "For Resource type 'microsoft.sql/servers/auditingsettings' make sure retentionDays exists and greater than 91 days.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_ARM_SQL_016.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_045.py"
                         }
                     ],
                     "severity": "High",
@@ -5011,11 +5011,11 @@
                     "rule": "file(dbforMySQL.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0147-ARM",
+                            "id": "PR-AZR-ARM-SQL-016",
                             "eval": "data.rule.ssl_enforcement",
                             "message": "data.rule.ssl_enforcement_err",
                             "remediationDescription": "For Resource type 'microsoft.dbformysql/servers' make sure sslEnforcement exists and the value is set to 'Enabled'.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0147_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_016.py"
                         }
                     ],
                     "severity": "High",
@@ -5050,11 +5050,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0148-ARM",
+                            "id": "PR-AZR-ARM-SAC-011",
                             "eval": "data.rule.storage_acount_by_pass",
                             "message": "data.rule.storage_acount_by_pass_err",
                             "remediationDescription": "For Resource type 'microsoft.storage/storageaccounts' make sure networkAcls.bypass exists and the value is set to 'AzureServices'.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0148_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SAC_011.py"
                         }
                     ],
                     "severity": "High",
@@ -5285,11 +5285,11 @@
                     "rule": "file(sql_servers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0190-ARM",
+                            "id": "PR-AZR-ARM-SQL-050",
                             "eval": "data.rule.fail_over_groups",
                             "message": "data.rule.fail_over_groups_err",
                             "remediationDescription": "For Resource type 'microsoft.sql/servers' make sure has a subresource with type 'failoverGroups'.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/failovergroups' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0190_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_050.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5324,11 +5324,11 @@
                     "rule": "file(sql_servers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0191-ARM",
+                            "id": "PR-AZR-ARM-SQL-051",
                             "eval": "data.rule.sql_server_administrators",
                             "message": "data.rule.sql_server_administrators_err",
                             "remediationDescription": "For Resource type 'microsoft.sql/servers/administrators' make sure name exists and the value is set to 'activedirectory'.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0191_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_051.py"
                         }
                     ],
                     "severity": "High",
@@ -5359,11 +5359,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0192-ARM",
+                            "id": "PR-AZR-ARM-SQL-033",
                             "eval": "data.rule.sql_logical_server_email_account",
                             "message": "data.rule.sql_logical_server_email_account_err",
                             "remediationDescription": "For Resource type 'microsoft.sql/servers/securityalertpolicies' make sure properties.emailAccountAdmins exists and the value is set to true.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0192_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_033.py"
                         }
                     ],
                     "severity": "High",
@@ -5399,11 +5399,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0193-ARM",
+                            "id": "PR-AZR-ARM-SQL-034",
                             "eval": "data.rule.sql_server_email_account",
                             "message": "data.rule.sql_server_email_account_err",
                             "remediationDescription": "For Resource type 'microsoft.sql/servers/securityalertpolicies' make sure properties.emailAccountAdmins exists and the value is set to true.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0193_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_034.py"
                         }
                     ],
                     "severity": "High",
@@ -5439,11 +5439,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0194-ARM",
+                            "id": "PR-AZR-ARM-SQL-035",
                             "eval": "data.rule.sql_logical_server_email_addressess",
                             "message": "data.rule.sql_logical_server_email_addressess_err",
                             "remediationDescription": "For Resource type 'microsoft.sql/servers/securityalertpolicies' make sure properties.emailAddresses exists and has a valid email address.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0194_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_035.py"
                         }
                     ],
                     "severity": "High",
@@ -5479,11 +5479,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0195-ARM",
+                            "id": "PR-AZR-ARM-SQL-036",
                             "eval": "data.rule.sql_server_email_addressess",
                             "message": "data.rule.sql_server_email_addressess_err",
                             "remediationDescription": "For Resource type 'microsoft.sql/servers/securityalertpolicies' make sure properties.emailAddresses exists and has a valid email address.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0195_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_036.py"
                         }
                     ],
                     "severity": "High",
@@ -5519,11 +5519,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0196-ARM",
+                            "id": "PR-AZR-ARM-SQL-037",
                             "eval": "data.rule.sql_logical_server_retention_days",
                             "message": "data.rule.sql_logical_server_retention_days_err",
                             "remediationDescription": "For Resource type 'microsoft.sql/servers/securityalertpolicies' make sure properties.retentionDays exists and the value is set to greater than 90.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0196_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_037.py"
                         }
                     ],
                     "severity": "High",
@@ -5559,11 +5559,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0197-ARM",
+                            "id": "PR-AZR-ARM-SQL-038",
                             "eval": "data.rule.sql_server_retention_days",
                             "message": "data.rule.sql_server_retention_days_err",
                             "remediationDescription": "For Resource type 'microsoft.sql/servers/securityalertpolicies' make sure properties.retentionDays exists and the value is set to greater than 90.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0197_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_038.py"
                         }
                     ],
                     "severity": "High",
@@ -5599,11 +5599,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0198-ARM",
+                            "id": "PR-AZR-ARM-SQL-039",
                             "eval": "data.rule.sql_logical_server_disabled_alerts",
                             "message": "data.rule.sql_logical_server_disabled_alerts_err",
                             "remediationDescription": "For the source type 'microsoft.sql/servers/securityalertpolicies' make sure that properties.disabledAlerts does not exist or is empty.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0198_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_039.py"
                         }
                     ],
                     "severity": "High",
@@ -5639,11 +5639,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0199-ARM",
+                            "id": "PR-AZR-ARM-SQL-040",
                             "eval": "data.rule.sql_server_disabled_alerts",
                             "message": "data.rule.sql_server_disabled_alerts_err",
                             "remediationDescription": "For the source type 'microsoft.sql/servers/securityalertpolicies' make sure that properties.disabledAlerts does not exist or is empty.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0199_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_040.py"
                         }
                     ],
                     "severity": "High",
@@ -5679,11 +5679,11 @@
                     "rule": "file(sql_servers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0200-ARM",
+                            "id": "PR-AZR-ARM-SQL-049",
                             "eval": "data.rule.sql_logical_server_login",
                             "message": "data.rule.sql_logical_server_login_err",
                             "remediationDescription": "In Resource of type \"Microsoft.Sql/servers/administrators\" make sure properties.login exists and the value isn't set to 'admin' or 'administrator'.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/administrators' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_0200_ARM.py"
+                            "remediationFunction": "PR_AZR_ARM_SQL_049.py"
                         }
                     ],
                     "severity": "Medium",

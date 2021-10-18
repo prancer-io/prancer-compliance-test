@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines
 
 #
-# PR-AZR-0065-ARM
+# PR-AZR-ARM-CMP-002
 #
 
 default vm_aset = null
@@ -28,7 +28,7 @@ vm_aset_err = "Azure Virtual Machine is not assigned to an availability set" {
 }
 
 vm_aset_metadata := {
-    "Policy Code": "PR-AZR-0065-ARM",
+    "Policy Code": "PR-AZR-ARM-CMP-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -42,7 +42,7 @@ vm_aset_metadata := {
 
 
 
-# PR-AZR-0136-ARM
+# PR-AZR-ARM-CMP-003
 #
 
 default linux_configuration = null
@@ -84,7 +84,7 @@ linux_configuration_err = "microsoft.compute/virtualmachines resource property l
 }
 
 linux_configuration_metadata := {
-    "Policy Code": "PR-AZR-0136-ARM",
+    "Policy Code": "PR-AZR-ARM-CMP-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

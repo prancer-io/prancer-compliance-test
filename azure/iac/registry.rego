@@ -2,7 +2,7 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries
 
-# PR-AZR-0104-ARM
+# PR-AZR-ARM-ACR-002
 
 default adminUserDisabled = null
 
@@ -36,7 +36,7 @@ adminUserDisabled_err = "Azure Container Registry admin user is currently not di
 }
 
 adminUserDisabled_metadata := {
-    "Policy Code": "PR-AZR-0104-ARM",
+    "Policy Code": "PR-AZR-ARM-ACR-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -50,7 +50,7 @@ adminUserDisabled_metadata := {
 
 
 #
-# PR-AZR-0015-ARM
+# PR-AZR-ARM-ACR-003
 #
 
 default acr_classic = null
@@ -90,7 +90,7 @@ acr_classic_miss_err = "Azure Container registry property sku.name is missing fr
 }
 
 acr_classic_metadata := {
-    "Policy Code": "PR-AZR-0015-ARM",
+    "Policy Code": "PR-AZR-ARM-ACR-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

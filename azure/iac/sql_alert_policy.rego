@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/securityalertpolicies
 
-# PR-AZR-0102-ARM
+# PR-AZR-ARM-SQL-030
 # This local server child resource is not available in Terraform yet.
 default sql_logical_server_alert = null
 
@@ -51,7 +51,7 @@ sql_logical_server_alert_err = "Security alert is currently not enabled on SQL L
 }
 
 sql_logical_server_alert_metadata := {
-    "Policy Code": "PR-AZR-0102-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-030",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -63,7 +63,7 @@ sql_logical_server_alert_metadata := {
 }
 
 
-# PR-AZR-0129-ARM
+# PR-AZR-ARM-SQL-031
 
 default sql_server_alert = null
 
@@ -103,7 +103,7 @@ sql_server_alert_err = "Security alert is currently not enabled on SQL Server" {
 }
 
 sql_server_alert_metadata := {
-    "Policy Code": "PR-AZR-0129-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-031",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -116,7 +116,7 @@ sql_server_alert_metadata := {
 
 
 
-# PR-AZR-0103-ARM
+# PR-AZR-ARM-SQL-032
 # SQL Managed Instance resource still not available for Terraform yet. 
 # see: https://github.com/hashicorp/terraform-provider-azurerm/issues/1747 for details
 
@@ -158,7 +158,7 @@ sql_managed_instance_alert_err = "Security alert is currently not enabled on SQL
 }
 
 sql_managed_instance_alert_metadata := {
-    "Policy Code": "PR-AZR-0103-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-032",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -171,7 +171,7 @@ sql_managed_instance_alert_metadata := {
 
 
 
-# PR-AZR-0192-ARM
+# PR-AZR-ARM-SQL-033
 #
 
 default sql_logical_server_email_account = null
@@ -219,7 +219,7 @@ sql_logical_server_email_account_err = "microsoft.sql/servers/securityalertpolic
 }
 
 sql_logical_server_email_account_metadata := {
-    "Policy Code": "PR-AZR-0192-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-033",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -232,7 +232,7 @@ sql_logical_server_email_account_metadata := {
 
 
 
-# PR-AZR-0193-ARM
+# PR-AZR-ARM-SQL-034
 #
 
 default sql_server_email_account = null
@@ -274,7 +274,7 @@ sql_server_email_account_err = "microsoft.sql/servers/securityalertpolicies prop
 }
 
 sql_server_email_account_metadata := {
-    "Policy Code": "PR-AZR-0193-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-034",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -287,7 +287,7 @@ sql_server_email_account_metadata := {
 
 
 
-# PR-AZR-0194-ARM
+# PR-AZR-ARM-SQL-035
 #
 
 default sql_logical_server_email_addressess = null
@@ -337,7 +337,7 @@ sql_logical_server_email_addressess_err = "Azure SQL security alert policy attri
 
 
 sql_logical_server_email_addressess_metadata := {
-    "Policy Code": "PR-AZR-0194-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-035",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -353,7 +353,7 @@ sql_logical_server_email_addressess_metadata := {
 
 
 
-# PR-AZR-0195-ARM
+# PR-AZR-ARM-SQL-036
 #
 
 default sql_server_email_addressess = null
@@ -396,7 +396,7 @@ sql_server_email_addressess_err = "Azure SQL security alert policy attribute 'em
 
 
 sql_server_email_addressess_metadata := {
-    "Policy Code": "PR-AZR-0195-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-036",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -411,7 +411,7 @@ sql_server_email_addressess_metadata := {
 
 
 
-# PR-AZR-0196-ARM
+# PR-AZR-ARM-SQL-037
 #
 
 default sql_logical_server_retention_days = null
@@ -475,7 +475,7 @@ sql_logical_server_retention_days_err = "Azure SQL security alert policy attribu
 
 
 sql_logical_server_retention_days_metadata := {
-    "Policy Code": "PR-AZR-0196-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-037",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -491,7 +491,7 @@ sql_logical_server_retention_days_metadata := {
 
 
 
-# PR-AZR-0197-ARM
+# PR-AZR-ARM-SQL-038
 #
 
 default sql_server_retention_days = null
@@ -543,7 +543,7 @@ sql_server_retention_days_err = "Azure SQL security alert policy attribute 'rete
 
 
 sql_server_retention_days_metadata := {
-    "Policy Code": "PR-AZR-0197-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-038",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -556,7 +556,7 @@ sql_server_retention_days_metadata := {
 
 
 
-# PR-AZR-0198-ARM
+# PR-AZR-ARM-SQL-039
 #
 
 default sql_logical_server_disabled_alerts = null
@@ -601,7 +601,7 @@ sql_logical_server_disabled_alerts_err = "Azure SQL Server Security Alert Policy
 
 
 sql_logical_server_disabled_alerts_metadata := {
-    "Policy Code": "PR-AZR-0198-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-039",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -616,7 +616,7 @@ sql_logical_server_disabled_alerts_metadata := {
 
 
 
-# PR-AZR-0199-ARM
+# PR-AZR-ARM-SQL-040
 #
 
 default sql_server_disabled_alerts = null
@@ -655,7 +655,7 @@ sql_server_disabled_alerts_err = "Azure SQL Server Security Alert Policy current
 
 
 sql_server_disabled_alerts_metadata := {
-    "Policy Code": "PR-AZR-0199-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-040",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
