@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances
 
 #
-# PR-GCP-0062-GDF
+# PR-GCP-GDF-SQLI-001
 #
 
 default sql_labels = null
@@ -34,7 +34,7 @@ sql_labels_err = "GCP SQL Instances without any Label information" {
 }
 
 sql_labels_metadata := {
-    "Policy Code": "PR-GCP-0062-GDF",
+    "Policy Code": "PR-GCP-GDF-SQLI-001",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -46,7 +46,7 @@ sql_labels_metadata := {
 }
 
 #
-# PR-GCP-0080-GDF
+# PR-GCP-GDF-SQLI-002
 #
 
 default sql_binary_logs = null
@@ -88,7 +88,7 @@ sql_binary_logs_miss_err = "GCP DB Instance attribute databaseVersion missing in
 }
 
 sql_binary_logs_metadata := {
-    "Policy Code": "PR-GCP-0080-GDF",
+    "Policy Code": "PR-GCP-GDF-SQLI-002",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -100,7 +100,7 @@ sql_binary_logs_metadata := {
 }
 
 #
-# PR-GCP-0081-GDF
+# PR-GCP-GDF-SQLI-003
 #
 
 default sql_backup = null
@@ -141,7 +141,7 @@ sql_backup_miss_err = "GCP DB Instance attribute backupConfiguration missing in 
 }
 
 sql_backup_metadata := {
-    "Policy Code": "PR-GCP-0081-GDF",
+    "Policy Code": "PR-GCP-GDF-SQLI-003",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -153,7 +153,7 @@ sql_backup_metadata := {
 }
 
 #
-# PR-GCP-0082-GDF
+# PR-GCP-GDF-SQLI-004
 #
 
 default sql_ssl = null
@@ -194,7 +194,7 @@ sql_ssl_miss_err = "GCP DB Instance attribute ipConfiguration.requireSsl missing
 }
 
 sql_ssl_metadata := {
-    "Policy Code": "PR-GCP-0082-GDF",
+    "Policy Code": "PR-GCP-GDF-SQLI-004",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -206,7 +206,7 @@ sql_ssl_metadata := {
 }
 
 #
-# PR-GCP-0083-GDF
+# PR-GCP-GDF-SQLI-005
 #
 
 default sql_exposed = null
@@ -259,7 +259,7 @@ sql_exposed_miss_err = "GCP DB Instance attribute ipConfiguration.authorizedNetw
 }
 
 sql_exposed_metadata := {
-    "Policy Code": "PR-GCP-0083-GDF",
+    "Policy Code": "PR-GCP-GDF-SQLI-005",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",

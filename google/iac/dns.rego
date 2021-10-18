@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/dns/docs/reference/v1/managedZones
 
 #
-# PR-GCP-0003-GDF
+# PR-GCP-GDF-MZ-001
 #
 
 default dnssec_state = null
@@ -44,7 +44,7 @@ dnssec_state_miss_err = "GCP Cloud DNS attribute dnssecConfig.state missing in t
 }
 
 dnssec_state_metadata := {
-    "Policy Code": "PR-GCP-0003-GDF",
+    "Policy Code": "PR-GCP-GDF-MZ-001",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -56,7 +56,7 @@ dnssec_state_metadata := {
 }
 
 #
-# PR-GCP-0004-GDF
+# PR-GCP-GDF-MZ-002
 #
 
 default dnssec_key_rsasha1 = null
@@ -99,7 +99,7 @@ dnssec_key_rsasha1_miss_err = "GCP Cloud DNS attribute dnssecConfig.defaultKeySp
 }
 
 dnssec_key_rsasha1_metadata := {
-    "Policy Code": "PR-GCP-0004-GDF",
+    "Policy Code": "PR-GCP-GDF-MZ-002",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -111,7 +111,7 @@ dnssec_key_rsasha1_metadata := {
 }
 
 #
-# PR-GCP-0005-GDF
+# PR-GCP-GDF-MZ-003
 #
 
 default dnssec_zone_rsasha1 = null
@@ -154,7 +154,7 @@ dnssec_zone_rsasha1_miss_err = "GCP Cloud DNS attribute dnssecConfig.defaultKeyS
 }
 
 dnssec_zone_rsasha1_metadata := {
-    "Policy Code": "PR-GCP-0005-GDF",
+    "Policy Code": "PR-GCP-GDF-MZ-003",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",

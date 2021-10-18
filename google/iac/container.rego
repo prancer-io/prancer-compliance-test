@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters
 
 #
-# PR-GCP-0030-GDF
+# PR-GCP-GDF-CLT-001
 #
 
 default k8s_svc_account = null
@@ -43,7 +43,7 @@ k8s_svc_account_miss_err = "Kubernetes Engine Cluster attribute nodePools config
 }
 
 k8s_svc_account_metadata := {
-    "Policy Code": "PR-GCP-0030-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-001",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -55,7 +55,7 @@ k8s_svc_account_metadata := {
 }
 
 #
-# PR-GCP-0031-GDF
+# PR-GCP-GDF-CLT-002
 #
 
 default k8s_basicauth = null
@@ -86,7 +86,7 @@ k8s_basicauth_err = "GCP Kubernetes Engine Clusters Basic Authentication is set 
 }
 
 k8s_basicauth_metadata := {
-    "Policy Code": "PR-GCP-0031-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-002",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -98,7 +98,7 @@ k8s_basicauth_metadata := {
 }
 
 #
-# PR-GCP-0032-GDF
+# PR-GCP-GDF-CLT-003
 #
 
 default k8s_client_cert = null
@@ -129,7 +129,7 @@ k8s_client_cert_err = "GCP Kubernetes Engine Clusters Client Certificate is set 
 }
 
 k8s_client_cert_metadata := {
-    "Policy Code": "PR-GCP-0032-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-003",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -141,7 +141,7 @@ k8s_client_cert_metadata := {
 }
 
 #
-# PR-GCP-0033-GDF
+# PR-GCP-GDF-CLT-004
 #
 
 default k8s_alias_ip = null
@@ -166,7 +166,7 @@ k8s_alias_ip_err = "GCP Kubernetes Engine Clusters have Alias IP disabled" {
 }
 
 k8s_alias_ip_metadata := {
-    "Policy Code": "PR-GCP-0033-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-004",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -178,7 +178,7 @@ k8s_alias_ip_metadata := {
 }
 
 #
-# PR-GCP-0034-GDF
+# PR-GCP-GDF-CLT-005
 #
 
 default k8s_alpha = null
@@ -203,7 +203,7 @@ k8s_alpha_err = "GCP Kubernetes Engine Clusters have Alpha cluster feature enabl
 }
 
 k8s_alpha_metadata := {
-    "Policy Code": "PR-GCP-0034-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-005",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -215,7 +215,7 @@ k8s_alpha_metadata := {
 }
 
 #
-# PR-GCP-0035-GDF
+# PR-GCP-GDF-CLT-006
 #
 
 default k8s_http_lbs = null
@@ -240,7 +240,7 @@ k8s_http_lbs_err = "GCP Kubernetes Engine Clusters have HTTP load balancing disa
 }
 
 k8s_http_lbs_metadata := {
-    "Policy Code": "PR-GCP-0035-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-006",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -252,7 +252,7 @@ k8s_http_lbs_metadata := {
 }
 
 #
-# PR-GCP-0036-GDF
+# PR-GCP-GDF-CLT-007
 #
 
 default k8s_legacy_abac = null
@@ -277,7 +277,7 @@ k8s_legacy_abac_err = "GCP Kubernetes Engine Clusters have Legacy Authorization 
 }
 
 k8s_legacy_abac_metadata := {
-    "Policy Code": "PR-GCP-0036-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-007",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -289,7 +289,7 @@ k8s_legacy_abac_metadata := {
 }
 
 #
-# PR-GCP-0037-GDF
+# PR-GCP-GDF-CLT-008
 #
 
 default k8s_master_auth_net = null
@@ -314,7 +314,7 @@ k8s_master_auth_net_err = "GCP Kubernetes Engine Clusters have Master authorized
 }
 
 k8s_master_auth_net_metadata := {
-    "Policy Code": "PR-GCP-0037-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-008",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -326,7 +326,7 @@ k8s_master_auth_net_metadata := {
 }
 
 #
-# PR-GCP-0038-GDF
+# PR-GCP-GDF-CLT-009
 #
 
 default k8s_net_policy = null
@@ -351,7 +351,7 @@ k8s_net_policy_err = "GCP Kubernetes Engine Clusters have Network policy disable
 }
 
 k8s_net_policy_metadata := {
-    "Policy Code": "PR-GCP-0038-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-009",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -363,7 +363,7 @@ k8s_net_policy_metadata := {
 }
 
 #
-# PR-GCP-0039-GDF
+# PR-GCP-GDF-CLT-010
 #
 
 default k8s_logging = null
@@ -403,7 +403,7 @@ k8s_logging_miss_err = "Kubernetes Engine Cluster attribute loggingService confi
 }
 
 k8s_logging_metadata := {
-    "Policy Code": "PR-GCP-0039-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-010",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -415,7 +415,7 @@ k8s_logging_metadata := {
 }
 
 #
-# PR-GCP-0040-GDF
+# PR-GCP-GDF-CLT-011
 #
 
 default k8s_monitor = null
@@ -455,7 +455,7 @@ k8s_monitor_miss_err = "Kubernetes Engine Cluster attribute monitoringService co
 }
 
 k8s_monitor_metadata := {
-    "Policy Code": "PR-GCP-0040-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-011",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -467,7 +467,7 @@ k8s_monitor_metadata := {
 }
 
 #
-# PR-GCP-0041-GDF
+# PR-GCP-GDF-CLT-012
 #
 
 default k8s_binary_auth = null
@@ -492,7 +492,7 @@ k8s_binary_auth_err = "GCP Kubernetes Engine Clusters have binary authorization 
 }
 
 k8s_binary_auth_metadata := {
-    "Policy Code": "PR-GCP-0041-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-012",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -504,7 +504,7 @@ k8s_binary_auth_metadata := {
 }
 
 #
-# PR-GCP-0042-GDF
+# PR-GCP-GDF-CLT-013
 #
 
 default k8s_legacy_endpoint = null
@@ -529,7 +529,7 @@ k8s_legacy_endpoint_err = "GCP Kubernetes Engine Clusters have legacy compute en
 }
 
 k8s_legacy_endpoint_metadata := {
-    "Policy Code": "PR-GCP-0042-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-013",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -541,7 +541,7 @@ k8s_legacy_endpoint_metadata := {
 }
 
 #
-# PR-GCP-0043-GDF
+# PR-GCP-GDF-CLT-014
 #
 
 default k8s_pod_security = null
@@ -566,7 +566,7 @@ k8s_pod_security_err = "GCP Kubernetes Engine Clusters have pod security policy 
 }
 
 k8s_pod_security_metadata := {
-    "Policy Code": "PR-GCP-0043-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-014",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -578,7 +578,7 @@ k8s_pod_security_metadata := {
 }
 
 #
-# PR-GCP-0045-GDF
+# PR-GCP-GDF-CLT-015
 #
 
 default k8s_egress_metering = null
@@ -603,7 +603,7 @@ k8s_egress_metering_err = "GCP Kubernetes Engine Clusters not configured with ne
 }
 
 k8s_egress_metering_metadata := {
-    "Policy Code": "PR-GCP-0045-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-015",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -615,7 +615,7 @@ k8s_egress_metering_metadata := {
 }
 
 #
-# PR-GCP-0046-GDF
+# PR-GCP-GDF-CLT-016
 #
 
 default k8s_private = null
@@ -640,7 +640,7 @@ k8s_private_err = "GCP Kubernetes Engine Clusters not configured with private cl
 }
 
 k8s_private_metadata := {
-    "Policy Code": "PR-GCP-0046-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-016",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -652,7 +652,7 @@ k8s_private_metadata := {
 }
 
 #
-# PR-GCP-0047-GDF
+# PR-GCP-GDF-CLT-017
 #
 
 default k8s_private_node = null
@@ -677,7 +677,7 @@ k8s_private_node_err = "GCP Kubernetes Engine Clusters not configured with priva
 }
 
 k8s_private_node_metadata := {
-    "Policy Code": "PR-GCP-0047-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-017",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -689,7 +689,7 @@ k8s_private_node_metadata := {
 }
 
 #
-# PR-GCP-0048-GDF
+# PR-GCP-GDF-CLT-018
 #
 
 default k8s_node_image = null
@@ -737,7 +737,7 @@ k8s_node_image_miss_err = "Kubernetes Engine Cluster attribute imageType config 
 }
 
 k8s_node_image_metadata := {
-    "Policy Code": "PR-GCP-0048-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-018",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -749,7 +749,7 @@ k8s_node_image_metadata := {
 }
 
 #
-# PR-GCP-0049-GDF
+# PR-GCP-GDF-CLT-019
 #
 
 default k8s_network = null
@@ -780,7 +780,7 @@ k8s_network_err = "GCP Kubernetes Engine Clusters using the default network" {
 }
 
 k8s_network_metadata := {
-    "Policy Code": "PR-GCP-0049-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-019",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -792,7 +792,7 @@ k8s_network_metadata := {
 }
 
 #
-# PR-GCP-0050-GDF
+# PR-GCP-GDF-CLT-020
 #
 
 default k8s_dashboard = null
@@ -817,7 +817,7 @@ k8s_dashboard_err = "GCP Kubernetes Engine Clusters web UI/Dashboard is set to E
 }
 
 k8s_dashboard_metadata := {
-    "Policy Code": "PR-GCP-0050-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-020",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -829,7 +829,7 @@ k8s_dashboard_metadata := {
 }
 
 #
-# PR-GCP-0051-GDF
+# PR-GCP-GDF-CLT-021
 #
 
 default k8s_labels = null
@@ -860,7 +860,7 @@ k8s_labels_err = "GCP Kubernetes Engine Clusters without any label information" 
 }
 
 k8s_labels_metadata := {
-    "Policy Code": "PR-GCP-0051-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-021",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -872,7 +872,7 @@ k8s_labels_metadata := {
 }
 
 #
-# PR-GCP-0052-GDF
+# PR-GCP-GDF-CLT-022
 #
 
 default k8s_db_encrypt = null
@@ -924,7 +924,7 @@ k8s_db_encrypt_miss_err = "Kubernetes Engine Cluster attribute databaseEncryptio
 }
 
 k8s_db_encrypt_metadata := {
-    "Policy Code": "PR-GCP-0052-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-022",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -936,7 +936,7 @@ k8s_db_encrypt_metadata := {
 }
 
 #
-# PR-GCP-0053-GDF
+# PR-GCP-GDF-CLT-023
 #
 
 default k8s_intra_node = null
@@ -961,7 +961,7 @@ k8s_intra_node_err = "GCP Kubernetes cluster intra-node visibility disabled" {
 }
 
 k8s_intra_node_metadata := {
-    "Policy Code": "PR-GCP-0053-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-023",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -973,7 +973,7 @@ k8s_intra_node_metadata := {
 }
 
 #
-# PR-GCP-0054-GDF
+# PR-GCP-GDF-CLT-024
 #
 
 default k8s_istio = null
@@ -998,7 +998,7 @@ k8s_istio_err = "GCP Kubernetes cluster istioConfig not enabled" {
 }
 
 k8s_istio_metadata := {
-    "Policy Code": "PR-GCP-0054-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-024",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -1010,7 +1010,7 @@ k8s_istio_metadata := {
 }
 
 #
-# PR-GCP-0055-GDF
+# PR-GCP-GDF-CLT-025
 #
 
 default k8s_zones = null
@@ -1040,7 +1040,7 @@ k8s_zones_miss_err = "GCP Kubernetes cluster not in redundant zones" {
 }
 
 k8s_zones_metadata := {
-    "Policy Code": "PR-GCP-0055-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-025",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -1052,7 +1052,7 @@ k8s_zones_metadata := {
 }
 
 #
-# PR-GCP-0056-GDF
+# PR-GCP-GDF-CLT-026
 #
 
 default k8s_auto_upgrade = null
@@ -1105,7 +1105,7 @@ k8s_auto_upgrade_miss_err = "Kubernetes Engine Cluster attribute currentNodeCoun
 }
 
 k8s_auto_upgrade_metadata := {
-    "Policy Code": "PR-GCP-0056-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-026",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",

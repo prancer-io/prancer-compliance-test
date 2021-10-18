@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/storage/docs/json_api/v1/buckets
 
 #
-# PR-GCP-0063-GDF
+# PR-GCP-GDF-BKT-001
 #
 
 default storage_encrypt = null
@@ -43,7 +43,7 @@ storage_encrypt_miss_err = "GCP Storage bucket attribute encryption missing in t
 }
 
 storage_encrypt_metadata := {
-    "Policy Code": "PR-GCP-0063-GDF",
+    "Policy Code": "PR-GCP-GDF-BKT-001",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -55,7 +55,7 @@ storage_encrypt_metadata := {
 }
 
 #
-# PR-GCP-0066-GDF
+# PR-GCP-GDF-BKT-002
 #
 
 default storage_versioning = null
@@ -96,7 +96,7 @@ storage_versioning_miss_err = "GCP Storage attribute versioning missing in the r
 }
 
 storage_versioning_metadata := {
-    "Policy Code": "PR-GCP-0066-GDF",
+    "Policy Code": "PR-GCP-GDF-BKT-002",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -108,7 +108,7 @@ storage_versioning_metadata := {
 }
 
 #
-# PR-GCP-0078-GDF
+# PR-GCP-GDF-BKT-003
 #
 
 default storage_stack_logging = null
@@ -149,7 +149,7 @@ storage_stack_logging_miss_err = "GCP Storage attribute logging missing in the r
 }
 
 storage_stack_logging_metadata := {
-    "Policy Code": "PR-GCP-0078-GDF",
+    "Policy Code": "PR-GCP-GDF-BKT-003",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -161,7 +161,7 @@ storage_stack_logging_metadata := {
 }
 
 #
-# PR-GCP-0089-GDF
+# PR-GCP-GDF-BKT-004
 #
 
 default storage_logging = null
@@ -186,7 +186,7 @@ storage_logging_err = "Storage Bucket does not have Access and Storage Logging e
 }
 
 storage_logging_metadata := {
-    "Policy Code": "PR-GCP-0089-GDF",
+    "Policy Code": "PR-GCP-GDF-BKT-004",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -198,7 +198,7 @@ storage_logging_metadata := {
 }
 
 #
-# PR-GCP-0090-GDF
+# PR-GCP-GDF-BKT-005
 #
 
 default storage_public_logs = null
@@ -248,7 +248,7 @@ storage_public_logs_miss_err = "GCP Storage attribute acl missing in the resourc
 }
 
 storage_public_logs_metadata := {
-    "Policy Code": "PR-GCP-0090-GDF",
+    "Policy Code": "PR-GCP-GDF-BKT-005",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",

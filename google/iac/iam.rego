@@ -3,7 +3,7 @@ package rule
 # https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys
 
 #
-# PR-GCP-0067-GDF
+# PR-GCP-GDF-SAK-001
 #
 
 default svc_account_key = null
@@ -45,7 +45,7 @@ svc_account_key_miss_err = "GCP User managed service account keys attribute name
 }
 
 svc_account_key_metadata := {
-    "Policy Code": "PR-GCP-0067-GDF",
+    "Policy Code": "PR-GCP-GDF-SAK-001",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
