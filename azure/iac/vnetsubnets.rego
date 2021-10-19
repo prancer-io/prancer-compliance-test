@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/subnets
 
 #
-# PR-AZR-ARM-NTW-037
+# PR-AZR-ARM-NTW-005
 #
 
 default vnet_subnet_nsg = null
@@ -35,7 +35,7 @@ vnet_subnet_nsg_err = "Azure Virtual Network subnet is currently not configured 
 }
 
 vnet_subnet_nsg_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-037",
+    "Policy Code": "PR-AZR-ARM-NTW-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

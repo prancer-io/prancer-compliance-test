@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/secrets
 
 #
-# PR-AZR-ARM-KYV-005
+# PR-AZR-ARM-KV-005
 #
 
 default kv_expire = null
@@ -45,7 +45,7 @@ kv_expire_miss_err = "Azure Key Vault attribute 'exp' is missing from the resour
 }
 
 kv_expire_metadata := {
-    "Policy Code": "PR-AZR-ARM-KYV-005",
+    "Policy Code": "PR-AZR-ARM-KV-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

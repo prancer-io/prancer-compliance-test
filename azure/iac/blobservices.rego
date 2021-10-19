@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/blobservices
 
 #
-# PR-AZR-ARM-SAC-001
+# PR-AZR-ARM-STR-001
 #
 # SideNote for Reference: This cannot be done via Terraform. terraform can only change retention days.
 # See the note section at https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#container_delete_retention_policy
@@ -43,7 +43,7 @@ storage_blob_soft_delete_err = "microsoft.storage/storageaccounts/blobservices r
 }
 
 storage_blob_soft_delete_metadata := {
-    "Policy Code": "PR-AZR-ARM-SAC-001",
+    "Policy Code": "PR-AZR-ARM-STR-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -56,7 +56,7 @@ storage_blob_soft_delete_metadata := {
 
 
 #
-# PR-AZR-ARM-SAC-002
+# PR-AZR-ARM-STR-002
 #
 # SideNote for Reference: This cannot be done via Terraform. terraform can only change retention days.
 # See the note section at https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#container_delete_retention_policy
@@ -96,7 +96,7 @@ storage_blob_container_soft_delete_err = "microsoft.storage/storageaccounts/blob
 }
 
 storage_blob_container_soft_delete_metadata := {
-    "Policy Code": "PR-AZR-ARM-SAC-002",
+    "Policy Code": "PR-AZR-ARM-STR-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

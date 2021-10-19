@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/vpngateways
 
 #
-# PR-AZR-ARM-NTW-038
+# PR-AZR-ARM-NTW-006
 #
 
 default vpn_encrypt = null
@@ -45,7 +45,7 @@ vpn_encrypt_miss_err = "VPN gateways connections or ipsec policies property 'ips
 }
 
 vpn_encrypt_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-038",
+    "Policy Code": "PR-AZR-ARM-NTW-006",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

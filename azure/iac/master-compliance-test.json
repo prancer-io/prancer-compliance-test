@@ -519,11 +519,11 @@
                     "rule": "file(blobservices.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-SAC-001",
+                            "id": "PR-AZR-ARM-STR-001",
                             "eval": "data.rule.storage_blob_soft_delete",
                             "message": "data.rule.storage_blob_soft_delete_err",
                             "remediationDescription": "For resource type \"Microsoft.storage/storageaccounts/blobservices\" make sure properties.deleteRetentionPolicy.enabled exists and value is set to true . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/blobservices for details.",
-                            "remediationFunction": "PR_AZR_ARM_SAC_001.py"
+                            "remediationFunction": "PR_AZR_ARM_STR_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -551,11 +551,11 @@
                     "rule": "file(blobservices.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-SAC-002",
+                            "id": "PR-AZR-ARM-STR-002",
                             "eval": "data.rule.storage_blob_container_soft_delete",
                             "message": "data.rule.storage_blob_container_soft_delete_err",
                             "remediationDescription": "For resource type \"Microsoft.storage/storageaccounts/blobservices\" make sure properties.containerDeleteRetentionPolicy.enabled exists and value is set to true . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/blobservices for details.",
-                            "remediationFunction": "PR_AZR_ARM_SAC_002.py"
+                            "remediationFunction": "PR_AZR_ARM_STR_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1760,11 +1760,11 @@
                     "rule": "file(KeyVault.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-KYV-001",
+                            "id": "PR-AZR-ARM-KV-001",
                             "eval": "data.rule.KeyVault",
                             "message": "data.rule.KeyVault_err",
                             "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure you have added either permissions.keys or permissions.secrets or permissions.certificates under each AccessPolicyEntry of properties.accessPolicies. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json for details.",
-                            "remediationFunction": "PR_AZR_ARM_KYV_001.py"
+                            "remediationFunction": "PR_AZR_ARM_KV_001.py"
                         }
                     ],
                     "severity": "Low",
@@ -1796,11 +1796,11 @@
                     "rule": "file(KeyVault.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-KYV-002",
+                            "id": "PR-AZR-ARM-KV-002",
                             "eval": "data.rule.enableSoftDelete",
                             "message": "data.rule.enableSoftDelete_err",
                             "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure properties.enableSoftDelete exists and value is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json for details.",
-                            "remediationFunction": "PR_AZR_ARM_KYV_002.py"
+                            "remediationFunction": "PR_AZR_ARM_KV_002.py"
                         }
                     ],
                     "severity": "High",
@@ -1830,11 +1830,11 @@
                     "rule": "file(KeyVault.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-KYV-003",
+                            "id": "PR-AZR-ARM-KV-003",
                             "eval": "data.rule.enablePurgeProtection",
                             "message": "data.rule.enablePurgeProtection_err",
                             "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure properties.enablePurgeProtection exists and value is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json for details.",
-                            "remediationFunction": "PR_AZR_ARM_KYV_003.py"
+                            "remediationFunction": "PR_AZR_ARM_KV_003.py"
                         }
                     ],
                     "severity": "High",
@@ -1864,11 +1864,11 @@
                     "rule": "file(keyvaultkeys.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-KYV-004",
+                            "id": "PR-AZR-ARM-KV-004",
                             "eval": "data.rule.kv_keys_expire",
                             "message": "data.rule.kv_keys_expire_err",
                             "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults/keys\" make sure properties.attributes.exp exists and value isn't set empty. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/keys for details.",
-                            "remediationFunction": "PR_AZR_ARM_KYV_004.py"
+                            "remediationFunction": "PR_AZR_ARM_KV_004.py"
                         }
                     ],
                     "severity": "High",
@@ -1903,11 +1903,11 @@
                     "rule": "file(keyvaultsecrets.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-KYV-005",
+                            "id": "PR-AZR-ARM-KV-005",
                             "eval": "data.rule.kv_expire",
                             "message": "data.rule.kv_expire_err",
                             "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults/secrets\" make sure properties.attributes.exp exists and value isn't set empty. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/secrets for details.",
-                            "remediationFunction": "PR_AZR_ARM_KYV_005.py"
+                            "remediationFunction": "PR_AZR_ARM_KV_005.py"
                         }
                     ],
                     "severity": "High",
@@ -2094,11 +2094,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-004",
+                            "id": "PR-AZR-ARM-NSG-001",
                             "eval": "data.rule.nsg_in_tcp_all_src",
                             "message": "data.rule.nsg_in_tcp_all_src_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_004.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_001.py"
                         }
                     ],
                     "severity": "High",
@@ -2133,11 +2133,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-005",
+                            "id": "PR-AZR-ARM-NSG-002",
                             "eval": "data.rule.nsg_in_udp_all_src",
                             "message": "data.rule.nsg_in_udp_all_src_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_005.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_002.py"
                         }
                     ],
                     "severity": "High",
@@ -2172,11 +2172,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-006",
+                            "id": "PR-AZR-ARM-NSG-003",
                             "eval": "data.rule.nsg_in_tcp_all",
                             "message": "data.rule.nsg_in_tcp_all_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_006.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_003.py"
                         }
                     ],
                     "severity": "High",
@@ -2211,11 +2211,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-007",
+                            "id": "PR-AZR-ARM-NSG-004",
                             "eval": "data.rule.nsg_in_udp_all",
                             "message": "data.rule.nsg_in_udp_all_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_007.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_004.py"
                         }
                     ],
                     "severity": "High",
@@ -2250,11 +2250,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-008",
+                            "id": "PR-AZR-ARM-NSG-005",
                             "eval": "data.rule.nsg_in_all",
                             "message": "data.rule.nsg_in_all_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_008.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_005.py"
                         }
                     ],
                     "severity": "High",
@@ -2289,11 +2289,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-009",
+                            "id": "PR-AZR-ARM-NSG-006",
                             "eval": "data.rule.nsg_in_all_src",
                             "message": "data.rule.nsg_in_all_src_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_009.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_006.py"
                         }
                     ],
                     "severity": "High",
@@ -2328,11 +2328,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-010",
+                            "id": "PR-AZR-ARM-NSG-007",
                             "eval": "data.rule.nsg_in_all_dst",
                             "message": "data.rule.nsg_in_all_dst_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_010.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_007.py"
                         }
                     ],
                     "severity": "High",
@@ -2367,11 +2367,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-011",
+                            "id": "PR-AZR-ARM-NSG-008",
                             "eval": "data.rule.nsg_allow_icmp",
                             "message": "data.rule.nsg_allow_icmp_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_011.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_008.py"
                         }
                     ],
                     "severity": "High",
@@ -2406,11 +2406,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-012",
+                            "id": "PR-AZR-ARM-NSG-009",
                             "eval": "data.rule.inbound_port_21",
                             "message": "data.rule.inbound_port_21_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_012.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_009.py"
                         }
                     ],
                     "severity": "High",
@@ -2445,11 +2445,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-013",
+                            "id": "PR-AZR-ARM-NSG-010",
                             "eval": "data.rule.inbound_insecure_port",
                             "message": "data.rule.inbound_insecure_port_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_013.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_010.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2483,11 +2483,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-014",
+                            "id": "PR-AZR-ARM-NSG-011",
                             "eval": "data.rule.inbound_port_11211",
                             "message": "data.rule.inbound_port_11211_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_014.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_011.py"
                         }
                     ],
                     "severity": "High",
@@ -2522,11 +2522,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-015",
+                            "id": "PR-AZR-ARM-NSG-012",
                             "eval": "data.rule.inbound_port_6379",
                             "message": "data.rule.inbound_port_6379_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_015.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_012.py"
                         }
                     ],
                     "severity": "High",
@@ -2561,11 +2561,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-016",
+                            "id": "PR-AZR-ARM-NSG-013",
                             "eval": "data.rule.inbound_port_dbs",
                             "message": "data.rule.inbound_port_dbs_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_016.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_013.py"
                         }
                     ],
                     "severity": "High",
@@ -2600,11 +2600,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-017",
+                            "id": "PR-AZR-ARM-NSG-014",
                             "eval": "data.rule.inbound_port_22",
                             "message": "data.rule.inbound_port_22_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_017.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_014.py"
                         }
                     ],
                     "severity": "High",
@@ -2638,11 +2638,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-018",
+                            "id": "PR-AZR-ARM-NSG-015",
                             "eval": "data.rule.inbound_port_3389",
                             "message": "data.rule.inbound_port_3389_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_018.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_015.py"
                         }
                     ],
                     "severity": "High",
@@ -2676,11 +2676,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-019",
+                            "id": "PR-AZR-ARM-NSG-016",
                             "eval": "data.rule.inbound_port_445",
                             "message": "data.rule.inbound_port_445_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_019.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_016.py"
                         }
                     ],
                     "severity": "High",
@@ -2715,11 +2715,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-021",
+                            "id": "PR-AZR-ARM-NSG-018",
                             "eval": "data.rule.inbound_port_53",
                             "message": "data.rule.inbound_port_53_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_021.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_018.py"
                         }
                     ],
                     "severity": "High",
@@ -2754,11 +2754,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-022",
+                            "id": "PR-AZR-ARM-NSG-019",
                             "eval": "data.rule.inbound_port_20",
                             "message": "data.rule.inbound_port_20_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_022.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_019.py"
                         }
                     ],
                     "severity": "High",
@@ -2793,11 +2793,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-023",
+                            "id": "PR-AZR-ARM-NSG-020",
                             "eval": "data.rule.inbound_port_4333",
                             "message": "data.rule.inbound_port_4333_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_023.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_020.py"
                         }
                     ],
                     "severity": "High",
@@ -2832,11 +2832,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-024",
+                            "id": "PR-AZR-ARM-NSG-021",
                             "eval": "data.rule.inbound_port_3306",
                             "message": "data.rule.inbound_port_3306_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_024.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_021.py"
                         }
                     ],
                     "severity": "High",
@@ -2871,11 +2871,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-025",
+                            "id": "PR-AZR-ARM-NSG-022",
                             "eval": "data.rule.inbound_port_netbios",
                             "message": "data.rule.inbound_port_netbios_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_025.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_022.py"
                         }
                     ],
                     "severity": "High",
@@ -2910,11 +2910,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-026",
+                            "id": "PR-AZR-ARM-NSG-023",
                             "eval": "data.rule.inbound_port_5432",
                             "message": "data.rule.inbound_port_5432_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_026.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_023.py"
                         }
                     ],
                     "severity": "High",
@@ -2949,11 +2949,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-027",
+                            "id": "PR-AZR-ARM-NSG-024",
                             "eval": "data.rule.inbound_port_25",
                             "message": "data.rule.inbound_port_25_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_027.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_024.py"
                         }
                     ],
                     "severity": "High",
@@ -2988,11 +2988,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-028",
+                            "id": "PR-AZR-ARM-NSG-025",
                             "eval": "data.rule.inbound_port_sqlserver",
                             "message": "data.rule.inbound_port_sqlserver_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_028.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_025.py"
                         }
                     ],
                     "severity": "High",
@@ -3027,11 +3027,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-029",
+                            "id": "PR-AZR-ARM-NSG-026",
                             "eval": "data.rule.inbound_port_23",
                             "message": "data.rule.inbound_port_23_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_029.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_026.py"
                         }
                     ],
                     "severity": "High",
@@ -3066,11 +3066,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-030",
+                            "id": "PR-AZR-ARM-NSG-027",
                             "eval": "data.rule.inbound_port_5500",
                             "message": "data.rule.inbound_port_5500_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_030.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_027.py"
                         }
                     ],
                     "severity": "High",
@@ -3105,11 +3105,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-031",
+                            "id": "PR-AZR-ARM-NSG-028",
                             "eval": "data.rule.inbound_port_5900",
                             "message": "data.rule.inbound_port_5900_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_031.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_028.py"
                         }
                     ],
                     "severity": "High",
@@ -3144,11 +3144,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-032",
+                            "id": "PR-AZR-ARM-NSG-029",
                             "eval": "data.rule.inbound_port_135",
                             "message": "data.rule.inbound_port_135_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_032.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_029.py"
                         }
                     ],
                     "severity": "High",
@@ -3183,11 +3183,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-033",
+                            "id": "PR-AZR-ARM-NSG-030",
                             "eval": "data.rule.nsg_out_all",
                             "message": "data.rule.nsg_out_all_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_033.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_030.py"
                         }
                     ],
                     "severity": "High",
@@ -3222,11 +3222,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-034",
+                            "id": "PR-AZR-ARM-NSG-031",
                             "eval": "data.rule.outbound_port_bitcoin",
                             "message": "data.rule.outbound_port_bitcoin_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_034.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_031.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3257,11 +3257,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-035",
+                            "id": "PR-AZR-ARM-NSG-032",
                             "eval": "data.rule.outbound_port_ethereum",
                             "message": "data.rule.outbound_port_ethereum_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_035.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_032.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3292,11 +3292,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-020",
+                            "id": "PR-AZR-ARM-NSG-017",
                             "eval": "data.rule.inbound_insecure_omi_port",
                             "message": "data.rule.inbound_insecure_omi_port_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
-                            "remediationFunction": "PR_AZR_ARM_NTW_020.py"
+                            "remediationFunction": "PR_AZR_ARM_NSG_017.py"
                         }
                     ],
                     "severity": "High",
@@ -3944,11 +3944,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-SAC-003",
+                            "id": "PR-AZR-ARM-STR-003",
                             "eval": "data.rule.storage_secure",
                             "message": "data.rule.storage_secure_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts supportsHttpsTrafficOnly should be true",
-                            "remediationFunction": "PR_AZR_ARM_SAC_003.py"
+                            "remediationFunction": "PR_AZR_ARM_STR_003.py"
                         }
                     ],
                     "severity": "High",
@@ -3983,11 +3983,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-SAC-004",
+                            "id": "PR-AZR-ARM-STR-004",
                             "eval": "data.rule.storage_acl",
                             "message": "data.rule.storage_acl_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts networkAcls should be configured",
-                            "remediationFunction": "PR_AZR_ARM_SAC_004.py"
+                            "remediationFunction": "PR_AZR_ARM_STR_004.py"
                         }
                     ],
                     "severity": "High",
@@ -4022,11 +4022,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-SAC-005",
+                            "id": "PR-AZR-ARM-STR-005",
                             "eval": "data.rule.storage_threat_protection",
                             "message": "data.rule.storage_threat_protection_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts. Also visit https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/microsoft.storage/storage-advanced-threat-protection-create/azuredeploy.json for template reference",
-                            "remediationFunction": "PR_AZR_ARM_SAC_005.py"
+                            "remediationFunction": "PR_AZR_ARM_STR_005.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4061,11 +4061,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-SAC-006",
+                            "id": "PR-AZR-ARM-STR-006",
                             "eval": "data.rule.blobService",
                             "message": "data.rule.blobService_err",
                             "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure properties.encryption.services.blob exists and blob.enabled is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts for details.",
-                            "remediationFunction": "PR_AZR_ARM_SAC_006.py"
+                            "remediationFunction": "PR_AZR_ARM_STR_006.py"
                         }
                     ],
                     "severity": "High",
@@ -4099,11 +4099,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-SAC-007",
+                            "id": "PR-AZR-ARM-STR-007",
                             "eval": "data.rule.fileService",
                             "message": "data.rule.fileService_err",
                             "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure properties.encryption.services.file exists and file.enabled is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts for details.",
-                            "remediationFunction": "PR_AZR_ARM_SAC_007.py"
+                            "remediationFunction": "PR_AZR_ARM_STR_007.py"
                         }
                     ],
                     "severity": "High",
@@ -4137,11 +4137,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-SAC-008",
+                            "id": "PR-AZR-ARM-STR-008",
                             "eval": "data.rule.keySource",
                             "message": "data.rule.keySource_err",
                             "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure properties.encryption.keySource exists and value is set to \"Microsoft.Keyvault\". \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts for details.",
-                            "remediationFunction": "PR_AZR_ARM_SAC_008.py"
+                            "remediationFunction": "PR_AZR_ARM_STR_008.py"
                         }
                     ],
                     "severity": "High",
@@ -4171,11 +4171,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-SAC-009",
+                            "id": "PR-AZR-ARM-STR-009",
                             "eval": "data.rule.region",
                             "message": "data.rule.region_err",
                             "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure location is set to northeurope or westeurope. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts for details.",
-                            "remediationFunction": "PR_AZR_ARM_SAC_009.py"
+                            "remediationFunction": "PR_AZR_ARM_STR_009.py"
                         }
                     ],
                     "severity": "High",
@@ -4205,11 +4205,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-SAC-010",
+                            "id": "PR-AZR-ARM-STR-010",
                             "eval": "data.rule.blobServicePublicAccessDisabled",
                             "message": "data.rule.blobServicePublicAccessDisabled_err",
                             "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure property allowBlobPublicAccess is not exist or value set to false. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts for details.",
-                            "remediationFunction": "PR_AZR_ARM_SAC_010.py"
+                            "remediationFunction": "PR_AZR_ARM_STR_010.py"
                         }
                     ],
                     "severity": "High",
@@ -4244,11 +4244,11 @@
                     "rule": "file(storageblobcontainers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-SAC-012",
+                            "id": "PR-AZR-ARM-STR-012",
                             "eval": "data.rule.storage_container_public_access_disabled",
                             "message": "data.rule.storage_container_public_access_disabled_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-06-01/storageaccounts/blobservices/containers",
-                            "remediationFunction": "PR_AZR_ARM_SAC_012.py"
+                            "remediationFunction": "PR_AZR_ARM_STR_012.py"
                         }
                     ],
                     "severity": "High",
@@ -4283,11 +4283,11 @@
                     "rule": "file(storageblobcontainers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-SAC-013",
+                            "id": "PR-AZR-ARM-STR-013",
                             "eval": "data.rule.storage__logical_container_public_access_disabled",
                             "message": "data.rule.storage__logical_container_public_access_disabled_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-06-01/storageaccounts/blobservices/containers",
-                            "remediationFunction": "PR_AZR_ARM_SAC_013.py"
+                            "remediationFunction": "PR_AZR_ARM_STR_013.py"
                         }
                     ],
                     "severity": "High",
@@ -4316,11 +4316,11 @@
                     "rule": "file(vm.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-CMP-002",
+                            "id": "PR-AZR-ARM-VM-001",
                             "eval": "data.rule.vm_aset",
                             "message": "data.rule.vm_aset_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines",
-                            "remediationFunction": "PR_AZR_ARM_CMP_002.py"
+                            "remediationFunction": "PR_AZR_ARM_VM_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4355,11 +4355,11 @@
                     "rule": "file(vmextensions.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-CMP-004",
+                            "id": "PR-AZR-ARM-VM-003",
                             "eval": "data.rule.vm_protection",
                             "message": "data.rule.vm_protection_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for extensions from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines/extensions",
-                            "remediationFunction": "PR_AZR_ARM_CMP_004.py"
+                            "remediationFunction": "PR_AZR_ARM_VM_003.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4387,11 +4387,11 @@
                     "rule": "file(vnetpeerings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-036",
+                            "id": "PR-AZR-ARM-NTW-004",
                             "eval": "data.rule.vnet_peer",
                             "message": "data.rule.vnet_peer_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for vnet from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/virtualnetworkpeerings",
-                            "remediationFunction": "PR_AZR_ARM_NTW_036.py"
+                            "remediationFunction": "PR_AZR_ARM_NTW_004.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4419,11 +4419,11 @@
                     "rule": "file(vnetsubnets.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-037",
+                            "id": "PR-AZR-ARM-NTW-005",
                             "eval": "data.rule.vnet_subnet_nsg",
                             "message": "data.rule.vnet_subnet_nsg_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for vnet from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/subnets",
-                            "remediationFunction": "PR_AZR_ARM_NTW_037.py"
+                            "remediationFunction": "PR_AZR_ARM_NTW_005.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4457,11 +4457,11 @@
                     "rule": "file(vpngateways.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-038",
+                            "id": "PR-AZR-ARM-NTW-006",
                             "eval": "data.rule.vpn_encrypt",
                             "message": "data.rule.vpn_encrypt_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for vpn gateway from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/vpngateways",
-                            "remediationFunction": "PR_AZR_ARM_NTW_038.py"
+                            "remediationFunction": "PR_AZR_ARM_NTW_006.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4647,11 +4647,11 @@
                     "rule": "file(vm.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-CMP-003",
+                            "id": "PR-AZR-ARM-VM-002",
                             "eval": "data.rule.linux_configuration",
                             "message": "data.rule.linux_configuration_err",
                             "remediationDescription": "For Resource type 'microsoft.compute/virtualmachines' make sure osProfile.linuxConfiguration.disablePasswordAuthentication exists and the value is set to true.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_ARM_CMP_003.py"
+                            "remediationFunction": "PR_AZR_ARM_VM_002.py"
                         }
                     ],
                     "severity": "High",
@@ -5050,11 +5050,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-SAC-011",
+                            "id": "PR-AZR-ARM-STR-011",
                             "eval": "data.rule.storage_acount_by_pass",
                             "message": "data.rule.storage_acount_by_pass_err",
                             "remediationDescription": "For Resource type 'microsoft.storage/storageaccounts' make sure networkAcls.bypass exists and the value is set to 'AzureServices'.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_ARM_SAC_011.py"
+                            "remediationFunction": "PR_AZR_ARM_STR_011.py"
                         }
                     ],
                     "severity": "High",

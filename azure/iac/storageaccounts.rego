@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts
 
 #
-# PR-AZR-ARM-SAC-003
+# PR-AZR-ARM-STR-003
 #
 
 default storage_secure = null
@@ -56,7 +56,7 @@ storage_secure_err = "Storage Accounts https based secure transfer is not enable
 
 
 storage_secure_metadata := {
-    "Policy Code": "PR-AZR-ARM-SAC-003",
+    "Policy Code": "PR-AZR-ARM-STR-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -68,7 +68,7 @@ storage_secure_metadata := {
 }
 
 #
-# PR-AZR-ARM-SAC-004
+# PR-AZR-ARM-STR-004
 #
 
 default storage_acl = null
@@ -108,7 +108,7 @@ storage_acl_miss_err = "Storage Account attribute networkAcls.defaultAction is m
 }
 
 storage_acl_metadata := {
-    "Policy Code": "PR-AZR-ARM-SAC-004",
+    "Policy Code": "PR-AZR-ARM-STR-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -121,7 +121,7 @@ storage_acl_metadata := {
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.security/advancedthreatprotectionsettings?tabs=json
 # Advanced Threat Protection should be enabled for storage account
-# PR-AZR-ARM-SAC-005
+# PR-AZR-ARM-STR-005
 
 default storage_threat_protection = null
 
@@ -165,7 +165,7 @@ storage_threat_protection_err = "Advanced Threat Protection is currently not ena
 }
 
 storage_threat_protection_metadata := {
-    "Policy Code": "PR-AZR-ARM-SAC-005",
+    "Policy Code": "PR-AZR-ARM-STR-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -179,7 +179,7 @@ storage_threat_protection_metadata := {
 
 # https://azure.microsoft.com/en-us/blog/announcing-default-encryption-for-azure-blobs-files-table-and-queue-storage/
 # This feature is enabled by default thats why Terraform does not have any property for that
-# PR-AZR-ARM-SAC-006
+# PR-AZR-ARM-STR-006
 
 default blobService = null
 
@@ -217,7 +217,7 @@ blobService_err = "Ensure that 'Storage service encryption' is enabled for the B
 
 
 blobService_metadata := {
-    "Policy Code": "PR-AZR-ARM-SAC-006",
+    "Policy Code": "PR-AZR-ARM-STR-006",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -230,7 +230,7 @@ blobService_metadata := {
 
 # https://azure.microsoft.com/en-us/blog/announcing-default-encryption-for-azure-blobs-files-table-and-queue-storage/
 # This feature is enabled by default thats why Terraform does not have any property for that
-# PR-AZR-ARM-SAC-007
+# PR-AZR-ARM-STR-007
 
 default fileService = null
 
@@ -268,7 +268,7 @@ fileService_err = "Ensure that 'Storage service encryption' is enabled for the F
 
 
 fileService_metadata := {
-    "Policy Code": "PR-AZR-ARM-SAC-007",
+    "Policy Code": "PR-AZR-ARM-STR-007",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -282,7 +282,7 @@ fileService_metadata := {
 
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts
-# PR-AZR-ARM-SAC-008
+# PR-AZR-ARM-STR-008
 
 default keySource = null
 
@@ -322,7 +322,7 @@ keySource_miss_err = "Storage Account encryption property 'keySource' is missing
 
 
 keySource_metadata := {
-    "Policy Code": "PR-AZR-ARM-SAC-008",
+    "Policy Code": "PR-AZR-ARM-STR-008",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -334,7 +334,7 @@ keySource_metadata := {
 }
 
 
-# PR-AZR-ARM-SAC-009
+# PR-AZR-ARM-STR-009
 
 default region = null
 
@@ -365,7 +365,7 @@ region_err = "Storage Accounts location configuration is currenly not inside of 
 }
 
 region_metadata := {
-    "Policy Code": "PR-AZR-ARM-SAC-009",
+    "Policy Code": "PR-AZR-ARM-STR-009",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -377,7 +377,7 @@ region_metadata := {
 }
 
 
-# PR-AZR-ARM-SAC-010
+# PR-AZR-ARM-STR-010
 
 default blobServicePublicAccessDisabled = null
 
@@ -407,7 +407,7 @@ blobServicePublicAccessDisabled_err = "Storage Account currently allowing public
 }
 
 blobServicePublicAccessDisabled_metadata := {
-    "Policy Code": "PR-AZR-ARM-SAC-010",
+    "Policy Code": "PR-AZR-ARM-STR-010",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -420,7 +420,7 @@ blobServicePublicAccessDisabled_metadata := {
 
 
 
- # PR-AZR-ARM-SAC-011
+ # PR-AZR-ARM-STR-011
 
 default storage_acount_by_pass = null
 
@@ -458,7 +458,7 @@ storage_acount_by_pass_err = "microsoft.storage/storageaccounts resource propert
 
 
 storage_acount_by_pass_metadata := {
-    "Policy Code": "PR-AZR-ARM-SAC-011",
+    "Policy Code": "PR-AZR-ARM-STR-011",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

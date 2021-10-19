@@ -74,7 +74,7 @@ nsg_inbound[port] {
 }
 
 #
-# PR-AZR-ARM-NTW-004
+# PR-AZR-ARM-NSG-001
 #
 
 default nsg_in_tcp_all_src = null
@@ -104,7 +104,7 @@ nsg_in_tcp_all_src_err = "Azure NSG having Inbound rule overly permissive to all
 }
 
 nsg_in_tcp_all_src_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-004",
+    "Policy Code": "PR-AZR-ARM-NSG-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -116,7 +116,7 @@ nsg_in_tcp_all_src_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-005
+# PR-AZR-ARM-NSG-002
 #
 
 default nsg_in_udp_all_src = null
@@ -146,7 +146,7 @@ nsg_in_udp_all_src_err = "Azure NSG having Inbound rule overly permissive to all
 }
 
 nsg_in_udp_all_src_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-005",
+    "Policy Code": "PR-AZR-ARM-NSG-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -158,7 +158,7 @@ nsg_in_udp_all_src_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-006
+# PR-AZR-ARM-NSG-003
 #
 
 default nsg_in_tcp_all = null
@@ -189,7 +189,7 @@ nsg_in_tcp_all_err = "Azure NSG having Inbound rule overly permissive to all tra
 }
 
 nsg_in_tcp_all_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-006",
+    "Policy Code": "PR-AZR-ARM-NSG-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -201,7 +201,7 @@ nsg_in_tcp_all_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-007
+# PR-AZR-ARM-NSG-004
 #
 
 default nsg_in_udp_all = null
@@ -232,7 +232,7 @@ nsg_in_udp_all_err = "Azure NSG having Inbound rule overly permissive to all UDP
 }
 
 nsg_in_udp_all_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-007",
+    "Policy Code": "PR-AZR-ARM-NSG-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -244,7 +244,7 @@ nsg_in_udp_all_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-008
+# PR-AZR-ARM-NSG-005
 #
 
 default nsg_in_all = null
@@ -274,7 +274,7 @@ nsg_in_all_err = "Azure NSG having Inbound rule overly permissive to all traffic
 }
 
 nsg_in_all_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-008",
+    "Policy Code": "PR-AZR-ARM-NSG-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -286,7 +286,7 @@ nsg_in_all_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-009
+# PR-AZR-ARM-NSG-006
 #
 
 default nsg_in_all_src = null
@@ -317,7 +317,7 @@ nsg_in_all_src_err = "Azure NSG having Inbound rule overly permissive to allow a
 }
 
 nsg_in_all_src_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-009",
+    "Policy Code": "PR-AZR-ARM-NSG-006",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -329,7 +329,7 @@ nsg_in_all_src_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-010
+# PR-AZR-ARM-NSG-007
 #
 
 default nsg_in_all_dst = null
@@ -360,7 +360,7 @@ nsg_in_all_dst_err = "Azure NSG having Inbound rule overly permissive to allow a
 }
 
 nsg_in_all_dst_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-010",
+    "Policy Code": "PR-AZR-ARM-NSG-007",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -373,7 +373,7 @@ nsg_in_all_dst_metadata := {
 
 
 #
-# PR-AZR-ARM-NTW-011
+# PR-AZR-ARM-NSG-008
 #
 
 default nsg_allow_icmp = null
@@ -402,7 +402,7 @@ nsg_allow_icmp_err = "Azure NSG having Inbound rule overly permissive to allow a
 }
 
 nsg_allow_icmp_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-011",
+    "Policy Code": "PR-AZR-ARM-NSG-008",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -414,7 +414,7 @@ nsg_allow_icmp_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-012
+# PR-AZR-ARM-NSG-009
 #
 
 default inbound_port_21 = null
@@ -437,7 +437,7 @@ inbound_port_21_err = "Azure Network Security Group allows FTP" {
 }
 
 inbound_port_21_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-012",
+    "Policy Code": "PR-AZR-ARM-NSG-009",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -449,7 +449,7 @@ inbound_port_21_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-013
+# PR-AZR-ARM-NSG-010
 #
 
 default inbound_insecure_port = null
@@ -480,7 +480,7 @@ inbound_insecure_port_err = "Internet connectivity via tcp over insecure port" {
 }
 
 inbound_insecure_port_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-013",
+    "Policy Code": "PR-AZR-ARM-NSG-010",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -492,7 +492,7 @@ inbound_insecure_port_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-014
+# PR-AZR-ARM-NSG-011
 #
 
 default inbound_port_11211 = null
@@ -515,7 +515,7 @@ inbound_port_11211_err = "Memcached DDoS attack attempted" {
 }
 
 inbound_port_11211_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-014",
+    "Policy Code": "PR-AZR-ARM-NSG-011",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -527,7 +527,7 @@ inbound_port_11211_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-015
+# PR-AZR-ARM-NSG-012
 #
 
 default inbound_port_6379 = null
@@ -550,7 +550,7 @@ inbound_port_6379_err = "RedisWannaMine vulnerable instances with active network
 }
 
 inbound_port_6379_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-015",
+    "Policy Code": "PR-AZR-ARM-NSG-012",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -562,7 +562,7 @@ inbound_port_6379_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-016
+# PR-AZR-ARM-NSG-013
 #
 
 default inbound_port_dbs = null
@@ -637,7 +637,7 @@ inbound_port_dbs_err = "Publicly exposed DB Ports" {
 }
 
 inbound_port_dbs_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-016",
+    "Policy Code": "PR-AZR-ARM-NSG-013",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -649,7 +649,7 @@ inbound_port_dbs_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-017
+# PR-AZR-ARM-NSG-014
 #
 
 default inbound_port_22 = null
@@ -672,7 +672,7 @@ inbound_port_22_err = "Azure NSG allows SSH traffic from internet on port 22" {
 }
 
 inbound_port_22_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-017",
+    "Policy Code": "PR-AZR-ARM-NSG-014",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -684,7 +684,7 @@ inbound_port_22_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-018
+# PR-AZR-ARM-NSG-015
 #
 
 default inbound_port_3389 = null
@@ -707,7 +707,7 @@ inbound_port_3389_err = "Azure NSG allows traffic from internet on port 3389" {
 }
 
 inbound_port_3389_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-018",
+    "Policy Code": "PR-AZR-ARM-NSG-015",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -719,8 +719,8 @@ inbound_port_3389_metadata := {
 }
 
 #
-# PR-AZR-0047-ARM
-# PR-AZR-ARM-NTW-019
+
+# PR-AZR-ARM-NSG-016
 #
 
 default inbound_port_445 = null
@@ -744,7 +744,7 @@ inbound_port_445_err = "Azure Network Security Group allows CIFS" {
 
 
 inbound_port_445_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-019",
+    "Policy Code": "PR-AZR-ARM-NSG-06",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -756,7 +756,7 @@ inbound_port_445_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-020
+# PR-AZR-ARM-NSG-017
 
 
 #
@@ -789,7 +789,7 @@ inbound_insecure_omi_port_err = "Azure Network Security Group (NSG) currently no
 }
  
 inbound_insecure_omi_port_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-020",
+    "Policy Code": "PR-AZR-ARM-NSG-017",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM",
@@ -800,7 +800,7 @@ inbound_insecure_omi_port_metadata := {
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
-# PR-AZR-ARM-NTW-021
+# PR-AZR-ARM-NSG-018
 #
 
 default inbound_port_53 = null
@@ -823,7 +823,7 @@ inbound_port_53_err = "Azure Network Security Group allows DNS" {
 }
 
 inbound_port_53_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-021",
+    "Policy Code": "PR-AZR-ARM-NSG-018",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -835,7 +835,7 @@ inbound_port_53_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-022
+# PR-AZR-ARM-NSG-019
 #
 
 default inbound_port_20 = null
@@ -859,7 +859,7 @@ inbound_port_20_err = "Azure Network Security Group allows FTP-Data" {
 
 
 inbound_port_20_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-022",
+    "Policy Code": "PR-AZR-ARM-NSG-019",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -871,7 +871,7 @@ inbound_port_20_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-023
+# PR-AZR-ARM-NSG-020
 #
 
 default inbound_port_4333 = null
@@ -894,7 +894,7 @@ inbound_port_4333_err = "Azure Network Security Group allows MSQL" {
 }
 
 inbound_port_4333_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-023",
+    "Policy Code": "PR-AZR-ARM-NSG-020",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -906,7 +906,7 @@ inbound_port_4333_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-024
+# PR-AZR-ARM-NSG-021
 #
 
 default inbound_port_3306 = null
@@ -929,7 +929,7 @@ inbound_port_3306_err = "Azure Network Security Group allows MySQL" {
 }
 
 inbound_port_3306_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-024",
+    "Policy Code": "PR-AZR-ARM-NSG-021",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -941,7 +941,7 @@ inbound_port_3306_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-025
+# PR-AZR-ARM-NSG-022
 
 default inbound_port_netbios = null
 
@@ -967,7 +967,7 @@ inbound_port_netbios_err = "Azure Network Security Group allows NetBIOS" {
 }
 
 inbound_port_netbios_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-025",
+    "Policy Code": "PR-AZR-ARM-NSG-022",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -979,7 +979,7 @@ inbound_port_netbios_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-026
+# PR-AZR-ARM-NSG-023
 #
 
 default inbound_port_5432 = null
@@ -1002,7 +1002,7 @@ inbound_port_5432_err = "Azure Network Security Group allows PostgreSQL" {
 }
 
 inbound_port_5432_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-026",
+    "Policy Code": "PR-AZR-ARM-NSG-023",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -1014,7 +1014,7 @@ inbound_port_5432_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-027
+# PR-AZR-ARM-NSG-024
 #
 
 default inbound_port_25 = null
@@ -1037,7 +1037,7 @@ inbound_port_25_err = "Azure Network Security Group allows SMTP" {
 }
 
 inbound_port_25_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-027",
+    "Policy Code": "PR-AZR-ARM-NSG-024",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -1049,7 +1049,7 @@ inbound_port_25_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-028
+# PR-AZR-ARM-NSG-025
 
 default inbound_port_sqlserver = null
 
@@ -1077,7 +1077,7 @@ inbound_port_sqlserver_err = "Azure Network Security Group allows SQLServer" {
 }
 
 inbound_port_sqlserver_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-028",
+    "Policy Code": "PR-AZR-ARM-NSG-025",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -1090,7 +1090,7 @@ inbound_port_sqlserver_metadata := {
 
 
 #
-# PR-AZR-ARM-NTW-029
+# PR-AZR-ARM-NSG-026
 #
 
 default inbound_port_23 = null
@@ -1113,7 +1113,7 @@ inbound_port_23_err = "Azure Network Security Group allows Telnet" {
 }
 
 inbound_port_23_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-029",
+    "Policy Code": "PR-AZR-ARM-NSG-026",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -1125,7 +1125,7 @@ inbound_port_23_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-030
+# PR-AZR-ARM-NSG-027
 #
 
 default inbound_port_5500 = null
@@ -1148,7 +1148,7 @@ inbound_port_5500_err = "Azure Network Security Group allows VNC Listener" {
 }
 
 inbound_port_5500_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-030",
+    "Policy Code": "PR-AZR-ARM-NSG-027",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -1160,7 +1160,7 @@ inbound_port_5500_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-031
+# PR-AZR-ARM-NSG-028
 #
 
 default inbound_port_5900 = null
@@ -1183,7 +1183,7 @@ inbound_port_5900_err = "Azure Network Security Group allows VNC Server" {
 }
 
 inbound_port_5900_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-031",
+    "Policy Code": "PR-AZR-ARM-NSG-028",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -1195,7 +1195,7 @@ inbound_port_5900_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-032
+# PR-AZR-ARM-NSG-029
 #
 
 default inbound_port_135 = null
@@ -1218,7 +1218,7 @@ inbound_port_135_err = "Azure Network Security Group allows Windows RPC" {
 }
 
 inbound_port_135_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-032",
+    "Policy Code": "PR-AZR-ARM-NSG-029",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -1298,7 +1298,7 @@ nsg_outbound[port] {
 }
 
 #
-# PR-AZR-ARM-NTW-033
+# PR-AZR-ARM-NSG-030
 #
 
 default nsg_out_all = null
@@ -1327,7 +1327,7 @@ nsg_out_all_err = "Azure NSG with Outbound rule to allow all traffic to any sour
 }
 
 nsg_out_all_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-033",
+    "Policy Code": "PR-AZR-ARM-NSG-030",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -1339,7 +1339,7 @@ nsg_out_all_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-034
+# PR-AZR-ARM-NSG-031
 #
 
 default outbound_port_bitcoin = null
@@ -1366,7 +1366,7 @@ outbound_port_bitcoin_err = "Instance is communicating with ports known to mine 
 }
 
 outbound_port_bitcoin_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-034",
+    "Policy Code": "PR-AZR-ARM-NSG-031",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -1378,7 +1378,7 @@ outbound_port_bitcoin_metadata := {
 }
 
 #
-# PR-AZR-ARM-NTW-035
+# PR-AZR-ARM-NSG-032
 #
 
 default outbound_port_ethereum = null
@@ -1405,7 +1405,7 @@ outbound_port_ethereum_err = "Instance is communicating with ports known to mine
 }
 
 outbound_port_ethereum_metadata := {
-    "Policy Code": "PR-AZR-ARM-NTW-035",
+    "Policy Code": "PR-AZR-ARM-NSG-032",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
