@@ -159,7 +159,7 @@ source_path[{"firewall_port_53": metadata}] {
     allow.ports[l] == "53"
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "allowed", k, "ports", l]
+            ["resources", i, "properties", "allowed", k, "ports", l]
         ],
     }
 }
@@ -188,7 +188,7 @@ source_path[{"firewall_port_53": metadata}] {
     to_number(port_range[1]) >= 53
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "allowed", k, "ports", l]
+            ["resources", i, "properties", "allowed", k, "ports", l]
         ],
     }
 }
@@ -211,7 +211,7 @@ source_path[{"firewall_port_53": metadata}] {
     lower(allow.IPProtocol) == "tcp"
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "allowed", k, "IPProtocol"]
+            ["resources", i, "properties", "allowed", k, "IPProtocol"]
         ],
     }
 }
@@ -234,7 +234,7 @@ source_path[{"firewall_port_53": metadata}] {
     lower(allow.IPProtocol) == "udp"
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "allowed", k, "IPProtocol"]
+            ["resources", i, "properties", "allowed", k, "IPProtocol"]
         ],
     }
 }

@@ -21,7 +21,7 @@ source_path[{"svc_account_key": metadata}] {
     not resource.properties.name
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "name"]
+            ["resources", i, "properties", "name"]
         ],
     }
 }
@@ -40,7 +40,7 @@ source_path[{"svc_account_key": metadata}] {
     time.now_ns() - time.parse_rfc3339_ns(resource.properties.validAfterTime) > 7776000000000000
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "validAfterTime"]
+            ["resources", i, "properties", "validAfterTime"]
         ],
     }
 }

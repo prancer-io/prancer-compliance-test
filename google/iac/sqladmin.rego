@@ -20,7 +20,7 @@ source_path[{"sql_labels": metadata}] {
     not resource.properties.settings.userLabels
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "settings", "userLabels"]
+            ["resources", i, "properties", "settings", "userLabels"]
         ],
     }
 }
@@ -37,7 +37,7 @@ source_path[{"sql_labels": metadata}] {
     count(resource.properties.settings.userLabels) == 0
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "settings", "userLabels"]
+            ["resources", i, "properties", "settings", "userLabels"]
         ],
     }
 }
@@ -86,7 +86,7 @@ source_path[{"sql_binary_logs": metadata}] {
     not resource.properties.databaseVersion
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "databaseVersion"]
+            ["resources", i, "properties", "databaseVersion"]
         ],
     }
 }
@@ -105,7 +105,7 @@ source_path[{"sql_binary_logs": metadata}] {
     not resource.properties.settings.backupConfiguration.binaryLogEnabled
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "settings", "backupConfiguration", "binaryLogEnabled"]
+            ["resources", i, "properties", "settings", "backupConfiguration", "binaryLogEnabled"]
         ],
     }
 }
@@ -163,7 +163,7 @@ source_path[{"sql_backup": metadata}] {
     not resource.properties.settings.backupConfiguration
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "settings", "backupConfiguration"]
+            ["resources", i, "properties", "settings", "backupConfiguration"]
         ],
     }
 }
@@ -180,7 +180,7 @@ source_path[{"sql_backup": metadata}] {
     not resource.properties.settings.backupConfiguration.enabled
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "settings", "backupConfiguration", "enabled"]
+            ["resources", i, "properties", "settings", "backupConfiguration", "enabled"]
         ],
     }
 }
@@ -238,7 +238,7 @@ source_path[{"sql_ssl": metadata}] {
     not resource.properties.settings.ipConfiguration.requireSsl
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "settings", "ipConfiguration", "requireSsl"]
+            ["resources", i, "properties", "settings", "ipConfiguration", "requireSsl"]
         ],
     }
 }
@@ -255,7 +255,7 @@ source_path[{"sql_ssl": metadata}] {
     resource.properties.settings.ipConfiguration.requireSsl != true
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "settings", "ipConfiguration", "requireSsl"]
+            ["resources", i, "properties", "settings", "ipConfiguration", "requireSsl"]
         ],
     }
 }
@@ -313,7 +313,7 @@ source_path[{"sql_exposed": metadata}] {
     not resource.properties.settings.ipConfiguration.authorizedNetworks
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "settings", "ipConfiguration", "authorizedNetworks"]
+            ["resources", i, "properties", "settings", "ipConfiguration", "authorizedNetworks"]
         ],
     }
 }
@@ -330,7 +330,7 @@ source_path[{"sql_exposed": metadata}] {
     resource.properties.settings.ipConfiguration.authorizedNetworks[j] == "0.0.0.0"
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "settings", "ipConfiguration", "authorizedNetworks", j]
+            ["resources", i, "properties", "settings", "ipConfiguration", "authorizedNetworks", j]
         ],
     }
 }
@@ -347,7 +347,7 @@ source_path[{"sql_exposed": metadata}] {
     resource.properties.settings.ipConfiguration.authorizedNetworks[j] == "0.0.0.0/0"
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "settings", "ipConfiguration", "authorizedNetworks", j]
+            ["resources", i, "properties", "settings", "ipConfiguration", "authorizedNetworks", j]
         ],
     }
 }
@@ -364,7 +364,7 @@ source_path[{"sql_exposed": metadata}] {
     resource.properties.settings.ipConfiguration.authorizedNetworks[j] == "::/0"
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "settings", "ipConfiguration", "authorizedNetworks", j]
+            ["resources", i, "properties", "settings", "ipConfiguration", "authorizedNetworks", j]
         ],
     }
 }

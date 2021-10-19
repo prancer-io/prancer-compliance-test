@@ -21,7 +21,7 @@ source_path[{"dnssec_state": metadata}] {
     not resource.properties.dnssecConfig.state
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "dnssecConfig", "state"]
+            ["resources", i, "properties", "dnssecConfig", "state"]
         ],
     }
 }
@@ -38,7 +38,7 @@ source_path[{"dnssec_state": metadata}] {
     lower(resource.properties.dnssecConfig.state) == "off"
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "dnssecConfig", "state"]
+            ["resources", i, "properties", "dnssecConfig", "state"]
         ],
     }
 }
@@ -96,7 +96,7 @@ source_path[{"dnssec_key_rsasha1": metadata}] {
     not resource.properties.dnssecConfig.defaultKeySpecs
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "dnssecConfig", "defaultKeySpecs"]
+            ["resources", i, "properties", "dnssecConfig", "defaultKeySpecs"]
         ],
     }
 }
@@ -117,7 +117,7 @@ source_path[{"dnssec_key_rsasha1": metadata}] {
     contains(lower(key.algorithm), "rsasha1")
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "dnssecConfig", "defaultKeySpecs", j, "algorithm"]
+            ["resources", i, "properties", "dnssecConfig", "defaultKeySpecs", j, "algorithm"]
         ],
     }
 }
@@ -175,7 +175,7 @@ source_path[{"dnssec_zone_rsasha1": metadata}] {
     not resource.properties.dnssecConfig.defaultKeySpecs
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "dnssecConfig", "defaultKeySpecs"]
+            ["resources", i, "properties", "dnssecConfig", "defaultKeySpecs"]
         ],
     }
 }
@@ -196,7 +196,7 @@ source_path[{"dnssec_zone_rsasha1": metadata}] {
     contains(lower(key.algorithm), "rsasha1")
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "dnssecConfig", "defaultKeySpecs", j, "algorithm"]
+            ["resources", i, "properties", "dnssecConfig", "defaultKeySpecs", j, "algorithm"]
         ],
     }
 }

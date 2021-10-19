@@ -20,7 +20,7 @@ source_path[{"k8s_svc_account": metadata}] {
     count([c | r = resource.properties.nodePools[j].config; c := 1]) == 0
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "nodePools"]
+            ["resources", i, "properties", "nodePools"]
         ],
     }
 }
@@ -37,7 +37,7 @@ source_path[{"k8s_svc_account": metadata}] {
     resource.properties.nodePools[j].config.serviceAccount == "default"
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "nodePools", j, "config", "serviceAccount"]
+            ["resources", i, "properties", "nodePools", j, "config", "serviceAccount"]
         ],
     }
 }
@@ -94,7 +94,7 @@ source_path[{"k8s_basicauth": metadata}] {
     count(resource.properties.masterAuth.username) > 0
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "masterAuth", "username"]
+            ["resources", i, "properties", "masterAuth", "username"]
         ],
     }
 }
@@ -111,7 +111,7 @@ source_path[{"k8s_basicauth": metadata}] {
     count(resource.properties.masterAuth.password) > 0
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "masterAuth", "password"]
+            ["resources", i, "properties", "masterAuth", "password"]
         ],
     }
 }
@@ -159,7 +159,7 @@ source_path[{"k8s_client_cert": metadata}] {
     not resource.properties.masterAuth.clientKey
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "masterAuth", "clientKey"]
+            ["resources", i, "properties", "masterAuth", "clientKey"]
         ],
     }
 }
@@ -176,7 +176,7 @@ source_path[{"k8s_client_cert": metadata}] {
     not resource.properties.masterAuth.clientCertificate
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "masterAuth", "clientCertificate"]
+            ["resources", i, "properties", "masterAuth", "clientCertificate"]
         ],
     }
 }
@@ -224,7 +224,7 @@ source_path[{"k8s_alias_ip": metadata}] {
     not resource.properties.ipAllocationPolicy.useIpAliases
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "ipAllocationPolicy", "useIpAliases"]
+            ["resources", i, "properties", "ipAllocationPolicy", "useIpAliases"]
         ],
     }
 }
@@ -272,7 +272,7 @@ source_path[{"k8s_alpha": metadata}] {
     resource.properties.enableKubernetesAlpha
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "enableKubernetesAlpha"]
+            ["resources", i, "properties", "enableKubernetesAlpha"]
         ],
     }
 }
@@ -320,7 +320,7 @@ source_path[{"k8s_http_lbs": metadata}] {
     resource.properties.addonsConfig.httpLoadBalancing.disabled
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "addonsConfig", "httpLoadBalancing", "disabled"]
+            ["resources", i, "properties", "addonsConfig", "httpLoadBalancing", "disabled"]
         ],
     }
 }
@@ -368,7 +368,7 @@ source_path[{"k8s_legacy_abac": metadata}] {
     resource.properties.legacyAbac.enabled
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "legacyAbac", "enabled"]
+            ["resources", i, "properties", "legacyAbac", "enabled"]
         ],
     }
 }
@@ -416,7 +416,7 @@ source_path[{"k8s_master_auth_net": metadata}] {
     resource.properties.legacyAbac.enabled
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "masterAuthorizedNetworksConfig", "enabled"]
+            ["resources", i, "properties", "masterAuthorizedNetworksConfig", "enabled"]
         ],
     }
 }
@@ -464,7 +464,7 @@ source_path[{"k8s_net_policy": metadata}] {
     not resource.properties.networkPolicy.enabled
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "networkPolicy", "enabled"]
+            ["resources", i, "properties", "networkPolicy", "enabled"]
         ],
     }
 }
@@ -512,7 +512,7 @@ source_path[{"k8s_logging": metadata}] {
     not resource.properties.loggingService
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "loggingService"]
+            ["resources", i, "properties", "loggingService"]
         ],
     }
 }
@@ -529,7 +529,7 @@ source_path[{"k8s_logging": metadata}] {
     lower(resource.properties.loggingService) == "none"
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "loggingService"]
+            ["resources", i, "properties", "loggingService"]
         ],
     }
 }
@@ -586,7 +586,7 @@ source_path[{"k8s_logging": metadata}] {
     not resource.properties.monitoringService
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "monitoringService"]
+            ["resources", i, "properties", "monitoringService"]
         ],
     }
 }
@@ -603,7 +603,7 @@ source_path[{"k8s_monitor": metadata}] {
     lower(resource.properties.monitoringService) == "none"
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "monitoringService"]
+            ["resources", i, "properties", "monitoringService"]
         ],
     }
 }
@@ -660,7 +660,7 @@ source_path[{"k8s_binary_auth": metadata}] {
     not resource.properties.binaryAuthorization.enabled
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "binaryAuthorization", "enabled"]
+            ["resources", i, "properties", "binaryAuthorization", "enabled"]
         ],
     }
 }
@@ -708,7 +708,7 @@ source_path[{"k8s_legacy_endpoint": metadata}] {
     resource.properties.nodeConfig.metadata["disable-legacy-endpoints"]
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "nodeConfig", "metadata", "disable-legacy-endpoints"]
+            ["resources", i, "properties", "nodeConfig", "metadata", "disable-legacy-endpoints"]
         ],
     }
 }
@@ -756,7 +756,7 @@ source_path[{"k8s_pod_security": metadata}] {
     not resource.properties.podSecurityPolicyConfig.enabled
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "podSecurityPolicyConfig", "enabled"]
+            ["resources", i, "properties", "podSecurityPolicyConfig", "enabled"]
         ],
     }
 }
@@ -804,7 +804,7 @@ source_path[{"k8s_egress_metering": metadata}] {
     not resource.properties.resourceUsageExportConfig.enableNetworkEgressMetering
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "resourceUsageExportConfig", "enableNetworkEgressMetering"]
+            ["resources", i, "properties", "resourceUsageExportConfig", "enableNetworkEgressMetering"]
         ],
     }
 }
@@ -852,7 +852,7 @@ source_path[{"k8s_private": metadata}] {
     not resource.properties.privateClusterConfig
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "privateClusterConfig"]
+            ["resources", i, "properties", "privateClusterConfig"]
         ],
     }
 }
@@ -900,7 +900,7 @@ source_path[{"k8s_private_node": metadata}] {
     not resource.properties.privateClusterConfig.enablePrivateNodes
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "privateClusterConfig", "enablePrivateNodes"]
+            ["resources", i, "properties", "privateClusterConfig", "enablePrivateNodes"]
         ],
     }
 }
@@ -952,7 +952,7 @@ source_path[{"k8s_node_image": metadata}] {
     not nodePools.config.imageType
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "nodePools", j, "config", "imageType"]
+            ["resources", i, "properties", "nodePools", j, "config", "imageType"]
         ],
     }
 }
@@ -969,7 +969,7 @@ source_path[{"k8s_node_image": metadata}] {
     not startswith(lower(resource.properties.nodeConfig.imageType), "cos")
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "nodeConfig", "imageType"]
+            ["resources", i, "properties", "nodeConfig", "imageType"]
         ],
     }
 }
@@ -988,7 +988,7 @@ source_path[{"k8s_node_image": metadata}] {
     not startswith(lower(nodePools.config.imageType), "cos")
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "nodePools", j, "config", "imageType"]
+            ["resources", i, "properties", "nodePools", j, "config", "imageType"]
         ],
     }
 }
@@ -1045,7 +1045,7 @@ source_path[{"k8s_network": metadata}] {
     not resource.properties.network
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "network"]
+            ["resources", i, "properties", "network"]
         ],
     }
 }
@@ -1062,7 +1062,7 @@ source_path[{"k8s_network": metadata}] {
     lower(resource.properties.network) == "default"
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "network"]
+            ["resources", i, "properties", "network"]
         ],
     }
 }
@@ -1110,7 +1110,7 @@ source_path[{"k8s_dashboard": metadata}] {
     not resource.properties.addonsConfig.kubernetesDashboard.disabled
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "addonsConfig", "kubernetesDashboard", "disabled"]
+            ["resources", i, "properties", "addonsConfig", "kubernetesDashboard", "disabled"]
         ],
     }
 }
@@ -1158,7 +1158,7 @@ source_path[{"k8s_labels": metadata}] {
     not resource.properties.resourceLabels
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "resourceLabels"]
+            ["resources", i, "properties", "resourceLabels"]
         ],
     }
 }
@@ -1175,7 +1175,7 @@ source_path[{"k8s_labels": metadata}] {
     count(resource.properties.resourceLabels) == 0
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "resourceLabels"]
+            ["resources", i, "properties", "resourceLabels"]
         ],
     }
 }
@@ -1223,7 +1223,7 @@ source_path[{"k8s_db_encrypt": metadata}] {
     not resource.properties.databaseEncryption
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "databaseEncryption"]
+            ["resources", i, "properties", "databaseEncryption"]
         ],
     }
 }
@@ -1240,7 +1240,7 @@ source_path[{"k8s_db_encrypt": metadata}] {
     lower(resource.properties.databaseEncryption.state) != "encrypted"
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "databaseEncryption"]
+            ["resources", i, "properties", "databaseEncryption"]
         ],
     }
 }
@@ -1257,7 +1257,7 @@ source_path[{"k8s_db_encrypt": metadata}] {
     not resource.properties.databaseEncryption.keyName
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "databaseEncryption", "keyName"]
+            ["resources", i, "properties", "databaseEncryption", "keyName"]
         ],
     }
 }
@@ -1274,7 +1274,7 @@ source_path[{"k8s_db_encrypt": metadata}] {
     count(resource.properties.databaseEncryption.keyName) == 0
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "databaseEncryption", "keyName"]
+            ["resources", i, "properties", "databaseEncryption", "keyName"]
         ],
     }
 }
@@ -1331,7 +1331,7 @@ source_path[{"k8s_intra_node": metadata}] {
     not resource.properties.networkConfig.enableIntraNodeVisibility
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "networkConfig", "enableIntraNodeVisibility"]
+            ["resources", i, "properties", "networkConfig", "enableIntraNodeVisibility"]
         ],
     }
 }
@@ -1379,7 +1379,7 @@ source_path[{"k8s_istio": metadata}] {
     resource.properties.addonsConfig.istioConfig.disabled == false
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "addonsConfig", "istioConfig", "disabled"]
+            ["resources", i, "properties", "addonsConfig", "istioConfig", "disabled"]
         ],
     }
 }
@@ -1429,7 +1429,7 @@ source_path[{"k8s_zones": metadata}] {
     count(resource.properties.locations) < 3
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "locations"]
+            ["resources", i, "properties", "locations"]
         ],
     }
 }
@@ -1481,7 +1481,7 @@ source_path[{"k8s_auto_upgrade": metadata}] {
     not resource.properties.currentNodeCount
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "currentNodeCount"]
+            ["resources", i, "properties", "currentNodeCount"]
         ],
     }
 }
@@ -1500,7 +1500,7 @@ source_path[{"k8s_auto_upgrade": metadata}] {
     resource.properties.nodePools[j].management.autoUpgrade
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "nodePools", j, "management", "autoUpgrade"]
+            ["resources", i, "properties", "nodePools", j, "management", "autoUpgrade"]
         ],
     }
 }
@@ -1517,7 +1517,7 @@ source_path[{"k8s_auto_upgrade": metadata}] {
     not resource.properties.databaseEncryption.keyName
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "databaseEncryption", "keyName"]
+            ["resources", i, "properties", "databaseEncryption", "keyName"]
         ],
     }
 }
@@ -1534,7 +1534,7 @@ source_path[{"k8s_auto_upgrade": metadata}] {
     count(resource.properties.databaseEncryption.keyName) == 0
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "databaseEncryption", "keyName"]
+            ["resources", i, "properties", "databaseEncryption", "keyName"]
         ],
     }
 }

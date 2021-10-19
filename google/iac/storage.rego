@@ -20,7 +20,7 @@ source_path[{"storage_encrypt": metadata}] {
     not resource.properties.encryption.defaultKmsKeyName
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "encryption", "defaultKmsKeyName"]
+            ["resources", i, "properties", "encryption", "defaultKmsKeyName"]
         ],
     }
 }
@@ -37,7 +37,7 @@ source_path[{"storage_encrypt": metadata}] {
     count(resource.properties.encryption.defaultKmsKeyName) == 0
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "encryption", "defaultKmsKeyName"]
+            ["resources", i, "properties", "encryption", "defaultKmsKeyName"]
         ],
     }
 }
@@ -94,7 +94,7 @@ source_path[{"storage_versioning": metadata}] {
     not resource.properties.versioning
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "versioning"]
+            ["resources", i, "properties", "versioning"]
         ],
     }
 }
@@ -113,7 +113,7 @@ source_path[{"storage_versioning": metadata}] {
     not resource.properties.versioning.enabled
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "versioning", "enabled"]
+            ["resources", i, "properties", "versioning", "enabled"]
         ],
     }
 }
@@ -170,7 +170,7 @@ source_path[{"storage_stack_logging": metadata}] {
     not resource.properties.logging
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "logging"]
+            ["resources", i, "properties", "logging"]
         ],
     }
 }
@@ -189,7 +189,7 @@ source_path[{"storage_stack_logging": metadata}] {
     not resource.properties.logging
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "logging"]
+            ["resources", i, "properties", "logging"]
         ],
     }
 }
@@ -246,7 +246,7 @@ source_path[{"storage_logging": metadata}] {
     not resource.properties.logging.logBucket
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "logging", "logBucket"]
+            ["resources", i, "properties", "logging", "logBucket"]
         ],
     }
 }
@@ -294,7 +294,7 @@ source_path[{"storage_public_logs": metadata}] {
     not resource.properties.acl
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "acl"]
+            ["resources", i, "properties", "acl"]
         ],
     }
 }
@@ -315,7 +315,7 @@ source_path[{"storage_public_logs": metadata}] {
     contains(lower(acl.entity), "allusers")
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "acl", j, "entity"]
+            ["resources", i, "properties", "acl", j, "entity"]
         ],
     }
 }
@@ -336,7 +336,7 @@ source_path[{"storage_public_logs": metadata}] {
     contains(lower(acl.entity), "allauthenticatedusers")
     metadata := {
         "resource_path": [
-            ["resources", i, "properties" "acl", j, "entity"]
+            ["resources", i, "properties", "acl", j, "entity"]
         ],
     }
 }
