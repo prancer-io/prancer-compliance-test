@@ -9,19 +9,41 @@ package rule
 default sql_labels = null
 
 gc_issue["sql_labels"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "sqladmin.v1beta4.instance"
     not resource.properties.settings.userLabels
 }
 
+source_path[{"sql_labels": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "sqladmin.v1beta4.instance"
+    not resource.properties.settings.userLabels
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties" "settings", "userLabels"]
+        ],
+    }
+}
+
 gc_issue["sql_labels"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "sqladmin.v1beta4.instance"
     count(resource.properties.settings.userLabels) == 0
 }
 
+source_path[{"sql_labels": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "sqladmin.v1beta4.instance"
+    count(resource.properties.settings.userLabels) == 0
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties" "settings", "userLabels"]
+        ],
+    }
+}
+
 sql_labels {
-    lower(input.resources[_].type) == "sqladmin.v1beta4.instance"
+    lower(input.resources[i].type) == "sqladmin.v1beta4.instance"
     not gc_issue["sql_labels"]
 }
 
@@ -53,20 +75,43 @@ default sql_binary_logs = null
 
 
 gc_attribute_absence["sql_binary_logs"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "sqladmin.v1beta4.instance"
     not resource.properties.databaseVersion
 }
 
+source_path[{"sql_binary_logs": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "sqladmin.v1beta4.instance"
+    not resource.properties.databaseVersion
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties" "databaseVersion"]
+        ],
+    }
+}
+
 gc_issue["sql_binary_logs"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "sqladmin.v1beta4.instance"
     contains(lower(resource.properties.databaseVersion), "mysql")
     not resource.properties.settings.backupConfiguration.binaryLogEnabled
 }
 
+source_path[{"sql_binary_logs": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "sqladmin.v1beta4.instance"
+    contains(lower(resource.properties.databaseVersion), "mysql")
+    not resource.properties.settings.backupConfiguration.binaryLogEnabled
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties" "settings", "backupConfiguration", "binaryLogEnabled"]
+        ],
+    }
+}
+
 sql_binary_logs {
-    lower(input.resources[_].type) == "sqladmin.v1beta4.instance"
+    lower(input.resources[i].type) == "sqladmin.v1beta4.instance"
     not gc_issue["sql_binary_logs"]
     not gc_attribute_absence["sql_binary_logs"]
 }
@@ -107,19 +152,41 @@ default sql_backup = null
 
 
 gc_attribute_absence["sql_backup"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "sqladmin.v1beta4.instance"
     not resource.properties.settings.backupConfiguration
 }
 
+source_path[{"sql_backup": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "sqladmin.v1beta4.instance"
+    not resource.properties.settings.backupConfiguration
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties" "settings", "backupConfiguration"]
+        ],
+    }
+}
+
 gc_issue["sql_backup"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "sqladmin.v1beta4.instance"
     not resource.properties.settings.backupConfiguration.enabled
 }
 
+source_path[{"sql_backup": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "sqladmin.v1beta4.instance"
+    not resource.properties.settings.backupConfiguration.enabled
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties" "settings", "backupConfiguration", "enabled"]
+        ],
+    }
+}
+
 sql_backup {
-    lower(input.resources[_].type) == "sqladmin.v1beta4.instance"
+    lower(input.resources[i].type) == "sqladmin.v1beta4.instance"
     not gc_issue["sql_backup"]
     not gc_attribute_absence["sql_backup"]
 }
@@ -160,19 +227,41 @@ default sql_ssl = null
 
 
 gc_attribute_absence["sql_ssl"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "sqladmin.v1beta4.instance"
     not resource.properties.settings.ipConfiguration.requireSsl
 }
 
+source_path[{"sql_ssl": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "sqladmin.v1beta4.instance"
+    not resource.properties.settings.ipConfiguration.requireSsl
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties" "settings", "ipConfiguration", "requireSsl"]
+        ],
+    }
+}
+
 gc_issue["sql_ssl"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "sqladmin.v1beta4.instance"
     resource.properties.settings.ipConfiguration.requireSsl != true
 }
 
+source_path[{"sql_ssl": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "sqladmin.v1beta4.instance"
+    resource.properties.settings.ipConfiguration.requireSsl != true
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties" "settings", "ipConfiguration", "requireSsl"]
+        ],
+    }
+}
+
 sql_ssl {
-    lower(input.resources[_].type) == "sqladmin.v1beta4.instance"
+    lower(input.resources[i].type) == "sqladmin.v1beta4.instance"
     not gc_issue["sql_ssl"]
     not gc_attribute_absence["sql_ssl"]
 }
@@ -213,31 +302,75 @@ default sql_exposed = null
 
 
 gc_attribute_absence["sql_exposed"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "sqladmin.v1beta4.instance"
     not resource.properties.settings.ipConfiguration.authorizedNetworks
 }
 
-gc_issue["sql_exposed"] {
-    resource := input.resources[_]
+source_path[{"sql_exposed": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "sqladmin.v1beta4.instance"
-    resource.properties.settings.ipConfiguration.authorizedNetworks[_] == "0.0.0.0"
+    not resource.properties.settings.ipConfiguration.authorizedNetworks
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties" "settings", "ipConfiguration", "authorizedNetworks"]
+        ],
+    }
 }
 
 gc_issue["sql_exposed"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "sqladmin.v1beta4.instance"
-    resource.properties.settings.ipConfiguration.authorizedNetworks[_] == "0.0.0.0/0"
+    resource.properties.settings.ipConfiguration.authorizedNetworks[j] == "0.0.0.0"
+}
+
+source_path[{"sql_exposed": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "sqladmin.v1beta4.instance"
+    resource.properties.settings.ipConfiguration.authorizedNetworks[j] == "0.0.0.0"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties" "settings", "ipConfiguration", "authorizedNetworks", j]
+        ],
+    }
 }
 
 gc_issue["sql_exposed"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "sqladmin.v1beta4.instance"
-    resource.properties.settings.ipConfiguration.authorizedNetworks[_] == "::/0"
+    resource.properties.settings.ipConfiguration.authorizedNetworks[j] == "0.0.0.0/0"
+}
+
+source_path[{"sql_exposed": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "sqladmin.v1beta4.instance"
+    resource.properties.settings.ipConfiguration.authorizedNetworks[j] == "0.0.0.0/0"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties" "settings", "ipConfiguration", "authorizedNetworks", j]
+        ],
+    }
+}
+
+gc_issue["sql_exposed"] {
+    resource := input.resources[i]
+    lower(resource.type) == "sqladmin.v1beta4.instance"
+    resource.properties.settings.ipConfiguration.authorizedNetworks[j] == "::/0"
+}
+
+source_path[{"sql_exposed": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "sqladmin.v1beta4.instance"
+    resource.properties.settings.ipConfiguration.authorizedNetworks[j] == "::/0"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties" "settings", "ipConfiguration", "authorizedNetworks", j]
+        ],
+    }
 }
 
 sql_exposed {
-    lower(input.resources[_].type) == "sqladmin.v1beta4.instance"
+    lower(input.resources[i].type) == "sqladmin.v1beta4.instance"
     not gc_issue["sql_exposed"]
     not gc_attribute_absence["sql_exposed"]
 }
