@@ -544,13 +544,13 @@ aks_kub_dashboard_disabled = false {
     azure_issue["aks_kub_dashboard_disabled"]
 }
 
-aks_kub_dashboard_disabled = false {
+aks_kub_dashboard_disabled {
+    lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
     azure_attribute_absence["aks_kub_dashboard_disabled"]
+    not azure_issue["aks_kub_dashboard_disabled"]
 }
 
-aks_kub_dashboard_disabled_err = "azurerm_kubernetes_cluster property 'addon_profile.kube_dashboard.enabled' is missing from the resource" {
-    azure_attribute_absence["aks_kub_dashboard_disabled"]
-} else = "Kubernetes Dashboard is currently not disabled" {
+aks_kub_dashboard_disabled_err = "Kubernetes Dashboard is currently not disabled" {
     azure_issue["aks_kub_dashboard_disabled"]
 }
 
