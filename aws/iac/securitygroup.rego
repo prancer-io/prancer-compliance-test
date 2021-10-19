@@ -10,18 +10,34 @@ ports = [
 aws_issue[port] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
-    ingress := resource.Properties.SecurityGroupIngress[_]
+    ingress := resource.Properties.SecurityGroupIngress[j]
     port := ports[_]
 
     ingress.CidrIp == "0.0.0.0/0"
     to_number(ingress.FromPort) <= to_number(port)
     to_number(ingress.ToPort) >= to_number(port)
+}
+
+source_path[{concat("_",["port", port]): metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := ports[_]
+
+    ingress.CidrIp == "0.0.0.0/0"
+    to_number(ingress.FromPort) <= to_number(port)
+    to_number(ingress.ToPort) >= to_number(port)
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "CidrIp"]
+        ],
+    }
 }
 
 aws_issue[port] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
-    ingress := resource.Properties.SecurityGroupIngress[_]
+    ingress := resource.Properties.SecurityGroupIngress[j]
     port := ports[_]
 
     ingress.CidrIpv6 == "::/0"
@@ -29,34 +45,100 @@ aws_issue[port] {
     to_number(ingress.ToPort) >= to_number(port)
 }
 
-aws_issue["all"] {
+source_path[{concat("_",["port", port]): metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
-    lower(resource.Properties.GroupName) == "default"
-    resource.Properties.SecurityGroupIngress[_].CidrIpv6 == "::/0"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := ports[_]
+
+    ingress.CidrIpv6 == "::/0"
+    to_number(ingress.FromPort) <= to_number(port)
+    to_number(ingress.ToPort) >= to_number(port)
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "CidrIpv6"]
+        ],
+    }
 }
 
 aws_issue["all"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
     lower(resource.Properties.GroupName) == "default"
-    resource.Properties.SecurityGroupIngress[_].CidrIp == "0.0.0.0/0"
+    resource.Properties.SecurityGroupIngress[j].CidrIpv6 == "::/0"
+}
+
+source_path[{"all": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    lower(resource.Properties.GroupName) == "default"
+    resource.Properties.SecurityGroupIngress[j].CidrIpv6 == "::/0"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "CidrIpv6"]
+        ],
+    }
+}
+
+aws_issue["all"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    lower(resource.Properties.GroupName) == "default"
+    resource.Properties.SecurityGroupIngress[j].CidrIp == "0.0.0.0/0"
+}
+
+source_path[{"all": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    lower(resource.Properties.GroupName) == "default"
+    resource.Properties.SecurityGroupIngress[j].CidrIp == "0.0.0.0/0"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "CidrIp"]
+        ],
+    }
 }
 
 aws_issue["proto_all"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
     lower(resource.Properties.GroupName) == "default"
-    ingress := resource.Properties.SecurityGroupEgress[_]
+    ingress := resource.Properties.SecurityGroupEgress[j]
     ingress.CidrIp == "0.0.0.0/0"
 }
 
+source_path[{"all": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    lower(resource.Properties.GroupName) == "default"
+    ingress := resource.Properties.SecurityGroupEgress[j]
+    ingress.CidrIp == "0.0.0.0/0"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupEgress", j, "CidrIp"]
+        ],
+    }
+}
+
 aws_issue["proto_all"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
     lower(resource.Properties.GroupName) == "default"
-    ingress := resource.Properties.SecurityGroupEgress[_]
+    ingress := resource.Properties.SecurityGroupEgress[j]
     ingress.CidrIpv6 == "::/0"
+}
+
+source_path[{"all": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    lower(resource.Properties.GroupName) == "default"
+    ingress := resource.Properties.SecurityGroupEgress[j]
+    ingress.CidrIpv6 == "::/0"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupEgress", j, "CidrIpv6"]
+        ],
+    }
 }
 
 #
@@ -764,15 +846,39 @@ default sg_description_absent = null
 aws_issue["sg_description_absent"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
-    ingress := resource.Properties.SecurityGroupIngress[_]
+    ingress := resource.Properties.SecurityGroupIngress[j]
     not ingress.description
+}
+
+source_path[{"sg_description_absent": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    not ingress.description
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "description"]
+        ],
+    }
 }
 
 aws_issue["sg_description_absent"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
-    ingress := resource.Properties.SecurityGroupIngress[_]
+    ingress := resource.Properties.SecurityGroupIngress[j]
     count(ingress.description) == 0
+}
+
+source_path[{"sg_description_absent": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    count(ingress.description) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "description"]
+        ],
+    }
 }
 
 sg_description_absent {
@@ -1004,21 +1110,51 @@ db_ports := [
 aws_issue["db_exposed"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
-    ingress := resource.Properties.SecurityGroupIngress[_]
+    ingress := resource.Properties.SecurityGroupIngress[j]
     port := db_ports[_]
     ingress.CidrIp == "0.0.0.0/0"
     to_number(ingress.FromPort) <= port
     to_number(ingress.ToPort) >= port
 }
 
+source_path[{"db_exposed": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := db_ports[_]
+    ingress.CidrIp == "0.0.0.0/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "CidrIp"]
+        ],
+    }
+}
+
 aws_issue["db_exposed"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
-    ingress := resource.Properties.SecurityGroupIngress[_]
+    ingress := resource.Properties.SecurityGroupIngress[j]
     port := db_ports[_]
     ingress.CidrIpv6="::/0"
     to_number(ingress.FromPort) <= port
     to_number(ingress.ToPort) >= port
+}
+
+source_path[{"db_exposed": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := db_ports[_]
+    ingress.CidrIpv6="::/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "CidrIpv6"]
+        ],
+    }
 }
 
 db_exposed {
@@ -1059,21 +1195,51 @@ bc_ports := [
 aws_issue["bitcoin_ports"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
-    ingress := resource.Properties.SecurityGroupIngress[_]
+    ingress := resource.Properties.SecurityGroupIngress[j]
     port := bc_ports[_]
     ingress.CidrIp == "0.0.0.0/0"
     to_number(ingress.FromPort) <= port
     to_number(ingress.ToPort) >= port
 }
 
+source_path[{"bitcoin_ports": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := bc_ports[_]
+    ingress.CidrIp == "0.0.0.0/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "CidrIp"]
+        ],
+    }
+}
+
 aws_issue["bitcoin_ports"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
-    ingress := resource.Properties.SecurityGroupIngress[_]
+    ingress := resource.Properties.SecurityGroupIngress[j]
     port := bc_ports[_]
     ingress.CidrIpv6="::/0"
     to_number(ingress.FromPort) <= port
     to_number(ingress.ToPort) >= port
+}
+
+source_path[{"bitcoin_ports": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := bc_ports[_]
+    ingress.CidrIpv6="::/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "CidrIpv6"]
+        ],
+    }
 }
 
 bitcoin_ports {
@@ -1114,21 +1280,51 @@ eth_ports := [
 aws_issue["ethereum_ports"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
-    ingress := resource.Properties.SecurityGroupIngress[_]
+    ingress := resource.Properties.SecurityGroupIngress[j]
     port := eth_ports[_]
     ingress.CidrIp == "0.0.0.0/0"
     to_number(ingress.FromPort) <= port
     to_number(ingress.ToPort) >= port
 }
 
+source_path[{"ethereum_ports": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := eth_ports[_]
+    ingress.CidrIp == "0.0.0.0/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "CidrIp"]
+        ],
+    }
+}
+
 aws_issue["ethereum_ports"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::securitygroup"
-    ingress := resource.Properties.SecurityGroupIngress[_]
+    ingress := resource.Properties.SecurityGroupIngress[j]
     port := eth_ports[_]
     ingress.CidrIpv6="::/0"
     to_number(ingress.FromPort) <= port
     to_number(ingress.ToPort) >= port
+}
+
+source_path[{"ethereum_ports": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::securitygroup"
+    ingress := resource.Properties.SecurityGroupIngress[j]
+    port := eth_ports[_]
+    ingress.CidrIpv6="::/0"
+    to_number(ingress.FromPort) <= port
+    to_number(ingress.ToPort) >= port
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroupIngress", j, "CidrIpv6"]
+        ],
+    }
 }
 
 ethereum_ports {

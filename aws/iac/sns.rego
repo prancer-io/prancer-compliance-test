@@ -22,7 +22,7 @@ aws_issue["sns_protocol"] {
     lower(resource.Properties.Protocol) == "http"
 }
 
-aws_path[{"sns_protocol": metadata}] {
+source_path[{"sns_protocol": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::subscription"
     not resource.Properties.Protocol
@@ -31,7 +31,7 @@ aws_path[{"sns_protocol": metadata}] {
     }
 }
 
-aws_path[{"sns_protocol": metadata}] {
+source_path[{"sns_protocol": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::subscription"
     lower(resource.Properties.Protocol) == "http"
@@ -86,7 +86,7 @@ aws_issue["sns_encrypt_key"] {
     contains(lower(resource.Properties.KmsMasterKeyId), "alias/aws/sns")
 }
 
-aws_path[{"sns_encrypt_key": metadata}] {
+source_path[{"sns_encrypt_key": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topic"
     contains(lower(resource.Properties.KmsMasterKeyId), "alias/aws/sns")
@@ -138,7 +138,7 @@ aws_issue["sns_encrypt"] {
     count(resource.Properties.KmsMasterKeyId) == 0
 }
 
-aws_path[{"sns_encrypt": metadata}] {
+source_path[{"sns_encrypt": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topic"
     not resource.Properties.KmsMasterKeyId
@@ -147,7 +147,7 @@ aws_path[{"sns_encrypt": metadata}] {
     }
 }
 
-aws_path[{"sns_encrypt": metadata}] {
+source_path[{"sns_encrypt": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topic"
     count(resource.Properties.KmsMasterKeyId) == 0

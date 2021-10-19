@@ -3014,7 +3014,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure S3 bucket has enabled lock configuration",
+                    "title": "Ensure S3 bucket cross-region replication is enabled",
                     "description": "Cross-region replication enables automatic, asynchronous copying of objects across S3 buckets. By default, replication supports copying new S3 objects after it is enabled",
                     "tags": [
                         {

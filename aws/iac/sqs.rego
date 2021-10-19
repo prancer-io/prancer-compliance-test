@@ -14,18 +14,24 @@ aws_issue["sqs_deadletter"] {
     not resource.Properties.RedrivePolicy.deadLetterTargetArn
 }
 
+source_path[{"sqs_deadletter": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sqs::queue"
+    not resource.Properties.RedrivePolicy.deadLetterTargetArn
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "RedrivePolicy", "deadLetterTargetArn"]
+        ],
+    }
+}
+
 sqs_deadletter {
     lower(input.Resources[i].Type) == "aws::sqs::queue"
     not aws_issue["sqs_deadletter"]
-    not aws_attribute_absence["sqs_deadletter"]
 }
 
 sqs_deadletter = false {
     aws_issue["sqs_deadletter"]
-}
-
-sqs_deadletter = false {
-    aws_attribute_absence["sqs_deadletter"]
 }
 
 sqs_deadletter_err = "AWS SQS does not have a dead letter queue configured" {
@@ -56,6 +62,18 @@ aws_issue["sqs_encrypt_key"] {
     lower(resource.Type) == "aws::sqs::queue"
     resource.Properties.KmsMasterKeyId
     contains(lower(resource.Properties.KmsMasterKeyId), "alias/aws/sqs")
+}
+
+source_path[{"sqs_encrypt_key": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sqs::queue"
+    resource.Properties.KmsMasterKeyId
+    contains(lower(resource.Properties.KmsMasterKeyId), "alias/aws/sqs")
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsMasterKeyId"]
+        ],
+    }
 }
 
 sqs_encrypt_key {
@@ -95,10 +113,32 @@ aws_attribute_absence["sqs_encrypt"] {
     not resource.Properties.KmsMasterKeyId
 }
 
+source_path[{"sqs_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sqs::queue"
+    not resource.Properties.KmsMasterKeyId
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsMasterKeyId"]
+        ],
+    }
+}
+
 aws_issue["sqs_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sqs::queue"
     count(resource.Properties.KmsMasterKeyId) == 0
+}
+
+source_path[{"sqs_policy_action": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sqs::queue"
+    count(resource.Properties.KmsMasterKeyId) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsMasterKeyId"]
+        ],
+    }
 }
 
 sqs_encrypt {
@@ -144,27 +184,65 @@ default sqs_policy_public = null
 aws_issue["sqs_policy_public"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sqs::queuepolicy"
-    statement := resource.Properties.PolicyDocument.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal == "*"
 }
 
+source_path[{"sqs_policy_public": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sqs::queuepolicy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Principal"]
+        ],
+    }
+}
+
 aws_issue["sqs_policy_public"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sqs::queuepolicy"
-    statement := resource.Properties.PolicyDocument.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
 }
 
+source_path[{"sqs_policy_public": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sqs::queuepolicy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Principal", "AWS"]
+        ],
+    }
+}
+
 aws_issue["sqs_policy_public"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sqs::queuepolicy"
-    statement := resource.Properties.PolicyDocument.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "allow"
-    statement.Principal.AWS[_] = "*"
+    statement.Principal.AWS[k] = "*"
 }
 
+source_path[{"sqs_policy_public": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sqs::queuepolicy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[k] = "*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Principal", "AWS", k]
+        ],
+    }
+}
 
 sqs_policy_public {
     lower(input.Resources[i].Type) == "aws::sqs::queuepolicy"
@@ -201,17 +279,43 @@ default sqs_policy_action = null
 aws_issue["sqs_policy_action"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sqs::queuepolicy"
-    statement := resource.Properties.PolicyDocument.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Action == "*"
+}
+
+source_path[{"sqs_policy_action": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sqs::queuepolicy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Action == "*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action"]
+        ],
+    }
 }
 
 aws_issue["sqs_policy_action"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sqs::queuepolicy"
-    statement := resource.Properties.PolicyDocument.Statement[_]
+    statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Effect) == "allow"
-    statement.Action[_] == "*"
+    statement.Action[k] == "*"
+}
+
+source_path[{"sqs_policy_action": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sqs::queuepolicy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Action[k] == "*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Action", k]
+        ],
+    }
 }
 
 sqs_policy_action {

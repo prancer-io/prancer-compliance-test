@@ -14,10 +14,32 @@ aws_issue["ec2_iam_role"] {
     not resource.Properties.IamInstanceProfile
 }
 
+source_path[{"ec2_iam_role": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    not resource.Properties.IamInstanceProfile
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "IamInstanceProfile"]
+        ],
+    }
+}
+
 aws_issue["ec2_iam_role"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::instance"
     not startswith(lower(resource.Properties.IamInstanceProfile), "arn:")
+}
+
+source_path[{"ec2_iam_role": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    not startswith(lower(resource.Properties.IamInstanceProfile), "arn:")
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "IamInstanceProfile"]
+        ],
+    }
 }
 
 ec2_iam_role {
@@ -58,6 +80,18 @@ aws_issue["ec2_no_vpc"] {
     count([c | resource.Properties.NetworkInterfaces[_].SubnetId; c := 1]) == 0
 }
 
+source_path[{"ec2_no_vpc": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    not resource.Properties.SubnetId
+    count([c | resource.Properties.NetworkInterfaces[_].SubnetId; c := 1]) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "NetworkInterfaces"]
+        ],
+    }
+}
+
 ec2_no_vpc {
     lower(input.Resources[i].Type) == "aws::ec2::instance"
     not aws_issue["ec2_no_vpc"]
@@ -92,15 +126,39 @@ default ec2_public_ip = null
 aws_issue["ec2_public_ip"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::instance"
-    lower(resource.Properties.NetworkInterfaces[_].AssociatePublicIpAddress) == "true"
-    lower(resource.Properties.SecurityGroups[_]) == "default"
+    lower(resource.Properties.NetworkInterfaces[j].AssociatePublicIpAddress) == "true"
+    lower(resource.Properties.SecurityGroups[k]) == "default"
+}
+
+source_path[{"ec2_public_ip": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    lower(resource.Properties.NetworkInterfaces[j].AssociatePublicIpAddress) == "true"
+    lower(resource.Properties.SecurityGroups[k]) == "default"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroups", k]
+        ],
+    }
 }
 
 aws_bool_issue["ec2_public_ip"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::instance"
-    resource.Properties.NetworkInterfaces[_].AssociatePublicIpAddress == true
-    lower(resource.Properties.SecurityGroups[_]) == "default"
+    resource.Properties.NetworkInterfaces[j].AssociatePublicIpAddress == true
+    lower(resource.Properties.SecurityGroups[k]) == "default"
+}
+
+source_path[{"ec2_public_ip": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    resource.Properties.NetworkInterfaces[j].AssociatePublicIpAddress == true
+    lower(resource.Properties.SecurityGroups[k]) == "default"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroups", k]
+        ],
+    }
 }
 
 ec2_public_ip {
@@ -147,10 +205,32 @@ aws_issue["ec2_ebs_optimized"] {
     not resource.Properties.EbsOptimized
 }
 
+source_path[{"ec2_ebs_optimized": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    not resource.Properties.EbsOptimized
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EbsOptimized"]
+        ],
+    }
+}
+
 aws_issue["ec2_ebs_optimized"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::instance"
     lower(resource.Properties.EbsOptimized) == "false"
+}
+
+source_path[{"ec2_ebs_optimized": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    lower(resource.Properties.EbsOptimized) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EbsOptimized"]
+        ],
+    }
 }
 
 ec2_ebs_optimized {
@@ -191,10 +271,32 @@ aws_issue["ec2_monitoring"] {
     not resource.Properties.Monitoring
 }
 
+source_path[{"ec2_monitoring": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    not resource.Properties.Monitoring
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Monitoring"]
+        ],
+    }
+}
+
 aws_issue["ec2_monitoring"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::instance"
     lower(resource.Properties.Monitoring) == "false"
+}
+
+source_path[{"ec2_monitoring": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    lower(resource.Properties.Monitoring) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Monitoring"]
+        ],
+    }
 }
 
 ec2_monitoring {

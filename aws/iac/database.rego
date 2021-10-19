@@ -15,10 +15,32 @@ aws_issue["rds_cluster_encrypt"] {
     lower(resource.Properties.StorageEncrypted) == "false"
 }
 
+source_path[{"rds_cluster_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbcluster"
+    lower(resource.Properties.StorageEncrypted) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "StorageEncrypted"]
+        ],
+    }
+}
+
 aws_bool_issue["rds_cluster_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbcluster"
     not resource.Properties.StorageEncrypted
+}
+
+source_path[{"rds_cluster_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbcluster"
+    not resource.Properties.StorageEncrypted
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "StorageEncrypted"]
+        ],
+    }
 }
 
 rds_cluster_encrypt {
@@ -65,10 +87,32 @@ aws_issue["rds_public"] {
     lower(resource.Properties.PubliclyAccessible) == "true"
 }
 
+source_path[{"rds_public": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    lower(resource.Properties.PubliclyAccessible) == "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PubliclyAccessible"]
+        ],
+    }
+}
+
 aws_bool_issue["rds_public"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbinstance"
     resource.Properties.PubliclyAccessible == true
+}
+
+source_path[{"rds_public": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    resource.Properties.PubliclyAccessible == true
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PubliclyAccessible"]
+        ],
+    }
 }
 
 rds_public {
@@ -115,10 +159,32 @@ aws_issue["rds_encrypt_key"] {
     not resource.Properties.KmsKeyId
 }
 
+source_path[{"rds_encrypt_key": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    not resource.Properties.KmsKeyId
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsKeyId"]
+        ],
+    }
+}
+
 aws_issue["rds_encrypt_key"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbinstance"
     count(resource.Properties.KmsKeyId) == 0
+}
+
+source_path[{"rds_encrypt_key": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    count(resource.Properties.KmsKeyId) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsKeyId"]
+        ],
+    }
 }
 
 rds_encrypt_key {
@@ -159,11 +225,35 @@ aws_issue["rds_instance_event"] {
     resource.Properties.SourceType == "db-instance"
 }
 
+source_path[{"rds_instance_event": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::eventsubscription"
+    lower(resource.Properties.Enabled) == "false"
+    resource.Properties.SourceType == "db-instance"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Enabled"]
+        ],
+    }
+}
+
 aws_bool_issue["rds_instance_event"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::eventsubscription"
     resource.Properties.Enabled == false
     resource.Properties.SourceType == "db-instance"
+}
+
+source_path[{"rds_instance_event": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::eventsubscription"
+    resource.Properties.Enabled == false
+    resource.Properties.SourceType == "db-instance"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Enabled"]
+        ],
+    }
 }
 
 rds_instance_event {
@@ -211,6 +301,18 @@ aws_issue["rds_secgroup_event"] {
     resource.Properties.SourceType == "db-security-group"
 }
 
+source_path[{"rds_secgroup_event": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::eventsubscription"
+    lower(resource.Properties.Enabled) == "false"
+    resource.Properties.SourceType == "db-security-group"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Enabled"]
+        ],
+    }
+}
+
 aws_bool_issue["rds_secgroup_event"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::eventsubscription"
@@ -218,6 +320,17 @@ aws_bool_issue["rds_secgroup_event"] {
     resource.Properties.SourceType == "db-security-group"
 }
 
+source_path[{"rds_secgroup_event": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::eventsubscription"
+    resource.Properties.Enabled == false
+    resource.Properties.SourceType == "db-security-group"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Enabled"]
+        ],
+    }
+}
 
 rds_secgroup_event {
     lower(input.Resources[i].Type) == "aws::rds::eventsubscription"
@@ -264,10 +377,32 @@ aws_issue["rds_encrypt"] {
     lower(resource.Properties.StorageEncrypted) == "false"
 }
 
+source_path[{"rds_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    lower(resource.Properties.StorageEncrypted) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "StorageEncrypted"]
+        ],
+    }
+}
+
 aws_bool_issue["rds_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbinstance"
     not resource.Properties.StorageEncrypted
+}
+
+source_path[{"rds_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    not resource.Properties.StorageEncrypted
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "StorageEncrypted"]
+        ],
+    }
 }
 
 rds_encrypt {
@@ -317,12 +452,38 @@ aws_issue["rds_multiaz"] {
     lower(resource.Properties.MultiAZ) == "false"
 }
 
+source_path[{"rds_multiaz": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    lower(resource.Properties.Engine) != "aurora"
+    lower(resource.Properties.Engine) != "sqlserver"
+    lower(resource.Properties.MultiAZ) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "MultiAZ"]
+        ],
+    }
+}
+
 aws_bool_issue["rds_multiaz"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbinstance"
     lower(resource.Properties.Engine) != "aurora"
     lower(resource.Properties.Engine) != "sqlserver"
     not resource.Properties.MultiAZ
+}
+
+source_path[{"rds_multiaz": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    lower(resource.Properties.Engine) != "aurora"
+    lower(resource.Properties.Engine) != "sqlserver"
+    not resource.Properties.MultiAZ
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "MultiAZ"]
+        ],
+    }
 }
 
 rds_multiaz {
@@ -369,10 +530,32 @@ aws_issue["rds_snapshot"] {
     lower(resource.Properties.CopyTagsToSnapshot) == "false"
 }
 
+source_path[{"rds_snapshot": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    lower(resource.Properties.CopyTagsToSnapshot) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CopyTagsToSnapshot"]
+        ],
+    }
+}
+
 aws_bool_issue["rds_snapshot"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbinstance"
     not resource.Properties.CopyTagsToSnapshot
+}
+
+source_path[{"rds_snapshot": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    not resource.Properties.CopyTagsToSnapshot
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CopyTagsToSnapshot"]
+        ],
+    }
 }
 
 rds_snapshot {
@@ -419,10 +602,32 @@ aws_attribute_absence["rds_backup"] {
     not resource.Properties.BackupRetentionPeriod
 }
 
+source_path[{"rds_backup": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    not resource.Properties.BackupRetentionPeriod
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "BackupRetentionPeriod"]
+        ],
+    }
+}
+
 aws_issue["rds_backup"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbinstance"
     to_number(resource.Properties.BackupRetentionPeriod) == 0
+}
+
+source_path[{"rds_backup": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    to_number(resource.Properties.BackupRetentionPeriod) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "BackupRetentionPeriod"]
+        ],
+    }
 }
 
 rds_backup {
@@ -471,10 +676,32 @@ aws_issue["rds_upgrade"] {
     lower(resource.Properties.AutoMinorVersionUpgrade) == "false"
 }
 
+source_path[{"rds_upgrade": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    lower(resource.Properties.AutoMinorVersionUpgrade) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AutoMinorVersionUpgrade"]
+        ],
+    }
+}
+
 aws_bool_issue["rds_upgrade"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbinstance"
     not resource.Properties.AutoMinorVersionUpgrade
+}
+
+source_path[{"rds_upgrade": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    not resource.Properties.AutoMinorVersionUpgrade
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AutoMinorVersionUpgrade"]
+        ],
+    }
 }
 
 rds_upgrade {
@@ -521,10 +748,32 @@ aws_attribute_absence["rds_retention"] {
     not resource.Properties.BackupRetentionPeriod
 }
 
+source_path[{"rds_retention": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    not resource.Properties.BackupRetentionPeriod
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "BackupRetentionPeriod"]
+        ],
+    }
+}
+
 aws_issue["rds_retention"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbinstance"
     to_number(resource.Properties.BackupRetentionPeriod) < 7
+}
+
+source_path[{"rds_retention": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    to_number(resource.Properties.BackupRetentionPeriod) < 7
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "BackupRetentionPeriod"]
+        ],
+    }
 }
 
 rds_retention {
@@ -574,10 +823,32 @@ aws_attribute_absence["rds_cluster_retention"] {
     not resource.Properties.BackupRetentionPeriod
 }
 
+source_path[{"rds_cluster_retention": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbcluster"
+    not resource.Properties.BackupRetentionPeriod
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "BackupRetentionPeriod"]
+        ],
+    }
+}
+
 aws_issue["rds_cluster_retention"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbcluster"
     to_number(resource.Properties.BackupRetentionPeriod) < 7
+}
+
+source_path[{"rds_cluster_retention": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbcluster"
+    to_number(resource.Properties.BackupRetentionPeriod) < 7
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "BackupRetentionPeriod"]
+        ],
+    }
 }
 
 rds_cluster_retention {
@@ -627,10 +898,32 @@ aws_issue["rds_cluster_deletion_protection"] {
     lower(resource.Properties.DeletionProtection) != "true"
 }
 
+source_path[{"rds_cluster_deletion_protection": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbcluster"
+    lower(resource.Properties.DeletionProtection) != "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DeletionProtection"]
+        ],
+    }
+}
+
 aws_bool_issue["rds_cluster_deletion_protection"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbcluster"
     not resource.Properties.DeletionProtection
+}
+
+source_path[{"rds_cluster_deletion_protection": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbcluster"
+    not resource.Properties.DeletionProtection
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DeletionProtection"]
+        ],
+    }
 }
 
 rds_cluster_deletion_protection {
@@ -678,10 +971,32 @@ aws_issue["rds_pgaudit_enable"] {
     count([c | lower(resource.Properties.Parameters["pgaudit.role"]) == "rds_pgaudit" ; c := 1]) == 0
 }
 
+source_path[{"rds_pgaudit_enable": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbparametergroup"
+    count([c | lower(resource.Properties.Parameters["pgaudit.role"]) == "rds_pgaudit" ; c := 1]) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Parameters"]
+        ],
+    }
+}
+
 aws_issue["rds_pgaudit_enable"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbparametergroup"
     not resource.Properties.Parameters
+}
+
+source_path[{"rds_pgaudit_enable": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbparametergroup"
+    not resource.Properties.Parameters
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Parameters"]
+        ],
+    }
 }
 
 rds_pgaudit_enable {
@@ -721,10 +1036,32 @@ aws_issue["rds_global_cluster_encrypt"] {
     lower(resource.Properties.StorageEncrypted) == "false"
 }
 
+source_path[{"rds_global_cluster_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::globalcluster"
+    lower(resource.Properties.StorageEncrypted) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "StorageEncrypted"]
+        ],
+    }
+}
+
 aws_bool_issue["rds_global_cluster_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::globalcluster"
     not resource.Properties.StorageEncrypted
+}
+
+source_path[{"rds_global_cluster_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::globalcluster"
+    not resource.Properties.StorageEncrypted
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "StorageEncrypted"]
+        ],
+    }
 }
 
 rds_global_cluster_encrypt {
@@ -771,10 +1108,32 @@ aws_issue["cluster_iam_authenticate"] {
     lower(resource.Properties.EnableIAMDatabaseAuthentication) == "false"
 }
 
+source_path[{"cluster_iam_authenticate": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbcluster"
+    lower(resource.Properties.EnableIAMDatabaseAuthentication) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EnableIAMDatabaseAuthentication"]
+        ],
+    }
+}
+
 aws_bool_issue["cluster_iam_authenticate"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbcluster"
     not resource.Properties.EnableIAMDatabaseAuthentication
+}
+
+source_path[{"cluster_iam_authenticate": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbcluster"
+    not resource.Properties.EnableIAMDatabaseAuthentication
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EnableIAMDatabaseAuthentication"]
+        ],
+    }
 }
 
 cluster_iam_authenticate {
@@ -821,10 +1180,32 @@ aws_issue["db_instance_iam_authenticate"] {
     lower(resource.Properties.EnableIAMDatabaseAuthentication) == "false"
 }
 
+source_path[{"db_instance_iam_authenticate": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    lower(resource.Properties.EnableIAMDatabaseAuthentication) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EnableIAMDatabaseAuthentication"]
+        ],
+    }
+}
+
 aws_bool_issue["db_instance_iam_authenticate"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbinstance"
     not resource.Properties.EnableIAMDatabaseAuthentication
+}
+
+source_path[{"db_instance_iam_authenticate": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    not resource.Properties.EnableIAMDatabaseAuthentication
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EnableIAMDatabaseAuthentication"]
+        ],
+    }
 }
 
 db_instance_iam_authenticate {
@@ -872,10 +1253,32 @@ aws_issue["db_instance_cloudwatch_logs"] {
     count(resource.Properties.EnableCloudwatchLogsExports) == 0
 }
 
+source_path[{"db_instance_cloudwatch_logs": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    count(resource.Properties.EnableCloudwatchLogsExports) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EnableCloudwatchLogsExports"]
+        ],
+    }
+}
+
 aws_issue["db_instance_cloudwatch_logs"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::rds::dbinstance"
     not resource.Properties.EnableCloudwatchLogsExports
+}
+
+source_path[{"db_instance_cloudwatch_logs": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    not resource.Properties.EnableCloudwatchLogsExports
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EnableCloudwatchLogsExports"]
+        ],
+    }
 }
 
 db_instance_cloudwatch_logs {
@@ -917,6 +1320,17 @@ aws_issue["db_instance_monitor"] {
     not resource.Properties.MonitoringInterval
 }
 
+source_path[{"db_instance_monitor": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    not resource.Properties.MonitoringInterval
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "MonitoringInterval"]
+        ],
+    }
+}
+
 db_instance_monitor {
     lower(input.Resources[i].Type) == "aws::rds::dbinstance"
     not aws_issue["db_instance_monitor"]
@@ -955,10 +1369,32 @@ aws_issue["dax_encrypt"] {
     lower(resource.Properties.SSESpecification.SSEEnabled) != "true"
 }
 
+source_path[{"db_instance_monitor": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::dax::cluster"
+    lower(resource.Properties.SSESpecification.SSEEnabled) != "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SSESpecification", "SSEEnabled"]
+        ],
+    }
+}
+
 aws_bool_issue["dax_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::dax::cluster"
     not resource.Properties.SSESpecification.SSEEnabled
+}
+
+source_path[{"db_instance_monitor": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::dax::cluster"
+    not resource.Properties.SSESpecification.SSEEnabled
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SSESpecification", "SSEEnabled"]
+        ],
+    }
 }
 
 dax_encrypt {
@@ -1006,10 +1442,32 @@ aws_issue["qldb_permission_mode"] {
     lower(resource.Properties.PermissionsMode) != "standard"
 }
 
+source_path[{"qldb_permission_mode": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::qldb::ledger"
+    lower(resource.Properties.PermissionsMode) != "standard"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PermissionsMode"]
+        ],
+    }
+}
+
 aws_issue["qldb_permission_mode"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::qldb::ledger"
     not resource.Properties.PermissionsMode
+}
+
+source_path[{"qldb_permission_mode": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::qldb::ledger"
+    not resource.Properties.PermissionsMode
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PermissionsMode"]
+        ],
+    }
 }
 
 qldb_permission_mode {
@@ -1051,10 +1509,32 @@ aws_issue["docdb_cluster_encrypt"] {
     not resource.Properties.StorageEncrypted
 }
 
+source_path[{"docdb_cluster_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbcluster"
+    not resource.Properties.StorageEncrypted
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "StorageEncrypted"]
+        ],
+    }
+}
+
 aws_issue["docdb_cluster_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::docdb::dbcluster"
     lower(resource.Properties.StorageEncrypted) == "false"
+}
+
+source_path[{"docdb_cluster_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbcluster"
+    lower(resource.Properties.StorageEncrypted) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "StorageEncrypted"]
+        ],
+    }
 }
 
 docdb_cluster_encrypt {
@@ -1095,10 +1575,32 @@ aws_issue["docdb_cluster_logs"] {
     not resource.Properties.EnableCloudwatchLogsExports
 }
 
+source_path[{"docdb_cluster_logs": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbcluster"
+    not resource.Properties.EnableCloudwatchLogsExports
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EnableCloudwatchLogsExports"]
+        ],
+    }
+}
+
 aws_issue["docdb_cluster_logs"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::docdb::dbcluster"
     count(resource.Properties.EnableCloudwatchLogsExports) == 0
+}
+
+source_path[{"docdb_cluster_logs": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbcluster"
+    count(resource.Properties.EnableCloudwatchLogsExports) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EnableCloudwatchLogsExports"]
+        ],
+    }
 }
 
 docdb_cluster_logs {
@@ -1138,10 +1640,32 @@ aws_issue["docdb_parameter_group_tls_enable"] {
     not resource.Properties.Parameters.tls
 }
 
+source_path[{"docdb_parameter_group_tls_enable": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
+    not resource.Properties.Parameters.tls
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Parameters", "tls"]
+        ],
+    }
+}
+
 aws_issue["docdb_parameter_group_tls_enable"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
     lower(resource.Properties.Parameters.tls) != "enabled"
+}
+
+source_path[{"docdb_parameter_group_tls_enable": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
+    lower(resource.Properties.Parameters.tls) != "enabled"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Parameters", "tls"]
+        ],
+    }
 }
 
 docdb_parameter_group_tls_enable {
@@ -1182,10 +1706,32 @@ aws_issue["docdb_parameter_group_audit_logs"] {
     not resource.Properties.Parameters.audit_logs
 }
 
+source_path[{"docdb_parameter_group_audit_logs": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
+    not resource.Properties.Parameters.audit_logs
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Parameters", "audit_logs"]
+        ],
+    }
+}
+
 aws_issue["docdb_parameter_group_audit_logs"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
     lower(resource.Properties.Parameters.audit_logs) != "enabled"
+}
+
+source_path[{"docdb_parameter_group_audit_logs": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::docdb::dbclusterparametergroup"
+    lower(resource.Properties.Parameters.audit_logs) != "enabled"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Parameters", "audit_logs"]
+        ],
+    }
 }
 
 docdb_parameter_group_audit_logs {
@@ -1226,10 +1772,32 @@ aws_issue["athena_encryption_disabling_prevent"] {
     not resource.Properties.WorkGroupConfiguration.EnforceWorkGroupConfiguration
 }
 
+source_path[{"athena_encryption_disabling_prevent": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::athena::workgroup"
+    not resource.Properties.WorkGroupConfiguration.EnforceWorkGroupConfiguration
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "WorkGroupConfiguration", "EnforceWorkGroupConfiguration"]
+        ],
+    }
+}
+
 aws_issue["athena_encryption_disabling_prevent"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::athena::workgroup"
     lower(resource.Properties.WorkGroupConfiguration.EnforceWorkGroupConfiguration) == "false"
+}
+
+source_path[{"athena_encryption_disabling_prevent": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::athena::workgroup"
+    lower(resource.Properties.WorkGroupConfiguration.EnforceWorkGroupConfiguration) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "WorkGroupConfiguration", "EnforceWorkGroupConfiguration"]
+        ],
+    }
 }
 
 athena_encryption_disabling_prevent {
@@ -1271,10 +1839,32 @@ aws_issue["timestream_database_encryption"] {
     not resource.Properties.KmsKeyId
 }
 
+source_path[{"timestream_database_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::timestream::database"
+    not resource.Properties.KmsKeyId
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsKeyId"]
+        ],
+    }
+}
+
 aws_issue["timestream_database_encryption"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::timestream::database"
     count(resource.Properties.KmsKeyId) == 0
+}
+
+source_path[{"timestream_database_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::timestream::database"
+    count(resource.Properties.KmsKeyId) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsKeyId"]
+        ],
+    }
 }
 
 aws_issue["timestream_database_encryption"] {
@@ -1322,10 +1912,32 @@ aws_issue["neptune_cluster_logs"] {
     not resource.Properties.EnableCloudwatchLogsExports
 }
 
+source_path[{"neptune_cluster_logs": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::neptune::dbcluster"
+    not resource.Properties.EnableCloudwatchLogsExports
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EnableCloudwatchLogsExports"]
+        ],
+    }
+}
+
 aws_issue["neptune_cluster_logs"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::neptune::dbcluster"
     count(resource.Properties.EnableCloudwatchLogsExports) == 0
+}
+
+source_path[{"neptune_cluster_logs": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::neptune::dbcluster"
+    count(resource.Properties.EnableCloudwatchLogsExports) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EnableCloudwatchLogsExports"]
+        ],
+    }
 }
 
 neptune_cluster_logs {
@@ -1366,10 +1978,32 @@ aws_issue["dynamodb_encrypt"] {
     lower(resource.Properties.SSESpecification.SSEEnabled) != "true"
 }
 
+source_path[{"dynamodb_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::dynamodb::table"
+    lower(resource.Properties.SSESpecification.SSEEnabled) != "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SSESpecification", "SSEEnabled"]
+        ],
+    }
+}
+
 aws_bool_issue["dynamodb_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::dynamodb::table"
     not resource.Properties.SSESpecification.SSEEnabled
+}
+
+source_path[{"dynamodb_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::dynamodb::table"
+    not resource.Properties.SSESpecification.SSEEnabled
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SSESpecification", "SSEEnabled"]
+        ],
+    }
 }
 
 dynamodb_encrypt {
@@ -1417,10 +2051,32 @@ aws_issue["dynamodb_PITR_enable"] {
     lower(resource.Properties.PointInTimeRecoverySpecification.PointInTimeRecoveryEnabled) != "true"
 }
 
+source_path[{"dynamodb_PITR_enable": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::dynamodb::table"
+    lower(resource.Properties.PointInTimeRecoverySpecification.PointInTimeRecoveryEnabled) != "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PointInTimeRecoverySpecification", "PointInTimeRecoveryEnabled"]
+        ],
+    }
+}
+
 aws_bool_issue["dynamodb_PITR_enable"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::dynamodb::table"
     not resource.Properties.PointInTimeRecoverySpecification.PointInTimeRecoveryEnabled
+}
+
+source_path[{"dynamodb_PITR_enable": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::dynamodb::table"
+    not resource.Properties.PointInTimeRecoverySpecification.PointInTimeRecoveryEnabled
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PointInTimeRecoverySpecification", "PointInTimeRecoveryEnabled"]
+        ],
+    }
 }
 
 dynamodb_PITR_enable {
@@ -1467,10 +2123,32 @@ aws_issue["cache_failover"] {
     lower(resource.Properties.AutomaticFailoverEnabled) == "false"
 }
 
+source_path[{"cache_failover": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
+    lower(resource.Properties.AutomaticFailoverEnabled) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AutomaticFailoverEnabled"]
+        ],
+    }
+}
+
 aws_bool_issue["cache_failover"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticache::replicationgroup"
     resource.Properties.AutomaticFailoverEnabled == false
+}
+
+source_path[{"cache_failover": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
+    resource.Properties.AutomaticFailoverEnabled == false
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AutomaticFailoverEnabled"]
+        ],
+    }
 }
 
 cache_failover {
@@ -1517,10 +2195,32 @@ aws_attribute_absence["cache_redis_auth"] {
     not resource.Properties.AuthToken
 }
 
+source_path[{"cache_redis_auth": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
+    not resource.Properties.AuthToken
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AuthToken"]
+        ],
+    }
+}
+
 aws_issue["cache_redis_auth"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticache::replicationgroup"
     count(resource.Properties.AuthToken) == 0
+}
+
+source_path[{"cache_redis_auth": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
+    count(resource.Properties.AuthToken) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AuthToken"]
+        ],
+    }
 }
 
 aws_issue["cache_redis_auth"] {
@@ -1529,10 +2229,32 @@ aws_issue["cache_redis_auth"] {
     lower(resource.Properties.TransitEncryptionEnabled) == "false"
 }
 
+source_path[{"cache_redis_auth": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
+    lower(resource.Properties.TransitEncryptionEnabled) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "TransitEncryptionEnabled"]
+        ],
+    }
+}
+
 aws_bool_issue["cache_redis_auth"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticache::replicationgroup"
     not resource.Properties.TransitEncryptionEnabled
+}
+
+source_path[{"cache_redis_auth": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
+    not resource.Properties.TransitEncryptionEnabled
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "TransitEncryptionEnabled"]
+        ],
+    }
 }
 
 cache_redis_auth {
@@ -1588,10 +2310,32 @@ aws_issue["cache_redis_encrypt"] {
     lower(resource.Properties.AtRestEncryptionEnabled) == "false"
 }
 
+source_path[{"cache_redis_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
+    lower(resource.Properties.AtRestEncryptionEnabled) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AtRestEncryptionEnabled"]
+        ],
+    }
+}
+
 aws_bool_issue["cache_redis_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticache::replicationgroup"
     not resource.Properties.AtRestEncryptionEnabled
+}
+
+source_path[{"cache_redis_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
+    not resource.Properties.AtRestEncryptionEnabled
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AtRestEncryptionEnabled"]
+        ],
+    }
 }
 
 cache_redis_encrypt {
@@ -1638,10 +2382,32 @@ aws_issue["cache_encrypt"] {
     lower(resource.Properties.TransitEncryptionEnabled) == "false"
 }
 
+source_path[{"cache_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
+    lower(resource.Properties.TransitEncryptionEnabled) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "TransitEncryptionEnabled"]
+        ],
+    }
+}
+
 aws_bool_issue["cache_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticache::replicationgroup"
     not resource.Properties.TransitEncryptionEnabled
+}
+
+source_path[{"cache_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
+    not resource.Properties.TransitEncryptionEnabled
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "TransitEncryptionEnabled"]
+        ],
+    }
 }
 
 cache_encrypt {
@@ -1690,10 +2456,32 @@ aws_issue["cache_ksm_key"] {
     not resource.Properties.KmsKeyId
 }
 
+source_path[{"cache_ksm_key": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
+    not resource.Properties.KmsKeyId
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsKeyId"]
+        ],
+    }
+}
+
 aws_issue["cache_ksm_key"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticache::replicationgroup"
     not startswith(resource.Properties.KmsKeyId, "arn:")
+}
+
+source_path[{"cache_ksm_key": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
+    not startswith(resource.Properties.KmsKeyId, "arn:")
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsKeyId"]
+        ],
+    }
 }
 
 cache_ksm_key {
@@ -1734,10 +2522,32 @@ aws_issue["cache_default_sg"] {
     not resource.Properties.CacheSecurityGroupNames
 }
 
+source_path[{"cache_default_sg": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
+    not resource.Properties.CacheSecurityGroupNames
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CacheSecurityGroupNames"]
+        ],
+    }
+}
+
 aws_issue["cache_default_sg"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticache::replicationgroup"
     count(resource.Properties.CacheSecurityGroupNames) == 0
+}
+
+source_path[{"cache_default_sg": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticache::replicationgroup"
+    count(resource.Properties.CacheSecurityGroupNames) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CacheSecurityGroupNames"]
+        ],
+    }
 }
 
 aws_issue["cache_default_sg"] {
@@ -1786,11 +2596,35 @@ aws_issue["dms_endpoint"] {
     lower(resource.Properties.SslMode) == "none"
 }
 
+source_path[{"dms_endpoint": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::dms::endpoint"
+    lower(resource.Properties.EngineName) != "s3"
+    lower(resource.Properties.SslMode) == "none"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SslMode"]
+        ],
+    }
+}
+
 aws_issue["dms_endpoint"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::dms::endpoint"
     lower(resource.Properties.EngineName) != "s3"
     not resource.Properties.SslMode
+}
+
+source_path[{"dms_endpoint": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::dms::endpoint"
+    lower(resource.Properties.EngineName) != "s3"
+    not resource.Properties.SslMode
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SslMode"]
+        ],
+    }
 }
 
 dms_endpoint {
@@ -1831,10 +2665,32 @@ aws_issue["dms_public_access"] {
     lower(resource.Properties.PubliclyAccessible) != "false"
 }
 
+source_path[{"dms_public_access": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::dms::replicationinstance"
+    lower(resource.Properties.PubliclyAccessible) != "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PubliclyAccessible"]
+        ],
+    }
+}
+
 aws_bool_issue["dms_public_access"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::dms::replicationinstance"
     resource.Properties.PubliclyAccessible == true
+}
+
+source_path[{"dms_public_access": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::dms::replicationinstance"
+    resource.Properties.PubliclyAccessible == true
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PubliclyAccessible"]
+        ],
+    }
 }
 
 dms_public_access {

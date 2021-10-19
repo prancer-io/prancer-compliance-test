@@ -17,6 +17,20 @@ aws_issue["acl_all_icmp_ipv4"] {
     lower(resource.Properties.RuleAction) == "allow"
 }
 
+source_path[{"ec2_monitoring": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::networkaclentry"
+    lower(resource.Properties.Egress) != "true"
+    to_number(resource.Properties.Protocol) == 1
+    resource.Properties.CidrBlock == "0.0.0.0/0"
+    lower(resource.Properties.RuleAction) == "allow"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CidrBlock"]
+        ],
+    }
+}
+
 aws_bool_issue["acl_all_icmp_ipv4"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::networkaclentry"

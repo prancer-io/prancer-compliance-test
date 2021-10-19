@@ -14,10 +14,32 @@ aws_issue["eks_multiple_sg"] {
     not resource.Properties.ResourcesVpcConfig.SecurityGroupIds
 }
 
+source_path[{"eks_multiple_sg": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    not resource.Properties.ResourcesVpcConfig.SecurityGroupIds
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ResourcesVpcConfig", "SecurityGroupIds"]
+        ],
+    }
+}
+
 aws_issue["eks_multiple_sg"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::eks::cluster"
     count(resource.Properties.ResourcesVpcConfig.SecurityGroupIds) > 1
+}
+
+source_path[{"eks_multiple_sg": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    count(resource.Properties.ResourcesVpcConfig.SecurityGroupIds) > 1
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ResourcesVpcConfig", "SecurityGroupIds"]
+        ],
+    }
 }
 
 eks_multiple_sg {
@@ -57,6 +79,16 @@ aws_issue["eks_version"] {
     startswith(lower(resource.Properties.Version), "1.9.")
 }
 
+source_path[{"eks_version": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    startswith(lower(resource.Properties.Version), "1.9.")
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Version"]
+        ],
+    }
+}
 
 eks_version {
     lower(input.Resources[i].Type) == "aws::eks::cluster"
@@ -92,17 +124,40 @@ default eks_encryption_resources = null
 aws_issue["eks_encryption_resources"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::eks::cluster"
-    EncryptionConfig := resource.Properties.EncryptionConfig[_]
+    EncryptionConfig := resource.Properties.EncryptionConfig[j]
     not EncryptionConfig.Resources
+}
+
+source_path[{"eks_encryption_resources": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    EncryptionConfig := resource.Properties.EncryptionConfig[j]
+    not EncryptionConfig.Resources
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionConfig", j, "Resources"]
+        ],
+    }
 }
 
 aws_issue["eks_encryption_resources"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::eks::cluster"
-    EncryptionConfig := resource.Properties.EncryptionConfig[_]
+    EncryptionConfig := resource.Properties.EncryptionConfig[j]
     count(EncryptionConfig.Resources) == 0
 }
 
+source_path[{"eks_encryption_resources": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    EncryptionConfig := resource.Properties.EncryptionConfig[j]
+    count(EncryptionConfig.Resources) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionConfig", j, "Resources"]
+        ],
+    }
+}
 
 eks_encryption_resources {
     lower(input.Resources[i].Type) == "aws::eks::cluster"
@@ -139,17 +194,40 @@ default eks_encryption_kms = null
 aws_issue["eks_encryption_kms"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::eks::cluster"
-    EncryptionConfig := resource.Properties.EncryptionConfig[_]
+    EncryptionConfig := resource.Properties.EncryptionConfig[j]
     not EncryptionConfig.Provider.keyArn
+}
+
+source_path[{"eks_encryption_resources": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    EncryptionConfig := resource.Properties.EncryptionConfig[j]
+    not EncryptionConfig.Provider.keyArn
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionConfig", j, "Provider", "keyArn"]
+        ],
+    }
 }
 
 aws_issue["eks_encryption_kms"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::eks::cluster"
-    EncryptionConfig := resource.Properties.EncryptionConfig[_]
+    EncryptionConfig := resource.Properties.EncryptionConfig[j]
     count(EncryptionConfig.Provider.keyArn) == 0
 }
 
+source_path[{"eks_encryption_resources": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    EncryptionConfig := resource.Properties.EncryptionConfig[j]
+    count(EncryptionConfig.Provider.keyArn) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionConfig", j, "Provider", "keyArn"]
+        ],
+    }
+}
 
 eks_encryption_kms {
     lower(input.Resources[i].Type) == "aws::eks::cluster"
