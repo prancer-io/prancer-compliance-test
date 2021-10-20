@@ -1,10 +1,8 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html
 
 #
-# PR-AWS-0133-TRF
+# PR-AWS-TRF-RSH-001
 #
 
 default redshift_encrypt_key = null
@@ -61,7 +59,7 @@ redshift_encrypt_key_err = "AWS Redshift Cluster not encrypted using Customer Ma
 }
 
 redshift_encrypt_key_metadata := {
-    "Policy Code": "PR-AWS-0133-TRF",
+    "Policy Code": "PR-AWS-TRF-RSH-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -73,7 +71,7 @@ redshift_encrypt_key_metadata := {
 }
 
 #
-# PR-AWS-0134-TRF
+# PR-AWS-TRF-RSH-002
 #
 
 default redshift_public = null
@@ -111,7 +109,7 @@ redshift_public_err = "AWS Redshift clusters should not be publicly accessible" 
 }
 
 redshift_public_metadata := {
-    "Policy Code": "PR-AWS-0134-TRF",
+    "Policy Code": "PR-AWS-TRF-RSH-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -123,7 +121,7 @@ redshift_public_metadata := {
 }
 
 #
-# PR-AWS-0135-TRF
+# PR-AWS-TRF-RSH-007
 #
 
 default redshift_audit = null
@@ -175,7 +173,7 @@ redshift_audit_err = "AWS Redshift database does not have audit logging enabled"
 }
 
 redshift_audit_metadata := {
-    "Policy Code": "PR-AWS-0135-TRF",
+    "Policy Code": "PR-AWS-TRF-RSH-007",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -186,9 +184,8 @@ redshift_audit_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
 }
 
-
 #
-# PR-AWS-0136-TRF
+# PR-AWS-TRF-RSH-003
 #
 
 default redshift_require_ssl = null
@@ -249,7 +246,7 @@ redshift_require_ssl_err = "AWS Redshift does not have require_ssl configured" {
 }
 
 redshift_require_ssl_metadata := {
-    "Policy Code": "PR-AWS-0136-TRF",
+    "Policy Code": "PR-AWS-TRF-RSH-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -261,7 +258,7 @@ redshift_require_ssl_metadata := {
 }
 
 #
-# PR-AWS-0137-TRF
+# PR-AWS-TRF-RSH-004
 #
 
 default redshift_encrypt = null
@@ -299,7 +296,7 @@ redshift_encrypt_err = "AWS Redshift instances are not encrypted" {
 }
 
 redshift_encrypt_metadata := {
-    "Policy Code": "PR-AWS-0137-TRF",
+    "Policy Code": "PR-AWS-TRF-RSH-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -311,7 +308,7 @@ redshift_encrypt_metadata := {
 }
 
 #
-# PR-AWS-0261-TRF
+# PR-AWS-TRF-RSH-005
 #
 
 default redshift_allow_version_upgrade = null
@@ -351,7 +348,7 @@ redshift_allow_version_upgrade_err = "Ensure Redshift cluster allow version upgr
 }
 
 redshift_allow_version_upgrade_metadata := {
-    "Policy Code": "PR-AWS-0261-TRF",
+    "Policy Code": "PR-AWS-TRF-RSH-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",

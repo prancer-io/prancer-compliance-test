@@ -1,9 +1,8 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html
 
 #
-# PR-AWS-0105-TRF
+# PR-AWS-TRF-LMD-001
 #
 
 default lambda_env = null
@@ -61,7 +60,7 @@ lambda_env_err = "AWS Lambda environment Variables not encrypted at-rest using C
 }
 
 lambda_env_metadata := {
-    "Policy Code": "PR-AWS-0105-TRF",
+    "Policy Code": "PR-AWS-TRF-LMD-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -73,7 +72,7 @@ lambda_env_metadata := {
 }
 
 #
-# PR-AWS-0106-TRF
+# PR-AWS-TRF-LMD-002
 #
 
 default lambda_vpc = null
@@ -118,7 +117,7 @@ lambda_vpc_err = "AWS Lambda Function is not assigned to access within VPC" {
 }
 
 lambda_vpc_metadata := {
-    "Policy Code": "PR-AWS-0106-TRF",
+    "Policy Code": "PR-AWS-TRF-LMD-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -130,7 +129,7 @@ lambda_vpc_metadata := {
 }
 
 #
-# PR-AWS-0107-TRF
+# PR-AWS-TRF-LMD-003
 #
 
 default lambda_tracing = null
@@ -182,7 +181,7 @@ lambda_tracing_err = "AWS Lambda functions with tracing not enabled" {
 }
 
 lambda_tracing_metadata := {
-    "Policy Code": "PR-AWS-0107-TRF",
+    "Policy Code": "PR-AWS-TRF-LMD-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",

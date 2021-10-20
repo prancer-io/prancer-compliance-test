@@ -1,8 +1,8 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html
+
 #
-# PR-AWS-0235-TRF
+# PR-AWS-TRF-KMS-001
 #
 default kms_key_rotation = null
 
@@ -40,7 +40,7 @@ kms_key_rotation_err = "AWS Customer Master Key (CMK) rotation is not enabled" {
 
 
 kms_key_rotation_metadata := {
-    "Policy Code": "PR-AWS-0235-TRF",
+    "Policy Code": "PR-AWS-TRF-KMS-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -51,9 +51,8 @@ kms_key_rotation_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enablekeyrotation"
 }
 
-
 #
-# PR-AWS-0236-TRF
+# PR-AWS-TRF-KMS-002
 #
 default kms_key_state = null
 
@@ -91,7 +90,7 @@ kms_key_state_err = "AWS KMS Customer Managed Key not in use" {
 
 
 kms_key_state_metadata := {
-    "Policy Code": "PR-AWS-0236-TRF",
+    "Policy Code": "PR-AWS-TRF-KMS-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -101,4 +100,3 @@ kms_key_state_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enabled"
 }
-

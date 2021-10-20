@@ -1,6 +1,5 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html
 
 ports = [
     "135", "137", "138", "1433", "1434", "20", "21", "22", "23", "25", "3306", "3389", "4333",
@@ -179,7 +178,178 @@ aws_issue["proto_all"] {
 
 
 #
-# PR-AWS-0175-TRF
+# PR-AWS-TRF-SG-030
+#
+
+default db_exposed = null
+
+db_ports := [
+    1433, 1521, 3306, 5000, 5432, 5984, 6379, 6380, 8080, 9042, 11211, 27017, 28015, 29015, 50000
+]
+
+aws_issue["db_exposed"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_security_group"
+    ingress := resource.properties.ingress[_]
+    cidr_blocks := ingress.cidr_blocks[_]
+    cidr_blocks == "0.0.0.0/0"
+    port := db_ports[_]
+    to_number(ingress.from_port) <= port
+    to_number(ingress.to_port) >= port
+}
+
+aws_issue["db_exposed"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_security_group"
+    ingress := resource.properties.ingress[_]
+    ipv6_cidr_blocks := ingress.ipv6_cidr_blocks[_]
+    ipv6_cidr_blocks="::/0"
+    port := db_ports[_]
+    to_number(ingress.from_port) <= port
+    to_number(ingress.to_port) >= port
+}
+
+db_exposed {
+    lower(input.resources[i].type) == "aws_security_group"
+    not aws_issue["db_exposed"]
+}
+
+db_exposed = false {
+    aws_issue["db_exposed"]
+}
+
+db_exposed_err = "Publicly exposed DB Ports" {
+    aws_issue["db_exposed"]
+}
+
+db_exposed_metadata := {
+    "Policy Code": "PR-AWS-TRF-SG-030",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Publicly exposed DB Ports",
+    "Policy Description": "DB Servers contain sensitive data and should not be exposed to any direct traffic from internet. This policy checks for the network traffic from internet hitting the DB Servers on their default ports. The DB servers monitored on the default ports are : Microsoft SQL Server (1433), Oracle (1521), MySQL (3306), Sybase (5000), Postgresql (5432), CouchDB (5984), Redis (6379, 6380), RethinkDB (8080,28015, 29015), CassandraDB (9042), Memcached (11211), MongoDB (27017), DB2 (50000).",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html"
+}
+
+#
+# PR-AWS-TRF-SG-031
+#
+
+default bitcoin_ports = null
+
+bc_ports := [
+    8332, 8333
+]
+
+aws_issue["bitcoin_ports"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_security_group"
+    ingress := resource.properties.ingress[_]
+    cidr_blocks := ingress.cidr_blocks[_]
+    cidr_blocks == "0.0.0.0/0"
+    port := db_ports[_]
+    to_number(ingress.from_port) <= port
+    to_number(ingress.to_port) >= port
+}
+
+aws_issue["bitcoin_ports"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_security_group"
+    ingress := resource.properties.ingress[_]
+    ipv6_cidr_blocks := ingress.ipv6_cidr_blocks[_]
+    ipv6_cidr_blocks="::/0"
+    port := db_ports[_]
+    to_number(ingress.from_port) <= port
+    to_number(ingress.to_port) >= port
+}
+
+bitcoin_ports {
+    lower(input.resources[i].type) == "aws_security_group"
+    not aws_issue["bitcoin_ports"]
+}
+
+bitcoin_ports = false {
+    aws_issue["bitcoin_ports"]
+}
+
+bitcoin_ports_err = "Instance is communicating with ports known to mine Bitcoin" {
+    aws_issue["bitcoin_ports"]
+}
+
+bitcoin_ports_metadata := {
+    "Policy Code": "PR-AWS-gID2-TRF",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Instance is communicating with ports known to mine Bitcoin",
+    "Policy Description": "Identifies traffic from internal workloads to internet IPs on ports 8332,8333 that are known to mine Bitcoins. Unless this traffic is part of authorized applications and processes, your instances may have been compromised.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html"
+}
+
+#
+# PR-AWS-TRF-SG-032
+#
+
+default ethereum_ports = null
+
+eth_ports := [
+    8545, 30303
+]
+
+aws_issue["ethereum_ports"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_security_group"
+    ingress := resource.properties.ingress[_]
+    cidr_blocks := ingress.cidr_blocks[_]
+    cidr_blocks == "0.0.0.0/0"
+    port := db_ports[_]
+    to_number(ingress.from_port) <= port
+    to_number(ingress.to_port) >= port
+}
+
+aws_issue["ethereum_ports"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_security_group"
+    ingress := resource.properties.ingress[_]
+    ipv6_cidr_blocks := ingress.ipv6_cidr_blocks[_]
+    ipv6_cidr_blocks="::/0"
+    port := db_ports[_]
+    to_number(ingress.from_port) <= port
+    to_number(ingress.to_port) >= port
+}
+
+ethereum_ports {
+    lower(input.resources[i].type) == "aws_security_group"
+    not aws_issue["ethereum_ports"]
+}
+
+ethereum_ports = false {
+    aws_issue["ethereum_ports"]
+}
+
+ethereum_ports_err = "Instance is communicating with ports known to mine Ethereum" {
+    aws_issue["ethereum_ports"]
+}
+
+ethereum_ports_metadata := {
+    "Policy Code": "PR-AWS-TRF-SG-032",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Instance is communicating with ports known to mine Ethereum",
+    "Policy Description": "Ethereum Identifies traffic from internal workloads to internet IPs on ports 8545,30303 that are known to mine Ethereum. Unless this traffic is part of authorized applications and processes, your instances may have been compromised.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html"
+}
+
+#
+# PR-AWS-TRF-SG-001
 #
 
 default port_135 = null
@@ -194,11 +364,11 @@ port_135 = false {
 }
 
 port_135_err = "AWS Security Groups allow internet traffic from internet to Windows RPC port (135)" {
-        aws_issue["135"]
+    aws_issue["135"]
 }
 
 port_135_metadata := {
-    "Policy Code": "PR-AWS-0175-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -210,7 +380,7 @@ port_135_metadata := {
 }
 
 #
-# PR-AWS-0165-TRF
+# PR-AWS-TRF-SG-002
 #
 
 default port_137 = null
@@ -225,11 +395,11 @@ port_137 = false {
 }
 
 port_137_err = "AWS Security Groups allow internet traffic from internet to NetBIOS port (137)" {
-        aws_issue["137"]
+    aws_issue["137"]
 }
 
 port_137_metadata := {
-    "Policy Code": "PR-AWS-0165-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -241,7 +411,7 @@ port_137_metadata := {
 }
 
 #
-# PR-AWS-0166-TRF
+# PR-AWS-TRF-SG-003
 #
 
 default port_138 = null
@@ -256,11 +426,11 @@ port_138 = false {
 }
 
 port_138_err = "AWS Security Groups allow internet traffic from internet to NetBIOS port (138)" {
-        aws_issue["138"]
+    aws_issue["138"]
 }
 
 port_138_metadata := {
-    "Policy Code": "PR-AWS-0166-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -272,7 +442,7 @@ port_138_metadata := {
 }
 
 #
-# PR-AWS-0170-TRF
+# PR-AWS-TRF-SG-004
 #
 
 default port_1433 = null
@@ -291,7 +461,7 @@ port_1433_err = "AWS Security Groups allow internet traffic from internet to SQL
 }
 
 port_1433_metadata := {
-    "Policy Code": "PR-AWS-0170-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -303,7 +473,7 @@ port_1433_metadata := {
 }
 
 #
-# PR-AWS-0171-TRF
+# PR-AWS-TRF-SG-005
 #
 
 default port_1434 = null
@@ -322,7 +492,7 @@ port_1434_err = "AWS Security Groups allow internet traffic from internet to SQL
 }
 
 port_1434_metadata := {
-    "Policy Code": "PR-AWS-0171-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -334,7 +504,7 @@ port_1434_metadata := {
 }
 
 #
-# PR-AWS-0162-TRF
+# PR-AWS-TRF-SG-006
 #
 
 default port_20 = null
@@ -349,11 +519,11 @@ port_20 = false {
 }
 
 port_20_err = "AWS Security Groups allow internet traffic from internet to FTP-Data port (20)" {
-        aws_issue["20"]
+    aws_issue["20"]
 }
 
 port_20_metadata := {
-    "Policy Code": "PR-AWS-0162-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-006",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -365,7 +535,7 @@ port_20_metadata := {
 }
 
 #
-# PR-AWS-0161-TRF
+# PR-AWS-TRF-SG-007
 #
 
 default port_21 = null
@@ -380,11 +550,11 @@ port_21 = false {
 }
 
 port_21_err = "AWS Security Groups allow internet traffic from internet to FTP port (21)" {
-        aws_issue["21"]
+    aws_issue["21"]
 }
 
 port_21_metadata := {
-    "Policy Code": "PR-AWS-0161-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-007",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -396,7 +566,7 @@ port_21_metadata := {
 }
 
 #
-# PR-AWS-0176-TRF
+# PR-AWS-TRF-SG-008
 #
 
 default port_22 = null
@@ -411,11 +581,11 @@ port_22 = false {
 }
 
 port_22_err = "AWS Security Groups allow internet traffic to SSH port (22)" {
-        aws_issue["22"]
+    aws_issue["22"]
 }
 
 port_22_metadata := {
-    "Policy Code": "PR-AWS-0176-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-008",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -427,7 +597,7 @@ port_22_metadata := {
 }
 
 #
-# PR-AWS-0172-TRF
+# PR-AWS-TRF-SG-009
 #
 
 default port_23 = null
@@ -442,11 +612,11 @@ port_23 = false {
 }
 
 port_23_err = "AWS Security Groups allow internet traffic from internet to Telnet port (23)" {
-        aws_issue["23"]
+    aws_issue["23"]
 }
 
 port_23_metadata := {
-    "Policy Code": "PR-AWS-0172-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-009",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -458,7 +628,7 @@ port_23_metadata := {
 }
 
 #
-# PR-AWS-0169-TRF
+# PR-AWS-TRF-SG-010
 #
 
 default port_25 = null
@@ -473,11 +643,11 @@ port_25 = false {
 }
 
 port_25_err = "AWS Security Groups allow internet traffic from internet to SMTP port (25)" {
-        aws_issue["25"]
+    aws_issue["25"]
 }
 
 port_25_metadata := {
-    "Policy Code": "PR-AWS-0169-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-010",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -489,7 +659,7 @@ port_25_metadata := {
 }
 
 #
-# PR-AWS-0164-TRF
+# PR-AWS-TRF-SG-011
 #
 
 default port_3306 = null
@@ -508,7 +678,7 @@ port_3306_err = "AWS Security Groups allow internet traffic from internet to MYS
 }
 
 port_3306_metadata := {
-    "Policy Code": "PR-AWS-0164-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-011",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -520,7 +690,7 @@ port_3306_metadata := {
 }
 
 #
-# PR-AWS-0168-TRF
+# PR-AWS-TRF-SG-012
 #
 
 default port_3389 = null
@@ -539,7 +709,7 @@ port_3389_err = "AWS Security Groups allow internet traffic from internet to RDP
 }
 
 port_3389_metadata := {
-    "Policy Code": "PR-AWS-0168-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-012",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -551,7 +721,7 @@ port_3389_metadata := {
 }
 
 #
-# PR-AWS-0163-TRF
+# PR-AWS-TRF-SG-013
 #
 
 default port_4333 = null
@@ -570,7 +740,7 @@ port_4333_err = "AWS Security Groups allow internet traffic from internet to MSQ
 }
 
 port_4333_metadata := {
-    "Policy Code": "PR-AWS-0163-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-013",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -582,7 +752,7 @@ port_4333_metadata := {
 }
 
 #
-# PR-AWS-0159-TRF
+# PR-AWS-TRF-SG-014
 #
 
 default port_445 = null
@@ -597,11 +767,11 @@ port_445 = false {
 }
 
 port_445_err = "AWS Security Groups allow internet traffic from internet to CIFS port (445)" {
-        aws_issue["445"]
+    aws_issue["445"]
 }
 
 port_445_metadata := {
-    "Policy Code": "PR-AWS-0159-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-014",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -613,7 +783,7 @@ port_445_metadata := {
 }
 
 #
-# PR-AWS-0160-TRF
+# PR-AWS-TRF-SG-015
 #
 
 default port_53 = null
@@ -628,11 +798,11 @@ port_53 = false {
 }
 
 port_53_err = "AWS Security Groups allow internet traffic from internet to DNS port (53)" {
-        aws_issue["53"]
+    aws_issue["53"]
 }
 
 port_53_metadata := {
-    "Policy Code": "PR-AWS-0160-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-015",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -644,7 +814,7 @@ port_53_metadata := {
 }
 
 #
-# PR-AWS-0167-TRF
+# PR-AWS-TRF-SG-016
 #
 
 default port_5432 = null
@@ -663,7 +833,7 @@ port_5432_err = "AWS Security Groups allow internet traffic from internet to Pos
 }
 
 port_5432_metadata := {
-    "Policy Code": "PR-AWS-0167-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-016",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -675,7 +845,7 @@ port_5432_metadata := {
 }
 
 #
-# PR-AWS-0173-TRF
+# PR-AWS-TRF-SG-017
 #
 
 default port_5500 = null
@@ -694,7 +864,7 @@ port_5500_err = "AWS Security Groups allow internet traffic from internet to VNC
 }
 
 port_5500_metadata := {
-    "Policy Code": "PR-AWS-0173-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-017",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -706,7 +876,7 @@ port_5500_metadata := {
 }
 
 #
-# PR-AWS-0174-TRF
+# PR-AWS-TRF-SG-018
 #
 
 default port_5900 = null
@@ -725,7 +895,7 @@ port_5900_err = "AWS Security Groups allow internet traffic from internet to VNC
 }
 
 port_5900_metadata := {
-    "Policy Code": "PR-AWS-0174-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-018",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -737,7 +907,7 @@ port_5900_metadata := {
 }
 
 #
-# PR-AWS-0035-TRF
+# PR-AWS-TRF-SG-019
 #
 
 default port_all = null
@@ -756,7 +926,7 @@ port_all_err = "AWS Default Security Group does not restrict all traffic" {
 }
 
 port_all_metadata := {
-    "Policy Code": "PR-AWS-0035-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-019",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -768,7 +938,7 @@ port_all_metadata := {
 }
 
 #
-# PR-AWS-0178-TRF
+# PR-AWS-TRF-SG-020
 #
 
 default port_proto_all = null
@@ -783,11 +953,11 @@ port_proto_all = false {
 }
 
 port_proto_all_err = "AWS Security Groups with Inbound rule overly permissive to All Traffic" {
-        aws_issue["proto_all"]
+    aws_issue["proto_all"]
 }
 
 port_proto_all_metadata := {
-    "Policy Code": "PR-AWS-0178-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-020",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -799,7 +969,7 @@ port_proto_all_metadata := {
 }
 
 #
-# PR-AWS-0251-TRF
+# PR-AWS-TRF-SG-021
 #
 
 default port_69 = null
@@ -818,7 +988,7 @@ port_69_err = "AWS Security Groups allow internet traffic from internet to Trivi
 }
 
 port_69_metadata := {
-    "Policy Code": "PR-AWS-0251-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-021",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -829,9 +999,8 @@ port_69_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html"
 }
 
-
 #
-# PR-AWS-0260-TRF
+# PR-AWS-TRF-SG-022
 #
 
 default sg_tag = null
@@ -862,7 +1031,7 @@ sg_tag_err = "Ensure AWS resources that support tags have Tags" {
 }
 
 sg_tag_metadata := {
-    "Policy Code": "PR-AWS-0260-TRF",
+    "Policy Code": "PR-AWS-TRF-SG-022",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
