@@ -3,25 +3,47 @@ package rule
 # https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters
 
 #
-# PR-GCP-0030-GDF
+# PR-GCP-GDF-CLT-001
 #
 
 default k8s_svc_account = null
 
 gc_attribute_absence["k8s_svc_account"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
-    count([c | r = resource.properties.nodePools[_].config; c := 1]) == 0
+    count([c | r = resource.properties.nodePools[j].config; c := 1]) == 0
+}
+
+source_path[{"k8s_svc_account": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    count([c | r = resource.properties.nodePools[j].config; c := 1]) == 0
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "nodePools"]
+        ],
+    }
 }
 
 gc_issue["k8s_svc_account"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
-    resource.properties.nodePools[_].config.serviceAccount == "default"
+    resource.properties.nodePools[j].config.serviceAccount == "default"
+}
+
+source_path[{"k8s_svc_account": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    resource.properties.nodePools[j].config.serviceAccount == "default"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "nodePools", j, "config", "serviceAccount"]
+        ],
+    }
 }
 
 k8s_svc_account {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_svc_account"]
     not gc_attribute_absence["k8s_svc_account"]
 }
@@ -43,7 +65,7 @@ k8s_svc_account_miss_err = "Kubernetes Engine Cluster attribute nodePools config
 }
 
 k8s_svc_account_metadata := {
-    "Policy Code": "PR-GCP-0030-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-001",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -55,25 +77,47 @@ k8s_svc_account_metadata := {
 }
 
 #
-# PR-GCP-0031-GDF
+# PR-GCP-GDF-CLT-002
 #
 
 default k8s_basicauth = null
 
 gc_issue["k8s_basicauth"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     count(resource.properties.masterAuth.username) > 0
 }
 
+source_path[{"k8s_basicauth": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    count(resource.properties.masterAuth.username) > 0
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "masterAuth", "username"]
+        ],
+    }
+}
+
 gc_issue["k8s_basicauth"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     count(resource.properties.masterAuth.password) > 0
 }
 
+source_path[{"k8s_basicauth": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    count(resource.properties.masterAuth.password) > 0
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "masterAuth", "password"]
+        ],
+    }
+}
+
 k8s_basicauth {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_basicauth"]
 }
 
@@ -86,7 +130,7 @@ k8s_basicauth_err = "GCP Kubernetes Engine Clusters Basic Authentication is set 
 }
 
 k8s_basicauth_metadata := {
-    "Policy Code": "PR-GCP-0031-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-002",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -98,25 +142,47 @@ k8s_basicauth_metadata := {
 }
 
 #
-# PR-GCP-0032-GDF
+# PR-GCP-GDF-CLT-003
 #
 
 default k8s_client_cert = null
 
 gc_issue["k8s_client_cert"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.masterAuth.clientKey
 }
 
+source_path[{"k8s_client_cert": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.masterAuth.clientKey
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "masterAuth", "clientKey"]
+        ],
+    }
+}
+
 gc_issue["k8s_client_cert"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.masterAuth.clientCertificate
 }
 
+source_path[{"k8s_client_cert": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.masterAuth.clientCertificate
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "masterAuth", "clientCertificate"]
+        ],
+    }
+}
+
 k8s_client_cert {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_client_cert"]
 }
 
@@ -129,7 +195,7 @@ k8s_client_cert_err = "GCP Kubernetes Engine Clusters Client Certificate is set 
 }
 
 k8s_client_cert_metadata := {
-    "Policy Code": "PR-GCP-0032-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-003",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -141,19 +207,30 @@ k8s_client_cert_metadata := {
 }
 
 #
-# PR-GCP-0033-GDF
+# PR-GCP-GDF-CLT-004
 #
 
 default k8s_alias_ip = null
 
 gc_issue["k8s_alias_ip"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.ipAllocationPolicy.useIpAliases
 }
 
+source_path[{"k8s_alias_ip": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.ipAllocationPolicy.useIpAliases
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "ipAllocationPolicy", "useIpAliases"]
+        ],
+    }
+}
+
 k8s_alias_ip {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_alias_ip"]
 }
 
@@ -166,7 +243,7 @@ k8s_alias_ip_err = "GCP Kubernetes Engine Clusters have Alias IP disabled" {
 }
 
 k8s_alias_ip_metadata := {
-    "Policy Code": "PR-GCP-0033-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-004",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -178,19 +255,30 @@ k8s_alias_ip_metadata := {
 }
 
 #
-# PR-GCP-0034-GDF
+# PR-GCP-GDF-CLT-005
 #
 
 default k8s_alpha = null
 
 gc_issue["k8s_alpha"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     resource.properties.enableKubernetesAlpha
 }
 
+source_path[{"k8s_alpha": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    resource.properties.enableKubernetesAlpha
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "enableKubernetesAlpha"]
+        ],
+    }
+}
+
 k8s_alpha {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_alpha"]
 }
 
@@ -203,7 +291,7 @@ k8s_alpha_err = "GCP Kubernetes Engine Clusters have Alpha cluster feature enabl
 }
 
 k8s_alpha_metadata := {
-    "Policy Code": "PR-GCP-0034-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-005",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -215,19 +303,30 @@ k8s_alpha_metadata := {
 }
 
 #
-# PR-GCP-0035-GDF
+# PR-GCP-GDF-CLT-006
 #
 
 default k8s_http_lbs = null
 
 gc_issue["k8s_http_lbs"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     resource.properties.addonsConfig.httpLoadBalancing.disabled
 }
 
+source_path[{"k8s_http_lbs": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    resource.properties.addonsConfig.httpLoadBalancing.disabled
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "addonsConfig", "httpLoadBalancing", "disabled"]
+        ],
+    }
+}
+
 k8s_http_lbs {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_http_lbs"]
 }
 
@@ -240,7 +339,7 @@ k8s_http_lbs_err = "GCP Kubernetes Engine Clusters have HTTP load balancing disa
 }
 
 k8s_http_lbs_metadata := {
-    "Policy Code": "PR-GCP-0035-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-006",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -252,19 +351,30 @@ k8s_http_lbs_metadata := {
 }
 
 #
-# PR-GCP-0036-GDF
+# PR-GCP-GDF-CLT-007
 #
 
 default k8s_legacy_abac = null
 
 gc_issue["k8s_legacy_abac"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     resource.properties.legacyAbac.enabled
 }
 
+source_path[{"k8s_legacy_abac": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    resource.properties.legacyAbac.enabled
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "legacyAbac", "enabled"]
+        ],
+    }
+}
+
 k8s_legacy_abac {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_legacy_abac"]
 }
 
@@ -277,7 +387,7 @@ k8s_legacy_abac_err = "GCP Kubernetes Engine Clusters have Legacy Authorization 
 }
 
 k8s_legacy_abac_metadata := {
-    "Policy Code": "PR-GCP-0036-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-007",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -289,19 +399,30 @@ k8s_legacy_abac_metadata := {
 }
 
 #
-# PR-GCP-0037-GDF
+# PR-GCP-GDF-CLT-008
 #
 
 default k8s_master_auth_net = null
 
 gc_issue["k8s_master_auth_net"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.masterAuthorizedNetworksConfig.enabled
 }
 
+source_path[{"k8s_master_auth_net": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    resource.properties.legacyAbac.enabled
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "masterAuthorizedNetworksConfig", "enabled"]
+        ],
+    }
+}
+
 k8s_master_auth_net {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_master_auth_net"]
 }
 
@@ -314,7 +435,7 @@ k8s_master_auth_net_err = "GCP Kubernetes Engine Clusters have Master authorized
 }
 
 k8s_master_auth_net_metadata := {
-    "Policy Code": "PR-GCP-0037-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-008",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -326,19 +447,30 @@ k8s_master_auth_net_metadata := {
 }
 
 #
-# PR-GCP-0038-GDF
+# PR-GCP-GDF-CLT-009
 #
 
 default k8s_net_policy = null
 
 gc_issue["k8s_net_policy"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.networkPolicy.enabled
 }
 
+source_path[{"k8s_net_policy": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.networkPolicy.enabled
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "networkPolicy", "enabled"]
+        ],
+    }
+}
+
 k8s_net_policy {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_net_policy"]
 }
 
@@ -351,7 +483,7 @@ k8s_net_policy_err = "GCP Kubernetes Engine Clusters have Network policy disable
 }
 
 k8s_net_policy_metadata := {
-    "Policy Code": "PR-GCP-0038-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-009",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -363,25 +495,47 @@ k8s_net_policy_metadata := {
 }
 
 #
-# PR-GCP-0039-GDF
+# PR-GCP-GDF-CLT-010
 #
 
 default k8s_logging = null
 
 gc_attribute_absence["k8s_logging"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.loggingService
 }
 
+source_path[{"k8s_logging": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.loggingService
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "loggingService"]
+        ],
+    }
+}
+
 gc_issue["k8s_logging"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     lower(resource.properties.loggingService) == "none"
 }
 
+source_path[{"k8s_logging": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    lower(resource.properties.loggingService) == "none"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "loggingService"]
+        ],
+    }
+}
+
 k8s_logging {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_logging"]
     not gc_attribute_absence["k8s_logging"]
 }
@@ -403,7 +557,7 @@ k8s_logging_miss_err = "Kubernetes Engine Cluster attribute loggingService confi
 }
 
 k8s_logging_metadata := {
-    "Policy Code": "PR-GCP-0039-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-010",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -415,25 +569,47 @@ k8s_logging_metadata := {
 }
 
 #
-# PR-GCP-0040-GDF
+# PR-GCP-GDF-CLT-011
 #
 
 default k8s_monitor = null
 
 gc_attribute_absence["k8s_monitor"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.monitoringService
 }
 
+source_path[{"k8s_logging": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.monitoringService
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "monitoringService"]
+        ],
+    }
+}
+
 gc_issue["k8s_monitor"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     lower(resource.properties.monitoringService) == "none"
 }
 
+source_path[{"k8s_monitor": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    lower(resource.properties.monitoringService) == "none"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "monitoringService"]
+        ],
+    }
+}
+
 k8s_monitor {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_monitor"]
     not gc_attribute_absence["k8s_monitor"]
 }
@@ -455,7 +631,7 @@ k8s_monitor_miss_err = "Kubernetes Engine Cluster attribute monitoringService co
 }
 
 k8s_monitor_metadata := {
-    "Policy Code": "PR-GCP-0040-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-011",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -467,19 +643,30 @@ k8s_monitor_metadata := {
 }
 
 #
-# PR-GCP-0041-GDF
+# PR-GCP-GDF-CLT-012
 #
 
 default k8s_binary_auth = null
 
 gc_issue["k8s_binary_auth"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.binaryAuthorization.enabled
 }
 
+source_path[{"k8s_binary_auth": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.binaryAuthorization.enabled
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "binaryAuthorization", "enabled"]
+        ],
+    }
+}
+
 k8s_binary_auth {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_binary_auth"]
 }
 
@@ -492,7 +679,7 @@ k8s_binary_auth_err = "GCP Kubernetes Engine Clusters have binary authorization 
 }
 
 k8s_binary_auth_metadata := {
-    "Policy Code": "PR-GCP-0041-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-012",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -504,19 +691,30 @@ k8s_binary_auth_metadata := {
 }
 
 #
-# PR-GCP-0042-GDF
+# PR-GCP-GDF-CLT-013
 #
 
 default k8s_legacy_endpoint = null
 
 gc_issue["k8s_legacy_endpoint"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     resource.properties.nodeConfig.metadata["disable-legacy-endpoints"]
 }
 
+source_path[{"k8s_legacy_endpoint": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    resource.properties.nodeConfig.metadata["disable-legacy-endpoints"]
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "nodeConfig", "metadata", "disable-legacy-endpoints"]
+        ],
+    }
+}
+
 k8s_legacy_endpoint {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_legacy_endpoint"]
 }
 
@@ -529,7 +727,7 @@ k8s_legacy_endpoint_err = "GCP Kubernetes Engine Clusters have legacy compute en
 }
 
 k8s_legacy_endpoint_metadata := {
-    "Policy Code": "PR-GCP-0042-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-013",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -541,19 +739,30 @@ k8s_legacy_endpoint_metadata := {
 }
 
 #
-# PR-GCP-0043-GDF
+# PR-GCP-GDF-CLT-014
 #
 
 default k8s_pod_security = null
 
 gc_issue["k8s_pod_security"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.podSecurityPolicyConfig.enabled
 }
 
+source_path[{"k8s_pod_security": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.podSecurityPolicyConfig.enabled
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "podSecurityPolicyConfig", "enabled"]
+        ],
+    }
+}
+
 k8s_pod_security {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_pod_security"]
 }
 
@@ -566,7 +775,7 @@ k8s_pod_security_err = "GCP Kubernetes Engine Clusters have pod security policy 
 }
 
 k8s_pod_security_metadata := {
-    "Policy Code": "PR-GCP-0043-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-014",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -578,19 +787,30 @@ k8s_pod_security_metadata := {
 }
 
 #
-# PR-GCP-0045-GDF
+# PR-GCP-GDF-CLT-015
 #
 
 default k8s_egress_metering = null
 
 gc_issue["k8s_egress_metering"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.resourceUsageExportConfig.enableNetworkEgressMetering
 }
 
+source_path[{"k8s_egress_metering": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.resourceUsageExportConfig.enableNetworkEgressMetering
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "resourceUsageExportConfig", "enableNetworkEgressMetering"]
+        ],
+    }
+}
+
 k8s_egress_metering {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_egress_metering"]
 }
 
@@ -603,7 +823,7 @@ k8s_egress_metering_err = "GCP Kubernetes Engine Clusters not configured with ne
 }
 
 k8s_egress_metering_metadata := {
-    "Policy Code": "PR-GCP-0045-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-015",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -615,19 +835,30 @@ k8s_egress_metering_metadata := {
 }
 
 #
-# PR-GCP-0046-GDF
+# PR-GCP-GDF-CLT-016
 #
 
 default k8s_private = null
 
 gc_issue["k8s_private"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.privateClusterConfig
 }
 
+source_path[{"k8s_private": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.privateClusterConfig
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "privateClusterConfig"]
+        ],
+    }
+}
+
 k8s_private {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_private"]
 }
 
@@ -640,7 +871,7 @@ k8s_private_err = "GCP Kubernetes Engine Clusters not configured with private cl
 }
 
 k8s_private_metadata := {
-    "Policy Code": "PR-GCP-0046-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-016",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -652,19 +883,30 @@ k8s_private_metadata := {
 }
 
 #
-# PR-GCP-0047-GDF
+# PR-GCP-GDF-CLT-017
 #
 
 default k8s_private_node = null
 
 gc_issue["k8s_private_node"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.privateClusterConfig.enablePrivateNodes
 }
 
+source_path[{"k8s_private_node": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.privateClusterConfig.enablePrivateNodes
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "privateClusterConfig", "enablePrivateNodes"]
+        ],
+    }
+}
+
 k8s_private_node {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_private_node"]
 }
 
@@ -677,7 +919,7 @@ k8s_private_node_err = "GCP Kubernetes Engine Clusters not configured with priva
 }
 
 k8s_private_node_metadata := {
-    "Policy Code": "PR-GCP-0047-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-017",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -689,33 +931,70 @@ k8s_private_node_metadata := {
 }
 
 #
-# PR-GCP-0048-GDF
+# PR-GCP-GDF-CLT-018
 #
 
 default k8s_node_image = null
 
 gc_attribute_absence["k8s_node_image"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.nodeConfig.imageType
-    nodePools := resource.properties.nodePools[_]
+    nodePools := resource.properties.nodePools[j]
     not nodePools.config.imageType
 }
 
+source_path[{"k8s_node_image": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.nodeConfig.imageType
+    nodePools := resource.properties.nodePools[j]
+    not nodePools.config.imageType
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "nodePools", j, "config", "imageType"]
+        ],
+    }
+}
+
 gc_issue["k8s_node_image"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not startswith(lower(resource.properties.nodeConfig.imageType), "cos")
 }
 
-gc_issue["k8s_node_image"] {
-    resource := input.resources[_]
+source_path[{"k8s_node_image": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
-    not startswith(lower(resource.properties.nodePools[_].config.imageType), "cos")
+    not startswith(lower(resource.properties.nodeConfig.imageType), "cos")
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "nodeConfig", "imageType"]
+        ],
+    }
+}
+
+gc_issue["k8s_node_image"] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    nodePools := resource.properties.nodePools[j]
+    not startswith(lower(nodePools.config.imageType), "cos")
+}
+
+source_path[{"k8s_node_image": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    nodePools := resource.properties.nodePools[j]
+    not startswith(lower(nodePools.config.imageType), "cos")
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "nodePools", j, "config", "imageType"]
+        ],
+    }
 }
 
 k8s_node_image {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_node_image"]
     not gc_attribute_absence["k8s_node_image"]
 }
@@ -737,7 +1016,7 @@ k8s_node_image_miss_err = "Kubernetes Engine Cluster attribute imageType config 
 }
 
 k8s_node_image_metadata := {
-    "Policy Code": "PR-GCP-0048-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-018",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -749,25 +1028,47 @@ k8s_node_image_metadata := {
 }
 
 #
-# PR-GCP-0049-GDF
+# PR-GCP-GDF-CLT-019
 #
 
 default k8s_network = null
 
 gc_issue["k8s_network"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.network
 }
 
+source_path[{"k8s_network": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.network
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "network"]
+        ],
+    }
+}
+
 gc_issue["k8s_network"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     lower(resource.properties.network) == "default"
 }
 
+source_path[{"k8s_network": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    lower(resource.properties.network) == "default"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "network"]
+        ],
+    }
+}
+
 k8s_network {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_network"]
 }
 
@@ -780,7 +1081,7 @@ k8s_network_err = "GCP Kubernetes Engine Clusters using the default network" {
 }
 
 k8s_network_metadata := {
-    "Policy Code": "PR-GCP-0049-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-019",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -792,19 +1093,30 @@ k8s_network_metadata := {
 }
 
 #
-# PR-GCP-0050-GDF
+# PR-GCP-GDF-CLT-020
 #
 
 default k8s_dashboard = null
 
 gc_issue["k8s_dashboard"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.addonsConfig.kubernetesDashboard.disabled
 }
 
+source_path[{"k8s_dashboard": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.addonsConfig.kubernetesDashboard.disabled
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "addonsConfig", "kubernetesDashboard", "disabled"]
+        ],
+    }
+}
+
 k8s_dashboard {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_dashboard"]
 }
 
@@ -817,7 +1129,7 @@ k8s_dashboard_err = "GCP Kubernetes Engine Clusters web UI/Dashboard is set to E
 }
 
 k8s_dashboard_metadata := {
-    "Policy Code": "PR-GCP-0050-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-020",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -829,25 +1141,47 @@ k8s_dashboard_metadata := {
 }
 
 #
-# PR-GCP-0051-GDF
+# PR-GCP-GDF-CLT-021
 #
 
 default k8s_labels = null
 
 gc_issue["k8s_labels"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.resourceLabels
 }
 
+source_path[{"k8s_labels": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.resourceLabels
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "resourceLabels"]
+        ],
+    }
+}
+
 gc_issue["k8s_labels"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     count(resource.properties.resourceLabels) == 0
 }
 
+source_path[{"k8s_labels": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    count(resource.properties.resourceLabels) == 0
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "resourceLabels"]
+        ],
+    }
+}
+
 k8s_labels {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_labels"]
 }
 
@@ -860,7 +1194,7 @@ k8s_labels_err = "GCP Kubernetes Engine Clusters without any label information" 
 }
 
 k8s_labels_metadata := {
-    "Policy Code": "PR-GCP-0051-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-021",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -872,37 +1206,81 @@ k8s_labels_metadata := {
 }
 
 #
-# PR-GCP-0052-GDF
+# PR-GCP-GDF-CLT-022
 #
 
 default k8s_db_encrypt = null
 
 gc_attribute_absence["k8s_db_encrypt"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.databaseEncryption
 }
 
+source_path[{"k8s_db_encrypt": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.databaseEncryption
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "databaseEncryption"]
+        ],
+    }
+}
+
 gc_issue["k8s_db_encrypt"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     lower(resource.properties.databaseEncryption.state) != "encrypted"
 }
 
+source_path[{"k8s_db_encrypt": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    lower(resource.properties.databaseEncryption.state) != "encrypted"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "databaseEncryption"]
+        ],
+    }
+}
+
 gc_issue["k8s_db_encrypt"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.databaseEncryption.keyName
 }
 
+source_path[{"k8s_db_encrypt": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.databaseEncryption.keyName
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "databaseEncryption", "keyName"]
+        ],
+    }
+}
+
 gc_issue["k8s_db_encrypt"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     count(resource.properties.databaseEncryption.keyName) == 0
 }
 
+source_path[{"k8s_db_encrypt": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    count(resource.properties.databaseEncryption.keyName) == 0
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "databaseEncryption", "keyName"]
+        ],
+    }
+}
+
 k8s_db_encrypt {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_db_encrypt"]
     not gc_attribute_absence["k8s_db_encrypt"]
 }
@@ -924,7 +1302,7 @@ k8s_db_encrypt_miss_err = "Kubernetes Engine Cluster attribute databaseEncryptio
 }
 
 k8s_db_encrypt_metadata := {
-    "Policy Code": "PR-GCP-0052-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-022",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -936,19 +1314,30 @@ k8s_db_encrypt_metadata := {
 }
 
 #
-# PR-GCP-0053-GDF
+# PR-GCP-GDF-CLT-023
 #
 
 default k8s_intra_node = null
 
 gc_issue["k8s_intra_node"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.networkConfig.enableIntraNodeVisibility
 }
 
+source_path[{"k8s_intra_node": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.networkConfig.enableIntraNodeVisibility
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "networkConfig", "enableIntraNodeVisibility"]
+        ],
+    }
+}
+
 k8s_intra_node {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_intra_node"]
 }
 
@@ -961,7 +1350,7 @@ k8s_intra_node_err = "GCP Kubernetes cluster intra-node visibility disabled" {
 }
 
 k8s_intra_node_metadata := {
-    "Policy Code": "PR-GCP-0053-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-023",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -973,19 +1362,30 @@ k8s_intra_node_metadata := {
 }
 
 #
-# PR-GCP-0054-GDF
+# PR-GCP-GDF-CLT-024
 #
 
 default k8s_istio = null
 
 gc_issue["k8s_istio"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     resource.properties.addonsConfig.istioConfig.disabled == false
 }
 
+source_path[{"k8s_istio": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    resource.properties.addonsConfig.istioConfig.disabled == false
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "addonsConfig", "istioConfig", "disabled"]
+        ],
+    }
+}
+
 k8s_istio {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_istio"]
 }
 
@@ -998,7 +1398,7 @@ k8s_istio_err = "GCP Kubernetes cluster istioConfig not enabled" {
 }
 
 k8s_istio_metadata := {
-    "Policy Code": "PR-GCP-0054-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-024",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -1010,20 +1410,32 @@ k8s_istio_metadata := {
 }
 
 #
-# PR-GCP-0055-GDF
+# PR-GCP-GDF-CLT-025
 #
 
 default k8s_zones = null
 
 gc_issue["k8s_zones"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     resource.properties.zone
     count(resource.properties.locations) < 3
 }
 
+source_path[{"k8s_zones": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    resource.properties.zone
+    count(resource.properties.locations) < 3
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "locations"]
+        ],
+    }
+}
+
 k8s_zones {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_zones"]
 }
 
@@ -1040,7 +1452,7 @@ k8s_zones_miss_err = "GCP Kubernetes cluster not in redundant zones" {
 }
 
 k8s_zones_metadata := {
-    "Policy Code": "PR-GCP-0055-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-025",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -1052,38 +1464,83 @@ k8s_zones_metadata := {
 }
 
 #
-# PR-GCP-0056-GDF
+# PR-GCP-GDF-CLT-026
 #
 
 default k8s_auto_upgrade = null
 
 gc_attribute_absence["k8s_auto_upgrade"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.currentNodeCount
 }
 
-gc_issue["k8s_auto_upgrade"] {
-    resource := input.resources[_]
+source_path[{"k8s_auto_upgrade": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
-    to_number(resource.properties.currentNodeCount) < 3
-    resource.properties.nodePools[_].management.autoUpgrade
+    not resource.properties.currentNodeCount
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "currentNodeCount"]
+        ],
+    }
 }
 
 gc_issue["k8s_auto_upgrade"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    to_number(resource.properties.currentNodeCount) < 3
+    resource.properties.nodePools[j].management.autoUpgrade
+}
+
+source_path[{"k8s_auto_upgrade": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    to_number(resource.properties.currentNodeCount) < 3
+    resource.properties.nodePools[j].management.autoUpgrade
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "nodePools", j, "management", "autoUpgrade"]
+        ],
+    }
+}
+
+gc_issue["k8s_auto_upgrade"] {
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     not resource.properties.databaseEncryption.keyName
 }
 
+source_path[{"k8s_auto_upgrade": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    not resource.properties.databaseEncryption.keyName
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "databaseEncryption", "keyName"]
+        ],
+    }
+}
+
 gc_issue["k8s_auto_upgrade"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "container.v1.cluster"
     count(resource.properties.databaseEncryption.keyName) == 0
 }
 
+source_path[{"k8s_auto_upgrade": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "container.v1.cluster"
+    count(resource.properties.databaseEncryption.keyName) == 0
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "databaseEncryption", "keyName"]
+        ],
+    }
+}
+
 k8s_auto_upgrade {
-    lower(input.resources[_].type) == "container.v1.cluster"
+    lower(input.resources[i].type) == "container.v1.cluster"
     not gc_issue["k8s_auto_upgrade"]
     not gc_attribute_absence["k8s_auto_upgrade"]
 }
@@ -1105,7 +1562,7 @@ k8s_auto_upgrade_miss_err = "Kubernetes Engine Cluster attribute currentNodeCoun
 }
 
 k8s_auto_upgrade_metadata := {
-    "Policy Code": "PR-GCP-0056-GDF",
+    "Policy Code": "PR-GCP-GDF-CLT-026",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
