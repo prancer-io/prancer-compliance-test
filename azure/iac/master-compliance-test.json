@@ -61,7 +61,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure CNI networking should be enabled in Azure AKS cluster",
-                    "description": "Azure CNI provides the following features over kubenet networking:_x000D__x000D_- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network._x000D_- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB._x000D_- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance._x000D_- Support for Network Policies securing communication between pods._x000D__x000D_This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.",
+                    "description": "Azure CNI provides the following features over kubenet networking:</br></br>- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network.</br>- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB.</br>- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance.</br>- Support for Network Policies securing communication between pods.</br></br>This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -164,7 +164,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure AKS cluster pool profile count should contain 3 nodes or more",
-                    "description": "Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)_x000D__x000D_This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.",
+                    "description": "Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)</br></br>This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -196,7 +196,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure AKS enable role-based access control (RBAC) should be enforced",
-                    "description": "To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster RBAC setting and alerts if disabled.",
+                    "description": "To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x005F</br> _x005F</br> This policy checks your AKS cluster RBAC setting and alerts if disabled.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1206,7 +1206,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure SQL Server threat detection alerts should be enabled for all threat types",
-                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x005F_x000D_ _x005F_x000D_ This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats.",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x005F</br> _x005F</br> This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1282,7 +1282,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure SQL Server advanced data security should be enabled",
-                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers.",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.</br></br>This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1315,7 +1315,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure SQL Server advanced data security should be enabled",
-                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers.",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.</br></br>This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1348,7 +1348,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure SQL Server advanced data security should have email alert recipient to get scan notification",
-                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL Servers that do not have an email address configured for ADS alert notifications. As a best practice, provide one or more email addresses where you want to receive alerts for any anomalous activities detected on SQL Servers.",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.</br></br>This policy identifies Azure SQL Servers that do not have an email address configured for ADS alert notifications. As a best practice, provide one or more email addresses where you want to receive alerts for any anomalous activities detected on SQL Servers.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1381,7 +1381,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure SQL Server advanced data security should have email alert recipient to get scan notification",
-                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL Servers that do not have an email address configured for ADS alert notifications. As a best practice, provide one or more email addresses where you want to receive alerts for any anomalous activities detected on SQL Servers.",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.</br></br>This policy identifies Azure SQL Servers that do not have an email address configured for ADS alert notifications. As a best practice, provide one or more email addresses where you want to receive alerts for any anomalous activities detected on SQL Servers.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1414,7 +1414,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure SQL Server advanced data security should send alerts to subscription administrators",
-                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the subscription admin can receive email alerts when anomalous activities are detected on the SQL Servers.",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.</br></br>This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the subscription admin can receive email alerts when anomalous activities are detected on the SQL Servers.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1447,7 +1447,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure SQL Server advanced data security should send alerts to subscription administrators",
-                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x000D__x000D_This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the subscription admin can receive email alerts when anomalous activities are detected on the SQL Servers.",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.</br></br>This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the subscription admin can receive email alerts when anomalous activities are detected on the SQL Servers.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1605,7 +1605,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure storage account blob services diagnostic logs should be enabled",
-                    "description": "Storage Logging records details of requests (read, write, and delete operations) against your Azure blobs. The logs include additional information such as:_x000D_- Timing and server latency._x000D_- Success or failure, and HTTP status code._x000D_- Authentication details_x000D__x000D_This policy identifies Azure storage accounts that do not have logging enabled for blobs. As a best practice, enable logging for read, write, and delete request types on blobs.",
+                    "description": "Storage Logging records details of requests (read, write, and delete operations) against your Azure blobs. The logs include additional information such as:</br>- Timing and server latency.</br>- Success or failure, and HTTP status code.</br>- Authentication details</br></br>This policy identifies Azure storage accounts that do not have logging enabled for blobs. As a best practice, enable logging for read, write, and delete request types on blobs.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1649,7 +1649,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure storage account queue services diagnostic logs should be enabled",
-                    "description": "Queue logging cannot be enabled for Storage Accounts with 'kind' of BlobStorage **_x000D__x000D_Storage Logging records details of requests (read, write, and delete operations) against your Azure queues. The logs include additional information such as:_x000D_- Timing and server latency._x000D_- Success or failure, and HTTP status code._x000D_- Authentication details_x000D__x000D_This policy identifies Azure storage accounts that do not have logging enabled for queues. As a best practice, enable logging for read, write, and delete request types on queues.",
+                    "description": "Queue logging cannot be enabled for Storage Accounts with 'kind' of BlobStorage **</br></br>Storage Logging records details of requests (read, write, and delete operations) against your Azure queues. The logs include additional information such as:</br>- Timing and server latency.</br>- Success or failure, and HTTP status code.</br>- Authentication details</br></br>This policy identifies Azure storage accounts that do not have logging enabled for queues. As a best practice, enable logging for read, write, and delete request types on queues.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1693,7 +1693,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure storage account table services diagnostic logs should be enabled",
-                    "description": "Storage Logging records details of requests (read, write, and delete operations) against your Azure queues. The logs include additional information such as:_x005F_x000D_ - Timing and server latency._x005F_x000D_ - Success or failure, and HTTP status code._x005F_x000D_ - Authentication details_x005F_x000D_ _x005F_x000D_ This policy identifies Azure storage accounts that do not have logging enabled for tables. As a best practice, enable logging for read, write, and delete request types on tables.",
+                    "description": "Storage Logging records details of requests (read, write, and delete operations) against your Azure queues. The logs include additional information such as:_x005F</br> - Timing and server latency._x005F</br> - Success or failure, and HTTP status code._x005F</br> - Authentication details_x005F</br> _x005F</br> This policy identifies Azure storage accounts that do not have logging enabled for tables. As a best practice, enable logging for read, write, and delete request types on tables.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1730,7 +1730,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure disk should have Azure Disk Encryption (ADE) enabled",
-                    "description": "To meet your organizational security or compliance requirement, Azure provides disk encryption at rest using Azure Storage Service Encryption (SSE) and Azure Disk Encryption (ADE). Starting February 2017, SSE is enabled by default for all managed disks. ADE is integrated with Azure Key Vault to help you control, manage, and audit the disk encryption keys and secrets._x000D__x000D_This policy detects Virtual Machine (VM) OS disks that are not encrypted at rest using ADE. As a best practice, enable ADE for provide volume encryption for the OS disk. For more information, see https://docs.microsoft.com/en-us/azure/security/azure-security-disk-encryption-overview.",
+                    "description": "To meet your organizational security or compliance requirement, Azure provides disk encryption at rest using Azure Storage Service Encryption (SSE) and Azure Disk Encryption (ADE). Starting February 2017, SSE is enabled by default for all managed disks. ADE is integrated with Azure Key Vault to help you control, manage, and audit the disk encryption keys and secrets.</br></br>This policy detects Virtual Machine (VM) OS disks that are not encrypted at rest using ADE. As a best practice, enable ADE for provide volume encryption for the OS disk. For more information, see https://docs.microsoft.com/en-us/azure/security/azure-security-disk-encryption-overview.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1951,7 +1951,7 @@
                     ],
                     "severity": "Low",
                     "title": "Azure Deployment Scope Resource Group should have a remove protection resource lock configured",
-                    "description": "Azure Resource Manager locks provide a way to lock down Azure resources from being deleted or modified. The lock level can be set to either 'CanNotDelete' or 'ReadOnly'. When you apply a lock at a parent scope, all resources within the scope inherit the same lock, and the most restrictive lock takes precedence._x000D__x000D_This policy identifies Azure Resource Groups that do not have a lock set. As a best practice, place a lock on important resources to prevent accidental or malicious modification or deletion by unauthorized users.",
+                    "description": "Azure Resource Manager locks provide a way to lock down Azure resources from being deleted or modified. The lock level can be set to either 'CanNotDelete' or 'ReadOnly'. When you apply a lock at a parent scope, all resources within the scope inherit the same lock, and the most restrictive lock takes precedence.</br></br>This policy identifies Azure Resource Groups that do not have a lock set. As a best practice, place a lock on important resources to prevent accidental or malicious modification or deletion by unauthorized users.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1990,7 +1990,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Network Watcher Network Security Group (NSG) flow logs should be enabled",
-                    "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs are disabled. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'._x000D__x000D_NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:_x000D_- Outbound and inbound flows on a per-rule basis._x000D_- Network interface to which the flow applies._x000D_- 5-tuple information about the flow (source/destination IP, source/destination port, protocol)._x000D_- Whether the traffic was allowed or denied._x000D__x000D_As a best practice, enable NSG flow logs to improve network visibility.",
+                    "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs are disabled. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.</br></br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:</br>- Outbound and inbound flows on a per-rule basis.</br>- Network interface to which the flow applies.</br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).</br>- Whether the traffic was allowed or denied.</br></br>As a best practice, enable NSG flow logs to improve network visibility.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2027,7 +2027,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Network Watcher Network Security Group (NSG) traffic analytics should be enabled",
-                    "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs are disabled. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'._x000D__x000D_NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:_x000D_- Outbound and inbound flows on a per-rule basis._x000D_- Network interface to which the flow applies._x000D_- 5-tuple information about the flow (source/destination IP, source/destination port, protocol)._x000D_- Whether the traffic was allowed or denied._x000D__x000D_As a best practice, enable NSG flow logs to improve network visibility.",
+                    "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs are disabled. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.</br></br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:</br>- Outbound and inbound flows on a per-rule basis.</br>- Network interface to which the flow applies.</br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).</br>- Whether the traffic was allowed or denied.</br></br>As a best practice, enable NSG flow logs to improve network visibility.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2065,7 +2065,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Watcher Network Security Group (NSG) flow logs retention should be greater than 90 days",
-                    "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs retention period is 90 days or less. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'._x000D__x000D_NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:_x000D_- Outbound and inbound flows on a per-rule basis._x000D_- Network interface to which the flow applies._x000D_- 5-tuple information about the flow (source/destination IP, source/destination port, protocol)._x000D_- Whether the traffic was allowed or denied._x000D__x000D_As a best practice, enable NSG flow logs and set the log retention period to at least 90 days.",
+                    "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs retention period is 90 days or less. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.</br></br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:</br>- Outbound and inbound flows on a per-rule basis.</br>- Network interface to which the flow applies.</br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).</br>- Whether the traffic was allowed or denied.</br></br>As a best practice, enable NSG flow logs and set the log retention period to at least 90 days.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2376,7 +2376,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group shouldn't allows ICMP (Ping)",
-                    "description": "ICMP is used by devices to communicate error messages and status. While ICMP is useful for  diagnostics and troubleshooting, it can also be used to exploit or disrupt systems._x000D__x000D_This policy detects any NSG rule that allows ICMP (Ping) traffic from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict ICMP (Ping) solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "description": "ICMP is used by devices to communicate error messages and status. While ICMP is useful for  diagnostics and troubleshooting, it can also be used to exploit or disrupt systems.</br></br>This policy detects any NSG rule that allows ICMP (Ping) traffic from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br>As a best practice, restrict ICMP (Ping) solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2415,7 +2415,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group shouldn't allow FTP (TCP Port 21)",
-                    "description": "This policy detects any NSG rule that allows FTP traffic on TCP port 21 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict FTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "description": "This policy detects any NSG rule that allows FTP traffic on TCP port 21 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br>As a best practice, restrict FTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2685,7 +2685,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow Windows SMB (TCP Port 445)",
-                    "description": "This policy detects any NSG rule that allows Windows SMB traffic on TCP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict Windows SMB solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "description": "This policy detects any NSG rule that allows Windows SMB traffic on TCP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br>As a best practice, restrict Windows SMB solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2724,7 +2724,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow DNS (UDP Port 53)",
-                    "description": "This policy detects any NSG rule that allows DNS traffic on UDP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "description": "This policy detects any NSG rule that allows DNS traffic on UDP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br>As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2763,7 +2763,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow FTP-Data (TCP Port 20)",
-                    "description": "This policy detects any NSG rule that allows FTP-Data traffic on TCP port 20 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict FTP-Data solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "description": "This policy detects any NSG rule that allows FTP-Data traffic on TCP port 20 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br>As a best practice, restrict FTP-Data solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2802,7 +2802,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow MS SQL (TCP Port 4333)",
-                    "description": "This policy detects any NSG rule that allows MSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "description": "This policy detects any NSG rule that allows MSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br>As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2841,7 +2841,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow MySQL (TCP Port 3306)",
-                    "description": "This policy detects any NSG rule that allows MySQL traffic on TCP port 3306 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict MySQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "description": "This policy detects any NSG rule that allows MySQL traffic on TCP port 3306 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br>As a best practice, restrict MySQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2880,7 +2880,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group allows NetBIOS (UDP Port 137 and 138)",
-                    "description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 and 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 and 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F</br> As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2919,7 +2919,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow PostgreSQL (TCP Port 5432)",
-                    "description": "This policy detects any NSG rule that allows PostgreSQL traffic on TCP port 5432 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict PostgreSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "description": "This policy detects any NSG rule that allows PostgreSQL traffic on TCP port 5432 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br>As a best practice, restrict PostgreSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2958,7 +2958,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow SMTP (TCP Port 25)",
-                    "description": "This policy detects any NSG rule that allows SMTP traffic on TCP port 25 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict SMTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "description": "This policy detects any NSG rule that allows SMTP traffic on TCP port 25 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br>As a best practice, restrict SMTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2997,7 +2997,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group allows SQLServer (TCP Port 1433 and UDP Port 1434)",
-                    "description": "This policy detects any NSG rule that allows SQLServer traffic on TCP Port 1433 and UDP Port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "description": "This policy detects any NSG rule that allows SQLServer traffic on TCP Port 1433 and UDP Port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F</br> As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3036,7 +3036,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow Telnet (TCP Port 23)",
-                    "description": "Telnet provides a plaintext connection to manage devices using the command line, and is less secure than SSH._x000D_This policy detects any NSG rule that allows Telnet traffic on TCP port 23 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict Telnet solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "description": "Telnet provides a plaintext connection to manage devices using the command line, and is less secure than SSH.</br>This policy detects any NSG rule that allows Telnet traffic on TCP port 23 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br>As a best practice, restrict Telnet solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3075,7 +3075,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow VNC Listener (TCP Port 5500)",
-                    "description": "This policy detects any NSG rule that allows VNC Listener traffic on TCP port 5500 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict VNC Listener solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "description": "This policy detects any NSG rule that allows VNC Listener traffic on TCP port 5500 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br>As a best practice, restrict VNC Listener solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3114,7 +3114,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow VNC Server (TCP Port 5900)",
-                    "description": "This policy detects any NSG rule that allows VNC Server traffic on TCP port 5900 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict VNC Server solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "description": "This policy detects any NSG rule that allows VNC Server traffic on TCP port 5900 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br>As a best practice, restrict VNC Server solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3153,7 +3153,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Network Security Group should not allow Windows RPC (TCP Port 135)",
-                    "description": "This policy detects any NSG rule that allows Windows RPC traffic on TCP port 135 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x000D_As a best practice, restrict Windows RPC solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+                    "description": "This policy detects any NSG rule that allows Windows RPC traffic on TCP port 135 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br>As a best practice, restrict Windows RPC solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3524,7 +3524,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Container Registry should not use the deprecated classic registry",
-                    "description": "This policy identifies an Azure Container Registry (ACR) that is using the classic SKU. The initial release of the Azure Container Registry (ACR) service that was offered as a classic SKU is being deprecated and will be unavailable after April 2019. As a best practice, upgrade your existing classic registry to a managed registry._x000D__x000D_For more information, visit https://docs.microsoft.com/en-us/azure/container-registry/container-registry-upgrade",
+                    "description": "This policy identifies an Azure Container Registry (ACR) that is using the classic SKU. The initial release of the Azure Container Registry (ACR) service that was offered as a classic SKU is being deprecated and will be unavailable after April 2019. As a best practice, upgrade your existing classic registry to a managed registry.</br></br>For more information, visit https://docs.microsoft.com/en-us/azure/container-registry/container-registry-upgrade",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3992,7 +3992,7 @@
                     ],
                     "severity": "High",
                     "title": "Storage Accounts should have firewall rules enabled",
-                    "description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on._x000D__x000D_You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
+                    "description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on.</br></br>You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -4253,7 +4253,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure storage blob container should not have public access enabled",
-                    "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature._x005F_x000D_ _x005F_x000D_ This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB'). As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers.",
+                    "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature._x005F</br> _x005F</br> This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB'). As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -4292,7 +4292,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure storage blob container should not have public access enabled",
-                    "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature._x005F_x000D_ _x005F_x000D_ This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB'). As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers.",
+                    "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature._x005F</br> _x005F</br> This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB'). As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -4325,7 +4325,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Virtual Machine should be assigned to an availability set",
-                    "description": "To provide application redundancy during planned or unplanned maintenance events, you can group two or more virtual machines (VMs) in an availability set. An availability set ensures that the VMs are distributed across multiple isolated hardware nodes in a cluster so that only a subset of your VMs are impacted should a hardware or software failure occur on Azure._x000D__x000D_This policy identifies Azure VMs that are not deployed in an availability set. As a high availability (HA) best practice, deploy your VMs in an availability set.",
+                    "description": "To provide application redundancy during planned or unplanned maintenance events, you can group two or more virtual machines (VMs) in an availability set. An availability set ensures that the VMs are distributed across multiple isolated hardware nodes in a cluster so that only a subset of your VMs are impacted should a hardware or software failure occur on Azure.</br></br>This policy identifies Azure VMs that are not deployed in an availability set. As a high availability (HA) best practice, deploy your VMs in an availability set.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -4396,7 +4396,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure virtual network peering state should be connected",
-                    "description": "Virtual network peering enables you to connect two Azure virtual networks so that the resources in these networks are directly connected._x000D__x000D_This policy identifies Azure virtual network peers that are disconnected. Typically, the disconnection happens when a peering configuration is deleted on one virtual network, and the other virtual network reports the peering status as disconnected.",
+                    "description": "Virtual network peering enables you to connect two Azure virtual networks so that the resources in these networks are directly connected.</br></br>This policy identifies Azure virtual network peers that are disconnected. Typically, the disconnection happens when a peering configuration is deleted on one virtual network, and the other virtual network reports the peering status as disconnected.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -4428,7 +4428,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Virtual Network subnet should be configured with Network Security Group",
-                    "description": "This policy identifies Azure Virtual Network (VNet) subnet which dont have any association with Network Security Group (NSG). While binding an NSG to a network interface of a Virtual Machine (VM) enables fine-grained control to the VM, associating a NSG to a subnet enables better control over network traffic to all resources within a subnet. As a best practice, associate an NSG with a subnet so that you can protect your VMs on a subnet-level._x005F_x000D_ _x005F_x000D_ For more information, see https://blogs.msdn.microsoft.com/igorpag/2016/05/14/azure-network-security-groups-nsg-best-practices-and-lessons-learned/",
+                    "description": "This policy identifies Azure Virtual Network (VNet) subnet which dont have any association with Network Security Group (NSG). While binding an NSG to a network interface of a Virtual Machine (VM) enables fine-grained control to the VM, associating a NSG to a subnet enables better control over network traffic to all resources within a subnet. As a best practice, associate an NSG with a subnet so that you can protect your VMs on a subnet-level._x005F</br> _x005F</br> For more information, see https://blogs.msdn.microsoft.com/igorpag/2016/05/14/azure-network-security-groups-nsg-best-practices-and-lessons-learned/",
                     "tags": [
                         {
                             "cloud": "git",
@@ -5608,7 +5608,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure SQL Server threat detection alerts should be enabled for all threat types",
-                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x005F_x000D_ _x005F_x000D_ This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats.",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x005F</br> _x005F</br> This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -5648,7 +5648,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure SQL Server threat detection alerts should be enabled for all threat types",
-                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x005F_x000D_ _x005F_x000D_ This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats.",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x005F</br> _x005F</br> This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats.",
                     "tags": [
                         {
                             "cloud": "git",

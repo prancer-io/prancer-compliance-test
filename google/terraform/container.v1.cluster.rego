@@ -776,7 +776,7 @@ k8s_egress_metering_metadata := {
     "Product": "GCP",
     "Language": "Terraform",
     "Policy Title": "GCP Kubernetes Engine Clusters not configured with network traffic egress metering",
-    "Policy Description": "This policy identifies Kubernetes Engine Clusters which are not configured with network traffic egress metering. When network traffic egress metering enabled, deployed DaemonSet pod meters network egress traffic by collecting data from the conntrack table, and exports the metered metrics to the specified destination. It is recommended to use, network egress metering so that you will be having data and track over monitored network traffic._x005F_x000D_ _x005F_x000D_ NOTE: Measuring network egress requires a network metering agent (NMA) running on each node. The NMA runs as a privileged pod, consumes some resources on the node (CPU, memory, and disk space), and enables the nf_conntrack_acct sysctl flag on the kernel (for connection tracking flow accounting). If you are comfortable with these caveats, you can enable network egress tracking for use with GKE usage metering.",
+    "Policy Description": "This policy identifies Kubernetes Engine Clusters which are not configured with network traffic egress metering. When network traffic egress metering enabled, deployed DaemonSet pod meters network egress traffic by collecting data from the conntrack table, and exports the metered metrics to the specified destination. It is recommended to use, network egress metering so that you will be having data and track over monitored network traffic.</br> </br> NOTE: Measuring network egress requires a network metering agent (NMA) running on each node. The NMA runs as a privileged pod, consumes some resources on the node (CPU, memory, and disk space), and enables the nf_conntrack_acct sysctl flag on the kernel (for connection tracking flow accounting). If you are comfortable with these caveats, you can enable network egress tracking for use with GKE usage metering.",
     "Resource Type": "google_container_cluster",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters"
@@ -1107,7 +1107,7 @@ k8s_db_encrypt_metadata := {
     "Product": "GCP",
     "Language": "Terraform",
     "Policy Title": "GCP Kubernetes cluster Application-layer Secrets not encrypted",
-    "Policy Description": "Application-layer Secrets Encryption provides an additional layer of security for sensitive data, such as Secrets, stored in etcd. Using this functionality, you can use a key, that you manage in Cloud KMS, to encrypt data at the application layer. This protects against attackers who gain access to an offline copy of etcd._x005F_x000D_ _x005F_x000D_ This policy checks your cluster for the Application-layer Secrets Encryption security feature and alerts if it is not enabled.",
+    "Policy Description": "Application-layer Secrets Encryption provides an additional layer of security for sensitive data, such as Secrets, stored in etcd. Using this functionality, you can use a key, that you manage in Cloud KMS, to encrypt data at the application layer. This protects against attackers who gain access to an offline copy of etcd.</br> </br> This policy checks your cluster for the Application-layer Secrets Encryption security feature and alerts if it is not enabled.",
     "Resource Type": "google_container_cluster",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters"
@@ -1144,7 +1144,7 @@ k8s_intra_node_metadata := {
     "Product": "GCP",
     "Language": "Terraform",
     "Policy Title": "GCP Kubernetes cluster intra-node visibility disabled",
-    "Policy Description": "With Intranode Visibility, all network traffic in your cluster is seen by the Google Cloud Platform network. This means you can see flow logs for all traffic between Pods, including traffic between Pods on the same node. And you can create firewall rules that apply to all traffic between Pods._x005F_x000D_ _x005F_x000D_ This policy checks your cluster's intra-node visibility feature and generates an alert if it's disabled.",
+    "Policy Description": "With Intranode Visibility, all network traffic in your cluster is seen by the Google Cloud Platform network. This means you can see flow logs for all traffic between Pods, including traffic between Pods on the same node. And you can create firewall rules that apply to all traffic between Pods.</br> </br> This policy checks your cluster's intra-node visibility feature and generates an alert if it's disabled.",
     "Resource Type": "google_container_cluster",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters"
@@ -1214,7 +1214,7 @@ k8s_istio_metadata := {
     "Product": "GCP",
     "Language": "Terraform",
     "Policy Title": "GCP Kubernetes cluster istioConfig not enabled",
-    "Policy Description": "Istio is an open service mesh that provides a uniform way to connect, manage, and secure microservices. It supports managing traffic flows between services, enforcing access policies, and aggregating telemetry data, all without requiring changes to the microservice code._x005F_x000D_ _x005F_x000D_ This policy checks your cluster for the Istio add-on feature and alerts if it is not enabled.",
+    "Policy Description": "Istio is an open service mesh that provides a uniform way to connect, manage, and secure microservices. It supports managing traffic flows between services, enforcing access policies, and aggregating telemetry data, all without requiring changes to the microservice code.</br> </br> This policy checks your cluster for the Istio add-on feature and alerts if it is not enabled.",
     "Resource Type": "google_container_cluster",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters"
@@ -1256,7 +1256,7 @@ k8s_zones_metadata := {
     "Product": "GCP",
     "Language": "Terraform",
     "Policy Title": "GCP Kubernetes cluster not in redundant zones",
-    "Policy Description": "Putting resources in different zones in a region provides isolation from many types of infrastructure, hardware, and software failures._x005F_x000D_ _x005F_x000D_ This policy alerts if your cluster is not located in at least 3 zones.",
+    "Policy Description": "Putting resources in different zones in a region provides isolation from many types of infrastructure, hardware, and software failures.</br> </br> This policy alerts if your cluster is not located in at least 3 zones.",
     "Resource Type": "google_container_cluster",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters"

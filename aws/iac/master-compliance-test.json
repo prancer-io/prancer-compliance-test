@@ -90,7 +90,7 @@
                     ],
                     "severity": "Medium",
                     "title": "AWS API Gateway endpoints without client certificate authentication",
-                    "description": "API Gateway can generate an SSL certificate and use its public key in the backend to verify that HTTP requests to your backend system are from API Gateway. This allows your HTTP backend to control and accept only requests originating from Amazon API Gateway, even if the backend is publicly accessible._x000D__x000D_Note: Some backend servers may not support SSL client authentication as API Gateway does and could return an SSL certificate error. For a list of incompatible backend servers, see Known Issues. https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-known-issues.html",
+                    "description": "API Gateway can generate an SSL certificate and use its public key in the backend to verify that HTTP requests to your backend system are from API Gateway. This allows your HTTP backend to control and accept only requests originating from Amazon API Gateway, even if the backend is publicly accessible.</br></br>Note: Some backend servers may not support SSL client authentication as API Gateway does and could return an SSL certificate error. For a list of incompatible backend servers, see Known Issues. https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-known-issues.html",
                     "tags": [
                         {
                             "cloud": "git",
@@ -830,7 +830,7 @@
                     ],
                     "severity": "Medium",
                     "title": "AWS ECS task definition elevated privileges enabled",
-                    "description": "Ensure your ECS containers are not given elevated privileges on the host container instance._x000D__x000D_When the Privileged parameter is true, the container is given elevated privileges on the host container instance (similar to the root user)._x000D__x000D_This policy checks the security configuration of your task definition and alerts if elevated privileges are enabled._x000D__x000D_Note: This parameter is not supported for Windows containers or tasks using the Fargate launch type.",
+                    "description": "Ensure your ECS containers are not given elevated privileges on the host container instance.</br></br>When the Privileged parameter is true, the container is given elevated privileges on the host container instance (similar to the root user).</br></br>This policy checks the security configuration of your task definition and alerts if elevated privileges are enabled.</br></br>Note: This parameter is not supported for Windows containers or tasks using the Fargate launch type.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -894,7 +894,7 @@
                     ],
                     "severity": "Medium",
                     "title": "AWS ECS/ Fargate task definition root user found",
-                    "description": "The user name to use inside the container should not be root. This policy generates an alert if root user is found in your container definition._x000D__x000D_The User parameter maps to User in the Create a container section of the Docker Remote API and the --user option to docker run_x000D__x000D_Note: This parameter is not supported for Windows containers.",
+                    "description": "The user name to use inside the container should not be root. This policy generates an alert if root user is found in your container definition.</br></br>The User parameter maps to User in the Create a container section of the Docker Remote API and the --user option to docker run</br></br>Note: This parameter is not supported for Windows containers.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1022,7 +1022,7 @@
                     ],
                     "severity": "Medium",
                     "title": "AWS ElastiCache Redis cluster with Multi-AZ Automatic Failover feature set to disabled",
-                    "description": "This policy identifies ElastiCache Redis clusters which have Multi-AZ Automatic Failover feature set to disabled. It is recommended to enable the Multi-AZ Automatic Failover feature for your Redis Cache cluster, which will improve primary node reachability by providing read replica in case of network connectivity loss or loss of availability in the primary's availability zone for read/write operations._x000D_Note: Redis cluster Multi-AZ with automatic failover does not support T1 and T2 cache node types and is only available if the cluster has at least one read replica.",
+                    "description": "This policy identifies ElastiCache Redis clusters which have Multi-AZ Automatic Failover feature set to disabled. It is recommended to enable the Multi-AZ Automatic Failover feature for your Redis Cache cluster, which will improve primary node reachability by providing read replica in case of network connectivity loss or loss of availability in the primary's availability zone for read/write operations.</br>Note: Redis cluster Multi-AZ with automatic failover does not support T1 and T2 cache node types and is only available if the cluster has at least one read replica.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1720,7 +1720,7 @@
                     ],
                     "severity": "Medium",
                     "title": "AWS Lambda Environment Variables not encrypted at-rest using CMK",
-                    "description": "When you create or update Lambda functions that use environment variables, AWS Lambda encrypts them using the AWS Key Management Service. When your Lambda function is invoked, those values are decrypted and made available to the Lambda code._x000D__x000D_This policy verifies that Lambda function uses the AMS Key Management Service to encrypt variables at-rest with CMK.",
+                    "description": "When you create or update Lambda functions that use environment variables, AWS Lambda encrypts them using the AWS Key Management Service. When your Lambda function is invoked, those values are decrypted and made available to the Lambda code.</br></br>This policy verifies that Lambda function uses the AMS Key Management Service to encrypt variables at-rest with CMK.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1784,7 +1784,7 @@
                     ],
                     "severity": "Medium",
                     "title": "AWS Lambda functions with tracing not enabled",
-                    "description": "TracingConfig is a property of the AWS::Lambda::Function resource that configures tracing settings for your AWS Lambda (Lambda) function. When enabled, AWS Lambda tracing acitivates AWS X-Ray service that collects information on requests that a specific function performed. It reduces the time and effort for debugging and diagnosing the errors._x000D__x000D_The value can be either PassThrough or Active. If PassThrough, Lambda will only trace the request from an upstream service if it contains a tracing header with 'sampled=1'. If Active, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received, Lambda will call X-Ray for a tracing decision.",
+                    "description": "TracingConfig is a property of the AWS::Lambda::Function resource that configures tracing settings for your AWS Lambda (Lambda) function. When enabled, AWS Lambda tracing acitivates AWS X-Ray service that collects information on requests that a specific function performed. It reduces the time and effort for debugging and diagnosing the errors.</br></br>The value can be either PassThrough or Active. If PassThrough, Lambda will only trace the request from an upstream service if it contains a tracing header with 'sampled=1'. If Active, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received, Lambda will call X-Ray for a tracing decision.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1819,7 +1819,7 @@
                     ],
                     "severity": "Medium",
                     "title": "AWS RDS DB cluster encryption is disabled",
-                    "description": "This policy identifies RDS DB clusters for which encryption is disabled. Amazon Aurora encrypted DB clusters provide an additional layer of data protection by securing your data from unauthorized access to the underlying storage. You can use Amazon Aurora encryption to increase data protection of your applications deployed in the cloud, and to fulfill compliance requirements for data-at-rest encryption._x000D_NOTE: This policy is applicable only for Aurora DB clusters._x000D_https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html",
+                    "description": "This policy identifies RDS DB clusters for which encryption is disabled. Amazon Aurora encrypted DB clusters provide an additional layer of data protection by securing your data from unauthorized access to the underlying storage. You can use Amazon Aurora encryption to increase data protection of your applications deployed in the cloud, and to fulfill compliance requirements for data-at-rest encryption.</br>NOTE: This policy is applicable only for Aurora DB clusters.</br>https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html",
                     "tags": [
                         {
                             "cloud": "git",
@@ -3410,7 +3410,7 @@
                     ],
                     "severity": "Medium",
                     "title": "AWS SQS server side encryption not enabled",
-                    "description": "SSE lets you transmit sensitive data in encrypted queues. SSE protects the contents of messages in Amazon SQS queues using keys managed in the AWS Key Management Service (AWS KMS). SSE encrypts messages as soon as Amazon SQS receives them. The messages are stored in encrypted form and Amazon SQS decrypts messages only when they are sent to an authorized consumer._x000D__x000D_SQS SSE and the AWS KMS security standards can help you meet encryption-related compliance requirements.",
+                    "description": "SSE lets you transmit sensitive data in encrypted queues. SSE protects the contents of messages in Amazon SQS queues using keys managed in the AWS Key Management Service (AWS KMS). SSE encrypts messages as soon as Amazon SQS receives them. The messages are stored in encrypted form and Amazon SQS decrypts messages only when they are sent to an authorized consumer.</br></br>SQS SSE and the AWS KMS security standards can help you meet encryption-related compliance requirements.",
                     "tags": [
                         {
                             "cloud": "git",

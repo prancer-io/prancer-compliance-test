@@ -393,7 +393,7 @@ nsg_allow_icmp_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure Network Security Group allows ICMP (Ping)",
-    "Policy Description": "ICMP is used by devices to communicate error messages and status. While ICMP is useful for  diagnostics and troubleshooting, it can also be used to exploit or disrupt systems._x005F_x000D_  _x005F_x000D_ This policy detects any NSG rule that allows ICMP (Ping) traffic from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict ICMP (Ping) solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "ICMP is used by devices to communicate error messages and status. While ICMP is useful for  diagnostics and troubleshooting, it can also be used to exploit or disrupt systems.</br>  </br> This policy detects any NSG rule that allows ICMP (Ping) traffic from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br> As a best practice, restrict ICMP (Ping) solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
@@ -428,7 +428,7 @@ inbound_port_21_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure Network Security Group allows FTP (TCP Port 21)",
-    "Policy Description": "This policy detects any NSG rule that allows FTP traffic on TCP port 21 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict FTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "This policy detects any NSG rule that allows FTP traffic on TCP port 21 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br> As a best practice, restrict FTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
@@ -628,7 +628,7 @@ inbound_port_dbs_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure Network Security Group allows Windows SMB (TCP Port 445)",
-    "Policy Description": "This policy detects any NSG rule that allows Windows SMB traffic on TCP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict Windows SMB solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "This policy detects any NSG rule that allows Windows SMB traffic on TCP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br> As a best practice, restrict Windows SMB solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
@@ -698,7 +698,7 @@ inbound_port_53_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure Network Security Group should not allows DNS (UDP Port 53)",
-    "Policy Description": "This policy detects any NSG rule that allows DNS traffic on UDP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "This policy detects any NSG rule that allows DNS traffic on UDP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br> As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule"
@@ -738,7 +738,7 @@ inbound_port_445_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure Network Security Group allows FTP-Data (TCP Port 20)",
-    "Policy Description": "This policy detects any NSG rule that allows FTP-Data traffic on TCP port 20 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict FTP-Data solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "This policy detects any NSG rule that allows FTP-Data traffic on TCP port 20 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br> As a best practice, restrict FTP-Data solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
@@ -773,7 +773,7 @@ inbound_port_4333_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure Network Security Group should not allow mSQL (TCP Port 4333)",
-    "Policy Description": "This policy detects any NSG rule that allows mSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "This policy detects any NSG rule that allows mSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br> As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule"
@@ -808,7 +808,7 @@ inbound_port_20_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure Network Security Group allows MySQL (TCP Port 3306)",
-    "Policy Description": "This policy detects any NSG rule that allows MySQL traffic on TCP port 3306 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict MySQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "This policy detects any NSG rule that allows MySQL traffic on TCP port 3306 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br> As a best practice, restrict MySQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
@@ -843,7 +843,7 @@ inbound_port_137_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure Network Security Group should not allow NetBIOS (UDP Port 137)",
-    "Policy Description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br> As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule"
@@ -878,7 +878,7 @@ inbound_port_3306_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure Network Security Group allows NetBIOS (UDP Port 138)",
-    "Policy Description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br> As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
@@ -918,7 +918,7 @@ inbound_port_netbios_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure Network Security Group allows PostgreSQL (TCP Port 5432)",
-    "Policy Description": "This policy detects any NSG rule that allows PostgreSQL traffic on TCP port 5432 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict PostgreSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "This policy detects any NSG rule that allows PostgreSQL traffic on TCP port 5432 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br> As a best practice, restrict PostgreSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
@@ -953,7 +953,7 @@ inbound_port_5432_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure Network Security Group allows SMTP (TCP Port 25)",
-    "Policy Description": "This policy detects any NSG rule that allows SMTP traffic on TCP port 25 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict SMTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "This policy detects any NSG rule that allows SMTP traffic on TCP port 25 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br> As a best practice, restrict SMTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
@@ -988,7 +988,7 @@ inbound_port_25_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure Network Security Group allows SQLServer (UDP Port 1434)",
-    "Policy Description": "This policy detects any NSG rule that allows SQLServer traffic on UDP port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "This policy detects any NSG rule that allows SQLServer traffic on UDP port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br> As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
@@ -1028,7 +1028,7 @@ inbound_port_sqlserver_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure Network Security Group allows SqlServer (TCP Port 1433)",
-    "Policy Description": "This policy detects any NSG rule that allows SqlServer traffic on TCP port 1433 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict SqlServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "This policy detects any NSG rule that allows SqlServer traffic on TCP port 1433 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br> As a best practice, restrict SqlServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
@@ -1063,7 +1063,7 @@ inbound_port_23_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure Network Security Group allows Telnet (TCP Port 23)",
-    "Policy Description": "Telnet provides a plaintext connection to manage devices using the command line, and is less secure than SSH._x005F_x000D_ This policy detects any NSG rule that allows Telnet traffic on TCP port 23 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict Telnet solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "Telnet provides a plaintext connection to manage devices using the command line, and is less secure than SSH.</br> This policy detects any NSG rule that allows Telnet traffic on TCP port 23 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br> As a best practice, restrict Telnet solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
@@ -1098,7 +1098,7 @@ inbound_port_5500_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure Network Security Group allows VNC Listener (TCP Port 5500)",
-    "Policy Description": "This policy detects any NSG rule that allows VNC Listener traffic on TCP port 5500 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict VNC Listener solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "This policy detects any NSG rule that allows VNC Listener traffic on TCP port 5500 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br> As a best practice, restrict VNC Listener solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
@@ -1133,7 +1133,7 @@ inbound_port_5900_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure Network Security Group allows VNC Server (TCP Port 5900)",
-    "Policy Description": "This policy detects any NSG rule that allows VNC Server traffic on TCP port 5900 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict VNC Server solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "This policy detects any NSG rule that allows VNC Server traffic on TCP port 5900 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br> As a best practice, restrict VNC Server solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
@@ -1168,7 +1168,7 @@ inbound_port_135_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure Network Security Group allows Windows RPC (TCP Port 135)",
-    "Policy Description": "This policy detects any NSG rule that allows Windows RPC traffic on TCP port 135 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict Windows RPC solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "This policy detects any NSG rule that allows Windows RPC traffic on TCP port 135 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.</br> As a best practice, restrict Windows RPC solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "azurerm_network_security_rule",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"

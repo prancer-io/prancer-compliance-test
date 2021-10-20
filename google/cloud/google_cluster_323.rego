@@ -29,7 +29,7 @@ metadata := {
     "Product": "GCP",
     "Language": "Cloud",
     "Policy Title": "GCP Kubernetes cluster intra-node visibility disabled",
-    "Policy Description": "With Intranode Visibility, all network traffic in your cluster is seen by the Google Cloud Platform network. This means you can see flow logs for all traffic between Pods, including traffic between Pods on the same node. And you can create firewall rules that apply to all traffic between Pods._x005F_x000D_ _x005F_x000D_ This policy checks your cluster's intra-node visibility feature and generates an alert if it's disabled.",
+    "Policy Description": "With Intranode Visibility, all network traffic in your cluster is seen by the Google Cloud Platform network. This means you can see flow logs for all traffic between Pods, including traffic between Pods on the same node. And you can create firewall rules that apply to all traffic between Pods.</br> </br> This policy checks your cluster's intra-node visibility feature and generates an alert if it's disabled.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters/get"
