@@ -1,4 +1,4 @@
-# Automated Vulnerability Scan result and Static Code Analysis for Azure Quickstart files
+# Automated Vulnerability Scan result and Static Code Analysis for Azure Quickstart files (Aug 2021)
 
 
 ## Azure Application Gateways Services

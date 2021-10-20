@@ -1,5 +1,14 @@
-# Automated Vulnerability Scan result and Static Code Analysis for Aws Labs files
+# Automated Vulnerability Scan result and Static Code Analysis for Aws Labs files (Oct 2021)
 
+## https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/aws-Labs/output10132021 (Part1).md
+## https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/aws-Labs/output10132021 (Part2).md
+## https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/aws-Labs/output10132021 (Part3).md
+## https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/aws-Labs/output10132021 (Part4).md
+## https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/aws-Labs/output10132021 (Part5).md
+## https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/aws-Labs/output10132021 (Part6).md
+## https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/aws-Labs/output10132021 (Part7).md
+## https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/aws-Labs/output10132021 (Part8).md
+## https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/aws-Labs/output10132021 (Part9).md
 
 ## Aws Labs Services (Part 7)
 
