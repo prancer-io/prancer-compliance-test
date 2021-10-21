@@ -82,8 +82,6 @@ log_profiles_retention_days_metadata := {
 }
 
 
-
-
 # PR-AZR-0152-ARM
 
 default log_profile_category = null
@@ -93,13 +91,12 @@ azure_attribute_absence ["log_profile_category"] {
     not resource.properties.categories
 }
 
-
 azure_issue ["log_profile_category"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/logprofiles"
-    contains(lower(resource.properties.categories), "write")
-    contains(lower(resource.properties.categories), "delete")
-    contains(lower(resource.properties.categories), "action")
+    contains(lower(resource.properties.categories[_]), "write")
+    contains(lower(resource.properties.categories[_]), "delete")
+    contains(lower(resource.properties.categories[_]), "action")
 }
 
 log_profile_category {
@@ -111,13 +108,10 @@ log_profile_category = false {
     azure_attribute_absence["log_profile_category"]
 }
 
-
 log_profile_category = false {
     lower(input.resources[_].type) == "microsoft.insights/logprofiles"
     not azure_issue["log_profile_category"]
 }
-
-
 
 log_profile_category_err = "microsoft.insights/logprofiles property 'categories' missing in the resource." {
     azure_attribute_absence["log_profile_category"]
