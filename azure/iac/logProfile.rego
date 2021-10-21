@@ -97,9 +97,9 @@ azure_attribute_absence ["log_profile_category"] {
 azure_issue ["log_profile_category"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/logprofiles"
-    contains(lower(resource.properties.categories), "write")
-    contains(lower(resource.properties.categories), "delete")
-    contains(lower(resource.properties.categories), "action")
+    contains(lower(resource.properties.categories[_]), "write")
+    contains(lower(resource.properties.categories[_]), "delete")
+    contains(lower(resource.properties.categories[_]), "action")
 }
 
 log_profile_category {
