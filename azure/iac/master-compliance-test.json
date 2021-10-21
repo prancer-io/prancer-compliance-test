@@ -65,7 +65,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -136,7 +142,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -168,7 +180,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -239,7 +257,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
