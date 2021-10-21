@@ -47,7 +47,7 @@ rds_cluster_encrypt_metadata := {
     "Product": "AWS",
     "Language": "Terraform",
     "Policy Title": "AWS RDS DB cluster encryption is disabled",
-    "Policy Description": "This policy identifies RDS DB clusters for which encryption is disabled. Amazon Aurora encrypted DB clusters provide an additional layer of data protection by securing your data from unauthorized access to the underlying storage. You can use Amazon Aurora encryption to increase data protection of your applications deployed in the cloud, and to fulfill compliance requirements for data-at-rest encryption.</br> NOTE: This policy is applicable only for Aurora DB clusters.</br> https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html",
+    "Policy Description": "This policy identifies RDS DB clusters for which encryption is disabled. Amazon Aurora encrypted DB clusters provide an additional layer of data protection by securing your data from unauthorized access to the underlying storage. You can use Amazon Aurora encryption to increase data protection of your applications deployed in the cloud, and to fulfill compliance requirements for data-at-rest encryption.<br>NOTE: This policy is applicable only for Aurora DB clusters.<br>https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html",
     "Resource Type": "aws_db_instance",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"

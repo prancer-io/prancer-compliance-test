@@ -1763,7 +1763,7 @@ firewall_inbound_all_metadata := {
     "Product": "GCP",
     "Language": "Terraform",
     "Policy Title": "GCP Firewall rules allow inbound traffic from anywhere with no target tags set",
-    "Policy Description": "This policy identifies GCP Firewall rules which allow inbound traffic from anywhere with no target filtering. </br> </br> The default target is all instances in the network. The use of target tags or target service accounts allows the rule to apply to select instances. Not using any firewall rule filtering may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
+    "Policy Description": "This policy identifies GCP Firewall rules which allow inbound traffic from anywhere with no target filtering.<br><br>The default target is all instances in the network. The use of target tags or target service accounts allows the rule to apply to select instances. Not using any firewall rule filtering may allow a bad actor to brute force their way into the system and potentially get access to the entire network.",
     "Resource Type": "google_compute_firewall",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/compute/docs/reference/rest/v1/firewalls"

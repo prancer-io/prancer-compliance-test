@@ -31,7 +31,7 @@ metadata := {
     "Product": "GCP",
     "Language": "Cloud",
     "Policy Title": "GCP Kubernetes cluster size contains less than 3 nodes with auto upgrade enabled",
-    "Policy Description": "Ensure your Kubernetes cluster size contains 3 or more nodes. (Clusters smaller than 3 may experience downtime during upgrades.)</br> </br> This policy checks the size of your cluster pools and alerts if there are fewer than 3 nodes in a pool.",
+    "Policy Description": "Ensure your Kubernetes cluster size contains 3 or more nodes. (Clusters smaller than 3 may experience downtime during upgrades.)<br><br>This policy checks the size of your cluster pools and alerts if there are fewer than 3 nodes in a pool.",
     "Resource Type": "container.v1.cluster",
     "Policy Help URL": "",
     "Resource Help URL": "https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters/get"

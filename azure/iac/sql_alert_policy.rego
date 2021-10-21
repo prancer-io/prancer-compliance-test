@@ -606,7 +606,7 @@ sql_logical_server_disabled_alerts_metadata := {
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "Azure SQL Server threat detection alerts should be enabled for all threat types",
-    "Policy Description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.</br> </br> This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats.",
+    "Policy Description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats.",
     "Resource Type": "microsoft.sql/servers/securityalertpolicies",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/securityalertpolicies"
@@ -660,7 +660,7 @@ sql_server_disabled_alerts_metadata := {
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "Azure SQL Server threat detection alerts should be enabled for all threat types",
-    "Policy Description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.</br> </br> This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats.",
+    "Policy Description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats.",
     "Resource Type": "microsoft.sql/servers/securityalertpolicies",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/securityalertpolicies"

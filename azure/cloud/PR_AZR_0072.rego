@@ -23,7 +23,7 @@ metadata := {
     "Product": "AZR",
     "Language": "Cloud",
     "Policy Title": "Azure storage account logging for tables is disabled",
-    "Policy Description": "Storage Logging records details of requests (read, write, and delete operations) against your Azure tables. The logs include additional information such as:</br> - Timing and server latency.</br> - Success or failure, and HTTP status code.</br> - Authentication details</br> </br> This policy identifies Azure storage accounts that do not have logging enabled for tables. As a best practice, enable logging for read, write, and delete request types on tables.",
+    "Policy Description": "Storage Logging records details of requests (read, write, and delete operations) against your Azure tables. The logs include additional information such as:<br>- Timing and server latency.<br>- Success or failure, and HTTP status code.<br>- Authentication details<br><br>This policy identifies Azure storage accounts that do not have logging enabled for tables. As a best practice, enable logging for read, write, and delete request types on tables.",
     "Resource Type": "microsoft.insights/diagnosticsettings",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-05-01-preview/diagnosticsettings"

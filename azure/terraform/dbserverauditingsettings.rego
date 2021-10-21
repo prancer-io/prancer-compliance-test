@@ -50,7 +50,7 @@ mssql_log_retention_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure MSSQL Server audit log retention should be greater then 90 days",
-    "Policy Description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance.</br> </br> This policy identifies SQL servers which do not retain audit logs for more than 90 days. As a best practice, configure the audit logs retention time period to be greater than 90 days.",
+    "Policy Description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance.<br><br>This policy identifies SQL servers which do not retain audit logs for more than 90 days. As a best practice, configure the audit logs retention time period to be greater than 90 days.",
     "Resource Type": "azurerm_mssql_server_extended_auditing_policy",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_extended_auditing_policy"
@@ -109,7 +109,7 @@ sql_log_retention_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure SQL Server audit log retention should be greater then 90 days",
-    "Policy Description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance.</br> </br> This policy identifies SQL servers which do not retain audit logs for more than 90 days. As a best practice, configure the audit logs retention time period to be greater than 90 days.",
+    "Policy Description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance.<br><br>This policy identifies SQL servers which do not retain audit logs for more than 90 days. As a best practice, configure the audit logs retention time period to be greater than 90 days.",
     "Resource Type": "azurerm_sql_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_server"
@@ -148,7 +148,7 @@ mssql_auditing_enabled_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure MSSQL Server audit log should be enabled",
-    "Policy Description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance.</br> </br> This policy identifies SQL servers which do not have audit log enabled.",
+    "Policy Description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance.<br><br>This policy identifies SQL servers which do not have audit log enabled.",
     "Resource Type": "azurerm_mssql_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server"
@@ -188,7 +188,7 @@ sql_auditing_enabled_metadata := {
     "Product": "AZR",
     "Language": "Terraform",
     "Policy Title": "Azure SQL Server audit log should be enabled",
-    "Policy Description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance.</br> </br> This policy identifies SQL servers which do not have audit log enabled.",
+    "Policy Description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance.<br><br>This policy identifies SQL servers which do not have audit log enabled.",
     "Resource Type": "azurerm_sql_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_server"

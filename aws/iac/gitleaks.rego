@@ -60,7 +60,7 @@ gl_aws_cred_file_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS API Gateway endpoints without client certificate authentication",
-    "Policy Description": "API Gateway can generate an SSL certificate and use its public key in the backend to verify that HTTP requests to your backend system are from API Gateway. This allows your HTTP backend to control and accept only requests originating from Amazon API Gateway, even if the backend is publicly accessible.</br> </br> Note: Some backend servers may not support SSL client authentication as API Gateway does and could return an SSL certificate error. For a list of incompatible backend servers, see Known Issues. https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-known-issues.html",
+    "Policy Description": "API Gateway can generate an SSL certificate and use its public key in the backend to verify that HTTP requests to your backend system are from API Gateway. This allows your HTTP backend to control and accept only requests originating from Amazon API Gateway, even if the backend is publicly accessible.<br><br>Note: Some backend servers may not support SSL client authentication as API Gateway does and could return an SSL certificate error. For a list of incompatible backend servers, see Known Issues. https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-known-issues.html",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://github.com/zricethezav/gitleaks/blob/master/examples/leaky-repo.toml"
@@ -280,7 +280,7 @@ gl_twit_client_id_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Certificate Manager (ACM) has certificates expiring in 30 days or less",
-    "Policy Description": "This policy identifies ACM certificates expiring in 30 days or less, which are in the AWS Certificate Manager. If SSL/TLS certificates are not renewed prior to their expiration date, they will become invalid and the communication between the client and the AWS resource that implements the certificates is no longer secure. As a best practice, it is recommended to renew certificates before their validity period ends. AWS Certificate Manager automatically renews certificates issued by the service that is used with other AWS resources. However, the ACM service does not renew automatically certificates that are not in use or not associated anymore with other AWS resources. So the renewal process must be done manually before these certificates become invalid.</br> </br> NOTE: If you wanted to be notified other than before or less than 30 days; you can clone this policy and replace '30' in RQL with your desired days value. For example, 15 days OR 7 days which will alert certificates expiring in 15 days or less OR 7 days or less respectively.",
+    "Policy Description": "This policy identifies ACM certificates expiring in 30 days or less, which are in the AWS Certificate Manager. If SSL/TLS certificates are not renewed prior to their expiration date, they will become invalid and the communication between the client and the AWS resource that implements the certificates is no longer secure. As a best practice, it is recommended to renew certificates before their validity period ends. AWS Certificate Manager automatically renews certificates issued by the service that is used with other AWS resources. However, the ACM service does not renew automatically certificates that are not in use or not associated anymore with other AWS resources. So the renewal process must be done manually before these certificates become invalid.<br><br>NOTE: If you wanted to be notified other than before or less than 30 days; you can clone this policy and replace '30' in RQL with your desired days value. For example, 15 days OR 7 days which will alert certificates expiring in 15 days or less OR 7 days or less respectively.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://github.com/zricethezav/gitleaks/blob/master/examples/leaky-repo.toml"
@@ -461,7 +461,7 @@ gl_ec_private_key_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS CloudFormation Template contains globally open resources",
-    "Policy Description": "This alert triggers if a CloudFormation template that when launched will result in resources allowing global network access. Below are three common causes:</br> </br> - Security Group with a {0.0.0.0/0, ::/0} rule</br> - Network Access Control List with a {0.0.0.0/0, ::/0} rule</br> - Network Access Control List with -1 IpProtocol",
+    "Policy Description": "This alert triggers if a CloudFormation template that when launched will result in resources allowing global network access. Below are three common causes:<br><br>- Security Group with a {0.0.0.0/0, ::/0} rule<br>- Network Access Control List with a {0.0.0.0/0, ::/0} rule<br>- Network Access Control List with -1 IpProtocol",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://github.com/zricethezav/gitleaks/blob/master/examples/leaky-repo.toml"
