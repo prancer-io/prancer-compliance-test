@@ -16,10 +16,34 @@ azure_attribute_absence["vpn_encrypt"] {
                ipsec.ipsecEncryption; c := 1]) == 0
 }
 
+source_path[{"vpn_encrypt":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/vpngateways"
+    count([c | con := resource.properties.connections[j];
+               ipsec := con.properties.ipsecPolicies[k]
+               ipsec.ipsecEncryption; c := 1]) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","connections",j,"properties","ipsecPolicies",k,"ipsecEncryption"]]
+    }
+}
+
 azure_issue["vpn_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/vpngateways"
-    lower(resource.properties.connections[_].properties.ipsecPolicies[_].ipsecEncryption) == "none"
+    con := resource.properties.connections[_]
+    ipsec := con.properties.ipsecPolicies[_]
+    lower(ipsec.ipsecEncryption) == "none"
+}
+
+source_path[{"vpn_encrypt":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/vpngateways"
+    con := resource.properties.connections[j]
+    ipsec := con.properties.ipsecPolicies[k]
+    lower(ipsec.ipsecEncryption) == "none"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","connections",j,"properties","ipsecPolicies",k,"ipsecEncryption"]]
+    }
 }
 
 vpn_encrypt {

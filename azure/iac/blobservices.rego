@@ -16,11 +16,30 @@ azure_attribute_absence["storage_blob_soft_delete"] {
     not resource.properties.deleteRetentionPolicy.enabled
 }
 
+source_path[{"storage_blob_soft_delete":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices"
+    not resource.properties.deleteRetentionPolicy.enabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","deleteRetentionPolicy","enabled"]]
+    }
+}
+
 azure_issue["storage_blob_soft_delete"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts/blobservices"
     resource.properties.deleteRetentionPolicy.enabled != true
 }
+
+source_path[{"storage_blob_soft_delete":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices"
+    resource.properties.deleteRetentionPolicy.enabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","deleteRetentionPolicy","enabled"]]
+    }
+}
+
 
 storage_blob_soft_delete {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts/blobservices"
@@ -68,10 +87,28 @@ azure_attribute_absence["storage_blob_container_soft_delete"] {
     not resource.properties.containerDeleteRetentionPolicy.enabled
 }
 
+source_path[{"storage_blob_container_soft_delete":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices"
+    not resource.properties.containerDeleteRetentionPolicy.enabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","containerDeleteRetentionPolicy","enabled"]]
+    }
+}
+
 azure_issue["storage_blob_container_soft_delete"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts/blobservices"
     resource.properties.containerDeleteRetentionPolicy.enabled != true
+}
+
+source_path[{"storage_blob_container_soft_delete":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices"
+    resource.properties.containerDeleteRetentionPolicy.enabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","containerDeleteRetentionPolicy","enabled"]]
+    }
 }
 
 storage_blob_container_soft_delete {

@@ -15,11 +15,33 @@ azure_attribute_absence["alerts"] {
     not resource.properties.enabled
 }
 
+source_path[{"alerts":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.insights/activitylogalerts"
+    not resource.properties.enabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","enabled"]]
+    }
+}
+
+
+
 azure_issue["alerts"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/activitylogalerts"
     resource.properties.enabled != true
 }
+
+
+source_path[{"alerts":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.insights/activitylogalerts"
+    resource.properties.enabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","enabled"]]
+    }
+}
+
 
 alerts {
     azure_attribute_absence["alerts"]

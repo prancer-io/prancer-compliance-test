@@ -11,10 +11,28 @@ azure_attribute_absence ["maria_ingress_from_any_ip_disabled"] {
     not resource.properties.startIpAddress
 }
 
+source_path[{"maria_ingress_from_any_ip_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformariadb/servers/firewallrules"
+    not resource.properties.startIpAddress
+    metadata:= {
+        "resource_path": [["resources",i,"properties","startIpAddress"]]
+    }
+}
+
 azure_attribute_absence ["maria_ingress_from_any_ip_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbformariadb/servers/firewallrules"
     not resource.properties.endIpAddress
+}
+
+source_path[{"maria_ingress_from_any_ip_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformariadb/servers/firewallrules"
+    not resource.properties.endIpAddress
+    metadata:= {
+        "resource_path": [["resources",i,"properties","endIpAddress"]]
+    }
 }
 
 azure_issue ["maria_ingress_from_any_ip_disabled"] {
@@ -23,10 +41,29 @@ azure_issue ["maria_ingress_from_any_ip_disabled"] {
     contains(resource.properties.startIpAddress, "0.0.0.0")
 }
 
+source_path[{"maria_ingress_from_any_ip_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformariadb/servers/firewallrules"
+    contains(resource.properties.startIpAddress, "0.0.0.0")
+    metadata:= {
+        "resource_path": [["resources",i,"properties","startIpAddress"]]
+    }
+}
+
+
 azure_issue ["maria_ingress_from_any_ip_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbformariadb/servers/firewallrules"
     contains(resource.properties.endIpAddress, "0.0.0.0")
+}
+
+source_path[{"maria_ingress_from_any_ip_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformariadb/servers/firewallrules"
+    contains(resource.properties.endIpAddress, "0.0.0.0")
+    metadata:= {
+        "resource_path": [["resources",i,"properties","endIpAddress"]]
+    }
 }
 
 maria_ingress_from_any_ip_disabled {
@@ -76,12 +113,34 @@ azure_attribute_absence ["dbmaria_ingress_from_any_ip_disabled"] {
     not dbsql_resources.properties.startIpAddress
 }
 
+source_path[{"dbmaria_ingress_from_any_ip_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    dbsql_resources := resource.resources[j]
+    lower(dbsql_resources.type) == "firewallrules"
+    not dbsql_resources.properties.startIpAddress
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","startIpAddress"]]
+    }
+}
+
 azure_attribute_absence ["dbmaria_ingress_from_any_ip_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbformariadb/servers"
     dbsql_resources := resource.resources[_]
     lower(dbsql_resources.type) == "firewallrules"
     not dbsql_resources.properties.endIpAddress
+}
+
+source_path[{"dbmaria_ingress_from_any_ip_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    dbsql_resources := resource.resources[j]
+    lower(dbsql_resources.type) == "firewallrules"
+    not dbsql_resources.properties.endIpAddress
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","endIpAddress"]]
+    }
 }
 
 azure_issue ["dbmaria_ingress_from_any_ip_disabled"] {
@@ -92,6 +151,17 @@ azure_issue ["dbmaria_ingress_from_any_ip_disabled"] {
     contains(dbsql_resources.properties.startIpAddress, "0.0.0.0")
 }
 
+source_path[{"dbmaria_ingress_from_any_ip_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    dbsql_resources := resource.resources[j]
+    lower(dbsql_resources.type) == "firewallrules"
+    contains(dbsql_resources.properties.startIpAddress, "0.0.0.0")
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","startIpAddress"]]
+    }
+}
+
 azure_issue ["dbmaria_ingress_from_any_ip_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbformariadb/servers"
@@ -99,6 +169,19 @@ azure_issue ["dbmaria_ingress_from_any_ip_disabled"] {
     lower(dbsql_resources.type) == "firewallrules"
     contains(dbsql_resources.properties.endIpAddress, "0.0.0.0")
 }
+
+
+source_path[{"dbmaria_ingress_from_any_ip_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    dbsql_resources := resource.resources[j]
+    lower(dbsql_resources.type) == "firewallrules"
+    contains(dbsql_resources.properties.endIpAddress, "0.0.0.0")
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","endIpAddress"]]
+    }
+}
+
 
 dbmaria_ingress_from_any_ip_disabled {
     resource := input.resources[_]

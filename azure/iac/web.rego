@@ -12,10 +12,28 @@ azure_attribute_absence ["https_only"] {
     not resource.properties.httpsOnly
 }
 
+source_path[{"https_only":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.httpsOnly
+    metadata:= {
+        "resource_path": [["resources",i,"properties","httpsOnly"]]
+    }
+}
+
 azure_issue ["https_only"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     resource.properties.httpsOnly != true
+}
+
+source_path[{"https_only":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.httpsOnly != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","httpsOnly"]]
+    }
 }
 
 
@@ -65,10 +83,28 @@ azure_attribute_absence ["min_tls_version"] {
     not resource.properties.siteConfig.minTlsVersion
 }
 
+source_path[{"min_tls_version":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.minTlsVersion
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","minTlsVersion"]]
+    }
+}
+
 azure_issue ["min_tls_version"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     resource.properties.siteConfig.minTlsVersion != "1.2"
+}
+
+source_path[{"min_tls_version":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.minTlsVersion != "1.2"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","minTlsVersion"]]
+    }
 }
 
 
@@ -117,10 +153,28 @@ azure_attribute_absence ["client_cert_enabled"] {
     not resource.properties.clientCertEnabled
 }
 
+source_path[{"client_cert_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.clientCertEnabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","clientCertEnabled"]]
+    }
+}
+
 azure_issue ["client_cert_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     resource.properties.clientCertEnabled != true
+}
+
+source_path[{"client_cert_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.clientCertEnabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","clientCertEnabled"]]
+    }
 }
 
 
@@ -170,10 +224,28 @@ azure_attribute_absence ["http_20_enabled"] {
     not resource.properties.siteConfig.http20Enabled
 }
 
+source_path[{"http_20_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.http20Enabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","http20Enabled"]]
+    }
+}
+
 azure_issue ["http_20_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     resource.properties.siteConfig.http20Enabled != true
+}
+
+source_path[{"http_20_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.http20Enabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","http20Enabled"]]
+    }
 }
 
 

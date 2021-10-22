@@ -14,10 +14,28 @@ azure_attribute_absence["pricing"] {
     not resource.properties.pricingTier
 }
 
+source_path[{"pricing":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.security/pricings"
+    not resource.properties.pricingTier
+    metadata:= {
+        "resource_path": [["resources",i,"properties","pricingTier"]]
+    }
+}
+
 azure_issue["pricing"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/pricings"
     lower(resource.properties.pricingTier) != "standard"
+}
+
+source_path[{"pricing":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.security/pricings"
+    lower(resource.properties.pricingTier) != "standard"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","pricingTier"]]
+    }
 }
 
 pricing {

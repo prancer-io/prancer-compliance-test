@@ -12,10 +12,28 @@ azure_attribute_absence ["db_account_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"db_account_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.documentdb/databaseaccounts"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["db_account_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.documentdb/databaseaccounts"
     count(resource.tags) == 0
+}
+
+source_path[{"db_account_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.documentdb/databaseaccounts"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 db_account_tagsLength {
@@ -71,10 +89,28 @@ azure_attribute_absence ["app_gw_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"app_gw_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["app_gw_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/applicationgateways"
     count(resource.tags) == 0
+}
+
+source_path[{"app_gw_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 app_gw_tagsLength {
@@ -125,10 +161,28 @@ azure_attribute_absence ["log_alert_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"log_alert_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.insights/activitylogalerts"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["log_alert_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/activitylogalerts"
     count(resource.tags) == 0
+}
+
+source_path[{"log_alert_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.insights/activitylogalerts"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 log_alert_tagsLength {
@@ -179,10 +233,28 @@ azure_attribute_absence ["acr_mc_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"acr_mc_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.insights/activitylogalerts"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["acr_mc_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     count(resource.tags) == 0
+}
+
+source_path[{"acr_mc_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.insights/activitylogalerts"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 acr_mc_tagsLength {
@@ -234,10 +306,29 @@ azure_attribute_absence ["databrick_workspaces_tagsLength"] {
     not resource.tags
 }
 
+
+source_path[{"databrick_workspaces_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.databricks/workspaces"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["databrick_workspaces_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.databricks/workspaces"
     count(resource.tags) == 0
+}
+
+source_path[{"databrick_workspaces_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.databricks/workspaces"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 databrick_workspaces_tagsLength {
@@ -289,10 +380,28 @@ azure_attribute_absence ["db_my_sql_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"db_my_sql_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["db_my_sql_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbformysql/servers"
     count(resource.tags) == 0
+}
+
+source_path[{"db_my_sql_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 db_my_sql_tagsLength {
@@ -344,10 +453,28 @@ azure_attribute_absence ["disks_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"disks_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.compute/disks"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["disks_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.compute/disks"
     count(resource.tags) == 0
+}
+
+source_path[{"disks_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.compute/disks"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 disks_tagsLength {
@@ -400,10 +527,28 @@ azure_attribute_absence ["kv_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"kv_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["kv_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults"
     count(resource.tags) == 0
+}
+
+source_path[{"kv_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 kv_tagsLength {
@@ -456,10 +601,28 @@ azure_attribute_absence ["kv_keys_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"kv_keys_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults/keys"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["kv_keys_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults/keys"
     count(resource.tags) == 0
+}
+
+source_path[{"kv_keys_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults/keys"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 kv_keys_tagsLength {
@@ -512,11 +675,30 @@ azure_attribute_absence ["kv_secrets_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"kv_secrets_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults/secrets"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["kv_secrets_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults/secrets"
     count(resource.tags) == 0
 }
+
+source_path[{"kv_secrets_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults/secrets"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 
 kv_secrets_tagsLength {
     lower(input.resources[_].type) == "microsoft.keyvault/vaults/secrets"
@@ -569,10 +751,28 @@ azure_attribute_absence ["insights_log_profile_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"insights_log_profile_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.insights/logprofiles"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["insights_log_profile_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/logprofiles"
     count(resource.tags) == 0
+}
+
+source_path[{"insights_log_profile_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.insights/logprofiles"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 insights_log_profile_tagsLength {
@@ -625,10 +825,28 @@ azure_attribute_absence ["network_watchers_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"network_watchers_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["network_watchers_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
     count(resource.tags) == 0
+}
+
+source_path[{"network_watchers_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 network_watchers_tagsLength {
@@ -682,10 +900,28 @@ azure_attribute_absence ["nsg_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"nsg_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["nsg_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/networksecuritygroups"
     count(resource.tags) == 0
+}
+
+source_path[{"nsg_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 nsg_tagsLength {
@@ -738,10 +974,28 @@ azure_attribute_absence ["db_postgresql_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"db_postgresql_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["db_postgresql_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbforpostgresql/servers"
     count(resource.tags) == 0
+}
+
+source_path[{"db_postgresql_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 db_postgresql_tagsLength {
@@ -796,10 +1050,28 @@ azure_attribute_absence ["cache_redis_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"cache_redis_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.cache/redis"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["cache_redis_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.cache/redis"
     count(resource.tags) == 0
+}
+
+source_path[{"cache_redis_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.cache/redis"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 cache_redis_tagsLength {
@@ -853,10 +1125,28 @@ azure_attribute_absence ["acr_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"acr_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerregistry/registries"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["acr_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries"
     count(resource.tags) == 0
+}
+
+source_path[{"acr_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerregistry/registries"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 acr_tagsLength {
@@ -910,11 +1200,30 @@ azure_attribute_absence ["acr_webhooks_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"acr_webhooks_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerregistry/registries/webhooks"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["acr_webhooks_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries/webhooks"
     count(resource.tags) == 0
 }
+
+source_path[{"acr_webhooks_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerregistry/registries/webhooks"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 
 acr_webhooks_tagsLength {
     lower(input.resources[_].type) == "microsoft.containerregistry/registries/webhooks"
@@ -966,10 +1275,29 @@ azure_attribute_absence ["sql_managed_instances_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"sql_managed_instances_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/managedinstances"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
+
 azure_issue ["sql_managed_instances_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/managedinstances"
     count(resource.tags) == 0
+}
+
+source_path[{"sql_managed_instances_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/managedinstances"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 sql_managed_instances_tagsLength {
@@ -1021,10 +1349,29 @@ azure_attribute_absence ["storage_accounts_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"storage_accounts_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
+
 azure_issue ["storage_accounts_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     count(resource.tags) == 0
+}
+
+source_path[{"storage_accounts_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 storage_accounts_tagsLength {
@@ -1078,10 +1425,28 @@ azure_attribute_absence ["vm_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"vm_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.compute/virtualmachines"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["vm_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.compute/virtualmachines"
     count(resource.tags) == 0
+}
+
+source_path[{"vm_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.compute/virtualmachines"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 vm_tagsLength {
@@ -1137,10 +1502,28 @@ azure_attribute_absence ["vm_extensions_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"vm_extensions_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.compute/virtualmachines/extensions"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["vm_extensions_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.compute/virtualmachines/extensions"
     count(resource.tags) == 0
+}
+
+source_path[{"vm_extensions_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.compute/virtualmachines/extensions"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 vm_extensions_tagsLength {
@@ -1195,10 +1578,28 @@ azure_attribute_absence ["vnet_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"vnet_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/virtualnetworks/subnets"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["vnet_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/virtualnetworks/subnets"
     count(resource.tags) == 0
+}
+
+source_path[{"vnet_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/virtualnetworks/subnets"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 vnet_tagsLength {
@@ -1252,10 +1653,28 @@ azure_attribute_absence ["vnet_vpn_gw_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"vnet_vpn_gw_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/vpngateways"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["vnet_vpn_gw_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/vpngateways"
     count(resource.tags) == 0
+}
+
+source_path[{"vnet_vpn_gw_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/vpngateways"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 vnet_vpn_gw_tagsLength {
@@ -1310,10 +1729,28 @@ azure_attribute_absence ["web_sites_tagsLength"] {
     not resource.tags
 }
 
+source_path[{"web_sites_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.tags
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
+}
+
 azure_issue ["web_sites_tagsLength"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     count(resource.tags) == 0
+}
+
+source_path[{"web_sites_tagsLength":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    count(resource.tags) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","tags"]]
+    }
 }
 
 web_sites_tagsLength {

@@ -14,10 +14,28 @@ azure_attribute_absence["sql_public_access_disabled"] {
     not resource.properties.publicNetworkAccess
 }
 
+source_path[{"sql_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    not resource.properties.publicNetworkAccess
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
+    }
+}
+
 azure_issue["sql_public_access_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
     lower(resource.properties.publicNetworkAccess) != "disabled"
+}
+
+source_path[{"sql_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    lower(resource.properties.publicNetworkAccess) != "disabled"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
+    }
 }
 
 sql_public_access_disabled {
@@ -76,6 +94,17 @@ azure_attribute_absence["sql_server_login"] {
     not sql_resources.properties.login
 }
 
+source_path[{"sql_server_login":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[j]
+    lower(sql_resources.type) == "administrators"
+    not sql_resources.properties.login
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","login"]]
+    }
+}
+
 no_azure_issue["sql_server_login"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
@@ -84,6 +113,19 @@ no_azure_issue["sql_server_login"] {
     lower(sql_resources.properties.login) != "admin"
     lower(sql_resources.properties.login) != "administrator"
 }
+
+source_path[{"sql_server_login":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[j]
+    lower(sql_resources.type) == "administrators"
+    lower(sql_resources.properties.login) != "admin"
+    lower(sql_resources.properties.login) != "administrator"
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","login"]]
+    }
+}
+
 
 sql_server_login {
     not azure_attribute_absence["sql_server_login"]
@@ -137,11 +179,30 @@ azure_attribute_absence["sql_logical_server_login"] {
     not resource.properties.login
 }
 
+source_path[{"sql_logical_server_login":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/administrators"
+    not resource.properties.login
+    metadata:= {
+        "resource_path": [["resources",i,"properties","login"]]
+    }
+}
+
 no_azure_issue["sql_logical_server_login"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/administrators"
     lower(resource.properties.login) != "admin"
     lower(resource.properties.login) != "administrator"
+}
+
+source_path[{"sql_logical_server_login":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/administrators"
+    lower(resource.properties.login) != "admin"
+    lower(resource.properties.login) != "administrator"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","login"]]
+    }
 }
 
 sql_logical_server_login {
@@ -196,6 +257,16 @@ azure_issue["fail_over_groups"] {
     lower(sql_resources.type) == "failovergroups"
 }
 
+source_path[{"fail_over_groups":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[j]
+    lower(sql_resources.type) == "failovergroups"
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"type"]]
+    }
+}
+
 
 fail_over_groups {
 	azure_issue["fail_over_groups"]
@@ -245,6 +316,17 @@ azure_attribute_absence["sql_server_administrators"] {
     not sql_resources.properties.administratorType
 }
 
+source_path[{"sql_server_administrators":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[j]
+    lower(sql_resources.type) == "administrators"
+    not sql_resources.name
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"name"]]
+    }
+}
+
 azure_issue["sql_server_administrators"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
@@ -253,6 +335,17 @@ azure_issue["sql_server_administrators"] {
     lower(sql_resources.properties.administratorType) != "activedirectory"
 }
 
+
+source_path[{"sql_server_administrators":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[j]
+    lower(sql_resources.type) == "administrators"
+    lower(sql_resources.name) != "activedirectory"
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"name"]]
+    }
+}
 
 sql_server_administrators {
     resource := input.resources[_]

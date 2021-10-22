@@ -16,12 +16,34 @@ azure_attribute_absence["db_logical_encrypt"] {
     not sql_db.properties.status
 }
 
+source_path[{"db_logical_encrypt":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_db := resource.resources[j]
+    lower(sql_db.type) == "transparentdataencryption"
+    not sql_db.properties.status
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","status"]]
+    }
+}
+
 azure_issue["db_logical_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases"
     sql_db := resource.resources[_]
     lower(sql_db.type) == "transparentdataencryption"
     lower(sql_db.properties.status) != "enabled"
+}
+
+source_path[{"db_logical_encrypt":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_db := resource.resources[j]
+    lower(sql_db.type) == "transparentdataencryption"
+    lower(sql_db.properties.status) != "enabled"
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","status"]]
+    }
 }
 
 db_logical_encrypt {
@@ -73,10 +95,29 @@ azure_attribute_absence["db_encrypt"] {
     not resource.properties.status
 }
 
+source_path[{"db_encrypt":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
+    not resource.properties.status
+    metadata:= {
+        "resource_path": [["resources",i,"properties","status"]]
+    }
+}
+
+
 azure_issue["db_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases/transparentdataencryption"
     lower(resource.properties.status) != "enabled"
+}
+
+source_path[{"db_encrypt":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
+    lower(resource.properties.status) != "enabled"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","status"]]
+    }
 }
 
 db_encrypt {

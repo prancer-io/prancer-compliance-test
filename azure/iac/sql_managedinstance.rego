@@ -14,10 +14,29 @@ default sql_mi_public_endpoint_disabled = null
 
 # https://docs.microsoft.com/en-us/powershell/module/az.sql/set-azsqlinstance?view=azps-6.2.1
 # if property does not exist default is false
+
+source_path[{"sql_mi_public_endpoint_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/managedinstances"
+    not resource.properties.publicDataEndpointEnabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicDataEndpointEnabled"]]
+    }
+}
+
 azure_issue["sql_mi_public_endpoint_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/managedinstances"
     resource.properties.publicDataEndpointEnabled == true
+}
+
+source_path[{"sql_mi_public_endpoint_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/managedinstances"
+    resource.properties.publicDataEndpointEnabled != "false"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicDataEndpointEnabled"]]
+    }
 }
 
 sql_mi_public_endpoint_disabled {

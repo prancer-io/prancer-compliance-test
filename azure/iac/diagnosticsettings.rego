@@ -14,12 +14,32 @@ azure_attribute_absence["log_keyvault"] {
     not resource.properties.logs
 }
 
+source_path[{"log_keyvault":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults/providers/diagnosticsettings"
+    not resource.properties.logs
+    metadata:= {
+        "resource_path": [["resources",i,"properties","logs"]]
+    }
+}
+
 azure_issue["log_keyvault"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults/providers/diagnosticsettings"
-    logs := resource.properties.logs[_]
-    lower(logs.category) == "auditevent"
+    log := resource.properties.logs[_]
+    lower(log.category) == "auditevent"
     logs.enabled == false
+}
+
+source_path[{"log_keyvault":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults/providers/diagnosticsettings"
+    log := resource.properties.logs[j]
+    lower(log.category) == "auditevent"
+    log.enabled == false
+    metadata:= {
+        "resource_path": [["resources",i,"properties","logs",j,"category"]]
+    }
 }
 
 log_keyvault {
@@ -68,16 +88,46 @@ azure_attribute_absence["log_lbs"] {
     not resource.properties.logs
 }
 
+source_path[{"log_lbs":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/loadbalancers/providers/diagnosticsettings"
+    not resource.properties.logs
+    metadata:= {
+        "resource_path": [["resources",i,"properties","logs"]]
+    }
+}
+
+
 azure_issue["log_lbs"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/loadbalancers/providers/diagnosticsettings"
     count(resource.properties.logs) == 0
 }
 
+source_path[{"log_lbs":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/loadbalancers/providers/diagnosticsettings"
+    count(resource.properties.logs) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","logs"]]
+    }
+}
+
 azure_issue["log_lbs"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/loadbalancers/providers/diagnosticsettings"
-    resource.properties.logs[_].enabled == false
+    log := resource.properties.logs[_]
+    lower(log.enabled) == false
+}
+
+source_path[{"log_lbs":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/loadbalancers/providers/diagnosticsettings"
+    log := resource.properties.logs[j]
+    lower(log.enabled) == false
+    metadata:= {
+        "resource_path": [["resources",i,"properties","logs",j,"enabled"]]
+    }
 }
 
 log_lbs {
@@ -126,26 +176,68 @@ azure_attribute_absence["log_storage_retention"] {
     not resource.properties.logs
 }
 
+source_path[{"log_storage_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/providers/diagnosticsettings"
+    not resource.properties.logs
+    metadata:= {
+        "resource_path": [["resources",i,"properties","logs"]]
+    }
+}
+
 azure_attribute_absence["log_storage_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts/providers/diagnosticsettings"
-    not resource.properties.logs.retentionPolicy.enabled
+    log := resource.properties.logs[_]
+    not log.retentionPolicy.enabled
+}
+
+source_path[{"log_storage_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/providers/diagnosticsettings"
+    log := resource.properties.logs[j]
+    not log.retentionPolicy.enabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","logs",j,"retentionPolicy","enabled"]]
+    }
 }
 
 azure_issue["log_storage_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts/providers/diagnosticsettings"
-    logs := resource.properties.logs[_]
-    lower(logs.category) == "auditevent"
-    logs.enabled != true
+    log := resource.properties.logs[_]
+    lower(log.category) == "auditevent"
+    log.enabled != true
+}
+
+source_path[{"log_storage_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/providers/diagnosticsettings"
+    log := resource.properties.logs[j]
+    lower(log.category) == "auditevent"
+    log.enabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","logs",j,"category"]]
+    }
 }
 
 azure_issue["log_storage_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts/providers/diagnosticsettings"
-    logs := resource.properties.logs[_]
-    lower(logs.category) == "auditevent"
-    logs.retentionPolicy.enabled != true
+    log := resource.properties.logs[_]
+    lower(log.category) == "auditevent"
+    log.retentionPolicy.enabled != true
+}
+
+source_path[{"log_storage_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/providers/diagnosticsettings"
+    log := resource.properties.logs[j]
+    lower(log.category) == "auditevent"
+    log.retentionPolicy.enabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","logs",j,"category"]]
+    }
 }
 
 #azure_issue["log_storage_retention"] {
@@ -159,9 +251,20 @@ azure_issue["log_storage_retention"] {
 azure_issue["log_storage_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts/providers/diagnosticsettings"
-    logs := resource.properties.logs[_]
-    lower(logs.category) == "auditevent"
-    to_number(logs.retentionPolicy.days) < 90
+    log := resource.properties.logs[_]
+    lower(log.category) == "auditevent"
+    to_number(log.retentionPolicy.days) < 90
+}
+
+source_path[{"log_storage_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/providers/diagnosticsettings"
+    log := resource.properties.logs[j]
+    lower(log.category) == "auditevent"
+    to_number(log.retentionPolicy.days) < 90
+    metadata:= {
+        "resource_path": [["resources",i,"properties","logs",j,"retentionPolicy","days"]]
+    }
 }
 
 log_storage_retention {
@@ -210,16 +313,45 @@ azure_attribute_absence["log_blob"] {
     not resource.properties.logs
 }
 
+source_path[{"log_blob":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/providers/diagnosticsettings"
+    not resource.properties.logs
+    metadata:= {
+        "resource_path": [["resources",i,"properties","logs"]]
+    }
+}
+
 azure_issue["log_blob"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/providers/diagnosticsettings"
     count(resource.properties.logs) == 0
 }
 
+source_path[{"log_blob":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/providers/diagnosticsettings"
+    count(resource.properties.logs) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","logs"]]
+    }
+}
+
 azure_issue["log_blob"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/providers/diagnosticsettings"
-    resource.properties.logs[_].enabled == false
+    log := resource.properties.logs[_]
+    log.enabled == false
+}
+
+source_path[{"log_blob":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/providers/diagnosticsettings"
+    log := resource.properties.logs[j]
+    log.enabled == false
+    metadata:= {
+        "resource_path": [["resources",i,"properties","logs",j,"enabled"]]
+    }
 }
 
 log_blob {
@@ -269,16 +401,45 @@ azure_attribute_absence["log_queue"] {
     not resource.properties.logs
 }
 
+source_path[{"log_queue":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/queueservices/providers/diagnosticsettings"
+    not resource.properties.logs
+    metadata:= {
+        "resource_path": [["resources",i,"properties","logs"]]
+    }
+}
+
 azure_issue["log_queue"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts/queueservices/providers/diagnosticsettings"
     count(resource.properties.logs) == 0
 }
 
+source_path[{"log_queue":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/queueservices/providers/diagnosticsettings"
+    count(resource.properties.logs) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","logs"]]
+    }
+}
+
 azure_issue["log_queue"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts/queueservices/providers/diagnosticsettings"
-    resource.properties.logs[_].enabled == false
+    log:= resource.properties.logs[_]
+    log.enabled == false
+}
+
+source_path[{"log_queue":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/queueservices/providers/diagnosticsettings"
+    log:= resource.properties.logs[j]
+    log.enabled == false
+    metadata:= {
+        "resource_path": [["resources",i,"properties","logs",j,"enabled"]]
+    }
 }
 
 log_queue {
@@ -327,16 +488,45 @@ azure_attribute_absence["log_table"] {
     not resource.properties.logs
 }
 
+source_path[{"log_table":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/tableservices/providers/diagnosticsettings"
+    not resource.properties.logs
+    metadata:= {
+        "resource_path": [["resources",i,"properties","logs"]]
+    }
+}
+
 azure_issue["log_table"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts/tableservices/providers/diagnosticsettings"
     count(resource.properties.logs) == 0
 }
 
+source_path[{"log_table":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/tableservices/providers/diagnosticsettings"
+    count(resource.properties.logs) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","logs"]]
+    }
+}
+
 azure_issue["log_table"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts/tableservices/providers/diagnosticsettings"
-    resource.properties.logs[_].enabled == false
+    log:= resource.properties.logs[_]
+    log.enabled == false
+}
+
+source_path[{"log_table":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/tableservices/providers/diagnosticsettings"
+    log:= resource.properties.logs[j]
+    log.enabled == false
+    metadata:= {
+        "resource_path": [["resources",i,"properties","logs",j,"enabled"]]
+    }
 }
 
 log_table {

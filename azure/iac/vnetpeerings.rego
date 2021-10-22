@@ -14,10 +14,28 @@ azure_attribute_absence["vnet_peer"] {
     not resource.properties.peeringState
 }
 
+source_path[{"vnet_peer":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/virtualnetworks/virtualnetworkpeerings"
+    not resource.properties.peeringState
+    metadata:= {
+        "resource_path": [["resources",i,"properties","peeringState"]]
+    }
+}
+
 azure_issue["vnet_peer"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/virtualnetworks/virtualnetworkpeerings"
     lower(resource.properties.peeringState) != "connected"
+}
+
+source_path[{"vnet_peer":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/virtualnetworks/virtualnetworkpeerings"
+    lower(resource.properties.peeringState) != "connected"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","peeringState"]]
+    }
 }
 
 vnet_peer {
