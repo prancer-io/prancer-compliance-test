@@ -4,7 +4,7 @@ package rule
 
 #
 
-# PR-AZR-0081-ARM
+# PR-AZR-ARM-SQL-010
 #
 
 default db_logical_firewall = null
@@ -66,7 +66,7 @@ db_logical_firewall_err = "Firewall rule attribute startIpAddress/endIpAddress i
 
 
 db_logical_firewall_metadata := {
-    "Policy Code": "PR-AZR-0081-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-010",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -77,7 +77,7 @@ db_logical_firewall_metadata := {
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2015-05-01-preview/servers/firewallrules"
 }
 
-# PR-AZR-0082-ARM
+# PR-AZR-ARM-SQL-011
 #
 
 default db_firewall = null
@@ -129,7 +129,7 @@ db_firewall_miss_err = "Firewall rule attribute startIpAddress/endIpAddress is m
 }
 
 db_firewall_metadata := {
-    "Policy Code": "PR-AZR-0082-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-011",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

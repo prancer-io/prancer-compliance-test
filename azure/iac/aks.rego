@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters
 
 #
-# PR-AZR-0006-ARM
+# PR-AZR-ARM-AKS-001
 #
 
 default aks_cni_net = null
@@ -43,7 +43,7 @@ aks_cni_net_miss_err = "AKS cluster attribute networkProfile.networkPlugin missi
 }
 
 aks_cni_net_metadata := {
-    "Policy Code": "PR-AZR-0006-ARM",
+    "Policy Code": "PR-AZR-ARM-AKS-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -55,7 +55,7 @@ aks_cni_net_metadata := {
 }
 
 #
-# PR-AZR-0007-ARM
+# PR-AZR-ARM-AKS-002
 #
 
 default aks_http_routing = null
@@ -95,7 +95,7 @@ aks_http_routing_miss_err = "AKS cluster attribute addonProfiles.httpApplication
 }
 
 aks_http_routing_metadata := {
-    "Policy Code": "PR-AZR-0007-ARM",
+    "Policy Code": "PR-AZR-ARM-AKS-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -107,7 +107,7 @@ aks_http_routing_metadata := {
 }
 
 #
-# PR-AZR-0008-ARM
+# PR-AZR-ARM-AKS-003
 #
 
 default aks_monitoring = null
@@ -147,7 +147,7 @@ aks_monitoring_miss_err = "AKS cluster attribute addonProfiles.omsagent missing 
 }
 
 aks_monitoring_metadata := {
-    "Policy Code": "PR-AZR-0008-ARM",
+    "Policy Code": "PR-AZR-ARM-AKS-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -159,7 +159,7 @@ aks_monitoring_metadata := {
 }
 
 #
-# PR-AZR-0009-ARM
+# PR-AZR-ARM-AKS-004
 #
 
 default aks_nodes = null
@@ -199,7 +199,7 @@ aks_nodes_miss_err = "AKS cluster attribute agentPoolProfiles missing in the res
 }
 
 aks_nodes_metadata := {
-    "Policy Code": "PR-AZR-0009-ARM",
+    "Policy Code": "PR-AZR-ARM-AKS-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -211,7 +211,7 @@ aks_nodes_metadata := {
 }
 
 #
-# PR-AZR-0010-ARM
+# PR-AZR-ARM-AKS-005
 #
 
 default aks_rbac = null
@@ -251,7 +251,7 @@ aks_rbac_miss_err = "AKS cluster attribute enableRBAC missing in the resource" {
 }
 
 aks_rbac_metadata := {
-    "Policy Code": "PR-AZR-0010-ARM",
+    "Policy Code": "PR-AZR-ARM-AKS-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -263,7 +263,7 @@ aks_rbac_metadata := {
 }
 
 #
-# PR-AZR-0101-ARM
+# PR-AZR-ARM-AKS-006
 #
 
 default aks_aad_azure_rbac = null
@@ -306,7 +306,7 @@ aks_aad_azure_rbac_err = "Managed Azure AD RBAC for AKS cluster is not enabled."
 }
 
 aks_aad_azure_rbac_metadata := {
-    "Policy Code": "PR-AZR-0101-ARM",
+    "Policy Code": "PR-AZR-ARM-AKS-006",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -319,7 +319,7 @@ aks_aad_azure_rbac_metadata := {
 
 
 #
-# PR-AZR-0137-ARM
+# PR-AZR-ARM-AKS-007
 #
 
 default aks_authorized_Ip = null
@@ -358,7 +358,7 @@ aks_authorized_Ip_err = "microsoft.containerservice/managedclusters resource pro
 
 
 aks_authorized_Ip_metadata := {
-    "Policy Code": "PR-AZR-0137-ARM",
+    "Policy Code": "PR-AZR-ARM-AKS-007",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -372,7 +372,7 @@ aks_authorized_Ip_metadata := {
 
 
 #
-# PR-AZR-0138-ARM
+# PR-AZR-ARM-AKS-008
 #
 
 default network_policy = null
@@ -411,7 +411,7 @@ network_policy_err = "microsoft.containerservice/managedclusters resource proper
 
 
 network_policy_metadata := {
-    "Policy Code": "PR-AZR-0138-ARM",
+    "Policy Code": "PR-AZR-ARM-AKS-008",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -424,7 +424,7 @@ network_policy_metadata := {
 
 
 # https://www.danielstechblog.io/disable-the-kubernetes-dashboard-on-azure-kubernetes-service/
-# PR-AZR-0144-ARM
+# PR-AZR-ARM-AKS-009
 #
 
 default aks_kub_dashboard_disabled = null
@@ -463,7 +463,7 @@ aks_kub_dashboard_disabled_err = "Kubernetes Dashboard is currently not disabled
 }
 
 aks_kub_dashboard_disabled_metadata := {
-    "Policy Code": "PR-AZR-0144-ARM",
+    "Policy Code": "PR-AZR-ARM-AKS-009",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

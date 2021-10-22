@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways
 
 #
-# PR-AZR-0011-ARM
+# PR-AZR-ARM-AGW-001
 #
 
 default gw_tls = null
@@ -44,7 +44,7 @@ gw_tls_miss_err = "App gateway attribute sslPolicy.minProtocolVersion is missing
 }
 
 gw_tls_metadata := {
-    "Policy Code": "PR-AZR-0011-ARM",
+    "Policy Code": "PR-AZR-ARM-AGW-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -56,7 +56,7 @@ gw_tls_metadata := {
 }
 
 #
-# PR-AZR-0012-ARM
+# PR-AZR-ARM-AGW-002
 #
 
 default gw_waf = null
@@ -96,7 +96,7 @@ gw_waf_miss_err = "Azure Application Gateway attribute webApplicationFirewallCon
 }
 
 gw_waf_metadata := {
-    "Policy Code": "PR-AZR-0012-ARM",
+    "Policy Code": "PR-AZR-ARM-AGW-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -110,7 +110,7 @@ gw_waf_metadata := {
 
 
 
-# PR-AZR-0125-ARM
+# PR-AZR-ARM-AGW-003
 
 default protocol = null
 azure_attribute_absence ["protocol"] {
@@ -148,7 +148,7 @@ protocol_err = "'httpListeners' property 'protocol' is missing from 'microsoft.n
 }
 
 protocol_metadata := {
-    "Policy Code": "PR-AZR-0125-ARM",
+    "Policy Code": "PR-AZR-ARM-AGW-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -160,7 +160,7 @@ protocol_metadata := {
 }
 
 
-# PR-AZR-0060-ARM
+# PR-AZR-ARM-AGW-004
 
 default frontendPublicIPConfigurationsDisabled = null
 azure_attribute_absence ["frontendPublicIPConfigurationsDisabled"] {
@@ -185,7 +185,7 @@ frontendPublicIPConfigurationsDisabled_err = "Application Gateway is currently a
 }
 
 frontendPublicIPConfigurationsDisabled_metadata := {
-    "Policy Code": "PR-AZR-0060-ARM",
+    "Policy Code": "PR-AZR-ARM-AGW-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -197,7 +197,7 @@ frontendPublicIPConfigurationsDisabled_metadata := {
 }
 
 
-# PR-AZR-0095-ARM
+# PR-AZR-ARM-AGW-005
 
 default backend_https_protocol_enabled = null
 azure_attribute_absence ["backend_https_protocol_enabled"] {
@@ -235,7 +235,7 @@ backend_https_protocol_enabled_err = "'backendHttpSettingsCollection' property '
 }
 
 backend_https_protocol_enabled_metadata := {
-    "Policy Code": "PR-AZR-0095-ARM",
+    "Policy Code": "PR-AZR-ARM-AGW-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -247,7 +247,7 @@ backend_https_protocol_enabled_metadata := {
 }
 
 
-# PR-AZR-0099-ARM
+# PR-AZR-ARM-AGW-006
 
 default secret_certificate_is_in_keyvalut = null
 azure_attribute_absence ["secret_certificate_is_in_keyvalut"] {
@@ -271,7 +271,7 @@ secret_certificate_is_in_keyvalut_err = "Application Gateway is currently not st
 }
 
 secret_certificate_is_in_keyvalut_metadata := {
-    "Policy Code": "PR-AZR-0099-ARM",
+    "Policy Code": "PR-AZR-ARM-AGW-006",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

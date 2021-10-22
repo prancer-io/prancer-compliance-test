@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings
 # https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/resource-manager-diagnostic-settings
 #
-# PR-AZR-0017-ARM
+# PR-AZR-ARM-MNT-002
 #
 
 default log_keyvault = null
@@ -45,7 +45,7 @@ log_keyvault_miss_err = "Azure Keyvault diagnostic settings attribute 'logs' is 
 }
 
 log_keyvault_metadata := {
-    "Policy Code": "PR-AZR-0017-ARM",
+    "Policy Code": "PR-AZR-ARM-MNT-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -57,7 +57,7 @@ log_keyvault_metadata := {
 }
 
 #
-# PR-AZR-0019-ARM
+# PR-AZR-ARM-MNT-003
 #
 
 default log_lbs = null
@@ -103,7 +103,7 @@ log_lbs_miss_err = "Azure Load Balancer diagnostic settings attribute 'logs' is 
 }
 
 log_lbs_metadata := {
-    "Policy Code": "PR-AZR-0019-ARM",
+    "Policy Code": "PR-AZR-ARM-MNT-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -115,7 +115,7 @@ log_lbs_metadata := {
 }
 
 #
-# PR-AZR-0063-ARM
+# PR-AZR-ARM-MNT-004
 #
 
 default log_storage_retention = null
@@ -187,7 +187,7 @@ log_storage_retention_miss_err = "Azure Storage Account diagnostics attribute 'l
 }
 
 log_storage_retention_metadata := {
-    "Policy Code": "PR-AZR-0063-ARM",
+    "Policy Code": "PR-AZR-ARM-MNT-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -199,7 +199,7 @@ log_storage_retention_metadata := {
 }
 
 #
-# PR-AZR-0069-ARM
+# PR-AZR-ARM-MNT-005
 #
 
 default log_blob = null
@@ -246,7 +246,7 @@ log_blob_miss_err = "Azure storage account blob services diagnostic logs attribu
 }
 
 log_blob_metadata := {
-    "Policy Code": "PR-AZR-0069-ARM",
+    "Policy Code": "PR-AZR-ARM-MNT-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -258,7 +258,7 @@ log_blob_metadata := {
 }
 
 #
-# PR-AZR-0070-ARM
+# PR-AZR-ARM-MNT-006
 #
 
 default log_queue = null
@@ -304,7 +304,7 @@ log_queue_miss_err = "Azure storage account queue services diagnostic logs attri
 }
 
 log_queue_metadata := {
-    "Policy Code": "PR-AZR-0070-ARM",
+    "Policy Code": "PR-AZR-ARM-MNT-006",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -316,7 +316,7 @@ log_queue_metadata := {
 }
 
 #
-# PR-AZR-0071-ARM
+# PR-AZR-ARM-MNT-007
 #
 
 default log_table = null
@@ -362,7 +362,7 @@ log_table_miss_err = "Azure storage account table services diagnostic logs attri
 }
 
 log_table_metadata := {
-    "Policy Code": "PR-AZR-0071-ARM",
+    "Policy Code": "PR-AZR-ARM-MNT-007",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

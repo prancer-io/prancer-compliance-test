@@ -2,7 +2,7 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers/firewallrules
 
-# PR-AZR-0151-ARM
+# PR-AZR-ARM-SQL-014
 
 default mysql_ingress_from_any_ip_disabled = null
 azure_attribute_absence ["mysql_ingress_from_any_ip_disabled"] {
@@ -51,7 +51,7 @@ mysql_ingress_from_any_ip_disabled_err = "microsoft.dbformysql/servers/firewallr
 }
 
 mysql_ingress_from_any_ip_disabled_metadata := {
-    "Policy Code": "PR-AZR-0151-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-014",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -64,7 +64,7 @@ mysql_ingress_from_any_ip_disabled_metadata := {
 
 
 
-# PR-AZR-0153-ARM
+# PR-AZR-ARM-SQL-015
 
 default my_logical_sql_ingress_from_any_ip_disabled = null
 azure_attribute_absence ["my_logical_sql_ingress_from_any_ip_disabled"] {
@@ -124,7 +124,7 @@ my_logical_sql_ingress_from_any_ip_disabled_err = "microsoft.dbformysql/servers/
 }
 
 my_logical_sql_ingress_from_any_ip_disabled_metadata := {
-    "Policy Code": "PR-AZR-0153-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-015",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

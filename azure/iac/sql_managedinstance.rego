@@ -7,7 +7,7 @@ package rule
 #
 
 #
-# PR-AZR-0116-ARM
+# PR-AZR-ARM-SQL-041
 #
 
 default sql_mi_public_endpoint_disabled = null
@@ -35,7 +35,7 @@ sql_mi_public_endpoint_disabled_err = "SQL Managed Instance currently have publi
 }
 
 sql_mi_public_endpoint_disabled_metadata := {
-    "Policy Code": "PR-AZR-0116-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-041",
     "Type": "IaC",
     "Product": "",
     "Language": "ARM template",

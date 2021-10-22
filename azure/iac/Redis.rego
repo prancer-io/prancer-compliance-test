@@ -2,7 +2,7 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/Microsoft.Cache/redis
 
-# PR-AZR-0131-ARM
+# PR-AZR-ARM-CCH-001
 
 default enableSslPort = null
 # default is false
@@ -36,7 +36,7 @@ enableSslPort_err = "Redis cache is currently allowing unsecure connection via a
 }
 
 enableSslPort_metadata := {
-    "Policy Code": "PR-AZR-0131-ARM",
+    "Policy Code": "PR-AZR-ARM-CCH-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -51,7 +51,7 @@ enableSslPort_metadata := {
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis/linkedservers
 
-# PR-AZR-0132-ARM
+# PR-AZR-ARM-CCH-002
 
 default serverRole = null
 
@@ -105,7 +105,7 @@ serverRole_err = "Azure Redis Cache linked backup server currently does not have
 }
 
 serverRole_metadata := {
-    "Policy Code": "PR-AZR-0132-ARM",
+    "Policy Code": "PR-AZR-ARM-CCH-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

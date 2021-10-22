@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-06-01/storageaccounts/blobservices/containers
 
 #
-# PR-AZR-0074-ARM
+# PR-AZR-ARM-STR-012
 #
 
 default storage_container_public_access_disabled = null
@@ -47,7 +47,7 @@ storage_container_public_access_disabled_err = "Azure storage account currently 
 }
 
 storage_container_public_access_disabled_metadata := {
-    "Policy Code": "PR-AZR-0074-ARM",
+    "Policy Code": "PR-AZR-ARM-STR-012",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -60,7 +60,7 @@ storage_container_public_access_disabled_metadata := {
 
 
 
-# PR-AZR-0073-ARM
+# PR-AZR-ARM-STR-013
 #
 
 default storage__logical_container_public_access_disabled = null
@@ -113,7 +113,7 @@ storage__logical_container_public_access_disabled_err = "Azure storage account c
 }
 
 storage__logical_container_public_access_disabled_metadata := {
-    "Policy Code": "PR-AZR-0073-ARM",
+    "Policy Code": "PR-AZR-ARM-STR-013",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

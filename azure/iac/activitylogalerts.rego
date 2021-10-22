@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-04-01/activitylogalerts
 
 #
-# PR-AZR-0090-ARM
+# PR-AZR-ARM-MNT-001
 #
 
 default alerts = null
@@ -41,7 +41,7 @@ alerts_err = "Activity log alerts is not enabled" {
 }
 
 alerts_metadata := {
-    "Policy Code": "PR-AZR-0090-ARM",
+    "Policy Code": "PR-AZR-ARM-MNT-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

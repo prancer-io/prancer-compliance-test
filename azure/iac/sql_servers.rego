@@ -4,7 +4,7 @@ package rule
 
 #
 
-# PR-AZR-0128-ARM
+# PR-AZR-ARM-SQL-047
 
 default sql_public_access_disabled = null
 
@@ -43,7 +43,7 @@ sql_public_access_disabled_err = "Public Network Access is currently not disable
 }
 
 sql_public_access_disabled_metadata := {
-    "Policy Code": "PR-AZR-0128-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-047",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -63,7 +63,7 @@ sql_public_access_disabled_metadata := {
 
 #
 
-# PR-AZR-0133-ARM
+# PR-AZR-ARM-SQL-048
 
 default sql_server_login = null
 
@@ -113,7 +113,7 @@ sql_server_login_err = "Azure SQL Server property 'login' is missing from the re
 }
 
 sql_server_login_metadata := {
-    "Policy Code": "PR-AZR-0133-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-048",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -126,7 +126,7 @@ sql_server_login_metadata := {
 
 
 
-# PR-AZR-0200-ARM
+# PR-AZR-ARM-SQL-049
 
 default sql_logical_server_login = null
 
@@ -168,7 +168,7 @@ sql_logical_server_login_err = "Azure SQL Server property 'login' is missing fro
 }
 
 sql_logical_server_login_metadata := {
-    "Policy Code": "PR-AZR-0200-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-049",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -185,7 +185,7 @@ sql_logical_server_login_metadata := {
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/failovergroups
 
-# PR-AZR-0190-ARM
+# PR-AZR-ARM-SQL-050
 
 default fail_over_groups = null
 
@@ -216,7 +216,7 @@ fail_over_groups_err = "Microsoft.sql/servers resource property type.failoverGro
 }
 
 fail_over_groups_metadata := {
-    "Policy Code": "PR-AZR-0190-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-050",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -232,7 +232,7 @@ fail_over_groups_metadata := {
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators
 
-# PR-AZR-0191-ARM
+# PR-AZR-ARM-SQL-051
 
 default sql_server_administrators = null
 
@@ -281,7 +281,7 @@ sql_server_administrators_err = "Microsoft.sql/servers/administrators resource p
 }
 
 sql_server_administrators_metadata := {
-    "Policy Code": "PR-AZR-0191-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-051",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

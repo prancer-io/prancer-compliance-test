@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/keys
 
 #
-# PR-AZR-0130-ARM
+# PR-AZR-ARM-KV-004
 #
 
 default kv_keys_expire = null
@@ -49,7 +49,7 @@ kv_keys_expire_err = "Azure Key Vault keys currently dont have any expiration da
 
 
 kv_keys_expire_metadata := {
-    "Policy Code": "PR-AZR-0130-ARM",
+    "Policy Code": "PR-AZR-ARM-KV-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

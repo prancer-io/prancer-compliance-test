@@ -2,7 +2,7 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults
 
-# PR-AZR-0107-ARM
+# PR-AZR-ARM-KV-001
 
 default KeyVault = null
 
@@ -48,7 +48,7 @@ KeyVault_err = "accessPolicy property 'permissions.keys' or 'permissions.secrets
 }
 
 KeyVault_metadata := {
-    "Policy Code": "PR-AZR-0107-ARM",
+    "Policy Code": "PR-AZR-ARM-KV-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -61,7 +61,7 @@ KeyVault_metadata := {
 
 
 
-# PR-AZR-0108-ARM
+# PR-AZR-ARM-KV-002
 
 default enableSoftDelete = null
 azure_attribute_absence ["enableSoftDelete"] {
@@ -96,7 +96,7 @@ enableSoftDelete_err = "'Soft Delete' setting is currently not enabled for Key V
 }
 
 enableSoftDelete_metadata := {
-    "Policy Code": "PR-AZR-0108-ARM",
+    "Policy Code": "PR-AZR-ARM-KV-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -109,7 +109,7 @@ enableSoftDelete_metadata := {
 
 
 
-# PR-AZR-0109-ARM
+# PR-AZR-ARM-KV-003
 
 default enablePurgeProtection = null
 
@@ -146,7 +146,7 @@ enablePurgeProtection_err = "microsoft.keyvault/vaults resoruce property enableP
 }
 
 enablePurgeProtection_metadata := {
-    "Policy Code": "PR-AZR-0109-ARM",
+    "Policy Code": "PR-AZR-ARM-KV-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

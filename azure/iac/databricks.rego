@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.databricks/workspaces?tabs=json
 
 #
-# PR-AZR-0117-ARM
+# PR-AZR-ARM-DBK-001
 #
 
 default databrics_workspace_has_public_ip_disabled = null
@@ -41,7 +41,7 @@ databrics_workspace_has_public_ip_disabled_err = "Azure Databricks currenty does
 }
 
 databrics_workspace_has_public_ip_disabled_metadata := {
-    "Policy Code": "PR-AZR-0117-ARM",
+    "Policy Code": "PR-AZR-ARM-DBK-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -54,7 +54,7 @@ databrics_workspace_has_public_ip_disabled_metadata := {
 
 
 #
-# PR-AZR-0118-ARM
+# PR-AZR-ARM-DBK-002
 #
 
 default databrics_workspace_has_vnet_integration = null
@@ -92,7 +92,7 @@ databrics_workspace_has_vnet_integration_err = "Azure Databricks currenty does n
 }
 
 databrics_workspace_has_vnet_integration_metadata := {
-    "Policy Code": "PR-AZR-0118-ARM",
+    "Policy Code": "PR-AZR-ARM-DBK-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
