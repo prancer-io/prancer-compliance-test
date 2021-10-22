@@ -21,7 +21,7 @@ Compliance Database: https://github.com/prancer-io/prancer-compliance-test/tree/
 ### Test ID - PR-AZR-0006-ARM
 Title: Azure CNI networking should be enabled in Azure AKS cluster\
 Test Result: **failed**\
-Description : Azure CNI provides the following features over kubenet networking:_x000D__x000D_- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network._x000D_- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB._x000D_- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance._x000D_- Support for Network Policies securing communication between pods._x000D__x000D_This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
+Description : Azure CNI provides the following features over kubenet networking:<br><br>- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network.<br>- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB.<br>- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance.<br>- Support for Network Policies securing communication between pods.<br><br>This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
 
 #### Test Details
 - eval: data.rule.aks_cni_net
@@ -57,7 +57,7 @@ tags
 ### Test ID - PR-AZR-0006-ARM
 Title: Azure CNI networking should be enabled in Azure AKS cluster\
 Test Result: **failed**\
-Description : Azure CNI provides the following features over kubenet networking:_x000D__x000D_- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network._x000D_- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB._x000D_- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance._x000D_- Support for Network Policies securing communication between pods._x000D__x000D_This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
+Description : Azure CNI provides the following features over kubenet networking:<br><br>- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network.<br>- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB.<br>- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance.<br>- Support for Network Policies securing communication between pods.<br><br>This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
 
 #### Test Details
 - eval: data.rule.aks_cni_net
@@ -93,7 +93,7 @@ tags
 ### Test ID - PR-AZR-0006-ARM
 Title: Azure CNI networking should be enabled in Azure AKS cluster\
 Test Result: **passed**\
-Description : Azure CNI provides the following features over kubenet networking:_x000D__x000D_- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network._x000D_- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB._x000D_- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance._x000D_- Support for Network Policies securing communication between pods._x000D__x000D_This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
+Description : Azure CNI provides the following features over kubenet networking:<br><br>- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network.<br>- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB.<br>- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance.<br>- Support for Network Policies securing communication between pods.<br><br>This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
 
 #### Test Details
 - eval: data.rule.aks_cni_net
@@ -129,7 +129,7 @@ tags
 ### Test ID - PR-AZR-0006-ARM
 Title: Azure CNI networking should be enabled in Azure AKS cluster\
 Test Result: **passed**\
-Description : Azure CNI provides the following features over kubenet networking:_x000D__x000D_- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network._x000D_- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB._x000D_- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance._x000D_- Support for Network Policies securing communication between pods._x000D__x000D_This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
+Description : Azure CNI provides the following features over kubenet networking:<br><br>- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network.<br>- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB.<br>- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance.<br>- Support for Network Policies securing communication between pods.<br><br>This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
 
 #### Test Details
 - eval: data.rule.aks_cni_net
@@ -165,7 +165,7 @@ tags
 ### Test ID - PR-AZR-0006-ARM
 Title: Azure CNI networking should be enabled in Azure AKS cluster\
 Test Result: **passed**\
-Description : Azure CNI provides the following features over kubenet networking:_x000D__x000D_- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network._x000D_- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB._x000D_- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance._x000D_- Support for Network Policies securing communication between pods._x000D__x000D_This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
+Description : Azure CNI provides the following features over kubenet networking:<br><br>- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network.<br>- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB.<br>- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance.<br>- Support for Network Policies securing communication between pods.<br><br>This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
 
 #### Test Details
 - eval: data.rule.aks_cni_net
@@ -201,7 +201,7 @@ tags
 ### Test ID - PR-AZR-0006-ARM
 Title: Azure CNI networking should be enabled in Azure AKS cluster\
 Test Result: **failed**\
-Description : Azure CNI provides the following features over kubenet networking:_x000D__x000D_- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network._x000D_- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB._x000D_- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance._x000D_- Support for Network Policies securing communication between pods._x000D__x000D_This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
+Description : Azure CNI provides the following features over kubenet networking:<br><br>- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network.<br>- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB.<br>- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance.<br>- Support for Network Policies securing communication between pods.<br><br>This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
 
 #### Test Details
 - eval: data.rule.aks_cni_net
@@ -237,7 +237,7 @@ tags
 ### Test ID - PR-AZR-0006-ARM
 Title: Azure CNI networking should be enabled in Azure AKS cluster\
 Test Result: **failed**\
-Description : Azure CNI provides the following features over kubenet networking:_x000D__x000D_- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network._x000D_- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB._x000D_- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance._x000D_- Support for Network Policies securing communication between pods._x000D__x000D_This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
+Description : Azure CNI provides the following features over kubenet networking:<br><br>- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network.<br>- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB.<br>- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance.<br>- Support for Network Policies securing communication between pods.<br><br>This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
 
 #### Test Details
 - eval: data.rule.aks_cni_net
@@ -273,7 +273,7 @@ tags
 ### Test ID - PR-AZR-0006-ARM
 Title: Azure CNI networking should be enabled in Azure AKS cluster\
 Test Result: **passed**\
-Description : Azure CNI provides the following features over kubenet networking:_x000D__x000D_- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network._x000D_- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB._x000D_- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance._x000D_- Support for Network Policies securing communication between pods._x000D__x000D_This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
+Description : Azure CNI provides the following features over kubenet networking:<br><br>- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network.<br>- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB.<br>- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance.<br>- Support for Network Policies securing communication between pods.<br><br>This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
 
 #### Test Details
 - eval: data.rule.aks_cni_net
@@ -309,7 +309,7 @@ tags
 ### Test ID - PR-AZR-0006-ARM
 Title: Azure CNI networking should be enabled in Azure AKS cluster\
 Test Result: **passed**\
-Description : Azure CNI provides the following features over kubenet networking:_x000D__x000D_- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network._x000D_- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB._x000D_- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance._x000D_- Support for Network Policies securing communication between pods._x000D__x000D_This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
+Description : Azure CNI provides the following features over kubenet networking:<br><br>- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network.<br>- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB.<br>- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance.<br>- Support for Network Policies securing communication between pods.<br><br>This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
 
 #### Test Details
 - eval: data.rule.aks_cni_net
@@ -345,7 +345,7 @@ tags
 ### Test ID - PR-AZR-0006-ARM
 Title: Azure CNI networking should be enabled in Azure AKS cluster\
 Test Result: **passed**\
-Description : Azure CNI provides the following features over kubenet networking:_x000D__x000D_- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network._x000D_- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB._x000D_- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance._x000D_- Support for Network Policies securing communication between pods._x000D__x000D_This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
+Description : Azure CNI provides the following features over kubenet networking:<br><br>- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network.<br>- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB.<br>- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance.<br>- Support for Network Policies securing communication between pods.<br><br>This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
 
 #### Test Details
 - eval: data.rule.aks_cni_net
@@ -381,7 +381,7 @@ tags
 ### Test ID - PR-AZR-0006-ARM
 Title: Azure CNI networking should be enabled in Azure AKS cluster\
 Test Result: **failed**\
-Description : Azure CNI provides the following features over kubenet networking:_x000D__x000D_- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network._x000D_- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB._x000D_- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance._x000D_- Support for Network Policies securing communication between pods._x000D__x000D_This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
+Description : Azure CNI provides the following features over kubenet networking:<br><br>- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network.<br>- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB.<br>- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance.<br>- Support for Network Policies securing communication between pods.<br><br>This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found.\
 
 #### Test Details
 - eval: data.rule.aks_cni_net
@@ -1209,7 +1209,7 @@ tags
 ### Test ID - PR-AZR-0009-ARM
 Title: Azure AKS cluster pool profile count should contain 3 nodes or more\
 Test Result: **passed**\
-Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)_x000D__x000D_This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
+Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)<br><br>This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
 
 #### Test Details
 - eval: data.rule.aks_nodes
@@ -1245,7 +1245,7 @@ tags
 ### Test ID - PR-AZR-0009-ARM
 Title: Azure AKS cluster pool profile count should contain 3 nodes or more\
 Test Result: **passed**\
-Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)_x000D__x000D_This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
+Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)<br><br>This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
 
 #### Test Details
 - eval: data.rule.aks_nodes
@@ -1281,7 +1281,7 @@ tags
 ### Test ID - PR-AZR-0009-ARM
 Title: Azure AKS cluster pool profile count should contain 3 nodes or more\
 Test Result: **passed**\
-Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)_x000D__x000D_This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
+Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)<br><br>This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
 
 #### Test Details
 - eval: data.rule.aks_nodes
@@ -1317,7 +1317,7 @@ tags
 ### Test ID - PR-AZR-0009-ARM
 Title: Azure AKS cluster pool profile count should contain 3 nodes or more\
 Test Result: **passed**\
-Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)_x000D__x000D_This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
+Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)<br><br>This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
 
 #### Test Details
 - eval: data.rule.aks_nodes
@@ -1353,7 +1353,7 @@ tags
 ### Test ID - PR-AZR-0009-ARM
 Title: Azure AKS cluster pool profile count should contain 3 nodes or more\
 Test Result: **passed**\
-Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)_x000D__x000D_This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
+Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)<br><br>This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
 
 #### Test Details
 - eval: data.rule.aks_nodes
@@ -1389,7 +1389,7 @@ tags
 ### Test ID - PR-AZR-0009-ARM
 Title: Azure AKS cluster pool profile count should contain 3 nodes or more\
 Test Result: **passed**\
-Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)_x000D__x000D_This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
+Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)<br><br>This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
 
 #### Test Details
 - eval: data.rule.aks_nodes
@@ -1425,7 +1425,7 @@ tags
 ### Test ID - PR-AZR-0009-ARM
 Title: Azure AKS cluster pool profile count should contain 3 nodes or more\
 Test Result: **passed**\
-Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)_x000D__x000D_This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
+Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)<br><br>This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
 
 #### Test Details
 - eval: data.rule.aks_nodes
@@ -1461,7 +1461,7 @@ tags
 ### Test ID - PR-AZR-0009-ARM
 Title: Azure AKS cluster pool profile count should contain 3 nodes or more\
 Test Result: **passed**\
-Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)_x000D__x000D_This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
+Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)<br><br>This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
 
 #### Test Details
 - eval: data.rule.aks_nodes
@@ -1497,7 +1497,7 @@ tags
 ### Test ID - PR-AZR-0009-ARM
 Title: Azure AKS cluster pool profile count should contain 3 nodes or more\
 Test Result: **passed**\
-Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)_x000D__x000D_This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
+Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)<br><br>This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
 
 #### Test Details
 - eval: data.rule.aks_nodes
@@ -1533,7 +1533,7 @@ tags
 ### Test ID - PR-AZR-0009-ARM
 Title: Azure AKS cluster pool profile count should contain 3 nodes or more\
 Test Result: **passed**\
-Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)_x000D__x000D_This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
+Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)<br><br>This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
 
 #### Test Details
 - eval: data.rule.aks_nodes
@@ -1569,7 +1569,7 @@ tags
 ### Test ID - PR-AZR-0009-ARM
 Title: Azure AKS cluster pool profile count should contain 3 nodes or more\
 Test Result: **failed**\
-Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)_x000D__x000D_This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
+Description : Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)<br><br>This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes.\
 
 #### Test Details
 - eval: data.rule.aks_nodes
@@ -1605,7 +1605,7 @@ tags
 ### Test ID - PR-AZR-0010-ARM
 Title: Azure AKS enable role-based access control (RBAC) should be enforced\
 Test Result: **passed**\
-Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster RBAC setting and alerts if disabled.\
+Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster.<br><br>This policy checks your AKS cluster RBAC setting and alerts if disabled.\
 
 #### Test Details
 - eval: data.rule.aks_rbac
@@ -1641,7 +1641,7 @@ tags
 ### Test ID - PR-AZR-0010-ARM
 Title: Azure AKS enable role-based access control (RBAC) should be enforced\
 Test Result: **passed**\
-Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster RBAC setting and alerts if disabled.\
+Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster.<br><br>This policy checks your AKS cluster RBAC setting and alerts if disabled.\
 
 #### Test Details
 - eval: data.rule.aks_rbac
@@ -1677,7 +1677,7 @@ tags
 ### Test ID - PR-AZR-0010-ARM
 Title: Azure AKS enable role-based access control (RBAC) should be enforced\
 Test Result: **passed**\
-Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster RBAC setting and alerts if disabled.\
+Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster.<br><br>This policy checks your AKS cluster RBAC setting and alerts if disabled.\
 
 #### Test Details
 - eval: data.rule.aks_rbac
@@ -1713,7 +1713,7 @@ tags
 ### Test ID - PR-AZR-0010-ARM
 Title: Azure AKS enable role-based access control (RBAC) should be enforced\
 Test Result: **passed**\
-Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster RBAC setting and alerts if disabled.\
+Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster.<br><br>This policy checks your AKS cluster RBAC setting and alerts if disabled.\
 
 #### Test Details
 - eval: data.rule.aks_rbac
@@ -1749,7 +1749,7 @@ tags
 ### Test ID - PR-AZR-0010-ARM
 Title: Azure AKS enable role-based access control (RBAC) should be enforced\
 Test Result: **passed**\
-Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster RBAC setting and alerts if disabled.\
+Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster.<br><br>This policy checks your AKS cluster RBAC setting and alerts if disabled.\
 
 #### Test Details
 - eval: data.rule.aks_rbac
@@ -1785,7 +1785,7 @@ tags
 ### Test ID - PR-AZR-0010-ARM
 Title: Azure AKS enable role-based access control (RBAC) should be enforced\
 Test Result: **failed**\
-Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster RBAC setting and alerts if disabled.\
+Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster.<br><br>This policy checks your AKS cluster RBAC setting and alerts if disabled.\
 
 #### Test Details
 - eval: data.rule.aks_rbac
@@ -1821,7 +1821,7 @@ tags
 ### Test ID - PR-AZR-0010-ARM
 Title: Azure AKS enable role-based access control (RBAC) should be enforced\
 Test Result: **passed**\
-Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster RBAC setting and alerts if disabled.\
+Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster.<br><br>This policy checks your AKS cluster RBAC setting and alerts if disabled.\
 
 #### Test Details
 - eval: data.rule.aks_rbac
@@ -1857,7 +1857,7 @@ tags
 ### Test ID - PR-AZR-0010-ARM
 Title: Azure AKS enable role-based access control (RBAC) should be enforced\
 Test Result: **passed**\
-Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster RBAC setting and alerts if disabled.\
+Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster.<br><br>This policy checks your AKS cluster RBAC setting and alerts if disabled.\
 
 #### Test Details
 - eval: data.rule.aks_rbac
@@ -1893,7 +1893,7 @@ tags
 ### Test ID - PR-AZR-0010-ARM
 Title: Azure AKS enable role-based access control (RBAC) should be enforced\
 Test Result: **failed**\
-Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster RBAC setting and alerts if disabled.\
+Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster.<br><br>This policy checks your AKS cluster RBAC setting and alerts if disabled.\
 
 #### Test Details
 - eval: data.rule.aks_rbac
@@ -1929,7 +1929,7 @@ tags
 ### Test ID - PR-AZR-0010-ARM
 Title: Azure AKS enable role-based access control (RBAC) should be enforced\
 Test Result: **failed**\
-Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster RBAC setting and alerts if disabled.\
+Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster.<br><br>This policy checks your AKS cluster RBAC setting and alerts if disabled.\
 
 #### Test Details
 - eval: data.rule.aks_rbac
@@ -1965,7 +1965,7 @@ tags
 ### Test ID - PR-AZR-0010-ARM
 Title: Azure AKS enable role-based access control (RBAC) should be enforced\
 Test Result: **failed**\
-Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x005F_x000D_ _x005F_x000D_ This policy checks your AKS cluster RBAC setting and alerts if disabled.\
+Description : To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster.<br><br>This policy checks your AKS cluster RBAC setting and alerts if disabled.\
 
 #### Test Details
 - eval: data.rule.aks_rbac
