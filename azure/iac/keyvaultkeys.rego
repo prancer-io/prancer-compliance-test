@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/keys
 
 #
-# PR-AZR-0130-ARM
+# PR-AZR-ARM-KV-004
 #
 
 default kv_keys_expire = null
@@ -16,11 +16,34 @@ azure_attribute_absence["kv_keys_expire"] {
     not resource.properties.rotationPolicy.attributes.expiryTime
 }
 
+source_path[{"kv_keys_expire":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults/keys"
+    resource.properties.attributes.enabled != false
+    not resource.properties.attributes.exp
+    not resource.properties.rotationPolicy.attributes.expiryTime
+    metadata:= {
+        "resource_path": [["resources",i,"properties","attributes","exp"]]
+    }
+}
+
 azure_issue["kv_keys_expire"] {
     resource := input.resources[_]
+    lower(resource.type) == "microsoft.keyvault/vaults/keys"
     resource.properties.attributes.enabled != false
     to_number(resource.properties.attributes.exp) < 0
     count(resource.properties.rotationPolicy.attributes.expiryTime) == 0
+}
+
+source_path[{"kv_keys_expire":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults/keys"
+    resource.properties.attributes.enabled != false
+    to_number(resource.properties.attributes.exp) < 0
+    count(resource.properties.rotationPolicy.attributes.expiryTime) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","attributes","exp"]]
+    }
 }
 
 kv_keys_expire {
@@ -49,7 +72,7 @@ kv_keys_expire_err = "Azure Key Vault keys currently dont have any expiration da
 
 
 kv_keys_expire_metadata := {
-    "Policy Code": "PR-AZR-0130-ARM",
+    "Policy Code": "PR-AZR-ARM-KV-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

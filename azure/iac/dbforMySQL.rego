@@ -2,7 +2,7 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers
 
-# PR-AZR-0147-ARM
+# PR-AZR-ARM-SQL-016
 
 default ssl_enforcement = null
 azure_attribute_absence ["ssl_enforcement"] {
@@ -11,10 +11,28 @@ azure_attribute_absence ["ssl_enforcement"] {
     not resource.properties.sslEnforcement
 }
 
+source_path[{"ssl_enforcement":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    not resource.properties.sslEnforcement
+    metadata:= {
+        "resource_path": [["resources",i,"properties","sslEnforcement"]]
+    }
+}
+
 azure_issue ["ssl_enforcement"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbformysql/servers"
     lower(resource.properties.sslEnforcement) != "enabled"
+}
+
+source_path[{"ssl_enforcement":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    lower(resource.properties.sslEnforcement) != "enabled"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","sslEnforcement"]]
+    }
 }
 
 ssl_enforcement {
@@ -39,7 +57,7 @@ ssl_enforcement_err = "Either ssl enforcement is absent or disabled on MySQL ser
 }
 
 ssl_enforcement_metadata := {
-    "Policy Code": "PR-AZR-0147-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-016",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

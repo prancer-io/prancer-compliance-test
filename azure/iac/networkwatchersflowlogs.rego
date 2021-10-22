@@ -5,7 +5,7 @@ package rule
 #
 
 
-# PR-AZR-0049-ARM
+# PR-AZR-ARM-NTW-001
 #
 
 default netwatchFlowlogs = null
@@ -16,11 +16,29 @@ azure_attribute_absence["netwatchFlowlogs"] {
     not resource.properties.enabled
 }
 
+source_path[{"netwatchFlowlogs":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
+    not resource.properties.enabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","enabled"]]
+    }
+}
+
 
 azure_issue["netwatchFlowlogs"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
     resource.properties.enabled != true
+}
+
+source_path[{"netwatchFlowlogs":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
+    resource.properties.enabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","enabled"]]
+    }
 }
 
 netwatchFlowlogs {
@@ -48,7 +66,7 @@ netwatchFlowlogs_err = "Azure Network Watcher NSG flow log is currently not enab
 
 
 netwatchFlowlogs_metadata := {
-    "Policy Code": "PR-AZR-0049-ARM",
+    "Policy Code": "PR-AZR-ARM-NTW-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -59,7 +77,7 @@ netwatchFlowlogs_metadata := {
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs"
 }
 
-# PR-AZR-0050-ARM
+# PR-AZR-ARM-NTW-002
 #
 
 default netwatch_logs = null
@@ -71,11 +89,30 @@ azure_attribute_absence["netwatch_logs"] {
     not resource.properties.flowAnalyticsConfiguration.networkWatcherFlowAnalyticsConfiguration.enabled
 }
 
+source_path[{"netwatch_logs":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
+    not resource.properties.flowAnalyticsConfiguration.networkWatcherFlowAnalyticsConfiguration.enabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","flowAnalyticsConfiguration","networkWatcherFlowAnalyticsConfiguration","enabled"]]
+    }
+}
+
 azure_issue["netwatch_logs"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
     resource.properties.flowAnalyticsConfiguration.networkWatcherFlowAnalyticsConfiguration.enabled == false
 }
+
+source_path[{"netwatch_logs":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
+    resource.properties.flowAnalyticsConfiguration.networkWatcherFlowAnalyticsConfiguration.enabled == false
+    metadata:= {
+        "resource_path": [["resources",i,"properties","flowAnalyticsConfiguration","networkWatcherFlowAnalyticsConfiguration","enabled"]]
+    }
+}
+
 
 netwatch_logs {
     lower(input.resources[_].type) == "microsoft.network/networkwatchers/flowlogs"
@@ -102,7 +139,7 @@ netwatch_logs_err = "Azure Network Watcher NSG traffic analytics is currently no
 
 
 netwatch_logs_metadata := {
-    "Policy Code": "PR-AZR-0050-ARM",
+    "Policy Code": "PR-AZR-ARM-NTW-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -114,7 +151,7 @@ netwatch_logs_metadata := {
 }
 
 #
-# PR-AZR-0051-ARM
+# PR-AZR-ARM-NTW-003
 #
 
 default netwatch_log_retention = null
@@ -125,10 +162,29 @@ azure_attribute_absence["netwatch_log_retention"] {
     not resource.properties.retentionPolicy.enabled
 }
 
+source_path[{"netwatch_log_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
+    not resource.properties.retentionPolicy.enabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","retentionPolicy","enabled"]]
+    }
+}
+
+
 azure_attribute_absence["netwatch_log_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
     not resource.properties.retentionPolicy.days
+}
+
+source_path[{"netwatch_log_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
+    not resource.properties.retentionPolicy.days
+    metadata:= {
+        "resource_path": [["resources",i,"properties","retentionPolicy","days"]]
+    }
 }
 
 azure_issue["netwatch_log_retention"] {
@@ -137,10 +193,28 @@ azure_issue["netwatch_log_retention"] {
     resource.properties.retentionPolicy.enabled != true
 }
 
+source_path[{"netwatch_log_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
+    resource.properties.retentionPolicy.enabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","retentionPolicy","enabled"]]
+    }
+}
+
 azure_issue["netwatch_log_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
     to_number(resource.properties.retentionPolicy.days) < 90
+}
+
+source_path[{"netwatch_log_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/networkwatchers/flowlogs"
+    to_number(resource.properties.retentionPolicy.days) < 90
+    metadata:= {
+        "resource_path": [["resources",i,"properties","retentionPolicy","days"]]
+    }
 }
 
 netwatch_log_retention {
@@ -167,7 +241,7 @@ netwatch_log_retention_err = "Azure Network Watcher NSG flow logs retention is c
 
 
 netwatch_log_retention_metadata := {
-    "Policy Code": "PR-AZR-0051-ARM",
+    "Policy Code": "PR-AZR-ARM-NTW-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

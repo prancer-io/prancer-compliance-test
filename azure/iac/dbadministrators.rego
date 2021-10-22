@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2019-06-01-preview/servers/administrators
 
 #
-# PR-AZR-0085-ARM
+# PR-AZR-ARM-SQL-001
 #
 
 default sql_server_ad_admin = null
@@ -14,10 +14,28 @@ azure_attribute_absence["sql_server_ad_admin"] {
     not resource.properties.administratorType
 }
 
+source_path[{"sql_server_ad_admin":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/administrators"
+    not resource.properties.administratorType
+    metadata:= {
+        "resource_path": [["resources",i,"properties","administratorType"]]
+    }
+}
+
 azure_issue["sql_server_ad_admin"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/administrators"
     lower(resource.properties.administratorType) != "activedirectory"
+}
+
+source_path[{"sql_server_ad_admin":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/administrators"
+    lower(resource.properties.administratorType) != "activedirectory"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","administratorType"]]
+    }
 }
 
 sql_server_ad_admin {
@@ -43,7 +61,7 @@ sql_server_ad_admin_miss_err = "SQL servers administrators attribute administrat
 }
 
 sql_server_ad_admin_metadata := {
-    "Policy Code": "PR-AZR-0085-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -55,7 +73,7 @@ sql_server_ad_admin_metadata := {
 }
 
 
-# PR-AZR-0088-ARM
+# PR-AZR-ARM-SQL-002
 #
 
 default sql_logical_server_ad_admin = null
@@ -68,12 +86,34 @@ azure_attribute_absence["sql_logical_server_ad_admin"] {
     not sql_resource.properties.administratorType
 }
 
+source_path[{"sql_logical_server_ad_admin":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resource := resource.resources[j]
+    lower(sql_resource.type) == "administrators"
+    not sql_resource.properties.administratorType
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","administratorType"]]
+    }
+}
+
 azure_issue["sql_logical_server_ad_admin"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
     sql_resource := resource.resources[_]
     lower(sql_resource.type) == "administrators"
     lower(sql_resource.properties.administratorType) != "activedirectory"
+}
+
+source_path[{"sql_logical_server_ad_admin":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resource := resource.resources[j]
+    lower(sql_resource.type) == "administrators"
+    lower(sql_resource.properties.administratorType) != "activedirectory"
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","administratorType"]]
+    }
 }
 
 sql_logical_server_ad_admin {
@@ -100,7 +140,7 @@ sql_logical_server_ad_admin_err = "SQL servers currently does not have Azure Act
 }
 
 sql_logical_server_ad_admin_metadata := {
-    "Policy Code": "PR-AZR-0088-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -114,7 +154,7 @@ sql_logical_server_ad_admin_metadata := {
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/administrators?tabs=json
 
 #
-# PR-AZR-0086-ARM
+# PR-AZR-ARM-SQL-003
 #
 # SQL Managed Instance is not available for Terraform yet. see: https://github.com/hashicorp/terraform-provider-azurerm/issues/1747
 default sql_managedinstances_ad_admin = null
@@ -125,10 +165,29 @@ azure_attribute_absence["sql_managedinstances_ad_admin"] {
     not resource.properties.administratorType
 }
 
+source_path[{"sql_server_ad_admin":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/managedinstances/administrators"
+    not resource.properties.administratorType
+    metadata:= {
+        "resource_path": [["resources",i,"properties","administratorType"]]
+    }
+}
+
+
 azure_issue["sql_managedinstances_ad_admin"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/managedinstances/administrators"
     lower(resource.properties.administratorType) != "activedirectory"
+}
+
+source_path[{"sql_server_ad_admin":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/managedinstances/administrators"
+    lower(resource.properties.administratorType) != "activedirectory"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","administratorType"]]
+    }
 }
 
 sql_managedinstances_ad_admin {
@@ -154,7 +213,7 @@ sql_managedinstances_ad_admin_miss_err = "SQL managedInstances administrators at
 }
 
 sql_managedinstances_ad_admin_metadata := {
-    "Policy Code": "PR-AZR-0086-ARM",
+    "PR-AZR-ARM-SQL-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

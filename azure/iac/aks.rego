@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters
 
 #
-# PR-AZR-0006-ARM
+# PR-AZR-ARM-AKS-001
 #
 
 default aks_cni_net = null
@@ -14,10 +14,30 @@ azure_attribute_absence["aks_cni_net"] {
     not resource.properties.networkProfile.networkPlugin
 }
 
+source_path[{"aks_cni_net":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.networkProfile.networkPlugin
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkProfile","networkPlugin"]]
+    }
+}
+
+
 azure_issue["aks_cni_net"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     lower(resource.properties.networkProfile.networkPlugin) != "azure"
+}
+
+
+source_path[{"aks_cni_net":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    lower(resource.properties.networkProfile.networkPlugin) != "azure"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkProfile","networkPlugin"]]
+    }
 }
 
 aks_cni_net {
@@ -43,7 +63,7 @@ aks_cni_net_miss_err = "AKS cluster attribute networkProfile.networkPlugin missi
 }
 
 aks_cni_net_metadata := {
-    "Policy Code": "PR-AZR-0006-ARM",
+    "Policy Code": "PR-AZR-ARM-AKS-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -55,7 +75,7 @@ aks_cni_net_metadata := {
 }
 
 #
-# PR-AZR-0007-ARM
+# PR-AZR-ARM-AKS-002
 #
 
 default aks_http_routing = null
@@ -66,10 +86,29 @@ azure_attribute_absence["aks_http_routing"] {
     not resource.properties.addonProfiles.httpApplicationRouting.enabled
 }
 
+
+source_path[{"aks_http_routing":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.addonProfiles.httpApplicationRouting.enabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","addonProfiles","httpApplicationRouting","enabled"]]
+    }
+}
+
 azure_issue["aks_http_routing"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     resource.properties.addonProfiles.httpApplicationRouting.enabled == true
+}
+
+source_path[{"aks_http_routing":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    resource.properties.addonProfiles.httpApplicationRouting.enabled == true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","addonProfiles","httpApplicationRouting","enabled"]]
+    }
 }
 
 aks_http_routing {
@@ -95,7 +134,7 @@ aks_http_routing_miss_err = "AKS cluster attribute addonProfiles.httpApplication
 }
 
 aks_http_routing_metadata := {
-    "Policy Code": "PR-AZR-0007-ARM",
+    "Policy Code": "PR-AZR-ARM-AKS-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -107,7 +146,7 @@ aks_http_routing_metadata := {
 }
 
 #
-# PR-AZR-0008-ARM
+# PR-AZR-ARM-AKS-003
 #
 
 default aks_monitoring = null
@@ -118,10 +157,28 @@ azure_attribute_absence["aks_monitoring"] {
     not resource.properties.addonProfiles.omsagent.enabled
 }
 
+source_path[{"aks_monitoring":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.addonProfiles.omsagent.enabled   
+    metadata:= {
+        "resource_path": [["resources",i,"properties","addonProfiles","omsagent","enabled"]]
+    }
+}
+
 azure_issue["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     input.properties.addonProfiles.omsagent.enabled != true
+}
+
+source_path[{"aks_monitoring":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    input.properties.addonProfiles.omsagent.enabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","addonProfiles","omsagent","enabled"]]
+    }
 }
 
 aks_monitoring {
@@ -147,7 +204,7 @@ aks_monitoring_miss_err = "AKS cluster attribute addonProfiles.omsagent missing 
 }
 
 aks_monitoring_metadata := {
-    "Policy Code": "PR-AZR-0008-ARM",
+    "Policy Code": "PR-AZR-ARM-AKS-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -159,7 +216,7 @@ aks_monitoring_metadata := {
 }
 
 #
-# PR-AZR-0009-ARM
+# PR-AZR-ARM-AKS-004
 #
 
 default aks_nodes = null
@@ -170,11 +227,30 @@ azure_attribute_absence["aks_nodes"] {
     not resource.properties.agentPoolProfiles
 }
 
+source_path[{"aks_nodes":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.agentPoolProfiles
+    metadata:= {
+        "resource_path": [["resources",i,"properties","agentPoolProfiles"]]
+    }
+}
+
 azure_issue["aks_nodes"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     min([ c | c := resource.properties.agentPoolProfiles[_].count]) < 3
 }
+
+source_path[{"aks_nodes":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    min([ c | c := resource.properties.agentPoolProfiles[j].count]) < 3
+    metadata:= {
+        "resource_path": [["resources",i,"properties","agentPoolProfiles",j,"count"]]
+    }
+}
+
 
 aks_nodes {
     lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
@@ -199,7 +275,7 @@ aks_nodes_miss_err = "AKS cluster attribute agentPoolProfiles missing in the res
 }
 
 aks_nodes_metadata := {
-    "Policy Code": "PR-AZR-0009-ARM",
+    "Policy Code": "PR-AZR-ARM-AKS-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -211,7 +287,7 @@ aks_nodes_metadata := {
 }
 
 #
-# PR-AZR-0010-ARM
+# PR-AZR-ARM-AKS-005
 #
 
 default aks_rbac = null
@@ -222,10 +298,28 @@ azure_attribute_absence["aks_rbac"] {
     not resource.properties.enableRBAC
 }
 
+source_path[{"aks_rbac":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.enableRBAC
+    metadata:= {
+        "resource_path": [["resources",i,"properties","enableRBAC"]]
+    }
+}
+
 azure_issue["aks_rbac"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     resource.properties.enableRBAC != true
+}
+
+source_path[{"aks_rbac":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    resource.properties.enableRBAC != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","enableRBAC"]]
+    }
 }
 
 aks_rbac {
@@ -251,7 +345,7 @@ aks_rbac_miss_err = "AKS cluster attribute enableRBAC missing in the resource" {
 }
 
 aks_rbac_metadata := {
-    "Policy Code": "PR-AZR-0010-ARM",
+    "Policy Code": "PR-AZR-ARM-AKS-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -263,7 +357,7 @@ aks_rbac_metadata := {
 }
 
 #
-# PR-AZR-0101-ARM
+# PR-AZR-ARM-AKS-006
 #
 
 default aks_aad_azure_rbac = null
@@ -274,10 +368,28 @@ azure_issue["aks_aad_azure_rbac"] {
     not resource.properties.aadProfile.managed
 }
 
+source_path[{"aks_aad_azure_rbac":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.aadProfile.managed
+    metadata:= {
+        "resource_path": [["resources",i,"properties","aadProfile","managed"]]
+    }
+}
+
 azure_issue["aks_aad_azure_rbac"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     not resource.properties.aadProfile.enableAzureRBAC
+}
+
+source_path[{"aks_aad_azure_rbac":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.aadProfile.enableAzureRBAC
+    metadata:= {
+        "resource_path": [["resources",i,"properties","aadProfile","enableAzureRBAC"]]
+    }
 }
 
 azure_issue["aks_aad_azure_rbac"] {
@@ -286,11 +398,32 @@ azure_issue["aks_aad_azure_rbac"] {
     resource.properties.aadProfile.managed != true
 }
 
+
+source_path[{"aks_aad_azure_rbac":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    resource.properties.aadProfile.managed != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","aadProfile","managed"]]
+    }
+}
+
 azure_issue["aks_aad_azure_rbac"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     resource.properties.aadProfile.enableAzureRBAC != true
 }
+
+
+source_path[{"aks_aad_azure_rbac":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    resource.properties.aadProfile.enableAzureRBAC != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","aadProfile","enableAzureRBAC"]]
+    }
+}
+
 
 aks_aad_azure_rbac {
     lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
@@ -306,7 +439,7 @@ aks_aad_azure_rbac_err = "Managed Azure AD RBAC for AKS cluster is not enabled."
 }
 
 aks_aad_azure_rbac_metadata := {
-    "Policy Code": "PR-AZR-0101-ARM",
+    "Policy Code": "PR-AZR-ARM-AKS-006",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -319,7 +452,7 @@ aks_aad_azure_rbac_metadata := {
 
 
 #
-# PR-AZR-0137-ARM
+# PR-AZR-ARM-AKS-007
 #
 
 default aks_authorized_Ip = null
@@ -330,11 +463,30 @@ azure_attribute_absence["aks_authorized_Ip"] {
     not resource.properties.apiServerAccessProfile.authorizedIPRanges
 }
 
+source_path[{"aks_authorized_Ip":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.apiServerAccessProfile.authorizedIPRanges
+    metadata:= {
+        "resource_path": [["resources",i,"properties","apiServerAccessProfile","authorizedIPRanges"]]
+    }
+}
+
 azure_issue["aks_authorized_Ip"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     count(resource.properties.apiServerAccessProfile.authorizedIPRanges) == 0
 }
+
+source_path[{"aks_authorized_Ip":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    count(resource.properties.apiServerAccessProfile.authorizedIPRanges) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","apiServerAccessProfile","authorizedIPRanges"]]
+    }
+}
+
 
 aks_authorized_Ip {
     lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
@@ -358,7 +510,7 @@ aks_authorized_Ip_err = "microsoft.containerservice/managedclusters resource pro
 
 
 aks_authorized_Ip_metadata := {
-    "Policy Code": "PR-AZR-0137-ARM",
+    "Policy Code": "PR-AZR-ARM-AKS-007",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -372,7 +524,7 @@ aks_authorized_Ip_metadata := {
 
 
 #
-# PR-AZR-0138-ARM
+# PR-AZR-ARM-AKS-008
 #
 
 default network_policy = null
@@ -383,10 +535,28 @@ azure_attribute_absence["network_policy"] {
     not resource.properties.networkProfile.networkPolicy
 }
 
+source_path[{"network_policy":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.networkProfile.networkPolicy
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkProfile","networkPolicy"]]
+    }
+}
+
 azure_issue["network_policy"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     lower(resource.properties.networkProfile.networkPolicy) != "azure"
+}
+
+source_path[{"network_policy":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    lower(resource.properties.networkProfile.networkPolicy) != "azure"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkProfile","networkPolicy"]]
+    }
 }
 
 network_policy {
@@ -411,7 +581,7 @@ network_policy_err = "microsoft.containerservice/managedclusters resource proper
 
 
 network_policy_metadata := {
-    "Policy Code": "PR-AZR-0138-ARM",
+    "Policy Code": "PR-AZR-ARM-AKS-008",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -424,7 +594,7 @@ network_policy_metadata := {
 
 
 # https://www.danielstechblog.io/disable-the-kubernetes-dashboard-on-azure-kubernetes-service/
-# PR-AZR-0144-ARM
+# PR-AZR-ARM-AKS-009
 #
 
 default aks_kub_dashboard_disabled = null
@@ -435,11 +605,31 @@ azure_attribute_absence["aks_kub_dashboard_disabled"] {
     not resource.properties.addonProfiles.kubeDashboard.enabled
 }
 
+
+source_path[{"aks_kub_dashboard_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not resource.properties.addonProfiles.kubeDashboard.enabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","addonProfiles","kubeDashboard","enabled"]]
+    }
+}
+
 azure_issue["aks_kub_dashboard_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
     resource.properties.addonProfiles.kubeDashboard.enabled != false
 }
+
+source_path[{"aks_kub_dashboard_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    resource.properties.addonProfiles.kubeDashboard.enabled != false
+    metadata:= {
+        "resource_path": [["resources",i,"properties","addonProfiles","kubeDashboard","enabled"]]
+    }
+}
+
 
 
 aks_kub_dashboard_disabled {
@@ -463,7 +653,7 @@ aks_kub_dashboard_disabled_err = "Kubernetes Dashboard is currently not disabled
 }
 
 aks_kub_dashboard_disabled_metadata := {
-    "Policy Code": "PR-AZR-0144-ARM",
+    "Policy Code": "PR-AZR-ARM-AKS-009",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

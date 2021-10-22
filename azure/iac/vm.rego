@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines
 
 #
-# PR-AZR-0065-ARM
+# PR-AZR-ARM-VM-001
 #
 
 default vm_aset = null
@@ -12,6 +12,15 @@ azure_issue["vm_aset"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.compute/virtualmachines"
     not resource.properties.availabilitySet
+}
+
+source_path[{"vm_aset":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.compute/virtualmachines"
+    not resource.properties.availabilitySet
+    metadata:= {
+        "resource_path": [["resources",i,"properties","availabilitySet"]]
+    }
 }
 
 vm_aset {
@@ -28,7 +37,7 @@ vm_aset_err = "Azure Virtual Machine is not assigned to an availability set" {
 }
 
 vm_aset_metadata := {
-    "Policy Code": "PR-AZR-0065-ARM",
+    "Policy Code": "PR-AZR-ARM-VM-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -42,7 +51,7 @@ vm_aset_metadata := {
 
 
 
-# PR-AZR-0136-ARM
+# PR-AZR-ARM-VM-002
 #
 
 default linux_configuration = null
@@ -53,6 +62,15 @@ azure_attribute_absence["linux_configuration"] {
     not resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication
 }
 
+source_path[{"linux_configuration":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.compute/virtualmachines"
+    not resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication
+    metadata:= {
+        "resource_path": [["resources",i,"properties","osProfile","linuxConfiguration","disablePasswordAuthentication"]]
+    }
+}
+
 
 azure_issue["linux_configuration"] {
     resource := input.resources[_]
@@ -60,6 +78,14 @@ azure_issue["linux_configuration"] {
     resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication != true
 }
 
+source_path[{"linux_configuration":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.compute/virtualmachines"
+    resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","osProfile","linuxConfiguration","disablePasswordAuthentication"]]
+    }
+}
 
 
 linux_configuration {
@@ -84,7 +110,7 @@ linux_configuration_err = "microsoft.compute/virtualmachines resource property l
 }
 
 linux_configuration_metadata := {
-    "Policy Code": "PR-AZR-0136-ARM",
+    "Policy Code": "PR-AZR-ARM-VM-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

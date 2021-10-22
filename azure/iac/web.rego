@@ -2,7 +2,7 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites
 
-# PR-AZR-0139-ARM
+# PR-AZR-ARM-WEB-001
 
 default https_only = null
 
@@ -12,10 +12,28 @@ azure_attribute_absence ["https_only"] {
     not resource.properties.httpsOnly
 }
 
+source_path[{"https_only":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.httpsOnly
+    metadata:= {
+        "resource_path": [["resources",i,"properties","httpsOnly"]]
+    }
+}
+
 azure_issue ["https_only"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     resource.properties.httpsOnly != true
+}
+
+source_path[{"https_only":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.httpsOnly != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","httpsOnly"]]
+    }
 }
 
 
@@ -41,7 +59,7 @@ https_only_err = "Microsoft.web/Sites resource property httpsOnly missing in the
 }
 
 https_only_metadata := {
-    "Policy Code": "PR-AZR-0139-ARM",
+    "Policy Code": "PR-AZR-ARM-WEB-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -55,7 +73,7 @@ https_only_metadata := {
 
 
 
-# PR-AZR-0140-ARM
+# PR-AZR-ARM-WEB-002
 
 default min_tls_version = null
 
@@ -65,10 +83,28 @@ azure_attribute_absence ["min_tls_version"] {
     not resource.properties.siteConfig.minTlsVersion
 }
 
+source_path[{"min_tls_version":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.minTlsVersion
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","minTlsVersion"]]
+    }
+}
+
 azure_issue ["min_tls_version"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     resource.properties.siteConfig.minTlsVersion != "1.2"
+}
+
+source_path[{"min_tls_version":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.minTlsVersion != "1.2"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","minTlsVersion"]]
+    }
 }
 
 
@@ -93,7 +129,7 @@ min_tls_version_err = "microsoft.web/sites resource property minTlsVersion missi
 }
 
 min_tls_version_metadata := {
-    "Policy Code": "PR-AZR-0140-ARM",
+    "Policy Code": "PR-AZR-ARM-WEB-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -107,7 +143,7 @@ min_tls_version_metadata := {
 
 
 
-# PR-AZR-0141-ARM
+# PR-AZR-ARM-WEB-003
 
 default client_cert_enabled = null
 
@@ -117,10 +153,28 @@ azure_attribute_absence ["client_cert_enabled"] {
     not resource.properties.clientCertEnabled
 }
 
+source_path[{"client_cert_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.clientCertEnabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","clientCertEnabled"]]
+    }
+}
+
 azure_issue ["client_cert_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     resource.properties.clientCertEnabled != true
+}
+
+source_path[{"client_cert_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.clientCertEnabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","clientCertEnabled"]]
+    }
 }
 
 
@@ -145,7 +199,7 @@ client_cert_enabled_err = "microsoft.web/sites resource property clientCertEnabl
 }
 
 client_cert_enabled_metadata := {
-    "Policy Code": "PR-AZR-0141-ARM",
+    "Policy Code": "PR-AZR-ARM-WEB-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -160,7 +214,7 @@ client_cert_enabled_metadata := {
 
 
 
-# PR-AZR-0142-ARM
+# PR-AZR-ARM-WEB-004
 
 default http_20_enabled = null
 
@@ -170,10 +224,28 @@ azure_attribute_absence ["http_20_enabled"] {
     not resource.properties.siteConfig.http20Enabled
 }
 
+source_path[{"http_20_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.http20Enabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","http20Enabled"]]
+    }
+}
+
 azure_issue ["http_20_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     resource.properties.siteConfig.http20Enabled != true
+}
+
+source_path[{"http_20_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.http20Enabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","http20Enabled"]]
+    }
 }
 
 
@@ -198,7 +270,7 @@ http_20_enabled_err = "microsoft.web/sites resource property http20Enabled missi
 }
 
 http_20_enabled_metadata := {
-    "Policy Code": "PR-AZR-0142-ARM",
+    "Policy Code": "PR-AZR-ARM-WEB-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

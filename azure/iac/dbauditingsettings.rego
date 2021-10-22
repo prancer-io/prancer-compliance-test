@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings
 
 #
-# PR-AZR-0003-ARM
+# PR-AZR-ARM-SQL-004
 #
 
 default sql_db_log_audit = null
@@ -14,10 +14,28 @@ azure_attribute_absence["sql_db_log_audit"] {
     not resource.properties.state
 }
 
+source_path[{"sql_db_log_audit":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
+    not resource.properties.state
+    metadata:= {
+        "resource_path": [["resources",i,"properties","state"]]
+    }
+}
+
 azure_issue["sql_db_log_audit"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
     lower(resource.properties.state) != "enabled"
+}
+
+source_path[{"sql_db_log_audit":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
+    lower(resource.properties.state) != "enabled"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","state"]]
+    }
 }
 
 sql_db_log_audit {
@@ -43,7 +61,7 @@ sql_db_log_audit_miss_err = "Azure SQL Database Auditing settings attribute 'sta
 }
 
 sql_db_log_audit_metadata := {
-    "Policy Code": "PR-AZR-0003-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -56,7 +74,7 @@ sql_db_log_audit_metadata := {
 
 
 
-# PR-AZR-0004-ARM
+# PR-AZR-ARM-SQL-005
 #
 
 default sql_logical_db_log_audit = null
@@ -69,12 +87,35 @@ azure_attribute_absence["sql_logical_db_log_audit"] {
     not sql_db.properties.state
 }
 
+source_path[{"sql_logical_db_log_audit":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_db := resource.resources[j]
+    lower(sql_db.type) == "auditingsettings"
+    not sql_db.properties.state
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","state"]]
+    }
+}
+
+
 azure_issue["sql_logical_db_log_audit"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases"
     sql_db := resource.resources[_]
     lower(sql_db.type) == "auditingsettings"
     lower(sql_db.properties.state) != "enabled"
+}
+
+source_path[{"sql_logical_db_log_audit":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_db := resource.resources[j]
+    lower(sql_db.type) == "auditingsettings"
+    lower(sql_db.properties.state) != "enabled"
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","state"]]
+    }
 }
 
 sql_logical_db_log_audit {
@@ -102,7 +143,7 @@ sql_logical_db_log_audit_err = "Azure SQL Database Auditing settings attribute '
 
 
 sql_logical_db_log_audit_metadata := {
-    "Policy Code": "PR-AZR-0004-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -116,7 +157,7 @@ sql_logical_db_log_audit_metadata := {
 
 
 #
-# PR-AZR-0053-ARM
+# PR-AZR-ARM-SQL-006
 #
 
 default sql_db_log_retention = null
@@ -127,10 +168,28 @@ azure_attribute_absence["sql_db_log_retention"] {
     not resource.properties.retentionDays
 }
 
+source_path[{"sql_db_log_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
+    not resource.properties.retentionDays
+    metadata:= {
+        "resource_path": [["resources",i,"properties","retentionDays"]]
+    }
+}
+
 azure_issue["sql_db_log_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
     to_number(resource.properties.retentionDays) < 90
+}
+
+source_path[{"sql_db_log_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
+    to_number(resource.properties.retentionDays) < 90
+    metadata:= {
+        "resource_path": [["resources",i,"properties","retentionDays"]]
+    }
 }
 
 sql_db_log_retention {
@@ -156,7 +215,7 @@ sql_db_log_retention_miss_err = "Azure SQL Database Auditing settings attribute 
 }
 
 sql_db_log_retention_metadata := {
-    "Policy Code": "PR-AZR-0053-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-006",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -169,7 +228,7 @@ sql_db_log_retention_metadata := {
 
 
 
-# PR-AZR-0059-ARM
+# PR-AZR-ARM-SQL-007
 #
 
 default sql_logical_db_log_retention = null
@@ -182,12 +241,35 @@ azure_attribute_absence["sql_logical_db_log_retention"] {
     not sql_db.properties.retentionDays
 }
 
+source_path[{"sql_logical_db_log_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_db := resource.resources[j]
+    lower(sql_db.type) == "auditingsettings"
+    not sql_db.properties.retentionDays
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","retentionDays"]]
+    }
+}
+
+
 azure_issue["sql_logical_db_log_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases"
     sql_db := resource.resources[_]
     lower(sql_db.type) == "auditingsettings"
     to_number(sql_db.properties.retentionDays) < 90
+}
+
+source_path[{"sql_logical_db_log_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_db := resource.resources[j]
+    lower(sql_db.type) == "auditingsettings"
+    to_number(sql_db.properties.retentionDays) < 90
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","retentionDays"]]
+    }
 }
 
 sql_logical_db_log_retention {
@@ -214,7 +296,7 @@ sql_logical_db_log_retention_err = "Azure SQL Database Auditing settings attribu
 }
 
 sql_logical_db_log_retention_metadata := {
-    "Policy Code": "PR-AZR-0059-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-007",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

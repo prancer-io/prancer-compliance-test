@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/2016-09-01/locks
 
 #
-# PR-AZR-0052-ARM
+# PR-AZR-ARM-MNT-008
 #
 
 default rg_locks = null
@@ -14,10 +14,28 @@ azure_attribute_absence["rg_locks"] {
     not resource.properties.level
 }
 
+source_path[{"rg_locks":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.authorization/locks"
+    not resource.properties.level
+    metadata:= {
+        "resource_path": [["resources",i,"properties","level"]]
+    }
+}
+
 azure_issue["rg_locks"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.authorization/locks"
     lower(resource.properties.level) != "cannotdelete"
+}
+
+source_path[{"rg_locks":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.authorization/locks"
+    lower(resource.properties.level) != "cannotdelete"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","level"]]
+    }
 }
 
 rg_locks {
@@ -43,7 +61,7 @@ rg_locks_miss_err = "Resource lock property 'level' is missing from the resource
 }
 
 rg_locks_metadata := {
-    "Policy Code": "PR-AZR-0052-ARM",
+    "Policy Code": "PR-AZR-ARM-MNT-008",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

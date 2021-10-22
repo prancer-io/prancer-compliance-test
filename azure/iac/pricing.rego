@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.security/pricings
 
 #
-# PR-AZR-0091-ARM
+# PR-AZR-ARM-SCT-001
 #
 
 default pricing = null
@@ -14,10 +14,28 @@ azure_attribute_absence["pricing"] {
     not resource.properties.pricingTier
 }
 
+source_path[{"pricing":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.security/pricings"
+    not resource.properties.pricingTier
+    metadata:= {
+        "resource_path": [["resources",i,"properties","pricingTier"]]
+    }
+}
+
 azure_issue["pricing"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/pricings"
     lower(resource.properties.pricingTier) != "standard"
+}
+
+source_path[{"pricing":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.security/pricings"
+    lower(resource.properties.pricingTier) != "standard"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","pricingTier"]]
+    }
 }
 
 pricing {
@@ -43,7 +61,7 @@ pricing_miss_err = "Azure Security Center property 'pricingTier' is missing from
 }
 
 pricing_metadata := {
-    "Policy Code": "PR-AZR-0091-ARM",
+    "Policy Code": "PR-AZR-ARM-SCT-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
