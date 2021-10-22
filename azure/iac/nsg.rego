@@ -74,7 +74,7 @@ nsg_inbound[port] {
 }
 
 #
-# PR-AZR-0022-ARM
+# PR-AZR-ARM-NSG-001
 #
 
 default nsg_in_tcp_all_src = null
@@ -104,7 +104,7 @@ nsg_in_tcp_all_src_err = "Azure NSG having Inbound rule overly permissive to all
 }
 
 nsg_in_tcp_all_src_metadata := {
-    "Policy Code": "PR-AZR-0022-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -116,7 +116,7 @@ nsg_in_tcp_all_src_metadata := {
 }
 
 #
-# PR-AZR-0023-ARM
+# PR-AZR-ARM-NSG-002
 #
 
 default nsg_in_udp_all_src = null
@@ -146,7 +146,7 @@ nsg_in_udp_all_src_err = "Azure NSG having Inbound rule overly permissive to all
 }
 
 nsg_in_udp_all_src_metadata := {
-    "Policy Code": "PR-AZR-0023-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -158,7 +158,7 @@ nsg_in_udp_all_src_metadata := {
 }
 
 #
-# PR-AZR-0024-ARM
+# PR-AZR-ARM-NSG-003
 #
 
 default nsg_in_tcp_all = null
@@ -189,7 +189,7 @@ nsg_in_tcp_all_err = "Azure NSG having Inbound rule overly permissive to all tra
 }
 
 nsg_in_tcp_all_metadata := {
-    "Policy Code": "PR-AZR-0024-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -201,7 +201,7 @@ nsg_in_tcp_all_metadata := {
 }
 
 #
-# PR-AZR-0025-ARM
+# PR-AZR-ARM-NSG-004
 #
 
 default nsg_in_udp_all = null
@@ -232,7 +232,7 @@ nsg_in_udp_all_err = "Azure NSG having Inbound rule overly permissive to all UDP
 }
 
 nsg_in_udp_all_metadata := {
-    "Policy Code": "PR-AZR-0025-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -244,7 +244,7 @@ nsg_in_udp_all_metadata := {
 }
 
 #
-# PR-AZR-0026-ARM
+# PR-AZR-ARM-NSG-005
 #
 
 default nsg_in_all = null
@@ -273,8 +273,20 @@ nsg_in_all_err = "Azure NSG having Inbound rule overly permissive to all traffic
     azure_issue["nsg_in_all"]
 }
 
+nsg_in_all_metadata := {
+    "Policy Code": "PR-AZR-ARM-NSG-005",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to allow all traffic from any source to any destination (TJX)",
+    "Policy Description": "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
+    "Resource Type": "microsoft.network/networksecuritygroups",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
+}
+
 #
-# PR-AZR-0027-ARM
+# PR-AZR-ARM-NSG-006
 #
 
 default nsg_in_all_src = null
@@ -305,7 +317,7 @@ nsg_in_all_src_err = "Azure NSG having Inbound rule overly permissive to allow a
 }
 
 nsg_in_all_src_metadata := {
-    "Policy Code": "PR-AZR-0026-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-006",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -317,7 +329,7 @@ nsg_in_all_src_metadata := {
 }
 
 #
-# PR-AZR-0028-ARM
+# PR-AZR-ARM-NSG-007
 #
 
 default nsg_in_all_dst = null
@@ -348,7 +360,7 @@ nsg_in_all_dst_err = "Azure NSG having Inbound rule overly permissive to allow a
 }
 
 nsg_in_all_dst_metadata := {
-    "Policy Code": "PR-AZR-0027-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-007",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -359,20 +371,9 @@ nsg_in_all_dst_metadata := {
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
-nsg_in_all_metadata := {
-    "Policy Code": "PR-AZR-0028-ARM",
-    "Type": "IaC",
-    "Product": "AZR",
-    "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to allow all traffic from any source to any destination (TJX)",
-    "Policy Description": "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
-    "Resource Type": "microsoft.network/networksecuritygroups",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
-}
 
 #
-# PR-AZR-0034-ARM
+# PR-AZR-ARM-NSG-008
 #
 
 default nsg_allow_icmp = null
@@ -401,19 +402,19 @@ nsg_allow_icmp_err = "Azure NSG having Inbound rule overly permissive to allow a
 }
 
 nsg_allow_icmp_metadata := {
-    "Policy Code": "PR-AZR-0034-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-008",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "Azure Network Security Group allows ICMP (Ping)",
-    "Policy Description": "ICMP is used by devices to communicate error messages and status. While ICMP is useful for  diagnostics and troubleshooting, it can also be used to exploit or disrupt systems._x005F_x000D_  _x005F_x000D_ This policy detects any NSG rule that allows ICMP (Ping) traffic from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict ICMP (Ping) solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "ICMP is used by devices to communicate error messages and status. While ICMP is useful for  diagnostics and troubleshooting, it can also be used to exploit or disrupt systems.<br><br>This policy detects any NSG rule that allows ICMP (Ping) traffic from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict ICMP (Ping) solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
 #
-# PR-AZR-0032-ARM
+# PR-AZR-ARM-NSG-009
 #
 
 default inbound_port_21 = null
@@ -436,19 +437,19 @@ inbound_port_21_err = "Azure Network Security Group allows FTP" {
 }
 
 inbound_port_21_metadata := {
-    "Policy Code": "PR-AZR-0032-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-009",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "Azure Network Security Group allows FTP (TCP Port 21)",
-    "Policy Description": "This policy detects any NSG rule that allows FTP traffic on TCP port 21 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict FTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "This policy detects any NSG rule that allows FTP traffic on TCP port 21 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict FTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
 #
-# gID3
+# PR-AZR-ARM-NSG-010
 #
 
 default inbound_insecure_port = null
@@ -479,19 +480,19 @@ inbound_insecure_port_err = "Internet connectivity via tcp over insecure port" {
 }
 
 inbound_insecure_port_metadata := {
-    "Policy Code": "PR-AZR-0020-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-010",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group (NSG) allows SSH traffic from internet on port 22",
-    "Policy Description": "Blocking SSH port 22 will protect users from attacks like Account compromise.",
+    "Policy Title": "Internet connectivity via tcp over insecure port should be prevented",
+    "Policy Description": "Identify network traffic coming from internet which is plain text FTP, Telnet or HTTP from Internet.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
 #
-# gID5
+# PR-AZR-ARM-NSG-011
 #
 
 default inbound_port_11211 = null
@@ -514,19 +515,19 @@ inbound_port_11211_err = "Memcached DDoS attack attempted" {
 }
 
 inbound_port_11211_metadata := {
-    "Policy Code": "PR-AZR-0021-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-011",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group (NSG) allows traffic from internet on port 3389",
-    "Policy Description": "Blocking RDP port 3389 will protect users from attacks like account compromise, Denial of service and ransomware.",
+    "Policy Title": "Memcached DDoS attack attempt should be prevented",
+    "Policy Description": "Memcached is a general-purpose distributed memory caching system. It is often used to speed up dynamic database-driven websites by caching data and objects in RAM to reduce the number of times an external data source (such as a database or API) must be read. It is reported that Memcache versions 1.5.5 and below are vulnerable to DDoS amplification attack. This policy aims at finding such attacks and generate alerts.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
 #
-# gID7
+# PR-AZR-ARM-NSG-012
 #
 
 default inbound_port_6379 = null
@@ -549,19 +550,19 @@ inbound_port_6379_err = "RedisWannaMine vulnerable instances with active network
 }
 
 inbound_port_6379_metadata := {
-    "Policy Code": "PR-AZR-0029-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-012",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group allows CIFS (UDP Port 445)",
-    "Policy Description": "This policy detects any NSG rule that allows CIFS traffic on UDP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict CIFS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "RedisWannaMine vulnerable instances with active network traffic should be locked down",
+    "Policy Description": "RedisWannaMine is cryptojacking attack which aims at both database servers and application servers via remote code execution, exploiting an Apache Struts vulnerability. To inject cryptocurrency mining malware, RedWannaMine uses a transmission control protocol (TCP) scanner to check open port 445 of SMB and scans vulnerable Redis server database over port 6379(tcp), so that it can use EternalBlue to spread further.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
 #
-# gID6
+# PR-AZR-ARM-NSG-013
 #
 
 default inbound_port_dbs = null
@@ -636,19 +637,19 @@ inbound_port_dbs_err = "Publicly exposed DB Ports" {
 }
 
 inbound_port_dbs_metadata := {
-    "Policy Code": "PR-AZR-0047-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-013",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group allows Windows SMB (TCP Port 445)",
-    "Policy Description": "This policy detects any NSG rule that allows Windows SMB traffic on TCP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict Windows SMB solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Publicly should not expose DB Ports",
+    "Policy Description": "DB Servers contain sensitive data and should not be exposed to any direct traffic from internet. This policy checks for the network traffic from internet hitting the DB Servers on their default ports. The DB servers monitored on the default ports are : Microsoft SQL Server (1433), Oracle (1521), MySQL (3306), Sybase (5000), Postgresql (5432), CouchDB (5984), Redis (6379, 6380), RethinkDB (8080,28015, 29015), CassandraDB (9042), Memcached (11211), MongoDB (27017), DB2 (50000).",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
 #
-# PR-AZR-0020-ARM
+# PR-AZR-ARM-NSG-014
 #
 
 default inbound_port_22 = null
@@ -671,19 +672,19 @@ inbound_port_22_err = "Azure NSG allows SSH traffic from internet on port 22" {
 }
 
 inbound_port_22_metadata := {
-    "Policy Code": "PR-AZR-0030-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-014",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group allows DNS (TCP Port 53)",
-    "Policy Description": "This policy detects any NSG rule that allows DNS traffic on TCP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group (NSG) allows SSH traffic from internet on port 22",
+    "Policy Description": "Blocking SSH port 22 will protect users from attacks like Account compromise.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
 #
-# PR-AZR-0021-ARM
+# PR-AZR-ARM-NSG-015
 #
 
 default inbound_port_3389 = null
@@ -706,20 +707,20 @@ inbound_port_3389_err = "Azure NSG allows traffic from internet on port 3389" {
 }
 
 inbound_port_3389_metadata := {
-    "Policy Code": "PR-AZR-0031-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-015",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group allows DNS (UDP Port 53)",
-    "Policy Description": "This policy detects any NSG rule that allows DNS traffic on UDP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group (NSG) allows traffic from internet on port 3389",
+    "Policy Description": "Blocking RDP port 3389 will protect users from attacks like account compromise, Denial of service and ransomware.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
 #
-# PR-AZR-0029-ARM
-# PR-AZR-0047-ARM
+
+# PR-AZR-ARM-NSG-016
 #
 
 default inbound_port_445 = null
@@ -741,25 +742,65 @@ inbound_port_445_err = "Azure Network Security Group allows CIFS" {
     azure_issue["inbound_port_445"]
 }
 
-inbound_port_smb_err = "Azure Network Security Group allows Windows SMB" {
-    azure_issue["inbound_port_445"]
-}
 
 inbound_port_445_metadata := {
-    "Policy Code": "PR-AZR-0033-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-06",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group allows FTP-Data (TCP Port 20)",
-    "Policy Description": "This policy detects any NSG rule that allows FTP-Data traffic on TCP port 20 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict FTP-Data solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group allows CIFS (UDP Port 445)",
+    "Policy Description": "This policy detects any NSG rule that allows CIFS traffic on UDP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict CIFS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
 #
-# PR-AZR-0030-ARM
-# PR-AZR-0031-ARM
+# PR-AZR-ARM-NSG-017
+
+
+#
+ 
+default inbound_insecure_omi_port = null
+ 
+azure_issue["inbound_insecure_omi_port"] {
+    to_number(nsg_inbound[_]) == 5985
+}
+ 
+azure_issue["inbound_insecure_omi_port"] {
+    to_number(nsg_inbound[_]) == 5986
+}
+ 
+azure_issue["inbound_insecure_omi_port"] {
+    to_number(nsg_inbound[_]) == 1270
+}
+ 
+inbound_insecure_omi_port {
+    azure_issue["inbound_insecure_omi_port"]
+}
+ 
+inbound_insecure_omi_port = false {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
+    not azure_issue["inbound_insecure_omi_port"]
+}
+ 
+inbound_insecure_omi_port_err = "Azure Network Security Group (NSG) currently not protecting OMIGOD attack from internet" {
+    azure_issue["inbound_insecure_omi_port"]
+}
+ 
+inbound_insecure_omi_port_metadata := {
+    "Policy Code": "PR-AZR-ARM-NSG-017",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM",
+    "Policy Title": "Azure Network Security Group (NSG) should protect OMIGOD attack from internet",
+    "Policy Description": "Blocking OMI port 5985, 5986, 1270 will protect vnet/subnet/vms from OMIGOD attacks from internet.",
+    "Resource Type": "microsoft.network/networksecuritygroups",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
+}
+
+# PR-AZR-ARM-NSG-018
 #
 
 default inbound_port_53 = null
@@ -782,19 +823,19 @@ inbound_port_53_err = "Azure Network Security Group allows DNS" {
 }
 
 inbound_port_53_metadata := {
-    "Policy Code": "PR-AZR-0035-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-018",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group allows MSQL (TCP Port 4333)",
-    "Policy Description": "This policy detects any NSG rule that allows MSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group allows DNS (UDP Port 53)",
+    "Policy Description": "This policy detects any NSG rule that allows DNS traffic on UDP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
 #
-# PR-AZR-0033-ARM
+# PR-AZR-ARM-NSG-019
 #
 
 default inbound_port_20 = null
@@ -816,20 +857,21 @@ inbound_port_20_err = "Azure Network Security Group allows FTP-Data" {
     azure_issue["inbound_port_20"]
 }
 
+
 inbound_port_20_metadata := {
-    "Policy Code": "PR-AZR-0036-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-019",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group allows MySQL (TCP Port 3306)",
-    "Policy Description": "This policy detects any NSG rule that allows MySQL traffic on TCP port 3306 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict MySQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group allows FTP-Data (TCP Port 20)",
+    "Policy Description": "This policy detects any NSG rule that allows FTP-Data traffic on TCP port 20 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict FTP-Data solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
 #
-# PR-AZR-0035-ARM
+# PR-AZR-ARM-NSG-020
 #
 
 default inbound_port_4333 = null
@@ -852,19 +894,19 @@ inbound_port_4333_err = "Azure Network Security Group allows MSQL" {
 }
 
 inbound_port_4333_metadata := {
-    "Policy Code": "PR-AZR-0037-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-020",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group allows NetBIOS (UDP Port 137)",
-    "Policy Description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group allows MSQL (TCP Port 4333)",
+    "Policy Description": "This policy detects any NSG rule that allows MSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
 #
-# PR-AZR-0036-ARM
+# PR-AZR-ARM-NSG-021
 #
 
 default inbound_port_3306 = null
@@ -887,21 +929,19 @@ inbound_port_3306_err = "Azure Network Security Group allows MySQL" {
 }
 
 inbound_port_3306_metadata := {
-    "Policy Code": "PR-AZR-0038-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-021",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group allows NetBIOS (UDP Port 138)",
-    "Policy Description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group allows MySQL (TCP Port 3306)",
+    "Policy Description": "This policy detects any NSG rule that allows MySQL traffic on TCP port 3306 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict MySQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
 #
-# PR-AZR-0037-ARM
-# PR-AZR-0038-ARM
-#
+# PR-AZR-ARM-NSG-022
 
 default inbound_port_netbios = null
 
@@ -927,19 +967,19 @@ inbound_port_netbios_err = "Azure Network Security Group allows NetBIOS" {
 }
 
 inbound_port_netbios_metadata := {
-    "Policy Code": "PR-AZR-0039-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-022",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group allows PostgreSQL (TCP Port 5432)",
-    "Policy Description": "This policy detects any NSG rule that allows PostgreSQL traffic on TCP port 5432 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict PostgreSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group allows NetBIOS (UDP Port 137 and 138)",
+    "Policy Description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 137 and 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
 #
-# PR-AZR-0039-ARM
+# PR-AZR-ARM-NSG-023
 #
 
 default inbound_port_5432 = null
@@ -962,19 +1002,19 @@ inbound_port_5432_err = "Azure Network Security Group allows PostgreSQL" {
 }
 
 inbound_port_5432_metadata := {
-    "Policy Code": "PR-AZR-0040-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-023",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group allows SMTP (TCP Port 25)",
-    "Policy Description": "This policy detects any NSG rule that allows SMTP traffic on TCP port 25 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict SMTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group allows PostgreSQL (TCP Port 5432)",
+    "Policy Description": "This policy detects any NSG rule that allows PostgreSQL traffic on TCP port 5432 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict PostgreSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
 #
-# PR-AZR-0040-ARM
+# PR-AZR-ARM-NSG-024
 #
 
 default inbound_port_25 = null
@@ -997,27 +1037,27 @@ inbound_port_25_err = "Azure Network Security Group allows SMTP" {
 }
 
 inbound_port_25_metadata := {
-    "Policy Code": "PR-AZR-0041-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-024",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group allows SQLServer (UDP Port 1434)",
-    "Policy Description": "This policy detects any NSG rule that allows SQLServer traffic on UDP port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group allows SMTP (TCP Port 25)",
+    "Policy Description": "This policy detects any NSG rule that allows SMTP traffic on TCP port 25 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SMTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
 #
-# PR-AZR-0041-ARM
-# PR-AZR-0042-ARM
-#
+# PR-AZR-ARM-NSG-025
 
 default inbound_port_sqlserver = null
+
 
 azure_issue["inbound_port_sqlserver"] {
     to_number(nsg_inbound[_]) == 1433
 }
+
 
 azure_issue["inbound_port_sqlserver"] {
     to_number(nsg_inbound[_]) == 1434
@@ -1037,19 +1077,20 @@ inbound_port_sqlserver_err = "Azure Network Security Group allows SQLServer" {
 }
 
 inbound_port_sqlserver_metadata := {
-    "Policy Code": "PR-AZR-0042-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-025",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Network Security Group allows SqlServer (TCP Port 1433)",
-    "Policy Description": "This policy detects any NSG rule that allows SqlServer traffic on TCP port 1433 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict SqlServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Title": "Azure Network Security Group allows SQLServer (TCP Port 1433 and UDP Port 1434)",
+    "Policy Description": "This policy detects any NSG rule that allows SQLServer traffic on TCP Port 1433 and UDP port 1434 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SQLServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
+
 #
-# PR-AZR-0043-ARM
+# PR-AZR-ARM-NSG-026
 #
 
 default inbound_port_23 = null
@@ -1072,19 +1113,19 @@ inbound_port_23_err = "Azure Network Security Group allows Telnet" {
 }
 
 inbound_port_23_metadata := {
-    "Policy Code": "PR-AZR-0043-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-026",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "Azure Network Security Group allows Telnet (TCP Port 23)",
-    "Policy Description": "Telnet provides a plaintext connection to manage devices using the command line, and is less secure than SSH._x005F_x000D_ This policy detects any NSG rule that allows Telnet traffic on TCP port 23 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict Telnet solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "Telnet provides a plaintext connection to manage devices using the command line, and is less secure than SSH.<br>This policy detects any NSG rule that allows Telnet traffic on TCP port 23 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict Telnet solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
 #
-# PR-AZR-0044-ARM
+# PR-AZR-ARM-NSG-027
 #
 
 default inbound_port_5500 = null
@@ -1107,19 +1148,19 @@ inbound_port_5500_err = "Azure Network Security Group allows VNC Listener" {
 }
 
 inbound_port_5500_metadata := {
-    "Policy Code": "PR-AZR-0044-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-027",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "Azure Network Security Group allows VNC Listener (TCP Port 5500)",
-    "Policy Description": "This policy detects any NSG rule that allows VNC Listener traffic on TCP port 5500 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict VNC Listener solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "This policy detects any NSG rule that allows VNC Listener traffic on TCP port 5500 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict VNC Listener solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
 #
-# PR-AZR-0045-ARM
+# PR-AZR-ARM-NSG-028
 #
 
 default inbound_port_5900 = null
@@ -1142,19 +1183,19 @@ inbound_port_5900_err = "Azure Network Security Group allows VNC Server" {
 }
 
 inbound_port_5900_metadata := {
-    "Policy Code": "PR-AZR-0045-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-028",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "Azure Network Security Group allows VNC Server (TCP Port 5900)",
-    "Policy Description": "This policy detects any NSG rule that allows VNC Server traffic on TCP port 5900 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict VNC Server solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "This policy detects any NSG rule that allows VNC Server traffic on TCP port 5900 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict VNC Server solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
 #
-# PR-AZR-0046-ARM
+# PR-AZR-ARM-NSG-029
 #
 
 default inbound_port_135 = null
@@ -1177,12 +1218,12 @@ inbound_port_135_err = "Azure Network Security Group allows Windows RPC" {
 }
 
 inbound_port_135_metadata := {
-    "Policy Code": "PR-AZR-0046-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-029",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "Azure Network Security Group allows Windows RPC (TCP Port 135)",
-    "Policy Description": "This policy detects any NSG rule that allows Windows RPC traffic on TCP port 135 from the internet. Review your list of NSG rules to ensure that your resources are not exposed._x005F_x000D_ As a best practice, restrict Windows RPC solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
+    "Policy Description": "This policy detects any NSG rule that allows Windows RPC traffic on TCP port 135 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict Windows RPC solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
     "Resource Type": "microsoft.network/networksecuritygroups",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
@@ -1257,7 +1298,7 @@ nsg_outbound[port] {
 }
 
 #
-# PR-AZR-0048-ARM
+# PR-AZR-ARM-NSG-030
 #
 
 default nsg_out_all = null
@@ -1286,7 +1327,7 @@ nsg_out_all_err = "Azure NSG with Outbound rule to allow all traffic to any sour
 }
 
 nsg_out_all_metadata := {
-    "Policy Code": "PR-AZR-0048-ARM",
+    "Policy Code": "PR-AZR-ARM-NSG-030",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -1298,7 +1339,7 @@ nsg_out_all_metadata := {
 }
 
 #
-# gID1
+# PR-AZR-ARM-NSG-031
 #
 
 default outbound_port_bitcoin = null
@@ -1325,7 +1366,7 @@ outbound_port_bitcoin_err = "Instance is communicating with ports known to mine 
 }
 
 outbound_port_bitcoin_metadata := {
-    "Policy Code": "",
+    "Policy Code": "PR-AZR-ARM-NSG-031",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -1337,7 +1378,7 @@ outbound_port_bitcoin_metadata := {
 }
 
 #
-# gID2
+# PR-AZR-ARM-NSG-032
 #
 
 default outbound_port_ethereum = null
@@ -1364,7 +1405,7 @@ outbound_port_ethereum_err = "Instance is communicating with ports known to mine
 }
 
 outbound_port_ethereum_metadata := {
-    "Policy Code": "",
+    "Policy Code": "PR-AZR-ARM-NSG-032",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

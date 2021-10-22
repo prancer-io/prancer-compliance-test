@@ -9,13 +9,12 @@ package rule
 default sns_encrypt_key = null
 
 aws_issue["sns_encrypt_key"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "topic"
-    contains(lower(resource.spec.KmsMasterKeyId), "alias/aws/sns")
+    lower(input.kind) == "topic"
+    contains(lower(input.spec.KmsMasterKeyId), "alias/aws/sns")
 }
 
 sns_encrypt_key {
-    lower(input.Resources[i].Type) == "topic"
+    lower(input.Type) == "topic"
     not aws_issue["sns_encrypt_key"]
 }
 
@@ -46,19 +45,17 @@ sns_encrypt_key_metadata := {
 default sns_encrypt = null
 
 aws_issue["sns_encrypt"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "topic"
-    not resource.spec.KmsMasterKeyId
+    lower(input.kind) == "topic"
+    not input.spec.KmsMasterKeyId
 }
 
 aws_issue["sns_encrypt"] {
-    resource := input.Resources[i]
-    lower(resource.kind) == "topic"
-    count(resource.spec.KmsMasterKeyId) == 0
+    lower(input.kind) == "topic"
+    count(input.spec.KmsMasterKeyId) == 0
 }
 
 sns_encrypt {
-    lower(input.Resources[i].Type) == "topic"
+    lower(input.Type) == "topic"
     not aws_issue["sns_encrypt"]
 }
 

@@ -7,18 +7,13 @@ package rule
 #
 
 #
-# PR-AZR-0116-ARM
+# PR-AZR-ARM-SQL-041
 #
 
 default sql_mi_public_endpoint_disabled = null
 
 # https://docs.microsoft.com/en-us/powershell/module/az.sql/set-azsqlinstance?view=azps-6.2.1
 # if property does not exist default is false
-azure_attribute_absence["sql_mi_public_endpoint_disabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/managedinstances"
-    not resource.properties.publicDataEndpointEnabled
-}
 
 source_path[{"sql_mi_public_endpoint_disabled":metadata}] {
     resource := input.resources[i]
@@ -32,7 +27,7 @@ source_path[{"sql_mi_public_endpoint_disabled":metadata}] {
 azure_issue["sql_mi_public_endpoint_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/managedinstances"
-    resource.properties.publicDataEndpointEnabled != "false"
+    resource.properties.publicDataEndpointEnabled == true
 }
 
 source_path[{"sql_mi_public_endpoint_disabled":metadata}] {
@@ -46,13 +41,9 @@ source_path[{"sql_mi_public_endpoint_disabled":metadata}] {
 
 sql_mi_public_endpoint_disabled {
     lower(input.resources[_].type) == "microsoft.sql/managedinstances"
-    not azure_attribute_absence["sql_mi_public_endpoint_disabled"]
     not azure_issue["sql_mi_public_endpoint_disabled"]
 }
 
-sql_mi_public_endpoint_disabled {
-    azure_attribute_absence["sql_mi_public_endpoint_disabled"]
-}
 
 sql_mi_public_endpoint_disabled = false {
     azure_issue["sql_mi_public_endpoint_disabled"]
@@ -63,7 +54,7 @@ sql_mi_public_endpoint_disabled_err = "SQL Managed Instance currently have publi
 }
 
 sql_mi_public_endpoint_disabled_metadata := {
-    "Policy Code": "PR-AZR-0116-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-041",
     "Type": "IaC",
     "Product": "",
     "Language": "ARM template",

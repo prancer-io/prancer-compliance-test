@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts
 
 #
-# PR-AZR-0092-ARM
+# PR-AZR-ARM-STR-003
 #
 
 default storage_secure = null
@@ -85,7 +85,7 @@ storage_secure_err = "Storage Accounts https based secure transfer is not enable
 
 
 storage_secure_metadata := {
-    "Policy Code": "PR-AZR-0092-ARM",
+    "Policy Code": "PR-AZR-ARM-STR-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -97,7 +97,7 @@ storage_secure_metadata := {
 }
 
 #
-# PR-AZR-0093-ARM
+# PR-AZR-ARM-STR-004
 #
 
 default storage_acl = null
@@ -155,12 +155,12 @@ storage_acl_miss_err = "Storage Account attribute networkAcls.defaultAction is m
 }
 
 storage_acl_metadata := {
-    "Policy Code": "PR-AZR-0093-ARM",
+    "Policy Code": "PR-AZR-ARM-STR-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "Storage Accounts should have firewall rules enabled",
-    "Policy Description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on._x005F_x000D_ _x005F_x000D_ You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
+    "Policy Description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on.<br><br>You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
     "Resource Type": "microsoft.storage/storageaccounts",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
@@ -168,7 +168,7 @@ storage_acl_metadata := {
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.security/advancedthreatprotectionsettings?tabs=json
 # Advanced Threat Protection should be enabled for storage account
-# PR-AZR-0094-ARM
+# PR-AZR-ARM-STR-005
 
 default storage_threat_protection = null
 
@@ -244,7 +244,7 @@ storage_threat_protection_err = "Advanced Threat Protection is currently not ena
 }
 
 storage_threat_protection_metadata := {
-    "Policy Code": "PR-AZR-0094-ARM",
+    "Policy Code": "PR-AZR-ARM-STR-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -258,7 +258,7 @@ storage_threat_protection_metadata := {
 
 # https://azure.microsoft.com/en-us/blog/announcing-default-encryption-for-azure-blobs-files-table-and-queue-storage/
 # This feature is enabled by default thats why Terraform does not have any property for that
-# PR-AZR-0112-ARM
+# PR-AZR-ARM-STR-006
 
 default blobService = null
 
@@ -314,7 +314,7 @@ blobService_err = "Ensure that 'Storage service encryption' is enabled for the B
 
 
 blobService_metadata := {
-    "Policy Code": "PR-AZR-0112-ARM",
+    "Policy Code": "PR-AZR-ARM-STR-006",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -327,7 +327,7 @@ blobService_metadata := {
 
 # https://azure.microsoft.com/en-us/blog/announcing-default-encryption-for-azure-blobs-files-table-and-queue-storage/
 # This feature is enabled by default thats why Terraform does not have any property for that
-# PR-AZR-0113-ARM
+# PR-AZR-ARM-STR-007
 
 default fileService = null
 
@@ -383,7 +383,7 @@ fileService_err = "Ensure that 'Storage service encryption' is enabled for the F
 
 
 fileService_metadata := {
-    "Policy Code": "PR-AZR-0113-ARM",
+    "Policy Code": "PR-AZR-ARM-STR-007",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -397,7 +397,7 @@ fileService_metadata := {
 
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts
-# PR-AZR-0114-ARM
+# PR-AZR-ARM-STR-008
 
 default keySource = null
 
@@ -455,7 +455,7 @@ keySource_miss_err = "Storage Account encryption property 'keySource' is missing
 
 
 keySource_metadata := {
-    "Policy Code": "PR-AZR-0114-ARM",
+    "Policy Code": "PR-AZR-ARM-STR-008",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -467,7 +467,7 @@ keySource_metadata := {
 }
 
 
-# PR-AZR-0122-ARM
+# PR-AZR-ARM-STR-009
 
 default region = null
 
@@ -517,7 +517,7 @@ region_err = "Storage Accounts location configuration is currenly not inside of 
 }
 
 region_metadata := {
-    "Policy Code": "PR-AZR-0122-ARM",
+    "Policy Code": "PR-AZR-ARM-STR-009",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -529,7 +529,7 @@ region_metadata := {
 }
 
 
-# PR-AZR-0123-ARM
+# PR-AZR-ARM-STR-010
 
 default blobServicePublicAccessDisabled = null
 
@@ -577,7 +577,7 @@ blobServicePublicAccessDisabled_err = "Storage Account currently allowing public
 }
 
 blobServicePublicAccessDisabled_metadata := {
-    "Policy Code": "PR-AZR-0113-ARM",
+    "Policy Code": "PR-AZR-ARM-STR-010",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -590,7 +590,7 @@ blobServicePublicAccessDisabled_metadata := {
 
 
 
- # PR-AZR-0148-ARM
+ # PR-AZR-ARM-STR-011
 
 default storage_acount_by_pass = null
 
@@ -646,7 +646,7 @@ storage_acount_by_pass_err = "microsoft.storage/storageaccounts resource propert
 
 
 storage_acount_by_pass_metadata := {
-    "Policy Code": "PR-AZR-0148-ARM",
+    "Policy Code": "PR-AZR-ARM-STR-011",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

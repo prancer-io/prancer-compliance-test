@@ -2,7 +2,7 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformariadb/2018-06-01/servers/firewallrules
 
-# PR-AZR-0150-ARM
+# PR-AZR-ARM-SQL-012
 
 default maria_ingress_from_any_ip_disabled = null
 azure_attribute_absence ["maria_ingress_from_any_ip_disabled"] {
@@ -88,7 +88,7 @@ maria_ingress_from_any_ip_disabled_err = "Microsoft.DBforMariaDB/servers/firewal
 }
 
 maria_ingress_from_any_ip_disabled_metadata := {
-    "Policy Code": "PR-AZR-0150-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-012",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -102,7 +102,7 @@ maria_ingress_from_any_ip_disabled_metadata := {
 
 
 
-# PR-AZR-0154-ARM
+# PR-AZR-ARM-SQL-013
 
 default dbmaria_ingress_from_any_ip_disabled = null
 azure_attribute_absence ["dbmaria_ingress_from_any_ip_disabled"] {
@@ -208,7 +208,7 @@ dbmaria_ingress_from_any_ip_disabled_err = "microsoft.dbformariadb/servers/firew
 }
 
 dbmaria_ingress_from_any_ip_disabled_metadata := {
-    "Policy Code": "PR-AZR-0154-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-013",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

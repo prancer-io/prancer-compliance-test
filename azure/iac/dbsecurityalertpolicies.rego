@@ -4,7 +4,7 @@ package rule
 
 
 #
-# PR-AZR-0096-ARM
+# PR-AZR-ARM-SQL-017
 #
 
 default dbsec_threat_off = null
@@ -72,7 +72,7 @@ dbsec_threat_off_err = "SQL Databases securityAlertPolicies attribute 'state' is
 
 
 dbsec_threat_off_metadata := {
-    "Policy Code": "PR-AZR-0096-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-017",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -85,7 +85,7 @@ dbsec_threat_off_metadata := {
 
 
 #
-# PR-AZR-0054-ARM
+# PR-AZR-ARM-SQL-018
 #
 
 default dbsec_threat_retention = null
@@ -156,7 +156,7 @@ dbsec_threat_retention_miss_err = "Azure SQL Database security alert policies re
 }
 
 dbsec_threat_retention_metadata := {
-    "Policy Code": "PR-AZR-0054-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-018",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -168,7 +168,7 @@ dbsec_threat_retention_metadata := {
 }
 
 #
-# PR-AZR-0055-ARM
+# PR-AZR-ARM-SQL-019
 #
 
 default dbsec_threat_email = null
@@ -240,7 +240,7 @@ dbsec_threat_email_err = "Azure SQL Databases security alert policy attribute 'e
 
 
 dbsec_threat_email_metadata := {
-    "Policy Code": "PR-AZR-0055-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-019",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -252,7 +252,7 @@ dbsec_threat_email_metadata := {
 }
 
 #
-# PR-AZR-0061-ARM
+# PR-AZR-ARM-SQL-020
 #
 
 default dbsec_threat_alert = null
@@ -320,19 +320,19 @@ dbsec_threat_alert_err = "Azure SQL Server Security Alert Policy currently have 
 
 
 dbsec_threat_alert_metadata := {
-    "Policy Code": "PR-AZR-0061-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-020",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "Azure SQL Server threat detection alerts should be enabled for all threat types",
-    "Policy Description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification._x005F_x000D_ _x005F_x000D_ This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats.",
+    "Policy Description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that have disabled the detection of one or more threat types. To protect your SQL Servers, as a best practice, enable ADS detection for all types of threats.",
     "Resource Type": "microsoft.sql/servers/databases/securityalertpolicies",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies"
 }
 
 #
-# PR-AZR-0097-ARM
+# PR-AZR-ARM-SQL-021
 #
 
 default sql_alert = null
@@ -402,7 +402,7 @@ sql_alert_err = "microsoft.sql/servers/databases/securityalertpolicies property 
 }
 
 sql_alert_metadata := {
-    "Policy Code": "PR-AZR-0097-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-021",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

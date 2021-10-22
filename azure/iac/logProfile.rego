@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/Microsoft.Insights/logprofiles
 
 
-# PR-AZR-0149-ARM
+# PR-AZR-ARM-MNT-009
 
 default log_profiles_retention_days = null
 
@@ -117,7 +117,7 @@ log_profiles_retention_days_err = "Microsoft.Insights/logprofiles resource prope
 
 
 log_profiles_retention_days_metadata := {
-    "Policy Code": "PR-AZR-0149-ARM",
+    "Policy Code": "PR-AZR-ARM-MNT-009",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -131,7 +131,7 @@ log_profiles_retention_days_metadata := {
 
 
 
-# PR-AZR-0152-ARM
+# PR-AZR-ARM-MNT-010
 
 default log_profile_category = null
 azure_attribute_absence ["log_profile_category"] {
@@ -153,9 +153,9 @@ source_path[{"log_profiles_retention_days":metadata}] {
 azure_issue ["log_profile_category"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/logprofiles"
-    contains(lower(resource.properties.categories), "write")
-    contains(lower(resource.properties.categories), "delete")
-    contains(lower(resource.properties.categories), "action")
+    contains(lower(resource.properties.categories[_]), "write")
+    contains(lower(resource.properties.categories[_]), "delete")
+    contains(lower(resource.properties.categories[_]), "action")
 }
 
 source_path[{"log_profiles_retention_days":metadata}] {
@@ -193,7 +193,7 @@ log_profile_category_err = "microsoft.insights/logprofiles property 'categories'
 }
 
 log_profile_category_metadata := {
-    "Policy Code": "PR-AZR-0152-ARM",
+    "Policy Code": "PR-AZR-ARM-MNT-010",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

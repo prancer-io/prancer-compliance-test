@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries/webhooks
 
 #
-# PR-AZR-0005-ARM
+# PR-AZR-ARM-ACR-001
 #
 
 default acr_webhooks = null
@@ -61,7 +61,7 @@ acr_webhooks_miss_err = "ACR webhook property 'serviceUri' is missing from the r
 }
 
 acr_webhooks_metadata := {
-    "Policy Code": "PR-AZR-0005-ARM",
+    "Policy Code": "PR-AZR-ARM-ACR-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

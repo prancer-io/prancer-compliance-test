@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines
 
 #
-# PR-AZR-0065-ARM
+# PR-AZR-ARM-VM-001
 #
 
 default vm_aset = null
@@ -37,12 +37,12 @@ vm_aset_err = "Azure Virtual Machine is not assigned to an availability set" {
 }
 
 vm_aset_metadata := {
-    "Policy Code": "PR-AZR-0065-ARM",
+    "Policy Code": "PR-AZR-ARM-VM-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "Azure Virtual Machine should be assigned to an availability set",
-    "Policy Description": "To provide application redundancy during planned or unplanned maintenance events, you can group two or more virtual machines (VMs) in an availability set. An availability set ensures that the VMs are distributed across multiple isolated hardware nodes in a cluster so that only a subset of your VMs are impacted should a hardware or software failure occur on Azure._x005F_x000D_ _x005F_x000D_ This policy identifies Azure VMs that are not deployed in an availability set. As a high availability (HA) best practice, deploy your VMs in an availability set.",
+    "Policy Description": "To provide application redundancy during planned or unplanned maintenance events, you can group two or more virtual machines (VMs) in an availability set. An availability set ensures that the VMs are distributed across multiple isolated hardware nodes in a cluster so that only a subset of your VMs are impacted should a hardware or software failure occur on Azure.<br><br>This policy identifies Azure VMs that are not deployed in an availability set. As a high availability (HA) best practice, deploy your VMs in an availability set.",
     "Resource Type": "microsoft.compute/virtualmachines",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines"
@@ -51,7 +51,7 @@ vm_aset_metadata := {
 
 
 
-# PR-AZR-0136-ARM
+# PR-AZR-ARM-VM-002
 #
 
 default linux_configuration = null
@@ -110,7 +110,7 @@ linux_configuration_err = "microsoft.compute/virtualmachines resource property l
 }
 
 linux_configuration_metadata := {
-    "Policy Code": "PR-AZR-0136-ARM",
+    "Policy Code": "PR-AZR-ARM-VM-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

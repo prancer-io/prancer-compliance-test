@@ -47,7 +47,7 @@ rds_cluster_encrypt_metadata := {
     "Product": "AWS",
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS RDS DB cluster encryption is disabled",
-    "Policy Description": "This policy identifies RDS DB clusters for which encryption is disabled. Amazon Aurora encrypted DB clusters provide an additional layer of data protection by securing your data from unauthorized access to the underlying storage. You can use Amazon Aurora encryption to increase data protection of your applications deployed in the cloud, and to fulfill compliance requirements for data-at-rest encryption._x005F_x000D_ NOTE: This policy is applicable only for Aurora DB clusters._x005F_x000D_ https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html",
+    "Policy Description": "This policy identifies RDS DB clusters for which encryption is disabled. Amazon Aurora encrypted DB clusters provide an additional layer of data protection by securing your data from unauthorized access to the underlying storage. You can use Amazon Aurora encryption to increase data protection of your applications deployed in the cloud, and to fulfill compliance requirements for data-at-rest encryption.<br>NOTE: This policy is applicable only for Aurora DB clusters.<br>https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
@@ -663,4 +663,281 @@ rds_cluster_deletion_protection_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
+}
+
+
+#
+# PR-AWS-0299-CFR
+#
+
+default rds_pgaudit_enable = null
+
+aws_issue["rds_pgaudit_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbparametergroup"
+    count([c | resource.Properties.Parameters["pgaudit.role"] == "rds_pgaudit" ; c := 1]) == 0
+}
+
+aws_issue["rds_pgaudit_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbparametergroup"
+    not resource.Properties.Parameters
+}
+
+rds_pgaudit_enable {
+    lower(input.Resources[i].Type) == "aws::rds::dbparametergroup"
+    not aws_issue["rds_pgaudit_enable"]
+}
+
+rds_pgaudit_enable = false {
+    aws_issue["rds_pgaudit_enable"]
+}
+
+rds_pgaudit_enable_err = "AWS RDS retention policy less than 7 days" {
+    aws_issue["rds_pgaudit_enable"]
+}
+
+rds_pgaudit_enable_metadata := {
+    "Policy Code": "PR-AWS-0299-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure PGAudit is enabled on RDS Postgres instances",
+    "Policy Description": "Postgres database instances can be enabled for auditing with PGAudit, the PostgresSQL Audit Extension. With PGAudit enabled you will be able to audit any database, its roles, relations, or columns.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbparametergroup.html#cfn-rds-dbparametergroup-parameters"
+}
+
+#
+# PR-AWS-0300-CFR
+#
+
+default rds_global_cluster_encrypt = null
+
+aws_issue["rds_global_cluster_encrypt"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::globalcluster"
+    lower(resource.Properties.StorageEncrypted) == "false"
+}
+
+aws_bool_issue["rds_global_cluster_encrypt"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::globalcluster"
+    not resource.Properties.StorageEncrypted
+}
+
+rds_global_cluster_encrypt {
+    lower(input.Resources[i].Type) == "aws::rds::globalcluster"
+    not aws_issue["rds_global_cluster_encrypt"]
+    not aws_bool_issue["rds_global_cluster_encrypt"]
+}
+
+rds_global_cluster_encrypt = false {
+    aws_issue["rds_global_cluster_encrypt"]
+}
+
+rds_global_cluster_encrypt = false {
+    aws_bool_issue["rds_global_cluster_encrypt"]
+}
+
+rds_global_cluster_encrypt_err = "AWS RDS Global DB cluster encryption is disabled" {
+    aws_issue["rds_global_cluster_encrypt"]
+} else = "AWS RDS Global DB cluster encryption is disabled" {
+    aws_bool_issue["rds_global_cluster_encrypt"]
+}
+
+rds_global_cluster_encrypt_metadata := {
+    "Policy Code": "PR-AWS-0300-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS RDS Global DB cluster encryption is disabled",
+    "Policy Description": "This policy identifies RDS Global DB clusters for which encryption is disabled. Amazon Aurora encrypted Global DB clusters provide an additional layer of data protection by securing your data from unauthorized access to the underlying storage. You can use Amazon Aurora encryption to increase data protection of your applications deployed in the cloud, and to fulfill compliance requirements",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-globalcluster.html"
+}
+
+#
+# PR-AWS-0312-CFR
+#
+
+default cluster_iam_authenticate = null
+
+aws_issue["cluster_iam_authenticate"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbcluster"
+    lower(resource.Properties.EnableIAMDatabaseAuthentication) == "false"
+}
+
+aws_bool_issue["cluster_iam_authenticate"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbcluster"
+    not resource.Properties.EnableIAMDatabaseAuthentication
+}
+
+cluster_iam_authenticate {
+    lower(input.Resources[i].Type) == "aws::rds::dbcluster"
+    not aws_issue["cluster_iam_authenticate"]
+    not aws_bool_issue["cluster_iam_authenticate"]
+}
+
+cluster_iam_authenticate = false {
+    aws_issue["cluster_iam_authenticate"]
+}
+
+cluster_iam_authenticate = false {
+    aws_bool_issue["cluster_iam_authenticate"]
+}
+
+cluster_iam_authenticate_err = "Ensure RDS cluster has IAM authentication enabled" {
+    aws_issue["cluster_iam_authenticate"]
+} else = "Ensure RDS cluster has IAM authentication enabled" {
+    aws_bool_issue["cluster_iam_authenticate"]
+}
+
+cluster_iam_authenticate_metadata := {
+    "Policy Code": "PR-AWS-0312-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure RDS cluster has IAM authentication enabled",
+    "Policy Description": "Ensure IAM Database Authentication feature is enabled in order to use AWS Identity and Access Management (IAM) service to manage database access to your Amazon RDS MySQL and PostgreSQL instances. With this feature enabled, you don't have to use a password when you connect to your MySQL/PostgreSQL database instances, instead you use an authentication token",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#cfn-rds-dbcluster-enableiamdatabaseauthentication"
+}
+
+#
+# PR-AWS-0314-CFR
+#
+
+default db_instance_iam_authenticate = null
+
+aws_issue["db_instance_iam_authenticate"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    lower(resource.Properties.EnableIAMDatabaseAuthentication) == "false"
+}
+
+aws_bool_issue["db_instance_iam_authenticate"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    not resource.Properties.EnableIAMDatabaseAuthentication
+}
+
+db_instance_iam_authenticate {
+    lower(input.Resources[i].Type) == "aws::rds::dbinstance"
+    not aws_issue["db_instance_iam_authenticate"]
+    not aws_bool_issue["db_instance_iam_authenticate"]
+}
+
+db_instance_iam_authenticate = false {
+    aws_issue["db_instance_iam_authenticate"]
+}
+
+db_instance_iam_authenticate = false {
+    aws_bool_issue["db_instance_iam_authenticate"]
+}
+
+db_instance_iam_authenticate_err = "Ensure RDS instance has IAM authentication enabled" {
+    aws_issue["db_instance_iam_authenticate"]
+} else = "Ensure RDS instace has IAM authentication enabled" {
+    aws_bool_issue["db_instance_iam_authenticate"]
+}
+
+db_instance_iam_authenticate_metadata := {
+    "Policy Code": "PR-AWS-0314-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure RDS instace has IAM authentication enabled",
+    "Policy Description": "Ensure IAM Database Authentication feature is enabled in order to use AWS Identity and Access Management (IAM) service to manage database access to your Amazon RDS MySQL and PostgreSQL instances. With this feature enabled, you don't have to use a password when you connect to your MySQL/PostgreSQL database instances, instead you use an authentication token",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-enableiamdatabaseauthentication"
+}
+
+
+#
+# PR-AWS-0320-CFR
+#
+
+default db_instance_cloudwatch_logs = null
+
+aws_issue["db_instance_cloudwatch_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    count(resource.Properties.EnableCloudwatchLogsExports) == 0
+}
+
+aws_issue["db_instance_cloudwatch_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    not resource.Properties.EnableCloudwatchLogsExports
+}
+
+db_instance_cloudwatch_logs {
+    lower(input.Resources[i].Type) == "aws::rds::dbinstance"
+    not aws_issue["db_instance_cloudwatch_logs"]
+}
+
+db_instance_cloudwatch_logs = false {
+    aws_issue["db_instance_cloudwatch_logs"]
+}
+
+db_instance_cloudwatch_logs_err = "Ensure respective logs of Amazon RDS instance are enabled" {
+    aws_issue["db_instance_cloudwatch_logs"]
+}
+
+db_instance_cloudwatch_logs_metadata := {
+    "Policy Code": "PR-AWS-0320-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure respective logs of Amazon RDS instance are enabled",
+    "Policy Description": "Use CloudWatch logging types for Amazon Relational Database Service (Amazon RDS) instances",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-enablecloudwatchlogsexports"
+}
+
+
+
+#
+# PR-AWS-0321-CFR
+#
+
+default db_instance_monitor = null
+
+aws_issue["db_instance_monitor"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::rds::dbinstance"
+    not resource.Properties.MonitoringInterval
+}
+
+db_instance_monitor {
+    lower(input.Resources[i].Type) == "aws::rds::dbinstance"
+    not aws_issue["db_instance_monitor"]
+}
+
+db_instance_monitor = false {
+    aws_issue["db_instance_monitor"]
+}
+
+db_instance_monitor_err = "Enhanced monitoring for Amazon RDS instances is enabled" {
+    aws_issue["db_instance_monitor"]
+}
+
+db_instance_monitor_metadata := {
+    "Policy Code": "PR-AWS-0321-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Enhanced monitoring for Amazon RDS instances is enabled",
+    "Policy Description": "This New Relic integration allows you to monitor and alert on RDS Enhanced Monitoring. You can use integration data and alerts to monitor the DB processes and identify potential trouble spots as well as to profile the DB allowing you to improve and optimize their response and cost",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-monitoringinterval"
 }

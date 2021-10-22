@@ -2,7 +2,7 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers
 
-# PR-AZR-0115-ARM
+# PR-AZR-ARM-SQL-028
 
 default geoRedundantBackup = null
 
@@ -62,7 +62,7 @@ geoRedundantBackup_miss_err = "Property geoRedundantBackup of type enum is absen
 }
 
 geoRedundantBackup_metadata := {
-    "Policy Code": "PR-AZR-0115-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-028",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -77,7 +77,7 @@ geoRedundantBackup_metadata := {
 
 
 
-# PR-AZR-0124-ARM
+# PR-AZR-ARM-SQL-029
 
 default sslEnforcement = null
 azure_attribute_absence ["sslEnforcement"] {
@@ -134,7 +134,7 @@ sslEnforcement_miss_err = "Property sslEnforcement of type enum is absent from r
 }
 
 sslEnforcement_metadata := {
-    "Policy Code": "PR-AZR-0124-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-029",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

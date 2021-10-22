@@ -4,7 +4,7 @@ package rule
 
 #
 
-# PR-AZR-0083-ARM
+# PR-AZR-ARM-SQL-008
 
 default db_logical_encrypt = null
 
@@ -70,7 +70,7 @@ db_logical_encrypt_err = "Azure SQL databases currently dont have transparent da
 }
 
 db_logical_encrypt_metadata := {
-    "Policy Code": "PR-AZR-0083-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-008",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -82,7 +82,7 @@ db_logical_encrypt_metadata := {
 }
 
 
-# PR-AZR-0084-ARM
+# PR-AZR-ARM-SQL-009
 #
 # This encryption is by default enabled for sql database. Thats why its not available in Terraform.
 # See https://github.com/hashicorp/terraform-provider-azurerm/issues/7187
@@ -143,7 +143,7 @@ db_encrypt_miss_err = "Azure SQL databases transparent encryption attribute 'sta
 }
 
 db_encrypt_metadata := {
-    "Policy Code": "PR-AZR-0084-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-009",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

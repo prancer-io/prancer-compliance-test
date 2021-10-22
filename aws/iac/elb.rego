@@ -802,3 +802,69 @@ elb_v2_listener_ssl_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html#cfn-elasticloadbalancingv2-listener-certificates"
 }
+
+
+#
+# PR-AWS-0334-CFR
+#
+
+default elb_drop_invalid_header = null
+
+aws_attribute_absence["elb_drop_invalid_header"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    not resource.Properties.LoadBalancerAttributes
+}
+
+aws_issue["elb_drop_invalid_header"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    item := resource.Properties.LoadBalancerAttributes[_]
+    lower(item.Key) == "routing.http.drop_invalid_header_fields.enabled"
+    lower(item.Value) != "true"
+}
+
+aws_bool_issue["elb_drop_invalid_header"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    item := resource.Properties.LoadBalancerAttributes[_]
+    lower(item.Key) == "routing.http.drop_invalid_header_fields.enabled"
+    not item.Value
+}
+
+elb_drop_invalid_header {
+    lower(input.Resources[i].Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    not aws_issue["elb_drop_invalid_header"]
+    not aws_bool_issue["elb_drop_invalid_header"]
+    not aws_attribute_absence["elb_drop_invalid_header"]
+}
+
+elb_drop_invalid_header = false {
+    aws_issue["elb_drop_invalid_header"]
+}
+
+elb_drop_invalid_header = false {
+    aws_bool_issue["elb_drop_invalid_header"]
+}
+
+elb_drop_invalid_header = false {
+    aws_attribute_absence["elb_drop_invalid_header"]
+}
+
+elb_drop_invalid_header_err = "Ensure that Application Load Balancer drops HTTP headers" {
+    aws_issue["elb_drop_invalid_header"]
+} else = "Ensure that Application Load Balancer drops HTTP headers" {
+    aws_bool_issue["elb_drop_invalid_header"]
+}
+
+elb_drop_invalid_header_metadata := {
+    "Policy Code": "PR-AWS-0334-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure that Application Load Balancer drops HTTP headers",
+    "Policy Description": "Checks if rule evaluates AWS Application Load Balancers (ALB) to ensure they are configured to drop http headers. The rule is NON_COMPLIANT if the value of routing.http.drop_invalid_header_fields.enabled is set to false",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-loadbalancer-loadbalancerattributes.html"
+}

@@ -2,7 +2,7 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites
 
-# PR-AZR-0139-ARM
+# PR-AZR-ARM-WEB-001
 
 default https_only = null
 
@@ -59,7 +59,7 @@ https_only_err = "Microsoft.web/Sites resource property httpsOnly missing in the
 }
 
 https_only_metadata := {
-    "Policy Code": "PR-AZR-0139-ARM",
+    "Policy Code": "PR-AZR-ARM-WEB-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -73,7 +73,7 @@ https_only_metadata := {
 
 
 
-# PR-AZR-0140-ARM
+# PR-AZR-ARM-WEB-002
 
 default min_tls_version = null
 
@@ -129,7 +129,7 @@ min_tls_version_err = "microsoft.web/sites resource property minTlsVersion missi
 }
 
 min_tls_version_metadata := {
-    "Policy Code": "PR-AZR-0140-ARM",
+    "Policy Code": "PR-AZR-ARM-WEB-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -143,7 +143,7 @@ min_tls_version_metadata := {
 
 
 
-# PR-AZR-0141-ARM
+# PR-AZR-ARM-WEB-003
 
 default client_cert_enabled = null
 
@@ -199,7 +199,7 @@ client_cert_enabled_err = "microsoft.web/sites resource property clientCertEnabl
 }
 
 client_cert_enabled_metadata := {
-    "Policy Code": "PR-AZR-0141-ARM",
+    "Policy Code": "PR-AZR-ARM-WEB-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -214,7 +214,7 @@ client_cert_enabled_metadata := {
 
 
 
-# PR-AZR-0142-ARM
+# PR-AZR-ARM-WEB-004
 
 default http_20_enabled = null
 
@@ -270,7 +270,7 @@ http_20_enabled_err = "microsoft.web/sites resource property http20Enabled missi
 }
 
 http_20_enabled_metadata := {
-    "Policy Code": "PR-AZR-0142-ARM",
+    "Policy Code": "PR-AZR-ARM-WEB-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

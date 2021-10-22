@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings
 
 #
-# PR-AZR-0134-ARM
+# PR-AZR-ARM-SQL-042
 #
 
 default sql_server_log_audit = null
@@ -61,7 +61,7 @@ sql_server_log_audit_miss_err = "Azure SQL Server Auditing settings attribute 's
 }
 
 sql_server_log_audit_metadata := {
-    "Policy Code": "PR-AZR-0134-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-042",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -76,7 +76,7 @@ sql_server_log_audit_metadata := {
 
 
 
-# PR-AZR-0135-ARM
+# PR-AZR-ARM-SQL-043
 #
 
 default sql_logical_server_log_audit = null
@@ -145,7 +145,7 @@ sql_logical_server_log_audit_miss_err = "Azure SQL Server Auditing settings attr
 }
 
 sql_logical_server_log_audit_metadata := {
-    "Policy Code": "PR-AZR-0135-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-043",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -159,7 +159,7 @@ sql_logical_server_log_audit_metadata := {
 
 
 
-# PR-AZR-0145-ARM
+# PR-AZR-ARM-SQL-044
 #
 
 default sql_server_audit_log_retention = null
@@ -217,7 +217,7 @@ sql_server_audit_log_retention_err = "microsoft.sql/servers/auditingsettings res
 
 
 sql_server_audit_log_retention_metadata := {
-    "Policy Code": "PR-AZR-0145-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-044",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -230,7 +230,7 @@ sql_server_audit_log_retention_metadata := {
 
 
 
-# PR-AZR-0146-ARM
+# PR-AZR-ARM-SQL-045
 #
 
 default sql_logial_server_audit_log_retention = null
@@ -299,7 +299,7 @@ sql_logial_server_audit_log_retention_err = "microsoft.sql/servers/auditingsetti
 
 
 sql_logial_server_audit_log_retention_metadata := {
-    "Policy Code": "PR-AZR-0146-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-045",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

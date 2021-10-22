@@ -2,7 +2,7 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries
 
-# PR-AZR-0104-ARM
+# PR-AZR-ARM-ACR-002
 
 default adminUserDisabled = null
 
@@ -54,7 +54,7 @@ adminUserDisabled_err = "Azure Container Registry admin user is currently not di
 }
 
 adminUserDisabled_metadata := {
-    "Policy Code": "PR-AZR-0104-ARM",
+    "Policy Code": "PR-AZR-ARM-ACR-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -68,7 +68,7 @@ adminUserDisabled_metadata := {
 
 
 #
-# PR-AZR-0015-ARM
+# PR-AZR-ARM-ACR-003
 #
 
 default acr_classic = null
@@ -128,12 +128,12 @@ acr_classic_miss_err = "Azure Container registry property sku.name is missing fr
 }
 
 acr_classic_metadata := {
-    "Policy Code": "PR-AZR-0015-ARM",
+    "Policy Code": "PR-AZR-ARM-ACR-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "Azure Container Registry should not use the deprecated classic registry",
-    "Policy Description": "This policy identifies an Azure Container Registry (ACR) that is using the classic SKU. The initial release of the Azure Container Registry (ACR) service that was offered as a classic SKU is being deprecated and will be unavailable after April 2019. As a best practice, upgrade your existing classic registry to a managed registry._x005F_x000D_ _x005F_x000D_ For more information, visit https://docs.microsoft.com/en-us/azure/container-registry/container-registry-upgrade",
+    "Policy Description": "This policy identifies an Azure Container Registry (ACR) that is using the classic SKU. The initial release of the Azure Container Registry (ACR) service that was offered as a classic SKU is being deprecated and will be unavailable after April 2019. As a best practice, upgrade your existing classic registry to a managed registry.<br><br>For more information, visit https://docs.microsoft.com/en-us/azure/container-registry/container-registry-upgrade",
     "Resource Type": "microsoft.containerregistry/registries",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/rest/api/containerregistry/registries/list"

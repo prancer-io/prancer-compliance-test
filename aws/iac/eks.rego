@@ -81,3 +81,96 @@ eks_version_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html#cfn-eks-cluster-version"
 }
+
+
+#
+# PR-AWS-0322-CFR
+#
+
+default eks_encryption_resources = null
+
+aws_issue["eks_encryption_resources"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    EncryptionConfig := resource.Properties.EncryptionConfig[_]
+    not EncryptionConfig.Resources
+}
+
+aws_issue["eks_encryption_resources"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    EncryptionConfig := resource.Properties.EncryptionConfig[_]
+    count(EncryptionConfig.Resources) == 0
+}
+
+
+eks_encryption_resources {
+    lower(input.Resources[i].Type) == "aws::eks::cluster"
+    not aws_issue["eks_encryption_resources"]
+}
+
+eks_encryption_resources = false {
+    aws_issue["eks_encryption_resources"]
+}
+
+eks_encryption_resources_err = "Ensure AWS EKS cluster has secrets encryption enabled" {
+    aws_issue["eks_encryption_resources"]
+}
+eks_encryption_resources_metadata := {
+    "Policy Code": "PR-AWS-0322-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure AWS EKS cluster has secrets encryption enabled",
+    "Policy Description": "Secrets in Kubernetes enables managing sensitive information such as passwords and API keys using Kubernetes-native APIs. When creating a secret resource the Kubernetes API server stores it in etcd in a base64 encoded form.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-eks-cluster-encryptionconfig.html#cfn-eks-cluster-encryptionconfig-resources"
+}
+
+
+
+#
+# PR-AWS-0323-CFR
+#
+
+default eks_encryption_kms = null
+
+aws_issue["eks_encryption_kms"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    EncryptionConfig := resource.Properties.EncryptionConfig[_]
+    not EncryptionConfig.Provider.keyArn
+}
+
+aws_issue["eks_encryption_kms"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    EncryptionConfig := resource.Properties.EncryptionConfig[_]
+    count(EncryptionConfig.Provider.keyArn) == 0
+}
+
+
+eks_encryption_kms {
+    lower(input.Resources[i].Type) == "aws::eks::cluster"
+    not aws_issue["eks_encryption_kms"]
+}
+
+eks_encryption_kms = false {
+    aws_issue["eks_encryption_kms"]
+}
+
+eks_encryption_kms_err = "Ensure Kubernetes secrets are encrypted using CMKs managed in AWS KMS" {
+    aws_issue["eks_encryption_kms"]
+}
+eks_encryption_kms_metadata := {
+    "Policy Code": "PR-AWS-0323-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Kubernetes secrets are encrypted using CMKs managed in AWS KMS",
+    "Policy Description": "Application-layer Secrets Encryption provides an additional layer of security for sensitive data, such as user defined Secrets and Secrets required for the operation of the cluster, such as service account keys, which are all stored in etcd. Using this functionality, you can use a key, that you manage in AWS KMS, to encrypt data at the application layer",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-eks-cluster-encryptionconfig.html#cfn-eks-cluster-encryptionconfig-provider"
+}

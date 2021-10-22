@@ -102,3 +102,49 @@ kms_key_state_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enabled"
 }
 
+
+#
+# PR-AWS-0313-CFR
+#
+default kms_key_state = null
+
+aws_issue["kms_key_state"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::kms::key"
+    Statement := resource.Properties.KeyPolicy.Statement[_]
+    Statement.Principal == "*"
+}
+
+aws_issue["kms_key_state"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::kms::key"
+    Statement := resource.Properties.KeyPolicy.Statement[_]
+    Statement.Principal["AWS"] == "*"
+}
+
+kms_key_state {
+    lower(input.Resources[i].Type) == "aws::kms::key"
+    not aws_issue["kms_key_state"]
+}
+
+kms_key_state = false {
+    aws_issue["kms_key_state"]
+}
+
+kms_key_state_err = "Ensure no KMS key policy contain wildcard (*) principal" {
+    aws_issue["kms_key_state"]
+}
+
+
+kms_key_state_metadata := {
+    "Policy Code": "PR-AWS-0313-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure no KMS key policy contain wildcard (*) principal",
+    "Policy Description": "This policy revents all user access to specific resource/s and actions",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html"
+}
+

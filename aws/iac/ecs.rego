@@ -379,3 +379,57 @@ ecs_transit_enabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-efsvolumeconfiguration.html#cfn-ecs-taskdefinition-efsvolumeconfiguration-transitencryption"
 }
+
+
+#
+# PR-AWS-0330-CFR
+#
+
+default ecs_container_insight_enable = null
+
+aws_issue["ecs_container_insight_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::cluster"
+    ClusterSettings := resource.Properties.ClusterSettings[_]
+    lower(ClusterSettings.Name) == "containerinsights" 
+    lower(ClusterSettings.Value) != "enabled"
+}
+
+aws_issue["ecs_container_insight_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::cluster"
+    count([c | resource.Properties.ClusterSettings[_].Name == "containerinsights" ; c:=1]) == 0
+}
+
+aws_issue["ecs_container_insight_enable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecs::cluster"
+    count(resource.Properties.ClusterSettings) == 0
+}
+
+
+ecs_container_insight_enable {
+    lower(input.Resources[i].Type) == "aws::ecs::cluster"
+    not aws_issue["ecs_container_insight_enable"]
+}
+
+ecs_container_insight_enable = false {
+    aws_issue["ecs_container_insight_enable"]
+}
+
+
+ecs_container_insight_enable_err = "Ensure container insights are enabled on ECS cluster" {
+    aws_issue["ecs_container_insight_enable"]
+}
+
+ecs_container_insight_enable_metadata := {
+    "Policy Code": "PR-AWS-0330-CFR",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure container insights are enabled on ECS cluster",
+    "Policy Description": "Container Insights can be used to collect, aggregate, and summarize metrics and logs from containerized applications and microservices. They can also be extended to collect metrics at the cluster, task, and service levels. Using Container Insights allows you to monitor, troubleshoot, and set alarms for all your Amazon ECS resources. It provides a simple to use native and fully managed service for managing ECS issues.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-cluster-clustersettings.html#cfn-ecs-cluster-clustersettings-name"
+}

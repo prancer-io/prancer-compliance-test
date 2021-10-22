@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines/extensions
 
 #
-# PR-AZR-0064-ARM
+# PR-AZR-ARM-VM-003
 #
 
 default vm_protection = null
@@ -61,7 +61,7 @@ vm_protection_miss_err = "VM extension attribute type missing in the resource" {
 }
 
 vm_protection_metadata := {
-    "Policy Code": "PR-AZR-0064-ARM",
+    "Policy Code": "PR-AZR-ARM-VM-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
