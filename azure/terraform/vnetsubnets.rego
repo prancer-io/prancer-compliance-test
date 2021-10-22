@@ -47,25 +47,25 @@ default vnet_subnet_nsg = null
 azure_attribute_absence["vnet_subnet_nsg"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_subnet_network_security_group_association"
-    not resource.subnet_id
+    not resource.properties.subnet_id
 }
 
 azure_attribute_absence["vnet_subnet_nsg"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_subnet_network_security_group_association"
-    not resource.network_security_group_id
+    not resource.properties.network_security_group_id
 }
 
 azure_issue["vnet_subnet_nsg"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_subnet_network_security_group_association"
-    count(resource.subnet_id) == 0
+    count(resource.properties.subnet_id) == 0
 }
 
 azure_issue["vnet_subnet_nsg"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_subnet_network_security_group_association"
-    count(resource.network_security_group_id) == 0
+    count(resource.properties.network_security_group_id) == 0
 }
 
 vnet_subnet_nsg {

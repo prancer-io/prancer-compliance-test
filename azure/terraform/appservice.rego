@@ -632,13 +632,6 @@ azure_attribute_absence["app_service_remote_debugging_disabled"] {
     not site_config.remote_debugging_enabled
 }
 
-azure_issue["app_service_remote_debugging_disabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_app_service"
-    site_config := resource.properties.site_config[_]
-    site_config.remote_debugging_enabled == true
-}
-
 app_service_remote_debugging_disabled {
     lower(input.resources[_].type) == "azurerm_app_service"
     azure_attribute_absence["app_service_remote_debugging_disabled"]
