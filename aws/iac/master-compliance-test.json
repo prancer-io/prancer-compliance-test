@@ -7962,8 +7962,8 @@
                         }
                     ],
                     "severity": "High",
-                    "title": "There is a possibility that password is exposed",
-                    "description": "There is a possibility that password is exposed, template should not have any secret in it. Make sure to put the secrets in a vault",
+                    "title": "Ensure no hardcoded password set in the template",
+                    "description": "Ensure no hardcoded password set in the template, template should not have any secret in it. Make sure to put the secrets in a vault",
                     "tags": [
                         {
                             "cloud": "git",
@@ -7992,8 +7992,8 @@
                         }
                     ],
                     "severity": "High",
-                    "title": "There is a possibility that random password is exposed",
-                    "description": "There is a possibility that random password is exposed, template should not have any secret in it. Make sure to put the secrets in a vault",
+                    "title": "There is a possibility that a value might contains a secret string or password",
+                    "description": "There is a possibility that a value might contains a secret string or password, template should not have any secret in it. Make sure to put the secrets in a vault",
                     "tags": [
                         {
                             "cloud": "git",

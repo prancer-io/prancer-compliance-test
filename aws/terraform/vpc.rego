@@ -1,9 +1,8 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-subnet.html
 
 #
-# PR-AWS-0184-TRF
+# PR-AWS-TRF-VPC-001
 #
 
 default vpc_subnet_autoip = null
@@ -41,7 +40,7 @@ vpc_subnet_autoip_err = "AWS VPC subnets should not allow automatic public IP as
 }
 
 vpc_subnet_autoip_metadata := {
-    "Policy Code": "PR-AWS-0184-TRF",
+    "Policy Code": "PR-AWS-TRF-VPC-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",

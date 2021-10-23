@@ -1,10 +1,185 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html
 
 #
-# PR-AWS-0004-TRF
+# PR-AWS-TRF-EBS-001
+#
+
+default ebs_encrypt = null
+
+aws_issue["ebs_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_ebs_volume"
+    lower(resource.properties.encrypted) == "false"
+}
+
+aws_bool_issue["ebs_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_ebs_volume"
+    not resource.properties.encrypted
+}
+
+ebs_encrypt {
+    lower(input.resources[_].type) == "aws_ebs_volume"
+    not aws_issue["ebs_encrypt"]
+    not aws_bool_issue["ebs_encrypt"]
+}
+
+ebs_encrypt = false {
+    aws_issue["ebs_encrypt"]
+}
+
+ebs_encrypt = false {
+    aws_bool_issue["ebs_encrypt"]
+}
+
+ebs_encrypt_err = "AWS EBS volumes are not encrypted" {
+    aws_issue["ebs_encrypt"]
+} else = "AWS EBS volumes are not encrypted" {
+    aws_bool_issue["ebs_encrypt"]
+}
+
+ebs_encrypt_metadata := {
+    "Policy Code": "PR-AWS-TRF-EBS-001",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS EBS volumes are not encrypted",
+    "Policy Description": "This policy identifies the EBS volumes which are not encrypted. The snapshots that you take of an encrypted EBS volume are also encrypted and can be moved between AWS Regions as needed. You cannot share encrypted snapshots with other AWS accounts and you cannot make them public. It is recommended that EBS volume should be encrypted.",
+    "Resource Type": "aws_ebs_volume",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volume.html"
+}
+
+#
+# PR-AWS-TRF-EFS-001
+#
+
+default efs_kms = null
+
+aws_attribute_absence["efs_kms"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_efs_file_system"
+    not resource.properties.kms_key_id
+}
+
+aws_issue["efs_kms"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_efs_file_system"
+    resource.properties.kms_key_id == null
+}
+
+aws_issue["efs_kms"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_efs_file_system"
+    resource.properties.kms_key_id != null
+    not startswith(resource.properties.kms_key_id, "arn:")
+}
+
+aws_issue["efs_kms"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_efs_file_system"
+    lower(resource.properties.encrypted) == "false"
+}
+
+aws_bool_issue["efs_kms"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_efs_file_system"
+    not resource.properties.encrypted
+}
+
+
+efs_kms {
+    lower(input.resources[_].type) == "aws_efs_file_system"
+    not aws_issue["efs_kms"]
+    not aws_bool_issue["efs_kms"]
+    not aws_attribute_absence["efs_kms"]
+}
+
+efs_kms = false {
+    aws_issue["efs_kms"]
+}
+
+efs_kms = false {
+    aws_bool_issue["efs_kms"]
+}
+
+efs_kms = false {
+    aws_attribute_absence["efs_kms"]
+}
+
+efs_kms_err = "AWS Elastic File System (EFS) not encrypted using Customer Managed Key" {
+    aws_issue["efs_kms"]
+} else = "AWS Elastic File System (EFS) not encrypted using Customer Managed Key" {
+    aws_bool_issue["efs_kms"]
+} else = "EFS attribute kms_key_id missing in the resource" {
+    aws_attribute_absence["efs_kms"]
+}
+
+efs_kms_metadata := {
+    "Policy Code": "PR-AWS-TRF-EFS-001",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS Elastic File System (EFS) not encrypted using Customer Managed Key",
+    "Policy Description": "This policy identifies Elastic File Systems (EFSs) which are encrypted with default KMS keys and not with Keys managed by Customer. It is a best practice to use customer managed KMS Keys to encrypt your EFS data. It gives you full control over the encrypted data.",
+    "Resource Type": "aws_efs_file_system",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-filesystem.html"
+}
+
+#
+# PR-AWS-TRF-EFS-002
+#
+
+default efs_encrypt = null
+
+aws_issue["efs_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_efs_file_system"
+    lower(resource.properties.encrypted) == "false"
+}
+
+aws_bool_issue["efs_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_efs_file_system"
+    not resource.properties.encrypted
+}
+
+efs_encrypt {
+    lower(input.resources[_].type) == "aws_efs_file_system"
+    not aws_issue["efs_encrypt"]
+    not aws_bool_issue["efs_encrypt"]
+}
+
+efs_encrypt = false {
+    aws_issue["efs_encrypt"]
+}
+
+efs_encrypt = false {
+    aws_bool_issue["efs_encrypt"]
+}
+
+efs_encrypt_err = "AWS Elastic File System (EFS) with encryption for data at rest disabled" {
+    aws_issue["efs_encrypt"]
+} else = "AWS Elastic File System (EFS) with encryption for data at rest disabled" {
+    aws_bool_issue["efs_encrypt"]
+}
+
+efs_encrypt_metadata := {
+    "Policy Code": "PR-AWS-TRF-EFS-002",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS Elastic File System (EFS) with encryption for data at rest disabled",
+    "Policy Description": "This policy identifies Elastic File Systems (EFSs) for which encryption for data at rest disabled. It is highly recommended to implement at-rest encryption in order to prevent unauthorized users from reading sensitive data saved to EFS.",
+    "Resource Type": "aws_efs_file_system",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-filesystem.html"
+}
+
+#
+# PR-AWS-TRF-S3-001
 #
 
 default s3_accesslog = null
@@ -56,19 +231,19 @@ s3_accesslog_err = "AWS Access logging not enabled on S3 buckets" {
 }
 
 s3_accesslog_metadata := {
-    "Policy Code": "PR-AWS-0004-TRF",
+    "Policy Code": "PR-AWS-TRF-S3-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
     "Policy Title": "AWS Access logging not enabled on S3 buckets",
-    "Policy Description": "Checks for S3 buckets without access logging turned on. Access logging allows customers to view complete audit trail on sensitive workloads such as S3 buckets. It is recommended that Access logging is turned on for all S3 buckets to meet audit PR-AWS-0004-TRF-DESC compliance requirement",
+    "Policy Description": "Checks for S3 buckets without access logging turned on. Access logging allows customers to view complete audit trail on sensitive workloads such as S3 buckets. It is recommended that Access logging is turned on for all S3 buckets to meet audit PR-AWS-TRF-S3-001-DESC compliance requirement",
     "Resource Type": "aws_s3_bucket_policy",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
 }
 
 #
-# PR-AWS-0140-TRF
+# PR-AWS-TRF-S3-002
 #
 
 default s3_acl_delete = null
@@ -127,7 +302,7 @@ s3_acl_delete_err = "AWS S3 Bucket has Global DELETE Permissions enabled via buc
 }
 
 s3_acl_delete_metadata := {
-    "Policy Code": "PR-AWS-0140-TRF",
+    "Policy Code": "PR-AWS-TRF-S3-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -139,7 +314,7 @@ s3_acl_delete_metadata := {
 }
 
 #
-# PR-AWS-0141-TRF
+# PR-AWS-TRF-S3-003
 #
 
 default s3_acl_get = null
@@ -198,7 +373,7 @@ s3_acl_get_err = "AWS S3 Bucket has Global get Permissions enabled via bucket po
 }
 
 s3_acl_get_metadata := {
-    "Policy Code": "PR-AWS-0141-TRF",
+    "Policy Code": "PR-AWS-TRF-S3-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -210,7 +385,7 @@ s3_acl_get_metadata := {
 }
 
 #
-# PR-AWS-0142-TRF
+# PR-AWS-TRF-S3-004
 #
 
 default s3_acl_list = null
@@ -269,7 +444,7 @@ s3_acl_list_err = "AWS S3 Bucket has Global list Permissions enabled via bucket 
 }
 
 s3_acl_list_metadata := {
-    "Policy Code": "PR-AWS-0142-TRF",
+    "Policy Code": "PR-AWS-TRF-S3-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -281,7 +456,7 @@ s3_acl_list_metadata := {
 }
 
 #
-# PR-AWS-0143-TRF
+# PR-AWS-TRF-S3-005
 #
 
 default s3_acl_put = null
@@ -340,7 +515,7 @@ s3_acl_put_err = "AWS S3 Bucket has Global put Permissions enabled via bucket po
 }
 
 s3_acl_put_metadata := {
-    "Policy Code": "PR-AWS-0143-TRF",
+    "Policy Code": "PR-AWS-TRF-S3-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -352,58 +527,7 @@ s3_acl_put_metadata := {
 }
 
 #
-# PR-AWS-0144-TRF
-#
-
-default s3_cloudtrail = null
-
-aws_issue["s3_cloudtrail"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_cloudtrail"
-    lower(resource.properties.enable_logging) == "false"
-}
-
-aws_bool_issue["s3_cloudtrail"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_cloudtrail"
-    not resource.properties.enable_logging
-}
-
-s3_cloudtrail {
-    lower(input.resources[i].type) == "aws_cloudtrail"
-    not aws_issue["s3_cloudtrail"]
-    not aws_bool_issue["s3_cloudtrail"]
-}
-
-s3_cloudtrail = false {
-    aws_issue["s3_cloudtrail"]
-}
-
-s3_cloudtrail = false {
-    aws_bool_issue["s3_cloudtrail"]
-}
-
-s3_cloudtrail_err = "AWS S3 CloudTrail buckets for which access logging is disabled" {
-    aws_issue["s3_cloudtrail"]
-} else = "AWS S3 CloudTrail buckets for which access logging is disabled" {
-    aws_bool_issue["s3_cloudtrail"]
-}
-
-s3_cloudtrail_metadata := {
-    "Policy Code": "PR-AWS-0144-TRF",
-    "Type": "IaC",
-    "Product": "AWS",
-    "Language": "Terraform",
-    "Policy Title": "AWS S3 CloudTrail buckets for which access logging is disabled",
-    "Policy Description": "This policy identifies S3 CloudTrail buckets for which access is disabled.S3 Bucket access logging generates access records for each request made to your S3 bucket. An access log record contains information such as the request type, the resources specified in the request worked, and the time and date the request was processed. It is recommended that bucket access logging be enabled on the CloudTrail S3 bucket",
-    "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
-}
-
-
-#
-# PR-AWS-0145-TRF
+# PR-AWS-TRF-S3-007
 #
 
 default s3_versioning = null
@@ -457,7 +581,7 @@ s3_versioning_err = "AWS S3 Object Versioning is disabled" {
 }
 
 s3_versioning_metadata := {
-    "Policy Code": "PR-AWS-0145-TRF",
+    "Policy Code": "PR-AWS-TRF-S3-007",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -469,45 +593,7 @@ s3_versioning_metadata := {
 }
 
 #
-# PR-AWS-0147-TRF
-#
-
-default s3_public_acl = null
-
-aws_issue["s3_public_acl"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_s3_bucket"
-    resource.properties.acl == "public-read"
-}
-
-s3_public_acl {
-    lower(input.resources[i].type) == "aws_s3_bucket"
-    not aws_issue["s3_public_acl"]
-}
-
-s3_public_acl = false {
-    aws_issue["s3_public_acl"]
-}
-
-s3_public_acl_err = "AWS S3 bucket has global view ACL permissions enabled." {
-    aws_issue["s3_public_acl"]
-}
-
-s3_public_acl_metadata := {
-    "Policy Code": "PR-AWS-0147-TRF",
-    "Type": "IaC",
-    "Product": "AWS",
-    "Language": "Terraform",
-    "Policy Title": "AWS S3 bucket has global view ACL permissions enabled.",
-    "Policy Description": "This policy determines if any S3 bucket(s) has Global View ACL permissions enabled for the All Users group. These permissions allow external resources to see the permission settings associated to the object.",
-    "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
-}
-
-
-#
-# PR-AWS-0148-TRF
+# PR-AWS-TRF-S3-009
 #
 
 default s3_transport = null
@@ -581,7 +667,7 @@ s3_transport_err = "AWS S3 bucket not configured with secure data transport poli
 }
 
 s3_transport_metadata := {
-    "Policy Code": "PR-AWS-0148-TRF",
+    "Policy Code": "PR-AWS-TRF-S3-009",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -593,7 +679,131 @@ s3_transport_metadata := {
 }
 
 #
-# PR-AWS-0149-TRF
+# PR-AWS-TRF-S3-013
+#
+
+default s3_website = null
+
+aws_issue["s3_website"] {
+    resource := input.resources[_]
+    lower(resource.type) == "aws_s3_bucket"
+    resource.properties.website
+}
+
+s3_website {
+    lower(input.resources[_].type) == "aws_s3_bucket"
+    not aws_issue["s3_website"]
+}
+
+s3_website = false {
+    aws_issue["s3_website"]
+}
+
+s3_website_err = "S3 buckets with configurations set to host websites" {
+    aws_issue["s3_website"]
+}
+
+s3_website_metadata := {
+    "Policy Code": "PR-AWS-TRF-S3-013",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "S3 buckets with configurations set to host websites",
+    "Policy Description": "To host a website on AWS S3 you should configure a bucket as a website. This policy identifies all the S3 buckets that are configured to host websites. By frequently surveying these S3 buckets you can ensure that only authorized buckets are enabled to host websites. Make sure to disable static website hosting for unauthorized S3 buckets.",
+    "Resource Type": "aws_s3_bucket_policy",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
+}
+
+#
+# PR-AWS-TRF-S3-006
+#
+
+default s3_cloudtrail = null
+
+aws_issue["s3_cloudtrail"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudtrail"
+    lower(resource.properties.enable_logging) == "false"
+}
+
+aws_bool_issue["s3_cloudtrail"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudtrail"
+    not resource.properties.enable_logging
+}
+
+s3_cloudtrail {
+    lower(input.resources[i].type) == "aws_cloudtrail"
+    not aws_issue["s3_cloudtrail"]
+    not aws_bool_issue["s3_cloudtrail"]
+}
+
+s3_cloudtrail = false {
+    aws_issue["s3_cloudtrail"]
+}
+
+s3_cloudtrail = false {
+    aws_bool_issue["s3_cloudtrail"]
+}
+
+s3_cloudtrail_err = "AWS S3 CloudTrail buckets for which access logging is disabled" {
+    aws_issue["s3_cloudtrail"]
+} else = "AWS S3 CloudTrail buckets for which access logging is disabled" {
+    aws_bool_issue["s3_cloudtrail"]
+}
+
+s3_cloudtrail_metadata := {
+    "Policy Code": "PR-AWS-TRF-S3-006",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS S3 CloudTrail buckets for which access logging is disabled",
+    "Policy Description": "This policy identifies S3 CloudTrail buckets for which access is disabled.S3 Bucket access logging generates access records for each request made to your S3 bucket. An access log record contains information such as the request type, the resources specified in the request worked, and the time and date the request was processed. It is recommended that bucket access logging be enabled on the CloudTrail S3 bucket",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
+}
+
+#
+# PR-AWS-TRF-S3-008
+#
+
+default s3_public_acl = null
+
+aws_issue["s3_public_acl"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_s3_bucket"
+    resource.properties.acl == "public-read"
+}
+
+s3_public_acl {
+    lower(input.resources[i].type) == "aws_s3_bucket"
+    not aws_issue["s3_public_acl"]
+}
+
+s3_public_acl = false {
+    aws_issue["s3_public_acl"]
+}
+
+s3_public_acl_err = "AWS S3 bucket has global view ACL permissions enabled." {
+    aws_issue["s3_public_acl"]
+}
+
+s3_public_acl_metadata := {
+    "Policy Code": "PR-AWS-TRF-S3-008",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS S3 bucket has global view ACL permissions enabled.",
+    "Policy Description": "This policy determines if any S3 bucket(s) has Global View ACL permissions enabled for the All Users group. These permissions allow external resources to see the permission settings associated to the object.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
+}
+
+#
+# PR-AWS-TRF-S3-010
 #
 
 default s3_auth_acl = null
@@ -618,7 +828,7 @@ s3_auth_acl_err = "AWS S3 buckets are accessible to any authenticated user." {
 }
 
 s3_auth_acl_metadata := {
-    "Policy Code": "PR-AWS-0149-TRF",
+    "Policy Code": "PR-AWS-TRF-S3-010",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -630,7 +840,7 @@ s3_auth_acl_metadata := {
 }
 
 #
-# PR-AWS-0150-TRF
+# PR-AWS-TRF-S3-011
 #
 
 default s3_public_access = null
@@ -661,7 +871,7 @@ s3_public_access_err = "AWS S3 buckets are accessible to public" {
 }
 
 s3_public_access_metadata := {
-    "Policy Code": "PR-AWS-0150-TRF",
+    "Policy Code": "PR-AWS-TRF-S3-011",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -673,7 +883,7 @@ s3_public_access_metadata := {
 }
 
 #
-# PR-AWS-0151-TRF
+# PR-AWS-TRF-S3-012
 #
 
 default s3_encryption = null
@@ -698,7 +908,7 @@ s3_encryption_err = "AWS S3 buckets do not have server side encryption" {
 }
 
 s3_encryption_metadata := {
-    "Policy Code": "PR-AWS-0151-TRF",
+    "Policy Code": "PR-AWS-TRF-S3-012",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -709,46 +919,8 @@ s3_encryption_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
 }
 
-
 #
-# PR-AWS-0196-TRF
-#
-
-default s3_website = null
-
-aws_issue["s3_website"] {
-    resource := input.resources[_]
-    lower(resource.type) == "aws_s3_bucket"
-    resource.properties.website
-}
-
-s3_website {
-    lower(input.resources[_].type) == "aws_s3_bucket"
-    not aws_issue["s3_website"]
-}
-
-s3_website = false {
-    aws_issue["s3_website"]
-}
-
-s3_website_err = "S3 buckets with configurations set to host websites" {
-    aws_issue["s3_website"]
-}
-
-s3_website_metadata := {
-    "Policy Code": "PR-AWS-0196-TRF",
-    "Type": "IaC",
-    "Product": "AWS",
-    "Language": "Terraform",
-    "Policy Title": "S3 buckets with configurations set to host websites",
-    "Policy Description": "To host a website on AWS S3 you should configure a bucket as a website. This policy identifies all the S3 buckets that are configured to host websites. By frequently surveying these S3 buckets you can ensure that only authorized buckets are enabled to host websites. Make sure to disable static website hosting for unauthorized S3 buckets.",
-    "Resource Type": "aws_s3_bucket_policy",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
-}
-
-#
-# PR-AWS-0246-TRF
+# PR-AWS-TRF-S3-014
 #
 
 default s3_cors = null
@@ -775,7 +947,7 @@ s3_cors_err = "Ensure S3 hosted sites supported hardened CORS" {
 }
 
 s3_cors_metadata := {
-    "Policy Code": "PR-AWS-0246-TRF",
+    "Policy Code": "PR-AWS-TRF-S3-014",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",

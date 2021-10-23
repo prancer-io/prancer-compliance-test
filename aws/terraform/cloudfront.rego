@@ -1,9 +1,8 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html
 
 #
-# PR-AWS-0015-TRF
+# PR-AWS-TRF-CF-001
 #
 
 default cf_default_cache = null
@@ -62,7 +61,7 @@ cf_default_cache_err = "AWS CloudFront Distributions with Field-Level Encryption
 }
 
 cf_default_cache_metadata := {
-    "Policy Code": "PR-AWS-0015-TRF",
+    "Policy Code": "PR-AWS-TRF-CF-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -73,9 +72,8 @@ cf_default_cache_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html"
 }
 
-
 #
-# PR-AWS-0016-TRF
+# PR-AWS-TRF-CF-002
 #
 
 default cf_ssl_protocol = null
@@ -116,7 +114,7 @@ cf_ssl_protocol_err = "AWS CloudFront distribution is using insecure SSL protoco
 }
 
 cf_ssl_protocol_metadata := {
-    "Policy Code": "PR-AWS-0016-TRF",
+    "Policy Code": "PR-AWS-TRF-CF-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -127,9 +125,8 @@ cf_ssl_protocol_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html"
 }
 
-
 #
-# PR-AWS-0017-TRF
+# PR-AWS-TRF-CF-003
 #
 
 default cf_logging = null
@@ -188,7 +185,7 @@ cf_logging_err = "AWS CloudFront distribution with access logging disabled" {
 }
 
 cf_logging_metadata := {
-    "Policy Code": "PR-AWS-0017-TRF",
+    "Policy Code": "PR-AWS-TRF-CF-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -200,7 +197,7 @@ cf_logging_metadata := {
 }
 
 #
-# PR-AWS-0018-TRF
+# PR-AWS-TRF-CF-004
 #
 
 default cf_https_only = null
@@ -242,7 +239,7 @@ cf_https_only_err = "AWS CloudFront origin protocol policy does not enforce HTTP
 }
 
 cf_https_only_metadata := {
-    "Policy Code": "PR-AWS-0018-TRF",
+    "Policy Code": "PR-AWS-TRF-CF-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -253,9 +250,8 @@ cf_https_only_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html"
 }
 
-
 #
-# PR-AWS-0019-TRF
+# PR-AWS-TRF-CF-005
 #
 
 default cf_https = null
@@ -296,7 +292,7 @@ cf_https_err = "AWS CloudFront viewer protocol policy is not configured with HTT
 }
 
 cf_https_metadata := {
-    "Policy Code": "PR-AWS-0019-TRF",
+    "Policy Code": "PR-AWS-TRF-CF-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -308,7 +304,7 @@ cf_https_metadata := {
 }
 
 #
-# PR-AWS-0020-TRF
+# PR-AWS-TRF-CF-006
 #
 
 default cf_min_protocol = null
@@ -355,7 +351,7 @@ cf_min_protocol_err = "AWS CloudFront web distribution that allow TLS versions 1
 }
 
 cf_min_protocol_metadata := {
-    "Policy Code": "PR-AWS-0020-TRF",
+    "Policy Code": "PR-AWS-TRF-CF-006",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -367,7 +363,7 @@ cf_min_protocol_metadata := {
 }
 
 #
-# PR-AWS-0021-TRF
+# PR-AWS-TRF-CF-007
 #
 
 default cf_firewall = null
@@ -405,7 +401,7 @@ cf_firewall_err = "AWS CloudFront web distribution with AWS Web Application Fire
 }
 
 cf_firewall_metadata := {
-    "Policy Code": "PR-AWS-0021-TRF",
+    "Policy Code": "PR-AWS-TRF-CF-007",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -417,7 +413,7 @@ cf_firewall_metadata := {
 }
 
 #
-# PR-AWS-0022-TRF
+# PR-AWS-TRF-CF-008
 #
 
 default cf_default_ssl = null
@@ -457,7 +453,7 @@ cf_default_ssl_err = "AWS CloudFront web distribution with default SSL certifica
 }
 
 cf_default_ssl_metadata := {
-    "Policy Code": "PR-AWS-0022-TRF",
+    "Policy Code": "PR-AWS-TRF-CF-008",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -469,7 +465,7 @@ cf_default_ssl_metadata := {
 }
 
 #
-# PR-AWS-0023-TRF
+# PR-AWS-TRF-CF-009
 #
 
 default cf_geo_restriction = null
@@ -511,7 +507,7 @@ cf_geo_restriction_err = "AWS CloudFront web distribution with geo restriction d
 }
 
 cf_geo_restriction_metadata := {
-    "Policy Code": "PR-AWS-0023-TRF",
+    "Policy Code": "PR-AWS-TRF-CF-009",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -523,7 +519,7 @@ cf_geo_restriction_metadata := {
 }
 
 #
-# PR-AWS-0030-TRF
+# PR-AWS-TRF-CF-010
 #
 
 default cf_s3_origin = null
@@ -577,7 +573,7 @@ cf_s3_origin_err = "AWS Cloudfront Distribution with S3 have Origin Access set t
 }
 
 cf_s3_origin_metadata := {
-    "Policy Code": "PR-AWS-0030-TRF",
+    "Policy Code": "PR-AWS-TRF-CF-010",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
