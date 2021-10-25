@@ -61,51 +61,6 @@ KeyVault_metadata := {
 }
 
 
-
-# PR-AZR-0108-TRF
-# As of 2020-12-15 Azure now requires that Soft Delete is enabled on Key Vaults and this can no longer be disabled. 
-# Version v2.42 of the Azure Provider and later ignore the value of the soft_delete_enabled field and force this value to be true - 
-# as such this field can be safely removed from your Terraform Configuration. This field will be removed in version 3.0 of the Azure Provider.
-
-default enableSoftDelete = null
-
-azure_issue ["enableSoftDelete"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_key_vault"
-    not resource.properties.soft_delete_enabled
-}
-
-enableSoftDelete {
-    lower(input.resources[_].type) == "azurerm_key_vault"
-    not azure_issue["enableSoftDelete"]
-}
-
-enableSoftDelete = false {
-    azure_issue["enableSoftDelete"]
-}
-
-enableSoftDelete {
-    lower(input.resources[_].type) == "azurerm_key_vault"
-    not azure_issue["enableSoftDelete"]
-}
-
-enableSoftDelete_err = "'Soft Delete' setting is currently not enabled for Key Vault" {
-    azure_issue["enableSoftDelete"]
-}
-
-enableSoftDelete_metadata := {
-    "Policy Code": "PR-AZR-0108-TRF",
-    "Type": "IaC",
-    "Product": "AZR",
-    "Language": "Terraform",
-    "Policy Title": "Ensure the key vault is recoverable - enable 'Soft Delete' setting for a Key Vault",
-    "Policy Description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation, etc.) supported by the key vault objects. It is recommended the key vault be made recoverable by enabling the 'Do Not Purge' and 'Soft Delete' functions. This is in order to prevent loss of encrypted data including storage accounts, SQL databases, and/or dependent services provided by key vault objects (Keys, Secrets, Certificates) etc., as may happen in the case of accidental deletion by a user or from disruptive activity by a malicious user.",
-    "Resource Type": "azurerm_key_vault",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault"
-}
-
-
 # PR-AZR-0109-TRF
 
 default enablePurgeProtection = null

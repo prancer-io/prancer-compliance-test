@@ -2246,40 +2246,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_KeyVault_2",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(KeyVault.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-0108-TRF",
-                            "eval": "data.rule.enableSoftDelete",
-                            "message": "data.rule.enableSoftDelete_err",
-                            "remediationDescription": "In 'azurerm_key_vault' resource, set 'soft_delete_enabled = true' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault for details.",
-                            "remediationFunction": "PR_AZR_0108_TRF.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure the key vault is recoverable - enable 'Soft Delete' setting for a Key Vault",
-                    "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation, etc.) supported by the key vault objects. It is recommended the key vault be made recoverable by enabling the 'Do Not Purge' and 'Soft Delete' functions. This is in order to prevent loss of encrypted data including storage accounts, SQL databases, and/or dependent services provided by key vault objects (Keys, Secrets, Certificates) etc., as may happen in the case of accidental deletion by a user or from disruptive activity by a malicious user.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "Best Practices"
-                            ],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "azurerm_key_vault"
-                    ]
-                },
-                {
                     "masterTestId": "TEST_KeyVault_3",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
