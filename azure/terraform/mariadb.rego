@@ -164,35 +164,22 @@ mairadb_public_access_disabled_metadata := {
 
 default mariadb_geo_redundant_backup_enabled = null
 
-azure_attribute_absence["mariadb_geo_redundant_backup_enabled"] {
+azure_issue["mariadb_geo_redundant_backup_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_mariadb_server"
     not resource.properties.geo_redundant_backup_enabled
 }
 
-azure_issue["mariadb_geo_redundant_backup_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_mariadb_server"
-    resource.properties.geo_redundant_backup_enabled == false
-}
-
 mariadb_geo_redundant_backup_enabled {
     lower(input.resources[_].type) == "azurerm_mariadb_server"
-    not azure_attribute_absence["mariadb_geo_redundant_backup_enabled"]
     not azure_issue["mariadb_geo_redundant_backup_enabled"]
-}
-
-mariadb_geo_redundant_backup_enabled = false {
-    azure_attribute_absence["mariadb_geo_redundant_backup_enabled"]
 }
 
 mariadb_geo_redundant_backup_enabled = false {
     azure_issue["mariadb_geo_redundant_backup_enabled"]
 }
 
-mariadb_geo_redundant_backup_enabled_err = "azurerm_postgresql_server property 'geo_redundant_backup_enabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
-    azure_attribute_absence["mariadb_geo_redundant_backup_enabled"]
-} else = "Geo-redundant backup is currently not enabled on MariaDB server." {
+mariadb_geo_redundant_backup_enabled_err = "Geo-redundant backup is currently not enabled on MariaDB server." {
     azure_issue["mariadb_geo_redundant_backup_enabled"]
 }
 

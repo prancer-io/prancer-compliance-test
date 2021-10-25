@@ -66,22 +66,17 @@ KeyVault_metadata := {
 # As of 2020-12-15 Azure now requires that Soft Delete is enabled on Key Vaults and this can no longer be disabled. 
 # Version v2.42 of the Azure Provider and later ignore the value of the soft_delete_enabled field and force this value to be true - 
 # as such this field can be safely removed from your Terraform Configuration. This field will be removed in version 3.0 of the Azure Provider.
+
 default enableSoftDelete = null
-azure_attribute_absence ["enableSoftDelete"] {
+
+azure_issue ["enableSoftDelete"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_key_vault"
     not resource.properties.soft_delete_enabled
 }
 
-azure_issue ["enableSoftDelete"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_key_vault"
-    resource.properties.soft_delete_enabled != true
-}
-
 enableSoftDelete {
     lower(input.resources[_].type) == "azurerm_key_vault"
-    not azure_attribute_absence["enableSoftDelete"]
     not azure_issue["enableSoftDelete"]
 }
 
@@ -91,7 +86,6 @@ enableSoftDelete = false {
 
 enableSoftDelete {
     lower(input.resources[_].type) == "azurerm_key_vault"
-    azure_attribute_absence["enableSoftDelete"]
     not azure_issue["enableSoftDelete"]
 }
 
@@ -116,21 +110,14 @@ enableSoftDelete_metadata := {
 
 default enablePurgeProtection = null
 
-azure_attribute_absence ["enablePurgeProtection"] {
+azure_issue ["enablePurgeProtection"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_key_vault"
     not resource.properties.purge_protection_enabled
 }
 
-azure_issue ["enablePurgeProtection"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_key_vault"
-    resource.properties.purge_protection_enabled != true
-}
-
 enablePurgeProtection {
     lower(input.resources[_].type) == "azurerm_key_vault"
-    not azure_attribute_absence["enablePurgeProtection"]
     not azure_issue["enablePurgeProtection"]
 }
 
@@ -138,13 +125,7 @@ enablePurgeProtection = false {
     azure_issue["enablePurgeProtection"]
 }
 
-enablePurgeProtection = false {
-    azure_attribute_absence["enablePurgeProtection"]
-}
-
-enablePurgeProtection_err = "azurerm_key_vault property 'purge_protection_enabled' is missing from the resource." {
-    azure_attribute_absence["enableSoftDelete"]
-} else = "Purge protection is currently not enabled on Key vault" {
+enablePurgeProtection_err = "Purge protection is currently not enabled on Key vault" {
     azure_issue["enableSoftDelete"]
 }
 

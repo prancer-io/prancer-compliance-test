@@ -219,7 +219,8 @@ azure_attribute_absence["mssql_server_latest_tls_configured"] {
 azure_issue["mssql_server_latest_tls_configured"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_mssql_server"
-    to_number(resource.properties.min_tls_version) != 1.2
+    min_tls_version := to_number(concat(".",array.slice(split(resource.properties.min_tls_version, "."), 0, 2)))
+    min_tls_version < 1.2
 }
 
 mssql_server_latest_tls_configured {

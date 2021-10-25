@@ -8,42 +8,6 @@ package rule
 
 default vnet_subnet_nsg = null
 
-#azure_attribute_absence["vnet_subnet_nsg"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "azurerm_subnet"
-#    count([c | input.resources[_].type == "azurerm_subnet_network_security_group_association";
-#    	   c := 1]) == 0
-#}
-
-#azure_issue["vnet_subnet_nsg"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "azurerm_subnet"
-#    count([c | r := input.resources[_];
-#               r.type == "azurerm_subnet_network_security_group_association";
-#               re_match(concat("", ["^.*\\.", resource.name, "\\..*$"]), r.properties.subnet_id); #matching is not wokring as expected due tf veriable reference in json. eventually we should match with resource.id instead of resource.name as per document but the id will only available from tf output file. it will be impossible to get id during compile time.
-#               c := 1]) == 0
-#    true == false # workaround for inconsistent resource naming
-#}
-
-#azure_issue["vnet_subnet_nsg"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "azurerm_network_security_group"
-#    count([c | r := input.resources[_];
-#               r.type == "azurerm_subnet_network_security_group_association";
-#               re_match(concat("", ["^.*\\.", resource.name, "\\..*$"]), r.properties.network_security_group_id ); #matching is not wokring as expected due tf veriable reference in json. eventually we should match with resource.id instead of resource.name as per document but the id will only available from tf output file. it will be impossible to get id during compile time.
-#               c := 1]) == 0
-#    true == false # workaround for inconsistent resource naming
-#}
-
-# this check is not necessary as azurerm_subnet and azurerm_network_security_group can be created without azurerm_subnet_network_security_group_association
-#azure_attribute_absence["vnet_subnet_nsg"] {
-#    count([c | input.resources[_].type == "azurerm_subnet"; c := 1]) != count([c | input.resources[_].type == "azurerm_subnet_network_security_group_association"; c := 1])
-#}
-
-#azure_attribute_absence["vnet_subnet_nsg"] {
-#    count([c | input.resources[_].type == "azurerm_network_security_group"; c := 1]) != count([c | input.resources[_].type == "azurerm_subnet_network_security_group_association"; c := 1])
-#}
-
 azure_attribute_absence["vnet_subnet_nsg"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_subnet_network_security_group_association"

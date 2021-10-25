@@ -60,29 +60,16 @@ vm_aset_metadata := {
 
 default vm_linux_disabled_password_auth = null
 
-azure_attribute_absence["vm_linux_disabled_password_auth"] {
+azure_issue["vm_linux_disabled_password_auth"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_virtual_machine"
     os_profile_linux_config := resource.properties.os_profile_linux_config[_]
     not os_profile_linux_config.disable_password_authentication
 }
 
-azure_issue["vm_linux_disabled_password_auth"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_virtual_machine"
-    os_profile_linux_config := resource.properties.os_profile_linux_config[_]
-    os_profile_linux_config.disable_password_authentication != true
-}
 
 vm_linux_disabled_password_auth {
     lower(input.resources[_].type) == "azurerm_virtual_machine"
-    not azure_attribute_absence["vm_linux_disabled_password_auth"]
-    not azure_issue["vm_linux_disabled_password_auth"]
-}
-
-vm_linux_disabled_password_auth {
-    lower(input.resources[_].type) == "azurerm_virtual_machine"
-    azure_attribute_absence["vm_linux_disabled_password_auth"]
     not azure_issue["vm_linux_disabled_password_auth"]
 }
 
@@ -114,27 +101,14 @@ vm_linux_disabled_password_auth_metadata := {
 
 default vm_type_linux_disabled_password_auth = null
 
-azure_attribute_absence["vm_type_linux_disabled_password_auth"] {
+azure_issue["vm_type_linux_disabled_password_auth"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_linux_virtual_machine"
     not resource.properties.disable_password_authentication
 }
 
-azure_issue["vm_type_linux_disabled_password_auth"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_linux_virtual_machine"
-    resource.properties.disable_password_authentication != true
-}
-
 vm_type_linux_disabled_password_auth {
     lower(input.resources[_].type) == "azurerm_linux_virtual_machine"
-    not azure_attribute_absence["vm_type_linux_disabled_password_auth"]
-    not azure_issue["vm_type_linux_disabled_password_auth"]
-}
-
-vm_type_linux_disabled_password_auth {
-    lower(input.resources[_].type) == "azurerm_linux_virtual_machine"
-    azure_attribute_absence["vm_type_linux_disabled_password_auth"]
     not azure_issue["vm_type_linux_disabled_password_auth"]
 }
 

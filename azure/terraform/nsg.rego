@@ -204,8 +204,8 @@ azure_issue["nsg_in_udp_all"] {
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
-    lower(resource.properties.protocol) == "UDP"
-    resource.properties.source_address_prefix == "Internet"
+    lower(resource.properties.protocol) == "udp"
+    lower(resource.properties.source_address_prefix) == "internet"
     resource.properties.destination_address_prefix == "*"
     resource.properties.destination_port_range == "*"
 }
@@ -337,18 +337,6 @@ nsg_in_all_dst_err = "Azure NSG having inbound rule overly permissive to allow a
 }
 
 nsg_in_all_dst_metadata := {
-    "Policy Code": "PR-AZR-0027-TRF",
-    "Type": "IaC",
-    "Product": "AZR",
-    "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to allow all traffic from any source on any protocol",
-    "Policy Description": "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
-    "Resource Type": "azurerm_network_security_rule",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
-}
-
-nsg_in_all_metadata := {
     "Policy Code": "PR-AZR-0028-TRF",
     "Type": "IaC",
     "Product": "AZR",
@@ -371,7 +359,7 @@ azure_issue["nsg_allow_icmp"] {
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
-    lower(resource.properties.protocol) == "ICMP"
+    lower(resource.properties.protocol) == "icmp"
     resource.properties.source_address_prefix == "*"
 }
 
