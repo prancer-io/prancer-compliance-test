@@ -556,7 +556,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA=CCM",
+                                "HITTRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -588,7 +595,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA=CCM",
+                                "HITTRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -3329,7 +3343,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -3687,7 +3708,7 @@
                             "remediationFunction": "PR-AZR-0002-RGX.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "There is a possibility that secure password is exposed",
                     "description": "There is a possibility that secure password is exposed. Make sure to put those secrets in a vault and access from there.",
                     "tags": [
@@ -3716,7 +3737,7 @@
                             "remediationFunction": "PR-AZR-0003-RGX.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "There is a possibility that secure password is exposed",
                     "description": "There is a possibility that secure password is exposed. Make sure to put those secrets in a vault and access from there.",
                     "tags": [
