@@ -28,7 +28,7 @@ azure_issue["log_keyvault"] {
     lower(resource.type) == "microsoft.keyvault/vaults/providers/diagnosticsettings"
     log := resource.properties.logs[_]
     lower(log.category) == "auditevent"
-    logs.enabled == false
+    log.enabled == false
 }
 
 source_path[{"log_keyvault":metadata}] {
