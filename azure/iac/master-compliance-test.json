@@ -65,7 +65,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -136,7 +142,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -168,7 +180,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -239,7 +257,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -532,7 +556,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA=CCM",
+                                "HITTRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -564,7 +595,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA=CCM",
+                                "HITTRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -3306,7 +3344,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -3664,7 +3709,7 @@
                             "remediationFunction": "PR_AZR_ARM_SEC_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "There is a possibility that secure password is exposed",
                     "description": "There is a possibility that secure password is exposed. Make sure to put those secrets in a vault and access from there.",
                     "tags": [
@@ -3693,7 +3738,7 @@
                             "remediationFunction": "PR_AZR_ARM_SEC_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "There is a possibility that secure password is exposed",
                     "description": "There is a possibility that secure password is exposed. Make sure to put those secrets in a vault and access from there.",
                     "tags": [
