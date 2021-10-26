@@ -408,7 +408,7 @@
                             "id": "PR-AZR-ARM-AGW-004",
                             "eval": "data.rule.frontendPublicIPConfigurationsDisabled",
                             "message": "data.rule.frontendPublicIPConfigurationsDisabled_err",
-                            "remediationDescription": "For resource type 'microsoft.network/applicationgateways' make sure 'properties.publicIPAddress' does not exist under 'frontendIPConfigurations' to fix the issue. \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways?tabs=json#applicationgatewayfrontendipconfiguration' target='_blank'>here</a> for details.",
+                            "remediationDescription": "For resource type 'microsoft.network/applicationgateways' make sure 'properties.publicIPAddress' does not exist under 'frontendIPConfigurations' to fix the issue.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways?tabs=json#applicationgatewayfrontendipconfiguration' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_AGW_004.py"
                         }
                     ],
@@ -446,7 +446,7 @@
                             "id": "PR-AZR-ARM-AGW-005",
                             "eval": "data.rule.backend_https_protocol_enabled",
                             "message": "data.rule.backend_https_protocol_enabled_err",
-                            "remediationDescription": "For resource type 'microsoft.network/applicationgateways' make sure 'properties.protocol' has value 'https' under 'backendHttpSettingsCollection' to fix the issue. \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways?tabs=json#applicationgatewaybackendhttpsettings' target='_blank'>here</a> for details.",
+                            "remediationDescription": "For resource type 'microsoft.network/applicationgateways' make sure 'properties.protocol' has value 'https' under 'backendHttpSettingsCollection' to fix the issue.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways?tabs=json#applicationgatewaybackendhttpsettings' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_AGW_005.py"
                         }
                     ],
@@ -484,7 +484,7 @@
                             "id": "PR-AZR-ARM-AGW-006",
                             "eval": "data.rule.secret_certificate_is_in_keyvalut",
                             "message": "data.rule.secret_certificate_is_in_keyvalut_err",
-                            "remediationDescription": "For resource type 'microsoft.network/applicationgateways' make sure 'properties.keyVaultSecretId' has target key vault id under 'sslCertificates' to fix the issue. \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways?tabs=json#applicationgatewaysslcertificate' target='_blank'>here</a> for details.",
+                            "remediationDescription": "For resource type 'microsoft.network/applicationgateways' make sure 'properties.keyVaultSecretId' has target key vault id under 'sslCertificates' to fix the issue.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways?tabs=json#applicationgatewaysslcertificate' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_AGW_006.py"
                         }
                     ],
@@ -522,7 +522,7 @@
                             "id": "PR-AZR-ARM-STR-001",
                             "eval": "data.rule.storage_blob_soft_delete",
                             "message": "data.rule.storage_blob_soft_delete_err",
-                            "remediationDescription": "For resource type \"Microsoft.storage/storageaccounts/blobservices\" make sure properties.deleteRetentionPolicy.enabled exists and value is set to true . \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/blobservices' target='_blank'>here</a> for details.",
+                            "remediationDescription": "For resource type \"Microsoft.storage/storageaccounts/blobservices\" make sure properties.deleteRetentionPolicy.enabled exists and value is set to true .<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/blobservices' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_STR_001.py"
                         }
                     ],
@@ -554,7 +554,7 @@
                             "id": "PR-AZR-ARM-STR-002",
                             "eval": "data.rule.storage_blob_container_soft_delete",
                             "message": "data.rule.storage_blob_container_soft_delete_err",
-                            "remediationDescription": "For resource type \"Microsoft.storage/storageaccounts/blobservices\" make sure properties.containerDeleteRetentionPolicy.enabled exists and value is set to true . \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/blobservices' target='_blank'>here</a> for details.",
+                            "remediationDescription": "For resource type \"Microsoft.storage/storageaccounts/blobservices\" make sure properties.containerDeleteRetentionPolicy.enabled exists and value is set to true .<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/blobservices' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_STR_002.py"
                         }
                     ],
@@ -586,7 +586,7 @@
                             "id": "PR-AZR-ARM-DBK-001",
                             "eval": "data.rule.databrics_workspace_has_public_ip_disabled",
                             "message": "data.rule.databrics_workspace_has_public_ip_disabled_err",
-                            "remediationDescription": "In Resource of type \"microsoft.databricks/workspaces\" make sure properties.parameters.enableNoPublicIp exist and its value set to true. \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.databricks/workspaces?tabs=json' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In Resource of type \"microsoft.databricks/workspaces\" make sure properties.parameters.enableNoPublicIp exist and its value set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.databricks/workspaces?tabs=json' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_DBK_001.py"
                         }
                     ],
@@ -620,7 +620,7 @@
                             "id": "PR-AZR-ARM-DBK-002",
                             "eval": "data.rule.databrics_workspace_has_vnet_integration",
                             "message": "data.rule.databrics_workspace_has_vnet_integration_err",
-                            "remediationDescription": "In Resource of type \"microsoft.databricks/workspaces\" make sure properties.parameters.customVirtualNetworkId exist and its value set to id of existing vnet. \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.databricks/workspaces?tabs=json' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In Resource of type \"microsoft.databricks/workspaces\" make sure properties.parameters.customVirtualNetworkId exist and its value set to id of existing vnet.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.databricks/workspaces?tabs=json' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_DBK_002.py"
                         }
                     ],
@@ -1238,7 +1238,7 @@
                             "id": "PR-AZR-ARM-SQL-021",
                             "eval": "data.rule.sql_alert",
                             "message": "data.rule.sql_alert_err",
-                            "remediationDescription": "In Resource of type \"microsoft.sql/servers/databases/securityalertpolicies\" make sure properties.emailAccountAdmins exist and its value set to true. \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In Resource of type \"microsoft.sql/servers/databases/securityalertpolicies\" make sure properties.emailAccountAdmins exist and its value set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_021.py"
                         }
                     ],
@@ -1763,7 +1763,7 @@
                             "id": "PR-AZR-ARM-KV-001",
                             "eval": "data.rule.KeyVault",
                             "message": "data.rule.KeyVault_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure you have added either permissions.keys or permissions.secrets or permissions.certificates under each AccessPolicyEntry of properties.accessPolicies. \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure you have added either permissions.keys or permissions.secrets or permissions.certificates under each AccessPolicyEntry of properties.accessPolicies.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_KV_001.py"
                         }
                     ],
@@ -1799,7 +1799,7 @@
                             "id": "PR-AZR-ARM-KV-002",
                             "eval": "data.rule.enableSoftDelete",
                             "message": "data.rule.enableSoftDelete_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure properties.enableSoftDelete exists and value is set to true. \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure properties.enableSoftDelete exists and value is set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_KV_002.py"
                         }
                     ],
@@ -1833,7 +1833,7 @@
                             "id": "PR-AZR-ARM-KV-003",
                             "eval": "data.rule.enablePurgeProtection",
                             "message": "data.rule.enablePurgeProtection_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure properties.enablePurgeProtection exists and value is set to true. \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure properties.enablePurgeProtection exists and value is set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_KV_003.py"
                         }
                     ],
@@ -1867,7 +1867,7 @@
                             "id": "PR-AZR-ARM-KV-004",
                             "eval": "data.rule.kv_keys_expire",
                             "message": "data.rule.kv_keys_expire_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults/keys\" make sure properties.attributes.exp exists and value isn't set empty. \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/keys' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults/keys\" make sure properties.attributes.exp exists and value isn't set empty.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/keys' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_KV_004.py"
                         }
                     ],
@@ -1906,7 +1906,7 @@
                             "id": "PR-AZR-ARM-KV-005",
                             "eval": "data.rule.kv_expire",
                             "message": "data.rule.kv_expire_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults/secrets\" make sure properties.attributes.exp exists and value isn't set empty. \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/secrets' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults/secrets\" make sure properties.attributes.exp exists and value isn't set empty.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/secrets' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_KV_005.py"
                         }
                     ],
@@ -1985,7 +1985,7 @@
                             "id": "PR-AZR-ARM-NTW-001",
                             "eval": "data.rule.netwatchFlowlogs",
                             "message": "data.rule.netwatchFlowlogs_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.network/networkwatchers/flowlogs\" make sure properties.enabled exists and value is set to true. \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.network/networkwatchers/flowlogs\" make sure properties.enabled exists and value is set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_NTW_001.py"
                         }
                     ],
@@ -2022,7 +2022,7 @@
                             "id": "PR-AZR-ARM-NTW-002",
                             "eval": "data.rule.netwatch_logs",
                             "message": "data.rule.netwatch_logs_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.network/networkwatchers/flowlogs\" make sure properties.flowAnalyticsConfiguration.networkWatcherFlowAnalyticsConfiguration.enabled exists and value is set to true. \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.network/networkwatchers/flowlogs\" make sure properties.flowAnalyticsConfiguration.networkWatcherFlowAnalyticsConfiguration.enabled exists and value is set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_NTW_002.py"
                         }
                     ],
@@ -3366,7 +3366,7 @@
                             "id": "PR-AZR-ARM-SQL-029",
                             "eval": "data.rule.sslEnforcement",
                             "message": "data.rule.sslEnforcement_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.dbforpostgresql/servers\" make sure properties.sslEnforcement exists and value is set to \"Enabled\". \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.dbforpostgresql/servers\" make sure properties.sslEnforcement exists and value is set to \"Enabled\".<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_029.py"
                         }
                     ],
@@ -3440,7 +3440,7 @@
                             "id": "PR-AZR-ARM-CCH-001",
                             "eval": "data.rule.enableSslPort",
                             "message": "data.rule.enableSslPort_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.Cache/redis\" make sure properties.enableNonSslPort value is set to false or isn't exist . \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/Microsoft.Cache/redis' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.Cache/redis\" make sure properties.enableNonSslPort value is set to false or isn't exist .<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/Microsoft.Cache/redis' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_CCH_001.py"
                         }
                     ],
@@ -3480,7 +3480,7 @@
                             "id": "PR-AZR-ARM-CCH-002",
                             "eval": "data.rule.serverRole",
                             "message": "data.rule.serverRole_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.Cache/redis/linkedServers\" make sure properties.serverRole value is set to Secondary. \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis/linkedservers' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.Cache/redis/linkedServers\" make sure properties.serverRole value is set to Secondary.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis/linkedservers' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_CCH_002.py"
                         }
                     ],
@@ -3596,7 +3596,7 @@
                             "id": "PR-AZR-ARM-ACR-002",
                             "eval": "data.rule.adminUserDisabled",
                             "message": "data.rule.adminUserDisabled_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.containerregistry/registries\" make sure properties.adminUserEnabled is set to \"Disabled\" . \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.containerregistry/registries\" make sure properties.adminUserEnabled is set to \"Disabled\" .<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_ACR_002.py"
                         }
                     ],
@@ -3797,7 +3797,7 @@
                             "id": "PR-AZR-ARM-SQL-031",
                             "eval": "data.rule.sql_server_alert",
                             "message": "data.rule.sql_server_alert_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.sql/servers/securityalertpolicies\" make sure properties.state exists and value is set to \"Enabled\" . \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a>",
+                            "remediationDescription": "In Resource of type \"Microsoft.sql/servers/securityalertpolicies\" make sure properties.state exists and value is set to \"Enabled\" .<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_SQL_031.py"
                         }
                     ],
@@ -3837,7 +3837,7 @@
                             "id": "PR-AZR-ARM-SQL-032",
                             "eval": "data.rule.sql_managed_instance_alert",
                             "message": "data.rule.sql_managed_instance_alert_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.sql/managedinstances/securityalertpolicies\" make sure properties.state exists and value is set to \"Enabled\" . \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/securityalertpolicies' target='_blank'>here</a>",
+                            "remediationDescription": "In Resource of type \"Microsoft.sql/managedinstances/securityalertpolicies\" make sure properties.state exists and value is set to \"Enabled\" .<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/securityalertpolicies' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_SQL_032.py"
                         }
                     ],
@@ -3909,7 +3909,7 @@
                             "id": "PR-AZR-ARM-SQL-046",
                             "eval": "data.rule.serverKeyType",
                             "message": "data.rule.serverKeyType_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.sql/servers/encryptionprotector\" make sure properties.serverKeyType is set to \"AzureKeyVault\". \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/encryptionprotector' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.sql/servers/encryptionprotector\" make sure properties.serverKeyType is set to \"AzureKeyVault\".<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/encryptionprotector' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_046.py"
                         }
                     ],
@@ -4065,7 +4065,7 @@
                             "id": "PR-AZR-ARM-STR-006",
                             "eval": "data.rule.blobService",
                             "message": "data.rule.blobService_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure properties.encryption.services.blob exists and blob.enabled is set to true. \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure properties.encryption.services.blob exists and blob.enabled is set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_STR_006.py"
                         }
                     ],
@@ -4103,7 +4103,7 @@
                             "id": "PR-AZR-ARM-STR-007",
                             "eval": "data.rule.fileService",
                             "message": "data.rule.fileService_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure properties.encryption.services.file exists and file.enabled is set to true. \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure properties.encryption.services.file exists and file.enabled is set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_STR_007.py"
                         }
                     ],
@@ -4141,7 +4141,7 @@
                             "id": "PR-AZR-ARM-STR-008",
                             "eval": "data.rule.keySource",
                             "message": "data.rule.keySource_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure properties.encryption.keySource exists and value is set to \"Microsoft.Keyvault\". \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure properties.encryption.keySource exists and value is set to \"Microsoft.Keyvault\".<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_STR_008.py"
                         }
                     ],
@@ -4175,7 +4175,7 @@
                             "id": "PR-AZR-ARM-STR-009",
                             "eval": "data.rule.region",
                             "message": "data.rule.region_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure location is set to northeurope or westeurope. \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure location is set to northeurope or westeurope.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_STR_009.py"
                         }
                     ],
@@ -4209,7 +4209,7 @@
                             "id": "PR-AZR-ARM-STR-010",
                             "eval": "data.rule.blobServicePublicAccessDisabled",
                             "message": "data.rule.blobServicePublicAccessDisabled_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure property allowBlobPublicAccess is not exist or value set to false. \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure property allowBlobPublicAccess is not exist or value set to false.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_STR_010.py"
                         }
                     ],
@@ -4498,7 +4498,7 @@
                             "id": "PR-AZR-ARM-SQL-047",
                             "eval": "data.rule.sql_public_access_disabled",
                             "message": "data.rule.sql_public_access_disabled_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.Sql/servers\" make sure properties.publicNetworkAccess exists and value is set to \"disabled\" . \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.Sql/servers\" make sure properties.publicNetworkAccess exists and value is set to \"disabled\" .<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_047.py"
                         }
                     ],
@@ -4531,7 +4531,7 @@
                             "id": "PR-AZR-ARM-SQL-048",
                             "eval": "data.rule.sql_server_login",
                             "message": "data.rule.sql_server_login_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.Sql/servers/administrators\" make sure properties.login value isn't set to \"admin\" or \"administrator\" . \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.Sql/servers/administrators\" make sure properties.login value isn't set to \"admin\" or \"administrator\" .<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_048.py"
                         }
                     ],
@@ -4571,7 +4571,7 @@
                             "id": "PR-AZR-ARM-SQL-042",
                             "eval": "data.rule.sql_server_log_audit",
                             "message": "data.rule.sql_server_log_audit_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.Sql/servers/auditingSettings\" make sure properties.state exists and value is set to \"Enabled\" . \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.Sql/servers/auditingSettings\" make sure properties.state exists and value is set to \"Enabled\" .<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_042.py"
                         }
                     ],
@@ -4611,7 +4611,7 @@
                             "id": "PR-AZR-ARM-SQL-043",
                             "eval": "data.rule.sql_logical_server_log_audit",
                             "message": "data.rule.sql_logical_server_log_audit_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.Sql/servers/auditingSettings\" make sure properties.state exists and value is set to \"Enabled\" . \n Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.Sql/servers/auditingSettings\" make sure properties.state exists and value is set to \"Enabled\" .<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_043.py"
                         }
                     ],
@@ -5250,7 +5250,7 @@
                             "id": "PR-AZR-ARM-MNT-010",
                             "eval": "data.rule.log_profile_category",
                             "message": "data.rule.log_profile_category_err",
-                            "remediationDescription": "For Resource type 'microsoft.insights/logprofiles' make sure categories exists and contains 'Write', 'Action' and 'Delete' <br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/Microsoft.Insights/logprofiles' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.insights/logprofiles' make sure categories exists and contains 'Write', 'Action' and 'Delete'.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/Microsoft.Insights/logprofiles' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_MNT_010.py"
                         }
                     ],

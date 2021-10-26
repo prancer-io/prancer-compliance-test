@@ -4145,7 +4145,7 @@
                     ],
                     "severity": "Medium",
                     "title": "AWS API gateway request parameter is not validated",
-                    "description": "This policy identifies the AWS API gateways for with the request parameters are not validated. It is recommended to validate the request parameters in the URI, query string, and headers of an incoming request to focus on the validation efforts specific to your application.\n",
+                    "description": "This policy identifies the AWS API gateways for with the request parameters are not validated. It is recommended to validate the request parameters in the URI, query string, and headers of an incoming request to focus on the validation efforts specific to your application.<br>",
                     "tags": [
                         {
                             "cloud": "git",
@@ -4289,7 +4289,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Ensure DMS endpoints are supporting SSL configuration",
-                    "description": "This policy identifies Database Migration Service (DMS) endpoints that are not configured with SSL to encrypt connections for source and target endpoints. It is recommended to use SSL connection for source and target endpoints; enforcing SSL connections help protect against 'man in the middle' attacks by encrypting the data stream between endpoint connections.\n\nNOTE: Not all databases use SSL in the same way. An Amazon Redshift endpoint already uses an SSL connection and does not require an SSL connection set up by AWS DMS. So there are some exlcusions included in policy RQL to report only those endpoints which can be configured using DMS SSL feature. \n\nFor more details:\nhttps://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.SSL",
+                    "description": "This policy identifies Database Migration Service (DMS) endpoints that are not configured with SSL to encrypt connections for source and target endpoints. It is recommended to use SSL connection for source and target endpoints; enforcing SSL connections help protect against 'man in the middle' attacks by encrypting the data stream between endpoint connections.<br><br>NOTE: Not all databases use SSL in the same way. An Amazon Redshift endpoint already uses an SSL connection and does not require an SSL connection set up by AWS DMS. So there are some exlcusions included in policy RQL to report only those endpoints which can be configured using DMS SSL feature. <br><br>For more details:<br>https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.SSL",
                     "tags": [
                         {
                             "cloud": "git",
@@ -5536,7 +5536,7 @@
                             "id": "PR-AWS-0246-TRF",
                             "eval": "data.rule.s3_cors",
                             "message": "data.rule.s3_cors_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket--seealso\nAllowedHeaders should not have default value '*', define value more specific like Content-Type, x-requested-with etc. and AllowedMethods should be 'GET', 'POST', 'PUT', 'PATHCH', 'DELETE' or 'OPTIONS'",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket--seealso<br>AllowedHeaders should not have default value '*', define value more specific like Content-Type, x-requested-with etc. and AllowedMethods should be 'GET', 'POST', 'PUT', 'PATHCH', 'DELETE' or 'OPTIONS'",
                             "remediationFunction": "PR_AWS_0246_TRF.py"
                         }
                     ],
@@ -5570,13 +5570,13 @@
                             "id": "PR-AWS-0247-TRF",
                             "eval": "data.rule.sagemaker_encryption_kms",
                             "message": "data.rule.sagemaker_encryption_kms_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html\nprovicde KMSKeyId using KMS or CMK or static value starts with 'arn:'",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html<br>provicde KMSKeyId using KMS or CMK or static value starts with 'arn:'",
                             "remediationFunction": "PR_AWS_0247_TRF.py"
                         }
                     ],
                     "severity": "Medium",
                     "title": "AWS SageMaker notebook instance not configured with data encryption at rest using KMS key",
-                    "description": "This policy identifies SageMaker notebook instances that are not configured with data encryption at rest using the AWS managed KMS key. It is recommended to implement encryption at rest in order to protect data from unauthorized entities.\n\nFor more details:\nhttps://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html",
+                    "description": "This policy identifies SageMaker notebook instances that are not configured with data encryption at rest using the AWS managed KMS key. It is recommended to implement encryption at rest in order to protect data from unauthorized entities.<br><br>For more details:<br>https://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html",
                     "tags": [
                         {
                             "cloud": "git",
@@ -5602,13 +5602,13 @@
                             "id": "PR-AWS-0248-TRF",
                             "eval": "data.rule.sagemaker_rootaccess_enabled",
                             "message": "data.rule.sagemaker_rootaccess_enabled_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html\nRootAccess should be disabled in properties to make sagemaker secure from unrestricted access",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html<br>RootAccess should be disabled in properties to make sagemaker secure from unrestricted access",
                             "remediationFunction": "PR_AWS_0248_TRF.py"
                         }
                     ],
                     "severity": "Medium",
                     "title": "AWS SageMaker notebook instance with root access enabled",
-                    "description": "This policy identifies the SageMaker notebook instances which are enabled with root access. Root access means having administrator privileges, users with root access can access and edit all files on the compute instance, including system-critical files. Removing root access prevents notebook users from deleting system-level software, installing new software, and modifying essential environment components.\nNOTE: Lifecycle configurations need root access to be able to set up a notebook instance. Because of this, lifecycle configurations associated with a notebook instance always run with root access even if you disable root access for users.\n\nFor more details:\nhttps://docs.aws.amazon.com/sagemaker/latest/dg/nbi-root-access.html",
+                    "description": "This policy identifies the SageMaker notebook instances which are enabled with root access. Root access means having administrator privileges, users with root access can access and edit all files on the compute instance, including system-critical files. Removing root access prevents notebook users from deleting system-level software, installing new software, and modifying essential environment components.<br>NOTE: Lifecycle configurations need root access to be able to set up a notebook instance. Because of this, lifecycle configurations associated with a notebook instance always run with root access even if you disable root access for users.<br><br>For more details:<br>https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-root-access.html",
                     "tags": [
                         {
                             "cloud": "git",
@@ -5634,13 +5634,13 @@
                             "id": "PR-AWS-0249-TRF",
                             "eval": "data.rule.sagemaker_direct_internet_access_enabled",
                             "message": "data.rule.sagemaker_direct_internet_access_enabled_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html\nDirectInternetAccess should be disabled in properties to restrict direct access from the internet.",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html<br>DirectInternetAccess should be disabled in properties to restrict direct access from the internet.",
                             "remediationFunction": "PR_AWS_0249_TRF.py"
                         }
                     ],
                     "severity": "Medium",
                     "title": "AWS SageMaker notebook instance configured with direct internet access feature",
-                    "description": "This policy identifies SageMaker notebook instances that are configured with direct internet access feature. If AWS SageMaker notebook instances are configured with direct internet access feature, any machine outside the VPC can establish a connection to these instances, which provides an additional avenue for unauthorized access to data and the opportunity for malicious activity.\n\nFor more details:\nhttps://docs.aws.amazon.com/sagemaker/latest/dg/appendix-notebook-and-internet-access.html",
+                    "description": "This policy identifies SageMaker notebook instances that are configured with direct internet access feature. If AWS SageMaker notebook instances are configured with direct internet access feature, any machine outside the VPC can establish a connection to these instances, which provides an additional avenue for unauthorized access to data and the opportunity for malicious activity.<br><br>For more details:<br>https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-notebook-and-internet-access.html",
                     "tags": [
                         {
                             "cloud": "git",
@@ -5672,7 +5672,7 @@
                     ],
                     "severity": "Medium",
                     "title": "AWS SageMaker notebook instance is not placed in VPC",
-                    "description": "This policy identifies SageMaker notebook instances that are not placed inside a VPC. It is recommended to place your SageMaker inside VPC so that VPC-only resources able to access your SageMaker data, which cannot be accessed outside a VPC network.\n\nFor more details:\nhttps://docs.aws.amazon.com/sagemaker/latest/dg/process-vpc.html",
+                    "description": "This policy identifies SageMaker notebook instances that are not placed inside a VPC. It is recommended to place your SageMaker inside VPC so that VPC-only resources able to access your SageMaker data, which cannot be accessed outside a VPC network.<br><br>For more details:<br>https://docs.aws.amazon.com/sagemaker/latest/dg/process-vpc.html",
                     "tags": [
                         {
                             "cloud": "git",
