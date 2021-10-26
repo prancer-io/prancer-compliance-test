@@ -97,7 +97,7 @@ azure_attribute_absence["db_encrypt"] {
 
 source_path[{"db_encrypt":metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
+    lower(resource.type) == "microsoft.sql/servers/databases/transparentdataencryption"
     not resource.properties.status
     metadata:= {
         "resource_path": [["resources",i,"properties","status"]]
@@ -113,7 +113,7 @@ azure_issue["db_encrypt"] {
 
 source_path[{"db_encrypt":metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
+    lower(resource.type) == "microsoft.sql/servers/databases/transparentdataencryption"
     lower(resource.properties.status) != "enabled"
     metadata:= {
         "resource_path": [["resources",i,"properties","status"]]
