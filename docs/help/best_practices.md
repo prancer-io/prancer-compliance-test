@@ -215,3 +215,21 @@ s3_accesslog_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
 }
 ```
+
+## Validate the Rule using [Rego Playground](https://play.openpolicyagent.org/)
+
+- Put the rego rule in the left side of the panel.
+
+- Put input JSON in `Input` section.
+
+- Run the compliance using `Evaluate` button.
+
+- Varify the output as follow:
+  - If the rule get passed then you can see the value  `s3_accesslog = True`
+  - If the rule get failed then you can see the value  `s3_accesslog = False`
+  - if the rule get skipped due to type of the resource not matched then you can see `s3_accesslog = null`
+  - also the source_path shows the path of failed resources
+  - before deploying the rule, a developer must test the rule in here.
+
+    here is an example:
+    ![Playground Image](playground.png "Playground Image")
