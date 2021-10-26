@@ -5,22 +5,11 @@ package rule
 # PR-AZR-ARM-CCH-001
 
 default enableSslPort = null
-# default is false
-azure_attribute_absence ["enableSslPort"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.cache/redis"
-    not resource.properties.enableNonSslPort
-}
 
 azure_issue ["enableSslPort"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.cache/redis"
     resource.properties.enableNonSslPort != false
-}
-
-enableSslPort {
-    azure_attribute_absence["enableSslPort"]
-    not azure_issue["enableSslPort"]
 }
 
 enableSslPort {
