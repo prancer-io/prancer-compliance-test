@@ -157,7 +157,7 @@ log_lbs_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure Load Balancer diagnostic logs should be enabled",
+    "Policy Title": "Azure Load Balancer diagnostics logs should be enabled",
     "Policy Description": "Azure Load Balancers provide different types of logsâ€”alert events, health probe, metricsâ€”to help you manage and troubleshoot issues. This policy identifies Azure Load Balancers that have diagnostics logs disabled. As a best practice, enable diagnostic logs to start collecting the data available through these logs.",
     "Resource Type": "microsoft.network/loadbalancers/providers/diagnosticsettings",
     "Policy Help URL": "",

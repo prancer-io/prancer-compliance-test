@@ -321,9 +321,9 @@ source_path[{"sql_server_administrators":metadata}] {
     lower(resource.type) == "microsoft.sql/servers"
     sql_resources := resource.resources[j]
     lower(sql_resources.type) == "administrators"
-    not sql_resources.name
+    not sql_resources.properties.administratorType
     metadata:= {
-        "resource_path": [["resources",i,"resources",j,"name"]]
+        "resource_path": [["resources",i,"resources",j,"properties","administratorType"]]
     }
 }
 
@@ -341,9 +341,9 @@ source_path[{"sql_server_administrators":metadata}] {
     lower(resource.type) == "microsoft.sql/servers"
     sql_resources := resource.resources[j]
     lower(sql_resources.type) == "administrators"
-    lower(sql_resources.name) != "activedirectory"
+    lower(sql_resources.properties.administratorType) != "activedirectory"
     metadata:= {
-        "resource_path": [["resources",i,"resources",j,"name"]]
+        "resource_path": [["resources",i,"resources",j,"properties","administratorType"]]
     }
 }
 
@@ -361,11 +361,9 @@ sql_server_administrators = false {
     azure_attribute_absence["sql_server_administrators"]
 }
 
-
 sql_server_administrators = false {
     azure_issue["sql_server_administrators"]
 }
-
 
 sql_server_administrators_err = "Microsoft.sql/servers/administrators resource property name missing in the resource" {
     azure_attribute_absence["sql_server_administrators"]

@@ -538,7 +538,7 @@ sql_server_email_addressess_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure SQL Security Alert Policy should be configured to send alert to the account administrators and configured email addresses",
+    "Policy Title": "Azure SQL Security Alert Policy should be configured to send alerts to the account administrators and configured email addresses",
     "Policy Description": "Provide the email address where alerts will be sent when anomalous activities are detected on SQL servers.",
     "Resource Type": "microsoft.sql/servers/securityalertpolicies",
     "Policy Help URL": "",
