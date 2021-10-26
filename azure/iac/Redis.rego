@@ -5,6 +5,12 @@ package rule
 # PR-AZR-ARM-CCH-001
 
 default enableSslPort = null
+# default is false
+azure_attribute_absence ["enableSslPort"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.cache/redis"
+    not resource.properties.enableNonSslPort
+}
 
 azure_issue ["enableSslPort"] {
     resource := input.resources[_]
@@ -12,17 +18,9 @@ azure_issue ["enableSslPort"] {
     resource.properties.enableNonSslPort != false
 }
 
-source_path[{"enableSslPort":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.cache/redis"
-    resource.properties.enableNonSslPort != false
-    metadata:= {
-        "resource_path": [["resources",i,"properties","enableNonSslPort"]]
-    }
-}
-
 enableSslPort {
     azure_attribute_absence["enableSslPort"]
+    not azure_issue["enableSslPort"]
 }
 
 enableSslPort {
@@ -49,7 +47,6 @@ enableSslPort_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/Microsoft.Cache/redis"
 }
-
 
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis/linkedservers
