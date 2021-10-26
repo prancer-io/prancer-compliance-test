@@ -11,17 +11,19 @@ default kv_keys_expire = null
 azure_attribute_absence["kv_keys_expire"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults/keys"
-    resource.properties.attributes.enabled != false
+    #create seperate rule with this property
+    #resource.properties.attributes.enabled != false
     not resource.properties.attributes.exp
-    not resource.properties.rotationPolicy.attributes.expiryTime
+    #create seperate rule with this property
+    #not resource.properties.rotationPolicy.attributes.expiryTime
 }
 
 source_path[{"kv_keys_expire":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.keyvault/vaults/keys"
-    resource.properties.attributes.enabled != false
+    #resource.properties.attributes.enabled != false
     not resource.properties.attributes.exp
-    not resource.properties.rotationPolicy.attributes.expiryTime
+    #not resource.properties.rotationPolicy.attributes.expiryTime
     metadata:= {
         "resource_path": [["resources",i,"properties","attributes","exp"]]
     }
@@ -30,17 +32,17 @@ source_path[{"kv_keys_expire":metadata}] {
 azure_issue["kv_keys_expire"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults/keys"
-    resource.properties.attributes.enabled != false
+    #resource.properties.attributes.enabled != false
     to_number(resource.properties.attributes.exp) < 0
-    count(resource.properties.rotationPolicy.attributes.expiryTime) == 0
+    #count(resource.properties.rotationPolicy.attributes.expiryTime) == 0
 }
 
 source_path[{"kv_keys_expire":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.keyvault/vaults/keys"
-    resource.properties.attributes.enabled != false
+    #resource.properties.attributes.enabled != false
     to_number(resource.properties.attributes.exp) < 0
-    count(resource.properties.rotationPolicy.attributes.expiryTime) == 0
+    #count(resource.properties.rotationPolicy.attributes.expiryTime) == 0
     metadata:= {
         "resource_path": [["resources",i,"properties","attributes","exp"]]
     }
