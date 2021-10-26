@@ -5,21 +5,6 @@ package rule
 # PR-AZR-ARM-CCH-001
 
 default enableSslPort = null
-# default is false
-azure_attribute_absence ["enableSslPort"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.cache/redis"
-    not resource.properties.enableNonSslPort
-}
-
-source_path[{"enableSslPort":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.cache/redis"
-    not resource.properties.enableNonSslPort
-    metadata:= {
-        "resource_path": [["resources",i,"properties","enableNonSslPort"]]
-    }
-}
 
 azure_issue ["enableSslPort"] {
     resource := input.resources[_]
@@ -74,11 +59,13 @@ enableSslPort_metadata := {
 default serverRole = null
 
 azure_attribute_absence ["serverRole"] {
-    count([c | input.resources[_].type == "microsoft.cache/redis"; c := 1]) != count([c | input.resources[_].type == "microsoft.cache/redis/linkedservers"; c := 1])
+    resource := input.resources[i]
+    count([c | resource.type == "microsoft.cache/redis"; c := 1]) != count([c | resource.type == "microsoft.cache/redis/linkedservers"; c := 1])
 }
 
 source_path[{"serverRole":metadata}] {
-    count([c | input.resources[i].type == "microsoft.cache/redis"; c := 1]) != count([c | input.resources[i].type == "microsoft.cache/redis/linkedservers"; c := 1])
+    resource := input.resources[i]
+    count([c | resource.type == "microsoft.cache/redis"; c := 1]) != count([c | resource.type == "microsoft.cache/redis/linkedservers"; c := 1])
     metadata:= {
         "resource_path": [["resources",i,"type"]]
     }

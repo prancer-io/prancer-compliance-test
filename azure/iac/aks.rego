@@ -239,13 +239,15 @@ source_path[{"aks_nodes":metadata}] {
 azure_issue["aks_nodes"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
-    min([ c | c := resource.properties.agentPoolProfiles[_].count]) < 3
+    agentPoolProfiles := resource.properties.agentPoolProfiles[j]
+    min([ c | c := agentPoolProfiles.count]) < 3
 }
 
 source_path[{"aks_nodes":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.containerservice/managedclusters"
-    min([ c | c := resource.properties.agentPoolProfiles[j].count]) < 3
+    agentPoolProfiles := resource.properties.agentPoolProfiles[j]
+    min([ c | c := agentPoolProfiles.count]) < 3
     metadata:= {
         "resource_path": [["resources",i,"properties","agentPoolProfiles",j,"count"]]
     }

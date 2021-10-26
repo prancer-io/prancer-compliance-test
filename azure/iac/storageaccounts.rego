@@ -186,7 +186,8 @@ source_path[{"storage_threat_protection":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     nested_type := "providers/advancedthreatprotectionsettings"
-    count([ c | lower(resource.resources[j].type) == nested_type; c = 1]) == 0
+    resources := resource.resources[j]
+    count([ c | lower(resources.type) == nested_type; c = 1]) == 0
     metadata:= {
         "resource_path": [["resources",i,"resources",j,"type"]]
     }

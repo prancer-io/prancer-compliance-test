@@ -11,17 +11,17 @@ default vpn_encrypt = null
 azure_attribute_absence["vpn_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/vpngateways"
-    count([c | con := resource.properties.connections[_];
-               ipsec := con.properties.ipsecPolicies[_]
-               ipsec.ipsecEncryption; c := 1]) == 0
+    con := resource.properties.connections[j]
+    ipsec := con.properties.ipsecPolicies[k]
+    count([c | ipsec.ipsecEncryption; c := 1]) == 0
 }
 
 source_path[{"vpn_encrypt":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.network/vpngateways"
-    count([c | con := resource.properties.connections[j];
-               ipsec := con.properties.ipsecPolicies[k]
-               ipsec.ipsecEncryption; c := 1]) == 0
+    con := resource.properties.connections[j]
+    ipsec := con.properties.ipsecPolicies[k]
+    count([c | ipsec.ipsecEncryption; c := 1]) == 0
     metadata:= {
         "resource_path": [["resources",i,"properties","connections",j,"properties","ipsecPolicies",k,"ipsecEncryption"]]
     }
