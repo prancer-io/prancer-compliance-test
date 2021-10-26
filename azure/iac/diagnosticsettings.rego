@@ -28,7 +28,7 @@ azure_issue["log_keyvault"] {
     lower(resource.type) == "microsoft.keyvault/vaults/providers/diagnosticsettings"
     log := resource.properties.logs[_]
     lower(log.category) == "auditevent"
-    logs.enabled == false
+    log.enabled == false
 }
 
 source_path[{"log_keyvault":metadata}] {
@@ -117,14 +117,14 @@ azure_issue["log_lbs"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/loadbalancers/providers/diagnosticsettings"
     log := resource.properties.logs[_]
-    lower(log.enabled) == false
+    lower(log.enabled) == "false"
 }
 
 source_path[{"log_lbs":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.network/loadbalancers/providers/diagnosticsettings"
     log := resource.properties.logs[j]
-    lower(log.enabled) == false
+    lower(log.enabled) == "false"
     metadata:= {
         "resource_path": [["resources",i,"properties","logs",j,"enabled"]]
     }
