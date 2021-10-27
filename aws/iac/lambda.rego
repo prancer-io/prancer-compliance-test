@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html
 
 #
-# PR-AWS-0105-CFR
+# PR-AWS-CFR-LMD-001
 #
 
 default lambda_env = null
@@ -14,10 +14,32 @@ aws_attribute_absence["lambda_env"] {
     not resource.Properties.KmsKeyArn
 }
 
+source_path[{"lambda_env": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    not resource.Properties.KmsKeyArn
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsKeyArn"]
+        ],
+    }
+}
+
 aws_attribute_absence["lambda_env"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::lambda::function"
     not resource.Properties.Environment
+}
+
+source_path[{"lambda_env": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    not resource.Properties.Environment
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Environment"]
+        ],
+    }
 }
 
 aws_issue["lambda_env"] {
@@ -27,11 +49,35 @@ aws_issue["lambda_env"] {
     not resource.Properties.KmsKeyArn
 }
 
+source_path[{"lambda_env": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    resource.Properties.Environment
+    not resource.Properties.KmsKeyArn
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsKeyArn"]
+        ],
+    }
+}
+
 aws_issue["lambda_env"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::lambda::function"
     resource.Properties.Environment
     not startswith(lower(resource.Properties.KmsKeyArn), "arn:")
+}
+
+source_path[{"lambda_env": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    resource.Properties.Environment
+    not startswith(lower(resource.Properties.KmsKeyArn), "arn:")
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsKeyArn"]
+        ],
+    }
 }
 
 lambda_env {
@@ -57,7 +103,7 @@ lambda_env_miss_err = "Lambda function attribute KmsKeyArn/Environment missing i
 }
 
 lambda_env_metadata := {
-    "Policy Code": "PR-AWS-0105-CFR",
+    "Policy Code": "PR-AWS-CFR-LMD-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -69,7 +115,7 @@ lambda_env_metadata := {
 }
 
 #
-# PR-AWS-0106-CFR
+# PR-AWS-CFR-LMD-002
 #
 
 default lambda_vpc = null
@@ -80,10 +126,32 @@ aws_attribute_absence["lambda_vpc"] {
     not resource.Properties.VpcConfig.SubnetIds
 }
 
+source_path[{"lambda_vpc": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    not resource.Properties.VpcConfig.SubnetIds
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "VpcConfig", "SubnetIds"]
+        ],
+    }
+}
+
 aws_issue["lambda_vpc"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::lambda::function"
     count(resource.Properties.VpcConfig.SubnetIds) == 0
+}
+
+source_path[{"lambda_vpc": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    count(resource.Properties.VpcConfig.SubnetIds) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "VpcConfig", "SubnetIds"]
+        ],
+    }
 }
 
 lambda_vpc {
@@ -109,7 +177,7 @@ lambda_vpc_miss_err = "Lambda function attribute VpcConfig.SubnetIds missing in 
 }
 
 lambda_vpc_metadata := {
-    "Policy Code": "PR-AWS-0106-CFR",
+    "Policy Code": "PR-AWS-CFR-LMD-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -121,7 +189,7 @@ lambda_vpc_metadata := {
 }
 
 #
-# PR-AWS-0107-CFR
+# PR-AWS-CFR-LMD-003
 #
 
 default lambda_tracing = null
@@ -132,10 +200,32 @@ aws_attribute_absence["lambda_tracing"] {
     not resource.Properties.TracingConfig.Mode
 }
 
+source_path[{"lambda_tracing": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    not resource.Properties.TracingConfig.Mode
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "TracingConfig", "Mode"]
+        ],
+    }
+}
+
 aws_issue["lambda_tracing"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::lambda::function"
     lower(resource.Properties.TracingConfig.Mode) == "passthrough"
+}
+
+source_path[{"lambda_tracing": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    lower(resource.Properties.TracingConfig.Mode) == "passthrough"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "TracingConfig", "Mode"]
+        ],
+    }
 }
 
 lambda_tracing {
@@ -161,7 +251,7 @@ lambda_tracing_miss_err = "Lambda function attribute TracingConfig.Mode missing 
 }
 
 lambda_tracing_metadata := {
-    "Policy Code": "PR-AWS-0107-CFR",
+    "Policy Code": "PR-AWS-CFR-LMD-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -174,7 +264,7 @@ lambda_tracing_metadata := {
 
 
 #
-# PR-AWS-305-CFR
+# PR-AWS-CFR-LMD-004
 #
 
 default lambda_concurrent_execution = null
@@ -183,6 +273,17 @@ aws_issue["lambda_concurrent_execution"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::lambda::function"
     not resource.Properties.ReservedConcurrentExecutions
+}
+
+source_path[{"lambda_concurrent_execution": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    not resource.Properties.ReservedConcurrentExecutions
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ReservedConcurrentExecutions"]
+        ],
+    }
 }
 
 lambda_concurrent_execution {
@@ -199,7 +300,7 @@ lambda_concurrent_execution_err = "Ensure AWS Lambda function is configured for 
 }
 
 lambda_concurrent_execution_metadata := {
-    "Policy Code": "PR-AWS-305-CFR",
+    "Policy Code": "PR-AWS-CFR-LMD-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -213,7 +314,7 @@ lambda_concurrent_execution_metadata := {
 
 
 #
-# PR-AWS-306-CFR
+# PR-AWS-CFR-LMD-005
 #
 
 default lambda_dlq = null
@@ -222,6 +323,17 @@ aws_issue["lambda_dlq"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::lambda::function"
     not resource.Properties.DeadLetterConfig.TargetArn
+}
+
+source_path[{"lambda_dlq": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::lambda::function"
+    not resource.Properties.DeadLetterConfig.TargetArn
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DeadLetterConfig", "TargetArn"]
+        ],
+    }
 }
 
 lambda_dlq {
@@ -238,7 +350,7 @@ lambda_dlq_err = "Ensure AWS Lambda function is configured for a DLQ" {
 }
 
 lambda_dlq_metadata := {
-    "Policy Code": "PR-AWS-306-CFR",
+    "Policy Code": "PR-AWS-CFR-LMD-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

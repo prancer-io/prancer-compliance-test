@@ -4,7 +4,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html
 
 #
-# PR-AWS-0062-CFR
+# PR-AWS-CFR-ELB-001
 #
 
 default elb_insecure_cipher = null
@@ -85,10 +85,24 @@ insecure_ciphers := [
 aws_issue["elb_insecure_cipher"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
-    policy := resource.Properties.Policies[_]
-    attribute := policy.Attributes[_]
+    policy := resource.Properties.Policies[j]
+    attribute := policy.Attributes[k]
     lower(attribute.Name) == lower(insecure_ciphers[_])
     lower(attribute.Value) == "true"
+}
+
+source_path[{"elb_insecure_cipher": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    policy := resource.Properties.Policies[j]
+    attribute := policy.Attributes[k]
+    lower(attribute.Name) == lower(insecure_ciphers[_])
+    lower(attribute.Value) == "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Policies", j, "Attributes", k, "Value"]
+        ],
+    }
 }
 
 elb_insecure_cipher {
@@ -105,7 +119,7 @@ elb_insecure_cipher_err = "AWS Elastic Load Balancer (Classic) SSL negotiation p
 }
 
 elb_insecure_cipher_metadata := {
-    "Policy Code": "PR-AWS-0062-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -117,7 +131,7 @@ elb_insecure_cipher_metadata := {
 }
 
 #
-# PR-AWS-0063-CFR
+# PR-AWS-CFR-ELB-002
 #
 
 default elb_insecure_protocol = null
@@ -131,10 +145,24 @@ insecure_ssl_protocols := [
 aws_issue["elb_insecure_protocol"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
-    policy := resource.Properties.Policies[_]
-    attribute := policy.Attributes[_]
+    policy := resource.Properties.Policies[j]
+    attribute := policy.Attributes[k]
     lower(attribute.Name) == lower(insecure_ssl_protocols[_])
     lower(attribute.Value) == "true"
+}
+
+source_path[{"elb_insecure_protocol": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    policy := resource.Properties.Policies[j]
+    attribute := policy.Attributes[k]
+    lower(attribute.Name) == lower(insecure_ssl_protocols[_])
+    lower(attribute.Value) == "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Policies", j, "Attributes", k, "Value"]
+        ],
+    }
 }
 
 elb_insecure_protocol {
@@ -151,7 +179,7 @@ elb_insecure_protocol_err = "AWS Elastic Load Balancer (Classic) SSL negotiation
 }
 
 elb_insecure_protocol_metadata := {
-    "Policy Code": "PR-AWS-0063-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -163,7 +191,7 @@ elb_insecure_protocol_metadata := {
 }
 
 #
-# PR-AWS-0064-CFR
+# PR-AWS-CFR-ELB-003
 #
 
 default elb_access_log = null
@@ -174,10 +202,32 @@ aws_issue["elb_access_log"] {
     lower(resource.Properties.AccessLoggingPolicy.Enabled) == "false"
 }
 
+source_path[{"elb_access_log": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    lower(resource.Properties.AccessLoggingPolicy.Enabled) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AccessLoggingPolicy", "Enabled"]
+        ],
+    }
+}
+
 aws_bool_issue["elb_access_log"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     not resource.Properties.AccessLoggingPolicy.Enabled
+}
+
+source_path[{"elb_access_log": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    not resource.Properties.AccessLoggingPolicy.Enabled
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AccessLoggingPolicy", "Enabled"]
+        ],
+    }
 }
 
 elb_access_log {
@@ -201,7 +251,7 @@ elb_access_log_err = "AWS Elastic Load Balancer (Classic) with access log disabl
 }
 
 elb_access_log_metadata := {
-    "Policy Code": "PR-AWS-0064-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -213,7 +263,7 @@ elb_access_log_metadata := {
 }
 
 #
-# PR-AWS-0065-CFR
+# PR-AWS-CFR-ELB-004
 #
 
 default elb_conn_drain = null
@@ -224,10 +274,32 @@ aws_issue["elb_conn_drain"] {
     lower(resource.Properties.ConnectionDrainingPolicy.Enabled) == "false"
 }
 
+source_path[{"elb_conn_drain": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    lower(resource.Properties.ConnectionDrainingPolicy.Enabled) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ConnectionDrainingPolicy", "Enabled"]
+        ],
+    }
+}
+
 aws_bool_issue["elb_conn_drain"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     not resource.Properties.ConnectionDrainingPolicy.Enabled
+}
+
+source_path[{"elb_conn_drain": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    not resource.Properties.ConnectionDrainingPolicy.Enabled
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ConnectionDrainingPolicy", "Enabled"]
+        ],
+    }
 }
 
 elb_conn_drain {
@@ -251,7 +323,7 @@ elb_conn_drain_err = "AWS Elastic Load Balancer (Classic) with connection draini
 }
 
 elb_conn_drain_metadata := {
-    "Policy Code": "PR-AWS-0065-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -263,7 +335,7 @@ elb_conn_drain_metadata := {
 }
 
 #
-# PR-AWS-0066-CFR
+# PR-AWS-CFR-ELB-005
 #
 
 default elb_crosszone = null
@@ -274,10 +346,32 @@ aws_issue["elb_crosszone"] {
     lower(resource.Properties.CrossZone) == "false"
 }
 
+source_path[{"elb_crosszone": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    lower(resource.Properties.CrossZone) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CrossZone"]
+        ],
+    }
+}
+
 aws_bool_issue["elb_crosszone"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     not resource.Properties.CrossZone
+}
+
+source_path[{"elb_crosszone": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    not resource.Properties.CrossZone
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CrossZone"]
+        ],
+    }
 }
 
 elb_crosszone {
@@ -301,7 +395,7 @@ elb_crosszone_err = "AWS Elastic Load Balancer (Classic) with cross-zone load ba
 }
 
 elb_crosszone_metadata := {
-    "Policy Code": "PR-AWS-0066-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -313,7 +407,7 @@ elb_crosszone_metadata := {
 }
 
 #
-# PR-AWS-0067-CFR
+# PR-AWS-CFR-ELB-006
 #
 default elb_sec_group_ingress = null
 
@@ -323,37 +417,107 @@ aws_attribute_absence["elb_sec_group_ingress"] {
     not resource.Properties.SecurityGroups
 }
 
+source_path[{"elb_sec_group_ingress": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    not resource.Properties.SecurityGroups
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroups"]
+        ],
+    }
+}
+
 aws_issue["elb_sec_group_ingress"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     count(resource.Properties.SecurityGroups) == 0
 }
 
+source_path[{"elb_sec_group_ingress": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroups"]
+        ],
+    }
+}
+
 aws_ref_absence["elb_sec_group_ingress"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     count(resource.Properties.SecurityGroups) != 0
-    security_groups := resource.Properties.SecurityGroups[_].Ref
-    count([c | input.Resources[j].Name == security_groups; c := 1]) == 0
+    security_groups := resource.Properties.SecurityGroups[j].Ref
+    count([c | input.Resources[k].Name == security_groups; c := 1]) == 0
     not input.Parameters[security_groups]
 }
 
-aws_ref_issue["elb_sec_group_ingress"] {
+source_path[{"elb_sec_group_ingress": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     count(resource.Properties.SecurityGroups) != 0
-    security_groups := resource.Properties.SecurityGroups[_].Ref
-    security_groups == input.Resources[j].Name
-    count(input.Resources[j].Properties.SecurityGroupIngress) == 0
+    security_groups := resource.Properties.SecurityGroups[j].Ref
+    count([c | input.Resources[k].Name == security_groups; c := 1]) == 0
+    not input.Parameters[security_groups]
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroups", j]
+        ],
+    }
 }
 
 aws_ref_issue["elb_sec_group_ingress"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     count(resource.Properties.SecurityGroups) != 0
-    security_groups := resource.Properties.SecurityGroups[_].Ref
-    security_groups == input.Resources[j].Name
-    not input.Resources[j].Properties.SecurityGroupIngress
+    security_groups := resource.Properties.SecurityGroups[j].Ref
+    ref_resource := input.Resources[k]
+    security_groups == ref_resource.Name
+    count(ref_resource.Properties.SecurityGroupIngress) == 0
+}
+
+source_path[{"elb_sec_group_ingress": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) != 0
+    security_groups := resource.Properties.SecurityGroups[j].Ref
+    ref_resource := input.Resources[k]
+    security_groups == ref_resource.Name
+    count(ref_resource.Properties.SecurityGroupIngress) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroups", j],
+            ["Resources", k, "Properties", "SecurityGroupIngress"]
+        ],
+    }
+}
+
+aws_ref_issue["elb_sec_group_ingress"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) != 0
+    security_groups := resource.Properties.SecurityGroups[j].Ref
+    ref_resource := input.Resources[k]
+    security_groups == ref_resource.Name
+    not ref_resource.Properties.SecurityGroupIngress
+}
+
+source_path[{"elb_sec_group_ingress": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) != 0
+    security_groups := resource.Properties.SecurityGroups[j].Ref
+    ref_resource := input.Resources[k]
+    security_groups == ref_resource.Name
+    not ref_resource.Properties.SecurityGroupIngress
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroups", j],
+            ["Resources", k, "Properties", "SecurityGroupIngress"]
+        ],
+    }
 }
 
 elb_sec_group_ingress {
@@ -391,7 +555,7 @@ elb_sec_group_ingress_err = "AWS Elastic Load Balancer (ELB) has security group 
 }
 
 elb_sec_group_ingress_metadata := {
-    "Policy Code": "PR-AWS-0067-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-006",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -403,7 +567,7 @@ elb_sec_group_ingress_metadata := {
 }
 
 #
-# PR-AWS-0068-CFR
+# PR-AWS-CFR-ELB-007
 #
 default elb_sec_group_egress = null
 
@@ -413,37 +577,107 @@ aws_attribute_absence["elb_sec_group_egress"] {
     not resource.Properties.SecurityGroups
 }
 
+source_path[{"elb_sec_group_egress": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    not resource.Properties.SecurityGroups
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroups"]
+        ],
+    }
+}
+
 aws_issue["elb_sec_group_egress"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     count(resource.Properties.SecurityGroups) == 0
 }
 
+source_path[{"elb_sec_group_egress": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroups"]
+        ],
+    }
+}
+
 aws_ref_absence["elb_sec_group_egress"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     count(resource.Properties.SecurityGroups) != 0
-    security_groups := resource.Properties.SecurityGroups[_].Ref
-    count([c | input.Resources[j].Name == security_groups; c := 1]) == 0
+    security_groups := resource.Properties.SecurityGroups[j].Ref
+    count([c | input.Resources[k].Name == security_groups; c := 1]) == 0
     not input.Parameters[security_groups]
 }
 
-aws_ref_issue["elb_sec_group_egress"] {
+source_path[{"elb_sec_group_egress": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     count(resource.Properties.SecurityGroups) != 0
-    security_groups := resource.Properties.SecurityGroups[_].Ref
-    security_groups == input.Resources[j].Name
-    count(input.Resources[j].Properties.SecurityGroupEgress) == 0
+    security_groups := resource.Properties.SecurityGroups[j].Ref
+    count([c | input.Resources[k].Name == security_groups; c := 1]) == 0
+    not input.Parameters[security_groups]
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroups", j]
+        ],
+    }
 }
 
 aws_ref_issue["elb_sec_group_egress"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     count(resource.Properties.SecurityGroups) != 0
-    security_groups := resource.Properties.SecurityGroups[_].Ref
-    security_groups == input.Resources[j].Name
-    not input.Resources[j].Properties.SecurityGroupEgress
+    security_groups := resource.Properties.SecurityGroups[j].Ref
+    ref_resource := input.Resources[k]
+    security_groups == ref_resource.Name
+    count(ref_resource.Properties.SecurityGroupEgress) == 0
+}
+
+source_path[{"elb_sec_group_egress": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) != 0
+    security_groups := resource.Properties.SecurityGroups[j].Ref
+    ref_resource := input.Resources[k]
+    security_groups == ref_resource.Name
+    count(ref_resource.Properties.SecurityGroupEgress) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroups", j],
+            ["Resources", k, "Properties", "SecurityGroupEgress", j],
+        ],
+    }
+}
+
+aws_ref_issue["elb_sec_group_egress"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) != 0
+    security_groups := resource.Properties.SecurityGroups[j].Ref
+    ref_resource := input.Resources[k]
+    security_groups == ref_resource.Name
+    not ref_resource.Properties.SecurityGroupEgress
+}
+
+source_path[{"elb_sec_group_egress": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.SecurityGroups) != 0
+    security_groups := resource.Properties.SecurityGroups[j].Ref
+    ref_resource := input.Resources[k]
+    security_groups == ref_resource.Name
+    not ref_resource.Properties.SecurityGroupEgress
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroups", j],
+            ["Resources", k, "Properties", "SecurityGroupEgress", j],
+        ],
+    }
 }
 
 elb_sec_group_egress {
@@ -482,7 +716,7 @@ elb_sec_group_egress_err = "AWS Elastic Load Balancer (ELB) has no security grou
 
 
 elb_sec_group_egress_metadata := {
-    "Policy Code": "PR-AWS-0068-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-007",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -494,7 +728,7 @@ elb_sec_group_egress_metadata := {
 }
 
 #
-# PR-AWS-0069-CFR
+# PR-AWS-CFR-ELB-008
 #
 
 default elb_not_in_use = null
@@ -505,10 +739,32 @@ aws_attribute_absence["elb_not_in_use"] {
     not resource.Properties.Instances
 }
 
+source_path[{"elb_not_in_use": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    not resource.Properties.Instances
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Instances"]
+        ],
+    }
+}
+
 aws_issue["elb_not_in_use"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
     count(resource.Properties.Instances) == 0
+}
+
+source_path[{"elb_not_in_use": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    count(resource.Properties.Instances) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Instances"]
+        ],
+    }
 }
 
 elb_not_in_use {
@@ -534,7 +790,7 @@ elb_not_in_use_miss_err = "ELB attribute Instances missing in the resource" {
 }
 
 elb_not_in_use_metadata := {
-    "Policy Code": "PR-AWS-0069-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-008",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -546,7 +802,7 @@ elb_not_in_use_metadata := {
 }
 
 #
-# PR-AWS-0072-CFR
+# PR-AWS-CFR-ELB-009
 #
 
 default elb_alb_logs = null
@@ -557,20 +813,57 @@ aws_attribute_absence["elb_alb_logs"] {
     not resource.Properties.LoadBalancerAttributes
 }
 
+source_path[{"elb_alb_logs": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    not resource.Properties.LoadBalancerAttributes
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LoadBalancerAttributes"]
+        ],
+    }
+}
+
 aws_issue["elb_alb_logs"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
-    item := resource.Properties.LoadBalancerAttributes[_]
+    item := resource.Properties.LoadBalancerAttributes[j]
     lower(item.Key) == "access_logs.s3.enabled"
     lower(item.Value) != "true"
+}
+
+source_path[{"elb_alb_logs": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    item := resource.Properties.LoadBalancerAttributes[j]
+    lower(item.Key) == "access_logs.s3.enabled"
+    lower(item.Value) != "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LoadBalancerAttributes", j, "Value"]
+        ],
+    }
 }
 
 aws_bool_issue["elb_alb_logs"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
-    item := resource.Properties.LoadBalancerAttributes[_]
+    item := resource.Properties.LoadBalancerAttributes[j]
     lower(item.Key) == "access_logs.s3.enabled"
     not item.Value
+}
+
+source_path[{"elb_alb_logs": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    item := resource.Properties.LoadBalancerAttributes[j]
+    lower(item.Key) == "access_logs.s3.enabled"
+    not item.Value
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LoadBalancerAttributes", j, "Value"]
+        ],
+    }
 }
 
 elb_alb_logs {
@@ -603,7 +896,7 @@ elb_alb_logs_miss_err = "ELBv2 attribute LoadBalancerAttributes missing in the r
 }
 
 elb_alb_logs_metadata := {
-    "Policy Code": "PR-AWS-0072-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-009",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -615,7 +908,7 @@ elb_alb_logs_metadata := {
 }
 
 #
-# PR-AWS-0073-CFR
+# PR-AWS-CFR-ELB-010
 #
 
 default elb_listener_ssl = null
@@ -626,23 +919,68 @@ aws_attribute_absence["elb_listener_ssl"] {
     not resource.Properties.Listeners
 }
 
-aws_issue["elb_listener_ssl"] {
+source_path[{"elb_listener_ssl": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
-    resource.Properties.Listeners[_].SSLCertificateId == ""
+    not resource.Properties.Listeners
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Listeners"]
+        ],
+    }
 }
 
 aws_issue["elb_listener_ssl"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
-    resource.Properties.Listeners[_].SSLCertificateId == null
+    resource.Properties.Listeners[j].SSLCertificateId == ""
+}
+
+source_path[{"elb_listener_ssl": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    resource.Properties.Listeners[j].SSLCertificateId == ""
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Listeners", j, "SSLCertificateId"]
+        ],
+    }
 }
 
 aws_issue["elb_listener_ssl"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
-    listener := resource.Properties.Listeners[_]
+    resource.Properties.Listeners[j].SSLCertificateId == null
+}
+
+source_path[{"elb_listener_ssl": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    resource.Properties.Listeners[j].SSLCertificateId == null
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Listeners", j, "SSLCertificateId"]
+        ],
+    }
+}
+
+aws_issue["elb_listener_ssl"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    listener := resource.Properties.Listeners[j]
     not listener.SSLCertificateId
+}
+
+source_path[{"elb_listener_ssl": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancing::loadbalancer"
+    listener := resource.Properties.Listeners[j]
+    not listener.SSLCertificateId
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Listeners", j, "SSLCertificateId"]
+        ],
+    }
 }
 
 elb_listener_ssl {
@@ -668,7 +1006,7 @@ elb_listener_ssl_miss_err = "ELB attribute Listeners missing in the resource" {
 }
 
 elb_listener_ssl_metadata := {
-    "Policy Code": "PR-AWS-0073-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-010",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -680,7 +1018,7 @@ elb_listener_ssl_metadata := {
 }
 
 #
-# PR-AWS-0006-CFR
+# PR-AWS-CFR-ELB-011
 #
 
 default elb_over_https = null
@@ -691,10 +1029,32 @@ aws_attribute_absence["elb_over_https"] {
     not resource.Properties.Protocol
 }
 
+source_path[{"elb_over_https": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    not resource.Properties.Protocol
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Protocol"]
+        ],
+    }
+}
+
 aws_issue["elb_over_https"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
     lower(resource.Properties.Protocol) == "http"
+}
+
+source_path[{"elb_over_https": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    lower(resource.Properties.Protocol) == "http"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Protocol"]
+        ],
+    }
 }
 
 elb_over_https {
@@ -720,7 +1080,7 @@ elb_over_https_miss_err = "ELBv2 attribute Protocol missing in the resource" {
 }
 
 elb_over_https_metadata := {
-    "Policy Code": "PR-AWS-0006-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-011",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -733,7 +1093,7 @@ elb_over_https_metadata := {
 
 
 #
-# PR-AWS-0217-CFR
+# PR-AWS-CFR-ELB-012
 #
 
 default elb_v2_listener_ssl = null
@@ -744,31 +1104,89 @@ aws_attribute_absence["elb_v2_listener_ssl"] {
     not resource.Properties.Certificates
 }
 
+source_path[{"elb_v2_listener_ssl": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    not resource.Properties.Certificates
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Certificates"]
+        ],
+    }
+}
+
 aws_issue["elb_v2_listener_ssl"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
     count(resource.Properties.Certificates) == 0
 }
 
+source_path[{"elb_v2_listener_ssl": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    count(resource.Properties.Certificates) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Certificates"]
+        ],
+    }
+}
+
 aws_issue["elb_v2_listener_ssl"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
-    certificate := resource.Properties.Certificates[_]
+    certificate := resource.Properties.Certificates[j]
     not certificate.CertificateArn
 }
 
-aws_issue["elb_v2_listener_ssl"] {
+source_path[{"elb_v2_listener_ssl": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
-    certificate := resource.Properties.Certificates[_]
-    lower(certificate.CertificateArn) == ""
+    certificate := resource.Properties.Certificates[j]
+    not certificate.CertificateArn
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Certificates", j, "CertificateArn"]
+        ],
+    }
 }
 
 aws_issue["elb_v2_listener_ssl"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
-    certificate := resource.Properties.Certificates[_]
+    certificate := resource.Properties.Certificates[j]
+    lower(certificate.CertificateArn) == ""
+}
+
+source_path[{"elb_v2_listener_ssl": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    certificate := resource.Properties.Certificates[j]
+    lower(certificate.CertificateArn) == ""
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Certificates", j, "CertificateArn"]
+        ],
+    }
+}
+
+aws_issue["elb_v2_listener_ssl"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    certificate := resource.Properties.Certificates[j]
     count(certificate.CertificateArn) == 0
+}
+
+source_path[{"elb_v2_listener_ssl": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    certificate := resource.Properties.Certificates[j]
+    count(certificate.CertificateArn) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Certificates", j, "CertificateArn"]
+        ],
+    }
 }
 
 elb_v2_listener_ssl {
@@ -792,7 +1210,7 @@ elb_v2_listener_ssl_err = "AWS Elastic Load Balancer V2 (ELBV2) with listener TL
 }
 
 elb_v2_listener_ssl_metadata := {
-    "Policy Code": "PR-AWS-0217-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-012",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -805,7 +1223,7 @@ elb_v2_listener_ssl_metadata := {
 
 
 #
-# PR-AWS-0334-CFR
+# PR-AWS-CFR-ELB-013
 #
 
 default elb_drop_invalid_header = null
@@ -816,20 +1234,57 @@ aws_attribute_absence["elb_drop_invalid_header"] {
     not resource.Properties.LoadBalancerAttributes
 }
 
+source_path[{"elb_drop_invalid_header": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    not resource.Properties.LoadBalancerAttributes
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LoadBalancerAttributes"]
+        ],
+    }
+}
+
 aws_issue["elb_drop_invalid_header"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
-    item := resource.Properties.LoadBalancerAttributes[_]
+    item := resource.Properties.LoadBalancerAttributes[j]
     lower(item.Key) == "routing.http.drop_invalid_header_fields.enabled"
     lower(item.Value) != "true"
+}
+
+source_path[{"elb_drop_invalid_header": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    item := resource.Properties.LoadBalancerAttributes[j]
+    lower(item.Key) == "routing.http.drop_invalid_header_fields.enabled"
+    lower(item.Value) != "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LoadBalancerAttributes", j, "Value"]
+        ],
+    }
 }
 
 aws_bool_issue["elb_drop_invalid_header"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
-    item := resource.Properties.LoadBalancerAttributes[_]
+    item := resource.Properties.LoadBalancerAttributes[j]
     lower(item.Key) == "routing.http.drop_invalid_header_fields.enabled"
     not item.Value
+}
+
+source_path[{"elb_drop_invalid_header": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    item := resource.Properties.LoadBalancerAttributes[j]
+    lower(item.Key) == "routing.http.drop_invalid_header_fields.enabled"
+    not item.Value
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LoadBalancerAttributes", j, "Value"]
+        ],
+    }
 }
 
 elb_drop_invalid_header {
@@ -858,7 +1313,7 @@ elb_drop_invalid_header_err = "Ensure that Application Load Balancer drops HTTP 
 }
 
 elb_drop_invalid_header_metadata := {
-    "Policy Code": "PR-AWS-0334-CFR",
+    "Policy Code": "PR-AWS-CFR-ELB-013",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

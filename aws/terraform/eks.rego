@@ -1,9 +1,8 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html
 
 #
-# PR-AWS-0050-TRF
+# PR-AWS-TRF-EKS-001
 #
 
 default eks_multiple_sg = null
@@ -49,7 +48,7 @@ eks_multiple_sg_err = "AWS EKS cluster control plane assigned multiple security 
 }
 
 eks_multiple_sg_metadata := {
-    "Policy Code": "PR-AWS-0050-TRF",
+    "Policy Code": "PR-AWS-TRF-EKS-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -60,9 +59,8 @@ eks_multiple_sg_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html"
 }
 
-
 #
-# PR-AWS-0213-TRF
+# PR-AWS-TRF-EKS-002
 #
 
 default eks_version = null
@@ -87,7 +85,7 @@ eks_version_err = "AWS EKS unsupported Master node version." {
     aws_issue["eks_version"]
 }
 eks_version_metadata := {
-    "Policy Code": "PR-AWS-0213-TRF",
+    "Policy Code": "PR-AWS-TRF-EKS-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",

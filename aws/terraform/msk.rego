@@ -1,9 +1,8 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html
 
 #
-# PR-AWS-0239-TRF
+# PR-AWS-TRF-MSK-001
 #
 default msk_encryption_at_rest_cmk = null
 
@@ -43,7 +42,7 @@ msk_encryption_at_rest_cmk_err = "Use KMS Customer Master Keys for AWS MSK Clust
 
 
 msk_encryption_at_rest_cmk_metadata := {
-    "Policy Code": "PR-AWS-0239-TRF",
+    "Policy Code": "PR-AWS-TRF-MSK-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -55,7 +54,7 @@ msk_encryption_at_rest_cmk_metadata := {
 }
 
 #
-# PR-AWS-0240-TRF
+# PR-AWS-TRF-MSK-002
 #
 default msk_in_transit_encryption = null
 
@@ -98,7 +97,7 @@ msk_in_transit_encryption_err = "Ensure data is Encrypted in transit (TLS)" {
 
 
 msk_in_transit_encryption_metadata := {
-    "Policy Code": "PR-AWS-0240-TRF",
+    "Policy Code": "PR-AWS-TRF-MSK-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -109,9 +108,8 @@ msk_in_transit_encryption_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo"
 }
 
-
 #
-# PR-AWS-0241-TRF
+# PR-AWS-TRF-MSK-003
 #
 default msk_in_transit_encryption_tls = null
 
@@ -154,7 +152,7 @@ msk_in_transit_encryption_tls_err = "Ensure client authentication is enabled wit
 
 
 msk_in_transit_encryption_tls_metadata := {
-    "Policy Code": "PR-AWS-0241-TRF",
+    "Policy Code": "PR-AWS-TRF-MSK-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -165,9 +163,8 @@ msk_in_transit_encryption_tls_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo"
 }
 
-
 #
-# PR-AWS-0242-TRF
+# PR-AWS-TRF-MSK-004
 #
 default msk_vpc = null
 
@@ -201,7 +198,7 @@ msk_vpc_err = "Ensure MSK cluster is setup in GS VPC" {
 
 
 msk_vpc_metadata := {
-    "Policy Code": "PR-AWS-0242-TRF",
+    "Policy Code": "PR-AWS-TRF-MSK-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",

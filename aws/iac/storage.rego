@@ -5,7 +5,7 @@ default metadata = {}
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html
 
 #
-# PR-AWS-0004-CFR
+# PR-AWS-CFR-S3-001
 #
 
 default s3_accesslog = null
@@ -16,7 +16,7 @@ aws_attribute_absence["s3_accesslog"] {
     not resource.Properties.LoggingConfiguration.DestinationBucketName
 }
 
-aws_path[{"s3_accesslog": metadata}] {
+source_path[{"s3_accesslog": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     not resource.Properties.LoggingConfiguration.DestinationBucketName
@@ -31,7 +31,7 @@ aws_attribute_absence["s3_accesslog"] {
     not resource.Properties.LoggingConfiguration.LogFilePrefix
 }
 
-aws_path[{"s3_accesslog": metadata}] {
+source_path[{"s3_accesslog": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     not resource.Properties.LoggingConfiguration.LogFilePrefix
@@ -46,7 +46,7 @@ aws_issue["s3_accesslog"] {
     count(resource.Properties.LoggingConfiguration.DestinationBucketName) == 0
 }
 
-aws_path[{"s3_accesslog": metadata}] {
+source_path[{"s3_accesslog": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     count(resource.Properties.LoggingConfiguration.DestinationBucketName) == 0
@@ -61,7 +61,7 @@ aws_issue["s3_accesslog"] {
     count(resource.Properties.LoggingConfiguration.LogFilePrefix) == 0
 }
 
-aws_path[{"s3_accesslog": metadata}] {
+source_path[{"s3_accesslog": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     count(resource.Properties.LoggingConfiguration.LogFilePrefix) == 0
@@ -93,12 +93,12 @@ s3_accesslog_miss_err = "S3 Bucket attribute DestinationBucketName/LogFilePrefix
 }
 
 s3_accesslog_metadata := {
-    "Policy Code": "PR-AWS-0004-CFR",
+    "Policy Code": "PR-AWS-CFR-S3-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS Access logging not enabled on S3 buckets",
-    "Policy Description": "Checks for S3 buckets without access logging turned on. Access logging allows customers to view complete audit trail on sensitive workloads such as S3 buckets. It is recommended that Access logging is turned on for all S3 buckets to meet audit PR-AWS-0004-CFR-DESC compliance requirement",
+    "Policy Description": "Checks for S3 buckets without access logging turned on. Access logging allows customers to view complete audit trail on sensitive workloads such as S3 buckets",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html"
@@ -106,7 +106,7 @@ s3_accesslog_metadata := {
 
 
 #
-# PR-AWS-0140-CFR
+# PR-AWS-CFR-S3-002
 #
 
 default s3_acl_delete = null
@@ -144,7 +144,7 @@ aws_issue["s3_acl_delete"] {
     startswith(lower(stat.Action[_]),"s3:delete")
 }
 
-aws_path[{"s3_acl_delete": metadata}] {
+source_path[{"s3_acl_delete": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     not resource.Properties.PolicyDocument.Statement
@@ -153,7 +153,7 @@ aws_path[{"s3_acl_delete": metadata}] {
     }
 }
 
-aws_path[{"s3_acl_delete": metadata}] {
+source_path[{"s3_acl_delete": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     stat := resource.Properties.PolicyDocument.Statement[j]
@@ -165,7 +165,7 @@ aws_path[{"s3_acl_delete": metadata}] {
     }
 }
 
-aws_path[{"s3_acl_delete": metadata}] {
+source_path[{"s3_acl_delete": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     stat := resource.Properties.PolicyDocument.Statement[j]
@@ -177,7 +177,7 @@ aws_path[{"s3_acl_delete": metadata}] {
     }
 }
 
-aws_path[{"s3_acl_delete": metadata}] {
+source_path[{"s3_acl_delete": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     stat := resource.Properties.PolicyDocument.Statement[j]
@@ -213,7 +213,7 @@ s3_acl_delete_miss_err = "S3 Policy attribute PolicyDocument.Statement missing i
 }
 
 s3_acl_delete_metadata := {
-    "Policy Code": "PR-AWS-0140-CFR",
+    "Policy Code": "PR-AWS-CFR-S3-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -225,7 +225,7 @@ s3_acl_delete_metadata := {
 }
 
 #
-# PR-AWS-0141-CFR
+# PR-AWS-CFR-S3-003
 #
 
 default s3_acl_get = null
@@ -264,7 +264,7 @@ aws_issue["s3_acl_get"] {
 }
 
 
-aws_path[{"s3_acl_get": metadata}] {
+source_path[{"s3_acl_get": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     not resource.Properties.PolicyDocument.Statement
@@ -273,7 +273,7 @@ aws_path[{"s3_acl_get": metadata}] {
     }
 }
 
-aws_path[{"s3_acl_get": metadata}] {
+source_path[{"s3_acl_get": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     stat := resource.Properties.PolicyDocument.Statement[j]
@@ -285,7 +285,7 @@ aws_path[{"s3_acl_get": metadata}] {
     }
 }
 
-aws_path[{"s3_acl_get": metadata}] {
+source_path[{"s3_acl_get": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     stat := resource.Properties.PolicyDocument.Statement[j]
@@ -297,7 +297,7 @@ aws_path[{"s3_acl_get": metadata}] {
     }
 }
 
-aws_path[{"s3_acl_get": metadata}] {
+source_path[{"s3_acl_get": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     stat := resource.Properties.PolicyDocument.Statement[j]
@@ -332,7 +332,7 @@ s3_acl_get_miss_err = "S3 Policy attribute PolicyDocument.Statement missing in t
 }
 
 s3_acl_get_metadata := {
-    "Policy Code": "PR-AWS-0141-CFR",
+    "Policy Code": "PR-AWS-CFR-S3-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -344,7 +344,7 @@ s3_acl_get_metadata := {
 }
 
 #
-# PR-AWS-0142-CFR
+# PR-AWS-CFR-S3-004
 #
 
 default s3_acl_list = null
@@ -384,7 +384,7 @@ aws_issue["s3_acl_list"] {
 
 }
 
-aws_path[{"s3_acl_list": metadata}] {
+source_path[{"s3_acl_list": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     not resource.Properties.PolicyDocument.Statement
@@ -393,7 +393,7 @@ aws_path[{"s3_acl_list": metadata}] {
     }
 }
 
-aws_path[{"s3_acl_list": metadata}] {
+source_path[{"s3_acl_list": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     stat := resource.Properties.PolicyDocument.Statement[j]
@@ -405,7 +405,7 @@ aws_path[{"s3_acl_list": metadata}] {
     }
 }
 
-aws_path[{"s3_acl_list": metadata}] {
+source_path[{"s3_acl_list": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     stat := resource.Properties.PolicyDocument.Statement[j]
@@ -418,7 +418,7 @@ aws_path[{"s3_acl_list": metadata}] {
 
 }
 
-aws_path[{"s3_acl_list": metadata}] {
+source_path[{"s3_acl_list": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     stat := resource.Properties.PolicyDocument.Statement[j]
@@ -454,7 +454,7 @@ s3_acl_list_miss_err = "S3 Policy attribute PolicyDocument.Statement missing in 
 }
 
 s3_acl_list_metadata := {
-    "Policy Code": "PR-AWS-0142-CFR",
+    "Policy Code": "PR-AWS-CFR-S3-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -466,7 +466,7 @@ s3_acl_list_metadata := {
 }
 
 #
-# PR-AWS-0143-CFR
+# PR-AWS-CFR-S3-005
 #
 
 default s3_acl_put = null
@@ -505,7 +505,7 @@ aws_issue["s3_acl_put"] {
     startswith(lower(stat.Action[_]),"s3:put")
 }
 
-aws_path[{"s3_acl_put": metadata}] {
+source_path[{"s3_acl_put": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     not resource.Properties.PolicyDocument.Statement
@@ -514,7 +514,7 @@ aws_path[{"s3_acl_put": metadata}] {
     }
 }
 
-aws_path[{"s3_acl_put": metadata}] {
+source_path[{"s3_acl_put": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     stat := resource.Properties.PolicyDocument.Statement[j]
@@ -526,7 +526,7 @@ aws_path[{"s3_acl_put": metadata}] {
     }
 }
 
-aws_path[{"s3_acl_put": metadata}] {
+source_path[{"s3_acl_put": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     stat := resource.Properties.PolicyDocument.Statement[j]
@@ -539,7 +539,7 @@ aws_path[{"s3_acl_put": metadata}] {
 
 }
 
-aws_path[{"s3_acl_put": metadata}] {
+source_path[{"s3_acl_put": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     stat := resource.Properties.PolicyDocument.Statement[j]
@@ -574,7 +574,7 @@ s3_acl_put_miss_err = "S3 Policy attribute PolicyDocument.Statement missing in t
 }
 
 s3_acl_put_metadata := {
-    "Policy Code": "PR-AWS-0143-CFR",
+    "Policy Code": "PR-AWS-CFR-S3-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -586,7 +586,7 @@ s3_acl_put_metadata := {
 }
 
 #
-# PR-AWS-0144-CFR
+# PR-AWS-CFR-S3-006
 #
 
 default s3_cloudtrail = null
@@ -603,7 +603,7 @@ aws_bool_issue["s3_cloudtrail"] {
     not resource.Properties.IsLogging
 }
 
-aws_path[{"s3_cloudtrail": metadata}] {
+source_path[{"s3_cloudtrail": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudtrail::trail"
     lower(resource.Properties.IsLogging) == "false"
@@ -614,7 +614,7 @@ aws_path[{"s3_cloudtrail": metadata}] {
     }
 }
 
-aws_path[{"s3_cloudtrail": metadata}] {
+source_path[{"s3_cloudtrail": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::cloudtrail::trail"
     not resource.Properties.IsLogging
@@ -646,7 +646,7 @@ s3_cloudtrail_err = "AWS S3 CloudTrail buckets for which access logging is disab
 }
 
 s3_cloudtrail_metadata := {
-    "Policy Code": "PR-AWS-0144-CFR",
+    "Policy Code": "PR-AWS-CFR-S3-006",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -658,7 +658,7 @@ s3_cloudtrail_metadata := {
 }
 
 #
-# PR-AWS-0145-CFR
+# PR-AWS-CFR-S3-007
 #
 
 default s3_versioning = null
@@ -675,7 +675,7 @@ aws_issue["s3_versioning"] {
     lower(resource.Properties.VersioningConfiguration.Status) != "enabled"
 }
 
-aws_path[{"s3_versioning": metadata}] {
+source_path[{"s3_versioning": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     not resource.Properties.VersioningConfiguration.Status
@@ -684,7 +684,7 @@ aws_path[{"s3_versioning": metadata}] {
     }
 }
 
-aws_path[{"s3_versioning": metadata}] {
+source_path[{"s3_versioning": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     lower(resource.Properties.VersioningConfiguration.Status) != "enabled"
@@ -716,7 +716,7 @@ s3_versioning_miss_err = "S3 Bucket attribute VersioningConfiguration.Status mis
 }
 
 s3_versioning_metadata := {
-    "Policy Code": "PR-AWS-0145-CFR",
+    "Policy Code": "PR-AWS-CFR-S3-007",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -728,7 +728,7 @@ s3_versioning_metadata := {
 }
 
 #
-# PR-AWS-0147-CFR
+# PR-AWS-CFR-S3-008
 #
 
 default s3_public_acl = null
@@ -739,7 +739,7 @@ aws_issue["s3_public_acl"] {
     resource.Properties.AccessControl == "PublicRead"
 }
 
-aws_path[{"s3_public_acl": metadata}] {
+source_path[{"s3_public_acl": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     lower(resource.Properties.AccessControl) == "publicread"
@@ -762,7 +762,7 @@ s3_public_acl_err = "AWS S3 bucket has global view ACL permissions enabled." {
 }
 
 s3_public_acl_metadata := {
-    "Policy Code": "PR-AWS-0147-CFR",
+    "Policy Code": "PR-AWS-CFR-S3-008",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -774,7 +774,7 @@ s3_public_acl_metadata := {
 }
 
 #
-# PR-AWS-0148-CFR
+# PR-AWS-CFR-S3-009
 #
 
 default s3_transport = null
@@ -819,7 +819,7 @@ aws_bool_issue["s3_transport"] {
     not statement.Condition.Bool["aws:SecureTransport"]
 }
 
-aws_path[{"s3_transport": metadata}] {
+source_path[{"s3_transport": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     statement := resource.Properties.PolicyDocument.Statement[j]
@@ -834,7 +834,7 @@ aws_path[{"s3_transport": metadata}] {
     }
 }
 
-aws_path[{"s3_transport": metadata}] {
+source_path[{"s3_transport": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     statement := resource.Properties.PolicyDocument.Statement[j]
@@ -847,7 +847,7 @@ aws_path[{"s3_transport": metadata}] {
     }
 }
 
-aws_path[{"s3_transport": metadata}] {
+source_path[{"s3_transport": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     statement := resource.Properties.PolicyDocument.Statement[j]
@@ -860,7 +860,7 @@ aws_path[{"s3_transport": metadata}] {
     }
 }
 
-aws_path[{"s3_transport": metadata}] {
+source_path[{"s3_transport": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     statement := resource.Properties.PolicyDocument.Statement[j]
@@ -873,7 +873,7 @@ aws_path[{"s3_transport": metadata}] {
     }
 }
 
-aws_path[{"s3_transport": metadata}] {
+source_path[{"s3_transport": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucketpolicy"
     statement := resource.Properties.PolicyDocument.Statement[j]
@@ -908,7 +908,7 @@ s3_transport_err = "AWS S3 bucket not configured with secure data transport poli
 }
 
 s3_transport_metadata := {
-    "Policy Code": "PR-AWS-0148-CFR",
+    "Policy Code": "PR-AWS-CFR-S3-009",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -920,7 +920,7 @@ s3_transport_metadata := {
 }
 
 #
-# PR-AWS-0149-CFR
+# PR-AWS-CFR-S3-010
 #
 
 default s3_auth_acl = null
@@ -931,7 +931,7 @@ aws_issue["s3_auth_acl"] {
     resource.Properties.AccessControl == "AuthenticatedRead"
 }
 
-aws_path[{"s3_auth_acl": metadata}] {
+source_path[{"s3_auth_acl": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     lower(resource.Properties.AccessControl) == "authenticatedread"
@@ -956,7 +956,7 @@ s3_auth_acl_err = "AWS S3 buckets are accessible to any authenticated user." {
 }
 
 s3_auth_acl_metadata := {
-    "Policy Code": "PR-AWS-0149-CFR",
+    "Policy Code": "PR-AWS-CFR-S3-010",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -968,7 +968,7 @@ s3_auth_acl_metadata := {
 }
 
 #
-# PR-AWS-0150-CFR
+# PR-AWS-CFR-S3-011
 #
 
 default s3_public_access = null
@@ -985,7 +985,7 @@ aws_issue["s3_public_access"] {
     resource.Properties.AccessControl == "PublicReadWrite"
 }
 
-aws_path[{"s3_public_access": metadata}] {
+source_path[{"s3_public_access": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     lower(resource.Properties.AccessControl) == "publicread"
@@ -996,7 +996,7 @@ aws_path[{"s3_public_access": metadata}] {
     }
 }
 
-aws_path[{"s3_public_access": metadata}] {
+source_path[{"s3_public_access": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     lower(resource.Properties.AccessControl) == "publicreadwrite"
@@ -1021,7 +1021,7 @@ s3_public_access_err = "AWS S3 buckets are accessible to public" {
 }
 
 s3_public_access_metadata := {
-    "Policy Code": "PR-AWS-0150-CFR",
+    "Policy Code": "PR-AWS-CFR-S3-011",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -1033,7 +1033,7 @@ s3_public_access_metadata := {
 }
 
 #
-# PR-AWS-0151-CFR
+# PR-AWS-CFR-S3-012
 #
 
 default s3_encryption = null
@@ -1044,7 +1044,7 @@ aws_issue["s3_encryption"] {
     not resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration
 }
 
-aws_path["s3_encryption"] {
+source_path["s3_encryption"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     metadata := {
@@ -1068,7 +1068,7 @@ s3_encryption_err = "AWS S3 buckets do not have server side encryption" {
 }
 
 s3_encryption_metadata := {
-    "Policy Code": "PR-AWS-0151-CFR",
+    "Policy Code": "PR-AWS-CFR-S3-012",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -1080,7 +1080,7 @@ s3_encryption_metadata := {
 }
 
 #
-# PR-AWS-0196-CFR
+# PR-AWS-CFR-S3-013
 #
 
 default s3_website = null
@@ -1091,7 +1091,7 @@ aws_issue["s3_website"] {
     resource.Properties.WebsiteConfiguration
 }
 
-aws_path[{"s3_website": metadata}] {
+source_path[{"s3_website": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     resource.Properties.WebsiteConfiguration
@@ -1116,7 +1116,7 @@ s3_website_err = "S3 buckets with configurations set to host websites" {
 }
 
 s3_website_metadata := {
-    "Policy Code": "PR-AWS-0196-CFR",
+    "Policy Code": "PR-AWS-CFR-S3-013",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -1129,7 +1129,7 @@ s3_website_metadata := {
 
 
 #
-# PR-AWS-0246-CFR
+# PR-AWS-CFR-S3-014
 #
 
 default s3_cors = null
@@ -1142,7 +1142,7 @@ aws_issue["s3_cors"] {
     cors_rule.AllowedMethods[_] == "*"
 }
 
-aws_path[{"s3_cors": metadata}] {
+source_path[{"s3_cors": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     cors_rule := resource.Properties.CorsConfiguration.CorsRules[j]
@@ -1170,7 +1170,7 @@ s3_cors_err = "Ensure S3 hosted sites supported hardened CORS" {
 }
 
 s3_cors_metadata := {
-    "Policy Code": "PR-AWS-0246-CFR",
+    "Policy Code": "PR-AWS-CFR-S3-014",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -1183,7 +1183,7 @@ s3_cors_metadata := {
 
 
 #
-# PR-AWS-0301-CFR
+# PR-AWS-CFR-S3-015
 #
 
 default bucket_kms_encryption = null
@@ -1195,47 +1195,131 @@ aws_issue["bucket_kms_encryption"] {
     count(resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration) == 0
 }
 
+source_path[{"bucket_kms_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    count(resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "BucketEncryption", "ServerSideEncryptionConfiguration"]
+        ],
+    }
+}
+
 aws_issue["bucket_kms_encryption"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     not resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration
 }
 
+source_path[{"bucket_kms_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "BucketEncryption", "ServerSideEncryptionConfiguration"]
+        ],
+    }
+}
+
 aws_issue["bucket_kms_encryption"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
-    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[_]
+    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[j]
     not ServerSideEncryptionConfiguration.BucketKeyEnabled
 }
 
+source_path[{"bucket_kms_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[j]
+    not ServerSideEncryptionConfiguration.BucketKeyEnabled
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "BucketEncryption", "ServerSideEncryptionConfiguration", j, "ServerSideEncryptionConfiguration", "ServerSideEncryptionConfiguration"]
+        ],
+    }
+}
+
 aws_issue["bucket_kms_encryption"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
-    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[_]
+    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[j]
     lower(ServerSideEncryptionConfiguration.BucketKeyEnabled) == "false"
 }
 
-aws_issue["bucket_kms_encryption"] {
+source_path[{"bucket_kms_encryption": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
-    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[_]
-    lower(ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.SSEAlgorithm) != "aws:kms"
+    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[j]
+    lower(ServerSideEncryptionConfiguration.BucketKeyEnabled) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "BucketEncryption", "ServerSideEncryptionConfiguration", j, "ServerSideEncryptionConfiguration", "ServerSideEncryptionConfiguration"]
+        ],
+    }
 }
 
 aws_issue["bucket_kms_encryption"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
-    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[_]
+    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[j]
+    lower(ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.SSEAlgorithm) != "aws:kms"
+}
+
+source_path[{"bucket_kms_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[j]
+    lower(ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.SSEAlgorithm) != "aws:kms"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "BucketEncryption", "ServerSideEncryptionConfiguration", j, "ServerSideEncryptionByDefault", "SSEAlgorithm"]
+        ],
+    }
+}
+
+aws_issue["bucket_kms_encryption"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[j]
     lower(ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.SSEAlgorithm) == "aws:kms"
     not ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.KMSMasterKeyID
 }
 
+source_path[{"bucket_kms_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[j]
+    lower(ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.SSEAlgorithm) == "aws:kms"
+    not ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.KMSMasterKeyID
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "BucketEncryption", "ServerSideEncryptionConfiguration", j, "ServerSideEncryptionByDefault", "KMSMasterKeyID"]
+        ],
+    }
+}
+
 aws_issue["bucket_kms_encryption"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
-    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[_]
+    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[j]
     lower(ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.SSEAlgorithm) == "aws:kms"
     count(ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.KMSMasterKeyID) == 0
+}
+
+source_path[{"bucket_kms_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    ServerSideEncryptionConfiguration := resource.Properties.BucketEncryption.ServerSideEncryptionConfiguration[j]
+    lower(ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.SSEAlgorithm) == "aws:kms"
+    count(ServerSideEncryptionConfiguration.ServerSideEncryptionByDefault.KMSMasterKeyID) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "BucketEncryption", "ServerSideEncryptionConfiguration", j, "ServerSideEncryptionByDefault", "KMSMasterKeyID"]
+        ],
+    }
 }
 
 
@@ -1254,7 +1338,7 @@ bucket_kms_encryption_err = "Ensure S3 bucket is encrypted using KMS" {
 }
 
 bucket_kms_encryption_metadata := {
-    "Policy Code": "PR-AWS-0301-CFR",
+    "Policy Code": "PR-AWS-CFR-S3-015",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -1267,7 +1351,7 @@ bucket_kms_encryption_metadata := {
 
 
 #
-# PR-AWS-0309-CFR
+# PR-AWS-CFR-S3-016
 #
 
 default s3_object_lock_enable = null
@@ -1278,10 +1362,32 @@ aws_issue["s3_object_lock_enable"] {
     not resource.Properties.ObjectLockEnabled
 }
 
+source_path[{"s3_object_lock_enable": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.ObjectLockEnabled
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ObjectLockEnabled"]
+        ],
+    }
+}
+
 aws_issue["s3_object_lock_enable"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     lower(resource.Properties.ObjectLockEnabled) != "true"
+}
+
+source_path[{"s3_object_lock_enable": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    lower(resource.Properties.ObjectLockEnabled) != "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ObjectLockEnabled"]
+        ],
+    }
 }
 
 s3_object_lock_enable {
@@ -1298,7 +1404,7 @@ s3_object_lock_enable_err = "Ensure S3 bucket has enabled lock configuration" {
 }
 
 s3_object_lock_enable_metadata := {
-    "Policy Code": "PR-AWS-0309-CFR",
+    "Policy Code": "PR-AWS-CFR-S3-016",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -1311,7 +1417,7 @@ s3_object_lock_enable_metadata := {
 
 
 #
-# PR-AWS-0310-CFR
+# PR-AWS-CFR-S3-017
 #
 
 default s3_cross_region_replica = null
@@ -1323,10 +1429,33 @@ aws_issue["s3_cross_region_replica"] {
     not Rules.Destination
 }
 
+source_path[{"s3_cross_region_replica": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    Rules := resource.Properties.ReplicationConfiguration.Rules[j]
+    not Rules.Destination
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ReplicationConfiguration", "Rules", j, "Destination"]
+        ],
+    }
+}
+
 aws_issue["s3_cross_region_replica"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     not resource.Properties.ReplicationConfiguration
+}
+
+source_path[{"s3_cross_region_replica": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.ReplicationConfiguration
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ReplicationConfiguration"]
+        ],
+    }
 }
 
 s3_cross_region_replica {
@@ -1338,16 +1467,16 @@ s3_cross_region_replica = false {
     aws_issue["s3_cross_region_replica"]
 }
 
-s3_cross_region_replica_err = "Ensure S3 bucket has enabled lock configuration" {
+s3_cross_region_replica_err = "Ensure S3 bucket cross-region replication is enabled" {
     aws_issue["s3_cross_region_replica"]
 }
 
 s3_cross_region_replica_metadata := {
-    "Policy Code": "PR-AWS-0310-CFR",
+    "Policy Code": "PR-AWS-CFR-S3-017",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
-    "Policy Title": "Ensure S3 bucket has enabled lock configuration",
+    "Policy Title": "Ensure S3 bucket cross-region replication is enabled",
     "Policy Description": "Cross-region replication enables automatic, asynchronous copying of objects across S3 buckets. By default, replication supports copying new S3 objects after it is enabled",
     "Resource Type": "",
     "Policy Help URL": "",
@@ -1356,7 +1485,7 @@ s3_cross_region_replica_metadata := {
 
 
 #
-# PR-AWS-0346-CFR
+# PR-AWS-CFR-S3-018
 #
 
 default s3_public_access_block = null
@@ -1367,10 +1496,32 @@ aws_issue["s3_public_access_block"] {
     not resource.Properties.PublicAccessBlockConfiguration.BlockPublicAcls
 }
 
+source_path[{"s3_public_access_block": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.PublicAccessBlockConfiguration.BlockPublicAcls
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PublicAccessBlockConfiguration", "BlockPublicAcls"]
+        ],
+    }
+}
+
 aws_issue["s3_public_access_block"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     lower(resource.Properties.PublicAccessBlockConfiguration.BlockPublicAcls) != "true"
+}
+
+source_path[{"s3_public_access_block": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    lower(resource.Properties.PublicAccessBlockConfiguration.BlockPublicAcls) != "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PublicAccessBlockConfiguration", "BlockPublicAcls"]
+        ],
+    }
 }
 
 s3_public_access_block {
@@ -1387,7 +1538,7 @@ s3_public_access_block_err = "Ensure S3 Bucket has public access blocks" {
 }
 
 s3_public_access_block_metadata := {
-    "Policy Code": "PR-AWS-0346-CFR",
+    "Policy Code": "PR-AWS-CFR-S3-018",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -1400,7 +1551,7 @@ s3_public_access_block_metadata := {
 
 
 #
-# PR-AWS-0351-CFR
+# PR-AWS-CFR-S3-019
 #
 
 default s3_restrict_public_bucket = null
@@ -1411,10 +1562,32 @@ aws_issue["s3_restrict_public_bucket"] {
     not resource.Properties.PublicAccessBlockConfiguration.RestrictPublicBuckets
 }
 
+source_path[{"s3_restrict_public_bucket": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.PublicAccessBlockConfiguration.RestrictPublicBuckets
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PublicAccessBlockConfiguration", "RestrictPublicBuckets"]
+        ],
+    }
+}
+
 aws_issue["s3_restrict_public_bucket"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     lower(resource.Properties.PublicAccessBlockConfiguration.RestrictPublicBuckets) != "true"
+}
+
+source_path[{"s3_restrict_public_bucket": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    lower(resource.Properties.PublicAccessBlockConfiguration.RestrictPublicBuckets) != "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PublicAccessBlockConfiguration", "RestrictPublicBuckets"]
+        ],
+    }
 }
 
 s3_restrict_public_bucket {
@@ -1431,7 +1604,7 @@ s3_restrict_public_bucket_err = "Ensure S3 bucket RestrictPublicBucket is enable
 }
 
 s3_restrict_public_bucket_metadata := {
-    "Policy Code": "PR-AWS-0351-CFR",
+    "Policy Code": "PR-AWS-CFR-S3-019",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -1444,7 +1617,7 @@ s3_restrict_public_bucket_metadata := {
 
 
 #
-# PR-AWS-0352-CFR
+# PR-AWS-CFR-S3-020
 #
 
 default s3_ignore_public_acl = null
@@ -1455,10 +1628,32 @@ aws_issue["s3_ignore_public_acl"] {
     not resource.Properties.PublicAccessBlockConfiguration.IgnorePublicAcls
 }
 
+source_path[{"s3_ignore_public_acl": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.PublicAccessBlockConfiguration.IgnorePublicAcls
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PublicAccessBlockConfiguration", "IgnorePublicAcls"]
+        ],
+    }
+}
+
 aws_issue["s3_ignore_public_acl"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     lower(resource.Properties.PublicAccessBlockConfiguration.IgnorePublicAcls) != "true"
+}
+
+source_path[{"s3_ignore_public_acl": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    lower(resource.Properties.PublicAccessBlockConfiguration.IgnorePublicAcls) != "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PublicAccessBlockConfiguration", "IgnorePublicAcls"]
+        ],
+    }
 }
 
 s3_ignore_public_acl {
@@ -1475,7 +1670,7 @@ s3_ignore_public_acl_err = "Ensure S3 bucket IgnorePublicAcls is enabled" {
 }
 
 s3_ignore_public_acl_metadata := {
-    "Policy Code": "PR-AWS-0352-CFR",
+    "Policy Code": "PR-AWS-CFR-S3-020",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -1489,7 +1684,7 @@ s3_ignore_public_acl_metadata := {
 
 
 #
-# PR-AWS-0353-CFR
+# PR-AWS-CFR-S3-021
 #
 
 default s3_block_public_policy = null
@@ -1500,10 +1695,32 @@ aws_issue["s3_block_public_policy"] {
     not resource.Properties.PublicAccessBlockConfiguration.BlockPublicPolicy
 }
 
+source_path[{"s3_block_public_policy": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    not resource.Properties.PublicAccessBlockConfiguration.BlockPublicPolicy
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PublicAccessBlockConfiguration", "BlockPublicPolicy"]
+        ],
+    }
+}
+
 aws_issue["s3_block_public_policy"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::s3::bucket"
     lower(resource.Properties.PublicAccessBlockConfiguration.BlockPublicPolicy) != "true"
+}
+
+source_path[{"s3_block_public_policy": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::s3::bucket"
+    lower(resource.Properties.PublicAccessBlockConfiguration.BlockPublicPolicy) != "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PublicAccessBlockConfiguration", "BlockPublicPolicy"]
+        ],
+    }
 }
 
 s3_block_public_policy {
@@ -1520,7 +1737,7 @@ s3_block_public_policy_err = "Ensure S3 Bucket BlockPublicPolicy is enabled" {
 }
 
 s3_block_public_policy_metadata := {
-    "Policy Code": "PR-AWS-0353-CFR",
+    "Policy Code": "PR-AWS-CFR-S3-021",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -1529,4 +1746,375 @@ s3_block_public_policy_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html#cfn-s3-bucket-publicaccessblockconfiguration-blockpublicpolicy"
+}
+
+#
+# PR-AWS-CFR-EFS-001
+#
+
+default efs_kms = null
+
+aws_issue["efs_kms"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::efs::filesystem"
+    not resource.Properties.KmsKeyId
+}
+
+source_path[{"efs_kms": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::efs::filesystem"
+    not resource.Properties.KmsKeyId
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsKeyId"]
+        ],
+    }
+}
+
+aws_issue["efs_kms"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::efs::filesystem"
+    not startswith(resource.Properties.KmsKeyId, "arn:")
+}
+
+source_path[{"efs_kms": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::efs::filesystem"
+    not startswith(resource.Properties.KmsKeyId, "arn:")
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsKeyId"]
+        ],
+    }
+}
+
+efs_kms {
+    lower(input.Resources[i].Type) == "aws::efs::filesystem"
+    not aws_issue["efs_kms"]
+}
+
+efs_kms = false {
+    aws_issue["efs_kms"]
+}
+
+efs_kms_err = "AWS Elastic File System (EFS) not encrypted using Customer Managed Key" {
+    aws_issue["efs_kms"]
+}
+
+efs_kms_metadata := {
+    "Policy Code": "PR-AWS-CFR-EFS-001",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Elastic File System (EFS) not encrypted using Customer Managed Key",
+    "Policy Description": "This policy identifies Elastic File Systems (EFSs) which are encrypted with default KMS keys and not with Keys managed by Customer. It is a best practice to use customer managed KMS Keys to encrypt your EFS data. It gives you full control over the encrypted data.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-filesystem.html"
+}
+
+#
+# PR-AWS-CFR-EFS-002
+#
+
+default efs_encrypt = null
+
+aws_issue["efs_encrypt"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::efs::filesystem"
+    lower(resource.Properties.Encrypted) != "true"
+}
+
+source_path[{"efs_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::efs::filesystem"
+    lower(resource.Properties.Encrypted) != "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Encrypted"]
+        ],
+    }
+}
+
+aws_bool_issue["efs_encrypt"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::efs::filesystem"
+    not resource.Properties.Encrypted
+}
+
+source_path[{"efs_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::efs::filesystem"
+    not resource.Properties.Encrypted
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Encrypted"]
+        ],
+    }
+}
+
+efs_encrypt {
+    lower(input.Resources[i].Type) == "aws::efs::filesystem"
+    not aws_issue["efs_encrypt"]
+    not aws_bool_issue["efs_encrypt"]
+}
+
+efs_encrypt = false {
+    aws_issue["efs_encrypt"]
+}
+
+efs_encrypt = false {
+    aws_bool_issue["efs_encrypt"]
+}
+
+efs_encrypt_err = "AWS Elastic File System (EFS) with encryption for data at rest disabled" {
+    aws_issue["efs_encrypt"]
+} else = "AWS Elastic File System (EFS) with encryption for data at rest disabled" {
+    aws_bool_issue["efs_encrypt"]
+}
+
+efs_encrypt_metadata := {
+    "Policy Code": "PR-AWS-CFR-EFS-002",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Elastic File System (EFS) with encryption for data at rest disabled",
+    "Policy Description": "This policy identifies Elastic File Systems (EFSs) for which encryption for data at rest disabled. It is highly recommended to implement at-rest encryption in order to prevent unauthorized users from reading sensitive data saved to EFS.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-filesystem.html"
+}
+
+#
+# PR-AWS-CFR-EBS-001
+#
+
+default ebs_encrypt = null
+
+
+aws_issue["ebs_encrypt"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::volume"
+    resource.Properties.Encrypted != "true"
+}
+
+source_path[{"efs_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::volume"
+    resource.Properties.Encrypted != "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Encrypted"]
+        ],
+    }
+}
+
+aws_bool_issue["ebs_encrypt"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::volume"
+    not resource.Properties.Encrypted
+}
+
+source_path[{"efs_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::volume"
+    not resource.Properties.Encrypted
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Encrypted"]
+        ],
+    }
+}
+
+ebs_encrypt {
+    lower(input.Resources[i].Type) == "aws::ec2::volume"
+    not aws_issue["ebs_encrypt"]
+    not aws_bool_issue["ebs_encrypt"]
+}
+
+ebs_encrypt = false {
+    aws_issue["ebs_encrypt"]
+}
+ebs_encrypt = false {
+    aws_bool_issue["ebs_encrypt"]
+}
+
+ebs_encrypt_err = "AWS EBS volumes are not encrypted" {
+    aws_issue["ebs_encrypt"]
+} else = "AWS EBS volumes are not encrypted" {
+    aws_bool_issue["ebs_encrypt"]
+}
+
+ebs_encrypt_metadata := {
+    "Policy Code": "PR-AWS-CFR-EBS-001",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS EBS volumes are not encrypted",
+    "Policy Description": "This policy identifies the EBS volumes which are not encrypted. The snapshots that you take of an encrypted EBS volume are also encrypted and can be moved between AWS Regions as needed. You cannot share encrypted snapshots with other AWS accounts and you cannot make them public. It is recommended that EBS volume should be encrypted.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volume.html"
+}
+
+#
+# PR-AWS-CFR-BKP-001
+#
+
+default backup_public_access_disable = null
+
+aws_issue["backup_public_access_disable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::backup::backupvault"
+    statement := resource.Properties.AccessPolicy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+}
+
+source_path[{"backup_public_access_disable": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::backup::backupvault"
+    statement := resource.Properties.AccessPolicy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AccessPolicy", "Statement", j, "Principal"]
+        ],
+    }
+}
+
+aws_issue["backup_public_access_disable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::backup::backupvault"
+    statement := resource.Properties.AccessPolicy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+}
+
+source_path[{"backup_public_access_disable": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::backup::backupvault"
+    statement := resource.Properties.AccessPolicy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AccessPolicy", "Statement", j, "Principal", "AWS"]
+        ],
+    }
+}
+
+aws_issue["backup_public_access_disable"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::backup::backupvault"
+    statement := resource.Properties.AccessPolicy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+}
+
+source_path[{"backup_public_access_disable": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::backup::backupvault"
+    statement := resource.Properties.AccessPolicy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AccessPolicy", "Statement", j, "Principal", "AWS"]
+        ],
+    }
+}
+
+
+backup_public_access_disable {
+    lower(input.Resources[i].Type) == "aws::backup::backupvault"
+    not aws_issue["backup_public_access_disable"]
+}
+
+backup_public_access_disable = false {
+    aws_issue["backup_public_access_disable"]
+}
+
+backup_public_access_disable_err = "Ensure Glacier Backup policy is not publicly accessible" {
+    aws_issue["backup_public_access_disable"]
+}
+
+backup_public_access_disable_metadata := {
+    "Policy Code": "PR-AWS-CFR-BKP-001",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Glacier Backup policy is not publicly accessible",
+    "Policy Description": "Public Glacier backup potentially expose existing interfaces to unwanted 3rd parties that can tap into an existing data stream, resulting in data leak to an unwanted party.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-backup-backupvault.html#cfn-backup-backupvault-accesspolicy"
+}
+
+
+#
+# PR-AWS-CFR-TRF-001
+#
+
+default transer_server_public_expose = null
+
+aws_issue["transer_server_public_expose"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::transfer::server"
+    not resource.Properties.EndpointType
+}
+
+source_path[{"transer_server_public_expose": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::transfer::server"
+    not resource.Properties.EndpointType
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EndpointType"]
+        ],
+    }
+}
+
+aws_issue["transer_server_public_expose"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::transfer::server"
+    lower(resource.Properties.EndpointType) != "vpc"
+}
+
+source_path[{"transer_server_public_expose": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::transfer::server"
+    lower(resource.Properties.EndpointType) != "vpc"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EndpointType"]
+        ],
+    }
+}
+
+
+transer_server_public_expose {
+    lower(input.Resources[i].Type) == "aws::transfer::server"
+    not aws_issue["transer_server_public_expose"]
+}
+
+transer_server_public_expose = false {
+    aws_issue["transer_server_public_expose"]
+}
+
+transer_server_public_expose_err = "Ensure Transfer Server is not publicly exposed" {
+    aws_issue["transer_server_public_expose"]
+}
+
+transer_server_public_expose_metadata := {
+    "Policy Code": "PR-AWS-CFR-TRF-001",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure Transfer Server is not publicly exposed",
+    "Policy Description": "It is recommended that you use VPC as the EndpointType. With this endpoint type, you have the option to directly associate up to three Elastic IPv4 addresses (BYO IP included) with your server's endpoint and use VPC security groups to restrict traffic by the client's public IP address. This is not possible with EndpointType set to VPC_ENDPOINT.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-transfer-server.html#cfn-transfer-server-endpointdetails"
 }
