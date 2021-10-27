@@ -14,18 +14,11 @@ azure_attribute_absence["databrics_workspace_has_public_ip_disabled"] {
     not resource.properties.custom_parameters
 }
 
-azure_attribute_absence["databrics_workspace_has_public_ip_disabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_databricks_workspace"
-    custom_parameters := resource.properties.custom_parameters[_]
-    not custom_parameters.no_public_ip
-}
-
 azure_issue["databrics_workspace_has_public_ip_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_databricks_workspace"
     custom_parameters := resource.properties.custom_parameters[_]
-    custom_parameters.no_public_ip != true
+    not custom_parameters.no_public_ip
 }
 
 databrics_workspace_has_public_ip_disabled {
