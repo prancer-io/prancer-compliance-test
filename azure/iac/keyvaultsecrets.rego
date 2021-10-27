@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/secrets
 
 #
-# PR-AZR-0018-ARM
+# PR-AZR-ARM-KV-005
 #
 
 default kv_expire = null
@@ -11,15 +11,37 @@ default kv_expire = null
 azure_attribute_absence["kv_expire"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults/secrets"
-    resource.properties.attributes.enabled != false
+    #create seperate rule with this property
+    #resource.properties.attributes.enabled != false
     not resource.properties.attributes.exp
+}
+
+source_path[{"kv_expire":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults/secrets"
+    #resource.properties.attributes.enabled != false
+    not resource.properties.attributes.exp
+    metadata:= {
+        "resource_path": [["resources",i,"properties","attributes","exp"]]
+    }
 }
 
 azure_issue["kv_expire"] {
     resource := input.resources[_]
-    resource.properties.attributes.enabled != false
+    lower(resource.type) == "microsoft.keyvault/vaults/secrets"
+    #resource.properties.attributes.enabled != false
     #Expiry date in seconds since 1970-01-01T00:00:00Z.
     to_number(resource.properties.attributes.exp) < 0
+}
+
+source_path[{"kv_expire":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults/secrets"
+    #resource.properties.attributes.enabled != false
+    to_number(resource.properties.attributes.exp) < 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","attributes","exp"]]
+    }
 }
 
 kv_expire {
@@ -45,7 +67,7 @@ kv_expire_miss_err = "Azure Key Vault attribute 'exp' is missing from the resour
 }
 
 kv_expire_metadata := {
-    "Policy Code": "PR-AZR-0018-ARM",
+    "Policy Code": "PR-AZR-ARM-KV-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

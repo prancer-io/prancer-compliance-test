@@ -2,7 +2,7 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/Microsoft.Cache/redis
 
-# PR-AZR-0131-ARM
+# PR-AZR-ARM-CCH-001
 
 default enableSslPort = null
 # default is false
@@ -20,6 +20,7 @@ azure_issue ["enableSslPort"] {
 
 enableSslPort {
     azure_attribute_absence["enableSslPort"]
+    not azure_issue["enableSslPort"]
 }
 
 enableSslPort {
@@ -36,7 +37,7 @@ enableSslPort_err = "Redis cache is currently allowing unsecure connection via a
 }
 
 enableSslPort_metadata := {
-    "Policy Code": "PR-AZR-0131-ARM",
+    "Policy Code": "PR-AZR-ARM-CCH-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -48,15 +49,23 @@ enableSslPort_metadata := {
 }
 
 
-
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis/linkedservers
 
-# PR-AZR-0132-ARM
+# PR-AZR-ARM-CCH-002
 
 default serverRole = null
 
 azure_attribute_absence ["serverRole"] {
-    count([c | input.resources[_].type == "microsoft.cache/redis"; c := 1]) != count([c | input.resources[_].type == "microsoft.cache/redis/linkedservers"; c := 1])
+    resource := input.resources[i]
+    count([c | resource.type == "microsoft.cache/redis"; c := 1]) != count([c | resource.type == "microsoft.cache/redis/linkedservers"; c := 1])
+}
+
+source_path[{"serverRole":metadata}] {
+    resource := input.resources[i]
+    count([c | resource.type == "microsoft.cache/redis"; c := 1]) != count([c | resource.type == "microsoft.cache/redis/linkedservers"; c := 1])
+    metadata:= {
+        "resource_path": [["resources",i,"type"]]
+    }
 }
 
 # as linkedservers is child resource of microsoft.cache/redis, we need to make sure microsoft.cache/redis exist in the same template first.
@@ -73,10 +82,29 @@ azure_attribute_absence ["serverRole"] {
    not resource.properties.serverRole
 }
 
+
+source_path[{"serverRole":metadata}] {
+   resource := input.resources[i]
+   lower(resource.type) == "microsoft.cache/redis/linkedservers"
+   not resource.properties.serverRole
+   metadata:= {
+        "resource_path": [["resources",i,"properties","serverRole"]]
+    }
+}
+
 azure_issue ["serverRole"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.cache/redis/linkedservers"
     lower(resource.properties.serverRole) != "secondary"
+}
+
+source_path[{"serverRole":metadata}] {
+   resource := input.resources[i]
+   lower(resource.type) == "microsoft.cache/redis/linkedservers"
+    lower(resource.properties.serverRole) != "secondary"
+   metadata:= {
+        "resource_path": [["resources",i,"properties","serverRole"]]
+    }
 }
 
 
@@ -105,7 +133,7 @@ serverRole_err = "Azure Redis Cache linked backup server currently does not have
 }
 
 serverRole_metadata := {
-    "Policy Code": "PR-AZR-0132-ARM",
+    "Policy Code": "PR-AZR-ARM-CCH-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

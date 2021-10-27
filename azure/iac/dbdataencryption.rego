@@ -4,7 +4,7 @@ package rule
 
 #
 
-# PR-AZR-0083-ARM
+# PR-AZR-ARM-SQL-008
 
 default db_logical_encrypt = null
 
@@ -16,12 +16,34 @@ azure_attribute_absence["db_logical_encrypt"] {
     not sql_db.properties.status
 }
 
+source_path[{"db_logical_encrypt":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_db := resource.resources[j]
+    lower(sql_db.type) == "transparentdataencryption"
+    not sql_db.properties.status
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","status"]]
+    }
+}
+
 azure_issue["db_logical_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases"
     sql_db := resource.resources[_]
     lower(sql_db.type) == "transparentdataencryption"
     lower(sql_db.properties.status) != "enabled"
+}
+
+source_path[{"db_logical_encrypt":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_db := resource.resources[j]
+    lower(sql_db.type) == "transparentdataencryption"
+    lower(sql_db.properties.status) != "enabled"
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","status"]]
+    }
 }
 
 db_logical_encrypt {
@@ -48,7 +70,7 @@ db_logical_encrypt_err = "Azure SQL databases currently dont have transparent da
 }
 
 db_logical_encrypt_metadata := {
-    "Policy Code": "PR-AZR-0083-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-008",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -60,7 +82,7 @@ db_logical_encrypt_metadata := {
 }
 
 
-# PR-AZR-0084-ARM
+# PR-AZR-ARM-SQL-009
 #
 # This encryption is by default enabled for sql database. Thats why its not available in Terraform.
 # See https://github.com/hashicorp/terraform-provider-azurerm/issues/7187
@@ -73,10 +95,29 @@ azure_attribute_absence["db_encrypt"] {
     not resource.properties.status
 }
 
+source_path[{"db_encrypt":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases/transparentdataencryption"
+    not resource.properties.status
+    metadata:= {
+        "resource_path": [["resources",i,"properties","status"]]
+    }
+}
+
+
 azure_issue["db_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/databases/transparentdataencryption"
     lower(resource.properties.status) != "enabled"
+}
+
+source_path[{"db_encrypt":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases/transparentdataencryption"
+    lower(resource.properties.status) != "enabled"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","status"]]
+    }
 }
 
 db_encrypt {
@@ -102,7 +143,7 @@ db_encrypt_miss_err = "Azure SQL databases transparent encryption attribute 'sta
 }
 
 db_encrypt_metadata := {
-    "Policy Code": "PR-AZR-0084-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-009",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

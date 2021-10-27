@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-04-01/activitylogalerts
 
 #
-# PR-AZR-0090-ARM
+# PR-AZR-ARM-MNT-001
 #
 
 default alerts = null
@@ -15,11 +15,33 @@ azure_attribute_absence["alerts"] {
     not resource.properties.enabled
 }
 
+source_path[{"alerts":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.insights/activitylogalerts"
+    not resource.properties.enabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","enabled"]]
+    }
+}
+
+
+
 azure_issue["alerts"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/activitylogalerts"
     resource.properties.enabled != true
 }
+
+
+source_path[{"alerts":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.insights/activitylogalerts"
+    resource.properties.enabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","enabled"]]
+    }
+}
+
 
 alerts {
     azure_attribute_absence["alerts"]
@@ -41,7 +63,7 @@ alerts_err = "Activity log alerts is not enabled" {
 }
 
 alerts_metadata := {
-    "Policy Code": "PR-AZR-0090-ARM",
+    "Policy Code": "PR-AZR-ARM-MNT-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

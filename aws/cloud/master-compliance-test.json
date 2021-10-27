@@ -637,7 +637,7 @@
                             "id": "PR-AWS-0159",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to the AWS Console and navigate to the 'VPC' service. \n 2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'. \n 3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 445 (or range containing 445).",
+                            "remediationDescription": "1. Login to the AWS Console and navigate to the 'VPC' service.<br>2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'.<br>3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 445 (or range containing 445).",
                             "remediationFunction": "PR_AWS_0159.py"
                         }
                     ],
@@ -668,7 +668,7 @@
                             "id": "PR-AWS-0160",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to the AWS Console and navigate to the 'VPC' service. \n 2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'. \n 3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 53 (or range containing 53).",
+                            "remediationDescription": "1. Login to the AWS Console and navigate to the 'VPC' service.<br>2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'.<br>3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 53 (or range containing 53).",
                             "remediationFunction": "PR_AWS_0160.py"
                         }
                     ],
@@ -699,7 +699,7 @@
                             "id": "PR-AWS-0161",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to the AWS Console and navigate to the 'VPC' service. \n 2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'. \n 3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 21 (or range containing 21).",
+                            "remediationDescription": "1. Login to the AWS Console and navigate to the 'VPC' service.<br>2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'.<br>3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 21 (or range containing 21).",
                             "remediationFunction": "PR_AWS_0161.py"
                         }
                     ],
@@ -730,7 +730,7 @@
                             "id": "PR-AWS-0162",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to the AWS Console and navigate to the 'VPC' service. \n 2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'. \n 3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 20 (or range containing 20).",
+                            "remediationDescription": "1. Login to the AWS Console and navigate to the 'VPC' service.<br>2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'.<br>3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 20 (or range containing 20).",
                             "remediationFunction": "PR_AWS_0162.py"
                         }
                     ],
@@ -761,7 +761,7 @@
                             "id": "PR-AWS-0163",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to the AWS Console and navigate to the 'VPC' service. \n 2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'. \n 3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 4333 (or range containing 4333).",
+                            "remediationDescription": "1. Login to the AWS Console and navigate to the 'VPC' service.<br>2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'.<br>3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 4333 (or range containing 4333).",
                             "remediationFunction": "PR_AWS_0163.py"
                         }
                     ],
@@ -792,7 +792,7 @@
                             "id": "PR-AWS-0164",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to the AWS Console and navigate to the 'VPC' service. \n 2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'. \n 3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 3306 (or range containing 3306).",
+                            "remediationDescription": "1. Login to the AWS Console and navigate to the 'VPC' service.<br>2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'.<br>3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 3306 (or range containing 3306).",
                             "remediationFunction": "PR_AWS_0164.py"
                         }
                     ],
@@ -823,7 +823,7 @@
                             "id": "PR-AWS-0165",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to the AWS Console and navigate to the 'VPC' service. \n 2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'. \n 3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 137 (or range containing 137).",
+                            "remediationDescription": "1. Login to the AWS Console and navigate to the 'VPC' service.<br>2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'.<br>3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 137 (or range containing 137).",
                             "remediationFunction": "PR_AWS_0165.py"
                         }
                     ],
@@ -854,7 +854,7 @@
                             "id": "PR-AWS-0166",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to the AWS Console and navigate to the 'VPC' service. \n 2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'. \n 3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 138 (or range containing 138).",
+                            "remediationDescription": "1. Login to the AWS Console and navigate to the 'VPC' service.<br>2. Select the 'Security Group' reported in the alert. Click on the 'Inbound Rule'.<br>3. Remove the rule which has 'Source' value as 0.0.0.0/0 or ::/0 and 'Port Range' value as 138 (or range containing 138).",
                             "remediationFunction": "PR_AWS_0166.py"
                         }
                     ],
@@ -2168,7 +2168,7 @@
                     ],
                     "severity": "Medium",
                     "title": "AWS SQS server side encryption not enabled",
-                    "description": "SSE lets you transmit sensitive data in encrypted queues. SSE protects the contents of messages in Amazon SQS queues using keys managed in the AWS Key Management Service (AWS KMS). SSE encrypts messages as soon as Amazon SQS receives them. The messages are stored in encrypted form and Amazon SQS decrypts messages only when they are sent to an authorized consumer._x000D__x000D_SQS SSE and the AWS KMS security standards can help you meet encryption-related compliance requirements.",
+                    "description": "SSE lets you transmit sensitive data in encrypted queues. SSE protects the contents of messages in Amazon SQS queues using keys managed in the AWS Key Management Service (AWS KMS). SSE encrypts messages as soon as Amazon SQS receives them. The messages are stored in encrypted form and Amazon SQS decrypts messages only when they are sent to an authorized consumer.<br><br>SQS SSE and the AWS KMS security standards can help you meet encryption-related compliance requirements.",
                     "tags": [
                         {
                             "cloud": "AWS",

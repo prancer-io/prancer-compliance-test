@@ -13,7 +13,7 @@
                             "id": "PR-AZR-0007",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Sign in to the Azure portal. \n 2. Goto the Kubernetes Service and select your cluster. \n 3. Click Networking option in the left window pane. \n 4. Uncheck \"Enable HTTP application routing\" and click on save button.",
+                            "remediationDescription": "1. Sign in to the Azure portal.<br>2. Goto the Kubernetes Service and select your cluster.<br>3. Click Networking option in the left window pane.<br>4. Uncheck \"Enable HTTP application routing\" and click on save button.",
                             "remediationFunction": "PR_AZR_0007.py"
                         }
                     ],
@@ -44,7 +44,7 @@
                             "id": "PR-AZR-0008",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Sign in to the Azure portal. \n 2. Goto the Kubernetes Service and select your cluster. \n 3. Click Insights in the left window pane. \n 4. If you have an existing Log Analytics workspace in the same subscription as the cluster, select it in the drop-down list. \n 5. Select Enable.",
+                            "remediationDescription": "1. Sign in to the Azure portal.<br>2. Goto the Kubernetes Service and select your cluster.<br>3. Click Insights in the left window pane.<br>4. If you have an existing Log Analytics workspace in the same subscription as the cluster, select it in the drop-down list.<br>5. Select Enable.",
                             "remediationFunction": "PR_AZR_0008.py"
                         }
                     ],
@@ -75,7 +75,7 @@
                             "id": "PR-AZR-0009",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Sign in to the Azure portal. \n 2. Goto the Kubernetes Service and select your cluster. \n 3. Click Scale in the left window pane. \n 4. Just above Total cluster capacity, increase the total number of nodes in your pool. \n 5. Click Save.",
+                            "remediationDescription": "1. Sign in to the Azure portal.<br>2. Goto the Kubernetes Service and select your cluster.<br>3. Click Scale in the left window pane.<br>4. Just above Total cluster capacity, increase the total number of nodes in your pool.<br>5. Click Save.",
                             "remediationFunction": "PR_AZR_0009.py"
                         }
                     ],
@@ -137,7 +137,7 @@
                             "id": "PR-AZR-0015",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Log in to the Azure portal. \n 2. Select 'All services' > 'Container Registries'. \n 3. Select the Container registry you need to modify. \n 4. Select 'Upgrade to managed registry'. \n 5. Select 'OK' to confirm the upgrade.",
+                            "remediationDescription": "1. Log in to the Azure portal.<br>2. Select 'All services' > 'Container Registries'.<br>3. Select the Container registry you need to modify.<br>4. Select 'Upgrade to managed registry'.<br>5. Select 'OK' to confirm the upgrade.",
                             "remediationFunction": "PR_AZR_0015.py"
                         }
                     ],
@@ -168,7 +168,7 @@
                             "id": "PR-AZR-0020",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (22 PORT). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row (22 PORT).<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0020.py"
                         }
                     ],
@@ -203,7 +203,7 @@
                             "id": "PR-AZR-0021",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (3389 PORT). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row (3389 PORT).<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0021.py"
                         }
                     ],
@@ -238,7 +238,7 @@
                             "id": "PR-AZR-0022",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row.<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0022.py"
                         }
                     ],
@@ -269,7 +269,7 @@
                             "id": "PR-AZR-0023",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row.<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0023.py"
                         }
                     ],
@@ -300,7 +300,7 @@
                             "id": "PR-AZR-0024",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row.<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0024.py"
                         }
                     ],
@@ -331,7 +331,7 @@
                             "id": "PR-AZR-0025",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row.<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0025.py"
                         }
                     ],
@@ -362,7 +362,7 @@
                             "id": "PR-AZR-0026",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row.<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0026.py"
                         }
                     ],
@@ -393,7 +393,7 @@
                             "id": "PR-AZR-0027",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row.<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0027.py"
                         }
                     ],
@@ -424,7 +424,7 @@
                             "id": "PR-AZR-0028",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row.<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0028.py"
                         }
                     ],
@@ -455,7 +455,7 @@
                             "id": "PR-AZR-0029",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (445 PORT). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row (445 PORT).<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0029.py"
                         }
                     ],
@@ -486,7 +486,7 @@
                             "id": "PR-AZR-0030",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row ( TCP PORT 53). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row ( TCP PORT 53).<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0030.py"
                         }
                     ],
@@ -517,7 +517,7 @@
                             "id": "PR-AZR-0031",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row ( UDP Port 53 ). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row ( UDP Port 53 ).<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0031.py"
                         }
                     ],
@@ -548,7 +548,7 @@
                             "id": "PR-AZR-0032",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (21 PORT). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row (21 PORT).<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0032.py"
                         }
                     ],
@@ -579,7 +579,7 @@
                             "id": "PR-AZR-0033",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (PORT 20). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row (PORT 20).<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0033.py"
                         }
                     ],
@@ -610,7 +610,7 @@
                             "id": "PR-AZR-0034",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row.<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0034.py"
                         }
                     ],
@@ -641,7 +641,7 @@
                             "id": "PR-AZR-0035",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row (PORT 4333). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row (PORT 4333).<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0035.py"
                         }
                     ],
@@ -672,7 +672,7 @@
                             "id": "PR-AZR-0036",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row ( PORT 3306). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row ( PORT 3306).<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0036.py"
                         }
                     ],
@@ -703,7 +703,7 @@
                             "id": "PR-AZR-0037",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row ( PORT 137). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row ( PORT 137).<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0037.py"
                         }
                     ],
@@ -734,7 +734,7 @@
                             "id": "PR-AZR-0038",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 138). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row(PORT 138).<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0038.py"
                         }
                     ],
@@ -765,7 +765,7 @@
                             "id": "PR-AZR-0039",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 5432). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row(PORT 5432).<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0039.py"
                         }
                     ],
@@ -796,7 +796,7 @@
                             "id": "PR-AZR-0040",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 25). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row(PORT 25).<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0040.py"
                         }
                     ],
@@ -827,7 +827,7 @@
                             "id": "PR-AZR-0041",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 1434). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row(PORT 1434).<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0041.py"
                         }
                     ],
@@ -858,7 +858,7 @@
                             "id": "PR-AZR-0042",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 1433). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row(PORT 1433).<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0042.py"
                         }
                     ],
@@ -889,7 +889,7 @@
                             "id": "PR-AZR-0043",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 4333). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row(PORT 4333).<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0043.py"
                         }
                     ],
@@ -920,7 +920,7 @@
                             "id": "PR-AZR-0044",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 5500). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row(PORT 5500).<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0044.py"
                         }
                     ],
@@ -951,7 +951,7 @@
                             "id": "PR-AZR-0045",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 5900). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row(PORT 5900).<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0045.py"
                         }
                     ],
@@ -982,7 +982,7 @@
                             "id": "PR-AZR-0046",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 135). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row(PORT 135).<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0046.py"
                         }
                     ],
@@ -1013,7 +1013,7 @@
                             "id": "PR-AZR-0047",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row(PORT 445). \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row(PORT 445).<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0047.py"
                         }
                     ],
@@ -1044,7 +1044,7 @@
                             "id": "PR-AZR-0048",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "1. Login to Azure Portal. \n 2. Click on All services. \n 3. Under Networking, click on Network security groups. \n 4. Click on reported Network security group. \n  5. Under settings, click on Inbound security rules. \n 6. Click on reported row. \n 7. Set Action to Deny. \n 8. Click on OK.",
+                            "remediationDescription": "1. Login to Azure Portal.<br>2. Click on All services.<br>3. Under Networking, click on Network security groups.<br>4. Click on reported Network security group.<br> 5. Under settings, click on Inbound security rules.<br>6. Click on reported row.<br>7. Set Action to Deny.<br>8. Click on OK.",
                             "remediationFunction": "PR_AZR_0048.py"
                         }
                     ],
@@ -2139,7 +2139,7 @@
                     ],
                     "severity": "Medium",
                     "title": "Azure Resource Group does not have a resource lock",
-                    "description": "Azure Resource Manager locks provide a way to lock down Azure resources from being deleted or modified. The lock level can be set to either 'CanNotDelete' or 'ReadOnly'. When you apply a lock at a parent scope, all resources within the scope inherit the same lock, and the most restrictive lock takes precedence._x000D__x000D_This policy identifies Azure Resource Groups that do not have a lock set. As a best practice, place a lock on important resources to prevent accidental or malicious modification or deletion by unauthorized users."
+                    "description": "Azure Resource Manager locks provide a way to lock down Azure resources from being deleted or modified. The lock level can be set to either 'CanNotDelete' or 'ReadOnly'. When you apply a lock at a parent scope, all resources within the scope inherit the same lock, and the most restrictive lock takes precedence.<br><br>This policy identifies Azure Resource Groups that do not have a lock set. As a best practice, place a lock on important resources to prevent accidental or malicious modification or deletion by unauthorized users."
                 },
                 {
                     "masterTestId": "AZURE_TEST_262",
@@ -3196,7 +3196,7 @@
                             "id": "PR-AZR-0101",
                             "eval": "data.rule.sql_server_rulepass",
                             "message": "data.rule.sql_server_rulepass_err",
-                            "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open SQL Servers list \n 3) Select the SQL Server for which you want to modify the Mimimal TLS Version. \n 4) Click on `Firewalls and virtual networks` option under `Security` section. \n 5) Update the Minimum TLS Version to `1.2` and click on save button.",
+                            "remediationDescription": "Mannual Steps:<br>1) Open Azure Portal.<br>2) Open SQL Servers list<br>3) Select the SQL Server for which you want to modify the Mimimal TLS Version.<br>4) Click on `Firewalls and virtual networks` option under `Security` section.<br>5) Update the Minimum TLS Version to `1.2` and click on save button.",
                             "remediationFunction": "PR_AZR_0101.py"
                         }
                     ],
@@ -3225,7 +3225,7 @@
                             "id": "PR-AZR-0101",
                             "eval": "data.rule.sql_instance_rulepass",
                             "message": "data.rule.sql_instance_rulepass_err",
-                            "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open SQL Instances list \n 3) Select the SQL Server for which you want to modify the Mimimal TLS Version. \n 4) Click on `Firewalls and virtual networks` option under `Security` section. \n 5) Update the Minimum TLS Version to `1.2` and click on save button.",
+                            "remediationDescription": "Mannual Steps:<br>1) Open Azure Portal.<br>2) Open SQL Instances list<br>3) Select the SQL Server for which you want to modify the Mimimal TLS Version.<br>4) Click on `Firewalls and virtual networks` option under `Security` section.<br>5) Update the Minimum TLS Version to `1.2` and click on save button.",
                             "remediationFunction": "PR_AZR_0101.py"
                         }
                     ],
@@ -3254,7 +3254,7 @@
                             "id": "PR-AZR-0102",
                             "eval": "data.rule.sql_server_rulepass",
                             "message": "data.rule.sql_server_rulepass_err",
-                            "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open Azure SQL list \n 3) Select the reported SQL Server. \n 4) Click on `Security Center` option under `Security` section. \n 5) Click on \"Enable Azure Defender for SQL\" button.",
+                            "remediationDescription": "Mannual Steps:<br>1) Open Azure Portal.<br>2) Open Azure SQL list<br>3) Select the reported SQL Server.<br>4) Click on `Security Center` option under `Security` section.<br>5) Click on \"Enable Azure Defender for SQL\" button.",
                             "remediationFunction": "PR_AZR_0102.py"
                         }
                     ],
@@ -3283,7 +3283,7 @@
                             "id": "PR-AZR-0102",
                             "eval": "data.rule.sql_instance_rulepass",
                             "message": "data.rule.sql_instance_rulepass_err",
-                            "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open Azure SQL list \n 3) Select the reported SQL Managed Instance. \n 4) Click on `Security Center` option under `Security` section. \n 5) Click on \"Enable Azure Defender for SQL\" button.",
+                            "remediationDescription": "Mannual Steps:<br>1) Open Azure Portal.<br>2) Open Azure SQL list<br>3) Select the reported SQL Managed Instance.<br>4) Click on `Security Center` option under `Security` section.<br>5) Click on \"Enable Azure Defender for SQL\" button.",
                             "remediationFunction": "PR_AZR_0102.py"
                         }
                     ],
@@ -3312,7 +3312,7 @@
                             "id": "PR-AZR-0103",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Mannual Steps: \n 1) Open Azure Portal. \n 2) Open Azure SQL list \n 3) Select the reported SQL Server. \n 4) Click on `Security Center` option under `Security` section. \n 5) Click on \"Enable Azure Defender for SQL\" button.",
+                            "remediationDescription": "Mannual Steps:<br>1) Open Azure Portal.<br>2) Open Azure SQL list<br>3) Select the reported SQL Server.<br>4) Click on `Security Center` option under `Security` section.<br>5) Click on \"Enable Azure Defender for SQL\" button.",
                             "remediationFunction": "PR_AZR_0103.py"
                         }
                     ],

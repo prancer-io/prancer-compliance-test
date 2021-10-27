@@ -2,7 +2,7 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults
 
-# PR-AZR-0107-ARM
+# PR-AZR-ARM-KV-001
 
 default KeyVault = null
 
@@ -16,6 +16,19 @@ azure_attribute_absence["KeyVault"] {
     not accessPolicy.permissions.storage
 }
 
+source_path[{"KeyVault":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    accessPolicy := resource.properties.accessPolicies[j]
+    not accessPolicy.permissions.keys
+    not accessPolicy.permissions.secrets
+    not accessPolicy.permissions.certificates
+    not accessPolicy.permissions.storage
+    metadata:= {
+        "resource_path": [["resources",i,"properties","accessPolicies",j,"permissions"]]
+    }
+}
+
 
 azure_issue["KeyVault"] {
     resource := input.resources[_]
@@ -25,6 +38,19 @@ azure_issue["KeyVault"] {
     count(accessPolicy.permissions.secrets) == 0
     count(accessPolicy.permissions.certificates) == 0
     count(accessPolicy.permissions.storage) == 0
+}
+
+source_path[{"KeyVault":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    accessPolicy := resource.properties.accessPolicies[j]
+    count(accessPolicy.permissions.keys) == 0
+    count(accessPolicy.permissions.secrets) == 0
+    count(accessPolicy.permissions.certificates) == 0
+    count(accessPolicy.permissions.storage) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","accessPolicies",j,"permissions"]]
+    }
 }
 
 KeyVault {
@@ -48,7 +74,7 @@ KeyVault_err = "accessPolicy property 'permissions.keys' or 'permissions.secrets
 }
 
 KeyVault_metadata := {
-    "Policy Code": "PR-AZR-0107-ARM",
+    "Policy Code": "PR-AZR-ARM-KV-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -61,7 +87,7 @@ KeyVault_metadata := {
 
 
 
-# PR-AZR-0108-ARM
+# PR-AZR-ARM-KV-002
 
 default enableSoftDelete = null
 azure_attribute_absence ["enableSoftDelete"] {
@@ -70,10 +96,28 @@ azure_attribute_absence ["enableSoftDelete"] {
     not resource.properties.enableSoftDelete
 }
 
+source_path[{"enableSoftDelete":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    not resource.properties.enableSoftDelete
+    metadata:= {
+        "resource_path": [["resources",i,"properties","enableSoftDelete"]]
+    }
+}
+
 azure_issue ["enableSoftDelete"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults"
     resource.properties.enableSoftDelete != true
+}
+
+source_path[{"enableSoftDelete":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    resource.properties.enableSoftDelete != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","enableSoftDelete"]]
+    }
 }
 
 enableSoftDelete {
@@ -96,7 +140,7 @@ enableSoftDelete_err = "'Soft Delete' setting is currently not enabled for Key V
 }
 
 enableSoftDelete_metadata := {
-    "Policy Code": "PR-AZR-0108-ARM",
+    "Policy Code": "PR-AZR-ARM-KV-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -109,7 +153,7 @@ enableSoftDelete_metadata := {
 
 
 
-# PR-AZR-0109-ARM
+# PR-AZR-ARM-KV-003
 
 default enablePurgeProtection = null
 
@@ -119,10 +163,28 @@ azure_attribute_absence ["enablePurgeProtection"] {
     not resource.properties.enablePurgeProtection
 }
 
+source_path[{"enablePurgeProtection":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    not resource.properties.enablePurgeProtection
+    metadata:= {
+        "resource_path": [["resources",i,"properties","enablePurgeProtection"]]
+    }
+}
+
 azure_issue ["enablePurgeProtection"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults"
     resource.properties.enablePurgeProtection != true
+}
+
+source_path[{"enablePurgeProtection":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    resource.properties.enablePurgeProtection != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","enablePurgeProtection"]]
+    }
 }
 
 enablePurgeProtection {
@@ -146,7 +208,7 @@ enablePurgeProtection_err = "microsoft.keyvault/vaults resoruce property enableP
 }
 
 enablePurgeProtection_metadata := {
-    "Policy Code": "PR-AZR-0109-ARM",
+    "Policy Code": "PR-AZR-ARM-KV-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

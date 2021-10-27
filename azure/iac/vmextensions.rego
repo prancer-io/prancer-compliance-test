@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines/extensions
 
 #
-# PR-AZR-0064-ARM
+# PR-AZR-ARM-VM-003
 #
 
 default vm_protection = null
@@ -14,10 +14,28 @@ azure_attribute_absence["vm_protection"] {
     not resource.properties.type
 }
 
+source_path[{"vm_protection":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.compute/virtualmachines/extensions"
+    not resource.properties.type
+    metadata:= {
+        "resource_path": [["resources",i,"properties","type"]]
+    }
+}
+
 azure_issue["vm_protection"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.compute/virtualmachines/extensions"
     lower(resource.properties.type) != "iaasantimalware"
+}
+
+source_path[{"vm_protection":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.compute/virtualmachines/extensions"
+    lower(resource.properties.type) != "iaasantimalware"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","type"]]
+    }
 }
 
 vm_protection {
@@ -43,7 +61,7 @@ vm_protection_miss_err = "VM extension attribute type missing in the resource" {
 }
 
 vm_protection_metadata := {
-    "Policy Code": "PR-AZR-0064-ARM",
+    "Policy Code": "PR-AZR-ARM-VM-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

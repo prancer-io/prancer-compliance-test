@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts
 
 #
-# PR-AZR-0087-ARM
+# PR-AZR-ARM-SCT-002
 #
 
 default securitycontacts = null
@@ -14,10 +14,29 @@ azure_attribute_absence["securitycontacts"] {
     not resource.properties.email
 }
 
+source_path[{"securitycontacts":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.security/securitycontacts"
+    not resource.properties.email
+    metadata:= {
+        "resource_path": [["resources",i,"properties","email"]]
+    }
+}
+
+
 azure_issue["securitycontacts"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
     re_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", resource.properties.email) == false
+}
+
+source_path[{"securitycontacts":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.security/securitycontacts"
+    re_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", resource.properties.email) == false
+    metadata:= {
+        "resource_path": [["resources",i,"properties","email"]]
+    }
 }
 
 securitycontacts {
@@ -43,7 +62,7 @@ securitycontacts_miss_err = "Security Center security contacts property 'email' 
 }
 
 securitycontacts_metadata := {
-    "Policy Code": "PR-AZR-0087-ARM",
+    "Policy Code": "PR-AZR-ARM-SCT-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -58,7 +77,7 @@ securitycontacts_metadata := {
 
 
 #
-# PR-AZR-0143-ARM
+# PR-AZR-ARM-SCT-003
 #
 
 default alert_notifications = null
@@ -69,10 +88,29 @@ azure_attribute_absence["alert_notifications"] {
     not resource.properties.alertNotifications
 }
 
+source_path[{"alert_notifications":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.security/securitycontacts"
+    not resource.properties.alertNotifications
+    metadata:= {
+        "resource_path": [["resources",i,"properties","alertNotifications"]]
+    }
+}
+
+
 azure_issue["alert_notifications"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
     lower(resource.properties.alertNotifications) != "on"
+}
+
+source_path[{"alert_notifications":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.security/securitycontacts"
+    lower(resource.properties.alertNotifications) != "on"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","alertNotifications"]]
+    }
 }
 
 alert_notifications {
@@ -96,7 +134,7 @@ alert_notifications_err = "microsoft.security/securitycontacts resource property
 }
 
 alert_notifications_metadata := {
-    "Policy Code": "PR-AZR-0143-ARM",
+    "Policy Code": "PR-AZR-ARM-SCT-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
