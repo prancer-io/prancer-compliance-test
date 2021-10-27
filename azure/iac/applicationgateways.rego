@@ -309,6 +309,13 @@ backend_https_protocol_enabled_metadata := {
 # PR-AZR-ARM-AGW-006
 
 default secret_certificate_is_in_keyvalut = null
+
+azure_attribute_absence ["secret_certificate_is_in_keyvalut"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    count(resource.properties.sslCertificates) == 0
+} 
+
 azure_attribute_absence ["secret_certificate_is_in_keyvalut"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/applicationgateways"
@@ -316,17 +323,31 @@ azure_attribute_absence ["secret_certificate_is_in_keyvalut"] {
     not sslCertificates.properties.keyVaultSecretId
 }  
 
+azure_issue ["secret_certificate_is_in_keyvalut"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    sslCertificates := resource.properties.sslCertificates[_]
+    trim(sslCertificates.properties.keyVaultSecretId, " ") == ""
+}  
+
 secret_certificate_is_in_keyvalut {
-    lower(input.resources[_].type) == "microsoft.network/applicationgateways"
-    not azure_attribute_absence["secret_certificate_is_in_keyvalut"]
+   lower(input.resources[_].type) == "microsoft.network/applicationgateways"
+   not azure_attribute_absence["secret_certificate_is_in_keyvalut"]
+   not azure_issue["secret_certificate_is_in_keyvalut"]
 }
 
 secret_certificate_is_in_keyvalut = false {
     azure_attribute_absence["secret_certificate_is_in_keyvalut"]
-} 
+}
 
-secret_certificate_is_in_keyvalut_err = "Application Gateway is currently not storing ssl certificates in keyvalut" {
+secret_certificate_is_in_keyvalut = false {
+    azure_issue["secret_certificate_is_in_keyvalut"]
+}
+
+secret_certificate_is_in_keyvalut_err = "'sslCertificates' property 'keyVaultSecretId' is missing from 'microsoft.network/applicationgateways' resource" {
     azure_attribute_absence["secret_certificate_is_in_keyvalut"]
+} else = "Application Gateway is currently not storing ssl certificates in keyvalut"{
+	azure_issue["secret_certificate_is_in_keyvalut"]
 }
 
 secret_certificate_is_in_keyvalut_metadata := {

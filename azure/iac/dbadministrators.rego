@@ -213,7 +213,7 @@ sql_managedinstances_ad_admin_miss_err = "SQL managedInstances administrators at
 }
 
 sql_managedinstances_ad_admin_metadata := {
-    "PR-AZR-ARM-SQL-003",
+    "Policy Code": "PR-AZR-ARM-SQL-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

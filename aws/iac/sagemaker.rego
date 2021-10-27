@@ -2,7 +2,7 @@ package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html
 #
-# PR-AWS-0247-CFR
+# PR-AWS-CFR-SGM-001
 #
 
 default sagemaker_encryption_kms = null
@@ -13,10 +13,32 @@ aws_issue["sagemaker_encryption_kms"] {
     not resource.Properties.KMSKeyId
 }
 
+source_path[{"sagemaker_encryption_kms": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sagemaker::notebookinstance"
+    not resource.Properties.KMSKeyId
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsKeyId"]
+        ],
+    }
+}
+
 aws_issue["sagemaker_encryption_kms"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sagemaker::notebookinstance"
     count(resource.Properties.KMSKeyId) == 0
+}
+
+source_path[{"sagemaker_encryption_kms": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sagemaker::notebookinstance"
+    count(resource.Properties.KMSKeyId) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsKeyId"]
+        ],
+    }
 }
 
 sagemaker_encryption_kms {
@@ -33,7 +55,7 @@ sagemaker_encryption_kms_err = "AWS SageMaker notebook instance not configured w
 }
 
 sagemaker_encryption_kms_metadata := {
-    "Policy Code": "PR-AWS-0247-CFR",
+    "Policy Code": "PR-AWS-CFR-SGM-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -45,7 +67,7 @@ sagemaker_encryption_kms_metadata := {
 }
 
 #
-# PR-AWS-0248-CFR
+# PR-AWS-CFR-SGM-002
 #
 
 default sagemaker_rootaccess_enabled = null
@@ -56,10 +78,32 @@ aws_issue["sagemaker_rootaccess_enabled"] {
     lower(resource.Properties.RootAccess) == "enabled"
 }
 
+source_path[{"sagemaker_rootaccess_enabled": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sagemaker::notebookinstance"
+    lower(resource.Properties.RootAccess) == "enabled"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "RootAccess"]
+        ],
+    }
+}
+
 aws_issue["sagemaker_rootaccess_enabled"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sagemaker::notebookinstance"
     not resource.Properties.RootAccess
+}
+
+source_path[{"sagemaker_rootaccess_enabled": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sagemaker::notebookinstance"
+    not resource.Properties.RootAccess
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "RootAccess"]
+        ],
+    }
 }
 
 sagemaker_rootaccess_enabled {
@@ -76,7 +120,7 @@ sagemaker_rootaccess_enabled_err = "AWS SageMaker notebook instance with root ac
 }
 
 sagemaker_rootaccess_enabled_metadata := {
-    "Policy Code": "PR-AWS-0248-CFR",
+    "Policy Code": "PR-AWS-CFR-SGM-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -89,7 +133,7 @@ sagemaker_rootaccess_enabled_metadata := {
 
 
 #
-# PR-AWS-0249-CFR
+# PR-AWS-CFR-SGM-003
 #
 
 default sagemaker_direct_internet_access_enabled = null
@@ -100,10 +144,32 @@ aws_issue["sagemaker_direct_internet_access_enabled"] {
     lower(resource.Properties.DirectInternetAccess) == "enabled"
 }
 
+source_path[{"sagemaker_direct_internet_access_enabled": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sagemaker::notebookinstance"
+    lower(resource.Properties.DirectInternetAccess) == "enabled"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DirectInternetAccess"]
+        ],
+    }
+}
+
 aws_issue["sagemaker_direct_internet_access_enabled"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sagemaker::notebookinstance"
     not resource.Properties.DirectInternetAccess
+}
+
+source_path[{"sagemaker_direct_internet_access_enabled": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sagemaker::notebookinstance"
+    not resource.Properties.DirectInternetAccess
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DirectInternetAccess"]
+        ],
+    }
 }
 
 sagemaker_direct_internet_access_enabled {
@@ -120,7 +186,7 @@ sagemaker_direct_internet_access_enabled_err = "AWS SageMaker notebook instance 
 }
 
 sagemaker_direct_internet_access_enabled_metadata := {
-    "Policy Code": "PR-AWS-0249-CFR",
+    "Policy Code": "PR-AWS-CFR-SGM-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -133,7 +199,7 @@ sagemaker_direct_internet_access_enabled_metadata := {
 
 
 #
-# PR-AWS-0250-CFR
+# PR-AWS-CFR-SGM-004
 #
 
 default sagemaker_vpc = null
@@ -144,10 +210,32 @@ aws_issue["sagemaker_vpc"] {
     count(resource.Properties.subnetId) == 0
 }
 
+source_path[{"sagemaker_vpc": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sagemaker::notebookinstance"
+    count(resource.Properties.subnetId) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "subnetId"]
+        ],
+    }
+}
+
 aws_issue["sagemaker_vpc"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sagemaker::notebookinstance"
     not resource.Properties.subnetId
+}
+
+source_path[{"sagemaker_vpc": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::sagemaker::notebookinstance"
+    not resource.Properties.subnetId
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "subnetId"]
+        ],
+    }
 }
 
 sagemaker_vpc {
@@ -164,7 +252,7 @@ sagemaker_vpc_err = "AWS SageMaker notebook instance is not placed in VPC" {
 }
 
 sagemaker_vpc_metadata := {
-    "Policy Code": "PR-AWS-0250-CFR",
+    "Policy Code": "PR-AWS-CFR-SGM-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

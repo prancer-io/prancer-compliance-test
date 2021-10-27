@@ -5,7 +5,7 @@ default metadata = {}
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html
 
 #
-# PR-AWS-0152-CFR
+# PR-AWS-CFR-SNS-001
 #
 
 default sns_protocol = null
@@ -22,7 +22,7 @@ aws_issue["sns_protocol"] {
     lower(resource.Properties.Protocol) == "http"
 }
 
-aws_path[{"sns_protocol": metadata}] {
+source_path[{"sns_protocol": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::subscription"
     not resource.Properties.Protocol
@@ -31,7 +31,7 @@ aws_path[{"sns_protocol": metadata}] {
     }
 }
 
-aws_path[{"sns_protocol": metadata}] {
+source_path[{"sns_protocol": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::subscription"
     lower(resource.Properties.Protocol) == "http"
@@ -63,7 +63,7 @@ sns_protocol_miss_err = "SNS attribute Protocol missing in the resource" {
 }
 
 sns_protocol_metadata := {
-    "Policy Code": "PR-AWS-0152-CFR",
+    "Policy Code": "PR-AWS-CFR-SNS-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -75,7 +75,7 @@ sns_protocol_metadata := {
 }
 
 #
-# PR-AWS-0153-CFR
+# PR-AWS-CFR-SNS-002
 #
 
 default sns_encrypt_key = null
@@ -86,7 +86,7 @@ aws_issue["sns_encrypt_key"] {
     contains(lower(resource.Properties.KmsMasterKeyId), "alias/aws/sns")
 }
 
-aws_path[{"sns_encrypt_key": metadata}] {
+source_path[{"sns_encrypt_key": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topic"
     contains(lower(resource.Properties.KmsMasterKeyId), "alias/aws/sns")
@@ -109,7 +109,7 @@ sns_encrypt_key_err = "AWS SNS topic encrypted using default KMS key instead of 
 }
 
 sns_encrypt_key_metadata := {
-    "Policy Code": "PR-AWS-0153-CFR",
+    "Policy Code": "PR-AWS-CFR-SNS-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -121,7 +121,7 @@ sns_encrypt_key_metadata := {
 }
 
 #
-# PR-AWS-0154-CFR
+# PR-AWS-CFR-SNS-003
 #
 
 default sns_encrypt = null
@@ -138,7 +138,7 @@ aws_issue["sns_encrypt"] {
     count(resource.Properties.KmsMasterKeyId) == 0
 }
 
-aws_path[{"sns_encrypt": metadata}] {
+source_path[{"sns_encrypt": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topic"
     not resource.Properties.KmsMasterKeyId
@@ -147,7 +147,7 @@ aws_path[{"sns_encrypt": metadata}] {
     }
 }
 
-aws_path[{"sns_encrypt": metadata}] {
+source_path[{"sns_encrypt": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::sns::topic"
     count(resource.Properties.KmsMasterKeyId) == 0
@@ -179,7 +179,7 @@ sns_encrypt_miss_err = "SNS attribute KmsMasterKeyId missing in the resource" {
 }
 
 sns_encrypt_metadata := {
-    "Policy Code": "PR-AWS-0154-CFR",
+    "Policy Code": "PR-AWS-CFR-SNS-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -192,7 +192,7 @@ sns_encrypt_metadata := {
 
 
 #
-# PR-AWS-0318-CFR
+# PR-AWS-CFR-SNS-004
 #
 
 default sns_policy_public = null
@@ -231,12 +231,12 @@ sns_policy_public = false {
     aws_issue["sns_policy_public"]
 }
 
-sns_policy_public_err = "Ensure SQS queue policy is not publicly accessible" {
+sns_policy_public_err = "Ensure SNS Topic policy is not publicly accessible" {
     aws_issue["sns_policy_public"]
 }
 
 sns_policy_public_metadata := {
-    "Policy Code": "PR-AWS-0318-CFR",
+    "Policy Code": "PR-AWS-CFR-SNS-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

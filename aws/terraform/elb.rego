@@ -1,10 +1,8 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html
 
 #
-# PR-AWS-0062-TRF
+# PR-AWS-TRF-ELB-001
 #
 
 default elb_insecure_cipher = null
@@ -119,7 +117,7 @@ elb_insecure_cipher_err = "AWS Elastic Load Balancer (Classic) SSL negotiation p
 }
 
 elb_insecure_cipher_metadata := {
-    "Policy Code": "PR-AWS-0062-TRF",
+    "Policy Code": "PR-AWS-TRF-ELB-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -131,7 +129,7 @@ elb_insecure_cipher_metadata := {
 }
 
 #
-# PR-AWS-0063-TRF
+# PR-AWS-TRF-ELB-002
 #
 
 default elb_insecure_protocol = null
@@ -179,7 +177,7 @@ elb_insecure_protocol_err = "AWS Elastic Load Balancer (Classic) SSL negotiation
 }
 
 elb_insecure_protocol_metadata := {
-    "Policy Code": "PR-AWS-0063-TRF",
+    "Policy Code": "PR-AWS-TRF-ELB-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -191,7 +189,7 @@ elb_insecure_protocol_metadata := {
 }
 
 #
-# PR-AWS-0064-TRF
+# PR-AWS-TRF-ELB-003
 #
 
 default elb_access_log = null
@@ -246,7 +244,7 @@ elb_access_log_err = "AWS Elastic Load Balancer (Classic) with access log disabl
 }
 
 elb_access_log_metadata := {
-    "Policy Code": "PR-AWS-0064-TRF",
+    "Policy Code": "PR-AWS-TRF-ELB-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -258,7 +256,7 @@ elb_access_log_metadata := {
 }
 
 #
-# PR-AWS-0065-TRF
+# PR-AWS-TRF-ELB-004
 #
 
 default elb_conn_drain = null
@@ -296,7 +294,7 @@ elb_conn_drain_err = "AWS Elastic Load Balancer (Classic) with connection draini
 }
 
 elb_conn_drain_metadata := {
-    "Policy Code": "PR-AWS-0065-TRF",
+    "Policy Code": "PR-AWS-TRF-ELB-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -308,7 +306,7 @@ elb_conn_drain_metadata := {
 }
 
 #
-# PR-AWS-0066-TRF
+# PR-AWS-TRF-ELB-005
 #
 
 default elb_crosszone = null
@@ -346,7 +344,7 @@ elb_crosszone_err = "AWS Elastic Load Balancer (Classic) with cross-zone load ba
 }
 
 elb_crosszone_metadata := {
-    "Policy Code": "PR-AWS-0066-TRF",
+    "Policy Code": "PR-AWS-TRF-ELB-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -358,7 +356,7 @@ elb_crosszone_metadata := {
 }
 
 #
-# PR-AWS-0069-TRF
+# PR-AWS-TRF-ELB-008
 #
 
 default elb_not_in_use = null
@@ -396,7 +394,7 @@ elb_not_in_use_err = "AWS Elastic Load Balancer (ELB) not in use" {
 }
 
 elb_not_in_use_metadata := {
-    "Policy Code": "PR-AWS-0069-TRF",
+    "Policy Code": "PR-AWS-TRF-ELB-008",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -408,7 +406,7 @@ elb_not_in_use_metadata := {
 }
 
 #
-# PR-AWS-0072-TRF
+# PR-AWS-TRF-ELB-009
 #
 
 
@@ -468,7 +466,7 @@ elb_alb_logs_err = "AWS Elastic Load Balancer v2 (ELBv2) Application Load Balanc
 }
 
 elb_alb_logs_metadata := {
-    "Policy Code": "PR-AWS-0072-TRF",
+    "Policy Code": "PR-AWS-TRF-ELB-009",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -480,7 +478,7 @@ elb_alb_logs_metadata := {
 }
 
 #
-# PR-AWS-0073-TRF
+# PR-AWS-TRF-ELB-010
 #
 
 default elb_listener_ssl = null
@@ -533,7 +531,7 @@ elb_listener_ssl_err = "AWS Elastic Load Balancer with listener TLS/SSL disabled
 }
 
 elb_listener_ssl_metadata := {
-    "Policy Code": "PR-AWS-0073-TRF",
+    "Policy Code": "PR-AWS-TRF-ELB-010",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -545,7 +543,7 @@ elb_listener_ssl_metadata := {
 }
 
 #
-# PR-AWS-0006-TRF
+# PR-AWS-TRF-ELB-011
 #
 
 default elb_over_https = null
@@ -585,7 +583,7 @@ elb_over_https_err = "AWS Elastic Load Balancer v2 (ELBv2) Application Load Bala
 }
 
 elb_over_https_metadata := {
-    "Policy Code": "PR-AWS-0006-TRF",
+    "Policy Code": "PR-AWS-TRF-ELB-011",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -597,7 +595,7 @@ elb_over_https_metadata := {
 }
 
 #
-# PR-AWS-0217-TRF
+# PR-AWS-TRF-ELB-012
 #
 
 default elb_v2_listener_ssl = null
@@ -630,7 +628,7 @@ elb_v2_listener_ssl_err = "AWS Elastic Load Balancer V2 (ELBV2) with listener TL
 }
 
 elb_v2_listener_ssl_metadata := {
-    "Policy Code": "PR-AWS-0217-TRF",
+    "Policy Code": "PR-AWS-TRF-ELB-012",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",

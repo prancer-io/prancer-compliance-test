@@ -150,7 +150,7 @@ source_path[{"log_profiles_retention_days":metadata}] {
 }
 
 
-azure_issue ["log_profile_category"] {
+no_azure_issue ["log_profile_category"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/logprofiles"
     contains(lower(resource.properties.categories[_]), "write")
@@ -170,26 +170,23 @@ source_path[{"log_profiles_retention_days":metadata}] {
 
 log_profile_category {
     not azure_attribute_absence["log_profile_category"]
-    azure_issue["log_profile_category"]
+    no_azure_issue["log_profile_category"]
 }
 
 log_profile_category = false {
     azure_attribute_absence["log_profile_category"]
 }
 
-
 log_profile_category = false {
     lower(input.resources[_].type) == "microsoft.insights/logprofiles"
-    not azure_issue["log_profile_category"]
+    not no_azure_issue["log_profile_category"]
 }
-
-
 
 log_profile_category_err = "microsoft.insights/logprofiles property 'categories' missing in the resource." {
     azure_attribute_absence["log_profile_category"]
 } else = "Log profile is not configured to capture all activities" {
     lower(input.resources[_].type) == "microsoft.insights/logprofiles"
-    not azure_issue["log_profile_category"]
+    not no_azure_issue["log_profile_category"]
 }
 
 log_profile_category_metadata := {

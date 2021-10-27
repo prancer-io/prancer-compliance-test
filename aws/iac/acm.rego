@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html
 
 #
-# PR-AWS-0001-CFR
+# PR-AWS-CFR-ACM-001
 #
 
 default acm_wildcard = null
@@ -14,22 +14,66 @@ aws_issue["acm_wildcard"] {
     not resource.Properties.DomainName
 }
 
+source_path[{"acm_wildcard": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::certificatemanager::certificate"
+    not resource.Properties.DomainName
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DomainName"]
+        ],
+    }
+}
+
 aws_issue["acm_wildcard"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::certificatemanager::certificate"
     startswith(resource.Properties.DomainName, "*")
 }
 
-aws_issue["acm_wildcard"] {
+source_path[{"acm_wildcard": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::certificatemanager::certificate"
-    startswith(resource.Properties.SubjectAlternativeNames[_], "*")
+    startswith(resource.Properties.DomainName, "*")
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DomainName"]
+        ],
+    }
 }
 
 aws_issue["acm_wildcard"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::certificatemanager::certificate"
-    startswith(resource.Properties.DomainValidationOptions[_].DomainName, "*")
+    startswith(resource.Properties.SubjectAlternativeNames[j], "*")
+}
+
+source_path[{"acm_wildcard": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::certificatemanager::certificate"
+    startswith(resource.Properties.SubjectAlternativeNames[j], "*")
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SubjectAlternativeNames", j]
+        ],
+    }
+}
+
+aws_issue["acm_wildcard"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::certificatemanager::certificate"
+    startswith(resource.Properties.DomainValidationOptions[j].DomainName, "*")
+}
+
+source_path[{"acm_wildcard": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::certificatemanager::certificate"
+    startswith(resource.Properties.DomainValidationOptions[j].DomainName, "*")
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "DomainValidationOptions", j, "DomainName"]
+        ],
+    }
 }
 
 acm_wildcard {
@@ -46,7 +90,7 @@ acm_wildcard_err = "AWS ACM Certificate with wildcard domain name" {
 }
 
 acm_wildcard_metadata := {
-    "Policy Code": "PR-AWS-0001-CFR",
+    "Policy Code": "PR-AWS-CFR-ACM-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -57,8 +101,9 @@ acm_wildcard_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html"
 }
 
+
 #
-# PR-AWS-0009-CFR
+# PR-AWS-CFR-ACM-002
 #
 
 default acm_ct_log = null
@@ -67,6 +112,17 @@ aws_issue["acm_ct_log"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::certificatemanager::certificate"
     lower(resource.Properties.CertificateTransparencyLoggingPreference) != "enabled"
+}
+
+source_path[{"acm_ct_log": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::certificatemanager::certificate"
+    lower(resource.Properties.CertificateTransparencyLoggingPreference) != "enabled"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CertificateTransparencyLoggingPreference"]
+        ],
+    }
 }
 
 acm_ct_log {
@@ -83,7 +139,7 @@ acm_ct_log_err = "AWS Certificate Manager (ACM) has certificates with Certificat
 }
 
 acm_ct_log_metadata := {
-    "Policy Code": "PR-AWS-0009-CFR",
+    "Policy Code": "PR-AWS-CFR-ACM-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

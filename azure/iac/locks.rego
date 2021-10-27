@@ -9,6 +9,10 @@ package rule
 default rg_locks = null
 
 azure_attribute_absence["rg_locks"] {
+    count([c | lower(input.resources[_].type) == "microsoft.resources/resourcegroups"; c := 1]) != count([c | lower(input.resources[_].type) == "microsoft.authorization/locks"; c := 1])
+}
+
+azure_attribute_absence["rg_locks"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.authorization/locks"
     not resource.properties.level
@@ -39,24 +43,28 @@ source_path[{"rg_locks":metadata}] {
 }
 
 rg_locks {
-    lower(input.resources[_].type) == "microsoft.authorization/locks"
+    lower(input.resources[_].type) == "microsoft.resources/resourcegroups"
     not azure_attribute_absence["rg_locks"]
     not azure_issue["rg_locks"]
 }
 
 rg_locks = false {
+    lower(input.resources[_].type) == "microsoft.resources/resourcegroups"
     azure_issue["rg_locks"]
 }
 
 rg_locks = false {
+    lower(input.resources[_].type) == "microsoft.resources/resourcegroups"
     azure_attribute_absence["rg_locks"]
 }
 
 rg_locks_err = "Azure Deployment Scope Resource Group currently dont have any remove protection resource lock configured" {
+    lower(input.resources[_].type) == "microsoft.resources/resourcegroups"
     azure_issue["rg_locks"]
 }
 
 rg_locks_miss_err = "Resource lock property 'level' is missing from the resource" {
+    lower(input.resources[_].type) == "microsoft.resources/resourcegroups"
     azure_attribute_absence["rg_locks"]
 }
 

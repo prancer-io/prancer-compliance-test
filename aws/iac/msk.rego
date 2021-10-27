@@ -1,46 +1,9 @@
 package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html
-#
-# PR-AWS-0238-CFR
-#
-# default msk_encryption_at_rest = null
-
-# aws_issue["msk_encryption_at_rest"] {
-#     resource := input.Resources[i]
-#     lower(resource.Type) == "aws::msk::cluster"
-#     not resource.Properties.EncryptionInfo.EncryptionAtRest
-# }
-
-# msk_encryption_at_rest {
-#     lower(input.Resources[i].Type) == "aws::msk::cluster"
-#     not aws_issue["msk_encryption_at_rest"]
-# }
-
-# msk_encryption_at_rest = false {
-#     aws_issue["msk_encryption_at_rest"]
-# }
-
-# msk_encryption_at_rest_err = "Ensure MSK cluster encryption at rest is enabled" {
-#     aws_issue["msk_encryption_at_rest"]
-# }
-
-
-# msk_encryption_at_rest_metadata := {
-#     "Policy Code": "PR-AWS-0238-CFR",
-#     "Type": "IaC",
-#     "Product": "AWS",
-#     "Language": "AWS Cloud formation",
-#     "Policy Title": "Ensure MSK cluster encryption at rest is enabled",
-#     "Policy Description": "Amazon MSK integrates with AWS Key Management Service (KMS) for server-side encryption. When you create an MSK cluster, you can specify the AWS KMS CMK for Amazon MSK to use to encrypt your data at rest. If you don't specify a CMK, Amazon MSK creates an AWS managed CMK for you and uses it on your behalf.",
-#     "Resource Type": "",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo"
-# }
-
 
 #
-# PR-AWS-0239-CFR
+# PR-AWS-CFR-MSK-001
 #
 default msk_encryption_at_rest_cmk = null
 
@@ -50,10 +13,32 @@ aws_issue["msk_encryption_at_rest_cmk"] {
     not resource.Properties.EncryptionInfo.EncryptionAtRest.DataVolumeKMSKeyId
 }
 
+source_path[{"msk_encryption_at_rest_cmk": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    not resource.Properties.EncryptionInfo.EncryptionAtRest.DataVolumeKMSKeyId
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionInfo", "EncryptionAtRest", "DataVolumeKMSKeyId"]
+        ],
+    }
+}
+
 aws_issue["msk_encryption_at_rest_cmk"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::msk::cluster"
     count(resource.Properties.EncryptionInfo.EncryptionAtRest.DataVolumeKMSKeyId) == 0
+}
+
+source_path[{"msk_encryption_at_rest_cmk": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    count(resource.Properties.EncryptionInfo.EncryptionAtRest.DataVolumeKMSKeyId) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionInfo", "EncryptionAtRest", "DataVolumeKMSKeyId"]
+        ],
+    }
 }
 
 msk_encryption_at_rest_cmk {
@@ -71,7 +56,7 @@ msk_encryption_at_rest_cmk_err = "Use KMS Customer Master Keys for AWS MSK Clust
 
 
 msk_encryption_at_rest_cmk_metadata := {
-    "Policy Code": "PR-AWS-0239-CFR",
+    "Policy Code": "PR-AWS-CFR-MSK-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -83,7 +68,7 @@ msk_encryption_at_rest_cmk_metadata := {
 }
 
 #
-# PR-AWS-0240-CFR
+# PR-AWS-CFR-MSK-002
 #
 default msk_in_transit_encryption = null
 
@@ -93,10 +78,32 @@ aws_bool_issue["msk_in_transit_encryption"] {
     not resource.Properties.EncryptionInfo.EncryptionInTransit.InCluster
 }
 
+source_path[{"msk_in_transit_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    not resource.Properties.EncryptionInfo.EncryptionInTransit.InCluster
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionInfo", "EncryptionInTransit", "InCluster"]
+        ],
+    }
+}
+
 aws_issue["msk_in_transit_encryption"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::msk::cluster"
     lower(resource.Properties.EncryptionInfo.EncryptionInTransit.InCluster) == "false"
+}
+
+source_path[{"msk_in_transit_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    lower(resource.Properties.EncryptionInfo.EncryptionInTransit.InCluster) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionInfo", "EncryptionInTransit", "InCluster"]
+        ],
+    }
 }
 
 msk_in_transit_encryption {
@@ -122,7 +129,7 @@ msk_in_transit_encryption_err = "Ensure data is Encrypted in transit (TLS)" {
 
 
 msk_in_transit_encryption_metadata := {
-    "Policy Code": "PR-AWS-0240-CFR",
+    "Policy Code": "PR-AWS-CFR-MSK-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -135,7 +142,7 @@ msk_in_transit_encryption_metadata := {
 
 
 #
-# PR-AWS-0241-CFR
+# PR-AWS-CFR-MSK-003
 #
 default msk_in_transit_encryption_tls = null
 
@@ -145,10 +152,32 @@ aws_bool_issue["msk_in_transit_encryption_tls"] {
     not resource.Properties.EncryptionInfo.EncryptionInTransit.ClientBroker
 }
 
+source_path[{"msk_in_transit_encryption_tls": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    not resource.Properties.EncryptionInfo.EncryptionInTransit.ClientBroker
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionInfo", "EncryptionInTransit", "ClientBroker"]
+        ],
+    }
+}
+
 aws_issue["msk_in_transit_encryption_tls"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::msk::cluster"
     lower(resource.Properties.EncryptionInfo.EncryptionInTransit.ClientBroker) != "tls"
+}
+
+source_path[{"msk_in_transit_encryption_tls": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    lower(resource.Properties.EncryptionInfo.EncryptionInTransit.ClientBroker) != "tls"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionInfo", "EncryptionInTransit", "ClientBroker"]
+        ],
+    }
 }
 
 msk_in_transit_encryption_tls {
@@ -174,7 +203,7 @@ msk_in_transit_encryption_tls_err = "Ensure client authentication is enabled wit
 
 
 msk_in_transit_encryption_tls_metadata := {
-    "Policy Code": "PR-AWS-0241-CFR",
+    "Policy Code": "PR-AWS-CFR-MSK-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -187,7 +216,7 @@ msk_in_transit_encryption_tls_metadata := {
 
 
 #
-# PR-AWS-0242-CFR
+# PR-AWS-CFR-MSK-004
 #
 default msk_vpc = null
 
@@ -197,10 +226,32 @@ aws_issue["msk_vpc"] {
     not resource.Properties.BrokerNodeGroupInfo.ClientSubnets
 }
 
+source_path[{"msk_vpc": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    not resource.Properties.BrokerNodeGroupInfo.ClientSubnets
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "BrokerNodeGroupInfo", "ClientSubnets"]
+        ],
+    }
+}
+
 aws_issue["msk_vpc"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::msk::cluster"
     count(resource.Properties.BrokerNodeGroupInfo.ClientSubnets) == 0
+}
+
+source_path[{"msk_vpc": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    count(resource.Properties.BrokerNodeGroupInfo.ClientSubnets) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "BrokerNodeGroupInfo", "ClientSubnets"]
+        ],
+    }
 }
 
 msk_vpc {
@@ -219,7 +270,7 @@ msk_vpc_err = "Ensure MSK cluster is setup in GS VPC" {
 
 
 msk_vpc_metadata := {
-    "Policy Code": "PR-AWS-0242-CFR",
+    "Policy Code": "PR-AWS-CFR-MSK-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -231,7 +282,7 @@ msk_vpc_metadata := {
 }
 
 #
-# PR-AWS-0331-CFR
+# PR-AWS-CFR-MSK-005
 #
 default msk_cluster_logging_enable = null
 
@@ -239,6 +290,17 @@ aws_issue["msk_cluster_logging_enable"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::msk::cluster"
     not resource.Properties.LoggingInfo.BrokerLogs
+}
+
+source_path[{"msk_cluster_logging_enable": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::msk::cluster"
+    not resource.Properties.LoggingInfo.BrokerLogs
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LoggingInfo", "BrokerLogs"]
+        ],
+    }
 }
 
 msk_cluster_logging_enable {
@@ -256,7 +318,7 @@ msk_cluster_logging_enable_err = "Ensure Amazon MSK cluster has logging enabled"
 
 
 msk_cluster_logging_enable_metadata := {
-    "Policy Code": "PR-AWS-0331-CFR",
+    "Policy Code": "PR-AWS-CFR-MSK-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

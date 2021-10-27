@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html
 
 #
-# PR-AWS-0074-CFR
+# PR-AWS-CFR-ES-001
 #
 
 default esearch_vpc = null
@@ -14,10 +14,32 @@ aws_attribute_absence["esearch_vpc"] {
     not resource.Properties.VPCOptions.SubnetIds
 }
 
+source_path[{"esearch_vpc": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.VPCOptions.SubnetIds
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "VPCOptions", "SubnetIds"]
+        ],
+    }
+}
+
 aws_issue["esearch_vpc"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     count(resource.Properties.VPCOptions.SubnetIds) == 0
+}
+
+source_path[{"esearch_vpc": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    count(resource.Properties.VPCOptions.SubnetIds) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "VPCOptions", "SubnetIds"]
+        ],
+    }
 }
 
 esearch_vpc {
@@ -43,7 +65,7 @@ esearch_vpc_miss_err = "Elasticsearch attribute VPCOptions.SubnetIds missing in 
 }
 
 esearch_vpc_metadata := {
-    "Policy Code": "PR-AWS-0074-CFR",
+    "Policy Code": "PR-AWS-CFR-ES-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -55,7 +77,7 @@ esearch_vpc_metadata := {
 }
 
 #
-# PR-AWS-0076-CFR
+# PR-AWS-CFR-ES-002
 #
 
 default esearch_encrypt = null
@@ -66,10 +88,32 @@ aws_issue["esearch_encrypt"] {
     lower(resource.Properties.EncryptionAtRestOptions.Enabled) == "false"
 }
 
+source_path[{"esearch_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    lower(resource.Properties.EncryptionAtRestOptions.Enabled) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionAtRestOptions", "Enabled"]
+        ],
+    }
+}
+
 aws_bool_issue["esearch_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     not resource.Properties.EncryptionAtRestOptions.Enabled
+}
+
+source_path[{"esearch_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.EncryptionAtRestOptions.Enabled
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionAtRestOptions", "Enabled"]
+        ],
+    }
 }
 
 esearch_encrypt {
@@ -94,7 +138,7 @@ esearch_encrypt_err = "AWS Elasticsearch domain Encryption for data at rest is d
 
 
 esearch_encrypt_metadata := {
-    "Policy Code": "PR-AWS-0076-CFR",
+    "Policy Code": "PR-AWS-CFR-ES-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -106,7 +150,7 @@ esearch_encrypt_metadata := {
 }
 
 #
-# PR-AWS-0077-CFR
+# PR-AWS-CFR-ES-003
 #
 
 default esearch_master = null
@@ -115,6 +159,17 @@ aws_issue["esearch_master"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     not resource.Properties.ElasticsearchClusterConfig.DedicatedMasterEnabled
+}
+
+source_path[{"esearch_master": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.ElasticsearchClusterConfig.DedicatedMasterEnabled
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ElasticsearchClusterConfig", "DedicatedMasterEnabled"]
+        ],
+    }
 }
 
 esearch_master {
@@ -131,7 +186,7 @@ esearch_master_err = "AWS Elasticsearch domain has Dedicated master set to disab
 }
 
 esearch_master_metadata := {
-    "Policy Code": "PR-AWS-0077-CFR",
+    "Policy Code": "PR-AWS-CFR-ES-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -143,7 +198,7 @@ esearch_master_metadata := {
 }
 
 #
-# PR-AWS-0078-CFR
+# PR-AWS-CFR-ES-004
 #
 
 default esearch_index_slow_log = null
@@ -154,10 +209,32 @@ aws_attribute_absence["esearch_index_slow_log"] {
     not resource.Properties.LogPublishingOptions
 }
 
+source_path[{"esearch_index_slow_log": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.LogPublishingOptions
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LogPublishingOptions"]
+        ],
+    }
+}
+
 aws_issue["esearch_index_slow_log"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     lower(resource.Properties.LogPublishingOptions.INDEX_SLOW_LOGS.Enabled) == "false"
+}
+
+source_path[{"esearch_index_slow_log": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    lower(resource.Properties.LogPublishingOptions.INDEX_SLOW_LOGS.Enabled) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LogPublishingOptions", "INDEX_SLOW_LOGS", "Enabled"]
+        ],
+    }
 }
 
 aws_bool_issue["esearch_index_slow_log"] {
@@ -166,16 +243,49 @@ aws_bool_issue["esearch_index_slow_log"] {
     not resource.Properties.LogPublishingOptions.INDEX_SLOW_LOGS.Enabled
 }
 
+source_path[{"esearch_index_slow_log": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.LogPublishingOptions.INDEX_SLOW_LOGS.Enabled
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LogPublishingOptions", "INDEX_SLOW_LOGS", "Enabled"]
+        ],
+    }
+}
+
 aws_issue["esearch_index_slow_log"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     not resource.Properties.LogPublishingOptions.INDEX_SLOW_LOGS.CloudWatchLogsLogGroupArn
 }
 
+source_path[{"esearch_index_slow_log": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.LogPublishingOptions.INDEX_SLOW_LOGS.CloudWatchLogsLogGroupArn
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LogPublishingOptions", "INDEX_SLOW_LOGS", "CloudWatchLogsLogGroupArn"]
+        ],
+    }
+}
+
 aws_issue["esearch_index_slow_log"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     count(resource.Properties.LogPublishingOptions.INDEX_SLOW_LOGS.CloudWatchLogsLogGroupArn) == 0
+}
+
+source_path[{"esearch_index_slow_log": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    count(resource.Properties.LogPublishingOptions.INDEX_SLOW_LOGS.CloudWatchLogsLogGroupArn) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LogPublishingOptions", "INDEX_SLOW_LOGS", "CloudWatchLogsLogGroupArn"]
+        ],
+    }
 }
 
 esearch_index_slow_log {
@@ -208,7 +318,7 @@ esearch_index_slow_log_miss_err = "Elasticsearch attribute LogPublishingOptions 
 }
 
 esearch_index_slow_log_metadata := {
-    "Policy Code": "PR-AWS-0078-CFR",
+    "Policy Code": "PR-AWS-CFR-ES-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -220,7 +330,7 @@ esearch_index_slow_log_metadata := {
 }
 
 #
-# PR-AWS-0079-CFR
+# PR-AWS-CFR-ES-005
 #
 
 default esearch_search_slow_log = null
@@ -231,10 +341,32 @@ aws_attribute_absence["esearch_search_slow_log"] {
     not resource.Properties.LogPublishingOptions
 }
 
+source_path[{"esearch_search_slow_log": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.LogPublishingOptions
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LogPublishingOptions"]
+        ],
+    }
+}
+
 aws_issue["esearch_search_slow_log"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     lower(resource.Properties.LogPublishingOptions.SEARCH_SLOW_LOGS.Enabled) == "false"
+}
+
+source_path[{"esearch_search_slow_log": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    lower(resource.Properties.LogPublishingOptions.SEARCH_SLOW_LOGS.Enabled) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LogPublishingOptions", "SEARCH_SLOW_LOGS", "Enabled"]
+        ],
+    }
 }
 
 aws_bool_issue["esearch_search_slow_log"] {
@@ -243,16 +375,49 @@ aws_bool_issue["esearch_search_slow_log"] {
     not resource.Properties.LogPublishingOptions.SEARCH_SLOW_LOGS.Enabled
 }
 
+source_path[{"esearch_search_slow_log": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.LogPublishingOptions.SEARCH_SLOW_LOGS.Enabled
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LogPublishingOptions", "SEARCH_SLOW_LOGS", "Enabled"]
+        ],
+    }
+}
+
 aws_issue["esearch_search_slow_log"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     not resource.Properties.LogPublishingOptions.SEARCH_SLOW_LOGS.CloudWatchLogsLogGroupArn
 }
 
+source_path[{"esearch_search_slow_log": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.LogPublishingOptions.SEARCH_SLOW_LOGS.CloudWatchLogsLogGroupArn
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LogPublishingOptions", "SEARCH_SLOW_LOGS", "CloudWatchLogsLogGroupArn"]
+        ],
+    }
+}
+
 aws_issue["esearch_search_slow_log"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     count(resource.Properties.LogPublishingOptions.SEARCH_SLOW_LOGS.CloudWatchLogsLogGroupArn) == 0
+}
+
+source_path[{"esearch_search_slow_log": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    count(resource.Properties.LogPublishingOptions.SEARCH_SLOW_LOGS.CloudWatchLogsLogGroupArn) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LogPublishingOptions", "SEARCH_SLOW_LOGS", "CloudWatchLogsLogGroupArn"]
+        ],
+    }
 }
 
 esearch_search_slow_log {
@@ -285,7 +450,7 @@ esearch_search_slow_log_miss_err = "Elasticsearch attribute LogPublishingOptions
 }
 
 esearch_search_slow_log_metadata := {
-    "Policy Code": "PR-AWS-0079-CFR",
+    "Policy Code": "PR-AWS-CFR-ES-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -297,7 +462,7 @@ esearch_search_slow_log_metadata := {
 }
 
 #
-# PR-AWS-0080-CFR
+# PR-AWS-CFR-ES-006
 #
 
 default esearch_zone_awareness = null
@@ -308,10 +473,32 @@ aws_issue["esearch_zone_awareness"] {
     lower(resource.Properties.ElasticsearchClusterConfig.ZoneAwarenessEnabled) == "false"
 }
 
+source_path[{"esearch_zone_awareness": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    lower(resource.Properties.ElasticsearchClusterConfig.ZoneAwarenessEnabled) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ElasticsearchClusterConfig", "ZoneAwarenessEnabled"]
+        ],
+    }
+}
+
 aws_bool_issue["esearch_zone_awareness"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     not resource.Properties.ElasticsearchClusterConfig.ZoneAwarenessEnabled
+}
+
+source_path[{"esearch_zone_awareness": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.ElasticsearchClusterConfig.ZoneAwarenessEnabled
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ElasticsearchClusterConfig", "ZoneAwarenessEnabled"]
+        ],
+    }
 }
 
 esearch_zone_awareness {
@@ -335,7 +522,7 @@ esearch_zone_awareness_err = "AWS Elasticsearch domain has Zone Awareness set to
 }
 
 esearch_zone_awareness_metadata := {
-    "Policy Code": "PR-AWS-0080-CFR",
+    "Policy Code": "PR-AWS-CFR-ES-006",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -348,7 +535,7 @@ esearch_zone_awareness_metadata := {
 
 
 #
-# PR-AWS-0216-CFR
+# PR-AWS-CFR-ES-007
 #
 
 default esearch_node_encryption = null
@@ -359,10 +546,32 @@ aws_issue["esearch_node_encryption"] {
     lower(resource.Properties.NodeToNodeEncryptionOptions.Enabled) == "false"
 }
 
+source_path[{"esearch_node_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    lower(resource.Properties.NodeToNodeEncryptionOptions.Enabled) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "NodeToNodeEncryptionOptions", "Enabled"]
+        ],
+    }
+}
+
 aws_bool_issue["esearch_node_encryption"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     not resource.Properties.NodeToNodeEncryptionOptions.Enabled
+}
+
+source_path[{"esearch_node_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.NodeToNodeEncryptionOptions.Enabled
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "NodeToNodeEncryptionOptions", "Enabled"]
+        ],
+    }
 }
 
 esearch_node_encryption {
@@ -386,7 +595,7 @@ esearch_node_encryption_err = "Ensure node-to-node encryption is enabled on each
 }
 
 esearch_node_encryption_metadata := {
-    "Policy Code": "PR-AWS-0216-CFR",
+    "Policy Code": "PR-AWS-CFR-ES-007",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -399,7 +608,7 @@ esearch_node_encryption_metadata := {
 
 
 #
-# PR-AWS-0252-CFR
+# PR-AWS-CFR-ES-008
 #
 
 default esearch_enforce_https = null
@@ -410,10 +619,32 @@ aws_issue["esearch_enforce_https"] {
     lower(resource.Properties.DomainEndpointOptions.EnforceHTTPS) == "false"
 }
 
+source_path[{"esearch_enforce_https": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    lower(resource.Properties.DomainEndpointOptions.EnforceHTTPS) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "NodeToNodeEncryptionOptions", "EnforceHTTPS"]
+        ],
+    }
+}
+
 aws_bool_issue["esearch_enforce_https"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     not resource.Properties.DomainEndpointOptions.EnforceHTTPS
+}
+
+source_path[{"esearch_enforce_https": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    not resource.Properties.DomainEndpointOptions.EnforceHTTPS
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "NodeToNodeEncryptionOptions", "EnforceHTTPS"]
+        ],
+    }
 }
 
 esearch_enforce_https {
@@ -437,7 +668,7 @@ esearch_enforce_https_err = "AWS Elasticsearch domain is not configured with HTT
 }
 
 esearch_enforce_https_metadata := {
-    "Policy Code": "PR-AWS-0252-CFR",
+    "Policy Code": "PR-AWS-CFR-ES-008",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -450,7 +681,7 @@ esearch_enforce_https_metadata := {
 
 
 #
-# PR-AWS-0253-CFR
+# PR-AWS-CFR-ES-009
 #
 
 default esearch_encrypt_kms = null
@@ -462,11 +693,35 @@ aws_issue["esearch_encrypt_kms"] {
     not resource.Properties.EncryptionAtRestOptions.KmsKeyId
 }
 
+source_path[{"esearch_encrypt_kms": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    lower(resource.Properties.EncryptionAtRestOptions.Enabled) == "true"
+    not resource.Properties.EncryptionAtRestOptions.KmsKeyId
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionAtRestOptions", "KmsKeyId"]
+        ],
+    }
+}
+
 aws_issue["esearch_encrypt_kms"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
     lower(resource.Properties.EncryptionAtRestOptions.Enabled) == "true"
     count(resource.Properties.EncryptionAtRestOptions.KmsKeyId) == 0
+}
+
+source_path[{"esearch_encrypt_kms": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    lower(resource.Properties.EncryptionAtRestOptions.Enabled) == "true"
+    count(resource.Properties.EncryptionAtRestOptions.KmsKeyId) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionAtRestOptions", "KmsKeyId"]
+        ],
+    }
 }
 
 aws_bool_issue["esearch_encrypt_kms"] {
@@ -476,6 +731,18 @@ aws_bool_issue["esearch_encrypt_kms"] {
     not resource.Properties.EncryptionAtRestOptions.KmsKeyId
 }
 
+source_path[{"esearch_encrypt_kms": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    resource.Properties.EncryptionAtRestOptions.Enabled
+    not resource.Properties.EncryptionAtRestOptions.KmsKeyId
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionAtRestOptions", "KmsKeyId"]
+        ],
+    }
+}
+
 aws_bool_issue["esearch_encrypt_kms"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticsearch::domain"
@@ -483,6 +750,17 @@ aws_bool_issue["esearch_encrypt_kms"] {
     count(resource.Properties.EncryptionAtRestOptions.KmsKeyId) == 0
 }
 
+source_path[{"esearch_encrypt_kms": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticsearch::domain"
+    resource.Properties.EncryptionAtRestOptions.Enabled
+    count(resource.Properties.EncryptionAtRestOptions.KmsKeyId) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionAtRestOptions", "KmsKeyId"]
+        ],
+    }
+}
 
 esearch_encrypt_kms {
     lower(input.Resources[i].Type) == "aws::elasticsearch::domain"
@@ -506,7 +784,7 @@ esearch_encrypt_kms_err = "Elasticsearch Domain should not have Encrytion using 
 
 
 esearch_encrypt_kms_metadata := {
-    "Policy Code": "PR-AWS-0253-CFR",
+    "Policy Code": "PR-AWS-CFR-ES-009",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

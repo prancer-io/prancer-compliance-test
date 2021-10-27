@@ -16,7 +16,7 @@
                             "id": "PR-AZR-ARM-MNT-001",
                             "eval": "data.rule.alerts",
                             "message": "data.rule.alerts_err",
-                            "remediationDescription": "Make sure you are following the ARM template format presented at this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-04-01/activitylogalerts",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for Activity Log Alert by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-04-01/activitylogalerts' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_MNT_001.py"
                         }
                     ],
@@ -55,7 +55,7 @@
                             "id": "PR-AZR-ARM-AKS-001",
                             "eval": "data.rule.aks_cni_net",
                             "message": "data.rule.aks_cni_net_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for AKS from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for AKS by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_AKS_001.py"
                         }
                     ],
@@ -65,7 +65,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -87,7 +93,7 @@
                             "id": "PR-AZR-ARM-AKS-002",
                             "eval": "data.rule.aks_http_routing",
                             "message": "data.rule.aks_http_routing_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for AKS from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters addonProfiles.httpApplicationRouting.enabled",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for AKS by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters' target='_blank'>here</a> for addonProfiles.httpApplicationRouting.enabled",
                             "remediationFunction": "PR_AZR_ARM_AKS_002.py"
                         }
                     ],
@@ -126,7 +132,7 @@
                             "id": "PR-AZR-ARM-AKS-003",
                             "eval": "data.rule.aks_monitoring",
                             "message": "data.rule.aks_monitoring_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for AKS from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters addonProfiles.omsagent.enabled",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for AKS by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters' target='_blank'>here</a> for addonProfiles.omsagent.enabled",
                             "remediationFunction": "PR_AZR_ARM_AKS_003.py"
                         }
                     ],
@@ -136,7 +142,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -158,7 +170,7 @@
                             "id": "PR-AZR-ARM-AKS-004",
                             "eval": "data.rule.aks_nodes",
                             "message": "data.rule.aks_nodes_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for AKS from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters set minCount for Minimum number of nodes for auto-scaling to 3",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for AKS by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters' target='_blank'>here</a>. Set minCount for Minimum number of nodes for auto-scaling to 3",
                             "remediationFunction": "PR_AZR_ARM_AKS_004.py"
                         }
                     ],
@@ -168,7 +180,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -190,7 +208,7 @@
                             "id": "PR-AZR-ARM-AKS-005",
                             "eval": "data.rule.aks_rbac",
                             "message": "data.rule.aks_rbac_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for AKS from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters set enable RBAC to true to enable Kubernetes Role-Based Access Control.",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for AKS by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters' target='_blank'>here</a>. Set enable RBAC to true to enable Kubernetes Role-Based Access Control.",
                             "remediationFunction": "PR_AZR_ARM_AKS_005.py"
                         }
                     ],
@@ -229,7 +247,7 @@
                             "id": "PR-AZR-ARM-AKS-006",
                             "eval": "data.rule.aks_aad_azure_rbac",
                             "message": "data.rule.aks_aad_azure_rbac_err",
-                            "remediationDescription": "Make sure aadProfile property of type object exist in ARM template with boolean managed = true and enableAzureRBAC = true as child property. Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters?tabs=json#managedclusteraadprofile-object for details.",
+                            "remediationDescription": "Make sure aadProfile property of type object exist in ARM template with boolean managed = true and enableAzureRBAC = true as child property. Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters?tabs=json#managedclusteraadprofile-object' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_AKS_006.py"
                         }
                     ],
@@ -239,7 +257,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -261,7 +285,7 @@
                             "id": "PR-AZR-ARM-AKS-009",
                             "eval": "data.rule.aks_kub_dashboard_disabled",
                             "message": "data.rule.aks_kub_dashboard_disabled_err",
-                            "remediationDescription": "For resource type 'microsoft.containerservice/managedclusters' make sure property 'addonProfiles.kubeDashboard.enabled' exist and its value set to 'false' to fix the issue. Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters?tabs=json for details.",
+                            "remediationDescription": "For resource type 'microsoft.containerservice/managedclusters' make sure property 'addonProfiles.kubeDashboard.enabled' exist and its value set to 'false' to fix the issue. Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters?tabs=json' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_AKS_009.py"
                         }
                     ],
@@ -293,7 +317,7 @@
                             "id": "PR-AZR-ARM-AGW-001",
                             "eval": "data.rule.gw_tls",
                             "message": "data.rule.gw_tls_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for Application Gateway from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways Ssl protocols to be disabled on application gateway. - TLSv1_0, TLSv1_1",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for Application Gateway by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways' target='_blank'>here</a>. Ssl protocols to be disabled on application gateway. - TLSv1_0, TLSv1_1",
                             "remediationFunction": "PR_AZR_ARM_AGW_001.py"
                         }
                     ],
@@ -332,7 +356,7 @@
                             "id": "PR-AZR-ARM-AGW-002",
                             "eval": "data.rule.gw_waf",
                             "message": "data.rule.gw_waf_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for Application Gateway from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways webApplicationFirewallConfiguration should be enabled",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for Application Gateway by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways' target='_blank'>here</a>. webApplicationFirewallConfiguration should be enabled",
                             "remediationFunction": "PR_AZR_ARM_AGW_002.py"
                         }
                     ],
@@ -408,7 +432,7 @@
                             "id": "PR-AZR-ARM-AGW-004",
                             "eval": "data.rule.frontendPublicIPConfigurationsDisabled",
                             "message": "data.rule.frontendPublicIPConfigurationsDisabled_err",
-                            "remediationDescription": "For resource type 'microsoft.network/applicationgateways' make sure 'properties.publicIPAddress' does not exist under 'frontendIPConfigurations' to fix the issue. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways?tabs=json#applicationgatewayfrontendipconfiguration for details.",
+                            "remediationDescription": "For resource type 'microsoft.network/applicationgateways' make sure 'properties.publicIPAddress' does not exist under 'frontendIPConfigurations' to fix the issue.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways?tabs=json#applicationgatewayfrontendipconfiguration' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_AGW_004.py"
                         }
                     ],
@@ -446,7 +470,7 @@
                             "id": "PR-AZR-ARM-AGW-005",
                             "eval": "data.rule.backend_https_protocol_enabled",
                             "message": "data.rule.backend_https_protocol_enabled_err",
-                            "remediationDescription": "For resource type 'microsoft.network/applicationgateways' make sure 'properties.protocol' has value 'https' under 'backendHttpSettingsCollection' to fix the issue. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways?tabs=json#applicationgatewaybackendhttpsettings for details.",
+                            "remediationDescription": "For resource type 'microsoft.network/applicationgateways' make sure 'properties.protocol' has value 'https' under 'backendHttpSettingsCollection' to fix the issue.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways?tabs=json#applicationgatewaybackendhttpsettings' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_AGW_005.py"
                         }
                     ],
@@ -484,7 +508,7 @@
                             "id": "PR-AZR-ARM-AGW-006",
                             "eval": "data.rule.secret_certificate_is_in_keyvalut",
                             "message": "data.rule.secret_certificate_is_in_keyvalut_err",
-                            "remediationDescription": "For resource type 'microsoft.network/applicationgateways' make sure 'properties.keyVaultSecretId' has target key vault id under 'sslCertificates' to fix the issue. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways?tabs=json#applicationgatewaysslcertificate for details.",
+                            "remediationDescription": "For resource type 'microsoft.network/applicationgateways' make sure 'properties.keyVaultSecretId' has target key vault id under 'sslCertificates' to fix the issue.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways?tabs=json#applicationgatewaysslcertificate' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_AGW_006.py"
                         }
                     ],
@@ -522,7 +546,7 @@
                             "id": "PR-AZR-ARM-STR-001",
                             "eval": "data.rule.storage_blob_soft_delete",
                             "message": "data.rule.storage_blob_soft_delete_err",
-                            "remediationDescription": "For resource type \"Microsoft.storage/storageaccounts/blobservices\" make sure properties.deleteRetentionPolicy.enabled exists and value is set to true . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/blobservices for details.",
+                            "remediationDescription": "For resource type \"Microsoft.storage/storageaccounts/blobservices\" make sure properties.deleteRetentionPolicy.enabled exists and value is set to true .<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/blobservices' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_STR_001.py"
                         }
                     ],
@@ -532,7 +556,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA=CCM",
+                                "HITTRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -554,7 +585,7 @@
                             "id": "PR-AZR-ARM-STR-002",
                             "eval": "data.rule.storage_blob_container_soft_delete",
                             "message": "data.rule.storage_blob_container_soft_delete_err",
-                            "remediationDescription": "For resource type \"Microsoft.storage/storageaccounts/blobservices\" make sure properties.containerDeleteRetentionPolicy.enabled exists and value is set to true . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/blobservices for details.",
+                            "remediationDescription": "For resource type \"Microsoft.storage/storageaccounts/blobservices\" make sure properties.containerDeleteRetentionPolicy.enabled exists and value is set to true .<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/blobservices' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_STR_002.py"
                         }
                     ],
@@ -564,7 +595,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA=CCM",
+                                "HITTRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -586,7 +624,7 @@
                             "id": "PR-AZR-ARM-DBK-001",
                             "eval": "data.rule.databrics_workspace_has_public_ip_disabled",
                             "message": "data.rule.databrics_workspace_has_public_ip_disabled_err",
-                            "remediationDescription": "In Resource of type \"microsoft.databricks/workspaces\" make sure properties.parameters.enableNoPublicIp exist and its value set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.databricks/workspaces?tabs=json for details.",
+                            "remediationDescription": "In Resource of type \"microsoft.databricks/workspaces\" make sure properties.parameters.enableNoPublicIp exist and its value set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.databricks/workspaces?tabs=json' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_DBK_001.py"
                         }
                     ],
@@ -620,7 +658,7 @@
                             "id": "PR-AZR-ARM-DBK-002",
                             "eval": "data.rule.databrics_workspace_has_vnet_integration",
                             "message": "data.rule.databrics_workspace_has_vnet_integration_err",
-                            "remediationDescription": "In Resource of type \"microsoft.databricks/workspaces\" make sure properties.parameters.customVirtualNetworkId exist and its value set to id of existing vnet. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.databricks/workspaces?tabs=json for details.",
+                            "remediationDescription": "In Resource of type \"microsoft.databricks/workspaces\" make sure properties.parameters.customVirtualNetworkId exist and its value set to id of existing vnet.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.databricks/workspaces?tabs=json' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_DBK_002.py"
                         }
                     ],
@@ -654,7 +692,7 @@
                             "id": "PR-AZR-ARM-SQL-001",
                             "eval": "data.rule.sql_server_ad_admin",
                             "message": "data.rule.sql_server_ad_admin_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2019-06-01-preview/servers/administrators  administratorType should be ActiveDirectory",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2019-06-01-preview/servers/administrators' target='_blank'>here</a>. administratorType should be ActiveDirectory",
                             "remediationFunction": "PR_AZR_ARM_SQL_001.py"
                         }
                     ],
@@ -693,7 +731,7 @@
                             "id": "PR-AZR-ARM-SQL-003",
                             "eval": "data.rule.sql_managedinstances_ad_admin",
                             "message": "data.rule.sql_managedinstances_ad_admin_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL managedInstances from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/administrators?tabs=json  administratorType should be ActiveDirectory",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL managedInstances by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/administrators?tabs=json' target='_blank'>here</a>. administratorType should be ActiveDirectory",
                             "remediationFunction": "PR_AZR_ARM_SQL_003.py"
                         }
                     ],
@@ -732,7 +770,7 @@
                             "id": "PR-AZR-ARM-SQL-002",
                             "eval": "data.rule.sql_logical_server_ad_admin",
                             "message": "data.rule.sql_logical_server_ad_admin_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2019-06-01-preview/servers/administrators  administratorType should be ActiveDirectory",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2019-06-01-preview/servers/administrators' target='_blank'>here</a>. administratorType should be ActiveDirectory",
                             "remediationFunction": "PR_AZR_ARM_SQL_002.py"
                         }
                     ],
@@ -771,7 +809,7 @@
                             "id": "PR-AZR-ARM-SQL-004",
                             "eval": "data.rule.sql_db_log_audit",
                             "message": "data.rule.sql_db_log_audit_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings  make sure the state of auditing is enabled",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings' target='_blank'>here</a> . Make sure the state of auditing is enabled",
                             "remediationFunction": "PR_AZR_ARM_SQL_004.py"
                         }
                     ],
@@ -811,7 +849,7 @@
                             "id": "PR-AZR-ARM-SQL-006",
                             "eval": "data.rule.sql_db_log_retention",
                             "message": "data.rule.sql_db_log_retention_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings  make sure retentionDays is at least 90",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings' target='_blank'>here</a>. Make sure retentionDays is at least 90",
                             "remediationFunction": "PR_AZR_ARM_SQL_006.py"
                         }
                     ],
@@ -851,7 +889,7 @@
                             "id": "PR-AZR-ARM-SQL-005",
                             "eval": "data.rule.sql_logical_db_log_audit",
                             "message": "data.rule.sql_logical_db_log_audit_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings  make sure the state of auditing is enabled",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings' target='_blank'>here</a>. Make sure the state of auditing is enabled",
                             "remediationFunction": "PR_AZR_ARM_SQL_005.py"
                         }
                     ],
@@ -891,7 +929,7 @@
                             "id": "PR-AZR-ARM-SQL-007",
                             "eval": "data.rule.sql_logical_db_log_retention",
                             "message": "data.rule.sql_logical_db_log_retention_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings  make sure retentionDays is at least 90",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings' target='_blank'>here</a>. Make sure retentionDays is at least 90",
                             "remediationFunction": "PR_AZR_ARM_SQL_007.py"
                         }
                     ],
@@ -931,7 +969,7 @@
                             "id": "PR-AZR-ARM-SQL-009",
                             "eval": "data.rule.db_encrypt",
                             "message": "data.rule.db_encrypt_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/databases/transparentdataencryption  status should be Enabled",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/databases/transparentdataencryption' target='_blank'>here</a>. status should be Enabled",
                             "remediationFunction": "PR_AZR_ARM_SQL_009.py"
                         }
                     ],
@@ -971,7 +1009,7 @@
                             "id": "PR-AZR-ARM-SQL-008",
                             "eval": "data.rule.db_logical_encrypt",
                             "message": "data.rule.db_logical_encrypt_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/databases/transparentdataencryption  status should be Enabled",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/databases/transparentdataencryption' target='_blank'>here</a>. status should be Enabled",
                             "remediationFunction": "PR_AZR_ARM_SQL_008.py"
                         }
                     ],
@@ -1011,7 +1049,7 @@
                             "id": "PR-AZR-ARM-SQL-010",
                             "eval": "data.rule.db_logical_firewall",
                             "message": "data.rule.db_logical_firewall_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2015-05-01-preview/servers/firewallrules  startIPAddress and endIPAddress should not be 0.0.0.0",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2015-05-01-preview/servers/firewallrules' target='_blank'>here</a>. startIPAddress and endIPAddress should not be 0.0.0.0",
                             "remediationFunction": "PR_AZR_ARM_SQL_010.py"
                         }
                     ],
@@ -1050,7 +1088,7 @@
                             "id": "PR-AZR-ARM-SQL-011",
                             "eval": "data.rule.db_firewall",
                             "message": "data.rule.db_firewall_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2015-05-01-preview/servers/firewallrules  startIPAddress and endIPAddress should not be 0.0.0.0",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2015-05-01-preview/servers/firewallrules' target='_blank'>here</a>. startIPAddress and endIPAddress should not be 0.0.0.0",
                             "remediationFunction": "PR_AZR_ARM_SQL_011.py"
                         }
                     ],
@@ -1089,7 +1127,7 @@
                             "id": "PR-AZR-ARM-SQL-017",
                             "eval": "data.rule.dbsec_threat_off",
                             "message": "data.rule.dbsec_threat_off_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies  state should be enabled",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies' target='_blank'>here</a>. state should be enabled",
                             "remediationFunction": "PR_AZR_ARM_SQL_017.py"
                         }
                     ],
@@ -1123,7 +1161,7 @@
                             "id": "PR-AZR-ARM-SQL-018",
                             "eval": "data.rule.dbsec_threat_retention",
                             "message": "data.rule.dbsec_threat_retention_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies  retentionDays should be more than 90 days",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies' target='_blank'>here</a>. retentionDays should be more than 90 days",
                             "remediationFunction": "PR_AZR_ARM_SQL_018.py"
                         }
                     ],
@@ -1162,7 +1200,7 @@
                             "id": "PR-AZR-ARM-SQL-019",
                             "eval": "data.rule.dbsec_threat_email",
                             "message": "data.rule.dbsec_threat_email_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies  emailAccountAdmins and emailAddresses should be set",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies' target='_blank'>here</a>. emailAccountAdmins and emailAddresses should be set",
                             "remediationFunction": "PR_AZR_ARM_SQL_019.py"
                         }
                     ],
@@ -1200,7 +1238,7 @@
                             "id": "PR-AZR-ARM-SQL-020",
                             "eval": "data.rule.dbsec_threat_alert",
                             "message": "data.rule.dbsec_threat_alert_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies  disabledAlerts should be empty or not present",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies' target='_blank'>here</a>. disabledAlerts should be empty or not present",
                             "remediationFunction": "PR_AZR_ARM_SQL_020.py"
                         }
                     ],
@@ -1238,7 +1276,7 @@
                             "id": "PR-AZR-ARM-SQL-021",
                             "eval": "data.rule.sql_alert",
                             "message": "data.rule.sql_alert_err",
-                            "remediationDescription": "In Resource of type \"microsoft.sql/servers/databases/securityalertpolicies\" make sure properties.emailAccountAdmins exist and its value set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies for details.",
+                            "remediationDescription": "In Resource of type \"microsoft.sql/servers/databases/securityalertpolicies\" make sure properties.emailAccountAdmins exist and its value set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_021.py"
                         }
                     ],
@@ -1276,7 +1314,7 @@
                             "id": "PR-AZR-ARM-SQL-022",
                             "eval": "data.rule.db_ads_scan",
                             "message": "data.rule.db_ads_scan_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments  recurringScans should be enabled",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments' target='_blank'>here</a>. recurringScans should be enabled",
                             "remediationFunction": "PR_AZR_ARM_SQL_022.py"
                         }
                     ],
@@ -1309,7 +1347,7 @@
                             "id": "PR-AZR-ARM-SQL-023",
                             "eval": "data.rule.db_logical_ads_scan",
                             "message": "data.rule.db_logical_ads_scan_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments  recurringScans should be enabled",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments' target='_blank'>here</a>. recurringScans should be enabled",
                             "remediationFunction": "PR_AZR_ARM_SQL_023.py"
                         }
                     ],
@@ -1342,7 +1380,7 @@
                             "id": "PR-AZR-ARM-SQL-024",
                             "eval": "data.rule.db_ads_mail",
                             "message": "data.rule.db_ads_mail_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments  Specifies an array of e-mail addresses to which the scan notification is sent.",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments' target='_blank'>here</a>. Specifies an array of e-mail addresses to which the scan notification is sent.",
                             "remediationFunction": "PR_AZR_ARM_SQL_024.py"
                         }
                     ],
@@ -1375,7 +1413,7 @@
                             "id": "PR-AZR-ARM-SQL-025",
                             "eval": "data.rule.db_logical_ads_mail",
                             "message": "data.rule.db_logical_ads_mail_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments  Specifies an array of e-mail addresses to which the scan notification is sent.",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments' target='_blank'>here</a>. Specifies an array of e-mail addresses to which the scan notification is sent.",
                             "remediationFunction": "PR_AZR_ARM_SQL_025.py"
                         }
                     ],
@@ -1408,7 +1446,7 @@
                             "id": "PR-AZR-ARM-SQL-026",
                             "eval": "data.rule.db_ads_alert",
                             "message": "data.rule.db_ads_alert_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments  Specifies that the schedule scan notification will be is sent to the subscription administrators.",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments' target='_blank'>here</a>. Specifies that the schedule scan notification will be is sent to the subscription administrators.",
                             "remediationFunction": "PR_AZR_ARM_SQL_026.py"
                         }
                     ],
@@ -1441,7 +1479,7 @@
                             "id": "PR-AZR-ARM-SQL-027",
                             "eval": "data.rule.db_logical_ads_alert",
                             "message": "data.rule.db_logical_ads_alert_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments  Specifies that the schedule scan notification will be is sent to the subscription administrators.",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments' target='_blank'>here</a>. Specifies that the schedule scan notification will be is sent to the subscription administrators.",
                             "remediationFunction": "PR_AZR_ARM_SQL_027.py"
                         }
                     ],
@@ -1474,7 +1512,7 @@
                             "id": "PR-AZR-ARM-MNT-002",
                             "eval": "data.rule.log_keyvault",
                             "message": "data.rule.log_keyvault_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings  make sure to enable diagnostics settings for keyvault",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings' target='_blank'>here</a>. Make sure to enable diagnostics settings for keyvault",
                             "remediationFunction": "PR_AZR_ARM_MNT_002.py"
                         }
                     ],
@@ -1518,7 +1556,7 @@
                             "id": "PR-AZR-ARM-MNT-003",
                             "eval": "data.rule.log_lbs",
                             "message": "data.rule.log_lbs_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings  make sure to enable diagnostics settings for load balancers",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings' target='_blank'>here</a>. Make sure to enable diagnostics settings for load balancers",
                             "remediationFunction": "PR_AZR_ARM_MNT_003.py"
                         }
                     ],
@@ -1555,7 +1593,7 @@
                             "id": "PR-AZR-ARM-MNT-004",
                             "eval": "data.rule.log_storage_retention",
                             "message": "data.rule.log_storage_retention_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings  retentionPolicy should be enabled and more than 90 days",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings' target='_blank'>here</a>. retentionPolicy should be enabled and more than 90 days",
                             "remediationFunction": "PR_AZR_ARM_MNT_004.py"
                         }
                     ],
@@ -1599,7 +1637,7 @@
                             "id": "PR-AZR-ARM-MNT-005",
                             "eval": "data.rule.log_blob",
                             "message": "data.rule.log_blob_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings  should be enabled for blobs",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings' target='_blank'>here</a>. Should be enabled for blobs",
                             "remediationFunction": "PR_AZR_ARM_MNT_005.py"
                         }
                     ],
@@ -1643,7 +1681,7 @@
                             "id": "PR-AZR-ARM-MNT-006",
                             "eval": "data.rule.log_queue",
                             "message": "data.rule.log_queue_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings  should be enabled for queues",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings' target='_blank'>here</a>. Should be enabled for queues",
                             "remediationFunction": "PR_AZR_ARM_MNT_006.py"
                         }
                     ],
@@ -1687,7 +1725,7 @@
                             "id": "PR-AZR-ARM-MNT-007",
                             "eval": "data.rule.log_table",
                             "message": "data.rule.log_table_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings  should be enabled for tables",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for SQL Server by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings' target='_blank'>here</a>. Should be enabled for tables",
                             "remediationFunction": "PR_AZR_ARM_MNT_007.py"
                         }
                     ],
@@ -1724,7 +1762,7 @@
                             "id": "PR-AZR-ARM-CMP-001",
                             "eval": "data.rule.disk_encrypt",
                             "message": "data.rule.disk_encrypt_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for Disks from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/disks  encryptionSettingsCollection enabled should be true",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for Disks by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/disks' target='_blank'>here</a>. encryptionSettingsCollection enabled should be true",
                             "remediationFunction": "PR_AZR_ARM_CMP_001.py"
                         }
                     ],
@@ -1763,7 +1801,7 @@
                             "id": "PR-AZR-ARM-KV-001",
                             "eval": "data.rule.KeyVault",
                             "message": "data.rule.KeyVault_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure you have added either permissions.keys or permissions.secrets or permissions.certificates under each AccessPolicyEntry of properties.accessPolicies. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure you have added either permissions.keys or permissions.secrets or permissions.certificates under each AccessPolicyEntry of properties.accessPolicies.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_KV_001.py"
                         }
                     ],
@@ -1799,7 +1837,7 @@
                             "id": "PR-AZR-ARM-KV-002",
                             "eval": "data.rule.enableSoftDelete",
                             "message": "data.rule.enableSoftDelete_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure properties.enableSoftDelete exists and value is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure properties.enableSoftDelete exists and value is set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_KV_002.py"
                         }
                     ],
@@ -1833,7 +1871,7 @@
                             "id": "PR-AZR-ARM-KV-003",
                             "eval": "data.rule.enablePurgeProtection",
                             "message": "data.rule.enablePurgeProtection_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure properties.enablePurgeProtection exists and value is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure properties.enablePurgeProtection exists and value is set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_KV_003.py"
                         }
                     ],
@@ -1867,7 +1905,7 @@
                             "id": "PR-AZR-ARM-KV-004",
                             "eval": "data.rule.kv_keys_expire",
                             "message": "data.rule.kv_keys_expire_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults/keys\" make sure properties.attributes.exp exists and value isn't set empty. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/keys for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults/keys\" make sure properties.attributes.exp exists and value isn't set empty.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/keys' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_KV_004.py"
                         }
                     ],
@@ -1906,7 +1944,7 @@
                             "id": "PR-AZR-ARM-KV-005",
                             "eval": "data.rule.kv_expire",
                             "message": "data.rule.kv_expire_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults/secrets\" make sure properties.attributes.exp exists and value isn't set empty. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/secrets for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults/secrets\" make sure properties.attributes.exp exists and value isn't set empty.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/secrets' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_KV_005.py"
                         }
                     ],
@@ -1945,7 +1983,7 @@
                             "id": "PR-AZR-ARM-MNT-008",
                             "eval": "data.rule.rg_locks",
                             "message": "data.rule.rg_locks_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for locks from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/2016-09-01/locks",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for locks by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/2016-09-01/locks' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_MNT_008.py"
                         }
                     ],
@@ -1969,6 +2007,7 @@
                         }
                     ],
                     "resourceTypes": [
+                        "microsoft.resources/resourcegroups",
                         "microsoft.authorization/locks"
                     ]
                 },
@@ -1984,7 +2023,7 @@
                             "id": "PR-AZR-ARM-NTW-001",
                             "eval": "data.rule.netwatchFlowlogs",
                             "message": "data.rule.netwatchFlowlogs_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.network/networkwatchers/flowlogs\" make sure properties.enabled exists and value is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.network/networkwatchers/flowlogs\" make sure properties.enabled exists and value is set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_NTW_001.py"
                         }
                     ],
@@ -2021,7 +2060,7 @@
                             "id": "PR-AZR-ARM-NTW-002",
                             "eval": "data.rule.netwatch_logs",
                             "message": "data.rule.netwatch_logs_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.network/networkwatchers/flowlogs\" make sure properties.flowAnalyticsConfiguration.networkWatcherFlowAnalyticsConfiguration.enabled exists and value is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.network/networkwatchers/flowlogs\" make sure properties.flowAnalyticsConfiguration.networkWatcherFlowAnalyticsConfiguration.enabled exists and value is set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_NTW_002.py"
                         }
                     ],
@@ -2059,7 +2098,7 @@
                             "id": "PR-AZR-ARM-NTW-003",
                             "eval": "data.rule.netwatch_log_retention",
                             "message": "data.rule.netwatch_log_retention_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for Network Watcher from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs enabled should be true",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for Network Watcher by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networkwatchers/flowlogs' target='_blank'>here</a>. enabled should be true",
                             "remediationFunction": "PR_AZR_ARM_NTW_003.py"
                         }
                     ],
@@ -2097,7 +2136,7 @@
                             "id": "PR-AZR-ARM-NSG-001",
                             "eval": "data.rule.nsg_in_tcp_all_src",
                             "message": "data.rule.nsg_in_tcp_all_src_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_001.py"
                         }
                     ],
@@ -2136,7 +2175,7 @@
                             "id": "PR-AZR-ARM-NSG-002",
                             "eval": "data.rule.nsg_in_udp_all_src",
                             "message": "data.rule.nsg_in_udp_all_src_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_002.py"
                         }
                     ],
@@ -2175,7 +2214,7 @@
                             "id": "PR-AZR-ARM-NSG-003",
                             "eval": "data.rule.nsg_in_tcp_all",
                             "message": "data.rule.nsg_in_tcp_all_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_003.py"
                         }
                     ],
@@ -2214,7 +2253,7 @@
                             "id": "PR-AZR-ARM-NSG-004",
                             "eval": "data.rule.nsg_in_udp_all",
                             "message": "data.rule.nsg_in_udp_all_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_004.py"
                         }
                     ],
@@ -2253,7 +2292,7 @@
                             "id": "PR-AZR-ARM-NSG-005",
                             "eval": "data.rule.nsg_in_all",
                             "message": "data.rule.nsg_in_all_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_005.py"
                         }
                     ],
@@ -2292,7 +2331,7 @@
                             "id": "PR-AZR-ARM-NSG-006",
                             "eval": "data.rule.nsg_in_all_src",
                             "message": "data.rule.nsg_in_all_src_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_006.py"
                         }
                     ],
@@ -2331,7 +2370,7 @@
                             "id": "PR-AZR-ARM-NSG-007",
                             "eval": "data.rule.nsg_in_all_dst",
                             "message": "data.rule.nsg_in_all_dst_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_007.py"
                         }
                     ],
@@ -2370,7 +2409,7 @@
                             "id": "PR-AZR-ARM-NSG-008",
                             "eval": "data.rule.nsg_allow_icmp",
                             "message": "data.rule.nsg_allow_icmp_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_008.py"
                         }
                     ],
@@ -2409,7 +2448,7 @@
                             "id": "PR-AZR-ARM-NSG-009",
                             "eval": "data.rule.inbound_port_21",
                             "message": "data.rule.inbound_port_21_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_009.py"
                         }
                     ],
@@ -2448,7 +2487,7 @@
                             "id": "PR-AZR-ARM-NSG-010",
                             "eval": "data.rule.inbound_insecure_port",
                             "message": "data.rule.inbound_insecure_port_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_010.py"
                         }
                     ],
@@ -2486,7 +2525,7 @@
                             "id": "PR-AZR-ARM-NSG-011",
                             "eval": "data.rule.inbound_port_11211",
                             "message": "data.rule.inbound_port_11211_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_011.py"
                         }
                     ],
@@ -2525,7 +2564,7 @@
                             "id": "PR-AZR-ARM-NSG-012",
                             "eval": "data.rule.inbound_port_6379",
                             "message": "data.rule.inbound_port_6379_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_012.py"
                         }
                     ],
@@ -2564,7 +2603,7 @@
                             "id": "PR-AZR-ARM-NSG-013",
                             "eval": "data.rule.inbound_port_dbs",
                             "message": "data.rule.inbound_port_dbs_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_013.py"
                         }
                     ],
@@ -2603,7 +2642,7 @@
                             "id": "PR-AZR-ARM-NSG-014",
                             "eval": "data.rule.inbound_port_22",
                             "message": "data.rule.inbound_port_22_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_014.py"
                         }
                     ],
@@ -2641,7 +2680,7 @@
                             "id": "PR-AZR-ARM-NSG-015",
                             "eval": "data.rule.inbound_port_3389",
                             "message": "data.rule.inbound_port_3389_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_015.py"
                         }
                     ],
@@ -2679,7 +2718,7 @@
                             "id": "PR-AZR-ARM-NSG-016",
                             "eval": "data.rule.inbound_port_445",
                             "message": "data.rule.inbound_port_445_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_016.py"
                         }
                     ],
@@ -2718,7 +2757,7 @@
                             "id": "PR-AZR-ARM-NSG-018",
                             "eval": "data.rule.inbound_port_53",
                             "message": "data.rule.inbound_port_53_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_018.py"
                         }
                     ],
@@ -2757,7 +2796,7 @@
                             "id": "PR-AZR-ARM-NSG-019",
                             "eval": "data.rule.inbound_port_20",
                             "message": "data.rule.inbound_port_20_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_019.py"
                         }
                     ],
@@ -2796,7 +2835,7 @@
                             "id": "PR-AZR-ARM-NSG-020",
                             "eval": "data.rule.inbound_port_4333",
                             "message": "data.rule.inbound_port_4333_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_020.py"
                         }
                     ],
@@ -2835,7 +2874,7 @@
                             "id": "PR-AZR-ARM-NSG-021",
                             "eval": "data.rule.inbound_port_3306",
                             "message": "data.rule.inbound_port_3306_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_021.py"
                         }
                     ],
@@ -2874,7 +2913,7 @@
                             "id": "PR-AZR-ARM-NSG-022",
                             "eval": "data.rule.inbound_port_netbios",
                             "message": "data.rule.inbound_port_netbios_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_022.py"
                         }
                     ],
@@ -2913,7 +2952,7 @@
                             "id": "PR-AZR-ARM-NSG-023",
                             "eval": "data.rule.inbound_port_5432",
                             "message": "data.rule.inbound_port_5432_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_023.py"
                         }
                     ],
@@ -2952,7 +2991,7 @@
                             "id": "PR-AZR-ARM-NSG-024",
                             "eval": "data.rule.inbound_port_25",
                             "message": "data.rule.inbound_port_25_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_024.py"
                         }
                     ],
@@ -2991,7 +3030,7 @@
                             "id": "PR-AZR-ARM-NSG-025",
                             "eval": "data.rule.inbound_port_sqlserver",
                             "message": "data.rule.inbound_port_sqlserver_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_025.py"
                         }
                     ],
@@ -3030,7 +3069,7 @@
                             "id": "PR-AZR-ARM-NSG-026",
                             "eval": "data.rule.inbound_port_23",
                             "message": "data.rule.inbound_port_23_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_026.py"
                         }
                     ],
@@ -3069,7 +3108,7 @@
                             "id": "PR-AZR-ARM-NSG-027",
                             "eval": "data.rule.inbound_port_5500",
                             "message": "data.rule.inbound_port_5500_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_027.py"
                         }
                     ],
@@ -3108,7 +3147,7 @@
                             "id": "PR-AZR-ARM-NSG-028",
                             "eval": "data.rule.inbound_port_5900",
                             "message": "data.rule.inbound_port_5900_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_028.py"
                         }
                     ],
@@ -3147,7 +3186,7 @@
                             "id": "PR-AZR-ARM-NSG-029",
                             "eval": "data.rule.inbound_port_135",
                             "message": "data.rule.inbound_port_135_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_029.py"
                         }
                     ],
@@ -3186,7 +3225,7 @@
                             "id": "PR-AZR-ARM-NSG-030",
                             "eval": "data.rule.nsg_out_all",
                             "message": "data.rule.nsg_out_all_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_030.py"
                         }
                     ],
@@ -3225,7 +3264,7 @@
                             "id": "PR-AZR-ARM-NSG-031",
                             "eval": "data.rule.outbound_port_bitcoin",
                             "message": "data.rule.outbound_port_bitcoin_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_031.py"
                         }
                     ],
@@ -3260,7 +3299,7 @@
                             "id": "PR-AZR-ARM-NSG-032",
                             "eval": "data.rule.outbound_port_ethereum",
                             "message": "data.rule.outbound_port_ethereum_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_032.py"
                         }
                     ],
@@ -3295,7 +3334,7 @@
                             "id": "PR-AZR-ARM-NSG-017",
                             "eval": "data.rule.inbound_insecure_omi_port",
                             "message": "data.rule.inbound_insecure_omi_port_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for NSG by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NSG_017.py"
                         }
                     ],
@@ -3305,7 +3344,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -3327,7 +3373,7 @@
                             "id": "PR-AZR-ARM-SQL-028",
                             "eval": "data.rule.geoRedundantBackup",
                             "message": "data.rule.geoRedundantBackup_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.dbforpostgresql/servers\" make sure properties.storageProfile.geoRedundantBackup exists and value is set to \"Enabled\". \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.dbforpostgresql/servers\" make sure properties.storageProfile.geoRedundantBackup exists and value is set to \"Enabled\".<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_028.py"
                         }
                     ],
@@ -3365,7 +3411,7 @@
                             "id": "PR-AZR-ARM-SQL-029",
                             "eval": "data.rule.sslEnforcement",
                             "message": "data.rule.sslEnforcement_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.dbforpostgresql/servers\" make sure properties.sslEnforcement exists and value is set to \"Enabled\". \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.dbforpostgresql/servers\" make sure properties.sslEnforcement exists and value is set to \"Enabled\".<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_029.py"
                         }
                     ],
@@ -3404,7 +3450,7 @@
                             "id": "PR-AZR-ARM-SCT-001",
                             "eval": "data.rule.pricing",
                             "message": "data.rule.pricing_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for pricing from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.security/pricings",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for pricing by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.security/pricings' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_SCT_001.py"
                         }
                     ],
@@ -3439,7 +3485,7 @@
                             "id": "PR-AZR-ARM-CCH-001",
                             "eval": "data.rule.enableSslPort",
                             "message": "data.rule.enableSslPort_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.Cache/redis\" make sure properties.enableNonSslPort value is set to false or isn't exist . \n Please visit https://docs.microsoft.com/en-us/azure/templates/Microsoft.Cache/redis for more details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.Cache/redis\" make sure properties.enableNonSslPort value is set to false or isn't exist .<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/Microsoft.Cache/redis' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_CCH_001.py"
                         }
                     ],
@@ -3479,7 +3525,7 @@
                             "id": "PR-AZR-ARM-CCH-002",
                             "eval": "data.rule.serverRole",
                             "message": "data.rule.serverRole_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.Cache/redis/linkedServers\" make sure properties.serverRole value is set to Secondary. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis/linkedservers for more details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.Cache/redis/linkedServers\" make sure properties.serverRole value is set to Secondary.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis/linkedservers' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_CCH_002.py"
                         }
                     ],
@@ -3518,7 +3564,7 @@
                             "id": "PR-AZR-ARM-ACR-003",
                             "eval": "data.rule.acr_classic",
                             "message": "data.rule.acr_classic_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for container registry from this URL : https://docs.microsoft.com/en-us/rest/api/containerregistry/registries/list",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for container registry by visiting <a href='https://docs.microsoft.com/en-us/rest/api/containerregistry/registries/list' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_ACR_003.py"
                         }
                     ],
@@ -3556,7 +3602,7 @@
                             "id": "PR-AZR-ARM-ACR-001",
                             "eval": "data.rule.acr_webhooks",
                             "message": "data.rule.acr_webhooks_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for registry webhook from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries/webhooks",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for registry webhook by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries/webhooks' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_ACR_001.py"
                         }
                     ],
@@ -3595,7 +3641,7 @@
                             "id": "PR-AZR-ARM-ACR-002",
                             "eval": "data.rule.adminUserDisabled",
                             "message": "data.rule.adminUserDisabled_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.containerregistry/registries\" make sure properties.adminUserEnabled is set to \"Disabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries for more details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.containerregistry/registries\" make sure properties.adminUserEnabled is set to \"Disabled\" .<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_ACR_002.py"
                         }
                     ],
@@ -3663,7 +3709,7 @@
                             "remediationFunction": "PR_AZR_ARM_SEC_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "There is a possibility that secure password is exposed",
                     "description": "There is a possibility that secure password is exposed. Make sure to put those secrets in a vault and access from there.",
                     "tags": [
@@ -3692,7 +3738,7 @@
                             "remediationFunction": "PR_AZR_ARM_SEC_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "There is a possibility that secure password is exposed",
                     "description": "There is a possibility that secure password is exposed. Make sure to put those secrets in a vault and access from there.",
                     "tags": [
@@ -3717,7 +3763,7 @@
                             "id": "PR-AZR-ARM-SCT-002",
                             "eval": "data.rule.securitycontacts",
                             "message": "data.rule.securitycontacts_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for security center from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for security center by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_SCT_002.py"
                         }
                     ],
@@ -3756,7 +3802,7 @@
                             "id": "PR-AZR-ARM-SQL-030",
                             "eval": "data.rule.sql_logical_server_alert",
                             "message": "data.rule.sql_logical_server_alert_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for vpn gateway from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for vpn gateway by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_SQL_030.py"
                         }
                     ],
@@ -3796,7 +3842,7 @@
                             "id": "PR-AZR-ARM-SQL-031",
                             "eval": "data.rule.sql_server_alert",
                             "message": "data.rule.sql_server_alert_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.sql/servers/securityalertpolicies\" make sure properties.state exists and value is set to \"Enabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies.",
+                            "remediationDescription": "In Resource of type \"Microsoft.sql/servers/securityalertpolicies\" make sure properties.state exists and value is set to \"Enabled\" .<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_SQL_031.py"
                         }
                     ],
@@ -3836,7 +3882,7 @@
                             "id": "PR-AZR-ARM-SQL-032",
                             "eval": "data.rule.sql_managed_instance_alert",
                             "message": "data.rule.sql_managed_instance_alert_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.sql/managedinstances/securityalertpolicies\" make sure properties.state exists and value is set to \"Enabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/securityalertpolicies.",
+                            "remediationDescription": "In Resource of type \"Microsoft.sql/managedinstances/securityalertpolicies\" make sure properties.state exists and value is set to \"Enabled\" .<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances/securityalertpolicies' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_SQL_032.py"
                         }
                     ],
@@ -3876,7 +3922,7 @@
                             "id": "PR-AZR-ARM-SQL-041",
                             "eval": "data.rule.sql_mi_public_endpoint_disabled",
                             "message": "data.rule.sql_mi_public_endpoint_disabled_err",
-                            "remediationDescription": "IN ARM template make sure 'properties.publicDataEndpointEnabled' does not exist or if exist set value 'false' to 'properties.publicDataEndpointEnabled' under resource of type 'microsoft.sql/managedinstances'. Visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances for details.",
+                            "remediationDescription": "IN ARM template make sure 'properties.publicDataEndpointEnabled' does not exist or if exist set value 'false' to 'properties.publicDataEndpointEnabled' under resource of type 'microsoft.sql/managedinstances'. Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/managedinstances' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_041.py"
                         }
                     ],
@@ -3908,7 +3954,7 @@
                             "id": "PR-AZR-ARM-SQL-046",
                             "eval": "data.rule.serverKeyType",
                             "message": "data.rule.serverKeyType_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.sql/servers/encryptionprotector\" make sure properties.serverKeyType is set to \"AzureKeyVault\". \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/encryptionprotector for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.sql/servers/encryptionprotector\" make sure properties.serverKeyType is set to \"AzureKeyVault\".<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/encryptionprotector' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_046.py"
                         }
                     ],
@@ -3947,7 +3993,7 @@
                             "id": "PR-AZR-ARM-STR-003",
                             "eval": "data.rule.storage_secure",
                             "message": "data.rule.storage_secure_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts supportsHttpsTrafficOnly should be true",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a>. supportsHttpsTrafficOnly should be true",
                             "remediationFunction": "PR_AZR_ARM_STR_003.py"
                         }
                     ],
@@ -3986,7 +4032,7 @@
                             "id": "PR-AZR-ARM-STR-004",
                             "eval": "data.rule.storage_acl",
                             "message": "data.rule.storage_acl_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts networkAcls should be configured",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a>. networkAcls should be configured",
                             "remediationFunction": "PR_AZR_ARM_STR_004.py"
                         }
                     ],
@@ -4025,7 +4071,7 @@
                             "id": "PR-AZR-ARM-STR-005",
                             "eval": "data.rule.storage_threat_protection",
                             "message": "data.rule.storage_threat_protection_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts. Also visit https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/microsoft.storage/storage-advanced-threat-protection-create/azuredeploy.json for template reference",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a>. Also visit <a href='https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/microsoft.storage/storage-advanced-threat-protection-create/azuredeploy.json' target='_blank'>here</a> for template reference",
                             "remediationFunction": "PR_AZR_ARM_STR_005.py"
                         }
                     ],
@@ -4064,7 +4110,7 @@
                             "id": "PR-AZR-ARM-STR-006",
                             "eval": "data.rule.blobService",
                             "message": "data.rule.blobService_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure properties.encryption.services.blob exists and blob.enabled is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure properties.encryption.services.blob exists and blob.enabled is set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_STR_006.py"
                         }
                     ],
@@ -4102,7 +4148,7 @@
                             "id": "PR-AZR-ARM-STR-007",
                             "eval": "data.rule.fileService",
                             "message": "data.rule.fileService_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure properties.encryption.services.file exists and file.enabled is set to true. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure properties.encryption.services.file exists and file.enabled is set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_STR_007.py"
                         }
                     ],
@@ -4140,7 +4186,7 @@
                             "id": "PR-AZR-ARM-STR-008",
                             "eval": "data.rule.keySource",
                             "message": "data.rule.keySource_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure properties.encryption.keySource exists and value is set to \"Microsoft.Keyvault\". \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure properties.encryption.keySource exists and value is set to \"Microsoft.Keyvault\".<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_STR_008.py"
                         }
                     ],
@@ -4174,7 +4220,7 @@
                             "id": "PR-AZR-ARM-STR-009",
                             "eval": "data.rule.region",
                             "message": "data.rule.region_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure location is set to northeurope or westeurope. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure location is set to northeurope or westeurope.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_STR_009.py"
                         }
                     ],
@@ -4208,7 +4254,7 @@
                             "id": "PR-AZR-ARM-STR-010",
                             "eval": "data.rule.blobServicePublicAccessDisabled",
                             "message": "data.rule.blobServicePublicAccessDisabled_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure property allowBlobPublicAccess is not exist or value set to false. \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.storage/storageaccounts\" make sure property allowBlobPublicAccess is not exist or value set to false.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_STR_010.py"
                         }
                     ],
@@ -4247,7 +4293,7 @@
                             "id": "PR-AZR-ARM-STR-012",
                             "eval": "data.rule.storage_container_public_access_disabled",
                             "message": "data.rule.storage_container_public_access_disabled_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-06-01/storageaccounts/blobservices/containers",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-06-01/storageaccounts/blobservices/containers' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_STR_012.py"
                         }
                     ],
@@ -4286,7 +4332,7 @@
                             "id": "PR-AZR-ARM-STR-013",
                             "eval": "data.rule.storage__logical_container_public_access_disabled",
                             "message": "data.rule.storage__logical_container_public_access_disabled_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-06-01/storageaccounts/blobservices/containers",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-06-01/storageaccounts/blobservices/containers' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_STR_013.py"
                         }
                     ],
@@ -4319,7 +4365,7 @@
                             "id": "PR-AZR-ARM-VM-001",
                             "eval": "data.rule.vm_aset",
                             "message": "data.rule.vm_aset_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for storage accounts by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_VM_001.py"
                         }
                     ],
@@ -4358,7 +4404,7 @@
                             "id": "PR-AZR-ARM-VM-003",
                             "eval": "data.rule.vm_protection",
                             "message": "data.rule.vm_protection_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for extensions from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines/extensions",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for extensions by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines/extensions' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_VM_003.py"
                         }
                     ],
@@ -4390,7 +4436,7 @@
                             "id": "PR-AZR-ARM-NTW-004",
                             "eval": "data.rule.vnet_peer",
                             "message": "data.rule.vnet_peer_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for vnet from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/virtualnetworkpeerings",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for vnet by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/virtualnetworkpeerings' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NTW_004.py"
                         }
                     ],
@@ -4422,7 +4468,7 @@
                             "id": "PR-AZR-ARM-NTW-005",
                             "eval": "data.rule.vnet_subnet_nsg",
                             "message": "data.rule.vnet_subnet_nsg_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for vnet from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/subnets",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for vnet by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/subnets' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NTW_005.py"
                         }
                     ],
@@ -4460,7 +4506,7 @@
                             "id": "PR-AZR-ARM-NTW-006",
                             "eval": "data.rule.vpn_encrypt",
                             "message": "data.rule.vpn_encrypt_err",
-                            "remediationDescription": "Make sure you are following the ARM template guidelines for vpn gateway from this URL : https://docs.microsoft.com/en-us/azure/templates/microsoft.network/vpngateways",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for vpn gateway by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/vpngateways' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_ARM_NTW_006.py"
                         }
                     ],
@@ -4497,7 +4543,7 @@
                             "id": "PR-AZR-ARM-SQL-047",
                             "eval": "data.rule.sql_public_access_disabled",
                             "message": "data.rule.sql_public_access_disabled_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.Sql/servers\" make sure properties.publicNetworkAccess exists and value is set to \"disabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.Sql/servers\" make sure properties.publicNetworkAccess exists and value is set to \"disabled\" .<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_047.py"
                         }
                     ],
@@ -4530,7 +4576,7 @@
                             "id": "PR-AZR-ARM-SQL-048",
                             "eval": "data.rule.sql_server_login",
                             "message": "data.rule.sql_server_login_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.Sql/servers/administrators\" make sure properties.login value isn't set to \"admin\" or \"administrator\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.Sql/servers/administrators\" make sure properties.login value isn't set to \"admin\" or \"administrator\" .<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_048.py"
                         }
                     ],
@@ -4570,7 +4616,7 @@
                             "id": "PR-AZR-ARM-SQL-042",
                             "eval": "data.rule.sql_server_log_audit",
                             "message": "data.rule.sql_server_log_audit_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.Sql/servers/auditingSettings\" make sure properties.state exists and value is set to \"Enabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.Sql/servers/auditingSettings\" make sure properties.state exists and value is set to \"Enabled\" .<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_042.py"
                         }
                     ],
@@ -4610,7 +4656,7 @@
                             "id": "PR-AZR-ARM-SQL-043",
                             "eval": "data.rule.sql_logical_server_log_audit",
                             "message": "data.rule.sql_logical_server_log_audit_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.Sql/servers/auditingSettings\" make sure properties.state exists and value is set to \"Enabled\" . \n Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings for details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.Sql/servers/auditingSettings\" make sure properties.state exists and value is set to \"Enabled\" .<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_043.py"
                         }
                     ],
@@ -4650,7 +4696,7 @@
                             "id": "PR-AZR-ARM-VM-002",
                             "eval": "data.rule.linux_configuration",
                             "message": "data.rule.linux_configuration_err",
-                            "remediationDescription": "For Resource type 'microsoft.compute/virtualmachines' make sure osProfile.linuxConfiguration.disablePasswordAuthentication exists and the value is set to true.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.compute/virtualmachines' make sure osProfile.linuxConfiguration.disablePasswordAuthentication exists and the value is set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_VM_002.py"
                         }
                     ],
@@ -4682,7 +4728,7 @@
                             "id": "PR-AZR-ARM-AKS-007",
                             "eval": "data.rule.aks_authorized_Ip",
                             "message": "data.rule.aks_authorized_Ip_err",
-                            "remediationDescription": "For Resource type 'microsoft.containerservice/managedclusters' make sure apiServerAccessProfile.authorizedIPRanges exists and the value of that be accessible from a limited set of IP address ranges.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.containerservice/managedclusters' make sure apiServerAccessProfile.authorizedIPRanges exists and the value of that be accessible from a limited set of IP address ranges.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_AKS_007.py"
                         }
                     ],
@@ -4714,7 +4760,7 @@
                             "id": "PR-AZR-ARM-AKS-008",
                             "eval": "data.rule.network_policy",
                             "message": "data.rule.network_policy_err",
-                            "remediationDescription": "For Resource type 'microsoft.containerservice/managedclusters' make sure networkProfile.networkPolicy exists and the value is set to `azure` or 'calico`.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.containerservice/managedclusters' make sure networkProfile.networkPolicy exists and the value is set to `azure` or 'calico`.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_AKS_008.py"
                         }
                     ],
@@ -4746,7 +4792,7 @@
                             "id": "PR-AZR-ARM-WEB-001",
                             "eval": "data.rule.https_only",
                             "message": "data.rule.https_only_err",
-                            "remediationDescription": "For Resource type 'microsoft.web/sites' make sure httpsOnly exists and the value is set to true.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.web/sites' make sure httpsOnly exists and the value is set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_WEB_001.py"
                         }
                     ],
@@ -4785,7 +4831,7 @@
                             "id": "PR-AZR-ARM-WEB-002",
                             "eval": "data.rule.min_tls_version",
                             "message": "data.rule.min_tls_version_err",
-                            "remediationDescription": "For Resource type 'microsoft.web/sites' make sure siteConfig.minTlsVersion exists and the value is set to '1.2'.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.web/sites' make sure siteConfig.minTlsVersion exists and the value is set to '1.2'.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_WEB_002.py"
                         }
                     ],
@@ -4824,7 +4870,7 @@
                             "id": "PR-AZR-ARM-WEB-003",
                             "eval": "data.rule.client_cert_enabled",
                             "message": "data.rule.client_cert_enabled_err",
-                            "remediationDescription": "For Resource type 'microsoft.web/sites' make sure clientCertEnabled exists and the value is set to true.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.web/sites' make sure clientCertEnabled exists and the value is set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_WEB_003.py"
                         }
                     ],
@@ -4863,7 +4909,7 @@
                             "id": "PR-AZR-ARM-WEB-004",
                             "eval": "data.rule.http_20_enabled",
                             "message": "data.rule.http_20_enabled_err",
-                            "remediationDescription": "For Resource type 'microsoft.web/sites' make sure siteConfig.http20Enabled exists and the value is set to true.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.web/sites' make sure siteConfig.http20Enabled exists and the value is set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_WEB_004.py"
                         }
                     ],
@@ -4902,7 +4948,7 @@
                             "id": "PR-AZR-ARM-SCT-003",
                             "eval": "data.rule.alert_notifications",
                             "message": "data.rule.alert_notifications_err",
-                            "remediationDescription": "For Resource type 'microsoft.security/securitycontacts' make sure alertNotifications exists and the value is set to 'On'.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.security/securitycontacts' make sure alertNotifications exists and the value is set to 'On'.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_SCT_003.py"
                         }
                     ],
@@ -4934,13 +4980,13 @@
                             "id": "PR-AZR-ARM-SQL-044",
                             "eval": "data.rule.sql_server_audit_log_retention",
                             "message": "data.rule.sql_server_audit_log_retention_err",
-                            "remediationDescription": "For Resource type 'microsoft.sql/servers/auditingsettings' make sure retentionDays exists and greater than 91 days.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.sql/servers/auditingsettings' make sure retentionDays exists and greater than 91 days.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_044.py"
                         }
                     ],
                     "severity": "High",
-                    "title": "Ensure that SQL Server Auditing is Enabled",
-                    "description": "Ensure that SQL Server Auditing is enabled in order to keep track of Audit events.",
+                    "title": "Azure SQL server audit log retention should be greater than 90 days",
+                    "description": "Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. We recommend you configure SQL server audit retention to be greater than 90 days.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -4974,13 +5020,13 @@
                             "id": "PR-AZR-ARM-SQL-045",
                             "eval": "data.rule.sql_logial_server_audit_log_retention",
                             "message": "data.rule.sql_logial_server_audit_log_retention_err",
-                            "remediationDescription": "For Resource type 'microsoft.sql/servers/auditingsettings' make sure retentionDays exists and greater than 91 days.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.sql/servers/auditingsettings' make sure retentionDays exists and greater than 91 days.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2021-02-01-preview/servers/auditingsettings' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_045.py"
                         }
                     ],
                     "severity": "High",
-                    "title": "Ensure that SQL Server Auditing is Enabled",
-                    "description": "Ensure that SQL Server Auditing is enabled in order to keep track of Audit events.",
+                    "title": "Azure SQL server audit log retention should be greater than 90 days",
+                    "description": "Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. We recommend you configure SQL server audit retention to be greater than 90 days.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -5014,7 +5060,7 @@
                             "id": "PR-AZR-ARM-SQL-016",
                             "eval": "data.rule.ssl_enforcement",
                             "message": "data.rule.ssl_enforcement_err",
-                            "remediationDescription": "For Resource type 'microsoft.dbformysql/servers' make sure sslEnforcement exists and the value is set to 'Enabled'.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.dbformysql/servers' make sure sslEnforcement exists and the value is set to 'Enabled'.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_016.py"
                         }
                     ],
@@ -5053,7 +5099,7 @@
                             "id": "PR-AZR-ARM-STR-011",
                             "eval": "data.rule.storage_acount_by_pass",
                             "message": "data.rule.storage_acount_by_pass_err",
-                            "remediationDescription": "For Resource type 'microsoft.storage/storageaccounts' make sure networkAcls.bypass exists and the value is set to 'AzureServices'.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.storage/storageaccounts' make sure networkAcls.bypass exists and the value is set to 'AzureServices'.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_STR_011.py"
                         }
                     ],
@@ -5085,7 +5131,7 @@
                             "id": "PR-AZR-ARM-MNT-009",
                             "eval": "data.rule.log_profiles_retention_days",
                             "message": "data.rule.log_profiles_retention_days_err",
-                            "remediationDescription": "For Resource type 'microsoft.insights/logprofiles' make sure retentionPolicy.days exists and greater than 365 and retentionPolicy.enabled exists and the value is set to true or retentionPolicy.days exists and set to 0 and retentionPolicy.enabled exists and the value is set to false.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/Microsoft.Insights/logprofiles' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.insights/logprofiles' make sure retentionPolicy.days exists and greater than 365 and retentionPolicy.enabled exists and the value is set to true or retentionPolicy.days exists and set to 0 and retentionPolicy.enabled exists and the value is set to false.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/Microsoft.Insights/logprofiles' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_MNT_009.py"
                         }
                     ],
@@ -5117,7 +5163,7 @@
                             "id": "PR-AZR-ARM-SQL-012",
                             "eval": "data.rule.maria_ingress_from_any_ip_disabled",
                             "message": "data.rule.maria_ingress_from_any_ip_disabled_err",
-                            "remediationDescription": "For Resource type 'microsoft.dbformariadb/servers/firewallrules' make sure startIpAddress and endIpAddress exists and do not allow ingress from all Azure-internal IP addresses (0.0.0.0/0).<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformariadb/2018-06-01/servers/firewallrules' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.dbformariadb/servers/firewallrules' make sure startIpAddress and endIpAddress exists and do not allow ingress from all Azure-internal IP addresses (0.0.0.0/0).<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformariadb/2018-06-01/servers/firewallrules' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_012.py"
                         }
                     ],
@@ -5150,7 +5196,7 @@
                             "id": "PR-AZR-ARM-SQL-013",
                             "eval": "data.rule.dbmaria_ingress_from_any_ip_disabled",
                             "message": "data.rule.dbmaria_ingress_from_any_ip_disabled_err",
-                            "remediationDescription": "For Resource type 'microsoft.dbformariadb/servers/firewallrules' make sure startIpAddress and endIpAddress exists and do not allow ingress from all Azure-internal IP addresses (0.0.0.0/0).<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformariadb/2018-06-01/servers/firewallrules' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.dbformariadb/servers/firewallrules' make sure startIpAddress and endIpAddress exists and do not allow ingress from all Azure-internal IP addresses (0.0.0.0/0).<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformariadb/2018-06-01/servers/firewallrules' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_013.py"
                         }
                     ],
@@ -5183,13 +5229,13 @@
                             "id": "PR-AZR-ARM-SQL-014",
                             "eval": "data.rule.mysql_ingress_from_any_ip_disabled",
                             "message": "data.rule.mysql_ingress_from_any_ip_disabled_err",
-                            "remediationDescription": "For Resource type 'microsoft.dbformariadb/servers/firewallrules' make sure startIpAddress and endIpAddress exists and do not allow ingress from all Azure-internal IP addresses (0.0.0.0/0).<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers/firewallrules' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.dbformariadb/servers/firewallrules' make sure startIpAddress and endIpAddress exists and do not allow ingress from all Azure-internal IP addresses (0.0.0.0/0).<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers/firewallrules' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_014.py"
                         }
                     ],
                     "severity": "High",
-                    "title": "MariaDB should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
-                    "description": "This policy will identify MariaDB firewall rule that are currently allowing ingress from all Azure-internal IP addresses.",
+                    "title": "MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
+                    "description": "This policy will identify MySQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
                     "tags": [
                         {
                             "cloud": "git",
@@ -5216,13 +5262,13 @@
                             "id": "PR-AZR-ARM-SQL-015",
                             "eval": "data.rule.my_logical_sql_ingress_from_any_ip_disabled",
                             "message": "data.rule.my_logical_sql_ingress_from_any_ip_disabled_err",
-                            "remediationDescription": "For Resource type 'microsoft.dbformariadb/servers/firewallrules' make sure startIpAddress and endIpAddress exists and do not allow ingress from all Azure-internal IP addresses (0.0.0.0/0).<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers/firewallrules' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.dbformariadb/servers/firewallrules' make sure startIpAddress and endIpAddress exists and do not allow ingress from all Azure-internal IP addresses (0.0.0.0/0).<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers/firewallrules' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_015.py"
                         }
                     ],
                     "severity": "High",
-                    "title": "MariaDB should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
-                    "description": "This policy will identify MariaDB firewall rule that are currently allowing ingress from all Azure-internal IP addresses.",
+                    "title": "MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
+                    "description": "This policy will identify MySQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
                     "tags": [
                         {
                             "cloud": "git",
@@ -5249,7 +5295,7 @@
                             "id": "PR-AZR-ARM-MNT-010",
                             "eval": "data.rule.log_profile_category",
                             "message": "data.rule.log_profile_category_err",
-                            "remediationDescription": "For Resource type 'microsoft.insights/logprofiles' make sure categories exists and contains 'Write', 'Action' and 'Delete' <br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/Microsoft.Insights/logprofiles' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.insights/logprofiles' make sure categories exists and contains 'Write', 'Action' and 'Delete'.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/Microsoft.Insights/logprofiles' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_MNT_010.py"
                         }
                     ],
@@ -5288,7 +5334,7 @@
                             "id": "PR-AZR-ARM-SQL-050",
                             "eval": "data.rule.fail_over_groups",
                             "message": "data.rule.fail_over_groups_err",
-                            "remediationDescription": "For Resource type 'microsoft.sql/servers' make sure has a subresource with type 'failoverGroups'.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/failovergroups' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.sql/servers' make sure has a subresource with type 'failoverGroups'.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/failovergroups' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_050.py"
                         }
                     ],
@@ -5327,12 +5373,12 @@
                             "id": "PR-AZR-ARM-SQL-051",
                             "eval": "data.rule.sql_server_administrators",
                             "message": "data.rule.sql_server_administrators_err",
-                            "remediationDescription": "For Resource type 'microsoft.sql/servers/administrators' make sure name exists and the value is set to 'activedirectory'.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.sql/servers/administrators' make sure name exists and the value is set to 'activedirectory'.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_051.py"
                         }
                     ],
                     "severity": "High",
-                    "title": "Ensure that Azure Active Directory Admin is configured for SQL Server.",
+                    "title": "Ensure that Azure Active Directory Admin is configured for SQL Server",
                     "description": "Use Azure Active Directory Authentication for authentication with SQL Databases. Azure Active Directory authentication is a mechanism of connecting Microsoft Azure SQL Databases and SQL Data Warehouses using identities in an Azure Active Directory (Azure AD). With Azure AD authentication, you can centrally manage the identities of database users and other Microsoft services in one central location.",
                     "tags": [
                         {
@@ -5362,7 +5408,7 @@
                             "id": "PR-AZR-ARM-SQL-033",
                             "eval": "data.rule.sql_logical_server_email_account",
                             "message": "data.rule.sql_logical_server_email_account_err",
-                            "remediationDescription": "For Resource type 'microsoft.sql/servers/securityalertpolicies' make sure properties.emailAccountAdmins exists and the value is set to true.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.sql/servers/securityalertpolicies' make sure properties.emailAccountAdmins exists and the value is set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_033.py"
                         }
                     ],
@@ -5402,7 +5448,7 @@
                             "id": "PR-AZR-ARM-SQL-034",
                             "eval": "data.rule.sql_server_email_account",
                             "message": "data.rule.sql_server_email_account_err",
-                            "remediationDescription": "For Resource type 'microsoft.sql/servers/securityalertpolicies' make sure properties.emailAccountAdmins exists and the value is set to true.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.sql/servers/securityalertpolicies' make sure properties.emailAccountAdmins exists and the value is set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_034.py"
                         }
                     ],
@@ -5442,7 +5488,7 @@
                             "id": "PR-AZR-ARM-SQL-035",
                             "eval": "data.rule.sql_logical_server_email_addressess",
                             "message": "data.rule.sql_logical_server_email_addressess_err",
-                            "remediationDescription": "For Resource type 'microsoft.sql/servers/securityalertpolicies' make sure properties.emailAddresses exists and has a valid email address.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.sql/servers/securityalertpolicies' make sure properties.emailAddresses exists and has a valid email address.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_035.py"
                         }
                     ],
@@ -5482,7 +5528,7 @@
                             "id": "PR-AZR-ARM-SQL-036",
                             "eval": "data.rule.sql_server_email_addressess",
                             "message": "data.rule.sql_server_email_addressess_err",
-                            "remediationDescription": "For Resource type 'microsoft.sql/servers/securityalertpolicies' make sure properties.emailAddresses exists and has a valid email address.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.sql/servers/securityalertpolicies' make sure properties.emailAddresses exists and has a valid email address.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_036.py"
                         }
                     ],
@@ -5522,7 +5568,7 @@
                             "id": "PR-AZR-ARM-SQL-037",
                             "eval": "data.rule.sql_logical_server_retention_days",
                             "message": "data.rule.sql_logical_server_retention_days_err",
-                            "remediationDescription": "For Resource type 'microsoft.sql/servers/securityalertpolicies' make sure properties.retentionDays exists and the value is set to greater than 90.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.sql/servers/securityalertpolicies' make sure properties.retentionDays exists and the value is set to greater than 90.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_037.py"
                         }
                     ],
@@ -5562,7 +5608,7 @@
                             "id": "PR-AZR-ARM-SQL-038",
                             "eval": "data.rule.sql_server_retention_days",
                             "message": "data.rule.sql_server_retention_days_err",
-                            "remediationDescription": "For Resource type 'microsoft.sql/servers/securityalertpolicies' make sure properties.retentionDays exists and the value is set to greater than 90.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For Resource type 'microsoft.sql/servers/securityalertpolicies' make sure properties.retentionDays exists and the value is set to greater than 90.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_038.py"
                         }
                     ],
@@ -5602,7 +5648,7 @@
                             "id": "PR-AZR-ARM-SQL-039",
                             "eval": "data.rule.sql_logical_server_disabled_alerts",
                             "message": "data.rule.sql_logical_server_disabled_alerts_err",
-                            "remediationDescription": "For the source type 'microsoft.sql/servers/securityalertpolicies' make sure that properties.disabledAlerts does not exist or is empty.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For the source type 'microsoft.sql/servers/securityalertpolicies' make sure that properties.disabledAlerts does not exist or is empty.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_039.py"
                         }
                     ],
@@ -5642,7 +5688,7 @@
                             "id": "PR-AZR-ARM-SQL-040",
                             "eval": "data.rule.sql_server_disabled_alerts",
                             "message": "data.rule.sql_server_disabled_alerts_err",
-                            "remediationDescription": "For the source type 'microsoft.sql/servers/securityalertpolicies' make sure that properties.disabledAlerts does not exist or is empty.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "For the source type 'microsoft.sql/servers/securityalertpolicies' make sure that properties.disabledAlerts does not exist or is empty.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/securityalertpolicies' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_040.py"
                         }
                     ],
@@ -5671,7 +5717,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_MSSQL_SERVER_4",
+                    "masterTestId": "TEST_MSSQL_SERVER_5",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
@@ -5682,7 +5728,7 @@
                             "id": "PR-AZR-ARM-SQL-049",
                             "eval": "data.rule.sql_logical_server_login",
                             "message": "data.rule.sql_logical_server_login_err",
-                            "remediationDescription": "In Resource of type \"Microsoft.Sql/servers/administrators\" make sure properties.login exists and the value isn't set to 'admin' or 'administrator'.<br>Please click <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/administrators' target='_blank'>here</a> for more details.",
+                            "remediationDescription": "In Resource of type \"Microsoft.Sql/servers/administrators\" make sure properties.login exists and the value isn't set to 'admin' or 'administrator'.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/administrators' target='_blank'>here</a> for more details.",
                             "remediationFunction": "PR_AZR_ARM_SQL_049.py"
                         }
                     ],

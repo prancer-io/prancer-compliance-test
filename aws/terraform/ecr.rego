@@ -1,8 +1,8 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-imagetagmutability
+
 #
-# PR-AWS-0208-TRF
+# PR-AWS-TRF-ECR-001
 #
 
 default ecr_imagetag = null
@@ -28,7 +28,7 @@ ecr_imagetag_err = "Ensure ECR image tags are immutable" {
 }
 
 ecr_imagetag_metadata := {
-    "Policy Code": "PR-AWS-0208-TRF",
+    "Policy Code": "PR-AWS-TRF-ECR-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -40,7 +40,7 @@ ecr_imagetag_metadata := {
 }
 
 #
-# PR-AWS-0209-TRF
+# PR-AWS-TRF-ECR-002
 #
 
 default ecr_encryption = null
@@ -67,7 +67,7 @@ ecr_encryption_err = "Ensure ECR repositories are encrypted" {
 }
 
 ecr_encryption_metadata := {
-    "Policy Code": "PR-AWS-0209-TRF",
+    "Policy Code": "PR-AWS-TRF-ECR-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -78,9 +78,8 @@ ecr_encryption_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-imagetagmutability"
 }
 
-
 #
-# PR-AWS-0255-TRF
+# PR-AWS-TRF-ECR-003
 #
 
 default ecr_scan = null
@@ -121,7 +120,7 @@ ecr_scan_err = "Ensure ECR image scan on push is enabled" {
 }
 
 ecr_scan_metadata := {
-    "Policy Code": "PR-AWS-0255-TRF",
+    "Policy Code": "PR-AWS-TRF-ECR-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -131,4 +130,3 @@ ecr_scan_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecr-repository-image_scanning_configuration.html#cfn-ecr-repository-image_scanning_configuration-scan_on_push"
 }
-

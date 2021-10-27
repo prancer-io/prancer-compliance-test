@@ -3,27 +3,51 @@ package rule
 # https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys
 
 #
-# PR-GCP-0067-GDF
+# PR-GCP-GDF-SAK-001
 #
 
 default svc_account_key = null
 
 
 gc_attribute_absence["svc_account_key"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "iam.v1.serviceaccounts.key"
     not resource.properties.name
 }
 
+source_path[{"svc_account_key": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "iam.v1.serviceaccounts.key"
+    not resource.properties.name
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "name"]
+        ],
+    }
+}
+
 gc_issue["svc_account_key"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "iam.v1.serviceaccounts.key"
     contains(lower(resource.properties.name), "iam.gserviceaccount.com")
     time.now_ns() - time.parse_rfc3339_ns(resource.properties.validAfterTime) > 7776000000000000
 }
 
+source_path[{"svc_account_key": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "iam.v1.serviceaccounts.key"
+    contains(lower(resource.properties.name), "iam.gserviceaccount.com")
+    time.now_ns() - time.parse_rfc3339_ns(resource.properties.validAfterTime) > 7776000000000000
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "validAfterTime"]
+        ],
+    }
+}
+
+
 svc_account_key {
-    lower(input.resources[_].type) == "iam.v1.serviceaccounts.key"
+    lower(input.resources[i].type) == "iam.v1.serviceaccounts.key"
     not gc_issue["svc_account_key"]
     not gc_attribute_absence["svc_account_key"]
 }
@@ -45,7 +69,7 @@ svc_account_key_miss_err = "GCP User managed service account keys attribute name
 }
 
 svc_account_key_metadata := {
-    "Policy Code": "PR-GCP-0067-GDF",
+    "Policy Code": "PR-GCP-GDF-SAK-001",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
