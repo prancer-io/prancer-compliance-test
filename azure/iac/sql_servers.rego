@@ -4,7 +4,7 @@ package rule
 
 #
 
-# PR-AZR-0128-ARM
+# PR-AZR-ARM-SQL-047
 
 default sql_public_access_disabled = null
 
@@ -14,10 +14,28 @@ azure_attribute_absence["sql_public_access_disabled"] {
     not resource.properties.publicNetworkAccess
 }
 
+source_path[{"sql_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    not resource.properties.publicNetworkAccess
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
+    }
+}
+
 azure_issue["sql_public_access_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
     lower(resource.properties.publicNetworkAccess) != "disabled"
+}
+
+source_path[{"sql_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    lower(resource.properties.publicNetworkAccess) != "disabled"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
+    }
 }
 
 sql_public_access_disabled {
@@ -43,7 +61,7 @@ sql_public_access_disabled_err = "Public Network Access is currently not disable
 }
 
 sql_public_access_disabled_metadata := {
-    "Policy Code": "PR-AZR-0128-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-047",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -63,7 +81,7 @@ sql_public_access_disabled_metadata := {
 
 #
 
-# PR-AZR-0133-ARM
+# PR-AZR-ARM-SQL-048
 
 default sql_server_login = null
 
@@ -76,6 +94,17 @@ azure_attribute_absence["sql_server_login"] {
     not sql_resources.properties.login
 }
 
+source_path[{"sql_server_login":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[j]
+    lower(sql_resources.type) == "administrators"
+    not sql_resources.properties.login
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","login"]]
+    }
+}
+
 no_azure_issue["sql_server_login"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
@@ -84,6 +113,19 @@ no_azure_issue["sql_server_login"] {
     lower(sql_resources.properties.login) != "admin"
     lower(sql_resources.properties.login) != "administrator"
 }
+
+source_path[{"sql_server_login":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[j]
+    lower(sql_resources.type) == "administrators"
+    lower(sql_resources.properties.login) != "admin"
+    lower(sql_resources.properties.login) != "administrator"
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","login"]]
+    }
+}
+
 
 sql_server_login {
     not azure_attribute_absence["sql_server_login"]
@@ -113,7 +155,7 @@ sql_server_login_err = "Azure SQL Server property 'login' is missing from the re
 }
 
 sql_server_login_metadata := {
-    "Policy Code": "PR-AZR-0133-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-048",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -126,7 +168,7 @@ sql_server_login_metadata := {
 
 
 
-# PR-AZR-0200-ARM
+# PR-AZR-ARM-SQL-049
 
 default sql_logical_server_login = null
 
@@ -137,11 +179,30 @@ azure_attribute_absence["sql_logical_server_login"] {
     not resource.properties.login
 }
 
+source_path[{"sql_logical_server_login":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/administrators"
+    not resource.properties.login
+    metadata:= {
+        "resource_path": [["resources",i,"properties","login"]]
+    }
+}
+
 no_azure_issue["sql_logical_server_login"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers/administrators"
     lower(resource.properties.login) != "admin"
     lower(resource.properties.login) != "administrator"
+}
+
+source_path[{"sql_logical_server_login":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/administrators"
+    lower(resource.properties.login) != "admin"
+    lower(resource.properties.login) != "administrator"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","login"]]
+    }
 }
 
 sql_logical_server_login {
@@ -168,7 +229,7 @@ sql_logical_server_login_err = "Azure SQL Server property 'login' is missing fro
 }
 
 sql_logical_server_login_metadata := {
-    "Policy Code": "PR-AZR-0200-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-049",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -185,7 +246,7 @@ sql_logical_server_login_metadata := {
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/failovergroups
 
-# PR-AZR-0190-ARM
+# PR-AZR-ARM-SQL-050
 
 default fail_over_groups = null
 
@@ -194,6 +255,16 @@ azure_issue["fail_over_groups"] {
     lower(resource.type) == "microsoft.sql/servers"
     sql_resources := resource.resources[_]
     lower(sql_resources.type) == "failovergroups"
+}
+
+source_path[{"fail_over_groups":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[j]
+    lower(sql_resources.type) == "failovergroups"
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"type"]]
+    }
 }
 
 
@@ -216,7 +287,7 @@ fail_over_groups_err = "Microsoft.sql/servers resource property type.failoverGro
 }
 
 fail_over_groups_metadata := {
-    "Policy Code": "PR-AZR-0190-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-050",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -232,7 +303,7 @@ fail_over_groups_metadata := {
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators
 
-# PR-AZR-0191-ARM
+# PR-AZR-ARM-SQL-051
 
 default sql_server_administrators = null
 
@@ -245,6 +316,17 @@ azure_attribute_absence["sql_server_administrators"] {
     not sql_resources.properties.administratorType
 }
 
+source_path[{"sql_server_administrators":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[j]
+    lower(sql_resources.type) == "administrators"
+    not sql_resources.properties.administratorType
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","administratorType"]]
+    }
+}
+
 azure_issue["sql_server_administrators"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
@@ -253,6 +335,17 @@ azure_issue["sql_server_administrators"] {
     lower(sql_resources.properties.administratorType) != "activedirectory"
 }
 
+
+source_path[{"sql_server_administrators":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    sql_resources := resource.resources[j]
+    lower(sql_resources.type) == "administrators"
+    lower(sql_resources.properties.administratorType) != "activedirectory"
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","administratorType"]]
+    }
+}
 
 sql_server_administrators {
     resource := input.resources[_]
@@ -268,11 +361,9 @@ sql_server_administrators = false {
     azure_attribute_absence["sql_server_administrators"]
 }
 
-
 sql_server_administrators = false {
     azure_issue["sql_server_administrators"]
 }
-
 
 sql_server_administrators_err = "Microsoft.sql/servers/administrators resource property name missing in the resource" {
     azure_attribute_absence["sql_server_administrators"]
@@ -281,7 +372,7 @@ sql_server_administrators_err = "Microsoft.sql/servers/administrators resource p
 }
 
 sql_server_administrators_metadata := {
-    "Policy Code": "PR-AZR-0191-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-051",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways
 
 #
-# PR-AZR-0011-ARM
+# PR-AZR-ARM-AGW-001
 #
 
 default gw_tls = null
@@ -14,11 +14,32 @@ azure_attribute_absence["gw_tls"] {
     not resource.properties.sslPolicy.minProtocolVersion
 }
 
+
+source_path[{"gw_tls":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    not resource.properties.sslPolicy.minProtocolVersion
+    metadata:= {
+        "resource_path": [["resources",i,"properties","sslPolicy","minProtocolVersion"]]
+    }
+}
+
+
 azure_issue["gw_tls"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/applicationgateways"
     lower(resource.properties.sslPolicy.minProtocolVersion) != "tlsv1_2"
     lower(resource.properties.sslPolicy.minProtocolVersion) != "tlsv1_3"
+}
+
+source_path[{"gw_tls":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    lower(resource.properties.sslPolicy.minProtocolVersion) != "tlsv1_2"
+    lower(resource.properties.sslPolicy.minProtocolVersion) != "tlsv1_3"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","sslPolicy","minProtocolVersion"]]
+    }
 }
 
 gw_tls {
@@ -44,19 +65,19 @@ gw_tls_miss_err = "App gateway attribute sslPolicy.minProtocolVersion is missing
 }
 
 gw_tls_metadata := {
-    "Policy Code": "PR-AZR-0011-ARM",
+    "Policy Code": "PR-AZR-ARM-AGW-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "Azure Application Gateway should not allow TLSv1.1 or lower",
-    "Policy Description": "The Application Gateway supports end-to-end SSL encryption using multiple TLS versions and by default, it supports TLS version 1.0 as the minimum version._x005F_x000D_ _x005F_x000D_ This policy identifies the Application Gateway instances that are configured to use TLS versions 1.1 or lower as the minimum protocol version. As a best practice set the MinProtocolVersion to TLSv1.2 (if you use custom SSL policy) or use the predefined â€˜AppGwSslPolicy20170401Sâ€™ policy.",
+    "Policy Description": "The Application Gateway supports end-to-end SSL encryption using multiple TLS versions and by default, it supports TLS version 1.0 as the minimum version.<br><br>This policy identifies the Application Gateway instances that are configured to use TLS versions 1.1 or lower as the minimum protocol version. As a best practice set the MinProtocolVersion to TLSv1.2 (if you use custom SSL policy) or use the predefined â€˜AppGwSslPolicy20170401Sâ€™ policy.",
     "Resource Type": "microsoft.network/applicationgateways",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways"
 }
 
 #
-# PR-AZR-0012-ARM
+# PR-AZR-ARM-AGW-002
 #
 
 default gw_waf = null
@@ -67,10 +88,28 @@ azure_attribute_absence["gw_waf"] {
     not resource.properties.webApplicationFirewallConfiguration.enabled
 }
 
+source_path[{"gw_waf":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    not resource.properties.webApplicationFirewallConfiguration.enabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","webApplicationFirewallConfiguration","enabled"]]
+    }
+}
+
 azure_issue["gw_waf"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/applicationgateways"
     resource.properties.webApplicationFirewallConfiguration.enabled != true
+}
+
+source_path[{"gw_waf":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    resource.properties.webApplicationFirewallConfiguration.enabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","webApplicationFirewallConfiguration","enabled"]]
+    }
 }
 
 gw_waf {
@@ -96,7 +135,7 @@ gw_waf_miss_err = "Azure Application Gateway attribute webApplicationFirewallCon
 }
 
 gw_waf_metadata := {
-    "Policy Code": "PR-AZR-0012-ARM",
+    "Policy Code": "PR-AZR-ARM-AGW-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -110,7 +149,7 @@ gw_waf_metadata := {
 
 
 
-# PR-AZR-0125-ARM
+# PR-AZR-ARM-AGW-003
 
 default protocol = null
 azure_attribute_absence ["protocol"] {
@@ -120,12 +159,32 @@ azure_attribute_absence ["protocol"] {
     not httpListener.properties.protocol
 }  
 
+source_path[{"protocol":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    httpListener := resource.properties.httpListeners[j]
+    not httpListener.properties.protocol
+    metadata:= {
+        "resource_path": [["resources",i,"properties","httpListeners",j,"properties","protocol"]]
+    }
+}
+
 azure_issue ["protocol"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/applicationgateways"
     httpListener := resource.properties.httpListeners[_]
     lower(httpListener.properties.protocol) != "https"
 } 
+
+source_path[{"protocol":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    httpListener := resource.properties.httpListeners[j]
+    lower(httpListener.properties.protocol) != "https"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","httpListeners",j,"properties","protocol"]]
+    }
+}
 
 protocol {
     lower(input.resources[_].type) == "microsoft.network/applicationgateways"
@@ -148,7 +207,7 @@ protocol_err = "'httpListeners' property 'protocol' is missing from 'microsoft.n
 }
 
 protocol_metadata := {
-    "Policy Code": "PR-AZR-0125-ARM",
+    "Policy Code": "PR-AZR-ARM-AGW-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -160,7 +219,7 @@ protocol_metadata := {
 }
 
 
-# PR-AZR-0060-ARM
+# PR-AZR-ARM-AGW-004
 
 default frontendPublicIPConfigurationsDisabled = null
 azure_attribute_absence ["frontendPublicIPConfigurationsDisabled"] {
@@ -185,7 +244,7 @@ frontendPublicIPConfigurationsDisabled_err = "Application Gateway is currently a
 }
 
 frontendPublicIPConfigurationsDisabled_metadata := {
-    "Policy Code": "PR-AZR-0060-ARM",
+    "Policy Code": "PR-AZR-ARM-AGW-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -197,7 +256,7 @@ frontendPublicIPConfigurationsDisabled_metadata := {
 }
 
 
-# PR-AZR-0095-ARM
+# PR-AZR-ARM-AGW-005
 
 default backend_https_protocol_enabled = null
 azure_attribute_absence ["backend_https_protocol_enabled"] {
@@ -235,7 +294,7 @@ backend_https_protocol_enabled_err = "'backendHttpSettingsCollection' property '
 }
 
 backend_https_protocol_enabled_metadata := {
-    "Policy Code": "PR-AZR-0095-ARM",
+    "Policy Code": "PR-AZR-ARM-AGW-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -247,9 +306,16 @@ backend_https_protocol_enabled_metadata := {
 }
 
 
-# PR-AZR-0099-ARM
+# PR-AZR-ARM-AGW-006
 
 default secret_certificate_is_in_keyvalut = null
+
+azure_attribute_absence ["secret_certificate_is_in_keyvalut"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    count(resource.properties.sslCertificates) == 0
+} 
+
 azure_attribute_absence ["secret_certificate_is_in_keyvalut"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/applicationgateways"
@@ -257,21 +323,35 @@ azure_attribute_absence ["secret_certificate_is_in_keyvalut"] {
     not sslCertificates.properties.keyVaultSecretId
 }  
 
+azure_issue ["secret_certificate_is_in_keyvalut"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    sslCertificates := resource.properties.sslCertificates[_]
+    trim(sslCertificates.properties.keyVaultSecretId, " ") == ""
+}  
+
 secret_certificate_is_in_keyvalut {
-    lower(input.resources[_].type) == "microsoft.network/applicationgateways"
-    not azure_attribute_absence["secret_certificate_is_in_keyvalut"]
+   lower(input.resources[_].type) == "microsoft.network/applicationgateways"
+   not azure_attribute_absence["secret_certificate_is_in_keyvalut"]
+   not azure_issue["secret_certificate_is_in_keyvalut"]
 }
 
 secret_certificate_is_in_keyvalut = false {
     azure_attribute_absence["secret_certificate_is_in_keyvalut"]
-} 
+}
 
-secret_certificate_is_in_keyvalut_err = "Application Gateway is currently not storing ssl certificates in keyvalut" {
+secret_certificate_is_in_keyvalut = false {
+    azure_issue["secret_certificate_is_in_keyvalut"]
+}
+
+secret_certificate_is_in_keyvalut_err = "'sslCertificates' property 'keyVaultSecretId' is missing from 'microsoft.network/applicationgateways' resource" {
     azure_attribute_absence["secret_certificate_is_in_keyvalut"]
+} else = "Application Gateway is currently not storing ssl certificates in keyvalut"{
+	azure_issue["secret_certificate_is_in_keyvalut"]
 }
 
 secret_certificate_is_in_keyvalut_metadata := {
-    "Policy Code": "PR-AZR-0099-ARM",
+    "Policy Code": "PR-AZR-ARM-AGW-006",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

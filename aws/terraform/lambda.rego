@@ -1,9 +1,8 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html
 
 #
-# PR-AWS-0105-TRF
+# PR-AWS-TRF-LMD-001
 #
 
 default lambda_env = null
@@ -61,19 +60,19 @@ lambda_env_err = "AWS Lambda environment Variables not encrypted at-rest using C
 }
 
 lambda_env_metadata := {
-    "Policy Code": "PR-AWS-0105-TRF",
+    "Policy Code": "PR-AWS-TRF-LMD-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
     "Policy Title": "AWS Lambda Environment Variables not encrypted at-rest using CMK",
-    "Policy Description": "When you create or update Lambda functions that use environment variables, AWS Lambda encrypts them using the AWS Key Management Service. When your Lambda function is invoked, those values are decrypted and made available to the Lambda code._x005F_x000D_ _x005F_x000D_ This policy verifies that Lambda function uses the AMS Key Management Service to encrypt variables at-rest with CMK.",
+    "Policy Description": "When you create or update Lambda functions that use environment variables, AWS Lambda encrypts them using the AWS Key Management Service. When your Lambda function is invoked, those values are decrypted and made available to the Lambda code.<br><br>This policy verifies that Lambda function uses the AMS Key Management Service to encrypt variables at-rest with CMK.",
     "Resource Type": "aws_lambda_function",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html"
 }
 
 #
-# PR-AWS-0106-TRF
+# PR-AWS-TRF-LMD-002
 #
 
 default lambda_vpc = null
@@ -118,7 +117,7 @@ lambda_vpc_err = "AWS Lambda Function is not assigned to access within VPC" {
 }
 
 lambda_vpc_metadata := {
-    "Policy Code": "PR-AWS-0106-TRF",
+    "Policy Code": "PR-AWS-TRF-LMD-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -130,7 +129,7 @@ lambda_vpc_metadata := {
 }
 
 #
-# PR-AWS-0107-TRF
+# PR-AWS-TRF-LMD-003
 #
 
 default lambda_tracing = null
@@ -182,12 +181,12 @@ lambda_tracing_err = "AWS Lambda functions with tracing not enabled" {
 }
 
 lambda_tracing_metadata := {
-    "Policy Code": "PR-AWS-0107-TRF",
+    "Policy Code": "PR-AWS-TRF-LMD-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
     "Policy Title": "AWS Lambda functions with tracing not enabled",
-    "Policy Description": "TracingConfig is a property of the AWS::Lambda::Function resource that configures tracing settings for your AWS Lambda (Lambda) function. When enabled, AWS Lambda tracing acitivates AWS X-Ray service that collects information on requests that a specific function performed. It reduces the time and effort for debugging and diagnosing the errors._x005F_x000D_ _x005F_x000D_ The value can be either PassThrough or Active. If PassThrough, Lambda will only trace the request from an upstream service if it contains a tracing header with 'sampled=1'. If Active, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received, Lambda will call X-Ray for a tracing decision.",
+    "Policy Description": "TracingConfig is a property of the AWS::Lambda::Function resource that configures tracing settings for your AWS Lambda (Lambda) function. When enabled, AWS Lambda tracing acitivates AWS X-Ray service that collects information on requests that a specific function performed. It reduces the time and effort for debugging and diagnosing the errors.<br><br>The value can be either PassThrough or Active. If PassThrough, Lambda will only trace the request from an upstream service if it contains a tracing header with 'sampled=1'. If Active, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received, Lambda will call X-Ray for a tracing decision.",
     "Resource Type": "aws_lambda_function",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html"

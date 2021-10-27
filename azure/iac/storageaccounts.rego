@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts
 
 #
-# PR-AZR-0092-ARM
+# PR-AZR-ARM-STR-003
 #
 
 default storage_secure = null
@@ -16,6 +16,16 @@ azure_attribute_absence_new["storage_secure"] {
     not resource.properties.supportsHttpsTrafficOnly
 }
 
+source_path[{"storage_secure":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    resource.apiVersion >= "2019-04-01"
+    not resource.properties.supportsHttpsTrafficOnly
+    metadata:= {
+        "resource_path": [["resources",i,"properties","supportsHttpsTrafficOnly"]]
+    }
+}
+
 #in older API before 2019-04-01, supportsHttpsTrafficOnly is false by default if not exist
 azure_attribute_absence_old["storage_secure"] {
     resource := input.resources[_]
@@ -24,10 +34,29 @@ azure_attribute_absence_old["storage_secure"] {
     not resource.properties.supportsHttpsTrafficOnly
 }
 
+source_path[{"storage_secure":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    resource.apiVersion < "2019-04-01"
+    not resource.properties.supportsHttpsTrafficOnly
+    metadata:= {
+        "resource_path": [["resources",i,"properties","supportsHttpsTrafficOnly"]]
+    }
+}
+
 azure_issue["storage_secure"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     resource.properties.supportsHttpsTrafficOnly == false
+}
+
+source_path[{"storage_secure":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    resource.properties.supportsHttpsTrafficOnly == false
+    metadata:= {
+        "resource_path": [["resources",i,"properties","supportsHttpsTrafficOnly"]]
+    }
 }
 
 storage_secure {
@@ -56,7 +85,7 @@ storage_secure_err = "Storage Accounts https based secure transfer is not enable
 
 
 storage_secure_metadata := {
-    "Policy Code": "PR-AZR-0092-ARM",
+    "Policy Code": "PR-AZR-ARM-STR-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -68,7 +97,7 @@ storage_secure_metadata := {
 }
 
 #
-# PR-AZR-0093-ARM
+# PR-AZR-ARM-STR-004
 #
 
 default storage_acl = null
@@ -79,10 +108,28 @@ azure_attribute_absence["storage_acl"] {
     not resource.properties.networkAcls.defaultAction
 }
 
+source_path[{"storage_acl":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.networkAcls.defaultAction
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkAcls","defaultAction"]]
+    }
+}
+
 azure_issue["storage_acl"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     lower(resource.properties.networkAcls.defaultAction) != "deny"
+}
+
+source_path[{"storage_acl":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    lower(resource.properties.networkAcls.defaultAction) != "deny"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkAcls","defaultAction"]]
+    }
 }
 
 storage_acl {
@@ -108,12 +155,12 @@ storage_acl_miss_err = "Storage Account attribute networkAcls.defaultAction is m
 }
 
 storage_acl_metadata := {
-    "Policy Code": "PR-AZR-0093-ARM",
+    "Policy Code": "PR-AZR-ARM-STR-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "Storage Accounts should have firewall rules enabled",
-    "Policy Description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on._x005F_x000D_ _x005F_x000D_ You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
+    "Policy Description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on.<br><br>You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
     "Resource Type": "microsoft.storage/storageaccounts",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
@@ -121,7 +168,7 @@ storage_acl_metadata := {
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.security/advancedthreatprotectionsettings?tabs=json
 # Advanced Threat Protection should be enabled for storage account
-# PR-AZR-0094-ARM
+# PR-AZR-ARM-STR-005
 
 default storage_threat_protection = null
 
@@ -135,6 +182,17 @@ azure_issue["storage_threat_protection"] {
     count([ c | lower(resource.resources[_].type) == nested_type; c = 1]) == 0
 }
 
+source_path[{"storage_threat_protection":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    nested_type := "providers/advancedthreatprotectionsettings"
+    resources := resource.resources[j]
+    count([ c | lower(resources.type) == nested_type; c = 1]) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"type"]]
+    }
+}
+
 azure_issue["storage_threat_protection"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
@@ -143,12 +201,34 @@ azure_issue["storage_threat_protection"] {
     not nested.properties.isEnabled
 }
 
+source_path[{"storage_threat_protection":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    nested := resource.resources[j]
+    lower(nested.type) == "providers/advancedthreatprotectionsettings"
+    not nested.properties.isEnabled
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","isEnabled"]]
+    }
+}
+
 azure_issue["storage_threat_protection"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     nested := resource.resources[_]
     lower(nested.type) == "providers/advancedthreatprotectionsettings"
     nested.properties.isEnabled != true
+}
+
+source_path[{"storage_threat_protection":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    nested := resource.resources[j]
+    lower(nested.type) == "providers/advancedthreatprotectionsettings"
+    nested.properties.isEnabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","isEnabled"]]
+    }
 }
 
 storage_threat_protection {
@@ -165,7 +245,7 @@ storage_threat_protection_err = "Advanced Threat Protection is currently not ena
 }
 
 storage_threat_protection_metadata := {
-    "Policy Code": "PR-AZR-0094-ARM",
+    "Policy Code": "PR-AZR-ARM-STR-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -179,7 +259,7 @@ storage_threat_protection_metadata := {
 
 # https://azure.microsoft.com/en-us/blog/announcing-default-encryption-for-azure-blobs-files-table-and-queue-storage/
 # This feature is enabled by default thats why Terraform does not have any property for that
-# PR-AZR-0112-ARM
+# PR-AZR-ARM-STR-006
 
 default blobService = null
 
@@ -189,10 +269,28 @@ azure_attribute_absence["blobService"] {
     not resource.properties.encryption.services.blob.enabled
 }
 
+source_path[{"blobService":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.encryption.services.blob.enabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","encryption","services","blob","enabled"]]
+    }
+}
+
 azure_issue["blobService"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     resource.properties.encryption.services.blob.enabled != true
+}
+
+source_path[{"blobService":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    resource.properties.encryption.services.blob.enabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","encryption","services","blob","enabled"]]
+    }
 }
 
 blobService {
@@ -217,7 +315,7 @@ blobService_err = "Ensure that 'Storage service encryption' is enabled for the B
 
 
 blobService_metadata := {
-    "Policy Code": "PR-AZR-0112-ARM",
+    "Policy Code": "PR-AZR-ARM-STR-006",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -230,7 +328,7 @@ blobService_metadata := {
 
 # https://azure.microsoft.com/en-us/blog/announcing-default-encryption-for-azure-blobs-files-table-and-queue-storage/
 # This feature is enabled by default thats why Terraform does not have any property for that
-# PR-AZR-0113-ARM
+# PR-AZR-ARM-STR-007
 
 default fileService = null
 
@@ -240,10 +338,28 @@ azure_attribute_absence["fileService"] {
     not resource.properties.encryption.services.file.enabled
 }
 
+source_path[{"fileService":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.encryption.services.file.enabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","encryption","services","file","enabled"]]
+    }
+}
+
 azure_issue["fileService"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     resource.properties.encryption.services.file.enabled != true
+}
+
+source_path[{"fileService":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    resource.properties.encryption.services.file.enabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","encryption","services","file","enabled"]]
+    }
 }
 
 fileService {
@@ -268,7 +384,7 @@ fileService_err = "Ensure that 'Storage service encryption' is enabled for the F
 
 
 fileService_metadata := {
-    "Policy Code": "PR-AZR-0113-ARM",
+    "Policy Code": "PR-AZR-ARM-STR-007",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -282,7 +398,7 @@ fileService_metadata := {
 
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts
-# PR-AZR-0114-ARM
+# PR-AZR-ARM-STR-008
 
 default keySource = null
 
@@ -292,10 +408,28 @@ azure_attribute_absence["keySource"] {
     not resource.properties.encryption.keySource
 }
 
+source_path[{"keySource":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.encryption.keySource
+    metadata:= {
+        "resource_path": [["resources",i,"properties","encryption","keySource"]]
+    }
+}
+
 azure_issue["keySource"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     lower(resource.properties.encryption.keySource) != "microsoft.keyvault"
+}
+
+source_path[{"keySource":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    lower(resource.properties.encryption.keySource) != "microsoft.keyvault"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","encryption","keySource"]]
+    }
 }
 
 keySource {
@@ -322,7 +456,7 @@ keySource_miss_err = "Storage Account encryption property 'keySource' is missing
 
 
 keySource_metadata := {
-    "Policy Code": "PR-AZR-0114-ARM",
+    "Policy Code": "PR-AZR-ARM-STR-008",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -334,7 +468,7 @@ keySource_metadata := {
 }
 
 
-# PR-AZR-0122-ARM
+# PR-AZR-ARM-STR-009
 
 default region = null
 
@@ -344,11 +478,30 @@ azure_issue["region"] {
     not resource.location
 }
 
+source_path[{"region":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.location
+    metadata:= {
+        "resource_path": [["resources",i,"location"]]
+    }
+}
+
 azure_issue["region"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     lower(resource.location) != "northeurope"
     lower(resource.location) != "westeurope"
+}
+
+source_path[{"region":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    lower(resource.location) != "northeurope"
+    lower(resource.location) != "westeurope"
+    metadata:= {
+        "resource_path": [["resources",i,"location"]]
+    }
 }
 
 region {
@@ -365,7 +518,7 @@ region_err = "Storage Accounts location configuration is currenly not inside of 
 }
 
 region_metadata := {
-    "Policy Code": "PR-AZR-0122-ARM",
+    "Policy Code": "PR-AZR-ARM-STR-009",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -377,7 +530,7 @@ region_metadata := {
 }
 
 
-# PR-AZR-0123-ARM
+# PR-AZR-ARM-STR-010
 
 default blobServicePublicAccessDisabled = null
 
@@ -387,10 +540,28 @@ azure_issue["blobServicePublicAccessDisabled"] {
     not resource.properties.allowBlobPublicAccess
 }
 
+source_path[{"blobServicePublicAccessDisabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.allowBlobPublicAccess
+    metadata:= {
+        "resource_path": [["resources",i,"properties","allowBlobPublicAccess"]]
+    }
+}
+
 azure_issue["blobServicePublicAccessDisabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     resource.properties.allowBlobPublicAccess == true
+}
+
+source_path[{"blobServicePublicAccessDisabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    resource.properties.allowBlobPublicAccess == true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","allowBlobPublicAccess"]]
+    }
 }
 
 blobServicePublicAccessDisabled {
@@ -407,7 +578,7 @@ blobServicePublicAccessDisabled_err = "Storage Account currently allowing public
 }
 
 blobServicePublicAccessDisabled_metadata := {
-    "Policy Code": "PR-AZR-0113-ARM",
+    "Policy Code": "PR-AZR-ARM-STR-010",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -420,7 +591,7 @@ blobServicePublicAccessDisabled_metadata := {
 
 
 
- # PR-AZR-0148-ARM
+ # PR-AZR-ARM-STR-011
 
 default storage_acount_by_pass = null
 
@@ -430,10 +601,28 @@ azure_attribute_absence["storage_acount_by_pass"] {
     not resource.properties.networkAcls.bypass
 }
 
+source_path[{"storage_acount_by_pass":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.networkAcls.bypass
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkAcls","bypass"]]
+    }
+}
+
 azure_issue["storage_acount_by_pass"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     lower(resource.properties.networkAcls.bypass) != "azureservices"
+}
+
+source_path[{"storage_acount_by_pass":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    lower(resource.properties.networkAcls.bypass) != "azureservices"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkAcls","bypass"]]
+    }
 }
 
 storage_acount_by_pass {
@@ -458,7 +647,7 @@ storage_acount_by_pass_err = "microsoft.storage/storageaccounts resource propert
 
 
 storage_acount_by_pass_metadata := {
-    "Policy Code": "PR-AZR-0148-ARM",
+    "Policy Code": "PR-AZR-ARM-STR-011",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

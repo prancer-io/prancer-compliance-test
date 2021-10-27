@@ -1,312 +1,376 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html
 
 #
-# PR-AWS-0002-TRF
+# PR-AWS-TRF-CFR-001
 #
 
-default api_gw_cert = null
+default cf_sns = null
 
-aws_issue["api_gw_cert"] {
-    resource := input.resources[_]
-    lower(resource.type) == "aws_api_gateway_rest_api"
-    not resource.properties.client_certificate_id
+aws_issue["cf_sns"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudformation_stack"
+    not resource.properties.notification_arns
 }
 
-aws_issue["api_gw_cert"] {
-    resource := input.resources[_]
-    lower(resource.type) == "aws_api_gateway_rest_api"
-    count(resource.properties.client_certificate_id) == 0
+aws_issue["cf_sns"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudformation_stack"
+    count(resource.properties.notification_arns) == 0
 }
 
-api_gw_cert {
-    lower(input.resources[_].type) == "aws_api_gateway_rest_api"
-    not aws_issue["api_gw_cert"]
+cf_sns {
+    lower(input.resources[i].type) == "aws_cloudformation_stack"
+    not aws_issue["cf_sns"]
 }
 
-api_gw_cert = false {
-    aws_issue["api_gw_cert"]
+cf_sns = false {
+    aws_issue["cf_sns"]
 }
 
-api_gw_cert_err = "AWS API Gateway endpoints without client certificate authentication" {
-    aws_issue["api_gw_cert"]
+cf_sns_err = "AWS CloudFormation stack configured without SNS topic" {
+    aws_issue["cf_sns"]
 }
 
-api_gw_cert_metadata := {
-    "Policy Code": "PR-AWS-0002-TRF",
+cf_sns_metadata := {
+    "Policy Code": "PR-AWS-TRF-CFR-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
-    "Policy Title": "AWS API Gateway endpoints without client certificate authentication",
-    "Policy Description": "API Gateway can generate an SSL certificate and use its public key in the backend to verify that HTTP requests to your backend system are from API Gateway. This allows your HTTP backend to control and accept only requests originating from Amazon API Gateway, even if the backend is publicly accessible._x005F_x000D_ _x005F_x000D_ Note: Some backend servers may not support SSL client authentication as API Gateway does and could return an SSL certificate error. For a list of incompatible backend servers, see Known Issues. https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-known-issues.html",
-    "Resource Type": "aws_api_gateway_rest_api",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html"
-}
-
-
-#
-# PR-AWS-gID6-TRF
-#
-
-default db_exposed = null
-
-db_ports := [
-    1433, 1521, 3306, 5000, 5432, 5984, 6379, 6380, 8080, 9042, 11211, 27017, 28015, 29015, 50000
-]
-
-aws_issue["db_exposed"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_security_group"
-    ingress := resource.properties.ingress[_]
-    cidr_blocks := ingress.cidr_blocks[_]
-    cidr_blocks == "0.0.0.0/0"
-    port := db_ports[_]
-    to_number(ingress.from_port) <= port
-    to_number(ingress.to_port) >= port
-}
-
-aws_issue["db_exposed"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_security_group"
-    ingress := resource.properties.ingress[_]
-    ipv6_cidr_blocks := ingress.ipv6_cidr_blocks[_]
-    ipv6_cidr_blocks="::/0"
-    port := db_ports[_]
-    to_number(ingress.from_port) <= port
-    to_number(ingress.to_port) >= port
-}
-
-db_exposed {
-    lower(input.resources[i].type) == "aws_security_group"
-    not aws_issue["db_exposed"]
-}
-
-db_exposed = false {
-    aws_issue["db_exposed"]
-}
-
-db_exposed_err = "Publicly exposed DB Ports" {
-    aws_issue["db_exposed"]
-}
-
-db_exposed_metadata := {
-    "Policy Code": "PR-AWS-gID6-TRF",
-    "Type": "IaC",
-    "Product": "AWS",
-    "Language": "Terraform",
-    "Policy Title": "Publicly exposed DB Ports",
-    "Policy Description": "DB Servers contain sensitive data and should not be exposed to any direct traffic from internet. This policy checks for the network traffic from internet hitting the DB Servers on their default ports. The DB servers monitored on the default ports are : Microsoft SQL Server (1433), Oracle (1521), MySQL (3306), Sybase (5000), Postgresql (5432), CouchDB (5984), Redis (6379, 6380), RethinkDB (8080,28015, 29015), CassandraDB (9042), Memcached (11211), MongoDB (27017), DB2 (50000).",
+    "Policy Title": "AWS CloudFormation stack configured without SNS topic",
+    "Policy Description": "This policy identifies CloudFormation stacks which are configured without SNS topic. It is recommended to configure Simple Notification Service (SNS) topic to be notified of CloudFormation stack status and changes.",
     "Resource Type": "",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html"
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-stack.html"
 }
 
 #
-# PR-AWS-gID1-TRF
+# PR-AWS-TRF-CFG-001
 #
 
-default bitcoin_ports = null
+default config_all_resource = null
 
-bc_ports := [
-    8332, 8333
-]
-
-aws_issue["bitcoin_ports"] {
+aws_issue["config_all_resource"] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_security_group"
-    ingress := resource.properties.ingress[_]
-    cidr_blocks := ingress.cidr_blocks[_]
-    cidr_blocks == "0.0.0.0/0"
-    port := db_ports[_]
-    to_number(ingress.from_port) <= port
-    to_number(ingress.to_port) >= port
+    lower(resource.type) == "aws_config_configuration_recorder"
+    not resource.properties.recording_group
 }
 
-aws_issue["bitcoin_ports"] {
+aws_issue["config_all_resource"] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_security_group"
-    ingress := resource.properties.ingress[_]
-    ipv6_cidr_blocks := ingress.ipv6_cidr_blocks[_]
-    ipv6_cidr_blocks="::/0"
-    port := db_ports[_]
-    to_number(ingress.from_port) <= port
-    to_number(ingress.to_port) >= port
+    lower(resource.type) == "aws_config_configuration_recorder"
+    recording_group := resource.properties.recording_group[_]
+    lower(recording_group.all_supported) == "false"
 }
 
-bitcoin_ports {
-    lower(input.resources[i].type) == "aws_security_group"
-    not aws_issue["bitcoin_ports"]
+aws_issue["config_all_resource"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_config_configuration_recorder"
+    recording_group := resource.properties.recording_group[_]
+    lower(recording_group.include_global_resource_types) == "false"
 }
 
-bitcoin_ports = false {
-    aws_issue["bitcoin_ports"]
+aws_bool_issue["config_all_resource"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_config_configuration_recorder"
+    recording_group := resource.properties.recording_group[_]
+    not recording_group.all_supported
 }
 
-bitcoin_ports_err = "Instance is communicating with ports known to mine Bitcoin" {
-    aws_issue["bitcoin_ports"]
+aws_bool_issue["config_all_resource"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_config_configuration_recorder"
+    recording_group := resource.properties.recording_group[_]
+    not recording_group.include_global_resource_types
 }
 
-bitcoin_ports_metadata := {
-    "Policy Code": "PR-AWS-gID2-TRF",
+
+config_all_resource {
+    lower(input.resources[i].type) == "aws_config_configuration_recorder"
+    not aws_issue["config_all_resource"]
+    not aws_bool_issue["config_all_resource"]
+}
+
+config_all_resource = false {
+    aws_issue["config_all_resource"]
+}
+
+config_all_resource = false {
+    aws_bool_issue["config_all_resource"]
+}
+
+config_all_resource_err = "AWS Config must record all possible resources" {
+    aws_issue["config_all_resource"]
+} else = "AWS Config must record all possible resources" {
+    aws_bool_issue["config_all_resource"]
+}
+
+config_all_resource_metadata := {
+    "Policy Code": "PR-AWS-TRF-CFG-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
-    "Policy Title": "Instance is communicating with ports known to mine Bitcoin",
-    "Policy Description": "Identifies traffic from internal workloads to internet IPs on ports 8332,8333 that are known to mine Bitcoins. Unless this traffic is part of authorized applications and processes, your instances may have been compromised.",
+    "Policy Title": "AWS Config must record all possible resources",
+    "Policy Description": "This policy identifies resources for which AWS Config recording is enabled but recording for all possible resources are disabled. AWS Config provides an inventory of your AWS resources and a history of configuration changes to these resources. You can use AWS Config to define rules that evaluate these configurations for compliance. Hence, it is important to enable this feature.",
     "Resource Type": "",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html"
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html"
 }
 
 #
-# PR-AWS-gID2-TRF
+# PR-AWS-TRF-KNS-001
 #
+default kinesis_encryption = null
 
-default ethereum_ports = null
-
-eth_ports := [
-    8545, 30303
-]
-
-aws_issue["ethereum_ports"] {
+aws_issue["kinesis_encryption"] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_security_group"
-    ingress := resource.properties.ingress[_]
-    cidr_blocks := ingress.cidr_blocks[_]
-    cidr_blocks == "0.0.0.0/0"
-    port := db_ports[_]
-    to_number(ingress.from_port) <= port
-    to_number(ingress.to_port) >= port
+    lower(resource.type) == "aws_kinesis_stream"
+    not resource.properties.encryption_type
 }
 
-aws_issue["ethereum_ports"] {
+aws_issue["kinesis_encryption"] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_security_group"
-    ingress := resource.properties.ingress[_]
-    ipv6_cidr_blocks := ingress.ipv6_cidr_blocks[_]
-    ipv6_cidr_blocks="::/0"
-    port := db_ports[_]
-    to_number(ingress.from_port) <= port
-    to_number(ingress.to_port) >= port
+    lower(resource.type) == "aws_kinesis_stream"
+    resource.properties.encryption_type == null
 }
 
-ethereum_ports {
-    lower(input.resources[i].type) == "aws_security_group"
-    not aws_issue["ethereum_ports"]
+aws_issue["kinesis_encryption"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_kinesis_stream"
+    count(resource.properties.encryption_type) == 0
 }
 
-ethereum_ports = false {
-    aws_issue["ethereum_ports"]
+kinesis_encryption {
+    lower(input.resources[i].type) == "aws_kinesis_stream"
+    not aws_issue["kinesis_encryption"]
 }
 
-ethereum_ports_err = "Instance is communicating with ports known to mine Ethereum" {
-    aws_issue["ethereum_ports"]
+kinesis_encryption = false {
+    aws_issue["kinesis_encryption"]
 }
 
-ethereum_ports_metadata := {
-    "Policy Code": "PR-AWS-gID2-TRF",
+kinesis_encryption_err = "AWS Kinesis streams are not encrypted using Server Side Encryption" {
+    aws_issue["kinesis_encryption"]
+}
+
+kinesis_encryption_metadata := {
+    "Policy Code": "PR-AWS-TRF-KNS-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
-    "Policy Title": "Instance is communicating with ports known to mine Ethereum",
-    "Policy Description": "Ethereum Identifies traffic from internal workloads to internet IPs on ports 8545,30303 that are known to mine Ethereum. Unless this traffic is part of authorized applications and processes, your instances may have been compromised.",
+    "Policy Title": "AWS Kinesis streams are not encrypted using Server Side Encryption",
+    "Policy Description": "This Policy identifies the AWS Kinesis streams which are not encrypted using Server Side Encryption. Server Side Encryption is used to encrypt your sensitive data before it is written to the Kinesis stream storage layer and decrypted after it is retrieved from storage.",
     "Resource Type": "",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html"
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesis-stream.html#aws-resource-kinesis-stream--examples"
 }
-
 
 #
-# PR-AWS-0257-TRF
+# PR-AWS-TRF-KNS-002
 #
 
-default dax_encrypt = null
+default kinesis_encryption_kms = null
 
-aws_issue["dax_encrypt"] {
+aws_issue["kinesis_encryption_kms"] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_dax_cluster"
-    lower(resource.properties.server_side_encryption) != "true"
+    lower(resource.type) == "aws_kinesis_stream"
+    not resource.properties.encryption_type
 }
 
-aws_bool_issue["dax_encrypt"] {
+aws_issue["kinesis_encryption_kms"] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_dax_cluster"
-    not resource.properties.server_side_encryption
+    lower(resource.type) == "aws_kinesis_stream"
+    resource.properties.encryption_type == null
 }
 
-dax_encrypt {
-    lower(input.resources[i].type) == "aws_dax_cluster"
-    not aws_issue["dax_encrypt"]
-    not aws_bool_issue["dax_encrypt"]
+aws_issue["kinesis_encryption_kms"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_kinesis_stream"
+    lower(resource.properties.encryption_type) != "kms"
 }
 
-dax_encrypt = false {
-    aws_issue["dax_encrypt"]
+kinesis_encryption_kms {
+    lower(input.resources[i].type) == "aws_kinesis_stream"
+    not aws_issue["kinesis_encryption_kms"]
 }
 
-dax_encrypt = false {
-    aws_bool_issue["dax_encrypt"]
+kinesis_encryption_kms = false {
+    aws_issue["kinesis_encryption_kms"]
 }
 
-dax_encrypt_err = "Ensure DAX is securely encrypted at rest" {
-    aws_issue["dax_encrypt"]
-} else = "Ensure DAX is securely encrypted at rest" {
-    aws_bool_issue["dax_encrypt"]
+kinesis_encryption_kms_err = "AWS Kinesis streams encryption using default KMS keys instead of Customer's Managed Master Keys" {
+    aws_issue["kinesis_encryption_kms"]
 }
 
-dax_encrypt_metadata := {
-    "Policy Code": "PR-AWS-0257-TRF",
+kinesis_encryption_kms_metadata := {
+    "Policy Code": "PR-AWS-TRF-KNS-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
-    "Policy Title": "Ensure DAX is securely encrypted at rest",
-    "Policy Description": "Amazon DynamoDB Accelerator (DAX) encryption at rest provides an additional layer of data protection, helping secure your data from unauthorized access to underlying storage. With encryption at rest the data persisted by DAX on disk is encrypted using 256-bit Advanced Encryption Standard (AES-256). DAX writes data to disk as part of propagating changes from the primary node to read replicas. DAX encryption at rest automatically integrates with AWS KMS for managing the single service default key used to encrypt clusters.",
+    "Policy Title": "AWS Kinesis streams encryption using default KMS keys instead of Customer's Managed Master Keys",
+    "Policy Description": "This policy identifies the AWS Kinesis streams which are encrypted with default KMS keys and not with Master Keys managed by Customer. It is a best practice to use customer managed Master Keys to encrypt your Amazon Kinesis streams data. It gives you full control over the encrypted data.",
     "Resource Type": "",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dax-cluster-ssespecification.html"
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesis-stream.html#aws-resource-kinesis-stream--examples"
 }
 
 #
-# PR-AWS-0259-TRF
+# PR-AWS-TRF-MQ-001
 #
+default mq_publicly_accessible = null
 
-default qldb_permission_mode = null
-
-aws_issue["qldb_permission_mode"] {
+aws_bool_issue["mq_publicly_accessible"] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_qldb_ledger"
-    lower(resource.properties.permissions_mode) != "standard"
+    lower(resource.type) == "aws_mq_broker"
+    resource.properties.publicly_accessible == true
 }
 
-aws_issue["qldb_permission_mode"] {
+aws_issue["mq_publicly_accessible"] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_qldb_ledger"
-    not resource.properties.permissions_mode
+    lower(resource.type) == "aws_mq_broker"
+    lower(resource.properties.publicly_accessible) == "true"
 }
 
-qldb_permission_mode {
-    lower(input.resources[i].type) == "aws_qldb_ledger"
-    not aws_issue["qldb_permission_mode"]
+mq_publicly_accessible {
+    lower(input.resources[i].type) == "aws_mq_broker"
+    not aws_issue["mq_publicly_accessible"]
+    not aws_bool_issue["mq_publicly_accessible"]
 }
 
-qldb_permission_mode = false {
-    aws_issue["qldb_permission_mode"]
+mq_publicly_accessible = false {
+    aws_issue["mq_publicly_accessible"]
 }
 
-qldb_permission_mode_err = "Ensure QLDB ledger permissions mode is set to STANDARD" {
-    aws_issue["qldb_permission_mode"]
+mq_publicly_accessible = false {
+    aws_bool_issue["mq_publicly_accessible"]
 }
 
-qldb_permission_mode_metadata := {
-    "Policy Code": "PR-AWS-0259-TRF",
+mq_publicly_accessible_err = "AWS MQ is publicly accessible" {
+    aws_issue["mq_publicly_accessible"]
+} else = "AWS MQ is publicly accessible" {
+    aws_bool_issue["mq_publicly_accessible"]
+}
+
+
+mq_publicly_accessible_metadata := {
+    "Policy Code": "PR-AWS-TRF-MQ-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
-    "Policy Title": "Ensure QLDB ledger permissions mode is set to STANDARD",
-    "Policy Description": "In Amazon Quantum Ledger Database define PermissionsMode value to STANDARD permissions mode that enables access control with finer granularity for ledgers, tables, and PartiQL commands",
+    "Policy Title": "AWS MQ is publicly accessible",
+    "Policy Description": "This policy identifies the AWS MQ brokers which are publicly accessible. It is advisable to use MQ brokers privately only from within your AWS Virtual Private Cloud (VPC). Ensure that the AWS MQ brokers provisioned in your AWS account are not publicly accessible from the Internet to avoid sensitive data exposure and minimize security risks.",
     "Resource Type": "",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-qldb-ledger.html#cfn-qldb-ledger-permissionsmode"
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#cfn-amazonmq-broker-publiclyaccessible"
+}
+
+#
+# PR-AWS-TRF-R53-001
+#
+
+default route_healthcheck_disable = null
+
+aws_issue["route_healthcheck_disable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_route53_record"
+    alias := resource.properties.alias[_]
+    lower(alias.evaluate_target_health) == "false"
+}
+
+aws_bool_issue["route_healthcheck_disable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_route53_record"
+    alias := resource.properties.alias[_]
+    not alias.evaluate_target_health
+}
+
+route_healthcheck_disable {
+    lower(input.resources[i].type) == "aws_route53_record"
+    not aws_issue["route_healthcheck_disable"]
+    not aws_bool_issue["route_healthcheck_disable"]
+}
+
+route_healthcheck_disable = false {
+    aws_issue["route_healthcheck_disable"]
+}
+
+route_healthcheck_disable = false {
+    aws_bool_issue["route_healthcheck_disable"]
+}
+
+route_healthcheck_disable_err = "Ensure Route53 DNS evaluateTargetHealth is enabled" {
+    aws_issue["route_healthcheck_disable"]
+} else = "Ensure Route53 DNS evaluateTargetHealth is enabled" {
+    aws_bool_issue["route_healthcheck_disable"]
+}
+
+route_healthcheck_disable_metadata := {
+    "Policy Code": "PR-AWS-TRF-R53-001",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Route53 DNS evaluateTargetHealth is enabled",
+    "Policy Description": "The EvaluateTargetHealth of Route53 is not enabled, an alias record can't inherits the health of the referenced AWS resource, such as an ELB load balancer or another record in the hosted zone.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
+}
+
+#
+# PR-AWS-TRF-AS-001
+#
+
+default as_volume_encrypted = null
+
+aws_issue["as_volume_encrypted"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_launch_configuration"
+    count([c | resource.properties.ebs_block_device; c:=1]) == 0
+}
+
+aws_bool_issue["as_volume_encrypted"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_launch_configuration"
+    ebs_block_device := resource.properties.ebs_block_device[_]
+    not ebs_block_device.encrypted
+}
+
+aws_issue["as_volume_encrypted"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_launch_configuration"
+    ebs_block_device := resource.properties.ebs_block_device[_]
+    lower(ebs_block_device.encrypted) != "true"
+}
+
+
+as_volume_encrypted {
+    lower(input.resources[i].type) == "aws_launch_configuration"
+    not aws_issue["as_volume_encrypted"]
+    not aws_bool_issue["as_volume_encrypted"]
+}
+
+as_volume_encrypted = false {
+    aws_issue["as_volume_encrypted"]
+}
+
+as_volume_encrypted = false {
+    aws_bool_issue["as_volume_encrypted"]
+}
+
+as_volume_encrypted_err = "Ensure EBS volumes have encrypted launch configurations" {
+    aws_issue["as_volume_encrypted"]
+} else = "Ensure EBS volumes have encrypted launch configurations" {
+    aws_bool_issue["as_volume_encrypted"]
+}
+
+as_volume_encrypted_metadata := {
+    "Policy Code": "PR-AWS-TRF-AS-001",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure EBS volumes have encrypted launch configurations",
+    "Policy Description": "Amazon Elastic Block Store (EBS) volumes allow you to create encrypted launch configurations when creating EC2 instances and auto scaling. When the entire EBS volume is encrypted, data stored at rest on the volume, disk I/O, snapshots created from the volume, and data in-transit between EBS and EC2 are all encrypted.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig-blockdev-template.html#cfn-as-launchconfig-blockdev-template-encrypted"
 }

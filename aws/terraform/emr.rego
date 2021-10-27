@@ -1,8 +1,8 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration
+
 #
-# PR-AWS-0218-TRF
+# PR-AWS-TRF-EMR-001
 #
 
 default emr_security = null
@@ -39,7 +39,7 @@ emr_security_err = "AWS EMR cluster is not configured with security configuratio
 }
 
 emr_security_metadata := {
-    "Policy Code": "PR-AWS-0218-TRF",
+    "Policy Code": "PR-AWS-TRF-EMR-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -50,9 +50,8 @@ emr_security_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration"
 }
 
-
 #
-# PR-AWS-0219-TRF
+# PR-AWS-TRF-EMR-002
 #
 
 default emr_kerberos = null
@@ -92,7 +91,7 @@ emr_kerberos_err = "AWS EMR cluster is not configured with Kerberos Authenticati
 }
 
 emr_kerberos_metadata := {
-    "Policy Code": "PR-AWS-0219-TRF",
+    "Policy Code": "PR-AWS-TRF-EMR-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -103,9 +102,8 @@ emr_kerberos_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-kerberosattributes"
 }
 
-
 #
-# PR-AWS-0220-TRF
+# PR-AWS-TRF-EMR-003
 #
 
 default emr_s3_encryption = null
@@ -144,7 +142,7 @@ emr_s3_encryption_err = "AWS EMR cluster is not configured with CSE CMK for data
 }
 
 emr_s3_encryption_metadata := {
-    "Policy Code": "PR-AWS-0220-TRF",
+    "Policy Code": "PR-AWS-TRF-EMR-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -155,9 +153,8 @@ emr_s3_encryption_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration"
 }
 
-
 #
-# PR-AWS-0221-TRF
+# PR-AWS-TRF-EMR-004
 #
 
 default emr_local_encryption_cmk = null
@@ -206,7 +203,7 @@ emr_local_encryption_cmk_err = "AWS EMR cluster is not enabled with local disk e
 }
 
 emr_local_encryption_cmk_metadata := {
-    "Policy Code": "PR-AWS-0221-TRF",
+    "Policy Code": "PR-AWS-TRF-EMR-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -217,9 +214,8 @@ emr_local_encryption_cmk_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration"
 }
 
-
 #
-# PR-AWS-0222-TRF
+# PR-AWS-TRF-EMR-005
 #
 
 default emr_local_encryption = null
@@ -258,7 +254,7 @@ emr_local_encryption_err = "AWS EMR cluster is not enabled with local disk encry
 }
 
 emr_local_encryption_metadata := {
-    "Policy Code": "PR-AWS-0222-TRF",
+    "Policy Code": "PR-AWS-TRF-EMR-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -269,9 +265,8 @@ emr_local_encryption_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration"
 }
 
-
 #
-# PR-AWS-0223-TRF
+# PR-AWS-TRF-EMR-006
 #
 
 default emr_rest_encryption = null
@@ -313,7 +308,7 @@ emr_rest_encryption_err = "AWS EMR cluster is not enabled with data encryption a
 }
 
 emr_rest_encryption_metadata := {
-    "Policy Code": "PR-AWS-0223-TRF",
+    "Policy Code": "PR-AWS-TRF-EMR-006",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -324,10 +319,8 @@ emr_rest_encryption_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration"
 }
 
-
-
 #
-# PR-AWS-0224-TRF
+# PR-AWS-TRF-EMR-008
 #
 
 default emr_s3_encryption_sse = null
@@ -377,7 +370,7 @@ emr_s3_encryption_sse_err = "AWS EMR cluster is not configured with SSE KMS for 
 }
 
 emr_s3_encryption_sse_metadata := {
-    "Policy Code": "PR-AWS-0224-TRF",
+    "Policy Code": "PR-AWS-TRF-EMR-008",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -388,9 +381,8 @@ emr_s3_encryption_sse_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration"
 }
 
-
 #
-# PR-AWS-0225-TRF
+# PR-AWS-TRF-EMR-007
 #
 
 default emr_transit_encryption = null
@@ -432,7 +424,7 @@ emr_transit_encryption_err = "AWS EMR cluster is not enabled with data encryptio
 }
 
 emr_transit_encryption_metadata := {
-    "Policy Code": "PR-AWS-0225-TRF",
+    "Policy Code": "PR-AWS-TRF-EMR-007",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",

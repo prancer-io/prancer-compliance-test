@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries/webhooks
 
 #
-# PR-AZR-0005-ARM
+# PR-AZR-ARM-ACR-001
 #
 
 default acr_webhooks = null
@@ -14,10 +14,28 @@ azure_attribute_absence["acr_webhooks"] {
     not resource.properties.serviceUri
 }
 
+source_path[{"acr_webhooks":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerregistry/registries/webhooks"
+    not resource.properties.serviceUri
+    metadata:= {
+        "resource_path": [["resources",i,"properties","serviceUri"]]
+    }
+}
+
 azure_issue["acr_webhooks"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.containerregistry/registries/webhooks"
     substring(lower(resource.properties.serviceUri), 0, 6) != "https:"
+}
+
+source_path[{"acr_webhooks":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerregistry/registries/webhooks"
+    substring(lower(resource.properties.serviceUri), 0, 6) != "https:"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","serviceUri"]]
+    }
 }
 
 acr_webhooks {
@@ -43,7 +61,7 @@ acr_webhooks_miss_err = "ACR webhook property 'serviceUri' is missing from the r
 }
 
 acr_webhooks_metadata := {
-    "Policy Code": "PR-AZR-0005-ARM",
+    "Policy Code": "PR-AZR-ARM-ACR-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

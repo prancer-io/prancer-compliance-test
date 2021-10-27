@@ -1,9 +1,8 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
 
 #
-# PR-AWS-0047-TRF
+# PR-AWS-TRF-ECS-001
 #
 
 default ecs_task_evelated = null
@@ -43,7 +42,7 @@ ecs_task_evelated_err = "AWS ECS task definition elevated privileges enabled" {
 }
 
 ecs_task_evelated_metadata := {
-    "Policy Code": "PR-AWS-0047-TRF",
+    "Policy Code": "PR-AWS-TRF-ECS-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -55,7 +54,7 @@ ecs_task_evelated_metadata := {
 }
 
 #
-# PR-AWS-0048-TRF
+# PR-AWS-TRF-ECS-002
 #
 
 default ecs_exec = null
@@ -93,7 +92,7 @@ ecs_exec_err = "AWS ECS/Fargate task definition execution IAM Role not found" {
 }
 
 ecs_exec_metadata := {
-    "Policy Code": "PR-AWS-0048-TRF",
+    "Policy Code": "PR-AWS-TRF-ECS-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -105,7 +104,7 @@ ecs_exec_metadata := {
 }
 
 #
-# PR-AWS-0049-TRF
+# PR-AWS-TRF-ECS-003
 #
 
 default ecs_root_user = null
@@ -131,7 +130,7 @@ ecs_root_user_err = "AWS ECS/Fargate task definition root user found" {
 }
 
 ecs_root_user_metadata := {
-    "Policy Code": "PR-AWS-0049-TRF",
+    "Policy Code": "PR-AWS-TRF-ECS-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -143,7 +142,7 @@ ecs_root_user_metadata := {
 }
 
 #
-# PR-AWS-0210-TRF
+# PR-AWS-TRF-ECS-004
 #
 
 default ecs_root_filesystem = null
@@ -183,7 +182,7 @@ ecs_root_filesystem_err = "AWS ECS Task Definition readonlyRootFilesystem Not En
 }
 
 ecs_root_filesystem_metadata := {
-    "Policy Code": "PR-AWS-0210-TRF",
+    "Policy Code": "PR-AWS-TRF-ECS-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -194,9 +193,8 @@ ecs_root_filesystem_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html"
 }
 
-
 #
-# PR-AWS-0211-TRF
+# PR-AWS-TRF-ECS-005
 #
 
 default ecs_resource_limit = null
@@ -301,7 +299,7 @@ ecs_resource_limit_err = "AWS ECS task definition resource limits not set." {
 }
 
 ecs_resource_limit_metadata := {
-    "Policy Code": "PR-AWS-0211-TRF",
+    "Policy Code": "PR-AWS-TRF-ECS-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -313,7 +311,7 @@ ecs_resource_limit_metadata := {
 }
 
 #
-# PR-AWS-0212-TRF
+# PR-AWS-TRF-ECS-006
 #
 
 default ecs_logging = null
@@ -355,7 +353,7 @@ ecs_logging_err = "AWS ECS task definition logging not enabled." {
 }
 
 ecs_logging_metadata := {
-    "Policy Code": "PR-AWS-0212-TRF",
+    "Policy Code": "PR-AWS-TRF-ECS-006",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -366,9 +364,8 @@ ecs_logging_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html"
 }
 
-
 #
-# PR-AWS-0254-TRF
+# PR-AWS-TRF-ECS-007
 #
 
 default ecs_transit_enabled = null
@@ -402,7 +399,7 @@ ecs_transit_enabled_err = "Ensure EFS volumes in ECS task definitions have encry
 }
 
 ecs_transit_enabled_metadata := {
-    "Policy Code": "PR-AWS-0254-TRF",
+    "Policy Code": "PR-AWS-TRF-ECS-007",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",

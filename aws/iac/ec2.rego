@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
 
 #
-# PR-AWS-0042-CFR
+# PR-AWS-CFR-EC2-001
 #
 
 default ec2_iam_role = null
@@ -14,10 +14,32 @@ aws_issue["ec2_iam_role"] {
     not resource.Properties.IamInstanceProfile
 }
 
+source_path[{"ec2_iam_role": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    not resource.Properties.IamInstanceProfile
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "IamInstanceProfile"]
+        ],
+    }
+}
+
 aws_issue["ec2_iam_role"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::instance"
     not startswith(lower(resource.Properties.IamInstanceProfile), "arn:")
+}
+
+source_path[{"ec2_iam_role": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    not startswith(lower(resource.Properties.IamInstanceProfile), "arn:")
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "IamInstanceProfile"]
+        ],
+    }
 }
 
 ec2_iam_role {
@@ -34,7 +56,7 @@ ec2_iam_role_err = "AWS EC2 Instance IAM Role not enabled" {
 }
 
 ec2_iam_role_metadata := {
-    "Policy Code": "PR-AWS-0042-CFR",
+    "Policy Code": "PR-AWS-CFR-EC2-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -46,7 +68,7 @@ ec2_iam_role_metadata := {
 }
 
 #
-# PR-AWS-0045-CFR
+# PR-AWS-CFR-EC2-002
 #
 
 default ec2_no_vpc = null
@@ -56,6 +78,18 @@ aws_issue["ec2_no_vpc"] {
     lower(resource.Type) == "aws::ec2::instance"
     not resource.Properties.SubnetId
     count([c | resource.Properties.NetworkInterfaces[_].SubnetId; c := 1]) == 0
+}
+
+source_path[{"ec2_no_vpc": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    not resource.Properties.SubnetId
+    count([c | resource.Properties.NetworkInterfaces[_].SubnetId; c := 1]) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "NetworkInterfaces"]
+        ],
+    }
 }
 
 ec2_no_vpc {
@@ -72,7 +106,7 @@ ec2_no_vpc_err = "AWS EC2 instance is not configured with VPC" {
 }
 
 ec2_no_vpc_metadata := {
-    "Policy Code": "PR-AWS-0045-CFR",
+    "Policy Code": "PR-AWS-CFR-EC2-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -84,7 +118,7 @@ ec2_no_vpc_metadata := {
 }
 
 #
-# PR-AWS-0046-CFR
+# PR-AWS-CFR-EC2-003
 #
 
 default ec2_public_ip = null
@@ -92,15 +126,39 @@ default ec2_public_ip = null
 aws_issue["ec2_public_ip"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::instance"
-    lower(resource.Properties.NetworkInterfaces[_].AssociatePublicIpAddress) == "true"
-    lower(resource.Properties.SecurityGroups[_]) == "default"
+    lower(resource.Properties.NetworkInterfaces[j].AssociatePublicIpAddress) == "true"
+    lower(resource.Properties.SecurityGroups[k]) == "default"
+}
+
+source_path[{"ec2_public_ip": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    lower(resource.Properties.NetworkInterfaces[j].AssociatePublicIpAddress) == "true"
+    lower(resource.Properties.SecurityGroups[k]) == "default"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroups", k]
+        ],
+    }
 }
 
 aws_bool_issue["ec2_public_ip"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::instance"
-    resource.Properties.NetworkInterfaces[_].AssociatePublicIpAddress == true
-    lower(resource.Properties.SecurityGroups[_]) == "default"
+    resource.Properties.NetworkInterfaces[j].AssociatePublicIpAddress == true
+    lower(resource.Properties.SecurityGroups[k]) == "default"
+}
+
+source_path[{"ec2_public_ip": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    resource.Properties.NetworkInterfaces[j].AssociatePublicIpAddress == true
+    lower(resource.Properties.SecurityGroups[k]) == "default"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SecurityGroups", k]
+        ],
+    }
 }
 
 ec2_public_ip {
@@ -124,7 +182,7 @@ ec2_public_ip_err = "AWS EC2 instances with Public IP and associated with Securi
 }
 
 ec2_public_ip_metadata := {
-    "Policy Code": "PR-AWS-0046-CFR",
+    "Policy Code": "PR-AWS-CFR-EC2-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -136,7 +194,7 @@ ec2_public_ip_metadata := {
 }
 
 #
-# PR-AWS-0298-CFR
+# PR-AWS-CFR-EC2-004
 #
 
 default ec2_ebs_optimized = null
@@ -147,10 +205,32 @@ aws_issue["ec2_ebs_optimized"] {
     not resource.Properties.EbsOptimized
 }
 
+source_path[{"ec2_ebs_optimized": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    not resource.Properties.EbsOptimized
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EbsOptimized"]
+        ],
+    }
+}
+
 aws_issue["ec2_ebs_optimized"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::instance"
     lower(resource.Properties.EbsOptimized) == "false"
+}
+
+source_path[{"ec2_ebs_optimized": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    lower(resource.Properties.EbsOptimized) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EbsOptimized"]
+        ],
+    }
 }
 
 ec2_ebs_optimized {
@@ -167,7 +247,7 @@ ec2_ebs_optimized_err = "Ensure that EC2 instace is EBS Optimized" {
 }
 
 ec2_ebs_optimized_metadata := {
-    "Policy Code": "PR-AWS-0297-CFR",
+    "Policy Code": "PR-AWS-CFR-EC2-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -180,7 +260,7 @@ ec2_ebs_optimized_metadata := {
 
 
 #
-# PR-AWS-0332-CFR
+# PR-AWS-CFR-EC2-005
 #
 
 default ec2_monitoring = null
@@ -191,10 +271,32 @@ aws_issue["ec2_monitoring"] {
     not resource.Properties.Monitoring
 }
 
+source_path[{"ec2_monitoring": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    not resource.Properties.Monitoring
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Monitoring"]
+        ],
+    }
+}
+
 aws_issue["ec2_monitoring"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::instance"
     lower(resource.Properties.Monitoring) == "false"
+}
+
+source_path[{"ec2_monitoring": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    lower(resource.Properties.Monitoring) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Monitoring"]
+        ],
+    }
 }
 
 ec2_monitoring {
@@ -211,7 +313,7 @@ ec2_monitoring_err = "Ensure detailed monitoring is enabled for EC2 instances" {
 }
 
 ec2_monitoring_metadata := {
-    "Policy Code": "PR-AWS-0332-CFR",
+    "Policy Code": "PR-AWS-CFR-EC2-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

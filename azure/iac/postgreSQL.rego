@@ -2,7 +2,7 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers
 
-# PR-AZR-0115-ARM
+# PR-AZR-ARM-SQL-028
 
 default geoRedundantBackup = null
 
@@ -12,11 +12,32 @@ azure_attribute_absence["geoRedundantBackup"] {
     not resource.properties.storageProfile.geoRedundantBackup
 }
 
+source_path[{"geoRedundantBackup":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    not resource.properties.storageProfile.geoRedundantBackup
+    metadata:= {
+        "resource_path": [["resources",i,"properties","storageProfile","geoRedundantBackup"]]
+    }
+}
+
+
 azure_issue["geoRedundantBackup"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbforpostgresql/servers"
     lower(resource.properties.storageProfile.geoRedundantBackup) != "enabled"
 }
+
+
+source_path[{"geoRedundantBackup":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    lower(resource.properties.storageProfile.geoRedundantBackup) != "enabled"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","storageProfile","geoRedundantBackup"]]
+    }
+}
+
 
 geoRedundantBackup {
     lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
@@ -41,7 +62,7 @@ geoRedundantBackup_miss_err = "Property geoRedundantBackup of type enum is absen
 }
 
 geoRedundantBackup_metadata := {
-    "Policy Code": "PR-AZR-0115-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-028",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -56,7 +77,7 @@ geoRedundantBackup_metadata := {
 
 
 
-# PR-AZR-0124-ARM
+# PR-AZR-ARM-SQL-029
 
 default sslEnforcement = null
 azure_attribute_absence ["sslEnforcement"] {
@@ -65,10 +86,28 @@ azure_attribute_absence ["sslEnforcement"] {
     not resource.properties.sslEnforcement
 }
 
+source_path[{"sslEnforcement":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    not resource.properties.sslEnforcement
+    metadata:= {
+        "resource_path": [["resources",i,"properties","sslEnforcement"]]
+    }
+}
+
 azure_issue ["sslEnforcement"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbforpostgresql/servers"
     lower(resource.properties.sslEnforcement) != "enabled"
+}
+
+source_path[{"sslEnforcement":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    lower(resource.properties.sslEnforcement) != "enabled"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","sslEnforcement"]]
+    }
 }
 
 sslEnforcement {
@@ -95,7 +134,7 @@ sslEnforcement_miss_err = "Property sslEnforcement of type enum is absent from r
 }
 
 sslEnforcement_metadata := {
-    "Policy Code": "PR-AZR-0124-ARM",
+    "Policy Code": "PR-AZR-ARM-SQL-029",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
