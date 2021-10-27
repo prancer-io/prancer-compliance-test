@@ -11,9 +11,41 @@ default vpn_encrypt = null
 azure_attribute_absence["vpn_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/vpngateways"
+    not resource.properties.connections
+}
+
+source_path[{"vpn_encrypt":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/vpngateways"
+    not resource.properties.connections
+    metadata:= {
+        "resource_path": [["resources",i,"properties","connections"]]
+    }
+}
+
+azure_attribute_absence["vpn_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/vpngateways"
+    con := resource.properties.connections[_]
+    not con.properties.ipsecPolicies
+}
+
+source_path[{"vpn_encrypt":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/vpngateways"
     con := resource.properties.connections[j]
-    ipsec := con.properties.ipsecPolicies[k]
-    count([c | ipsec.ipsecEncryption; c := 1]) == 0
+    not con.properties.ipsecPolicies
+    metadata:= {
+        "resource_path": [["resources",i,"properties","connections",j,"properties","ipsecPolicies"]]
+    }
+}
+
+azure_attribute_absence["vpn_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/vpngateways"
+    con := resource.properties.connections[_]
+    ipsec := con.properties.ipsecPolicies[_]
+    not ipsec.ipsecEncryption
 }
 
 source_path[{"vpn_encrypt":metadata}] {
@@ -21,7 +53,7 @@ source_path[{"vpn_encrypt":metadata}] {
     lower(resource.type) == "microsoft.network/vpngateways"
     con := resource.properties.connections[j]
     ipsec := con.properties.ipsecPolicies[k]
-    count([c | ipsec.ipsecEncryption; c := 1]) == 0
+    not ipsec.ipsecEncryption
     metadata:= {
         "resource_path": [["resources",i,"properties","connections",j,"properties","ipsecPolicies",k,"ipsecEncryption"]]
     }
