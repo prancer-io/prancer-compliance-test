@@ -1,5 +1,9 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine
 
 #
@@ -196,13 +200,13 @@ default vm_type_linux_disabled_extension_operation = null
 azure_attribute_absence["vm_type_linux_disabled_extension_operation"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_linux_virtual_machine"
-    not resource.properties.allow_extension_operations
+	not has_property(resource.properties, "allow_extension_operations")
 }
 
 azure_issue["vm_type_linux_disabled_extension_operation"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_linux_virtual_machine"
-    resource.properties.allow_extension_operations != false
+    resource.properties.allow_extension_operations == true
 }
 
 vm_type_linux_disabled_extension_operation {
@@ -250,13 +254,14 @@ default vm_type_windows_disabled_extension_operation = null
 azure_attribute_absence["vm_type_windows_disabled_extension_operation"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_windows_virtual_machine"
-    not resource.properties.allow_extension_operations
+    #not resource.properties.allow_extension_operations
+    not has_property(resource.properties, "allow_extension_operations")
 }
 
 azure_issue["vm_type_windows_disabled_extension_operation"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_windows_virtual_machine"
-    resource.properties.allow_extension_operations != false
+    resource.properties.allow_extension_operations == true
 }
 
 vm_type_windows_disabled_extension_operation {
