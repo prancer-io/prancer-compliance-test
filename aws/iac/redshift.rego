@@ -4,7 +4,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clusterparametergroup.html
 
 #
-# PR-AWS-0133-CFR
+# PR-AWS-CFR-RSH-001
 #
 
 default redshift_encrypt_key = null
@@ -15,10 +15,32 @@ aws_attribute_absence["redshift_encrypt_key"] {
     not resource.Properties.KmsKeyId
 }
 
+source_path[{"redshift_encrypt_key": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    not resource.Properties.KmsKeyId
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsKeyId"]
+        ],
+    }
+}
+
 aws_issue["redshift_encrypt_key"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::redshift::cluster"
     not startswith(lower(resource.Properties.KmsKeyId), "arn:")
+}
+
+source_path[{"redshift_encrypt_key": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    not startswith(lower(resource.Properties.KmsKeyId), "arn:")
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsKeyId"]
+        ],
+    }
 }
 
 aws_issue["redshift_encrypt_key"] {
@@ -27,10 +49,32 @@ aws_issue["redshift_encrypt_key"] {
     lower(resource.Properties.Encrypted) == "false"
 }
 
+source_path[{"redshift_encrypt_key": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    lower(resource.Properties.Encrypted) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Encrypted"]
+        ],
+    }
+}
+
 aws_bool_issue["redshift_encrypt_key"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::redshift::cluster"
     not resource.Properties.Encrypted
+}
+
+source_path[{"redshift_encrypt_key": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    not resource.Properties.Encrypted
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Encrypted"]
+        ],
+    }
 }
 
 redshift_encrypt_key {
@@ -63,7 +107,7 @@ redshift_encrypt_key_miss_err = "Redshift attribute KmsKeyId missing in the reso
 }
 
 redshift_encrypt_key_metadata := {
-    "Policy Code": "PR-AWS-0133-CFR",
+    "Policy Code": "PR-AWS-CFR-RSH-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -75,7 +119,7 @@ redshift_encrypt_key_metadata := {
 }
 
 #
-# PR-AWS-0134-CFR
+# PR-AWS-CFR-RSH-002
 #
 
 default redshift_public = null
@@ -86,10 +130,32 @@ aws_issue["redshift_public"] {
     lower(resource.Properties.PubliclyAccessible) == "true"
 }
 
+source_path[{"redshift_public": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    lower(resource.Properties.PubliclyAccessible) == "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PubliclyAccessible"]
+        ],
+    }
+}
+
 aws_bool_issue["redshift_public"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::redshift::cluster"
     resource.Properties.PubliclyAccessible == true
+}
+
+source_path[{"redshift_public": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    resource.Properties.PubliclyAccessible == true
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PubliclyAccessible"]
+        ],
+    }
 }
 
 redshift_public {
@@ -114,7 +180,7 @@ redshift_public_err = "AWS Redshift clusters should not be publicly accessible" 
 
 
 redshift_public_metadata := {
-    "Policy Code": "PR-AWS-0134-CFR",
+    "Policy Code": "PR-AWS-CFR-RSH-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -126,60 +192,7 @@ redshift_public_metadata := {
 }
 
 #
-# PR-AWS-0135-CFR
-#
-
-default redshift_audit = null
-
-aws_attribute_absence["redshift_audit"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::redshift::cluster"
-    not resource.Properties.LoggingProperties.BucketName
-}
-
-aws_issue["redshift_audit"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::redshift::cluster"
-    count(resource.Properties.LoggingProperties.BucketName) == 0
-}
-
-redshift_audit {
-    lower(input.Resources[i].Type) == "aws::redshift::cluster"
-    not aws_issue["redshift_audit"]
-    not aws_attribute_absence["redshift_audit"]
-}
-
-redshift_audit = false {
-    aws_issue["redshift_audit"]
-}
-
-redshift_audit = false {
-    aws_attribute_absence["redshift_audit"]
-}
-
-redshift_audit_err = "AWS Redshift database does not have audit logging enabled" {
-    aws_issue["redshift_audit"]
-}
-
-redshift_audit_miss_err = "Redshift attribute LoggingProperties.BucketName missing in the resource" {
-    aws_attribute_absence["redshift_audit"]
-}
-
-redshift_audit_metadata := {
-    "Policy Code": "PR-AWS-0135-CFR",
-    "Type": "IaC",
-    "Product": "AWS",
-    "Language": "AWS Cloud formation",
-    "Policy Title": "AWS Redshift database does not have audit logging enabled",
-    "Policy Description": "Audit logging is not enabled by default in Amazon Redshift. When you enable logging on your cluster, Amazon Redshift creates and uploads logs to Amazon S3 that capture data from the creation of the cluster to the present time.",
-    "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
-}
-
-
-#
-# PR-AWS-0136-CFR
+# PR-AWS-CFR-RSH-003
 #
 
 default redshift_require_ssl = null
@@ -190,18 +203,53 @@ aws_attribute_absence["redshift_require_ssl"] {
     not resource.Properties.Parameters
 }
 
+source_path[{"redshift_require_ssl": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::clusterparametergroup"
+    not resource.Properties.Parameters
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Parameters"]
+        ],
+    }
+}
+
 aws_issue["redshift_require_ssl"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::redshift::clusterparametergroup"
     count([c | lower(resource.Properties.Parameters[_].ParameterName) == "require_ssl"; c := 1]) == 0
 }
 
+source_path[{"redshift_require_ssl": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::clusterparametergroup"
+    count([c | lower(resource.Properties.Parameters[_].ParameterName) == "require_ssl"; c := 1]) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Parameters"]
+        ],
+    }
+}
+
 aws_issue["redshift_require_ssl"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::redshift::clusterparametergroup"
-    params = resource.Properties.Parameters[_]
+    params = resource.Properties.Parameters[j]
     lower(params.ParameterName) == "require_ssl"
     lower(params.ParameterValue) == "false"
+}
+
+source_path[{"redshift_require_ssl": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::clusterparametergroup"
+    params = resource.Properties.Parameters[j]
+    lower(params.ParameterName) == "require_ssl"
+    lower(params.ParameterValue) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Parameters", j, "ParameterValue"]
+        ],
+    }
 }
 
 redshift_require_ssl {
@@ -227,7 +275,7 @@ redshift_require_ssl_miss_err = "Redshift attribute Properties missing in the re
 }
 
 redshift_require_ssl_metadata := {
-    "Policy Code": "PR-AWS-0136-CFR",
+    "Policy Code": "PR-AWS-CFR-RSH-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -239,7 +287,7 @@ redshift_require_ssl_metadata := {
 }
 
 #
-# PR-AWS-0137-CFR
+# PR-AWS-CFR-RSH-004
 #
 
 default redshift_encrypt = null
@@ -250,19 +298,39 @@ aws_issue["redshift_encrypt"] {
     lower(resource.Properties.Encrypted) == "false"
 }
 
+source_path[{"redshift_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    lower(resource.Properties.Encrypted) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Encrypted"]
+        ],
+    }
+}
+
 aws_bool_issue["redshift_encrypt"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::redshift::cluster"
     not resource.Properties.Encrypted
 }
 
+source_path[{"redshift_encrypt": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    not resource.Properties.Encrypted
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Encrypted"]
+        ],
+    }
+}
 
 redshift_encrypt {
     lower(input.Resources[i].Type) == "aws::redshift::cluster"
     not aws_issue["redshift_encrypt"]
     not aws_bool_issue["redshift_encrypt"]
 }
-
 
 redshift_encrypt = false {
     aws_issue["redshift_encrypt"]
@@ -279,7 +347,7 @@ redshift_encrypt_err = "AWS Redshift instances are not encrypted" {
 }
 
 redshift_encrypt_metadata := {
-    "Policy Code": "PR-AWS-0137-CFR",
+    "Policy Code": "PR-AWS-CFR-RSH-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -292,7 +360,7 @@ redshift_encrypt_metadata := {
 
 
 #
-# PR-AWS-0261-CFR
+# PR-AWS-CFR-RSH-005
 #
 
 default redshift_allow_version_upgrade = null
@@ -303,10 +371,32 @@ aws_issue["redshift_allow_version_upgrade"] {
     lower(resource.Properties.AllowVersionUpgrade) == "false"
 }
 
+source_path[{"redshift_allow_version_upgrade": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    lower(resource.Properties.AllowVersionUpgrade) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AllowVersionUpgrade"]
+        ],
+    }
+}
+
 aws_bool_issue["redshift_allow_version_upgrade"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::redshift::cluster"
     not resource.Properties.AllowVersionUpgrade
+}
+
+source_path[{"redshift_allow_version_upgrade": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    not resource.Properties.AllowVersionUpgrade
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AllowVersionUpgrade"]
+        ],
+    }
 }
 
 
@@ -332,7 +422,7 @@ redshift_allow_version_upgrade_err = "Ensure Redshift cluster allow version upgr
 }
 
 redshift_allow_version_upgrade_metadata := {
-    "Policy Code": "PR-AWS-0261-CFR",
+    "Policy Code": "PR-AWS-CFR-RSH-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -345,7 +435,7 @@ redshift_allow_version_upgrade_metadata := {
 
 
 #
-# PR-AWS-333-CFR
+# PR-AWS-CFR-RSH-006
 #
 
 default redshift_deploy_vpc = null
@@ -356,10 +446,32 @@ aws_issue["redshift_deploy_vpc"] {
     count(resource.Properties.ClusterSubnetGroupName) == 0
 }
 
+source_path[{"redshift_deploy_vpc": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    count(resource.Properties.ClusterSubnetGroupName) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ClusterSubnetGroupName"]
+        ],
+    }
+}
+
 aws_issue["redshift_deploy_vpc"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::redshift::cluster"
     not resource.Properties.ClusterSubnetGroupName
+}
+
+source_path[{"redshift_deploy_vpc": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    not resource.Properties.ClusterSubnetGroupName
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ClusterSubnetGroupName"]
+        ],
+    }
 }
 
 redshift_deploy_vpc {
@@ -377,7 +489,7 @@ redshift_deploy_vpc_err = "Ensure Redshift is not deployed outside of a VPC" {
 }
 
 redshift_deploy_vpc_metadata := {
-    "Policy Code": "PR-AWS-0333-CFR",
+    "Policy Code": "PR-AWS-CFR-RSH-006",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -386,4 +498,79 @@ redshift_deploy_vpc_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html#cfn-redshift-cluster-clustersubnetgroupname"
+}
+
+
+#
+# PR-AWS-CFR-RSH-007
+#
+
+default redshift_audit = null
+
+aws_attribute_absence["redshift_audit"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    not resource.Properties.LoggingProperties.BucketName
+}
+
+source_path[{"redshift_audit": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    not resource.Properties.LoggingProperties.BucketName
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LoggingProperties", "BucketName"]
+        ],
+    }
+}
+
+aws_issue["redshift_audit"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    count(resource.Properties.LoggingProperties.BucketName) == 0
+}
+
+source_path[{"redshift_audit": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    count(resource.Properties.LoggingProperties.BucketName) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LoggingProperties", "BucketName"]
+        ],
+    }
+}
+
+redshift_audit {
+    lower(input.Resources[i].Type) == "aws::redshift::cluster"
+    not aws_issue["redshift_audit"]
+    not aws_attribute_absence["redshift_audit"]
+}
+
+redshift_audit = false {
+    aws_issue["redshift_audit"]
+}
+
+redshift_audit = false {
+    aws_attribute_absence["redshift_audit"]
+}
+
+redshift_audit_err = "AWS Redshift database does not have audit logging enabled" {
+    aws_issue["redshift_audit"]
+}
+
+redshift_audit_miss_err = "Redshift attribute LoggingProperties.BucketName missing in the resource" {
+    aws_attribute_absence["redshift_audit"]
+}
+
+redshift_audit_metadata := {
+    "Policy Code": "PR-AWS-CFR-RSH-007",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS Redshift database does not have audit logging enabled",
+    "Policy Description": "Audit logging is not enabled by default in Amazon Redshift. When you enable logging on your cluster, Amazon Redshift creates and uploads logs to Amazon S3 that capture data from the creation of the cluster to the present time.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html"
 }

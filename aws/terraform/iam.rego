@@ -1,8 +1,8 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_IAM.html
+
 #
-# PR-AWS-0226-TRF
+# PR-AWS-TRF-IAM-001
 #
 default iam_wildcard_resource = null
 
@@ -27,7 +27,7 @@ iam_wildcard_resource_err = "Ensure no wildcards are specified in IAM policy wit
 }
 
 iam_wildcard_resource_metadata := {
-    "Policy Code": "PR-AWS-0226-TRF",
+    "Policy Code": "PR-AWS-TRF-IAM-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -39,7 +39,7 @@ iam_wildcard_resource_metadata := {
 }
 
 #
-# PR-AWS-0227-TRF
+# PR-AWS-TRF-IAM-002
 #
 default iam_wildcard_action = null
 
@@ -64,7 +64,7 @@ iam_wildcard_action_err = "Ensure no wildcards are specified in IAM policy with 
 }
 
 iam_wildcard_action_metadata := {
-    "Policy Code": "PR-AWS-0227-TRF",
+    "Policy Code": "PR-AWS-TRF-IAM-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -75,10 +75,8 @@ iam_wildcard_action_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html"
 }
 
-
-
 #
-# PR-AWS-0228-TRF
+# PR-AWS-TRF-IAM-003
 #
 default iam_wildcard_principal = null
 
@@ -103,7 +101,7 @@ iam_wildcard_principal_err = "Ensure no wildcards are specified in IAM trust-rel
 }
 
 iam_wildcard_principal_metadata := {
-    "Policy Code": "PR-AWS-0228-TRF",
+    "Policy Code": "PR-AWS-TRF-IAM-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -114,9 +112,8 @@ iam_wildcard_principal_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html"
 }
 
-
 #
-# PR-AWS-0229-TRF
+# PR-AWS-TRF-IAM-004
 #
 default iam_resource_format = null
 
@@ -166,7 +163,7 @@ iam_resource_format_err = "Ensure no IAM policy has a resource specified in the 
 }
 
 iam_resource_format_metadata := {
-    "Policy Code": "PR-AWS-0229-TRF",
+    "Policy Code": "PR-AWS-TRF-IAM-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -177,10 +174,8 @@ iam_resource_format_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html"
 }
 
-
-
 #
-# PR-AWS-0230-TRF
+# PR-AWS-TRF-IAM-005
 #
 default iam_assume_permission = null
 
@@ -216,7 +211,7 @@ iam_assume_permission_err = "AWS IAM policy allows assume role permission across
 }
 
 iam_assume_permission_metadata := {
-    "Policy Code": "PR-AWS-0230-TRF",
+    "Policy Code": "PR-AWS-TRF-IAM-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -228,7 +223,7 @@ iam_assume_permission_metadata := {
 }
 
 #
-# PR-AWS-0231-TRF
+# PR-AWS-TRF-IAM-006
 #
 default iam_all_traffic = null
 
@@ -254,7 +249,7 @@ iam_all_traffic_err = "AWS IAM policy is overly permissive to all traffic via co
 }
 
 iam_all_traffic_metadata := {
-    "Policy Code": "PR-AWS-0231-TRF",
+    "Policy Code": "PR-AWS-TRF-IAM-006",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -266,7 +261,7 @@ iam_all_traffic_metadata := {
 }
 
 #
-# PR-AWS-0232-TRF
+# PR-AWS-TRF-IAM-007
 #
 default iam_administrative_privileges = null
 
@@ -293,7 +288,7 @@ iam_administrative_privileges_err = "AWS IAM policy allows full administrative p
 }
 
 iam_administrative_privileges_metadata := {
-    "Policy Code": "PR-AWS-0232-TRF",
+    "Policy Code": "PR-AWS-TRF-IAM-007",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",

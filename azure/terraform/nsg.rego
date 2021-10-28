@@ -3,9 +3,10 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule
 
 iports := [
-    "21", "22", "23", "25", "53", "80", "135", "137", "138", "445", "1433", "1434", "1521", 
-    "3306", "4333", "5000", "5432", "5500", "5900", "5984", "6379", "6380", "9042", "11211",
-    "27017", "28015", "29015", "50000"
+    "11211", "1270", "135", "137", "138", "1433", "1434", "1521", 
+    "20", "21", "22", "23", "25", "27017", "28015", "29015", "3306", 
+    "3389", "4333", "445", "5000", "50000", "53", "5432", "5500", "5900", 
+    "5984", "5985", "5986", "6379", "9042", "80", "6380"
 ]
 
 # allowed in all
@@ -27,7 +28,7 @@ nsg_inbound[port] {
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
     resource.properties.destination_address_prefix == "*"
-    resource.properties.destination_port_range == port
+    to_number(resource.properties.destination_port_range) == to_number(port)
 }
 
 # allowed in range
@@ -52,7 +53,7 @@ nsg_inbound[port] {
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
     resource.properties.destination_address_prefix == "*"
-    resource.properties.destination_port_ranges[_] == port
+    to_number(resource.properties.destination_port_ranges[_]) == to_number(port)
 }
 
 # allowed in list range
@@ -203,8 +204,8 @@ azure_issue["nsg_in_udp_all"] {
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
-    lower(resource.properties.protocol) == "UDP"
-    resource.properties.source_address_prefix == "Internet"
+    lower(resource.properties.protocol) == "udp"
+    lower(resource.properties.source_address_prefix) == "internet"
     resource.properties.destination_address_prefix == "*"
     resource.properties.destination_port_range == "*"
 }
@@ -336,18 +337,6 @@ nsg_in_all_dst_err = "Azure NSG having inbound rule overly permissive to allow a
 }
 
 nsg_in_all_dst_metadata := {
-    "Policy Code": "PR-AZR-0027-TRF",
-    "Type": "IaC",
-    "Product": "AZR",
-    "Language": "Terraform",
-    "Policy Title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to allow all traffic from any source on any protocol",
-    "Policy Description": "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
-    "Resource Type": "azurerm_network_security_rule",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/azurerm_network_security_rule"
-}
-
-nsg_in_all_metadata := {
     "Policy Code": "PR-AZR-0028-TRF",
     "Type": "IaC",
     "Product": "AZR",
@@ -370,7 +359,7 @@ azure_issue["nsg_allow_icmp"] {
     lower(resource.type) == "azurerm_network_security_rule"
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "inbound"
-    lower(resource.properties.protocol) == "ICMP"
+    lower(resource.properties.protocol) == "icmp"
     resource.properties.source_address_prefix == "*"
 }
 
@@ -1197,7 +1186,7 @@ nsg_outbound[port] {
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "Outbound"
     resource.properties.destination_address_prefix == "*"
-    resource.properties.destination_port_range == port
+    to_number(resource.properties.destination_port_range) == to_number(port)
 }
 
 # allowed in range
@@ -1223,7 +1212,7 @@ nsg_outbound[port] {
     lower(resource.properties.access) == "allow"
     lower(resource.properties.direction) == "Outbound"
     resource.properties.destination_address_prefix == "*"
-    resource.properties.destination_port_ranges[_] == port
+    to_number(resource.properties.destination_port_ranges[_]) == to_number(port)
 }
 
 # allowed in list range
@@ -1377,12 +1366,12 @@ azure_issue["inbound_insecure_omi_port"] {
 }
 
 inbound_insecure_omi_port {
-    azure_issue["inbound_insecure_omi_port"]
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
+    not azure_issue["inbound_insecure_omi_port"]
 }
 
 inbound_insecure_omi_port = false {
-    lower(input.resources[_].type) == "azurerm_network_security_rule"
-    not azure_issue["inbound_insecure_omi_port"]
+    azure_issue["inbound_insecure_omi_port"]
 }
 
 inbound_insecure_omi_port_err = "Azure Network Security Group (NSG) currently not protecting OMIGOD attack from internet" {

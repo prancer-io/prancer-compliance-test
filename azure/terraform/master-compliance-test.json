@@ -1255,7 +1255,7 @@
                             "eval": "data.rule.tagsLength",
                             "message": "data.rule.tagsLength_err",
                             "remediationDescription": "In 'azurerm_cosmosdb_account' resource, add relevent tag on property 'tags' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_account#tags for details.",
-                            "remediationFunction": "PR-AZR-0105-TRF.py"
+                            "remediationFunction": "PR_AZR_0105_TRF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2222,7 +2222,7 @@
                             "eval": "data.rule.KeyVault",
                             "message": "data.rule.KeyVault_err",
                             "remediationDescription": "In 'azurerm_key_vault' resource, make sure you have added either 'key_permissions' or 'secret_permissions' or 'certificate_permissions' or 'storage_permissions' under access_policy block to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault#access_policy for details.",
-                            "remediationFunction": "PR-AZR-0107-TRF.py"
+                            "remediationFunction": "PR_AZR_0107_TRF.py"
                         }
                     ],
                     "severity": "Low",
@@ -2246,40 +2246,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_KeyVault_2",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(KeyVault.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-0108-TRF",
-                            "eval": "data.rule.enableSoftDelete",
-                            "message": "data.rule.enableSoftDelete_err",
-                            "remediationDescription": "In 'azurerm_key_vault' resource, set 'soft_delete_enabled = true' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault for details.",
-                            "remediationFunction": "PR-AZR-0108-TRF.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure the key vault is recoverable - enable 'Soft Delete' setting for a Key Vault",
-                    "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation, etc.) supported by the key vault objects. It is recommended the key vault be made recoverable by enabling the 'Do Not Purge' and 'Soft Delete' functions. This is in order to prevent loss of encrypted data including storage accounts, SQL databases, and/or dependent services provided by key vault objects (Keys, Secrets, Certificates) etc., as may happen in the case of accidental deletion by a user or from disruptive activity by a malicious user.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "Best Practices"
-                            ],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "azurerm_key_vault"
-                    ]
-                },
-                {
                     "masterTestId": "TEST_KeyVault_3",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -2292,7 +2258,7 @@
                             "eval": "data.rule.enablePurgeProtection",
                             "message": "data.rule.enablePurgeProtection_err",
                             "remediationDescription": "In 'azurerm_key_vault' resource, set 'purge_protection_enabled = true' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault#purge_protection_enabled for details.",
-                            "remediationFunction": "PR-AZR-0109-TRF.py"
+                            "remediationFunction": "PR_AZR_0109_TRF.py"
                         }
                     ],
                     "severity": "High",
@@ -3878,7 +3844,7 @@
                             "eval": "data.rule.geoRedundantBackup",
                             "message": "data.rule.geoRedundantBackup_err",
                             "remediationDescription": "In 'azurerm_postgresql_server' resource, set 'geo_redundant_backup_enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server#geo_redundant_backup_enabled for details.",
-                            "remediationFunction": "PR-AZR-0115-TRF.py"
+                            "remediationFunction": "PR_AZR_0115_TRF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3914,7 +3880,7 @@
                             "eval": "data.rule.sslEnforcement",
                             "message": "data.rule.sslEnforcement_err",
                             "remediationDescription": "In 'azurerm_postgresql_server' resource, set 'ssl_enforcement_enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server#ssl_enforcement_enabled for details.",
-                            "remediationFunction": "PR-AZR-0124-TRF.py"
+                            "remediationFunction": "PR_AZR_0124_TRF.py"
                         }
                     ],
                     "severity": "High",
@@ -4570,7 +4536,7 @@
                             "eval": "data.rule.serverKeyType",
                             "message": "data.rule.serverKeyType_err",
                             "remediationDescription": "Make sure resource 'azurerm_mssql_server' and 'azurerm_mssql_server_transparent_data_encryption' both exist and in 'azurerm_mssql_server_transparent_data_encryption' resource, make sure 'key_vault_key_id' property has id of associated 'azurerm_key_vault_key' resource to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption#key_vault_key_id for details.",
-                            "remediationFunction": "PR-AZR-0111-TRF.py"
+                            "remediationFunction": "PR_AZR_0111_TRF.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4881,7 +4847,7 @@
                             "eval": "data.rule.keySource",
                             "message": "data.rule.keySource_err",
                             "remediationDescription": "In 'azurerm_storage_encryption_scope' resource, set 'source = microsoft.keyvault' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_encryption_scope#source for details.",
-                            "remediationFunction": "PR-AZR-0114-TRF.py"
+                            "remediationFunction": "PR_AZR_0114_TRF.py"
                         }
                     ],
                     "severity": "High",
@@ -4918,7 +4884,7 @@
                             "eval": "data.rule.region",
                             "message": "data.rule.region_err",
                             "remediationDescription": "In 'azurerm_storage_account' resource, set value as 'northeurope' or 'westeurope' in property 'location' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#location for details.",
-                            "remediationFunction": "PR-AZR-0122-TRF.py"
+                            "remediationFunction": "PR_AZR_0122_TRF.py"
                         }
                     ],
                     "severity": "High",

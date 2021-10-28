@@ -3,25 +3,47 @@ package rule
 # https://cloud.google.com/storage/docs/json_api/v1/buckets
 
 #
-# PR-GCP-0063-GDF
+# PR-GCP-GDF-BKT-001
 #
 
 default storage_encrypt = null
 
 gc_attribute_absence["storage_encrypt"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "storage.v1.bucket"
     not resource.properties.encryption.defaultKmsKeyName
 }
 
+source_path[{"storage_encrypt": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    not resource.properties.encryption.defaultKmsKeyName
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encryption", "defaultKmsKeyName"]
+        ],
+    }
+}
+
 gc_issue["storage_encrypt"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "storage.v1.bucket"
     count(resource.properties.encryption.defaultKmsKeyName) == 0
 }
 
+source_path[{"storage_encrypt": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    count(resource.properties.encryption.defaultKmsKeyName) == 0
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encryption", "defaultKmsKeyName"]
+        ],
+    }
+}
+
 storage_encrypt {
-    lower(input.resources[_].type) == "storage.v1.bucket"
+    lower(input.resources[i].type) == "storage.v1.bucket"
     not gc_issue["storage_encrypt"]
     not gc_attribute_absence["storage_encrypt"]
 }
@@ -43,7 +65,7 @@ storage_encrypt_miss_err = "GCP Storage bucket attribute encryption missing in t
 }
 
 storage_encrypt_metadata := {
-    "Policy Code": "PR-GCP-0063-GDF",
+    "Policy Code": "PR-GCP-GDF-BKT-001",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -55,26 +77,49 @@ storage_encrypt_metadata := {
 }
 
 #
-# PR-GCP-0066-GDF
+# PR-GCP-GDF-BKT-002
 #
 
 default storage_versioning = null
 
 gc_attribute_absence["storage_versioning"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "storage.v1.bucket"
     not resource.properties.versioning
 }
 
-gc_issue["storage_versioning"] {
-    resource := input.resources[_]
+source_path[{"storage_versioning": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "storage.v1.bucket"
-    contains(lower(resource.properties.acl[_].email), "logging")
+    not resource.properties.versioning
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "versioning"]
+        ],
+    }
+}
+
+gc_issue["storage_versioning"] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    contains(lower(resource.properties.acl[j].email), "logging")
     not resource.properties.versioning.enabled
 }
 
+source_path[{"storage_versioning": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    contains(lower(resource.properties.acl[j].email), "logging")
+    not resource.properties.versioning.enabled
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "versioning", "enabled"]
+        ],
+    }
+}
+
 storage_versioning {
-    lower(input.resources[_].type) == "storage.v1.bucket"
+    lower(input.resources[i].type) == "storage.v1.bucket"
     not gc_issue["storage_versioning"]
     not gc_attribute_absence["storage_versioning"]
 }
@@ -96,7 +141,7 @@ storage_versioning_miss_err = "GCP Storage attribute versioning missing in the r
 }
 
 storage_versioning_metadata := {
-    "Policy Code": "PR-GCP-0066-GDF",
+    "Policy Code": "PR-GCP-GDF-BKT-002",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -108,26 +153,49 @@ storage_versioning_metadata := {
 }
 
 #
-# PR-GCP-0078-GDF
+# PR-GCP-GDF-BKT-003
 #
 
 default storage_stack_logging = null
 
 gc_attribute_absence["storage_stack_logging"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "storage.v1.bucket"
     not resource.properties.logging
+}
+
+source_path[{"storage_stack_logging": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    not resource.properties.logging
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "logging"]
+        ],
+    }
 }
 
 gc_issue["storage_stack_logging"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "storage.v1.bucket"
-    contains(lower(resource.properties.acl[_].email), "logging")
+    contains(lower(resource.properties.acl[j].email), "logging")
     not resource.properties.logging
 }
 
+source_path[{"storage_stack_logging": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    contains(lower(resource.properties.acl[j].email), "logging")
+    not resource.properties.logging
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "logging"]
+        ],
+    }
+}
+
 storage_stack_logging {
-    lower(input.resources[_].type) == "storage.v1.bucket"
+    lower(input.resources[i].type) == "storage.v1.bucket"
     not gc_issue["storage_stack_logging"]
     not gc_attribute_absence["storage_stack_logging"]
 }
@@ -149,7 +217,7 @@ storage_stack_logging_miss_err = "GCP Storage attribute logging missing in the r
 }
 
 storage_stack_logging_metadata := {
-    "Policy Code": "PR-GCP-0078-GDF",
+    "Policy Code": "PR-GCP-GDF-BKT-003",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -161,19 +229,30 @@ storage_stack_logging_metadata := {
 }
 
 #
-# PR-GCP-0089-GDF
+# PR-GCP-GDF-BKT-004
 #
 
 default storage_logging = null
 
 gc_issue["storage_logging"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "storage.v1.bucket"
     not resource.properties.logging.logBucket
 }
 
+source_path[{"storage_logging": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    not resource.properties.logging.logBucket
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "logging", "logBucket"]
+        ],
+    }
+}
+
 storage_logging {
-    lower(input.resources[_].type) == "storage.v1.bucket"
+    lower(input.resources[i].type) == "storage.v1.bucket"
     not gc_issue["storage_logging"]
 }
 
@@ -186,7 +265,7 @@ storage_logging_err = "Storage Bucket does not have Access and Storage Logging e
 }
 
 storage_logging_metadata := {
-    "Policy Code": "PR-GCP-0089-GDF",
+    "Policy Code": "PR-GCP-GDF-BKT-004",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",
@@ -198,35 +277,72 @@ storage_logging_metadata := {
 }
 
 #
-# PR-GCP-0090-GDF
+# PR-GCP-GDF-BKT-005
 #
 
 default storage_public_logs = null
 
 gc_attribute_absence["storage_public_logs"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "storage.v1.bucket"
     not resource.properties.acl
 }
 
-gc_issue["storage_public_logs"] {
-    resource := input.resources[_]
+source_path[{"storage_public_logs": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "storage.v1.bucket"
-    acl := resource.properties.acl[_]
+    not resource.properties.acl
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "acl"]
+        ],
+    }
+}
+
+gc_issue["storage_public_logs"] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    acl := resource.properties.acl[j]
     contains(lower(acl.email), "logging")
     contains(lower(acl.entity), "allusers")
 }
 
-gc_issue["storage_public_logs"] {
-    resource := input.resources[_]
+source_path[{"storage_public_logs": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "storage.v1.bucket"
-    acl := resource.properties.acl[_]
+    acl := resource.properties.acl[j]
+    contains(lower(acl.email), "logging")
+    contains(lower(acl.entity), "allusers")
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "acl", j, "entity"]
+        ],
+    }
+}
+
+gc_issue["storage_public_logs"] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    acl := resource.properties.acl[j]
     contains(lower(acl.email), "logging")
     contains(lower(acl.entity), "allauthenticatedusers")
 }
 
+source_path[{"storage_public_logs": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "storage.v1.bucket"
+    acl := resource.properties.acl[j]
+    contains(lower(acl.email), "logging")
+    contains(lower(acl.entity), "allauthenticatedusers")
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "acl", j, "entity"]
+        ],
+    }
+}
+
 storage_public_logs {
-    lower(input.resources[_].type) == "storage.v1.bucket"
+    lower(input.resources[i].type) == "storage.v1.bucket"
     not gc_issue["storage_public_logs"]
     not gc_attribute_absence["storage_public_logs"]
 }
@@ -248,7 +364,7 @@ storage_public_logs_miss_err = "GCP Storage attribute acl missing in the resourc
 }
 
 storage_public_logs_metadata := {
-    "Policy Code": "PR-GCP-0090-GDF",
+    "Policy Code": "PR-GCP-GDF-BKT-005",
     "Type": "IaC",
     "Product": "GCP",
     "Language": "GCP deployment",

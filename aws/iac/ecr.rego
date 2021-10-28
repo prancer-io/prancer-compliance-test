@@ -2,7 +2,7 @@ package rule
 
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-imagetagmutability
 #
-# PR-AWS-0208-CFR
+# PR-AWS-CFR-ECR-001
 #
 
 default ecr_imagetag = null
@@ -13,6 +13,16 @@ aws_issue["ecr_imagetag"] {
     lower(resource.Properties.ImageTagMutability) == "mutable"
 }
 
+source_path[{"ecr_imagetag": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecr::repository"
+    lower(resource.Properties.ImageTagMutability) == "mutable"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ImageTagMutability"]
+        ],
+    }
+}
 
 ecr_imagetag {
     lower(input.Resources[i].Type) == "aws::ecr::repository"
@@ -28,7 +38,7 @@ ecr_imagetag_err = "Ensure ECR image tags are immutable" {
 }
 
 ecr_imagetag_metadata := {
-    "Policy Code": "PR-AWS-0208-CFR",
+    "Policy Code": "PR-AWS-CFR-ECR-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -40,7 +50,7 @@ ecr_imagetag_metadata := {
 }
 
 #
-# PR-AWS-0209-CFR
+# PR-AWS-CFR-ECR-002
 #
 
 default ecr_encryption = null
@@ -51,6 +61,16 @@ aws_issue["ecr_encryption"] {
     not resource.Properties.EncryptionConfiguration.EncryptionType
 }
 
+source_path[{"ecr_encryption": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecr::repository"
+    not resource.Properties.EncryptionConfiguration.EncryptionType
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionConfiguration", "EncryptionType"]
+        ],
+    }
+}
 
 ecr_encryption {
     lower(input.Resources[i].Type) == "aws::ecr::repository"
@@ -66,7 +86,7 @@ ecr_encryption_err = "Ensure ECR repositories are encrypted" {
 }
 
 ecr_encryption_metadata := {
-    "Policy Code": "PR-AWS-0209-CFR",
+    "Policy Code": "PR-AWS-CFR-ECR-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -79,7 +99,7 @@ ecr_encryption_metadata := {
 
 
 #
-# PR-AWS-0255-CFR
+# PR-AWS-CFR-ECR-003
 #
 
 default ecr_scan = null
@@ -90,12 +110,33 @@ aws_bool_issue["ecr_scan"] {
     not resource.Properties.ImageScanningConfiguration.ScanOnPush
 }
 
+source_path[{"ecr_scan": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecr::repository"
+    not resource.Properties.ImageScanningConfiguration.ScanOnPush
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ImageScanningConfiguration", "ScanOnPush"]
+        ],
+    }
+}
+
 aws_issue["ecr_scan"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ecr::repository"
     lower(resource.Properties.ImageScanningConfiguration.ScanOnPush) != "true"
 }
 
+source_path[{"ecr_scan": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecr::repository"
+    lower(resource.Properties.ImageScanningConfiguration.ScanOnPush) != "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ImageScanningConfiguration", "ScanOnPush"]
+        ],
+    }
+}
 
 ecr_scan {
     lower(input.Resources[i].Type) == "aws::ecr::repository"
@@ -118,7 +159,7 @@ ecr_scan_err = "Ensure ECR image scan on push is enabled" {
 }
 
 ecr_scan_metadata := {
-    "Policy Code": "PR-AWS-0255-CFR",
+    "Policy Code": "PR-AWS-CFR-ECR-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -131,7 +172,7 @@ ecr_scan_metadata := {
 
 
 #
-# PR-AWS-0348-CFR
+# PR-AWS-CFR-ECR-004
 #
 
 default ecr_public_access_disable = null
@@ -139,27 +180,65 @@ default ecr_public_access_disable = null
 aws_issue["ecr_public_access_disable"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ecr::repository"
-    statement := resource.Properties.RepositoryPolicyText.Statement[_]
+    statement := resource.Properties.RepositoryPolicyText.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal == "*"
 }
 
+source_path[{"ecr_scan": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecr::repository"
+    statement := resource.Properties.RepositoryPolicyText.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "RepositoryPolicyText", "Statement", j, "Principal"]
+        ],
+    }
+}
+
 aws_issue["ecr_public_access_disable"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ecr::repository"
-    statement := resource.Properties.RepositoryPolicyText.Statement[_]
+    statement := resource.Properties.RepositoryPolicyText.Statement[j]
     lower(statement.Effect) == "allow"
     statement.Principal.AWS == "*"
 }
 
+source_path[{"ecr_scan": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecr::repository"
+    statement := resource.Properties.RepositoryPolicyText.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "RepositoryPolicyText", "Statement", j, "Principal", "AWS"]
+        ],
+    }
+}
+
 aws_issue["ecr_public_access_disable"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ecr::repository"
-    statement := resource.Properties.RepositoryPolicyText.Statement[_]
+    statement := resource.Properties.RepositoryPolicyText.Statement[j]
     lower(statement.Effect) == "allow"
-    statement.Principal.AWS[_] = "*"
+    statement.Principal.AWS[k] = "*"
 }
 
+source_path[{"ecr_scan": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ecr::repository"
+    statement := resource.Properties.RepositoryPolicyText.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[k] = "*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "RepositoryPolicyText", "Statement", j, "Principal", "AWS", k]
+        ],
+    }
+}
 
 ecr_public_access_disable {
     lower(input.Resources[i].Type) == "aws::ecr::repository"
@@ -175,7 +254,7 @@ ecr_public_access_disable_err = "Ensure AWS ECR Repository is not publicly acces
 }
 
 ecr_public_access_disable_metadata := {
-    "Policy Code": "PR-AWS-0348-CFR",
+    "Policy Code": "PR-AWS-CFR-ECR-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

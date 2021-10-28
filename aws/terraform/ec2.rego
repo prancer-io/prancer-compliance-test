@@ -1,9 +1,8 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
 
 #
-# PR-AWS-0042-TRF
+# PR-AWS-TRF-EC2-001
 #
 
 default ec2_iam_role = null
@@ -41,7 +40,7 @@ ec2_iam_role_err = "AWS EC2 Instance IAM Role not enabled" {
 }
 
 ec2_iam_role_metadata := {
-    "Policy Code": "PR-AWS-0042-TRF",
+    "Policy Code": "PR-AWS-TRF-EC2-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -52,9 +51,8 @@ ec2_iam_role_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html"
 }
 
-
 #
-# PR-AWS-0045-TRF
+# PR-AWS-TRF-EC2-002
 #
 
 default ec2_no_vpc = null
@@ -97,7 +95,7 @@ ec2_no_vpc_err = "AWS EC2 instance is not configured with VPC" {
 }
 
 ec2_no_vpc_metadata := {
-    "Policy Code": "PR-AWS-0045-TRF",
+    "Policy Code": "PR-AWS-TRF-EC2-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -108,9 +106,8 @@ ec2_no_vpc_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html"
 }
 
-
 #
-# PR-AWS-0046-TRF
+# PR-AWS-TRF-EC2-003
 #
 
 default ec2_public_ip = null
@@ -164,7 +161,7 @@ ec2_public_ip_err = "AWS EC2 instances with Public IP and associated with Securi
 }
 
 ec2_public_ip_metadata := {
-    "Policy Code": "PR-AWS-0046-TRF",
+    "Policy Code": "PR-AWS-TRF-EC2-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",

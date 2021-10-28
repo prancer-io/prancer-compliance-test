@@ -1,9 +1,8 @@
 package rule
 
-# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html
 
 #
-# PR-AWS-0074-TRF
+# PR-AWS-TRF-ES-001
 #
 
 default esearch_vpc = null
@@ -48,7 +47,7 @@ esearch_vpc_err = "AWS ElasticSearch cluster not in a VPC" {
 }
 
 esearch_vpc_metadata := {
-    "Policy Code": "PR-AWS-0074-TRF",
+    "Policy Code": "PR-AWS-TRF-ES-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -60,7 +59,7 @@ esearch_vpc_metadata := {
 }
 
 #
-# PR-AWS-0076-TRF
+# PR-AWS-TRF-ES-002
 #
 
 default esearch_encrypt = null
@@ -119,7 +118,7 @@ esearch_encrypt_err = "AWS Elasticsearch domain Encryption for data at rest is d
 }
 
 esearch_encrypt_metadata := {
-    "Policy Code": "PR-AWS-0076-TRF",
+    "Policy Code": "PR-AWS-TRF-ES-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -131,7 +130,7 @@ esearch_encrypt_metadata := {
 }
 
 #
-# PR-AWS-0077-TRF
+# PR-AWS-TRF-ES-003
 #
 
 default esearch_master = null
@@ -177,7 +176,7 @@ esearch_master_err = "AWS Elasticsearch domain has Dedicated master set to disab
 }
 
 esearch_master_metadata := {
-    "Policy Code": "PR-AWS-0077-TRF",
+    "Policy Code": "PR-AWS-TRF-ES-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -189,7 +188,7 @@ esearch_master_metadata := {
 }
 
 #
-# PR-AWS-0078-TRF
+# PR-AWS-TRF-ES-004
 #
 
 default esearch_index_slow_log = null
@@ -251,7 +250,7 @@ esearch_index_slow_log_err = "AWS Elasticsearch domain has Index slow logs set t
 }
 
 esearch_index_slow_log_metadata := {
-    "Policy Code": "PR-AWS-0078-TRF",
+    "Policy Code": "PR-AWS-TRF-ES-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -263,7 +262,7 @@ esearch_index_slow_log_metadata := {
 }
 
 #
-# PR-AWS-0079-TRF
+# PR-AWS-TRF-ES-005
 #
 
 default esearch_search_slow_log = null
@@ -325,7 +324,7 @@ esearch_search_slow_log_err = "AWS Elasticsearch domain has Search slow logs set
 }
 
 esearch_search_slow_log_metadata := {
-    "Policy Code": "PR-AWS-0079-TRF",
+    "Policy Code": "PR-AWS-TRF-ES-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -337,7 +336,7 @@ esearch_search_slow_log_metadata := {
 }
 
 #
-# PR-AWS-0080-TRF
+# PR-AWS-TRF-ES-006
 #
 
 default esearch_zone_awareness = null
@@ -378,7 +377,7 @@ esearch_zone_awareness_err = "AWS Elasticsearch domain has Zone Awareness set to
 }
 
 esearch_zone_awareness_metadata := {
-    "Policy Code": "PR-AWS-0080-TRF",
+    "Policy Code": "PR-AWS-TRF-ES-006",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -390,7 +389,7 @@ esearch_zone_awareness_metadata := {
 }
 
 #
-# PR-AWS-0216-TRF
+# PR-AWS-TRF-ES-007
 #
 
 default esearch_node_encryption = null
@@ -430,7 +429,7 @@ esearch_node_encryption_err = "Ensure node-to-node encryption is enabled on each
 }
 
 esearch_node_encryption_metadata := {
-    "Policy Code": "PR-AWS-0216-TRF",
+    "Policy Code": "PR-AWS-TRF-ES-007",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -441,9 +440,8 @@ esearch_node_encryption_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html#cfn-elasticsearch-domain-node_to_node_encryption"
 }
 
-
 #
-# PR-AWS-0252-TRF
+# PR-AWS-TRF-ES-008
 #
 
 default esearch_enforce_https = null
@@ -483,7 +481,7 @@ esearch_enforce_https_err = "AWS Elasticsearch domain is not configured with HTT
 }
 
 esearch_enforce_https_metadata := {
-    "Policy Code": "PR-AWS-0252-TRF",
+    "Policy Code": "PR-AWS-TRF-ES-008",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
@@ -494,9 +492,8 @@ esearch_enforce_https_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-domain_endpoint_options.html#cfn-elasticsearch-domain-domain_endpoint_options-enforce_https"
 }
 
-
 #
-# PR-AWS-0253-TRF
+# PR-AWS-TRF-ES-009
 #
 
 default esearch_encrypt_kms = null
@@ -556,7 +553,7 @@ esearch_encrypt_kms_err = "Elasticsearch Domain should not have Encrytion using 
 
 
 esearch_encrypt_kms_metadata := {
-    "Policy Code": "PR-AWS-0253-TRF",
+    "Policy Code": "PR-AWS-TRF-ES-009",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",

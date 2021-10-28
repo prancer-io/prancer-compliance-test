@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-restapi-endpointconfiguration.html
 
 #
-# PR-AWS-0202-CFR
+# PR-AWS-CFR-AG-001
 #
 
 default gateway_private = null
@@ -14,17 +14,51 @@ aws_attribute_absence["gateway_private"] {
     not resource.Properties.EndpointConfiguration.Types
 }
 
+source_path[{"gateway_private": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::restapi"
+    not resource.Properties.EndpointConfiguration.Types
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EndpointConfiguration", "Types"]
+        ],
+    }
+}
+
 aws_issue["gateway_private"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::apigateway::restapi"
     count(resource.Properties.EndpointConfiguration.Types) == 0
 }
 
+source_path[{"gateway_private": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::restapi"
+    count(resource.Properties.EndpointConfiguration.Types) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EndpointConfiguration", "Types"]
+        ],
+    }
+}
+
 aws_issue["gateway_private"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::apigateway::restapi"
-    type := resource.Properties.EndpointConfiguration.Types[_]
+    type := resource.Properties.EndpointConfiguration.Types[j]
     count([c | lower(type)== "private"; c:=1]) == 0
+}
+
+source_path[{"gateway_private": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::restapi"
+    type := resource.Properties.EndpointConfiguration.Types[j]
+    count([c | lower(type)== "private"; c:=1]) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EndpointConfiguration", "Types"]
+        ],
+    }
 }
 
 gateway_private {
@@ -48,7 +82,7 @@ gateway_private_err = "API Gateway should have API Endpoint type as private and 
 }
 
 gateway_private_metadata := {
-    "Policy Code": "PR-AWS-0202-CFR",
+    "Policy Code": "PR-AWS-CFR-AG-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -61,7 +95,7 @@ gateway_private_metadata := {
 
 
 #
-# PR-AWS-0203-CFR
+# PR-AWS-CFR-AG-002
 #
 
 default gateway_validate_parameter = null
@@ -72,10 +106,32 @@ aws_bool_issue["gateway_validate_parameter"] {
     not resource.Properties.ValidateRequestParameters
 }
 
+source_path[{"gateway_validate_parameter": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::requestvalidator"
+    not resource.Properties.ValidateRequestParameters
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ValidateRequestParameters"]
+        ],
+    }
+}
+
 aws_issue["gateway_validate_parameter"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::apigateway::requestvalidator"
     lower(resource.Properties.ValidateRequestParameters) == "false"
+}
+
+source_path[{"gateway_validate_parameter": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::requestvalidator"
+    lower(resource.Properties.ValidateRequestParameters) == "false"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ValidateRequestParameters"]
+        ],
+    }
 }
 
 gateway_validate_parameter {
@@ -99,7 +155,7 @@ gateway_validate_parameter_err = "AWS API Gateway request parameter is not valid
 }
 
 gateway_validate_parameter_metadata := {
-    "Policy Code": "PR-AWS-0203-CFR",
+    "Policy Code": "PR-AWS-CFR-AG-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -112,7 +168,7 @@ gateway_validate_parameter_metadata := {
 
 
 #
-# PR-AWS-0204-CFR
+# PR-AWS-CFR-AG-003
 #
 
 default gateway_request_authorizer = null
@@ -123,10 +179,32 @@ aws_attribute_absence["gateway_request_authorizer"] {
     not resource.Properties.Type
 }
 
+source_path[{"gateway_request_authorizer": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::authorizer"
+    not resource.Properties.Type
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Type"]
+        ],
+    }
+}
+
 aws_issue["gateway_request_authorizer"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::apigateway::authorizer"
     lower(resource.Properties.Type) != "request"
+}
+
+source_path[{"gateway_request_authorizer": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::authorizer"
+    lower(resource.Properties.Type) != "request"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Type"]
+        ],
+    }
 }
 
 gateway_request_authorizer {
@@ -150,7 +228,7 @@ gateway_request_authorizer_err = "AWS API gateway request authorization is not s
 }
 
 gateway_request_authorizer_metadata := {
-    "Policy Code": "PR-AWS-0204-CFR",
+    "Policy Code": "PR-AWS-CFR-AG-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -163,7 +241,7 @@ gateway_request_authorizer_metadata := {
 
 
 #
-# PR-AWS-0324-CFR
+# PR-AWS-CFR-AG-004
 #
 
 default gateway_logging_enable = null
@@ -174,16 +252,49 @@ aws_issue["gateway_logging_enable"] {
     not resource.Properties.AccessLogSetting.DestinationArn
 }
 
+source_path[{"gateway_logging_enable": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::stage"
+    not resource.Properties.AccessLogSetting.DestinationArn
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AccessLogSetting", "DestinationArn"]
+        ],
+    }
+}
+
 aws_issue["gateway_logging_enable"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::apigateway::stage"
     count(resource.Properties.AccessLogSetting.DestinationArn) == 0
 }
 
+source_path[{"gateway_logging_enable": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::stage"
+    count(resource.Properties.AccessLogSetting.DestinationArn) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AccessLogSetting", "DestinationArn"]
+        ],
+    }
+}
+
 aws_issue["gateway_logging_enable"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::apigateway::stage"
     resource.Properties.AccessLogSetting.DestinationArn == null
+}
+
+source_path[{"gateway_logging_enable": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::stage"
+    resource.Properties.AccessLogSetting.DestinationArn == null
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "AccessLogSetting", "DestinationArn"]
+        ],
+    }
 }
 
 gateway_logging_enable {
@@ -200,7 +311,7 @@ gateway_logging_enable_err = "Ensure that API Gateway has enabled access logging
 }
 
 gateway_logging_enable_metadata := {
-    "Policy Code": "PR-AWS-0324-CFR",
+    "Policy Code": "PR-AWS-CFR-AG-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -214,7 +325,7 @@ gateway_logging_enable_metadata := {
 
 
 #
-# PR-AWS-0327-CFR
+# PR-AWS-CFR-AG-005
 #
 
 default gateway_tracing_enable = null
@@ -225,10 +336,32 @@ aws_issue["gateway_tracing_enable"] {
     not resource.Properties.TracingEnabled
 }
 
+source_path[{"gateway_tracing_enable": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::stage"
+    not resource.Properties.TracingEnabled
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "TracingEnabled"]
+        ],
+    }
+}
+
 aws_issue["gateway_tracing_enable"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::apigateway::stage"
     lower(resource.Properties.TracingEnabled) != "true"
+}
+
+source_path[{"gateway_tracing_enable": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::stage"
+    lower(resource.Properties.TracingEnabled) != "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "TracingEnabled"]
+        ],
+    }
 }
 
 gateway_tracing_enable {
@@ -245,7 +378,7 @@ gateway_tracing_enable_err = "Ensure API Gateway has tracing enabled" {
 }
 
 gateway_tracing_enable_metadata := {
-    "Policy Code": "PR-AWS-0327-CFR",
+    "Policy Code": "PR-AWS-CFR-AG-005",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -258,7 +391,7 @@ gateway_tracing_enable_metadata := {
 
 
 #
-# PR-AWS-0349-CFR
+# PR-AWS-CFR-AG-006
 #
 
 default gateway_method_public_access = null
@@ -270,6 +403,18 @@ aws_issue["gateway_method_public_access"] {
     not resource.Properties.ApiKeyRequired
 }
 
+source_path[{"gateway_method_public_access": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::method"
+    not resource.Properties.AuthorizationType
+    not resource.Properties.ApiKeyRequired
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ApiKeyRequired"]
+        ],
+    }
+}
+
 aws_issue["gateway_method_public_access"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::apigateway::method"
@@ -277,11 +422,35 @@ aws_issue["gateway_method_public_access"] {
     not resource.Properties.ApiKeyRequired
 }
 
+source_path[{"gateway_method_public_access": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::method"
+    lower(resource.Properties.AuthorizationType) == "none"
+    not resource.Properties.ApiKeyRequired
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ApiKeyRequired"]
+        ],
+    }
+}
+
 aws_issue["gateway_method_public_access"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::apigateway::method"
     resource.Properties.AuthorizationType == null
     not resource.Properties.ApiKeyRequired
+}
+
+source_path[{"gateway_method_public_access": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::method"
+    resource.Properties.AuthorizationType == null
+    not resource.Properties.ApiKeyRequired
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ApiKeyRequired"]
+        ],
+    }
 }
 
 aws_issue["gateway_method_public_access"] {
@@ -291,6 +460,18 @@ aws_issue["gateway_method_public_access"] {
     lower(resource.Properties.ApiKeyRequired) != "true"
 }
 
+source_path[{"gateway_method_public_access": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::method"
+    not resource.Properties.AuthorizationType
+    lower(resource.Properties.ApiKeyRequired) != "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ApiKeyRequired"]
+        ],
+    }
+}
+
 aws_issue["gateway_method_public_access"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::apigateway::method"
@@ -298,11 +479,35 @@ aws_issue["gateway_method_public_access"] {
     lower(resource.Properties.ApiKeyRequired) != "true"
 }
 
+source_path[{"gateway_method_public_access": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::method"
+    lower(resource.Properties.AuthorizationType) == "none"
+    lower(resource.Properties.ApiKeyRequired) != "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ApiKeyRequired"]
+        ],
+    }
+}
+
 aws_issue["gateway_method_public_access"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::apigateway::method"
     resource.Properties.AuthorizationType == null
     lower(resource.Properties.ApiKeyRequired) != "true"
+}
+
+source_path[{"gateway_method_public_access": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::method"
+    resource.Properties.AuthorizationType == null
+    lower(resource.Properties.ApiKeyRequired) != "true"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ApiKeyRequired"]
+        ],
+    }
 }
 
 gateway_method_public_access {
@@ -319,7 +524,7 @@ gateway_method_public_access_err = "Ensure API gateway methods are not publicly 
 }
 
 gateway_method_public_access_metadata := {
-    "Policy Code": "PR-AWS-0349-CFR",
+    "Policy Code": "PR-AWS-CFR-AG-006",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -328,4 +533,69 @@ gateway_method_public_access_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-method.html#cfn-apigateway-method-authorizationtype"
+}
+
+#
+# PR-AWS-CFR-AG-007
+#
+
+default api_gw_cert = null
+
+aws_issue["api_gw_cert"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::stage"
+    not resource.Properties.ClientCertificateId
+}
+
+source_path[{"api_gw_cert": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::stage"
+    not resource.Properties.ClientCertificateId
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ClientCertificateId"]
+        ],
+    }
+}
+
+aws_issue["api_gw_cert"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::stage"
+    count(resource.Properties.ClientCertificateId) == 0
+}
+
+source_path[{"api_gw_cert": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::apigateway::stage"
+    count(resource.Properties.ClientCertificateId) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ClientCertificateId"]
+        ],
+    }
+}
+
+api_gw_cert {
+    lower(input.Resources[i].Type) == "aws::apigateway::stage"
+    not aws_issue["api_gw_cert"]
+}
+
+api_gw_cert = false {
+    aws_issue["api_gw_cert"]
+}
+
+api_gw_cert_err = "AWS API Gateway endpoints without client certificate authentication" {
+    aws_issue["api_gw_cert"]
+}
+
+api_gw_cert_metadata := {
+    "Policy Code": "PR-AWS-CFR-AG-007",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "AWS API Gateway endpoints without client certificate authentication",
+    "Policy Description": "API Gateway can generate an SSL certificate and use its public key in the backend to verify that HTTP requests to your backend system are from API Gateway. This allows your HTTP backend to control and accept only requests originating from Amazon API Gateway, even if the backend is publicly accessible._x005F_x000D_ _x005F_x000D_ Note: Some backend servers may not support SSL client authentication as API Gateway does and could return an SSL certificate error. For a list of incompatible backend servers, see Known Issues. https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-known-issues.html",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html"
 }

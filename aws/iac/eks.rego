@@ -3,7 +3,7 @@ package rule
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html
 
 #
-# PR-AWS-0050-CFR
+# PR-AWS-CFR-EKS-001
 #
 
 default eks_multiple_sg = null
@@ -14,10 +14,32 @@ aws_issue["eks_multiple_sg"] {
     not resource.Properties.ResourcesVpcConfig.SecurityGroupIds
 }
 
+source_path[{"eks_multiple_sg": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    not resource.Properties.ResourcesVpcConfig.SecurityGroupIds
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ResourcesVpcConfig", "SecurityGroupIds"]
+        ],
+    }
+}
+
 aws_issue["eks_multiple_sg"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::eks::cluster"
     count(resource.Properties.ResourcesVpcConfig.SecurityGroupIds) > 1
+}
+
+source_path[{"eks_multiple_sg": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    count(resource.Properties.ResourcesVpcConfig.SecurityGroupIds) > 1
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ResourcesVpcConfig", "SecurityGroupIds"]
+        ],
+    }
 }
 
 eks_multiple_sg {
@@ -34,7 +56,7 @@ eks_multiple_sg_err = "AWS EKS cluster control plane assigned multiple security 
 }
 
 eks_multiple_sg_metadata := {
-    "Policy Code": "PR-AWS-0050-CFR",
+    "Policy Code": "PR-AWS-CFR-EKS-001",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -46,7 +68,7 @@ eks_multiple_sg_metadata := {
 }
 
 #
-# PR-AWS-0213-CFR
+# PR-AWS-CFR-EKS-002
 #
 
 default eks_version = null
@@ -57,6 +79,16 @@ aws_issue["eks_version"] {
     startswith(lower(resource.Properties.Version), "1.9.")
 }
 
+source_path[{"eks_version": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    startswith(lower(resource.Properties.Version), "1.9.")
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Version"]
+        ],
+    }
+}
 
 eks_version {
     lower(input.Resources[i].Type) == "aws::eks::cluster"
@@ -71,7 +103,7 @@ eks_version_err = "AWS EKS unsupported Master node version." {
     aws_issue["eks_version"]
 }
 eks_version_metadata := {
-    "Policy Code": "PR-AWS-0213-CFR",
+    "Policy Code": "PR-AWS-CFR-EKS-002",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -84,7 +116,7 @@ eks_version_metadata := {
 
 
 #
-# PR-AWS-0322-CFR
+# PR-AWS-CFR-EKS-003
 #
 
 default eks_encryption_resources = null
@@ -92,17 +124,40 @@ default eks_encryption_resources = null
 aws_issue["eks_encryption_resources"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::eks::cluster"
-    EncryptionConfig := resource.Properties.EncryptionConfig[_]
+    EncryptionConfig := resource.Properties.EncryptionConfig[j]
     not EncryptionConfig.Resources
+}
+
+source_path[{"eks_encryption_resources": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    EncryptionConfig := resource.Properties.EncryptionConfig[j]
+    not EncryptionConfig.Resources
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionConfig", j, "Resources"]
+        ],
+    }
 }
 
 aws_issue["eks_encryption_resources"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::eks::cluster"
-    EncryptionConfig := resource.Properties.EncryptionConfig[_]
+    EncryptionConfig := resource.Properties.EncryptionConfig[j]
     count(EncryptionConfig.Resources) == 0
 }
 
+source_path[{"eks_encryption_resources": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    EncryptionConfig := resource.Properties.EncryptionConfig[j]
+    count(EncryptionConfig.Resources) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionConfig", j, "Resources"]
+        ],
+    }
+}
 
 eks_encryption_resources {
     lower(input.Resources[i].Type) == "aws::eks::cluster"
@@ -117,7 +172,7 @@ eks_encryption_resources_err = "Ensure AWS EKS cluster has secrets encryption en
     aws_issue["eks_encryption_resources"]
 }
 eks_encryption_resources_metadata := {
-    "Policy Code": "PR-AWS-0322-CFR",
+    "Policy Code": "PR-AWS-CFR-EKS-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
@@ -131,7 +186,7 @@ eks_encryption_resources_metadata := {
 
 
 #
-# PR-AWS-0323-CFR
+# PR-AWS-CFR-EKS-004
 #
 
 default eks_encryption_kms = null
@@ -139,17 +194,40 @@ default eks_encryption_kms = null
 aws_issue["eks_encryption_kms"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::eks::cluster"
-    EncryptionConfig := resource.Properties.EncryptionConfig[_]
+    EncryptionConfig := resource.Properties.EncryptionConfig[j]
     not EncryptionConfig.Provider.keyArn
+}
+
+source_path[{"eks_encryption_resources": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    EncryptionConfig := resource.Properties.EncryptionConfig[j]
+    not EncryptionConfig.Provider.keyArn
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionConfig", j, "Provider", "keyArn"]
+        ],
+    }
 }
 
 aws_issue["eks_encryption_kms"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::eks::cluster"
-    EncryptionConfig := resource.Properties.EncryptionConfig[_]
+    EncryptionConfig := resource.Properties.EncryptionConfig[j]
     count(EncryptionConfig.Provider.keyArn) == 0
 }
 
+source_path[{"eks_encryption_resources": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::eks::cluster"
+    EncryptionConfig := resource.Properties.EncryptionConfig[j]
+    count(EncryptionConfig.Provider.keyArn) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "EncryptionConfig", j, "Provider", "keyArn"]
+        ],
+    }
+}
 
 eks_encryption_kms {
     lower(input.Resources[i].Type) == "aws::eks::cluster"
@@ -164,7 +242,7 @@ eks_encryption_kms_err = "Ensure Kubernetes secrets are encrypted using CMKs man
     aws_issue["eks_encryption_kms"]
 }
 eks_encryption_kms_metadata := {
-    "Policy Code": "PR-AWS-0323-CFR",
+    "Policy Code": "PR-AWS-CFR-EKS-004",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",

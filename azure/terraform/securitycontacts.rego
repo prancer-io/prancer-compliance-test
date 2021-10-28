@@ -110,35 +110,22 @@ securitycontacts_phone_metadata := {
 
 default securitycontacts_alert_notifications_enabled = null
 
-azure_attribute_absence["securitycontacts_alert_notifications_enabled"] {
+azure_issue["securitycontacts_alert_notifications_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_security_center_contact"
     not resource.properties.alert_notifications
 }
 
-azure_issue["securitycontacts_alert_notifications_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_security_center_contact"
-    resource.properties.alert_notifications != true
-}
-
 securitycontacts_alert_notifications_enabled {
     lower(input.resources[_].type) == "azurerm_security_center_contact"
-    not azure_attribute_absence["securitycontacts_alert_notifications_enabled"]
     not azure_issue["securitycontacts_alert_notifications_enabled"]
-}
-
-securitycontacts_alert_notifications_enabled = false {
-    azure_attribute_absence["securitycontacts_alert_notifications_enabled"]
 }
 
 securitycontacts_alert_notifications_enabled = false {
     azure_issue["securitycontacts_alert_notifications_enabled"]
 }
 
-securitycontacts_alert_notifications_enabled_err = "azurerm_security_center_contact property 'alert_notifications' need to be exist. Its missing from the resource. Please set 'true' as value after property addition." {
-    azure_attribute_absence["securitycontacts_alert_notifications_enabled"]
-} else = "Security Center currently not configured to send security alerts notifications to the security contact."  {
+securitycontacts_alert_notifications_enabled_err = "Security Center currently not configured to send security alerts notifications to the security contact."  {
     azure_issue["securitycontacts_alert_notifications_enabled"]
 }
 
@@ -161,35 +148,22 @@ securitycontacts_alert_notifications_enabled_metadata := {
 
 default securitycontacts_alerts_to_admins_enabled = null
 
-azure_attribute_absence["securitycontacts_alerts_to_admins_enabled"] {
+azure_issue["securitycontacts_alerts_to_admins_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_security_center_contact"
     not resource.properties.alerts_to_admins
 }
 
-azure_issue["securitycontacts_alerts_to_admins_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_security_center_contact"
-    resource.properties.alerts_to_admins != true
-}
-
 securitycontacts_alerts_to_admins_enabled {
     lower(input.resources[_].type) == "azurerm_security_center_contact"
-    not azure_attribute_absence["securitycontacts_alerts_to_admins_enabled"]
     not azure_issue["securitycontacts_alerts_to_admins_enabled"]
-}
-
-securitycontacts_alerts_to_admins_enabled = false {
-    azure_attribute_absence["securitycontacts_alerts_to_admins_enabled"]
 }
 
 securitycontacts_alerts_to_admins_enabled = false {
     azure_issue["securitycontacts_alerts_to_admins_enabled"]
 }
 
-securitycontacts_alerts_to_admins_enabled_err = "azurerm_security_center_contact property 'alerts_to_admins' need to be exist. Its missing from the resource. Please set 'true' as value after property addition." {
-    azure_attribute_absence["securitycontacts_alerts_to_admins_enabled"]
-} else = "Security Center currently not configured to send security alerts notifications to subscription admins"  {
+securitycontacts_alerts_to_admins_enabled_err = "Security Center currently not configured to send security alerts notifications to subscription admins"  {
     azure_issue["securitycontacts_alerts_to_admins_enabled"]
 }
 
