@@ -14,11 +14,18 @@ azure_attribute_absence["disk_encrypt"] {
     not resource.properties.encryption_settings
 }
 
-azure_issue["disk_encrypt"] {
+azure_attribute_absence["disk_encrypt"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_managed_disk"
     encryption_settings := resource.properties.encryption_settings[_]
     not encryption_settings.enabled
+}
+
+azure_issue["disk_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_managed_disk"
+    encryption_settings := resource.properties.encryption_settings[_]
+    encryption_settings.enabled != true
 }
 
 disk_encrypt = false {
