@@ -376,22 +376,22 @@ azure_issue["app_service_cors_not_allowing_all"] {
 
 app_service_cors_not_allowing_all {
     lower(input.resources[_].type) == "azurerm_app_service"
-    azure_attribute_absence["app_service_uses_http_two"]
-    not azure_issue["app_service_uses_http_two"]
+    azure_attribute_absence["app_service_cors_not_allowing_all"]
+    not azure_issue["app_service_cors_not_allowing_all"]
 }
 
 app_service_cors_not_allowing_all {
     lower(input.resources[_].type) == "azurerm_app_service"
-    not azure_attribute_absence["app_service_uses_http_two"]
-    not azure_issue["app_service_uses_http_two"]
+    not azure_attribute_absence["app_service_cors_not_allowing_all"]
+    not azure_issue["app_service_cors_not_allowing_all"]
 }
 
 app_service_cors_not_allowing_all = false {
-    azure_issue["app_service_uses_http_two"]
+    azure_issue["app_service_cors_not_allowing_all"]
 }
 
 app_service_cors_not_allowing_all_err = "CORS configuration is currently allowing every resources to access Azure App Service" {
-    azure_issue["app_service_uses_http_two"]
+    azure_issue["app_service_cors_not_allowing_all"]
 }
 
 app_service_cors_not_allowing_all_metadata := {
