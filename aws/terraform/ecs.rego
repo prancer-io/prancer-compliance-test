@@ -10,15 +10,41 @@ default ecs_task_evelated = null
 aws_bool_issue["ecs_task_evelated"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
-    container_definitions := resource.properties.container_definitions[_]
+    container_definitions := resource.properties.container_definitions[j]
     container_definitions.privileged == true
+}
+
+source_path[{"ecs_task_evelated": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definitions := resource.properties.container_definitions[j]
+    container_definitions.privileged == true
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "container_definitions", j, "privileged"]
+        ],
+    }
 }
 
 aws_issue["ecs_task_evelated"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
-    container_definitions := resource.properties.container_definitions[_]
-    lower(container_definitions[_].privileged) == "true"
+    container_definitions := resource.properties.container_definitions[j]
+    lower(container_definitions[j].privileged) == "true"
+}
+
+source_path[{"ecs_task_evelated": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definitions := resource.properties.container_definitions[j]
+    lower(container_definitions[j].privileged) == "true"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "container_definitions", j, "privileged"]
+        ],
+    }
 }
 
 ecs_task_evelated {
@@ -60,19 +86,43 @@ ecs_task_evelated_metadata := {
 default ecs_exec = null
 
 aws_attribute_absence["ecs_exec"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
     not resource.properties.execution_role_arn
 }
 
+source_path[{"ecs_exec": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    not resource.properties.execution_role_arn
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "execution_role_arn"]
+        ],
+    }
+}
+
 aws_issue["ecs_exec"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
     not startswith(lower(resource.properties.execution_role_arn), "arn:aws:iam")
 }
 
+source_path[{"ecs_exec": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    not startswith(lower(resource.properties.execution_role_arn), "arn:aws:iam")
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "execution_role_arn"]
+        ],
+    }
+}
+
 ecs_exec {
-    lower(input.resources[_].type) == "aws_ecs_task_definition"
+    lower(input.resources[i].type) == "aws_ecs_task_definition"
     not aws_issue["ecs_exec"]
     not aws_attribute_absence["ecs_exec"]
 }
@@ -112,8 +162,21 @@ default ecs_root_user = null
 aws_issue["ecs_root_user"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
-    container_definitions := resource.properties.container_definitions[_]
+    container_definitions := resource.properties.container_definitions[j]
     lower(container_definitions.user) == "root"
+}
+
+source_path[{"ecs_root_user": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definitions := resource.properties.container_definitions[j]
+    lower(container_definitions.user) == "root"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "container_definitions", j, "user"]
+        ],
+    }
 }
 
 ecs_root_user {
@@ -150,15 +213,41 @@ default ecs_root_filesystem = null
 aws_bool_issue["ecs_root_filesystem"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
-    container_definition := resource.properties.container_definitions[_]
+    container_definition := resource.properties.container_definitions[j]
     not container_definition.readonlyRootFilesystem
+}
+
+source_path[{"ecs_root_filesystem": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definition := resource.properties.container_definitions[j]
+    not container_definition.readonlyRootFilesystem
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "container_definitions", j, "readonlyRootFilesystem"]
+        ],
+    }
 }
 
 aws_issue["ecs_root_filesystem"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
-    container_definition := resource.properties.container_definitions[_]
+    container_definition := resource.properties.container_definitions[j]
     lower(container_definition.readonlyRootFilesystem) == "false"
+}
+
+source_path[{"ecs_root_filesystem": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definition := resource.properties.container_definitions[j]
+    lower(container_definition.readonlyRootFilesystem) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "container_definitions", j, "readonlyRootFilesystem"]
+        ],
+    }
 }
 
 ecs_root_filesystem {
@@ -205,10 +294,34 @@ aws_cpu_issue["ecs_resource_limit"] {
     not resource.properties.cpu
 }
 
+source_path[{"ecs_resource_limit": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    not resource.properties.cpu
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "cpu"]
+        ],
+    }
+}
+
 aws_cpu_issue["ecs_resource_limit"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
     resource.properties.cpu == null
+}
+
+source_path[{"ecs_resource_limit": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    resource.properties.cpu == null
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "cpu"]
+        ],
+    }
 }
 
 aws_cpu_issue["ecs_resource_limit"] {
@@ -217,25 +330,76 @@ aws_cpu_issue["ecs_resource_limit"] {
     to_number(resource.properties.cpu) == 0
 }
 
+source_path[{"ecs_resource_limit": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    to_number(resource.properties.cpu) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "cpu"]
+        ],
+    }
+}
+
 aws_cpu_issue["ecs_resource_limit"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
-    container_definition := resource.properties.container_definitions[_]
+    container_definition := resource.properties.container_definitions[j]
     not container_definition.cpu
 }
 
-aws_cpu_issue["ecs_resource_limit"] {
+source_path[{"ecs_resource_limit": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
-    container_definition := resource.properties.container_definitions[_]
-    container_definition.cpu == null
+    container_definition := resource.properties.container_definitions[j]
+    not container_definition.cpu
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "container_definitions", j, "cpu"]
+        ],
+    }
 }
 
 aws_cpu_issue["ecs_resource_limit"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
-    container_definition := resource.properties.container_definitions[_]
+    container_definition := resource.properties.container_definitions[j]
+    container_definition.cpu == null
+}
+
+source_path[{"ecs_resource_limit": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definition := resource.properties.container_definitions[j]
+    container_definition.cpu == null
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "container_definitions", j, "cpu"]
+        ],
+    }
+}
+
+aws_cpu_issue["ecs_resource_limit"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definition := resource.properties.container_definitions[j]
     to_number(container_definition.cpu) == 0
+}
+
+source_path[{"ecs_resource_limit": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definition := resource.properties.container_definitions[j]
+    to_number(container_definition.cpu) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "container_definitions", j, "cpu"]
+        ],
+    }
 }
 
 aws_memory_issue["ecs_resource_limit"] {
@@ -244,10 +408,34 @@ aws_memory_issue["ecs_resource_limit"] {
     not resource.properties.memory
 }
 
+source_path[{"ecs_resource_limit": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    not resource.properties.memory
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "memory"]
+        ],
+    }
+}
+
 aws_memory_issue["ecs_resource_limit"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
     resource.properties.memory == null
+}
+
+source_path[{"ecs_resource_limit": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    resource.properties.memory == null
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "memory"]
+        ],
+    }
 }
 
 aws_memory_issue["ecs_resource_limit"] {
@@ -256,25 +444,76 @@ aws_memory_issue["ecs_resource_limit"] {
     to_number(resource.properties.memory) == 0
 }
 
+source_path[{"ecs_resource_limit": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    to_number(resource.properties.memory) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "memory"]
+        ],
+    }
+}
+
 aws_memory_issue["ecs_resource_limit"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
-    container_definition := resource.properties.container_definitions[_]
+    container_definition := resource.properties.container_definitions[j]
     not container_definition.memory
 }
 
-aws_memory_issue["ecs_resource_limit"] {
+source_path[{"ecs_resource_limit": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
-    container_definition := resource.properties.container_definitions[_]
-    container_definition.memory == null
+    container_definition := resource.properties.container_definitions[j]
+    not container_definition.memory
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "container_definitions", j, "memory"]
+        ],
+    }
 }
 
 aws_memory_issue["ecs_resource_limit"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
-    container_definition := resource.properties.container_definitions[_]
+    container_definition := resource.properties.container_definitions[j]
+    container_definition.memory == null
+}
+
+source_path[{"ecs_resource_limit": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definition := resource.properties.container_definitions[j]
+    container_definition.memory == null
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "container_definitions", j, "memory"]
+        ],
+    }
+}
+
+aws_memory_issue["ecs_resource_limit"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definition := resource.properties.container_definitions[j]
     to_number(container_definition.memory) == 0
+}
+
+source_path[{"ecs_resource_limit": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definition := resource.properties.container_definitions[j]
+    to_number(container_definition.memory) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "container_definitions", j, "memory"]
+        ],
+    }
 }
 
 
@@ -319,25 +558,62 @@ default ecs_logging = null
 aws_issue["ecs_logging"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
-    container_definition := resource.properties.container_definitions[_]
+    container_definition := resource.properties.container_definitions[j]
     not container_definition.logConfiguration.logDriver
 }
 
+source_path[{"ecs_logging": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definition := resource.properties.container_definitions[j]
+    not container_definition.logConfiguration.logDriver
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "container_definitions", j, "logConfiguration", "logDriver"]
+        ],
+    }
+}
+
 aws_issue["ecs_logging"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
-    container_definition := resource.properties.container_definitions[_]
+    container_definition := resource.properties.container_definitions[j]
     count(container_definition.logConfiguration.logDriver) == 0
 }
 
+source_path[{"ecs_logging": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definition := resource.properties.container_definitions[j]
+    count(container_definition.logConfiguration.logDriver) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "container_definitions", j, "logConfiguration", "logDriver"]
+        ],
+    }
+}
 
 aws_issue["ecs_logging"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
-    container_definition := resource.properties.container_definitions[_]
+    container_definition := resource.properties.container_definitions[j]
     container_definition.logConfiguration.logDriver == null
 }
 
+source_path[{"ecs_logging": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    container_definition := resource.properties.container_definitions[j]
+    container_definition.logConfiguration.logDriver == null
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "container_definitions", j, "logConfiguration", "logDriver"]
+        ],
+    }
+}
 
 ecs_logging {
     lower(input.resources[i].type) == "aws_ecs_task_definition"
@@ -373,15 +649,41 @@ default ecs_transit_enabled = null
 aws_issue["ecs_transit_enabled"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
-    volume := resource.properties.volume[_]
+    volume := resource.properties.volume[j]
     not volume.efs_volume_configuration.transit_encryption
+}
+
+source_path[{"ecs_transit_enabled": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    volume := resource.properties.volume[j]
+    not volume.efs_volume_configuration.transit_encryption
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "volume", j, "efs_volume_configuration", "transit_encryption"]
+        ],
+    }
 }
 
 aws_issue["ecs_transit_enabled"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
-    volume := resource.properties.volume[_]
+    volume := resource.properties.volume[j]
     lower(volume.efs_volume_configuration.transit_encryption) != "enabled"
+}
+
+source_path[{"ecs_transit_enabled": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_task_definition"
+    volume := resource.properties.volume[j]
+    lower(volume.efs_volume_configuration.transit_encryption) != "enabled"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "volume", j, "efs_volume_configuration", "transit_encryption"]
+        ],
+    }
 }
 
 ecs_transit_enabled {

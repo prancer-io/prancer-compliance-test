@@ -8,27 +8,65 @@ package rule
 default eks_multiple_sg = null
 
 aws_attribute_absence["eks_multiple_sg"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_eks_cluster"
     not resource.properties.vpc_config
 }
 
-aws_attribute_absence["eks_multiple_sg"] {
-    resource := input.resources[_]
+source_path[{"eks_multiple_sg": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_eks_cluster"
-    vpc_config := resource.properties.vpc_config[_]
+    not resource.properties.vpc_config
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "vpc_config"]
+        ],
+    }
+}
+
+aws_attribute_absence["eks_multiple_sg"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_eks_cluster"
+    vpc_config := resource.properties.vpc_config[j]
     not vpc_config.security_group_ids
 }
 
-aws_issue["eks_multiple_sg"] {
-    resource := input.resources[_]
+source_path[{"eks_multiple_sg": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_eks_cluster"
-    vpc_config := resource.properties.vpc_config[_]
+    vpc_config := resource.properties.vpc_config[j]
+    not vpc_config.security_group_ids
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "vpc_config", j, "security_group_ids"]
+        ],
+    }
+}
+
+aws_issue["eks_multiple_sg"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_eks_cluster"
+    vpc_config := resource.properties.vpc_config[j]
     count(vpc_config.security_group_ids) != 1
 }
 
+source_path[{"eks_multiple_sg": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_eks_cluster"
+    vpc_config := resource.properties.vpc_config[j]
+    count(vpc_config.security_group_ids) != 1
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "vpc_config", j, "security_group_ids"]
+        ],
+    }
+}
+
 eks_multiple_sg {
-    lower(input.resources[_].type) == "aws_eks_cluster"
+    lower(input.resources[i].type) == "aws_eks_cluster"
     not aws_issue["eks_multiple_sg"]
     not aws_attribute_absence["eks_multiple_sg"]
 }
@@ -71,6 +109,17 @@ aws_issue["eks_version"] {
     startswith(lower(resource.properties.version), "1.9.")
 }
 
+source_path[{"eks_version": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_eks_cluster"
+    startswith(lower(resource.properties.version), "1.9.")
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "version"]
+        ],
+    }
+}
 
 eks_version {
     lower(input.resources[i].type) == "aws_eks_cluster"
