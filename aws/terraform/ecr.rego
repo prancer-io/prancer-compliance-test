@@ -13,6 +13,17 @@ aws_issue["ecr_imagetag"] {
     lower(resource.properties.image_tag_mutability) == "mutable"
 }
 
+source_path[{"ecr_imagetag": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository"
+    lower(resource.properties.image_tag_mutability) == "mutable"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "image_tag_mutability"]
+        ],
+    }
+}
 
 ecr_imagetag {
     lower(input.resources[i].type) == "aws_ecr_repository"
@@ -48,10 +59,22 @@ default ecr_encryption = null
 aws_issue["ecr_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecr_repository"
-    encryption_configuration := resource.properties.encryption_configuration[_]
+    encryption_configuration := resource.properties.encryption_configuration[j]
     not encryption_configuration.encryption_type
 }
 
+source_path[{"ecr_imagetag": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository"
+    encryption_configuration := resource.properties.encryption_configuration[j]
+    not encryption_configuration.encryption_type
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encryption_configuration", j, "encryption_type"]
+        ],
+    }
+}
 
 ecr_encryption {
     lower(input.resources[i].type) == "aws_ecr_repository"
@@ -87,17 +110,42 @@ default ecr_scan = null
 aws_bool_issue["ecr_scan"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecr_repository"
-    image_scanning_configuration := resource.properties.image_scanning_configuration[_]
+    image_scanning_configuration := resource.properties.image_scanning_configuration[j]
     not image_scanning_configuration.scan_on_push
+}
+
+source_path[{"ecr_scan": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository"
+    image_scanning_configuration := resource.properties.image_scanning_configuration[j]
+    not image_scanning_configuration.scan_on_push
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "image_scanning_configuration", j, "scan_on_push"]
+        ],
+    }
 }
 
 aws_issue["ecr_scan"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecr_repository"
-    image_scanning_configuration := resource.properties.image_scanning_configuration[_]
+    image_scanning_configuration := resource.properties.image_scanning_configuration[j]
     lower(image_scanning_configuration.scan_on_push) != "true"
 }
 
+source_path[{"ecr_scan": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository"
+    image_scanning_configuration := resource.properties.image_scanning_configuration[j]
+    lower(image_scanning_configuration.scan_on_push) != "true"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "image_scanning_configuration", j, "scan_on_push"]
+        ],
+    }
+}
 
 ecr_scan {
     lower(input.resources[i].type) == "aws_ecr_repository"

@@ -1387,8 +1387,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-TRF-CP-001",
-                            "eval": "data.rule.deploy_compute_platform",
-                            "message": "data.rule.deploy_compute_platform_err",
+                            "eval": "data.rule.cp_artifact_encrypt",
+                            "message": "data.rule.cp_artifact_encrypt_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-application.html#cfn-codedeploy-application-computeplatform",
                             "remediationFunction": "PR_AWS_TRF_CP_001.py"
                         }

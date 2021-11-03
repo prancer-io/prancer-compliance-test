@@ -12,10 +12,34 @@ aws_bool_issue["kms_key_rotation"] {
     not resource.properties.enable_key_rotation
 }
 
+source_path[{"kms_key_rotation": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_kms_key"
+    not resource.properties.enable_key_rotation
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "enable_key_rotation"]
+        ],
+    }
+}
+
 aws_issue["kms_key_rotation"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_kms_key"
     lower(resource.properties.enable_key_rotation) == "false"
+}
+
+source_path[{"kms_key_rotation": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_kms_key"
+    lower(resource.properties.enable_key_rotation) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "enable_key_rotation"]
+        ],
+    }
 }
 
 kms_key_rotation {
@@ -62,10 +86,34 @@ aws_bool_issue["kms_key_state"] {
     not resource.properties.is_enabled
 }
 
+source_path[{"kms_key_state": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_kms_key"
+    not resource.properties.is_enabled
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "is_enabled"]
+        ],
+    }
+}
+
 aws_issue["kms_key_state"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_kms_key"
     lower(resource.properties.is_enabled) == "false"
+}
+
+source_path[{"kms_key_state": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_kms_key"
+    lower(resource.properties.is_enabled) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "is_enabled"]
+        ],
+    }
 }
 
 kms_key_state {

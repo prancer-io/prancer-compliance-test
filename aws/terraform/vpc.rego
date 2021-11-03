@@ -8,19 +8,43 @@ package rule
 default vpc_subnet_autoip = null
 
 aws_issue["vpc_subnet_autoip"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_subnet"
     lower(resource.properties.map_public_ip_on_launch) == "true"
 }
 
+source_path[{"vpc_subnet_autoip": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_subnet"
+    lower(resource.properties.map_public_ip_on_launch) == "true"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "map_public_ip_on_launch"]
+        ],
+    }
+}
+
 aws_bool_issue["vpc_subnet_autoip"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_subnet"
     resource.properties.map_public_ip_on_launch == true
 }
 
+source_path[{"vpc_subnet_autoip": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_subnet"
+    resource.properties.map_public_ip_on_launch == true
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "map_public_ip_on_launch"]
+        ],
+    }
+}
+
 vpc_subnet_autoip {
-    lower(input.resources[_].type) == "aws_subnet"
+    lower(input.resources[i].type) == "aws_subnet"
     not aws_issue["vpc_subnet_autoip"]
     not aws_bool_issue["vpc_subnet_autoip"]
 }
