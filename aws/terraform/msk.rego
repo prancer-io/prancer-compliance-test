@@ -330,3 +330,55 @@ msk_vpc_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo"
 }
+
+
+#
+# PR-AWS-TRF-MSK-005
+#
+
+default msk_cluster_logging_enable = null
+
+aws_issue["msk_cluster_logging_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_msk_cluster"
+    logging_info := resource.properties.logging_info[j]
+    not logging_info.broker_logs
+}
+
+source_path[{"msk_cluster_logging_enable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_msk_cluster"
+    logging_info := resource.properties.logging_info[j]
+    not logging_info.broker_logs
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "logging_info", "broker_logs"]
+        ],
+    }
+}
+
+msk_cluster_logging_enable {
+    lower(input.resources[i].type) == "aws_msk_cluster"
+    not aws_issue["msk_cluster_logging_enable"]
+}
+
+msk_cluster_logging_enable = false {
+    aws_issue["msk_cluster_logging_enable"]
+}
+
+msk_cluster_logging_enable_err = "Ensure Amazon MSK cluster has logging enabled" {
+    aws_issue["msk_cluster_logging_enable"]
+}
+
+
+msk_cluster_logging_enable_metadata := {
+    "Policy Code": "PR-AWS-TRF-MSK-005",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Amazon MSK cluster has logging enabled",
+    "Policy Description": "Consistent cluster logging helps you determine if a request was made with root or AWS Identity and Access Management (IAM) user credentials and whether the request was made with temporary security credentials for a role or federated user.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/msk_cluster"
+}

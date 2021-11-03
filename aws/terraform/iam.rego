@@ -45,7 +45,7 @@ iam_wildcard_resource_metadata := {
     "Product": "AWS",
     "Language": "Terraform",
     "Policy Title": "Ensure no wildcards are specified in IAM policy with 'Resource' section",
-    "Policy Description": "Using a wildcard in the Resource element in a role's trust policy would allow any IAM user in an account to access all Resources. This is a significant security gap and can be used to gain access to sensitive data.",
+    "Policy Description": "Using a wildcard in the Resource element in a role's trust policy would allow any IAM user in an account to access all resources. This is a significant security gap and can be used to gain access to sensitive data.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html"
@@ -217,17 +217,17 @@ source_path[{"iam_resource_format": metadata}] {
 }
 
 iam_resource_format {
-    lower(input.resource[i].Type) == "aws_iam_role"
+    lower(input.resource[i].type) == "aws_iam_role"
     not aws_issue["iam_resource_format"]
 }
 
 iam_resource_format {
-    lower(input.resource[i].Type) == "aws_iam_user_policy"
+    lower(input.resource[i].type) == "aws_iam_user_policy"
     not aws_issue["iam_resource_format"]
 }
 
 iam_resource_format {
-    lower(input.resource[i].Type) == "aws_iam_group_policy"
+    lower(input.resource[i].type) == "aws_iam_group_policy"
     not aws_issue["iam_resource_format"]
 }
 
@@ -434,4 +434,68 @@ iam_administrative_privileges_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html"
+}
+
+#
+# PR-AWS-TRF-IAM-008
+#
+default iam_user_group_attach = null
+
+aws_issue["iam_user_group_attach"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_group_membership"
+    not resource.properties.users
+}
+
+source_path[{"iam_user_group_attach": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_group_membership"
+    not resource.properties.users
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "users"]
+        ],
+    }
+}
+
+aws_issue["iam_user_group_attach"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_group_membership"
+    count(resource.properties.users) < 1
+}
+
+source_path[{"iam_user_group_attach": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_iam_group_membership"
+    count(resource.properties.users) < 1
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "users"]
+        ],
+    }
+}
+
+iam_user_group_attach {
+    lower(input.resources[i].type) == "aws_iam_group_membership"
+    not aws_issue["iam_user_group_attach"]
+}
+
+iam_user_group_attach = false {
+    aws_issue["iam_user_group_attach"]
+}
+
+iam_user_group_attach_err = "Ensure IAM groups contains at least one IAM user" {
+    aws_issue["iam_user_group_attach"]
+}
+
+iam_user_group_attach_metadata := {
+    "Policy Code": "PR-AWS-TRF-IAM-008",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure IAM groups contains at least one IAM user",
+    "Policy Description": "Ensure that your Amazon Identity and Access Management (IAM) users are members of at least one IAM group in order to adhere to IAM security best practices",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_membership"
 }

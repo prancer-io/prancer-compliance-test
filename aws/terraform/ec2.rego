@@ -289,3 +289,134 @@ ec2_public_ip_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html"
 }
+
+#
+# PR-AWS-TRF-EC2-004
+#
+
+default ec2_ebs_optimized = null
+
+aws_issue["ec2_ebs_optimized"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    not resource.properties.ebs_optimized
+}
+
+source_path[{"ec2_ebs_optimized": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    not resource.properties.ebs_optimized
+    metadata := {
+        "resource_path": [
+            ["resources", i, ".properties", "ebs_optimized"]
+        ],
+    }
+}
+
+aws_issue["ec2_ebs_optimized"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    lower(resource.properties.ebs_optimized) == "false"
+}
+
+source_path[{"ec2_ebs_optimized": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    lower(resource.properties.ebs_optimized) == "false"
+    metadata := {
+        "resource_path": [
+            ["resources", i, ".properties", "ebs_optimized"]
+        ],
+    }
+}
+
+ec2_ebs_optimized {
+    lower(input.resources[i].type) == "aws_instance"
+    not aws_issue["ec2_ebs_optimized"]
+}
+
+ec2_ebs_optimized = false {
+    aws_issue["ec2_ebs_optimized"]
+}
+
+ec2_ebs_optimized_err = "Ensure that EC2 instace is EBS Optimized" {
+    aws_issue["ec2_ebs_optimized"]
+}
+
+ec2_ebs_optimized_metadata := {
+    "Policy Code": "PR-AWS-TRF-EC2-004",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure that EC2 instace is EBS Optimized",
+    "Policy Description": "Enable ebs_optimized provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal Amazon EBS I/O performance",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance"
+}
+
+
+#
+# PR-AWS-TRF-EC2-005
+#
+
+default ec2_monitoring = null
+
+aws_issue["ec2_monitoring"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    not resource.properties.monitoring
+}
+
+source_path[{"ec2_monitoring": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    not resource.properties.monitoring
+    metadata := {
+        "resource_path": [
+            ["resources", i, ".properties", "monitoring"]
+        ],
+    }
+}
+
+aws_issue["ec2_monitoring"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    lower(resource.properties.monitoring) == "false"
+}
+
+source_path[{"ec2_monitoring": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    lower(resource.properties.monitoring) == "false"
+    metadata := {
+        "resource_path": [
+            ["resources", i, ".properties", "monitoring"]
+        ],
+    }
+}
+
+ec2_monitoring {
+    lower(input.resources[i].type) == "aws_instance"
+    not aws_issue["ec2_monitoring"]
+}
+
+ec2_monitoring = false {
+    aws_issue["ec2_monitoring"]
+}
+
+ec2_monitoring_err = "Ensure detailed monitoring is enabled for EC2 instances" {
+    aws_issue["ec2_monitoring"]
+}
+
+ec2_monitoring_metadata := {
+    "Policy Code": "PR-AWS-TRF-EC2-005",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure detailed monitoring is enabled for EC2 instances",
+    "Policy Description": "Ensure that detailed monitoring is enabled for your Amazon EC2 instances in order to have enough monitoring data to help you make better decisions on architecting and managing compute resources within your AWS account",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance"
+}

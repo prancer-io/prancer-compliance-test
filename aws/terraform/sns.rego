@@ -72,7 +72,7 @@ sns_protocol_metadata := {
     "Policy Description": "This policy identifies SNS subscriptions using HTTP instead of HTTPS as the delivery protocol in order to enforce SSL encryption for all subscription requests. It is strongly recommended use only HTTPS-based subscriptions by implementing secure SNS topic policies.",
     "Resource Type": "aws_sns_topic",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic"
 }
 
 #
@@ -123,7 +123,7 @@ sns_encrypt_key_metadata := {
     "Policy Description": "This policy identifies Amazon Simple Notification Service (SNS) topics that are encrypted with the default AWS Key Management Service (KMS) keys. As a best practice, use Customer Master Keys (CMK) to encrypt the data in your SNS topics and ensure full control over your data.",
     "Resource Type": "aws_sns_topic",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic"
 }
 
 #
@@ -199,5 +199,61 @@ sns_encrypt_metadata := {
     "Policy Description": "This policy identifies Amazon Simple Notification Service (SNS) topics that have server-side encryption disabled. As a best practice, enable server-side encryption for at-rest encryption of message content published to SNS topics. When you publish a message, the SNS encrypts your message as soon as it receives it, and decrypts it just prior to delivery.",
     "Resource Type": "aws_sns_topic",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic"
+}
+
+#
+# PR-AWS-TRF-SNS-004
+#
+
+default sns_policy_public = null
+
+aws_issue["sns_policy_public"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sns_topic_policy"
+    statement := resource.properties.policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+}
+
+aws_issue["sns_policy_public"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sns_topic_policy"
+    statement := resource.properties.policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+}
+
+aws_issue["sns_policy_public"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sns_topic_policy"
+    statement := resource.properties.policy.Statement[_]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[_] = "*"
+}
+
+
+sns_policy_public {
+    lower(input.resources[i].type) == "aws_sns_topic_policy"
+    not aws_issue["sns_policy_public"]
+}
+
+sns_policy_public = false {
+    aws_issue["sns_policy_public"]
+}
+
+sns_policy_public_err = "Ensure SNS Topic policy is not publicly accessible" {
+    aws_issue["sns_policy_public"]
+}
+
+sns_policy_public_metadata := {
+    "Policy Code": "PR-AWS-TRF-SNS-004",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure SNS Topic policy is not publicly accessible",
+    "Policy Description": "Public SNS Topic potentially expose existing interfaces to unwanted 3rd parties that can tap into an existing data stream, resulting in data leak to an unwanted party.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic_policy"
 }

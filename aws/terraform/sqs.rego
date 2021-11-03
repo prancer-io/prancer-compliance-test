@@ -203,3 +203,171 @@ sqs_encrypt_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html"
 }
+
+#
+# PR-AWS-TRF-SQS-004
+#
+
+default sqs_policy_public = null
+
+aws_issue["sqs_policy_public"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+}
+
+source_path[{"sqs_policy_public": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy", "Statement", j, "Principal"]
+        ],
+    }
+}
+
+aws_issue["sqs_policy_public"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+}
+
+source_path[{"sqs_policy_public": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy", "Statement", j, "Principal", "AWS"]
+        ],
+    }
+}
+
+aws_issue["sqs_policy_public"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[k] = "*"
+}
+
+source_path[{"sqs_policy_public": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[k] = "*"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy", "Statement", j, "Principal", "AWS", k]
+        ],
+    }
+}
+
+sqs_policy_public {
+    lower(input.resources[i].type) == "aws_sqs_queue_policy"
+    not aws_issue["sqs_policy_public"]
+}
+
+sqs_policy_public = false {
+    aws_issue["sqs_policy_public"]
+}
+
+sqs_policy_public_err = "Ensure SQS queue policy is not publicly accessible" {
+    aws_issue["sqs_policy_public"]
+}
+
+sqs_policy_public_metadata := {
+    "Policy Code": "PR-AWS-TRF-SQS-004",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure SQS queue policy is not publicly accessible",
+    "Policy Description": "Public SQS queues potentially expose existing interfaces to unwanted 3rd parties that can tap into an existing data stream, resulting in data leak to an unwanted party.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue_policy"
+}
+
+
+#
+# PR-AWS-TRF-SQS-005
+#
+
+default sqs_policy_action = null
+
+aws_issue["sqs_policy_action"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Action == "*"
+}
+
+source_path[{"sqs_policy_action": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Action == "*"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy", "Statement", j, "Action"]
+        ],
+    }
+}
+
+aws_issue["sqs_policy_action"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Action[k] == "*"
+}
+
+source_path[{"sqs_policy_action": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Action[k] == "*"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy", "Statement", j, "Action", k]
+        ],
+    }
+}
+
+sqs_policy_action {
+    lower(input.resources[i].type) == "aws_sqs_queue_policy"
+    not aws_issue["sqs_policy_action"]
+}
+
+sqs_policy_action = false {
+    aws_issue["sqs_policy_action"]
+}
+
+sqs_policy_action_err = "Ensure SQS policy documents do not allow all actions" {
+    aws_issue["sqs_policy_action"]
+}
+
+sqs_policy_action_metadata := {
+    "Policy Code": "PR-AWS-TRF-SQS-005",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure SQS policy documents do not allow all actions",
+    "Policy Description": "This level of access could potentially grant unwanted and unregulated access to anyone given this policy document setting. We recommend you to write a refined policy describing the specific action allowed or required by the specific policy holder",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue_policy"
+}
