@@ -8,13 +8,25 @@ package rule
 default sqs_deadletter = null
 
 aws_issue["sqs_deadletter"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_sqs_queue"
     not resource.properties.redrive_policy.deadLetterTargetArn
 }
 
+source_path[{"sqs_deadletter": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue"
+    not resource.properties.redrive_policy.deadLetterTargetArn
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "redrive_policy", "deadLetterTargetArn"]
+        ],
+    }
+}
+
 sqs_deadletter {
-    lower(input.resources[_].type) == "aws_sqs_queue"
+    lower(input.resources[i].type) == "aws_sqs_queue"
     not aws_issue["sqs_deadletter"]
 }
 
@@ -45,15 +57,29 @@ sqs_deadletter_metadata := {
 default sqs_encrypt_key = null
 
 aws_issue["sqs_encrypt_key"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_sqs_queue"
     resource.properties.kms_master_key_id
     resource.properties.kms_master_key_id != null
     contains(lower(resource.properties.kms_master_key_id), "alias/aws/sqs")
 }
 
+source_path[{"sqs_encrypt_key": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue"
+    resource.properties.kms_master_key_id
+    resource.properties.kms_master_key_id != null
+    contains(lower(resource.properties.kms_master_key_id), "alias/aws/sqs")
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "kms_master_key_id"]
+        ],
+    }
+}
+
 sqs_encrypt_key {
-    lower(input.resources[_].type) == "aws_sqs_queue"
+    lower(input.resources[i].type) == "aws_sqs_queue"
     not aws_issue["sqs_encrypt_key"]
     not aws_attribute_absence["sqs_encrypt_key"]
 }
@@ -91,26 +117,63 @@ sqs_encrypt_key_metadata := {
 default sqs_encrypt = null
 
 aws_attribute_absence["sqs_encrypt"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_sqs_queue"
     not resource.properties.kms_master_key_id
 }
 
+source_path[{"sqs_encrypt": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue"
+    not resource.properties.kms_master_key_id
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "kms_master_key_id"]
+        ],
+    }
+}
+
 aws_attribute_absence["sqs_encrypt"] {
-	resource := input.resources[_]
+	resource := input.resources[i]
 	lower(resource.type) == "aws_sqs_queue"
 	resource.properties.kms_master_key_id == null
 }
 
+source_path[{"sqs_encrypt": metadata}] {
+	resource := input.resources[i]
+	lower(resource.type) == "aws_sqs_queue"
+	resource.properties.kms_master_key_id == null
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "kms_master_key_id"]
+        ],
+    }
+}
+
 aws_issue["sqs_encrypt"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_sqs_queue"
     resource.properties.kms_master_key_id != null
     count(resource.properties.kms_master_key_id) == 0
 }
 
+source_path[{"sqs_encrypt": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue"
+    resource.properties.kms_master_key_id != null
+    count(resource.properties.kms_master_key_id) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "kms_master_key_id"]
+        ],
+    }
+}
+
 sqs_encrypt {
-    lower(input.resources[_].type) == "aws_sqs_queue"
+    lower(input.resources[i].type) == "aws_sqs_queue"
     not aws_issue["sqs_encrypt"]
     not aws_attribute_absence["sqs_encrypt"]
 }

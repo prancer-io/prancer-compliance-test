@@ -119,23 +119,48 @@ app_service_https_only_metadata := {
 
 default app_service_latest_tls_configured = null
 
+# cannot check existance of property if there is a default value and same terraform resoruce appear in the same snapshot file multiple time with different configuration
+# it will work well for valid values, but if we provide invalid value for one resoruce will produce multiple output, which is not exceptable.
+#azure_attribute_absence["app_service_latest_tls_configured"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_app_service"
+#    not resource.properties.site_config
+#}
+
+#default to 1.2
+#azure_attribute_absence["app_service_latest_tls_configured"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_app_service"
+#    site_config := resource.properties.site_config[_]
+#    not site_config.min_tls_version
+#}
 
 azure_issue["app_service_latest_tls_configured"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_app_service"
     site_config := resource.properties.site_config[_]
-    min_tls_version := to_number(concat(".",array.slice(split(site_config.min_tls_version, "."), 0, 2)))
-    min_tls_version < 1.2
+    to_number(site_config.min_tls_version) != 1.2 # though tf resource has string value but currently prancer compliance engine is converting string to float (not sure why). thats why we need to compare as number.
 }
 
 app_service_latest_tls_configured {
     lower(input.resources[_].type) == "azurerm_app_service"
+    #not azure_attribute_absence["app_service_latest_tls_configured"]
     not azure_issue["app_service_latest_tls_configured"]
 }
+
+#app_service_latest_tls_configured {
+#    azure_attribute_absence["app_service_latest_tls_configured"]
+#}
 
 app_service_latest_tls_configured = false {
     azure_issue["app_service_latest_tls_configured"]
 }
+
+#app_service_latest_tls_configured_err = "azurerm_app_service property 'auth_settings.enabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
+#    azure_attribute_absence["app_service_latest_tls_configured"]
+#} else = "Azure App Service currently dont have latest version of tls configured" {
+#    azure_issue["app_service_latest_tls_configured"]
+#}
 
 app_service_latest_tls_configured_err = "Azure App Service currently dont have latest version of tls configured" {
     azure_issue["app_service_latest_tls_configured"]
@@ -607,6 +632,13 @@ azure_attribute_absence["app_service_remote_debugging_disabled"] {
     not site_config.remote_debugging_enabled
 }
 
+azure_issue["app_service_remote_debugging_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_app_service"
+    site_config := resource.properties.site_config[_]
+    site_config.remote_debugging_enabled == true
+}
+
 app_service_remote_debugging_disabled {
     lower(input.resources[_].type) == "azurerm_app_service"
     azure_attribute_absence["app_service_remote_debugging_disabled"]
@@ -788,8 +820,7 @@ azure_issue["app_service_php_version_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_app_service"
     site_config := resource.properties.site_config[_]
-    php_version := to_number(concat(".",array.slice(split(site_config.php_version, "."), 0, 2)))
-    php_version < latest_php_version
+    to_number(site_config.php_version) != latest_php_version
 }
 
 # we need to make it pass if property is missing, as azurerm_app_service may not need php
@@ -832,7 +863,7 @@ app_service_php_version_latest_metadata := {
 
 default app_service_python_version_latest = null
 
-latest_python_version := 3.9
+latest_python_version := 3.4
 
 azure_attribute_absence["app_service_python_version_latest"] {
     resource := input.resources[_]
@@ -851,8 +882,7 @@ azure_issue["app_service_python_version_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_app_service"
     site_config := resource.properties.site_config[_]
-    python_version := to_number(concat(".",array.slice(split(site_config.python_version, "."), 0, 2)))
-    python_version < latest_python_version
+    to_number(site_config.python_version) != latest_python_version
 }
 
 # we need to make it pass if property is missing, as azurerm_app_service may not need python
@@ -916,8 +946,7 @@ azure_issue["app_service_java_version_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_app_service"
     site_config := resource.properties.site_config[_]
-    latest_java_version := to_number(concat(".",array.slice(split(site_config.latest_java_version, "."), 0, 2)))
-    latest_java_version < latest_java_version
+    site_config.java_version != latest_java_version
 }
 
 # we need to make it pass if property is missing, as azurerm_app_service may not need java

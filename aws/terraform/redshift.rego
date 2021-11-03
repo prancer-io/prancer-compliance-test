@@ -8,31 +8,79 @@ package rule
 default redshift_encrypt_key = null
 
 aws_attribute_absence["redshift_encrypt_key"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_redshift_cluster"
     not resource.properties.kms_key_id
 }
 
+source_path[{"redshift_encrypt_key": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_cluster"
+    not resource.properties.kms_key_id
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "kms_key_id"]
+        ],
+    }
+}
+
 aws_issue["redshift_encrypt_key"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_redshift_cluster"
     not startswith(lower(resource.properties.kms_key_id), "arn:")
 }
 
+source_path[{"redshift_encrypt_key": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_cluster"
+    not startswith(lower(resource.properties.kms_key_id), "arn:")
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "kms_key_id"]
+        ],
+    }
+}
+
 aws_issue["redshift_encrypt_key"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_redshift_cluster"
     lower(resource.properties.encrypted) == "false"
 }
 
+source_path[{"redshift_encrypt_key": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_cluster"
+    lower(resource.properties.encrypted) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encrypted"]
+        ],
+    }
+}
+
 aws_bool_issue["redshift_encrypt_key"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_redshift_cluster"
     not resource.properties.encrypted
 }
 
+source_path[{"redshift_encrypt_key": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_cluster"
+    not resource.properties.encrypted
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encrypted"]
+        ],
+    }
+}
+
 redshift_encrypt_key {
-    lower(input.resources[_].type) == "aws_redshift_cluster"
+    lower(input.resources[i].type) == "aws_redshift_cluster"
     not aws_issue["redshift_encrypt_key"]
     not aws_bool_issue["redshift_encrypt_key"]
     not aws_attribute_absence["redshift_encrypt_key"]
@@ -77,19 +125,43 @@ redshift_encrypt_key_metadata := {
 default redshift_public = null
 
 aws_issue["redshift_public"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_redshift_cluster"
     lower(resource.properties.publicly_accessible) == "true"
 }
 
+source_path[{"redshift_public": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_cluster"
+    lower(resource.properties.publicly_accessible) == "true"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "publicly_accessible"]
+        ],
+    }
+}
+
 aws_bool_issue["redshift_public"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_redshift_cluster"
     resource.properties.publicly_accessible
 }
 
+source_path[{"redshift_public": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_cluster"
+    resource.properties.publicly_accessible
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "publicly_accessible"]
+        ],
+    }
+}
+
 redshift_public {
-    lower(input.resources[_].type) == "aws_redshift_cluster"
+    lower(input.resources[i].type) == "aws_redshift_cluster"
     not aws_issue["redshift_public"]
     not aws_bool_issue["redshift_public"]
 }
@@ -127,33 +199,83 @@ redshift_public_metadata := {
 default redshift_audit = null
 
 aws_attribute_absence["redshift_audit"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_redshift_cluster"
     not resource.properties.logging
 }
 
+source_path[{"redshift_audit": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_cluster"
+    not resource.properties.logging
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "logging"]
+        ],
+    }
+}
+
 aws_issue["redshift_audit"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_redshift_cluster"
     count(resource.properties.logging) == 0
 }
 
-aws_issue["redshift_audit"] {
-    resource := input.resources[_]
+source_path[{"redshift_audit": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_redshift_cluster"
-    logging := resource.properties.logging[_]
+    count(resource.properties.logging) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "logging"]
+        ],
+    }
+}
+
+aws_issue["redshift_audit"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_cluster"
+    logging := resource.properties.logging[j]
     count([c | logging.bucket_name != null; c:= 1]) == 0
 }
 
-aws_issue["redshift_audit"] {
-    resource := input.resources[_]
+source_path[{"redshift_audit": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_redshift_cluster"
-    logging := resource.properties.logging[_]
+    logging := resource.properties.logging[j]
+    count([c | logging.bucket_name != null; c:= 1]) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "logging", j, "bucket_name"]
+        ],
+    }
+}
+
+aws_issue["redshift_audit"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_cluster"
+    logging := resource.properties.logging[j]
     count(logging.bucket_name) == 0
 }
 
+source_path[{"redshift_audit": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_cluster"
+    logging := resource.properties.logging[j]
+    count(logging.bucket_name) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "logging", j, "bucket_name"]
+        ],
+    }
+}
+
 redshift_audit {
-    lower(input.resources[_].type) == "aws_redshift_cluster"
+    lower(input.resources[i].type) == "aws_redshift_cluster"
     not aws_issue["redshift_audit"]
     not aws_attribute_absence["redshift_audit"]
 }
@@ -191,35 +313,89 @@ redshift_audit_metadata := {
 default redshift_require_ssl = null
 
 aws_attribute_absence["redshift_require_ssl"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_redshift_parameter_group"
     not resource.properties.parameter
 }
 
-aws_issue["redshift_require_ssl"] {
-    resource := input.resources[_]
+source_path[{"redshift_require_ssl": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_redshift_parameter_group"
-    count([c | lower(resource.properties.parameter[_].name) == "require_ssl"; c := 1]) == 0
+    not resource.properties.parameter
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "parameter"]
+        ],
+    }
 }
 
 aws_issue["redshift_require_ssl"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_redshift_parameter_group"
-    params = resource.properties.parameter[_]
+    parameter := resource.properties.parameter[j]
+    count([c | lower(parameter.name) == "require_ssl"; c := 1]) == 0
+}
+
+source_path[{"redshift_require_ssl": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_parameter_group"
+    parameter := resource.properties.parameter[j]
+    count([c | lower(parameter.name) == "require_ssl"; c := 1]) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "parameter", j]
+        ],
+    }
+}
+
+aws_issue["redshift_require_ssl"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_parameter_group"
+    params = resource.properties.parameter[j]
     lower(params.name) == "require_ssl"
     lower(params.value) == "false"
 }
 
-aws_bool_issue["redshift_require_ssl"] {
-    resource := input.resources[_]
+source_path[{"redshift_require_ssl": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_redshift_parameter_group"
-    params = resource.properties.parameter[_]
+    params = resource.properties.parameter[j]
+    lower(params.name) == "require_ssl"
+    lower(params.value) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "parameter", j, "value"]
+        ],
+    }
+}
+
+aws_bool_issue["redshift_require_ssl"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_parameter_group"
+    params = resource.properties.parameter[j]
     lower(params.name) == "require_ssl"
     not params.value
 }
 
+source_path[{"redshift_require_ssl": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_parameter_group"
+    params = resource.properties.parameter[j]
+    lower(params.name) == "require_ssl"
+    not params.value
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "parameter", j, "value"]
+        ],
+    }
+}
+
 redshift_require_ssl {
-    lower(input.resources[_].type) == "aws_redshift_parameter_group"
+    lower(input.resources[i].type) == "aws_redshift_parameter_group"
     not aws_issue["redshift_require_ssl"]
     not aws_bool_issue["redshift_require_ssl"]
     not aws_attribute_absence["redshift_require_ssl"]
@@ -264,19 +440,43 @@ redshift_require_ssl_metadata := {
 default redshift_encrypt = null
 
 aws_issue["redshift_encrypt"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_redshift_cluster"
     lower(resource.properties.encrypted) == "false"
 }
 
+source_path[{"redshift_encrypt": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_cluster"
+    lower(resource.properties.encrypted) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encrypted"]
+        ],
+    }
+}
+
 aws_bool_issue["redshift_encrypt"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_redshift_cluster"
     not resource.properties.encrypted
 }
 
+source_path[{"redshift_encrypt": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_cluster"
+    not resource.properties.encrypted
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encrypted"]
+        ],
+    }
+}
+
 redshift_encrypt {
-    lower(input.resources[_].type) == "aws_redshift_cluster"
+    lower(input.resources[i].type) == "aws_redshift_cluster"
     not aws_issue["redshift_encrypt"]
     not aws_bool_issue["redshift_encrypt"]
 }
@@ -319,12 +519,35 @@ aws_issue["redshift_allow_version_upgrade"] {
     lower(resource.properties.allow_version_upgrade) == "false"
 }
 
+source_path[{"redshift_allow_version_upgrade": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_cluster"
+    lower(resource.properties.allow_version_upgrade) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "allow_version_upgrade"]
+        ],
+    }
+}
+
 aws_bool_issue["redshift_allow_version_upgrade"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_redshift_cluster"
     not resource.properties.allow_version_upgrade
 }
 
+source_path[{"redshift_allow_version_upgrade": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_cluster"
+    not resource.properties.allow_version_upgrade
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "allow_version_upgrade"]
+        ],
+    }
+}
 
 redshift_allow_version_upgrade {
     lower(input.resources[i].type) == "aws_redshift_cluster"

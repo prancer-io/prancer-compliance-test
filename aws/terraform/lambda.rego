@@ -8,39 +8,101 @@ package rule
 default lambda_env = null
 
 aws_attribute_absence["lambda_env"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_lambda_function"
     not resource.properties.kms_key_arn
 }
 
+source_path[{"lambda_env": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lambda_function"
+    not resource.properties.kms_key_arn
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "kms_key_arn"]
+        ],
+    }
+}
+
 aws_attribute_absence["lambda_env"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_lambda_function"
     not resource.properties.environment
 }
 
+source_path[{"lambda_env": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lambda_function"
+    not resource.properties.environment
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "environment"]
+        ],
+    }
+}
+
 aws_issue["lambda_env"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_lambda_function"
     is_null(resource.properties.kms_key_arn)
 }
 
+source_path[{"lambda_env": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lambda_function"
+    is_null(resource.properties.kms_key_arn)
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "kms_key_arn"]
+        ],
+    }
+}
+
 aws_issue["lambda_env"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_lambda_function"
     resource.properties.environment
     not resource.properties.kms_key_arn
 }
 
+source_path[{"lambda_env": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lambda_function"
+    resource.properties.environment
+    not resource.properties.kms_key_arn
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "kms_key_arn"]
+        ],
+    }
+}
+
 aws_issue["lambda_env"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_lambda_function"
     resource.properties.environment
     not startswith(lower(resource.properties.kms_key_arn), "arn:")
 }
 
+source_path[{"lambda_env": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lambda_function"
+    resource.properties.environment
+    not startswith(lower(resource.properties.kms_key_arn), "arn:")
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "kms_key_arn"]
+        ],
+    }
+}
+
 lambda_env {
-    lower(input.resources[_].type) == "aws_lambda_function"
+    lower(input.resources[i].type) == "aws_lambda_function"
     not aws_issue["lambda_env"]
     not aws_attribute_absence["lambda_env"]
 }
@@ -78,26 +140,63 @@ lambda_env_metadata := {
 default lambda_vpc = null
 
 aws_attribute_absence["lambda_vpc"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_lambda_function"
     not resource.properties.vpc_config
 }
 
+source_path[{"lambda_vpc": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lambda_function"
+    not resource.properties.vpc_config
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "vpc_config"]
+        ],
+    }
+}
+
 aws_attribute_absence["lambda_vpc"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_lambda_function"
     count(resource.properties.vpc_config) == 0
 }
 
-aws_issue["lambda_vpc"] {
-    resource := input.resources[_]
+source_path[{"lambda_vpc": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_lambda_function"
-    vpc_config := resource.properties.vpc_config[_]
+    count(resource.properties.vpc_config) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "vpc_config"]
+        ],
+    }
+}
+
+aws_issue["lambda_vpc"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lambda_function"
+    vpc_config := resource.properties.vpc_config[j]
     count(vpc_config.subnet_ids) == 0
 }
 
+source_path[{"lambda_vpc": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lambda_function"
+    vpc_config := resource.properties.vpc_config[j]
+    count(vpc_config.subnet_ids) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "vpc_config", j, "subnet_ids"]
+        ],
+    }
+}
+
 lambda_vpc {
-    lower(input.resources[_].type) == "aws_lambda_function"
+    lower(input.resources[i].type) == "aws_lambda_function"
     not aws_issue["lambda_vpc"]
     not aws_attribute_absence["lambda_vpc"]
 }
@@ -135,33 +234,82 @@ lambda_vpc_metadata := {
 default lambda_tracing = null
 
 aws_attribute_absence["lambda_tracing"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_lambda_function"
     not resource.properties.tracing_config
 }
 
+source_path[{"lambda_tracing": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lambda_function"
+    not resource.properties.tracing_config
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "tracing_config"]
+        ],
+    }
+}
+
 aws_attribute_absence["lambda_tracing"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_lambda_function"
     count(resource.properties.tracing_config) == 0
 }
 
-aws_attribute_absence["lambda_tracing"] {
-    resource := input.resources[_]
+source_path[{"lambda_tracing": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_lambda_function"
-    tracing_config := resource.properties.tracing_config[_]
+    count(resource.properties.tracing_config) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "tracing_config"]
+        ],
+    }
+}
+
+aws_attribute_absence["lambda_tracing"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lambda_function"
+    tracing_config := resource.properties.tracing_config[j]
     not tracing_config.mode
 }
 
-aws_issue["lambda_tracing"] {
-    resource := input.resources[_]
+source_path[{"lambda_tracing": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_lambda_function"
-    tracing_config := resource.properties.tracing_config[_]
+    count(resource.properties.tracing_config) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "tracing_config"]
+        ],
+    }
+}
+
+aws_issue["lambda_tracing"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lambda_function"
+    tracing_config := resource.properties.tracing_config[j]
     lower(tracing_config.mode) == "passthrough"
 }
 
+source_path[{"lambda_tracing": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lambda_function"
+    tracing_config := resource.properties.tracing_config[j]
+    lower(tracing_config.mode) == "passthrough"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "tracing_config", j, "mode"]
+        ],
+    }
+}
+
 lambda_tracing {
-    lower(input.resources[_].type) == "aws_lambda_function"
+    lower(input.resources[i].type) == "aws_lambda_function"
     not aws_issue["lambda_tracing"]
     not aws_attribute_absence["lambda_tracing"]
 }

@@ -8,19 +8,44 @@ package rule
 default api_gw_cert = null
 
 aws_issue["api_gw_cert"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_api_gateway_rest_api"
     not resource.properties.client_certificate_id
 }
 
+
+source_path[{"api_gw_cert": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_rest_api"
+    not resource.properties.client_certificate_id
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "client_certificate_id"]
+        ],
+    }
+}
+
 aws_issue["api_gw_cert"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_api_gateway_rest_api"
     count(resource.properties.client_certificate_id) == 0
 }
 
+source_path[{"api_gw_cert": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_rest_api"
+    count(resource.properties.client_certificate_id) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "client_certificate_id"]
+        ],
+    }
+}
+
 api_gw_cert {
-    lower(input.resources[_].type) == "aws_api_gateway_rest_api"
+    lower(input.resources[i].type) == "aws_api_gateway_rest_api"
     not aws_issue["api_gw_cert"]
 }
 
@@ -53,23 +78,63 @@ default gateway_private = null
 aws_attribute_absence["gateway_private"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_api_gateway_rest_api"
-    endpoint_configuration := resource.properties.endpoint_configuration[_]
+    endpoint_configuration := resource.properties.endpoint_configuration[j]
     not endpoint_configuration.types
 }
 
-aws_issue["gateway_private"] {
+source_path[{"gateway_private": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_api_gateway_rest_api"
-    endpoint_configuration := resource.properties.endpoint_configuration[_]
-    count(endpoint_configuration.types) == 0
+    endpoint_configuration := resource.properties.endpoint_configuration[j]
+    not endpoint_configuration.types
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "endpoint_configuration", j, "types"]
+        ],
+    }
 }
 
 aws_issue["gateway_private"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_api_gateway_rest_api"
-    endpoint_configuration := resource.properties.endpoint_configuration[_]
+    endpoint_configuration := resource.properties.endpoint_configuration[j]
+    count(endpoint_configuration.types) == 0
+}
+
+source_path[{"gateway_private": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_rest_api"
+    endpoint_configuration := resource.properties.endpoint_configuration[j]
+    count(endpoint_configuration.types) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "endpoint_configuration", j, "types"]
+        ],
+    }
+}
+
+aws_issue["gateway_private"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_rest_api"
+    endpoint_configuration := resource.properties.endpoint_configuration[j]
     type := endpoint_configuration.types[_]
     count([c | lower(type)== "private"; c:=1]) == 0
+}
+
+source_path[{"gateway_private": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_rest_api"
+    endpoint_configuration := resource.properties.endpoint_configuration[j]
+    type := endpoint_configuration.types[_]
+    count([c | lower(type)== "private"; c:=1]) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "endpoint_configuration", j, "types"]
+        ],
+    }
 }
 
 gateway_private {
@@ -116,10 +181,34 @@ aws_bool_issue["gateway_validate_parameter"] {
     not resource.properties.validate_request_parameters
 }
 
+source_path[{"gateway_validate_parameter": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_request_validator"
+    not resource.properties.validate_request_parameters
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "validate_request_parameters"]
+        ],
+    }
+}
+
 aws_issue["gateway_validate_parameter"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_api_gateway_request_validator"
     lower(resource.properties.validate_request_parameters) == "false"
+}
+
+source_path[{"gateway_validate_parameter": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_request_validator"
+    lower(resource.properties.validate_request_parameters) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "validate_request_parameters"]
+        ],
+    }
 }
 
 gateway_validate_parameter {
@@ -166,10 +255,34 @@ aws_attribute_absence["gateway_request_authorizer"] {
     not resource.properties.type
 }
 
+source_path[{"gateway_request_authorizer": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_authorizer"
+    not resource.properties.type
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "type"]
+        ],
+    }
+}
+
 aws_issue["gateway_request_authorizer"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_api_gateway_authorizer"
     lower(resource.properties.type) != "request"
+}
+
+source_path[{"gateway_request_authorizer": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_authorizer"
+    lower(resource.properties.type) != "request"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "type"]
+        ],
+    }
 }
 
 gateway_request_authorizer {
