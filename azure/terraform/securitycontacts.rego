@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_security_center_contact
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_contact
 #
-# PR-AZR-0087-TRF
+# PR-AZR-TRF-SCT-002
 #
 
 default securitycontacts = null
@@ -41,7 +41,7 @@ securitycontacts_err = "azurerm_security_center_contact property 'email' need to
 }
 
 securitycontacts_metadata := {
-    "Policy Code": "PR-AZR-0087-TRF",
+    "Policy Code": "PR-AZR-TRF-SCT-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -54,7 +54,7 @@ securitycontacts_metadata := {
 
 
 #
-# PR-AZR-0155-TRF
+# PR-AZR-TRF-SCT-004
 #
 
 default securitycontacts_phone = null
@@ -92,7 +92,7 @@ securitycontacts_phone_err = "azurerm_security_center_contact property 'phone' n
 }
 
 securitycontacts_phone_metadata := {
-    "Policy Code": "PR-AZR-0155-TRF",
+    "Policy Code": "PR-AZR-TRF-SCT-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -105,7 +105,7 @@ securitycontacts_phone_metadata := {
 
 
 #
-# PR-AZR-0156-TRF
+# PR-AZR-TRF-SCT-003
 #
 
 default securitycontacts_alert_notifications_enabled = null
@@ -130,7 +130,7 @@ securitycontacts_alert_notifications_enabled_err = "Security Center currently no
 }
 
 securitycontacts_alert_notifications_enabled_metadata := {
-    "Policy Code": "PR-AZR-0156-TRF",
+    "Policy Code": "PR-AZR-TRF-SCT-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -143,7 +143,7 @@ securitycontacts_alert_notifications_enabled_metadata := {
 
 
 #
-# PR-AZR-0157-TRF
+# PR-AZR-TRF-SCT-005
 #
 
 default securitycontacts_alerts_to_admins_enabled = null
@@ -168,7 +168,7 @@ securitycontacts_alerts_to_admins_enabled_err = "Security Center currently not c
 }
 
 securitycontacts_alerts_to_admins_enabled_metadata := {
-    "Policy Code": "PR-AZR-0157-TRF",
+    "Policy Code": "PR-AZR-TRF-SCT-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

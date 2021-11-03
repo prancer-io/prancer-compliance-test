@@ -1,7 +1,7 @@
 package rule
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/function_app
-# PR-AZR-0062-TRF
+# PR-AZR-TRF-FUNC-001
 
 default functionapp_authentication_enabled = null
 
@@ -39,7 +39,7 @@ functionapp_authentication_enabled_err = "azurerm_function_app property 'auth_se
 }
 
 functionapp_authentication_enabled_metadata := {
-    "Policy Code": "PR-AZR-0062-TRF",
+    "Policy Code": "PR-AZR-TRF-FUNC-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

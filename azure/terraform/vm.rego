@@ -3,7 +3,7 @@ package rule
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine
 
 #
-# PR-AZR-0065-TRF
+# PR-AZR-TRF-VM-001
 #
 
 default vm_aset = null
@@ -41,7 +41,7 @@ vm_aset_err = "azurerm_virtual_machine property 'availability_set_id' need to be
 }
 
 vm_aset_metadata := {
-    "Policy Code": "PR-AZR-0065-TRF",
+    "Policy Code": "PR-AZR-TRF-VM-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -55,7 +55,7 @@ vm_aset_metadata := {
 
 # https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/microsoft.compute/vm-new-or-existing-conditions/azuredeploy.json
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine
-# PR-AZR-0136-TRF
+# PR-AZR-TRF-VM-002
 #
 
 default vm_linux_disabled_password_auth = null
@@ -82,7 +82,7 @@ vm_linux_disabled_password_auth_err = "Azure Linux Instance currently does not h
 }
 
 vm_linux_disabled_password_auth_metadata := {
-    "Policy Code": "PR-AZR-0136-TRF",
+    "Policy Code": "PR-AZR-TRF-VM-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -96,7 +96,7 @@ vm_linux_disabled_password_auth_metadata := {
 
 # https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/microsoft.compute/vm-new-or-existing-conditions/azuredeploy.json
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine
-# PR-AZR-0134-TRF
+# PR-AZR-TRF-VM-004
 #
 
 default vm_type_linux_disabled_password_auth = null
@@ -121,7 +121,7 @@ vm_type_linux_disabled_password_auth_err = "Azure Linux Instance currently does 
 }
 
 vm_type_linux_disabled_password_auth_metadata := {
-    "Policy Code": "PR-AZR-0134-TRF",
+    "Policy Code": "PR-AZR-TRF-VM-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -134,7 +134,7 @@ vm_type_linux_disabled_password_auth_metadata := {
 
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine_scale_set
-# PR-AZR-0135-TRF
+# PR-AZR-TRF-VM-005
 #
 
 default vm_type_linux_scale_set_disabled_password_auth = null
@@ -172,7 +172,7 @@ vm_type_linux_scale_set_disabled_password_auth_err = "Azure Linux scale set curr
 }
 
 vm_type_linux_scale_set_disabled_password_auth_metadata := {
-    "Policy Code": "PR-AZR-0135-TRF",
+    "Policy Code": "PR-AZR-TRF-VM-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -185,7 +185,7 @@ vm_type_linux_scale_set_disabled_password_auth_metadata := {
 
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine
-# PR-AZR-0002-TRF
+# PR-AZR-TRF-VM-006
 #
 
 default vm_type_linux_disabled_extension_operation = null
@@ -226,7 +226,7 @@ vm_type_linux_disabled_extension_operation_err = "azurerm_linux_virtual_machine 
 }
 
 vm_type_linux_disabled_extension_operation_metadata := {
-    "Policy Code": "PR-AZR-0002-TRF",
+    "Policy Code": "PR-AZR-TRF-VM-006",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -239,7 +239,7 @@ vm_type_linux_disabled_extension_operation_metadata := {
 
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/windows_virtual_machine
-# PR-AZR-0004-TRF
+# PR-AZR-TRF-VM-007
 #
 
 default vm_type_windows_disabled_extension_operation = null
@@ -280,7 +280,7 @@ vm_type_windows_disabled_extension_operation_err = "azurerm_windows_virtual_mach
 }
 
 vm_type_windows_disabled_extension_operation_metadata := {
-    "Policy Code": "PR-AZR-0004-TRF",
+    "Policy Code": "PR-AZR-TRF-VM-007",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

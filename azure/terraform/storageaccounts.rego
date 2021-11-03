@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_storage_account
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
 #
-# PR-AZR-0092-TRF
+# PR-AZR-TRF-STR-003
 #
 
 default storage_secure = null
@@ -33,7 +33,7 @@ storage_secure_err = "Storage Accounts https based secure transfer is not enable
 }
 
 storage_secure_metadata := {
-    "Policy Code": "PR-AZR-0092-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -46,7 +46,7 @@ storage_secure_metadata := {
 
 
 #
-# PR-AZR-0093-TRF
+# PR-AZR-TRF-STR-004
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules
 
 default storage_acl = null
@@ -89,7 +89,7 @@ storage_acl_err = "azurerm_storage_account_network_rules property 'default_actio
 }
 
 storage_acl_metadata := {
-    "Policy Code": "PR-AZR-0093-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -102,7 +102,7 @@ storage_acl_metadata := {
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/advanced_threat_protection
 # Advanced Threat Protection should be enabled for storage account
-# PR-AZR-0094-TRF
+# PR-AZR-TRF-STR-005
 
 default storage_threat_protection = null
 
@@ -146,7 +146,7 @@ storage_threat_protection_err = "azurerm_advanced_threat_protection property 'en
 }
 
 storage_threat_protection_metadata := {
-    "Policy Code": "PR-AZR-0094-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -158,7 +158,7 @@ storage_threat_protection_metadata := {
 }
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_encryption_scope
-# PR-AZR-0114-TRF
+# PR-AZR-TRF-STR-008
 
 default keySource = null
 
@@ -202,7 +202,7 @@ keySource_err = "azurerm_storage_encryption_scope property 'source' need to be e
 }
 
 keySource_metadata := {
-    "Policy Code": "PR-AZR-0114-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-008",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -215,7 +215,7 @@ keySource_metadata := {
 
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
-# PR-AZR-0122-TRF
+# PR-AZR-TRF-STR-009
 
 default region = null
 
@@ -253,7 +253,7 @@ region_err = "azurerm_storage_account property 'location' need to be exist. Its 
 }
 
 region_metadata := {
-    "Policy Code": "PR-AZR-0122-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-009",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -266,7 +266,7 @@ region_metadata := {
 
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
-# PR-AZR-0123-TRF
+# PR-AZR-TRF-STR-010
 
 default storage_account_public_access_disabled = null
 
@@ -290,7 +290,7 @@ storage_account_public_access_disabled_err = "Storage Account currently allowing
 }
 
 storage_account_public_access_disabled_metadata := {
-    "Policy Code": "PR-AZR-0123-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-010",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -304,7 +304,7 @@ storage_account_public_access_disabled_metadata := {
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
 #
-# PR-AZR-0188-TRF
+# PR-AZR-TRF-STR-014
 #
 
 default storage_account_queue_logging_enabled_for_all_operation = null
@@ -353,7 +353,7 @@ storage_account_queue_logging_enabled_for_all_operation_err = "azurerm_storage_a
 }
 
 storage_account_queue_logging_enabled_for_all_operation_metadata := {
-    "Policy Code": "PR-AZR-0188-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-014",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -366,7 +366,7 @@ storage_account_queue_logging_enabled_for_all_operation_metadata := {
 
 
 #
-# PR-AZR-0193-TRF
+# PR-AZR-TRF-STR-015
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
 
 default storage_acr_firewall_enabled = null
@@ -412,7 +412,7 @@ storage_acr_firewall_enabled_err = "azurerm_storage_account property 'network_ru
 }
 
 storage_acr_firewall_enabled_metadata := {
-    "Policy Code": "PR-AZR-0193-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-015",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -425,7 +425,7 @@ storage_acr_firewall_enabled_metadata := {
 
 
 #
-# PR-AZR-0194-TRF
+# PR-AZR-TRF-STR-011
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules
 
 default storage_nr_allow_trusted_azure_services = null
@@ -469,7 +469,7 @@ storage_nr_allow_trusted_azure_services_err = "azurerm_storage_account_network_r
 }
 
 storage_nr_allow_trusted_azure_services_metadata := {
-    "Policy Code": "PR-AZR-0194-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-011",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -482,7 +482,7 @@ storage_nr_allow_trusted_azure_services_metadata := {
 
 
 #
-# PR-AZR-0195-TRF
+# PR-AZR-TRF-STR-016
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
 
 default storage_allow_trusted_azure_services = null
@@ -528,7 +528,7 @@ storage_allow_trusted_azure_services_err = "azurerm_storage_account_network_rule
 }
 
 storage_allow_trusted_azure_services_metadata := {
-    "Policy Code": "PR-AZR-0195-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-016",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -542,7 +542,7 @@ storage_allow_trusted_azure_services_metadata := {
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
 #
-# PR-AZR-0013-TRF
+# PR-AZR-TRF-STR-017
 #
 
 default storage_correct_naming_convention = null
@@ -581,7 +581,7 @@ storage_correct_naming_convention_err = "azurerm_storage_account property 'name'
 }
 
 storage_correct_naming_convention_metadata := {
-    "Policy Code": "PR-AZR-0013-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-017",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -594,7 +594,7 @@ storage_correct_naming_convention_metadata := {
 
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
-# PR-AZR-0014-TRF
+# PR-AZR-TRF-STR-018
 #
 
 default storage_account_latest_tls_configured = null
@@ -633,7 +633,7 @@ storage_account_latest_tls_configured_err = "azurerm_storage_account property 'm
 }
 
 storage_account_latest_tls_configured_metadata := {
-    "Policy Code": "PR-AZR-0014-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-018",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

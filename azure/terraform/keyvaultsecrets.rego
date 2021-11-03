@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_key_vault_secret
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret
 #
-# PR-AZR-0018-TRF
+# PR-AZR-TRF-KV-005
 #
 
 default kv_expire = null
@@ -42,7 +42,7 @@ kv_expire_err = "azurerm_key_vault_secret property 'expiration_date' need to be 
 }
 
 kv_expire_metadata := {
-    "Policy Code": "PR-AZR-0018-TRF",
+    "Policy Code": "PR-AZR-TRF-KV-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

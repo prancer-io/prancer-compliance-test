@@ -3558,7 +3558,7 @@
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(registrieslist.rego)",
+                    "rule": "file(registry.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-ARM-ACR-003",

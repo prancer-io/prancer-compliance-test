@@ -4,7 +4,7 @@ package rule
 # It's possible to define Key Vault Access Policies both within the azurerm_key_vault resource via the access_policy block and by using the azurerm_key_vault_access_policy resource. 
 # However it's not possible to use both methods to manage Access Policies within a KeyVault, since there'll be conflicts.
 
-# PR-AZR-0107-TRF
+# PR-AZR-TRF-KV-001
 
 default KeyVault = null
 
@@ -49,7 +49,7 @@ KeyVault_err = "access_policy block property 'key_permissions' or 'secret_permis
 }
 
 KeyVault_metadata := {
-    "Policy Code": "PR-AZR-0107-TRF",
+    "Policy Code": "PR-AZR-TRF-KV-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -61,7 +61,7 @@ KeyVault_metadata := {
 }
 
 
-# PR-AZR-0109-TRF
+# PR-AZR-TRF-KV-003
 
 default enablePurgeProtection = null
 
@@ -85,7 +85,7 @@ enablePurgeProtection_err = "Purge protection is currently not enabled on Key va
 }
 
 enablePurgeProtection_metadata := {
-    "Policy Code": "PR-AZR-0109-TRF",
+    "Policy Code": "PR-AZR-TRF-KV-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

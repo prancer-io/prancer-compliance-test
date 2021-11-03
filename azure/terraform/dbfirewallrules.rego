@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2015-05-01-preview/servers/firewallrules
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_firewall_rule
 #
-# PR-AZR-0082-TRF
+# PR-AZR-TRF-SQL-011
 #
 
 default db_firewall = null
@@ -58,7 +58,7 @@ db_firewall_err = "azurerm_sql_firewall_rule property 'start_ip_address' or 'end
 }
 
 db_firewall_metadata := {
-    "Policy Code": "PR-AZR-0082-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-011",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

@@ -13,11 +13,11 @@
                     "rule": "file(roles.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0001-TRF",
+                            "id": "PR-AZR-TRF-ROLE-001",
                             "eval": "data.rule.no_custom_subs_owner_role_created",
                             "message": "data.rule.no_custom_subs_owner_role_created_err",
                             "remediationDescription": "In 'azurerm_role_definition' resource, make sure 'permissions' blocks 'actions' array dont have '*' as entry to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_definition#actions for details.",
-                            "remediationFunction": "PR_AZR_0001_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_ROLE_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -45,11 +45,11 @@
                     "rule": "file(activitylogalerts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0090-TRF",
+                            "id": "PR-AZR-TRF-MNT-001",
                             "eval": "data.rule.azure_monitor_activity_log_alert_enabled",
                             "message": "data.rule.azure_monitor_activity_log_alert_enabled_err",
                             "remediationDescription": "In 'azurerm_monitor_activity_log_alert' resource, set 'enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_activity_log_alert#enabled for details.",
-                            "remediationFunction": "PR_AZR_0090_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_MNT_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -78,11 +78,11 @@
                     "rule": "file(activitylogalerts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0196-TRF",
+                            "id": "PR-AZR-TRF-MNT-011",
                             "eval": "data.rule.azure_monitor_log_profile_retention",
                             "message": "data.rule.azure_monitor_log_profile_retention_err",
                             "remediationDescription": "In 'azurerm_monitor_log_profile' resource, set days = '365' under 'retention_policy' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_log_profile#days for details.",
-                            "remediationFunction": "PR_AZR_0196_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_MNT_011.py"
                         }
                     ],
                     "severity": "Medium",
@@ -111,11 +111,11 @@
                     "rule": "file(activitylogalerts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0197-TRF",
+                            "id": "PR-AZR-TRF-MNT-012",
                             "eval": "data.rule.azure_monitor_log_profile_retention_enabled",
                             "message": "data.rule.azure_monitor_log_profile_retention_enabled_err",
                             "remediationDescription": "In 'azurerm_monitor_log_profile' resource, set 'enabled = true' under 'retention_policy' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_log_profile#enabled for details.",
-                            "remediationFunction": "PR_AZR_0197_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_MNT_012.py"
                         }
                     ],
                     "severity": "Medium",
@@ -144,11 +144,11 @@
                     "rule": "file(activitylogalerts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0198-TRF",
+                            "id": "PR-AZR-TRF-MNT-013",
                             "eval": "data.rule.azure_monitor_log_profile_capture_all_activities",
                             "message": "data.rule.azure_monitor_log_profile_capture_all_activities_err",
                             "remediationDescription": "In 'azurerm_monitor_log_profile' resource, make sure 'categories' array exist and contains at least ['Action','Delete','Write'] as value to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_log_profile#categories for details.",
-                            "remediationFunction": "PR_AZR_0198_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_MNT_013.py"
                         }
                     ],
                     "severity": "Medium",
@@ -177,11 +177,11 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0006-TRF",
+                            "id": "PR-AZR-TRF-AKS-001",
                             "eval": "data.rule.aks_cni_net",
                             "message": "data.rule.aks_cni_net_err",
                             "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, set network_plugin = 'azure' under 'network_profile' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#network_policy for details.",
-                            "remediationFunction": "PR_AZR_0006_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_AKS_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -209,11 +209,11 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0007-TRF",
+                            "id": "PR-AZR-TRF-AKS-002",
                             "eval": "data.rule.aks_http_routing",
                             "message": "data.rule.aks_http_routing_err",
                             "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, set enabled = false under 'http_application_routing' block which exist under 'addon_profile' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#http_application_routing for details.",
-                            "remediationFunction": "PR_AZR_0007_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_AKS_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -241,11 +241,11 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0008-TRF",
+                            "id": "PR-AZR-TRF-AKS-003",
                             "eval": "data.rule.aks_monitoring",
                             "message": "data.rule.aks_monitoring_err",
                             "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, set enabled = true under 'oms_agent' which exist under 'addon_profile' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#oms_agent for details.",
-                            "remediationFunction": "PR_AZR_0008_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_AKS_003.py"
                         }
                     ],
                     "severity": "Medium",
@@ -273,11 +273,11 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0009-TRF",
+                            "id": "PR-AZR-TRF-AKS-004",
                             "eval": "data.rule.aks_nodes",
                             "message": "data.rule.aks_nodes_err",
                             "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, set node_count = 3 under 'default_node_pool' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#node_count for details.",
-                            "remediationFunction": "PR_AZR_0009_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_AKS_004.py"
                         }
                     ],
                     "severity": "Medium",
@@ -305,11 +305,11 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0010-TRF",
+                            "id": "PR-AZR-TRF-AKS-005",
                             "eval": "data.rule.aks_rbac",
                             "message": "data.rule.aks_rbac_err",
                             "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, set enabled = true under 'role_based_access_control' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#role_based_access_control for details.",
-                            "remediationFunction": "PR_AZR_0010_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_AKS_005.py"
                         }
                     ],
                     "severity": "Medium",
@@ -337,11 +337,11 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0101-TRF",
+                            "id": "PR-AZR-TRF-AKS-006",
                             "eval": "data.rule.aks_aad_rbac_enabled",
                             "message": "data.rule.aks_aad_rbac_enabled_err",
                             "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, set role_based_access_control.azure_active_directory.managed = true to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#role_based_access_control for details.",
-                            "remediationFunction": "PR_AZR_0101_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_AKS_006.py"
                         }
                     ],
                     "severity": "Medium",
@@ -369,11 +369,11 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0138-TRF",
+                            "id": "PR-AZR-TRF-AKS-008",
                             "eval": "data.rule.aks_network_policy_configured",
                             "message": "data.rule.aks_network_policy_configured_err",
                             "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, set network_policy = 'azure' under 'network_profile' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#network_policy for details.",
-                            "remediationFunction": "PR_AZR_0138_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_AKS_008.py"
                         }
                     ],
                     "severity": "Medium",
@@ -401,11 +401,11 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0137-TRF",
+                            "id": "PR-AZR-TRF-AKS-007",
                             "eval": "data.rule.aks_api_server_authorized_ip_range_enabled",
                             "message": "data.rule.aks_api_server_authorized_ip_range_enabled_err",
                             "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, make sure property 'api_server_authorized_ip_ranges' exist and its value has valid ip range to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#api_server_authorized_ip_ranges for details.",
-                            "remediationFunction": "PR_AZR_0137_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_AKS_007.py"
                         }
                     ],
                     "severity": "Medium",
@@ -433,11 +433,11 @@
                     "rule": "file(aks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0144-TRF",
+                            "id": "PR-AZR-TRF-AKS-009",
                             "eval": "data.rule.aks_kub_dashboard_disabled",
                             "message": "data.rule.aks_kub_dashboard_disabled_err",
                             "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, set 'kube_dashboard.enabled = true' under 'addon_profile' block to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#kube_dashboard for details.",
-                            "remediationFunction": "PR_AZR_0144_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_AKS_009.py"
                         }
                     ],
                     "severity": "Medium",
@@ -465,11 +465,11 @@
                     "rule": "file(applicationgateways.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0011-TRF",
+                            "id": "PR-AZR-TRF-AGW-001",
                             "eval": "data.rule.gw_tls",
                             "message": "data.rule.gw_tls_err",
                             "remediationDescription": "In 'azurerm_application_gateway' resource, set min_protocol_version = 'TLSv1_2' under 'ssl_policy' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway#min_protocol_version for details.",
-                            "remediationFunction": "PR_AZR_0011_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_AGW_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -497,11 +497,11 @@
                     "rule": "file(applicationgateways.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0012-TRF",
+                            "id": "PR-AZR-TRF-AGW-002",
                             "eval": "data.rule.gw_waf",
                             "message": "data.rule.gw_waf_err",
                             "remediationDescription": "In 'azurerm_application_gateway' resource, set enabled = true under 'waf_configuration' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway#waf_configuration for details.",
-                            "remediationFunction": "PR_AZR_0012_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_AGW_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -529,11 +529,11 @@
                     "rule": "file(applicationgateways.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0125-TRF",
+                            "id": "PR-AZR-TRF-AGW-003",
                             "eval": "data.rule.https_protocol",
                             "message": "data.rule.https_protocol_err",
                             "remediationDescription": "In 'azurerm_application_gateway' resource, set protocol = 'https' under 'http_listener' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway#protocol for details.",
-                            "remediationFunction": "PR_AZR_0125_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_AGW_003.py"
                         }
                     ],
                     "severity": "Medium",
@@ -561,11 +561,11 @@
                     "rule": "file(applicationgateways.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0060-TRF",
+                            "id": "PR-AZR-TRF-AGW-004",
                             "eval": "data.rule.frontendPublicIPConfigurationsDisabled",
                             "message": "data.rule.frontendPublicIPConfigurationsDisabled_err",
                             "remediationDescription": "For resource type 'azurerm_application_gateway' make sure 'public_ip_address_id' does not exist under 'frontend_ip_configuration' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway#frontend_ip_configuration for details.",
-                            "remediationFunction": "PR_AZR_0060_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_AGW_004.py"
                         }
                     ],
                     "severity": "Medium",
@@ -599,11 +599,11 @@
                     "rule": "file(applicationgateways.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0095-TRF",
+                            "id": "PR-AZR-TRF-AGW-005",
                             "eval": "data.rule.backend_https_protocol_enabled",
                             "message": "data.rule.backend_https_protocol_enabled_err",
                             "remediationDescription": "For resource type 'azurerm_application_gateway' make sure 'protocol' has value 'https' under 'backend_http_settings' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway#backend_http_settings for details.",
-                            "remediationFunction": "PR_AZR_0095_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_AGW_005.py"
                         }
                     ],
                     "severity": "Medium",
@@ -637,11 +637,11 @@
                     "rule": "file(applicationgateways.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0099-TRF",
+                            "id": "PR-AZR-TRF-AGW-006",
                             "eval": "data.rule.secret_certificate_is_in_keyvalut",
                             "message": "data.rule.secret_certificate_is_in_keyvalut_err",
                             "remediationDescription": "For resource type 'azurerm_application_gateway' make sure 'key_vault_secret_id' has target key vault id under 'ssl_certificate' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway#key_vault_secret_id for details.",
-                            "remediationFunction": "PR_AZR_0099_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_AGW_006.py"
                         }
                     ],
                     "severity": "Medium",
@@ -675,11 +675,11 @@
                     "rule": "file(appservice.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0149-TRF",
+                            "id": "PR-AZR-TRF-WEB-005",
                             "eval": "data.rule.app_service_auth_enabled",
                             "message": "data.rule.app_service_auth_enabled_err",
                             "remediationDescription": "In 'azurerm_app_service' resource, set 'enabled = true' under 'auth_settings' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#enabled for details.",
-                            "remediationFunction": "PR_AZR_0149_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_WEB_005.py"
                         }
                     ],
                     "severity": "Medium",
@@ -707,11 +707,11 @@
                     "rule": "file(appservice.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0150-TRF",
+                            "id": "PR-AZR-TRF-WEB-001",
                             "eval": "data.rule.app_service_https_only",
                             "message": "data.rule.app_service_https_only_err",
                             "remediationDescription": "In 'azurerm_app_service' resource, set 'https_only = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#https_only for details.",
-                            "remediationFunction": "PR_AZR_0150_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_WEB_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -739,11 +739,11 @@
                     "rule": "file(appservice.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0151-TRF",
+                            "id": "PR-AZR-TRF-WEB-002",
                             "eval": "data.rule.app_service_latest_tls_configured",
                             "message": "data.rule.app_service_latest_tls_configured_err",
                             "remediationDescription": "In 'azurerm_app_service' resource, either remove property 'min_tls_version' or set min_tls_version = '1.2' under 'site_config' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#min_tls_version for details.",
-                            "remediationFunction": "PR_AZR_0151_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_WEB_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -771,11 +771,11 @@
                     "rule": "file(appservice.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0152-TRF",
+                            "id": "PR-AZR-TRF-WEB-018",
                             "eval": "data.rule.app_service_aad_auth_enabled",
                             "message": "data.rule.app_service_aad_auth_enabled_err",
                             "remediationDescription": "In 'azurerm_app_service' resource, make sure 'active_directory' block exist with proper configuration properties under 'auth_settings' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#active_directory for details.",
-                            "remediationFunction": "PR_AZR_0152_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_WEB_018.py"
                         }
                     ],
                     "severity": "Medium",
@@ -803,11 +803,11 @@
                     "rule": "file(appservice.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0153-TRF",
+                            "id": "PR-AZR-TRF-WEB-003",
                             "eval": "data.rule.app_service_client_cert_enabled",
                             "message": "data.rule.app_service_client_cert_enabled_err",
                             "remediationDescription": "In 'azurerm_app_service' resource, set 'client_cert_enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#client_cert_enabled for details.",
-                            "remediationFunction": "PR_AZR_0153_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_WEB_003.py"
                         }
                     ],
                     "severity": "Medium",
@@ -835,11 +835,11 @@
                     "rule": "file(appservice.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0154-TRF",
+                            "id": "PR-AZR-TRF-WEB-004",
                             "eval": "data.rule.app_service_uses_http_two",
                             "message": "data.rule.app_service_uses_http_two_err",
                             "remediationDescription": "In 'azurerm_app_service' resource, set 'http2_enabled = true' under 'site_config' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#http2_enabled for details.",
-                            "remediationFunction": "PR_AZR_0154_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_WEB_004.py"
                         }
                     ],
                     "severity": "Medium",
@@ -867,11 +867,11 @@
                     "rule": "file(appservice.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0067-TRF",
+                            "id": "PR-AZR-TRF-WEB-006",
                             "eval": "data.rule.app_service_cors_not_allowing_all",
                             "message": "data.rule.app_service_cors_not_allowing_all_err",
                             "remediationDescription": "In 'azurerm_app_service' resource, dont set '*' as value to 'allowed_origins' under 'cors' block which exists under 'site_config' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#allowed_origins for details.",
-                            "remediationFunction": "PR_AZR_0067_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_WEB_006.py"
                         }
                     ],
                     "severity": "Medium",
@@ -899,11 +899,11 @@
                     "rule": "file(appservice.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0072-TRF",
+                            "id": "PR-AZR-TRF-WEB-007",
                             "eval": "data.rule.app_service_cors_not_allowing_all",
                             "message": "data.rule.app_service_cors_not_allowing_all_err",
                             "remediationDescription": "In 'azurerm_app_service' resource, make sure 'http_logs' block exist under 'logs' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#http_logs for details.",
-                            "remediationFunction": "PR_AZR_0072_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_WEB_007.py"
                         }
                     ],
                     "severity": "Medium",
@@ -931,11 +931,11 @@
                     "rule": "file(appservice.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0073-TRF",
+                            "id": "PR-AZR-TRF-WEB-008",
                             "eval": "data.rule.app_service_detaild_error_message_enabled",
                             "message": "data.rule.app_service_detaild_error_message_enabled_err",
                             "remediationDescription": "In 'azurerm_app_service' resource, set 'detailed_error_messages_enabled = true' under 'logs' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#detailed_error_messages_enabled for details.",
-                            "remediationFunction": "PR_AZR_0073_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_WEB_008.py"
                         }
                     ],
                     "severity": "Medium",
@@ -963,11 +963,11 @@
                     "rule": "file(appservice.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0076-TRF",
+                            "id": "PR-AZR-TRF-WEB-009",
                             "eval": "data.rule.app_service_failed_request_tracing_enabled",
                             "message": "data.rule.app_service_failed_request_tracing_enabled_err",
                             "remediationDescription": "In 'azurerm_app_service' resource, set 'app_service_failed_request_tracing_enabled = true' under 'logs' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#failed_request_tracing_enabled for details.",
-                            "remediationFunction": "PR_AZR_0076_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_WEB_009.py"
                         }
                     ],
                     "severity": "Medium",
@@ -995,11 +995,11 @@
                     "rule": "file(appservice.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0077-TRF",
+                            "id": "PR-AZR-TRF-WEB-010",
                             "eval": "data.rule.app_service_managed_identity_provider_enabled",
                             "message": "data.rule.app_service_managed_identity_provider_enabled_err",
                             "remediationDescription": "In 'azurerm_app_service' resource, make sure property 'type' exist under 'identity' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#identity for details.",
-                            "remediationFunction": "PR_AZR_0077_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_WEB_010.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1027,11 +1027,11 @@
                     "rule": "file(appservice.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0078-TRF",
+                            "id": "PR-AZR-TRF-WEB-011",
                             "eval": "data.rule.app_service_remote_debugging_disabled",
                             "message": "data.rule.app_service_remote_debugging_disabled_err",
                             "remediationDescription": "In 'azurerm_app_service' resource, make sure property 'remote_debugging_enabled' does not exist under 'site_config' block or if exist set the value to 'false' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#remote_debugging_enabled for details.",
-                            "remediationFunction": "PR_AZR_0078_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_WEB_011.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1059,11 +1059,11 @@
                     "rule": "file(appservice.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0079-TRF",
+                            "id": "PR-AZR-TRF-WEB-012",
                             "eval": "data.rule.app_service_ftp_deployment_disabled",
                             "message": "data.rule.app_service_ftp_deployment_disabled_err",
                             "remediationDescription": "In 'azurerm_app_service' resource, make sure property 'ftps_state' has value either 'Disabled' or 'FtpsOnly' under 'site_config' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#ftps_state for details.",
-                            "remediationFunction": "PR_AZR_0079_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_WEB_012.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1091,11 +1091,11 @@
                     "rule": "file(appservice.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0080-TRF",
+                            "id": "PR-AZR-TRF-WEB-013",
                             "eval": "data.rule.app_service_dot_net_framework_latest",
                             "message": "data.rule.app_service_dot_net_framework_latest_err",
                             "remediationDescription": "In 'azurerm_app_service' resource, set dotnet_framework_version = 'v6.0' under 'site_config' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#dotnet_framework_version for details.",
-                            "remediationFunction": "PR_AZR_0080_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_WEB_013.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1123,11 +1123,11 @@
                     "rule": "file(appservice.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0081-TRF",
+                            "id": "PR-AZR-TRF-WEB-014",
                             "eval": "data.rule.app_service_php_version_latest",
                             "message": "data.rule.app_service_php_version_latest_err",
                             "remediationDescription": "In 'azurerm_app_service' resource, set php_version = '7.4' under 'site_config' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#php_version for details.",
-                            "remediationFunction": "PR_AZR_0081_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_WEB_014.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1155,11 +1155,11 @@
                     "rule": "file(appservice.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0083-TRF",
+                            "id": "PR-AZR-TRF-WEB-015",
                             "eval": "data.rule.app_service_python_version_latest",
                             "message": "data.rule.app_service_python_version_latest_err",
                             "remediationDescription": "In 'azurerm_app_service' resource, set python_version = '3.4' under 'site_config' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#python_version for details.",
-                            "remediationFunction": "PR_AZR_0083_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_WEB_015.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1187,11 +1187,11 @@
                     "rule": "file(appservice.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0084-TRF",
+                            "id": "PR-AZR-TRF-WEB-016",
                             "eval": "data.rule.app_service_java_version_latest",
                             "message": "data.rule.app_service_java_version_latest_err",
                             "remediationDescription": "In 'azurerm_app_service' resource, set java_version = '11' under 'site_config' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#java_version for details.",
-                            "remediationFunction": "PR_AZR_0084_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_WEB_016.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1219,11 +1219,11 @@
                     "rule": "file(appservice.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0086-TRF",
+                            "id": "PR-AZR-TRF-WEB-017",
                             "eval": "data.rule.app_service_storage_account_type_azurefile",
                             "message": "data.rule.app_service_storage_account_type_azurefile_err",
                             "remediationDescription": "In 'azurerm_app_service' resource, set type = 'AzureFiles' under 'storage_account' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#storage_account for details.",
-                            "remediationFunction": "PR_AZR_0086_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_WEB_017.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1251,11 +1251,11 @@
                     "rule": "file(databaseaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0105-TRF",
+                            "id": "PR-AZR-TRF-CDA-001",
                             "eval": "data.rule.tagsLength",
                             "message": "data.rule.tagsLength_err",
                             "remediationDescription": "In 'azurerm_cosmosdb_account' resource, add relevent tag on property 'tags' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_account#tags for details.",
-                            "remediationFunction": "PR_AZR_0105_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_CDA_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1285,11 +1285,11 @@
                     "rule": "file(databricks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0117-TRF",
+                            "id": "PR-AZR-TRF-DBK-001",
                             "eval": "data.rule.databrics_workspace_has_public_ip_disabled",
                             "message": "data.rule.databrics_workspace_has_public_ip_disabled_err",
                             "remediationDescription": "In 'azurerm_databricks_workspace' resource, set true as the value of 'no_public_ip' under 'custom_parameters' block to fix the issue. If 'custom_parameters' block does not exist please add one. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/databricks_workspace for details.",
-                            "remediationFunction": "PR_AZR_0117_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_DBK_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1317,11 +1317,11 @@
                     "rule": "file(databricks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0118-TRF",
+                            "id": "PR-AZR-TRF-DBK-002",
                             "eval": "data.rule.databrics_workspace_has_vnet_integration",
                             "message": "data.rule.databrics_workspace_has_vnet_integration_err",
                             "remediationDescription": "In 'azurerm_databricks_workspace' resource, set set vnet id as the value of 'virtual_network_id' under 'custom_parameters' block to fix the issue. If 'custom_parameters' block does not exist please add one. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/databricks_workspace for details.",
-                            "remediationFunction": "PR_AZR_0118_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_DBK_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1349,11 +1349,11 @@
                     "rule": "file(dbadministrators.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0085-TRF",
+                            "id": "PR-AZR-TRF-SQL-001",
                             "eval": "data.rule.db_ad_admin",
                             "message": "data.rule.db_ad_admin_err",
                             "remediationDescription": "In 'azurerm_sql_active_directory_administrator' resource, set the 'server_name' from associated 'azurerm_sql_server' resource's 'name' property to fix the issue. more simply make sure 'server_name' of 'azurerm_sql_active_directory_administrator' resource matches with 'name' of associated 'azurerm_sql_server' resource. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_active_directory_administrator#server_name for details.",
-                            "remediationFunction": "PR_AZR_0085_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1386,11 +1386,11 @@
                     "rule": "file(dbauditingsettings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0003-TRF",
+                            "id": "PR-AZR-TRF-SQL-004",
                             "eval": "data.rule.mssql_db_log_audit",
                             "message": "data.rule.mssql_db_log_audit_err",
                             "remediationDescription": "In 'azurerm_mssql_database_extended_auditing_policy' resource, set the 'database_id' from associated 'azurerm_mssql_database' resource's terraform deployment output to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_database_extended_auditing_policy#database_id for details.",
-                            "remediationFunction": "PR_AZR_0003_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_004.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1426,11 +1426,11 @@
                     "rule": "file(dbauditingsettings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0053-TRF",
+                            "id": "PR-AZR-TRF-SQL-005",
                             "eval": "data.rule.mssql_db_log_retention",
                             "message": "data.rule.mssql_db_log_retention_err",
                             "remediationDescription": "In 'azurerm_mssql_database_extended_auditing_policy' resource, set the 'retention_in_days = 90' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_database_extended_auditing_policy#retention_in_days for details.",
-                            "remediationFunction": "PR_AZR_0053_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_005.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1466,11 +1466,11 @@
                     "rule": "file(dbfirewallrules.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0082-TRF",
+                            "id": "PR-AZR-TRF-SQL-011",
                             "eval": "data.rule.db_firewall",
                             "message": "data.rule.db_firewall_err",
                             "remediationDescription": "In 'azurerm_sql_firewall_rule' resource, set valid ip range other then '0.0.0.0' between 'start_ip_address' and 'end_ip_address' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_firewall_rule for details.",
-                            "remediationFunction": "PR_AZR_0082_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_011.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1504,11 +1504,11 @@
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0096-TRF",
+                            "id": "PR-AZR-TRF-SQL-017",
                             "eval": "data.rule.dbsec_threat_off",
                             "message": "data.rule.dbsec_threat_off_err",
                             "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, set state = 'Enabled' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#state for details.",
-                            "remediationFunction": "PR_AZR_0096_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_017.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1541,11 +1541,11 @@
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0054-TRF",
+                            "id": "PR-AZR-TRF-SQL-018",
                             "eval": "data.rule.dbsec_threat_retention",
                             "message": "data.rule.dbsec_threat_retention_err",
                             "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, set 'retention_days = 91' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#retention_days for details.",
-                            "remediationFunction": "PR_AZR_0054_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_018.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1580,11 +1580,11 @@
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0055-TRF",
+                            "id": "PR-AZR-TRF-SQL-019",
                             "eval": "data.rule.dbsec_threat_email",
                             "message": "data.rule.dbsec_threat_email_err",
                             "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, add some email address who need to get notified about potential thread detection under 'email_addresses' array to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#email_addresses for details.",
-                            "remediationFunction": "PR_AZR_0055_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_019.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1618,11 +1618,11 @@
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0061-TRF",
+                            "id": "PR-AZR-TRF-SQL-020",
                             "eval": "data.rule.dbsec_threat_alert",
                             "message": "data.rule.dbsec_threat_alert_err",
                             "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, remove 'disabled_alerts' property or remove all the alerts element out of it to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#disabled_alerts for details.",
-                            "remediationFunction": "PR_AZR_0061_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_020.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1656,11 +1656,11 @@
                     "rule": "file(dbsecurityalertpolicies.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0097-TRF",
+                            "id": "PR-AZR-TRF-SQL-021",
                             "eval": "data.rule.sql_alert",
                             "message": "data.rule.sql_alert_err",
                             "remediationDescription": "In 'azurerm_mssql_server_security_alert_policy' resource, set 'email_account_admins = true' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#email_account_admins for details.",
-                            "remediationFunction": "PR_AZR_0097_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_021.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1694,11 +1694,11 @@
                     "rule": "file(dbserverauditingsettings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0059-TRF",
+                            "id": "PR-AZR-TRF-SQL-052",
                             "eval": "data.rule.mssql_log_retention",
                             "message": "data.rule.mssql_log_retention_err",
                             "remediationDescription": "In 'azurerm_mssql_server_extended_auditing_policy' resource, set the 'retention_in_days = 91' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_extended_auditing_policy#retention_in_days for details.",
-                            "remediationFunction": "PR_AZR_0059_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_052.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1728,11 +1728,11 @@
                     "rule": "file(dbserverauditingsettings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0160-TRF",
+                            "id": "PR-AZR-TRF-SQL-053",
                             "eval": "data.rule.sql_log_retention",
                             "message": "data.rule.sql_log_retention_err",
                             "remediationDescription": "In 'azurerm_sql_server' resource, set the 'retention_in_days = 91' under 'extended_auditing_policy' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_server#retention_in_days for details.",
-                            "remediationFunction": "PR_AZR_0160_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_053.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1762,11 +1762,11 @@
                     "rule": "file(dbserverauditingsettings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0158-TRF",
+                            "id": "PR-AZR-TRF-SQL-054",
                             "eval": "data.rule.mssql_auditing_enabled",
                             "message": "data.rule.mssql_auditing_enabled_err",
                             "remediationDescription": "In 'azurerm_mssql_server' resource, make sure 'extended_auditing_policy' block exist to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server#extended_auditing_policy for details.",
-                            "remediationFunction": "PR_AZR_0158_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_054.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1796,11 +1796,11 @@
                     "rule": "file(dbserverauditingsettings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0159-TRF",
+                            "id": "PR-AZR-TRF-SQL-055",
                             "eval": "data.rule.sql_auditing_enabled",
                             "message": "data.rule.sql_auditing_enabled_err",
                             "remediationDescription": "In 'azurerm_sql_server' resource, make sure 'extended_auditing_policy' block exist to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_server#extended_auditing_policy for details.",
-                            "remediationFunction": "PR_AZR_0159_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_055.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1830,11 +1830,11 @@
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0056-TRF",
+                            "id": "PR-AZR-TRF-SQL-024",
                             "eval": "data.rule.db_ads_mail",
                             "message": "data.rule.db_ads_mail_err",
                             "remediationDescription": "In 'azurerm_mssql_server_vulnerability_assessment' resource, specify recipient email addresses into 'emails' array under 'recurring_scans' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_vulnerability_assessment#emails for details.",
-                            "remediationFunction": "PR_AZR_0056_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_024.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1862,11 +1862,11 @@
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0057-TRF",
+                            "id": "PR-AZR-TRF-SQL-026",
                             "eval": "data.rule.db_ads_alert",
                             "message": "data.rule.db_ads_alert_err",
                             "remediationDescription": "In 'azurerm_mssql_server_vulnerability_assessment' resource, set 'email_subscription_admins = true' under 'recurring_scans' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_vulnerability_assessment#email_subscription_admins for details.",
-                            "remediationFunction": "PR_AZR_0057_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_026.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1894,11 +1894,11 @@
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0058-TRF",
+                            "id": "PR-AZR-TRF-SQL-022",
                             "eval": "data.rule.db_ads_scan",
                             "message": "data.rule.db_ads_scan_err",
                             "remediationDescription": "In 'azurerm_mssql_server_vulnerability_assessment' resource, set 'enabled = true' under 'recurring_scans' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_vulnerability_assessment#enabled for details.",
-                            "remediationFunction": "PR_AZR_0058_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_022.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1926,11 +1926,11 @@
                     "rule": "file(diagnosticsettings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0017-TRF",
+                            "id": "PR-AZR-TRF-MNT-002",
                             "eval": "data.rule.log_keyvault",
                             "message": "data.rule.log_keyvault_err",
                             "remediationDescription": "Make sure resource 'azurerm_key_vault' and 'azurerm_monitor_diagnostic_setting' both exist and in 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true' and category = 'auditevent' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
-                            "remediationFunction": "PR_AZR_0017_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_MNT_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1964,11 +1964,11 @@
                     "rule": "file(diagnosticsettings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0019-TRF",
+                            "id": "PR-AZR-TRF-MNT-003",
                             "eval": "data.rule.log_lbs",
                             "message": "data.rule.log_lbs_err",
                             "remediationDescription": "Make sure 'azurerm_lb' and 'azurerm_monitor_diagnostic_setting' both exist and in 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true' and category = 'auditevent' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
-                            "remediationFunction": "PR_AZR_0019_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_MNT_003.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2002,11 +2002,11 @@
                     "rule": "file(diagnosticsettings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0063-TRF",
+                            "id": "PR-AZR-TRF-MNT-004",
                             "eval": "data.rule.log_storage_retention",
                             "message": "data.rule.log_storage_retention_err",
                             "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true', category = 'auditevent', 'retention_policy.enabled = true' and 'retention_policy.days = 90' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
-                            "remediationFunction": "PR_AZR_0063_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_MNT_004.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2040,11 +2040,11 @@
                     "rule": "file(diagnosticsettings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0069-TRF",
+                            "id": "PR-AZR-TRF-MNT-005",
                             "eval": "data.rule.log_blob",
                             "message": "data.rule.log_blob_err",
                             "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true' and category = 'auditevent' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
-                            "remediationFunction": "PR_AZR_0069_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_MNT_005.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2078,11 +2078,11 @@
                     "rule": "file(diagnosticsettings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0070-TRF",
+                            "id": "PR-AZR-TRF-MNT-006",
                             "eval": "data.rule.log_queue",
                             "message": "data.rule.log_queue_err",
                             "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true' and category = 'auditevent' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
-                            "remediationFunction": "PR_AZR_0070_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_MNT_006.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2116,11 +2116,11 @@
                     "rule": "file(diagnosticsettings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0071-TRF",
+                            "id": "PR-AZR-TRF-MNT-007",
                             "eval": "data.rule.log_table",
                             "message": "data.rule.log_table_err",
                             "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, set 'enabled = true' and category = 'auditevent' under 'log' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log for details.",
-                            "remediationFunction": "PR_AZR_0071_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_MNT_007.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2154,11 +2154,11 @@
                     "rule": "file(disks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0068-TRF",
+                            "id": "PR-AZR-TRF-CMP-001",
                             "eval": "data.rule.disk_encrypt",
                             "message": "data.rule.disk_encrypt_err",
                             "remediationDescription": "In 'azurerm_managed_disk' resource, set 'enabled = true' under 'encryption_settings' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/managed_disk#enabled for details.",
-                            "remediationFunction": "PR_AZR_0068_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_CMP_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2186,11 +2186,11 @@
                     "rule": "file(functionapp.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0062-TRF",
+                            "id": "PR-AZR-TRF-FUNC-001",
                             "eval": "data.rule.functionapp_authentication_enabled",
                             "message": "data.rule.functionapp_authentication_enabled_err",
                             "remediationDescription": "In 'azurerm_function_app' resource, set 'enabled = true' under 'auth_settings' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/function_app#enabled for details.",
-                            "remediationFunction": "PR_AZR_0062_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_FUNC_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2218,11 +2218,11 @@
                     "rule": "file(KeyVault.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0107-TRF",
+                            "id": "PR-AZR-TRF-KV-001",
                             "eval": "data.rule.KeyVault",
                             "message": "data.rule.KeyVault_err",
                             "remediationDescription": "In 'azurerm_key_vault' resource, make sure you have added either 'key_permissions' or 'secret_permissions' or 'certificate_permissions' or 'storage_permissions' under access_policy block to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault#access_policy for details.",
-                            "remediationFunction": "PR_AZR_0107_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_KV_001.py"
                         }
                     ],
                     "severity": "Low",
@@ -2254,11 +2254,11 @@
                     "rule": "file(KeyVault.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0109-TRF",
+                            "id": "PR-AZR-TRF-KV-003",
                             "eval": "data.rule.enablePurgeProtection",
                             "message": "data.rule.enablePurgeProtection_err",
                             "remediationDescription": "In 'azurerm_key_vault' resource, set 'purge_protection_enabled = true' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault#purge_protection_enabled for details.",
-                            "remediationFunction": "PR_AZR_0109_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_KV_003.py"
                         }
                     ],
                     "severity": "High",
@@ -2288,11 +2288,11 @@
                     "rule": "file(keyvaultkeys.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0130-TRF",
+                            "id": "PR-AZR-TRF-KV-004",
                             "eval": "data.rule.kv_keys_expire",
                             "message": "data.rule.kv_keys_expire_err",
                             "remediationDescription": "In 'azurerm_key_vault_key' resource, set valid date other then null in property 'expiration_date' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_key#expiration_date for details.",
-                            "remediationFunction": "PR_AZR_0130_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_KV_004.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2320,11 +2320,11 @@
                     "rule": "file(keyvaultsecrets.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0018-TRF",
+                            "id": "PR-AZR-TRF-KV-005",
                             "eval": "data.rule.kv_expire",
                             "message": "data.rule.kv_expire_err",
                             "remediationDescription": "In 'azurerm_key_vault_secret' resource, set valid date other then null in property 'expiration_date' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret#expiration_date for details.",
-                            "remediationFunction": "PR_AZR_0018_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_KV_005.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2352,11 +2352,11 @@
                     "rule": "file(locks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0052-TRF",
+                            "id": "PR-AZR-TRF-MNT-008",
                             "eval": "data.rule.rg_locks",
                             "message": "data.rule.rg_locks_err",
                             "remediationDescription": "In 'azurerm_management_lock' resource, set lock_level = 'CanNotDelete' and make sure 'scope' property has id of target deployment resource group as value to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_lock#lock_level for details.",
-                            "remediationFunction": "PR_AZR_0052_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_MNT_008.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2384,11 +2384,11 @@
                     "rule": "file(mariadb.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0145-TRF",
+                            "id": "PR-AZR-TRF-SQL-012",
                             "eval": "data.rule.maria_ingress_from_any_ip_disabled",
                             "message": "data.rule.maria_ingress_from_any_ip_disabled_err",
                             "remediationDescription": "Make sure resource 'azurerm_mariadb_server' and 'azurerm_mariadb_firewall_rule' both exist and in 'azurerm_mariadb_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_firewall_rule#start_ip_address for details.",
-                            "remediationFunction": "PR_AZR_0145_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_012.py"
                         }
                     ],
                     "severity": "High",
@@ -2419,11 +2419,11 @@
                     "rule": "file(mariadb.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0189-TRF",
+                            "id": "PR-AZR-TRF-SQL-056",
                             "eval": "data.rule.mairadb_ssl_enforcement_enabled",
                             "message": "data.rule.mairadb_ssl_enforcement_enabled_err",
                             "remediationDescription": "In 'azurerm_mariadb_server' resource, set 'ssl_enforcement_enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server#ssl_enforcement_enabled for details.",
-                            "remediationFunction": "PR_AZR_0189_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_056.py"
                         }
                     ],
                     "severity": "High",
@@ -2454,11 +2454,11 @@
                     "rule": "file(mariadb.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0190-TRF",
+                            "id": "PR-AZR-TRF-SQL-057",
                             "eval": "data.rule.mairadb_public_access_disabled",
                             "message": "data.rule.mairadb_public_access_disabled_err",
                             "remediationDescription": "In 'azurerm_mariadb_server' resource, set 'public_network_access_enabled = false' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server#public_network_access_enabled for details.",
-                            "remediationFunction": "PR_AZR_0190_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_057.py"
                         }
                     ],
                     "severity": "High",
@@ -2489,11 +2489,11 @@
                     "rule": "file(mariadb.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0191-TRF",
+                            "id": "PR-AZR-TRF-SQL-058",
                             "eval": "data.rule.mariadb_geo_redundant_backup_enabled",
                             "message": "data.rule.mariadb_geo_redundant_backup_enabled_err",
                             "remediationDescription": "In 'azurerm_mariadb_server' resource, set 'geo_redundant_backup_enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server#geo_redundant_backup_enabled for details.",
-                            "remediationFunction": "PR_AZR_0191_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_058.py"
                         }
                     ],
                     "severity": "High",
@@ -2524,11 +2524,11 @@
                     "rule": "file(mysql_server.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0148-TRF",
+                            "id": "PR-AZR-TRF-SQL-059",
                             "eval": "data.rule.mysql_ingress_from_any_ip_disabled",
                             "message": "data.rule.mysql_ingress_from_any_ip_disabled_err",
                             "remediationDescription": "Make sure resource 'azurerm_mysql_server' and 'azurerm_mysql_firewall_rule' exist and in 'azurerm_mysql_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_firewall_rule#start_ip_address for details.",
-                            "remediationFunction": "PR_AZR_0148_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_059.py"
                         }
                     ],
                     "severity": "High",
@@ -2559,11 +2559,11 @@
                     "rule": "file(mysql_server.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0184-TRF",
+                            "id": "PR-AZR-TRF-SQL-060",
                             "eval": "data.rule.mysql_server_ssl_enforcement_enabled",
                             "message": "data.rule.mysql_server_ssl_enforcement_enabled_err",
                             "remediationDescription": "In 'azurerm_mysql_server' resource, set 'ssl_enforcement_enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server#ssl_enforcement_enabled for details.",
-                            "remediationFunction": "PR_AZR_0184_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_060.py"
                         }
                     ],
                     "severity": "High",
@@ -2594,11 +2594,11 @@
                     "rule": "file(mysql_server.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0030-TRF",
+                            "id": "PR-AZR-TRF-SQL-016",
                             "eval": "data.rule.mysql_public_access_disabled",
                             "message": "data.rule.mysql_public_access_disabled_err",
                             "remediationDescription": "In 'azurerm_mysql_server' resource, set 'public_network_access_enabled = false' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server#public_network_access_enabled for details.",
-                            "remediationFunction": "PR_AZR_0030_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_016.py"
                         }
                     ],
                     "severity": "High",
@@ -2629,11 +2629,11 @@
                     "rule": "file(mysql_server.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0041-TRF",
+                            "id": "PR-AZR-TRF-SQL-061",
                             "eval": "data.rule.mysql_server_latest_tls_configured",
                             "message": "data.rule.mysql_server_latest_tls_configured_err",
                             "remediationDescription": "In 'azurerm_mysql_server' resource, set ssl_minimal_tls_version_enforced = 'TLS1_2' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server#ssl_minimal_tls_version_enforced for details.",
-                            "remediationFunction": "PR_AZR_0041_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_061.py"
                         }
                     ],
                     "severity": "High",
@@ -2664,11 +2664,11 @@
                     "rule": "file(networkwatchersflowlogs.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0049-TRF",
+                            "id": "PR-AZR-TRF-NTW-001",
                             "eval": "data.rule.netwatchFlowlogs",
                             "message": "data.rule.netwatchFlowlogs_err",
                             "remediationDescription": "In 'azurerm_network_watcher_flow_log' resource, set 'enabled = true' to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_watcher_flow_log#enabled for details.",
-                            "remediationFunction": "PR_AZR_0049_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NTW_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2696,11 +2696,11 @@
                     "rule": "file(networkwatchersflowlogs.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0050-TRF",
+                            "id": "PR-AZR-TRF-NTW-002",
                             "eval": "data.rule.netwatch_logs",
                             "message": "data.rule.netwatch_logs_err",
                             "remediationDescription": "In 'azurerm_network_watcher_flow_log' resource, set 'enabled = true' under 'traffic_analytics' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_watcher_flow_log#enabled for details.",
-                            "remediationFunction": "PR_AZR_0050_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NTW_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2728,11 +2728,11 @@
                     "rule": "file(networkwatchersflowlogs.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0051-TRF",
+                            "id": "PR-AZR-TRF-NTW-003",
                             "eval": "data.rule.netwatch_log_retention",
                             "message": "data.rule.netwatch_log_retention_err",
                             "remediationDescription": "In 'azurerm_network_watcher_flow_log' resource, set 'enabled = true' and 'days = 91' under 'retention_policy' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_watcher_flow_log#enabled for details.",
-                            "remediationFunction": "PR_AZR_0051_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NTW_003.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2760,11 +2760,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0022-TRF",
+                            "id": "PR-AZR-TRF-NSG-001",
                             "eval": "data.rule.nsg_in_tcp_all_src",
                             "message": "data.rule.nsg_in_tcp_all_src_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0022_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2792,11 +2792,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0023-TRF",
+                            "id": "PR-AZR-TRF-NSG-002",
                             "eval": "data.rule.nsg_in_udp_all_src",
                             "message": "data.rule.nsg_in_udp_all_src_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0023_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2824,11 +2824,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0024-TRF",
+                            "id": "PR-AZR-TRF-NSG-003",
                             "eval": "data.rule.nsg_in_tcp_all",
                             "message": "data.rule.nsg_in_tcp_all_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0024_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_003.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2856,11 +2856,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0025-TRF",
+                            "id": "PR-AZR-TRF-NSG-004",
                             "eval": "data.rule.nsg_in_udp_all",
                             "message": "data.rule.nsg_in_udp_all_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0025_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_004.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2888,11 +2888,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0026-TRF",
+                            "id": "PR-AZR-TRF-NSG-005",
                             "eval": "data.rule.nsg_in_all",
                             "message": "data.rule.nsg_in_all_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0026_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_005.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2920,11 +2920,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0027-TRF",
+                            "id": "PR-AZR-TRF-NSG-006",
                             "eval": "data.rule.nsg_in_all_src",
                             "message": "data.rule.nsg_in_all_src_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0027_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_006.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2952,11 +2952,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0028-TRF",
+                            "id": "PR-AZR-TRF-NSG-007",
                             "eval": "data.rule.nsg_in_all_dst",
                             "message": "data.rule.nsg_in_all_dst_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0028_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_007.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2984,11 +2984,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0034-TRF",
+                            "id": "PR-AZR-TRF-NSG-008",
                             "eval": "data.rule.nsg_allow_icmp",
                             "message": "data.rule.nsg_allow_icmp_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0034_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_008.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3016,11 +3016,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0032-TRF",
+                            "id": "PR-AZR-TRF-NSG-009",
                             "eval": "data.rule.inbound_port_21",
                             "message": "data.rule.inbound_port_21_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0032_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_009.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3048,11 +3048,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "gID3",
+                            "id": "PR-AZR-TRF-NSG-010",
                             "eval": "data.rule.inbound_insecure_port",
                             "message": "data.rule.inbound_insecure_port_err",
                             "remediationDescription": "",
-                            "remediationFunction": "gID3.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_010.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3118,11 +3118,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0029-TRF",
+                            "id": "PR-AZR-TRF-NSG-012",
                             "eval": "data.rule.inbound_port_6379",
                             "message": "data.rule.inbound_port_6379_err",
                             "remediationDescription": "In 'azurerm_network_security_rule' resource, make sure property 'destination_port_range' dont have port '6379' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#destination_port_range for details.",
-                            "remediationFunction": "PR_AZR_0029_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_012.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3150,11 +3150,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "gID6",
+                            "id": "PR-AZR-TRF-NSG-013",
                             "eval": "data.rule.inbound_port_dbs",
                             "message": "data.rule.inbound_port_dbs_err",
                             "remediationDescription": "",
-                            "remediationFunction": "gID6.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_013.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3182,11 +3182,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0020-TRF",
+                            "id": "PR-AZR-TRF-NSG-014",
                             "eval": "data.rule.inbound_port_22",
                             "message": "data.rule.inbound_port_22_err",
                             "remediationDescription": "In 'azurerm_network_security_rule' resource, make sure property 'destination_port_range' dont have port '22' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#destination_port_range for details.",
-                            "remediationFunction": "PR_AZR_0020_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_014.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3220,11 +3220,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0021-TRF",
+                            "id": "PR-AZR-TRF-NSG-015",
                             "eval": "data.rule.inbound_port_3389",
                             "message": "data.rule.inbound_port_3389_err",
                             "remediationDescription": "In 'azurerm_network_security_rule' resource, make sure property 'destination_port_range' dont have port '3389' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#destination_port_range for details.",
-                            "remediationFunction": "PR_AZR_0021_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_015.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3258,11 +3258,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0047-TRF",
+                            "id": "PR-AZR-TRF-NSG-016",
                             "eval": "data.rule.inbound_port_445",
                             "message": "data.rule.inbound_port_445_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0047_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_016.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3290,11 +3290,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0031-TRF",
+                            "id": "PR-AZR-TRF-NSG-018",
                             "eval": "data.rule.inbound_port_53",
                             "message": "data.rule.inbound_port_53_err",
                             "remediationDescription": "In 'azurerm_network_security_rule' resource, make sure property 'destination_port_range' dont have port '53' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#destination_port_range for details.",
-                            "remediationFunction": "PR_AZR_0031_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_018.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3322,11 +3322,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0033-TRF",
+                            "id": "PR-AZR-TRF-NSG-019",
                             "eval": "data.rule.inbound_port_20",
                             "message": "data.rule.inbound_port_20_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0033_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_019.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3354,11 +3354,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0035-TRF",
+                            "id": "PR-AZR-TRF-NSG-020",
                             "eval": "data.rule.inbound_port_4333",
                             "message": "data.rule.inbound_port_4333_err",
                             "remediationDescription": "In 'azurerm_network_security_rule' resource, make sure property 'destination_port_range' dont have port '4333' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#destination_port_range for details.",
-                            "remediationFunction": "PR_AZR_0035_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_020.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3386,11 +3386,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0036-TRF",
+                            "id": "PR-AZR-TRF-NSG-021",
                             "eval": "data.rule.inbound_port_3306",
                             "message": "data.rule.inbound_port_3306_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0036_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_021.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3418,11 +3418,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0038-TRF",
+                            "id": "PR-AZR-TRF-NSG-022",
                             "eval": "data.rule.inbound_port_netbios",
                             "message": "data.rule.inbound_port_netbios_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0038_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_022.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3450,11 +3450,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0039-TRF",
+                            "id": "PR-AZR-TRF-NSG-023",
                             "eval": "data.rule.inbound_port_5432",
                             "message": "data.rule.inbound_port_5432_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0039_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_023.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3482,11 +3482,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0040-TRF",
+                            "id": "PR-AZR-TRF-NSG-024",
                             "eval": "data.rule.inbound_port_25",
                             "message": "data.rule.inbound_port_25_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0040_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_024.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3514,11 +3514,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0042-TRF",
+                            "id": "PR-AZR-TRF-NSG-025",
                             "eval": "data.rule.inbound_port_sqlserver",
                             "message": "data.rule.inbound_port_sqlserver_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0042_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_025.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3546,11 +3546,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0043-TRF",
+                            "id": "PR-AZR-TRF-NSG-026",
                             "eval": "data.rule.inbound_port_23",
                             "message": "data.rule.inbound_port_23_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0043_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_026.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3578,11 +3578,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0044-TRF",
+                            "id": "PR-AZR-TRF-NSG-027",
                             "eval": "data.rule.inbound_port_5500",
                             "message": "data.rule.inbound_port_5500_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0044_TRF.py"
+                            "remediationFunction": "PR-TRF-ARM-NSG-027.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3610,11 +3610,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0045-TRF",
+                            "id": "PR-AZR-TRF-NSG-028",
                             "eval": "data.rule.inbound_port_5900",
                             "message": "data.rule.inbound_port_5900_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0045_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_028.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3642,11 +3642,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0046-TRF",
+                            "id": "PR-AZR-TRF-NSG-029",
                             "eval": "data.rule.inbound_port_135",
                             "message": "data.rule.inbound_port_135_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0046_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_029.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3674,11 +3674,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0048-TRF",
+                            "id": "PR-AZR-TRF-NSG-030",
                             "eval": "data.rule.nsg_out_all",
                             "message": "data.rule.nsg_out_all_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_0048_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_030.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3706,11 +3706,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "gID1",
+                            "id": "PR-AZR-TRF-NSG-031",
                             "eval": "data.rule.outbound_port_bitcoin",
                             "message": "data.rule.outbound_port_bitcoin_err",
                             "remediationDescription": "",
-                            "remediationFunction": "gID1.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_031.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3741,11 +3741,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "gID2",
+                            "id": "PR-AZR-TRF-NSG-032",
                             "eval": "data.rule.outbound_port_ethereum",
                             "message": "data.rule.outbound_port_ethereum_err",
                             "remediationDescription": "",
-                            "remediationFunction": "gID2.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_032.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3776,11 +3776,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0037-TRF",
+                            "id": "PR-AZR-TRF-NSG-033",
                             "eval": "data.rule.inbound_port_137",
                             "message": "data.rule.inbound_port_137_err",
                             "remediationDescription": "In 'azurerm_network_security_rule' resource, make sure property 'destination_port_range' dont have port '137' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#destination_port_range for details.",
-                            "remediationFunction": "PR_AZR_0037_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_033.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3808,11 +3808,11 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0100-TRF",
+                            "id": "PR-AZR-TRF-NSG-017",
                             "eval": "data.rule.inbound_insecure_omi_port",
                             "message": "data.rule.inbound_insecure_omi_port_err",
                             "remediationDescription": "In 'azurerm_network_security_rule' resource, make sure property 'destination_port_range' dont have port '5985', '5986' and '1270' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule#destination_port_range for details.",
-                            "remediationFunction": "PR_AZR_0100_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_017.py"
                         }
                     ],
                     "severity": "High",
@@ -3840,11 +3840,11 @@
                     "rule": "file(postgreSQL.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0115-TRF",
+                            "id": "PR-AZR-TRF-SQL-028",
                             "eval": "data.rule.geoRedundantBackup",
                             "message": "data.rule.geoRedundantBackup_err",
                             "remediationDescription": "In 'azurerm_postgresql_server' resource, set 'geo_redundant_backup_enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server#geo_redundant_backup_enabled for details.",
-                            "remediationFunction": "PR_AZR_0115_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_028.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3876,11 +3876,11 @@
                     "rule": "file(postgreSQL.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0124-TRF",
+                            "id": "PR-AZR-TRF-SQL-029",
                             "eval": "data.rule.sslEnforcement",
                             "message": "data.rule.sslEnforcement_err",
                             "remediationDescription": "In 'azurerm_postgresql_server' resource, set 'ssl_enforcement_enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server#ssl_enforcement_enabled for details.",
-                            "remediationFunction": "PR_AZR_0124_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_029.py"
                         }
                     ],
                     "severity": "High",
@@ -3912,11 +3912,11 @@
                     "rule": "file(postgreSQL.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0146-TRF",
+                            "id": "PR-AZR-TRF-SQL-062",
                             "eval": "data.rule.pg_ingress_from_any_ip_disabled",
                             "message": "data.rule.pg_ingress_from_any_ip_disabled_err",
                             "remediationDescription": "Make sure resource 'azurerm_postgresql_server' and 'azurerm_postgresql_firewall_rule' both exist and in 'azurerm_postgresql_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_firewall_rule#start_ip_address for details.",
-                            "remediationFunction": "PR_AZR_0146_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_062.py"
                         }
                     ],
                     "severity": "High",
@@ -3948,11 +3948,11 @@
                     "rule": "file(postgreSQL.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0185-TRF",
+                            "id": "PR-AZR-TRF-SQL-063",
                             "eval": "data.rule.azurerm_postgresql_configuration_log_checkpoints",
                             "message": "data.rule.azurerm_postgresql_configuration_log_checkpoints_err",
                             "remediationDescription": "In 'azurerm_postgresql_configuration' resource, set name = 'log_checkpoints' and value = 'on' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration for details.",
-                            "remediationFunction": "PR_AZR_0185_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_063.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3984,11 +3984,11 @@
                     "rule": "file(postgreSQL.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0186-TRF",
+                            "id": "PR-AZR-TRF-SQL-064",
                             "eval": "data.rule.azurerm_postgresql_configuration_log_connections",
                             "message": "data.rule.azurerm_postgresql_configuration_log_connections_err",
                             "remediationDescription": "In 'azurerm_postgresql_configuration' resource, set name = 'log_connections' and value = 'on' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration for details.",
-                            "remediationFunction": "PR_AZR_0186_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_064.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4020,11 +4020,11 @@
                     "rule": "file(postgreSQL.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0187-TRF",
+                            "id": "PR-AZR-TRF-SQL-065",
                             "eval": "data.rule.azurerm_postgresql_configuration_connection_throttling",
                             "message": "data.rule.azurerm_postgresql_configuration_connection_throttling_err",
                             "remediationDescription": "In 'azurerm_postgresql_configuration' resource, set name = 'connection_throttling' and value = 'on' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration for details.",
-                            "remediationFunction": "PR_AZR_0187_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_065.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4056,11 +4056,11 @@
                     "rule": "file(postgreSQL.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0192-TRF",
+                            "id": "PR-AZR-TRF-SQL-066",
                             "eval": "data.rule.postgresql_public_access_disabled",
                             "message": "data.rule.postgresql_public_access_disabled_err",
                             "remediationDescription": "In 'azurerm_postgresql_server' resource, set 'public_network_access_enabled = false' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server#public_network_access_enabled for details.",
-                            "remediationFunction": "PR_AZR_0192_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_066.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4092,11 +4092,11 @@
                     "rule": "file(pricing.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0091-TRF",
+                            "id": "PR-AZR-TRF-SCT-001",
                             "eval": "data.rule.pricing",
                             "message": "data.rule.pricing_err",
                             "remediationDescription": "In 'azurerm_security_center_subscription_pricing' resource, set tier = 'standard' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_subscription_pricing#tier for details.",
-                            "remediationFunction": "PR_AZR_0091_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SCT_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4127,11 +4127,11 @@
                     "rule": "file(Redis.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0131-TRF",
+                            "id": "PR-AZR-TRF-CCH-001",
                             "eval": "data.rule.enableSslPort",
                             "message": "data.rule.enableSslPort_err",
                             "remediationDescription": "In 'azurerm_redis_cache' resource, set 'enable_non_ssl_port = false' or remove 'enable_non_ssl_port' property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache#enable_non_ssl_port for details.",
-                            "remediationFunction": "PR_AZR_0131_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_CCH_001.py"
                         }
                     ],
                     "severity": "High",
@@ -4167,11 +4167,11 @@
                     "rule": "file(Redis.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0132-TRF",
+                            "id": "PR-AZR-TRF-CCH-002",
                             "eval": "data.rule.serverRole",
                             "message": "data.rule.serverRole_err",
                             "remediationDescription": "In 'azurerm_redis_linked_server' resource, set server_role = 'Secondary' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_linked_server#server_role for details.",
-                            "remediationFunction": "PR_AZR_0132_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_CCH_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4206,11 +4206,11 @@
                     "rule": "file(registrieslist.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0015-TRF",
+                            "id": "PR-AZR-TRF-ACR-003",
                             "eval": "data.rule.acr_classic",
                             "message": "data.rule.acr_classic_err",
                             "remediationDescription": "In 'azurerm_container_registry' resource, set the value to 'Basic'/'Standard'/'Premimu' other then 'classic' at property 'sku' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry#sku for details.",
-                            "remediationFunction": "PR_AZR_0015_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_ACR_003.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4238,11 +4238,11 @@
                     "rule": "file(registrieswebhooks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0005-TRF",
+                            "id": "PR-AZR-TRF-ACR-001",
                             "eval": "data.rule.acr_webhooks",
                             "message": "data.rule.acr_webhooks_err",
                             "remediationDescription": "In 'azurerm_container_registry_webhook' resource, set secure http (https) based wekhook url at 'service_uri' property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry_webhook#service_uri for details.",
-                            "remediationFunction": "PR_AZR_0005_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_ACR_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4270,11 +4270,11 @@
                     "rule": "file(registry.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0104-TRF",
+                            "id": "PR-AZR-TRF-ACR-002",
                             "eval": "data.rule.adminUserDisabled",
                             "message": "data.rule.adminUserDisabled_err",
                             "remediationDescription": "In 'azurerm_container_registry' resource, set 'admin_enabled = false' or remove 'admin_enabled' property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry#admin_enabled for details.",
-                            "remediationFunction": "PR_AZR_0104_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_ACR_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4304,11 +4304,11 @@
                     "rule": "file(securitycontacts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0087-TRF",
+                            "id": "PR-AZR-TRF-SCT-002",
                             "eval": "data.rule.securitycontacts",
                             "message": "data.rule.securitycontacts_err",
                             "remediationDescription": "In 'azurerm_security_center_contact' resource, set a valid email address at 'email' property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_contact#email for details.",
-                            "remediationFunction": "PR_AZR_0087_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SCT_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4343,11 +4343,11 @@
                     "rule": "file(securitycontacts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0155-TRF",
+                            "id": "PR-AZR-TRF-SCT-004",
                             "eval": "data.rule.securitycontacts_phone",
                             "message": "data.rule.securitycontacts_phone_err",
                             "remediationDescription": "In 'azurerm_security_center_contact' resource, set a valid phone number at 'phone' property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_contact#phone for details.",
-                            "remediationFunction": "PR_AZR_0155_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SCT_004.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4382,11 +4382,11 @@
                     "rule": "file(securitycontacts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0156-TRF",
+                            "id": "PR-AZR-TRF-SCT-003",
                             "eval": "data.rule.securitycontacts_alert_notifications_enabled",
                             "message": "data.rule.securitycontacts_alert_notifications_enabled_err",
                             "remediationDescription": "In 'azurerm_security_center_contact' resource, set 'alert_notifications = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_contact#alert_notifications for details.",
-                            "remediationFunction": "PR_AZR_0156_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SCT_003.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4421,11 +4421,11 @@
                     "rule": "file(securitycontacts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0157-TRF",
+                            "id": "PR-AZR-TRF-SCT-005",
                             "eval": "data.rule.securitycontacts_alerts_to_admins_enabled",
                             "message": "data.rule.securitycontacts_alerts_to_admins_enabled_err",
                             "remediationDescription": "In 'azurerm_security_center_contact' resource, set 'alerts_to_admins = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_contact#alerts_to_admins for details.",
-                            "remediationFunction": "PR_AZR_0157_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SCT_005.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4460,11 +4460,11 @@
                     "rule": "file(sql_alert_policy.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0129-TRF",
+                            "id": "PR-AZR-TRF-SQL-031",
                             "eval": "data.rule.sql_server_alert",
                             "message": "data.rule.sql_server_alert_err",
                             "remediationDescription": "Make sure resource 'azurerm_mssql_server' and 'azurerm_mssql_server_security_alert_policy' both exist and in 'azurerm_mssql_server_security_alert_policy' resource, set state = 'Enabled' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy#state for details.",
-                            "remediationFunction": "PR_AZR_0129_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_031.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4492,11 +4492,11 @@
                     "rule": "file(sql_servers_encryption.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0140-TRF",
+                            "id": "PR-AZR-TRF-SQL-067",
                             "eval": "data.rule.db_server_encrypt",
                             "message": "data.rule.db_server_encrypt_err",
                             "remediationDescription": "In 'azurerm_mssql_server_transparent_data_encryption' resource, make sure 'server_id' property has id of associated 'azurerm_mssql_server' resource to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption#server_id for details.",
-                            "remediationFunction": "PR_AZR_0140_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_067.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4532,11 +4532,11 @@
                     "rule": "file(sql_servers_encryption.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0111-TRF",
+                            "id": "PR-AZR-TRF-SQL-046",
                             "eval": "data.rule.serverKeyType",
                             "message": "data.rule.serverKeyType_err",
                             "remediationDescription": "Make sure resource 'azurerm_mssql_server' and 'azurerm_mssql_server_transparent_data_encryption' both exist and in 'azurerm_mssql_server_transparent_data_encryption' resource, make sure 'key_vault_key_id' property has id of associated 'azurerm_key_vault_key' resource to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption#key_vault_key_id for details.",
-                            "remediationFunction": "PR_AZR_0111_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_046.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4567,11 +4567,11 @@
                     "rule": "file(sql_servers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0128-TRF",
+                            "id": "PR-AZR-TRF-SQL-047",
                             "eval": "data.rule.sql_public_access_disabled",
                             "message": "data.rule.sql_public_access_disabled_err",
                             "remediationDescription": "In 'azurerm_mssql_server' resource, set 'public_network_access_enabled = false' to fix the issue. If 'public_network_access_enabled' property does not exist please add it. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server#public_network_access_enabled for details.",
-                            "remediationFunction": "PR_AZR_0128_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_047.py"
                         }
                     ],
                     "severity": "High",
@@ -4608,11 +4608,11 @@
                     "rule": "file(sql_servers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0133-TRF",
+                            "id": "PR-AZR-TRF-SQL-048",
                             "eval": "data.rule.sql_server_login",
                             "message": "data.rule.sql_server_login_err",
                             "remediationDescription": "In 'azurerm_mssql_server' resource, make sure 'administrator_login' does not contains name like 'Admin/Administrator' to fix the issue. If 'administrator_login' property does not exist please add it. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server#administrator_login for details.",
-                            "remediationFunction": "PR_AZR_0133_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_048.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4649,11 +4649,11 @@
                     "rule": "file(sql_servers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0147-TRF",
+                            "id": "PR-AZR-TRF-SQL-068",
                             "eval": "data.rule.mssql_ingress_from_any_ip_disabled",
                             "message": "data.rule.mssql_ingress_from_any_ip_disabled_err",
                             "remediationDescription": "Make sure resource 'azurerm_mssql_server' and 'azurerm_mssql_firewall_rule' exist and in 'azurerm_mssql_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_firewall_rule#start_ip_address for details.",
-                            "remediationFunction": "PR_AZR_0147_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_068.py"
                         }
                     ],
                     "severity": "High",
@@ -4685,11 +4685,11 @@
                     "rule": "file(sql_servers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0016-TRF",
+                            "id": "PR-AZR-TRF-SQL-069",
                             "eval": "data.rule.mssql_server_latest_tls_configured",
                             "message": "data.rule.mssql_server_latest_tls_configured_err",
                             "remediationDescription": "In 'azurerm_mssql_server' resource, set 'min_tls_version = 1.2' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server#minimum_tls_version for details.",
-                            "remediationFunction": "PR_AZR_0016_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_069.py"
                         }
                     ],
                     "severity": "High",
@@ -4721,11 +4721,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0092-TRF",
+                            "id": "PR-AZR-TRF-STR-003",
                             "eval": "data.rule.storage_secure",
                             "message": "data.rule.storage_secure_err",
                             "remediationDescription": "In 'azurerm_storage_account' resource, set 'enable_https_traffic_only = true' or remove property 'enable_https_traffic_only' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#enable_https_traffic_only for details.",
-                            "remediationFunction": "PR_AZR_0092_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_STR_003.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4763,11 +4763,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0093-TRF",
+                            "id": "PR-AZR-TRF-STR-004",
                             "eval": "data.rule.storage_acl",
                             "message": "data.rule.storage_acl_err",
                             "remediationDescription": "In 'azurerm_storage_account_network_rules' resource, set 'default_action = Deny' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules#default_action for details.",
-                            "remediationFunction": "PR_AZR_0093_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_STR_004.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4803,11 +4803,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0094-TRF",
+                            "id": "PR-AZR-TRF-STR-005",
                             "eval": "data.rule.storage_threat_protection",
                             "message": "data.rule.storage_threat_protection_err",
                             "remediationDescription": "In 'azurerm_advanced_threat_protection' resource, set 'enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/advanced_threat_protection#enabled for details.",
-                            "remediationFunction": "PR_AZR_0094_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_STR_005.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4843,11 +4843,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0114-TRF",
+                            "id": "PR-AZR-TRF-STR-008",
                             "eval": "data.rule.keySource",
                             "message": "data.rule.keySource_err",
                             "remediationDescription": "In 'azurerm_storage_encryption_scope' resource, set 'source = microsoft.keyvault' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_encryption_scope#source for details.",
-                            "remediationFunction": "PR_AZR_0114_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_STR_008.py"
                         }
                     ],
                     "severity": "High",
@@ -4880,11 +4880,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0122-TRF",
+                            "id": "PR-AZR-TRF-STR-009",
                             "eval": "data.rule.region",
                             "message": "data.rule.region_err",
                             "remediationDescription": "In 'azurerm_storage_account' resource, set value as 'northeurope' or 'westeurope' in property 'location' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#location for details.",
-                            "remediationFunction": "PR_AZR_0122_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_STR_009.py"
                         }
                     ],
                     "severity": "High",
@@ -4917,11 +4917,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0123-TRF",
+                            "id": "PR-AZR-TRF-STR-010",
                             "eval": "data.rule.storage_account_public_access_disabled",
                             "message": "data.rule.storage_account_public_access_disabled_err",
                             "remediationDescription": "In 'azurerm_storage_account' resource, set 'allow_blob_public_access = false' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#allow_blob_public_access for details.",
-                            "remediationFunction": "PR_AZR_0123_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_STR_010.py"
                         }
                     ],
                     "severity": "High",
@@ -4957,11 +4957,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0188-TRF",
+                            "id": "PR-AZR-TRF-STR-014",
                             "eval": "data.rule.storage_account_queue_logging_enabled_for_all_operation",
                             "message": "data.rule.storage_account_queue_logging_enabled_for_all_operation_err",
                             "remediationDescription": "In 'azurerm_storage_account' resource, set 'read = true', 'write = true', 'delete = true' under 'logging' block which exist under 'queue_properties' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#logging for details.",
-                            "remediationFunction": "PR_AZR_0188_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_STR_014.py"
                         }
                     ],
                     "severity": "High",
@@ -4997,11 +4997,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0193-TRF",
+                            "id": "PR-AZR-TRF-STR-015",
                             "eval": "data.rule.storage_acr_firewall_enabled",
                             "message": "data.rule.storage_acr_firewall_enabled_err",
                             "remediationDescription": "In 'azurerm_storage_account' resource, set default_action = 'deny' under 'network_rules' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#default_action for details.",
-                            "remediationFunction": "PR_AZR_0193_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_STR_015.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5037,11 +5037,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0194-TRF",
+                            "id": "PR-AZR-TRF-STR-011",
                             "eval": "data.rule.storage_nr_allow_trusted_azure_services",
                             "message": "data.rule.storage_nr_allow_trusted_azure_services_err",
                             "remediationDescription": "Make sure both 'azurerm_storage_account' and 'azurerm_storage_account_network_rules' exist and in 'azurerm_storage_account_network_rules' resource, add 'AzureServices' value under 'bypass' array property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules#bypass for details.",
-                            "remediationFunction": "PR_AZR_0194_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_STR_011.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5077,11 +5077,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0195-TRF",
+                            "id": "PR-AZR-TRF-STR-016",
                             "eval": "data.rule.storage_allow_trusted_azure_services",
                             "message": "data.rule.storage_allow_trusted_azure_services_err",
                             "remediationDescription": "In 'azurerm_storage_account' resource, add 'AzureServices' value under 'bypass' array property which exist under 'network_rules' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#bypass for details.",
-                            "remediationFunction": "PR_AZR_0195_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_STR_016.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5117,11 +5117,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0013-TRF",
+                            "id": "PR-AZR-TRF-STR-017",
                             "eval": "data.rule.storage_correct_naming_convention",
                             "message": "data.rule.storage_correct_naming_convention_err",
                             "remediationDescription": "In 'azurerm_storage_account' resource, property 'name' must be between 3 and 24 characters in length and may contain numbers and lowercase letters only to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#name for details.",
-                            "remediationFunction": "PR_AZR_0013_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_STR_017.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5157,11 +5157,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0014-TRF",
+                            "id": "PR-AZR-TRF-STR-018",
                             "eval": "data.rule.storage_account_latest_tls_configured",
                             "message": "data.rule.storage_account_latest_tls_configured_err",
                             "remediationDescription": "In 'azurerm_storage_account' resource, set min_tls_version = 'TLS1_2' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#min_tls_version for details.",
-                            "remediationFunction": "PR_AZR_0014_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_STR_018.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5197,11 +5197,11 @@
                     "rule": "file(storageblobcontainers.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0074-TRF",
+                            "id": "PR-AZR-TRF-STR-012",
                             "eval": "data.rule.storage_container_public_access_disabled",
                             "message": "data.rule.storage_container_public_access_disabled_err",
                             "remediationDescription": "In 'azurerm_storage_container' resource, set 'container_access_type = private' or remove the container_access_type property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container#container_access_type for details.",
-                            "remediationFunction": "PR_AZR_0074_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_STR_012.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5229,11 +5229,11 @@
                     "rule": "file(vm.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0065-TRF",
+                            "id": "PR-AZR-TRF-VM-001",
                             "eval": "data.rule.vm_aset",
                             "message": "data.rule.vm_aset_err",
                             "remediationDescription": "In 'azurerm_virtual_machine' resource, make sure 'availability_set_id' property exist and its value is set from id of 'azurerm_availability_set' resource to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine#availability_set_id for details.",
-                            "remediationFunction": "PR_AZR_0065_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_VM_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5264,11 +5264,11 @@
                     "rule": "file(vm.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0136-TRF",
+                            "id": "PR-AZR-TRF-VM-002",
                             "eval": "data.rule.vm_linux_disabled_password_auth",
                             "message": "data.rule.vm_linux_disabled_password_auth_err",
                             "remediationDescription": "In 'azurerm_virtual_machine' resource, make sure to set 'disable_password_authentication = true' under 'os_profile_linux_config' block to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine#disable_password_authentication for details.",
-                            "remediationFunction": "PR_AZR_0136_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_VM_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5299,11 +5299,11 @@
                     "rule": "file(vm.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0134-TRF",
+                            "id": "PR-AZR-TRF-VM-004",
                             "eval": "data.rule.vm_type_linux_disabled_password_auth",
                             "message": "data.rule.vm_type_linux_disabled_password_auth_err",
                             "remediationDescription": "In 'azurerm_linux_virtual_machine' resource, make sure to set 'disable_password_authentication = true' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#disable_password_authentication for details.",
-                            "remediationFunction": "PR_AZR_0134_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_VM_004.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5334,11 +5334,11 @@
                     "rule": "file(vm.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0135-TRF",
+                            "id": "PR-AZR-TRF-VM-005",
                             "eval": "data.rule.vm_type_linux_scale_set_disabled_password_auth",
                             "message": "data.rule.vm_type_linux_scale_set_disabled_password_auth_err",
                             "remediationDescription": "In 'azurerm_linux_virtual_machine_scale_set' resource, make sure to set 'disable_password_authentication = true' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine_scale_set#disable_password_authentication for details.",
-                            "remediationFunction": "PR_AZR_0135_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_VM_005.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5369,11 +5369,11 @@
                     "rule": "file(vm.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0002-TRF",
+                            "id": "PR-AZR-TRF-VM-006",
                             "eval": "data.rule.vm_type_linux_disabled_extension_operation",
                             "message": "data.rule.vm_type_linux_disabled_extension_operation_err",
                             "remediationDescription": "In 'azurerm_linux_virtual_machine' resource, make sure to set 'allow_extension_operations = false' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine#allow_extension_operations for details.",
-                            "remediationFunction": "PR_AZR_0002_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_VM_006.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5404,11 +5404,11 @@
                     "rule": "file(vm.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0004-TRF",
+                            "id": "PR-AZR-TRF-VM-007",
                             "eval": "data.rule.vm_type_windows_disabled_extension_operation",
                             "message": "data.rule.vm_type_windows_disabled_extension_operation_err",
                             "remediationDescription": "In 'azurerm_windows_virtual_machine' resource, make sure to set 'allow_extension_operations = false' to fix the issue. Please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/windows_virtual_machine#allow_extension_operations for details.",
-                            "remediationFunction": "PR_AZR_0004_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_VM_007.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5439,11 +5439,11 @@
                     "rule": "file(vmextensions.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0064-TRF",
+                            "id": "PR-AZR-TRF-VM-003",
                             "eval": "data.rule.vm_protection",
                             "message": "data.rule.vm_protection_err",
                             "remediationDescription": "In 'azurerm_virtual_machine_extension' resource, set type = 'iaasantimalware' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_extension#type for details.",
-                            "remediationFunction": "PR_AZR_0064_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_VM_003.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5471,11 +5471,11 @@
                     "rule": "file(vnetpeerings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0075-TRF",
+                            "id": "PR-AZR-TRF-NTW-004",
                             "eval": "data.rule.vnet_peer",
                             "message": "data.rule.vnet_peer_err",
                             "remediationDescription": "In 'azurerm_virtual_network_peering' resource, set 'allow_virtual_network_access = true' or remove 'allow_virtual_network_access' property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering#allow_virtual_network_access for details.",
-                            "remediationFunction": "PR_AZR_0075_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NTW_004.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5503,11 +5503,11 @@
                     "rule": "file(vnetsubnets.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0066-TRF",
+                            "id": "PR-AZR-TRF-NTW-005",
                             "eval": "data.rule.vnet_subnet_nsg",
                             "message": "data.rule.vnet_subnet_nsg_err",
                             "remediationDescription": "In 'azurerm_subnet_network_security_group_association' resource, make sure both 'subnet_id' and 'network_security_group_id' property exist and both has id from 'azurerm_subnet' and 'azurerm_network_security_group' resource respectively to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_network_security_group_association#network_security_group_id for details.",
-                            "remediationFunction": "PR_AZR_0066_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NTW_005.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5537,11 +5537,11 @@
                     "rule": "file(vpngateways.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0098-TRF",
+                            "id": "PR-AZR-TRF-NTW-006",
                             "eval": "data.rule.vpn_encrypt",
                             "message": "data.rule.vpn_encrypt_err",
                             "remediationDescription": "Make sure resource 'azurerm_virtual_network_gateway' and 'azurerm_virtual_network_gateway_connection' exist and in 'azurerm_virtual_network_gateway_connection' resource, set 'use_policy_based_traffic_selectors = true' and make sure 'ipsec_policy' block exist with 'ipsec_encryption' property with value set other than 'none' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_gateway_connection#ipsec_encryption for details.",
-                            "remediationFunction": "PR_AZR_0098_TRF.py"
+                            "remediationFunction": "PR_AZR_TRF_NTW_006.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5574,11 +5574,11 @@
                     "rule": "file(secrets.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0001-RGX",
+                            "id": "PR-AZR-TRF-SEC-001",
                             "eval": "data.rule.gl_azure_secrets",
                             "message": "data.rule.gl_azure_secrets_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR-AZR-0001-RGX.py"
+                            "remediationFunction": "PR_AZR_TRF_SEC_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5603,11 +5603,11 @@
                     "rule": "file(secret_tf.py)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0002-RGX",
+                            "id": "PR-AZR-TRF-SEC-002",
                             "eval": "password_leak",
                             "message": "password_leak_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR-AZR-0002-RGX.py"
+                            "remediationFunction": "PR_AZR_TRF_SEC_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5632,11 +5632,11 @@
                     "rule": "file(secret_tf.py)",
                     "evals": [
                         {
-                            "id": "PR-AZR-0003-RGX",
+                            "id": "PR-AZR-TRF-SEC-003",
                             "eval": "entropy_password",
                             "message": "entropy_password_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR-AZR-0003-RGX.py"
+                            "remediationFunction": "PR_AZR_TRF_SEC_003.py"
                         }
                     ],
                     "severity": "Medium",

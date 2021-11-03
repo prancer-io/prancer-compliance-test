@@ -2,7 +2,7 @@ package rule
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting
 #
-# PR-AZR-0017-TRF
+# PR-AZR-TRF-MNT-002
 #
 
 default log_keyvault = null
@@ -62,7 +62,7 @@ log_keyvault_err = "azurerm_key_vault's azurerm_monitor_diagnostic_setting prope
 }
 
 log_keyvault_metadata := {
-    "Policy Code": "PR-AZR-0017-TRF",
+    "Policy Code": "PR-AZR-TRF-MNT-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -75,7 +75,7 @@ log_keyvault_metadata := {
 
 
 #
-# PR-AZR-0019-TRF
+# PR-AZR-TRF-MNT-003
 #
 
 default log_lbs = null
@@ -132,7 +132,7 @@ log_lbs_err = "azurerm_lb's azurerm_monitor_diagnostic_setting property block 'l
 }
 
 log_lbs_metadata := {
-    "Policy Code": "PR-AZR-0019-TRF",
+    "Policy Code": "PR-AZR-TRF-MNT-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -145,7 +145,7 @@ log_lbs_metadata := {
 
 
 # https://github.com/hashicorp/terraform-provider-azurerm/issues/8275
-# PR-AZR-0063-TRF
+# PR-AZR-TRF-MNT-004
 #
 
 default log_storage_retention = null
@@ -220,7 +220,7 @@ log_storage_retention_err = "azurerm_storage_account's azurerm_monitor_diagnosti
 }
 
 log_storage_retention_metadata := {
-    "Policy Code": "PR-AZR-0063-TRF",
+    "Policy Code": "PR-AZR-TRF-MNT-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -232,7 +232,7 @@ log_storage_retention_metadata := {
 }
 
 # https://github.com/hashicorp/terraform-provider-azurerm/issues/8275
-# PR-AZR-0069-TRF
+# PR-AZR-TRF-MNT-005
 #
 
 default log_blob = null
@@ -289,7 +289,7 @@ log_blob_err = "azurerm_storage_blob's azurerm_monitor_diagnostic_setting proper
 }
 
 log_blob_metadata := {
-    "Policy Code": "PR-AZR-0069-TRF",
+    "Policy Code": "PR-AZR-TRF-MNT-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -301,7 +301,7 @@ log_blob_metadata := {
 }
 
 # https://github.com/hashicorp/terraform-provider-azurerm/issues/8275
-# PR-AZR-0070-TRF
+# PR-AZR-TRF-MNT-006
 #
 
 default log_queue = null
@@ -358,7 +358,7 @@ log_queue_err = "azurerm_storage_queue's azurerm_monitor_diagnostic_setting prop
 }
 
 log_queue_metadata := {
-    "Policy Code": "PR-AZR-0070-TRF",
+    "Policy Code": "PR-AZR-TRF-MNT-006",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -370,7 +370,7 @@ log_queue_metadata := {
 }
 
 # https://github.com/hashicorp/terraform-provider-azurerm/issues/8275
-# PR-AZR-0071-TRF
+# PR-AZR-TRF-MNT-007
 #
 
 default log_table = null
@@ -427,7 +427,7 @@ log_table_err = "azurerm_storage_table's azurerm_monitor_diagnostic_setting prop
 }
 
 log_table_metadata := {
-    "Policy Code": "PR-AZR-0071-TRF",
+    "Policy Code": "PR-AZR-TRF-MNT-007",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

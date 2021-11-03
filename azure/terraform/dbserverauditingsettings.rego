@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/auditingsettings
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_extended_auditing_policy
 #
-# PR-AZR-0059-TRF
+# PR-AZR-TRF-SQL-052
 #
 
 default mssql_log_retention = null
@@ -45,7 +45,7 @@ mssql_log_retention_err = "azurerm_mssql_server_extended_auditing_policy resourc
 }
 
 mssql_log_retention_metadata := {
-    "Policy Code": "PR-AZR-0059-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-052",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -58,7 +58,7 @@ mssql_log_retention_metadata := {
 
 
 #
-# PR-AZR-0160-TRF
+# PR-AZR-TRF-SQL-053
 #
 
 default sql_log_retention = null
@@ -104,7 +104,7 @@ sql_log_retention_err = "azurerm_sql_server's resource block 'extended_auditing_
 }
 
 sql_log_retention_metadata := {
-    "Policy Code": "PR-AZR-0160-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-053",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -118,7 +118,7 @@ sql_log_retention_metadata := {
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server
 #
-# PR-AZR-0158-TRF
+# PR-AZR-TRF-SQL-054
 #
 
 default mssql_auditing_enabled = null
@@ -143,7 +143,7 @@ mssql_auditing_enabled_err = "Azure MSSQL Server audit log is currently not enab
 }
 
 mssql_auditing_enabled_metadata := {
-    "Policy Code": "PR-AZR-0158-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-054",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -157,7 +157,7 @@ mssql_auditing_enabled_metadata := {
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_server
 #
-# PR-AZR-0159-TRF
+# PR-AZR-TRF-SQL-055
 #
 # This resource provides usage of Microsoft SQL Azure Database server using an older sku based model. 
 # It is recommended going forward to use azurerm_mssql_server resource which provides support for vcores
@@ -183,7 +183,7 @@ sql_auditing_enabled_err = "Azure SQL Server audit log is currently not enabled"
 }
 
 sql_auditing_enabled_metadata := {
-    "Policy Code": "PR-AZR-0159-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-055",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

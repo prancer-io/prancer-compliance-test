@@ -5,7 +5,7 @@ package rule
 #
 
 
-# PR-AZR-0049-TRF
+# PR-AZR-TRF-NTW-001
 #
 
 default netwatchFlowlogs = null
@@ -25,7 +25,7 @@ netwatchFlowlogs_err = "azurerm_network_watcher_flow_log property 'enabled' is m
 }
 
 netwatchFlowlogs_metadata := {
-    "Policy Code": "PR-AZR-0049-TRF",
+    "Policy Code": "PR-AZR-TRF-NTW-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -36,7 +36,7 @@ netwatchFlowlogs_metadata := {
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_watcher_flow_log"
 }
 
-# PR-AZR-0050-TRF
+# PR-AZR-TRF-NTW-002
 #
 
 default netwatch_logs = null
@@ -83,7 +83,7 @@ netwatch_logs_err = "traffic_analytics property 'enabled' is missing from the az
 }
 
 netwatch_logs_metadata := {
-    "Policy Code": "PR-AZR-0050-TRF",
+    "Policy Code": "PR-AZR-TRF-NTW-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -95,7 +95,7 @@ netwatch_logs_metadata := {
 }
 
 #
-# PR-AZR-0051-TRF
+# PR-AZR-TRF-NTW-003
 #
 
 default netwatch_log_retention = null
@@ -156,7 +156,7 @@ netwatch_log_retention_err = "azurerm_network_watcher_flow_log property 'retenti
 
 
 netwatch_log_retention_metadata := {
-    "Policy Code": "PR-AZR-0051-TRF",
+    "Policy Code": "PR-AZR-TRF-NTW-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

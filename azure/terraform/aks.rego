@@ -3,7 +3,7 @@ package rule
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster
 
 #
-# PR-AZR-0006-TRF
+# PR-AZR-TRF-AKS-001
 #
 
 default aks_cni_net = null
@@ -49,7 +49,7 @@ aks_cni_net_err = "azurerm_kubernetes_cluster property 'network_profile.network_
 }
 
 aks_cni_net_metadata := {
-    "Policy Code": "PR-AZR-0006-TRF",
+    "Policy Code": "PR-AZR-TRF-AKS-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -61,7 +61,7 @@ aks_cni_net_metadata := {
 }
 
 #
-# PR-AZR-0007-TRF
+# PR-AZR-TRF-AKS-002
 #
 
 default aks_http_routing = null
@@ -116,7 +116,7 @@ aks_http_routing_err = "azurerm_kubernetes_cluster property 'addon_profile.http_
 }
 
 aks_http_routing_metadata := {
-    "Policy Code": "PR-AZR-0007-TRF",
+    "Policy Code": "PR-AZR-TRF-AKS-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -128,7 +128,7 @@ aks_http_routing_metadata := {
 }
 
 #
-# PR-AZR-0008-TRF
+# PR-AZR-TRF-AKS-003
 #
 
 default aks_monitoring = null
@@ -184,7 +184,7 @@ aks_monitoring_err = "azurerm_kubernetes_cluster property 'addon_profile.oms_age
 }
 
 aks_monitoring_metadata := {
-    "Policy Code": "PR-AZR-0008-TRF",
+    "Policy Code": "PR-AZR-TRF-AKS-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -196,7 +196,7 @@ aks_monitoring_metadata := {
 }
 
 #
-# PR-AZR-0009-TRF
+# PR-AZR-TRF-AKS-004
 #
 
 default aks_nodes = null
@@ -248,7 +248,7 @@ aks_nodes_err = "azurerm_kubernetes_cluster property 'default_node_pool.node_cou
 }
 
 aks_nodes_metadata := {
-    "Policy Code": "PR-AZR-0009-TRF",
+    "Policy Code": "PR-AZR-TRF-AKS-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -260,7 +260,7 @@ aks_nodes_metadata := {
 }
 
 #
-# PR-AZR-0010-TRF
+# PR-AZR-TRF-AKS-005
 #
 
 default aks_rbac = null
@@ -299,7 +299,7 @@ aks_rbac_err = "azurerm_kubernetes_cluster property 'role_based_access_control.e
 }
 
 aks_rbac_metadata := {
-    "Policy Code": "PR-AZR-0010-TRF",
+    "Policy Code": "PR-AZR-TRF-AKS-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -311,7 +311,7 @@ aks_rbac_metadata := {
 }
 
 #
-# PR-AZR-0101-TRF
+# PR-AZR-TRF-AKS-006
 #
 
 default aks_aad_rbac_enabled = null
@@ -384,7 +384,7 @@ aks_aad_rbac_enabled_err = "azurerm_kubernetes_cluster property 'role_based_acce
 }
 
 aks_aad_rbac_enabled_metadata := {
-    "Policy Code": "PR-AZR-0101-TRF",
+    "Policy Code": "PR-AZR-TRF-AKS-006",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -396,7 +396,7 @@ aks_aad_rbac_enabled_metadata := {
 }
 
 #
-# PR-AZR-0138-TRF
+# PR-AZR-TRF-AKS-008
 #
 
 default aks_network_policy_configured = null
@@ -436,7 +436,7 @@ aks_network_policy_configured_err = "azurerm_kubernetes_cluster property 'networ
 }
 
 aks_network_policy_configured_metadata := {
-    "Policy Code": "PR-AZR-0138-TRF",
+    "Policy Code": "PR-AZR-TRF-AKS-008",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -449,7 +449,7 @@ aks_network_policy_configured_metadata := {
 
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/1.43.0/docs/data-sources/kubernetes_cluster
-# PR-AZR-0137-TRF
+# PR-AZR-TRF-AKS-007
 #
 
 default aks_api_server_authorized_ip_range_enabled = null
@@ -487,7 +487,7 @@ aks_api_server_authorized_ip_range_enabled_err = "azurerm_kubernetes_cluster pro
 }
 
 aks_api_server_authorized_ip_range_enabled_metadata := {
-    "Policy Code": "PR-AZR-0137-TRF",
+    "Policy Code": "PR-AZR-TRF-AKS-007",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -500,7 +500,7 @@ aks_api_server_authorized_ip_range_enabled_metadata := {
 
 
 # https://www.danielstechblog.io/disable-the-kubernetes-dashboard-on-azure-kubernetes-service/
-# PR-AZR-0144-TRF
+# PR-AZR-TRF-AKS-009
 #
 
 default aks_kub_dashboard_disabled = null
@@ -532,7 +532,7 @@ aks_kub_dashboard_disabled_err = "Kubernetes Dashboard is currently not disabled
 }
 
 aks_kub_dashboard_disabled_metadata := {
-    "Policy Code": "PR-AZR-0144-TRF",
+    "Policy Code": "PR-AZR-TRF-AKS-009",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

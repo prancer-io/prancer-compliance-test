@@ -70,7 +70,7 @@ nsg_inbound[port] {
 }
 
 #
-# PR-AZR-0022-TRF
+# PR-AZR-TRF-NSG-001
 #
 
 default nsg_in_tcp_all_src = null
@@ -99,7 +99,7 @@ nsg_in_tcp_all_src_err = "Azure NSG having inbound rule overly permissive to all
 }
 
 nsg_in_tcp_all_src_metadata := {
-    "Policy Code": "PR-AZR-0022-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -111,7 +111,7 @@ nsg_in_tcp_all_src_metadata := {
 }
 
 #
-# PR-AZR-0023-TRF
+# PR-AZR-TRF-NSG-002
 #
 
 default nsg_in_udp_all_src = null
@@ -140,7 +140,7 @@ nsg_in_udp_all_src_err = "Azure NSG having inbound rule overly permissive to all
 }
 
 nsg_in_udp_all_src_metadata := {
-    "Policy Code": "PR-AZR-0023-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -152,7 +152,7 @@ nsg_in_udp_all_src_metadata := {
 }
 
 #
-# PR-AZR-0024-TRF
+# PR-AZR-TRF-NSG-003
 #
 
 default nsg_in_tcp_all = null
@@ -182,7 +182,7 @@ nsg_in_tcp_all_err = "Azure NSG having inbound rule overly permissive to all tra
 }
 
 nsg_in_tcp_all_metadata := {
-    "Policy Code": "PR-AZR-0024-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -194,7 +194,7 @@ nsg_in_tcp_all_metadata := {
 }
 
 #
-# PR-AZR-0025-TRF
+# PR-AZR-TRF-NSG-004
 #
 
 default nsg_in_udp_all = null
@@ -224,7 +224,7 @@ nsg_in_udp_all_err = "Azure NSG having inbound rule overly permissive to all UDP
 }
 
 nsg_in_udp_all_metadata := {
-    "Policy Code": "PR-AZR-0025-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -236,7 +236,7 @@ nsg_in_udp_all_metadata := {
 }
 
 #
-# PR-AZR-0026-TRF
+# PR-AZR-TRF-NSG-005
 #
 
 default nsg_in_all = null
@@ -265,7 +265,7 @@ nsg_in_all_err = "Azure NSG having inbound rule overly permissive to all traffic
 }
 
 #
-# PR-AZR-0027-TRF
+# PR-AZR-TRF-NSG-006
 #
 
 default nsg_in_all_src = null
@@ -295,7 +295,7 @@ nsg_in_all_src_err = "Azure NSG having inbound rule overly permissive to allow a
 }
 
 nsg_in_all_src_metadata := {
-    "Policy Code": "PR-AZR-0026-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-006",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -307,7 +307,7 @@ nsg_in_all_src_metadata := {
 }
 
 #
-# PR-AZR-0028-TRF
+# PR-AZR-TRF-NSG-007
 #
 
 default nsg_in_all_dst = null
@@ -337,7 +337,7 @@ nsg_in_all_dst_err = "Azure NSG having inbound rule overly permissive to allow a
 }
 
 nsg_in_all_dst_metadata := {
-    "Policy Code": "PR-AZR-0028-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-007",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -349,7 +349,7 @@ nsg_in_all_dst_metadata := {
 }
 
 #
-# PR-AZR-0034-TRF
+# PR-AZR-TRF-NSG-008
 #
 
 default nsg_allow_icmp = null
@@ -377,7 +377,7 @@ nsg_allow_icmp_err = "Azure NSG having inbound rule overly permissive to allow a
 }
 
 nsg_allow_icmp_metadata := {
-    "Policy Code": "PR-AZR-0034-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-008",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -389,7 +389,7 @@ nsg_allow_icmp_metadata := {
 }
 
 #
-# PR-AZR-0032-TRF
+# PR-AZR-TRF-NSG-009
 #
 
 default inbound_port_21 = null
@@ -412,7 +412,7 @@ inbound_port_21_err = "Azure Network Security Group allows FTP" {
 }
 
 inbound_port_21_metadata := {
-    "Policy Code": "PR-AZR-0032-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-009",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -424,7 +424,7 @@ inbound_port_21_metadata := {
 }
 
 #
-# gID3
+# PR-AZR-TRF-NSG-010
 #
 
 default inbound_insecure_port = null
@@ -455,7 +455,7 @@ inbound_insecure_port_err = "Internet connectivity via tcp over insecure port" {
 }
 
 inbound_insecure_port_metadata := {
-    "Policy Code": "PR-AZR-0020-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-010",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -467,7 +467,7 @@ inbound_insecure_port_metadata := {
 }
 
 #
-# PR-AZR-0021-TRF
+# PR-AZR-TRF-NSG-015
 #
 
 default inbound_port_3389 = null
@@ -490,7 +490,7 @@ inbound_port_3389_err = "Azure Network Security Group (NSG) currently allowing t
 }
 
 inbound_port_3389_metadata := {
-    "Policy Code": "PR-AZR-0021-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-015",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -502,7 +502,7 @@ inbound_port_3389_metadata := {
 }
 
 #
-# PR-AZR-0029-TRF
+# PR-AZR-TRF-NSG-012
 #
 
 default inbound_port_6379 = null
@@ -525,7 +525,7 @@ inbound_port_6379_err = "RedisWannaMine vulnerable instances currently allowing 
 }
 
 inbound_port_6379_metadata := {
-    "Policy Code": "PR-AZR-0029-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-012",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -537,7 +537,7 @@ inbound_port_6379_metadata := {
 }
 
 #
-# gID6
+# PR-AZR-TRF-NSG-013
 #
 
 default inbound_port_dbs = null
@@ -612,7 +612,7 @@ inbound_port_dbs_err = "Publicly exposed DB Ports" {
 }
 
 inbound_port_dbs_metadata := {
-    "Policy Code": "PR-AZR-0047-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-013",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -624,7 +624,7 @@ inbound_port_dbs_metadata := {
 }
 
 #
-# PR-AZR-0020-TRF
+# PR-AZR-TRF-NSG-014
 #
 
 default inbound_port_22 = null
@@ -647,7 +647,7 @@ inbound_port_22_err = "Azure NSG currently allowing SSH traffic from internet on
 }
 
 inbound_port_22_metadata := {
-    "Policy Code": "PR-AZR-0020-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-014",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -659,7 +659,7 @@ inbound_port_22_metadata := {
 }
 
 #
-# PR-AZR-0031-TRF
+# PR-AZR-TRF-NSG-018
 #
 
 default inbound_port_53 = null
@@ -682,7 +682,7 @@ inbound_port_53_err = "Azure NSG currently allowing traffic from internet on por
 }
 
 inbound_port_53_metadata := {
-    "Policy Code": "PR-AZR-0031-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-018",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -695,7 +695,7 @@ inbound_port_53_metadata := {
 
 #
 # PR-AZR-0029-TRF
-# PR-AZR-0047-TRF
+# PR-AZR-TRF-NSG-016
 #
 
 default inbound_port_445 = null
@@ -722,7 +722,7 @@ inbound_port_smb_err = "Azure Network Security Group allows Windows SMB" {
 }
 
 inbound_port_445_metadata := {
-    "Policy Code": "PR-AZR-0033-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-016",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -734,7 +734,7 @@ inbound_port_445_metadata := {
 }
 
 #
-# PR-AZR-0035-TRF
+# PR-AZR-TRF-NSG-020
 #
 
 default inbound_port_4333 = null
@@ -757,7 +757,7 @@ inbound_port_4333_err = "Azure Network Security Group currently allowing mSQL (T
 }
 
 inbound_port_4333_metadata := {
-    "Policy Code": "PR-AZR-0035-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-020",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -769,7 +769,7 @@ inbound_port_4333_metadata := {
 }
 
 #
-# PR-AZR-0033-TRF
+# PR-AZR-TRF-NSG-019
 #
 
 default inbound_port_20 = null
@@ -792,7 +792,7 @@ inbound_port_20_err = "Azure Network Security Group allows FTP-Data" {
 }
 
 inbound_port_20_metadata := {
-    "Policy Code": "PR-AZR-0036-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-019",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -804,7 +804,7 @@ inbound_port_20_metadata := {
 }
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule
-# PR-AZR-0037-TRF
+# PR-AZR-TRF-NSG-033
 #
 
 default inbound_port_137 = null
@@ -827,7 +827,7 @@ inbound_port_137_err = "Azure Network Security Group currently allowing NetBIOS 
 }
 
 inbound_port_137_metadata := {
-    "Policy Code": "PR-AZR-0037-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-033",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -839,7 +839,7 @@ inbound_port_137_metadata := {
 }
 
 #
-# PR-AZR-0036-TRF
+# PR-AZR-TRF-NSG-021
 #
 
 default inbound_port_3306 = null
@@ -862,7 +862,7 @@ inbound_port_3306_err = "Azure Network Security Group allows MySQL" {
 }
 
 inbound_port_3306_metadata := {
-    "Policy Code": "PR-AZR-0038-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-021",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -875,7 +875,7 @@ inbound_port_3306_metadata := {
 
 #
 # PR-AZR-0037-TRF
-# PR-AZR-0038-TRF
+# PR-AZR-TRF-NSG-022
 #
 
 default inbound_port_netbios = null
@@ -902,7 +902,7 @@ inbound_port_netbios_err = "Azure Network Security Group allows NetBIOS" {
 }
 
 inbound_port_netbios_metadata := {
-    "Policy Code": "PR-AZR-0039-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-022",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -914,7 +914,7 @@ inbound_port_netbios_metadata := {
 }
 
 #
-# PR-AZR-0039-TRF
+# PR-AZR-TRF-NSG-023
 #
 
 default inbound_port_5432 = null
@@ -937,7 +937,7 @@ inbound_port_5432_err = "Azure Network Security Group allows PostgreSQL" {
 }
 
 inbound_port_5432_metadata := {
-    "Policy Code": "PR-AZR-0040-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-023",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -949,7 +949,7 @@ inbound_port_5432_metadata := {
 }
 
 #
-# PR-AZR-0040-TRF
+#  PR-AZR-TRF-NSG-024
 #
 
 default inbound_port_25 = null
@@ -972,7 +972,7 @@ inbound_port_25_err = "Azure Network Security Group allows SMTP" {
 }
 
 inbound_port_25_metadata := {
-    "Policy Code": "PR-AZR-0041-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-024",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -985,7 +985,7 @@ inbound_port_25_metadata := {
 
 #
 # PR-AZR-0041-TRF
-# PR-AZR-0042-TRF
+# PR-AZR-TRF-NSG-025
 #
 
 default inbound_port_sqlserver = null
@@ -1012,7 +1012,7 @@ inbound_port_sqlserver_err = "Azure Network Security Group allows SQLServer" {
 }
 
 inbound_port_sqlserver_metadata := {
-    "Policy Code": "PR-AZR-0042-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-025",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -1024,7 +1024,7 @@ inbound_port_sqlserver_metadata := {
 }
 
 #
-# PR-AZR-0043-TRF
+# PR-AZR-TRF-NSG-026
 #
 
 default inbound_port_23 = null
@@ -1047,7 +1047,7 @@ inbound_port_23_err = "Azure Network Security Group allows Telnet" {
 }
 
 inbound_port_23_metadata := {
-    "Policy Code": "PR-AZR-0043-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-026",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -1059,7 +1059,7 @@ inbound_port_23_metadata := {
 }
 
 #
-# PR-AZR-0044-TRF
+# PR-AZR-TRF-NSG-027
 #
 
 default inbound_port_5500 = null
@@ -1082,7 +1082,7 @@ inbound_port_5500_err = "Azure Network Security Group allows VNC Listener" {
 }
 
 inbound_port_5500_metadata := {
-    "Policy Code": "PR-AZR-0044-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-027",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -1094,7 +1094,7 @@ inbound_port_5500_metadata := {
 }
 
 #
-# PR-AZR-0045-TRF
+# PR-AZR-TRF-NSG-028
 #
 
 default inbound_port_5900 = null
@@ -1117,7 +1117,7 @@ inbound_port_5900_err = "Azure Network Security Group allows VNC Server" {
 }
 
 inbound_port_5900_metadata := {
-    "Policy Code": "PR-AZR-0045-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-028",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -1129,7 +1129,7 @@ inbound_port_5900_metadata := {
 }
 
 #
-# PR-AZR-0046-TRF
+# PR-AZR-TRF-NSG-029
 #
 
 default inbound_port_135 = null
@@ -1152,7 +1152,7 @@ inbound_port_135_err = "Azure Network Security Group allows Windows RPC" {
 }
 
 inbound_port_135_metadata := {
-    "Policy Code": "PR-AZR-0046-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-029",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -1229,7 +1229,7 @@ nsg_outbound[port] {
 }
 
 #
-# PR-AZR-0048-TRF
+# PR-AZR-TRF-NSG-030
 #
 
 default nsg_out_all = null
@@ -1257,7 +1257,7 @@ nsg_out_all_err = "Azure NSG with Outbound rule to allow all traffic to any sour
 }
 
 nsg_out_all_metadata := {
-    "Policy Code": "PR-AZR-0048-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-030",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -1269,7 +1269,7 @@ nsg_out_all_metadata := {
 }
 
 #
-# gID1
+# PR-AZR-TRF-NSG-031
 #
 
 default outbound_port_bitcoin = null
@@ -1296,7 +1296,7 @@ outbound_port_bitcoin_err = "Instance is communicating with ports known to mine 
 }
 
 outbound_port_bitcoin_metadata := {
-    "Policy Code": "",
+    "Policy Code": "PR-AZR-TRF-NSG-031",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -1308,7 +1308,7 @@ outbound_port_bitcoin_metadata := {
 }
 
 #
-# gID2
+# PR-AZR-TRF-NSG-032
 #
 
 default outbound_port_ethereum = null
@@ -1335,7 +1335,7 @@ outbound_port_ethereum_err = "Instance is communicating with ports known to mine
 }
 
 outbound_port_ethereum_metadata := {
-    "Policy Code": "",
+    "Policy Code": "PR-AZR-TRF-NSG-032",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -1348,7 +1348,7 @@ outbound_port_ethereum_metadata := {
 
 
 #
-# PR-AZR-0100-TRF
+# PR-AZR-TRF-NSG-017
 #
 
 default inbound_insecure_omi_port = null
@@ -1379,7 +1379,7 @@ inbound_insecure_omi_port_err = "Azure Network Security Group (NSG) currently no
 }
 
 inbound_insecure_omi_port_metadata := {
-    "Policy Code": "PR-AZR-0100-TRF",
+    "Policy Code": "PR-AZR-TRF-NSG-017",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

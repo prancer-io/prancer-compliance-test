@@ -2,7 +2,7 @@ package rule
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry
 
-# PR-AZR-0104-TRF
+# PR-AZR-TRF-ACR-002
 
 default adminUserDisabled = null
 # default is false
@@ -28,7 +28,7 @@ adminUserDisabled_err = "Azure Container Registry admin user is currently not di
 }
 
 adminUserDisabled_metadata := {
-    "Policy Code": "PR-AZR-0104-TRF",
+    "Policy Code": "PR-AZR-TRF-ACR-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

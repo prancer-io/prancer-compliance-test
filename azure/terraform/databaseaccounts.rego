@@ -2,7 +2,7 @@ package rule
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_account
 
-# PR-AZR-0105-TRF
+# PR-AZR-TRF-CDA-001
 
 default tagsLength = null
 
@@ -39,7 +39,7 @@ tagsLength_err = "azurerm_cosmosdb_account property 'tags' need to be exist. Its
 }
 
 tagsLength_metadata := {
-    "Policy Code": "PR-AZR-0105-TRF",
+    "Policy Code": "PR-AZR-TRF-CDA-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

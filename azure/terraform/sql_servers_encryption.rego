@@ -3,7 +3,7 @@ package rule
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption
 
 #
-# PR-AZR-0140-TRF
+# PR-AZR-TRF-SQL-067
 #
 default db_server_encrypt = null
 
@@ -48,7 +48,7 @@ db_server_encrypt_err = "azurerm_mssql_server dont have any associative azurerm_
 #}
 
 db_server_encrypt_metadata := {
-    "Policy Code": "PR-AZR-0140-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-067",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -60,7 +60,7 @@ db_server_encrypt_metadata := {
 }
 
 
-# PR-AZR-0111-TRF
+# PR-AZR-TRF-SQL-046
 
 default serverKeyType = null
 
@@ -101,7 +101,7 @@ serverKeyType_err = "Make sure resource azurerm_mssql_server and azurerm_mssql_s
 }
 
 serverKeyType_metadata := {
-    "Policy Code": "PR-AZR-0111-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-046",
     "Type": "IaC",
     "Product": "",
     "Language": "Terraform",
