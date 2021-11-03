@@ -1719,7 +1719,8 @@ aws_issue["bucket_kms_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket"
     server_side_encryption_configuration := resource.properties.server_side_encryption_configuration[j]
-    apply_server_side_encryption_by_default := server_side_encryption_configuration.apply_server_side_encryption_by_default[k]
+    rule := server_side_encryption_configuration.rule[k]
+    apply_server_side_encryption_by_default := rule.apply_server_side_encryption_by_default[l]
     lower(apply_server_side_encryption_by_default.sse_algorithm) != "aws:kms"
 }
 
@@ -1727,11 +1728,12 @@ source_path[{"bucket_kms_encryption": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket"
     server_side_encryption_configuration := resource.properties.server_side_encryption_configuration[j]
-    apply_server_side_encryption_by_default := server_side_encryption_configuration.apply_server_side_encryption_by_default[k]
+    rule := server_side_encryption_configuration.rule[k]
+    apply_server_side_encryption_by_default := rule.apply_server_side_encryption_by_default[l]
     lower(apply_server_side_encryption_by_default.sse_algorithm) != "aws:kms"
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "server_side_encryption_configuration", j, "apply_server_side_encryption_by_default", k, "sse_algorithm"]
+            ["resources", i, "properties", "server_side_encryption_configuration", j, "rule", k, "apply_server_side_encryption_by_default", l, "sse_algorithm"]
         ],
     }
 }
@@ -1740,7 +1742,8 @@ aws_issue["bucket_kms_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket"
     server_side_encryption_configuration := resource.properties.server_side_encryption_configuration[j]
-    apply_server_side_encryption_by_default := server_side_encryption_configuration.apply_server_side_encryption_by_default[k]
+    rule := server_side_encryption_configuration.rule[k]
+    apply_server_side_encryption_by_default := rule.apply_server_side_encryption_by_default[l]
     lower(apply_server_side_encryption_by_default.sse_algorithm) == "aws:kms"
     not apply_server_side_encryption_by_default.kms_master_key_id
 }
@@ -1749,12 +1752,13 @@ source_path[{"bucket_kms_encryption": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket"
     server_side_encryption_configuration := resource.properties.server_side_encryption_configuration[j]
-    apply_server_side_encryption_by_default := server_side_encryption_configuration.apply_server_side_encryption_by_default[k]
+    rule := server_side_encryption_configuration.rule[k]
+    apply_server_side_encryption_by_default := rule.apply_server_side_encryption_by_default[l]
     lower(apply_server_side_encryption_by_default.sse_algorithm) == "aws:kms"
     not apply_server_side_encryption_by_default.kms_master_key_id
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "server_side_encryption_configuration", j, "apply_server_side_encryption_by_default", k, "kms_master_key_id"]
+            ["resources", i, "properties", "server_side_encryption_configuration", j, "rule", k, "apply_server_side_encryption_by_default", l, "kms_master_key_id"]
         ],
     }
 }
@@ -1763,7 +1767,8 @@ aws_issue["bucket_kms_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket"
     server_side_encryption_configuration := resource.properties.server_side_encryption_configuration[j]
-    apply_server_side_encryption_by_default := server_side_encryption_configuration.apply_server_side_encryption_by_default[k]
+    rule := server_side_encryption_configuration.rule[k]
+    apply_server_side_encryption_by_default := rule.apply_server_side_encryption_by_default[l]
     lower(apply_server_side_encryption_by_default.sse_algorithm) == "aws:kms"
     count(apply_server_side_encryption_by_default.kms_master_key_id) == 0
 }
@@ -1772,12 +1777,13 @@ source_path[{"bucket_kms_encryption": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket"
     server_side_encryption_configuration := resource.properties.server_side_encryption_configuration[j]
-    apply_server_side_encryption_by_default := server_side_encryption_configuration.apply_server_side_encryption_by_default[k]
+    rule := server_side_encryption_configuration.rule[k]
+    apply_server_side_encryption_by_default := rule.apply_server_side_encryption_by_default[l]
     lower(apply_server_side_encryption_by_default.sse_algorithm) == "aws:kms"
     count(apply_server_side_encryption_by_default.kms_master_key_id) == 0
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "server_side_encryption_configuration", j, "apply_server_side_encryption_by_default", k, "kms_master_key_id"]
+            ["resources", i, "properties", "server_side_encryption_configuration", j, "rule", k, "apply_server_side_encryption_by_default", l, "kms_master_key_id"]
         ],
     }
 }

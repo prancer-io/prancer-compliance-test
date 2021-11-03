@@ -719,82 +719,82 @@ default acl_unrestricted_admin_port = null
 aws_issue["acl_unrestricted_admin_port"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_network_acl_rule"
-    lower(resource.rroperties.egress) == "false"
-    to_number(resource.rroperties.from_port) <= 22
-    to_number(resource.rroperties.to_port) >= 22
-    resource.rroperties.cidr_block == "0.0.0.0/0"
-    lower(resource.rroperties.rule_action) == "allow"
+    lower(resource.properties.egress) == "false"
+    to_number(resource.properties.from_port) <= 22
+    to_number(resource.properties.to_port) >= 22
+    resource.properties.cidr_block == "0.0.0.0/0"
+    lower(resource.properties.rule_action) == "allow"
 }
 
 aws_issue["acl_unrestricted_admin_port"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_network_acl_rule"
-    lower(resource.rroperties.egress) == "false"
-    to_number(resource.rroperties.from_port) <= 22
-    to_number(resource.rroperties.to_port) >= 22
-    resource.rroperties.ipv6_cidr_block == "::/0"
-    lower(resource.rroperties.rule_action) == "allow"
+    lower(resource.properties.egress) == "false"
+    to_number(resource.properties.from_port) <= 22
+    to_number(resource.properties.to_port) >= 22
+    resource.properties.ipv6_cidr_block == "::/0"
+    lower(resource.properties.rule_action) == "allow"
 }
 
 aws_issue["acl_unrestricted_admin_port"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_network_acl_rule"
-    lower(resource.rroperties.egress) == "false"
-    to_number(resource.rroperties.from_port) <= 3389
-    to_number(resource.rroperties.to_port) >= 3389
-    resource.rroperties.cidr_block == "0.0.0.0/0"
-    lower(resource.rroperties.rule_action) == "allow"
+    lower(resource.properties.egress) == "false"
+    to_number(resource.properties.from_port) <= 3389
+    to_number(resource.properties.to_port) >= 3389
+    resource.properties.cidr_block == "0.0.0.0/0"
+    lower(resource.properties.rule_action) == "allow"
 }
 
 aws_issue["acl_unrestricted_admin_port"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_network_acl_rule"
-    lower(resource.rroperties.egress) == "false"
-    to_number(resource.rroperties.from_port) <= 3389
-    to_number(resource.rroperties.to_port) >= 3389
-    resource.rroperties.ipv6_cidr_block == "::/0"
-    lower(resource.rroperties.rule_action) == "allow"
+    lower(resource.properties.egress) == "false"
+    to_number(resource.properties.from_port) <= 3389
+    to_number(resource.properties.to_port) >= 3389
+    resource.properties.ipv6_cidr_block == "::/0"
+    lower(resource.properties.rule_action) == "allow"
 }
 
 
 aws_bool_issue["acl_unrestricted_admin_port"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_network_acl_rule"
-    resource.rroperties.egress == false
-    to_number(resource.rroperties.from_port) <= 22
-    to_number(resource.rroperties.to_port) >= 22
-    resource.rroperties.cidr_block == "0.0.0.0/0"
-    lower(resource.rroperties.rule_action) == "allow"
+    resource.properties.egress == false
+    to_number(resource.properties.from_port) <= 22
+    to_number(resource.properties.to_port) >= 22
+    resource.properties.cidr_block == "0.0.0.0/0"
+    lower(resource.properties.rule_action) == "allow"
 }
 
 aws_bool_issue["acl_unrestricted_admin_port"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_network_acl_rule"
-    resource.rroperties.egress == false
-    to_number(resource.rroperties.from_port) <= 22
-    to_number(resource.rroperties.to_port) >= 22
-    resource.rroperties.ipv6_cidr_block == "::/0"
-    lower(resource.rroperties.rule_action) == "allow"
+    resource.properties.egress == false
+    to_number(resource.properties.from_port) <= 22
+    to_number(resource.properties.to_port) >= 22
+    resource.properties.ipv6_cidr_block == "::/0"
+    lower(resource.properties.rule_action) == "allow"
 }
 
 aws_bool_issue["acl_unrestricted_admin_port"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_network_acl_rule"
-    resource.rroperties.egress == false
-    to_number(resource.rroperties.from_port) <= 3389
-    to_number(resource.rroperties.to_port) >= 3389
-    resource.rroperties.cidr_block == "0.0.0.0/0"
-    lower(resource.rroperties.rule_action) == "allow"
+    resource.properties.egress == false
+    to_number(resource.properties.from_port) <= 3389
+    to_number(resource.properties.to_port) >= 3389
+    resource.properties.cidr_block == "0.0.0.0/0"
+    lower(resource.properties.rule_action) == "allow"
 }
 
 aws_bool_issue["acl_unrestricted_admin_port"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_network_acl_rule"
-    resource.rroperties.egress == false
-    to_number(resource.rroperties.from_port) <= 3389
-    to_number(resource.rroperties.to_port) >= 3389
-    resource.rroperties.ipv6_cidr_block == "::/0"
-    lower(resource.rroperties.rule_action) == "allow"
+    resource.properties.egress == false
+    to_number(resource.properties.from_port) <= 3389
+    to_number(resource.properties.to_port) >= 3389
+    resource.properties.ipv6_cidr_block == "::/0"
+    lower(resource.properties.rule_action) == "allow"
 }
 
 
