@@ -1393,24 +1393,6 @@ default s3_public_access = null
 aws_issue["s3_public_access"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket"
-    resource.properties.acl == "public-read"
-}
-
-source_path[{"s3_public_access": metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_s3_bucket"
-    resource.properties.acl == "public-read"
-
-    metadata := {
-        "resource_path": [
-            ["resources", i, "properties", "acl"]
-        ],
-    }
-}
-
-aws_issue["s3_public_access"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_s3_bucket"
     resource.properties.acl == "public-read-write"
 }
 

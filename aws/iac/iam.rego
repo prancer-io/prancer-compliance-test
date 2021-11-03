@@ -8,25 +8,6 @@ default iam_wildcard_resource = null
 
 aws_issue["iam_wildcard_resource"] {
     resource := input.Resources[i]
-    lower(resource.Type) == "aws::iam::managedpolicy"
-    statement := resource.Properties.PolicyDocument.Statement[j]
-    lower(statement.Resource) == "*"
-}
-
-source_path[{"iam_wildcard_resource": metadata}] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::iam::managedpolicy"
-    statement := resource.Properties.PolicyDocument.Statement[j]
-    lower(statement.Resource) == "*"
-    metadata := {
-        "resource_path": [
-            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Resource"]
-        ],
-    }
-}
-
-aws_issue["iam_wildcard_resource"] {
-    resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::policy"
     statement := resource.Properties.PolicyDocument.Statement[j]
     lower(statement.Resource) == "*"
@@ -46,19 +27,10 @@ source_path[{"iam_wildcard_resource": metadata}] {
 
 iam_wildcard_resource {
     resource := input.Resources[i]
-    lower(resource.Type) == "aws::iam::managedpolicy"
-    not aws_issue["iam_wildcard_resource"]
-}
-
-iam_wildcard_resource {
-    resource := input.Resources[i]
     lower(resource.Type) == "aws::iam::policy"
     not aws_issue["iam_wildcard_resource"]
 }
 
-iam_wildcard_resource = false {
-    aws_issue["iam_wildcard_resource"]
-}
 
 iam_wildcard_resource_err = "Ensure no wildcards are specified in IAM policy with 'Resource' section" {
     aws_issue["iam_wildcard_resource"]
@@ -532,4 +504,55 @@ iam_user_group_attach_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html"
+}
+
+
+#
+# PR-AWS-CFR-IAM-009
+#
+default iam_managed_policy_wildcard_resource = null
+
+aws_issue["iam_managed_policy_wildcard_resource"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::managedpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    lower(statement.Resource) == "*"
+}
+
+source_path[{"iam_managed_policy_wildcard_resource": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::managedpolicy"
+    statement := resource.Properties.PolicyDocument.Statement[j]
+    lower(statement.Resource) == "*"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "PolicyDocument", "Statement", j, "Resource"]
+        ],
+    }
+}
+
+iam_managed_policy_wildcard_resource {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::iam::managedpolicy"
+    not aws_issue["iam_managed_policy_wildcard_resource"]
+}
+
+iam_managed_policy_wildcard_resource = false {
+    aws_issue["iam_managed_policy_wildcard_resource"]
+}
+
+iam_managed_policy_wildcard_resource_err = "Ensure no wildcards are specified in IAM Managed policy with 'Resource' section" {
+    aws_issue["iam_managed_policy_wildcard_resource"]
+}
+
+iam_managed_policy_wildcard_resource_metadata := {
+    "Policy Code": "PR-AWS-CFR-IAM-009",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure no wildcards are specified in IAM Managed policy with 'Resource' section",
+    "Policy Description": "Using a wildcard in the Resource element in a role's trust policy would allow any IAM user in an account to access all Resources. This is a significant security gap and can be used to gain access to sensitive data.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html"
 }
