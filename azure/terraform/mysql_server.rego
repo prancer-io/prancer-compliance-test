@@ -70,7 +70,7 @@ mysql_ingress_from_any_ip_disabled_metadata := {
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server
 
-# PR-AZR-TRF-SQL-060
+# PR-AZR-TRF-SQL-016
 
 default mysql_server_ssl_enforcement_enabled = null
 azure_attribute_absence ["mysql_server_ssl_enforcement_enabled"] {
@@ -107,7 +107,7 @@ mysql_server_ssl_enforcement_enabled_err = "azurerm_mysql_server property 'ssl_e
 }
 
 mysql_server_ssl_enforcement_enabled_metadata := {
-    "Policy Code": "PR-AZR-TRF-SQL-060",
+    "Policy Code": "PR-AZR-TRF-SQL-016",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -121,7 +121,7 @@ mysql_server_ssl_enforcement_enabled_metadata := {
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server
 
-# PR-AZR-TRF-SQL-016
+# PR-AZR-TRF-SQL-060
 
 default mysql_public_access_disabled = null
 # public_network_access_enabled Defaults to true if not exist. This was an issue because we need to fail if property not exist and also need to passed if property has value false.
@@ -148,7 +148,7 @@ mysql_public_access_disabled_err = "Public Network Access is currently not disab
 }
 
 mysql_public_access_disabled_metadata := {
-    "Policy Code": "PR-AZR-TRF-SQL-016",
+    "Policy Code": "PR-AZR-TRF-SQL-060",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

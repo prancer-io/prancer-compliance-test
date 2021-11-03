@@ -52,13 +52,20 @@
                             "remediationFunction": "PR_AZR_TRF_MNT_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Activity log alerts should be enabled",
                     "description": "Activity log alerts are alerts that activate when a new activity log event occurs that matches the conditions specified in the alert. Based on the order and volume of the events recorded in Azure activity log, the alert rule will fire. Enabling Activity log alerts will allow Azure to send you emails about any high severity alerts in your environment. This will make sure that you are aware of any security issues and take prompt actions to mitigate the risks.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -190,7 +197,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -216,13 +229,20 @@
                             "remediationFunction": "PR_AZR_TRF_AKS_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure AKS cluster HTTP application routing should be disabled",
                     "description": "HTTP application routing configures an Ingress controller in your AKS cluster. As applications are deployed, the solution also creates publicly accessible DNS names for application endpoints. While this makes it easy to access applications that are deployed to your Azure AKS cluster, this add-on is not recommended for production use.<br><br>This policy checks your AKS cluster HTTP application routing add-on setting and alerts if enabled.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -248,13 +268,19 @@
                             "remediationFunction": "PR_AZR_TRF_AKS_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure AKS cluster monitoring should be enabled",
                     "description": "Azure Monitor for containers is a feature designed to monitor the performance of container workloads deployed to either Azure Container Instances or managed Kubernetes clusters hosted on Azure Kubernetes Service (AKS). Monitoring your containers is critical, especially when you're running a production cluster, at scale, with multiple applications.<br><br>This policy checks your AKS cluster monitoring add-on setting and alerts if no configuration is found, or monitoring is disabled.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -286,7 +312,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -312,13 +344,20 @@
                             "remediationFunction": "PR_AZR_TRF_AKS_005.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure AKS role-based access control (RBAC) should be enforced",
                     "description": "To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster.<br><br>This policy checks your AKS cluster RBAC setting and alerts if disabled.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -350,7 +389,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -376,7 +421,7 @@
                             "remediationFunction": "PR_AZR_TRF_AKS_008.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "AKS cluster shoud have Network Policy configured",
                     "description": "Network policy used for building Kubernetes network. - calico or azure.",
                     "tags": [
@@ -408,7 +453,7 @@
                             "remediationFunction": "PR_AZR_TRF_AKS_007.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "AKS shoud have an API Server Authorized IP Ranges enabled",
                     "description": "Authorized IP Ranges to kubernetes API server",
                     "tags": [
@@ -478,7 +523,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -510,7 +562,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -542,7 +600,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -720,7 +784,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -752,7 +823,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -816,7 +894,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -848,7 +933,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -1939,7 +2031,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -2015,7 +2114,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -2053,7 +2159,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -2091,7 +2204,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -2161,13 +2281,20 @@
                             "remediationFunction": "PR_AZR_TRF_CMP_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure disk should have Azure Disk Encryption (ADE) enabled",
                     "description": "To meet your organizational security or compliance requirement, Azure provides disk encryption at rest using Azure Storage Service Encryption (SSE) and Azure Disk Encryption (ADE). Starting February 2017, SSE is enabled by default for all managed disks. ADE is integrated with Azure Key Vault to help you control, manage, and audit the disk encryption keys and secrets.<br><br>This policy detects Virtual Machine (VM) OS disks that are not encrypted at rest using ADE. As a best practice, enable ADE for provide volume encryption for the OS disk. For more information, see https://docs.microsoft.com/en-us/azure/security/azure-security-disk-encryption-overview.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -2295,13 +2422,20 @@
                             "remediationFunction": "PR_AZR_TRF_KV_004.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Key Vault keys should have an expiration date",
                     "description": "This policy identifies Azure Key Vault secrets that do not have an expiry date. As a best practice, set an expiration date for each secret and rotate the secret regularly.<br><br>Before you activate this policy, ensure that you have added the <compliance-software> Service Principal to each Key Vault: https://docs.paloaltonetworks.com/<compliance-software>/<compliance-software>-admin/connect-your-cloud-platform-to-<compliance-software>/onboard-your-azure-account/set-up-your-azure-account.html<br><br>Alternatively, run the following command on the Azure cloud shell:<br>az keyvault list | jq '.[].name' | xargs -I {} az keyvault set-policy --name {} --certificate-permissions list listissuers --key-permissions list --secret-permissions list --spn <<compliance-software>_app_id>",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "PCI-DSS",
+                                "GDPR",
+                                "ISO 27001",
+                                "NIST CSF",
+                                "HIPAA",
+                                "Best Practices"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -2327,13 +2461,20 @@
                             "remediationFunction": "PR_AZR_TRF_KV_005.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Key Vault secrets should have an expiration date",
                     "description": "This policy identifies Azure Key Vault secrets that do not have an expiry date. As a best practice, set an expiration date for each secret and rotate the secret regularly.<br><br>Before you activate this policy, ensure that you have added the <compliance-software> Service Principal to each Key Vault: https://docs.paloaltonetworks.com/<compliance-software>/<compliance-software>-admin/connect-your-cloud-platform-to-<compliance-software>/onboard-your-azure-account/set-up-your-azure-account.html<br><br>Alternatively, run the following command on the Azure cloud shell:<br>az keyvault list | jq '.[].name' | xargs -I {} az keyvault set-policy --name {} --certificate-permissions list listissuers --key-permissions list --secret-permissions list --spn <<compliance-software>_app_id>",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -2359,13 +2500,20 @@
                             "remediationFunction": "PR_AZR_TRF_MNT_008.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "Low",
                     "title": "Azure Deployment Scope Resource Group should have a remove protection resource lock configured",
                     "description": "Azure Resource Manager locks provide a way to lock down Azure resources from being deleted or modified. The lock level can be set to either 'CanNotDelete' or 'ReadOnly'. When you apply a lock at a parent scope, all resources within the scope inherit the same lock, and the most restrictive lock takes precedence.<br><br>This policy identifies Azure Resource Groups that do not have a lock set. As a best practice, place a lock on important resources to prevent accidental or malicious modification or deletion by unauthorized users.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -2559,11 +2707,11 @@
                     "rule": "file(mysql_server.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-SQL-060",
+                            "id": "PR-AZR-TRF-SQL-016",
                             "eval": "data.rule.mysql_server_ssl_enforcement_enabled",
                             "message": "data.rule.mysql_server_ssl_enforcement_enabled_err",
                             "remediationDescription": "In 'azurerm_mysql_server' resource, set 'ssl_enforcement_enabled = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server#ssl_enforcement_enabled for details.",
-                            "remediationFunction": "PR_AZR_TRF_SQL_060.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_016.py"
                         }
                     ],
                     "severity": "High",
@@ -2573,7 +2721,12 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "terraform"
@@ -2594,11 +2747,11 @@
                     "rule": "file(mysql_server.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-SQL-016",
+                            "id": "PR-AZR-TRF-SQL-060",
                             "eval": "data.rule.mysql_public_access_disabled",
                             "message": "data.rule.mysql_public_access_disabled_err",
                             "remediationDescription": "In 'azurerm_mysql_server' resource, set 'public_network_access_enabled = false' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server#public_network_access_enabled for details.",
-                            "remediationFunction": "PR_AZR_TRF_SQL_016.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_060.py"
                         }
                     ],
                     "severity": "High",
@@ -2677,7 +2830,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -2709,7 +2868,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -2735,13 +2900,19 @@
                             "remediationFunction": "PR_AZR_TRF_NTW_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Watcher Network Security Group (NSG) flow logs retention should be greater than 90 days",
                     "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs retention period is 90 days or less. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.<br><br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:<br>- Outbound and inbound flows on a per-rule basis.<br>- Network interface to which the flow applies.<br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).<br>- Whether the traffic was allowed or denied.<br><br>As a best practice, enable NSG flow logs and set the log retention period to at least 91 days.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -2767,13 +2938,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_001.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to all TCP traffic from any source",
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to open TCP traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -2799,13 +2977,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to all UDP traffic from any source",
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to open UDP traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -2831,13 +3016,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to all traffic from Internet on TCP protocol",
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on TCP protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -2863,13 +3055,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_004.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to all traffic from Internet on UDP protocol",
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on UDP protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -2895,13 +3094,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_005.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to all traffic from Internet on any protocol",
                     "description": "This policy identifies Azure Network Security Groups (NSGs) which are overly permissive to all traffic from Internet on any protocol. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources, allowing only authorized protocols and ports.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -2927,13 +3133,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_006.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to allow all traffic from any source on any protocol",
                     "description": "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -2959,13 +3172,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_007.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group (NSG) having Inbound rule overly permissive to allow all traffic from any source to any destination (TJX)",
                     "description": "This policy identifies NSGs which allows incoming traffic from any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic from known sources on authorized protocols and ports.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -2991,13 +3211,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_008.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group allows ICMP (Ping)",
                     "description": "ICMP is used by devices to communicate error messages and status. While ICMP is useful for  diagnostics and troubleshooting, it can also be used to exploit or disrupt systems.<br><br>This policy detects any NSG rule that allows ICMP (Ping) traffic from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict ICMP (Ping) solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -3023,13 +3250,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_009.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group allows FTP (TCP Port 21)",
                     "description": "This policy detects any NSG rule that allows FTP traffic on TCP port 21 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict FTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -3093,13 +3327,20 @@
                             "remediationFunction": "gID5.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Memcached DDoS attack attempted",
                     "description": "Memcached is a general-purpose distributed memory caching system. It is often used to speed up dynamic database-driven websites by caching data and objects in RAM to reduce the number of times an external data source (such as a database or API) must be read. It is reported that Memcache versions 1.5.5 and below are vulnerable to DDoS amplification attack. This policy aims at finding such attacks and generate alerts.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -3125,13 +3366,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_012.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "RedisWannaMine vulnerable instances should not allow network traffic on port 6379",
                     "description": "RedisWannaMine is cryptojacking attack which aims at both database servers and application servers via remote code execution, exploiting an Apache Struts vulnerability. To inject cryptocurrency mining malware, RedWannaMine uses a transmission control protocol (TCP) scanner to check open port 445 of SMB and scans vulnerable Redis server database over port 6379(tcp), so that it can use EternalBlue to spread further.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -3157,13 +3405,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_013.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Publicly exposed DB Ports",
                     "description": "DB Servers contain sensitive data and should not be exposed to any direct traffic from internet. This policy checks for the network traffic from internet hitting the DB Servers on their default ports. The DB servers monitored on the default ports are : Microsoft SQL Server (1433), Oracle (1521), MySQL (3306), Sybase (5000), Postgresql (5432), CouchDB (5984), Redis (6379, 6380), RethinkDB (8080,28015, 29015), CassandraDB (9042), Memcached (11211), MongoDB (27017), DB2 (50000).",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -3189,7 +3444,7 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_014.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group should not allow SSH traffic from internet on port 22",
                     "description": "Blocking SSH port 22 will protect users from attacks like Account compromise.",
                     "tags": [
@@ -3227,7 +3482,7 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_015.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group (NSG) should not allows traffic from internet on port 3389",
                     "description": "Blocking RDP port 3389 will protect users from attacks like account compromise, Denial of service and ransomware.",
                     "tags": [
@@ -3265,13 +3520,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_016.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group allows Windows SMB (TCP Port 445)",
                     "description": "This policy detects any NSG rule that allows Windows SMB traffic on TCP port 445 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict Windows SMB solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -3297,13 +3559,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_018.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group should not allows DNS (UDP Port 53)",
                     "description": "This policy detects any NSG rule that allows DNS traffic on UDP port 53 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict DNS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -3329,13 +3598,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_019.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group allows FTP-Data (TCP Port 20)",
                     "description": "This policy detects any NSG rule that allows FTP-Data traffic on TCP port 20 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict FTP-Data solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -3361,13 +3637,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_020.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group should not allow mSQL (TCP Port 4333)",
                     "description": "This policy detects any NSG rule that allows mSQL traffic on TCP port 4333 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict MSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -3393,13 +3676,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_021.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group allows MySQL (TCP Port 3306)",
                     "description": "This policy detects any NSG rule that allows MySQL traffic on TCP port 3306 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict MySQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -3425,13 +3715,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_022.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group allows NetBIOS (UDP Port 138)",
                     "description": "This policy detects any NSG rule that allows NetBIOS traffic on UDP port 138 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict NetBIOS solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -3457,13 +3754,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_023.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group allows PostgreSQL (TCP Port 5432)",
                     "description": "This policy detects any NSG rule that allows PostgreSQL traffic on TCP port 5432 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict PostgreSQL solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -3489,13 +3793,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_024.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group allows SMTP (TCP Port 25)",
                     "description": "This policy detects any NSG rule that allows SMTP traffic on TCP port 25 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SMTP solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -3521,13 +3832,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_025.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group allows SqlServer (TCP Port 1433)",
                     "description": "This policy detects any NSG rule that allows SqlServer traffic on TCP port 1433 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict SqlServer solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -3553,13 +3871,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_026.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group allows Telnet (TCP Port 23)",
                     "description": "Telnet provides a plaintext connection to manage devices using the command line, and is less secure than SSH.<br>This policy detects any NSG rule that allows Telnet traffic on TCP port 23 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict Telnet solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -3585,13 +3910,20 @@
                             "remediationFunction": "PR-TRF-ARM-NSG-027.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group allows VNC Listener (TCP Port 5500)",
                     "description": "This policy detects any NSG rule that allows VNC Listener traffic on TCP port 5500 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict VNC Listener solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -3617,13 +3949,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_028.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group allows VNC Server (TCP Port 5900)",
                     "description": "This policy detects any NSG rule that allows VNC Server traffic on TCP port 5900 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict VNC Server solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -3649,13 +3988,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_029.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group allows Windows RPC (TCP Port 135)",
                     "description": "This policy detects any NSG rule that allows Windows RPC traffic on TCP port 135 from the internet. Review your list of NSG rules to ensure that your resources are not exposed.<br>As a best practice, restrict Windows RPC solely to known static IP addresses. Limit the access list to include known hosts, services, or specific employees only.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -3681,13 +4027,20 @@
                             "remediationFunction": "PR_AZR_TRF_NSG_030.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Network Security Group with Outbound rule to allow all traffic to any source",
                     "description": "This policy identifies NSGs which allows outgoing traffic to any source. A network security group contains a list of security rules that allow or deny inbound or outbound network traffic based on source or destination IP address, port, and protocol. As a best practice, it is recommended to configure NSGs to restrict traffic to known sources on authorized protocols and ports.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -3821,7 +4174,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -3854,7 +4214,11 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "terraform"
@@ -3890,7 +4254,12 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "terraform"
@@ -4213,13 +4582,19 @@
                             "remediationFunction": "PR_AZR_TRF_ACR_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Container Registry should not use the deprecated classic registry",
                     "description": "This policy identifies an Azure Container Registry (ACR) that is using the classic SKU. The initial release of the Azure Container Registry (ACR) service that was offered as a classic SKU is being deprecated and will be unavailable after April 2019. As a best practice, upgrade your existing classic registry to a managed registry.<br><br>For more information, visit https://docs.microsoft.com/en-us/azure/container-registry/container-registry-upgrade",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -4251,7 +4626,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -4473,7 +4855,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -4546,7 +4934,12 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
                             ],
                             "service": [
                                 "terraform"
@@ -4728,7 +5121,7 @@
                             "remediationFunction": "PR_AZR_TRF_STR_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Storage Accounts https based secure transfer should be enabled",
                     "description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPs. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesn't support HTTPs for custom domain names, this option is not applied when using a custom domain name.",
                     "tags": [
@@ -4770,7 +5163,7 @@
                             "remediationFunction": "PR_AZR_TRF_STR_004.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Storage Accounts should have firewall rules enabled",
                     "description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on.<br><br>You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
                     "tags": [
@@ -4818,10 +5211,12 @@
                             "cloud": "git",
                             "compliance": [
                                 "CIS",
-                                "HIPAA",
+                                "CSA CCM",
+                                "HITRUST",
                                 "NIST 800",
+                                "NIST CSF",
                                 "PCI-DSS"
-                            ],
+                           ],
                             "service": [
                                 "terraform"
                             ]
@@ -5204,13 +5599,19 @@
                             "remediationFunction": "PR_AZR_TRF_STR_012.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure storage blob container should not have public access enabled",
                     "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature.<br><br>This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB') that also have Audit Log Retention set to less than 180 days.<br><br>As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -5242,7 +5643,14 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                           ],
                             "service": [
                                 "terraform"
                             ]
@@ -5271,7 +5679,7 @@
                             "remediationFunction": "PR_AZR_TRF_VM_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Azure Linux Instance should not use basic authentication(Use SSH Key Instead)",
                     "description": "For security purpose, linux vm password authentication should be disabled. Use SSH Key Instead.",
                     "tags": [
@@ -5516,7 +5924,13 @@
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "terraform"
                             ]
@@ -5610,7 +6024,7 @@
                             "remediationFunction": "PR_AZR_TRF_SEC_002.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "There is a possibility that secure password is exposed",
                     "description": "There is a possibility that secure password is exposed. Make sure to put those secrets in a vault and access from there.",
                     "tags": [
@@ -5639,7 +6053,7 @@
                             "remediationFunction": "PR_AZR_TRF_SEC_003.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "There is a possibility that secure password is exposed",
                     "description": "There is a possibility that secure password is exposed. Make sure to put those secrets in a vault and access from there.",
                     "tags": [

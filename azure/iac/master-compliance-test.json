@@ -2038,7 +2038,8 @@
                                 "HITRUST",
                                 "NIST 800",
                                 "NIST CSF",
-                                "PCI-DSS"],
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -3415,7 +3416,7 @@
                             "remediationFunction": "PR_AZR_ARM_SQL_029.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure ssl enforcement is enabled on PostgreSQL Database Server.",
                     "description": "Enable SSL connection on PostgreSQL Servers. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application.",
                     "tags": [
@@ -4547,13 +4548,20 @@
                             "remediationFunction": "PR_AZR_ARM_SQL_047.py"
                         }
                     ],
-                    "severity": "Medium",
+                    "severity": "High",
                     "title": "Ensure SQL servers don't have public network access enabled",
                     "description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -4952,13 +4960,20 @@
                             "remediationFunction": "PR_AZR_ARM_SCT_003.py"
                         }
                     ],
-                    "severity": "Low",
+                    "severity": "Medium",
                     "title": "Send email notification should be enabled",
                     "description": "Setting the security alert Send email notification for alerts to On ensures that emails are sent from Microsoft if their security team determines a potential security breach has taken place.",
                     "tags": [
                         {
                             "cloud": "git",
-                            "compliance": [],
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
                             "service": [
                                 "arm"
                             ]
