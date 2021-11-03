@@ -1816,6 +1816,23 @@ bucket_kms_encryption_metadata := {
 
 default s3_object_lock_enable = null
 
+aws_attribute_absence["s3_object_lock_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_s3_bucket"
+    not resource.properties.object_lock_configuration
+}
+
+source_path[{"s3_object_lock_enable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_s3_bucket"
+    not resource.properties.object_lock_configuration
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "object_lock_configuration"]
+        ],
+    }
+}
+
 aws_issue["s3_object_lock_enable"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket"
@@ -1857,14 +1874,22 @@ source_path[{"s3_object_lock_enable": metadata}] {
 s3_object_lock_enable {
     lower(input.resources[i].type) == "aws_s3_bucket"
     not aws_issue["s3_object_lock_enable"]
+    not aws_attribute_absence["s3_object_lock_enable"]
+
 }
 
 s3_object_lock_enable = false {
     aws_issue["s3_object_lock_enable"]
 }
 
+s3_object_lock_enable = false {
+    aws_attribute_absence["s3_object_lock_enable"]
+}
+
 s3_object_lock_enable_err = "Ensure S3 bucket has enabled lock configuration" {
     aws_issue["s3_object_lock_enable"]
+} else = "Ensure S3 bucket has enabled lock configuration" {
+    aws_attribute_absence["s3_object_lock_enable"]
 }
 
 s3_object_lock_enable_metadata := {
