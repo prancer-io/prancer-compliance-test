@@ -72,7 +72,7 @@ k8s_issue["run_as_root"] {
 source_path[{"run_as_root":metadata}] {
     lower(input.kind) == "podsecuritypolicy"
     lower(input.spec.runAsUser.rule) == "mustrunas"
-    input.spec.runAsUser.ranges[i].min == 0
+    input.spec.runAsUser.ranges[_].min == 0
     metadata:= {
         "resource_path": [["spec","runAsUser","ranges",i,"min"]]
     }
@@ -135,7 +135,7 @@ source_path[{"drop_capabilities":metadata}] {
     count([c | rdc[_] == "NET_RAW"; c := 1]) == 0
     count([c | rdc[_] == "ALL"; c := 1]) == 0
     metadata:= {
-        "resource_path": [["spec","requiredDropCapabilities",i]]
+        "resource_path": [["spec","requiredDropCapabilities"]]
     }
 }
 
