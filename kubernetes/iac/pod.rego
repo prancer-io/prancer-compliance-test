@@ -7,6 +7,19 @@ package rule
 default run_pod_as_root = null
 
 k8s_issue["run_pod_as_root"] {
+    lower(input.kind) == "pod"
+    input.spec.template.spec.containers[_].securityContext.runAsNonRoot == false
+}
+
+source_path[{"run_pod_as_root":metadata}] {
+    lower(input.kind) == "pod"
+    input.spec.template.spec.containers[i].securityContext.runAsNonRoot == false
+    metadata:= {
+        "resource_path": [["spec","template","spec","containers",i,"securityContext","runAsNonRoot"]]
+    }
+}
+
+k8s_issue["run_pod_as_root"] {
     lower(input.kind) == "daemonset"
     input.spec.template.spec.containers[_].securityContext.runAsNonRoot == false
 }
@@ -127,6 +140,19 @@ run_pod_as_root_metadata := {
 default run_privileged_pod = null
 
 k8s_issue["run_privileged_pod"] {
+    lower(input.kind) == "pod"
+    input.spec.template.spec.containers[_].securityContext.privileged == true
+}
+
+source_path[{"run_privileged_pod":metadata}] {
+    lower(input.kind) == "pod"
+    input.spec.template.spec.containers[i].securityContext.privileged == true
+    metadata:= {
+        "resource_path": [["spec","template","spec","containers",i,"securityContext","privileged"]]
+    }
+}
+
+k8s_issue["run_privileged_pod"] {
     lower(input.kind) == "daemonset"
     input.spec.template.spec.containers[_].securityContext.privileged == true
 }
@@ -205,6 +231,19 @@ run_privileged_pod_metadata := {
 #
 
 default pod_default_ns = null
+
+k8s_issue["pod_default_ns"] {
+    lower(input.kind) == "pod"
+    input.namespace == "default"
+}
+
+source_path[{"pod_default_ns":metadata}] {
+    lower(input.kind) == "pod"
+    input.namespace == "default"
+    metadata:= {
+        "resource_path": [["namespace"]]
+    }
+}
 
 k8s_issue["pod_default_ns"] {
     lower(input.kind) == "daemonset"
@@ -287,6 +326,19 @@ pod_default_ns_metadata := {
 default hostpath_mount = null
 
 k8s_issue["hostpath_mount"] {
+    lower(input.kind) == "pod"
+    count(input.spec.template.spec.volumes[_].hostPath) > 0
+}
+
+source_path[{"hostpath_mount":metadata}] {
+    lower(input.kind) == "pod"
+    count(input.spec.template.spec.volumes[i].hostPath) > 0
+    metadata:= {
+        "resource_path": [["spec","template","spec","volumes",i,"hostPath"]]
+    }
+}
+
+k8s_issue["hostpath_mount"] {
     lower(input.kind) == "daemonset"
     count(input.spec.template.spec.volumes[_].hostPath) > 0
 }
@@ -365,6 +417,21 @@ hostpath_mount_metadata := {
 #
 
 default pod_selinux = null
+
+k8s_issue["pod_selinux"] {
+    lower(input.kind) == "pod"
+    container := input.spec.template.spec.containers[_]
+    not container.securityContext.seLinuxOptions
+}
+
+source_path[{"hostpath_mount":metadata}] {
+    lower(input.kind) == "pod"
+    container := input.spec.template.spec.containers[i]
+    not container.securityContext.seLinuxOptions
+    metadata:= {
+        "resource_path": [["spec","template","spec","containers",i,"securityContext","seLinuxOptions"]]
+    }
+}
 
 k8s_issue["pod_selinux"] {
     lower(input.kind) == "daemonset"
