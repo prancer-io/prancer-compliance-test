@@ -133,20 +133,20 @@ aks_http_routing_metadata := {
 
 default aks_monitoring = null
 
-aws_attribute_absence["aks_monitoring"] {
+azure_attribute_absence["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     not resource.properties.addon_profile
 }
 
-aws_attribute_absence["aks_monitoring"] {
+azure_attribute_absence["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     addon_profile := resource.properties.addon_profile[_]
     not addon_profile.oms_agent
 }
 
-aws_attribute_absence["aks_monitoring"] {
+azure_attribute_absence["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     addon_profile := resource.properties.addon_profile[_]
@@ -413,6 +413,12 @@ aks_aad_rbac_enabled_metadata := {
 #
 
 default aks_network_policy_configured = null
+
+azure_attribute_absence["aks_network_policy_configured"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    not resource.properties.network_profile
+}
 
 azure_attribute_absence["aks_network_policy_configured"] {
     resource := input.resources[_]

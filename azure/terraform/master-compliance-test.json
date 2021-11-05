@@ -900,8 +900,8 @@
                     "evals": [
                         {
                             "id": "PR-AZR-0072-TRF",
-                            "eval": "data.rule.app_service_cors_not_allowing_all",
-                            "message": "data.rule.app_service_cors_not_allowing_all_err",
+                            "eval": "data.rule.app_service_http_logging_enabled",
+                            "message": "data.rule.app_service_http_logging_enabled_err",
                             "remediationDescription": "In 'azurerm_app_service' resource, make sure 'http_logs' block exist under 'logs' block to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service#http_logs for details.",
                             "remediationFunction": "PR_AZR_0072_TRF.py"
                         }
@@ -1588,7 +1588,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Azure SQL Databases Security Alert Policy should be configured to send alert to the configured email addresses",
+                    "title": "Azure SQL Database Server Security Alert Policy should be configured to send alert to the configured email addresses",
                     "description": "Checks to ensure that an valid email address is set for Threat Detection alerts. The alerts are sent to this email address when any anomalous activities are detected on SQL databases.",
                     "tags": [
                         {
@@ -5578,12 +5578,12 @@
                             "eval": "data.rule.gl_azure_secrets",
                             "message": "data.rule.gl_azure_secrets_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR-AZR-0001-RGX.py"
+                            "remediationFunction": "PR_AZR_0001_RGX.py"
                         }
                     ],
                     "severity": "Medium",
-                    "title": "Ensure Secrets are not hardcoded in the ARM template",
-                    "description": "Secrets should not be hardcoded in the ARM Template. Make sure to put those secrets in a vault and access from there.",
+                    "title": "Ensure Secrets are not hardcoded in the template",
+                    "description": "Secrets should not be hardcoded in the Template. Make sure to put those secrets in a vault and access from there.",
                     "tags": [
                         {
                             "cloud": "git",
