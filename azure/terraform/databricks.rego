@@ -83,7 +83,8 @@ azure_issue["databrics_workspace_has_vnet_integration"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_databricks_workspace"
     custom_parameters := resource.properties.custom_parameters[_]
-    contains(lower(custom_parameters.virtual_network_id), "microsoft.network/virtualnetworks") != true
+    #contains(lower(custom_parameters.virtual_network_id), "microsoft.network/virtualnetworks") != true
+    trim(custom_parameters.virtual_network_id, " ") == ""
 }
 
 databrics_workspace_has_vnet_integration {

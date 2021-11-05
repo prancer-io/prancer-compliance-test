@@ -863,7 +863,7 @@ app_service_php_version_latest_metadata := {
 
 default app_service_python_version_latest = null
 
-latest_python_version_three := 3.4
+latest_python_version_three := 3.9
 latest_python_version_two := 2.7
 
 azure_attribute_absence["app_service_python_version_latest"] {
@@ -988,6 +988,10 @@ app_service_java_version_latest_metadata := {
 #
 # PR-AZR-0086-TRF
 #
+# As per Farshid: it is not required for all the azure app service to use storage
+# but if they are using, then they should use Azure Files
+# it means the only time we fail the test is when lower(storage_account.type) != "azurefiles"
+# if it is not present, the test will pass
 
 default app_service_storage_account_type_azurefile = null
 
@@ -997,7 +1001,7 @@ azure_attribute_absence["app_service_storage_account_type_azurefile"] {
     not resource.properties.storage_account
 }
 
-azure_attribute_absence["app_service_storage_account_type_azurefile"] {
+azure_issue["app_service_storage_account_type_azurefile"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_app_service"
     storage_account := resource.properties.storage_account[_]
@@ -1011,8 +1015,10 @@ azure_issue["app_service_storage_account_type_azurefile"] {
     lower(storage_account.type) != "azurefiles"
 }
 
-app_service_storage_account_type_azurefile = false {
+app_service_storage_account_type_azurefile {
+	lower(input.resources[_].type) == "azurerm_app_service"
     azure_attribute_absence["app_service_storage_account_type_azurefile"]
+    not azure_issue["app_service_storage_account_type_azurefile"]
 }
 
 app_service_storage_account_type_azurefile {
@@ -1025,9 +1031,7 @@ app_service_storage_account_type_azurefile = false {
     azure_issue["app_service_storage_account_type_azurefile"]
 }
 
-app_service_storage_account_type_azurefile_err = "azurerm_app_service property 'storage_account.type' need to be exist. Its missing from the resource." {
-    azure_attribute_absence["app_service_storage_account_type_azurefile"]
-} else = "Azure App Service storage account type is currently not AzureFiles" {
+app_service_storage_account_type_azurefile_err = "Azure App Service storage account type is currently not AzureFiles" {
     azure_issue["app_service_storage_account_type_azurefile"]
 }
 
