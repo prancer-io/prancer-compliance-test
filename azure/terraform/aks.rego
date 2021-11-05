@@ -6,6 +6,10 @@ package rule
 # PR-AZR-0006-TRF
 #
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 default aks_cni_net = null
 
 azure_attribute_absence["aks_cni_net"] {
@@ -84,7 +88,8 @@ azure_attribute_absence["aks_http_routing"] {
     lower(resource.type) == "azurerm_kubernetes_cluster"
     addon_profile := resource.properties.addon_profile[_]
     http_application_routing := addon_profile.http_application_routing[_]
-    not http_application_routing.enabled
+    #not http_application_routing.enabled
+    not has_property(http_application_routing, "enabled")
 }
 
 azure_issue["aks_http_routing"] {
