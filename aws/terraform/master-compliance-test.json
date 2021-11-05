@@ -16,7 +16,7 @@
                             "id": "PR-AWS-TRF-KMS-001",
                             "eval": "data.rule.kms_key_rotation",
                             "message": "data.rule.kms_key_rotation_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enablekeyrotation",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key",
                             "remediationFunction": "PR_AWS_TRF_KMS_001.py"
                         }
                     ],
@@ -28,7 +28,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -48,7 +48,7 @@
                             "id": "PR-AWS-TRF-KMS-002",
                             "eval": "data.rule.kms_key_state",
                             "message": "data.rule.kms_key_state_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enabled",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key",
                             "remediationFunction": "PR_AWS_TRF_KMS_002.py"
                         }
                     ],
@@ -60,7 +60,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -80,7 +80,7 @@
                             "id": "PR-AWS-TRF-CT-001",
                             "eval": "data.rule.ct_regions",
                             "message": "data.rule.ct_regions_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudtrail",
                             "remediationFunction": "PR_AWS_TRF_CT_001.py"
                         }
                     ],
@@ -102,7 +102,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -122,7 +122,7 @@
                             "id": "PR-AWS-TRF-CT-002",
                             "eval": "data.rule.ct_log_validation",
                             "message": "data.rule.ct_log_validation_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudtrail",
                             "remediationFunction": "PR_AWS_TRF_CT_002.py"
                         }
                     ],
@@ -143,7 +143,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -163,7 +163,7 @@
                             "id": "PR-AWS-TRF-CT-003",
                             "eval": "data.rule.ct_master_key",
                             "message": "data.rule.ct_master_key_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudtrail",
                             "remediationFunction": "PR_AWS_TRF_CT_003.py"
                         }
                     ],
@@ -183,7 +183,7 @@
                                 "NIST CSF"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -203,7 +203,7 @@
                             "id": "PR-AWS-TRF-CT-004",
                             "eval": "data.rule.ct_cloudwatch",
                             "message": "data.rule.ct_cloudwatch_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudtrail",
                             "remediationFunction": "PR_AWS_TRF_CT_004.py"
                         }
                     ],
@@ -224,7 +224,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -244,7 +244,7 @@
                             "id": "PR-AWS-TRF-AG-007",
                             "eval": "data.rule.api_gw_cert",
                             "message": "data.rule.api_gw_cert_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_rest_api",
                             "remediationFunction": "PR_AWS_TRF_AG_007.py"
                         }
                     ],
@@ -261,7 +261,7 @@
                                 "NIST 800"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -281,7 +281,7 @@
                             "id": "PR-AWS-TRF-AG-001",
                             "eval": "data.rule.gateway_private",
                             "message": "data.rule.gateway_private_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-restapi-endpointconfiguration.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_rest_api",
                             "remediationFunction": "PR_AWS_TRF_AG_001.py"
                         }
                     ],
@@ -299,7 +299,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -319,7 +319,7 @@
                             "id": "PR-AWS-TRF-AG-002",
                             "eval": "data.rule.gateway_validate_parameter",
                             "message": "data.rule.gateway_validate_parameter_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-restapi-endpointconfiguration.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_request_validator",
                             "remediationFunction": "PR_AWS_TRF_AG_002.py"
                         }
                     ],
@@ -337,7 +337,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -357,7 +357,7 @@
                             "id": "PR-AWS-TRF-AG-003",
                             "eval": "data.rule.gateway_request_authorizer",
                             "message": "data.rule.gateway_request_authorizer_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-restapi-endpointconfiguration.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_authorizer",
                             "remediationFunction": "PR_AWS_TRF_AG_003.py"
                         }
                     ],
@@ -375,7 +375,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -395,7 +395,7 @@
                             "id": "PR-AWS-TRF-CFR-001",
                             "eval": "data.rule.cf_sns",
                             "message": "data.rule.cf_sns_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-stack.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack",
                             "remediationFunction": "PR_AWS_TRF_CFR_001.py"
                         }
                     ],
@@ -407,7 +407,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -427,7 +427,7 @@
                             "id": "PR-AWS-TRF-CFG-001",
                             "eval": "data.rule.config_all_resource",
                             "message": "data.rule.config_all_resource_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/config_configuration_recorder",
                             "remediationFunction": "PR_AWS_TRF_CFG_001.py"
                         }
                     ],
@@ -447,7 +447,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -467,7 +467,7 @@
                             "id": "PR-AWS-TRF-KNS-001",
                             "eval": "data.rule.kinesis_encryption",
                             "message": "data.rule.kinesis_encryption_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesis-stream.html#aws-resource-kinesis-stream--examples",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kinesis_stream",
                             "remediationFunction": "PR_AWS_TRF_KNS_001.py"
                         }
                     ],
@@ -479,7 +479,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -499,7 +499,7 @@
                             "id": "PR-AWS-TRF-KNS-002",
                             "eval": "data.rule.kinesis_encryption_kms",
                             "message": "data.rule.kinesis_encryption_kms_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesis-stream.html#aws-resource-kinesis-stream--examples",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kinesis_stream",
                             "remediationFunction": "PR_AWS_TRF_KNS_002.py"
                         }
                     ],
@@ -511,7 +511,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -531,7 +531,7 @@
                             "id": "PR-AWS-TRF-MQ-001",
                             "eval": "data.rule.mq_publicly_accessible",
                             "message": "data.rule.mq_publicly_accessible_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-amazonmq-broker.html#cfn-amazonmq-broker-publiclyaccessible",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/mq_broker",
                             "remediationFunction": "PR_AWS_TRF_MQ_001.py"
                         }
                     ],
@@ -543,7 +543,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -563,7 +563,7 @@
                             "id": "PR-AWS-TRF-R53-001",
                             "eval": "data.rule.route_healthcheck_disable",
                             "message": "data.rule.route_healthcheck_disable_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record",
                             "remediationFunction": "PR_AWS_TRF_R53_001.py"
                         }
                     ],
@@ -575,7 +575,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -595,7 +595,7 @@
                             "id": "PR-AWS-TRF-AS-001",
                             "eval": "data.rule.as_volume_encrypted",
                             "message": "data.rule.as_volume_encrypted_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig-blockdev-template.html#cfn-as-launchconfig-blockdev-template-encrypted",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration",
                             "remediationFunction": "PR_AWS_TRF_AS_001.py"
                         }
                     ],
@@ -607,7 +607,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -627,7 +627,7 @@
                             "id": "PR-AWS-TRF-VPC-001",
                             "eval": "data.rule.vpc_subnet_autoip",
                             "message": "data.rule.vpc_subnet_autoip_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-subnet.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet",
                             "remediationFunction": "PR_AWS_TRF_VPC_001.py"
                         }
                     ],
@@ -646,7 +646,7 @@
                                 "NIST CSF"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -666,7 +666,7 @@
                             "id": "PR-AWS-TRF-EKS-001",
                             "eval": "data.rule.eks_multiple_sg",
                             "message": "data.rule.eks_multiple_sg_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_cluster",
                             "remediationFunction": "PR_AWS_TRF_EKS_001.py"
                         }
                     ],
@@ -678,7 +678,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -698,7 +698,7 @@
                             "id": "PR-AWS-TRF-EKS-002",
                             "eval": "data.rule.eks_version",
                             "message": "data.rule.eks_version_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html#cfn-eks-cluster-version",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_cluster",
                             "remediationFunction": "PR_AWS_TRF_EKS_002.py"
                         }
                     ],
@@ -710,7 +710,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -730,7 +730,7 @@
                             "id": "PR-AWS-TRF-ES-001",
                             "eval": "data.rule.esearch_vpc",
                             "message": "data.rule.esearch_vpc_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticsearch_domain",
                             "remediationFunction": "PR_AWS_TRF_ES_001.py"
                         }
                     ],
@@ -742,7 +742,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -762,7 +762,7 @@
                             "id": "PR-AWS-TRF-ES-002",
                             "eval": "data.rule.esearch_encrypt",
                             "message": "data.rule.esearch_encrypt_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticsearch_domain",
                             "remediationFunction": "PR_AWS_TRF_ES_002.py"
                         }
                     ],
@@ -779,7 +779,7 @@
                                 "NIST 800"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -799,7 +799,7 @@
                             "id": "PR-AWS-TRF-ES-003",
                             "eval": "data.rule.esearch_master",
                             "message": "data.rule.esearch_master_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticsearch_domain",
                             "remediationFunction": "PR_AWS_TRF_ES_003.py"
                         }
                     ],
@@ -811,7 +811,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -831,7 +831,7 @@
                             "id": "PR-AWS-TRF-ES-004",
                             "eval": "data.rule.esearch_index_slow_log",
                             "message": "data.rule.esearch_index_slow_log_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticsearch_domain",
                             "remediationFunction": "PR_AWS_TRF_ES_004.py"
                         }
                     ],
@@ -847,7 +847,7 @@
                                 "NIST 800"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -867,7 +867,7 @@
                             "id": "PR-AWS-TRF-ES-005",
                             "eval": "data.rule.esearch_search_slow_log",
                             "message": "data.rule.esearch_search_slow_log_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticsearch_domain",
                             "remediationFunction": "PR_AWS_TRF_ES_005.py"
                         }
                     ],
@@ -883,7 +883,7 @@
                                 "NIST 800"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -903,7 +903,7 @@
                             "id": "PR-AWS-TRF-ES-006",
                             "eval": "data.rule.esearch_zone_awareness",
                             "message": "data.rule.esearch_zone_awareness_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticsearch_domain",
                             "remediationFunction": "PR_AWS_TRF_ES_006.py"
                         }
                     ],
@@ -918,7 +918,7 @@
                                 "NIST 800"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -938,7 +938,7 @@
                             "id": "PR-AWS-TRF-ES-007",
                             "eval": "data.rule.esearch_node_encryption",
                             "message": "data.rule.esearch_node_encryption_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html#cfn-elasticsearch-domain-node_to_node_encryption",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticsearch_domain",
                             "remediationFunction": "PR_AWS_TRF_ES_007.py"
                         }
                     ],
@@ -953,7 +953,7 @@
                                 "NIST 800"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -973,7 +973,7 @@
                             "id": "PR-AWS-TRF-ES-008",
                             "eval": "data.rule.esearch_enforce_https",
                             "message": "data.rule.esearch_enforce_https_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticsearch-domain-domain_endpoint_options.html#cfn-elasticsearch-domain-domain_endpoint_options-enforce_https",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticsearch_domain",
                             "remediationFunction": "PR_AWS_TRF_ES_008.py"
                         }
                     ],
@@ -985,7 +985,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1005,7 +1005,7 @@
                             "id": "PR-AWS-TRF-ES-009",
                             "eval": "data.rule.esearch_encrypt_kms",
                             "message": "data.rule.esearch_encrypt_kms_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticsearch_domain",
                             "remediationFunction": "PR_AWS_TRF_ES_009.py"
                         }
                     ],
@@ -1017,7 +1017,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1037,7 +1037,7 @@
                             "id": "PR-AWS-TRF-NACL-001",
                             "eval": "data.rule.acl_all_icmp_ipv4",
                             "message": "data.rule.acl_all_icmp_ipv4_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl_rule",
                             "remediationFunction": "PR_AWS_TRF_NACL_001.py"
                         }
                     ],
@@ -1049,7 +1049,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1069,7 +1069,7 @@
                             "id": "PR-AWS-TRF-NACL-002",
                             "eval": "data.rule.acl_all_icmp_ipv6",
                             "message": "data.rule.acl_all_icmp_ipv6_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl_rule",
                             "remediationFunction": "PR_AWS_TRF_NACL_002.py"
                         }
                     ],
@@ -1081,7 +1081,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1101,7 +1101,7 @@
                             "id": "PR-AWS-TRF-NACL-003",
                             "eval": "data.rule.acl_all_traffic",
                             "message": "data.rule.acl_all_traffic_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl_rule",
                             "remediationFunction": "PR_AWS_TRF_NACL_003.py"
                         }
                     ],
@@ -1113,7 +1113,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1133,7 +1133,7 @@
                             "id": "PR-AWS-TRF-NACL-004",
                             "eval": "data.rule.acl_all_icmp_ipv4_out",
                             "message": "data.rule.acl_all_icmp_ipv4_out_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl_rule",
                             "remediationFunction": "PR_AWS_TRF_NACL_004.py"
                         }
                     ],
@@ -1145,7 +1145,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1165,7 +1165,7 @@
                             "id": "PR-AWS-TRF-NACL-005",
                             "eval": "data.rule.acl_all_icmp_ipv6_out",
                             "message": "data.rule.acl_all_icmp_ipv6_out_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl_rule",
                             "remediationFunction": "PR_AWS_TRF_NACL_005.py"
                         }
                     ],
@@ -1177,7 +1177,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1197,7 +1197,7 @@
                             "id": "PR-AWS-TRF-NACL-006",
                             "eval": "data.rule.acl_all_traffic_out",
                             "message": "data.rule.acl_all_traffic_out_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_acl_rule",
                             "remediationFunction": "PR_AWS_TRF_NACL_006.py"
                         }
                     ],
@@ -1209,7 +1209,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1229,7 +1229,7 @@
                             "id": "PR-AWS-TRF-SGM-001",
                             "eval": "data.rule.sagemaker_encryption_kms",
                             "message": "data.rule.sagemaker_encryption_kms_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sagemaker_notebook_instance",
                             "remediationFunction": "PR_AWS_TRF_SGM_001.py"
                         }
                     ],
@@ -1241,7 +1241,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1261,7 +1261,7 @@
                             "id": "PR-AWS-TRF-SGM-002",
                             "eval": "data.rule.sagemaker_rootaccess_enabled",
                             "message": "data.rule.sagemaker_rootaccess_enabled_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sagemaker_notebook_instance",
                             "remediationFunction": "PR_AWS_TRF_SGM_002.py"
                         }
                     ],
@@ -1273,7 +1273,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1293,7 +1293,7 @@
                             "id": "PR-AWS-TRF-SGM-003",
                             "eval": "data.rule.sagemaker_direct_internet_access_enabled",
                             "message": "data.rule.sagemaker_direct_internet_access_enabled_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sagemaker_notebook_instance",
                             "remediationFunction": "PR_AWS_TRF_SGM_003.py"
                         }
                     ],
@@ -1305,7 +1305,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1325,7 +1325,7 @@
                             "id": "PR-AWS-TRF-SGM-004",
                             "eval": "data.rule.sagemaker_vpc",
                             "message": "data.rule.sagemaker_vpc_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sagemaker-notebookinstance.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sagemaker_notebook_instance",
                             "remediationFunction": "PR_AWS_TRF_SGM_004.py"
                         }
                     ],
@@ -1337,7 +1337,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1357,7 +1357,7 @@
                             "id": "PR-AWS-TRF-CD-001",
                             "eval": "data.rule.deploy_compute_platform",
                             "message": "data.rule.deploy_compute_platform_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-application.html#cfn-codedeploy-application-computeplatform",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/codedeploy_app",
                             "remediationFunction": "PR_AWS_TRF_CD_001.py"
                         }
                     ],
@@ -1369,7 +1369,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1387,8 +1387,8 @@
                     "evals": [
                         {
                             "id": "PR-AWS-TRF-CP-001",
-                            "eval": "data.rule.deploy_compute_platform",
-                            "message": "data.rule.deploy_compute_platform_err",
+                            "eval": "data.rule.cp_artifact_encrypt",
+                            "message": "data.rule.cp_artifact_encrypt_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-application.html#cfn-codedeploy-application-computeplatform",
                             "remediationFunction": "PR_AWS_TRF_CP_001.py"
                         }
@@ -1401,7 +1401,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1421,7 +1421,7 @@
                             "id": "PR-AWS-TRF-ELB-001",
                             "eval": "data.rule.elb_insecure_cipher",
                             "message": "data.rule.elb_insecure_cipher_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/load_balancer_policy",
                             "remediationFunction": "PR_AWS_TRF_ELB_001.py"
                         }
                     ],
@@ -1433,7 +1433,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1453,7 +1453,7 @@
                             "id": "PR-AWS-TRF-ELB-002",
                             "eval": "data.rule.elb_insecure_protocol",
                             "message": "data.rule.elb_insecure_protocol_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/load_balancer_policy",
                             "remediationFunction": "PR_AWS_TRF_ELB_002.py"
                         }
                     ],
@@ -1465,7 +1465,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1485,7 +1485,7 @@
                             "id": "PR-AWS-TRF-ELB-003",
                             "eval": "data.rule.elb_access_log",
                             "message": "data.rule.elb_access_log_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb",
                             "remediationFunction": "PR_AWS_TRF_ELB_003.py"
                         }
                     ],
@@ -1497,7 +1497,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1517,7 +1517,7 @@
                             "id": "PR-AWS-TRF-ELB-004",
                             "eval": "data.rule.elb_conn_drain",
                             "message": "data.rule.elb_conn_drain_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb",
                             "remediationFunction": "PR_AWS_TRF_ELB_004.py"
                         }
                     ],
@@ -1529,7 +1529,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1549,7 +1549,7 @@
                             "id": "PR-AWS-TRF-ELB-005",
                             "eval": "data.rule.elb_crosszone",
                             "message": "data.rule.elb_crosszone_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb",
                             "remediationFunction": "PR_AWS_TRF_ELB_005.py"
                         }
                     ],
@@ -1561,7 +1561,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1581,7 +1581,7 @@
                             "id": "PR-AWS-TRF-ELB-008",
                             "eval": "data.rule.elb_not_in_use",
                             "message": "data.rule.elb_not_in_use_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb",
                             "remediationFunction": "PR_AWS_TRF_ELB_008.py"
                         }
                     ],
@@ -1595,7 +1595,7 @@
                                 "ISO 27001"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1615,7 +1615,7 @@
                             "id": "PR-AWS-TRF-ELB-009",
                             "eval": "data.rule.elb_alb_logs",
                             "message": "data.rule.elb_alb_logs_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb",
                             "remediationFunction": "PR_AWS_TRF_ELB_009.py"
                         }
                     ],
@@ -1627,7 +1627,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1647,7 +1647,7 @@
                             "id": "PR-AWS-TRF-ELB-010",
                             "eval": "data.rule.elb_listener_ssl",
                             "message": "data.rule.elb_listener_ssl_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb",
                             "remediationFunction": "PR_AWS_TRF_ELB_010.py"
                         }
                     ],
@@ -1667,7 +1667,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1687,7 +1687,7 @@
                             "id": "PR-AWS-TRF-ELB-011",
                             "eval": "data.rule.elb_over_https",
                             "message": "data.rule.elb_over_https_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elb",
                             "remediationFunction": "PR_AWS_TRF_ELB_011.py"
                         }
                     ],
@@ -1699,7 +1699,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1719,7 +1719,7 @@
                             "id": "PR-AWS-TRF-ELB-012",
                             "eval": "data.rule.elb_v2_listener_ssl",
                             "message": "data.rule.elb_v2_listener_ssl_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html#cfn-elasticloadbalancingv2-listener-certificates",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener",
                             "remediationFunction": "PR_AWS_TRF_ELB_012.py"
                         }
                     ],
@@ -1731,7 +1731,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1751,7 +1751,7 @@
                             "id": "PR-AWS-TRF-EBS-001",
                             "eval": "data.rule.ebs_encrypt",
                             "message": "data.rule.ebs_encrypt_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volume.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ebs_volume",
                             "remediationFunction": "PR_AWS_TRF_EBS_001.py"
                         }
                     ],
@@ -1772,7 +1772,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1792,7 +1792,7 @@
                             "id": "PR-AWS-TRF-EFS-001",
                             "eval": "data.rule.efs_kms",
                             "message": "data.rule.efs_kms_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-filesystem.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_file_system",
                             "remediationFunction": "PR_AWS_TRF_EFS_001.py"
                         }
                     ],
@@ -1804,7 +1804,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1824,7 +1824,7 @@
                             "id": "PR-AWS-TRF-EFS-002",
                             "eval": "data.rule.efs_encrypt",
                             "message": "data.rule.efs_encrypt_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-filesystem.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_file_system",
                             "remediationFunction": "PR_AWS_TRF_EFS_002.py"
                         }
                     ],
@@ -1836,7 +1836,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1856,7 +1856,7 @@
                             "id": "PR-AWS-TRF-S3-001",
                             "eval": "data.rule.s3_accesslog",
                             "message": "data.rule.s3_accesslog_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket",
                             "remediationFunction": "PR_AWS_TRF_S3_001.py"
                         }
                     ],
@@ -1875,7 +1875,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1895,7 +1895,7 @@
                             "id": "PR-AWS-TRF-S3-002",
                             "eval": "data.rule.s3_acl_delete",
                             "message": "data.rule.s3_acl_delete_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy",
                             "remediationFunction": "PR_AWS_TRF_S3_002.py"
                         }
                     ],
@@ -1907,7 +1907,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1927,7 +1927,7 @@
                             "id": "PR-AWS-TRF-S3-003",
                             "eval": "data.rule.s3_acl_get",
                             "message": "data.rule.s3_acl_get_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy",
                             "remediationFunction": "PR_AWS_TRF_S3_003.py"
                         }
                     ],
@@ -1939,7 +1939,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1959,7 +1959,7 @@
                             "id": "PR-AWS-TRF-S3-004",
                             "eval": "data.rule.s3_acl_list",
                             "message": "data.rule.s3_acl_list_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy",
                             "remediationFunction": "PR_AWS_TRF_S3_004.py"
                         }
                     ],
@@ -1971,7 +1971,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -1991,7 +1991,7 @@
                             "id": "PR-AWS-TRF-S3-005",
                             "eval": "data.rule.s3_acl_put",
                             "message": "data.rule.s3_acl_put_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy",
                             "remediationFunction": "PR_AWS_TRF_S3_005.py"
                         }
                     ],
@@ -2003,7 +2003,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2023,7 +2023,7 @@
                             "id": "PR-AWS-TRF-S3-007",
                             "eval": "data.rule.s3_versioning",
                             "message": "data.rule.s3_versioning_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket",
                             "remediationFunction": "PR_AWS_TRF_S3_007.py"
                         }
                     ],
@@ -2035,7 +2035,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2055,7 +2055,7 @@
                             "id": "PR-AWS-TRF-S3-009",
                             "eval": "data.rule.s3_transport",
                             "message": "data.rule.s3_transport_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy",
                             "remediationFunction": "PR_AWS_TRF_S3_009.py"
                         }
                     ],
@@ -2067,7 +2067,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2087,7 +2087,7 @@
                             "id": "PR-AWS-TRF-S3-013",
                             "eval": "data.rule.s3_website",
                             "message": "data.rule.s3_website_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket",
                             "remediationFunction": "PR_AWS_TRF_S3_013.py"
                         }
                     ],
@@ -2101,7 +2101,7 @@
                                 "ISO 27001"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2121,7 +2121,7 @@
                             "id": "PR-AWS-TRF-S3-006",
                             "eval": "data.rule.s3_cloudtrail",
                             "message": "data.rule.s3_cloudtrail_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudtrail",
                             "remediationFunction": "PR_AWS_TRF_S3_006.py"
                         }
                     ],
@@ -2133,7 +2133,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2153,7 +2153,7 @@
                             "id": "PR-AWS-TRF-S3-008",
                             "eval": "data.rule.s3_public_acl",
                             "message": "data.rule.s3_public_acl_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket",
                             "remediationFunction": "PR_AWS_TRF_S3_008.py"
                         }
                     ],
@@ -2165,7 +2165,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2185,7 +2185,7 @@
                             "id": "PR-AWS-TRF-S3-010",
                             "eval": "data.rule.s3_auth_acl",
                             "message": "data.rule.s3_auth_acl_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket",
                             "remediationFunction": "PR_AWS_TRF_S3_010.py"
                         }
                     ],
@@ -2197,7 +2197,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2217,7 +2217,7 @@
                             "id": "PR-AWS-TRF-S3-011",
                             "eval": "data.rule.s3_public_access",
                             "message": "data.rule.s3_public_access_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket",
                             "remediationFunction": "PR_AWS_TRF_S3_011.py"
                         }
                     ],
@@ -2229,7 +2229,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2249,7 +2249,7 @@
                             "id": "PR-AWS-TRF-S3-012",
                             "eval": "data.rule.s3_encryption",
                             "message": "data.rule.s3_encryption_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket",
                             "remediationFunction": "PR_AWS_TRF_S3_012.py"
                         }
                     ],
@@ -2261,7 +2261,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2281,7 +2281,7 @@
                             "id": "PR-AWS-TRF-S3-014",
                             "eval": "data.rule.s3_cors",
                             "message": "data.rule.s3_cors_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket--seealso",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket",
                             "remediationFunction": "PR_AWS_TRF_S3_014.py"
                         }
                     ],
@@ -2293,7 +2293,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2313,7 +2313,7 @@
                             "id": "PR-AWS-TRF-EMR-001",
                             "eval": "data.rule.emr_security",
                             "message": "data.rule.emr_security_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/emr_cluster",
                             "remediationFunction": "PR_AWS_TRF_EMR_001.py"
                         }
                     ],
@@ -2325,7 +2325,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2345,7 +2345,7 @@
                             "id": "PR-AWS-TRF-EMR-002",
                             "eval": "data.rule.emr_kerberos",
                             "message": "data.rule.emr_kerberos_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-kerberosattributes",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/emr_cluster",
                             "remediationFunction": "PR_AWS_TRF_EMR_002.py"
                         }
                     ],
@@ -2357,7 +2357,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2377,7 +2377,7 @@
                             "id": "PR-AWS-TRF-EMR-003",
                             "eval": "data.rule.emr_s3_encryption",
                             "message": "data.rule.emr_s3_encryption_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/emr_security_configuration",
                             "remediationFunction": "PR_AWS_TRF_EMR_003.py"
                         }
                     ],
@@ -2389,7 +2389,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2409,7 +2409,7 @@
                             "id": "PR-AWS-TRF-EMR-004",
                             "eval": "data.rule.emr_local_encryption_cmk",
                             "message": "data.rule.emr_local_encryption_cmk_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/emr_security_configuration",
                             "remediationFunction": "PR_AWS_TRF_EMR_004.py"
                         }
                     ],
@@ -2421,7 +2421,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2441,7 +2441,7 @@
                             "id": "PR-AWS-TRF-EMR-005",
                             "eval": "data.rule.emr_local_encryption",
                             "message": "data.rule.emr_local_encryption_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/emr_security_configuration",
                             "remediationFunction": "PR_AWS_TRF_EMR_005.py"
                         }
                     ],
@@ -2453,7 +2453,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2473,7 +2473,7 @@
                             "id": "PR-AWS-TRF-EMR-006",
                             "eval": "data.rule.emr_rest_encryption",
                             "message": "data.rule.emr_rest_encryption_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/emr_security_configuration",
                             "remediationFunction": "PR_AWS_TRF_EMR_006.py"
                         }
                     ],
@@ -2485,7 +2485,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2505,7 +2505,7 @@
                             "id": "PR-AWS-TRF-EMR-008",
                             "eval": "data.rule.emr_s3_encryption_sse",
                             "message": "data.rule.emr_s3_encryption_sse_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/emr_security_configuration",
                             "remediationFunction": "PR_AWS_TRF_EMR_008.py"
                         }
                     ],
@@ -2517,7 +2517,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2537,7 +2537,7 @@
                             "id": "PR-AWS-TRF-EMR-007",
                             "eval": "data.rule.emr_transit_encryption",
                             "message": "data.rule.emr_transit_encryption_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/emr_security_configuration",
                             "remediationFunction": "PR_AWS_TRF_EMR_007.py"
                         }
                     ],
@@ -2549,7 +2549,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2569,7 +2569,7 @@
                             "id": "PR-AWS-TRF-SQS-001",
                             "eval": "data.rule.sqs_deadletter",
                             "message": "data.rule.sqs_deadletter_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue",
                             "remediationFunction": "PR_AWS_TRF_SQS_001.py"
                         }
                     ],
@@ -2581,7 +2581,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2601,7 +2601,7 @@
                             "id": "PR-AWS-TRF-SQS-002",
                             "eval": "data.rule.sqs_encrypt_key",
                             "message": "data.rule.sqs_encrypt_key_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue",
                             "remediationFunction": "PR_AWS_TRF_SQS_002.py"
                         }
                     ],
@@ -2613,7 +2613,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2633,7 +2633,7 @@
                             "id": "PR-AWS-TRF-SQS-003",
                             "eval": "data.rule.sqs_encrypt",
                             "message": "data.rule.sqs_encrypt_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue",
                             "remediationFunction": "PR_AWS_TRF_SQS_003.py"
                         }
                     ],
@@ -2645,7 +2645,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2665,7 +2665,7 @@
                             "id": "PR-AWS-TRF-MSK-001",
                             "eval": "data.rule.msk_encryption_at_rest_cmk",
                             "message": "data.rule.msk_encryption_at_rest_cmk_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/msk_cluster",
                             "remediationFunction": "PR_AWS_TRF_MSK_001.py"
                         }
                     ],
@@ -2677,7 +2677,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2697,7 +2697,7 @@
                             "id": "PR-AWS-TRF-MSK-002",
                             "eval": "data.rule.msk_in_transit_encryption",
                             "message": "data.rule.msk_in_transit_encryption_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/msk_cluster",
                             "remediationFunction": "PR_AWS_TRF_MSK_002.py"
                         }
                     ],
@@ -2709,7 +2709,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2729,7 +2729,7 @@
                             "id": "PR-AWS-TRF-MSK-003",
                             "eval": "data.rule.msk_in_transit_encryption_tls",
                             "message": "data.rule.msk_in_transit_encryption_tls_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/msk_cluster",
                             "remediationFunction": "PR_AWS_TRF_MSK_003.py"
                         }
                     ],
@@ -2741,7 +2741,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2761,7 +2761,7 @@
                             "id": "PR-AWS-TRF-MSK-004",
                             "eval": "data.rule.msk_vpc",
                             "message": "data.rule.msk_vpc_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/msk_cluster",
                             "remediationFunction": "PR_AWS_TRF_MSK_004.py"
                         }
                     ],
@@ -2773,7 +2773,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2793,7 +2793,7 @@
                             "id": "PR-AWS-TRF-IAM-001",
                             "eval": "data.rule.iam_wildcard_resource",
                             "message": "data.rule.iam_wildcard_resource_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy",
                             "remediationFunction": "PR_AWS_TRF_IAM_001.py"
                         }
                     ],
@@ -2805,7 +2805,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2825,7 +2825,7 @@
                             "id": "PR-AWS-TRF-IAM-002",
                             "eval": "data.rule.iam_wildcard_action",
                             "message": "data.rule.iam_wildcard_action_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy",
                             "remediationFunction": "PR_AWS_TRF_IAM_002.py"
                         }
                     ],
@@ -2837,7 +2837,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2857,7 +2857,7 @@
                             "id": "PR-AWS-TRF-IAM-003",
                             "eval": "data.rule.iam_wildcard_principal",
                             "message": "data.rule.iam_wildcard_principal_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role",
                             "remediationFunction": "PR_AWS_TRF_IAM_003.py"
                         }
                     ],
@@ -2869,7 +2869,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2889,7 +2889,7 @@
                             "id": "PR-AWS-TRF-IAM-004",
                             "eval": "data.rule.iam_resource_format",
                             "message": "data.rule.iam_resource_format_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role",
                             "remediationFunction": "PR_AWS_TRF_IAM_004.py"
                         }
                     ],
@@ -2901,7 +2901,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2923,7 +2923,7 @@
                             "id": "PR-AWS-TRF-IAM-005",
                             "eval": "data.rule.iam_assume_permission",
                             "message": "data.rule.iam_assume_permission_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy",
                             "remediationFunction": "PR_AWS_TRF_IAM_005.py"
                         }
                     ],
@@ -2935,7 +2935,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2955,7 +2955,7 @@
                             "id": "PR-AWS-TRF-IAM-006",
                             "eval": "data.rule.iam_all_traffic",
                             "message": "data.rule.iam_all_traffic_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy",
                             "remediationFunction": "PR_AWS_TRF_IAM_006.py"
                         }
                     ],
@@ -2967,7 +2967,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -2987,7 +2987,7 @@
                             "id": "PR-AWS-TRF-IAM-007",
                             "eval": "data.rule.iam_administrative_privileges",
                             "message": "data.rule.iam_administrative_privileges_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy",
                             "remediationFunction": "PR_AWS_TRF_IAM_007.py"
                         }
                     ],
@@ -2999,7 +2999,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3019,7 +3019,7 @@
                             "id": "PR-AWS-TRF-RSH-001",
                             "eval": "data.rule.redshift_encrypt_key",
                             "message": "data.rule.redshift_encrypt_key_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/redshift_cluster",
                             "remediationFunction": "PR_AWS_TRF_RSH_001.py"
                         }
                     ],
@@ -3031,7 +3031,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3051,7 +3051,7 @@
                             "id": "PR-AWS-TRF-RSH-002",
                             "eval": "data.rule.redshift_public",
                             "message": "data.rule.redshift_public_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/redshift_cluster",
                             "remediationFunction": "PR_AWS_TRF_RSH_002.py"
                         }
                     ],
@@ -3070,7 +3070,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3090,7 +3090,7 @@
                             "id": "PR-AWS-TRF-RSH-007",
                             "eval": "data.rule.redshift_audit",
                             "message": "data.rule.redshift_audit_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/redshift_cluster",
                             "remediationFunction": "PR_AWS_TRF_RSH_007.py"
                         }
                     ],
@@ -3109,7 +3109,7 @@
                                 "SOC 2"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3129,7 +3129,7 @@
                             "id": "PR-AWS-TRF-RSH-003",
                             "eval": "data.rule.redshift_require_ssl",
                             "message": "data.rule.redshift_require_ssl_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/redshift_parameter_group",
                             "remediationFunction": "PR_AWS_TRF_RSH_003.py"
                         }
                     ],
@@ -3147,7 +3147,7 @@
                                 "NIST 800"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3167,7 +3167,7 @@
                             "id": "PR-AWS-TRF-RSH-004",
                             "eval": "data.rule.redshift_encrypt",
                             "message": "data.rule.redshift_encrypt_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/redshift_cluster",
                             "remediationFunction": "PR_AWS_TRF_RSH_004.py"
                         }
                     ],
@@ -3187,7 +3187,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3207,7 +3207,7 @@
                             "id": "PR-AWS-TRF-RSH-005",
                             "eval": "data.rule.redshift_allow_version_upgrade",
                             "message": "data.rule.redshift_allow_version_upgrade_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html#cfn-redshift-cluster-allowversionupgrade",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/redshift_cluster",
                             "remediationFunction": "PR_AWS_TRF_RSH_005.py"
                         }
                     ],
@@ -3219,7 +3219,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3239,7 +3239,7 @@
                             "id": "PR-AWS-TRF-SNS-001",
                             "eval": "data.rule.sns_protocol",
                             "message": "data.rule.sns_protocol_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic_subscription",
                             "remediationFunction": "PR_AWS_TRF_SNS_001.py"
                         }
                     ],
@@ -3251,7 +3251,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3271,7 +3271,7 @@
                             "id": "PR-AWS-TRF-SNS-002",
                             "eval": "data.rule.sns_encrypt_key",
                             "message": "data.rule.sns_encrypt_key_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic",
                             "remediationFunction": "PR_AWS_TRF_SNS_002.py"
                         }
                     ],
@@ -3283,7 +3283,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3303,7 +3303,7 @@
                             "id": "PR-AWS-TRF-SNS-003",
                             "eval": "data.rule.sns_encrypt",
                             "message": "data.rule.sns_encrypt_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic",
                             "remediationFunction": "PR_AWS_TRF_SNS_003.py"
                         }
                     ],
@@ -3315,7 +3315,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3335,7 +3335,7 @@
                             "id": "PR-AWS-TRF-ACM-001",
                             "eval": "data.rule.acm_wildcard",
                             "message": "data.rule.acm_wildcard_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acm_certificate",
                             "remediationFunction": "PR_AWS_TRF_ACM_001.py"
                         }
                     ],
@@ -3347,7 +3347,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3367,7 +3367,7 @@
                             "id": "PR-AWS-TRF-ACM-002",
                             "eval": "data.rule.acm_ct_log",
                             "message": "data.rule.acm_ct_log_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acm_certificate",
                             "remediationFunction": "PR_AWS_TRF_ACM_002.py"
                         }
                     ],
@@ -3383,7 +3383,7 @@
                                 "NIST 800"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3403,7 +3403,7 @@
                             "id": "PR-AWS-TRF-ECR-001",
                             "eval": "data.rule.ecr_imagetag",
                             "message": "data.rule.ecr_imagetag_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-imagetagmutability",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository",
                             "remediationFunction": "PR_AWS_TRF_ECR_001.py"
                         }
                     ],
@@ -3415,7 +3415,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3435,7 +3435,7 @@
                             "id": "PR-AWS-TRF-ECR-002",
                             "eval": "data.rule.ecr_encryption",
                             "message": "data.rule.ecr_encryption_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-imagetagmutability",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository",
                             "remediationFunction": "PR_AWS_TRF_ECR_002.py"
                         }
                     ],
@@ -3447,7 +3447,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3467,7 +3467,7 @@
                             "id": "PR-AWS-TRF-ECR-003",
                             "eval": "data.rule.ecr_scan",
                             "message": "data.rule.ecr_scan_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecr-repository-image_scanning_configuration.html#cfn-ecr-repository-image_scanning_configuration-scan_on_push",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository",
                             "remediationFunction": "PR_AWS_TRF_ECR_003.py"
                         }
                     ],
@@ -3479,7 +3479,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3499,7 +3499,7 @@
                             "id": "PR-AWS-TRF-EC2-001",
                             "eval": "data.rule.ec2_iam_role",
                             "message": "data.rule.ec2_iam_role_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance",
                             "remediationFunction": "PR_AWS_TRF_EC2_001.py"
                         }
                     ],
@@ -3511,7 +3511,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3531,7 +3531,7 @@
                             "id": "PR-AWS-TRF-EC2-002",
                             "eval": "data.rule.ec2_no_vpc",
                             "message": "data.rule.ec2_no_vpc_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance",
                             "remediationFunction": "PR_AWS_TRF_EC2_002.py"
                         }
                     ],
@@ -3543,7 +3543,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3563,7 +3563,7 @@
                             "id": "PR-AWS-TRF-EC2-003",
                             "eval": "data.rule.ec2_public_ip",
                             "message": "data.rule.ec2_public_ip_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance",
                             "remediationFunction": "PR_AWS_TRF_EC2_003.py"
                         }
                     ],
@@ -3575,7 +3575,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3595,7 +3595,7 @@
                             "id": "PR-AWS-TRF-LMD-001",
                             "eval": "data.rule.lambda_env",
                             "message": "data.rule.lambda_env_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function",
                             "remediationFunction": "PR_AWS_TRF_LMD_001.py"
                         }
                     ],
@@ -3607,7 +3607,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3627,7 +3627,7 @@
                             "id": "PR-AWS-TRF-LMD-002",
                             "eval": "data.rule.lambda_vpc",
                             "message": "data.rule.lambda_vpc_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function",
                             "remediationFunction": "PR_AWS_TRF_LMD_002.py"
                         }
                     ],
@@ -3639,7 +3639,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3659,7 +3659,7 @@
                             "id": "PR-AWS-TRF-LMD-003",
                             "eval": "data.rule.lambda_tracing",
                             "message": "data.rule.lambda_tracing_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function",
                             "remediationFunction": "PR_AWS_TRF_LMD_003.py"
                         }
                     ],
@@ -3674,7 +3674,7 @@
                                 "NIST 800"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3694,7 +3694,7 @@
                             "id": "PR-AWS-TRF-CF-001",
                             "eval": "data.rule.cf_default_cache",
                             "message": "data.rule.cf_default_cache_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution",
                             "remediationFunction": "PR_AWS_TRF_CF_001.py"
                         }
                     ],
@@ -3706,7 +3706,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3726,7 +3726,7 @@
                             "id": "PR-AWS-TRF-CF-002",
                             "eval": "data.rule.cf_ssl_protocol",
                             "message": "data.rule.cf_ssl_protocol_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution",
                             "remediationFunction": "PR_AWS_TRF_CF_002.py"
                         }
                     ],
@@ -3738,7 +3738,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3758,7 +3758,7 @@
                             "id": "PR-AWS-TRF-CF-003",
                             "eval": "data.rule.cf_logging",
                             "message": "data.rule.cf_logging_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution",
                             "remediationFunction": "PR_AWS_TRF_CF_003.py"
                         }
                     ],
@@ -3770,7 +3770,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3790,7 +3790,7 @@
                             "id": "PR-AWS-TRF-CF-004",
                             "eval": "data.rule.cf_https_only",
                             "message": "data.rule.cf_https_only_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution",
                             "remediationFunction": "PR_AWS_TRF_CF_004.py"
                         }
                     ],
@@ -3802,7 +3802,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3822,7 +3822,7 @@
                             "id": "PR-AWS-TRF-CF-005",
                             "eval": "data.rule.cf_https",
                             "message": "data.rule.cf_https_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution",
                             "remediationFunction": "PR_AWS_TRF_CF_005.py"
                         }
                     ],
@@ -3834,7 +3834,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3854,7 +3854,7 @@
                             "id": "PR-AWS-TRF-CF-006",
                             "eval": "data.rule.cf_min_protocol",
                             "message": "data.rule.cf_min_protocol_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution",
                             "remediationFunction": "PR_AWS_TRF_CF_006.py"
                         }
                     ],
@@ -3866,7 +3866,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3886,7 +3886,7 @@
                             "id": "PR-AWS-TRF-CF-007",
                             "eval": "data.rule.cf_firewall",
                             "message": "data.rule.cf_firewall_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution",
                             "remediationFunction": "PR_AWS_TRF_CF_007.py"
                         }
                     ],
@@ -3898,7 +3898,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3918,7 +3918,7 @@
                             "id": "PR-AWS-TRF-CF-008",
                             "eval": "data.rule.cf_default_ssl",
                             "message": "data.rule.cf_default_ssl_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution",
                             "remediationFunction": "PR_AWS_TRF_CF_008.py"
                         }
                     ],
@@ -3930,7 +3930,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3950,7 +3950,7 @@
                             "id": "PR-AWS-TRF-CF-009",
                             "eval": "data.rule.cf_geo_restriction",
                             "message": "data.rule.cf_geo_restriction_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution",
                             "remediationFunction": "PR_AWS_TRF_CF_009.py"
                         }
                     ],
@@ -3962,7 +3962,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -3982,7 +3982,7 @@
                             "id": "PR-AWS-TRF-CF-010",
                             "eval": "data.rule.cf_s3_origin",
                             "message": "data.rule.cf_s3_origin_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution",
                             "remediationFunction": "PR_AWS_TRF_CF_010.py"
                         }
                     ],
@@ -3994,7 +3994,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4014,7 +4014,7 @@
                             "id": "PR-AWS-TRF-DD-001",
                             "eval": "data.rule.dynamodb_encrypt",
                             "message": "data.rule.dynamodb_encrypt_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table",
                             "remediationFunction": "PR_AWS_TRF_DD_001.py"
                         }
                     ],
@@ -4026,7 +4026,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4046,7 +4046,7 @@
                             "id": "PR-AWS-TRF-EC-001",
                             "eval": "data.rule.cache_failover",
                             "message": "data.rule.cache_failover_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticache_replication_group",
                             "remediationFunction": "PR_AWS_TRF_EC_001.py"
                         }
                     ],
@@ -4058,7 +4058,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4078,7 +4078,7 @@
                             "id": "PR-AWS-TRF-EC-002",
                             "eval": "data.rule.cache_redis_auth",
                             "message": "data.rule.cache_redis_auth_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticache_replication_group",
                             "remediationFunction": "PR_AWS_TRF_EC_002.py"
                         }
                     ],
@@ -4090,7 +4090,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4110,7 +4110,7 @@
                             "id": "PR-AWS-TRF-EC-003",
                             "eval": "data.rule.cache_redis_encrypt",
                             "message": "data.rule.cache_redis_encrypt_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticache_replication_group",
                             "remediationFunction": "PR_AWS_TRF_EC_003.py"
                         }
                     ],
@@ -4122,7 +4122,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4142,7 +4142,7 @@
                             "id": "PR-AWS-TRF-EC-004",
                             "eval": "data.rule.cache_encrypt",
                             "message": "data.rule.cache_encrypt_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticache_replication_group",
                             "remediationFunction": "PR_AWS_TRF_EC_004.py"
                         }
                     ],
@@ -4154,7 +4154,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4174,7 +4174,7 @@
                             "id": "PR-AWS-TRF-RDS-001",
                             "eval": "data.rule.rds_cluster_encrypt",
                             "message": "data.rule.rds_cluster_encrypt_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster",
                             "remediationFunction": "PR_AWS_TRF_RDS_001.py"
                         }
                     ],
@@ -4186,7 +4186,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4206,7 +4206,7 @@
                             "id": "PR-AWS-TRF-RDS-002",
                             "eval": "data.rule.rds_public",
                             "message": "data.rule.rds_public_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance",
                             "remediationFunction": "PR_AWS_TRF_RDS_002.py"
                         }
                     ],
@@ -4223,7 +4223,7 @@
                                 "NIST 800"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4243,7 +4243,7 @@
                             "id": "PR-AWS-TRF-RDS-006",
                             "eval": "data.rule.rds_encrypt",
                             "message": "data.rule.rds_encrypt_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance",
                             "remediationFunction": "PR_AWS_TRF_RDS_006.py"
                         }
                     ],
@@ -4264,7 +4264,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4284,7 +4284,7 @@
                             "id": "PR-AWS-TRF-RDS-007",
                             "eval": "data.rule.rds_multiaz",
                             "message": "data.rule.rds_multiaz_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance",
                             "remediationFunction": "PR_AWS_TRF_RDS_007.py"
                         }
                     ],
@@ -4296,7 +4296,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4316,7 +4316,7 @@
                             "id": "PR-AWS-TRF-RDS-008",
                             "eval": "data.rule.rds_snapshot",
                             "message": "data.rule.rds_snapshot_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance",
                             "remediationFunction": "PR_AWS_TRF_RDS_008.py"
                         }
                     ],
@@ -4328,7 +4328,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4348,7 +4348,7 @@
                             "id": "PR-AWS-TRF-RDS-009",
                             "eval": "data.rule.rds_backup",
                             "message": "data.rule.rds_backup_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance",
                             "remediationFunction": "PR_AWS_TRF_RDS_009.py"
                         }
                     ],
@@ -4360,7 +4360,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4380,7 +4380,7 @@
                             "id": "PR-AWS-TRF-RDS-010",
                             "eval": "data.rule.rds_upgrade",
                             "message": "data.rule.rds_upgrade_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance",
                             "remediationFunction": "PR_AWS_TRF_RDS_010.py"
                         }
                     ],
@@ -4392,7 +4392,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4412,7 +4412,7 @@
                             "id": "PR-AWS-TRF-RDS-011",
                             "eval": "data.rule.rds_retention",
                             "message": "data.rule.rds_retention_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance",
                             "remediationFunction": "PR_AWS_TRF_RDS_011.py"
                         }
                     ],
@@ -4424,7 +4424,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4444,7 +4444,7 @@
                             "id": "PR-AWS-TRF-RDS-003",
                             "eval": "data.rule.rds_encrypt_key",
                             "message": "data.rule.rds_encrypt_key_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance",
                             "remediationFunction": "PR_AWS_TRF_RDS_003.py"
                         }
                     ],
@@ -4456,7 +4456,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4476,7 +4476,7 @@
                             "id": "PR-AWS-TRF-RDS-004",
                             "eval": "data.rule.rds_instance_event",
                             "message": "data.rule.rds_instance_event_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_event_subscription",
                             "remediationFunction": "PR_AWS_TRF_RDS_004.py"
                         }
                     ],
@@ -4488,7 +4488,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4508,7 +4508,7 @@
                             "id": "PR-AWS-TRF-RDS-005",
                             "eval": "data.rule.rds_secgroup_event",
                             "message": "data.rule.rds_secgroup_event_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_event_subscription",
                             "remediationFunction": "PR_AWS_TRF_RDS_005.py"
                         }
                     ],
@@ -4520,7 +4520,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4540,7 +4540,7 @@
                             "id": "PR-AWS-TRF-DMS-001",
                             "eval": "data.rule.dms_endpoint",
                             "message": "data.rule.dms_endpoint_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.amazonaws.cn/en_us/AWSCloudFormation/latest/UserGuide/aws-resource-dms-endpoint.html#cfn-dms-endpoint-enginename",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_endpoint",
                             "remediationFunction": "PR_AWS_TRF_DMS_001.py"
                         }
                     ],
@@ -4552,7 +4552,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4572,7 +4572,7 @@
                             "id": "PR-AWS-TRF-EC-005",
                             "eval": "data.rule.cache_ksm_key",
                             "message": "data.rule.cache_ksm_key_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html#cfn-elasticache-replicationgroup-kmskeyid",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticache_replication_group",
                             "remediationFunction": "PR_AWS_TRF_EC_005.py"
                         }
                     ],
@@ -4584,7 +4584,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4604,7 +4604,7 @@
                             "id": "PR-AWS-TRF-EC-006",
                             "eval": "data.rule.cache_default_sg",
                             "message": "data.rule.cache_default_sg_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html#cfn-elasticache-replicationgroup-cachesubnetgroupname",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticache_replication_group",
                             "remediationFunction": "PR_AWS_TRF_EC_006.py"
                         }
                     ],
@@ -4616,7 +4616,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4636,7 +4636,7 @@
                             "id": "PR-AWS-TRF-RDS-012",
                             "eval": "data.rule.rds_cluster_retention",
                             "message": "data.rule.rds_cluster_retention_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster",
                             "remediationFunction": "PR_AWS_TRF_RDS_012.py"
                         }
                     ],
@@ -4648,7 +4648,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4668,7 +4668,7 @@
                             "id": "PR-AWS-TRF-DAX-001",
                             "eval": "data.rule.dax_encrypt",
                             "message": "data.rule.dax_encrypt_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dax-cluster-ssespecification.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dax_cluster",
                             "remediationFunction": "PR_AWS_TRF_DAX_001.py"
                         }
                     ],
@@ -4680,7 +4680,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4700,7 +4700,7 @@
                             "id": "PR-AWS-TRF-DD-002",
                             "eval": "data.rule.dynamodb_PITR_enable",
                             "message": "data.rule.dynamodb_PITR_enable_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table",
                             "remediationFunction": "PR_AWS_TRF_DD_002.py"
                         }
                     ],
@@ -4712,7 +4712,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4732,7 +4732,7 @@
                             "id": "PR-AWS-TRF-QLDB-001",
                             "eval": "data.rule.qldb_permission_mode",
                             "message": "data.rule.qldb_permission_mode_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-qldb-ledger.html#cfn-qldb-ledger-permissionsmode",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/qldb_ledger",
                             "remediationFunction": "PR_AWS_TRF_QLDB_001.py"
                         }
                     ],
@@ -4744,7 +4744,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4764,7 +4764,7 @@
                             "id": "PR-AWS-TRF-RDS-013",
                             "eval": "data.rule.rds_cluster_deletion_protection",
                             "message": "data.rule.rds_cluster_deletion_protection_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster",
                             "remediationFunction": "PR_AWS_TRF_RDS_013.py"
                         }
                     ],
@@ -4776,7 +4776,7 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "terraform"
                             ]
                         }
                     ],
@@ -4796,7 +4796,7 @@
                             "id": "PR-AWS-TRF-ECS-001",
                             "eval": "data.rule.ecs_task_evelated",
                             "message": "data.rule.ecs_task_evelated_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition",
                             "remediationFunction": "PR_AWS_TRF_ECS_001.py"
                         }
                     ],
@@ -4828,7 +4828,7 @@
                             "id": "PR-AWS-TRF-ECS-002",
                             "eval": "data.rule.ecs_exec",
                             "message": "data.rule.ecs_exec_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition",
                             "remediationFunction": "PR_AWS_TRF_ECS_002.py"
                         }
                     ],
@@ -4860,7 +4860,7 @@
                             "id": "PR-AWS-TRF-ECS-003",
                             "eval": "data.rule.ecs_root_user",
                             "message": "data.rule.ecs_root_user_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition",
                             "remediationFunction": "PR_AWS_TRF_ECS_003.py"
                         }
                     ],
@@ -4892,7 +4892,7 @@
                             "id": "PR-AWS-TRF-ECS-004",
                             "eval": "data.rule.ecs_root_filesystem",
                             "message": "data.rule.ecs_root_filesystem_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition",
                             "remediationFunction": "PR_AWS_TRF_ECS_004.py"
                         }
                     ],
@@ -4924,7 +4924,7 @@
                             "id": "PR-AWS-TRF-ECS-005",
                             "eval": "data.rule.ecs_resource_limit",
                             "message": "data.rule.ecs_resource_limit_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition",
                             "remediationFunction": "PR_AWS_TRF_ECS_005.py"
                         }
                     ],
@@ -4956,7 +4956,7 @@
                             "id": "PR-AWS-TRF-ECS-006",
                             "eval": "data.rule.ecs_logging",
                             "message": "data.rule.ecs_logging_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition",
                             "remediationFunction": "PR_AWS_TRF_ECS_006.py"
                         }
                     ],
@@ -4988,7 +4988,7 @@
                             "id": "PR-AWS-TRF-ECS-007",
                             "eval": "data.rule.ecs_transit_enabled",
                             "message": "data.rule.ecs_transit_enabled_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-efsvolumeconfiguration.html#cfn-ecs-taskdefinition-efsvolumeconfiguration-transitencryption",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition",
                             "remediationFunction": "PR_AWS_TRF_ECS_007.py"
                         }
                     ],
@@ -5020,7 +5020,7 @@
                             "id": "PR-AWS-TRF-SG-030",
                             "eval": "data.rule.db_exposed",
                             "message": "data.rule.db_exposed_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_030.py"
                         }
                     ],
@@ -5055,7 +5055,7 @@
                             "id": "PR-AWS-TRF-SG-031",
                             "eval": "data.rule.bitcoin_ports",
                             "message": "data.rule.bitcoin_ports_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_031.py"
                         }
                     ],
@@ -5093,7 +5093,7 @@
                             "id": "PR-AWS-TRF-SG-032",
                             "eval": "data.rule.ethereum_ports",
                             "message": "data.rule.ethereum_ports_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_032.py"
                         }
                     ],
@@ -5131,7 +5131,7 @@
                             "id": "PR-AWS-TRF-SG-001",
                             "eval": "data.rule.port_135",
                             "message": "data.rule.port_135_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_001.py"
                         }
                     ],
@@ -5164,7 +5164,7 @@
                             "id": "PR-AWS-TRF-SG-002",
                             "eval": "data.rule.port_137",
                             "message": "data.rule.port_137_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_002.py"
                         }
                     ],
@@ -5197,7 +5197,7 @@
                             "id": "PR-AWS-TRF-SG-003",
                             "eval": "data.rule.port_138",
                             "message": "data.rule.port_138_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_003.py"
                         }
                     ],
@@ -5230,7 +5230,7 @@
                             "id": "PR-AWS-TRF-SG-004",
                             "eval": "data.rule.port_1433",
                             "message": "data.rule.port_1433_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_004.py"
                         }
                     ],
@@ -5263,7 +5263,7 @@
                             "id": "PR-AWS-TRF-SG-005",
                             "eval": "data.rule.port_1434",
                             "message": "data.rule.port_1434_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_005.py"
                         }
                     ],
@@ -5296,7 +5296,7 @@
                             "id": "PR-AWS-TRF-SG-006",
                             "eval": "data.rule.port_20",
                             "message": "data.rule.port_20_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_006.py"
                         }
                     ],
@@ -5329,7 +5329,7 @@
                             "id": "PR-AWS-TRF-SG-007",
                             "eval": "data.rule.port_21",
                             "message": "data.rule.port_21_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_007.py"
                         }
                     ],
@@ -5362,7 +5362,7 @@
                             "id": "PR-AWS-TRF-SG-008",
                             "eval": "data.rule.port_22",
                             "message": "data.rule.port_22_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_008.py"
                         }
                     ],
@@ -5405,7 +5405,7 @@
                             "id": "PR-AWS-TRF-SG-009",
                             "eval": "data.rule.port_23",
                             "message": "data.rule.port_23_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_009.py"
                         }
                     ],
@@ -5438,7 +5438,7 @@
                             "id": "PR-AWS-TRF-SG-010",
                             "eval": "data.rule.port_25",
                             "message": "data.rule.port_25_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_010.py"
                         }
                     ],
@@ -5471,7 +5471,7 @@
                             "id": "PR-AWS-TRF-SG-011",
                             "eval": "data.rule.port_3306",
                             "message": "data.rule.port_3306_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_011.py"
                         }
                     ],
@@ -5504,7 +5504,7 @@
                             "id": "PR-AWS-TRF-SG-012",
                             "eval": "data.rule.port_3389",
                             "message": "data.rule.port_3389_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_012.py"
                         }
                     ],
@@ -5547,7 +5547,7 @@
                             "id": "PR-AWS-TRF-SG-013",
                             "eval": "data.rule.port_4333",
                             "message": "data.rule.port_4333_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_013.py"
                         }
                     ],
@@ -5580,7 +5580,7 @@
                             "id": "PR-AWS-TRF-SG-014",
                             "eval": "data.rule.port_445",
                             "message": "data.rule.port_445_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_014.py"
                         }
                     ],
@@ -5613,7 +5613,7 @@
                             "id": "PR-AWS-TRF-SG-015",
                             "eval": "data.rule.port_53",
                             "message": "data.rule.port_53_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_015.py"
                         }
                     ],
@@ -5646,7 +5646,7 @@
                             "id": "PR-AWS-TRF-SG-016",
                             "eval": "data.rule.port_5432",
                             "message": "data.rule.port_5432_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_016.py"
                         }
                     ],
@@ -5679,7 +5679,7 @@
                             "id": "PR-AWS-TRF-SG-017",
                             "eval": "data.rule.port_5500",
                             "message": "data.rule.port_5500_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_017.py"
                         }
                     ],
@@ -5712,7 +5712,7 @@
                             "id": "PR-AWS-TRF-SG-018",
                             "eval": "data.rule.port_5900",
                             "message": "data.rule.port_5900_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_018.py"
                         }
                     ],
@@ -5745,7 +5745,7 @@
                             "id": "PR-AWS-TRF-SG-019",
                             "eval": "data.rule.port_all",
                             "message": "data.rule.port_all_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_019.py"
                         }
                     ],
@@ -5786,7 +5786,7 @@
                             "id": "PR-AWS-TRF-SG-020",
                             "eval": "data.rule.port_proto_all",
                             "message": "data.rule.port_proto_all_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_020.py"
                         }
                     ],
@@ -5819,7 +5819,7 @@
                             "id": "PR-AWS-TRF-SG-021",
                             "eval": "data.rule.port_69",
                             "message": "data.rule.port_69_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_021.py"
                         }
                     ],
@@ -5852,7 +5852,7 @@
                             "id": "PR-AWS-TRF-SG-022",
                             "eval": "data.rule.sg_tag",
                             "message": "data.rule.sg_tag_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#cfn-ec2-securitygroup-tags, provide security group tags",
+                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
                             "remediationFunction": "PR_AWS_TRF_SG_022.py"
                         }
                     ],

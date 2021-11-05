@@ -8,19 +8,43 @@ package rule
 default ec2_iam_role = null
 
 aws_attribute_absence["ec2_iam_role"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_instance"
     not resource.properties.iam_instance_profile
 }
 
+source_path[{"ec2_iam_role": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    not resource.properties.iam_instance_profile
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "iam_instance_profile"]
+        ],
+    }
+}
+
 aws_issue["ec2_iam_role"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_instance"
     count(resource.properties.iam_instance_profile) == 0
 }
 
+source_path[{"ec2_iam_role": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    count(resource.properties.iam_instance_profile) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "iam_instance_profile"]
+        ],
+    }
+}
+
 ec2_iam_role {
-    lower(input.resources[_].type) == "aws_instance"
+    lower(input.resources[i].type) == "aws_instance"
     not aws_issue["ec2_iam_role"]
     not aws_attribute_absence["ec2_iam_role"]
 }
@@ -61,24 +85,66 @@ aws_issue["ec2_no_vpc"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_instance"
     not resource.properties.subnet_id
-    network_interface := resource.properties.network_interface[_]
+    network_interface := resource.properties.network_interface[j]
     count([c | network_interface.subnet_id; c := 1]) == 0
+}
+
+source_path[{"ec2_no_vpc": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    not resource.properties.subnet_id
+    network_interface := resource.properties.network_interface[j]
+    count([c | network_interface.subnet_id; c := 1]) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "network_interface", j, "subnet_id"]
+        ],
+    }
 }
 
 aws_issue["ec2_no_vpc"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_instance"
     count(resource.properties.subnet_id) == 0
-    network_interface := resource.properties.network_interface[_]
+    network_interface := resource.properties.network_interface[j]
     count([c | network_interface.subnet_id; c := 1]) == 0
+}
+
+source_path[{"ec2_no_vpc": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    count(resource.properties.subnet_id) == 0
+    network_interface := resource.properties.network_interface[j]
+    count([c | network_interface.subnet_id; c := 1]) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "network_interface", j, "subnet_id"]
+        ],
+    }
 }
 
 aws_issue["ec2_no_vpc"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_instance"
     resource.properties.subnet_id == null
-    network_interface := resource.properties.network_interface[_]
+    network_interface := resource.properties.network_interface[j]
     count([c | network_interface.subnet_id; c := 1]) == 0
+}
+
+source_path[{"ec2_no_vpc": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    resource.properties.subnet_id == null
+    network_interface := resource.properties.network_interface[j]
+    count([c | network_interface.subnet_id; c := 1]) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "network_interface", j, "subnet_id"]
+        ],
+    }
 }
 
 ec2_no_vpc {
@@ -119,11 +185,37 @@ aws_issue["ec2_public_ip"] {
     lower(resource.properties.security_groups[_]) == "default"
 }
 
+source_path[{"ec2_public_ip": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    lower(resource.properties.associate_public_ip_address) == "true"
+    lower(resource.properties.security_groups[_]) == "default"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "associate_public_ip_address"]
+        ],
+    }
+}
+
 aws_issue["ec2_public_ip"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_instance"
     lower(resource.properties.associate_public_ip_address) == "true"
-    lower(resource.properties.vpc_security_group_ids[_]) == "default"
+    lower(resource.properties.vpc_security_group_ids[j]) == "default"
+}
+
+source_path[{"ec2_public_ip": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    lower(resource.properties.associate_public_ip_address) == "true"
+    lower(resource.properties.vpc_security_group_ids[j]) == "default"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "associate_public_ip_address"]
+        ],
+    }
 }
 
 aws_bool_issue["ec2_public_ip"] {
@@ -133,11 +225,37 @@ aws_bool_issue["ec2_public_ip"] {
     lower(resource.properties.security_groups[_]) == "default"
 }
 
+source_path[{"ec2_public_ip": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    resource.properties.associate_public_ip_address == true
+    lower(resource.properties.security_groups[_]) == "default"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "associate_public_ip_address"]
+        ],
+    }
+}
+
 aws_bool_issue["ec2_public_ip"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_instance"
     resource.properties.associate_public_ip_address == true
-    lower(resource.properties.vpc_security_group_ids[_]) == "default"
+    lower(resource.properties.vpc_security_group_ids[j]) == "default"
+}
+
+source_path[{"ec2_public_ip": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    resource.properties.associate_public_ip_address == true
+    lower(resource.properties.vpc_security_group_ids[j]) == "default"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "associate_public_ip_address"]
+        ],
+    }
 }
 
 ec2_public_ip {

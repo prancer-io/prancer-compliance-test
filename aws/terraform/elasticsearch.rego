@@ -8,26 +8,63 @@ package rule
 default esearch_vpc = null
 
 aws_attribute_absence["esearch_vpc"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
     not resource.properties.vpc_options
 }
 
+source_path[{"esearch_vpc": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    not resource.properties.vpc_options
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "vpc_options"]
+        ],
+    }
+}
+
 aws_attribute_absence["esearch_vpc"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
     count(resource.properties.vpc_options) == 0
 }
 
-aws_issue["esearch_vpc"] {
-    resource := input.resources[_]
+source_path[{"esearch_vpc": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    vpc_options := resource.properties.vpc_options[_]
+    count(resource.properties.vpc_options) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "vpc_options"]
+        ],
+    }
+}
+
+aws_issue["esearch_vpc"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    vpc_options := resource.properties.vpc_options[j]
     count([ c | vpc_options.subnet_ids != ""; c = 1]) == 0
 }
 
+source_path[{"esearch_vpc": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    vpc_options := resource.properties.vpc_options[j]
+    count([ c | vpc_options.subnet_ids != ""; c = 1]) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "vpc_options", j, "subnet_ids"]
+        ],
+    }
+}
+
 esearch_vpc {
-    lower(input.resources[_].type) == "aws_elasticsearch_domain"
+    lower(input.resources[i].type) == "aws_elasticsearch_domain"
     not aws_issue["esearch_vpc"]
     not aws_attribute_absence["esearch_vpc"]
 }
@@ -65,33 +102,83 @@ esearch_vpc_metadata := {
 default esearch_encrypt = null
 
 aws_attribute_absence["esearch_encrypt"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
     not resource.properties.encrypt_at_rest
 }
 
+source_path[{"esearch_encrypt": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    not resource.properties.encrypt_at_rest
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encrypt_at_rest"]
+        ],
+    }
+}
+
 aws_issue["esearch_encrypt"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
     count(resource.properties.encrypt_at_rest) == 0
 }
 
-aws_issue["esearch_encrypt"] {
-    resource := input.resources[_]
+source_path[{"esearch_encrypt": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    encrypt_at_rest := resource.properties.encrypt_at_rest[_]
+    count(resource.properties.encrypt_at_rest) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encrypt_at_rest"]
+        ],
+    }
+}
+
+aws_issue["esearch_encrypt"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    encrypt_at_rest := resource.properties.encrypt_at_rest[j]
     lower(encrypt_at_rest.enabled) == "false"
 }
 
-aws_bool_issue["esearch_encrypt"] {
-    resource := input.resources[_]
+source_path[{"esearch_encrypt": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    encrypt_at_rest := resource.properties.encrypt_at_rest[_]
+    encrypt_at_rest := resource.properties.encrypt_at_rest[j]
+    lower(encrypt_at_rest.enabled) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encrypt_at_rest", j, "enabled"]
+        ],
+    }
+}
+
+aws_bool_issue["esearch_encrypt"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    encrypt_at_rest := resource.properties.encrypt_at_rest[j]
     not encrypt_at_rest.enabled
 }
 
+source_path[{"esearch_encrypt": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    encrypt_at_rest := resource.properties.encrypt_at_rest[j]
+    not encrypt_at_rest.enabled
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encrypt_at_rest", j, "enabled"]
+        ],
+    }
+}
+
 esearch_encrypt {
-    lower(input.resources[_].type) == "aws_elasticsearch_domain"
+    lower(input.resources[i].type) == "aws_elasticsearch_domain"
     not aws_issue["esearch_encrypt"]
     not aws_bool_issue["esearch_encrypt"]
     not aws_attribute_absence["esearch_encrypt"]
@@ -136,27 +223,65 @@ esearch_encrypt_metadata := {
 default esearch_master = null
 
 aws_issue["esearch_master"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
     count(resource.properties.cluster_config) == 0
 }
 
-aws_issue["esearch_master"] {
-    resource := input.resources[_]
+source_path[{"esearch_encrypt": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    cluster_config := resource.properties.cluster_config[_]
+    count(resource.properties.cluster_config) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "cluster_config"]
+        ],
+    }
+}
+
+aws_issue["esearch_master"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    cluster_config := resource.properties.cluster_config[j]
     lower(cluster_config.dedicated_master_enabled) == "false"
 }
 
-aws_bool_issue["esearch_master"] {
-    resource := input.resources[_]
+source_path[{"esearch_encrypt": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    cluster_config := resource.properties.cluster_config[_]
+    cluster_config := resource.properties.cluster_config[j]
+    lower(cluster_config.dedicated_master_enabled) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "cluster_config", j, "dedicated_master_enabled"]
+        ],
+    }
+}
+
+aws_bool_issue["esearch_master"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    cluster_config := resource.properties.cluster_config[j]
     not cluster_config.dedicated_master_enabled
 }
 
+source_path[{"esearch_encrypt": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    cluster_config := resource.properties.cluster_config[j]
+    not cluster_config.dedicated_master_enabled
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "cluster_config", j, "dedicated_master_enabled"]
+        ],
+    }
+}
+
 esearch_master {
-    lower(input.resources[_].type) == "aws_elasticsearch_domain"
+    lower(input.resources[i].type) == "aws_elasticsearch_domain"
     not aws_issue["esearch_master"]
     not aws_bool_issue["esearch_master"]
 }
@@ -194,36 +319,90 @@ esearch_master_metadata := {
 default esearch_index_slow_log = null
 
 aws_attribute_absence["esearch_index_slow_log"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
     not resource.properties.log_publishing_options
 }
 
-aws_issue["esearch_index_slow_log"] {
-    resource := input.resources[_]
+source_path[{"esearch_index_slow_log": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    logs := resource.properties.log_publishing_options[_]
+    not resource.properties.log_publishing_options
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "log_publishing_options"]
+        ],
+    }
+}
+
+aws_issue["esearch_index_slow_log"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    logs := resource.properties.log_publishing_options[j]
     logs.log_type == "INDEX_SLOW_LOGS"
     lower(logs.enabled) == "false"
 }
 
-aws_bool_issue["esearch_index_slow_log"] {
-    resource := input.resources[_]
+source_path[{"esearch_index_slow_log": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    logs := resource.properties.log_publishing_options[_]
+    logs := resource.properties.log_publishing_options[j]
+    logs.log_type == "INDEX_SLOW_LOGS"
+    lower(logs.enabled) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "log_publishing_options", j, "enabled"]
+        ],
+    }
+}
+
+aws_bool_issue["esearch_index_slow_log"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    logs := resource.properties.log_publishing_options[j]
     logs.log_type == "INDEX_SLOW_LOGS"
     logs.enabled == false
 }
 
-aws_issue["esearch_index_slow_log"] {
-    resource := input.resources[_]
+source_path[{"esearch_index_slow_log": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    log_publishing_options := resource.properties.log_publishing_options[_]
+    logs := resource.properties.log_publishing_options[j]
+    logs.log_type == "INDEX_SLOW_LOGS"
+    logs.enabled == false
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "log_publishing_options", j, "enabled"]
+        ],
+    }
+}
+
+aws_issue["esearch_index_slow_log"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    log_publishing_options := resource.properties.log_publishing_options[j]
     count([ c | log_publishing_options.log_type == "INDEX_SLOW_LOGS"; c = 1]) == 0
 }
 
+source_path[{"esearch_index_slow_log": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    logs := resource.properties.log_publishing_options[j]
+    logs.log_type == "INDEX_SLOW_LOGS"
+    logs.enabled == false
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "log_publishing_options", j]
+        ],
+    }
+}
+
 esearch_index_slow_log {
-    lower(input.resources[_].type) == "aws_elasticsearch_domain"
+    lower(input.resources[i].type) == "aws_elasticsearch_domain"
     not aws_issue["esearch_index_slow_log"]
     not aws_bool_issue["esearch_index_slow_log"]
     not aws_attribute_absence["esearch_index_slow_log"]
@@ -268,36 +447,89 @@ esearch_index_slow_log_metadata := {
 default esearch_search_slow_log = null
 
 aws_attribute_absence["esearch_search_slow_log"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
     not resource.properties.log_publishing_options
 }
 
-aws_issue["esearch_search_slow_log"] {
-    resource := input.resources[_]
+source_path[{"esearch_search_slow_log": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    logs := resource.properties.log_publishing_options[_]
+    not resource.properties.log_publishing_options
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "log_publishing_options"]
+        ],
+    }
+}
+
+aws_issue["esearch_search_slow_log"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    logs := resource.properties.log_publishing_options[j]
     logs.log_type == "SEARCH_SLOW_LOGS"
     lower(logs.enabled) == "false"
 }
 
-aws_bool_issue["esearch_search_slow_log"] {
-    resource := input.resources[_]
+source_path[{"esearch_search_slow_log": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    logs := resource.properties.log_publishing_options[_]
+    logs := resource.properties.log_publishing_options[j]
+    logs.log_type == "SEARCH_SLOW_LOGS"
+    lower(logs.enabled) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "log_publishing_options", j, "enabled"]
+        ],
+    }
+}
+
+aws_bool_issue["esearch_search_slow_log"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    logs := resource.properties.log_publishing_options[j]
     logs.log_type == "SEARCH_SLOW_LOGS"
     logs.enabled == false
 }
 
-aws_issue["esearch_search_slow_log"] {
-    resource := input.resources[_]
+source_path[{"esearch_search_slow_log": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    log_publishing_options := resource.properties.log_publishing_options[_]
+    logs := resource.properties.log_publishing_options[j]
+    logs.log_type == "SEARCH_SLOW_LOGS"
+    logs.enabled == false
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "log_publishing_options", j, "enabled"]
+        ],
+    }
+}
+
+aws_issue["esearch_search_slow_log"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    log_publishing_options := resource.properties.log_publishing_options[j]
     count([ c | log_publishing_options.log_type == "SEARCH_SLOW_LOGS"; c = 1]) == 0
 }
 
+source_path[{"esearch_search_slow_log": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    log_publishing_options := resource.properties.log_publishing_options[j]
+    count([ c | log_publishing_options.log_type == "SEARCH_SLOW_LOGS"; c = 1]) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "log_publishing_options", j]
+        ],
+    }
+}
+
 esearch_search_slow_log {
-    lower(input.resources[_].type) == "aws_elasticsearch_domain"
+    lower(input.resources[i].type) == "aws_elasticsearch_domain"
     not aws_issue["esearch_search_slow_log"]
     not aws_bool_issue["esearch_search_slow_log"]
     not aws_attribute_absence["esearch_search_slow_log"]
@@ -342,21 +574,47 @@ esearch_search_slow_log_metadata := {
 default esearch_zone_awareness = null
 
 aws_issue["esearch_zone_awareness"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    cluster_config := resource.properties.cluster_config[_]
+    cluster_config := resource.properties.cluster_config[j]
     lower(cluster_config.zone_awareness_enabled) == "false"
 }
 
-aws_bool_issue["esearch_zone_awareness"] {
-    resource := input.resources[_]
+source_path[{"esearch_zone_awareness": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    cluster_config := resource.properties.cluster_config[_]
+    cluster_config := resource.properties.cluster_config[j]
+    lower(cluster_config.zone_awareness_enabled) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "cluster_config", j, "zone_awareness_enabled"]
+        ],
+    }
+}
+
+aws_bool_issue["esearch_zone_awareness"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    cluster_config := resource.properties.cluster_config[j]
     not cluster_config.zone_awareness_enabled
 }
 
+source_path[{"esearch_zone_awareness": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    cluster_config := resource.properties.cluster_config[j]
+    not cluster_config.zone_awareness_enabled
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "cluster_config", j, "zone_awareness_enabled"]
+        ],
+    }
+}
+
 esearch_zone_awareness {
-    lower(input.resources[_].type) == "aws_elasticsearch_domain"
+    lower(input.resources[i].type) == "aws_elasticsearch_domain"
     not aws_issue["esearch_zone_awareness"]
     not aws_bool_issue["esearch_zone_awareness"]
 }
@@ -397,15 +655,41 @@ default esearch_node_encryption = null
 aws_issue["esearch_node_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    node_to_node_encryption := resource.properties.node_to_node_encryption[_]
+    node_to_node_encryption := resource.properties.node_to_node_encryption[j]
     lower(node_to_node_encryption.enabled) == "false"
+}
+
+source_path[{"esearch_node_encryption": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    node_to_node_encryption := resource.properties.node_to_node_encryption[j]
+    lower(node_to_node_encryption.enabled) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "node_to_node_encryption", j, "enabled"]
+        ],
+    }
 }
 
 aws_bool_issue["esearch_node_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    node_to_node_encryption := resource.properties.node_to_node_encryption[_]
+    node_to_node_encryption := resource.properties.node_to_node_encryption[j]
     not node_to_node_encryption.enabled
+}
+
+source_path[{"esearch_node_encryption": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    node_to_node_encryption := resource.properties.node_to_node_encryption[j]
+    not node_to_node_encryption.enabled
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "node_to_node_encryption", j, "enabled"]
+        ],
+    }
 }
 
 esearch_node_encryption {
@@ -449,15 +733,41 @@ default esearch_enforce_https = null
 aws_issue["esearch_enforce_https"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    domain_endpoint_options := resource.properties.domain_endpoint_options[_]
+    domain_endpoint_options := resource.properties.domain_endpoint_options[j]
     lower(domain_endpoint_options.enforce_https) == "false"
+}
+
+source_path[{"esearch_node_encryption": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    domain_endpoint_options := resource.properties.domain_endpoint_options[j]
+    lower(domain_endpoint_options.enforce_https) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "domain_endpoint_options", j, "enforce_https"]
+        ],
+    }
 }
 
 aws_bool_issue["esearch_enforce_https"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    domain_endpoint_options := resource.properties.domain_endpoint_options[_]
+    domain_endpoint_options := resource.properties.domain_endpoint_options[j]
     not domain_endpoint_options.enforce_https
+}
+
+source_path[{"esearch_node_encryption": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    domain_endpoint_options := resource.properties.domain_endpoint_options[j]
+    not domain_endpoint_options.enforce_https
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "domain_endpoint_options", j, "enforce_https"]
+        ],
+    }
 }
 
 esearch_enforce_https {
@@ -501,35 +811,90 @@ default esearch_encrypt_kms = null
 aws_issue["esearch_encrypt_kms"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    encrypt_at_rest := resource.properties.encrypt_at_rest[_]
+    encrypt_at_rest := resource.properties.encrypt_at_rest[j]
     lower(encrypt_at_rest.enabled) == "true"
     not encrypt_at_rest.kms_key_id
+}
+
+source_path[{"esearch_encrypt_kms": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    encrypt_at_rest := resource.properties.encrypt_at_rest[j]
+    lower(encrypt_at_rest.enabled) == "true"
+    not encrypt_at_rest.kms_key_id
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encrypt_at_rest", j, "kms_key_id"]
+        ],
+    }
 }
 
 aws_issue["esearch_encrypt_kms"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    encrypt_at_rest := resource.properties.encrypt_at_rest[_]
+    encrypt_at_rest := resource.properties.encrypt_at_rest[j]
     lower(encrypt_at_rest.enabled) == "true"
     lower(encrypt_at_rest.kms_key_id) == ""
 }
 
+source_path[{"esearch_encrypt_kms": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    encrypt_at_rest := resource.properties.encrypt_at_rest[j]
+    lower(encrypt_at_rest.enabled) == "true"
+    lower(encrypt_at_rest.kms_key_id) == ""
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encrypt_at_rest", j, "kms_key_id"]
+        ],
+    }
+}
+
 aws_bool_issue["esearch_encrypt_kms"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    encrypt_at_rest := resource.properties.encrypt_at_rest[_]
+    encrypt_at_rest := resource.properties.encrypt_at_rest[j]
     encrypt_at_rest.enabled == true
     not encrypt_at_rest.kms_key_id
 }
 
+source_path[{"esearch_encrypt_kms": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    encrypt_at_rest := resource.properties.encrypt_at_rest[j]
+    encrypt_at_rest.enabled == true
+    not encrypt_at_rest.kms_key_id
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encrypt_at_rest", j, "kms_key_id"]
+        ],
+    }
+}
+
 aws_bool_issue["esearch_encrypt_kms"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
-    encrypt_at_rest := resource.properties.encrypt_at_rest[_]
+    encrypt_at_rest := resource.properties.encrypt_at_rest[j]
     encrypt_at_rest.enabled == true
     lower(encrypt_at_rest.kms_key_id) == ""
 }
 
+source_path[{"esearch_encrypt_kms": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    encrypt_at_rest := resource.properties.encrypt_at_rest[j]
+    encrypt_at_rest.enabled == true
+    lower(encrypt_at_rest.kms_key_id) == ""
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encrypt_at_rest", j, "kms_key_id"]
+        ],
+    }
+}
 
 esearch_encrypt_kms {
     lower(input.resources[i].type) == "aws_elasticsearch_domain"

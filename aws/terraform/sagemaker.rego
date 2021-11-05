@@ -13,10 +13,34 @@ aws_issue["sagemaker_encryption_kms"] {
     not resource.properties.kms_key_id
 }
 
+source_path[{"sagemaker_encryption_kms": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sagemaker_notebook_instance"
+    not resource.properties.kms_key_id
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "kms_key_id"]
+        ],
+    }
+}
+
 aws_issue["sagemaker_encryption_kms"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_sagemaker_notebook_instance"
     count(resource.properties.kms_key_id) == 0
+}
+
+source_path[{"sagemaker_encryption_kms": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sagemaker_notebook_instance"
+    count(resource.properties.kms_key_id) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "kms_key_id"]
+        ],
+    }
 }
 
 sagemaker_encryption_kms {
@@ -56,10 +80,34 @@ aws_issue["sagemaker_rootaccess_enabled"] {
     lower(resource.properties.root_access) == "enabled"
 }
 
+source_path[{"sagemaker_rootaccess_enabled": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sagemaker_notebook_instance"
+    lower(resource.properties.root_access) == "enabled"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "root_access"]
+        ],
+    }
+}
+
 aws_issue["sagemaker_rootaccess_enabled"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_sagemaker_notebook_instance"
     not resource.properties.root_access
+}
+
+source_path[{"sagemaker_rootaccess_enabled": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sagemaker_notebook_instance"
+    not resource.properties.root_access
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "root_access"]
+        ],
+    }
 }
 
 sagemaker_rootaccess_enabled {
@@ -99,10 +147,34 @@ aws_issue["sagemaker_direct_internet_access_enabled"] {
     lower(resource.properties.direct_internet_access) == "enabled"
 }
 
+source_path[{"sagemaker_direct_internet_access_enabled": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sagemaker_notebook_instance"
+    lower(resource.properties.direct_internet_access) == "enabled"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "direct_internet_access"]
+        ],
+    }
+}
+
 aws_issue["sagemaker_direct_internet_access_enabled"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_sagemaker_notebook_instance"
     not resource.properties.direct_internet_access
+}
+
+source_path[{"sagemaker_direct_internet_access_enabled": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sagemaker_notebook_instance"
+    not resource.properties.direct_internet_access
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "direct_internet_access"]
+        ],
+    }
 }
 
 sagemaker_direct_internet_access_enabled {
@@ -142,10 +214,34 @@ aws_issue["sagemaker_vpc"] {
     count(resource.properties.subnet_id) == 0
 }
 
+source_path[{"sagemaker_vpc": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sagemaker_notebook_instance"
+    count(resource.properties.subnet_id) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "subnet_id"]
+        ],
+    }
+}
+
 aws_issue["sagemaker_vpc"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_sagemaker_notebook_instance"
     not resource.properties.subnet_id
+}
+
+source_path[{"sagemaker_vpc": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sagemaker_notebook_instance"
+    not resource.properties.subnet_id
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "subnet_id"]
+        ],
+    }
 }
 
 sagemaker_vpc {
