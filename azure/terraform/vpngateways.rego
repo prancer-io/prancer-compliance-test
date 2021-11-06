@@ -3,7 +3,7 @@ package rule
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_gateway_connection
 
 #
-# PR-AZR-TRF-NTW-006
+# PR-AZR-TRF-NET-006
 #
 
 default vpn_encrypt = null
@@ -60,7 +60,7 @@ vpn_encrypt_err = "Resource azurerm_virtual_network_gateway and azurerm_virtual_
 }
 
 vpn_encrypt_metadata := {
-    "Policy Code": "PR-AZR-TRF-NTW-006",
+    "Policy Code": "PR-AZR-TRF-NET-006",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

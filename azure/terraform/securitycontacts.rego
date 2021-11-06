@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_security_center_contact
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_contact
 #
-# PR-AZR-TRF-SCT-002
+# PR-AZR-TRF-ASC-002
 #
 
 default securitycontacts = null
@@ -41,7 +41,7 @@ securitycontacts_err = "azurerm_security_center_contact property 'email' need to
 }
 
 securitycontacts_metadata := {
-    "Policy Code": "PR-AZR-TRF-SCT-002",
+    "Policy Code": "PR-AZR-TRF-ASC-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -54,7 +54,7 @@ securitycontacts_metadata := {
 
 
 #
-# PR-AZR-TRF-SCT-004
+# PR-AZR-TRF-ASC-004
 #
 
 default securitycontacts_phone = null
@@ -92,7 +92,7 @@ securitycontacts_phone_err = "azurerm_security_center_contact property 'phone' n
 }
 
 securitycontacts_phone_metadata := {
-    "Policy Code": "PR-AZR-TRF-SCT-004",
+    "Policy Code": "PR-AZR-TRF-ASC-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -105,7 +105,7 @@ securitycontacts_phone_metadata := {
 
 
 #
-# PR-AZR-TRF-SCT-003
+# PR-AZR-TRF-ASC-003
 #
 
 default securitycontacts_alert_notifications_enabled = null
@@ -130,7 +130,7 @@ securitycontacts_alert_notifications_enabled_err = "Security Center currently no
 }
 
 securitycontacts_alert_notifications_enabled_metadata := {
-    "Policy Code": "PR-AZR-TRF-SCT-003",
+    "Policy Code": "PR-AZR-TRF-ASC-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -143,7 +143,7 @@ securitycontacts_alert_notifications_enabled_metadata := {
 
 
 #
-# PR-AZR-TRF-SCT-005
+# PR-AZR-TRF-ASC-005
 #
 
 default securitycontacts_alerts_to_admins_enabled = null
@@ -168,7 +168,7 @@ securitycontacts_alerts_to_admins_enabled_err = "Security Center currently not c
 }
 
 securitycontacts_alerts_to_admins_enabled_metadata := {
-    "Policy Code": "PR-AZR-TRF-SCT-005",
+    "Policy Code": "PR-AZR-TRF-ASC-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

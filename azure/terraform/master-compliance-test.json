@@ -2274,11 +2274,11 @@
                     "rule": "file(disks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-CMP-001",
+                            "id": "PR-AZR-TRF-DSK-001",
                             "eval": "data.rule.disk_encrypt",
                             "message": "data.rule.disk_encrypt_err",
                             "remediationDescription": "In 'azurerm_managed_disk' resource, set 'enabled = true' under 'encryption_settings' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/managed_disk#enabled for details.",
-                            "remediationFunction": "PR_AZR_TRF_CMP_001.py"
+                            "remediationFunction": "PR_AZR_TRF_DSK_001.py"
                         }
                     ],
                     "severity": "High",
@@ -2313,11 +2313,11 @@
                     "rule": "file(functionapp.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-FUNC-001",
+                            "id": "PR-AZR-TRF-AFA-001",
                             "eval": "data.rule.functionapp_authentication_enabled",
                             "message": "data.rule.functionapp_authentication_enabled_err",
                             "remediationDescription": "In 'azurerm_function_app' resource, set 'enabled = true' under 'auth_settings' block to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/function_app#enabled for details.",
-                            "remediationFunction": "PR_AZR_TRF_FUNC_001.py"
+                            "remediationFunction": "PR_AZR_TRF_AFA_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -2493,11 +2493,11 @@
                     "rule": "file(locks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-MNT-008",
+                            "id": "PR-AZR-TRF-AML-008",
                             "eval": "data.rule.rg_locks",
                             "message": "data.rule.rg_locks_err",
                             "remediationDescription": "In 'azurerm_management_lock' resource, set lock_level = 'CanNotDelete' and make sure 'scope' property has id of target deployment resource group as value to fix the issue. please visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_lock#lock_level for details.",
-                            "remediationFunction": "PR_AZR_TRF_MNT_008.py"
+                            "remediationFunction": "PR_AZR_TRF_AML_008.py"
                         }
                     ],
                     "severity": "Low",
@@ -4461,11 +4461,11 @@
                     "rule": "file(pricing.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-SCT-001",
+                            "id": "PR-AZR-TRF-ASC-001",
                             "eval": "data.rule.pricing",
                             "message": "data.rule.pricing_err",
                             "remediationDescription": "In 'azurerm_security_center_subscription_pricing' resource, set tier = 'standard' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_subscription_pricing#tier for details.",
-                            "remediationFunction": "PR_AZR_TRF_SCT_001.py"
+                            "remediationFunction": "PR_AZR_TRF_ASC_001.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4496,11 +4496,11 @@
                     "rule": "file(Redis.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-CCH-001",
+                            "id": "PR-AZR-TRF-ARC-001",
                             "eval": "data.rule.enableSslPort",
                             "message": "data.rule.enableSslPort_err",
                             "remediationDescription": "In 'azurerm_redis_cache' resource, set 'enable_non_ssl_port = false' or remove 'enable_non_ssl_port' property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache#enable_non_ssl_port for details.",
-                            "remediationFunction": "PR_AZR_TRF_CCH_001.py"
+                            "remediationFunction": "PR_AZR_TRF_ARC_001.py"
                         }
                     ],
                     "severity": "High",
@@ -4536,11 +4536,11 @@
                     "rule": "file(Redis.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-CCH-002",
+                            "id": "PR-AZR-TRF-ARC-002",
                             "eval": "data.rule.serverRole",
                             "message": "data.rule.serverRole_err",
                             "remediationDescription": "In 'azurerm_redis_linked_server' resource, set server_role = 'Secondary' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_linked_server#server_role for details.",
-                            "remediationFunction": "PR_AZR_TRF_CCH_002.py"
+                            "remediationFunction": "PR_AZR_TRF_ARC_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4686,11 +4686,11 @@
                     "rule": "file(securitycontacts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-SCT-002",
+                            "id": "PR-AZR-TRF-ASC-002",
                             "eval": "data.rule.securitycontacts",
                             "message": "data.rule.securitycontacts_err",
                             "remediationDescription": "In 'azurerm_security_center_contact' resource, set a valid email address at 'email' property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_contact#email for details.",
-                            "remediationFunction": "PR_AZR_TRF_SCT_002.py"
+                            "remediationFunction": "PR_AZR_TRF_ASC_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4725,11 +4725,11 @@
                     "rule": "file(securitycontacts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-SCT-004",
+                            "id": "PR-AZR-TRF-ASC-004",
                             "eval": "data.rule.securitycontacts_phone",
                             "message": "data.rule.securitycontacts_phone_err",
                             "remediationDescription": "In 'azurerm_security_center_contact' resource, set a valid phone number at 'phone' property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_contact#phone for details.",
-                            "remediationFunction": "PR_AZR_TRF_SCT_004.py"
+                            "remediationFunction": "PR_AZR_TRF_ASC_004.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4764,11 +4764,11 @@
                     "rule": "file(securitycontacts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-SCT-003",
+                            "id": "PR-AZR-TRF-ASC-003",
                             "eval": "data.rule.securitycontacts_alert_notifications_enabled",
                             "message": "data.rule.securitycontacts_alert_notifications_enabled_err",
                             "remediationDescription": "In 'azurerm_security_center_contact' resource, set 'alert_notifications = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_contact#alert_notifications for details.",
-                            "remediationFunction": "PR_AZR_TRF_SCT_003.py"
+                            "remediationFunction": "PR_AZR_TRF_ASC_003.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4803,11 +4803,11 @@
                     "rule": "file(securitycontacts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-SCT-005",
+                            "id": "PR-AZR-TRF-ASC-005",
                             "eval": "data.rule.securitycontacts_alerts_to_admins_enabled",
                             "message": "data.rule.securitycontacts_alerts_to_admins_enabled_err",
                             "remediationDescription": "In 'azurerm_security_center_contact' resource, set 'alerts_to_admins = true' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_contact#alerts_to_admins for details.",
-                            "remediationFunction": "PR_AZR_TRF_SCT_005.py"
+                            "remediationFunction": "PR_AZR_TRF_ASC_005.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5879,11 +5879,11 @@
                     "rule": "file(vnetpeerings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-NTW-004",
+                            "id": "PR-AZR-TRF-NET-004",
                             "eval": "data.rule.vnet_peer",
                             "message": "data.rule.vnet_peer_err",
                             "remediationDescription": "In 'azurerm_virtual_network_peering' resource, set 'allow_virtual_network_access = true' or remove 'allow_virtual_network_access' property to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering#allow_virtual_network_access for details.",
-                            "remediationFunction": "PR_AZR_TRF_NTW_004.py"
+                            "remediationFunction": "PR_AZR_TRF_NET_004.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5911,11 +5911,11 @@
                     "rule": "file(vnetsubnets.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-NTW-005",
+                            "id": "PR-AZR-TRF-NET-005",
                             "eval": "data.rule.vnet_subnet_nsg",
                             "message": "data.rule.vnet_subnet_nsg_err",
                             "remediationDescription": "In 'azurerm_subnet_network_security_group_association' resource, make sure both 'subnet_id' and 'network_security_group_id' property exist and both has id from 'azurerm_subnet' and 'azurerm_network_security_group' resource respectively to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_network_security_group_association#network_security_group_id for details.",
-                            "remediationFunction": "PR_AZR_TRF_NTW_005.py"
+                            "remediationFunction": "PR_AZR_TRF_NET_005.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5951,11 +5951,11 @@
                     "rule": "file(vpngateways.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-NTW-006",
+                            "id": "PR-AZR-TRF-NET-006",
                             "eval": "data.rule.vpn_encrypt",
                             "message": "data.rule.vpn_encrypt_err",
                             "remediationDescription": "Make sure resource 'azurerm_virtual_network_gateway' and 'azurerm_virtual_network_gateway_connection' exist and in 'azurerm_virtual_network_gateway_connection' resource, set 'use_policy_based_traffic_selectors = true' and make sure 'ipsec_policy' block exist with 'ipsec_encryption' property with value set other than 'none' to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_gateway_connection#ipsec_encryption for details.",
-                            "remediationFunction": "PR_AZR_TRF_NTW_006.py"
+                            "remediationFunction": "PR_AZR_TRF_NET_006.py"
                         }
                     ],
                     "severity": "Medium",

@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_subnet
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_network_security_group_association
 #
-# PR-AZR-TRF-NTW-005
+# PR-AZR-TRF-NET-005
 #
 
 default vnet_subnet_nsg = null
@@ -53,7 +53,7 @@ vnet_subnet_nsg_err = "azurerm_subnet_network_security_group_association resourc
 }
 
 vnet_subnet_nsg_metadata := {
-    "Policy Code": "PR-AZR-TRF-NTW-005",
+    "Policy Code": "PR-AZR-TRF-NET-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

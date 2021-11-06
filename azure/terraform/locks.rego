@@ -3,7 +3,7 @@ package rule
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_lock
 
 #
-# PR-AZR-TRF-MNT-008
+# PR-AZR-TRF-AML-008
 #
 
 default rg_locks = null
@@ -48,7 +48,7 @@ rg_locks_err = "azurerm_management_lock property 'scope' and 'lock_level' need t
 }
 
 rg_locks_metadata := {
-    "Policy Code": "PR-AZR-TRF-MNT-008",
+    "Policy Code": "PR-AZR-TRF-AML-008",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

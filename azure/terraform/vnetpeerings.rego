@@ -3,7 +3,7 @@ package rule
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering
 
 #
-# PR-AZR-TRF-NTW-004
+# PR-AZR-TRF-NET-004
 #
 
 default vnet_peer = null
@@ -29,7 +29,7 @@ vnet_peer_err = "Azure virtual network peering state is currently not connected"
 }
 
 vnet_peer_metadata := {
-    "Policy Code": "PR-AZR-TRF-NTW-004",
+    "Policy Code": "PR-AZR-TRF-NET-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
