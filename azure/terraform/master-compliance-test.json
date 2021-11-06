@@ -13,11 +13,11 @@
                     "rule": "file(roles.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-ROLE-001",
-                            "eval": "data.rule.no_custom_subs_owner_role_created",
+                            "id": "PR-AZR-TRF-ARD-001",
+                            "eval": "data.rule.no_cusRtom_subs_owner_role_created",
                             "message": "data.rule.no_custom_subs_owner_role_created_err",
-                            "remediationDescription": "In 'azurerm_role_definition' resource, make sure 'permissions' blocks 'actions' array dont have '*' as entry to fix the issue. Visit https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_definition#actions for details.",
-                            "remediationFunction": "PR_AZR_TRF_ROLE_001.py"
+                            "remediationDescription": "In 'azurerm_role_definition' resource, make sure 'permissions' blocks 'actions' array dont have '*' as entry to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_definition#actions' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ARD_001.py"
                         }
                     ],
                     "severity": "Medium",
