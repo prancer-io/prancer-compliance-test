@@ -11,11 +11,18 @@ azure_attribute_absence ["functionapp_authentication_enabled"] {
     not resource.properties.auth_settings
 }
 
-azure_issue ["functionapp_authentication_enabled"] {
+azure_attribute_absence ["functionapp_authentication_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_function_app"
     auth_settings := resource.properties.auth_settings[_]
     not auth_settings.enabled
+}
+
+azure_issue ["functionapp_authentication_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_function_app"
+    auth_settings := resource.properties.auth_settings[_]
+    auth_settings.enabled != true
 }
 
 functionapp_authentication_enabled {

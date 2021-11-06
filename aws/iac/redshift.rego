@@ -29,6 +29,23 @@ source_path[{"redshift_encrypt_key": metadata}] {
 aws_issue["redshift_encrypt_key"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::redshift::cluster"
+    count(resource.Properties.KmsKeyId) == 0
+}
+
+source_path[{"redshift_encrypt_key": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    count(resource.Properties.KmsKeyId) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KmsKeyId"]
+        ],
+    }
+}
+
+aws_issue["redshift_encrypt_key"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
     not startswith(lower(resource.Properties.KmsKeyId), "arn:")
 }
 
@@ -450,6 +467,24 @@ source_path[{"redshift_deploy_vpc": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::redshift::cluster"
     count(resource.Properties.ClusterSubnetGroupName) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ClusterSubnetGroupName"]
+        ],
+    }
+}
+
+
+aws_issue["redshift_deploy_vpc"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    resource.Properties.ClusterSubnetGroupName == null
+}
+
+source_path[{"redshift_deploy_vpc": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::redshift::cluster"
+    resource.Properties.ClusterSubnetGroupName == null
     metadata := {
         "resource_path": [
             ["Resources", i, "Properties", "ClusterSubnetGroupName"]

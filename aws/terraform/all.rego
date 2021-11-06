@@ -13,10 +13,34 @@ aws_issue["cf_sns"] {
     not resource.properties.notification_arns
 }
 
+source_path[{"cf_sns": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudformation_stack"
+    not resource.properties.notification_arns
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "notification_arns"]
+        ],
+    }
+}
+
 aws_issue["cf_sns"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_cloudformation_stack"
     count(resource.properties.notification_arns) == 0
+}
+
+source_path[{"cf_sns": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudformation_stack"
+    count(resource.properties.notification_arns) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "notification_arns"]
+        ],
+    }
 }
 
 cf_sns {
@@ -56,34 +80,97 @@ aws_issue["config_all_resource"] {
     not resource.properties.recording_group
 }
 
+source_path[{"config_all_resource": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_config_configuration_recorder"
+    not resource.properties.recording_group
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "recording_group"]
+        ],
+    }
+}
+
 aws_issue["config_all_resource"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_config_configuration_recorder"
-    recording_group := resource.properties.recording_group[_]
+    recording_group := resource.properties.recording_group[j]
     lower(recording_group.all_supported) == "false"
 }
 
+source_path[{"config_all_resource": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_config_configuration_recorder"
+    recording_group := resource.properties.recording_group[j]
+    lower(recording_group.all_supported) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "recording_group", j, "all_supported"]
+        ],
+    }
+}
+
 aws_issue["config_all_resource"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_config_configuration_recorder"
-    recording_group := resource.properties.recording_group[_]
+    recording_group := resource.properties.recording_group[j]
     lower(recording_group.include_global_resource_types) == "false"
 }
 
+source_path[{"config_all_resource": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_config_configuration_recorder"
+    recording_group := resource.properties.recording_group[j]
+    lower(recording_group.include_global_resource_types) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "recording_group", j, "include_global_resource_types"]
+        ],
+    }
+}
+
 aws_bool_issue["config_all_resource"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_config_configuration_recorder"
-    recording_group := resource.properties.recording_group[_]
+    recording_group := resource.properties.recording_group[j]
     not recording_group.all_supported
 }
 
+source_path[{"config_all_resource": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_config_configuration_recorder"
+    recording_group := resource.properties.recording_group[j]
+    not recording_group.all_supported
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "recording_group", j, "all_supported"]
+        ],
+    }
+}
+
 aws_bool_issue["config_all_resource"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_config_configuration_recorder"
-    recording_group := resource.properties.recording_group[_]
+    recording_group := resource.properties.recording_group[j]
     not recording_group.include_global_resource_types
 }
 
+source_path[{"config_all_resource": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_config_configuration_recorder"
+    recording_group := resource.properties.recording_group[j]
+    not recording_group.include_global_resource_types
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "recording_group", j, "include_global_resource_types"]
+        ],
+    }
+}
 
 config_all_resource {
     lower(input.resources[i].type) == "aws_config_configuration_recorder"
@@ -128,16 +215,52 @@ aws_issue["kinesis_encryption"] {
     not resource.properties.encryption_type
 }
 
+source_path[{"kinesis_encryption": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_kinesis_stream"
+    not resource.properties.encryption_type
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encryption_type"]
+        ],
+    }
+}
+
 aws_issue["kinesis_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_kinesis_stream"
     resource.properties.encryption_type == null
 }
 
+source_path[{"kinesis_encryption": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_kinesis_stream"
+    resource.properties.encryption_type == null
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encryption_type"]
+        ],
+    }
+}
+
 aws_issue["kinesis_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_kinesis_stream"
     count(resource.properties.encryption_type) == 0
+}
+
+source_path[{"kinesis_encryption": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_kinesis_stream"
+    count(resource.properties.encryption_type) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encryption_type"]
+        ],
+    }
 }
 
 kinesis_encryption {
@@ -177,16 +300,52 @@ aws_issue["kinesis_encryption_kms"] {
     not resource.properties.encryption_type
 }
 
+source_path[{"kinesis_encryption_kms": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_kinesis_stream"
+    not resource.properties.encryption_type
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encryption_type"]
+        ],
+    }
+}
+
 aws_issue["kinesis_encryption_kms"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_kinesis_stream"
     resource.properties.encryption_type == null
 }
 
+source_path[{"kinesis_encryption_kms": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_kinesis_stream"
+    resource.properties.encryption_type == null
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encryption_type"]
+        ],
+    }
+}
+
 aws_issue["kinesis_encryption_kms"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_kinesis_stream"
     lower(resource.properties.encryption_type) != "kms"
+}
+
+source_path[{"kinesis_encryption_kms": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_kinesis_stream"
+    lower(resource.properties.encryption_type) != "kms"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encryption_type"]
+        ],
+    }
 }
 
 kinesis_encryption_kms {
@@ -225,10 +384,34 @@ aws_bool_issue["mq_publicly_accessible"] {
     resource.properties.publicly_accessible == true
 }
 
+source_path[{"mq_publicly_accessible": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_mq_broker"
+    resource.properties.publicly_accessible == true
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "publicly_accessible"]
+        ],
+    }
+}
+
 aws_issue["mq_publicly_accessible"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_mq_broker"
     lower(resource.properties.publicly_accessible) == "true"
+}
+
+source_path[{"mq_publicly_accessible": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_mq_broker"
+    lower(resource.properties.publicly_accessible) == "true"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "publicly_accessible"]
+        ],
+    }
 }
 
 mq_publicly_accessible {
@@ -273,15 +456,41 @@ default route_healthcheck_disable = null
 aws_issue["route_healthcheck_disable"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_route53_record"
-    alias := resource.properties.alias[_]
+    alias := resource.properties.alias[j]
     lower(alias.evaluate_target_health) == "false"
+}
+
+source_path[{"route_healthcheck_disable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_route53_record"
+    alias := resource.properties.alias[j]
+    lower(alias.evaluate_target_health) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "alias", j, "evaluate_target_health"]
+        ],
+    }
 }
 
 aws_bool_issue["route_healthcheck_disable"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_route53_record"
-    alias := resource.properties.alias[_]
+    alias := resource.properties.alias[j]
     not alias.evaluate_target_health
+}
+
+source_path[{"route_healthcheck_disable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_route53_record"
+    alias := resource.properties.alias[j]
+    not alias.evaluate_target_health
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "alias", j, "evaluate_target_health"]
+        ],
+    }
 }
 
 route_healthcheck_disable {
@@ -328,20 +537,57 @@ aws_issue["as_volume_encrypted"] {
     count([c | resource.properties.ebs_block_device; c:=1]) == 0
 }
 
+source_path[{"as_volume_encrypted": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_launch_configuration"
+    count([c | resource.properties.ebs_block_device; c:=1]) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "ebs_block_device"]
+        ],
+    }
+}
+
 aws_bool_issue["as_volume_encrypted"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_launch_configuration"
-    ebs_block_device := resource.properties.ebs_block_device[_]
+    ebs_block_device := resource.properties.ebs_block_device[j]
     not ebs_block_device.encrypted
+}
+
+source_path[{"as_volume_encrypted": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_launch_configuration"
+    ebs_block_device := resource.properties.ebs_block_device[j]
+    not ebs_block_device.encrypted
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "ebs_block_device", j, "encrypted"]
+        ],
+    }
 }
 
 aws_issue["as_volume_encrypted"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_launch_configuration"
-    ebs_block_device := resource.properties.ebs_block_device[_]
+    ebs_block_device := resource.properties.ebs_block_device[j]
     lower(ebs_block_device.encrypted) != "true"
 }
 
+source_path[{"as_volume_encrypted": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_launch_configuration"
+    ebs_block_device := resource.properties.ebs_block_device[j]
+    lower(ebs_block_device.encrypted) != "true"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "ebs_block_device", j, "encrypted"]
+        ],
+    }
+}
 
 as_volume_encrypted {
     lower(input.resources[i].type) == "aws_launch_configuration"

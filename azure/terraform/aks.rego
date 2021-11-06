@@ -6,6 +6,10 @@ package rule
 # PR-AZR-TRF-AKS-001
 #
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 default aks_cni_net = null
 
 azure_attribute_absence["aks_cni_net"] {
@@ -84,7 +88,8 @@ azure_attribute_absence["aks_http_routing"] {
     lower(resource.type) == "azurerm_kubernetes_cluster"
     addon_profile := resource.properties.addon_profile[_]
     http_application_routing := addon_profile.http_application_routing[_]
-    not http_application_routing.enabled
+    #not http_application_routing.enabled
+    not has_property(http_application_routing, "enabled")
 }
 
 azure_issue["aks_http_routing"] {
@@ -133,20 +138,20 @@ aks_http_routing_metadata := {
 
 default aks_monitoring = null
 
-aws_attribute_absence["aks_monitoring"] {
+azure_attribute_absence["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     not resource.properties.addon_profile
 }
 
-aws_attribute_absence["aks_monitoring"] {
+azure_attribute_absence["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     addon_profile := resource.properties.addon_profile[_]
     not addon_profile.oms_agent
 }
 
-aws_attribute_absence["aks_monitoring"] {
+azure_attribute_absence["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     addon_profile := resource.properties.addon_profile[_]
@@ -271,11 +276,24 @@ azure_attribute_absence["aks_rbac"] {
     not resource.properties.role_based_access_control
 }
 
-azure_issue["aks_rbac"] {
+#azure_attribute_absence["aks_rbac"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_kubernetes_cluster"
+#    count(resource.properties.role_based_access_control) == 0
+#}
+
+azure_attribute_absence["aks_rbac"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     role_based_access_control := resource.properties.role_based_access_control[_]
     not role_based_access_control.enabled
+}
+
+azure_issue["aks_rbac"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    role_based_access_control := resource.properties.role_based_access_control[_]
+    role_based_access_control.enabled != true
 }
 
 aks_rbac {
@@ -404,6 +422,12 @@ default aks_network_policy_configured = null
 azure_attribute_absence["aks_network_policy_configured"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
+    not resource.properties.network_profile
+}
+
+azure_attribute_absence["aks_network_policy_configured"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
     network_profile := resource.properties.network_profile[_]
     not network_profile.network_policy
 }
@@ -505,6 +529,14 @@ aks_api_server_authorized_ip_range_enabled_metadata := {
 
 default aks_kub_dashboard_disabled = null
 
+azure_attribute_absence["aks_kub_dashboard_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    addon_profile := resource.properties.addon_profile[_]
+    kube_dashboard := addon_profile.kube_dashboard[_]
+    not kube_dashboard.enabled
+}
+
 azure_issue["aks_kub_dashboard_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
@@ -515,6 +547,7 @@ azure_issue["aks_kub_dashboard_disabled"] {
 
 aks_kub_dashboard_disabled {
     lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
+    not azure_attribute_absence["aks_kub_dashboard_disabled"]
     not azure_issue["aks_kub_dashboard_disabled"]
 }
 
@@ -524,6 +557,7 @@ aks_kub_dashboard_disabled = false {
 
 aks_kub_dashboard_disabled {
     lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
+    azure_attribute_absence["aks_kub_dashboard_disabled"]
     not azure_issue["aks_kub_dashboard_disabled"]
 }
 

@@ -8,19 +8,28 @@ package rule
 
 default storage_secure = null
 
+azure_attribute_absence["storage_secure"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    # Defaults to true if property not available
+    not resource.properties.enable_https_traffic_only
+}
+
 azure_issue["storage_secure"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_storage_account"
-    not resource.properties.enable_https_traffic_only
+    resource.properties.enable_https_traffic_only != true
 }
 
 storage_secure {
     lower(input.resources[_].type) == "azurerm_storage_account"
+    not azure_attribute_absence["storage_secure"]
     not azure_issue["storage_secure"]
 }
 
 storage_secure {
     lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_attribute_absence["storage_secure"]
     not azure_issue["storage_secure"]
 }
 
@@ -270,6 +279,13 @@ region_metadata := {
 
 default storage_account_public_access_disabled = null
 
+# defaults to false
+azure_attribute_absence["storage_account_public_access_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    not resource.properties.allow_blob_public_access
+}
+
 azure_issue["storage_account_public_access_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_storage_account"
@@ -278,6 +294,13 @@ azure_issue["storage_account_public_access_disabled"] {
 
 storage_account_public_access_disabled {
     lower(input.resources[_].type) == "azurerm_storage_account"
+    not azure_attribute_absence["storage_account_public_access_disabled"]
+    not azure_issue["storage_account_public_access_disabled"]
+}
+
+storage_account_public_access_disabled {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_attribute_absence["storage_account_public_access_disabled"]
     not azure_issue["storage_account_public_access_disabled"]
 }
 

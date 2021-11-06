@@ -55,15 +55,21 @@ geoRedundantBackup_metadata := {
 # PR-AZR-TRF-SQL-029
 
 default sslEnforcement = null
-
-azure_issue ["sslEnforcement"] {
+azure_attribute_absence ["sslEnforcement"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_postgresql_server"
     not resource.properties.ssl_enforcement_enabled
 }
 
+azure_issue ["sslEnforcement"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_postgresql_server"
+    resource.properties.ssl_enforcement_enabled == false
+}
+
 sslEnforcement {
     lower(input.resources[_].type) == "azurerm_postgresql_server"
+    not azure_attribute_absence["sslEnforcement"]
     not azure_issue["sslEnforcement"]
 }
 
@@ -71,7 +77,14 @@ sslEnforcement = false {
     azure_issue["sslEnforcement"]
 }
 
-sslEnforcement_err = "ssl enforcement is currently not enabled on PostgreSQL database server." {
+sslEnforcement = false {
+    azure_attribute_absence["sslEnforcement"]
+}
+
+
+sslEnforcement_err = "azurerm_postgresql_server property 'ssl_enforcement_enabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
+    azure_attribute_absence["sslEnforcement"]
+} else = "ssl enforcement is currently not enabled on PostgreSQL database server." {
     azure_issue["sslEnforcement"]
 }
 

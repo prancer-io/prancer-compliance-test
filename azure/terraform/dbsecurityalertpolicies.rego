@@ -158,7 +158,7 @@ dbsec_threat_email_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure SQL Databases Security Alert Policy should be configured to send alert to the configured email addresses",
+    "Policy Title": "Azure SQL Database Server Security Alert Policy should be configured to send alert to the configured email addresses",
     "Policy Description": "Checks to ensure that an valid email address is set for Threat Detection alerts. The alerts are sent to this email address when any anomalous activities are detected on SQL databases.",
     "Resource Type": "azurerm_mssql_server_security_alert_policy",
     "Policy Help URL": "",

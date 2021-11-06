@@ -16,6 +16,21 @@ aws_issue["acl_all_icmp_ipv4"] {
     lower(resource.properties.rule_action) == "allow"
 }
 
+source_path[{"acl_all_icmp_ipv4": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_network_acl_rule"
+    lower(resource.properties.egress) != "true"
+    to_number(resource.properties.protocol) == 1
+    resource.properties.cidr_block == "0.0.0.0/0"
+    lower(resource.properties.rule_action) == "allow"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "rule_action"]
+        ],
+    }
+}
+
 aws_bool_issue["acl_all_icmp_ipv4"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_network_acl_rule"
@@ -23,6 +38,21 @@ aws_bool_issue["acl_all_icmp_ipv4"] {
     to_number(resource.properties.protocol) == 1
     resource.properties.cidr_block == "0.0.0.0/0"
     lower(resource.properties.rule_action) == "allow"
+}
+
+source_path[{"acl_all_icmp_ipv4": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_network_acl_rule"
+    resource.properties.egress != true
+    to_number(resource.properties.protocol) == 1
+    resource.properties.cidr_block == "0.0.0.0/0"
+    lower(resource.properties.rule_action) == "allow"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "rule_action"]
+        ],
+    }
 }
 
 aws_issue["acl_all_icmp_ipv4"] {
@@ -34,6 +64,21 @@ aws_issue["acl_all_icmp_ipv4"] {
     lower(resource.properties.rule_action) == "allow"
 }
 
+source_path[{"acl_all_icmp_ipv4": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_network_acl_rule"
+    lower(resource.properties.egress) != "true"
+    to_number(resource.properties.protocol) == -1
+    resource.properties.cidr_block == "0.0.0.0/0"
+    lower(resource.properties.rule_action) == "allow"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "rule_action"]
+        ],
+    }
+}
+
 aws_bool_issue["acl_all_icmp_ipv4"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_network_acl_rule"
@@ -41,6 +86,21 @@ aws_bool_issue["acl_all_icmp_ipv4"] {
     to_number(resource.properties.protocol) == -1
     resource.properties.cidr_block == "0.0.0.0/0"
     lower(resource.properties.rule_action) == "allow"
+}
+
+source_path[{"acl_all_icmp_ipv4": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_network_acl_rule"
+    resource.properties.egress != true
+    to_number(resource.properties.protocol) == -1
+    resource.properties.cidr_block == "0.0.0.0/0"
+    lower(resource.properties.rule_action) == "allow"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "rule_action"]
+        ],
+    }
 }
 
 acl_all_icmp_ipv4 {
@@ -90,6 +150,21 @@ aws_issue["acl_all_icmp_ipv6"] {
     lower(resource.properties.rule_action) == "allow"
 }
 
+source_path[{"acl_all_icmp_ipv6": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_network_acl_rule"
+    lower(resource.properties.egress) != "true"
+    to_number(resource.properties.protocol) == 1
+    resource.properties.ipv6_cidr_block == "::/0"
+    lower(resource.properties.rule_action) == "allow"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "rule_action"]
+        ],
+    }
+}
+
 aws_bool_issue["acl_all_icmp_ipv6"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_network_acl_rule"
@@ -97,6 +172,21 @@ aws_bool_issue["acl_all_icmp_ipv6"] {
     to_number(resource.properties.protocol) == 1
     resource.properties.ipv6_cidr_block == "::/0"
     lower(resource.properties.rule_action) == "allow"
+}
+
+source_path[{"acl_all_icmp_ipv6": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_network_acl_rule"
+    resource.properties.egress != true
+    to_number(resource.properties.protocol) == 1
+    resource.properties.ipv6_cidr_block == "::/0"
+    lower(resource.properties.rule_action) == "allow"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "rule_action"]
+        ],
+    }
 }
 
 aws_issue["acl_all_icmp_ipv6"] {
@@ -108,6 +198,21 @@ aws_issue["acl_all_icmp_ipv6"] {
     lower(resource.properties.rule_action) == "allow"
 }
 
+source_path[{"acl_all_icmp_ipv6": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_network_acl_rule"
+    lower(resource.properties.egress) != "true"
+    to_number(resource.properties.protocol) == -1
+    resource.properties.ipv6_cidr_block == "::/0"
+    lower(resource.properties.rule_action) == "allow"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "rule_action"]
+        ],
+    }
+}
+
 aws_bool_issue["acl_all_icmp_ipv6"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_network_acl_rule"
@@ -115,6 +220,21 @@ aws_bool_issue["acl_all_icmp_ipv6"] {
     to_number(resource.properties.protocol) == -1
     resource.properties.ipv6_cidr_block == "::/0"
     lower(resource.properties.rule_action) == "allow"
+}
+
+source_path[{"acl_all_icmp_ipv6": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_network_acl_rule"
+    resource.properties.egress != true
+    to_number(resource.properties.protocol) == -1
+    resource.properties.ipv6_cidr_block == "::/0"
+    lower(resource.properties.rule_action) == "allow"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "rule_action"]
+        ],
+    }
 }
 
 acl_all_icmp_ipv6 {
@@ -164,6 +284,21 @@ aws_issue["acl_all_traffic"] {
     lower(resource.properties.rule_action) == "allow"
 }
 
+source_path[{"acl_all_traffic": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_network_acl_rule"
+    lower(resource.properties.egress) != "true"
+    to_number(resource.properties.protocol) == -1
+    resource.properties.cidr_block == "0.0.0.0/0"
+    lower(resource.properties.rule_action) == "allow"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "rule_action"]
+        ],
+    }
+}
+
 aws_bool_issue["acl_all_traffic"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_network_acl_rule"
@@ -171,6 +306,21 @@ aws_bool_issue["acl_all_traffic"] {
     to_number(resource.properties.protocol) == -1
     resource.properties.cidr_block == "0.0.0.0/0"
     lower(resource.properties.rule_action) == "allow"
+}
+
+source_path[{"acl_all_traffic": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_network_acl_rule"
+    resource.properties.egress != true
+    to_number(resource.properties.protocol) == -1
+    resource.properties.cidr_block == "0.0.0.0/0"
+    lower(resource.properties.rule_action) == "allow"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "rule_action"]
+        ],
+    }
 }
 
 
@@ -221,6 +371,21 @@ aws_issue["acl_all_icmp_ipv4_out"] {
     lower(resource.properties.rule_action) == "allow"
 }
 
+source_path[{"acl_all_icmp_ipv4_out": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_network_acl_rule"
+    lower(resource.properties.egress) == "true"
+    to_number(resource.properties.protocol) == 1
+    resource.properties.cidr_block == "0.0.0.0/0"
+    lower(resource.properties.rule_action) == "allow"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "rule_action"]
+        ],
+    }
+}
+
 aws_bool_issue["acl_all_icmp_ipv4_out"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_network_acl_rule"
@@ -228,6 +393,21 @@ aws_bool_issue["acl_all_icmp_ipv4_out"] {
     to_number(resource.properties.protocol) == 1
     resource.properties.cidr_block == "0.0.0.0/0"
     lower(resource.properties.rule_action) == "allow"
+}
+
+source_path[{"acl_all_icmp_ipv4_out": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_network_acl_rule"
+    resource.properties.egress == true
+    to_number(resource.properties.protocol) == 1
+    resource.properties.cidr_block == "0.0.0.0/0"
+    lower(resource.properties.rule_action) == "allow"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "rule_action"]
+        ],
+    }
 }
 
 aws_issue["acl_all_icmp_ipv4_out"] {
@@ -239,6 +419,21 @@ aws_issue["acl_all_icmp_ipv4_out"] {
     lower(resource.properties.rule_action) == "allow"
 }
 
+source_path[{"acl_all_icmp_ipv4_out": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_network_acl_rule"
+    lower(resource.properties.egress) == "true"
+    to_number(resource.properties.protocol) == -1
+    resource.properties.cidr_block == "0.0.0.0/0"
+    lower(resource.properties.rule_action) == "allow"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "rule_action"]
+        ],
+    }
+}
+
 aws_bool_issue["acl_all_icmp_ipv4_out"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_network_acl_rule"
@@ -246,6 +441,21 @@ aws_bool_issue["acl_all_icmp_ipv4_out"] {
     to_number(resource.properties.protocol) == -1
     resource.properties.cidr_block == "0.0.0.0/0"
     lower(resource.properties.rule_action) == "allow"
+}
+
+source_path[{"acl_all_icmp_ipv4_out": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_network_acl_rule"
+    resource.properties.egress == true
+    to_number(resource.properties.protocol) == -1
+    resource.properties.cidr_block == "0.0.0.0/0"
+    lower(resource.properties.rule_action) == "allow"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "rule_action"]
+        ],
+    }
 }
 
 acl_all_icmp_ipv4_out {
@@ -295,6 +505,21 @@ aws_issue["acl_all_icmp_ipv6_out"] {
     lower(resource.properties.rule_action) == "allow"
 }
 
+source_path[{"acl_all_icmp_ipv6_out": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_network_acl_rule"
+    lower(resource.properties.egress) == "true"
+    to_number(resource.properties.protocol) == 1
+    resource.properties.ipv6_cidr_block == "::/0"
+    lower(resource.properties.rule_action) == "allow"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "rule_action"]
+        ],
+    }
+}
+
 aws_bool_issue["acl_all_icmp_ipv6_out"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_network_acl_rule"
@@ -302,6 +527,21 @@ aws_bool_issue["acl_all_icmp_ipv6_out"] {
     to_number(resource.properties.protocol) == 1
     resource.properties.ipv6_cidr_block == "::/0"
     lower(resource.properties.rule_action) == "allow"
+}
+
+source_path[{"acl_all_icmp_ipv6_out": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_network_acl_rule"
+    resource.properties.egress == true
+    to_number(resource.properties.protocol) == 1
+    resource.properties.ipv6_cidr_block == "::/0"
+    lower(resource.properties.rule_action) == "allow"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "rule_action"]
+        ],
+    }
 }
 
 aws_issue["acl_all_icmp_ipv6_out"] {
@@ -313,6 +553,21 @@ aws_issue["acl_all_icmp_ipv6_out"] {
     lower(resource.properties.rule_action) == "allow"
 }
 
+source_path[{"acl_all_icmp_ipv6_out": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_network_acl_rule"
+    lower(resource.properties.egress) == "true"
+    to_number(resource.properties.protocol) == -1
+    resource.properties.ipv6_cidr_block == "::/0"
+    lower(resource.properties.rule_action) == "allow"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "rule_action"]
+        ],
+    }
+}
+
 aws_bool_issue["acl_all_icmp_ipv6_out"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_network_acl_rule"
@@ -320,6 +575,21 @@ aws_bool_issue["acl_all_icmp_ipv6_out"] {
     to_number(resource.properties.protocol) == -1
     resource.properties.ipv6_cidr_block == "::/0"
     lower(resource.properties.rule_action) == "allow"
+}
+
+source_path[{"acl_all_icmp_ipv6_out": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_network_acl_rule"
+    resource.properties.egress == true
+    to_number(resource.properties.protocol) == -1
+    resource.properties.ipv6_cidr_block == "::/0"
+    lower(resource.properties.rule_action) == "allow"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "rule_action"]
+        ],
+    }
 }
 
 acl_all_icmp_ipv6_out {
@@ -369,6 +639,21 @@ aws_issue["acl_all_traffic_out"] {
     lower(resource.properties.rule_action) == "allow"
 }
 
+source_path[{"acl_all_traffic_out": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_network_acl_rule"
+    lower(resource.properties.egress) == "true"
+    to_number(resource.properties.protocol) == -1
+    resource.properties.cidr_block == "0.0.0.0/0"
+    lower(resource.properties.rule_action) == "allow"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "rule_action"]
+        ],
+    }
+}
+
 aws_bool_issue["acl_all_traffic_out"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_network_acl_rule"
@@ -376,6 +661,21 @@ aws_bool_issue["acl_all_traffic_out"] {
     to_number(resource.properties.protocol) == -1
     resource.properties.cidr_block == "0.0.0.0/0"
     lower(resource.properties.rule_action) == "allow"
+}
+
+source_path[{"acl_all_traffic_out": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_network_acl_rule"
+    resource.properties.egress == true
+    to_number(resource.properties.protocol) == -1
+    resource.properties.cidr_block == "0.0.0.0/0"
+    lower(resource.properties.rule_action) == "allow"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "rule_action"]
+        ],
+    }
 }
 
 acl_all_traffic_out {

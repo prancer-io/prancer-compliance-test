@@ -10,10 +10,26 @@ package rule
 
 default netwatchFlowlogs = null
 
-netwatchFlowlogs["netwatchFlowlogs"] {
+azure_attribute_absence["netwatchFlowlogs"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_network_watcher_flow_log"
     not resource.properties.enabled
+}
+
+azure_issue["netwatchFlowlogs"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_watcher_flow_log"
+    resource.properties.enabled != true
+}
+
+netwatchFlowlogs {
+    lower(input.resources[_].type) == "azurerm_network_watcher_flow_log"
+    not azure_attribute_absence["netwatchFlowlogs"]
+    not azure_issue["netwatchFlowlogs"]
+}
+
+netwatchFlowlogs = false {
+    azure_attribute_absence["netwatchFlowlogs"]
 }
 
 netwatchFlowlogs = false {
@@ -21,6 +37,8 @@ netwatchFlowlogs = false {
 }
 
 netwatchFlowlogs_err = "azurerm_network_watcher_flow_log property 'enabled' is missing from the resource." {
+    azure_attribute_absence["netwatchFlowlogs"]
+} else = "Azure Network Watcher NSG flow log is disabled" {
     azure_issue["netwatchFlowlogs"]
 }
 

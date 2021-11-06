@@ -8,19 +8,43 @@ package rule
 default sns_protocol = null
 
 aws_attribute_absence["sns_protocol"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_sns_topic_subscription"
     not resource.properties.protocol
 }
 
+source_path[{"sns_protocol": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sns_topic_subscription"
+    not resource.properties.protocol
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "protocol"]
+        ],
+    }
+}
+
 aws_issue["sns_protocol"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_sns_topic_subscription"
     lower(resource.properties.protocol) == "http"
 }
 
+source_path[{"sns_protocol": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sns_topic_subscription"
+    lower(resource.properties.protocol) == "http"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "protocol"]
+        ],
+    }
+}
+
 sns_protocol {
-    lower(input.resources[_].type) == "aws_sns_topic_subscription"
+    lower(input.resources[i].type) == "aws_sns_topic_subscription"
     not aws_issue["sns_protocol"]
     not aws_attribute_absence["sns_protocol"]
 }
@@ -58,14 +82,27 @@ sns_protocol_metadata := {
 default sns_encrypt_key = null
 
 aws_issue["sns_encrypt_key"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_sns_topic"
     resource.properties.kms_master_key_id != null
     contains(lower(resource.properties.kms_master_key_id), "alias/aws/sns")
 }
 
+source_path[{"sns_encrypt_key": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sns_topic"
+    resource.properties.kms_master_key_id != null
+    contains(lower(resource.properties.kms_master_key_id), "alias/aws/sns")
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "kms_master_key_id"]
+        ],
+    }
+}
+
 sns_encrypt_key {
-    lower(input.resources[_].type) == "aws_sns_topic"
+    lower(input.resources[i].type) == "aws_sns_topic"
     not aws_issue["sns_encrypt_key"]
 }
 
@@ -96,20 +133,45 @@ sns_encrypt_key_metadata := {
 default sns_encrypt = null
 
 aws_attribute_absence["sns_encrypt"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_sns_topic"
     not resource.properties.kms_master_key_id
 }
 
+source_path[{"sns_encrypt": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sns_topic"
+    not resource.properties.kms_master_key_id
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "kms_master_key_id"]
+        ],
+    }
+}
+
 aws_issue["sns_encrypt"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_sns_topic"
     resource.properties.kms_master_key_id != null
     count(resource.properties.kms_master_key_id) == 0
 }
 
+source_path[{"sns_encrypt": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sns_topic"
+    resource.properties.kms_master_key_id != null
+    count(resource.properties.kms_master_key_id) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "kms_master_key_id"]
+        ],
+    }
+}
+
 sns_encrypt {
-    lower(input.resources[_].type) == "aws_sns_topic"
+    lower(input.resources[i].type) == "aws_sns_topic"
     not aws_attribute_absence["sns_encrypt"]
     not aws_issue["sns_encrypt"]
 }
