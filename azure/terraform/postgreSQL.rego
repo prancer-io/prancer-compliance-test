@@ -102,32 +102,46 @@ sslEnforcement_metadata := {
 
 
 # PR-AZR-0146-TRF
+# As per Farshid Mahdavipour
+# this shoud be a smart policy 
+# we have to check for firewall 
+# but if it is on private endpoint
+# it means there is no public connectivity
+# so the rule should pass
 
 default pg_ingress_from_any_ip_disabled = null
 
-azure_attribute_absence ["pg_ingress_from_any_ip_disabled"] {
-    count([c | input.resources[_].type == "azurerm_postgresql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_postgresql_firewall_rule"; c := 1])
+# azure_attribute_absence ["pg_ingress_from_any_ip_disabled"] {
+#     count([c | input.resources[_].type == "azurerm_postgresql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_postgresql_firewall_rule"; c := 1])
+# }
+
+is_private_endpoint_exist["pg_ingress_from_any_ip_disabled"] {
+    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) > 0
 }
 
-azure_attribute_absence ["pg_ingress_from_any_ip_disabled"] {
+firewall_rule_attribute_absence ["pg_ingress_from_any_ip_disabled"] {
+    count([c | input.resources[_].type == "azurerm_postgresql_firewall_rule"; c := 1]) == 0
+}
+
+firewall_rule_attribute_absence ["pg_ingress_from_any_ip_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_postgresql_firewall_rule"
     not resource.properties.start_ip_address
 }
 
-azure_attribute_absence ["pg_ingress_from_any_ip_disabled"] {
+firewall_rule_attribute_absence ["pg_ingress_from_any_ip_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_postgresql_firewall_rule"
     not resource.properties.end_ip_address
 }
 
-azure_issue ["pg_ingress_from_any_ip_disabled"] {
+firewall_rule_issue ["pg_ingress_from_any_ip_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_postgresql_firewall_rule"
     contains(resource.properties.start_ip_address, "0.0.0.0")
 }
 
-azure_issue ["pg_ingress_from_any_ip_disabled"] {
+firewall_rule_issue ["pg_ingress_from_any_ip_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_postgresql_firewall_rule"
     contains(resource.properties.end_ip_address, "0.0.0.0")
@@ -135,22 +149,35 @@ azure_issue ["pg_ingress_from_any_ip_disabled"] {
 
 pg_ingress_from_any_ip_disabled {
     lower(input.resources[_].type) == "azurerm_postgresql_server"
-    not azure_attribute_absence["pg_ingress_from_any_ip_disabled"]
-    not azure_issue["pg_ingress_from_any_ip_disabled"]
+    is_private_endpoint_exist["pg_ingress_from_any_ip_disabled"]
+}
+
+pg_ingress_from_any_ip_disabled {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    not firewall_rule_attribute_absence["pg_ingress_from_any_ip_disabled"]
+    not firewall_rule_issue["pg_ingress_from_any_ip_disabled"]
 }
 
 pg_ingress_from_any_ip_disabled = false {
-    azure_issue["pg_ingress_from_any_ip_disabled"]
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    firewall_rule_issue["pg_ingress_from_any_ip_disabled"]
+    not is_private_endpoint_exist["pg_ingress_from_any_ip_disabled"]
 }
 
 pg_ingress_from_any_ip_disabled = false {
-    azure_attribute_absence["pg_ingress_from_any_ip_disabled"]
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    firewall_rule_attribute_absence["pg_ingress_from_any_ip_disabled"]
+    not is_private_endpoint_exist["pg_ingress_from_any_ip_disabled"]
 }
 
-pg_ingress_from_any_ip_disabled_err = "Resource azurerm_postgresql_server and azurerm_postgresql_firewall_rule need to be exist and property 'start_ip_address' and 'end_ip_address' need to be exist under azurerm_postgresql_firewall_rule as well. one or all are missing from the resource." {
-    azure_attribute_absence["pg_ingress_from_any_ip_disabled"]
+pg_ingress_from_any_ip_disabled_err = "Resource azurerm_postgresql_server and azurerm_private_endpoint or azurerm_postgresql_firewall_rule need to be exist and property 'start_ip_address' and 'end_ip_address' need to be exist under azurerm_postgresql_firewall_rule as well. one or all are missing from the resource." {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    firewall_rule_attribute_absence["pg_ingress_from_any_ip_disabled"]
+    not is_private_endpoint_exist["pg_ingress_from_any_ip_disabled"]
 } else = "PostgreSQL Database Server currently allowing ingress from all Azure-internal IP addresses" {
-    azure_issue["pg_ingress_from_any_ip_disabled"]
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    firewall_rule_issue["pg_ingress_from_any_ip_disabled"]
+    not is_private_endpoint_exist["pg_ingress_from_any_ip_disabled"]
 }
 
 pg_ingress_from_any_ip_disabled_metadata := {
