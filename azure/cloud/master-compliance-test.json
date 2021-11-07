@@ -5,6 +5,95 @@
             "version": "0.1",
             "cases": [
                 {
+                    "masterTestId": "AZURE_TEST_KV_01",
+                    "type": "rego",
+                    "rule": "file(Keyvault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-KV-001",
+                            "eval": "data.rule.KeyVault",
+                            "message": "data.rule.KeyVault_err",
+                            "remediationDescription": "1. Go to 'Key vaults' and choose your Key Vault<br>2. Select 'Keys/Secrets/Certificates' under 'Settings' in the navigation menu<br>3. Select 'Generate/Import' and complete the wizard.<br>Please visit <a href='https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_KV_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practices",
+                                "HIPAA",
+                                "NIST CSF"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_228"
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure that keyvault is in use",
+                    "description": "Use the Azure Key Vault to store secrets within the Microsoft Azure environment. Secrets in Azure Key Vault are octet sequences with a maximum size of 25k bytes each."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_KV_02",
+                    "type": "rego",
+                    "rule": "file(Keyvault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-KV-002",
+                            "eval": "data.rule.KeyVault",
+                            "message": "data.rule.KeyVault_err",
+                            "remediationDescription": "Via Azure Portal<br>Azure Portal does not have provision to update the respective configurations<br><br>Via Azure CLI<br>Existing key vault:<br><br>For an existing key vault named ContosoVault, enable soft-delete as follows:<br><br>az resource update --id $(az keyvault show --name ContosoVault -o tsv , awk '{print $1}') --set properties.enableSoftDelete=true.<br>Please visit <a href='https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_KV_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_228"
+                    ],
+                    "severity": "High",
+                    "title": "Ensure the key vault is recoverable - enable 'Soft Delete' setting for a Key Vault",
+                    "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation, etc.) supported by the key vault objects. It is recommended the key vault be made recoverable by enabling the 'Do Not Purge' and 'Soft Delete' functions. This is in order to prevent loss of encrypted data including storage accounts, SQL databases, and/or dependent services provided by key vault objects (Keys, Secrets, Certificates) etc., as may happen in the case of accidental deletion by a user or from disruptive activity by a malicious user."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_KV_03",
+                    "type": "rego",
+                    "rule": "file(Keyvault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-KV-003",
+                            "eval": "data.rule.KeyVault",
+                            "message": "data.rule.KeyVault_err",
+                            "remediationDescription": "Via Azure Portal<br>Azure Portal does not have provision to update the respective configurations<br><br>Via Azure CLI<br>Existing key vault:<br><br>For an existing key vault named ContosoVault, enable soft-delete as follows:<br><br>az resource update --id $(az keyvault show --name ContosoVault -o tsv , awk '{print $1}') --set properties.enableSoftDelete=true.<br>Please visit <a href='https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR-AZR-KV-003.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_228"
+                    ],
+                    "severity": "High",
+                    "title": "Key vault should have purge protection enabled",
+                    "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation"
+                },
+                {
                     "masterTestId": "AZURE_TEST_216",
                     "type": "rego",
                     "rule": "file(PR_AZR_0007.rego)",
