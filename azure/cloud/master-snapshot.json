@@ -121,7 +121,7 @@
                 },
                 {
                     "masterSnapshotId": "AZRSNP_228",
-                    "type": "Microsoft.KeyVault/vaults",
+                    "type": "microsoft.keyvault/vaults",
                     "collection": "Microsoft.KeyVault"
                 },
                 {
