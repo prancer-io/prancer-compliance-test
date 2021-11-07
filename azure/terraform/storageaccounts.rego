@@ -575,9 +575,16 @@ storage_allow_trusted_azure_services_metadata := {
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
 #
 # PR-AZR-0013-TRF
-#
+# As per Farshid: For the storage naming convention we have to make sure the name is not the variable name
+# If a variable name is in the name , and there is no value for that, just pass the test Var.
 
 default storage_correct_naming_convention = null
+
+is_name_contains_variable_reference["storage_correct_naming_convention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    contains(resource.properties.name, "${")
+}
 
 azure_attribute_absence["storage_correct_naming_convention"] {
     resource := input.resources[_]
@@ -594,6 +601,11 @@ azure_issue["storage_correct_naming_convention"] {
 
 storage_correct_naming_convention {
     lower(input.resources[_].type) == "azurerm_storage_account"
+    is_name_contains_variable_reference["storage_correct_naming_convention"]
+}
+
+storage_correct_naming_convention {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     not azure_attribute_absence["storage_correct_naming_convention"]
     not azure_issue["storage_correct_naming_convention"]
 }
@@ -604,12 +616,14 @@ storage_correct_naming_convention = false {
 
 storage_correct_naming_convention = false {
     azure_issue["storage_correct_naming_convention"]
+    not is_name_contains_variable_reference["storage_correct_naming_convention"]
 }
 
 storage_correct_naming_convention_err = "azurerm_storage_account property 'name' need to be exist. Its missing from the resource." {
     azure_attribute_absence["storage_correct_naming_convention"]
 } else = "Storage Account naming convention is not correct" {
     azure_issue["storage_correct_naming_convention"]
+    not is_name_contains_variable_reference["storage_correct_naming_convention"]
 }
 
 storage_correct_naming_convention_metadata := {
