@@ -74,7 +74,7 @@
                             "eval": "data.rule.enablePurgeProtection",
                             "message": "data.rule.enablePurgeProtection_err",
                             "remediationDescription": "Via Azure Portal<br>Azure Portal does not have provision to update the respective configurations<br><br>Via Azure CLI<br>Existing key vault:<br><br>For an existing key vault named ContosoVault, enable soft-delete as follows:<br><br>az resource update --id $(az keyvault show --name ContosoVault -o tsv , awk '{print $1}') --set properties.enableSoftDelete=true.<br>Please visit <a href='https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR-AZR-KV-003.py"
+                            "remediationFunction": "PR_AZR_KV_003.py"
                         }
                     ],
                     "tags": [
@@ -92,6 +92,74 @@
                     "severity": "High",
                     "title": "Key vault should have purge protection enabled",
                     "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_KV_04",
+                    "type": "rego",
+                    "rule": "file(Keyvault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-KV-004",
+                            "eval": "data.rule.kv_expire",
+                            "message": "data.rule.kv_expire_err",
+                            "remediationDescription": "1. Go to 'Key vaults' and choose your Key Vault<br>2. Select 'Keys' under 'Settings' in the navigation menu<br>3. Select the relevant key and reselect its current version<br>3. Check 'Set expiration date'<br>4. Save.<br>Please visit <a href='https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_KV_004.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_229"
+                    ],
+                    "severity": "High",
+                    "title": "Azure Key Vault secrets should have an expiration date",
+                    "description": "This policy identifies Azure Key Vault secrets that do not have an expiration date. As a best practice, set an expiration date for each secret and rotate the secret regularly."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_KV_05",
+                    "type": "rego",
+                    "rule": "file(Keyvault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-KV-005",
+                            "eval": "data.rule.kv_expire",
+                            "message": "data.rule.kv_expire_err",
+                            "remediationDescription": "1. Go to Key vaults<br>2. For each Key vault, click on Secrets.<br>3. Ensure that each secret in the vault has EXPIRATION DATE set as appropriate.<br>Please visit <a href='https://docs.microsoft.com/en-us/rest/api/keyvault/vaults/get' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_KV_005.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": []
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_227"
+                    ],
+                    "severity": "High",
+                    "title": "Azure Key Vault secrets should have an expiration date",
+                    "description": "This policy identifies Azure Key Vault secrets that do not have an expiration date. As a best practice, set an expiration date for each secret and rotate the secret regularly."
                 },
                 {
                     "masterTestId": "AZURE_TEST_216",
