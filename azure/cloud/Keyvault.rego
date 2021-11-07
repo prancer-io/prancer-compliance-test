@@ -7,9 +7,8 @@ package rule
 default KeyVault = null
 
 azure_attribute_absence["KeyVault"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    accessPolicy := resource.properties.accessPolicies[_]
+    lower(input.type) == "microsoft.keyvault/vaults"
+    accessPolicy := input.resource.properties.accessPolicies[_]
     not accessPolicy.permissions.keys
     not accessPolicy.permissions.secrets
     not accessPolicy.permissions.certificates
@@ -17,9 +16,8 @@ azure_attribute_absence["KeyVault"] {
 }
 
 azure_issue["KeyVault"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    accessPolicy := resource.properties.accessPolicies[_]
+    lower(input.type) == "microsoft.keyvault/vaults"
+    accessPolicy := input.resource.properties.accessPolicies[_]
     count(accessPolicy.permissions.keys) == 0
     count(accessPolicy.permissions.secrets) == 0
     count(accessPolicy.permissions.certificates) == 0
@@ -28,7 +26,7 @@ azure_issue["KeyVault"] {
 
 
 KeyVault {
-    lower(input.resources[_].type) == "microsoft.keyvault/vaults"
+    lower(input.type) == "microsoft.keyvault/vaults"
     not azure_attribute_absence["KeyVault"]
     not azure_issue["KeyVault"]
 }
@@ -64,20 +62,18 @@ KeyVault_metadata := {
 
 default enableSoftDelete = null
 azure_attribute_absence ["enableSoftDelete"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    not resource.properties.enableSoftDelete
+    lower(input.type) == "microsoft.keyvault/vaults"
+    not input.properties.enableSoftDelete
 }
 
 azure_issue ["enableSoftDelete"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    resource.properties.enableSoftDelete != true
+    lower(input.type) == "microsoft.keyvault/vaults"
+    input.properties.enableSoftDelete != true
 }
 
 
 enableSoftDelete {
-    lower(input.resources[_].type) == "microsoft.keyvault/vaults"
+    lower(input.type) == "microsoft.keyvault/vaults"
     not azure_attribute_absence["enableSoftDelete"]
     not azure_issue["enableSoftDelete"]
 }
@@ -114,15 +110,13 @@ enableSoftDelete_metadata := {
 default enablePurgeProtection = null
 
 azure_attribute_absence ["enablePurgeProtection"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    not resource.properties.enablePurgeProtection
+    lower(input.type) == "microsoft.keyvault/vaults"
+    not input.properties.enablePurgeProtection
 }
 
 azure_issue ["enablePurgeProtection"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.keyvault/vaults"
-    resource.properties.enablePurgeProtection != true
+    lower(input.type) == "microsoft.keyvault/vaults"
+    input.properties.enablePurgeProtection != true
 }
 
 enablePurgeProtection {
