@@ -99,8 +99,8 @@ azure_attribute_absence["sql_server_login"] {
 no_azure_issue["sql_server_login"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_mssql_server"
-    lower(resource.properties.administrator_login) != "admin"
-    lower(resource.properties.administrator_login) != "administrator"
+    not contains(lower(resource.properties.administrator_login)), "admin")
+    not contains(lower(resource.properties.administrator_login)), "administrator")
 }
 
 sql_server_login {

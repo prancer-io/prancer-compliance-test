@@ -3915,7 +3915,7 @@
                             "id": "PR-AZR-0146-TRF",
                             "eval": "data.rule.pg_ingress_from_any_ip_disabled",
                             "message": "data.rule.pg_ingress_from_any_ip_disabled_err",
-                            "remediationDescription": "Make sure resource 'azurerm_postgresql_server' and 'azurerm_postgresql_firewall_rule' both exist and in 'azurerm_postgresql_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_firewall_rule#start_ip_address' target='_blank'>here</a> for details.",
+                            "remediationDescription": "Make sure resource 'azurerm_postgresql_server' and 'azurerm_private_endpoint' or 'azurerm_postgresql_firewall_rule' exist and in 'azurerm_postgresql_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_firewall_rule#start_ip_address' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_0146_TRF.py"
                         }
                     ],
@@ -4059,7 +4059,7 @@
                             "id": "PR-AZR-0192-TRF",
                             "eval": "data.rule.postgresql_public_access_disabled",
                             "message": "data.rule.postgresql_public_access_disabled_err",
-                            "remediationDescription": "In 'azurerm_postgresql_server' resource, set 'public_network_access_enabled = false' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server#public_network_access_enabled' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In 'azurerm_postgresql_server' resource, set 'public_network_access_enabled = false' or make sure resource 'azurerm_private_endpoint' exist to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server#public_network_access_enabled' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_0192_TRF.py"
                         }
                     ],
@@ -4481,46 +4481,6 @@
                     ],
                     "resourceTypes": [
                         "azurerm_mssql_server_security_alert_policy"
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_SQL_SERVER_ENCRYPTION_1",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(sql_servers_encryption.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-0140-TRF",
-                            "eval": "data.rule.db_server_encrypt",
-                            "message": "data.rule.db_server_encrypt_err",
-                            "remediationDescription": "In 'azurerm_mssql_server_transparent_data_encryption' resource, make sure 'server_id' property has id of associated 'azurerm_mssql_server' resource to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_transparent_data_encryption#server_id' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_0140_TRF.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Azure SQL Server should have transparent data encryption enabled",
-                    "description": "Transparent data encryption protects Azure SQL Server against malicious activity.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "HIPAA",
-                                "ISO 27001",
-                                "NIST 800",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "azurerm_mssql_server",
-                        "azurerm_mssql_server_transparent_data_encryption"
                     ]
                 },
                 {

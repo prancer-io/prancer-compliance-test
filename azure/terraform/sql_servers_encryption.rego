@@ -4,7 +4,7 @@ package rule
 
 #
 # PR-AZR-0140-TRF
-#
+# Depricated rule. test case should be removed. as All the new Azure SQL Server TDE is enabled by default. There is no way to create an Azure SQL with TDE disabled
 default db_server_encrypt = null
 
 #azure_attribute_absence["db_server_encrypt"] {
@@ -65,7 +65,7 @@ db_server_encrypt_metadata := {
 default serverKeyType = null
 
 azure_attribute_absence["serverKeyType"] {
-    count([c | input.resources[_].type == "azurerm_mssql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_mssql_server_transparent_data_encryption"; c := 1])
+    count([c | input.resources[_].type == "azurerm_mssql_server_transparent_data_encryption"; c := 1]) == 0
 }
 
 azure_attribute_absence["serverKeyType"] {
@@ -87,16 +87,20 @@ serverKeyType {
 }
 
 serverKeyType = false {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_attribute_absence["serverKeyType"]
 }
 
 serverKeyType = false {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_issue["serverKeyType"]
 }
 
 serverKeyType_err = "Make sure resource azurerm_mssql_server and azurerm_mssql_server_transparent_data_encryption both exist and property 'key_vault_key_id' exist under azurerm_mssql_server_transparent_data_encryption as well." {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_attribute_absence["serverKeyType"]
 } else = "SQL server's TDE protector is currently not encrypted with Customer-managed key." {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_issue["serverKeyType"]
 }
 

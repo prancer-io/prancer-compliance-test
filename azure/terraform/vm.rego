@@ -80,21 +80,27 @@ azure_issue["vm_linux_disabled_password_auth"] {
 
 vm_linux_disabled_password_auth {
     lower(input.resources[_].type) == "azurerm_virtual_machine"
+    count(input.resources[_].properties.os_profile_linux_config) > 0
     not azure_attribute_absence["vm_linux_disabled_password_auth"]
     not azure_issue["vm_linux_disabled_password_auth"]
 }
 
 vm_linux_disabled_password_auth {
     lower(input.resources[_].type) == "azurerm_virtual_machine"
+    count(input.resources[_].properties.os_profile_linux_config) > 0
     azure_attribute_absence["vm_linux_disabled_password_auth"]
     not azure_issue["vm_linux_disabled_password_auth"]
 }
 
 vm_linux_disabled_password_auth = false {
+    lower(input.resources[_].type) == "azurerm_virtual_machine"
+    count(input.resources[_].properties.os_profile_linux_config) > 0
     azure_issue["vm_linux_disabled_password_auth"]
 }
 
 vm_linux_disabled_password_auth_err = "Azure Linux Instance currently does not have basic authentication disabled" {
+    lower(input.resources[_].type) == "azurerm_virtual_machine"
+    count(input.resources[_].properties.os_profile_linux_config) > 0
     azure_issue["vm_linux_disabled_password_auth"]
 }
 
