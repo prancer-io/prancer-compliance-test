@@ -2,7 +2,7 @@ package rule
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server
 
-# PR-AZR-0115-TRF
+# PR-AZR-TRF-SQL-028
 
 default geoRedundantBackup = null
 
@@ -39,7 +39,7 @@ geoRedundantBackup_err = "azurerm_postgresql_server property 'geo_redundant_back
 }
 
 geoRedundantBackup_metadata := {
-    "Policy Code": "PR-AZR-0115-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-028",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -52,7 +52,7 @@ geoRedundantBackup_metadata := {
 
 
 
-# PR-AZR-0124-TRF
+# PR-AZR-TRF-SQL-029
 
 default sslEnforcement = null
 azure_attribute_absence ["sslEnforcement"] {
@@ -89,7 +89,7 @@ sslEnforcement_err = "azurerm_postgresql_server property 'ssl_enforcement_enable
 }
 
 sslEnforcement_metadata := {
-    "Policy Code": "PR-AZR-0124-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-029",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -101,7 +101,7 @@ sslEnforcement_metadata := {
 }
 
 
-# PR-AZR-0146-TRF
+# PR-AZR-TRF-SQL-062
 # As per Farshid Mahdavipour
 # this shoud be a smart policy 
 # we have to check for firewall 
@@ -181,7 +181,7 @@ pg_ingress_from_any_ip_disabled_err = "Resource azurerm_postgresql_server and az
 }
 
 pg_ingress_from_any_ip_disabled_metadata := {
-    "Policy Code": "PR-AZR-0146-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-062",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -194,7 +194,7 @@ pg_ingress_from_any_ip_disabled_metadata := {
 
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration
-# PR-AZR-0185-TRF
+# PR-AZR-TRF-SQL-063
 
 default azurerm_postgresql_configuration_log_checkpoints = null
 
@@ -230,7 +230,7 @@ azurerm_postgresql_configuration_log_checkpoints_err = "Resource azurerm_postgre
 }
 
 azurerm_postgresql_configuration_log_checkpoints_metadata := {
-    "Policy Code": "PR-AZR-0185-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-063",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -243,7 +243,7 @@ azurerm_postgresql_configuration_log_checkpoints_metadata := {
 
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration
-# PR-AZR-0186-TRF
+# PR-AZR-TRF-SQL-064
 
 default azurerm_postgresql_configuration_log_connections = null
 
@@ -279,7 +279,7 @@ azurerm_postgresql_configuration_log_connections_err = "Resource azurerm_postgre
 }
 
 azurerm_postgresql_configuration_log_connections_metadata := {
-    "Policy Code": "PR-AZR-0186-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-064",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -292,7 +292,7 @@ azurerm_postgresql_configuration_log_connections_metadata := {
 
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration
-# PR-AZR-0187-TRF
+# PR-AZR-TRF-SQL-065
 
 default azurerm_postgresql_configuration_connection_throttling = null
 
@@ -328,7 +328,7 @@ azurerm_postgresql_configuration_connection_throttling_err = "Resource azurerm_p
 }
 
 azurerm_postgresql_configuration_connection_throttling_metadata := {
-    "Policy Code": "PR-AZR-0187-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-065",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -341,7 +341,7 @@ azurerm_postgresql_configuration_connection_throttling_metadata := {
 
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server
-# PR-AZR-0192-TRF
+# PR-AZR-TRF-SQL-066
 
 default postgresql_public_access_disabled = null
 
@@ -415,7 +415,7 @@ postgresql_public_access_disabled_err = "Resource azurerm_postgresql_server and 
 }
 
 postgresql_public_access_disabled_metadata := {
-    "Policy Code": "PR-AZR-0192-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-066",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

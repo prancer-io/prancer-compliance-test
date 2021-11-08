@@ -3,7 +3,7 @@ package rule
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_extension
 
 #
-# PR-AZR-0064-TRF
+# PR-AZR-TRF-VM-003
 #
 
 default vm_protection = null
@@ -41,7 +41,7 @@ vm_protection_err = "azurerm_virtual_machine_extension property 'type' need to b
 }
 
 vm_protection_metadata := {
-    "Policy Code": "PR-AZR-0064-TRF",
+    "Policy Code": "PR-AZR-TRF-VM-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

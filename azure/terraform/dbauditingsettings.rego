@@ -4,7 +4,7 @@ package rule
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_database_extended_auditing_policy
 
 #
-# PR-AZR-0003-TRF
+# PR-AZR-TRF-SQL-004
 #
 
 default mssql_db_log_audit = null
@@ -51,7 +51,7 @@ mssql_db_log_audit_err = "azurerm_mssql_database_extended_auditing_policy resour
 #}
 
 mssql_db_log_audit_metadata := {
-    "Policy Code": "PR-AZR-0003-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -63,7 +63,7 @@ mssql_db_log_audit_metadata := {
 }
 
 #
-# PR-AZR-0053-TRF
+# PR-AZR-TRF-SQL-005
 #
 
 default mssql_db_log_retention = null
@@ -105,7 +105,7 @@ mssql_db_log_retention_err = "azurerm_mssql_database_extended_auditing_policy re
 }
 
 mssql_db_log_retention_metadata := {
-    "Policy Code": "PR-AZR-0053-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

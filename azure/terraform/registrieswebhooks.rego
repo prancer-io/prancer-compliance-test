@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_container_registry_webhook
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry_webhook
 #
-# PR-AZR-0005-TRF
+# PR-AZR-TRF-ACR-001
 #
 
 default acr_webhooks = null
@@ -42,7 +42,7 @@ acr_webhooks_err = "azurerm_container_registry_webhook property 'service_uri' ne
 }
 
 acr_webhooks_metadata := {
-    "Policy Code": "PR-AZR-0005-TRF",
+    "Policy Code": "PR-AZR-TRF-ACR-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

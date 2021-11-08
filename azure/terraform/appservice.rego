@@ -3,7 +3,7 @@ package rule
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service
 
 #
-# PR-AZR-0149-TRF
+# PR-AZR-TRF-WEB-005
 #
 
 default app_service_auth_enabled = null
@@ -49,7 +49,7 @@ app_service_auth_enabled_err = "azurerm_app_service property 'auth_settings.enab
 }
 
 app_service_auth_enabled_metadata := {
-    "Policy Code": "PR-AZR-0149-TRF",
+    "Policy Code": "PR-AZR-TRF-WEB-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -62,7 +62,7 @@ app_service_auth_enabled_metadata := {
 
 
 #
-# PR-AZR-0150-TRF
+# PR-AZR-TRF-WEB-001
 #
 
 default app_service_https_only = null
@@ -100,7 +100,7 @@ app_service_https_only_err = "azurerm_app_service property 'https_only' need to 
 }
 
 app_service_https_only_metadata := {
-    "Policy Code": "PR-AZR-0150-TRF",
+    "Policy Code": "PR-AZR-TRF-WEB-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -113,7 +113,7 @@ app_service_https_only_metadata := {
 
 
 #
-# PR-AZR-0151-TRF
+# PR-AZR-TRF-WEB-002
 #
 
 
@@ -167,7 +167,7 @@ app_service_latest_tls_configured_err = "Azure App Service currently dont have l
 }
 
 app_service_latest_tls_configured_metadata := {
-    "Policy Code": "PR-AZR-0151-TRF",
+    "Policy Code": "PR-AZR-TRF-WEB-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -180,7 +180,7 @@ app_service_latest_tls_configured_metadata := {
 
 
 #
-# PR-AZR-0152-TRF
+# PR-AZR-TRF-WEB-018
 #
 
 default app_service_aad_auth_enabled = null
@@ -212,7 +212,7 @@ app_service_aad_auth_enabled_err = "Azure App Service AAD authentication is curr
 }
 
 app_service_aad_auth_enabled_metadata := {
-    "Policy Code": "PR-AZR-0152-TRF",
+    "Policy Code": "PR-AZR-TRF-WEB-018",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -225,7 +225,7 @@ app_service_aad_auth_enabled_metadata := {
 
 
 #
-# PR-AZR-0153-TRF
+# PR-AZR-TRF-WEB-003
 #
 
 default app_service_client_cert_enabled = null
@@ -263,7 +263,7 @@ app_service_client_cert_enabled_err = "azurerm_app_service property 'client_cert
 }
 
 app_service_client_cert_enabled_metadata := {
-    "Policy Code": "PR-AZR-0153-TRF",
+    "Policy Code": "PR-AZR-TRF-WEB-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -276,7 +276,7 @@ app_service_client_cert_enabled_metadata := {
 
 
 #
-# PR-AZR-0154-TRF
+# PR-AZR-TRF-WEB-004
 #
 
 default app_service_uses_http_two = null
@@ -323,7 +323,7 @@ app_service_uses_http_two_err = "azurerm_app_service property 'site_config.http2
 }
 
 app_service_uses_http_two_metadata := {
-    "Policy Code": "PR-AZR-0154-TRF",
+    "Policy Code": "PR-AZR-TRF-WEB-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -336,7 +336,7 @@ app_service_uses_http_two_metadata := {
 
 
 #
-# PR-AZR-0067-TRF
+# PR-AZR-TRF-WEB-006
 #
 
 default app_service_cors_not_allowing_all = null
@@ -395,7 +395,7 @@ app_service_cors_not_allowing_all_err = "CORS configuration is currently allowin
 }
 
 app_service_cors_not_allowing_all_metadata := {
-    "Policy Code": "PR-AZR-0067-TRF",
+    "Policy Code": "PR-AZR-TRF-WEB-006",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -408,7 +408,7 @@ app_service_cors_not_allowing_all_metadata := {
 
 
 #
-# PR-AZR-0072-TRF
+# PR-AZR-TRF-WEB-007
 #
 
 default app_service_http_logging_enabled = null
@@ -438,7 +438,7 @@ app_service_http_logging_enabled_err = "azurerm_app_service property 'logs.http_
 }
 
 app_service_http_logging_enabled_metadata := {
-    "Policy Code": "PR-AZR-0072-TRF",
+    "Policy Code": "PR-AZR-TRF-WEB-007",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -451,7 +451,7 @@ app_service_http_logging_enabled_metadata := {
 
 
 #
-# PR-AZR-0073-TRF
+# PR-AZR-TRF-WEB-008
 #
 
 default app_service_detaild_error_message_enabled = null
@@ -498,7 +498,7 @@ app_service_detaild_error_message_enabled_err = "azurerm_app_service property 'l
 }
 
 app_service_detaild_error_message_enabled_metadata := {
-    "Policy Code": "PR-AZR-0073-TRF",
+    "Policy Code": "PR-AZR-TRF-WEB-008",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -511,7 +511,7 @@ app_service_detaild_error_message_enabled_metadata := {
 
 
 #
-# PR-AZR-0076-TRF
+# PR-AZR-TRF-WEB-009
 #
 
 default app_service_failed_request_tracing_enabled = null
@@ -558,7 +558,7 @@ app_service_failed_request_tracing_enabled_err = "azurerm_app_service property '
 }
 
 app_service_failed_request_tracing_enabled_metadata := {
-    "Policy Code": "PR-AZR-0076-TRF",
+    "Policy Code": "PR-AZR-TRF-WEB-009",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -571,7 +571,7 @@ app_service_failed_request_tracing_enabled_metadata := {
 
 
 #
-# PR-AZR-0077-TRF
+# PR-AZR-TRF-WEB-010
 #
 
 default app_service_managed_identity_provider_enabled = null
@@ -600,7 +600,7 @@ app_service_managed_identity_provider_enabled_err = "azurerm_app_service propert
 }
 
 app_service_managed_identity_provider_enabled_metadata := {
-    "Policy Code": "PR-AZR-0077-TRF",
+    "Policy Code": "PR-AZR-TRF-WEB-010",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -613,7 +613,7 @@ app_service_managed_identity_provider_enabled_metadata := {
 
 
 #
-# PR-AZR-0078-TRF
+# PR-AZR-TRF-WEB-011
 #
 
 default app_service_remote_debugging_disabled = null
@@ -660,7 +660,7 @@ app_service_remote_debugging_disabled_err = "Azure App Service remote debugging 
 }
 
 app_service_remote_debugging_disabled_metadata := {
-    "Policy Code": "PR-AZR-0078-TRF",
+    "Policy Code": "PR-AZR-TRF-WEB-011",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -673,7 +673,7 @@ app_service_remote_debugging_disabled_metadata := {
 
 
 #
-# PR-AZR-0079-TRF
+# PR-AZR-TRF-WEB-012
 #
 
 default app_service_ftp_deployment_disabled = null
@@ -720,7 +720,7 @@ app_service_ftp_deployment_disabled_err = "azurerm_app_service property 'site_co
 }
 
 app_service_ftp_deployment_disabled_metadata := {
-    "Policy Code": "PR-AZR-0079-TRF",
+    "Policy Code": "PR-AZR-TRF-WEB-012",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -733,7 +733,7 @@ app_service_ftp_deployment_disabled_metadata := {
 
 
 #
-# PR-AZR-0080-TRF
+# PR-AZR-TRF-WEB-013
 #
 
 default app_service_dot_net_framework_latest = null
@@ -783,7 +783,7 @@ app_service_dot_net_framework_latest_err = "Azure App Service currently dont hav
 }
 
 app_service_dot_net_framework_latest_metadata := {
-    "Policy Code": "PR-AZR-0080-TRF",
+    "Policy Code": "PR-AZR-TRF-WEB-013",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -796,7 +796,7 @@ app_service_dot_net_framework_latest_metadata := {
 
 
 #
-# PR-AZR-0081-TRF
+# PR-AZR-TRF-WEB-014
 #
 
 default app_service_php_version_latest = null
@@ -845,7 +845,7 @@ app_service_php_version_latest_err = "Azure App Service currently dont have late
 }
 
 app_service_php_version_latest_metadata := {
-    "Policy Code": "PR-AZR-0081-TRF",
+    "Policy Code": "PR-AZR-TRF-WEB-014",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -858,7 +858,7 @@ app_service_php_version_latest_metadata := {
 
 
 #
-# PR-AZR-0083-TRF
+# PR-AZR-TRF-WEB-015
 #
 
 default app_service_python_version_latest = null
@@ -909,7 +909,7 @@ app_service_python_version_latest_err = "Azure App Service currently dont have l
 }
 
 app_service_python_version_latest_metadata := {
-    "Policy Code": "PR-AZR-0083-TRF",
+    "Policy Code": "PR-AZR-TRF-WEB-015",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -922,7 +922,7 @@ app_service_python_version_latest_metadata := {
 
 
 #
-# PR-AZR-0084-TRF
+# PR-AZR-TRF-WEB-016
 #
 
 default app_service_java_version_latest = null
@@ -973,7 +973,7 @@ app_service_java_version_latest_err = "Azure App Service currently dont have lat
 }
 
 app_service_java_version_latest_metadata := {
-    "Policy Code": "PR-AZR-0084-TRF",
+    "Policy Code": "PR-AZR-TRF-WEB-016",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -986,7 +986,7 @@ app_service_java_version_latest_metadata := {
 
 
 #
-# PR-AZR-0086-TRF
+# PR-AZR-TRF-WEB-017
 #
 # As per Farshid: it is not required for all the azure app service to use storage
 # but if they are using, then they should use Azure Files
@@ -1036,7 +1036,7 @@ app_service_storage_account_type_azurefile_err = "Azure App Service storage acco
 }
 
 app_service_storage_account_type_azurefile_metadata := {
-    "Policy Code": "PR-AZR-0086-TRF",
+    "Policy Code": "PR-AZR-TRF-WEB-017",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

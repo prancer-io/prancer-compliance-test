@@ -7,7 +7,7 @@ package rule
 # visit: https://github.com/hashicorp/terraform-provider-azurerm/issues/1747)
 #
 
-# PR-AZR-0128-TRF
+# PR-AZR-TRF-SQL-047
 
 default sql_public_access_disabled = null
 
@@ -32,7 +32,7 @@ sql_public_access_disabled_err = "Public Network Access is currently not disable
 }
 
 sql_public_access_disabled_metadata := {
-    "Policy Code": "PR-AZR-0128-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-047",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -85,7 +85,7 @@ sql_public_access_metadata := {
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server
 
-# PR-AZR-0133-TRF
+# PR-AZR-TRF-SQL-048
 
 default sql_server_login = null
 
@@ -126,7 +126,7 @@ sql_server_login_err = "azurerm_mssql_server property 'administrator_login' need
 }
 
 sql_server_login_metadata := {
-    "Policy Code": "PR-AZR-0133-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-048",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -137,7 +137,7 @@ sql_server_login_metadata := {
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server"
 }
 
-# PR-AZR-0147-TRF
+# PR-AZR-TRF-SQL-068
 
 default mssql_ingress_from_any_ip_disabled = null
 
@@ -191,7 +191,7 @@ mssql_ingress_from_any_ip_disabled_err = "Resource azurerm_mssql_server and azur
 }
 
 mssql_ingress_from_any_ip_disabled_metadata := {
-    "Policy Code": "PR-AZR-0147-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-068",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -204,7 +204,7 @@ mssql_ingress_from_any_ip_disabled_metadata := {
 
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server
-# PR-AZR-0016-TRF
+# PR-AZR-TRF-SQL-069
 # Once minimum_tls_version is set it is not possible to remove this setting and must be given a valid value for any further updates to the resource.
 
 default mssql_server_latest_tls_configured = null
@@ -243,7 +243,7 @@ mssql_server_latest_tls_configured_err = "azurerm_mssql_server property 'min_tls
 }
 
 mssql_server_latest_tls_configured_metadata := {
-    "Policy Code": "PR-AZR-0016-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-069",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

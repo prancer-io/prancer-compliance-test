@@ -1,7 +1,7 @@
 package rule
 
 #
-# PR-AZR-0001-RGX
+# PR-AZR-TRF-SEC-001
 #
 
 default gl_azure_secrets = null
@@ -110,7 +110,7 @@ gl_azure_secrets_err = "Secrets has been found hardcoded in the template. Please
 }
 
 gl_azure_secrets_metadata := {
-    "Policy Code": "PR-AZR-0001-RGX",
+    "Policy Code": "PR-AZR-TRF-SEC-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

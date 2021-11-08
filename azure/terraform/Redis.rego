@@ -2,7 +2,7 @@ package rule
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache
 
-# PR-AZR-0131-TRF
+# PR-AZR-TRF-ARC-001
 
 default enableSslPort = null
 # default is false
@@ -39,7 +39,7 @@ enableSslPort_err = "Redis cache is currently allowing unsecure connection via a
 }
 
 enableSslPort_metadata := {
-    "Policy Code": "PR-AZR-0131-TRF",
+    "Policy Code": "PR-AZR-TRF-ARC-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -54,7 +54,7 @@ enableSslPort_metadata := {
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_linked_server
 
-# PR-AZR-0132-TRF
+# PR-AZR-TRF-ARC-002
 
 default serverRole = null
 # as azurerm_redis_linked_server is child resource of microsoft.cache/redis, we need to make sure microsoft.cache/redis exist in the same template first.
@@ -100,7 +100,7 @@ serverRole_err = "Azure Redis Cache linked backup server currently does not have
 }
 
 serverRole_metadata := {
-    "Policy Code": "PR-AZR-0132-TRF",
+    "Policy Code": "PR-AZR-TRF-ARC-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

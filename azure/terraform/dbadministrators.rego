@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2019-06-01-preview/servers/administrators
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_active_directory_administrator
 #
-# PR-AZR-0085-TRF
+# PR-AZR-TRF-SQL-001
 #
 
 default db_ad_admin = null
@@ -50,7 +50,7 @@ db_ad_admin_err = "sql_active_directory_administrator resource is missing from t
 #}
 
 db_ad_admin_metadata := {
-    "Policy Code": "PR-AZR-0085-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

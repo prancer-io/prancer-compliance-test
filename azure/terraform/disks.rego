@@ -3,7 +3,7 @@ package rule
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/managed_disk
 
 #
-# PR-AZR-0068-TRF
+# PR-AZR-TRF-DSK-001
 #
 
 default disk_encrypt = null
@@ -49,7 +49,7 @@ disk_encrypt_err = "azurerm_managed_disk property 'encryption_settings.enabled' 
 }
 
 disk_encrypt_metadata := {
-    "Policy Code": "PR-AZR-0068-TRF",
+    "Policy Code": "PR-AZR-TRF-DSK-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

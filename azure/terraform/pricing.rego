@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_security_center_subscription_pricing
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_subscription_pricing
 #
-# PR-AZR-0091-TRF
+# PR-AZR-TRF-ASC-001
 #
 
 default pricing = null
@@ -41,7 +41,7 @@ pricing_err = "azurerm_security_center_subscription_pricing property 'tier' need
 }
 
 pricing_metadata := {
-    "Policy Code": "PR-AZR-0091-TRF",
+    "Policy Code": "PR-AZR-TRF-ASC-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

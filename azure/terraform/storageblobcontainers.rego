@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-06-01/storageaccounts/blobservices/containers
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container
 #
-# PR-AZR-0074-TRF
+# PR-AZR-TRF-STR-012
 #
 
 default storage_container_public_access_disabled = null
@@ -42,7 +42,7 @@ storage_container_public_access_disabled_err = "Azure storage accounts has blob 
 }
 
 storage_container_public_access_disabled_metadata := {
-    "Policy Code": "PR-AZR-0074-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-012",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
