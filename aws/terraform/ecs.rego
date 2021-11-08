@@ -282,6 +282,7 @@ ecs_root_filesystem_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html"
 }
 
+
 #
 # PR-AWS-TRF-ECS-005
 #
@@ -710,4 +711,91 @@ ecs_transit_enabled_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-efsvolumeconfiguration.html#cfn-ecs-taskdefinition-efsvolumeconfiguration-transitencryption"
+}
+
+#
+# PR-AWS-TRF-ECS-008
+#
+
+default ecs_container_insight_enable = null
+
+aws_issue["ecs_container_insight_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_cluster"
+    setting := resource.properties.setting[j]
+    lower(setting.name) == "containerinsights" 
+    lower(setting.value) != "enabled"
+}
+
+source_path[{"ecs_container_insight_enable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_cluster"
+    setting := resource.properties.setting[j]
+    lower(setting.name) == "containerinsights" 
+    lower(setting.value) != "enabled"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "setting", j, "value"]
+        ],
+    }
+}
+
+aws_issue["ecs_container_insight_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_cluster"
+    count([c | resource.properties.setting[j].name == "containerinsights" ; c:=1]) == 0
+}
+
+source_path[{"ecs_container_insight_enable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_cluster"
+    count([c | resource.properties.setting[j].name == "containerinsights" ; c:=1]) == 0
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "setting"]
+        ],
+    }
+}
+
+aws_issue["ecs_container_insight_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_cluster"
+    count(resource.properties.setting) == 0
+}
+
+source_path[{"ecs_container_insight_enable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecs_cluster"
+    count(resource.properties.setting) == 0
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "setting"]
+        ],
+    }
+}
+
+ecs_container_insight_enable {
+    lower(input.resources[i].type) == "aws_ecs_cluster"
+    not aws_issue["ecs_container_insight_enable"]
+}
+
+ecs_container_insight_enable = false {
+    aws_issue["ecs_container_insight_enable"]
+}
+
+
+ecs_container_insight_enable_err = "Ensure container insights are enabled on ECS cluster" {
+    aws_issue["ecs_container_insight_enable"]
+}
+
+ecs_container_insight_enable_metadata := {
+    "Policy Code": "PR-AWS-TRF-ECS-008",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure container insights are enabled on ECS cluster",
+    "Policy Description": "Container Insights can be used to collect, aggregate, and summarize metrics and logs from containerized applications and microservices. They can also be extended to collect metrics at the cluster, task, and service levels. Using Container Insights allows you to monitor, troubleshoot, and set alarms for all your Amazon ECS resources. It provides a simple to use native and fully managed service for managing ECS issues.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_cluster"
 }

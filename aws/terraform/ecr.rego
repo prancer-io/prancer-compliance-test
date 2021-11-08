@@ -178,3 +178,97 @@ ecr_scan_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecr-repository-image_scanning_configuration.html#cfn-ecr-repository-image_scanning_configuration-scan_on_push"
 }
+
+#
+# PR-AWS-TRF-ECR-004
+#
+
+default ecr_public_access_disable = null
+
+aws_issue["ecr_public_access_disable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+}
+
+source_path[{"ecr_scan": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    metadata := {
+        "resource_path": [
+            ["resources", i, ".properties", "policy", "Statement", j, "Principal"]
+        ],
+    }
+}
+
+aws_issue["ecr_public_access_disable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+}
+
+source_path[{"ecr_scan": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    metadata := {
+        "resource_path": [
+            ["resources", i, ".properties", "policy", "Statement", j, "Principal", "AWS"]
+        ],
+    }
+}
+
+aws_issue["ecr_public_access_disable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[k] = "*"
+}
+
+source_path[{"ecr_scan": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[k] = "*"
+    metadata := {
+        "resource_path": [
+            ["resources", i, ".properties", "policy", "Statement", j, "Principal", "AWS", k]
+        ],
+    }
+}
+
+ecr_public_access_disable {
+    lower(input.resources[i].type) == "aws_ecr_repository_policy"
+    not aws_issue["ecr_public_access_disable"]
+}
+
+ecr_public_access_disable = false {
+    aws_issue["ecr_public_access_disable"]
+}
+
+ecr_public_access_disable_err = "Ensure AWS ECR Repository is not publicly accessible" {
+    aws_issue["ecr_public_access_disable"]
+}
+
+ecr_public_access_disable_metadata := {
+    "Policy Code": "PR-AWS-TRF-ECR-004",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS ECR Repository is not publicly accessible",
+    "Policy Description": "Public AWS ECR Repository potentially expose existing interfaces to unwanted 3rd parties that can tap into an existing data stream, resulting in data leak to an unwanted party.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository_policy"
+}

@@ -3,7 +3,7 @@ package rule
 
 ports = [
     "135", "137", "138", "1433", "1434", "20", "21", "22", "23", "25", "3306", "3389", "4333",
-    "445", "53", "5432", "5500", "5900", "69",
+    "445", "53", "5432", "5500", "5900", "69", "9300", "5601", "2379", "5986", "5985", "1270"
 ]
 
 aws_issue[port] {
@@ -1432,4 +1432,265 @@ sg_tag_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#cfn-ec2-securitygroup-tags"
+}
+
+
+#
+# PR-AWS-TRF-SG-023
+#
+
+default sg_description_absent = null
+
+aws_issue["sg_description_absent"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_security_group"
+    ingress := resource.properties.ingress[j]
+    not ingress.description
+}
+
+source_path[{"sg_description_absent": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_security_group"
+    ingress := resource.properties.ingress[j]
+    not ingress.description
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "ingress", j, "description"]
+        ],
+    }
+}
+
+aws_issue["sg_description_absent"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_security_group"
+    ingress := resource.properties.ingress[j]
+    count(ingress.description) == 0
+}
+
+source_path[{"sg_description_absent": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_security_group"
+    ingress := resource.properties.ingress[j]
+    count(ingress.description) == 0
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "ingress", j, "description"]
+        ],
+    }
+}
+
+sg_description_absent {
+    lower(input.resources[i].type) == "aws_security_group"
+    not aws_issue["sg_description_absent"]
+}
+
+sg_description_absent = false {
+    aws_issue["sg_description_absent"]
+}
+
+sg_description_absent_err = "Ensure every Security Group rule contains a description" {
+    aws_issue["sg_description_absent"]
+}
+
+sg_description_absent_metadata := {
+    "Policy Code": "PR-AWS-TRF-SG-023",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure every Security Group rule contains a description",
+    "Policy Description": "We recommend you add descriptive text to each of your Security Group Rules clarifying each rule's goals, this helps prevent developer errors.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group"
+}
+
+
+#
+# PR-AWS-TRF-SG-024
+#
+
+default port_9300 = null
+
+port_9300 {
+    lower(input.resources[i].type) == "aws_security_group"
+    not aws_issue["9300"]
+}
+
+port_9300 = false {
+    aws_issue["9300"]
+}
+
+port_9300_err = "AWS Security Groups allow internet traffic from internet to ElasticSearch Protocol Port (9300)" {
+    aws_issue["9300"]
+}
+
+port_9300_metadata := {
+    "Policy Code": "PR-AWS-TRF-SG-024",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to ElasticSearch Protocol Port (9300)",
+    "Policy Description": "This policy identifies the security groups which are exposing ElasticSearch Protocol Port (9300) to the internet. It is recommended that Global permission to access the well known services ElasticSearch Protocol Port (9300) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group"
+}
+
+
+#
+# PR-AWS-TRF-SG-025
+#
+
+default port_5601 = null
+
+port_5601 {
+    lower(input.resources[i].type) == "aws_security_group"
+    not aws_issue["5601"]
+}
+
+port_5601 = false {
+    aws_issue["5601"]
+}
+
+port_5601_err = "AWS Security Groups allow internet traffic from internet to Kibana Protocol Port (5601)" {
+    aws_issue["5601"]
+}
+
+port_5601_metadata := {
+    "Policy Code": "PR-AWS-TRF-SG-025",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to Kibana Protocol Port (5601)",
+    "Policy Description": "This policy identifies the security groups which are exposing Kibana Protocol Port (5601) to the internet. It is recommended that Global permission to access the well known services Kibana Protocol Port (5601) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group"
+}
+
+
+#
+# PR-AWS-TRF-SG-026
+#
+
+default port_2379 = null
+
+port_2379 {
+    lower(input.resources[i].type) == "aws_security_group"
+    not aws_issue["2379"]
+}
+
+port_2379 = false {
+    aws_issue["2379"]
+}
+
+port_2379_err = "AWS Security Groups allow internet traffic from internet to etcd-client Protocol Port (2379)" {
+    aws_issue["2379"]
+}
+
+port_2379_metadata := {
+    "Policy Code": "PR-AWS-TRF-SG-026",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to etcd-client Protocol Port (2379)",
+    "Policy Description": "This policy identifies the security groups which are exposing etcd-client Protocol Port (2379) to the internet. It is recommended that Global permission to access the well known services etcd-client Protocol Port (2379) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group"
+}
+
+#
+# PR-AWS-TRF-SG-027
+#
+
+default port_5986 = null
+
+port_5986 {
+    lower(input.resources[i].type) == "aws_security_group"
+    not aws_issue["5986"]
+}
+
+port_5986 = false {
+    aws_issue["5986"]
+}
+
+port_5986_err = "AWS Security Groups allow internet traffic from internet to WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5986)" {
+    aws_issue["5986"]
+}
+
+port_5986_metadata := {
+    "Policy Code": "PR-AWS-TRF-SG-027",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5986)",
+    "Policy Description": "This policy identifies the security groups which are exposing WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5986) to the internet. It is recommended that Global permission to access the well known services WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5986) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group"
+}
+
+
+#
+# PR-AWS-TRF-SG-028
+#
+
+default port_5985 = null
+
+port_5985 {
+    lower(input.resources[i].type) == "aws_security_group"
+    not aws_issue["5985"]
+}
+
+port_5985 = false {
+    aws_issue["5985"]
+}
+
+port_5985_err = "AWS Security Groups allow internet traffic from internet to WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985)" {
+    aws_issue["5985"]
+}
+
+port_5985_metadata := {
+    "Policy Code": "PR-AWS-TRF-SG-028",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985)",
+    "Policy Description": "This policy identifies the security groups which are exposing WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985) to the internet. It is recommended that Global permission to access the well known services WinRM 2.0 (Microsoft Windows Remote Management) Protocol Port (5985) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group"
+}
+
+
+#
+# PR-AWS-TRF-SG-029
+#
+
+default port_1270 = null
+
+port_1270 {
+    lower(input.resources[i].type) == "aws_security_group"
+    not aws_issue["1270"]
+}
+
+port_1270 = false {
+    aws_issue["1270"]
+}
+
+port_1270_err = "AWS Security Groups allow internet traffic from internet to Microsoft Operations Manager Protocol Port (1270)" {
+    aws_issue["1270"]
+}
+
+port_1270_metadata := {
+    "Policy Code": "PR-AWS-TRF-SG-029",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "AWS Security Groups allow internet traffic from internet to Microsoft Operations Manager Protocol Port (1270)",
+    "Policy Description": "This policy identifies the security groups which are exposing Microsoft Operations Manager Protocol Port (1270) to the internet. It is recommended that Global permission to access the well known services Microsoft Operations Manager Protocol Port (1270) should not be allowed in a security group.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group"
 }

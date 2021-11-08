@@ -581,3 +581,87 @@ redshift_allow_version_upgrade_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html#cfn-redshift-cluster-allowversionupgrade"
 }
+
+#
+# PR-AWS-TRF-RSH-006
+#
+
+default redshift_deploy_vpc = null
+
+aws_issue["redshift_deploy_vpc"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_cluster"
+    count(resource.properties.cluster_subnet_group_name) == 0
+}
+
+source_path[{"redshift_deploy_vpc": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_cluster"
+    count(resource.properties.cluster_subnet_group_name) == 0
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "cluster_subnet_group_name"]
+        ],
+    }
+}
+
+
+aws_issue["redshift_deploy_vpc"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_cluster"
+    resource.properties.cluster_subnet_group_name == null
+}
+
+source_path[{"redshift_deploy_vpc": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_cluster"
+    resource.properties.cluster_subnet_group_name == null
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "cluster_subnet_group_name"]
+        ],
+    }
+}
+
+aws_issue["redshift_deploy_vpc"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_cluster"
+    not resource.properties.cluster_subnet_group_name
+}
+
+source_path[{"redshift_deploy_vpc": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_redshift_cluster"
+    not resource.properties.cluster_subnet_group_name
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "cluster_subnet_group_name"]
+        ],
+    }
+}
+
+redshift_deploy_vpc {
+    lower(input.resources[i].type) == "aws_redshift_cluster"
+    not aws_issue["redshift_deploy_vpc"]
+}
+
+redshift_deploy_vpc = false {
+    aws_issue["redshift_deploy_vpc"]
+}
+
+
+redshift_deploy_vpc_err = "Ensure Redshift is not deployed outside of a VPC" {
+    aws_issue["redshift_deploy_vpc"]
+}
+
+redshift_deploy_vpc_metadata := {
+    "Policy Code": "PR-AWS-TRF-RSH-006",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure Redshift is not deployed outside of a VPC",
+    "Policy Description": "Ensure that your Redshift clusters are provisioned within the AWS EC2-VPC platform instead of EC2-Classic platform (outdated) for better flexibility and control over clusters security, traffic routing, availability and more.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/redshift_cluster"
+}
