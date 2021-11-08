@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts
 
 #
-# PR-AZR-ARM-SCT-002
+# PR-AZR-ARM-ASC-002
 #
 
 default securitycontacts = null
@@ -62,7 +62,7 @@ securitycontacts_miss_err = "Security Center security contacts property 'email' 
 }
 
 securitycontacts_metadata := {
-    "Policy Code": "PR-AZR-ARM-SCT-002",
+    "Policy Code": "PR-AZR-ARM-ASC-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -77,7 +77,7 @@ securitycontacts_metadata := {
 
 
 #
-# PR-AZR-ARM-SCT-003
+# PR-AZR-ARM-ASC-003
 #
 
 default alert_notifications = null
@@ -134,7 +134,7 @@ alert_notifications_err = "microsoft.security/securitycontacts resource property
 }
 
 alert_notifications_metadata := {
-    "Policy Code": "PR-AZR-ARM-SCT-003",
+    "Policy Code": "PR-AZR-ARM-ASC-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
