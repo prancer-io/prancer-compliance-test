@@ -5153,7 +5153,7 @@
                             "id": "PR-AZR-TRF-STR-004",
                             "eval": "data.rule.storage_acl",
                             "message": "data.rule.storage_acl_err",
-                            "remediationDescription": "In 'azurerm_storage_account_network_rules' resource, set 'default_action = Deny' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules#default_action' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In 'azurerm_storage_account_network_rules' resource or azurerm_storage_account's inner block 'network_rules', set 'default_action = Deny' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules#default_action' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_TRF_STR_004.py"
                         }
                     ],
@@ -5356,46 +5356,6 @@
                     "severity": "Medium",
                     "title": "Storage Accounts queue service logging should be enabled",
                     "description": "The Azure Storage Queue service logging records details for both successful and failed requests made to the queues, as well as end-to-end latency, server latency, and authentication information.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "CIS",
-                                "HIPAA",
-                                "NIST 800",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "azurerm_advanced_threat_protection",
-                        "azurerm_storage_encryption_scope",
-                        "azurerm_storage_account_network_rules",
-                        "azurerm_storage_account"
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_STORAGE_ACCOUNT_8",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(storageaccounts.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-TRF-STR-015",
-                            "eval": "data.rule.storage_acr_firewall_enabled",
-                            "message": "data.rule.storage_acr_firewall_enabled_err",
-                            "remediationDescription": "In 'azurerm_storage_account' resource, set default_action = 'deny' under 'network_rules' block to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#default_action' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_TRF_STR_015.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Storage Accounts should have firewall rules enabled",
-                    "description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on.<br><br>You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
                     "tags": [
                         {
                             "cloud": "git",

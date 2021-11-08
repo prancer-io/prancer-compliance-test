@@ -61,7 +61,7 @@ storage_secure_metadata := {
 default storage_acl = null
 
 azure_attribute_absence ["storage_acl"] {
-    count([c | input.resources[_].type == "azurerm_storage_account"; c := 1]) != count([c | input.resources[_].type == "azurerm_storage_account_network_rules"; c := 1])
+    count([c | input.resources[_].type == "azurerm_storage_account_network_rules"; c := 1]) == 0
 }
 
 azure_attribute_absence["storage_acl"] {
@@ -76,25 +76,64 @@ azure_issue["storage_acl"] {
     lower(resource.properties.default_action) != "deny"
 }
 
+azure_inner_attribute_absence["storage_acl"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    not resource.properties.network_rules
+}
+
+azure_inner_attribute_absence["storage_acl"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    network_rules := resource.properties.network_rules[_]
+    not network_rules.default_action
+}
+
+azure_inner_issue["storage_acl"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    network_rules := resource.properties.network_rules[_]
+    lower(network_rules.default_action) != "deny"
+}
+
 storage_acl {
     lower(input.resources[_].type) == "azurerm_storage_account"
     not azure_attribute_absence["storage_acl"]
     not azure_issue["storage_acl"]
 }
 
-storage_acl = false {
-    azure_attribute_absence["storage_acl"]
+storage_acl {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    not azure_inner_attribute_absence["storage_acl"]
+    not azure_inner_issue["storage_acl"]
 }
 
 storage_acl = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_attribute_absence["storage_acl"]
+    azure_inner_attribute_absence["storage_acl"]
+}
+
+storage_acl = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_issue["storage_acl"]
 }
 
+storage_acl = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_inner_issue["storage_acl"]
+}
 
-storage_acl_err = "azurerm_storage_account_network_rules property 'default_action' need to be exist. Its missing from the resource. Please set the value to 'deny' after property addition." {
+storage_acl_err = "azurerm_storage_account_network_rules property 'default_action' or azurerm_storage_account's inner block 'network_rules' with property 'default_action' need to be exist. Its missing from the resource. Please set the value to 'deny' after property addition." {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_attribute_absence["storage_acl"]
+    azure_inner_attribute_absence["storage_acl"]
 } else = "Storage Accounts firewall rule is currently not enabled" {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_issue["storage_acl"]
+} else = "Storage Accounts firewall rule is currently not enabled" {
+ 	lower(input.resources[_].type) == "azurerm_storage_account"
+ 	azure_inner_issue["storage_acl"]
 }
 
 storage_acl_metadata := {
@@ -395,66 +434,6 @@ storage_account_queue_logging_enabled_for_all_operation_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"
 }
-
-
-#
-# PR-AZR-TRF-STR-015
-# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
-
-default storage_acr_firewall_enabled = null
-
-azure_attribute_absence["storage_acr_firewall_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_storage_account"
-    not resource.properties.network_rules
-}
-
-azure_attribute_absence["storage_acr_firewall_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_storage_account"
-    network_rules := resource.properties.network_rules[_]
-    not network_rules.default_action
-}
-
-azure_issue["storage_acr_firewall_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_storage_account"
-    network_rules := resource.properties.network_rules[_]
-    lower(network_rules.default_action) != "deny"
-}
-
-storage_acr_firewall_enabled {
-    lower(input.resources[_].type) == "azurerm_storage_account"
-    not azure_attribute_absence["storage_acr_firewall_enabled"]
-    not azure_issue["storage_acr_firewall_enabled"]
-}
-
-storage_acr_firewall_enabled = false {
-    azure_attribute_absence["storage_acr_firewall_enabled"]
-}
-
-storage_acr_firewall_enabled = false {
-    azure_issue["storage_acr_firewall_enabled"]
-}
-
-storage_acr_firewall_enabled_err = "azurerm_storage_account property 'network_rules.default_action' need to be exist. Its missing from the resource. Please set the value to 'deny' after property addition." {
-    azure_attribute_absence["storage_acl"]
-} else = "Storage Accounts firewall rule is currently not enabled" {
-    azure_issue["storage_acl"]
-}
-
-storage_acr_firewall_enabled_metadata := {
-    "Policy Code": "PR-AZR-TRF-STR-015",
-    "Type": "IaC",
-    "Product": "AZR",
-    "Language": "Terraform",
-    "Policy Title": "Storage Accounts should have firewall rules enabled",
-    "Policy Description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on.<br><br>You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
-    "Resource Type": "azurerm_storage_account",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"
-}
-
 
 #
 # PR-AZR-TRF-STR-011
