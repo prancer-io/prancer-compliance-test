@@ -3941,7 +3941,7 @@
                             "eval": "data.rule.inbound_port_5500",
                             "message": "data.rule.inbound_port_5500_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR-TRF-ARM-NSG-027.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_027.py"
                         }
                     ],
                     "severity": "High",
