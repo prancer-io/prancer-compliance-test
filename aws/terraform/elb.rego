@@ -967,3 +967,106 @@ elb_v2_listener_ssl_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html#cfn-elasticloadbalancingv2-listener-certificates"
 }
+
+
+#
+# PR-AWS-TRF-ELB-013
+#
+
+default elb_drop_invalid_header = null
+
+aws_attribute_absence["elb_drop_invalid_header"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_load_balancer_listener_policy"
+    not resource.properties.policy_attribute
+}
+
+source_path[{"elb_drop_invalid_header": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_load_balancer_listener_policy"
+    not resource.properties.policy_attribute
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy_attribute"]
+        ],
+    }
+}
+
+aws_issue["elb_drop_invalid_header"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_load_balancer_listener_policy"
+    item := resource.properties.policy_attribute[j]
+    lower(item.name) == "routing.http.drop_invalid_header_fields.enabled"
+    lower(item.value) != "true"
+}
+
+source_path[{"elb_drop_invalid_header": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_load_balancer_listener_policy"
+    item := resource.properties.policy_attribute[j]
+    lower(item.name) == "routing.http.drop_invalid_header_fields.enabled"
+    lower(item.value) != "true"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy_attribute", j, "value"]
+        ],
+    }
+}
+
+aws_bool_issue["elb_drop_invalid_header"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_load_balancer_listener_policy"
+    item := resource.properties.policy_attribute[j]
+    lower(item.name) == "routing.http.drop_invalid_header_fields.enabled"
+    not item.value
+}
+
+source_path[{"elb_drop_invalid_header": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_load_balancer_listener_policy"
+    item := resource.properties.policy_attribute[j]
+    lower(item.name) == "routing.http.drop_invalid_header_fields.enabled"
+    not item.value
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy_attribute", j, "value"]
+        ],
+    }
+}
+
+elb_drop_invalid_header {
+    lower(input.resources[i].type) == "aws_load_balancer_listener_policy"
+    not aws_issue["elb_drop_invalid_header"]
+    not aws_bool_issue["elb_drop_invalid_header"]
+    not aws_attribute_absence["elb_drop_invalid_header"]
+}
+
+elb_drop_invalid_header = false {
+    aws_issue["elb_drop_invalid_header"]
+}
+
+elb_drop_invalid_header = false {
+    aws_bool_issue["elb_drop_invalid_header"]
+}
+
+elb_drop_invalid_header = false {
+    aws_attribute_absence["elb_drop_invalid_header"]
+}
+
+elb_drop_invalid_header_err = "Ensure that Application Load Balancer drops HTTP headers" {
+    aws_issue["elb_drop_invalid_header"]
+} else = "Ensure that Application Load Balancer drops HTTP headers" {
+    aws_bool_issue["elb_drop_invalid_header"]
+}
+
+elb_drop_invalid_header_metadata := {
+    "Policy Code": "PR-AWS-TRF-ELB-013",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure that Application Load Balancer drops HTTP headers",
+    "Policy Description": "Checks if rule evaluates AWS Application Load Balancers (ALB) to ensure they are configured to drop http headers. The rule is NON_COMPLIANT if the value of routing.http.drop_invalid_header_fields.enabled is set to false",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/load_balancer_listener_policy"
+}

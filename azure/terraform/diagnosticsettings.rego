@@ -51,13 +51,16 @@ log_keyvault {
 }
 
 log_keyvault = false {
+    lower(input.resources[_].type) == "azurerm_key_vault"
     azure_issue["log_keyvault"]
 }
 
 
 log_keyvault_err = "azurerm_key_vault's azurerm_monitor_diagnostic_setting property block 'log' need to be exist. its currently missing from the resource." {
+    lower(input.resources[_].type) == "azurerm_key_vault"
     azure_attribute_absence["log_keyvault"]
 } else = "Azure Key Vault audit logging is currently not enabled" {
+    lower(input.resources[_].type) == "azurerm_key_vault"
     azure_issue["log_keyvault"] 
 }
 
@@ -118,16 +121,20 @@ log_lbs {
 }
 
 log_lbs = false {
+    lower(input.resources[_].type) == "azurerm_lb"
     azure_issue["log_lbs"]
 }
 
 log_lbs = false {
+    lower(input.resources[_].type) == "azurerm_lb"
     azure_attribute_absence["log_lbs"]
 }
 
 log_lbs_err = "azurerm_lb's azurerm_monitor_diagnostic_setting property block 'log' need to be exist. its currently missing from the resource." {
+    lower(input.resources[_].type) == "azurerm_lb"
     azure_attribute_absence["log_lbs"]
 } else = "Azure Load Balancer diagnostics logging is currently not enabled" {
+    lower(input.resources[_].type) == "azurerm_lb"
     azure_issue["log_lbs"] 
 }
 
@@ -206,16 +213,20 @@ log_storage_retention {
 }
 
 log_storage_retention = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_issue["log_storage_retention"]
 }
 
 log_storage_retention = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_attribute_absence["log_storage_retention"]
 }
 
 log_storage_retention_err = "azurerm_storage_account's azurerm_monitor_diagnostic_setting property block 'log' and 'log.retention_policy' need to be exist. one or both are currently missing from the resource." {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_attribute_absence["log_storage_retention"]
 } else = "Azure Storage Account with Auditing Retention is currently less than 90 days. Its need to be 90 days or more" {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_issue["log_storage_retention"]
 }
 
@@ -275,16 +286,20 @@ log_blob {
 }
 
 log_blob = false {
+    lower(input.resources[_].type) == "azurerm_storage_blob"
     azure_issue["log_blob"]
 }
 
 log_blob = false {
+    lower(input.resources[_].type) == "azurerm_storage_blob"
     azure_attribute_absence["log_blob"]
 }
 
 log_blob_err = "azurerm_storage_blob's azurerm_monitor_diagnostic_setting property block 'log' need to be exist. Its currently missing from the resource." {
-    azure_issue["log_blob"]
+    lower(input.resources[_].type) == "azurerm_storage_blob"
+    azure_attribute_absence["log_blob"]
 } else = "Azure storage account blob services diagnostic logs is currently not enabled" {
+    lower(input.resources[_].type) == "azurerm_storage_blob"
     azure_issue["log_blob"]
 }
 
@@ -344,16 +359,20 @@ log_queue {
 }
 
 log_queue = false {
+    lower(input.resources[_].type) == "azurerm_storage_queue"
     azure_issue["log_queue"]
 }
 
 log_queue = false {
+    lower(input.resources[_].type) == "azurerm_storage_queue"
     azure_attribute_absence["log_queue"]
 }
 
 log_queue_err = "azurerm_storage_queue's azurerm_monitor_diagnostic_setting property block 'log' need to be exist. Its currently missing from the resource." {
+    lower(input.resources[_].type) == "azurerm_storage_queue"
     azure_attribute_absence["log_queue"]
 } else = "Azure storage account queue services diagnostic logs is currently not enabled" {
+    lower(input.resources[_].type) == "azurerm_storage_queue"
     azure_issue["log_queue"]
 }
 
@@ -413,16 +432,20 @@ log_table {
 }
 
 log_table = false {
+    lower(input.resources[_].type) == "azurerm_storage_table"
     azure_issue["log_table"]
 }
 
 log_table = false {
+    lower(input.resources[_].type) == "azurerm_storage_table"
     azure_attribute_absence["log_table"]
 }
 
 log_table_err = "azurerm_storage_table's azurerm_monitor_diagnostic_setting property block 'log' need to be exist. Its currently missing from the resource." {
+    lower(input.resources[_].type) == "azurerm_storage_table"
     azure_attribute_absence["log_table"]
 } else = "Azure storage account table services diagnostic logs is currently not enabled" {
+    lower(input.resources[_].type) == "azurerm_storage_table"
     azure_issue["log_table"]
 }
 

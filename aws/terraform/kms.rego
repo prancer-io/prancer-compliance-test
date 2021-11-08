@@ -148,3 +148,72 @@ kms_key_state_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enabled"
 }
+
+#
+# PR-AWS-TRF-KMS-003
+#
+default kms_key_allow_all_principal = null
+
+aws_issue["kms_key_allow_all_principal"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_kms_key"
+    Statement := resource.properties.policy.Statement[j]
+    Statement.Principal == "*"
+}
+
+source_path[{"kms_key_allow_all_principal": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_kms_key"
+    Statement := resource.properties.policy.Statement[j]
+    Statement.Principal == "*"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy", "Statement", j, "Principal"]
+        ],
+    }
+}
+
+aws_issue["kms_key_allow_all_principal"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_kms_key"
+    Statement := resource.properties.policy.Statement[j]
+    Statement.Principal["AWS"] == "*"
+}
+
+source_path[{"kms_key_allow_all_principal": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_kms_key"
+    Statement := resource.properties.policy.Statement[j]
+    Statement.Principal["AWS"] == "*"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy", "Statement", j, "Principal", "AWS"]
+        ],
+    }
+}
+
+kms_key_allow_all_principal {
+    lower(input.resources[i].type) == "aws_kms_key"
+    not aws_issue["kms_key_allow_all_principal"]
+}
+
+kms_key_allow_all_principal = false {
+    aws_issue["kms_key_allow_all_principal"]
+}
+
+kms_key_allow_all_principal_err = "Ensure no KMS key policy contain wildcard (*) principal" {
+    aws_issue["kms_key_allow_all_principal"]
+}
+
+
+kms_key_allow_all_principal_metadata := {
+    "Policy Code": "PR-AWS-TRF-KMS-003",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure no KMS key policy contain wildcard (*) principal",
+    "Policy Description": "This policy revents all user access to specific resource/s and actions",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key"
+}

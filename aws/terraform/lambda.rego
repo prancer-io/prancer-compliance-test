@@ -339,3 +339,104 @@ lambda_tracing_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html"
 }
+
+
+#
+# PR-AWS-TRF-LMD-004
+#
+
+default lambda_concurrent_execution = null
+
+aws_issue["lambda_concurrent_execution"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lambda_function"
+    not resource.properties.reserved_concurrent_executions
+}
+
+source_path[{"lambda_concurrent_execution": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lambda_function"
+    not resource.properties.reserved_concurrent_executions
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "reserved_concurrent_executions"]
+        ],
+    }
+}
+
+lambda_concurrent_execution {
+    lower(input.resources[i].type) == "aws_lambda_function"
+    not aws_issue["lambda_concurrent_execution"]
+}
+
+lambda_concurrent_execution = false {
+    aws_issue["lambda_concurrent_execution"]
+}
+
+lambda_concurrent_execution_err = "Ensure AWS Lambda function is configured for function-level concurrent execution limit" {
+    aws_issue["lambda_concurrent_execution"]
+}
+
+lambda_concurrent_execution_metadata := {
+    "Policy Code": "PR-AWS-TRF-LMD-004",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS Lambda function is configured for function-level concurrent execution limit",
+    "Policy Description": "Concurrency is the number of requests that your function is serving at any given time. When your function is invoked, Lambda allocates an instance of it to process the event",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function#target_arn"
+}
+
+
+
+#
+# PR-AWS-TRF-LMD-005
+#
+
+default lambda_dlq = null
+
+aws_issue["lambda_dlq"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lambda_function"
+    dead_letter_config := resource.properties.dead_letter_config[_]
+    not dead_letter_config.target_arn
+}
+
+source_path[{"lambda_dlq": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lambda_function"
+    dead_letter_config := resource.properties.dead_letter_config[_]
+    not dead_letter_config.target_arn
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "dead_letter_config", "target_arn"]
+        ],
+    }
+}
+
+lambda_dlq {
+    lower(input.resources[i].type) == "aws_lambda_function"
+    not aws_issue["lambda_dlq"]
+}
+
+lambda_dlq = false {
+    aws_issue["lambda_dlq"]
+}
+
+lambda_dlq_err = "Ensure AWS Lambda function is configured for a DLQ" {
+    aws_issue["lambda_dlq"]
+}
+
+lambda_dlq_metadata := {
+    "Policy Code": "PR-AWS-TRF-LMD-005",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS Lambda function is configured for a DLQ",
+    "Policy Description": "A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. it is required to get all items which is been not processed for some reason",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function#target_arn"
+}
