@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/2016-09-01/locks
 
 #
-# PR-AZR-ARM-MNT-008
+# PR-AZR-ARM-AML-008
 #
 
 default rg_locks = null
@@ -69,7 +69,7 @@ rg_locks_miss_err = "Resource lock property 'level' is missing from the resource
 }
 
 rg_locks_metadata := {
-    "Policy Code": "PR-AZR-ARM-MNT-008",
+    "Policy Code": "PR-AZR-ARM-AML-008",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

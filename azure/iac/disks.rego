@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/disks
 
 #
-# PR-AZR-ARM-CMP-001
+# PR-AZR-ARM-DSK-001
 #
 
 default disk_encrypt = null
@@ -69,7 +69,7 @@ disk_encrypt_err = "microsoft.compute/disks resoruce property encryptionSettings
 }
 
 disk_encrypt_metadata := {
-    "Policy Code": "PR-AZR-ARM-CMP-001",
+    "Policy Code": "PR-AZR-ARM-DSK-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",

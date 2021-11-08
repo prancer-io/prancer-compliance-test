@@ -1759,11 +1759,11 @@
                     "rule": "file(disks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-CMP-001",
+                            "id": "PR-AZR-ARM-DSK-001",
                             "eval": "data.rule.disk_encrypt",
                             "message": "data.rule.disk_encrypt_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for Disks by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/disks' target='_blank'>here</a>. encryptionSettingsCollection enabled should be true",
-                            "remediationFunction": "PR_AZR_ARM_CMP_001.py"
+                            "remediationFunction": "PR_AZR_ARM_DSK_001.py"
                         }
                     ],
                     "severity": "High",
@@ -1950,7 +1950,7 @@
                     ],
                     "severity": "High",
                     "title": "Azure Key Vault secrets should have an expiration date",
-                    "description": "This policy identifies Azure Key Vault secrets that do not have an expiration date. As a best practice, set an expiration date for each secret and rotate the secret regularly.",
+                    "description": "This policy identifies Azure Key Vault secrets that do not have an expiratiSon date. As a best practice, set an expiration date for each secret and rotate the secret regularly.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1980,11 +1980,11 @@
                     "rule": "file(locks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-MNT-008",
+                            "id": "PR-AZR-ARM-AML-008",
                             "eval": "data.rule.rg_locks",
                             "message": "data.rule.rg_locks_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for locks by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/2016-09-01/locks' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AZR_ARM_MNT_008.py"
+                            "remediationFunction": "PR_AZR_ARM_AML_008.py"
                         }
                     ],
                     "severity": "Low",
@@ -3448,11 +3448,11 @@
                     "rule": "file(pricing.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-SCT-001",
+                            "id": "PR-AZR-ARM-ASC-001",
                             "eval": "data.rule.pricing",
                             "message": "data.rule.pricing_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for pricing by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.security/pricings' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AZR_ARM_SCT_001.py"
+                            "remediationFunction": "PR_AZR_ARM_ASC_001.py"
                         }
                     ],
                     "severity": "High",
@@ -3483,11 +3483,11 @@
                     "rule": "file(Redis.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-CCH-001",
+                            "id": "PR-AZR-ARM-ARC-001",
                             "eval": "data.rule.enableSslPort",
                             "message": "data.rule.enableSslPort_err",
                             "remediationDescription": "In Resource of type \"Microsoft.Cache/redis\" make sure properties.enableNonSslPort value is set to false or isn't exist .<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/Microsoft.Cache/redis' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_ARM_CCH_001.py"
+                            "remediationFunction": "PR_AZR_ARM_ARC_001.py"
                         }
                     ],
                     "severity": "High",
@@ -3523,11 +3523,11 @@
                     "rule": "file(Redis.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-CCH-002",
+                            "id": "PR-AZR-ARM-ARC-002",
                             "eval": "data.rule.serverRole",
                             "message": "data.rule.serverRole_err",
                             "remediationDescription": "In Resource of type \"Microsoft.Cache/redis/linkedServers\" make sure properties.serverRole value is set to Secondary.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis/linkedservers' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_ARM_CCH_002.py"
+                            "remediationFunction": "PR_AZR_ARM_ARC_002.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3761,11 +3761,11 @@
                     "rule": "file(securitycontacts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-SCT-002",
+                            "id": "PR-AZR-ARM-ASC-002",
                             "eval": "data.rule.securitycontacts",
                             "message": "data.rule.securitycontacts_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for security center by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AZR_ARM_SCT_002.py"
+                            "remediationFunction": "PR_AZR_ARM_ASC_002.py"
                         }
                     ],
                     "severity": "Low",
@@ -4434,11 +4434,11 @@
                     "rule": "file(vnetpeerings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-004",
+                            "id": "PR-AZR-ARM-NET-004",
                             "eval": "data.rule.vnet_peer",
                             "message": "data.rule.vnet_peer_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for vnet by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/virtualnetworkpeerings' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AZR_ARM_NTW_004.py"
+                            "remediationFunction": "PR_AZR_ARM_NET_004.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4466,11 +4466,11 @@
                     "rule": "file(vnetsubnets.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-005",
+                            "id": "PR-AZR-ARM-NET-005",
                             "eval": "data.rule.vnet_subnet_nsg",
                             "message": "data.rule.vnet_subnet_nsg_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for vnet by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/subnets' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AZR_ARM_NTW_005.py"
+                            "remediationFunction": "PR_AZR_ARM_NET_005.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4504,11 +4504,11 @@
                     "rule": "file(vpngateways.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-NTW-006",
+                            "id": "PR-AZR-ARM-NET-006",
                             "eval": "data.rule.vpn_encrypt",
                             "message": "data.rule.vpn_encrypt_err",
                             "remediationDescription": "Make sure you are following the ARM template guidelines for vpn gateway by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/vpngateways' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AZR_ARM_NTW_006.py"
+                            "remediationFunction": "PR_AZR_ARM_NET_006.py"
                         }
                     ],
                     "severity": "Medium",
@@ -4953,11 +4953,11 @@
                     "rule": "file(securitycontacts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-SCT-003",
+                            "id": "PR-AZR-ARM-ASC-003",
                             "eval": "data.rule.alert_notifications",
                             "message": "data.rule.alert_notifications_err",
                             "remediationDescription": "For Resource type 'microsoft.security/securitycontacts' make sure alertNotifications exists and the value is set to 'On'.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_ARM_SCT_003.py"
+                            "remediationFunction": "PR_AZR_ARM_ASC_003.py"
                         }
                     ],
                     "severity": "Medium",
