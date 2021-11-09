@@ -1,9 +1,9 @@
 package rule
 
-# https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/secrets
+# https://docs.microsoft.com/en-us/rest/api/keyvault/get-keys/get-keys
 
 #
-# PR-AZR-ARM-KV-005
+# PR-AZR-KV-005
 #
 
 default kv_expire = null
@@ -38,13 +38,13 @@ kv_expire_err = "Azure Key Vault attribute 'exp' is missing from the resource" {
 }
 
 kv_expire_metadata := {
-    "Policy Code": "PR-AZR-ARM-KV-005",
-    "Type": "IaC",
+    "Policy Code": "PR-AZR-KV-005",
+    "Type": "Cloud",
     "Product": "AZR",
-    "Language": "ARM template",
+    "Language": "",
     "Policy Title": "Azure Key Vault secrets should have an expiration date",
     "Policy Description": "This policy identifies Azure Key Vault secrets that do not have an expiration date. As a best practice, set an expiration date for each secret and rotate the secret regularly.",
     "Resource Type": "microsoft.keyvault/vaults/secrets",
     "Policy Help URL": "",
-    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/secrets"
+    "Resource Help URL": "https://docs.microsoft.com/en-us/rest/api/keyvault/get-keys/get-keys"
 }

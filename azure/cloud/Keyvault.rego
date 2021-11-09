@@ -7,7 +7,7 @@ package rule
 default KeyVault = null
 
 azure_attribute_absence["KeyVault"] {
-    accessPolicy := input.resource.properties.accessPolicies[_]
+    accessPolicy := input.properties.accessPolicies[_]
     not accessPolicy.permissions.keys
     not accessPolicy.permissions.secrets
     not accessPolicy.permissions.certificates
@@ -15,7 +15,7 @@ azure_attribute_absence["KeyVault"] {
 }
 
 azure_issue["KeyVault"] {
-    accessPolicy := input.resource.properties.accessPolicies[_]
+    accessPolicy := input.properties.accessPolicies[_]
     count(accessPolicy.permissions.keys) == 0
     count(accessPolicy.permissions.secrets) == 0
     count(accessPolicy.permissions.certificates) == 0
@@ -44,9 +44,9 @@ KeyVault_err = "accessPolicy property 'permissions.keys' or 'permissions.secrets
 
 KeyVault_metadata := {
     "Policy Code": "PR-AZR-KV-001",
-    "Type": "IaC",
+    "Type": "Cloud",
     "Product": "AZR",
-    "Language":  "template",
+    "Language":  "",
     "Policy Title": "Ensure that keyvault is in use",
     "Policy Description": "Use the Azure Key Vault to store secrets within the Microsoft Azure environment. Secrets in Azure Key Vault are octet sequences with a maximum size of 25k bytes each.",
     "Resource Type": "microsoft.keyvault/vaults",
@@ -87,9 +87,9 @@ enableSoftDelete_err = "'Soft Delete' setting is currently not enabled for Key V
 
 enableSoftDelete_metadata := {
     "Policy Code": "PR-AZR-KV-002",
-    "Type": "IaC",
+    "Type": "Cloud",
     "Product": "AZR",
-    "Language": "ARM template",
+    "Language": "",
     "Policy Title": "Ensure the key vault is recoverable - enable 'Soft Delete' setting for a Key Vault",
     "Policy Description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation, etc.) supported by the key vault objects. It is recommended the key vault be made recoverable by enabling the 'Do Not Purge' and 'Soft Delete' functions. This is in order to prevent loss of encrypted data including storage accounts, SQL databases, and/or dependent services provided by key vault objects (Keys, Secrets, Certificates) etc., as may happen in the case of accidental deletion by a user or from disruptive activity by a malicious user.",
     "Resource Type": "microsoft.keyvault/vaults",
@@ -132,9 +132,9 @@ enablePurgeProtection_err = "microsoft.keyvault/vaults resoruce property enableP
 
 enablePurgeProtection_metadata := {
     "Policy Code": "PR-AZR-KV-003",
-    "Type": "IaC",
+    "Type": "Cloud",
     "Product": "AZR",
-    "Language": "ARM template",
+    "Language": "",
     "Policy Title": "Key vault should have purge protection enabled",
     "Policy Description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation",
     "Resource Type": "microsoft.keyvault/vaults",
