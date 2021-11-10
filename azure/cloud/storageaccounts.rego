@@ -195,7 +195,7 @@ azure_attribute_absence["keySource"] {
 }
 
 azure_issue["keySource"] {
-    lower(resource.properties.encryption.keySource) != "microsoft.keyvault"
+    lower(input.properties.encryption.keySource) != "microsoft.keyvault"
 }
 
 
