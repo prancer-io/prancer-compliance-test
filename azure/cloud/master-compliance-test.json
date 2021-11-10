@@ -232,7 +232,7 @@
                             "id": "PR-AZR-STR-004",
                             "eval": "data.rule.storage_acl",
                             "message": "data.rule.storage_acl_err",
-                            "remediationDescription": "1. Go to Storage Accounts<br>2. For each storage account, Click on the settings menu called Firewalls and virtual networks.<br>3. Ensure that you have elected to allow access from Selected networks.<br>4. Add rules to allow traffic from specific network.<br>5. Click Save to apply your changes.<br>Azure Command Line Interface 2.0 Use the below command to update default-action to Deny.<br>Please visit <a href='https://docs.microsoft.com/en-us/rest/api/storagerp/storage-accounts/get-properties' target='_blank'>here</a> for details.",
+                            "remediationDescription": "1. Go to Storage Accounts<br>2. For each storage account, Click on the settings menu called Firewalls and virtual networks.<br>3. Ensure that you have selected to allow access from Selected networks.<br>4. Add rules to allow traffic from specific network.<br>5. Click Save to apply your changes.<br>Azure Command Line Interface 2.0 Use the below command to update default-action to Deny.<br>Please visit <a href='https://docs.microsoft.com/en-us/rest/api/storagerp/storage-accounts/get-properties' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_STR_004.py"
                         }
                     ],

@@ -13,7 +13,12 @@ azure_attribute_absence["storage_secure"] {
 }
 
 azure_issue["storage_secure"] {
-    input.properties.supportsHttpsTrafficOnly == false
+    input.properties.supportsHttpsTrafficOnly != true
+}
+
+storage_secure {
+    not azure_attribute_absence["storage_secure"]
+    not azure_issue["storage_secure"]
 }
 
 
@@ -105,6 +110,10 @@ azure_issue["blobService"] {
     input.properties.encryption.services.blob.enabled != true
 }
 
+blobService  {
+    not azure_attribute_absence["blobService"]
+    not azure_issue["blobService"]
+}
 
 blobService  {
     azure_attribute_absence["blobService"]
@@ -143,6 +152,10 @@ azure_issue["fileService"] {
     input.properties.encryption.services.file.enabled != true
 }
 
+fileService {
+    not azure_attribute_absence["fileService"]
+    not azure_issue["fileService"]
+}
 
 fileService {
     azure_attribute_absence["fileService"]
@@ -259,12 +272,16 @@ region_metadata := {
 
 default blobServicePublicAccessDisabled = null
 
-azure_issue["blobServicePublicAccessDisabled"] {
+azure_attribute_absence["blobServicePublicAccessDisabled"] {
     not input.properties.allowBlobPublicAccess
 }
 
 azure_issue["blobServicePublicAccessDisabled"] {
-    input.properties.allowBlobPublicAccess == true
+    input.properties.allowBlobPublicAccess != false
+}
+
+blobServicePublicAccessDisabled {
+     azure_attribute_absence["blobServicePublicAccessDisabled"]
 }
 
 
@@ -275,7 +292,6 @@ blobServicePublicAccessDisabled {
 blobServicePublicAccessDisabled = false {
     azure_issue["blobServicePublicAccessDisabled"]
 }
-
 blobServicePublicAccessDisabled_err = "Storage Account currently allowing public access to all blobs or containers" {
     azure_issue["blobServicePublicAccessDisabled"]
 }
