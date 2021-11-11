@@ -1,5 +1,9 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering
 
 #
@@ -16,7 +20,8 @@ default vnet_peer = null
 azure_attribute_absence["vnet_peer"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_virtual_network_peering"
-    not resource.properties.allow_virtual_network_access
+    #not resource.properties.allow_virtual_network_access
+    not has_property(resource.properties, "allow_virtual_network_access")
 }
 
 azure_issue["vnet_peer"] {

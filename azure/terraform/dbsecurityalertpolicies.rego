@@ -10,7 +10,7 @@ package rule
 default dbsec_threat_off = null
 
 azure_attribute_absence["dbsec_threat_off"] {
-    count([c | input.resources[_].type == "azurerm_mssql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_mssql_server_security_alert_policy"; c := 1])
+    count([c | input.resources[_].type == "azurerm_mssql_server_security_alert_policy"; c := 1]) == 0
 }
 
 azure_attribute_absence["dbsec_threat_off"] {
@@ -32,16 +32,20 @@ dbsec_threat_off {
 }
 
 dbsec_threat_off = false {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_attribute_absence["dbsec_threat_off"]
 }
 
 dbsec_threat_off = false {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_issue["dbsec_threat_off"]
 }
 
 dbsec_threat_off_err = "azurerm_mssql_server_security_alert_policy property 'state' is missing from the resource. Set the value to 'Enabled' after property addition." {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_attribute_absence["dbsec_threat_off"]
 } else = "SQL Database Server security alert policy is currently not enabled" {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_issue["dbsec_threat_off"]
 }
 

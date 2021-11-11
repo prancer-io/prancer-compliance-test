@@ -27,7 +27,7 @@ default mssql_db_log_audit = null
 #}
 
 azure_attribute_absence ["mssql_db_log_audit"] {
-    count([c | input.resources[_].type == "azurerm_mssql_database"; c := 1]) != count([c | input.resources[_].type == "azurerm_mssql_database_extended_auditing_policy"; c := 1])
+    count([c | input.resources[_].type == "azurerm_mssql_database_extended_auditing_policy"; c := 1]) == 0
 }
 
 mssql_db_log_audit {
@@ -37,6 +37,7 @@ mssql_db_log_audit {
 }
 
 mssql_db_log_audit = false {
+    lower(input.resources[_].type) == "azurerm_mssql_database"
     azure_attribute_absence["mssql_db_log_audit"]
 }
 
@@ -45,6 +46,7 @@ mssql_db_log_audit = false {
 #}
 
 mssql_db_log_audit_err = "azurerm_mssql_database_extended_auditing_policy resource is missing from template" {
+    lower(input.resources[_].type) == "azurerm_mssql_database"
     azure_attribute_absence["mssql_db_log_audit"]
 } #else = "Auditing for SQL database is not enabled" {
   #  azure_issue["mssql_db_log_audit"]

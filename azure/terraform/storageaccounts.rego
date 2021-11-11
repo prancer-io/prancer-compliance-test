@@ -1,5 +1,9 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_storage_account
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
 #
@@ -12,7 +16,8 @@ azure_attribute_absence["storage_secure"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_storage_account"
     # Defaults to true if property not available
-    not resource.properties.enable_https_traffic_only
+    #not resource.properties.enable_https_traffic_only
+    not has_property(resource.properties, "enable_https_traffic_only")
 }
 
 azure_issue["storage_secure"] {
@@ -465,17 +470,21 @@ storage_nr_allow_trusted_azure_services {
 }
 
 storage_nr_allow_trusted_azure_services = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_attribute_absence["storage_nr_allow_trusted_azure_services"]
 }
 
 storage_nr_allow_trusted_azure_services = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_issue["storage_nr_allow_trusted_azure_services"]
 }
 
 
 storage_nr_allow_trusted_azure_services_err = "azurerm_storage_account_network_rules property 'bypass' need to be exist. Its missing from the resource. Please add 'AzureServices' in the array element after property addition." {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_attribute_absence["storage_nr_allow_trusted_azure_services"]
 } else = "Storage Accounts is not currently allowing trusted Microsoft services" {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_issue["storage_nr_allow_trusted_azure_services"]
 }
 
