@@ -5135,9 +5135,6 @@
                         }
                     ],
                     "resourceTypes": [
-                        "azurerm_advanced_threat_protection",
-                        "azurerm_storage_encryption_scope",
-                        "azurerm_storage_account_network_rules",
                         "azurerm_storage_account"
                     ]
                 },
@@ -5175,8 +5172,6 @@
                         }
                     ],
                     "resourceTypes": [
-                        "azurerm_advanced_threat_protection",
-                        "azurerm_storage_encryption_scope",
                         "azurerm_storage_account_network_rules",
                         "azurerm_storage_account"
                     ]
@@ -5218,8 +5213,6 @@
                     ],
                     "resourceTypes": [
                         "azurerm_advanced_threat_protection",
-                        "azurerm_storage_encryption_scope",
-                        "azurerm_storage_account_network_rules",
                         "azurerm_storage_account"
                     ]
                 },
@@ -5254,9 +5247,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "azurerm_advanced_threat_protection",
                         "azurerm_storage_encryption_scope",
-                        "azurerm_storage_account_network_rules",
                         "azurerm_storage_account"
                     ]
                 },
@@ -5291,9 +5282,6 @@
                         }
                     ],
                     "resourceTypes": [
-                        "azurerm_advanced_threat_protection",
-                        "azurerm_storage_encryption_scope",
-                        "azurerm_storage_account_network_rules",
                         "azurerm_storage_account"
                     ]
                 },
@@ -5331,9 +5319,6 @@
                         }
                     ],
                     "resourceTypes": [
-                        "azurerm_advanced_threat_protection",
-                        "azurerm_storage_encryption_scope",
-                        "azurerm_storage_account_network_rules",
                         "azurerm_storage_account"
                     ]
                 },
@@ -5371,9 +5356,6 @@
                         }
                     ],
                     "resourceTypes": [
-                        "azurerm_advanced_threat_protection",
-                        "azurerm_storage_encryption_scope",
-                        "azurerm_storage_account_network_rules",
                         "azurerm_storage_account"
                     ]
                 },
@@ -5411,8 +5393,6 @@
                         }
                     ],
                     "resourceTypes": [
-                        "azurerm_advanced_threat_protection",
-                        "azurerm_storage_encryption_scope",
                         "azurerm_storage_account_network_rules",
                         "azurerm_storage_account"
                     ]
@@ -5451,9 +5431,6 @@
                         }
                     ],
                     "resourceTypes": [
-                        "azurerm_advanced_threat_protection",
-                        "azurerm_storage_encryption_scope",
-                        "azurerm_storage_account_network_rules",
                         "azurerm_storage_account"
                     ]
                 },
@@ -5491,9 +5468,6 @@
                         }
                     ],
                     "resourceTypes": [
-                        "azurerm_advanced_threat_protection",
-                        "azurerm_storage_encryption_scope",
-                        "azurerm_storage_account_network_rules",
                         "azurerm_storage_account"
                     ]
                 },

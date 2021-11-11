@@ -148,7 +148,7 @@ storage_acl_metadata := {
     "Language": "Terraform",
     "Policy Title": "Storage Accounts should have firewall rules enabled",
     "Policy Description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on.<br><br>You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
-    "Resource Type": "azurerm_storage_account_network_rules",
+    "Resource Type": "azurerm_storage_account",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules"
 }
@@ -160,10 +160,7 @@ storage_acl_metadata := {
 default storage_threat_protection = null
 
 azure_attribute_absence["storage_threat_protection"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_storage_account"
-    count([c | input.resources[_].type == "azurerm_advanced_threat_protection";
-    	   c := 1]) == 0
+    count([c | input.resources[_].type == "azurerm_advanced_threat_protection"; c := 1]) == 0
 }
 
 azure_attribute_absence["storage_threat_protection"] {
@@ -179,22 +176,26 @@ azure_issue["storage_threat_protection"] {
 }
 
 storage_threat_protection {
-    lower(input.resources[_].type) == "azurerm_advanced_threat_protection"
+    lower(input.resources[_].type) == "azurerm_storage_account"
     not azure_attribute_absence["storage_threat_protection"]
     not azure_issue["storage_threat_protection"]
 }
 
 storage_threat_protection = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_attribute_absence["storage_threat_protection"]
 }
 
 storage_threat_protection = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_issue["storage_threat_protection"]
 }
 
 storage_threat_protection_err = "azurerm_advanced_threat_protection property 'enabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_attribute_absence["storage_threat_protection"]
 } else = "Advanced Threat Protection is currently not enabled for storage account" {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_issue["storage_threat_protection"]
 }
 
@@ -216,10 +217,7 @@ storage_threat_protection_metadata := {
 default keySource = null
 
 azure_attribute_absence["keySource"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_storage_account"
-    count([c | input.resources[_].type == "azurerm_storage_encryption_scope";
-    	   c := 1]) == 0
+    count([c | input.resources[_].type == "azurerm_storage_encryption_scope"; c := 1]) == 0
 }
 
 azure_attribute_absence["keySource"] {
@@ -241,16 +239,20 @@ keySource {
 }
 
 keySource = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_issue["keySource"]
 }
 
 keySource = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_attribute_absence["keySource"]
 }
 
 keySource_err = "azurerm_storage_encryption_scope property 'source' need to be exist. Its missing from the resource. Please set the value to 'Microsoft.KeyVault' after property addition." {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_attribute_absence["keySource"]
 } else = "Critical data storage in Storage Account is currently not encrypted with Customer Managed Key" {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_issue["keySource"] 
 }
 
@@ -530,7 +532,7 @@ storage_nr_allow_trusted_azure_services_metadata := {
     "Language": "Terraform",
     "Policy Title": "Storage Accounts access should be allowed for trusted Microsoft services",
     "Policy Description": "Ensure that 'Allow trusted Microsoft services to access this storage account' exception is enabled within your Azure Storage account configuration settings to grant access to trusted cloud services.",
-    "Resource Type": "azurerm_storage_account_network_rules",
+    "Resource Type": "azurerm_storage_account",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules"
 }
