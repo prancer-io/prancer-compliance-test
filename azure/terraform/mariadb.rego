@@ -7,7 +7,7 @@ package rule
 default maria_ingress_from_any_ip_disabled = null
 
 azure_attribute_absence ["maria_ingress_from_any_ip_disabled"] {
-    count([c | input.resources[_].type == "azurerm_mariadb_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_mariadb_firewall_rule"; c := 1])
+    count([c | input.resources[_].type == "azurerm_mariadb_firewall_rule"; c := 1]) == 0
 }
 
 azure_attribute_absence ["maria_ingress_from_any_ip_disabled"] {
@@ -41,17 +41,21 @@ maria_ingress_from_any_ip_disabled {
 }
 
 maria_ingress_from_any_ip_disabled = false {
+    lower(input.resources[_].type) == "azurerm_mariadb_server"
     azure_issue["maria_ingress_from_any_ip_disabled"]
 }
 
 maria_ingress_from_any_ip_disabled = false {
+    lower(input.resources[_].type) == "azurerm_mariadb_server"
     azure_attribute_absence["maria_ingress_from_any_ip_disabled"]
 }
 
 
 maria_ingress_from_any_ip_disabled_err = "Resource azurerm_mariadb_server and azurerm_mariadb_firewall_rule need to be exist and property 'start_ip_address' and 'end_ip_address' need to be exist under azurerm_mariadb_firewall_rule as well. one or all are missing from the resource." {
+    lower(input.resources[_].type) == "azurerm_mariadb_server"
     azure_attribute_absence["maria_ingress_from_any_ip_disabled"]
 } else = "MariaDB currently allowing ingress from all Azure-internal IP addresses" {
+    lower(input.resources[_].type) == "azurerm_mariadb_server"
     azure_issue["maria_ingress_from_any_ip_disabled"]
 }
 

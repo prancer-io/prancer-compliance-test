@@ -7,7 +7,7 @@ package rule
 default sql_server_alert = null
 
 azure_attribute_absence["sql_server_alert"] {
-    count([c | input.resources[_].type == "azurerm_mssql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_mssql_server_security_alert_policy"; c := 1])
+    count([c | input.resources[_].type == "azurerm_mssql_server_security_alert_policy"; c := 1]) == 0
 }
 
 azure_attribute_absence["sql_server_alert"] {

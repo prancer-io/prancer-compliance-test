@@ -68,7 +68,7 @@ dbsec_threat_off_metadata := {
 default dbsec_threat_retention = null
 
 azure_attribute_absence["dbsec_threat_retention"] {
-    count([c | input.resources[_].type == "azurerm_mssql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_mssql_server_security_alert_policy"; c := 1])
+    count([c | input.resources[_].type == "azurerm_mssql_server_security_alert_policy"; c := 1]) == 0
 }
 
 azure_attribute_absence["dbsec_threat_retention"] {
@@ -90,16 +90,20 @@ dbsec_threat_retention {
 }
 
 dbsec_threat_retention = false {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_attribute_absence["dbsec_threat_retention"]
 }
 
 dbsec_threat_retention = false {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_issue["dbsec_threat_retention"]
 }
 
 dbsec_threat_retention_err = "azurerm_mssql_server_security_alert_policy property 'retention_days' need to be exist. Its missing from the resource. Please set the value to '91' after property addition." {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_attribute_absence["dbsec_threat_retention"]
 } else = "Azure SQL Database Server security alert policies thread retention is currently not configured for more than 90 days" {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_issue["dbsec_threat_retention"]
 }
 
@@ -122,7 +126,7 @@ dbsec_threat_retention_metadata := {
 default dbsec_threat_email = null
 
 azure_attribute_absence["dbsec_threat_email"] {
-    count([c | input.resources[_].type == "azurerm_mssql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_mssql_server_security_alert_policy"; c := 1])
+    count([c | input.resources[_].type == "azurerm_mssql_server_security_alert_policy"; c := 1]) == 0
 }
 
 azure_attribute_absence["dbsec_threat_email"] {
@@ -144,16 +148,20 @@ dbsec_threat_email {
 }
 
 dbsec_threat_email = false {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_attribute_absence["dbsec_threat_email"]
 }
 
 dbsec_threat_email = false {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_issue["dbsec_threat_email"]
 }
 
 dbsec_threat_email_err = "azurerm_mssql_server_security_alert_policy property 'email_addresses' need to be exist. Those are missing from the resource." {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_attribute_absence["dbsec_threat_email"]
 } else = "Azure SQL Database Server security alert policy is currently not configured to sent alert to the configured email addresses" {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_issue["dbsec_threat_email"]
 }
 
@@ -176,7 +184,7 @@ dbsec_threat_email_metadata := {
 default dbsec_threat_alert = null
 
 azure_attribute_absence["dbsec_threat_alert"] {
-    count([c | input.resources[_].type == "azurerm_mssql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_mssql_server_security_alert_policy"; c := 1])
+    count([c | input.resources[_].type == "azurerm_mssql_server_security_alert_policy"; c := 1]) == 0
 }
 
 azure_attribute_absence["dbsec_threat_alert"] {
@@ -204,10 +212,12 @@ dbsec_threat_alert {
 }
 
 dbsec_threat_alert = false {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_issue["dbsec_threat_alert"]
 }
 
 dbsec_threat_alert_err = "Azure SQL Server threat detection alerts not enabled for all threat types" {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_issue["dbsec_threat_alert"]
 }
 
@@ -230,7 +240,7 @@ dbsec_threat_alert_metadata := {
 default sql_alert = null
 
 azure_attribute_absence["sql_alert"] {
-    count([c | input.resources[_].type == "azurerm_mssql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_mssql_server_security_alert_policy"; c := 1])
+    count([c | input.resources[_].type == "azurerm_mssql_server_security_alert_policy"; c := 1]) == 0
 }
 
 azure_issue["sql_alert"] {
@@ -252,16 +262,20 @@ sql_alert {
 }
 
 sql_alert = false {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_attribute_absence["sql_alert"]
 }
 
 sql_alert = false {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_issue["sql_alert"]
 }
 
 sql_alert_err = "azurerm_mssql_server_security_alert_policy property 'email_account_admins' need to be exist. Its missing from the resource." {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_attribute_absence["sql_alert"]
 } else = "Threat Detection alert currently is not configured to sent notification to the sql server account administrators" {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_issue["sql_alert"]
 }
 

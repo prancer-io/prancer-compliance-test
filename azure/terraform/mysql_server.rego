@@ -1,5 +1,9 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_firewall_rule
 
 # PR-AZR-TRF-SQL-059
@@ -7,7 +11,7 @@ package rule
 default mysql_ingress_from_any_ip_disabled = null
 
 azure_attribute_absence ["mysql_ingress_from_any_ip_disabled"] {
-    count([c | input.resources[_].type == "azurerm_mysql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_mysql_firewall_rule"; c := 1])
+    count([c | input.resources[_].type == "azurerm_mysql_firewall_rule"; c := 1]) == 0
 }
 
 azure_attribute_absence ["mysql_ingress_from_any_ip_disabled"] {
@@ -41,17 +45,21 @@ mysql_ingress_from_any_ip_disabled {
 }
 
 mysql_ingress_from_any_ip_disabled = false {
+    lower(input.resources[_].type) == "azurerm_mysql_server"
     azure_issue["mysql_ingress_from_any_ip_disabled"]
 }
 
 mysql_ingress_from_any_ip_disabled = false {
+    lower(input.resources[_].type) == "azurerm_mysql_server"
     azure_attribute_absence["mysql_ingress_from_any_ip_disabled"]
 }
 
 
 mysql_ingress_from_any_ip_disabled_err = "Resource azurerm_mysql_server and azurerm_mysql_firewall_rule need to be exist and property 'start_ip_address' and 'end_ip_address' need to be exist under azurerm_mysql_firewall_rule as well. one or all are missing from the resource." {
+    lower(input.resources[_].type) == "azurerm_mysql_server"
     azure_attribute_absence["mysql_ingress_from_any_ip_disabled"]
 } else = "MySQL Database Server currently allowing ingress from all Azure-internal IP addresses" {
+    lower(input.resources[_].type) == "azurerm_mysql_server"
     azure_issue["mysql_ingress_from_any_ip_disabled"]
 }
 
@@ -125,10 +133,6 @@ mysql_server_ssl_enforcement_enabled_metadata := {
 
 default mysql_public_access_disabled = null
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
-
 # public_network_access_enabled Defaults to true if not exist. This was an issue because we need to fail if property not exist and also need to passed if property has value false.
 # if property does not exist it has false value in OPA, and explicitly setting false value will be treated as property not exist as well. so we need to implement a comparison like below.
 # no_azure_issue(resource_type) {
@@ -139,6 +143,7 @@ has_property(parent_object, target_property) {
 # } else = false {
 # 	true
 # }
+
 is_private_endpoint_exist["mysql_public_access_disabled"] {
     count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) > 0
 }
