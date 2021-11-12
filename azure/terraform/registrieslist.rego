@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/rest/api/containerregistry/registries/list
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry
 #
-# PR-AZR-0015-TRF
+# PR-AZR-TRF-ACR-003
 #
 
 default acr_classic = null
@@ -41,7 +41,7 @@ acr_classic_err = "azurerm_container_registry property 'sku' need to be exist. I
 }
 
 acr_classic_metadata := {
-    "Policy Code": "PR-AZR-0015-TRF",
+    "Policy Code": "PR-AZR-TRF-ACR-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

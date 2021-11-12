@@ -3,8 +3,12 @@ package rule
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster
 
 #
-# PR-AZR-0006-TRF
+# PR-AZR-TRF-AKS-001
 #
+
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
 
 default aks_cni_net = null
 
@@ -49,7 +53,7 @@ aks_cni_net_err = "azurerm_kubernetes_cluster property 'network_profile.network_
 }
 
 aks_cni_net_metadata := {
-    "Policy Code": "PR-AZR-0006-TRF",
+    "Policy Code": "PR-AZR-TRF-AKS-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -61,7 +65,7 @@ aks_cni_net_metadata := {
 }
 
 #
-# PR-AZR-0007-TRF
+# PR-AZR-TRF-AKS-002
 #
 
 default aks_http_routing = null
@@ -84,7 +88,8 @@ azure_attribute_absence["aks_http_routing"] {
     lower(resource.type) == "azurerm_kubernetes_cluster"
     addon_profile := resource.properties.addon_profile[_]
     http_application_routing := addon_profile.http_application_routing[_]
-    not http_application_routing.enabled
+    #not http_application_routing.enabled
+    not has_property(http_application_routing, "enabled")
 }
 
 azure_issue["aks_http_routing"] {
@@ -116,7 +121,7 @@ aks_http_routing_err = "azurerm_kubernetes_cluster property 'addon_profile.http_
 }
 
 aks_http_routing_metadata := {
-    "Policy Code": "PR-AZR-0007-TRF",
+    "Policy Code": "PR-AZR-TRF-AKS-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -128,25 +133,25 @@ aks_http_routing_metadata := {
 }
 
 #
-# PR-AZR-0008-TRF
+# PR-AZR-TRF-AKS-003
 #
 
 default aks_monitoring = null
 
-aws_attribute_absence["aks_monitoring"] {
+azure_attribute_absence["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     not resource.properties.addon_profile
 }
 
-aws_attribute_absence["aks_monitoring"] {
+azure_attribute_absence["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     addon_profile := resource.properties.addon_profile[_]
     not addon_profile.oms_agent
 }
 
-aws_attribute_absence["aks_monitoring"] {
+azure_attribute_absence["aks_monitoring"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     addon_profile := resource.properties.addon_profile[_]
@@ -184,7 +189,7 @@ aks_monitoring_err = "azurerm_kubernetes_cluster property 'addon_profile.oms_age
 }
 
 aks_monitoring_metadata := {
-    "Policy Code": "PR-AZR-0008-TRF",
+    "Policy Code": "PR-AZR-TRF-AKS-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -196,7 +201,7 @@ aks_monitoring_metadata := {
 }
 
 #
-# PR-AZR-0009-TRF
+# PR-AZR-TRF-AKS-004
 #
 
 default aks_nodes = null
@@ -248,7 +253,7 @@ aks_nodes_err = "azurerm_kubernetes_cluster property 'default_node_pool.node_cou
 }
 
 aks_nodes_metadata := {
-    "Policy Code": "PR-AZR-0009-TRF",
+    "Policy Code": "PR-AZR-TRF-AKS-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -260,7 +265,7 @@ aks_nodes_metadata := {
 }
 
 #
-# PR-AZR-0010-TRF
+# PR-AZR-TRF-AKS-005
 #
 
 default aks_rbac = null
@@ -271,11 +276,24 @@ azure_attribute_absence["aks_rbac"] {
     not resource.properties.role_based_access_control
 }
 
-azure_issue["aks_rbac"] {
+#azure_attribute_absence["aks_rbac"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "azurerm_kubernetes_cluster"
+#    count(resource.properties.role_based_access_control) == 0
+#}
+
+azure_attribute_absence["aks_rbac"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_kubernetes_cluster"
     role_based_access_control := resource.properties.role_based_access_control[_]
     not role_based_access_control.enabled
+}
+
+azure_issue["aks_rbac"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    role_based_access_control := resource.properties.role_based_access_control[_]
+    role_based_access_control.enabled != true
 }
 
 aks_rbac {
@@ -299,7 +317,7 @@ aks_rbac_err = "azurerm_kubernetes_cluster property 'role_based_access_control.e
 }
 
 aks_rbac_metadata := {
-    "Policy Code": "PR-AZR-0010-TRF",
+    "Policy Code": "PR-AZR-TRF-AKS-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -311,7 +329,7 @@ aks_rbac_metadata := {
 }
 
 #
-# PR-AZR-0101-TRF
+# PR-AZR-TRF-AKS-006
 #
 
 default aks_aad_rbac_enabled = null
@@ -384,7 +402,7 @@ aks_aad_rbac_enabled_err = "azurerm_kubernetes_cluster property 'role_based_acce
 }
 
 aks_aad_rbac_enabled_metadata := {
-    "Policy Code": "PR-AZR-0101-TRF",
+    "Policy Code": "PR-AZR-TRF-AKS-006",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -396,10 +414,16 @@ aks_aad_rbac_enabled_metadata := {
 }
 
 #
-# PR-AZR-0138-TRF
+# PR-AZR-TRF-AKS-008
 #
 
 default aks_network_policy_configured = null
+
+azure_attribute_absence["aks_network_policy_configured"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    not resource.properties.network_profile
+}
 
 azure_attribute_absence["aks_network_policy_configured"] {
     resource := input.resources[_]
@@ -436,7 +460,7 @@ aks_network_policy_configured_err = "azurerm_kubernetes_cluster property 'networ
 }
 
 aks_network_policy_configured_metadata := {
-    "Policy Code": "PR-AZR-0138-TRF",
+    "Policy Code": "PR-AZR-TRF-AKS-008",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -449,7 +473,7 @@ aks_network_policy_configured_metadata := {
 
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/1.43.0/docs/data-sources/kubernetes_cluster
-# PR-AZR-0137-TRF
+# PR-AZR-TRF-AKS-007
 #
 
 default aks_api_server_authorized_ip_range_enabled = null
@@ -487,7 +511,7 @@ aks_api_server_authorized_ip_range_enabled_err = "azurerm_kubernetes_cluster pro
 }
 
 aks_api_server_authorized_ip_range_enabled_metadata := {
-    "Policy Code": "PR-AZR-0137-TRF",
+    "Policy Code": "PR-AZR-TRF-AKS-007",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -500,10 +524,18 @@ aks_api_server_authorized_ip_range_enabled_metadata := {
 
 
 # https://www.danielstechblog.io/disable-the-kubernetes-dashboard-on-azure-kubernetes-service/
-# PR-AZR-0144-TRF
+# PR-AZR-TRF-AKS-009
 #
 
 default aks_kub_dashboard_disabled = null
+
+azure_attribute_absence["aks_kub_dashboard_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    addon_profile := resource.properties.addon_profile[_]
+    kube_dashboard := addon_profile.kube_dashboard[_]
+    not kube_dashboard.enabled
+}
 
 azure_issue["aks_kub_dashboard_disabled"] {
     resource := input.resources[_]
@@ -515,6 +547,7 @@ azure_issue["aks_kub_dashboard_disabled"] {
 
 aks_kub_dashboard_disabled {
     lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
+    not azure_attribute_absence["aks_kub_dashboard_disabled"]
     not azure_issue["aks_kub_dashboard_disabled"]
 }
 
@@ -524,6 +557,7 @@ aks_kub_dashboard_disabled = false {
 
 aks_kub_dashboard_disabled {
     lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
+    azure_attribute_absence["aks_kub_dashboard_disabled"]
     not azure_issue["aks_kub_dashboard_disabled"]
 }
 
@@ -532,7 +566,7 @@ aks_kub_dashboard_disabled_err = "Kubernetes Dashboard is currently not disabled
 }
 
 aks_kub_dashboard_disabled_metadata := {
-    "Policy Code": "PR-AZR-0144-TRF",
+    "Policy Code": "PR-AZR-TRF-AKS-009",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

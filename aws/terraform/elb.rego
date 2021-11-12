@@ -81,23 +81,51 @@ insecure_ciphers := [
 ]
 
 aws_issue["elb_insecure_cipher"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_load_balancer_policy"
-    policy := resource.properties.policy_attribute[_]
+    policy := resource.properties.policy_attribute[j]
     lower(policy.name) == lower(insecure_ciphers[_])
     lower(policy.value) == "true"
 }
 
-aws_bool_issue["elb_insecure_cipher"] {
-    resource := input.resources[_]
+source_path[{"elb_insecure_cipher": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_load_balancer_policy"
-    policy := resource.properties.policy_attribute[_]
+    policy := resource.properties.policy_attribute[j]
+    lower(policy.name) == lower(insecure_ciphers[_])
+    lower(policy.value) == "true"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy_attribute", j, "value"]
+        ],
+    }
+}
+
+aws_bool_issue["elb_insecure_cipher"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_load_balancer_policy"
+    policy := resource.properties.policy_attribute[j]
     lower(policy.name) == lower(insecure_ciphers[_])
     policy.value == true
 }
 
+source_path[{"elb_insecure_cipher": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_load_balancer_policy"
+    policy := resource.properties.policy_attribute[j]
+    lower(policy.name) == lower(insecure_ciphers[_])
+    policy.value == true
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy_attribute", j, "value"]
+        ],
+    }
+}
+
 elb_insecure_cipher {
-    lower(input.resources[_].type) == "aws_load_balancer_policy"
+    lower(input.resources[i].type) == "aws_load_balancer_policy"
     not aws_issue["elb_insecure_cipher"]
     not aws_bool_issue["elb_insecure_cipher"]
 }
@@ -141,23 +169,51 @@ insecure_ssl_protocols := [
 ]
 
 aws_issue["elb_insecure_protocol"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_load_balancer_policy"
-    policy := resource.properties.policy_attribute[_]
+    policy := resource.properties.policy_attribute[j]
     lower(policy.name) == lower(insecure_ssl_protocols[_])
     lower(policy.value) == "true"
 }
 
-aws_bool_issue["elb_insecure_protocol"] {
-    resource := input.resources[_]
+source_path[{"elb_insecure_cipher": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_load_balancer_policy"
-    policy := resource.properties.policy_attribute[_]
+    policy := resource.properties.policy_attribute[j]
+    lower(policy.name) == lower(insecure_ssl_protocols[_])
+    lower(policy.value) == "true"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy_attribute", j, "value"]
+        ],
+    }
+}
+
+aws_bool_issue["elb_insecure_protocol"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_load_balancer_policy"
+    policy := resource.properties.policy_attribute[j]
     lower(policy.name) == lower(insecure_ssl_protocols[_])
     policy.value == true
 }
 
+source_path[{"elb_insecure_cipher": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_load_balancer_policy"
+    policy := resource.properties.policy_attribute[j]
+    lower(policy.name) == lower(insecure_ssl_protocols[_])
+    policy.value == true
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy_attribute", j, "value"]
+        ],
+    }
+}
+
 elb_insecure_protocol {
-    lower(input.resources[_].type) == "aws_load_balancer_policy"
+    lower(input.resources[i].type) == "aws_load_balancer_policy"
     not aws_issue["elb_insecure_protocol"]
     not aws_bool_issue["elb_insecure_protocol"]
 }
@@ -195,33 +251,83 @@ elb_insecure_protocol_metadata := {
 default elb_access_log = null
 
 aws_attribute_absence["elb_access_log"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_elb"
     not resource.properties.access_logs
 }
 
+source_path[{"elb_access_log": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elb"
+    not resource.properties.access_logs
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "access_logs"]
+        ],
+    }
+}
+
 aws_issue["elb_access_log"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_elb"
     count(resource.properties.access_logs) == 0
 }
 
-aws_issue["elb_access_log"] {
-    resource := input.resources[_]
+source_path[{"elb_access_log": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_elb"
-    access_logs := resource.properties.access_logs[_]
+    count(resource.properties.access_logs) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "access_logs"]
+        ],
+    }
+}
+
+aws_issue["elb_access_log"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elb"
+    access_logs := resource.properties.access_logs[j]
     lower(access_logs.enabled) == "false"
 }
 
-aws_bool_issue["elb_access_log"] {
-    resource := input.resources[_]
+source_path[{"elb_access_log": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_elb"
-    access_logs := resource.properties.access_logs[_]
+    access_logs := resource.properties.access_logs[j]
+    lower(access_logs.enabled) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "access_logs", j, "enabled"]
+        ],
+    }
+}
+
+aws_bool_issue["elb_access_log"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elb"
+    access_logs := resource.properties.access_logs[j]
     access_logs.enabled == false
 }
 
+source_path[{"elb_access_log": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elb"
+    access_logs := resource.properties.access_logs[j]
+    access_logs.enabled == false
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "access_logs", j, "enabled"]
+        ],
+    }
+}
+
 elb_access_log {
-    lower(input.resources[_].type) == "aws_elb"
+    lower(input.resources[i].type) == "aws_elb"
     not aws_issue["elb_access_log"]
     not aws_bool_issue["elb_access_log"]
     not aws_attribute_absence["elb_access_log"]
@@ -262,19 +368,43 @@ elb_access_log_metadata := {
 default elb_conn_drain = null
 
 aws_issue["elb_conn_drain"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_elb"
     lower(resource.properties.connection_draining) == "false"
 }
 
+source_path[{"elb_conn_drain": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elb"
+    lower(resource.properties.connection_draining) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "connection_draining"]
+        ],
+    }
+}
+
 aws_bool_issue["elb_conn_drain"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_elb"
     not resource.properties.connection_draining
 }
 
+source_path[{"elb_conn_drain": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elb"
+    not resource.properties.connection_draining
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "connection_draining"]
+        ],
+    }
+}
+
 elb_conn_drain {
-    lower(input.resources[_].type) == "aws_elb"
+    lower(input.resources[i].type) == "aws_elb"
     not aws_issue["elb_conn_drain"]
     not aws_bool_issue["elb_conn_drain"]
 }
@@ -312,19 +442,43 @@ elb_conn_drain_metadata := {
 default elb_crosszone = null
 
 aws_issue["elb_crosszone"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_elb"
     lower(resource.properties.cross_zone_load_balancing) == "false"
 }
 
+source_path[{"elb_crosszone": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elb"
+    lower(resource.properties.cross_zone_load_balancing) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "cross_zone_load_balancing"]
+        ],
+    }
+}
+
 aws_bool_issue["elb_crosszone"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_elb"
     resource.properties.cross_zone_load_balancing == false
 }
 
+source_path[{"elb_crosszone": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elb"
+    resource.properties.cross_zone_load_balancing == false
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "cross_zone_load_balancing"]
+        ],
+    }
+}
+
 elb_crosszone {
-    lower(input.resources[_].type) == "aws_elb"
+    lower(input.resources[i].type) == "aws_elb"
     not aws_issue["elb_crosszone"]
     not aws_bool_issue["elb_crosszone"]
 }
@@ -362,19 +516,43 @@ elb_crosszone_metadata := {
 default elb_not_in_use = null
 
 aws_attribute_absence["elb_not_in_use"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_elb"
     not resource.properties.instances
 }
 
+source_path[{"elb_not_in_use": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elb"
+    not resource.properties.instances
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "instances"]
+        ],
+    }
+}
+
 aws_issue["elb_not_in_use"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_elb"
     count(resource.properties.instances) == 0
 }
 
+source_path[{"elb_not_in_use": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elb"
+    count(resource.properties.instances) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "instances"]
+        ],
+    }
+}
+
 elb_not_in_use {
-    lower(input.resources[_].type) == "aws_elb"
+    lower(input.resources[i].type) == "aws_elb"
     not aws_issue["elb_not_in_use"]
     not aws_attribute_absence["elb_not_in_use"]
 }
@@ -413,33 +591,83 @@ elb_not_in_use_metadata := {
 default elb_alb_logs = null
 
 aws_attribute_absence["elb_alb_logs"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_lb"
     not resource.properties.access_logs
 }
 
-aws_issue["elb_alb_logs"] {
-    resource := input.resources[_]
+source_path[{"elb_alb_logs": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_lb"
-    access_logs := resource.properties.access_logs[_]
+    not resource.properties.access_logs
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "access_logs"]
+        ],
+    }
+}
+
+aws_issue["elb_alb_logs"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb"
+    access_logs := resource.properties.access_logs[j]
     lower(access_logs.enabled) == "false"
 }
 
-aws_bool_issue["elb_alb_logs"] {
-    resource := input.resources[_]
+source_path[{"elb_alb_logs": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_lb"
-    access_logs := resource.properties.access_logs[_]
+    access_logs := resource.properties.access_logs[j]
+    lower(access_logs.enabled) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "access_logs", j, "enabled"]
+        ],
+    }
+}
+
+aws_bool_issue["elb_alb_logs"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb"
+    access_logs := resource.properties.access_logs[j]
     not access_logs.enabled
 }
 
+source_path[{"elb_alb_logs": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb"
+    access_logs := resource.properties.access_logs[j]
+    not access_logs.enabled
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "access_logs", j, "enabled"]
+        ],
+    }
+}
+
 aws_issue["elb_alb_logs"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_lb"
     count(resource.properties.access_logs) == 0
 }
 
+source_path[{"elb_alb_logs": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb"
+    count(resource.properties.access_logs) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "access_logs"]
+        ],
+    }
+}
+
 elb_alb_logs {
-    lower(input.resources[_].type) == "aws_lb"
+    lower(input.resources[i].type) == "aws_lb"
     not aws_attribute_absence["elb_alb_logs"]
     not aws_issue["elb_alb_logs"]
     not aws_bool_issue["elb_alb_logs"]
@@ -484,34 +712,85 @@ elb_alb_logs_metadata := {
 default elb_listener_ssl = null
 
 aws_attribute_absence["elb_listener_ssl"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_elb"
     not resource.properties.listener
 }
 
-aws_issue["elb_listener_ssl"] {
-    resource := input.resources[_]
+source_path[{"elb_listener_ssl": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_elb"
-    listener := resource.properties.listener[_]
+    not resource.properties.listener
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "listener"]
+        ],
+    }
+}
+
+aws_issue["elb_listener_ssl"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elb"
+    listener := resource.properties.listener[j]
     listener.ssl_certificate_id == ""
 }
 
-aws_issue["elb_listener_ssl"] {
-    resource := input.resources[_]
+source_path[{"elb_listener_ssl": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_elb"
-    listener := resource.properties.listener[_]
+    listener := resource.properties.listener[j]
+    listener.ssl_certificate_id == ""
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "listener", j, "ssl_certificate_id"]
+        ],
+    }
+}
+
+aws_issue["elb_listener_ssl"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elb"
+    listener := resource.properties.listener[j]
     listener.ssl_certificate_id == null
 }
 
-aws_issue["elb_listener_ssl"] {
-    resource := input.resources[_]
+source_path[{"elb_listener_ssl": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_elb"
-    listener := resource.properties.listener[_]
+    listener := resource.properties.listener[j]
+    listener.ssl_certificate_id == null
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "listener", j, "ssl_certificate_id"]
+        ],
+    }
+}
+
+aws_issue["elb_listener_ssl"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elb"
+    listener := resource.properties.listener[j]
     not listener.ssl_certificate_id
 }
 
+source_path[{"elb_listener_ssl": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elb"
+    listener := resource.properties.listener[j]
+    not listener.ssl_certificate_id
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "listener", j, "ssl_certificate_id"]
+        ],
+    }
+}
+
 elb_listener_ssl {
-    lower(input.resources[_].type) == "aws_elb"
+    lower(input.resources[i].type) == "aws_elb"
     not aws_issue["elb_listener_ssl"]
     not aws_attribute_absence["elb_listener_ssl"]
 }
@@ -549,21 +828,47 @@ elb_listener_ssl_metadata := {
 default elb_over_https = null
 
 aws_attribute_absence["elb_over_https"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_elb"
-    listener := resource.properties.listener[_]
+    listener := resource.properties.listener[j]
     not listener.lb_protocol
 }
 
-aws_issue["elb_over_https"] {
-    resource := input.resources[_]
+source_path[{"elb_over_https": metadata}] {
+    resource := input.resources[i]
     lower(resource.type) == "aws_elb"
-    listener := resource.properties.listener[_]
+    listener := resource.properties.listener[j]
+    not listener.lb_protocol
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "listener", j, "lb_protocol"]
+        ],
+    }
+}
+
+aws_issue["elb_over_https"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elb"
+    listener := resource.properties.listener[j]
     lower(listener.lb_protocol) == "http"
 }
 
+source_path[{"elb_over_https": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elb"
+    listener := resource.properties.listener[j]
+    lower(listener.lb_protocol) == "http"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "listener", j, "lb_protocol"]
+        ],
+    }
+}
+
 elb_over_https {
-    lower(input.resources[_].type) == "aws_elb"
+    lower(input.resources[i].type) == "aws_elb"
     not aws_issue["elb_over_https"]
     not aws_attribute_absence["elb_over_https"]
 }
@@ -607,10 +912,34 @@ aws_issue["elb_v2_listener_ssl"] {
     not resource.properties.certificate_arn
 }
 
+source_path[{"elb_v2_listener_ssl": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb_listener"
+    not resource.properties.certificate_arn
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "certificate_arn"]
+        ],
+    }
+}
+
 aws_issue["elb_v2_listener_ssl"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_lb_listener"
     count(resource.properties.certificate_arn) == 0
+}
+
+source_path[{"elb_v2_listener_ssl": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb_listener"
+    count(resource.properties.certificate_arn) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "certificate_arn"]
+        ],
+    }
 }
 
 elb_v2_listener_ssl {
@@ -637,4 +966,107 @@ elb_v2_listener_ssl_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html#cfn-elasticloadbalancingv2-listener-certificates"
+}
+
+
+#
+# PR-AWS-TRF-ELB-013
+#
+
+default elb_drop_invalid_header = null
+
+aws_attribute_absence["elb_drop_invalid_header"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_load_balancer_listener_policy"
+    not resource.properties.policy_attribute
+}
+
+source_path[{"elb_drop_invalid_header": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_load_balancer_listener_policy"
+    not resource.properties.policy_attribute
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy_attribute"]
+        ],
+    }
+}
+
+aws_issue["elb_drop_invalid_header"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_load_balancer_listener_policy"
+    item := resource.properties.policy_attribute[j]
+    lower(item.name) == "routing.http.drop_invalid_header_fields.enabled"
+    lower(item.value) != "true"
+}
+
+source_path[{"elb_drop_invalid_header": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_load_balancer_listener_policy"
+    item := resource.properties.policy_attribute[j]
+    lower(item.name) == "routing.http.drop_invalid_header_fields.enabled"
+    lower(item.value) != "true"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy_attribute", j, "value"]
+        ],
+    }
+}
+
+aws_bool_issue["elb_drop_invalid_header"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_load_balancer_listener_policy"
+    item := resource.properties.policy_attribute[j]
+    lower(item.name) == "routing.http.drop_invalid_header_fields.enabled"
+    not item.value
+}
+
+source_path[{"elb_drop_invalid_header": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_load_balancer_listener_policy"
+    item := resource.properties.policy_attribute[j]
+    lower(item.name) == "routing.http.drop_invalid_header_fields.enabled"
+    not item.value
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy_attribute", j, "value"]
+        ],
+    }
+}
+
+elb_drop_invalid_header {
+    lower(input.resources[i].type) == "aws_load_balancer_listener_policy"
+    not aws_issue["elb_drop_invalid_header"]
+    not aws_bool_issue["elb_drop_invalid_header"]
+    not aws_attribute_absence["elb_drop_invalid_header"]
+}
+
+elb_drop_invalid_header = false {
+    aws_issue["elb_drop_invalid_header"]
+}
+
+elb_drop_invalid_header = false {
+    aws_bool_issue["elb_drop_invalid_header"]
+}
+
+elb_drop_invalid_header = false {
+    aws_attribute_absence["elb_drop_invalid_header"]
+}
+
+elb_drop_invalid_header_err = "Ensure that Application Load Balancer drops HTTP headers" {
+    aws_issue["elb_drop_invalid_header"]
+} else = "Ensure that Application Load Balancer drops HTTP headers" {
+    aws_bool_issue["elb_drop_invalid_header"]
+}
+
+elb_drop_invalid_header_metadata := {
+    "Policy Code": "PR-AWS-TRF-ELB-013",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure that Application Load Balancer drops HTTP headers",
+    "Policy Description": "Checks if rule evaluates AWS Application Load Balancers (ALB) to ensure they are configured to drop http headers. The rule is NON_COMPLIANT if the value of routing.http.drop_invalid_header_fields.enabled is set to false",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/load_balancer_listener_policy"
 }

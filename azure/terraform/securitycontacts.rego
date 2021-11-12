@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_security_center_contact
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/security_center_contact
 #
-# PR-AZR-0087-TRF
+# PR-AZR-TRF-ASC-002
 #
 
 default securitycontacts = null
@@ -41,7 +41,7 @@ securitycontacts_err = "azurerm_security_center_contact property 'email' need to
 }
 
 securitycontacts_metadata := {
-    "Policy Code": "PR-AZR-0087-TRF",
+    "Policy Code": "PR-AZR-TRF-ASC-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -54,7 +54,7 @@ securitycontacts_metadata := {
 
 
 #
-# PR-AZR-0155-TRF
+# PR-AZR-TRF-ASC-004
 #
 
 default securitycontacts_phone = null
@@ -92,7 +92,7 @@ securitycontacts_phone_err = "azurerm_security_center_contact property 'phone' n
 }
 
 securitycontacts_phone_metadata := {
-    "Policy Code": "PR-AZR-0155-TRF",
+    "Policy Code": "PR-AZR-TRF-ASC-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -105,32 +105,45 @@ securitycontacts_phone_metadata := {
 
 
 #
-# PR-AZR-0156-TRF
+# PR-AZR-TRF-ASC-003
 #
 
 default securitycontacts_alert_notifications_enabled = null
 
-azure_issue["securitycontacts_alert_notifications_enabled"] {
+azure_attribute_absence["securitycontacts_alert_notifications_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_security_center_contact"
     not resource.properties.alert_notifications
 }
 
+azure_issue["securitycontacts_alert_notifications_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_security_center_contact"
+    resource.properties.alert_notifications != true
+}
+
 securitycontacts_alert_notifications_enabled {
     lower(input.resources[_].type) == "azurerm_security_center_contact"
+    not azure_attribute_absence["securitycontacts_alert_notifications_enabled"]
     not azure_issue["securitycontacts_alert_notifications_enabled"]
+}
+
+securitycontacts_alert_notifications_enabled = false {
+    azure_attribute_absence["securitycontacts_alert_notifications_enabled"]
 }
 
 securitycontacts_alert_notifications_enabled = false {
     azure_issue["securitycontacts_alert_notifications_enabled"]
 }
 
-securitycontacts_alert_notifications_enabled_err = "Security Center currently not configured to send security alerts notifications to the security contact."  {
+securitycontacts_alert_notifications_enabled_err = "azurerm_security_center_contact property 'alert_notifications' need to be exist. Its missing from the resource. Please set 'true' as value after property addition." {
+    azure_attribute_absence["securitycontacts_alert_notifications_enabled"]
+} else = "Security Center currently not configured to send security alerts notifications to the security contact."  {
     azure_issue["securitycontacts_alert_notifications_enabled"]
 }
 
 securitycontacts_alert_notifications_enabled_metadata := {
-    "Policy Code": "PR-AZR-0156-TRF",
+    "Policy Code": "PR-AZR-TRF-ASC-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -143,32 +156,45 @@ securitycontacts_alert_notifications_enabled_metadata := {
 
 
 #
-# PR-AZR-0157-TRF
+# PR-AZR-TRF-ASC-005
 #
 
 default securitycontacts_alerts_to_admins_enabled = null
 
-azure_issue["securitycontacts_alerts_to_admins_enabled"] {
+azure_attribute_absence["securitycontacts_alerts_to_admins_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_security_center_contact"
     not resource.properties.alerts_to_admins
 }
 
+azure_issue["securitycontacts_alerts_to_admins_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_security_center_contact"
+    resource.properties.alerts_to_admins != true
+}
+
 securitycontacts_alerts_to_admins_enabled {
     lower(input.resources[_].type) == "azurerm_security_center_contact"
+    not azure_attribute_absence["securitycontacts_alerts_to_admins_enabled"]
     not azure_issue["securitycontacts_alerts_to_admins_enabled"]
+}
+
+securitycontacts_alerts_to_admins_enabled = false {
+    azure_attribute_absence["securitycontacts_alerts_to_admins_enabled"]
 }
 
 securitycontacts_alerts_to_admins_enabled = false {
     azure_issue["securitycontacts_alerts_to_admins_enabled"]
 }
 
-securitycontacts_alerts_to_admins_enabled_err = "Security Center currently not configured to send security alerts notifications to subscription admins"  {
+securitycontacts_alerts_to_admins_enabled_err = "azurerm_security_center_contact property 'alerts_to_admins' need to be exist. Its missing from the resource. Please set 'true' as value after property addition." {
+    azure_attribute_absence["securitycontacts_alerts_to_admins_enabled"]
+} else = "Security Center currently not configured to send security alerts notifications to subscription admins"  {
     azure_issue["securitycontacts_alerts_to_admins_enabled"]
 }
 
 securitycontacts_alerts_to_admins_enabled_metadata := {
-    "Policy Code": "PR-AZR-0157-TRF",
+    "Policy Code": "PR-AZR-TRF-ASC-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

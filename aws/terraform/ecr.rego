@@ -13,6 +13,17 @@ aws_issue["ecr_imagetag"] {
     lower(resource.properties.image_tag_mutability) == "mutable"
 }
 
+source_path[{"ecr_imagetag": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository"
+    lower(resource.properties.image_tag_mutability) == "mutable"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "image_tag_mutability"]
+        ],
+    }
+}
 
 ecr_imagetag {
     lower(input.resources[i].type) == "aws_ecr_repository"
@@ -48,10 +59,22 @@ default ecr_encryption = null
 aws_issue["ecr_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecr_repository"
-    encryption_configuration := resource.properties.encryption_configuration[_]
+    encryption_configuration := resource.properties.encryption_configuration[j]
     not encryption_configuration.encryption_type
 }
 
+source_path[{"ecr_imagetag": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository"
+    encryption_configuration := resource.properties.encryption_configuration[j]
+    not encryption_configuration.encryption_type
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encryption_configuration", j, "encryption_type"]
+        ],
+    }
+}
 
 ecr_encryption {
     lower(input.resources[i].type) == "aws_ecr_repository"
@@ -87,17 +110,42 @@ default ecr_scan = null
 aws_bool_issue["ecr_scan"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecr_repository"
-    image_scanning_configuration := resource.properties.image_scanning_configuration[_]
+    image_scanning_configuration := resource.properties.image_scanning_configuration[j]
     not image_scanning_configuration.scan_on_push
+}
+
+source_path[{"ecr_scan": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository"
+    image_scanning_configuration := resource.properties.image_scanning_configuration[j]
+    not image_scanning_configuration.scan_on_push
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "image_scanning_configuration", j, "scan_on_push"]
+        ],
+    }
 }
 
 aws_issue["ecr_scan"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecr_repository"
-    image_scanning_configuration := resource.properties.image_scanning_configuration[_]
+    image_scanning_configuration := resource.properties.image_scanning_configuration[j]
     lower(image_scanning_configuration.scan_on_push) != "true"
 }
 
+source_path[{"ecr_scan": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository"
+    image_scanning_configuration := resource.properties.image_scanning_configuration[j]
+    lower(image_scanning_configuration.scan_on_push) != "true"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "image_scanning_configuration", j, "scan_on_push"]
+        ],
+    }
+}
 
 ecr_scan {
     lower(input.resources[i].type) == "aws_ecr_repository"
@@ -129,4 +177,98 @@ ecr_scan_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecr-repository-image_scanning_configuration.html#cfn-ecr-repository-image_scanning_configuration-scan_on_push"
+}
+
+#
+# PR-AWS-TRF-ECR-004
+#
+
+default ecr_public_access_disable = null
+
+aws_issue["ecr_public_access_disable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+}
+
+source_path[{"ecr_scan": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    metadata := {
+        "resource_path": [
+            ["resources", i, ".properties", "policy", "Statement", j, "Principal"]
+        ],
+    }
+}
+
+aws_issue["ecr_public_access_disable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+}
+
+source_path[{"ecr_scan": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    metadata := {
+        "resource_path": [
+            ["resources", i, ".properties", "policy", "Statement", j, "Principal", "AWS"]
+        ],
+    }
+}
+
+aws_issue["ecr_public_access_disable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[k] = "*"
+}
+
+source_path[{"ecr_scan": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[k] = "*"
+    metadata := {
+        "resource_path": [
+            ["resources", i, ".properties", "policy", "Statement", j, "Principal", "AWS", k]
+        ],
+    }
+}
+
+ecr_public_access_disable {
+    lower(input.resources[i].type) == "aws_ecr_repository_policy"
+    not aws_issue["ecr_public_access_disable"]
+}
+
+ecr_public_access_disable = false {
+    aws_issue["ecr_public_access_disable"]
+}
+
+ecr_public_access_disable_err = "Ensure AWS ECR Repository is not publicly accessible" {
+    aws_issue["ecr_public_access_disable"]
+}
+
+ecr_public_access_disable_metadata := {
+    "Policy Code": "PR-AWS-TRF-ECR-004",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure AWS ECR Repository is not publicly accessible",
+    "Policy Description": "Public AWS ECR Repository potentially expose existing interfaces to unwanted 3rd parties that can tap into an existing data stream, resulting in data leak to an unwanted party.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository_policy"
 }

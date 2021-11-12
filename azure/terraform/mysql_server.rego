@@ -2,7 +2,7 @@ package rule
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_firewall_rule
 
-# PR-AZR-0148-TRF
+# PR-AZR-TRF-SQL-059
 
 default mysql_ingress_from_any_ip_disabled = null
 
@@ -56,7 +56,7 @@ mysql_ingress_from_any_ip_disabled_err = "Resource azurerm_mysql_server and azur
 }
 
 mysql_ingress_from_any_ip_disabled_metadata := {
-    "Policy Code": "PR-AZR-0148-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-059",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -70,7 +70,7 @@ mysql_ingress_from_any_ip_disabled_metadata := {
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server
 
-# PR-AZR-0184-TRF
+# PR-AZR-TRF-SQL-016
 
 default mysql_server_ssl_enforcement_enabled = null
 azure_attribute_absence ["mysql_server_ssl_enforcement_enabled"] {
@@ -107,7 +107,7 @@ mysql_server_ssl_enforcement_enabled_err = "azurerm_mysql_server property 'ssl_e
 }
 
 mysql_server_ssl_enforcement_enabled_metadata := {
-    "Policy Code": "PR-AZR-0184-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-016",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -121,7 +121,7 @@ mysql_server_ssl_enforcement_enabled_metadata := {
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server
 
-# PR-AZR-0030-TRF
+# PR-AZR-TRF-SQL-060
 
 default mysql_public_access_disabled = null
 # public_network_access_enabled Defaults to true if not exist. This was an issue because we need to fail if property not exist and also need to passed if property has value false.
@@ -148,7 +148,7 @@ mysql_public_access_disabled_err = "Public Network Access is currently not disab
 }
 
 mysql_public_access_disabled_metadata := {
-    "Policy Code": "PR-AZR-0030-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-060",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -161,7 +161,7 @@ mysql_public_access_disabled_metadata := {
 
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server
-# PR-AZR-0041-TRF
+# PR-AZR-TRF-SQL-061
 #
 
 default mysql_server_latest_tls_configured = null
@@ -200,7 +200,7 @@ mysql_server_latest_tls_configured_err = "azurerm_mysql_server property 'ssl_min
 }
 
 storage_account_latest_tls_configured_metadata := {
-    "Policy Code": "PR-AZR-0041-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-061",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

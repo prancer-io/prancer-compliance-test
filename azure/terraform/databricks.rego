@@ -3,7 +3,7 @@ package rule
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/databricks_workspace
 
 #
-# PR-AZR-0117-TRF
+# PR-AZR-TRF-DBK-001
 #
 
 default databrics_workspace_has_public_ip_disabled = null
@@ -14,11 +14,18 @@ azure_attribute_absence["databrics_workspace_has_public_ip_disabled"] {
     not resource.properties.custom_parameters
 }
 
-azure_issue["databrics_workspace_has_public_ip_disabled"] {
+azure_attribute_absence["databrics_workspace_has_public_ip_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_databricks_workspace"
     custom_parameters := resource.properties.custom_parameters[_]
     not custom_parameters.no_public_ip
+}
+
+azure_issue["databrics_workspace_has_public_ip_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_databricks_workspace"
+    custom_parameters := resource.properties.custom_parameters[_]
+    custom_parameters.no_public_ip != true
 }
 
 databrics_workspace_has_public_ip_disabled {
@@ -42,7 +49,7 @@ databrics_workspace_has_public_ip_disabled_err = "azurerm_databricks_workspace p
 }
 
 databrics_workspace_has_public_ip_disabled_metadata := {
-    "Policy Code": "PR-AZR-0117-TRF",
+    "Policy Code": "PR-AZR-TRF-DBK-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -54,7 +61,7 @@ databrics_workspace_has_public_ip_disabled_metadata := {
 }
 
 #
-# PR-AZR-0118-TRF
+# PR-AZR-TRF-DBK-002
 #
 
 default databrics_workspace_has_vnet_integration = null
@@ -76,7 +83,8 @@ azure_issue["databrics_workspace_has_vnet_integration"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_databricks_workspace"
     custom_parameters := resource.properties.custom_parameters[_]
-    contains(lower(custom_parameters.virtual_network_id), "microsoft.network/virtualnetworks") != true
+    #contains(lower(custom_parameters.virtual_network_id), "microsoft.network/virtualnetworks") != true
+    trim(custom_parameters.virtual_network_id, " ") == ""
 }
 
 databrics_workspace_has_vnet_integration {
@@ -100,7 +108,7 @@ databrics_workspace_has_vnet_integration_err = "azurerm_databricks_workspace pro
 }
 
 databrics_workspace_has_vnet_integration_metadata := {
-    "Policy Code": "PR-AZR-0118-TRF",
+    "Policy Code": "PR-AZR-TRF-DBK-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

@@ -4,7 +4,7 @@ package rule
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy
 
 #
-# PR-AZR-0096-TRF
+# PR-AZR-TRF-SQL-017
 #
 
 default dbsec_threat_off = null
@@ -46,7 +46,7 @@ dbsec_threat_off_err = "azurerm_mssql_server_security_alert_policy property 'sta
 }
 
 dbsec_threat_off_metadata := {
-    "Policy Code": "PR-AZR-0096-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-017",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -58,7 +58,7 @@ dbsec_threat_off_metadata := {
 }
 
 #
-# PR-AZR-0054-TRF
+# PR-AZR-TRF-SQL-018
 #
 
 default dbsec_threat_retention = null
@@ -100,7 +100,7 @@ dbsec_threat_retention_err = "azurerm_mssql_server_security_alert_policy propert
 }
 
 dbsec_threat_retention_metadata := {
-    "Policy Code": "PR-AZR-0054-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-018",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -112,7 +112,7 @@ dbsec_threat_retention_metadata := {
 }
 
 #
-# PR-AZR-0055-TRF
+# PR-AZR-TRF-SQL-019
 #
 
 default dbsec_threat_email = null
@@ -154,11 +154,11 @@ dbsec_threat_email_err = "azurerm_mssql_server_security_alert_policy property 'e
 }
 
 dbsec_threat_email_metadata := {
-    "Policy Code": "PR-AZR-0055-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-019",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Azure SQL Databases Security Alert Policy should be configured to send alert to the configured email addresses",
+    "Policy Title": "Azure SQL Database Server Security Alert Policy should be configured to send alert to the configured email addresses",
     "Policy Description": "Checks to ensure that an valid email address is set for Threat Detection alerts. The alerts are sent to this email address when any anomalous activities are detected on SQL databases.",
     "Resource Type": "azurerm_mssql_server_security_alert_policy",
     "Policy Help URL": "",
@@ -166,7 +166,7 @@ dbsec_threat_email_metadata := {
 }
 
 #
-# PR-AZR-0061-TRF
+# PR-AZR-TRF-SQL-020
 #
 
 default dbsec_threat_alert = null
@@ -208,7 +208,7 @@ dbsec_threat_alert_err = "Azure SQL Server threat detection alerts not enabled f
 }
 
 dbsec_threat_alert_metadata := {
-    "Policy Code": "PR-AZR-0061-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-020",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -220,7 +220,7 @@ dbsec_threat_alert_metadata := {
 }
 
 #
-# PR-AZR-0097-TRF
+# PR-AZR-TRF-SQL-021
 #
 
 default sql_alert = null
@@ -262,7 +262,7 @@ sql_alert_err = "azurerm_mssql_server_security_alert_policy property 'email_acco
 }
 
 sql_alert_metadata := {
-    "Policy Code": "PR-AZR-0097-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-021",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

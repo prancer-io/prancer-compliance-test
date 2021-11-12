@@ -5,15 +5,31 @@ package rule
 #
 
 
-# PR-AZR-0049-TRF
+# PR-AZR-TRF-NTW-001
 #
 
 default netwatchFlowlogs = null
 
-netwatchFlowlogs["netwatchFlowlogs"] {
+azure_attribute_absence["netwatchFlowlogs"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_network_watcher_flow_log"
     not resource.properties.enabled
+}
+
+azure_issue["netwatchFlowlogs"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_network_watcher_flow_log"
+    resource.properties.enabled != true
+}
+
+netwatchFlowlogs {
+    lower(input.resources[_].type) == "azurerm_network_watcher_flow_log"
+    not azure_attribute_absence["netwatchFlowlogs"]
+    not azure_issue["netwatchFlowlogs"]
+}
+
+netwatchFlowlogs = false {
+    azure_attribute_absence["netwatchFlowlogs"]
 }
 
 netwatchFlowlogs = false {
@@ -21,11 +37,13 @@ netwatchFlowlogs = false {
 }
 
 netwatchFlowlogs_err = "azurerm_network_watcher_flow_log property 'enabled' is missing from the resource." {
+    azure_attribute_absence["netwatchFlowlogs"]
+} else = "Azure Network Watcher NSG flow log is disabled" {
     azure_issue["netwatchFlowlogs"]
 }
 
 netwatchFlowlogs_metadata := {
-    "Policy Code": "PR-AZR-0049-TRF",
+    "Policy Code": "PR-AZR-TRF-NTW-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -36,7 +54,7 @@ netwatchFlowlogs_metadata := {
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_watcher_flow_log"
 }
 
-# PR-AZR-0050-TRF
+# PR-AZR-TRF-NTW-002
 #
 
 default netwatch_logs = null
@@ -83,7 +101,7 @@ netwatch_logs_err = "traffic_analytics property 'enabled' is missing from the az
 }
 
 netwatch_logs_metadata := {
-    "Policy Code": "PR-AZR-0050-TRF",
+    "Policy Code": "PR-AZR-TRF-NTW-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -95,7 +113,7 @@ netwatch_logs_metadata := {
 }
 
 #
-# PR-AZR-0051-TRF
+# PR-AZR-TRF-NTW-003
 #
 
 default netwatch_log_retention = null
@@ -156,7 +174,7 @@ netwatch_log_retention_err = "azurerm_network_watcher_flow_log property 'retenti
 
 
 netwatch_log_retention_metadata := {
-    "Policy Code": "PR-AZR-0051-TRF",
+    "Policy Code": "PR-AZR-TRF-NTW-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

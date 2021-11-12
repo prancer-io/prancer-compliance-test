@@ -8,19 +8,44 @@ package rule
 default api_gw_cert = null
 
 aws_issue["api_gw_cert"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_api_gateway_rest_api"
     not resource.properties.client_certificate_id
 }
 
+
+source_path[{"api_gw_cert": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_rest_api"
+    not resource.properties.client_certificate_id
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "client_certificate_id"]
+        ],
+    }
+}
+
 aws_issue["api_gw_cert"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_api_gateway_rest_api"
     count(resource.properties.client_certificate_id) == 0
 }
 
+source_path[{"api_gw_cert": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_rest_api"
+    count(resource.properties.client_certificate_id) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "client_certificate_id"]
+        ],
+    }
+}
+
 api_gw_cert {
-    lower(input.resources[_].type) == "aws_api_gateway_rest_api"
+    lower(input.resources[i].type) == "aws_api_gateway_rest_api"
     not aws_issue["api_gw_cert"]
 }
 
@@ -53,23 +78,63 @@ default gateway_private = null
 aws_attribute_absence["gateway_private"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_api_gateway_rest_api"
-    endpoint_configuration := resource.properties.endpoint_configuration[_]
+    endpoint_configuration := resource.properties.endpoint_configuration[j]
     not endpoint_configuration.types
 }
 
-aws_issue["gateway_private"] {
+source_path[{"gateway_private": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_api_gateway_rest_api"
-    endpoint_configuration := resource.properties.endpoint_configuration[_]
-    count(endpoint_configuration.types) == 0
+    endpoint_configuration := resource.properties.endpoint_configuration[j]
+    not endpoint_configuration.types
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "endpoint_configuration", j, "types"]
+        ],
+    }
 }
 
 aws_issue["gateway_private"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_api_gateway_rest_api"
-    endpoint_configuration := resource.properties.endpoint_configuration[_]
+    endpoint_configuration := resource.properties.endpoint_configuration[j]
+    count(endpoint_configuration.types) == 0
+}
+
+source_path[{"gateway_private": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_rest_api"
+    endpoint_configuration := resource.properties.endpoint_configuration[j]
+    count(endpoint_configuration.types) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "endpoint_configuration", j, "types"]
+        ],
+    }
+}
+
+aws_issue["gateway_private"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_rest_api"
+    endpoint_configuration := resource.properties.endpoint_configuration[j]
     type := endpoint_configuration.types[_]
     count([c | lower(type)== "private"; c:=1]) == 0
+}
+
+source_path[{"gateway_private": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_rest_api"
+    endpoint_configuration := resource.properties.endpoint_configuration[j]
+    type := endpoint_configuration.types[_]
+    count([c | lower(type)== "private"; c:=1]) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "endpoint_configuration", j, "types"]
+        ],
+    }
 }
 
 gateway_private {
@@ -116,10 +181,34 @@ aws_bool_issue["gateway_validate_parameter"] {
     not resource.properties.validate_request_parameters
 }
 
+source_path[{"gateway_validate_parameter": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_request_validator"
+    not resource.properties.validate_request_parameters
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "validate_request_parameters"]
+        ],
+    }
+}
+
 aws_issue["gateway_validate_parameter"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_api_gateway_request_validator"
     lower(resource.properties.validate_request_parameters) == "false"
+}
+
+source_path[{"gateway_validate_parameter": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_request_validator"
+    lower(resource.properties.validate_request_parameters) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "validate_request_parameters"]
+        ],
+    }
 }
 
 gateway_validate_parameter {
@@ -166,10 +255,34 @@ aws_attribute_absence["gateway_request_authorizer"] {
     not resource.properties.type
 }
 
+source_path[{"gateway_request_authorizer": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_authorizer"
+    not resource.properties.type
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "type"]
+        ],
+    }
+}
+
 aws_issue["gateway_request_authorizer"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_api_gateway_authorizer"
     lower(resource.properties.type) != "request"
+}
+
+source_path[{"gateway_request_authorizer": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_authorizer"
+    lower(resource.properties.type) != "request"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "type"]
+        ],
+    }
 }
 
 gateway_request_authorizer {
@@ -202,4 +315,337 @@ gateway_request_authorizer_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-restapi-endpointconfiguration.html"
+}
+
+#
+# PR-AWS-TRF-AG-004
+#
+
+default gateway_logging_enable = null
+
+aws_issue["gateway_logging_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_stage"
+    access_log_settings := resource.properties.access_log_settings[j]
+    not access_log_settings.destination_arn
+}
+
+source_path[{"gateway_logging_enable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_stage"
+    access_log_settings := resource.properties.access_log_settings[j]
+    not access_log_settings.destination_arn
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "access_log_settings", j, "destination_arn"]
+        ],
+    }
+}
+
+aws_issue["gateway_logging_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_stage"
+    access_log_settings := resource.properties.access_log_settings[j]
+    count(access_log_settings.destination_arn) == 0
+}
+
+source_path[{"gateway_logging_enable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_stage"
+    access_log_settings := resource.properties.access_log_settings[j]
+    count(access_log_settings.destination_arn) == 0
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "access_log_settings", j, "destination_arn"]
+        ],
+    }
+}
+
+aws_issue["gateway_logging_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_stage"
+    access_log_settings := resource.properties.access_log_settings[j]
+    access_log_settings.destination_arn == null
+}
+
+source_path[{"gateway_logging_enable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_stage"
+    access_log_settings := resource.properties.access_log_settings[j]
+    access_log_settings.destination_arn == null
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "access_log_settings", j, "destination_arn"]
+        ],
+    }
+}
+
+gateway_logging_enable {
+    lower(input.resources[i].type) == "aws_api_gateway_stage"
+    not aws_issue["gateway_logging_enable"]
+}
+
+gateway_logging_enable = false {
+    aws_issue["gateway_logging_enable"]
+}
+
+gateway_logging_enable_err = "Ensure that API Gateway has enabled access logging" {
+    aws_issue["gateway_logging_enable"]
+}
+
+gateway_logging_enable_metadata := {
+    "Policy Code": "PR-AWS-TRF-AG-004",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure that API Gateway has enabled access logging",
+    "Policy Description": "Enabling the custom access logging option in API Gateway allows delivery of custom logs to CloudWatch Logs, which can be analyzed using CloudWatch Logs Insights. Using custom domain names in Amazon API Gateway allows insights into requests sent to each custom domain name.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage#access_log_settings"
+}
+
+#
+# PR-AWS-TRF-AG-005
+#
+
+default gateway_tracing_enable = null
+
+aws_attribute_absence["gateway_tracing_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_stage"
+    not resource.properties.xray_tracing_enabled
+}
+
+source_path[{"gateway_tracing_enable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_stage"
+    not resource.properties.xray_tracing_enabled
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "xray_tracing_enabled"]
+        ],
+    }
+}
+
+aws_bool_issue["gateway_tracing_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_stage"
+    resource.properties.xray_tracing_enabled == false
+}
+
+source_path[{"gateway_tracing_enable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_stage"
+    resource.properties.xray_tracing_enabled == false
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "xray_tracing_enabled"]
+        ],
+    }
+}
+
+aws_issue["gateway_tracing_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_stage"
+    lower(resource.properties.xray_tracing_enabled) == "false"
+}
+
+source_path[{"gateway_tracing_enable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_stage"
+    lower(resource.properties.xray_tracing_enabled) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "xray_tracing_enabled"]
+        ],
+    }
+}
+
+gateway_tracing_enable {
+    lower(input.resources[i].type) == "aws_api_gateway_stage"
+    not aws_issue["gateway_tracing_enable"]
+    not aws_attribute_absence["gateway_tracing_enable"]
+    not aws_bool_issue["gateway_tracing_enable"]
+}
+
+gateway_tracing_enable = false {
+    aws_issue["gateway_tracing_enable"]
+}
+
+gateway_tracing_enable = false {
+    aws_bool_issue["gateway_tracing_enable"]
+}
+
+gateway_tracing_enable = false {
+    aws_attribute_absence["gateway_tracing_enable"]
+}
+
+gateway_tracing_enable_err = "AWS API gateway request authorization is not set" {
+    aws_issue["gateway_tracing_enable"]
+} else = "AWS API gateway request authorization is not set" {
+    aws_bool_issue["gateway_tracing_enable"]
+} else = "AWS API Gateway Authorizer type is absent" {
+    aws_attribute_absence["gateway_tracing_enable"]
+}
+
+gateway_tracing_enable_metadata := {
+    "Policy Code": "PR-AWS-TRF-AG-005",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure API Gateway has tracing enabled",
+    "Policy Description": "With tracing enabled X-Ray can provide an end-to-end view of an entire HTTP request. You can use this to analyze latencies in APIs and their backend services",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_stage#xray_tracing_enabled"
+}
+
+
+#
+# PR-AWS-TRF-AG-006
+#
+
+default gateway_method_public_access = null
+
+aws_issue["gateway_method_public_access"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_method"
+    not resource.properties.authorization
+    not resource.properties.api_key_required
+}
+
+source_path[{"gateway_method_public_access": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_method"
+    not resource.properties.authorization
+    not resource.properties.api_key_required
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "api_key_required"]
+        ],
+    }
+}
+
+aws_issue["gateway_method_public_access"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_method"
+    lower(resource.properties.authorization) == "none"
+    not resource.properties.api_key_required
+}
+
+source_path[{"gateway_method_public_access": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_method"
+    lower(resource.properties.authorization) == "none"
+    not resource.properties.api_key_required
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "api_key_required"]
+        ],
+    }
+}
+
+aws_issue["gateway_method_public_access"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_method"
+    resource.properties.authorization == null
+    not resource.properties.api_key_required
+}
+
+source_path[{"gateway_method_public_access": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_method"
+    resource.properties.authorization == null
+    not resource.properties.api_key_required
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "api_key_required"]
+        ],
+    }
+}
+
+aws_issue["gateway_method_public_access"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_method"
+    not resource.properties.authorization
+    lower(resource.properties.api_key_required) != "true"
+}
+
+source_path[{"gateway_method_public_access": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_method"
+    not resource.properties.authorization
+    lower(resource.properties.api_key_required) != "true"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "api_key_required"]
+        ],
+    }
+}
+
+aws_issue["gateway_method_public_access"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_method"
+    lower(resource.properties.authorization) == "none"
+    lower(resource.properties.api_key_required) != "true"
+}
+
+source_path[{"gateway_method_public_access": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_method"
+    lower(resource.properties.authorization) == "none"
+    lower(resource.properties.api_key_required) != "true"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "api_key_required"]
+        ],
+    }
+}
+
+aws_issue["gateway_method_public_access"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_method"
+    resource.properties.authorization == null
+    lower(resource.properties.api_key_required) != "true"
+}
+
+source_path[{"gateway_method_public_access": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_method"
+    resource.properties.authorization == null
+    lower(resource.properties.api_key_required) != "true"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "api_key_required"]
+        ],
+    }
+}
+
+gateway_method_public_access {
+    lower(input.resources[i].type) == "aws_api_gateway_method"
+    not aws_issue["gateway_method_public_access"]
+}
+
+gateway_method_public_access = false {
+    aws_issue["gateway_method_public_access"]
+}
+
+gateway_method_public_access_err = "Ensure API gateway methods are not publicly accessible" {
+    aws_issue["gateway_method_public_access"]
+}
+
+gateway_method_public_access_metadata := {
+    "Policy Code": "PR-AWS-TRF-AG-006",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure API gateway methods are not publicly accessible",
+    "Policy Description": "We recommend you configure a custom authorizer OR an API key for every method in the API Gateway.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/api_gateway_method#authorization"
 }

@@ -2,7 +2,7 @@ package rule
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_definition
 
-# PR-AZR-0001-TRF
+# PR-AZR-TRF-ARD-001
 
 default no_custom_subs_owner_role_created = null
 
@@ -51,7 +51,7 @@ no_custom_subs_owner_role_created_err = "Custom Role Definition currently has pe
 }
 
 no_custom_subs_owner_role_created_metadata := {
-    "Policy Code": "PR-AZR-0001-TRF",
+    "Policy Code": "PR-AZR-TRF-ARD-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

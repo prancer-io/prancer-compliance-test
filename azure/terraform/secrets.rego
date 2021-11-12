@@ -1,7 +1,7 @@
 package rule
 
 #
-# PR-AZR-0001-RGX
+# PR-AZR-TRF-SEC-001
 #
 
 default gl_azure_secrets = null
@@ -96,7 +96,7 @@ azure_issue["gl_azure_secrets"] {
     regex.match(regexp, value)
 }
 
-gl_azure_secrets = false {
+gl_azure_secrets {
    not azure_issue["gl_azure_secrets"]
 }
 
@@ -110,12 +110,12 @@ gl_azure_secrets_err = "Secrets has been found hardcoded in the template. Please
 }
 
 gl_azure_secrets_metadata := {
-    "Policy Code": "PR-AZR-0001-RGX",
+    "Policy Code": "PR-AZR-TRF-SEC-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
-    "Policy Title": "Ensure Secrets are not hardcoded in the ARM template",
-    "Policy Description": "Secrets should not be hardcoded in the ARM Template. Make sure to put those secrets in a vault and access from there.",
+    "Policy Title": "Ensure Secrets are not hardcoded in the template",
+    "Policy Description": "Secrets should not be hardcoded in the Template. Make sure to put those secrets in a vault and access from there.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": ""

@@ -3,24 +3,33 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/azurerm_storage_account
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
 #
-# PR-AZR-0092-TRF
+# PR-AZR-TRF-STR-003
 #
 
 default storage_secure = null
 
+azure_attribute_absence["storage_secure"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    # Defaults to true if property not available
+    not resource.properties.enable_https_traffic_only
+}
+
 azure_issue["storage_secure"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_storage_account"
-    not resource.properties.enable_https_traffic_only
+    resource.properties.enable_https_traffic_only != true
 }
 
 storage_secure {
     lower(input.resources[_].type) == "azurerm_storage_account"
+    not azure_attribute_absence["storage_secure"]
     not azure_issue["storage_secure"]
 }
 
 storage_secure {
     lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_attribute_absence["storage_secure"]
     not azure_issue["storage_secure"]
 }
 
@@ -33,7 +42,7 @@ storage_secure_err = "Storage Accounts https based secure transfer is not enable
 }
 
 storage_secure_metadata := {
-    "Policy Code": "PR-AZR-0092-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -46,13 +55,13 @@ storage_secure_metadata := {
 
 
 #
-# PR-AZR-0093-TRF
+# PR-AZR-TRF-STR-004
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules
 
 default storage_acl = null
 
 azure_attribute_absence ["storage_acl"] {
-    count([c | input.resources[_].type == "azurerm_storage_account"; c := 1]) != count([c | input.resources[_].type == "azurerm_storage_account_network_rules"; c := 1])
+    count([c | input.resources[_].type == "azurerm_storage_account_network_rules"; c := 1]) == 0
 }
 
 azure_attribute_absence["storage_acl"] {
@@ -67,29 +76,68 @@ azure_issue["storage_acl"] {
     lower(resource.properties.default_action) != "deny"
 }
 
+azure_inner_attribute_absence["storage_acl"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    not resource.properties.network_rules
+}
+
+azure_inner_attribute_absence["storage_acl"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    network_rules := resource.properties.network_rules[_]
+    not network_rules.default_action
+}
+
+azure_inner_issue["storage_acl"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    network_rules := resource.properties.network_rules[_]
+    lower(network_rules.default_action) != "deny"
+}
+
 storage_acl {
     lower(input.resources[_].type) == "azurerm_storage_account"
     not azure_attribute_absence["storage_acl"]
     not azure_issue["storage_acl"]
 }
 
-storage_acl = false {
-    azure_attribute_absence["storage_acl"]
+storage_acl {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    not azure_inner_attribute_absence["storage_acl"]
+    not azure_inner_issue["storage_acl"]
 }
 
 storage_acl = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_attribute_absence["storage_acl"]
+    azure_inner_attribute_absence["storage_acl"]
+}
+
+storage_acl = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_issue["storage_acl"]
 }
 
+storage_acl = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_inner_issue["storage_acl"]
+}
 
-storage_acl_err = "azurerm_storage_account_network_rules property 'default_action' need to be exist. Its missing from the resource. Please set the value to 'deny' after property addition." {
+storage_acl_err = "azurerm_storage_account_network_rules property 'default_action' or azurerm_storage_account's inner block 'network_rules' with property 'default_action' need to be exist. Its missing from the resource. Please set the value to 'deny' after property addition." {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_attribute_absence["storage_acl"]
+    azure_inner_attribute_absence["storage_acl"]
 } else = "Storage Accounts firewall rule is currently not enabled" {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     azure_issue["storage_acl"]
+} else = "Storage Accounts firewall rule is currently not enabled" {
+ 	lower(input.resources[_].type) == "azurerm_storage_account"
+ 	azure_inner_issue["storage_acl"]
 }
 
 storage_acl_metadata := {
-    "Policy Code": "PR-AZR-0093-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -102,7 +150,7 @@ storage_acl_metadata := {
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/advanced_threat_protection
 # Advanced Threat Protection should be enabled for storage account
-# PR-AZR-0094-TRF
+# PR-AZR-TRF-STR-005
 
 default storage_threat_protection = null
 
@@ -146,7 +194,7 @@ storage_threat_protection_err = "azurerm_advanced_threat_protection property 'en
 }
 
 storage_threat_protection_metadata := {
-    "Policy Code": "PR-AZR-0094-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -158,7 +206,7 @@ storage_threat_protection_metadata := {
 }
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_encryption_scope
-# PR-AZR-0114-TRF
+# PR-AZR-TRF-STR-008
 
 default keySource = null
 
@@ -202,7 +250,7 @@ keySource_err = "azurerm_storage_encryption_scope property 'source' need to be e
 }
 
 keySource_metadata := {
-    "Policy Code": "PR-AZR-0114-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-008",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -215,7 +263,7 @@ keySource_metadata := {
 
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
-# PR-AZR-0122-TRF
+# PR-AZR-TRF-STR-009
 
 default region = null
 
@@ -253,7 +301,7 @@ region_err = "azurerm_storage_account property 'location' need to be exist. Its 
 }
 
 region_metadata := {
-    "Policy Code": "PR-AZR-0122-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-009",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -266,9 +314,16 @@ region_metadata := {
 
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
-# PR-AZR-0123-TRF
+# PR-AZR-TRF-STR-010
 
 default storage_account_public_access_disabled = null
+
+# defaults to false
+azure_attribute_absence["storage_account_public_access_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    not resource.properties.allow_blob_public_access
+}
 
 azure_issue["storage_account_public_access_disabled"] {
     resource := input.resources[_]
@@ -278,6 +333,13 @@ azure_issue["storage_account_public_access_disabled"] {
 
 storage_account_public_access_disabled {
     lower(input.resources[_].type) == "azurerm_storage_account"
+    not azure_attribute_absence["storage_account_public_access_disabled"]
+    not azure_issue["storage_account_public_access_disabled"]
+}
+
+storage_account_public_access_disabled {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_attribute_absence["storage_account_public_access_disabled"]
     not azure_issue["storage_account_public_access_disabled"]
 }
 
@@ -290,7 +352,7 @@ storage_account_public_access_disabled_err = "Storage Account currently allowing
 }
 
 storage_account_public_access_disabled_metadata := {
-    "Policy Code": "PR-AZR-0123-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-010",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -304,7 +366,7 @@ storage_account_public_access_disabled_metadata := {
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
 #
-# PR-AZR-0188-TRF
+# PR-AZR-TRF-STR-014
 #
 
 default storage_account_queue_logging_enabled_for_all_operation = null
@@ -327,33 +389,42 @@ azure_issue["storage_account_queue_logging_enabled_for_all_operation"] {
     lower(resource.type) == "azurerm_storage_account"
     queue_properties := resource.properties.queue_properties[_]
     logging := queue_properties.logging[_]
-    logging.read != true
-    logging.write != true
-    logging.delete != true
+    not logging.read
+    not logging.write
+    not logging.delete
 }
 
 storage_account_queue_logging_enabled_for_all_operation {
     lower(input.resources[_].type) == "azurerm_storage_account"
+    count(input.resources[_].properties.queue_properties) > 0
     not azure_attribute_absence["storage_account_queue_logging_enabled_for_all_operation"]
     not azure_issue["storage_account_queue_logging_enabled_for_all_operation"]
 }
 
 storage_account_queue_logging_enabled_for_all_operation = false {
+	lower(input.resources[_].type) == "azurerm_storage_account"
+    count(input.resources[_].properties.queue_properties) > 0
     azure_attribute_absence["storage_account_queue_logging_enabled_for_all_operation"]
 }
 
 storage_account_queue_logging_enabled_for_all_operation = false {
+	lower(input.resources[_].type) == "azurerm_storage_account"
+    count(input.resources[_].properties.queue_properties) > 0
     azure_issue["storage_account_queue_logging_enabled_for_all_operation"]
 }
 
 storage_account_queue_logging_enabled_for_all_operation_err = "azurerm_storage_account property block 'queue_properties.logging' need to be exist with child property 'read', 'write' and 'delete'. one or all are missing from the resource." {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    count(input.resources[_].properties.queue_properties) > 0
     azure_attribute_absence["storage_account_queue_logging_enabled_for_all_operation"]
 } else = "Storage Accounts queue service logging is currently not enabled" {
+	lower(input.resources[_].type) == "azurerm_storage_account"
+    count(input.resources[_].properties.queue_properties) > 0
     azure_issue["storage_account_queue_logging_enabled_for_all_operation"]
 }
 
 storage_account_queue_logging_enabled_for_all_operation_metadata := {
-    "Policy Code": "PR-AZR-0188-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-014",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -364,68 +435,8 @@ storage_account_queue_logging_enabled_for_all_operation_metadata := {
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"
 }
 
-
 #
-# PR-AZR-0193-TRF
-# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
-
-default storage_acr_firewall_enabled = null
-
-azure_attribute_absence["storage_acr_firewall_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_storage_account"
-    not resource.properties.network_rules
-}
-
-azure_attribute_absence["storage_acr_firewall_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_storage_account"
-    network_rules := resource.properties.network_rules[_]
-    not network_rules.default_action
-}
-
-azure_issue["storage_acr_firewall_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_storage_account"
-    network_rules := resource.properties.network_rules[_]
-    lower(network_rules.default_action) != "deny"
-}
-
-storage_acr_firewall_enabled {
-    lower(input.resources[_].type) == "azurerm_storage_account"
-    not azure_attribute_absence["storage_acr_firewall_enabled"]
-    not azure_issue["storage_acr_firewall_enabled"]
-}
-
-storage_acr_firewall_enabled = false {
-    azure_attribute_absence["storage_acr_firewall_enabled"]
-}
-
-storage_acr_firewall_enabled = false {
-    azure_issue["storage_acr_firewall_enabled"]
-}
-
-storage_acr_firewall_enabled_err = "azurerm_storage_account property 'network_rules.default_action' need to be exist. Its missing from the resource. Please set the value to 'deny' after property addition." {
-    azure_attribute_absence["storage_acl"]
-} else = "Storage Accounts firewall rule is currently not enabled" {
-    azure_issue["storage_acl"]
-}
-
-storage_acr_firewall_enabled_metadata := {
-    "Policy Code": "PR-AZR-0193-TRF",
-    "Type": "IaC",
-    "Product": "AZR",
-    "Language": "Terraform",
-    "Policy Title": "Storage Accounts should have firewall rules enabled",
-    "Policy Description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on.<br><br>You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
-    "Resource Type": "azurerm_storage_account",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"
-}
-
-
-#
-# PR-AZR-0194-TRF
+# PR-AZR-TRF-STR-011
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules
 
 default storage_nr_allow_trusted_azure_services = null
@@ -469,7 +480,7 @@ storage_nr_allow_trusted_azure_services_err = "azurerm_storage_account_network_r
 }
 
 storage_nr_allow_trusted_azure_services_metadata := {
-    "Policy Code": "PR-AZR-0194-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-011",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -482,7 +493,7 @@ storage_nr_allow_trusted_azure_services_metadata := {
 
 
 #
-# PR-AZR-0195-TRF
+# PR-AZR-TRF-STR-016
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
 
 default storage_allow_trusted_azure_services = null
@@ -528,7 +539,7 @@ storage_allow_trusted_azure_services_err = "azurerm_storage_account_network_rule
 }
 
 storage_allow_trusted_azure_services_metadata := {
-    "Policy Code": "PR-AZR-0195-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-016",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -542,10 +553,17 @@ storage_allow_trusted_azure_services_metadata := {
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
 #
-# PR-AZR-0013-TRF
-#
 
+# PR-AZR-TRF-STR-017
+# As per Farshid: For the storage naming convention we have to make sure the name is not the variable name
+# If a variable name is in the name , and there is no value for that, just pass the test Var.
 default storage_correct_naming_convention = null
+
+is_name_contains_variable_reference["storage_correct_naming_convention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    contains(resource.properties.name, "${")
+}
 
 azure_attribute_absence["storage_correct_naming_convention"] {
     resource := input.resources[_]
@@ -562,6 +580,11 @@ azure_issue["storage_correct_naming_convention"] {
 
 storage_correct_naming_convention {
     lower(input.resources[_].type) == "azurerm_storage_account"
+    is_name_contains_variable_reference["storage_correct_naming_convention"]
+}
+
+storage_correct_naming_convention {
+    lower(input.resources[_].type) == "azurerm_storage_account"
     not azure_attribute_absence["storage_correct_naming_convention"]
     not azure_issue["storage_correct_naming_convention"]
 }
@@ -572,16 +595,18 @@ storage_correct_naming_convention = false {
 
 storage_correct_naming_convention = false {
     azure_issue["storage_correct_naming_convention"]
+    not is_name_contains_variable_reference["storage_correct_naming_convention"]
 }
 
 storage_correct_naming_convention_err = "azurerm_storage_account property 'name' need to be exist. Its missing from the resource." {
     azure_attribute_absence["storage_correct_naming_convention"]
 } else = "Storage Account naming convention is not correct" {
     azure_issue["storage_correct_naming_convention"]
+    not is_name_contains_variable_reference["storage_correct_naming_convention"]
 }
 
 storage_correct_naming_convention_metadata := {
-    "Policy Code": "PR-AZR-0013-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-017",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -594,7 +619,7 @@ storage_correct_naming_convention_metadata := {
 
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
-# PR-AZR-0014-TRF
+# PR-AZR-TRF-STR-018
 #
 
 default storage_account_latest_tls_configured = null
@@ -633,7 +658,7 @@ storage_account_latest_tls_configured_err = "azurerm_storage_account property 'm
 }
 
 storage_account_latest_tls_configured_metadata := {
-    "Policy Code": "PR-AZR-0014-TRF",
+    "Policy Code": "PR-AZR-TRF-STR-018",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

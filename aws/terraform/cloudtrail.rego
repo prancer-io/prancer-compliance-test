@@ -8,19 +8,43 @@ package rule
 default ct_regions = null
 
 aws_issue["ct_regions"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_cloudtrail"
     lower(resource.properties.is_multi_region_trail) == "false"
 }
 
+source_path[{"ct_regions": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudtrail"
+    lower(resource.properties.is_multi_region_trail) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "is_multi_region_trail"]
+        ],
+    }
+}
+
 aws_bool_issue["ct_regions"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_cloudtrail"
     not resource.properties.is_multi_region_trail
 }
 
+source_path[{"ct_regions": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudtrail"
+    not resource.properties.is_multi_region_trail
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "is_multi_region_trail"]
+        ],
+    }
+}
+
 ct_regions {
-    lower(input.resources[_].type) == "aws_cloudtrail"
+    lower(input.resources[i].type) == "aws_cloudtrail"
     not aws_issue["ct_regions"]
     not aws_bool_issue["ct_regions"]
 }
@@ -58,19 +82,43 @@ ct_regions_metadata := {
 default ct_log_validation = null
 
 aws_issue["ct_log_validation"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_cloudtrail"
     lower(resource.properties.enable_log_file_validation) == "false"
 }
 
+source_path[{"ct_log_validation": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudtrail"
+    lower(resource.properties.enable_log_file_validation) == "false"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "enable_log_file_validation"]
+        ],
+    }
+}
+
 aws_bool_issue["ct_log_validation"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_cloudtrail"
     not resource.properties.enable_log_file_validation
 }
 
+source_path[{"ct_log_validation": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudtrail"
+    not resource.properties.enable_log_file_validation
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "enable_log_file_validation"]
+        ],
+    }
+}
+
 ct_log_validation {
-    lower(input.resources[_].type) == "aws_cloudtrail"
+    lower(input.resources[i].type) == "aws_cloudtrail"
     not aws_issue["ct_log_validation"]
     not aws_bool_issue["ct_log_validation"]
 }
@@ -109,19 +157,43 @@ ct_log_validation_metadata := {
 default ct_master_key = null
 
 aws_attribute_absence["ct_master_key"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_cloudtrail"
     not resource.properties.kms_key_id
 }
 
+source_path[{"ct_master_key": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudtrail"
+    not resource.properties.kms_key_id
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "kms_key_id"]
+        ],
+    }
+}
+
 aws_issue["ct_master_key"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_cloudtrail"
     count(resource.properties.kms_key_id) == 0
 }
 
+source_path[{"ct_master_key": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudtrail"
+    count(resource.properties.kms_key_id) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "kms_key_id"]
+        ],
+    }
+}
+
 ct_master_key {
-    lower(input.resources[_].type) == "aws_cloudtrail"
+    lower(input.resources[i].type) == "aws_cloudtrail"
     not aws_issue["ct_master_key"]
     not aws_attribute_absence["ct_master_key"]
 }
@@ -159,19 +231,43 @@ ct_master_key_metadata := {
 default ct_cloudwatch = null
 
 aws_attribute_absence["ct_cloudwatch"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_cloudtrail"
     not resource.properties.cloud_watch_logs_role_arn
 }
 
+source_path[{"ct_cloudwatch": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudtrail"
+    not resource.properties.cloud_watch_logs_role_arn
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "cloud_watch_logs_role_arn"]
+        ],
+    }
+}
+
 aws_issue["ct_cloudwatch"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_cloudtrail"
     count(resource.properties.cloud_watch_logs_role_arn) == 0
 }
 
+source_path[{"ct_cloudwatch": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudtrail"
+    count(resource.properties.cloud_watch_logs_role_arn) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "cloud_watch_logs_role_arn"]
+        ],
+    }
+}
+
 ct_cloudwatch {
-    lower(input.resources[_].type) == "aws_cloudtrail"
+    lower(input.resources[i].type) == "aws_cloudtrail"
     not aws_issue["ct_cloudwatch"]
     not aws_attribute_absence["ct_cloudwatch"]
 }

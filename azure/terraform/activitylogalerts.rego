@@ -3,7 +3,7 @@ package rule
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_activity_log_alert
 
 #
-# PR-AZR-0090-TRF
+# PR-AZR-TRF-MNT-001
 #
 
 default azure_monitor_activity_log_alert_enabled = null
@@ -42,7 +42,7 @@ azure_monitor_activity_log_alert_enabled_err = "azurerm_monitor_activity_log_ale
 }
 
 azure_monitor_activity_log_alert_enabled_metadata := {
-    "Policy Code": "PR-AZR-0090-TRF",
+    "Policy Code": "PR-AZR-TRF-MNT-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -58,7 +58,7 @@ azure_monitor_activity_log_alert_enabled_metadata := {
 
 # Manages a Log Profile. A Log Profile configures how Activity Logs are exported.
 # It's only possible to configure one Log Profile per Subscription. If you are trying to create more than one Log Profile, an error with StatusCode=409 will occur.
-# PR-AZR-0196-TRF
+# PR-AZR-TRF-MNT-011
 #
 
 default azure_monitor_log_profile_retention = null
@@ -104,7 +104,7 @@ azure_monitor_log_profile_retention_err = "azurerm_monitor_log_profile property 
 }
 
 azure_monitor_log_profile_retention_metadata := {
-    "Policy Code": "PR-AZR-0196-TRF",
+    "Policy Code": "PR-AZR-TRF-MNT-011",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -119,7 +119,7 @@ azure_monitor_log_profile_retention_metadata := {
 
 # Manages a Log Profile. A Log Profile configures how Activity Logs are exported.
 # It's only possible to configure one Log Profile per Subscription. If you are trying to create more than one Log Profile, an error with StatusCode=409 will occur.
-# PR-AZR-0197-TRF
+# PR-AZR-TRF-MNT-012
 #
 
 default azure_monitor_log_profile_retention_enabled = null
@@ -165,7 +165,7 @@ azure_monitor_log_profile_retention_enabled_err = "azurerm_monitor_log_profile p
 }
 
 azure_monitor_log_profile_retention_enabled_metadata := {
-    "Policy Code": "PR-AZR-0197-TRF",
+    "Policy Code": "PR-AZR-TRF-MNT-012",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -181,7 +181,7 @@ azure_monitor_log_profile_retention_enabled_metadata := {
 
 # Manages a Log Profile. A Log Profile configures how Activity Logs are exported.
 # It's only possible to configure one Log Profile per Subscription. If you are trying to create more than one Log Profile, an error with StatusCode=409 will occur.
-# PR-AZR-0198-TRF
+# PR-AZR-TRF-MNT-013
 #
 
 default azure_monitor_log_profile_capture_all_activities = null
@@ -237,7 +237,7 @@ azure_monitor_log_profile_capture_all_activities_err = "azurerm_monitor_log_prof
 }
 
 azure_monitor_log_profile_capture_all_activities_metadata := {
-    "Policy Code": "PR-AZR-0198-TRF",
+    "Policy Code": "PR-AZR-TRF-MNT-013",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

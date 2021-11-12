@@ -2,7 +2,7 @@ package rule
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_firewall_rule
 
-# PR-AZR-0145-TRF
+# PR-AZR-TRF-SQL-012
 
 default maria_ingress_from_any_ip_disabled = null
 
@@ -56,7 +56,7 @@ maria_ingress_from_any_ip_disabled_err = "Resource azurerm_mariadb_server and az
 }
 
 maria_ingress_from_any_ip_disabled_metadata := {
-    "Policy Code": "PR-AZR-0145-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-012",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -69,7 +69,7 @@ maria_ingress_from_any_ip_disabled_metadata := {
 
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server
-# PR-AZR-0189-TRF
+# PR-AZR-TRF-SQL-056
 
 default mairadb_ssl_enforcement_enabled = null
 azure_attribute_absence ["mairadb_ssl_enforcement_enabled"] {
@@ -106,7 +106,7 @@ mairadb_ssl_enforcement_enabled_err = "azurerm_mariadb_server property 'ssl_enfo
 }
 
 mairadb_ssl_enforcement_enabled_metadata := {
-    "Policy Code": "PR-AZR-0189-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-056",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -119,7 +119,7 @@ mairadb_ssl_enforcement_enabled_metadata := {
 
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server
-# PR-AZR-0190-TRF
+# PR-AZR-TRF-SQL-057
 
 default mairadb_public_access_disabled = null
 
@@ -147,7 +147,7 @@ mairadb_public_access_disabled_err = "Public Network Access is currently not dis
 }
 
 mairadb_public_access_disabled_metadata := {
-    "Policy Code": "PR-AZR-0190-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-057",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -160,31 +160,44 @@ mairadb_public_access_disabled_metadata := {
 
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server
-# PR-AZR-0191-TRF
+# PR-AZR-TRF-SQL-058
 
 default mariadb_geo_redundant_backup_enabled = null
 
-azure_issue["mariadb_geo_redundant_backup_enabled"] {
+azure_attribute_absence["mariadb_geo_redundant_backup_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_mariadb_server"
     not resource.properties.geo_redundant_backup_enabled
 }
 
+azure_issue["mariadb_geo_redundant_backup_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mariadb_server"
+    resource.properties.geo_redundant_backup_enabled == false
+}
+
 mariadb_geo_redundant_backup_enabled {
     lower(input.resources[_].type) == "azurerm_mariadb_server"
+    not azure_attribute_absence["mariadb_geo_redundant_backup_enabled"]
     not azure_issue["mariadb_geo_redundant_backup_enabled"]
+}
+
+mariadb_geo_redundant_backup_enabled = false {
+    azure_attribute_absence["mariadb_geo_redundant_backup_enabled"]
 }
 
 mariadb_geo_redundant_backup_enabled = false {
     azure_issue["mariadb_geo_redundant_backup_enabled"]
 }
 
-mariadb_geo_redundant_backup_enabled_err = "Geo-redundant backup is currently not enabled on MariaDB server." {
+mariadb_geo_redundant_backup_enabled_err = "azurerm_postgresql_server property 'geo_redundant_backup_enabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
+    azure_attribute_absence["mariadb_geo_redundant_backup_enabled"]
+} else = "Geo-redundant backup is currently not enabled on MariaDB server." {
     azure_issue["mariadb_geo_redundant_backup_enabled"]
 }
 
 mariadb_geo_redundant_backup_enabled_metadata := {
-    "Policy Code": "PR-AZR-0191-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-058",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

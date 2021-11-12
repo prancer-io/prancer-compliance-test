@@ -2,7 +2,7 @@ package rule
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy
 
-# PR-AZR-0129-TRF
+# PR-AZR-TRF-SQL-031
 
 default sql_server_alert = null
 
@@ -43,7 +43,7 @@ sql_server_alert_err = "Make sure resource azurerm_mssql_server and azurerm_mssq
 }
 
 sql_server_alert_metadata := {
-    "Policy Code": "PR-AZR-0129-TRF",
+    "Policy Code": "PR-AZR-TRF-SQL-031",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

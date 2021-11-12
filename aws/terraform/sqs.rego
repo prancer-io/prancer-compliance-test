@@ -8,13 +8,25 @@ package rule
 default sqs_deadletter = null
 
 aws_issue["sqs_deadletter"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_sqs_queue"
     not resource.properties.redrive_policy.deadLetterTargetArn
 }
 
+source_path[{"sqs_deadletter": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue"
+    not resource.properties.redrive_policy.deadLetterTargetArn
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "redrive_policy", "deadLetterTargetArn"]
+        ],
+    }
+}
+
 sqs_deadletter {
-    lower(input.resources[_].type) == "aws_sqs_queue"
+    lower(input.resources[i].type) == "aws_sqs_queue"
     not aws_issue["sqs_deadletter"]
 }
 
@@ -45,15 +57,29 @@ sqs_deadletter_metadata := {
 default sqs_encrypt_key = null
 
 aws_issue["sqs_encrypt_key"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_sqs_queue"
     resource.properties.kms_master_key_id
     resource.properties.kms_master_key_id != null
     contains(lower(resource.properties.kms_master_key_id), "alias/aws/sqs")
 }
 
+source_path[{"sqs_encrypt_key": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue"
+    resource.properties.kms_master_key_id
+    resource.properties.kms_master_key_id != null
+    contains(lower(resource.properties.kms_master_key_id), "alias/aws/sqs")
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "kms_master_key_id"]
+        ],
+    }
+}
+
 sqs_encrypt_key {
-    lower(input.resources[_].type) == "aws_sqs_queue"
+    lower(input.resources[i].type) == "aws_sqs_queue"
     not aws_issue["sqs_encrypt_key"]
     not aws_attribute_absence["sqs_encrypt_key"]
 }
@@ -91,26 +117,63 @@ sqs_encrypt_key_metadata := {
 default sqs_encrypt = null
 
 aws_attribute_absence["sqs_encrypt"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_sqs_queue"
     not resource.properties.kms_master_key_id
 }
 
+source_path[{"sqs_encrypt": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue"
+    not resource.properties.kms_master_key_id
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "kms_master_key_id"]
+        ],
+    }
+}
+
 aws_attribute_absence["sqs_encrypt"] {
-	resource := input.resources[_]
+	resource := input.resources[i]
 	lower(resource.type) == "aws_sqs_queue"
 	resource.properties.kms_master_key_id == null
 }
 
+source_path[{"sqs_encrypt": metadata}] {
+	resource := input.resources[i]
+	lower(resource.type) == "aws_sqs_queue"
+	resource.properties.kms_master_key_id == null
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "kms_master_key_id"]
+        ],
+    }
+}
+
 aws_issue["sqs_encrypt"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_sqs_queue"
     resource.properties.kms_master_key_id != null
     count(resource.properties.kms_master_key_id) == 0
 }
 
+source_path[{"sqs_encrypt": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue"
+    resource.properties.kms_master_key_id != null
+    count(resource.properties.kms_master_key_id) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "kms_master_key_id"]
+        ],
+    }
+}
+
 sqs_encrypt {
-    lower(input.resources[_].type) == "aws_sqs_queue"
+    lower(input.resources[i].type) == "aws_sqs_queue"
     not aws_issue["sqs_encrypt"]
     not aws_attribute_absence["sqs_encrypt"]
 }
@@ -139,4 +202,172 @@ sqs_encrypt_metadata := {
     "Resource Type": "aws_sqs_queue",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html"
+}
+
+#
+# PR-AWS-TRF-SQS-004
+#
+
+default sqs_policy_public = null
+
+aws_issue["sqs_policy_public"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+}
+
+source_path[{"sqs_policy_public": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal == "*"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy", "Statement", j, "Principal"]
+        ],
+    }
+}
+
+aws_issue["sqs_policy_public"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+}
+
+source_path[{"sqs_policy_public": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS == "*"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy", "Statement", j, "Principal", "AWS"]
+        ],
+    }
+}
+
+aws_issue["sqs_policy_public"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[k] = "*"
+}
+
+source_path[{"sqs_policy_public": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Principal.AWS[k] = "*"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy", "Statement", j, "Principal", "AWS", k]
+        ],
+    }
+}
+
+sqs_policy_public {
+    lower(input.resources[i].type) == "aws_sqs_queue_policy"
+    not aws_issue["sqs_policy_public"]
+}
+
+sqs_policy_public = false {
+    aws_issue["sqs_policy_public"]
+}
+
+sqs_policy_public_err = "Ensure SQS queue policy is not publicly accessible" {
+    aws_issue["sqs_policy_public"]
+}
+
+sqs_policy_public_metadata := {
+    "Policy Code": "PR-AWS-TRF-SQS-004",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure SQS queue policy is not publicly accessible",
+    "Policy Description": "Public SQS queues potentially expose existing interfaces to unwanted 3rd parties that can tap into an existing data stream, resulting in data leak to an unwanted party.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue_policy"
+}
+
+
+#
+# PR-AWS-TRF-SQS-005
+#
+
+default sqs_policy_action = null
+
+aws_issue["sqs_policy_action"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Action == "*"
+}
+
+source_path[{"sqs_policy_action": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Action == "*"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy", "Statement", j, "Action"]
+        ],
+    }
+}
+
+aws_issue["sqs_policy_action"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Action[k] == "*"
+}
+
+source_path[{"sqs_policy_action": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_sqs_queue_policy"
+    statement := resource.properties.policy.Statement[j]
+    lower(statement.Effect) == "allow"
+    statement.Action[k] == "*"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "policy", "Statement", j, "Action", k]
+        ],
+    }
+}
+
+sqs_policy_action {
+    lower(input.resources[i].type) == "aws_sqs_queue_policy"
+    not aws_issue["sqs_policy_action"]
+}
+
+sqs_policy_action = false {
+    aws_issue["sqs_policy_action"]
+}
+
+sqs_policy_action_err = "Ensure SQS policy documents do not allow all actions" {
+    aws_issue["sqs_policy_action"]
+}
+
+sqs_policy_action_metadata := {
+    "Policy Code": "PR-AWS-TRF-SQS-005",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure SQS policy documents do not allow all actions",
+    "Policy Description": "This level of access could potentially grant unwanted and unregulated access to anyone given this policy document setting. We recommend you to write a refined policy describing the specific action allowed or required by the specific policy holder",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue_policy"
 }

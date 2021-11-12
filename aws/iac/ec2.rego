@@ -1,5 +1,9 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
 
 #
@@ -123,6 +127,25 @@ ec2_no_vpc_metadata := {
 
 default ec2_public_ip = null
 
+aws_attribute_absence["ec2_public_ip"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    NetworkInterfaces := resource.Properties.NetworkInterfaces[j]
+    not has_property(NetworkInterfaces, "AssociatePublicIpAddress")
+}
+
+source_path[{"ec2_public_ip": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::ec2::instance"
+    NetworkInterfaces := resource.Properties.NetworkInterfaces[j]
+    not has_property(NetworkInterfaces, "AssociatePublicIpAddress")
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "NetworkInterfaces", j]
+        ],
+    }
+}
+
 aws_issue["ec2_public_ip"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::ec2::instance"
@@ -165,10 +188,15 @@ ec2_public_ip {
     lower(input.Resources[i].Type) == "aws::ec2::instance"
     not aws_issue["ec2_public_ip"]
     not aws_bool_issue["ec2_public_ip"]
+    not aws_attribute_absence["ec2_public_ip"]
 }
 
 ec2_public_ip = false {
     aws_issue["ec2_public_ip"]
+}
+
+ec2_public_ip = false {
+    aws_attribute_absence["ec2_public_ip"]
 }
 
 ec2_public_ip = false {
@@ -179,6 +207,8 @@ ec2_public_ip_err = "AWS EC2 instances with Public IP and associated with Securi
     aws_issue["ec2_public_ip"]
 } else = "AWS EC2 instances with Public IP and associated with Security Groups have Internet Access" {
     aws_bool_issue["ec2_public_ip"]
+} else = "AWS EC2 instances with Public IP and associated is True by default with Security Groups which have Internet Access" {
+    aws_attribute_absence["ec2_public_ip"]
 }
 
 ec2_public_ip_metadata := {

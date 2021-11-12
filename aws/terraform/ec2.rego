@@ -8,19 +8,43 @@ package rule
 default ec2_iam_role = null
 
 aws_attribute_absence["ec2_iam_role"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_instance"
     not resource.properties.iam_instance_profile
 }
 
+source_path[{"ec2_iam_role": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    not resource.properties.iam_instance_profile
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "iam_instance_profile"]
+        ],
+    }
+}
+
 aws_issue["ec2_iam_role"] {
-    resource := input.resources[_]
+    resource := input.resources[i]
     lower(resource.type) == "aws_instance"
     count(resource.properties.iam_instance_profile) == 0
 }
 
+source_path[{"ec2_iam_role": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    count(resource.properties.iam_instance_profile) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "iam_instance_profile"]
+        ],
+    }
+}
+
 ec2_iam_role {
-    lower(input.resources[_].type) == "aws_instance"
+    lower(input.resources[i].type) == "aws_instance"
     not aws_issue["ec2_iam_role"]
     not aws_attribute_absence["ec2_iam_role"]
 }
@@ -61,24 +85,66 @@ aws_issue["ec2_no_vpc"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_instance"
     not resource.properties.subnet_id
-    network_interface := resource.properties.network_interface[_]
+    network_interface := resource.properties.network_interface[j]
     count([c | network_interface.subnet_id; c := 1]) == 0
+}
+
+source_path[{"ec2_no_vpc": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    not resource.properties.subnet_id
+    network_interface := resource.properties.network_interface[j]
+    count([c | network_interface.subnet_id; c := 1]) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "network_interface", j, "subnet_id"]
+        ],
+    }
 }
 
 aws_issue["ec2_no_vpc"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_instance"
     count(resource.properties.subnet_id) == 0
-    network_interface := resource.properties.network_interface[_]
+    network_interface := resource.properties.network_interface[j]
     count([c | network_interface.subnet_id; c := 1]) == 0
+}
+
+source_path[{"ec2_no_vpc": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    count(resource.properties.subnet_id) == 0
+    network_interface := resource.properties.network_interface[j]
+    count([c | network_interface.subnet_id; c := 1]) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "network_interface", j, "subnet_id"]
+        ],
+    }
 }
 
 aws_issue["ec2_no_vpc"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_instance"
     resource.properties.subnet_id == null
-    network_interface := resource.properties.network_interface[_]
+    network_interface := resource.properties.network_interface[j]
     count([c | network_interface.subnet_id; c := 1]) == 0
+}
+
+source_path[{"ec2_no_vpc": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    resource.properties.subnet_id == null
+    network_interface := resource.properties.network_interface[j]
+    count([c | network_interface.subnet_id; c := 1]) == 0
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "network_interface", j, "subnet_id"]
+        ],
+    }
 }
 
 ec2_no_vpc {
@@ -119,11 +185,37 @@ aws_issue["ec2_public_ip"] {
     lower(resource.properties.security_groups[_]) == "default"
 }
 
+source_path[{"ec2_public_ip": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    lower(resource.properties.associate_public_ip_address) == "true"
+    lower(resource.properties.security_groups[_]) == "default"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "associate_public_ip_address"]
+        ],
+    }
+}
+
 aws_issue["ec2_public_ip"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_instance"
     lower(resource.properties.associate_public_ip_address) == "true"
-    lower(resource.properties.vpc_security_group_ids[_]) == "default"
+    lower(resource.properties.vpc_security_group_ids[j]) == "default"
+}
+
+source_path[{"ec2_public_ip": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    lower(resource.properties.associate_public_ip_address) == "true"
+    lower(resource.properties.vpc_security_group_ids[j]) == "default"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "associate_public_ip_address"]
+        ],
+    }
 }
 
 aws_bool_issue["ec2_public_ip"] {
@@ -133,11 +225,37 @@ aws_bool_issue["ec2_public_ip"] {
     lower(resource.properties.security_groups[_]) == "default"
 }
 
+source_path[{"ec2_public_ip": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    resource.properties.associate_public_ip_address == true
+    lower(resource.properties.security_groups[_]) == "default"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "associate_public_ip_address"]
+        ],
+    }
+}
+
 aws_bool_issue["ec2_public_ip"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_instance"
     resource.properties.associate_public_ip_address == true
-    lower(resource.properties.vpc_security_group_ids[_]) == "default"
+    lower(resource.properties.vpc_security_group_ids[j]) == "default"
+}
+
+source_path[{"ec2_public_ip": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    resource.properties.associate_public_ip_address == true
+    lower(resource.properties.vpc_security_group_ids[j]) == "default"
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "associate_public_ip_address"]
+        ],
+    }
 }
 
 ec2_public_ip {
@@ -170,4 +288,135 @@ ec2_public_ip_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html"
+}
+
+#
+# PR-AWS-TRF-EC2-004
+#
+
+default ec2_ebs_optimized = null
+
+aws_issue["ec2_ebs_optimized"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    not resource.properties.ebs_optimized
+}
+
+source_path[{"ec2_ebs_optimized": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    not resource.properties.ebs_optimized
+    metadata := {
+        "resource_path": [
+            ["resources", i, ".properties", "ebs_optimized"]
+        ],
+    }
+}
+
+aws_issue["ec2_ebs_optimized"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    lower(resource.properties.ebs_optimized) == "false"
+}
+
+source_path[{"ec2_ebs_optimized": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    lower(resource.properties.ebs_optimized) == "false"
+    metadata := {
+        "resource_path": [
+            ["resources", i, ".properties", "ebs_optimized"]
+        ],
+    }
+}
+
+ec2_ebs_optimized {
+    lower(input.resources[i].type) == "aws_instance"
+    not aws_issue["ec2_ebs_optimized"]
+}
+
+ec2_ebs_optimized = false {
+    aws_issue["ec2_ebs_optimized"]
+}
+
+ec2_ebs_optimized_err = "Ensure that EC2 instace is EBS Optimized" {
+    aws_issue["ec2_ebs_optimized"]
+}
+
+ec2_ebs_optimized_metadata := {
+    "Policy Code": "PR-AWS-TRF-EC2-004",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure that EC2 instace is EBS Optimized",
+    "Policy Description": "Enable ebs_optimized provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal Amazon EBS I/O performance",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance"
+}
+
+
+#
+# PR-AWS-TRF-EC2-005
+#
+
+default ec2_monitoring = null
+
+aws_issue["ec2_monitoring"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    not resource.properties.monitoring
+}
+
+source_path[{"ec2_monitoring": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    not resource.properties.monitoring
+    metadata := {
+        "resource_path": [
+            ["resources", i, ".properties", "monitoring"]
+        ],
+    }
+}
+
+aws_issue["ec2_monitoring"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    lower(resource.properties.monitoring) == "false"
+}
+
+source_path[{"ec2_monitoring": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_instance"
+    lower(resource.properties.monitoring) == "false"
+    metadata := {
+        "resource_path": [
+            ["resources", i, ".properties", "monitoring"]
+        ],
+    }
+}
+
+ec2_monitoring {
+    lower(input.resources[i].type) == "aws_instance"
+    not aws_issue["ec2_monitoring"]
+}
+
+ec2_monitoring = false {
+    aws_issue["ec2_monitoring"]
+}
+
+ec2_monitoring_err = "Ensure detailed monitoring is enabled for EC2 instances" {
+    aws_issue["ec2_monitoring"]
+}
+
+ec2_monitoring_metadata := {
+    "Policy Code": "PR-AWS-TRF-EC2-005",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure detailed monitoring is enabled for EC2 instances",
+    "Policy Description": "Ensure that detailed monitoring is enabled for your Amazon EC2 instances in order to have enough monitoring data to help you make better decisions on architecting and managing compute resources within your AWS account",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance"
 }

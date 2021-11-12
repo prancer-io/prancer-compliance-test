@@ -3,7 +3,7 @@ package rule
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway
 
 #
-# PR-AZR-0011-TRF
+# PR-AZR-TRF-AGW-001
 #
 
 default gw_tls = null
@@ -56,7 +56,7 @@ gw_tls_err = "azurerm_application_gateway property 'ssl_policy.min_protocol_vers
 }
 
 gw_tls_metadata := {
-    "Policy Code": "PR-AZR-0011-TRF",
+    "Policy Code": "PR-AZR-TRF-AGW-001",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -68,7 +68,7 @@ gw_tls_metadata := {
 }
 
 #
-# PR-AZR-0012-TRF
+# PR-AZR-TRF-AGW-002
 #
 
 default gw_waf = null
@@ -120,7 +120,7 @@ gw_waf_err = "azurerm_application_gateway property 'waf_configuration.enabled' n
 }
 
 gw_waf_metadata := {
-    "Policy Code": "PR-AZR-0012-TRF",
+    "Policy Code": "PR-AZR-TRF-AGW-002",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -131,7 +131,7 @@ gw_waf_metadata := {
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway"
 }
 
-# PR-AZR-0125-TRF
+# PR-AZR-TRF-AGW-003
 
 default https_protocol = null
 
@@ -176,7 +176,7 @@ https_protocol_err = "azurerm_application_gateway property 'http_listener.protoc
 }
 
 https_protocol_metadata := {
-    "Policy Code": "PR-AZR-0125-TRF",
+    "Policy Code": "PR-AZR-TRF-AGW-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -188,7 +188,7 @@ https_protocol_metadata := {
 }
 
 
-# PR-AZR-0060-TRF
+# PR-AZR-TRF-AGW-004
 
 default frontendPublicIPConfigurationsDisabled = null
 azure_attribute_absence ["frontendPublicIPConfigurationsDisabled"] {
@@ -213,7 +213,7 @@ frontendPublicIPConfigurationsDisabled_err = "Application Gateway is currently a
 }
 
 frontendPublicIPConfigurationsDisabled_metadata := {
-    "Policy Code": "PR-AZR-0060-TRF",
+    "Policy Code": "PR-AZR-TRF-AGW-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -225,7 +225,7 @@ frontendPublicIPConfigurationsDisabled_metadata := {
 }
 
 
-# PR-AZR-0095-TRF
+# PR-AZR-TRF-AGW-005
 
 default backend_https_protocol_enabled = null
 azure_attribute_absence ["backend_https_protocol_enabled"] {
@@ -263,7 +263,7 @@ backend_https_protocol_enabled_err = "'backend_http_settings' property 'protocol
 }
 
 backend_https_protocol_enabled_metadata := {
-    "Policy Code": "PR-AZR-0095-TRF",
+    "Policy Code": "PR-AZR-TRF-AGW-005",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -275,7 +275,7 @@ backend_https_protocol_enabled_metadata := {
 }
 
 
-# PR-AZR-0099-TRF
+# PR-AZR-TRF-AGW-006
 
 default secret_certificate_is_in_keyvalut = null
 azure_attribute_absence ["secret_certificate_is_in_keyvalut"] {
@@ -299,7 +299,7 @@ secret_certificate_is_in_keyvalut_err = "Application Gateway is currently not st
 }
 
 secret_certificate_is_in_keyvalut_metadata := {
-    "Policy Code": "PR-AZR-0099-TRF",
+    "Policy Code": "PR-AZR-TRF-AGW-006",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
