@@ -2925,7 +2925,7 @@
                             "remediationFunction": "PR_AWS_TRF_S3_012.py"
                         }
                     ],
-                    "severity": "low",
+                    "severity": "High",
                     "title": "AWS S3 buckets do not have server side encryption.",
                     "description": "Customers can protect the data in S3 buckets using the AWS server-side encryption. If the server-side encryption is not turned on for S3 buckets with sensitive data, in the event of a data breach, malicious users can gain access to the data.",
                     "tags": [

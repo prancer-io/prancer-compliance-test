@@ -7,6 +7,23 @@ package rule
 
 default codebuild_encryption_disable = null
 
+aws_attribute_absence["codebuild_encryption_disable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_codebuild_project"
+    not resource.properties.artifacts
+}
+
+source_path[{"codebuild_encryption_disable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_codebuild_project"
+    not resource.properties.artifacts
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "Artifacts"]
+        ],
+    }
+}
+
 aws_issue["codebuild_encryption_disable"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_codebuild_project"
@@ -48,14 +65,22 @@ source_path[{"codebuild_encryption_disable": metadata}] {
 codebuild_encryption_disable {
     lower(input.resources[i].type) == "aws_codebuild_project"
     not aws_issue["codebuild_encryption_disable"]
+    not aws_attribute_absence["codebuild_encryption_disable"]
 }
 
 codebuild_encryption_disable = false {
     aws_issue["codebuild_encryption_disable"]
 }
 
+codebuild_encryption_disable = false {
+    aws_attribute_absence["codebuild_encryption_disable"]
+}
+
+
 codebuild_encryption_disable_err = "Ensure CodeBuild project Artifact encryption is not disabled" {
     aws_issue["codebuild_encryption_disable"]
+} else = "Ensure CodeBuild project Artifact encryption is not disabled" {
+    aws_attribute_absence["codebuild_encryption_disable"]
 }
 
 codebuild_encryption_disable_metadata := {
@@ -213,6 +238,24 @@ deploy_compute_platform_metadata := {
 #
 
 default cp_artifact_encrypt = null
+
+aws_attribute_absence["cp_artifact_encrypt"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_codepipeline"
+    not resource.properties.artifact_store
+}
+
+source_path[{"cp_artifact_encrypt": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_codepipeline"
+    not resource.properties.artifact_store
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "artifact_store"]
+        ],
+    }
+}
 
 aws_attribute_absence["cp_artifact_encrypt"] {
     resource := input.resources[i]

@@ -910,19 +910,17 @@ default s3_versioning = null
 aws_attribute_absence["s3_versioning"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket"
-    versioning := resource.properties.versioning[j]
-    not versioning.enabled
+    versioning := resource.properties.versioning
 }
 
 source_path[{"s3_versioning": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket"
-    versioning := resource.properties.versioning[j]
-    not versioning.enabled
+    versioning := resource.properties.versioning
 
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "versioning", j, "enabled"]
+            ["resources", i, "properties", "versioning"]
         ],
     }
 }
@@ -2122,13 +2120,13 @@ default s3_ignore_public_acl = null
 aws_issue["s3_ignore_public_acl"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket_public_access_block"
-    not resource.property.ignore_public_acls
+    not resource.properties.ignore_public_acls
 }
 
 source_path[{"s3_ignore_public_acl": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket_public_access_block"
-    not resource.property.ignore_public_acls
+    not resource.properties.ignore_public_acls
     metadata := {
         "resource_path": [
             ["resources", i, "properties", "ignore_public_acls"]
@@ -2139,13 +2137,13 @@ source_path[{"s3_ignore_public_acl": metadata}] {
 aws_issue["s3_ignore_public_acl"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket_public_access_block"
-    lower(resource.property.ignore_public_acls) != "true"
+    lower(resource.properties.ignore_public_acls) != "true"
 }
 
 source_path[{"s3_ignore_public_acl": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket_public_access_block"
-    lower(resource.property.ignore_public_acls) != "true"
+    lower(resource.properties.ignore_public_acls) != "true"
     metadata := {
         "resource_path": [
             ["resources", i, "properties", "ignore_public_acls"]
@@ -2189,13 +2187,13 @@ default s3_block_public_policy = null
 aws_issue["s3_block_public_policy"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket_public_access_block"
-    not resource.property.block_public_policy
+    not resource.properties.block_public_policy
 }
 
 source_path[{"s3_block_public_policy": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket_public_access_block"
-    not resource.property.block_public_policy
+    not resource.properties.block_public_policy
     metadata := {
         "resource_path": [
             ["resources", i, "properties", "block_public_policy"]
@@ -2206,13 +2204,13 @@ source_path[{"s3_block_public_policy": metadata}] {
 aws_issue["s3_block_public_policy"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket_public_access_block"
-    lower(resource.property.block_public_policy) != "true"
+    lower(resource.properties.block_public_policy) != "true"
 }
 
 source_path[{"s3_block_public_policy": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket_public_access_block"
-    lower(resource.property.block_public_policy) != "true"
+    lower(resource.properties.block_public_policy) != "true"
     metadata := {
         "resource_path": [
             ["resources", i, "properties", "block_public_policy"]

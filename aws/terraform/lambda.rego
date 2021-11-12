@@ -400,18 +400,18 @@ default lambda_dlq = null
 aws_issue["lambda_dlq"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_lambda_function"
-    dead_letter_config := resource.properties.dead_letter_config[_]
+    dead_letter_config := resource.properties.dead_letter_config[j]
     not dead_letter_config.target_arn
 }
 
 source_path[{"lambda_dlq": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_lambda_function"
-    dead_letter_config := resource.properties.dead_letter_config[_]
+    dead_letter_config := resource.properties.dead_letter_config[j]
     not dead_letter_config.target_arn
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "dead_letter_config", "target_arn"]
+            ["resources", i, "properties", "dead_letter_config", j, "target_arn"]
         ],
     }
 }

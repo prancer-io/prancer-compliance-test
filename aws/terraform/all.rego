@@ -1038,6 +1038,24 @@ route_healthcheck_disable_metadata := {
 
 default glue_catalog_encryption = null
 
+
+aws_attribute_absence["glue_catalog_encryption"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_glue_data_catalog_encryption_settings"
+    not resource.properties.data_catalog_encryption_settings
+}
+
+source_path[{"glue_catalog_encryption": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_glue_data_catalog_encryption_settings"
+    not resource.properties.data_catalog_encryption_settings
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "data_catalog_encryption_settings"]
+        ],
+    }
+}
+
 aws_issue["glue_catalog_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_glue_data_catalog_encryption_settings"
@@ -1125,14 +1143,21 @@ source_path[{"glue_catalog_encryption": metadata}] {
 glue_catalog_encryption {
     lower(input.resources[i].type) == "aws_glue_data_catalog_encryption_settings"
     not aws_issue["glue_catalog_encryption"]
+    not aws_attribute_absence["glue_catalog_encryption"]
 }
 
 glue_catalog_encryption = false {
     aws_issue["glue_catalog_encryption"]
 }
 
+glue_catalog_encryption = false {
+    aws_attribute_absence["glue_catalog_encryption"]
+}
+
 glue_catalog_encryption_err = "Ensure Glue Data Catalog encryption is enabled" {
     aws_issue["glue_catalog_encryption"]
+} else = "Ensure Glue Data Catalog encryption is enabled" {
+    aws_attribute_absence["glue_catalog_encryption"]
 }
 
 glue_catalog_encryption_metadata := {
