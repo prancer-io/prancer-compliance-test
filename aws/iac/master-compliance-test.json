@@ -3455,38 +3455,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_EMR_5",
-                    "masterSnapshotId": [
-                        "CFR_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(emr.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CFR-EMR-005",
-                            "eval": "data.rule.emr_local_encryption",
-                            "message": "data.rule.emr_local_encryption_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration",
-                            "remediationFunction": "PR_AWS_CFR_EMR_005.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "AWS EMR cluster is not enabled with local disk encryption",
-                    "description": "This policy identifies AWS EMR clusters that are not enabled with local disk encryption. Applications using the local file system on each cluster instance for intermediate data throughout workloads, where data could be spilled to disk when it overflows memory. With Local disk encryption at place, data at rest can be protected.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "cloudformation"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "aws::emr::securityconfiguration"
-                    ]
-                },
-                {
                     "masterTestId": "TEST_EMR_6",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"

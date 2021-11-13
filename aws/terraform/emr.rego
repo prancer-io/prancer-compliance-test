@@ -186,25 +186,25 @@ default emr_s3_encryption = null
 aws_issue["emr_s3_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
-    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration[l]
-    S3EncryptionConfiguration := AtRestEncryptionConfiguration.S3EncryptionConfiguration[m]
+    configuration := resource.properties.configuration
+    EncryptionConfiguration := configuration.EncryptionConfiguration
+    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration
+    S3EncryptionConfiguration := AtRestEncryptionConfiguration.S3EncryptionConfiguration
     not S3EncryptionConfiguration.EncryptionMode
 }
 
 source_path[{"emr_s3_encryption": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
-    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration[l]
-    S3EncryptionConfiguration := AtRestEncryptionConfiguration.S3EncryptionConfiguration[m]
+    configuration := resource.properties.configuration
+    EncryptionConfiguration := configuration.EncryptionConfiguration
+    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration
+    S3EncryptionConfiguration := AtRestEncryptionConfiguration.S3EncryptionConfiguration
     not S3EncryptionConfiguration.EncryptionMode
 
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "configuration", j, "EncryptionConfiguration", k, "AtRestEncryptionConfiguration", l, "S3EncryptionConfiguration", m, "EncryptionMode"]
+            ["resources", i, "properties", "configuration", "EncryptionConfiguration", "AtRestEncryptionConfiguration", "S3EncryptionConfiguration", "EncryptionMode"]
         ],
     }
 }
@@ -212,25 +212,25 @@ source_path[{"emr_s3_encryption": metadata}] {
 aws_issue["emr_s3_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
-    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration[l]
-    S3EncryptionConfiguration := AtRestEncryptionConfiguration.S3EncryptionConfiguration[m]
+    configuration := resource.properties.configuration
+    EncryptionConfiguration := configuration.EncryptionConfiguration
+    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration
+    S3EncryptionConfiguration := AtRestEncryptionConfiguration.S3EncryptionConfiguration
     count(S3EncryptionConfiguration.EncryptionMode) == 0
 }
 
 source_path[{"emr_s3_encryption": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
-    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration[l]
-    S3EncryptionConfiguration := AtRestEncryptionConfiguration.S3EncryptionConfiguration[m]
+    configuration := resource.properties.configuration
+    EncryptionConfiguration := configuration.EncryptionConfiguration
+    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration
+    S3EncryptionConfiguration := AtRestEncryptionConfiguration.S3EncryptionConfiguration
     count(S3EncryptionConfiguration.EncryptionMode) == 0
 
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "configuration", j, "EncryptionConfiguration", k, "AtRestEncryptionConfiguration", l, "S3EncryptionConfiguration", m, "EncryptionMode"]
+            ["resources", i, "properties", "configuration", "EncryptionConfiguration", "AtRestEncryptionConfiguration", "S3EncryptionConfiguration", "EncryptionMode"]
         ],
     }
 }
@@ -269,25 +269,25 @@ default emr_local_encryption_cmk = null
 aws_issue["emr_local_encryption_cmk"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
-    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration[l]
-    LocalDiskEncryptionConfiguration := AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration[m]
+    configuration := resource.properties.configuration
+    EncryptionConfiguration := configuration.EncryptionConfiguration
+    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration
+    LocalDiskEncryptionConfiguration := AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration
     not LocalDiskEncryptionConfiguration.EncryptionKeyProviderType
 }
 
 source_path[{"emr_local_encryption_cmk": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
-    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration[l]
-    LocalDiskEncryptionConfiguration := AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration[m]
+    configuration := resource.properties.configuration
+    EncryptionConfiguration := configuration.EncryptionConfiguration
+    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration
+    LocalDiskEncryptionConfiguration := AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration
     not LocalDiskEncryptionConfiguration.EncryptionKeyProviderType
 
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "configuration", j, "EncryptionConfiguration", k, "AtRestEncryptionConfiguration", l, "LocalDiskEncryptionConfiguration", m, "EncryptionKeyProviderType"]
+            ["resources", i, "properties", "configuration", "EncryptionConfiguration", "AtRestEncryptionConfiguration", "LocalDiskEncryptionConfiguration", "EncryptionKeyProviderType"]
         ],
     }
 }
@@ -295,25 +295,25 @@ source_path[{"emr_local_encryption_cmk": metadata}] {
 aws_issue["emr_local_encryption_cmk"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
-    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration[l]
-    LocalDiskEncryptionConfiguration := AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration[m]
+    configuration := resource.properties.configuration
+    EncryptionConfiguration := configuration.EncryptionConfiguration
+    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration
+    LocalDiskEncryptionConfiguration := AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration
     count(LocalDiskEncryptionConfiguration.EncryptionKeyProviderType) == 0
 }
 
 source_path[{"emr_local_encryption_cmk": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
-    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration[l]
-    LocalDiskEncryptionConfiguration := AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration[m]
+    configuration := resource.properties.configuration
+    EncryptionConfiguration := configuration.EncryptionConfiguration
+    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration
+    LocalDiskEncryptionConfiguration := AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration
     count(LocalDiskEncryptionConfiguration.EncryptionKeyProviderType) == 0
 
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "configuration", j, "EncryptionConfiguration", k, "AtRestEncryptionConfiguration", l, "LocalDiskEncryptionConfiguration", m, "EncryptionKeyProviderType"]
+            ["resources", i, "properties", "configuration", "EncryptionConfiguration", "AtRestEncryptionConfiguration", "LocalDiskEncryptionConfiguration", "EncryptionKeyProviderType"]
         ],
     }
 }
@@ -321,25 +321,25 @@ source_path[{"emr_local_encryption_cmk": metadata}] {
 aws_issue["emr_local_encryption_cmk"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
-    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration[l]
-    LocalDiskEncryptionConfiguration := AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration[m]
+    configuration := resource.properties.configuration
+    EncryptionConfiguration := configuration.EncryptionConfiguration
+    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration
+    LocalDiskEncryptionConfiguration := AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration
     lower(LocalDiskEncryptionConfiguration.EncryptionKeyProviderType) != "awskms"
 }
 
 source_path[{"emr_local_encryption_cmk": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
-    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration[l]
-    LocalDiskEncryptionConfiguration := AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration[m]
+    configuration := resource.properties.configuration
+    EncryptionConfiguration := configuration.EncryptionConfiguration
+    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration
+    LocalDiskEncryptionConfiguration := AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration
     lower(LocalDiskEncryptionConfiguration.EncryptionKeyProviderType) != "awskms"
 
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "configuration", j, "EncryptionConfiguration", k, "AtRestEncryptionConfiguration", l, "LocalDiskEncryptionConfiguration", m, "EncryptionKeyProviderType"]
+            ["resources", i, "properties", "configuration", "EncryptionConfiguration", "AtRestEncryptionConfiguration", "LocalDiskEncryptionConfiguration", "EncryptionKeyProviderType"]
         ],
     }
 }
@@ -353,7 +353,7 @@ emr_local_encryption_cmk = false {
     aws_issue["emr_local_encryption_cmk"]
 }
 
-emr_local_encryption_cmk_err = "AWS EMR cluster is not enabled with local disk encryption using CMK" {
+emr_local_encryption_cmk_err = "AWS EMR cluster is not enabled with local disk encryption" {
     aws_issue["emr_local_encryption_cmk"]
 }
 
@@ -362,95 +362,13 @@ emr_local_encryption_cmk_metadata := {
     "Type": "IaC",
     "Product": "AWS",
     "Language": "Terraform",
-    "Policy Title": "AWS EMR cluster is not enabled with local disk encryption using CMK",
-    "Policy Description": "This policy identifies AWS EMR clusters that are not enabled with local disk encryption using CMK(Customer Managed Key). Applications using the local file system on each cluster instance for intermediate data throughout workloads, where data could be spilled to disk when it overflows memory. With Local disk encryption at place, data at rest can be protected.",
-    "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration"
-}
-
-#
-# PR-AWS-TRF-EMR-005
-#
-
-default emr_local_encryption = null
-
-aws_issue["emr_local_encryption"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
-    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration[l]
-    LocalDiskEncryptionConfiguration := AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration[m]
-    not LocalDiskEncryptionConfiguration.EncryptionKeyProviderType
-}
-
-source_path[{"emr_local_encryption": metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
-    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration[l]
-    LocalDiskEncryptionConfiguration := AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration[m]
-    not LocalDiskEncryptionConfiguration.EncryptionKeyProviderType
-
-    metadata := {
-        "resource_path": [
-            ["resources", i, "properties", "configuration", j, "EncryptionConfiguration", k, "AtRestEncryptionConfiguration", l, "LocalDiskEncryptionConfiguration", m, "EncryptionKeyProviderType"]
-        ],
-    }
-}
-
-aws_issue["emr_local_encryption"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
-    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration[l]
-    LocalDiskEncryptionConfiguration := AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration[m]
-    count(LocalDiskEncryptionConfiguration.EncryptionKeyProviderType) == 0
-}
-
-source_path[{"emr_local_encryption": metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
-    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration[l]
-    LocalDiskEncryptionConfiguration := AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration[m]
-    count(LocalDiskEncryptionConfiguration.EncryptionKeyProviderType) == 0
-
-    metadata := {
-        "resource_path": [
-            ["resources", i, "properties", "configuration", j, "EncryptionConfiguration", k, "AtRestEncryptionConfiguration", l, "LocalDiskEncryptionConfiguration", m, "EncryptionKeyProviderType"]
-        ],
-    }
-}
-
-emr_local_encryption {
-    lower(input.resources[i].type) == "aws_emr_security_configuration"
-    not aws_issue["emr_local_encryption"]
-}
-
-emr_local_encryption = false {
-    aws_issue["emr_local_encryption"]
-}
-
-emr_local_encryption_err = "AWS EMR cluster is not enabled with local disk encryption" {
-    aws_issue["emr_local_encryption"]
-}
-
-emr_local_encryption_metadata := {
-    "Policy Code": "PR-AWS-TRF-EMR-005",
-    "Type": "IaC",
-    "Product": "AWS",
-    "Language": "Terraform",
     "Policy Title": "AWS EMR cluster is not enabled with local disk encryption",
-    "Policy Description": "This policy identifies AWS EMR clusters that are not enabled with local disk encryption. Applications using the local file system on each cluster instance for intermediate data throughout workloads, where data could be spilled to disk when it overflows memory. With Local disk encryption at place, data at rest can be protected.",
+    "Policy Description": "This policy identifies AWS EMR clusters that are not enabled with local disk encryption(Customer Managed Key). Applications using the local file system on each cluster instance for intermediate data throughout workloads, where data could be spilled to disk when it overflows memory. With Local disk encryption at place, data at rest can be protected.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration"
 }
+
 
 #
 # PR-AWS-TRF-EMR-006
@@ -461,21 +379,21 @@ default emr_rest_encryption = null
 aws_issue["emr_rest_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
+    configuration := resource.properties.configuration
+    EncryptionConfiguration := configuration.EncryptionConfiguration
     lower(EncryptionConfiguration.EnableAtRestEncryption) == "false"
 }
 
 source_path[{"emr_rest_encryption": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
+    configuration := resource.properties.configuration
+    EncryptionConfiguration := configuration.EncryptionConfiguration
     lower(EncryptionConfiguration.EnableAtRestEncryption) == "false"
 
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "configuration", j, "EncryptionConfiguration", k, "EnableAtRestEncryption"]
+            ["resources", i, "properties", "configuration", "EncryptionConfiguration", "EnableAtRestEncryption"]
         ],
     }
 }
@@ -483,21 +401,21 @@ source_path[{"emr_rest_encryption": metadata}] {
 aws_bool_issue["emr_rest_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
+    configuration := resource.properties.configuration
+    EncryptionConfiguration := configuration.EncryptionConfiguration
     not EncryptionConfiguration.EnableAtRestEncryption
 }
 
 source_path[{"emr_rest_encryption": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
+    configuration := resource.properties.configuration
+    EncryptionConfiguration := configuration.EncryptionConfiguration
     not EncryptionConfiguration.EnableAtRestEncryption
 
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "configuration", j, "EncryptionConfiguration", k, "EnableAtRestEncryption"]
+            ["resources", i, "properties", "configuration", "EncryptionConfiguration", "EnableAtRestEncryption"]
         ],
     }
 }
@@ -534,116 +452,6 @@ emr_rest_encryption_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration"
 }
 
-#
-# PR-AWS-TRF-EMR-008
-#
-
-default emr_s3_encryption_sse = null
-
-aws_issue["emr_s3_encryption_sse"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
-    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration[l]
-    S3EncryptionConfiguration := AtRestEncryptionConfiguration.S3EncryptionConfiguration[m]
-    not S3EncryptionConfiguration.EncryptionMode
-}
-
-source_path[{"emr_s3_encryption_sse": metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
-    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration[l]
-    S3EncryptionConfiguration := AtRestEncryptionConfiguration.S3EncryptionConfiguration[m]
-    not S3EncryptionConfiguration.EncryptionMode
-
-    metadata := {
-        "resource_path": [
-            ["resources", i, "properties", "configuration", j, "EncryptionConfiguration", k, "AtRestEncryptionConfiguration", l, "S3EncryptionConfiguration", m, "EncryptionMode"]
-        ],
-    }
-}
-
-aws_issue["emr_s3_encryption_sse"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
-    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration[l]
-    S3EncryptionConfiguration := AtRestEncryptionConfiguration.S3EncryptionConfiguration[m]
-    count(S3EncryptionConfiguration.EncryptionMode) == 0
-}
-
-source_path[{"emr_s3_encryption_sse": metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
-    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration[l]
-    S3EncryptionConfiguration := AtRestEncryptionConfiguration.S3EncryptionConfiguration[m]
-    count(S3EncryptionConfiguration.EncryptionMode) == 0
-
-    metadata := {
-        "resource_path": [
-            ["resources", i, "properties", "configuration", j, "EncryptionConfiguration", k, "AtRestEncryptionConfiguration", l, "S3EncryptionConfiguration", m, "EncryptionMode"]
-        ],
-    }
-}
-
-aws_issue["emr_s3_encryption_sse"] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
-    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration[l]
-    S3EncryptionConfiguration := AtRestEncryptionConfiguration.S3EncryptionConfiguration[m]
-    S3EncryptionConfiguration.EncryptionMode
-    lower(S3EncryptionConfiguration.EncryptionMode) != "sse-kms"
-}
-
-source_path[{"emr_s3_encryption_sse": metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
-    AtRestEncryptionConfiguration := EncryptionConfiguration.AtRestEncryptionConfiguration[l]
-    S3EncryptionConfiguration := AtRestEncryptionConfiguration.S3EncryptionConfiguration[m]
-    S3EncryptionConfiguration.EncryptionMode
-    lower(S3EncryptionConfiguration.EncryptionMode) != "sse-kms"
-
-    metadata := {
-        "resource_path": [
-            ["resources", i, "properties", "configuration", j, "EncryptionConfiguration", k, "AtRestEncryptionConfiguration", l, "S3EncryptionConfiguration", m, "EncryptionMode"]
-        ],
-    }
-}
-
-emr_s3_encryption_sse {
-    lower(input.resources[i].type) == "aws_emr_security_configuration"
-    not aws_issue["emr_s3_encryption_sse"]
-}
-
-emr_s3_encryption_sse = false {
-    aws_issue["emr_s3_encryption_sse"]
-}
-
-emr_s3_encryption_sse_err = "AWS EMR cluster is not configured with SSE KMS for data at rest encryption (Amazon S3 with EMRFS)" {
-    aws_issue["emr_s3_encryption_sse"]
-}
-
-emr_s3_encryption_sse_metadata := {
-    "Policy Code": "PR-AWS-TRF-EMR-008",
-    "Type": "IaC",
-    "Product": "AWS",
-    "Language": "Terraform",
-    "Policy Title": "AWS EMR cluster is not configured with SSE KMS for data at rest encryption (Amazon S3 with EMRFS)",
-    "Policy Description": "This policy identifies EMR clusters which are not configured with Server Side Encryption(SSE KMS) for data at rest encryption of Amazon S3 with EMRFS. As a best practice, use SSE-KMS for server side encryption to encrypt the data in your EMR cluster and ensure full control over your data.",
-    "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration"
-}
 
 #
 # PR-AWS-TRF-EMR-007
@@ -654,21 +462,21 @@ default emr_transit_encryption = null
 aws_issue["emr_transit_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
+    configuration := resource.properties.configuration
+    EncryptionConfiguration := configuration.EncryptionConfiguration
     lower(EncryptionConfiguration.EnableInTransitEncryption) == "false"
 }
 
 source_path[{"emr_transit_encryption": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
+    configuration := resource.properties.configuration
+    EncryptionConfiguration := configuration.EncryptionConfiguration
     lower(EncryptionConfiguration.EnableInTransitEncryption) == "false"
 
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "configuration", j, "EncryptionConfiguration", k, "EnableInTransitEncryption"]
+            ["resources", i, "properties", "configuration", "EncryptionConfiguration", "EnableInTransitEncryption"]
         ],
     }
 }
@@ -676,21 +484,21 @@ source_path[{"emr_transit_encryption": metadata}] {
 aws_bool_issue["emr_transit_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
+    configuration := resource.properties.configuration
+    EncryptionConfiguration := configuration.EncryptionConfiguration
     not EncryptionConfiguration.EnableInTransitEncryption
 }
 
 source_path[{"emr_transit_encryption": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_emr_security_configuration"
-    configuration := resource.properties.configuration[j]
-    EncryptionConfiguration := configuration.EncryptionConfiguration[k]
+    configuration := resource.properties.configuration
+    EncryptionConfiguration := configuration.EncryptionConfiguration
     not EncryptionConfiguration.EnableInTransitEncryption
 
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "configuration", j, "EncryptionConfiguration", k, "EnableInTransitEncryption"]
+            ["resources", i, "properties", "configuration", "EncryptionConfiguration", "EnableInTransitEncryption"]
         ],
     }
 }

@@ -19,7 +19,7 @@ source_path[{"codebuild_encryption_disable": metadata}] {
     not resource.properties.artifacts
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "Artifacts"]
+            ["resources", i, "properties", "artifacts"]
         ],
     }
 }
@@ -38,7 +38,7 @@ source_path[{"codebuild_encryption_disable": metadata}] {
     artifacts.encryption_disabled == true
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "Artifacts", j, "encryption_disabled"]
+            ["resources", i, "properties", "artifacts", j, "encryption_disabled"]
         ],
     }
 }
@@ -57,7 +57,7 @@ source_path[{"codebuild_encryption_disable": metadata}] {
     lower(artifacts.encryption_disabled) == "true"
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "Artifacts", j, "encryption_disabled"]
+            ["resources", i, "properties", "artifacts", j, "encryption_disabled"]
         ],
     }
 }

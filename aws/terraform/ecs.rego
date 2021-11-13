@@ -31,14 +31,14 @@ aws_issue["ecs_task_evelated"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
     container_definitions := resource.properties.container_definitions[j]
-    lower(container_definitions[j].privileged) == "true"
+    lower(container_definitions.privileged) == "true"
 }
 
 source_path[{"ecs_task_evelated": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
     container_definitions := resource.properties.container_definitions[j]
-    lower(container_definitions[j].privileged) == "true"
+    lower(container_definitions.privileged) == "true"
 
     metadata := {
         "resource_path": [
