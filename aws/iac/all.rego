@@ -564,6 +564,25 @@ as_volume_encrypted_metadata := {
 
 default as_elb_health_check = null
 
+aws_attribute_absence["as_elb_health_check"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::autoscaling::autoscalinggroup"
+    resource.Properties.LoadBalancerNames
+    not resource.Properties.HealthCheckType
+}
+
+source_path[{"as_elb_health_check": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::autoscaling::autoscalinggroup"
+    resource.Properties.LoadBalancerNames
+    not resource.Properties.HealthCheckType
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "HealthCheckType"]
+        ],
+    }
+}
+
 aws_issue["as_elb_health_check"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::autoscaling::autoscalinggroup"
@@ -576,6 +595,25 @@ source_path[{"as_elb_health_check": metadata}] {
     lower(resource.Type) == "aws::autoscaling::autoscalinggroup"
     resource.Properties.LoadBalancerNames
     lower(resource.Properties.HealthCheckType) != "elb"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "HealthCheckType"]
+        ],
+    }
+}
+
+aws_attribute_absence["as_elb_health_check"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::autoscaling::autoscalinggroup"
+    resource.Properties.TargetGroupARNs
+    resource.Properties.HealthCheckType
+}
+
+source_path[{"as_elb_health_check": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::autoscaling::autoscalinggroup"
+    resource.Properties.TargetGroupARNs
+    resource.Properties.HealthCheckType
     metadata := {
         "resource_path": [
             ["Resources", i, "Properties", "HealthCheckType"]
