@@ -910,13 +910,13 @@ default s3_versioning = null
 aws_attribute_absence["s3_versioning"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket"
-    versioning := resource.properties.versioning
+    not resource.properties.versioning
 }
 
 source_path[{"s3_versioning": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_s3_bucket"
-    versioning := resource.properties.versioning
+    not resource.properties.versioning
 
     metadata := {
         "resource_path": [
