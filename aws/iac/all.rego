@@ -643,14 +643,21 @@ source_path[{"as_elb_health_check": metadata}] {
 as_elb_health_check {
     lower(input.Resources[i].Type) == "aws::autoscaling::autoscalinggroup"
     not aws_issue["as_elb_health_check"]
+    not aws_attribute_absence["as_elb_health_check"]
 }
 
 as_elb_health_check = false {
     aws_issue["as_elb_health_check"]
 }
 
+as_elb_health_check = false {
+    aws_attribute_absence["as_elb_health_check"]
+}
+
 as_elb_health_check_err = "Ensure auto scaling groups associated with a load balancer use elastic load balancing health checks" {
     aws_issue["as_elb_health_check"]
+} else = "Ensure auto scaling groups associated with a load balancer use elastic load balancing health checks" {
+    aws_attribute_absence["as_elb_health_check"]
 }
 
 as_elb_health_check_metadata := {
