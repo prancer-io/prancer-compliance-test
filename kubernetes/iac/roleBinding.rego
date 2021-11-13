@@ -12,16 +12,35 @@ k8s_issue["default_role"] {
     lower(input.roleRef.name) == "default"
 }
 
+source_path[{"default_role":metadata}] {
+    lower(input.kind) == "clusterrolebinding"
+    lower(input.roleRef.kind) == "role"
+    lower(input.roleRef.name) == "default"
+    metadata:= {
+        "resource_path": [["roleRef","name"]]
+    }
+}
+
 k8s_issue["default_role"] {
     lower(input.kind) == "rolebinding"
     lower(input.roleRef.kind) == "role"
     lower(input.roleRef.name) == "default"
 }
 
+source_path[{"default_role":metadata}] {
+    lower(input.kind) == "rolebinding"
+    lower(input.roleRef.kind) == "role"
+    lower(input.roleRef.name) == "default"
+    metadata:= {
+        "resource_path": [["roleRef","name"]]
+    }
+}
+
 default_role {
     lower(input.kind) == "clusterrolebinding"
     not k8s_issue["default_role"]
 }
+
 
 default_role {
     lower(input.kind) == "rolebinding"
@@ -60,10 +79,28 @@ k8s_issue["admin_role"] {
     lower(input.roleRef.name) == "cluster-admin"
 }
 
+source_path[{"admin_role":metadata}] {
+    lower(input.kind) == "clusterrolebinding"
+    lower(input.roleRef.kind) == "role"
+    lower(input.roleRef.name) == "cluster-admin"
+    metadata:= {
+        "resource_path": [["roleRef","name"]]
+    }
+}
+
 k8s_issue["admin_role"] {
     lower(input.kind) == "rolebinding"
     lower(input.roleRef.kind) == "role"
     lower(input.roleRef.name) == "cluster-admin"
+}
+
+source_path[{"admin_role":metadata}] {
+    lower(input.kind) == "rolebinding"
+    lower(input.roleRef.kind) == "role"
+    lower(input.roleRef.name) == "cluster-admin"
+    metadata:= {
+        "resource_path": [["roleRef","name"]]
+    }
 }
 
 admin_role {
