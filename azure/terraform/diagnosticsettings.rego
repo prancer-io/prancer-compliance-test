@@ -41,6 +41,7 @@ azure_issue["log_keyvault"] {
 }
 
 log_keyvault = false {
+    lower(input.resources[_].type) == "azurerm_key_vault"
     azure_attribute_absence["log_keyvault"]
 }
 

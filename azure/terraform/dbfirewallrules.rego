@@ -10,7 +10,7 @@ default db_firewall = null
 
 
 azure_attribute_absence ["db_firewall"] {
-    count([c | input.resources[_].type == "azurerm_sql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_sql_firewall_rule"; c := 1])
+    count([c | input.resources[_].type == "azurerm_sql_firewall_rule"; c := 1]) == 0
 }
 
 azure_attribute_absence["db_firewall"] {
@@ -28,13 +28,13 @@ azure_attribute_absence["db_firewall"] {
 azure_issue["db_firewall"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_sql_firewall_rule"
-    resource.properties.start_ip_address == "0.0.0.0"
+    contains(resource.properties.start_ip_address, "0.0.0.0")
 }
 
 azure_issue["db_firewall"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_sql_firewall_rule"
-    resource.properties.end_ip_address == "0.0.0.0"
+    contains(resource.properties.end_ip_address, "0.0.0.0")
 }
 
 db_firewall {
@@ -44,16 +44,20 @@ db_firewall {
 }
 
 db_firewall = false {
+    lower(input.resources[_].type) == "azurerm_sql_server"
     azure_attribute_absence["db_firewall"]
 }
 
 db_firewall = false {
+    lower(input.resources[_].type) == "azurerm_sql_server"
     azure_issue["db_firewall"]
 }
 
 db_firewall_err = "azurerm_sql_firewall_rule property 'start_ip_address' or 'end_ip_address' is missing from the resource" {
+    lower(input.resources[_].type) == "azurerm_sql_server"
     azure_attribute_absence["db_firewall"]
 } else = "SQL Server firewall rule configuration currently allowing full inbound access to everyone" {
+    lower(input.resources[_].type) == "azurerm_sql_server"
     azure_issue["db_firewall"]
 }
 

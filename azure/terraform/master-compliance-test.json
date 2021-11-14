@@ -2639,7 +2639,7 @@
                             "id": "PR-AZR-TRF-SQL-057",
                             "eval": "data.rule.mairadb_public_access_disabled",
                             "message": "data.rule.mairadb_public_access_disabled_err",
-                            "remediationDescription": "In 'azurerm_mariadb_server' resource, set 'public_network_access_enabled = false' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server#public_network_access_enabled' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In 'azurerm_mariadb_server' resource, set 'public_network_access_enabled = false' or make sure resource 'azurerm_private_endpoint' exist to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server#public_network_access_enabled' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_TRF_SQL_057.py"
                         }
                     ],
@@ -2784,7 +2784,7 @@
                             "id": "PR-AZR-TRF-SQL-060",
                             "eval": "data.rule.mysql_public_access_disabled",
                             "message": "data.rule.mysql_public_access_disabled_err",
-                            "remediationDescription": "In 'azurerm_mysql_server' resource, set 'public_network_access_enabled = false' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server#public_network_access_enabled' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In 'azurerm_mysql_server' resource, set 'public_network_access_enabled = false' or make sure resource 'azurerm_private_endpoint' exist to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server#public_network_access_enabled' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_TRF_SQL_060.py"
                         }
                     ],
@@ -5135,9 +5135,6 @@
                         }
                     ],
                     "resourceTypes": [
-                        "azurerm_advanced_threat_protection",
-                        "azurerm_storage_encryption_scope",
-                        "azurerm_storage_account_network_rules",
                         "azurerm_storage_account"
                     ]
                 },
@@ -5175,8 +5172,6 @@
                         }
                     ],
                     "resourceTypes": [
-                        "azurerm_advanced_threat_protection",
-                        "azurerm_storage_encryption_scope",
                         "azurerm_storage_account_network_rules",
                         "azurerm_storage_account"
                     ]
@@ -5218,8 +5213,6 @@
                     ],
                     "resourceTypes": [
                         "azurerm_advanced_threat_protection",
-                        "azurerm_storage_encryption_scope",
-                        "azurerm_storage_account_network_rules",
                         "azurerm_storage_account"
                     ]
                 },
@@ -5254,9 +5247,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "azurerm_advanced_threat_protection",
                         "azurerm_storage_encryption_scope",
-                        "azurerm_storage_account_network_rules",
                         "azurerm_storage_account"
                     ]
                 },
@@ -5291,9 +5282,6 @@
                         }
                     ],
                     "resourceTypes": [
-                        "azurerm_advanced_threat_protection",
-                        "azurerm_storage_encryption_scope",
-                        "azurerm_storage_account_network_rules",
                         "azurerm_storage_account"
                     ]
                 },
@@ -5331,9 +5319,6 @@
                         }
                     ],
                     "resourceTypes": [
-                        "azurerm_advanced_threat_protection",
-                        "azurerm_storage_encryption_scope",
-                        "azurerm_storage_account_network_rules",
                         "azurerm_storage_account"
                     ]
                 },
@@ -5371,9 +5356,6 @@
                         }
                     ],
                     "resourceTypes": [
-                        "azurerm_advanced_threat_protection",
-                        "azurerm_storage_encryption_scope",
-                        "azurerm_storage_account_network_rules",
                         "azurerm_storage_account"
                     ]
                 },
@@ -5389,7 +5371,7 @@
                             "id": "PR-AZR-TRF-STR-011",
                             "eval": "data.rule.storage_nr_allow_trusted_azure_services",
                             "message": "data.rule.storage_nr_allow_trusted_azure_services_err",
-                            "remediationDescription": "Make sure both 'azurerm_storage_account' and 'azurerm_storage_account_network_rules' exist and in 'azurerm_storage_account_network_rules' resource, add 'AzureServices' value under 'bypass' array property to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules#bypass' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In 'azurerm_storage_account_network_rules' resource or azurerm_storage_account's inner block 'network_rules', make sure array property 'bypass' exist add 'AzureServices' value under 'bypass' array property to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules#bypass' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_TRF_STR_011.py"
                         }
                     ],
@@ -5411,48 +5393,6 @@
                         }
                     ],
                     "resourceTypes": [
-                        "azurerm_advanced_threat_protection",
-                        "azurerm_storage_encryption_scope",
-                        "azurerm_storage_account_network_rules",
-                        "azurerm_storage_account"
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_STORAGE_ACCOUNT_10",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(storageaccounts.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-TRF-STR-016",
-                            "eval": "data.rule.storage_allow_trusted_azure_services",
-                            "message": "data.rule.storage_allow_trusted_azure_services_err",
-                            "remediationDescription": "In 'azurerm_storage_account' resource, add 'AzureServices' value under 'bypass' array property which exist under 'network_rules' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#bypass' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_TRF_STR_016.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Storage Accounts access should be allowed for trusted Microsoft services",
-                    "description": "Ensure that 'Allow trusted Microsoft services to access this storage account' exception is enabled within your Azure Storage account configuration settings to grant access to trusted cloud services.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "CIS",
-                                "HIPAA",
-                                "NIST 800",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "azurerm_advanced_threat_protection",
-                        "azurerm_storage_encryption_scope",
                         "azurerm_storage_account_network_rules",
                         "azurerm_storage_account"
                     ]
@@ -5491,9 +5431,6 @@
                         }
                     ],
                     "resourceTypes": [
-                        "azurerm_advanced_threat_protection",
-                        "azurerm_storage_encryption_scope",
-                        "azurerm_storage_account_network_rules",
                         "azurerm_storage_account"
                     ]
                 },
@@ -5531,9 +5468,6 @@
                         }
                     ],
                     "resourceTypes": [
-                        "azurerm_advanced_threat_protection",
-                        "azurerm_storage_encryption_scope",
-                        "azurerm_storage_account_network_rules",
                         "azurerm_storage_account"
                     ]
                 },

@@ -89,7 +89,6 @@ sql_public_access_metadata := {
 
 default sql_server_login = null
 
-
 azure_attribute_absence["sql_server_login"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_mssql_server"
@@ -142,7 +141,7 @@ sql_server_login_metadata := {
 default mssql_ingress_from_any_ip_disabled = null
 
 azure_attribute_absence ["mssql_ingress_from_any_ip_disabled"] {
-    count([c | input.resources[_].type == "azurerm_mssql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_mssql_firewall_rule"; c := 1])
+    count([c | input.resources[_].type == "azurerm_mssql_firewall_rule"; c := 1]) == 0
 }
 
 azure_attribute_absence ["mssql_ingress_from_any_ip_disabled"] {
@@ -176,17 +175,21 @@ mssql_ingress_from_any_ip_disabled {
 }
 
 mssql_ingress_from_any_ip_disabled = false {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_issue["mssql_ingress_from_any_ip_disabled"]
 }
 
 mssql_ingress_from_any_ip_disabled = false {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_attribute_absence["mssql_ingress_from_any_ip_disabled"]
 }
 
 
 mssql_ingress_from_any_ip_disabled_err = "Resource azurerm_mssql_server and azurerm_mssql_firewall_rule need to be exist and property 'start_ip_address' and 'end_ip_address' need to be exist under azurerm_mssql_firewall_rule as well. one or all are missing from the resource." {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_attribute_absence["mssql_ingress_from_any_ip_disabled"]
 } else = "MSSQL Database Server currently allowing ingress from all Azure-internal IP addresses" {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_issue["mssql_ingress_from_any_ip_disabled"]
 }
 

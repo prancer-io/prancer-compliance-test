@@ -26,7 +26,7 @@ default db_ad_admin = null
 #}
 
 azure_attribute_absence ["db_ad_admin"] {
-    count([c | input.resources[_].type == "azurerm_sql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_sql_active_directory_administrator"; c := 1])
+    count([c | input.resources[_].type == "azurerm_sql_active_directory_administrator"; c := 1]) == 0
 }
 
 db_ad_admin {
@@ -36,6 +36,7 @@ db_ad_admin {
 }
 
 db_ad_admin = false {
+    lower(input.resources[_].type) == "azurerm_sql_server"
     azure_attribute_absence["db_ad_admin"]
 }
 
@@ -44,6 +45,7 @@ db_ad_admin = false {
 #}
 
 db_ad_admin_err = "sql_active_directory_administrator resource is missing from template" {
+    lower(input.resources[_].type) == "azurerm_sql_server"
     azure_attribute_absence["db_ad_admin"]
 } #else = "SQL servers does not have Azure Active Directory admin configured" {
   #  azure_issue["db_ad_admin"]

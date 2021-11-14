@@ -25,10 +25,11 @@ default db_server_encrypt = null
 #}
 
 azure_attribute_absence["db_server_encrypt"] {
-    count([c | input.resources[_].type == "azurerm_mssql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_mssql_server_transparent_data_encryption"; c := 1])
+    count([c | input.resources[_].type == "azurerm_mssql_server_transparent_data_encryption"; c := 1]) == 0
 }
 
 db_server_encrypt = false {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_attribute_absence["db_server_encrypt"]
 }
 
@@ -43,6 +44,7 @@ db_server_encrypt {
 #}
 
 db_server_encrypt_err = "azurerm_mssql_server dont have any associative azurerm_mssql_server_transparent_data_encryption resource" {
+    lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_attribute_absence["db_server_encrypt"]
 } #else = "Azure SQL Server currently dont have transparent data encryption enabled" {
   #  azure_issue["db_server_encrypt"]
