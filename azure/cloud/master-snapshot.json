@@ -215,6 +215,11 @@
                     "collection": "Microsoft.Sql"
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_407",
+                    "type": "Microsoft.Sql/servers/encryptionprotector",
+                    "collection": "Microsoft.Sql"
+                },
+                {
                     "masterSnapshotId": "AZRSNP_40",
                     "type": "Microsoft.Sql/servers/auditingSettings",
                     "collection": "Microsoft.Sql"
