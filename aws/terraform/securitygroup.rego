@@ -160,13 +160,13 @@ aws_issue[port] {
 
 source_path[{concat("_",["port", port]): metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_security_group"
-    ingress := resource.properties.ingress
+    lower(resource.type) == "aws_security_group_rule"
+    lower(resource.properties.type) == "ingress"
     port := ports[_]
 
-    ingress.ipv6_cidr_blocks[j] == "::/0"
-    to_number(ingress.from_port) <= to_number(port)
-    to_number(ingress.to_port) >= to_number(port)
+    resource.properties.ipv6_cidr_blocks[j] == "::/0"
+    to_number(resource.properties.from_port) <= to_number(port)
+    to_number(resource.properties.to_port) >= to_number(port)
 
     metadata := {
         "resource_path": [

@@ -430,6 +430,42 @@ source_path[{"msk_cluster_logging_enable": metadata}] {
     }
 }
 
+aws_issue["msk_cluster_logging_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_msk_cluster"
+    logging_info := resource.properties.logging_info[j]
+    count(logging_info.broker_logs) == 0
+}
+
+source_path[{"msk_cluster_logging_enable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_msk_cluster"
+    logging_info := resource.properties.logging_info[j]
+    count(logging_info.broker_logs) == 0
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "logging_info", "broker_logs"]
+        ],
+    }
+}
+
+aws_issue["msk_cluster_logging_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_msk_cluster"
+    count(resource.properties.logging_info) == 0
+}
+
+source_path[{"msk_cluster_logging_enable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_msk_cluster"
+    count(resource.properties.logging_info) == 0
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "logging_info", "broker_logs"]
+        ],
+    }
+}
+
 msk_cluster_logging_enable {
     lower(input.resources[i].type) == "aws_msk_cluster"
     not aws_issue["msk_cluster_logging_enable"]

@@ -2408,7 +2408,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws_load_balancer_listener_policy"
+                        "aws_load_balancer_policy"
                     ]
                 },
                 {

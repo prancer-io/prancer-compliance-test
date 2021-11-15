@@ -1223,13 +1223,13 @@ glue_catalog_encryption_metadata := {
 
 default glue_security_config = null
 
-aws_issue["glue_security_config_disable"] {
+aws_issue["glue_security_config"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_glue_security_configuration"
     not resource.properties.encryption_configuration
 }
 
-source_path[{"glue_security_config_disable": metadata}] {
+source_path[{"glue_security_config": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_glue_security_configuration"
     not resource.properties.encryption_configuration
@@ -1240,7 +1240,7 @@ source_path[{"glue_security_config_disable": metadata}] {
     }
 }
 
-aws_issue["glue_security_config_disable"] {
+aws_issue["glue_security_config"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_glue_security_configuration"
     encryption_configuration := resource.properties.encryption_configuration[j]
@@ -1248,7 +1248,7 @@ aws_issue["glue_security_config_disable"] {
     lower(cloudwatch_encryption.cloudwatch_encryption_mode) != "sse-kms"
 }
 
-source_path[{"glue_security_config_disable": metadata}] {
+source_path[{"glue_security_config": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_glue_security_configuration"
     encryption_configuration := resource.properties.encryption_configuration[j]
@@ -1261,7 +1261,7 @@ source_path[{"glue_security_config_disable": metadata}] {
     }
 }
 
-aws_issue["glue_security_config_disable"] {
+aws_issue["glue_security_config"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_glue_security_configuration"
     encryption_configuration := resource.properties.encryption_configuration[j]
@@ -1269,7 +1269,7 @@ aws_issue["glue_security_config_disable"] {
     lower(job_bookmarks_encryption.job_bookmarks_encryption_mode) != "sse-kms"
 }
 
-source_path[{"glue_security_config_disable": metadata}] {
+source_path[{"glue_security_config": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_glue_security_configuration"
     encryption_configuration := resource.properties.encryption_configuration[j]
@@ -1282,7 +1282,7 @@ source_path[{"glue_security_config_disable": metadata}] {
     }
 }
 
-aws_issue["glue_security_config_disable"] {
+aws_issue["glue_security_config"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_glue_security_configuration"
     encryption_configuration := resource.properties.encryption_configuration[j]
@@ -1290,7 +1290,7 @@ aws_issue["glue_security_config_disable"] {
     lower(s3_encryption.s3_encryption_mode) != "sse-kms"
 }
 
-source_path[{"glue_security_config_disable": metadata}] {
+source_path[{"glue_security_config": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_glue_security_configuration"
     encryption_configuration := resource.properties.encryption_configuration[j]
