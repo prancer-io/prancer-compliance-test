@@ -1622,16 +1622,16 @@ rds_cluster_retention_metadata := {
 
 default dax_encrypt = null
 
-aws_issue["dax_encrypt"] {
+aws_attribute_absence["dax_encrypt"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_dax_cluster"
-    lower(resource.properties.server_side_encryption) != "true"
+    not resource.properties.server_side_encryption
 }
 
 source_path[{"dax_encrypt": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_dax_cluster"
-    lower(resource.properties.server_side_encryption) != "true"
+    not resource.properties.server_side_encryption
 
     metadata := {
         "resource_path": [
@@ -1640,20 +1640,42 @@ source_path[{"dax_encrypt": metadata}] {
     }
 }
 
-aws_bool_issue["dax_encrypt"] {
+aws_issue["dax_encrypt"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_dax_cluster"
-    not resource.properties.server_side_encryption
+    server_side_encryption := resource.properties.server_side_encryption[j]
+    lower(server_side_encryption.enabled) != "true"
 }
 
 source_path[{"dax_encrypt": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_dax_cluster"
-    not resource.properties.server_side_encryption
+    server_side_encryption := resource.properties.server_side_encryption[j]
+    lower(server_side_encryption.enabled) != "true"
 
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "server_side_encryption"]
+            ["resources", i, "properties", "server_side_encryption", j, "enabled"]
+        ],
+    }
+}
+
+aws_bool_issue["dax_encrypt"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_dax_cluster"
+    server_side_encryption := resource.properties.server_side_encryption[j]
+    not server_side_encryption.enabled
+}
+
+source_path[{"dax_encrypt": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_dax_cluster"
+    server_side_encryption := resource.properties.server_side_encryption[j]
+    not server_side_encryption.enabled
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "server_side_encryption", j, "enabled"]
         ],
     }
 }
@@ -1695,6 +1717,24 @@ dax_encrypt_metadata := {
 #
 
 default dynamodb_PITR_enable = null
+
+aws_attribute_absence["dynamodb_PITR_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_dynamodb_table"
+    not resource.properties.point_in_time_recovery
+}
+
+source_path[{"dynamodb_PITR_enable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_dynamodb_table"
+    not resource.properties.point_in_time_recovery
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "point_in_time_recovery"]
+        ],
+    }
+}
 
 aws_issue["dynamodb_PITR_enable"] {
     resource := input.resources[i]
@@ -1740,10 +1780,15 @@ dynamodb_PITR_enable {
     lower(input.resources[i].type) == "aws_dynamodb_table"
     not aws_issue["dynamodb_PITR_enable"]
     not aws_bool_issue["dynamodb_PITR_enable"]
+    not aws_attribute_absence["dynamodb_PITR_enable"]
 }
 
 dynamodb_PITR_enable = false {
     aws_issue["dynamodb_PITR_enable"]
+}
+
+dynamodb_PITR_enable = false {
+    aws_attribute_absence["dynamodb_PITR_enable"]
 }
 
 dynamodb_PITR_enable = false {
@@ -1754,6 +1799,8 @@ dynamodb_PITR_enable_err = "Ensure DynamoDB PITR is enabled" {
     aws_issue["dynamodb_PITR_enable"]
 } else = "Ensure DynamoDB PITR is enabled" {
     aws_bool_issue["dynamodb_PITR_enable"]
+} else = "Ensure DynamoDB PITR is enabled" {
+    aws_attribute_absence["dynamodb_PITR_enable"]
 }
 
 dynamodb_PITR_enable_metadata := {
@@ -1973,6 +2020,23 @@ docdb_cluster_logs_metadata := {
 
 default docdb_parameter_group_tls_enable = null
 
+aws_attribute_absence["docdb_parameter_group_tls_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_docdb_cluster_parameter_group"
+    not resource.properties.parameter
+}
+
+source_path[{"docdb_parameter_group_tls_enable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_docdb_cluster_parameter_group"
+    not resource.properties.parameter
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "parameter"]
+        ],
+    }
+}
+
 aws_issue["docdb_parameter_group_tls_enable"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_docdb_cluster_parameter_group"
@@ -2018,14 +2082,21 @@ source_path[{"docdb_parameter_group_tls_enable": metadata}] {
 docdb_parameter_group_tls_enable {
     lower(input.resources[i].type) == "aws_docdb_cluster_parameter_group"
     not aws_issue["docdb_parameter_group_tls_enable"]
+    not aws_attribute_absence["docdb_parameter_group_tls_enable"]
 }
 
 docdb_parameter_group_tls_enable = false {
     aws_issue["docdb_parameter_group_tls_enable"]
 }
 
+docdb_parameter_group_tls_enable = false {
+    aws_attribute_absence["docdb_parameter_group_tls_enable"]
+}
+
 docdb_parameter_group_tls_enable_err = "Ensure DocDB ParameterGroup has TLS enable" {
     aws_issue["docdb_parameter_group_tls_enable"]
+} else = "Ensure DocDB ParameterGroup has TLS enable" {
+    aws_attribute_absence["docdb_parameter_group_tls_enable"]
 }
 
 docdb_parameter_group_tls_enable_metadata := {
@@ -2046,6 +2117,24 @@ docdb_parameter_group_tls_enable_metadata := {
 #
 
 default docdb_parameter_group_audit_logs = null
+
+
+aws_attribute_absence["docdb_parameter_group_audit_logs"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_docdb_cluster_parameter_group"
+    not resource.properties.parameter
+}
+
+source_path[{"docdb_parameter_group_audit_logs": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_docdb_cluster_parameter_group"
+    not resource.properties.parameter
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "parameter"]
+        ],
+    }
+}
 
 aws_issue["docdb_parameter_group_audit_logs"] {
     resource := input.resources[i]
@@ -2092,14 +2181,21 @@ source_path[{"docdb_parameter_group_audit_logs": metadata}] {
 docdb_parameter_group_audit_logs {
     lower(input.resources[i].type) == "aws_docdb_cluster_parameter_group"
     not aws_issue["docdb_parameter_group_audit_logs"]
+    not aws_attribute_absence["docdb_parameter_group_audit_logs"]
 }
 
 docdb_parameter_group_audit_logs = false {
     aws_issue["docdb_parameter_group_audit_logs"]
 }
 
+docdb_parameter_group_audit_logs = false {
+    aws_attribute_absence["docdb_parameter_group_audit_logs"]
+}
+
 docdb_parameter_group_audit_logs_err = "Ensure DocDB has audit logs enabled" {
     aws_issue["docdb_parameter_group_audit_logs"]
+} else = "Ensure DocDB has audit logs enabled" {
+    aws_attribute_absence["docdb_parameter_group_audit_logs"]
 }
 
 docdb_parameter_group_audit_logs_metadata := {
@@ -2120,6 +2216,23 @@ docdb_parameter_group_audit_logs_metadata := {
 #
 
 default athena_encryption_disabling_prevent = null
+
+aws_attribute_absence["athena_encryption_disabling_prevent"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_athena_workgroup"
+    not resource.properties.configuration
+}
+
+source_path[{"athena_encryption_disabling_prevent": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_athena_workgroup"
+    not resource.properties.configuration
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "configuration"]
+        ],
+    }
+}
 
 aws_issue["athena_encryption_disabling_prevent"] {
     resource := input.resources[i]
@@ -2162,14 +2275,21 @@ source_path[{"athena_encryption_disabling_prevent": metadata}] {
 athena_encryption_disabling_prevent {
     lower(input.resources[i].type) == "aws_athena_workgroup"
     not aws_issue["athena_encryption_disabling_prevent"]
+    not aws_attribute_absence["athena_encryption_disabling_prevent"]
 }
 
 athena_encryption_disabling_prevent = false {
     aws_issue["athena_encryption_disabling_prevent"]
 }
 
+athena_encryption_disabling_prevent = false {
+    aws_attribute_absence["athena_encryption_disabling_prevent"]
+}
+
 athena_encryption_disabling_prevent_err = "Ensure to enable enforce_workgroup_configuration for athena workgroup" {
     aws_issue["athena_encryption_disabling_prevent"]
+} else = "Ensure to enable enforce_workgroup_configuration for athena workgroup" {
+    aws_attribute_absence["athena_encryption_disabling_prevent"]
 }
 
 athena_encryption_disabling_prevent_metadata := {
@@ -2475,6 +2595,23 @@ neptune_cluster_logs_metadata := {
 
 default rds_pgaudit_enable = null
 
+aws_attribute_absence["rds_pgaudit_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_db_parameter_group"
+    not resource.properties.parameter
+}
+
+source_path[{"rds_pgaudit_enable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_db_parameter_group"
+    not resource.properties.parameter
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "parameter"]
+        ],
+    }
+}
+
 aws_issue["rds_pgaudit_enable"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_db_parameter_group"
@@ -2516,14 +2653,21 @@ source_path[{"rds_pgaudit_enable": metadata}] {
 rds_pgaudit_enable {
     lower(input.resources[i].type) == "aws_db_parameter_group"
     not aws_issue["rds_pgaudit_enable"]
+    not aws_attribute_absence["rds_pgaudit_enable"]
 }
 
 rds_pgaudit_enable = false {
     aws_issue["rds_pgaudit_enable"]
 }
 
+rds_pgaudit_enable = false {
+    aws_attribute_absence["rds_pgaudit_enable"]
+}
+
 rds_pgaudit_enable_err = "AWS RDS retention policy less than 7 days" {
     aws_issue["rds_pgaudit_enable"]
+} else = "AWS RDS retention policy less than 7 days" {
+    aws_attribute_absence["rds_pgaudit_enable"]
 }
 
 rds_pgaudit_enable_metadata := {

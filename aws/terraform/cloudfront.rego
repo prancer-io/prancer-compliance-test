@@ -161,6 +161,24 @@ source_path[{"cf_ssl_protocol": metadata}] {
     }
 }
 
+aws_attribute_absence["cf_ssl_protocol"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudfront_distribution"
+    not resource.properties.origin
+}
+
+source_path[{"cf_ssl_protocol": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudfront_distribution"
+    not resource.properties.origin
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "origin"]
+        ],
+    }
+}
+
 aws_issue["cf_ssl_protocol"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_cloudfront_distribution"
@@ -360,6 +378,24 @@ default cf_https_only = null
 aws_attribute_absence["cf_https_only"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_cloudfront_distribution"
+    not resource.properties.origin
+}
+
+source_path[{"cf_https_only": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudfront_distribution"
+    not resource.properties.origin
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "origin"]
+        ],
+    }
+}
+
+aws_attribute_absence["cf_https_only"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudfront_distribution"
     origin := resource.properties.origin[j]
     custom_origin_config := origin.custom_origin_config[k]
     not custom_origin_config.origin_protocol_policy
@@ -442,6 +478,24 @@ default cf_https = null
 aws_attribute_absence["cf_https"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_cloudfront_distribution"
+    not resource.properties.default_cache_behavior
+}
+
+source_path[{"cf_https": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudfront_distribution"
+    not resource.properties.default_cache_behavior
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "default_cache_behavior"]
+        ],
+    }
+}
+
+aws_attribute_absence["cf_https"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudfront_distribution"
     default_cache_behavior := resource.properties.default_cache_behavior[j]
     not default_cache_behavior.viewer_protocol_policy
 }
@@ -518,6 +572,24 @@ cf_https_metadata := {
 #
 
 default cf_min_protocol = null
+
+aws_attribute_absence["cf_min_protocol"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudfront_distribution"
+    not resource.properties.viewer_certificate
+}
+
+source_path[{"cf_min_protocol": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudfront_distribution"
+    not resource.properties.viewer_certificate
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "viewer_certificate"]
+        ],
+    }
+}
 
 aws_attribute_absence["cf_min_protocol"] {
     resource := input.resources[i]
@@ -691,6 +763,24 @@ cf_firewall_metadata := {
 
 default cf_default_ssl = null
 
+aws_attribute_absence["cf_default_ssl"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudfront_distribution"
+    not resource.properties.viewer_certificate
+}
+
+source_path[{"cf_default_ssl": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudfront_distribution"
+    not resource.properties.viewer_certificate
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "viewer_certificate"]
+        ],
+    }
+}
+
 aws_issue["cf_default_ssl"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_cloudfront_distribution"
@@ -735,6 +825,7 @@ cf_default_ssl {
     lower(input.resources[i].type) == "aws_cloudfront_distribution"
     not aws_issue["cf_default_ssl"]
     not aws_bool_issue["cf_default_ssl"]
+    not aws_attribute_absence["cf_default_ssl"]
 }
 
 cf_default_ssl = false {
@@ -743,12 +834,18 @@ cf_default_ssl = false {
 
 cf_default_ssl = false {
     aws_bool_issue["cf_default_ssl"]
+}
+
+cf_default_ssl = false {
+    aws_attribute_absence["cf_default_ssl"]
 }
 
 cf_default_ssl_err = "AWS CloudFront web distribution with default SSL certificate (deprecated)" {
     aws_issue["cf_default_ssl"]
 } else = "AWS CloudFront web distribution with default SSL certificate (deprecated)" {
     aws_bool_issue["cf_default_ssl"]
+} else = "AWS CloudFront web distribution with default SSL certificate (deprecated)" {
+    aws_attribute_absence["cf_default_ssl"]
 }
 
 cf_default_ssl_metadata := {
@@ -768,6 +865,24 @@ cf_default_ssl_metadata := {
 #
 
 default cf_geo_restriction = null
+
+aws_attribute_absence["cf_geo_restriction"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudfront_distribution"
+    not resource.properties.restrictions
+}
+
+source_path[{"cf_geo_restriction": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_cloudfront_distribution"
+    not resource.properties.restrictions
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "restrictions"]
+        ],
+    }
+}
 
 aws_attribute_absence["cf_geo_restriction"] {
     resource := input.resources[i]

@@ -31,14 +31,14 @@ aws_issue["ecs_task_evelated"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
     container_definitions := resource.properties.container_definitions[j]
-    lower(container_definitions[j].privileged) == "true"
+    lower(container_definitions.privileged) == "true"
 }
 
 source_path[{"ecs_task_evelated": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
     container_definitions := resource.properties.container_definitions[j]
-    lower(container_definitions[j].privileged) == "true"
+    lower(container_definitions.privileged) == "true"
 
     metadata := {
         "resource_path": [
@@ -651,18 +651,20 @@ aws_issue["ecs_transit_enabled"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
     volume := resource.properties.volume[j]
-    not volume.efs_volume_configuration.transit_encryption
+    efs_volume_configuration := volume.efs_volume_configuration[k]
+    not efs_volume_configuration.transit_encryption
 }
 
 source_path[{"ecs_transit_enabled": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
     volume := resource.properties.volume[j]
-    not volume.efs_volume_configuration.transit_encryption
+    efs_volume_configuration := volume.efs_volume_configuration[k]
+    not efs_volume_configuration.transit_encryption
 
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "volume", j, "efs_volume_configuration", "transit_encryption"]
+            ["resources", i, "properties", "volume", j, "efs_volume_configuration", k, "transit_encryption"]
         ],
     }
 }
@@ -671,18 +673,20 @@ aws_issue["ecs_transit_enabled"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
     volume := resource.properties.volume[j]
-    lower(volume.efs_volume_configuration.transit_encryption) != "enabled"
+    efs_volume_configuration := volume.efs_volume_configuration[k]
+    lower(efs_volume_configuration.transit_encryption) != "enabled"
 }
 
 source_path[{"ecs_transit_enabled": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_task_definition"
     volume := resource.properties.volume[j]
-    lower(volume.efs_volume_configuration.transit_encryption) != "enabled"
+    efs_volume_configuration := volume.efs_volume_configuration[k]
+    lower(efs_volume_configuration.transit_encryption) != "enabled"
 
     metadata := {
         "resource_path": [
-            ["resources", i, "properties", "volume", j, "efs_volume_configuration", "transit_encryption"]
+            ["resources", i, "properties", "volume", j, "efs_volume_configuration", k, "transit_encryption"]
         ],
     }
 }

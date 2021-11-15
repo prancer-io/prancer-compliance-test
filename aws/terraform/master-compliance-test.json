@@ -2408,7 +2408,7 @@
                         }
                     ],
                     "resourceTypes": [
-                        "aws_load_balancer_listener_policy"
+                        "aws_load_balancer_policy"
                     ]
                 },
                 {
@@ -2925,7 +2925,7 @@
                             "remediationFunction": "PR_AWS_TRF_S3_012.py"
                         }
                     ],
-                    "severity": "low",
+                    "severity": "High",
                     "title": "AWS S3 buckets do not have server side encryption.",
                     "description": "Customers can protect the data in S3 buckets using the AWS server-side encryption. If the server-side encryption is not turned on for S3 buckets with sensitive data, in the event of a data breach, malicious users can gain access to the data.",
                     "tags": [
@@ -3358,38 +3358,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_EMR_5",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(emr.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-TRF-EMR-005",
-                            "eval": "data.rule.emr_local_encryption",
-                            "message": "data.rule.emr_local_encryption_err",
-                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/emr_security_configuration",
-                            "remediationFunction": "PR_AWS_TRF_EMR_005.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "AWS EMR cluster is not enabled with local disk encryption",
-                    "description": "This policy identifies AWS EMR clusters that are not enabled with local disk encryption. Applications using the local file system on each cluster instance for intermediate data throughout workloads, where data could be spilled to disk when it overflows memory. With Local disk encryption at place, data at rest can be protected.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "aws_emr_security_configuration"
-                    ]
-                },
-                {
                     "masterTestId": "TEST_EMR_6",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -3423,38 +3391,6 @@
                 },
                 {
                     "masterTestId": "TEST_EMR_7",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(emr.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-TRF-EMR-008",
-                            "eval": "data.rule.emr_s3_encryption_sse",
-                            "message": "data.rule.emr_s3_encryption_sse_err",
-                            "remediationDescription": "Make sure you are following the Terraform template format presented at this URL: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/emr_security_configuration",
-                            "remediationFunction": "PR_AWS_TRF_EMR_008.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "AWS EMR cluster is not configured with SSE KMS for data at rest encryption (Amazon S3 with EMRFS)",
-                    "description": "This policy identifies EMR clusters which are not configured with Server Side Encryption(SSE KMS) for data at rest encryption of Amazon S3 with EMRFS. As a best practice, use SSE-KMS for server side encryption to encrypt the data in your EMR cluster and ensure full control over your data.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "aws_emr_security_configuration"
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_EMR_8",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
@@ -7636,7 +7572,7 @@
                 {
                     "masterTestId": "TEST_SECURITY_GROUP_23",
                     "masterSnapshotId": [
-                        "CFR_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(securitygroup.rego)",
@@ -7669,7 +7605,7 @@
                 {
                     "masterTestId": "TEST_SECURITY_GROUP_24",
                     "masterSnapshotId": [
-                        "CFR_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(securitygroup.rego)",
@@ -7702,7 +7638,7 @@
                 {
                     "masterTestId": "TEST_SECURITY_GROUP_25",
                     "masterSnapshotId": [
-                        "CFR_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(securitygroup.rego)",
@@ -7735,7 +7671,7 @@
                 {
                     "masterTestId": "TEST_SECURITY_GROUP_26",
                     "masterSnapshotId": [
-                        "CFR_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(securitygroup.rego)",
@@ -7768,7 +7704,7 @@
                 {
                     "masterTestId": "TEST_SECURITY_GROUP_27",
                     "masterSnapshotId": [
-                        "CFR_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(securitygroup.rego)",
@@ -7801,7 +7737,7 @@
                 {
                     "masterTestId": "TEST_SECURITY_GROUP_28",
                     "masterSnapshotId": [
-                        "CFR_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(securitygroup.rego)",
@@ -7834,7 +7770,7 @@
                 {
                     "masterTestId": "TEST_SECURITY_GROUP_29",
                     "masterSnapshotId": [
-                        "CFR_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(securitygroup.rego)",

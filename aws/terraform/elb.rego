@@ -977,13 +977,13 @@ default elb_drop_invalid_header = null
 
 aws_attribute_absence["elb_drop_invalid_header"] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_load_balancer_listener_policy"
+    lower(resource.type) == "aws_load_balancer_policy"
     not resource.properties.policy_attribute
 }
 
 source_path[{"elb_drop_invalid_header": metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_load_balancer_listener_policy"
+    lower(resource.type) == "aws_load_balancer_policy"
     not resource.properties.policy_attribute
     metadata := {
         "resource_path": [
@@ -994,7 +994,7 @@ source_path[{"elb_drop_invalid_header": metadata}] {
 
 aws_issue["elb_drop_invalid_header"] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_load_balancer_listener_policy"
+    lower(resource.type) == "aws_load_balancer_policy"
     item := resource.properties.policy_attribute[j]
     lower(item.name) == "routing.http.drop_invalid_header_fields.enabled"
     lower(item.value) != "true"
@@ -1002,7 +1002,7 @@ aws_issue["elb_drop_invalid_header"] {
 
 source_path[{"elb_drop_invalid_header": metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_load_balancer_listener_policy"
+    lower(resource.type) == "aws_load_balancer_policy"
     item := resource.properties.policy_attribute[j]
     lower(item.name) == "routing.http.drop_invalid_header_fields.enabled"
     lower(item.value) != "true"
@@ -1015,7 +1015,7 @@ source_path[{"elb_drop_invalid_header": metadata}] {
 
 aws_bool_issue["elb_drop_invalid_header"] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_load_balancer_listener_policy"
+    lower(resource.type) == "aws_load_balancer_policy"
     item := resource.properties.policy_attribute[j]
     lower(item.name) == "routing.http.drop_invalid_header_fields.enabled"
     not item.value
@@ -1023,7 +1023,7 @@ aws_bool_issue["elb_drop_invalid_header"] {
 
 source_path[{"elb_drop_invalid_header": metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_load_balancer_listener_policy"
+    lower(resource.type) == "aws_load_balancer_policy"
     item := resource.properties.policy_attribute[j]
     lower(item.name) == "routing.http.drop_invalid_header_fields.enabled"
     not item.value
@@ -1035,7 +1035,7 @@ source_path[{"elb_drop_invalid_header": metadata}] {
 }
 
 elb_drop_invalid_header {
-    lower(input.resources[i].type) == "aws_load_balancer_listener_policy"
+    lower(input.resources[i].type) == "aws_load_balancer_policy"
     not aws_issue["elb_drop_invalid_header"]
     not aws_bool_issue["elb_drop_invalid_header"]
     not aws_attribute_absence["elb_drop_invalid_header"]

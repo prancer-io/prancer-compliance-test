@@ -71,6 +71,25 @@ secret_manager_kms_metadata := {
 
 default as_elb_health_check = null
 
+aws_attribute_absence["as_elb_health_check"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_autoscaling_group"
+    resource.properties.load_balancers
+    not resource.properties.health_check_type
+}
+
+source_path[{"as_elb_health_check": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_autoscaling_group"
+    resource.properties.load_balancers
+    not resource.properties.health_check_type
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "health_check_type"]
+        ],
+    }
+}
+
 aws_issue["as_elb_health_check"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_autoscaling_group"
@@ -83,6 +102,25 @@ source_path[{"as_elb_health_check": metadata}] {
     lower(resource.type) == "aws_autoscaling_group"
     resource.properties.load_balancers
     lower(resource.properties.health_check_type) != "elb"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "health_check_type"]
+        ],
+    }
+}
+
+aws_attribute_absence["as_elb_health_check"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_autoscaling_group"
+    resource.properties.target_group_arns
+    not resource.properties.health_check_type
+}
+
+source_path[{"as_elb_health_check": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_autoscaling_group"
+    resource.properties.target_group_arns
+    not resource.properties.health_check_type
     metadata := {
         "resource_path": [
             ["resources", i, "properties", "health_check_type"]
@@ -112,14 +150,21 @@ source_path[{"as_elb_health_check": metadata}] {
 as_elb_health_check {
     lower(input.resources[i].type) == "aws_autoscaling_group"
     not aws_issue["as_elb_health_check"]
+    not aws_attribute_absence["as_elb_health_check"]
 }
 
 as_elb_health_check = false {
     aws_issue["as_elb_health_check"]
 }
 
+as_elb_health_check = false {
+    aws_attribute_absence["as_elb_health_check"]
+}
+
 as_elb_health_check_err = "Ensure auto scaling groups associated with a load balancer use elastic load balancing health checks" {
     aws_issue["as_elb_health_check"]
+} else = "Ensure auto scaling groups associated with a load balancer use elastic load balancing health checks" {
+    aws_attribute_absence["as_elb_health_check"]
 }
 
 as_elb_health_check_metadata := {
@@ -1038,6 +1083,24 @@ route_healthcheck_disable_metadata := {
 
 default glue_catalog_encryption = null
 
+
+aws_attribute_absence["glue_catalog_encryption"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_glue_data_catalog_encryption_settings"
+    not resource.properties.data_catalog_encryption_settings
+}
+
+source_path[{"glue_catalog_encryption": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_glue_data_catalog_encryption_settings"
+    not resource.properties.data_catalog_encryption_settings
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "data_catalog_encryption_settings"]
+        ],
+    }
+}
+
 aws_issue["glue_catalog_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_glue_data_catalog_encryption_settings"
@@ -1125,14 +1188,21 @@ source_path[{"glue_catalog_encryption": metadata}] {
 glue_catalog_encryption {
     lower(input.resources[i].type) == "aws_glue_data_catalog_encryption_settings"
     not aws_issue["glue_catalog_encryption"]
+    not aws_attribute_absence["glue_catalog_encryption"]
 }
 
 glue_catalog_encryption = false {
     aws_issue["glue_catalog_encryption"]
 }
 
+glue_catalog_encryption = false {
+    aws_attribute_absence["glue_catalog_encryption"]
+}
+
 glue_catalog_encryption_err = "Ensure Glue Data Catalog encryption is enabled" {
     aws_issue["glue_catalog_encryption"]
+} else = "Ensure Glue Data Catalog encryption is enabled" {
+    aws_attribute_absence["glue_catalog_encryption"]
 }
 
 glue_catalog_encryption_metadata := {
@@ -1153,13 +1223,13 @@ glue_catalog_encryption_metadata := {
 
 default glue_security_config = null
 
-aws_issue["glue_security_config_disable"] {
+aws_issue["glue_security_config"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_glue_security_configuration"
     not resource.properties.encryption_configuration
 }
 
-source_path[{"glue_security_config_disable": metadata}] {
+source_path[{"glue_security_config": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_glue_security_configuration"
     not resource.properties.encryption_configuration
@@ -1170,20 +1240,20 @@ source_path[{"glue_security_config_disable": metadata}] {
     }
 }
 
-aws_issue["glue_security_config_disable"] {
+aws_issue["glue_security_config"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_glue_security_configuration"
     encryption_configuration := resource.properties.encryption_configuration[j]
     cloudwatch_encryption := encryption_configuration.cloudwatch_encryption[k]
-    lower(cloudwatch_encryption.cloudwatch_encryption_mode) != "SSE-KMS"
+    lower(cloudwatch_encryption.cloudwatch_encryption_mode) != "sse-kms"
 }
 
-source_path[{"glue_security_config_disable": metadata}] {
+source_path[{"glue_security_config": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_glue_security_configuration"
     encryption_configuration := resource.properties.encryption_configuration[j]
     cloudwatch_encryption := encryption_configuration.cloudwatch_encryption[k]
-    lower(cloudwatch_encryption.cloudwatch_encryption_mode) != "SSE-KMS"
+    lower(cloudwatch_encryption.cloudwatch_encryption_mode) != "sse-kms"
     metadata := {
         "resource_path": [
             ["resources", i, "properties", "encryption_configuration", j, "cloudwatch_encryption", k, "cloudwatch_encryption_mode"]
@@ -1191,20 +1261,20 @@ source_path[{"glue_security_config_disable": metadata}] {
     }
 }
 
-aws_issue["glue_security_config_disable"] {
+aws_issue["glue_security_config"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_glue_security_configuration"
     encryption_configuration := resource.properties.encryption_configuration[j]
     job_bookmarks_encryption := encryption_configuration.job_bookmarks_encryption[k]
-    lower(job_bookmarks_encryption.job_bookmarks_encryption_mode) != "SSE-KMS"
+    lower(job_bookmarks_encryption.job_bookmarks_encryption_mode) != "sse-kms"
 }
 
-source_path[{"glue_security_config_disable": metadata}] {
+source_path[{"glue_security_config": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_glue_security_configuration"
     encryption_configuration := resource.properties.encryption_configuration[j]
     job_bookmarks_encryption := encryption_configuration.job_bookmarks_encryption[k]
-    lower(job_bookmarks_encryption.job_bookmarks_encryption_mode) != "SSE-KMS"
+    lower(job_bookmarks_encryption.job_bookmarks_encryption_mode) != "sse-kms"
     metadata := {
         "resource_path": [
             ["resources", i, "properties", "encryption_configuration", j, "job_bookmarks_encryption", k, "job_bookmarks_encryption_mode"]
@@ -1212,20 +1282,20 @@ source_path[{"glue_security_config_disable": metadata}] {
     }
 }
 
-aws_issue["glue_security_config_disable"] {
+aws_issue["glue_security_config"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_glue_security_configuration"
     encryption_configuration := resource.properties.encryption_configuration[j]
     s3_encryption := encryption_configuration.s3_encryption[k]
-    lower(s3_encryption.s3_encryption_mode) != "SSE-KMS"
+    lower(s3_encryption.s3_encryption_mode) != "sse-kms"
 }
 
-source_path[{"glue_security_config_disable": metadata}] {
+source_path[{"glue_security_config": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_glue_security_configuration"
     encryption_configuration := resource.properties.encryption_configuration[j]
     s3_encryption := encryption_configuration.s3_encryption[k]
-    lower(s3_encryption.s3_encryption_mode) != "SSE-KMS"
+    lower(s3_encryption.s3_encryption_mode) != "sse-kms"
     metadata := {
         "resource_path": [
             ["resources", i, "properties", "encryption_configuration", j, "s3_encryption", k, "s3_encryption_mode"]

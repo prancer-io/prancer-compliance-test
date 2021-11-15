@@ -6,6 +6,24 @@ package rule
 #
 default msk_encryption_at_rest_cmk = null
 
+aws_attribute_absence["msk_encryption_at_rest_cmk"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_msk_cluster"
+    not resource.properties.encryption_info
+}
+
+source_path[{"msk_encryption_at_rest_cmk": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_msk_cluster"
+    not resource.properties.encryption_info
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encryption_info"]
+        ],
+    }
+}
+
 aws_issue["msk_encryption_at_rest_cmk"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_msk_cluster"
@@ -34,7 +52,6 @@ aws_issue["msk_encryption_at_rest_cmk"] {
 }
 
 source_path[{"msk_encryption_at_rest_cmk": metadata}] {
-    resource := input.resources[i]
     resource := input.resources[i]
     lower(resource.type) == "aws_msk_cluster"
     encryption_info := resource.properties.encryption_info[j]
@@ -70,16 +87,22 @@ source_path[{"msk_encryption_at_rest_cmk": metadata}] {
 msk_encryption_at_rest_cmk {
     lower(input.resources[i].type) == "aws_msk_cluster"
     not aws_issue["msk_encryption_at_rest_cmk"]
+    not aws_attribute_absence["msk_encryption_at_rest_cmk"]
 }
 
 msk_encryption_at_rest_cmk = false {
     aws_issue["msk_encryption_at_rest_cmk"]
 }
 
-msk_encryption_at_rest_cmk_err = "Use KMS Customer Master Keys for AWS MSK Clusters" {
-    aws_issue["msk_encryption_at_rest_cmk"]
+msk_encryption_at_rest_cmk = false {
+    aws_attribute_absence["msk_encryption_at_rest_cmk"]
 }
 
+msk_encryption_at_rest_cmk_err = "Use KMS Customer Master Keys for AWS MSK Clusters" {
+    aws_issue["msk_encryption_at_rest_cmk"]
+} else = "Use KMS Customer Master Keys for AWS MSK Clusters" {
+    aws_attribute_absence["msk_encryption_at_rest_cmk"]
+}
 
 msk_encryption_at_rest_cmk_metadata := {
     "Policy Code": "PR-AWS-TRF-MSK-001",
@@ -96,7 +119,26 @@ msk_encryption_at_rest_cmk_metadata := {
 #
 # PR-AWS-TRF-MSK-002
 #
+
 default msk_in_transit_encryption = null
+
+aws_attribute_absence["msk_in_transit_encryption"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_msk_cluster"
+    not resource.properties.encryption_info
+}
+
+source_path[{"msk_in_transit_encryption": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_msk_cluster"
+    not resource.properties.encryption_info
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encryption_info"]
+        ],
+    }
+}
 
 aws_bool_issue["msk_in_transit_encryption"] {
     resource := input.resources[i]
@@ -145,11 +187,16 @@ source_path[{"msk_in_transit_encryption": metadata}] {
 msk_in_transit_encryption {
     lower(input.resources[i].type) == "aws_msk_cluster"
     not aws_issue["msk_in_transit_encryption"]
+    not aws_attribute_absence["msk_in_transit_encryption"]
     not aws_bool_issue["msk_in_transit_encryption"]
 }
 
 msk_in_transit_encryption = false {
     aws_issue["msk_in_transit_encryption"]
+}
+
+msk_in_transit_encryption = false {
+    aws_attribute_absence["msk_in_transit_encryption"]
 }
 
 msk_in_transit_encryption = false {
@@ -161,6 +208,8 @@ msk_in_transit_encryption_err = "Ensure data is Encrypted in transit (TLS)" {
     aws_issue["msk_in_transit_encryption"]
 } else = "Ensure data is Encrypted in transit (TLS)" {
     aws_bool_issue["msk_in_transit_encryption"]
+} else = "Ensure data is Encrypted in transit (TLS)" {
+    aws_attribute_absence["msk_in_transit_encryption"]
 }
 
 
@@ -180,6 +229,24 @@ msk_in_transit_encryption_metadata := {
 # PR-AWS-TRF-MSK-003
 #
 default msk_in_transit_encryption_tls = null
+
+aws_attribute_absence["msk_in_transit_encryption_tls"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_msk_cluster"
+    not resource.properties.encryption_info
+}
+
+source_path[{"msk_in_transit_encryption_tls": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_msk_cluster"
+    not resource.properties.encryption_info
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encryption_info"]
+        ],
+    }
+}
 
 aws_bool_issue["msk_in_transit_encryption_tls"] {
     resource := input.resources[i]
@@ -229,6 +296,7 @@ msk_in_transit_encryption_tls {
     lower(input.resources[i].type) == "aws_msk_cluster"
     not aws_issue["msk_in_transit_encryption_tls"]
     not aws_bool_issue["msk_in_transit_encryption_tls"]
+    not aws_attribute_absence["msk_in_transit_encryption_tls"]
 }
 
 msk_in_transit_encryption_tls = false {
@@ -236,14 +304,19 @@ msk_in_transit_encryption_tls = false {
 }
 
 msk_in_transit_encryption_tls = false {
-    aws_bool_issue["msk_in_transit_encryption_tls"]
+    aws_attribute_absence["msk_in_transit_encryption_tls"]
 }
 
+msk_in_transit_encryption_tls = false {
+    aws_bool_issue["msk_in_transit_encryption_tls"]
+}
 
 msk_in_transit_encryption_tls_err = "Ensure client authentication is enabled with TLS (mutual TLS authentication)" {
     aws_issue["msk_in_transit_encryption_tls"]
 } else = "Ensure client authentication is enabled with TLS (mutual TLS authentication)" {
     aws_bool_issue["msk_in_transit_encryption_tls"]
+} else = "Ensure client authentication is enabled with TLS (mutual TLS authentication)" {
+    aws_attribute_absence["msk_in_transit_encryption_tls"]
 }
 
 
@@ -350,6 +423,42 @@ source_path[{"msk_cluster_logging_enable": metadata}] {
     lower(resource.type) == "aws_msk_cluster"
     logging_info := resource.properties.logging_info[j]
     not logging_info.broker_logs
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "logging_info", "broker_logs"]
+        ],
+    }
+}
+
+aws_issue["msk_cluster_logging_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_msk_cluster"
+    logging_info := resource.properties.logging_info[j]
+    count(logging_info.broker_logs) == 0
+}
+
+source_path[{"msk_cluster_logging_enable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_msk_cluster"
+    logging_info := resource.properties.logging_info[j]
+    count(logging_info.broker_logs) == 0
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "logging_info", "broker_logs"]
+        ],
+    }
+}
+
+aws_issue["msk_cluster_logging_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_msk_cluster"
+    count(resource.properties.logging_info) == 0
+}
+
+source_path[{"msk_cluster_logging_enable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_msk_cluster"
+    count(resource.properties.logging_info) == 0
     metadata := {
         "resource_path": [
             ["resources", i, "properties", "logging_info", "broker_logs"]

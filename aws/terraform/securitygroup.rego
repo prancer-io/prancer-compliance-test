@@ -160,13 +160,13 @@ aws_issue[port] {
 
 source_path[{concat("_",["port", port]): metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_security_group"
-    ingress := resource.properties.ingress
+    lower(resource.type) == "aws_security_group_rule"
+    lower(resource.properties.type) == "ingress"
     port := ports[_]
 
-    ingress.ipv6_cidr_blocks[j] == "::/0"
-    to_number(ingress.from_port) <= to_number(port)
-    to_number(ingress.to_port) >= to_number(port)
+    resource.properties.ipv6_cidr_blocks[j] == "::/0"
+    to_number(resource.properties.from_port) <= to_number(port)
+    to_number(resource.properties.to_port) >= to_number(port)
 
     metadata := {
         "resource_path": [
@@ -1443,14 +1443,14 @@ default sg_description_absent = null
 
 aws_issue["sg_description_absent"] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_security_group"
+    lower(resource.type) == "aws_security_group_rule"
     ingress := resource.properties.ingress[j]
     not ingress.description
 }
 
 source_path[{"sg_description_absent": metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_security_group"
+    lower(resource.type) == "aws_security_group_rule"
     ingress := resource.properties.ingress[j]
     not ingress.description
     metadata := {
@@ -1462,14 +1462,14 @@ source_path[{"sg_description_absent": metadata}] {
 
 aws_issue["sg_description_absent"] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_security_group"
+    lower(resource.type) == "aws_security_group_rule"
     ingress := resource.properties.ingress[j]
     count(ingress.description) == 0
 }
 
 source_path[{"sg_description_absent": metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_security_group"
+    lower(resource.type) == "aws_security_group_rule"
     ingress := resource.properties.ingress[j]
     count(ingress.description) == 0
     metadata := {
@@ -1480,7 +1480,7 @@ source_path[{"sg_description_absent": metadata}] {
 }
 
 sg_description_absent {
-    lower(input.resources[i].type) == "aws_security_group"
+    lower(input.resources[i].type) == "aws_security_group_rule"
     not aws_issue["sg_description_absent"]
 }
 
@@ -1512,7 +1512,7 @@ sg_description_absent_metadata := {
 default port_9300 = null
 
 port_9300 {
-    lower(input.resources[i].type) == "aws_security_group"
+    lower(input.resources[i].type) == "aws_security_group_rule"
     not aws_issue["9300"]
 }
 
@@ -1536,7 +1536,6 @@ port_9300_metadata := {
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group"
 }
 
-
 #
 # PR-AWS-TRF-SG-025
 #
@@ -1544,7 +1543,7 @@ port_9300_metadata := {
 default port_5601 = null
 
 port_5601 {
-    lower(input.resources[i].type) == "aws_security_group"
+    lower(input.resources[i].type) == "aws_security_group_rule"
     not aws_issue["5601"]
 }
 
@@ -1576,7 +1575,7 @@ port_5601_metadata := {
 default port_2379 = null
 
 port_2379 {
-    lower(input.resources[i].type) == "aws_security_group"
+    lower(input.resources[i].type) == "aws_security_group_rule"
     not aws_issue["2379"]
 }
 
@@ -1607,7 +1606,7 @@ port_2379_metadata := {
 default port_5986 = null
 
 port_5986 {
-    lower(input.resources[i].type) == "aws_security_group"
+    lower(input.resources[i].type) == "aws_security_group_rule"
     not aws_issue["5986"]
 }
 
@@ -1639,7 +1638,7 @@ port_5986_metadata := {
 default port_5985 = null
 
 port_5985 {
-    lower(input.resources[i].type) == "aws_security_group"
+    lower(input.resources[i].type) == "aws_security_group_rule"
     not aws_issue["5985"]
 }
 
@@ -1671,7 +1670,7 @@ port_5985_metadata := {
 default port_1270 = null
 
 port_1270 {
-    lower(input.resources[i].type) == "aws_security_group"
+    lower(input.resources[i].type) == "aws_security_group_rule"
     not aws_issue["1270"]
 }
 
