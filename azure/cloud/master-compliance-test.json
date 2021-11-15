@@ -448,6 +448,178 @@
                     ]
                 },
                 {
+                    "masterTestId": "AZURE_TEST_SQL_47",
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-047",
+                            "eval": "data.rule.sql_public_access_disabled",
+                            "message": "data.rule.sql_public_access_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_047.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure SQL servers don't have public network access enabled",
+                    "description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance",
+                    "masterSnapshotId": [
+                        "AZRSNP_400"
+                    ]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_49",
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "PCI-DSS",
+                                "GDPR",
+                                "ISO 27001",
+                                "NIST CSF",
+                                "HIPAA",
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-049",
+                            "eval": "data.rule.sql_logical_server_login",
+                            "message": "data.rule.sql_logical_server_login_err",
+                            "remediationDescription": "This is set when the SQL Server is created. After created, only using external tools connected to the SQL Server, such as SSMS, can be used to alter the user, but it will not change the value in the Portal.<br><br>For more information: <a href='https://docs.microsoft.com/en-us/azure/sql-database/sql-database-manage-logins' target='_blank'>https://docs.microsoft.com/en-us/azure/sql-database/sql-database-manage-logins</a>.",
+                            "remediationFunction": "PR_AZR_SQL_049.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure SQL Server administrator login does not contains 'Admin/Administrator' as name",
+                    "description": "You must designate a Server admin login when you create an Azure SQL server. SQL server creates this account as a login in the master database. Only one such account can exist. This account connects using SQL Server authentication (username and password). It is recommended to avoid using names like 'admin' or 'administrator', which are targeted in brute force dictionary attacks.",
+                    "masterSnapshotId": [
+                        "AZRSNP_400"
+                    ]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_50",
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "PCI-DSS",
+                                "ISO 27001",
+                                "NIST CSF",
+                                "HIPAA",
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-050",
+                            "eval": "data.rule.fail_over_groups",
+                            "message": "data.rule.fail_over_groups_err",
+                            "remediationDescription": "Azure Console:<br>1. Go to SQL Servers<br>2. For each SQL Server<br>3. Select Failover groups<br>4. Press the Add group link on top of the page",
+                            "remediationFunction": "PR_AZR_SQL_050.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure SQL Server data replication with Fail Over groups",
+                    "description": "SQL Server data should be replicated to avoid loss of unreplicated data.",
+                    "masterSnapshotId": [
+                        "AZRSNP_400"
+                    ]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_42",
+                    "type": "rego",
+                    "rule": "file(sql_servers_auditing.rego)",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-042",
+                            "eval": "data.rule.sql_server_log_audit",
+                            "message": "data.rule.sql_server_log_audit_err",
+                            "remediationDescription": "az sql server audit-policy show --name<br><br>References:<br><a href='https://docs.microsoft.com/en-us/cli/azure/mysql/server?view=azure-cli-latest#az_mysql_server_update' target='_blank'>https://docs.microsoft.com/en-us/cli/azure/mysql/server?view=azure-cli-latest#az_mysql_server_update</a> for details.",
+                            "remediationFunction": "PR_AZR_SQL_042.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure that SQL Server Auditing is Enabled",
+                    "description": "Ensure that SQL Server Auditing is enabled in order to keep track of Audit events.",
+                    "masterSnapshotId": [
+                        "AZRSNP_404"
+                    ]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_44",
+                    "type": "rego",
+                    "rule": "file(sql_servers_auditing.rego)",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-044",
+                            "eval": "data.rule.sql_server_audit_log_retention",
+                            "message": "data.rule.sql_server_audit_log_retention_err",
+                            "remediationDescription": "az sql server audit-policy update -g -n --state Enabled --storage-account --retention-days 91<br><br>References:<br><a href='https://docs.microsoft.com/en-us/cli/azure/sql/server/audit-policy?view=azure-cli-latest#az_sql_server_audit_policy_show' target='_blank'>https://docs.microsoft.com/en-us/cli/azure/sql/server/audit-policy?view=azure-cli-latest#az_sql_server_audit_policy_show</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_044.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure SQL server audit log retention should be greater than 90 days",
+                    "description": "Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access. We recommend you configure SQL server audit retention to be greater than 90 days.",
+                    "masterSnapshotId": [
+                        "AZRSNP_404"
+                    ]
+                },
+                {
                     "masterTestId": "AZURE_TEST_216",
                     "type": "rego",
                     "rule": "file(PR_AZR_0007.rego)",
