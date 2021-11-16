@@ -372,13 +372,13 @@ glue_catalog_encryption_metadata := {
 
 default glue_security_config = null
 
-aws_issue["glue_security_config_disable"] {
+aws_issue["glue_security_config"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::glue::securityconfiguration"
     not resource.Properties.EncryptionConfiguration
 }
 
-source_path[{"glue_security_config_disable": metadata}] {
+source_path[{"glue_security_config": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::glue::securityconfiguration"
     not resource.Properties.EncryptionConfiguration
@@ -389,13 +389,13 @@ source_path[{"glue_security_config_disable": metadata}] {
     }
 }
 
-aws_issue["glue_security_config_disable"] {
+aws_issue["glue_security_config"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::glue::securityconfiguration"
     lower(resource.Properties.EncryptionConfiguration.CloudWatchEncryption.CloudWatchEncryptionMode) != "SSE-KMS"
 }
 
-source_path[{"glue_security_config_disable": metadata}] {
+source_path[{"glue_security_config": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::glue::securityconfiguration"
     lower(resource.Properties.EncryptionConfiguration.CloudWatchEncryption.CloudWatchEncryptionMode) != "SSE-KMS"
@@ -406,13 +406,13 @@ source_path[{"glue_security_config_disable": metadata}] {
     }
 }
 
-aws_issue["glue_security_config_disable"] {
+aws_issue["glue_security_config"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::glue::securityconfiguration"
     lower(resource.Properties.EncryptionConfiguration.JobBookmarksEncryption.JobBookmarksEncryptionMode) != "SSE-KMS"
 }
 
-source_path[{"glue_security_config_disable": metadata}] {
+source_path[{"glue_security_config": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::glue::securityconfiguration"
     lower(resource.Properties.EncryptionConfiguration.JobBookmarksEncryption.JobBookmarksEncryptionMode) != "SSE-KMS"
@@ -423,13 +423,13 @@ source_path[{"glue_security_config_disable": metadata}] {
     }
 }
 
-aws_issue["glue_security_config_disable"] {
+aws_issue["glue_security_config"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::glue::securityconfiguration"
     lower(resource.Properties.EncryptionConfiguration.S3Encryptions.S3EncryptionMode) != "SSE-KMS"
 }
 
-source_path[{"glue_security_config_disable": metadata}] {
+source_path[{"glue_security_config": metadata}] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::glue::securityconfiguration"
     lower(resource.Properties.EncryptionConfiguration.S3Encryptions.S3EncryptionMode) != "SSE-KMS"
