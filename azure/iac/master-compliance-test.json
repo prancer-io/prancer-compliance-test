@@ -1972,6 +1972,102 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_KeyVault_6",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(KeyVault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-KV-006",
+                            "eval": "data.rule.keyvault_Acl",
+                            "message": "data.rule.keyvault_Acl_err",
+                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure properties.networkAcls.defaultAction exists and the value isn't set 'deny'.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_KV_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Key Vault should disable public network access",
+                    "description": "Disable public network access for your key vault so that it's not accessible over the public internet. This can reduce data leakage risks.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.keyvault/vaults"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KeyVault_7",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(KeyVault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-KV-007",
+                            "eval": "data.rule.keyvault_bypass",
+                            "message": "data.rule.keyvault_bypass_err",
+                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure properties.networkAcls.bypass exists and the value isn't set 'AzureServices'.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_KV_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Key Vault Trusted Microsoft Services access should be enabled",
+                    "description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging, Metrics, AzureServices (For example, 'Logging, Metrics'), or None to bypass none of those traffics. - None, Logging, Metrics, AzureServices.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.keyvault/vaults"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KeyVault_8",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(KeyVault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-KV-008",
+                            "eval": "data.rule.keyvault_service_endpoint",
+                            "message": "data.rule.keyvault_service_endpoint_err",
+                            "remediationDescription": "In Resource of type \"Microsoft.KeyVault/vaults\" make sure properties.networkAcls.virtualNetworkRules.ignoreMissingVnetServiceEndpoint isn't set false.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_KV_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Service Endpoint should be enabled for Keyvault",
+                    "description": "",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.keyvault/vaults"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_LOCKS",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"

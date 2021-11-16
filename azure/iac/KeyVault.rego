@@ -218,3 +218,202 @@ enablePurgeProtection_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults"
 }
+
+
+# PR-AZR-ARM-KV-006
+
+default keyvault_Acl = null
+
+azure_attribute_absence ["keyvault_Acl"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    not resource.properties.networkAcls.defaultAction
+}
+
+source_path[{"keyvault_Acl":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    not resource.properties.networkAcls.defaultAction
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkAcls","defaultAction"]]
+    }
+}
+
+azure_issue ["keyvault_Acl"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    lower(resource.properties.networkAcls.defaultAction) != "deny"
+}
+
+source_path[{"keyvault_Acl":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    lower(resource.properties.networkAcls.defaultAction) != "deny"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkAcls","defaultAction"]]
+    }
+}
+
+keyvault_Acl {
+    lower(input.resources[_].type) == "microsoft.keyvault/vaults"
+    not azure_attribute_absence["keyvault_Acl"]
+    not azure_issue["keyvault_Acl"]
+}
+
+keyvault_Acl = false {
+    azure_issue["keyvault_Acl"]
+}
+
+keyvault_Acl = false {
+    azure_attribute_absence["keyvault_Acl"]
+}
+
+keyvault_Acl_err = "microsoft.keyvault/vaults resoruce property 'networkAcls.defaultAction' is missing" {
+    azure_attribute_absence["keyvault_Acl"]
+} else = "Azure Key Vault enabled for public network access" {
+    azure_issue["keyvault_Acl"]
+}
+
+keyvault_Acl_metadata := {
+    "Policy Code": "PR-AZR-ARM-KV-006",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Key Vault should disable public network access",
+    "Policy Description": "Disable public network access for your key vault so that it's not accessible over the public internet. This can reduce data leakage risks.",
+    "Resource Type": "microsoft.keyvault/vaults",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults"
+}
+
+
+# PR-AZR-ARM-KV-007
+
+default keyvault_bypass = null
+
+azure_attribute_absence ["keyvault_bypass"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    not resource.properties.networkAcls.bypass
+}
+
+source_path[{"keyvault_bypass":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    not resource.properties.networkAcls.bypass
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkAcls","bypass"]]
+    }
+}
+
+azure_issue ["keyvault_bypass"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    lower(resource.properties.networkAcls.bypass) != "azureservices"
+}
+
+source_path[{"keyvault_bypass":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    lower(resource.properties.networkAcls.bypass) != "azureservices"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkAcls","bypass"]]
+    }
+}
+
+keyvault_bypass {
+    lower(input.resources[_].type) == "microsoft.keyvault/vaults"
+    not azure_attribute_absence["keyvault_bypass"]
+    not azure_issue["keyvault_bypass"]
+}
+
+keyvault_bypass = false {
+    azure_issue["keyvault_bypass"]
+}
+
+keyvault_bypass = false {
+    azure_attribute_absence["keyvault_bypass"]
+}
+
+keyvault_bypass_err = "microsoft.keyvault/vaults resoruce property 'networkAcls.bypass' is missing" {
+    azure_attribute_absence["keyvault_bypass"]
+} else = "Azure Key Vault Trusted Microsoft Services access is not enabled" {
+    azure_issue["keyvault_bypass"]
+}
+
+keyvault_bypass_metadata := {
+    "Policy Code": "PR-AZR-ARM-KV-007",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Key Vault Trusted Microsoft Services access should be enabled",
+    "Policy Description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging, Metrics, AzureServices (For example, 'Logging, Metrics'), or None to bypass none of those traffics. - None, Logging, Metrics, AzureServices.",
+    "Resource Type": "microsoft.keyvault/vaults",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults"
+}
+
+
+# PR-AZR-ARM-KV-008
+
+default keyvault_service_endpoint = null
+
+azure_attribute_absence ["keyvault_service_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    virtualNetworkRule := resource.properties.networkAcls.virtualNetworkRules[_]
+    not virtualNetworkRule.ignoreMissingVnetServiceEndpoint
+}
+
+source_path[{"keyvault_service_endpoint":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    virtualNetworkRule := resource.properties.networkAcls.virtualNetworkRules[j]
+    not virtualNetworkRule.ignoreMissingVnetServiceEndpoint
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkAcls","virtualNetworkRules",j,"ignoreMissingVnetServiceEndpoint"]]
+    }
+}
+
+azure_issue ["keyvault_service_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    virtualNetworkRule := resource.properties.networkAcls.virtualNetworkRules[_]
+    virtualNetworkRule.ignoreMissingVnetServiceEndpoint != false
+}
+
+source_path[{"keyvault_service_endpoint":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    virtualNetworkRule := resource.properties.networkAcls.virtualNetworkRules[j]
+    virtualNetworkRule.ignoreMissingVnetServiceEndpoint != false
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkAcls","virtualNetworkRules",j,"ignoreMissingVnetServiceEndpoint"]]
+    }
+}
+
+keyvault_service_endpoint {
+    lower(input.resources[_].type) == "microsoft.keyvault/vaults"
+    azure_attribute_absence["keyvault_service_endpoint"]
+    not azure_issue["keyvault_service_endpoint"]
+}
+
+keyvault_service_endpoint = false {
+    azure_issue["keyvault_service_endpoint"]
+}
+
+keyvault_service_endpoint_err = "Service Endpoint disabled for Azure Key Vault" {
+    azure_issue["keyvault_service_endpoint"]
+}
+
+keyvault_service_endpoint_metadata := {
+    "Policy Code": "PR-AZR-ARM-KV-008",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Service Endpoint should be enabled for Keyvault",
+    "Policy Description": "",
+    "Resource Type": "microsoft.keyvault/vaults",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults"
+}
