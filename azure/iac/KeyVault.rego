@@ -362,16 +362,31 @@ azure_attribute_absence ["keyvault_service_endpoint"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults"
     virtualNetworkRule := resource.properties.networkAcls.virtualNetworkRules[_]
-    not virtualNetworkRule.ignoreMissingVnetServiceEndpoint
+    not virtualNetworkRule.id
 }
 
 source_path[{"keyvault_service_endpoint":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.keyvault/vaults"
     virtualNetworkRule := resource.properties.networkAcls.virtualNetworkRules[j]
-    not virtualNetworkRule.ignoreMissingVnetServiceEndpoint
+    not virtualNetworkRule.id
     metadata:= {
-        "resource_path": [["resources",i,"properties","networkAcls","virtualNetworkRules",j,"ignoreMissingVnetServiceEndpoint"]]
+        "resource_path": [["resources",i,"properties","networkAcls","virtualNetworkRules",j,"id"]]
+    }
+}
+
+azure_attribute_absence ["keyvault_service_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    not resource.properties.networkAcls.virtualNetworkRules
+}
+
+source_path[{"keyvault_service_endpoint":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    virtualNetworkRule := resource.properties.networkAcls.virtualNetworkRules
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkAcls","virtualNetworkRules"]]
     }
 }
 
@@ -379,30 +394,36 @@ azure_issue ["keyvault_service_endpoint"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.keyvault/vaults"
     virtualNetworkRule := resource.properties.networkAcls.virtualNetworkRules[_]
-    virtualNetworkRule.ignoreMissingVnetServiceEndpoint != false
+    count(virtualNetworkRule.id) == 0
 }
 
 source_path[{"keyvault_service_endpoint":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.keyvault/vaults"
     virtualNetworkRule := resource.properties.networkAcls.virtualNetworkRules[j]
-    virtualNetworkRule.ignoreMissingVnetServiceEndpoint != false
+    count(virtualNetworkRule.id) == 0
     metadata:= {
-        "resource_path": [["resources",i,"properties","networkAcls","virtualNetworkRules",j,"ignoreMissingVnetServiceEndpoint"]]
+        "resource_path": [["resources",i,"properties","networkAcls","virtualNetworkRules",j,"id"]]
     }
 }
 
 keyvault_service_endpoint {
     lower(input.resources[_].type) == "microsoft.keyvault/vaults"
-    azure_attribute_absence["keyvault_service_endpoint"]
+    not azure_attribute_absence["keyvault_service_endpoint"]
     not azure_issue["keyvault_service_endpoint"]
+}
+
+keyvault_service_endpoint = false {
+    azure_attribute_absence["keyvault_service_endpoint"]
 }
 
 keyvault_service_endpoint = false {
     azure_issue["keyvault_service_endpoint"]
 }
 
-keyvault_service_endpoint_err = "Service Endpoint disabled for Azure Key Vault" {
+keyvault_service_endpoint_err = "microsoft.keyvault/vaults resoruce property 'networkAcls.virtualNetworkRules' or 'networkAcls.virtualNetworkRules.id' are missing" {
+    azure_attribute_absence["keyvault_service_endpoint"]
+} else = "Service Endpoint disabled for Azure Key Vault" {
     azure_issue["keyvault_service_endpoint"]
 }
 
