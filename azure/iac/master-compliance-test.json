@@ -5140,7 +5140,7 @@
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(logProfile.rego)",
+                    "rule": "file(activitylogalerts.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-ARM-MNT-009",
@@ -5153,6 +5153,38 @@
                     "severity": "High",
                     "title": "activity log retention should be set to 365 days or greater",
                     "description": "Specifies the retention policy for the log. We recommend you set activity log retention for 365 days or greater. (A value of 0 will retain the events indefinitely.)",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.insights/logprofiles"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_LOG_PROFILE_2",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(activitylogalerts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-MNT-010",
+                            "eval": "data.rule.log_profiles_retention_enabled",
+                            "message": "data.rule.log_profiles_retention_enabled_err",
+                            "remediationDescription": "For Resource type 'microsoft.insights/logprofiles' make sure retentionPolicy.enabled exists and the value is set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/Microsoft.Insights/logprofiles' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_MNT_010.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Activity log profile retention should be enabled",
+                    "description": "This policy identifies Microsoft.Insights/logprofiles which dont have log retention enabled. Activity Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -5299,19 +5331,19 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_LOG_PROFILE_2",
+                    "masterTestId": "TEST_LOG_PROFILE_3",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(logProfile.rego)",
+                    "rule": "file(activitylogalerts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-MNT-010",
+                            "id": "PR-AZR-ARM-MNT-011",
                             "eval": "data.rule.log_profile_category",
                             "message": "data.rule.log_profile_category_err",
                             "remediationDescription": "For Resource type 'microsoft.insights/logprofiles' make sure categories exists and contains 'Write', 'Action' and 'Delete'.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/Microsoft.Insights/logprofiles' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_ARM_MNT_010.py"
+                            "remediationFunction": "PR_AZR_ARM_MNT_011.py"
                         }
                     ],
                     "severity": "High",
