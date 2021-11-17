@@ -4945,6 +4945,230 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_WEB_6",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(web.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-WEB-006",
+                            "eval": "data.rule.web_service_cors_not_allowing_all",
+                            "message": "data.rule.web_service_cors_not_allowing_all_err",
+                            "remediationDescription": "In 'microsoft.web/sites' resource, don't set '*' as value to 'allowedOrigins' under 'cors' block which exists under 'siteConfig' block to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_WEB_006.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure CORS configuration is not allowing every resources to access Azure Web Service",
+                    "description": "This policy will identify CORS configuration which are allowing every resoruces to access Azure Web service and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_WEB_7",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(web.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-WEB-007",
+                            "eval": "data.rule.web_service_http_logging_enabled",
+                            "message": "data.rule.web_service_http_logging_enabled_err",
+                            "remediationDescription": "In 'microsoft.web/sites' resource, make sure 'httpLoggingEnabled' exists and the value is set to true.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_WEB_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service http logging should be enabled",
+                    "description": "This policy will identify the Azure Web service which dont have http logging enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_WEB_8",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(web.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-WEB-008",
+                            "eval": "data.rule.web_service_detaild_error_message_enabled",
+                            "message": "data.rule.web_service_detaild_error_message_enabled_err",
+                            "remediationDescription": "make sure 'detailedErrorLoggingEnabled' exists and the value is set to true.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_WEB_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service detaild error message should be enabled",
+                    "description": "This policy will identify the Azure Web service which dont have detaild error message enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_WEB_9",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(web.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-WEB-009",
+                            "eval": "data.rule.web_service_request_tracing_enabled",
+                            "message": "data.rule.web_service_request_tracing_enabled_err",
+                            "remediationDescription": "make sure 'requestTracingEnabled' exists and the value is set to true.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_WEB_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service request tracing should be enabled",
+                    "description": "This policy will identify the Azure web service which dont have request tracing enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_WEB_10",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(web.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-WEB-010",
+                            "eval": "data.rule.web_service_managed_identity_provider_enabled",
+                            "message": "data.rule.web_service_managed_identity_provider_enabled_err",
+                            "remediationDescription": "In 'microsoft.web/sites' resource, make sure property 'type' exists under 'identity' block to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_WEB_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service Managed Identity provider should be enabled",
+                    "description": "This policy will identify the Azure Web service which dont have Managed Identity provider enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_WEB_11",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(web.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-WEB-011",
+                            "eval": "data.rule.web_service_remote_debugging_disabled",
+                            "message": "data.rule.web_service_remote_debugging_disabled_err",
+                            "remediationDescription": "In 'microsoft.web/sites' resource, make sure property 'remoteDebuggingEnabled' does not exist under 'siteConfig' block or if exists set the value to 'false' to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_WEB_011.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service remote debugging should be disabled",
+                    "description": "This policy will identify the Azure web service which have remote debugging enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_WEB_12",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(web.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-WEB-012",
+                            "eval": "data.rule.web_service_ftp_deployment_disabled",
+                            "message": "data.rule.web_service_ftp_deployment_disabled_err",
+                            "remediationDescription": "In 'microsoft.web/sites' resource, make sure property 'ftpsState' has value either 'Disabled' or 'FtpsOnly' under 'siteConfig' block to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_WEB_012.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service FTP deployments should be disabled",
+                    "description": "This policy will identify the Azure web service which have FTP deployment enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_SECURITY_CONTACTS_2",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
