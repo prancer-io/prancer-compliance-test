@@ -619,7 +619,7 @@
                 {
                     "masterTestId": "TEST_APPLICATION_GATEWAYS_4",
                     "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(applicationgateways.rego)",
@@ -657,7 +657,7 @@
                 {
                     "masterTestId": "TEST_APPLICATION_GATEWAYS_5",
                     "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(applicationgateways.rego)",
@@ -695,7 +695,7 @@
                 {
                     "masterTestId": "TEST_APPLICATION_GATEWAYS_6",
                     "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(applicationgateways.rego)",
