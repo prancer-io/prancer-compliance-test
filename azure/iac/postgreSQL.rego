@@ -144,3 +144,49 @@ sslEnforcement_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers"
 }
+
+# PR-AZR-ARM-SQL-066
+
+default postgresql_public_access_disabled = null
+
+azure_attribute_absence["postgresql_public_access_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    not resource.properties.publicNetworkAccess
+}
+
+azure_issue["postgresql_public_access_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    lower(resource.properties.publicNetworkAccess) != "disabled"
+}
+
+postgresql_public_access_disabled {
+    azure_attribute_absence["postgresql_public_access_disabled"]
+} 
+
+postgresql_public_access_disabled {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
+    not azure_attribute_absence["postgresql_public_access_disabled"]
+    not azure_issue["postgresql_public_access_disabled"]
+}
+
+postgresql_public_access_disabled = false {
+    azure_issue["postgresql_public_access_disabled"]
+}
+
+postgresql_public_access_disabled_err = "Public Network Access is currently not disabled on PostgreSQL Server." {
+    azure_issue["postgresql_public_access_disabled"]
+}
+
+postgresql_public_access_disabled_metadata := {
+    "Policy Code": "PR-AZR-ARM-SQL-066",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure PostgreSQL servers don't have public network access enabled",
+    "Policy Description": "Always use Private Endpoint for PostgreSQL Server",
+    "Resource Type": "microsoft.dbforpostgresql/servers",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers"
+}
