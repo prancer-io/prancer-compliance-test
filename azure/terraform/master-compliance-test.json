@@ -2706,11 +2706,11 @@
                     "rule": "file(mysql_server.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-SQL-059",
+                            "id": "PR-AZR-TRF-SQL-014",
                             "eval": "data.rule.mysql_ingress_from_any_ip_disabled",
                             "message": "data.rule.mysql_ingress_from_any_ip_disabled_err",
                             "remediationDescription": "Make sure resource 'azurerm_mysql_server' and 'azurerm_mysql_firewall_rule' exist and in 'azurerm_mysql_firewall_rule' resource, make sure 'start_ip_address' and 'end_ip_address' dont have port range configured to '0.0.0.0' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_firewall_rule#start_ip_address' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_TRF_SQL_059.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_014.py"
                         }
                     ],
                     "severity": "High",

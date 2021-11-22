@@ -5455,6 +5455,74 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_DB_FOR_MY_SQL_2",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbforMySQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-060",
+                            "eval": "data.rule.mysql_public_access_disabled",
+                            "message": "data.rule.mysql_public_access_disabled_err",
+                            "remediationDescription": "In 'microsoft.dbformysql/servers' resource, set 'publicNetworkAccess = Disabled' to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_060.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure MySQL servers don't have public network access enabled",
+                    "description": "Always use Private Endpoint for Azure MySQL Database Server",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.dbformysql/servers"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DB_FOR_MY_SQL_3",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbforMySQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-061",
+                            "eval": "data.rule.mysql_server_latest_tls_configured",
+                            "message": "data.rule.mysql_server_latest_tls_configured_err",
+                            "remediationDescription": "In 'microsoft.dbformysql/servers' resource, set minimalTlsVersion = 'TLS1_2' to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_061.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Azure MySQL Server has latest version of tls configured",
+                    "description": "This policy will identify the Azure MySQL Server which dont have latest version of tls configured and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.dbformysql/servers"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_STORAGE_ACCOUNTS_9",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
