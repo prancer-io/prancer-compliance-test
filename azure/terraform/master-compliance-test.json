@@ -1786,11 +1786,11 @@
                     "rule": "file(dbserverauditingsettings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-SQL-052",
+                            "id": "PR-AZR-TRF-SQL-044",
                             "eval": "data.rule.mssql_log_retention",
                             "message": "data.rule.mssql_log_retention_err",
                             "remediationDescription": "In 'azurerm_mssql_server_extended_auditing_policy' resource, set the 'retention_in_days = 91' to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_extended_auditing_policy#retention_in_days' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_TRF_SQL_052.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_044.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1820,11 +1820,11 @@
                     "rule": "file(dbserverauditingsettings.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-SQL-053",
+                            "id": "PR-AZR-TRF-SQL-045",
                             "eval": "data.rule.sql_log_retention",
                             "message": "data.rule.sql_log_retention_err",
                             "remediationDescription": "In 'azurerm_sql_server' resource, set the 'retention_in_days = 91' under 'extended_auditing_policy' block to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_server#retention_in_days' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_TRF_SQL_053.py"
+                            "remediationFunction": "PR_AZR_TRF_SQL_045.py"
                         }
                     ],
                     "severity": "Medium",

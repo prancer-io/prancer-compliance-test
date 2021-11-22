@@ -3,7 +3,7 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/auditingsettings
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_extended_auditing_policy
 #
-# PR-AZR-TRF-SQL-052
+# PR-AZR-TRF-SQL-044
 #
 
 default mssql_log_retention = null
@@ -62,7 +62,7 @@ mssql_log_retention_metadata := {
 
 
 #
-# PR-AZR-TRF-SQL-053
+# PR-AZR-TRF-SQL-045
 #
 
 default sql_log_retention = null
@@ -108,7 +108,7 @@ sql_log_retention_err = "azurerm_sql_server's resource block 'extended_auditing_
 }
 
 sql_log_retention_metadata := {
-    "Policy Code": "PR-AZR-TRF-SQL-053",
+    "Policy Code": "PR-AZR-TRF-SQL-045",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
