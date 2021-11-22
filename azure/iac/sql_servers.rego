@@ -396,10 +396,29 @@ azure_attribute_absence["sql_server_latest_tls_configured"] {
     not resource.properties.minimalTlsVersion
 }
 
+source_path[{"sql_server_latest_tls_configured":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    not resource.properties.minimalTlsVersion
+    metadata:= {
+        "resource_path": [["resources",i,"properties","minimalTlsVersion"]]
+    }
+}
+
+
 azure_issue["sql_server_latest_tls_configured"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
     to_number(resource.properties.minimalTlsVersion) != 1.2
+}
+
+source_path[{"sql_server_latest_tls_configured":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    to_number(resource.properties.minimalTlsVersion) != 1.2
+    metadata:= {
+        "resource_path": [["resources",i,"properties","minimalTlsVersion"]]
+    }
 }
 
 sql_server_latest_tls_configured {
@@ -439,16 +458,34 @@ sql_server_latest_tls_configured_metadata := {
 default sql_public_access = null
 
 
-azure_attribute_absence["sql_server_latest_tls_configured"] {
+azure_attribute_absence["sql_public_access"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
     not resource.properties.publicNetworkAccess
+}
+
+source_path[{"sql_public_access":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    not resource.properties.publicNetworkAccess
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
+    }
 }
 
 azure_issue["sql_public_access"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.sql/servers"
     lower(resource.properties.publicNetworkAccess) != "disabled"
+}
+
+source_path[{"sql_public_access":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers"
+    lower(resource.properties.publicNetworkAccess) != "disabled"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
+    }
 }
 
 

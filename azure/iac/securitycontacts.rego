@@ -157,10 +157,28 @@ azure_attribute_absence["securitycontacts_alerts_to_admins_enabled"] {
     not resource.properties.alertsToAdmins
 }
 
+source_path[{"securitycontacts_alerts_to_admins_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.security/securitycontacts"
+    not resource.properties.alertsToAdmins
+    metadata:= {
+        "resource_path": [["resources",i,"properties","alertsToAdmins"]]
+    }
+}
+
 azure_issue["securitycontacts_alerts_to_admins_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.security/securitycontacts"
     lower(resource.properties.alertsToAdmins) != "on"
+}
+
+source_path[{"securitycontacts_alerts_to_admins_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.security/securitycontacts"
+    lower(resource.properties.alertsToAdmins) != "on"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","alertsToAdmins"]]
+    }
 }
 
 securitycontacts_alerts_to_admins_enabled {

@@ -671,10 +671,28 @@ azure_attribute_absence["storage_account_latest_tls_configured"] {
     not resource.properties.minimumTlsVersion
 }
 
+source_path[{"storage_account_latest_tls_configured":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.minimumTlsVersion
+    metadata:= {
+        "resource_path": [["resources",i,"properties","minimumTlsVersion"]]
+    }
+}
+
 azure_issue["storage_account_latest_tls_configured"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.storage/storageaccounts"
     lower(resource.properties.minimumTlsVersion) != "tls1_2"
+}
+
+source_path[{"storage_account_latest_tls_configured":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    lower(resource.properties.minimumTlsVersion) != "tls1_2"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","minimumTlsVersion"]]
+    }
 }
 
 storage_account_latest_tls_configured {

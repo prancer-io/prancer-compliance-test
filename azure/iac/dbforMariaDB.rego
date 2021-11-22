@@ -230,10 +230,28 @@ azure_attribute_absence ["mairadb_ssl_enforcement_enabled"] {
     not resource.properties.sslEnforcement
 }
 
+source_path[{"mairadb_ssl_enforcement_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    not resource.properties.sslEnforcement
+    metadata:= {
+        "resource_path": [["resources",i,"properties","sslEnforcement"]]
+    }
+}
+
 azure_issue ["mairadb_ssl_enforcement_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbformariadb/servers"
     lower(resource.properties.sslEnforcement) != "enabled"
+}
+
+source_path[{"mairadb_ssl_enforcement_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    lower(resource.properties.sslEnforcement) != "enabled"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","sslEnforcement"]]
+    }
 }
 
 mairadb_ssl_enforcement_enabled {
@@ -281,10 +299,29 @@ azure_attribute_absence["mairadb_public_access_disabled"] {
     not resource.properties.publicNetworkAccess
 }
 
+source_path[{"mairadb_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    not resource.properties.publicNetworkAccess
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
+    }
+}
+
+
 azure_issue["mairadb_public_access_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbformariadb/servers"
     lower(resource.properties.publicNetworkAccess) != "disabled"
+}
+
+source_path[{"mairadb_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    lower(resource.properties.publicNetworkAccess) != "disabled"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
+    }
 }
 
 mairadb_public_access_disabled {
@@ -330,10 +367,28 @@ azure_attribute_absence["mariadb_geo_redundant_backup_enabled"] {
     not resource.properties.storageProfile.geoRedundantBackup
 }
 
+source_path[{"mariadb_geo_redundant_backup_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    not resource.properties.storageProfile.geoRedundantBackup
+    metadata:= {
+        "resource_path": [["resources",i,"properties","geoRedundantBackup"]]
+    }
+}
+
 azure_issue["mariadb_geo_redundant_backup_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbformariadb/servers"
     lower(resource.properties.storageProfile.geoRedundantBackup) != "enabled"
+}
+
+source_path[{"mariadb_geo_redundant_backup_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformariadb/servers"
+    lower(resource.properties.storageProfile.geoRedundantBackup) != "enabled"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","geoRedundantBackup"]]
+    }
 }
 
 mariadb_geo_redundant_backup_enabled {

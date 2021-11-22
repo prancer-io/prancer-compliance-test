@@ -293,11 +293,29 @@ azure_attribute_absence["web_service_cors_not_allowing_all"] {
     not resource.properties.siteConfig
 }
 
+source_path[{"web_service_cors_not_allowing_all":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig"]]
+    }
+}
+
 
 azure_attribute_absence["web_service_cors_not_allowing_all"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     not resource.properties.siteConfig.cors
+}
+
+source_path[{"web_service_cors_not_allowing_all":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.cors
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","cors"]]
+    }
 }
 
 azure_attribute_absence["web_service_cors_not_allowing_all"] {
@@ -306,12 +324,31 @@ azure_attribute_absence["web_service_cors_not_allowing_all"] {
     not resource.properties.siteConfig.allowedOrigins
 }
 
+source_path[{"web_service_cors_not_allowing_all":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.cors.allowedOrigins
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","cors","allowedOrigins"]]
+    }
+}
+
 
 azure_issue["web_service_cors_not_allowing_all"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     allowedOrigin := resource.properties.siteConfig.cors.allowedOrigins[_]
     contains(allowedOrigin, "*")
+}
+
+source_path[{"web_service_cors_not_allowing_all":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    allowedOrigin := resource.properties.siteConfig.cors.allowedOrigins[_]
+    contains(allowedOrigin, "*")
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","cors","allowedOrigins"]]
+    }
 }
 
 web_service_cors_not_allowing_all {
@@ -358,10 +395,28 @@ azure_attribute_absence["web_service_http_logging_enabled"] {
     not resource.properties.siteConfig.httpLoggingEnabled
 }
 
+source_path[{"web_service_http_logging_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.httpLoggingEnabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","httpLoggingEnabled"]]
+    }
+}
+
 azure_issue["web_service_http_logging_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     resource.properties.siteConfig.httpLoggingEnabled != true
+}
+
+source_path[{"web_service_http_logging_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.httpLoggingEnabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","httpLoggingEnabled"]]
+    }
 }
 
 web_service_http_logging_enabled {
@@ -408,10 +463,28 @@ azure_attribute_absence["web_service_detaild_error_message_enabled"] {
     not resource.properties.siteConfig.detailedErrorLoggingEnabled
 }
 
+source_path[{"web_service_detaild_error_message_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.detailedErrorLoggingEnabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","detailedErrorLoggingEnabled"]]
+    }
+}
+
 azure_issue["web_service_detaild_error_message_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     resource.properties.siteConfig.detailedErrorLoggingEnabled != true
+}
+
+source_path[{"web_service_detaild_error_message_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.detailedErrorLoggingEnabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","detailedErrorLoggingEnabled"]]
+    }
 }
 
 web_service_detaild_error_message_enabled {
@@ -458,10 +531,28 @@ azure_attribute_absence["web_service_request_tracing_enabled"] {
     not resource.properties.siteConfig.requestTracingEnabled
 }
 
+source_path[{"web_service_request_tracing_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.requestTracingEnabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","requestTracingEnabled"]]
+    }
+}
+
 azure_issue["web_service_request_tracing_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     resource.properties.siteConfig.requestTracingEnabled != true
+}
+
+source_path[{"web_service_request_tracing_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.requestTracingEnabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","requestTracingEnabled"]]
+    }
 }
 
 web_service_request_tracing_enabled {
@@ -507,10 +598,28 @@ azure_attribute_absence["web_service_managed_identity_provider_enabled"] {
     not resource.identity
 }
 
+source_path[{"web_service_managed_identity_provider_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.identity
+    metadata:= {
+        "resource_path": [["resources","identity"]]
+    }
+}
+
 azure_attribute_absence["web_service_managed_identity_provider_enabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     not resource.identity.type
+}
+
+source_path[{"web_service_managed_identity_provider_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.identity.type
+    metadata:= {
+        "resource_path": [["resources","identity","type"]]
+    }
 }
 
 web_service_managed_identity_provider_enabled = false {
@@ -546,11 +655,30 @@ azure_attribute_absence["web_service_remote_debugging_disabled"] {
     not resource.properties.siteConfig.remoteDebuggingEnabled
 }
 
+source_path[{"web_service_remote_debugging_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.remoteDebuggingEnabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","remoteDebuggingEnabled"]]
+    }
+}
+
 azure_issue["web_service_remote_debugging_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     resource.properties.siteConfig.remoteDebuggingEnabled != false
 }
+
+source_path[{"web_service_remote_debugging_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.remoteDebuggingEnabled != false
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","remoteDebuggingEnabled"]]
+    }
+}
+
 
 web_service_remote_debugging_disabled {
     lower(input.resources[_].type) == "microsoft.web/sites"
@@ -590,12 +718,32 @@ azure_attribute_absence["web_service_ftp_deployment_disabled"] {
     not resource.properties.siteConfig.ftpsState
 }
 
+source_path[{"web_service_ftp_deployment_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.ftpsState
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","ftpsState"]]
+    }
+}
+
 azure_issue["web_service_ftp_deployment_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     resource.properties.siteConfig.ftpsState
     lower(resource.properties.siteConfig.ftpsState) != "disabled"
     lower(resource.properties.siteConfig.ftpsState) != "ftpsonly"
+}
+
+source_path[{"web_service_ftp_deployment_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.ftpsState
+    lower(resource.properties.siteConfig.ftpsState) != "disabled"
+    lower(resource.properties.siteConfig.ftpsState) != "ftpsonly"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","ftpsState"]]
+    }
 }
 
 web_service_ftp_deployment_disabled = false {
@@ -646,11 +794,29 @@ azure_attribute_absence["web_service_net_framework_latest"] {
     not resource.properties.siteConfig.netFrameworkVersion
 }
 
+source_path[{"web_service_net_framework_latest":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.netFrameworkVersion
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","netFrameworkVersion"]]
+    }
+}
+
 
 azure_issue["web_service_net_framework_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     lower(resource.properties.siteConfig.netFrameworkVersion) != latest_dotnet_framework_version
+}
+
+source_path[{"web_service_net_framework_latest":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    lower(resource.properties.siteConfig.netFrameworkVersion) != latest_dotnet_framework_version
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","netFrameworkVersion"]]
+    }
 }
 
 # we need to make it pass if property is missing, as microsoft.web/sites may not need dot net framework
@@ -701,10 +867,28 @@ azure_attribute_absence["web_service_php_version_latest"] {
     not resource.properties.siteConfig.phpVersion
 }
 
+source_path[{"web_service_php_version_latest":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.phpVersion
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","phpVersion"]]
+    }
+}
+
 azure_issue["web_service_php_version_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     to_number(resource.properties.siteConfig.phpVersion) != latest_php_version
+}
+
+source_path[{"web_service_php_version_latest":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    to_number(resource.properties.siteConfig.phpVersion) != latest_php_version
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","phpVersion"]]
+    }
 }
 
 # we need to make it pass if property is missing, as microsoft.web/sites may not need php
@@ -756,12 +940,31 @@ azure_attribute_absence["web_service_python_version_latest"] {
     not resource.properties.siteConfig.pythonVersion
 }
 
+source_path[{"web_service_python_version_latest":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.pythonVersion
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","pythonVersion"]]
+    }
+}
+
 
 azure_issue["web_service_python_version_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     to_number(resource.properties.siteConfig.pythonVersion) != latest_python_version_three
     to_number(resource.properties.siteConfig.pythonVersion) != latest_python_version_two
+}
+
+source_path[{"web_service_python_version_latest":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    to_number(resource.properties.siteConfig.pythonVersion) != latest_python_version_three
+    to_number(resource.properties.siteConfig.pythonVersion) != latest_python_version_two
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","pythonVersion"]]
+    }
 }
 
 # we need to make it pass if property is missing, as microsoft.web/sites may not need python
@@ -813,11 +1016,30 @@ azure_attribute_absence["web_service_java_version_latest"] {
     not resource.properties.siteConfig.javaVersion
 }
 
+source_path[{"web_service_java_version_latest":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.javaVersion
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","javaVersion"]]
+    }
+}
+
+
 # valid values are 1.7.0_80, 1.8.0_181, 11
 azure_issue["web_service_java_version_latest"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
     resource.properties.siteConfig.javaVersion != latest_java_version
+}
+
+source_path[{"web_service_java_version_latest":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.javaVersion != latest_java_version
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","javaVersion"]]
+    }
 }
 
 # we need to make it pass if property is missing, as microsoft.web/sites may not need java

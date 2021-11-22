@@ -80,6 +80,7 @@ geoRedundantBackup_metadata := {
 # PR-AZR-ARM-SQL-029
 
 default sslEnforcement = null
+
 azure_attribute_absence ["sslEnforcement"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbforpostgresql/servers"
@@ -155,10 +156,28 @@ azure_attribute_absence["postgresql_public_access_disabled"] {
     not resource.properties.publicNetworkAccess
 }
 
+source_path[{"postgresql_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    not resource.properties.publicNetworkAccess
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
+    }
+}
+
 azure_issue["postgresql_public_access_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbforpostgresql/servers"
     lower(resource.properties.publicNetworkAccess) != "disabled"
+}
+
+source_path[{"mairadb_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    not resource.properties.publicNetworkAccess
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
+    }
 }
 
 postgresql_public_access_disabled {

@@ -79,10 +79,28 @@ azure_attribute_absence["mysql_public_access_disabled"] {
     not resource.properties.publicNetworkAccess 
 }
 
+source_path[{"mysql_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    not resource.properties.publicNetworkAccess
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
+    }
+}
+
 azure_issue["mysql_public_access_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbformysql/servers"
     lower(resource.properties.publicNetworkAccess) != "disabled"
+}
+
+source_path[{"mysql_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    lower(resource.properties.publicNetworkAccess) != "disabled"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
+    }
 }
 
 mysql_public_access_disabled {
@@ -128,10 +146,28 @@ azure_attribute_absence["mysql_server_latest_tls_configured"] {
     not resource.properties.minimalTlsVersion
 }
 
+source_path[{"mysql_server_latest_tls_configured":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    not resource.properties.minimalTlsVersion
+    metadata:= {
+        "resource_path": [["resources",i,"properties","minimalTlsVersion"]]
+    }
+}
+
 azure_issue["mysql_server_latest_tls_configured"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.dbformysql/servers"
     lower(resource.properties.minimalTlsVersion) != "tls1_2"
+}
+
+source_path[{"mysql_server_latest_tls_configured":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    lower(resource.properties.minimalTlsVersion) != "tls1_2"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","minimalTlsVersion"]]
+    }
 }
 
 mysql_server_latest_tls_configured {
