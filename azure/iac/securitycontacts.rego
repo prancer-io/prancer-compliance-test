@@ -144,3 +144,53 @@ alert_notifications_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts"
 }
+
+
+# PR-AZR-ARM-ASC-005
+#
+
+default securitycontacts_alerts_to_admins_enabled = null
+
+azure_attribute_absence["securitycontacts_alerts_to_admins_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.security/securitycontacts"
+    not resource.properties.alertsToAdmins
+}
+
+azure_issue["securitycontacts_alerts_to_admins_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.security/securitycontacts"
+    lower(resource.properties.alertsToAdmins) != "on"
+}
+
+securitycontacts_alerts_to_admins_enabled {
+    lower(input.resources[_].type) == "microsoft.security/securitycontacts"
+    not azure_attribute_absence["securitycontacts_alerts_to_admins_enabled"]
+    not azure_issue["securitycontacts_alerts_to_admins_enabled"]
+}
+
+securitycontacts_alerts_to_admins_enabled = false {
+    azure_attribute_absence["securitycontacts_alerts_to_admins_enabled"]
+}
+
+securitycontacts_alerts_to_admins_enabled = false {
+    azure_issue["securitycontacts_alerts_to_admins_enabled"]
+}
+
+securitycontacts_alerts_to_admins_enabled_err = "Security Center currently not configured to send security alerts notifications to subscription admins" {
+    azure_issue["securitycontacts_alerts_to_admins_enabled"]
+} else = "microsoft.security/securitycontacts property 'alerts_to_admins' need to be exist. Its missing from the resource. Please set 'true' as value after property addition."  {
+    azure_attribute_absence["securitycontacts_alerts_to_admins_enabled"]
+}
+
+securitycontacts_alerts_to_admins_enabled_metadata := {
+    "Policy Code": "PR-AZR-ARM-ASC-005",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Security Center shoud send security alerts notifications to subscription admins",
+    "Policy Description": "This policy will identify security centers which dont have configuration enabled to send security alerts notifications to subscription admins and alert if missing.",
+    "Resource Type": "microsoft.security/securitycontacts",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts"
+}
