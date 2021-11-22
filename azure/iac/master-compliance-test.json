@@ -5656,7 +5656,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "terraform"
+                                "arm"
                             ]
                         }
                     ],
