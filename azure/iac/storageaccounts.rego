@@ -657,3 +657,54 @@ storage_acount_by_pass_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
 }
+
+
+# PR-AZR-ARM-STR-018
+#
+
+default storage_account_latest_tls_configured = null
+
+#default to TLS1_0
+azure_attribute_absence["storage_account_latest_tls_configured"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.minimumTlsVersion
+}
+
+azure_issue["storage_account_latest_tls_configured"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    lower(resource.properties.minimumTlsVersion) != "tls1_2"
+}
+
+storage_account_latest_tls_configured {
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    not azure_attribute_absence["storage_account_latest_tls_configured"]
+    not azure_issue["storage_account_latest_tls_configured"]
+}
+
+storage_account_latest_tls_configured = false {
+    azure_attribute_absence["storage_account_latest_tls_configured"]
+}
+
+storage_account_latest_tls_configured = false {
+    azure_issue["storage_account_latest_tls_configured"]
+}
+
+storage_account_latest_tls_configured_err = "Azure Storage Account currently dont have latest version of tls configured" {
+    azure_issue["storage_account_latest_tls_configured"]
+} else = "microsoft.storage/storageaccounts property 'minimumTlsVersion' need to be exist. Its missing from the resource. Please set the value to 'TLS1_2' after property addition." {
+    azure_attribute_absence["storage_account_latest_tls_configured"]
+}
+
+storage_account_latest_tls_configured_metadata := {
+    "Policy Code": "PR-AZR-ARM-STR-018",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure Azure Storage Account has latest version of tls configured",
+    "Policy Description": "This policy will identify the Azure Storage Account which dont have latest version of tls configured and give alert",
+    "Resource Type": "microsoft.storage/storageaccounts",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
+}

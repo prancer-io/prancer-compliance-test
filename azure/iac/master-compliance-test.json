@@ -5628,6 +5628,43 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_10",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-STR-018",
+                            "eval": "data.rule.storage_account_latest_tls_configured",
+                            "message": "data.rule.storage_account_latest_tls_configured_err",
+                            "remediationDescription": "In 'microsoft.storage/storageaccounts' resource, set minimumTlsVersion = 'TLS1_2' to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_STR_018.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Azure Storage Account has latest version of tls configured",
+                    "description": "This policy will identify the Azure Storage Account which dont have latest version of tls configured and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "HIPAA",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_LOG_PROFILE_1",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
