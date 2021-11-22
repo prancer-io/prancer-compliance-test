@@ -54,7 +54,7 @@ https_only = false {
 
 https_only_err = "Microsoft.web/Sites resource property httpsOnly missing in the resource" {
     azure_attribute_absence["https_only"]
-} else = "Azure App Service Web app does not redirect HTTP to HTTPS" {
+} else = "Azure Web Service Web app does not redirect HTTP to HTTPS" {
     azure_issue["https_only"]
 }
 
@@ -63,7 +63,7 @@ https_only_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Ensure Azure App Service Web App enforce https connection",
+    "Policy Title": "Ensure Azure Web Service Web App enforce https connection",
     "Policy Description": "Azure Web Apps by default allows sites to run under both HTTP and HTTPS, and can be accessed by anyone using non-secure HTTP links. Non-secure HTTP requests can be restricted and all HTTP requests redirected to the secure HTTPS port. We recommend you enforce HTTPS-only traffic to increase security. This will redirect all non-secure HTTP requests to HTTPS ports. HTTPS uses the SSL/TLS protocol to provide a secure connection, which is both encrypted and authenticated.",
     "Resource Type": "microsoft.web/sites",
     "Policy Help URL": "",
@@ -631,3 +631,225 @@ web_service_ftp_deployment_disabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
 }
+
+# PR-AZR-ARM-WEB-013
+#
+
+default web_service_net_framework_latest = null
+
+#Defaults to v4.0
+latest_dotnet_framework_version := "v6.0"
+
+azure_attribute_absence["web_service_net_framework_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.netFrameworkVersion
+}
+
+
+azure_issue["web_service_net_framework_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    lower(resource.properties.siteConfig.netFrameworkVersion) != latest_dotnet_framework_version
+}
+
+# we need to make it pass if property is missing, as microsoft.web/sites may not need dot net framework
+web_service_net_framework_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    azure_attribute_absence["web_service_net_framework_latest"]
+    not azure_issue["web_service_net_framework_latest"]
+}
+
+web_service_net_framework_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_net_framework_latest"]
+    not azure_issue["web_service_net_framework_latest"]
+}
+
+web_service_net_framework_latest = false {
+    azure_issue["web_service_net_framework_latest"]
+}
+
+web_service_det_framework_latest_err = "Azure web Service currently dont have latest version of Dot Net Framework" {
+    azure_issue["web_service_net_framework_latest"]
+}
+
+web_service_dot_neamework_latest_metadata := {
+    "Policy Code": "PR-AZR-ARM-WEB-013",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure web Service Dot Net Framework should be latest",
+    "Policy Description": "This policy will identify the Azure web service which dont have latest version of Net Framework and give alert",
+    "Resource Type": "microsoft.web/sites",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
+}
+
+
+#
+# PR-AZR-ARM-WEB-014
+#
+
+default web_service_php_version_latest = null
+
+latest_php_version := 7.4
+
+azure_attribute_absence["web_service_php_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.phpVersion
+}
+
+azure_issue["web_service_php_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    to_number(resource.properties.siteConfig.phpVersion) != latest_php_version
+}
+
+# we need to make it pass if property is missing, as microsoft.web/sites may not need php
+web_service_php_version_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    azure_attribute_absence["web_service_php_version_latest"]
+    not azure_issue["web_service_php_version_latest"]
+}
+
+web_service_php_version_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_php_version_latest"]
+    not azure_issue["web_service_php_version_latest"]
+}
+
+web_service_php_version_latest = false {
+    azure_issue["web_service_php_version_latest"]
+}
+
+web_service_php_version_latest_err = "Azure Web Service currently dont have latest version of PHP" {
+    azure_issue["web_service_php_version_latest"]
+}
+
+web_service_php_version_latest_metadata := {
+    "Policy Code": "PR-AZR-ARM-WEB-014",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Web Service PHP version should be latest",
+    "Policy Description": "This policy will identify the Azure web service which dont have latest version of PHP and give alert",
+    "Resource Type": "microsoft.web/sites",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
+}
+
+
+#
+# PR-AZR-ARM-WEB-015
+#
+
+default web_service_python_version_latest = null
+
+latest_python_version_three := 3.9
+latest_python_version_two := 2.7
+
+azure_attribute_absence["web_service_python_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.pythonVersion
+}
+
+
+azure_issue["web_service_python_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    to_number(resource.properties.siteConfig.pythonVersion) != latest_python_version_three
+    to_number(resource.properties.siteConfig.pythonVersion) != latest_python_version_two
+}
+
+# we need to make it pass if property is missing, as microsoft.web/sites may not need python
+web_service_python_version_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    azure_attribute_absence["web_service_python_version_latest"]
+    not azure_issue["web_service_python_version_latest"]
+}
+
+web_service_python_version_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_python_version_latest"]
+    not azure_issue["web_service_python_version_latest"]
+}
+
+web_service_python_version_latest = false {
+    azure_issue["web_service_python_version_latest"]
+}
+
+web_service_python_version_latest_err = "Azure Web Service currently dont have latest version of Python" {
+    azure_issue["web_service_python_version_latest"]
+}
+
+web_service_python_version_latest_metadata := {
+    "Policy Code": "PR-AZR-ARM-WEB-015",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Web Service Pyhton version should be latest",
+    "Policy Description": "This policy will identify the Azure web service which dont have latest version of Pyhton and give alert",
+    "Resource Type": "microsoft.web/sites",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
+}
+
+
+#
+# PR-AZR-ARM-WEB-016
+#
+
+default web_service_java_version_latest = null
+
+# valid values are 1.7.0_80, 1.8.0_181, 11
+latest_java_version := "11"
+
+azure_attribute_absence["web_service_java_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.javaVersion
+}
+
+# valid values are 1.7.0_80, 1.8.0_181, 11
+azure_issue["web_service_java_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.javaVersion != latest_java_version
+}
+
+# we need to make it pass if property is missing, as microsoft.web/sites may not need java
+web_service_java_version_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    azure_attribute_absence["web_service_java_version_latest"]
+    not azure_issue["web_service_java_version_latest"]
+}
+
+web_service_java_version_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_java_version_latest"]
+    not azure_issue["web_service_java_version_latest"]
+}
+
+web_service_java_version_latest = false {
+    azure_issue["web_service_java_version_latest"]
+}
+
+web_service_java_version_latest_err = "Azure Web Service currently dont have latest version of Java" {
+    azure_issue["web_service_java_version_latest"]
+}
+
+web_service_java_version_latest_metadata := {
+    "Policy Code": "PR-AZR-ARM-WEB-016",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Web Service Java version should be latest",
+    "Policy Description": "This policy will identify the Azure web service which dont have latest version of Java and give alert",
+    "Resource Type": "microsoft.web/sites",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
+}
+
