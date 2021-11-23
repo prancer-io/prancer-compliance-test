@@ -619,7 +619,7 @@
                 {
                     "masterTestId": "TEST_APPLICATION_GATEWAYS_4",
                     "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(applicationgateways.rego)",
@@ -657,7 +657,7 @@
                 {
                     "masterTestId": "TEST_APPLICATION_GATEWAYS_5",
                     "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(applicationgateways.rego)",
@@ -695,7 +695,7 @@
                 {
                     "masterTestId": "TEST_APPLICATION_GATEWAYS_6",
                     "masterSnapshotId": [
-                        "ARM_TEMPLATE_SNAPSHOT"
+                        "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
                     "rule": "file(applicationgateways.rego)",
@@ -3354,15 +3354,15 @@
                     "rule": "file(nsg.rego)",
                     "evals": [
                         {
-                            "id": "gID5",
+                            "id": "PR-AZR-TRF-NSG-011",
                             "eval": "data.rule.inbound_port_11211",
                             "message": "data.rule.inbound_port_11211_err",
                             "remediationDescription": "",
-                            "remediationFunction": "gID5.py"
+                            "remediationFunction": "PR_AZR_TRF_NSG_011.py"
                         }
                     ],
                     "severity": "High",
-                    "title": "Memcached DDoS attack attempted",
+                    "title": "Memcached DDoS attack attempt should be prevented",
                     "description": "Memcached is a general-purpose distributed memory caching system. It is often used to speed up dynamic database-driven websites by caching data and objects in RAM to reduce the number of times an external data source (such as a database or API) must be read. It is reported that Memcache versions 1.5.5 and below are vulnerable to DDoS amplification attack. This policy aims at finding such attacks and generate alerts.",
                     "tags": [
                         {
