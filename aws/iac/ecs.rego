@@ -807,7 +807,7 @@ ecs_enable_execute_command_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "Ensure ECS Services and Task Set EnableExecuteCommand property set to False",
     "Policy Description": "If the EnableExecuteCommand property is set to True on an ECS Service then any third person can launch ECS service into an unsafe configuration allowing for external exposure or unaccounted for configurations.",
-    "Resource Type": "aws::ecs::service",
+    "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-enableexecutecommand"
 }
@@ -936,7 +936,7 @@ ecs_launch_type_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "Ensure that ECS services and Task Sets are launched as Fargate type",
     "Policy Description": "Ensure that ECS services and Task Sets are launched as Fargate type else Actor can launch ECS service into an unsafe configuration allowing for external exposure or unaccounted for configurations.",
-    "Resource Type": "aws::ecs::service",
+    "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-launchtype"
 }
@@ -1013,7 +1013,7 @@ ecs_subnet_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "Value(s) of subnets attached to aws ecs service or taskset AwsVpcConfiguration resources are vended",
     "Policy Description": "Value(s) of subnets attached to aws ecs service or taskset AwsVpcConfiguration resources are vended else Actor can exfiltrate data by associating ECS resources with non-ADATUM resources.",
-    "Resource Type": "aws::ecs::service",
+    "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-awsvpcconfiguration.html#cfn-ecs-service-awsvpcconfiguration-subnets"
 }

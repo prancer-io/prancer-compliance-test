@@ -209,13 +209,13 @@ acm_certificate_arn_err = "Ensure that the CertificateManager certificates refer
 }
 
 acm_certificate_arn_metadata := {
-    "Policy Code": "PR-AWS-CFR-ECS-013",
+    "Policy Code": "PR-AWS-CFR-ACM-003",
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
     "Policy Title": "Ensure that the CertificateManager certificates reference only Private ACMPCA certificate authorities",
     "Policy Description": "Ensure that the aws certificate manager/ACMPCA Certificate CertificateAuthorityArn property references (using Fn::GetAtt or Ref) a Private CA, or that the property is not used.",
-    "Resource Type": "aws::certificatemanager::certificate",
+    "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html#cfn-certificatemanager-certificate-certificateauthorityarn"
 }
