@@ -2111,6 +2111,56 @@ dynamodb_PITR_enable_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html"
 }
 
+
+#
+# PR-AWS-CFR-DD-003
+#
+
+default dynamodb_kinesis_stream = null
+
+aws_issue["dynamodb_kinesis_stream"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::dynamodb::table"
+    count(resource.Properties.KinesisStreamSpecification.StreamArn) == 0
+}
+
+source_path[{"dynamodb_kinesis_stream": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::dynamodb::table"
+    count(resource.Properties.KinesisStreamSpecification.StreamArn) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KinesisStreamSpecification", "StreamArn"]
+        ],
+    }
+}
+
+dynamodb_kinesis_stream {
+    lower(input.Resources[i].Type) == "aws::dynamodb::table"
+    not aws_issue["dynamodb_kinesis_stream"]
+}
+
+dynamodb_kinesis_stream = false {
+    aws_issue["dynamodb_kinesis_stream"]
+}
+
+dynamodb_kinesis_stream_err = "Dynamo DB kinesis specification property should not be null" {
+    aws_issue["dynamodb_kinesis_stream"]
+}
+
+dynamodb_kinesis_stream_metadata := {
+    "Policy Code": "PR-AWS-CFR-DD-003",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Dynamo DB kinesis specification property should not be null",
+    "Policy Description": "Dynamo DB kinesis specification property should not be null",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-kinesisstreamspecification.html#cfn-dynamodb-kinesisstreamspecification-streamarn"
+}
+
+
 #
 # PR-AWS-CFR-EC-001
 #

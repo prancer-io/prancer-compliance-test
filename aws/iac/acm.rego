@@ -149,3 +149,73 @@ acm_ct_log_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html"
 }
+
+
+#
+# PR-AWS-CFR-ACM-003
+#
+
+default acm_certificate_arn = null
+
+aws_issue["acm_certificate_arn"] {
+    resource := input.Resources[i]
+    type = ["aws::certificatemanager::certificate", "aws::acmpca::certificate", "aws::acmpca::certificateauthorityactivation"]
+    lower(resource.Type) == type[_]
+    count(resource.Properties.CertificateAuthorityArn) == 0
+}
+
+source_path[{"acm_certificate_arn": metadata}] {
+    resource := input.Resources[i]
+    type = ["aws::certificatemanager::certificate", "aws::acmpca::certificate", "aws::acmpca::certificateauthorityactivation"]
+    lower(resource.Type) == type[_]
+    count(resource.Properties.CertificateAuthorityArn) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CertificateAuthorityArn"]
+        ],
+    }
+}
+
+aws_issue["acm_certificate_arn"] {
+    resource := input.Resources[i]
+    type = ["aws::certificatemanager::certificate", "aws::acmpca::certificate", "aws::acmpca::certificateauthorityactivation"]
+    lower(resource.Type) == type[_]
+    resource.Properties.CertificateAuthorityArn == null
+}
+
+source_path[{"acm_certificate_arn": metadata}] {
+    resource := input.Resources[i]
+    type = ["aws::certificatemanager::certificate", "aws::acmpca::certificate", "aws::acmpca::certificateauthorityactivation"]
+    lower(resource.Type) == type[_]
+    resource.Properties.CertificateAuthorityArn == null
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "CertificateAuthorityArn"]
+        ],
+    }
+}
+
+acm_certificate_arn {
+    type = ["aws::certificatemanager::certificate", "aws::acmpca::certificate", "aws::acmpca::certificateauthorityactivation"]
+    not aws_issue["acm_certificate_arn"]
+}
+
+acm_certificate_arn = false {
+    aws_issue["acm_certificate_arn"]
+}
+
+acm_certificate_arn_err = "Ensure that the CertificateManager certificates reference only Private ACMPCA certificate authorities" {
+    aws_issue["acm_certificate_arn"]
+}
+
+acm_certificate_arn_metadata := {
+    "Policy Code": "PR-AWS-CFR-ECS-013",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure that the CertificateManager certificates reference only Private ACMPCA certificate authorities",
+    "Policy Description": "Ensure that the aws certificate manager/ACMPCA Certificate CertificateAuthorityArn property references (using Fn::GetAtt or Ref) a Private CA, or that the property is not used.",
+    "Resource Type": "aws::certificatemanager::certificate",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html#cfn-certificatemanager-certificate-certificateauthorityarn"
+}
