@@ -1,5 +1,8 @@
 
-# Best Practices For Creating Rego Rules for Prancer Security Platform
+# Best Practices to create custom policies for Prancer Security Platform
+
+## Introduction
+Prancer Cloud Security Platform supports more than 800 security policies out of the box. And Prancer team maintains these policies across different clouds. But it is still possible that you need to create custom policies to comply with internal requirements. This document discusses best practices and guidelines to create new custom policies for Prancer Platform based on OPA Rego policy language.
 
 ## 1. Policy Code
 
@@ -17,12 +20,12 @@ Example
 
 ## 3. Write the rule to verify your resource configurations
 
-There are 2 situation exist when you check configuration of a resource
-In any type of rule, we always check resource type
+2 situations exist when you check the configuration of a resource
+In any rule, we always check resource type
 
 ### **a. Attribute is not exist**
 
-The attribute which you want to check in your configuration is not exist in your file.
+The attribute which you want to check in your configuration does not exist in your file.
 
 ```
 aws_attribute_absence["s3_accesslog"] {
@@ -44,7 +47,7 @@ aws_issue["s3_accesslog"] {
 
 ## 4. Send failed resource path in issue metadata
 
-`source_path contains same logic of the issue with extra field on metadata, which sends path of failed resource.`
+`source_path contains same logic of the issue with an extra field on metadata, which sends path of failed resource.`
 
 ```
 source_path[{"s3_accesslog": metadata}] {
@@ -100,15 +103,15 @@ s3_accesslog_metadata := {
 
 - `Policy Code:` which should be the same as defined at the starting of the test and must be unique across all rules in the project
 - `Type:` type of policy, available values are: IAC and Cloud
-- `Product:` type of the cloud for example 'AWS'
-- `Language`: related to the product, for example for product 'AWS' Languange will be 'AWS Cloud Formation'
+- `Product:` type of the cloud, for example 'AWS'
+- `Language`: related to the product, for example, for product 'AWS' Languange will be 'AWS Cloud Formation'
 - `Title`: Title of the policy
 - `"Resource Type"`: type of the resource, in this example value is `aws::s3::bucket`,
 - `Description`: Description of the policy
 - `Policy Help URL`: more information about the rule
 - `Resource Help URL`: more information about the resource
 
-## Complate Example
+## Complete Example
 
 ```
 package rule
@@ -225,11 +228,11 @@ s3_accesslog_metadata := {
 - Run the compliance using `Evaluate` button.
 
 - Varify the output as follow:
-  - If the rule get passed then you can see the value  `s3_accesslog = True`
+  - If the rule get passed, then you can see the value  `s3_accesslog = True`
   - If the rule get failed then you can see the value  `s3_accesslog = False`
-  - if the rule get skipped due to type of the resource not matched then you can see `s3_accesslog = null`
-  - also the source_path shows the path of failed resources
-  - before deploying the rule, a developer must test the rule in here.
+  - if the rule gets skipped due to the type of the resource not matched, then you can see `s3_accesslog = null`
+  - also, the source_path shows the path of failed resources
+  - before deploying the rule, a developer must test the rule here.
 
     here is an example:
     ![Playground Image](playground.png "Playground Image")

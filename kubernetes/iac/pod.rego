@@ -7,13 +7,42 @@ package rule
 default run_pod_as_root = null
 
 k8s_issue["run_pod_as_root"] {
+    lower(input.kind) == "pod"
+    input.spec.template.spec.containers[_].securityContext.runAsNonRoot == false
+}
+
+source_path[{"run_pod_as_root":metadata}] {
+    lower(input.kind) == "pod"
+    input.spec.template.spec.containers[i].securityContext.runAsNonRoot == false
+    metadata:= {
+        "resource_path": [["spec","template","spec","containers",i,"securityContext","runAsNonRoot"]]
+    }
+}
+
+k8s_issue["run_pod_as_root"] {
     lower(input.kind) == "daemonset"
     input.spec.template.spec.containers[_].securityContext.runAsNonRoot == false
+}
+
+source_path[{"run_pod_as_root":metadata}] {
+    lower(input.kind) == "daemonset"
+    input.spec.template.spec.containers[i].securityContext.runAsNonRoot == false
+    metadata:= {
+        "resource_path": [["spec","template","spec","containers",i,"securityContext","runAsNonRoot"]]
+    }
 }
 
 k8s_issue["run_pod_as_root"] {
     lower(input.kind) == "daemonset"
     input.spec.template.spec.containers[_].securityContext.runAsUser == 0
+}
+
+source_path[{"run_pod_as_root":metadata}] {
+    lower(input.kind) == "daemonset"
+    input.spec.template.spec.containers[i].securityContext.runAsUser == 0
+    metadata:= {
+        "resource_path": [["spec","template","spec","containers",i,"securityContext","runAsUser"]]
+    }
 }
 
 k8s_issue["run_pod_as_root"] {
@@ -21,9 +50,25 @@ k8s_issue["run_pod_as_root"] {
     input.spec.template.spec.containers[_].securityContext.runAsNonRoot == false
 }
 
+source_path[{"run_pod_as_root":metadata}] {
+    lower(input.kind) == "deployment"
+    input.spec.template.spec.containers[i].securityContext.runAsNonRoot == false
+    metadata:= {
+        "resource_path": [["spec","template","spec","containers",i,"securityContext","runAsNonRoot"]]
+    }
+}
+
 k8s_issue["run_pod_as_root"] {
     lower(input.kind) == "deployment"
     input.spec.template.spec.containers[_].securityContext.runAsUser == 0
+}
+
+source_path[{"run_pod_as_root":metadata}] {
+    lower(input.kind) == "deployment"
+    input.spec.template.spec.containers[i].securityContext.runAsUser == 0
+    metadata:= {
+        "resource_path": [["spec","template","spec","containers",i,"securityContext","runAsUser"]]
+    }
 }
 
 k8s_issue["run_pod_as_root"] {
@@ -31,9 +76,26 @@ k8s_issue["run_pod_as_root"] {
     input.spec.template.spec.containers[_].securityContext.runAsNonRoot == false
 }
 
+source_path[{"run_pod_as_root":metadata}] {
+    lower(input.kind) == "statefulset"
+    input.spec.template.spec.containers[i].securityContext.runAsNonRoot == false
+    metadata:= {
+        "resource_path": [["spec","template","spec","containers",i,"securityContext","runAsNonRoot"]]
+    }
+}
+
+
 k8s_issue["run_pod_as_root"] {
     lower(input.kind) == "statefulset"
     input.spec.template.spec.containers[_].securityContext.runAsUser == 0
+}
+
+source_path[{"run_pod_as_root":metadata}] {
+    lower(input.kind) == "statefulset"
+    input.spec.template.spec.containers[i].securityContext.runAsUser == 0
+    metadata:= {
+        "resource_path": [["spec","template","spec","containers",i,"securityContext","runAsUser"]]
+    }
 }
 
 run_pod_as_root {
@@ -78,8 +140,29 @@ run_pod_as_root_metadata := {
 default run_privileged_pod = null
 
 k8s_issue["run_privileged_pod"] {
+    lower(input.kind) == "pod"
+    input.spec.template.spec.containers[_].securityContext.privileged == true
+}
+
+source_path[{"run_privileged_pod":metadata}] {
+    lower(input.kind) == "pod"
+    input.spec.template.spec.containers[i].securityContext.privileged == true
+    metadata:= {
+        "resource_path": [["spec","template","spec","containers",i,"securityContext","privileged"]]
+    }
+}
+
+k8s_issue["run_privileged_pod"] {
     lower(input.kind) == "daemonset"
     input.spec.template.spec.containers[_].securityContext.privileged == true
+}
+
+source_path[{"run_privileged_pod":metadata}] {
+    lower(input.kind) == "daemonset"
+    input.spec.template.spec.containers[i].securityContext.privileged == true
+    metadata:= {
+        "resource_path": [["spec","template","spec","containers",i,"securityContext","privileged"]]
+    }
 }
 
 k8s_issue["run_privileged_pod"] {
@@ -87,9 +170,25 @@ k8s_issue["run_privileged_pod"] {
     input.spec.template.spec.containers[_].securityContext.privileged == true
 }
 
+source_path[{"run_privileged_pod":metadata}] {
+    lower(input.kind) == "deployment"
+    input.spec.template.spec.containers[i].securityContext.privileged == true
+    metadata:= {
+        "resource_path": [["spec","template","spec","containers",i,"securityContext","privileged"]]
+    }
+}
+
 k8s_issue["run_privileged_pod"] {
     lower(input.kind) == "statefulset"
     input.spec.template.spec.containers[_].securityContext.privileged == true
+}
+
+source_path[{"run_privileged_pod":metadata}] {
+    lower(input.kind) == "statefulset"
+    input.spec.template.spec.containers[i].securityContext.privileged == true
+    metadata:= {
+        "resource_path": [["spec","template","spec","containers",i,"securityContext","privileged"]]
+    }
 }
 
 run_privileged_pod {
@@ -134,8 +233,29 @@ run_privileged_pod_metadata := {
 default pod_default_ns = null
 
 k8s_issue["pod_default_ns"] {
+    lower(input.kind) == "pod"
+    input.namespace == "default"
+}
+
+source_path[{"pod_default_ns":metadata}] {
+    lower(input.kind) == "pod"
+    input.namespace == "default"
+    metadata:= {
+        "resource_path": [["namespace"]]
+    }
+}
+
+k8s_issue["pod_default_ns"] {
     lower(input.kind) == "daemonset"
     input.namespace == "default"
+}
+
+source_path[{"pod_default_ns":metadata}] {
+    lower(input.kind) == "daemonset"
+    input.namespace == "default"
+    metadata:= {
+        "resource_path": [["namespace"]]
+    }
 }
 
 k8s_issue["pod_default_ns"] {
@@ -143,9 +263,25 @@ k8s_issue["pod_default_ns"] {
     input.namespace == "default"
 }
 
+source_path[{"pod_default_ns":metadata}] {
+    lower(input.kind) == "deployment"
+    input.namespace == "default"
+    metadata:= {
+        "resource_path": [["namespace"]]
+    }
+}
+
 k8s_issue["pod_default_ns"] {
     lower(input.kind) == "statefulset"
     input.namespace == "default"
+}
+
+source_path[{"pod_default_ns":metadata}] {
+    lower(input.kind) == "statefulset"
+    input.namespace == "default"
+    metadata:= {
+        "resource_path": [["namespace"]]
+    }
 }
 
 pod_default_ns {
@@ -190,8 +326,29 @@ pod_default_ns_metadata := {
 default hostpath_mount = null
 
 k8s_issue["hostpath_mount"] {
+    lower(input.kind) == "pod"
+    count(input.spec.template.spec.volumes[_].hostPath) > 0
+}
+
+source_path[{"hostpath_mount":metadata}] {
+    lower(input.kind) == "pod"
+    count(input.spec.template.spec.volumes[i].hostPath) > 0
+    metadata:= {
+        "resource_path": [["spec","template","spec","volumes",i,"hostPath"]]
+    }
+}
+
+k8s_issue["hostpath_mount"] {
     lower(input.kind) == "daemonset"
     count(input.spec.template.spec.volumes[_].hostPath) > 0
+}
+
+source_path[{"hostpath_mount":metadata}] {
+    lower(input.kind) == "daemonset"
+    count(input.spec.template.spec.volumes[i].hostPath) > 0
+    metadata:= {
+        "resource_path": [["spec","template","spec","volumes",i,"hostPath"]]
+    }
 }
 
 k8s_issue["hostpath_mount"] {
@@ -199,9 +356,25 @@ k8s_issue["hostpath_mount"] {
     count(input.spec.template.spec.volumes[_].hostPath) > 0
 }
 
+source_path[{"hostpath_mount":metadata}] {
+    lower(input.kind) == "deployment"
+    count(input.spec.template.spec.volumes[i].hostPath) > 0
+    metadata:= {
+        "resource_path": [["spec","template","spec","volumes",i,"hostPath"]]
+    }
+}
+
 k8s_issue["hostpath_mount"] {
     lower(input.kind) == "statefulset"
     count(input.spec.template.spec.volumes[_].hostPath) > 0
+}
+
+source_path[{"hostpath_mount":metadata}] {
+    lower(input.kind) == "statefulset"
+    count(input.spec.template.spec.volumes[i].hostPath) > 0
+    metadata:= {
+        "resource_path": [["spec","template","spec","volumes",i,"hostPath"]]
+    }
 }
 
 hostpath_mount {
@@ -246,9 +419,33 @@ hostpath_mount_metadata := {
 default pod_selinux = null
 
 k8s_issue["pod_selinux"] {
+    lower(input.kind) == "pod"
+    container := input.spec.template.spec.containers[_]
+    not container.securityContext.seLinuxOptions
+}
+
+source_path[{"hostpath_mount":metadata}] {
+    lower(input.kind) == "pod"
+    container := input.spec.template.spec.containers[i]
+    not container.securityContext.seLinuxOptions
+    metadata:= {
+        "resource_path": [["spec","template","spec","containers",i,"securityContext","seLinuxOptions"]]
+    }
+}
+
+k8s_issue["pod_selinux"] {
     lower(input.kind) == "daemonset"
     container := input.spec.template.spec.containers[_]
     not container.securityContext.seLinuxOptions
+}
+
+source_path[{"hostpath_mount":metadata}] {
+    lower(input.kind) == "daemonset"
+    container := input.spec.template.spec.containers[i]
+    not container.securityContext.seLinuxOptions
+    metadata:= {
+        "resource_path": [["spec","template","spec","containers",i,"securityContext","seLinuxOptions"]]
+    }
 }
 
 k8s_issue["pod_selinux"] {
@@ -257,10 +454,28 @@ k8s_issue["pod_selinux"] {
     not container.securityContext.seLinuxOptions
 }
 
+source_path[{"hostpath_mount":metadata}] {
+    lower(input.kind) == "deployment"
+    container := input.spec.template.spec.containers[i]
+    not container.securityContext.seLinuxOptions
+    metadata:= {
+        "resource_path": [["spec","template","spec","containers",i,"securityContext","seLinuxOptions"]]
+    }
+}
+
 k8s_issue["pod_selinux"] {
     lower(input.kind) == "statefulset"
     container := input.spec.template.spec.containers[_]
     not container.securityContext.seLinuxOptions
+}
+
+source_path[{"hostpath_mount":metadata}] {
+    lower(input.kind) == "statefulset"
+    container := input.spec.template.spec.containers[i]
+    not container.securityContext.seLinuxOptions
+    metadata:= {
+        "resource_path": [["spec","template","spec","containers",i,"securityContext","seLinuxOptions"]]
+    }
 }
 
 pod_selinux {
