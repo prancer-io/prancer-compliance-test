@@ -1840,6 +1840,25 @@ source_path[{"dynamodb_kinesis_stream": metadata}] {
     }
 }
 
+aws_issue["dynamodb_kinesis_stream"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_dynamodb_table"
+    resource.properties.stream_enabled == true
+    resource.properties.stream_arn == null
+}
+
+source_path[{"dynamodb_kinesis_stream": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_dynamodb_table"
+    resource.properties.stream_enabled == true
+    resource.properties.stream_arn == null
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "stream_arn"]
+        ],
+    }
+}
+
 dynamodb_kinesis_stream {
     lower(input.resources[i].type) == "aws_dynamodb_table"
     not aws_issue["dynamodb_kinesis_stream"]

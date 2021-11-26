@@ -227,6 +227,25 @@ acm_ct_log_metadata := {
 
 default acm_certificate_arn = null
 
+aws_attribute_absence["acm_certificate_arn"] {
+    resource := input.resources[i]
+    type = ["aws_acm_certificate", "aws_acmpca_certificate_authority_certificate"]
+    lower(resource.type) == type[_]
+    not resource.properties.certificate_authority_arn
+}
+
+source_path[{"acm_certificate_arn": metadata}] {
+    resource := input.resources[i]
+    type = ["aws_acm_certificate", "aws_acmpca_certificate_authority_certificate"]
+    lower(resource.type) == type[_]
+    not resource.properties.certificate_authority_arn
+    metadata := {
+        "resource_path": [
+            ["resource", i, "properties", "certificate_authority_arn"]
+        ],
+    }
+}
+
 aws_issue["acm_certificate_arn"] {
     resource := input.resources[i]
     type = ["aws_acm_certificate", "aws_acmpca_certificate_authority_certificate"]
@@ -241,7 +260,7 @@ source_path[{"acm_certificate_arn": metadata}] {
     count(resource.properties.certificate_authority_arn) == 0
     metadata := {
         "resource_path": [
-            ["Resources", i, "properties", "certificate_authority_arn"]
+            ["resource", i, "properties", "certificate_authority_arn"]
         ],
     }
 }
@@ -260,7 +279,7 @@ source_path[{"acm_certificate_arn": metadata}] {
     resource.properties.certificate_authority_arn == null
     metadata := {
         "resource_path": [
-            ["Resources", i, "properties", "certificate_authority_arn"]
+            ["resource", i, "properties", "certificate_authority_arn"]
         ],
     }
 }
@@ -268,14 +287,21 @@ source_path[{"acm_certificate_arn": metadata}] {
 acm_certificate_arn {
     type = ["aws_acm_certificate", "aws_acmpca_certificate_authority_certificate"]
     not aws_issue["acm_certificate_arn"]
+    not aws_attribute_absence["acm_certificate_arn"]
 }
 
 acm_certificate_arn = false {
     aws_issue["acm_certificate_arn"]
 }
 
+acm_certificate_arn = false {
+    aws_attribute_absence["acm_certificate_arn"]
+}
+
 acm_certificate_arn_err = "Ensure that the CertificateManager certificates reference only Private ACMPCA certificate authorities" {
     aws_issue["acm_certificate_arn"]
+} else = "Ensure that the CertificateManager certificates reference only Private ACMPCA certificate authorities" {
+    aws_attribute_absence["acm_certificate_arn"]
 }
 
 acm_certificate_arn_metadata := {

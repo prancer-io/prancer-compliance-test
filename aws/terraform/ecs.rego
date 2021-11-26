@@ -935,11 +935,13 @@ ecs_assign_public_ip = false {
 }
 
 ecs_assign_public_ip = false {
-    aws_issue["ecs_assign_public_ip"]
+    aws_bool_issue["ecs_assign_public_ip"]
 }
 
 ecs_assign_public_ip_err = "Ensure that ECS Service and Task Set network configuration disallows the assignment of public IPs" {
     aws_issue["ecs_assign_public_ip"]
+} else = "Ensure that ECS Service and Task Set network configuration disallows the assignment of public IPs" {
+    aws_bool_issue["ecs_assign_public_ip"]
 }
 
 ecs_assign_public_ip_metadata := {
@@ -1135,14 +1137,14 @@ aws_issue["ecs_security_group"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_service"
     network_configuration := resource.properties.network_configuration[j]
-    count(network_configuration.security_groups)
+    count(network_configuration.security_groups) == 0
 }
 
 source_path[{"ecs_security_group": metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecs_service"
     network_configuration := resource.properties.network_configuration[j]
-    count(network_configuration.security_groups)
+    count(network_configuration.security_groups) == 0
     metadata := {
         "resource_path": [
             ["resources", i, "properties", "network_configuration", j, "security_groups"]
@@ -1191,13 +1193,13 @@ default ecs_network_mode = null
 
 aws_issue["ecs_network_mode"] {
     resource := input.resources[i]
-    lower(resource.type) == "aws::ecs::taskdefinition"
+    lower(resource.type) == "aws_ecs_task_definition"
     not resource.properties.network_mode
 }
 
 source_path[{"ecs_network_mode": metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "aws::ecs::taskdefinition"
+    lower(resource.type) == "aws_ecs_task_definition"
     not resource.properties.network_mode
     metadata := {
         "resource_path": [
@@ -1208,13 +1210,13 @@ source_path[{"ecs_network_mode": metadata}] {
 
 aws_issue["ecs_network_mode"] {
     resource := input.resources[i]
-    lower(resource.type) == "aws::ecs::taskdefinition"
+    lower(resource.type) == "aws_ecs_task_definition"
     count(resource.properties.network_mode) == 0
 }
 
 source_path[{"ecs_network_mode": metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "aws::ecs::taskdefinition"
+    lower(resource.type) == "aws_ecs_task_definition"
     count(resource.properties.network_mode) == 0
     metadata := {
         "resource_path": [
@@ -1225,13 +1227,13 @@ source_path[{"ecs_network_mode": metadata}] {
 
 aws_issue["ecs_network_mode"] {
     resource := input.resources[i]
-    lower(resource.type) == "aws::ecs::taskdefinition"
+    lower(resource.type) == "aws_ecs_task_definition"
     resource.properties.network_mode == null
 }
 
 source_path[{"ecs_network_mode": metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "aws::ecs::taskdefinition"
+    lower(resource.type) == "aws_ecs_task_definition"
     resource.properties.network_mode == null
     metadata := {
         "resource_path": [
@@ -1242,13 +1244,13 @@ source_path[{"ecs_network_mode": metadata}] {
 
 aws_issue["ecs_network_mode"] {
     resource := input.resources[i]
-    lower(resource.type) == "aws::ecs::taskdefinition"
+    lower(resource.type) == "aws_ecs_task_definition"
     lower(resource.properties.network_mode) != "awsvpc"
 }
 
 source_path[{"ecs_network_mode": metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "aws::ecs::taskdefinition"
+    lower(resource.type) == "aws_ecs_task_definition"
     lower(resource.properties.network_mode) != "awsvpc"
     metadata := {
         "resource_path": [
@@ -1258,7 +1260,7 @@ source_path[{"ecs_network_mode": metadata}] {
 }
 
 ecs_network_mode {
-    lower(input.resources[i].type) == "aws::ecs::taskdefinition"
+    lower(input.resources[i].type) == "aws_ecs_task_definition"
     not aws_issue["ecs_network_mode"]
 }
 
