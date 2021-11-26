@@ -1816,6 +1816,75 @@ dynamodb_PITR_enable_metadata := {
 }
 
 #
+# PR-AWS-TRF-DD-003
+#
+
+default dynamodb_kinesis_stream = null
+
+aws_issue["dynamodb_kinesis_stream"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_dynamodb_table"
+    resource.properties.stream_enabled == true
+    count(resource.properties.stream_arn) == 0
+}
+
+source_path[{"dynamodb_kinesis_stream": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_dynamodb_table"
+    resource.properties.stream_enabled == true
+    count(resource.properties.stream_arn) == 0
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "stream_arn"]
+        ],
+    }
+}
+
+aws_issue["dynamodb_kinesis_stream"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_dynamodb_table"
+    resource.properties.stream_enabled == true
+    resource.properties.stream_arn == null
+}
+
+source_path[{"dynamodb_kinesis_stream": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_dynamodb_table"
+    resource.properties.stream_enabled == true
+    resource.properties.stream_arn == null
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "stream_arn"]
+        ],
+    }
+}
+
+dynamodb_kinesis_stream {
+    lower(input.resources[i].type) == "aws_dynamodb_table"
+    not aws_issue["dynamodb_kinesis_stream"]
+}
+
+dynamodb_kinesis_stream = false {
+    aws_issue["dynamodb_kinesis_stream"]
+}
+
+dynamodb_kinesis_stream_err = "Dynamo DB kinesis specification property should not be null" {
+    aws_issue["dynamodb_kinesis_stream"]
+}
+
+dynamodb_kinesis_stream_metadata := {
+    "Policy Code": "PR-AWS-TRF-DD-003",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Dynamo DB kinesis specification property should not be null",
+    "Policy Description": "Dynamo DB kinesis specification property should not be null",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table#stream_arn"
+}
+
+#
 # PR-AWS-TRF-QLDB-001
 #
 
