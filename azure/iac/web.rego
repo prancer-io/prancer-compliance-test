@@ -54,7 +54,7 @@ https_only = false {
 
 https_only_err = "Microsoft.web/Sites resource property httpsOnly missing in the resource" {
     azure_attribute_absence["https_only"]
-} else = "Azure Web Service Web app does not redirect HTTP to HTTPS" {
+} else = "Azure App Service Web app does not redirect HTTP to HTTPS" {
     azure_issue["https_only"]
 }
 
@@ -63,14 +63,12 @@ https_only_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Ensure Azure Web Service Web App enforce https connection",
+    "Policy Title": "Ensure Azure App Service Web App enforce https connection",
     "Policy Description": "Azure Web Apps by default allows sites to run under both HTTP and HTTPS, and can be accessed by anyone using non-secure HTTP links. Non-secure HTTP requests can be restricted and all HTTP requests redirected to the secure HTTPS port. We recommend you enforce HTTPS-only traffic to increase security. This will redirect all non-secure HTTP requests to HTTPS ports. HTTPS uses the SSL/TLS protocol to provide a secure connection, which is both encrypted and authenticated.",
     "Resource Type": "microsoft.web/sites",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
 }
-
-
 
 
 # PR-AZR-ARM-WEB-002
@@ -321,7 +319,7 @@ source_path[{"web_service_cors_not_allowing_all":metadata}] {
 azure_attribute_absence["web_service_cors_not_allowing_all"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.web/sites"
-    not resource.properties.siteConfig.allowedOrigins
+    not resource.properties.siteConfig.cors.allowedOrigins
 }
 
 source_path[{"web_service_cors_not_allowing_all":metadata}] {
@@ -332,7 +330,6 @@ source_path[{"web_service_cors_not_allowing_all":metadata}] {
         "resource_path": [["resources",i,"properties","siteConfig","cors","allowedOrigins"]]
     }
 }
-
 
 azure_issue["web_service_cors_not_allowing_all"] {
     resource := input.resources[_]

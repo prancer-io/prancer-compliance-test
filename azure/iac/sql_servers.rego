@@ -495,6 +495,7 @@ sql_public_access {
 
 sql_public_access {
     lower(input.resources[_].type) == "microsoft.sql/servers"
+    not azure_attribute_absence["sql_public_access"]
     not azure_issue["sql_public_access"]
 }
 
