@@ -6,7 +6,7 @@ has_property(parent_object, target_property) {
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_firewall_rule
 
-# PR-AZR-TRF-SQL-059
+# PR-AZR-TRF-SQL-014
 
 default mysql_ingress_from_any_ip_disabled = null
 
@@ -64,7 +64,7 @@ mysql_ingress_from_any_ip_disabled_err = "Resource azurerm_mysql_server and azur
 }
 
 mysql_ingress_from_any_ip_disabled_metadata := {
-    "Policy Code": "PR-AZR-TRF-SQL-059",
+    "Policy Code": "PR-AZR-TRF-SQL-014",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",

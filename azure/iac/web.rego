@@ -71,8 +71,6 @@ https_only_metadata := {
 }
 
 
-
-
 # PR-AZR-ARM-WEB-002
 
 default min_tls_version = null
@@ -280,3 +278,797 @@ http_20_enabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
 }
+
+
+# PR-AZR-ARM-WEB-006
+#
+
+default web_service_cors_not_allowing_all = null
+
+azure_attribute_absence["web_service_cors_not_allowing_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig
+}
+
+source_path[{"web_service_cors_not_allowing_all":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig"]]
+    }
+}
+
+
+azure_attribute_absence["web_service_cors_not_allowing_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.cors
+}
+
+source_path[{"web_service_cors_not_allowing_all":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.cors
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","cors"]]
+    }
+}
+
+azure_attribute_absence["web_service_cors_not_allowing_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.cors.allowedOrigins
+}
+
+source_path[{"web_service_cors_not_allowing_all":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.cors.allowedOrigins
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","cors","allowedOrigins"]]
+    }
+}
+
+azure_issue["web_service_cors_not_allowing_all"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    allowedOrigin := resource.properties.siteConfig.cors.allowedOrigins[_]
+    contains(allowedOrigin, "*")
+}
+
+source_path[{"web_service_cors_not_allowing_all":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    allowedOrigin := resource.properties.siteConfig.cors.allowedOrigins[_]
+    contains(allowedOrigin, "*")
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","cors","allowedOrigins"]]
+    }
+}
+
+web_service_cors_not_allowing_all {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    azure_attribute_absence["web_service_cors_not_allowing_all"]
+    not azure_issue["web_service_cors_not_allowing_all"]
+}
+
+web_service_cors_not_allowing_all {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_cors_not_allowing_all"]
+    not azure_issue["web_service_cors_not_allowing_all"]
+}
+
+web_service_cors_not_allowing_all = false {
+    azure_issue["web_service_cors_not_allowing_all"]
+}
+
+web_service_cors_not_allowing_all_err = "CORS configuration is currently allowing every resources to access Azure Web Service" {
+    azure_issue["web_service_cors_not_allowing_all"]
+}
+
+web_service_cors_not_allowing_all_metadata := {
+    "Policy Code": "PR-AZR-ARM-WEB-006",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure CORS configuration is not allowing every resources to access Azure Web Service",
+    "Policy Description": "This policy will identify CORS configuration which are allowing every resoruces to access Azure Web service and give alert",
+    "Resource Type": "microsoft.web/sites",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
+}
+
+
+# PR-AZR-ARM-WEB-007
+#
+
+default web_service_http_logging_enabled = null
+
+azure_attribute_absence["web_service_http_logging_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.httpLoggingEnabled
+}
+
+source_path[{"web_service_http_logging_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.httpLoggingEnabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","httpLoggingEnabled"]]
+    }
+}
+
+azure_issue["web_service_http_logging_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.httpLoggingEnabled != true
+}
+
+source_path[{"web_service_http_logging_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.httpLoggingEnabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","httpLoggingEnabled"]]
+    }
+}
+
+web_service_http_logging_enabled {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_http_logging_enabled"]
+    not azure_issue["web_service_http_logging_enabled"]
+}
+
+web_service_http_logging_enabled = false {
+    azure_attribute_absence["web_service_http_logging_enabled"]
+}
+
+web_service_http_logging_enabled = false {
+    azure_issue["web_service_http_logging_enabled"]
+}
+
+web_service_http_logging_enabled_err = "Azure Web Service http logging currently is disable" {
+    azure_issue["web_service_http_logging_enabled"]
+} else = "microsoft.web/sites property 'siteConfig.httpLoggingEnabled' need to be exist. Its missing from the resource.e" {
+    azure_attribute_absence["web_service_http_logging_enabled"]
+}
+
+web_service_http_logging_enabled_metadata := {
+    "Policy Code": "PR-AZR-ARM-WEB-007",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Web Service http logging should be enabled",
+    "Policy Description": "This policy will identify the Azure Web service which dont have http logging enabled and give alert",
+    "Resource Type": "microsoft.web/sites",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
+}
+
+
+# PR-AZR-ARM-WEB-008
+#
+
+default web_service_detaild_error_message_enabled = null
+
+azure_attribute_absence["web_service_detaild_error_message_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.detailedErrorLoggingEnabled
+}
+
+source_path[{"web_service_detaild_error_message_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.detailedErrorLoggingEnabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","detailedErrorLoggingEnabled"]]
+    }
+}
+
+azure_issue["web_service_detaild_error_message_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.detailedErrorLoggingEnabled != true
+}
+
+source_path[{"web_service_detaild_error_message_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.detailedErrorLoggingEnabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","detailedErrorLoggingEnabled"]]
+    }
+}
+
+web_service_detaild_error_message_enabled {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_detaild_error_message_enabled"]
+    not azure_issue["web_service_detaild_error_message_enabled"]
+}
+
+web_service_detaild_error_message_enabled = false {
+    azure_attribute_absence["web_service_detaild_error_message_enabled"]
+}
+
+web_service_detaild_error_message_enabled = false {
+    azure_issue["web_service_detaild_error_message_enabled"]
+}
+
+web_service_detaild_error_message_enabled_err = "Azure Web Service detaild error message currently not enabled" {
+    azure_issue["web_service_detaild_error_message_enabled"]
+} else = "microsoft.web/sites property 'siteConfig.detailedErrorLoggingEnabled' need to be exist. Its missing from the resource." {
+    azure_attribute_absence["web_service_detaild_error_message_enabled"]
+}
+
+web_service_detaild_error_message_enabled_metadata := {
+    "Policy Code": "PR-AZR-ARM-WEB-008",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Web Service detaild error message should be enabled",
+    "Policy Description": "This policy will identify the Azure Web service which dont have detaild error message enabled and give alert",
+    "Resource Type": "microsoft.web/sites",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
+}
+
+
+# PR-AZR-ARM-WEB-009
+#
+
+default web_service_request_tracing_enabled = null
+
+azure_attribute_absence["web_service_request_tracing_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.requestTracingEnabled
+}
+
+source_path[{"web_service_request_tracing_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.requestTracingEnabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","requestTracingEnabled"]]
+    }
+}
+
+azure_issue["web_service_request_tracing_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.requestTracingEnabled != true
+}
+
+source_path[{"web_service_request_tracing_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.requestTracingEnabled != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","requestTracingEnabled"]]
+    }
+}
+
+web_service_request_tracing_enabled {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_request_tracing_enabled"]
+    not azure_issue["web_service_request_tracing_enabled"]
+}
+
+web_service_request_tracing_enabled = false {
+    azure_attribute_absence["web_service_request_tracing_enabled"]
+}
+
+web_service_request_tracing_enabled = false {
+    azure_issue["web_service_request_tracing_enabled"]
+}
+
+web_service_request_tracing_enabled_err = "Azure Web Service Failed request tracing currently not enabled" {
+    azure_issue["web_service_request_tracing_enabled"]
+} else = "microsoft.web/sites property 'siteConfig.requestTracingEnabled' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
+    azure_attribute_absence["web_service_request_tracing_enabled"]
+}
+
+web_service_request_tracing_enabled_metadata := {
+    "Policy Code": "PR-AZR-ARM-WEB-009",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Web Service Failed request tracing should be enabled",
+    "Policy Description": "This policy will identify the Azure Web service which dont have request tracing enabled and give alert",
+    "Resource Type": "microsoft.web/sites",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
+}
+
+
+# PR-AZR-ARM-WEB-010
+
+default web_service_managed_identity_provider_enabled = null
+
+azure_attribute_absence["web_service_managed_identity_provider_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.identity
+}
+
+source_path[{"web_service_managed_identity_provider_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.identity
+    metadata:= {
+        "resource_path": [["resources","identity"]]
+    }
+}
+
+azure_attribute_absence["web_service_managed_identity_provider_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.identity.type
+}
+
+source_path[{"web_service_managed_identity_provider_enabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.identity.type
+    metadata:= {
+        "resource_path": [["resources","identity","type"]]
+    }
+}
+
+web_service_managed_identity_provider_enabled = false {
+    azure_attribute_absence["web_service_managed_identity_provider_enabled"]
+} else = true {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+}
+
+web_service_managed_identity_provider_enabled_err = "microsoft.web/sites property 'identity.type' need to be exist. Its missing from the resource." {
+    azure_attribute_absence["web_service_managed_identity_provider_enabled"]
+}
+
+web_service_managed_identity_provider_enabled_metadata := {
+    "Policy Code": "PR-AZR-ARM-WEB-010",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Web Service Managed Identity provider should be enabled",
+    "Policy Description": "This policy will identify the Azure web service which dont have Managed Identity provider enabled and give alert",
+    "Resource Type": "microsoft.web/sites",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
+}
+
+
+# PR-AZR-ARM-WEB-011
+
+default web_service_remote_debugging_disabled = null
+
+azure_attribute_absence["web_service_remote_debugging_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.remoteDebuggingEnabled
+}
+
+source_path[{"web_service_remote_debugging_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.remoteDebuggingEnabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","remoteDebuggingEnabled"]]
+    }
+}
+
+azure_issue["web_service_remote_debugging_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.remoteDebuggingEnabled != false
+}
+
+source_path[{"web_service_remote_debugging_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.remoteDebuggingEnabled != false
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","remoteDebuggingEnabled"]]
+    }
+}
+
+
+web_service_remote_debugging_disabled {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    azure_attribute_absence["web_service_remote_debugging_disabled"]
+    not azure_issue["web_service_remote_debugging_disabled"]
+}
+
+web_service_remote_debugging_disabled = false {
+    azure_issue["web_service_remote_debugging_disabled"]
+}
+
+web_service_remote_debugging_disabled_err = "Azure Web Service remote debugging currently not disabled" {
+    azure_issue["web_service_remote_debugging_disabled"]
+}
+
+web_service_remote_debugging_disabled_metadata := {
+    "Policy Code": "PR-AZR-ARM-WEB-011",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Web Service remote debugging should be disabled",
+    "Policy Description": "This policy will identify the Azure web service which have remote debugging enabled and give alert",
+    "Resource Type": "microsoft.web/sites",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
+}
+
+
+# PR-AZR-ARM-WEB-012
+#
+
+default web_service_ftp_deployment_disabled = null
+
+azure_attribute_absence["web_service_ftp_deployment_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.ftpsState
+}
+
+source_path[{"web_service_ftp_deployment_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.ftpsState
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","ftpsState"]]
+    }
+}
+
+azure_issue["web_service_ftp_deployment_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.ftpsState
+    lower(resource.properties.siteConfig.ftpsState) != "disabled"
+    lower(resource.properties.siteConfig.ftpsState) != "ftpsonly"
+}
+
+source_path[{"web_service_ftp_deployment_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.ftpsState
+    lower(resource.properties.siteConfig.ftpsState) != "disabled"
+    lower(resource.properties.siteConfig.ftpsState) != "ftpsonly"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","ftpsState"]]
+    }
+}
+
+web_service_ftp_deployment_disabled = false {
+    azure_attribute_absence["web_service_ftp_deployment_disabled"]
+}
+
+web_service_ftp_deployment_disabled {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_ftp_deployment_disabled"]
+    not azure_issue["web_service_ftp_deployment_disabled"]
+}
+
+web_service_ftp_deployment_disabled = false {
+    azure_issue["web_service_ftp_deployment_disabled"]
+}
+
+
+
+web_service_ftp_deployment_disabled_err = "Azure Web Service FTP deployment is currently not disabled" {
+    azure_issue["web_service_ftp_deployment_disabled"]
+} else = "microsoft.web/sites property 'siteConfig.ftpsState' need to be exist. Its missing from the resource." {
+    azure_attribute_absence["web_service_ftp_deployment_disabled"]
+}
+
+web_service_ftp_deployment_disabled_metadata := {
+    "Policy Code": "PR-AZR-ARM-WEB-012",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Web Service FTP deployments should be disabled",
+    "Policy Description": "This policy will identify the Azure Web service which have FTP deployment enabled and give alert",
+    "Resource Type": "microsoft.web/sites",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
+}
+
+# PR-AZR-ARM-WEB-013
+#
+
+default web_service_net_framework_latest = null
+
+#Defaults to v4.0
+latest_dotnet_framework_version := "v6.0"
+
+azure_attribute_absence["web_service_net_framework_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.netFrameworkVersion
+}
+
+source_path[{"web_service_net_framework_latest":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.netFrameworkVersion
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","netFrameworkVersion"]]
+    }
+}
+
+
+azure_issue["web_service_net_framework_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    lower(resource.properties.siteConfig.netFrameworkVersion) != latest_dotnet_framework_version
+}
+
+source_path[{"web_service_net_framework_latest":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    lower(resource.properties.siteConfig.netFrameworkVersion) != latest_dotnet_framework_version
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","netFrameworkVersion"]]
+    }
+}
+
+# we need to make it pass if property is missing, as microsoft.web/sites may not need dot net framework
+web_service_net_framework_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    azure_attribute_absence["web_service_net_framework_latest"]
+    not azure_issue["web_service_net_framework_latest"]
+}
+
+web_service_net_framework_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_net_framework_latest"]
+    not azure_issue["web_service_net_framework_latest"]
+}
+
+web_service_net_framework_latest = false {
+    azure_issue["web_service_net_framework_latest"]
+}
+
+web_service_det_framework_latest_err = "Azure web Service currently dont have latest version of Dot Net Framework" {
+    azure_issue["web_service_net_framework_latest"]
+}
+
+web_service_dot_neamework_latest_metadata := {
+    "Policy Code": "PR-AZR-ARM-WEB-013",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure web Service Dot Net Framework should be latest",
+    "Policy Description": "This policy will identify the Azure web service which dont have latest version of Net Framework and give alert",
+    "Resource Type": "microsoft.web/sites",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
+}
+
+
+#
+# PR-AZR-ARM-WEB-014
+#
+
+default web_service_php_version_latest = null
+
+latest_php_version := 7.4
+
+azure_attribute_absence["web_service_php_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.phpVersion
+}
+
+source_path[{"web_service_php_version_latest":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.phpVersion
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","phpVersion"]]
+    }
+}
+
+azure_issue["web_service_php_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    to_number(resource.properties.siteConfig.phpVersion) != latest_php_version
+}
+
+source_path[{"web_service_php_version_latest":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    to_number(resource.properties.siteConfig.phpVersion) != latest_php_version
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","phpVersion"]]
+    }
+}
+
+# we need to make it pass if property is missing, as microsoft.web/sites may not need php
+web_service_php_version_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    azure_attribute_absence["web_service_php_version_latest"]
+    not azure_issue["web_service_php_version_latest"]
+}
+
+web_service_php_version_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_php_version_latest"]
+    not azure_issue["web_service_php_version_latest"]
+}
+
+web_service_php_version_latest = false {
+    azure_issue["web_service_php_version_latest"]
+}
+
+web_service_php_version_latest_err = "Azure Web Service currently dont have latest version of PHP" {
+    azure_issue["web_service_php_version_latest"]
+}
+
+web_service_php_version_latest_metadata := {
+    "Policy Code": "PR-AZR-ARM-WEB-014",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Web Service PHP version should be latest",
+    "Policy Description": "This policy will identify the Azure web service which dont have latest version of PHP and give alert",
+    "Resource Type": "microsoft.web/sites",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
+}
+
+
+#
+# PR-AZR-ARM-WEB-015
+#
+
+default web_service_python_version_latest = null
+
+latest_python_version_three := 3.9
+latest_python_version_two := 2.7
+
+azure_attribute_absence["web_service_python_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.pythonVersion
+}
+
+source_path[{"web_service_python_version_latest":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.pythonVersion
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","pythonVersion"]]
+    }
+}
+
+
+azure_issue["web_service_python_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    to_number(resource.properties.siteConfig.pythonVersion) != latest_python_version_three
+    to_number(resource.properties.siteConfig.pythonVersion) != latest_python_version_two
+}
+
+source_path[{"web_service_python_version_latest":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    to_number(resource.properties.siteConfig.pythonVersion) != latest_python_version_three
+    to_number(resource.properties.siteConfig.pythonVersion) != latest_python_version_two
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","pythonVersion"]]
+    }
+}
+
+# we need to make it pass if property is missing, as microsoft.web/sites may not need python
+web_service_python_version_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    azure_attribute_absence["web_service_python_version_latest"]
+    not azure_issue["web_service_python_version_latest"]
+}
+
+web_service_python_version_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_python_version_latest"]
+    not azure_issue["web_service_python_version_latest"]
+}
+
+web_service_python_version_latest = false {
+    azure_issue["web_service_python_version_latest"]
+}
+
+web_service_python_version_latest_err = "Azure Web Service currently dont have latest version of Python" {
+    azure_issue["web_service_python_version_latest"]
+}
+
+web_service_python_version_latest_metadata := {
+    "Policy Code": "PR-AZR-ARM-WEB-015",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Web Service Pyhton version should be latest",
+    "Policy Description": "This policy will identify the Azure web service which dont have latest version of Pyhton and give alert",
+    "Resource Type": "microsoft.web/sites",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
+}
+
+
+#
+# PR-AZR-ARM-WEB-016
+#
+
+default web_service_java_version_latest = null
+
+# valid values are 1.7.0_80, 1.8.0_181, 11
+latest_java_version := "11"
+
+azure_attribute_absence["web_service_java_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.javaVersion
+}
+
+source_path[{"web_service_java_version_latest":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    not resource.properties.siteConfig.javaVersion
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","javaVersion"]]
+    }
+}
+
+
+# valid values are 1.7.0_80, 1.8.0_181, 11
+azure_issue["web_service_java_version_latest"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.javaVersion != latest_java_version
+}
+
+source_path[{"web_service_java_version_latest":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.web/sites"
+    resource.properties.siteConfig.javaVersion != latest_java_version
+    metadata:= {
+        "resource_path": [["resources",i,"properties","siteConfig","javaVersion"]]
+    }
+}
+
+# we need to make it pass if property is missing, as microsoft.web/sites may not need java
+web_service_java_version_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    azure_attribute_absence["web_service_java_version_latest"]
+    not azure_issue["web_service_java_version_latest"]
+}
+
+web_service_java_version_latest {
+    lower(input.resources[_].type) == "microsoft.web/sites"
+    not azure_attribute_absence["web_service_java_version_latest"]
+    not azure_issue["web_service_java_version_latest"]
+}
+
+web_service_java_version_latest = false {
+    azure_issue["web_service_java_version_latest"]
+}
+
+web_service_java_version_latest_err = "Azure Web Service currently dont have latest version of Java" {
+    azure_issue["web_service_java_version_latest"]
+}
+
+web_service_java_version_latest_metadata := {
+    "Policy Code": "PR-AZR-ARM-WEB-016",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Web Service Java version should be latest",
+    "Policy Description": "This policy will identify the Azure web service which dont have latest version of Java and give alert",
+    "Resource Type": "microsoft.web/sites",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites"
+}
+
