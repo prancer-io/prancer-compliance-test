@@ -11,9 +11,25 @@ k8s_issue["empty_ingress"] {
     not input.spec.ingress
 }
 
+source_path[{"empty_ingress":metadata}] {
+    lower(input.kind) == "networkpolicy"
+    not input.spec.ingress
+    metadata:= {
+        "resource_path": [["spec","ingress"]]
+    }
+}
+
 k8s_issue["empty_ingress"] {
     lower(input.kind) == "networkpolicy"
     count(input.spec.ingress) == 0
+}
+
+source_path[{"empty_ingress":metadata}] {
+    lower(input.kind) == "networkpolicy"
+    count(input.spec.ingress) == 0
+    metadata:= {
+        "resource_path": [["spec","ingress"]]
+    }
 }
 
 empty_ingress {

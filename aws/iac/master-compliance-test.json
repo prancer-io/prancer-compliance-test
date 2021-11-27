@@ -2477,6 +2477,198 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_ELB_14",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-ELB-014",
+                            "eval": "data.rule.elb_certificate_listner_arn",
+                            "message": "data.rule.elb_certificate_listner_arn_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenercertificate.html",
+                            "remediationFunction": "PR_AWS_CFR_ELB_014.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure the ELBv2 ListenerCertificate ListenerArn value is defined",
+                    "description": "Ensure the ELBv2 ListenerCertificate ListenerArn value is defined, else an Actor can provide access to CA to non-ADATUM principals.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::elasticloadbalancingv2::listenercertificate"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ELB_15",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-ELB-015",
+                            "eval": "data.rule.elb_listener_sslpolicy",
+                            "message": "data.rule.elb_listener_sslpolicy_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+                            "remediationFunction": "PR_AWS_CFR_ELB_015.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure the Load Balancer Listener SSLPolicy is set to at least one value from approved policies",
+                    "description": "Ensure the Load Balancer Listener SSLPolicy is set to at least one value from approved policies, else an Actor can gain access to ADATUM information due to misconfigured cryptographic settings",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::elasticloadbalancingv2::listener"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ELB_16",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-ELB-016",
+                            "eval": "data.rule.elb_subnet",
+                            "message": "data.rule.elb_subnet_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-loadbalancer-subnetmapping.html#cfn-elasticloadbalancingv2-loadbalancer-subnetmapping-subnetid",
+                            "remediationFunction": "PR_AWS_CFR_ELB_016.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure one of Subnets or SubnetMappings is defined for loadbalancer",
+                    "description": "Ensure one of Subnets or SubnetMappings is defined for loadbalancer",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::elasticloadbalancingv2::loadbalancer"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ELB_17",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-ELB-017",
+                            "eval": "data.rule.elb_scheme",
+                            "message": "data.rule.elb_scheme_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html",
+                            "remediationFunction": "PR_AWS_CFR_ELB_017.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure LoadBalancer scheme is set to internal and not internet-facing",
+                    "description": "LoadBalancer scheme must be explicitly set to internal, else an Actor can allow access to ADATUM information through the misconfiguration of an ELB resource",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::elasticloadbalancingv2::loadbalancer"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ELB_18",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-ELB-018",
+                            "eval": "data.rule.elb_type",
+                            "message": "data.rule.elb_type_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html#cfn-elasticloadbalancingv2-loadbalancer-type",
+                            "remediationFunction": "PR_AWS_CFR_ELB_018.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure all load balancers created are application load balancers",
+                    "description": "Ensure the value of Type for each LoadBalancer resource is application or the Type is not set, since it defaults to application",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::elasticloadbalancingv2::loadbalancer"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ELB_19",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(elb.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-ELB-019",
+                            "eval": "data.rule.elb_protocol",
+                            "message": "data.rule.elb_protocol_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html#cfn-elasticloadbalancingv2-targetgroup-protocol",
+                            "remediationFunction": "PR_AWS_CFR_ELB_019.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure LoadBalancer TargetGroup Protocol values are limited to HTTPS",
+                    "description": "The only allowed Protocol value for LoadBalancer TargetGroups is HTTPS, though the property is ignored if the target type is lambda.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::elasticloadbalancingv2::targetgroup"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_STORAGE_1",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -4547,6 +4739,40 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_ACM_3",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(acm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-ACM-003",
+                            "eval": "data.rule.acm_certificate_arn",
+                            "message": "data.rule.acm_certificate_arn_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html#cfn-certificatemanager-certificate-certificateauthorityarn",
+                            "remediationFunction": "PR_AWS_CFR_ACM_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that the CertificateManager certificates reference only Private ACMPCA certificate authorities",
+                    "description": "Ensure that the aws certificate manager/ACMPCA Certificate CertificateAuthorityArn property references (using Fn::GetAtt or Ref) a Private CA, or that the property is not used.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::certificatemanager::certificate",
+                        "aws::acmpca::certificate",
+                        "aws::acmpca::certificateauthorityactivation"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_ECR_1",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
@@ -5011,7 +5237,7 @@
                         }
                     ],
                     "severity": "Medium",
-                    "title": "AWS ECS task definition logging not enabled.",
+                    "title": "AWS ECS task definition logging not enabled. or only valid option for LogDriver is 'awslogs'",
                     "description": "It is recommended that logging is enabled for AWS ECS task definition. Please make sure your 'TaskDefinition' template has 'LogConfiguration' and 'LogDriver' configured.",
                     "tags": [
                         {
@@ -5071,7 +5297,7 @@
                             "eval": "data.rule.ecs_container_insight_enable",
                             "message": "data.rule.ecs_container_insight_enable_err",
                             "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-cluster-clustersettings.html#cfn-ecs-cluster-clustersettings-name",
-                            "remediationFunction": "PR_AWS_CFR_ECS_008.py"
+                            "remediationFunction": "PR_AWS_CFR_ECS_009.py"
                         }
                     ],
                     "severity": "Medium",
@@ -5088,6 +5314,204 @@
                     ],
                     "resourceTypes": [
                         "aws::ecs::cluster"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_9",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-ECS-009",
+                            "eval": "data.rule.ecs_enable_execute_command",
+                            "message": "data.rule.ecs_enable_execute_command_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-enableexecutecommand",
+                            "remediationFunction": "PR_AWS_CFR_ECS_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure ECS Services and Task Set EnableExecuteCommand property set to False",
+                    "description": "If the EnableExecuteCommand property is set to True on an ECS Service then any third person can launch ECS service into an unsafe configuration allowing for external exposure or unaccounted for configurations.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::ecs::service",
+                        "aws::ecs::taskset"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_10",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-ECS-010",
+                            "eval": "data.rule.ecs_assign_public_ip",
+                            "message": "data.rule.ecs_assign_public_ip_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-enableexecutecommand",
+                            "remediationFunction": "PR_AWS_CFR_ECS_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that ECS Service and Task Set network configuration disallows the assignment of public IPs",
+                    "description": "Ensure that the ecs service and Task Set Network has set [AssignPublicIp/assign_public_ip] property is set to DISABLED else an Actor can exfiltrate data by associating ECS resources with non-ADATUM resources",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::ecs::service",
+                        "aws::ecs::taskset"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_11",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-ECS-011",
+                            "eval": "data.rule.ecs_launch_type",
+                            "message": "data.rule.ecs_launch_type_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-launchtype",
+                            "remediationFunction": "PR_AWS_CFR_ECS_011.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that ECS services and Task Sets are launched as Fargate type",
+                    "description": "Ensure that ECS services and Task Sets are launched as Fargate type else Actor can launch ECS service into an unsafe configuration allowing for external exposure or unaccounted for configurations",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::ecs::service",
+                        "aws::ecs::taskset"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_12",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-ECS-012",
+                            "eval": "data.rule.ecs_subnet",
+                            "message": "data.rule.ecs_subnet_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-awsvpcconfiguration.html#cfn-ecs-service-awsvpcconfiguration-subnets",
+                            "remediationFunction": "PR_AWS_CFR_ECS_012.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Value(s) of subnets attached to aws ecs service or taskset AwsVpcConfiguration resources are vended",
+                    "description": "Value(s) of subnets attached to aws ecs service or taskset AwsVpcConfiguration resources are vended else Actor can exfiltrate data by associating ECS resources with non-ADATUM resources.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::ecs::service",
+                        "aws::ecs::taskset"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_13",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-ECS-013",
+                            "eval": "data.rule.ecs_security_group",
+                            "message": "data.rule.ecs_security_group_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-awsvpcconfiguration.html#cfn-ecs-service-awsvpcconfiguration-securitygroups",
+                            "remediationFunction": "PR_AWS_CFR_ECS_013.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "VPC configurations on ECS Services and TaskSets must use either vended security groups",
+                    "description": "ECS Service and ECS TaskSet resources set a SecurityGroup in the AwsvpcConfiguration. else Actor can exfiltrate data by associating ECS resources with non-ADATUM resources.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::ecs::service",
+                        "aws::ecs::taskset"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_ECS_14",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ecs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-ECS-014",
+                            "eval": "data.rule.ecs_network_mode",
+                            "message": "data.rule.ecs_network_mode_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html#cfn-ecs-taskdefinition-networkmode",
+                            "remediationFunction": "PR_AWS_CFR_ECS_014.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that ECS Task Definition have their network mode property set to awsvpc",
+                    "description": "Ensure that ECS Task Definition have their network mode property set to awsvpc. else an Actor can launch ECS service into an unsafe configuration allowing for external exposure or unaccounted for configurations",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::ecs::service",
+                        "aws::ecs::taskset"
                     ]
                 },
                 {
@@ -6524,6 +6948,38 @@
                     "rule": "file(database.rego)",
                     "evals": [
                         {
+                            "id": "PR-AWS-CFR-DD-003",
+                            "eval": "data.rule.dynamodb_kinesis_stream",
+                            "message": "data.rule.dynamodb_kinesis_stream_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-kinesisstreamspecification.html#cfn-dynamodb-kinesisstreamspecification-streamarn",
+                            "remediationFunction": "PR_AWS_CFR_DD_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Dynamo DB kinesis specification property should not be null",
+                    "description": "Dynamo DB kinesis specification property should not be null",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::dynamodb::table"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DATABASE_32",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(database.rego)",
+                    "evals": [
+                        {
                             "id": "PR-AWS-CFR-EC-001",
                             "eval": "data.rule.cache_failover",
                             "message": "data.rule.cache_failover_err",
@@ -6548,7 +7004,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DATABASE_32",
+                    "masterTestId": "TEST_DATABASE_33",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
                     ],
@@ -6580,7 +7036,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DATABASE_33",
+                    "masterTestId": "TEST_DATABASE_34",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
                     ],
@@ -6612,7 +7068,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DATABASE_34",
+                    "masterTestId": "TEST_DATABASE_35",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
                     ],
@@ -6644,7 +7100,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DATABASE_35",
+                    "masterTestId": "TEST_DATABASE_36",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
                     ],
@@ -6676,7 +7132,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DATABASE_36",
+                    "masterTestId": "TEST_DATABASE_37",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
                     ],
@@ -6708,7 +7164,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DATABASE_37",
+                    "masterTestId": "TEST_DATABASE_38",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
                     ],
@@ -6740,7 +7196,7 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_DATABASE_38",
+                    "masterTestId": "TEST_DATABASE_39",
                     "masterSnapshotId": [
                         "CFR_TEMPLATE_SNAPSHOT"
                     ],
@@ -7810,6 +8266,38 @@
                     "severity": "Medium",
                     "title": "Instance is communicating with ports known to mine Ethereum",
                     "description": "Ethereum Identifies traffic from internal workloads to internet IPs on ports 8545,30303 that are known to mine Ethereum. Unless this traffic is part of authorized applications and processes, your instances may have been compromised.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "aws::ec2::securitygroup"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_GROUP_33",
+                    "masterSnapshotId": [
+                        "CFR_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitygroup.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CFR-SG-033",
+                            "eval": "data.rule.sg_vpc",
+                            "message": "data.rule.sg_vpc_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#cfn-ec2-securitygroup-vpcid",
+                            "remediationFunction": "PR_AWS_CFR_SG_033.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Security groups has attached to a VPCs",
+                    "description": "Ensure Security groups has attached to a VPCs else Shared security groups/port ranges lead to violation of principle of least privilege due to the reviewers not being aware that the security group/port range is shared.",
                     "tags": [
                         {
                             "cloud": "git",

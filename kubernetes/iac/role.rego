@@ -11,9 +11,25 @@ k8s_issue["rbac_secrets"] {
     input.rules[_].resources[_] == "secrets"
 }
 
+source_path[{"rbac_secrets":metadata}] {
+    lower(input.kind) == "clusterrole"
+    input.rules[i].resources[j] == "secrets"
+    metadata:= {
+        "resource_path": [["rules",i,"resources",j]]
+    }
+}
+
 k8s_issue["rbac_secrets"] {
     lower(input.kind) == "clusterrole"
     regex.match(".*\\*.*", input.rules[_].resources[_])
+}
+
+source_path[{"rbac_secrets":metadata}] {
+    lower(input.kind) == "clusterrole"
+    regex.match(".*\\*.*", input.rules[i].resources[j])
+    metadata:= {
+        "resource_path": [["rules",i,"resources",j]]
+    }
 }
 
 k8s_issue["rbac_secrets"] {
@@ -21,9 +37,25 @@ k8s_issue["rbac_secrets"] {
     input.rules[_].resources[_] == "secrets"
 }
 
+source_path[{"rbac_secrets":metadata}] {
+    lower(input.kind) == "role"
+    input.rules[i].resources[j] == "secrets"
+    metadata:= {
+        "resource_path": [["rules",i,"resources",j]]
+    }
+}
+
 k8s_issue["rbac_secrets"] {
     lower(input.kind) == "role"
     regex.match(".*\\*.*", input.rules[_].resources[_])
+}
+
+source_path[{"rbac_secrets":metadata}] {
+    lower(input.kind) == "role"
+    regex.match(".*\\*.*", input.rules[i].resources[j])
+    metadata:= {
+        "resource_path": [["rules",i,"resources",j]]
+    }
 }
 
 rbac_secrets {
@@ -67,14 +99,38 @@ k8s_issue["rbac_wildcard"] {
     regex.match(".*\\*.*", input.rules[_].resources[_])
 }
 
+source_path[{"rbac_wildcard":metadata}] {
+    lower(input.kind) == "clusterrole"
+    regex.match(".*\\*.*", input.rules[i].resources[j])
+    metadata:= {
+        "resource_path": [["rules",i,"resources",j]]
+    }
+}
+
 k8s_issue["rbac_wildcard"] {
     lower(input.kind) == "clusterrole"
     regex.match(".*\\*.*", input.rules[_].apiGroups[_])
 }
 
+source_path[{"rbac_wildcard":metadata}] {
+    lower(input.kind) == "clusterrole"
+    regex.match(".*\\*.*", input.rules[i].apiGroups[j])
+    metadata:= {
+        "resource_path": [["rules",i,"apiGroups",j]]
+    }
+}
+
 k8s_issue["rbac_wildcard"] {
     lower(input.kind) == "clusterrole"
     regex.match(".*\\*.*", input.rules[_].verbs[_])
+}
+
+source_path[{"rbac_wildcard":metadata}] {
+    lower(input.kind) == "clusterrole"
+    regex.match(".*\\*.*", input.rules[i].verbs[j])
+    metadata:= {
+        "resource_path": [["rules",i,"verbs",j]]
+    }
 }
 
 k8s_issue["rbac_wildcard"] {
@@ -82,14 +138,38 @@ k8s_issue["rbac_wildcard"] {
     regex.match(".*\\*.*", input.rules[_].resources[_])
 }
 
+source_path[{"rbac_wildcard":metadata}] {
+    lower(input.kind) == "role"
+    regex.match(".*\\*.*", input.rules[i].resources[j])
+    metadata:= {
+        "resource_path": [["rules",i,"resources",j]]
+    }
+}
+
 k8s_issue["rbac_wildcard"] {
     lower(input.kind) == "role"
     regex.match(".*\\*.*", input.rules[_].apiGroups[_])
 }
 
+source_path[{"rbac_wildcard":metadata}] {
+    lower(input.kind) == "role"
+    regex.match(".*\\*.*", input.rules[i].apiGroups[j])
+    metadata:= {
+        "resource_path": [["rules",i,"apiGroups",j]]
+    }
+}
+
 k8s_issue["rbac_wildcard"] {
     lower(input.kind) == "role"
     regex.match(".*\\*.*", input.rules[_].verbs[_])
+}
+
+source_path[{"rbac_wildcard":metadata}] {
+    lower(input.kind) == "role"
+    regex.match(".*\\*.*", input.rules[i].verbs[j])
+    metadata:= {
+        "resource_path": [["rules",i,"verbs",j]]
+    }
 }
 
 rbac_wildcard {

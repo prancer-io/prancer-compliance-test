@@ -219,3 +219,99 @@ acm_ct_log_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html"
 }
+
+
+#
+# PR-AWS-TRF-ACM-003
+#
+
+default acm_certificate_arn = null
+
+aws_attribute_absence["acm_certificate_arn"] {
+    resource := input.resources[i]
+    type = ["aws_acm_certificate", "aws_acmpca_certificate_authority_certificate"]
+    lower(resource.type) == type[_]
+    not resource.properties.certificate_authority_arn
+}
+
+source_path[{"acm_certificate_arn": metadata}] {
+    resource := input.resources[i]
+    type = ["aws_acm_certificate", "aws_acmpca_certificate_authority_certificate"]
+    lower(resource.type) == type[_]
+    not resource.properties.certificate_authority_arn
+    metadata := {
+        "resource_path": [
+            ["resource", i, "properties", "certificate_authority_arn"]
+        ],
+    }
+}
+
+aws_issue["acm_certificate_arn"] {
+    resource := input.resources[i]
+    type = ["aws_acm_certificate", "aws_acmpca_certificate_authority_certificate"]
+    lower(resource.type) == type[_]
+    count(resource.properties.certificate_authority_arn) == 0
+}
+
+source_path[{"acm_certificate_arn": metadata}] {
+    resource := input.resources[i]
+    type = ["aws_acm_certificate", "aws_acmpca_certificate_authority_certificate"]
+    lower(resource.type) == type[_]
+    count(resource.properties.certificate_authority_arn) == 0
+    metadata := {
+        "resource_path": [
+            ["resource", i, "properties", "certificate_authority_arn"]
+        ],
+    }
+}
+
+aws_issue["acm_certificate_arn"] {
+    resource := input.resources[i]
+    type = ["aws_acm_certificate", "aws_acmpca_certificate_authority_certificate"]
+    lower(resource.type) == type[_]
+    resource.properties.certificate_authority_arn == null
+}
+
+source_path[{"acm_certificate_arn": metadata}] {
+    resource := input.resources[i]
+    type = ["aws_acm_certificate", "aws_acmpca_certificate_authority_certificate"]
+    lower(resource.type) == type[_]
+    resource.properties.certificate_authority_arn == null
+    metadata := {
+        "resource_path": [
+            ["resource", i, "properties", "certificate_authority_arn"]
+        ],
+    }
+}
+
+acm_certificate_arn {
+    type = ["aws_acm_certificate", "aws_acmpca_certificate_authority_certificate"]
+    not aws_issue["acm_certificate_arn"]
+    not aws_attribute_absence["acm_certificate_arn"]
+}
+
+acm_certificate_arn = false {
+    aws_issue["acm_certificate_arn"]
+}
+
+acm_certificate_arn = false {
+    aws_attribute_absence["acm_certificate_arn"]
+}
+
+acm_certificate_arn_err = "Ensure that the CertificateManager certificates reference only Private ACMPCA certificate authorities" {
+    aws_issue["acm_certificate_arn"]
+} else = "Ensure that the CertificateManager certificates reference only Private ACMPCA certificate authorities" {
+    aws_attribute_absence["acm_certificate_arn"]
+}
+
+acm_certificate_arn_metadata := {
+    "Policy Code": "PR-AWS-TRF-ACM-003",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "Terraform",
+    "Policy Title": "Ensure that the CertificateManager certificates reference only Private ACMPCA certificate authorities",
+    "Policy Description": "Ensure that the aws certificate manager/ACMPCA Certificate certificate_authority_arn property references (using Fn::GetAtt or Ref) a Private CA, or that the property is not used.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acmpca_certificate"
+}

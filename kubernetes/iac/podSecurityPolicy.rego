@@ -11,6 +11,14 @@ k8s_issue["privileged"] {
     input.spec.privileged
 }
 
+source_path[{"privileged":metadata}] {
+    lower(input.kind) == "podsecuritypolicy"
+    input.spec.privileged
+    metadata:= {
+        "resource_path": [["spec","privileged"]]
+    }
+}
+
 privileged {
     lower(input.kind) == "podsecuritypolicy"
     not k8s_issue["privileged"]
@@ -47,10 +55,27 @@ k8s_issue["run_as_root"] {
     lower(input.spec.runAsUser.rule) == "runasany"
 }
 
+source_path[{"run_as_root":metadata}] {
+    lower(input.kind) == "podsecuritypolicy"
+    lower(input.spec.runAsUser.rule) == "runasany"
+    metadata:= {
+        "resource_path": [["spec","runAsUser","rule"]]
+    }
+}
+
 k8s_issue["run_as_root"] {
     lower(input.kind) == "podsecuritypolicy"
     lower(input.spec.runAsUser.rule) == "mustrunas"
     input.spec.runAsUser.ranges[_].min == 0
+}
+
+source_path[{"run_as_root":metadata}] {
+    lower(input.kind) == "podsecuritypolicy"
+    lower(input.spec.runAsUser.rule) == "mustrunas"
+    input.spec.runAsUser.ranges[i].min == 0
+    metadata:= {
+        "resource_path": [["spec","runAsUser","ranges",i,"min"]]
+    }
 }
 
 run_as_root {
@@ -89,11 +114,29 @@ k8s_issue["drop_capabilities"] {
     not input.spec.requiredDropCapabilities
 }
 
+source_path[{"drop_capabilities":metadata}] {
+    lower(input.kind) == "podsecuritypolicy"
+    not input.spec.requiredDropCapabilities
+    metadata:= {
+        "resource_path": [["spec","requiredDropCapabilities"]]
+    }
+}
+
 k8s_issue["drop_capabilities"] {
     lower(input.kind) == "podsecuritypolicy"
     rdc := input.spec.requiredDropCapabilities
     count([c | rdc[_] == "NET_RAW"; c := 1]) == 0
     count([c | rdc[_] == "ALL"; c := 1]) == 0
+}
+
+source_path[{"drop_capabilities":metadata}] {
+    lower(input.kind) == "podsecuritypolicy"
+    rdc := input.spec.requiredDropCapabilities
+    count([c | rdc[_] == "NET_RAW"; c := 1]) == 0
+    count([c | rdc[_] == "ALL"; c := 1]) == 0
+    metadata:= {
+        "resource_path": [["spec","requiredDropCapabilities"]]
+    }
 }
 
 drop_capabilities {
@@ -132,6 +175,14 @@ k8s_issue["host_ipc"] {
     input.spec.hostIPC == true
 }
 
+source_path[{"host_ipc":metadata}] {
+    lower(input.kind) == "podsecuritypolicy"
+    input.spec.hostIPC == true
+    metadata:= {
+        "resource_path": [["spec","hostIPC"]]
+    }
+}
+
 host_ipc {
     lower(input.kind) == "podsecuritypolicy"
     not k8s_issue["host_ipc"]
@@ -166,6 +217,14 @@ default host_network = null
 k8s_issue["host_network"] {
     lower(input.kind) == "podsecuritypolicy"
     input.spec.hostNetwork == true
+}
+
+source_path[{"host_network":metadata}] {
+    lower(input.kind) == "podsecuritypolicy"
+    input.spec.hostNetwork == true
+    metadata:= {
+        "resource_path": [["spec","hostNetwork"]]
+    }
 }
 
 host_network {
@@ -204,6 +263,14 @@ k8s_issue["host_pid"] {
     input.spec.hostPID == true
 }
 
+source_path[{"host_pid":metadata}] {
+    lower(input.kind) == "podsecuritypolicy"
+    input.spec.hostPID == true
+    metadata:= {
+        "resource_path": [["spec","hostPID"]]
+    }
+}
+
 host_pid {
     lower(input.kind) == "podsecuritypolicy"
     not k8s_issue["host_pid"]
@@ -237,7 +304,15 @@ default privilege_escalation = null
 
 k8s_issue["privilege_escalation"] {
     lower(input.kind) == "podsecuritypolicy"
-    input.spec.hostPID == true
+    input.spec.allowPrivilegeEscalation == true
+}
+
+source_path[{"privilege_escalation":metadata}] {
+    lower(input.kind) == "podsecuritypolicy"
+    input.spec.allowPrivilegeEscalation == true
+    metadata:= {
+        "resource_path": [["spec","allowPrivilegeEscalation"]]
+    }
 }
 
 privilege_escalation {
