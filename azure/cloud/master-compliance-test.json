@@ -5,6 +5,449 @@
             "version": "0.1",
             "cases": [
                 {
+                    "masterTestId": "AZURE_TEST_KV_01",
+                    "type": "rego",
+                    "rule": "file(Keyvault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-KV-001",
+                            "eval": "data.rule.KeyVault",
+                            "message": "data.rule.KeyVault_err",
+                            "remediationDescription": "1. Go to 'Key vaults' and choose your Key Vault<br>2. Select 'Keys/Secrets/Certificates' under 'Settings' in the navigation menu<br>3. Select 'Generate/Import' and complete the wizard.<br>Please visit <a href='https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_KV_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practices",
+                                "HIPAA",
+                                "NIST CSF"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_228"
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure that keyvault is in use",
+                    "description": "Use the Azure Key Vault to store secrets within the Microsoft Azure environment. Secrets in Azure Key Vault are octet sequences with a maximum size of 25k bytes each."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_KV_02",
+                    "type": "rego",
+                    "rule": "file(Keyvault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-KV-002",
+                            "eval": "data.rule.enableSoftDelete",
+                            "message": "data.rule.enableSoftDelete_err",
+                            "remediationDescription": "Via Azure Portal<br>Azure Portal does not have provision to update the respective configurations<br><br>Via Azure CLI<br>Existing key vault:<br><br>For an existing key vault named ContosoVault, enable soft-delete as follows:<br><br>az resource update --id $(az keyvault show --name ContosoVault -o tsv , awk '{print $1}') --set properties.enableSoftDelete=true.<br>Please visit <a href='https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_KV_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_228"
+                    ],
+                    "severity": "High",
+                    "title": "Ensure the key vault is recoverable - enable 'Soft Delete' setting for a Key Vault",
+                    "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation, etc.) supported by the key vault objects. It is recommended the key vault be made recoverable by enabling the 'Do Not Purge' and 'Soft Delete' functions. This is in order to prevent loss of encrypted data including storage accounts, SQL databases, and/or dependent services provided by key vault objects (Keys, Secrets, Certificates) etc., as may happen in the case of accidental deletion by a user or from disruptive activity by a malicious user."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_KV_03",
+                    "type": "rego",
+                    "rule": "file(Keyvault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-KV-003",
+                            "eval": "data.rule.enablePurgeProtection",
+                            "message": "data.rule.enablePurgeProtection_err",
+                            "remediationDescription": "Via Azure Portal<br>Azure Portal does not have provision to update the respective configurations<br><br>Via Azure CLI<br>Existing key vault:<br><br>For an existing key vault named ContosoVault, enable soft-delete as follows:<br><br>az resource update --id $(az keyvault show --name ContosoVault -o tsv , awk '{print $1}') --set properties.enableSoftDelete=true.<br>Please visit <a href='https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_KV_003.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_228"
+                    ],
+                    "severity": "High",
+                    "title": "Key vault should have purge protection enabled",
+                    "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_KV_04",
+                    "type": "rego",
+                    "rule": "file(KeyvaultKey.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-KV-004",
+                            "eval": "data.rule.kv_expire",
+                            "message": "data.rule.kv_expire_err",
+                            "remediationDescription": "1. Go to 'Key vaults' and choose your Key Vault<br>2. Select 'Keys' under 'Settings' in the navigation menu<br>3. Select the relevant key and reselect its current version<br>3. Check 'Set expiration date'<br>4. Save.<br>Please visit <a href='https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_KV_004.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_229"
+                    ],
+                    "severity": "High",
+                    "title": "Azure Key Vault secrets should have an expiration date",
+                    "description": "This policy identifies Azure Key Vault secrets that do not have an expiration date. As a best practice, set an expiration date for each secret and rotate the secret regularly."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_KV_05",
+                    "type": "rego",
+                    "rule": "file(KeyvaultSecrets.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-KV-005",
+                            "eval": "data.rule.kv_expire",
+                            "message": "data.rule.kv_expire_err",
+                            "remediationDescription": "1. Go to Key vaults<br>2. For each Key vault, click on Secrets.<br>3. Ensure that each secret in the vault has EXPIRATION DATE set as appropriate.<br>Please visit <a href='https://docs.microsoft.com/en-us/rest/api/keyvault/vaults/get' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_KV_005.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_227"
+                    ],
+                    "severity": "High",
+                    "title": "Azure Key Vault secrets should have an expiration date",
+                    "description": "This policy identifies Azure Key Vault secrets that do not have an expiration date. As a best practice, set an expiration date for each secret and rotate the secret regularly."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_STR_03",
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "tags": [
+                        {
+                            "cloud": "Azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Storage"
+                            ]
+                        }
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AZR-STR-003",
+                            "eval": "data.rule.storage_secure",
+                            "message": "data.rule.storage_secure_err",
+                            "remediationDescription": "1. Go to 'Storage accounts' and choose your storage account<br>2. Select 'Configuration' under 'Settings' in the navigation menu<br>3. Set 'Secure transfer required' to 'Enabled'<br>4. Save.<br>Please visit <a href='https://docs.microsoft.com/en-us/rest/api/storagerp/storage-accounts/get-properties' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_STR_003.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage Accounts https based secure transfer should be enabled",
+                    "description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPs. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesnâ€™t support HTTPs for custom domain names, this option is not applied when using a custom domain name.",
+                    "masterSnapshotId": [
+                        "AZRSNP_301"
+                    ]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_STR_04",
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "tags": [
+                        {
+                            "cloud": "Azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Storage"
+                            ]
+                        }
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AZR-STR-004",
+                            "eval": "data.rule.storage_acl",
+                            "message": "data.rule.storage_acl_err",
+                            "remediationDescription": "1. Go to Storage Accounts<br>2. For each storage account, Click on the settings menu called Firewalls and virtual networks.<br>3. Ensure that you have selected to allow access from Selected networks.<br>4. Add rules to allow traffic from specific network.<br>5. Click Save to apply your changes.<br>Azure Command Line Interface 2.0 Use the below command to update default-action to Deny.<br>Please visit <a href='https://docs.microsoft.com/en-us/rest/api/storagerp/storage-accounts/get-properties' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_STR_004.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage Accounts should have firewall rules enabled",
+                    "description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on.<br><br>You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
+                    "masterSnapshotId": [
+                        "AZRSNP_301"
+                    ]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_STR_06",
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "tags": [
+                        {
+                            "cloud": "Azure",
+                            "compliance": [
+                                "PCI-DSS",
+                                "GDPR",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Storage"
+                            ]
+                        }
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AZR-STR-006",
+                            "eval": "data.rule.blobService",
+                            "message": "data.rule.blobService_err",
+                            "remediationDescription": "Currently, Storage account supports customer-managed keys encryption for blobs by default upon account creation, this cannot be changed after.<br>Note: When customer-managed keys are configured, your data in Blob storage and Azure Files is automatically protected using the customer-managed keys.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/storage/common/storage-service-encryption' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_STR_006.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure that 'Storage service encryption' is enabled for the Blob Service",
+                    "description": "Enable data encryption at rest for blobs. Storage service encryption protects your data at rest. Azure Storage encrypts data when it's written, and automatically decrypts it when it is accessed.",
+                    "masterSnapshotId": [
+                        "AZRSNP_301"
+                    ]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_STR_07",
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "tags": [
+                        {
+                            "cloud": "Azure",
+                            "compliance": [
+                                "PCI-DSS",
+                                "GDPR",
+                                "ISO 27001",
+                                "HIPAA",
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Storage"
+                            ]
+                        }
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AZR-STR-007",
+                            "eval": "data.rule.fileService",
+                            "message": "data.rule.fileService_err",
+                            "remediationDescription": "Currently, Storage account supports customer-managed keys encryption for files by default upon account creation, this cannot be changed after.<br>Note: When customer-managed keys are configured, your data in Blob storage and Azure Files is automatically protected using the customer-managed keys.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/storage/common/storage-service-encryption' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_STR_007.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure that 'Storage service encryption' is enabled for the File Service",
+                    "description": "Azure Storage encryption protects your data and to help you to meet your organizational security and compliance commitments. Data in Azure Storage is encrypted and decrypted transparently using 256-bit AES encryption, one of the strongest block ciphers available, and is FIPS 140-2 compliant. Azure Storage encryption is similar to BitLocker encryption on Windows.",
+                    "masterSnapshotId": [
+                        "AZRSNP_301"
+                    ]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_STR_08",
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "tags": [
+                        {
+                            "cloud": "Azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Storage"
+                            ]
+                        }
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AZR-STR-008",
+                            "eval": "data.rule.keySource",
+                            "message": "data.rule.keySource_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_STR_008.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure critical data storage in Storage Account is encrypted with Customer Managed Key",
+                    "description": "By default, data in the storage account is encrypted using Microsoft Managed Keys at rest. All Azure Storage resources are encrypted, including blobs, disks, files, queues, and tables. All object metadata is also encrypted. However, if you want to control and manage this encryption key yourself, you can specify a customer-managed key, that key is used to protect and control access to the key that encrypts your data. You can also choose to automatically update the key version used for Azure Storage encryption whenever a new version is available in the associated Key Vault.",
+                    "masterSnapshotId": [
+                        "AZRSNP_301"
+                    ]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_STR_09",
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "tags": [
+                        {
+                            "cloud": "Azure",
+                            "compliance": [
+                                "GDPR"
+                            ],
+                            "service": [
+                                "Storage"
+                            ]
+                        }
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AZR-STR-009",
+                            "eval": "data.rule.region",
+                            "message": "data.rule.region_err",
+                            "remediationDescription": "Please refer to Azure documentations about Storage Accounts:<br><a href='https://docs.microsoft.com/en-us/azure/storage/common/storage-create-storage-account' target='_blank'>https://docs.microsoft.com/en-us/azure/storage/common/storage-create-storage-account</a>.<br>and<br>Azure documentations about Regions:<br><a href='https://azure.microsoft.com/en-us/global-infrastructure/regions/#services' target='_blank'>https://azure.microsoft.com/en-us/global-infrastructure/regions/#services</a>",
+                            "remediationFunction": "PR_AZR_STR_009.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage Accounts location configuration should be inside of Europe",
+                    "description": "Identify Storage Accounts outside of the following regions: northeurope, westeurope",
+                    "masterSnapshotId": [
+                        "AZRSNP_301"
+                    ]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_STR_10",
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "tags": [
+                        {
+                            "cloud": "Azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Storage"
+                            ]
+                        }
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AZR-STR-010",
+                            "eval": "data.rule.blobServicePublicAccessDisabled",
+                            "message": "data.rule.blobServicePublicAccessDisabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_STR_010.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure that Storage Account should not allow public access to all blobs or containers",
+                    "description": "Identify Storage Accounts outside of the following regions: northeurope, westeurope",
+                    "masterSnapshotId": [
+                        "AZRSNP_301"
+                    ]
+                },
+                {
+                    "masterTestId": "AZURE_TEST_STR_11",
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "tags": [
+                        {
+                            "cloud": "Azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Storage"
+                            ]
+                        }
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AZR-STR-011",
+                            "eval": "data.rule.storage_acount_by_pass",
+                            "message": "data.rule.storage_acount_by_pass_err",
+                            "remediationDescription": "1. Go to Storage Accounts<br>2. For each storage account, Click on the settings menu called Firewalls and virtual networks.<br>3. Ensure that you have elected to allow access from 'Selected networks'.<br>4. Enable check box for Allow trusted Microsoft services to access this storage account.<br>5. Click Save to apply your changes.<br>Azure Command Line Interface 2.0 Use the below command to update trusted Microsoft services.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/storage/common/storage-network-security' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_STR_011.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure Storage Account Trusted Microsoft Services access should be enabled",
+                    "description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging, Metrics, AzureServices (For example, 'Logging, Metrics'), or None to bypass none of those traffics. - None, Logging, Metrics, AzureServices.",
+                    "masterSnapshotId": [
+                        "AZRSNP_301"
+                    ]
+                },
+                {
                     "masterTestId": "AZURE_TEST_216",
                     "type": "rego",
                     "rule": "file(PR_AZR_0007.rego)",
@@ -1646,42 +2089,6 @@
                     "description": "To meet your organizational security or compliance requirement, Azure provides disk encryption at rest using Azure Storage Service Encryption (SSE) and Azure Disk Encryption (ADE). Starting February 2017, SSE is enabled by default for all managed disks. ADE is integrated with Azure Key Vault to help you control, manage, and audit the disk encryption keys and secrets.This policy detects Virtual Machine (VM) OS disks that are not encrypted at rest using ADE. As a best practice, enable ADE for provide volume encryption for the OS disk. For more information, see https://docs.microsoft.com/en-us/azure/security/azure-security-disk-encryption-overview.",
                     "masterSnapshotId": [
                         "AZRSNP_277"
-                    ]
-                },
-                {
-                    "masterTestId": "AZURE_TEST_301",
-                    "type": "rego",
-                    "rule": "file(PR_AZR_0092.rego)",
-                    "tags": [
-                        {
-                            "cloud": "Azure",
-                            "compliance": [
-                                "CIS",
-                                "CSA-CCM",
-                                "HIPAA",
-                                "ISO 27001",
-                                "NIST 800",
-                                "PCI-DSS"
-                            ],
-                            "service": [
-                                "Storage"
-                            ]
-                        }
-                    ],
-                    "evals": [
-                        {
-                            "id": "PR-AZR-0092",
-                            "eval": "data.rule.rulepass",
-                            "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.Storage/storageAccounts/vatsalstorage1 , https://docs.microsoft.com/en-us/rest/api/storagerp/storageaccounts/getproperties",
-                            "remediationFunction": "PR_AZR_0092.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Storage Accounts without Secure transfer enabled",
-                    "description": "The secure transfer option enhances the security of your storage account by only allowing requests to the storage account by a secure connection. For example, when calling REST APIs to access your storage accounts, you must connect using HTTPs. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When you are using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client. Because Azure storage doesnâ€™t support HTTPs for custom domain names, this option is not applied when using a custom domain name.",
-                    "masterSnapshotId": [
-                        "AZRSNP_301"
                     ]
                 },
                 {
