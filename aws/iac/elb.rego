@@ -824,6 +824,23 @@ source_path[{"elb_alb_logs": metadata}] {
     }
 }
 
+aws_attribute_absence["elb_alb_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    count([c | resource.Properties.LoadBalancerAttributes[_].Key == "access_logs.s3.enabled"; c:=1]) == 0
+}
+
+source_path[{"elb_alb_logs": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    count([c | resource.Properties.LoadBalancerAttributes[_].Key == "access_logs.s3.enabled"; c:=1]) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LoadBalancerAttributes"]
+        ],
+    }
+}
+
 aws_issue["elb_alb_logs"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
@@ -845,6 +862,88 @@ source_path[{"elb_alb_logs": metadata}] {
     }
 }
 
+aws_issue["elb_alb_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    item := resource.Properties.LoadBalancerAttributes[j]
+    item2 := resource.Properties.LoadBalancerAttributes[k]
+    lower(item.Key) == "access_logs.s3.enabled"
+    lower(item.Value) == "true"
+    lower(item2.Key) == "access_logs.s3.bucket"
+    not item2.Value
+}
+
+source_path[{"elb_alb_logs": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    item := resource.Properties.LoadBalancerAttributes[j]
+    item2 := resource.Properties.LoadBalancerAttributes[k]
+    lower(item.Key) == "access_logs.s3.enabled"
+    lower(item.Value) == "true"
+    lower(item2.Key) == "access_logs.s3.bucket"
+    not item2.Value
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LoadBalancerAttributes", k, "Value"]
+        ],
+    }
+}
+
+aws_issue["elb_alb_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    item := resource.Properties.LoadBalancerAttributes[j]
+    item2 := resource.Properties.LoadBalancerAttributes[k]
+    lower(item.Key) == "access_logs.s3.enabled"
+    lower(item.Value) == "true"
+    lower(item2.Key) == "access_logs.s3.bucket"
+    item2.Value == null
+}
+
+source_path[{"elb_alb_logs": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    item := resource.Properties.LoadBalancerAttributes[j]
+    item2 := resource.Properties.LoadBalancerAttributes[k]
+    lower(item.Key) == "access_logs.s3.enabled"
+    lower(item.Value) == "true"
+    lower(item2.Key) == "access_logs.s3.bucket"
+    item2.Value == null
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LoadBalancerAttributes", k, "Value"]
+        ],
+    }
+}
+
+
+aws_issue["elb_alb_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    item := resource.Properties.LoadBalancerAttributes[j]
+    item2 := resource.Properties.LoadBalancerAttributes[k]
+    lower(item.Key) == "access_logs.s3.enabled"
+    lower(item.Value) == "true"
+    lower(item2.Key) == "access_logs.s3.bucket"
+    item2.Value == ""
+}
+
+source_path[{"elb_alb_logs": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    item := resource.Properties.LoadBalancerAttributes[j]
+    item2 := resource.Properties.LoadBalancerAttributes[k]
+    lower(item.Key) == "access_logs.s3.enabled"
+    lower(item.Value) == "true"
+    lower(item2.Key) == "access_logs.s3.bucket"
+    item2.Value == ""
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LoadBalancerAttributes", k, "Value"]
+        ],
+    }
+}
+
 aws_bool_issue["elb_alb_logs"] {
     resource := input.Resources[i]
     lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
@@ -862,6 +961,87 @@ source_path[{"elb_alb_logs": metadata}] {
     metadata := {
         "resource_path": [
             ["Resources", i, "Properties", "LoadBalancerAttributes", j, "Value"]
+        ],
+    }
+}
+
+aws_bool_issue["elb_alb_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    item := resource.Properties.LoadBalancerAttributes[j]
+    item2 := resource.Properties.LoadBalancerAttributes[k]
+    lower(item.Key) == "access_logs.s3.enabled"
+    item.Value == true
+    lower(item2.Key) == "access_logs.s3.bucket"
+    not item2.Value
+}
+
+source_path[{"elb_alb_logs": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    item := resource.Properties.LoadBalancerAttributes[j]
+    item2 := resource.Properties.LoadBalancerAttributes[k]
+    lower(item.Key) == "access_logs.s3.enabled"
+    item.Value == true
+    lower(item2.Key) == "access_logs.s3.bucket"
+    not item2.Value
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LoadBalancerAttributes", k, "Value"]
+        ],
+    }
+}
+
+aws_bool_issue["elb_alb_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    item := resource.Properties.LoadBalancerAttributes[j]
+    item2 := resource.Properties.LoadBalancerAttributes[k]
+    lower(item.Key) == "access_logs.s3.enabled"
+    item.Value == true
+    lower(item2.Key) == "access_logs.s3.bucket"
+    item2.Value == ""
+}
+
+source_path[{"elb_alb_logs": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    item := resource.Properties.LoadBalancerAttributes[j]
+    item2 := resource.Properties.LoadBalancerAttributes[k]
+    lower(item.Key) == "access_logs.s3.enabled"
+    item.Value == true
+    lower(item2.Key) == "access_logs.s3.bucket"
+    item2.Value == ""
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LoadBalancerAttributes", k, "Value"]
+        ],
+    }
+}
+
+aws_bool_issue["elb_alb_logs"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    item := resource.Properties.LoadBalancerAttributes[j]
+    item2 := resource.Properties.LoadBalancerAttributes[k]
+    lower(item.Key) == "access_logs.s3.enabled"
+    item.Value == true
+    lower(item2.Key) == "access_logs.s3.bucket"
+    item2.Value == null
+}
+
+source_path[{"elb_alb_logs": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    item := resource.Properties.LoadBalancerAttributes[j]
+    item2 := resource.Properties.LoadBalancerAttributes[k]
+    lower(item.Key) == "access_logs.s3.enabled"
+    item.Value == true
+    lower(item2.Key) == "access_logs.s3.bucket"
+    item2.Value == null
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "LoadBalancerAttributes", k, "Value"]
         ],
     }
 }
@@ -1322,4 +1502,526 @@ elb_drop_invalid_header_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-loadbalancer-loadbalancerattributes.html"
+}
+
+
+#
+# PR-AWS-CFR-ELB-014
+#
+
+default elb_certificate_listner_arn = null
+
+aws_attribute_absence["elb_certificate_listner_arn"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listenercertificate"
+    not resource.Properties.ListenerArn
+}
+
+source_path[{"elb_certificate_listner_arn": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listenercertificate"
+    not resource.Properties.ListenerArn
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ListenerArn"]
+        ],
+    }
+}
+
+aws_issue["elb_certificate_listner_arn"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listenercertificate"
+    resource.Properties.ListenerArn == null
+}
+
+source_path[{"elb_certificate_listner_arn": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listenercertificate"
+    resource.Properties.ListenerArn == null
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ListenerArn"]
+        ],
+    }
+}
+
+aws_issue["elb_certificate_listner_arn"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listenercertificate"
+    count(resource.Properties.ListenerArn) == 0
+}
+
+source_path[{"elb_certificate_listner_arn": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listenercertificate"
+    count(resource.Properties.ListenerArn) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ListenerArn"]
+        ],
+    }
+}
+
+aws_issue["elb_certificate_listner_arn"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listenercertificate"
+    resource.Properties.ListenerArn == ""
+}
+
+source_path[{"elb_certificate_listner_arn": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listenercertificate"
+    resource.Properties.ListenerArn == ""
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "ListenerArn"]
+        ],
+    }
+}
+
+
+elb_certificate_listner_arn {
+    lower(input.Resources[i].Type) == "aws::elasticloadbalancingv2::listenercertificate"
+    not aws_issue["elb_certificate_listner_arn"]
+    not aws_attribute_absence["elb_certificate_listner_arn"]
+}
+
+elb_certificate_listner_arn = false {
+    aws_issue["elb_certificate_listner_arn"]
+}
+
+elb_certificate_listner_arn = false {
+    aws_attribute_absence["elb_certificate_listner_arn"]
+}
+
+elb_certificate_listner_arn_err = "Ensure the ELBv2 ListenerCertificate ListenerArn value is defined" {
+    aws_issue["elb_certificate_listner_arn"]
+} else = "Ensure the ELBv2 ListenerCertificate ListenerArn value is defined" {
+    aws_attribute_absence["elb_certificate_listner_arn"]
+}
+
+elb_certificate_listner_arn_metadata := {
+    "Policy Code": "PR-AWS-CFR-ELB-014",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure the ELBv2 ListenerCertificate ListenerArn value is defined",
+    "Policy Description": "Ensure the ELBv2 ListenerCertificate ListenerArn value is defined, else an Actor can provide access to CA to non-ADATUM principals.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenercertificate.html"
+}
+
+
+#
+# PR-AWS-CFR-ELB-015
+#
+
+
+default elb_listener_sslpolicy = null
+
+allowed_ssl_policies = ["ELBSecurityPolicy-TLS-1-2-2017-01", "ELBSecurityPolicy-TLS-1-2-Ext-2018-06", "ELBSecurityPolicy-FS-1-2-2019-08", "ELBSecurityPolicy-FS-1-2-Res-2019-08", "ELBSecurityPolicy-FS-1-2-Res-2020-10"]
+
+aws_attribute_absence["elb_listener_sslpolicy"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    not resource.Properties.SslPolicy
+}
+
+source_path[{"elb_listener_sslpolicy": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    not resource.Properties.SslPolicy
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SslPolicy"]
+        ],
+    }
+}
+
+aws_issue["elb_listener_sslpolicy"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    count([c | lower(resource.Properties.SslPolicy) == lower(allowed_ssl_policies[_]); c:=1 ]) == 0
+}
+
+source_path[{"elb_listener_sslpolicy": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::listener"
+    count([c | lower(resource.Properties.SslPolicy) == lower(allowed_ssl_policies[_]); c:=1 ]) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "SslPolicy"]
+        ],
+    }
+}
+
+elb_listener_sslpolicy {
+    lower(input.Resources[i].Type) == "aws::elasticloadbalancingv2::listener"
+    not aws_issue["elb_listener_sslpolicy"]
+    not aws_attribute_absence["elb_listener_sslpolicy"]
+}
+
+elb_listener_sslpolicy = false {
+    aws_issue["elb_listener_sslpolicy"]
+}
+
+elb_listener_sslpolicy = false {
+    aws_attribute_absence["elb_listener_sslpolicy"]
+}
+
+elb_listener_sslpolicy_err = "Ensure the Load Balancer Listener SSLPolicy is set to at least one value from approved policies" {
+    aws_issue["elb_listener_sslpolicy"]
+} else = "ELBv2 attribute SslPolicy is missing from the resource" {
+    aws_attribute_absence["elb_listener_sslpolicy"]
+}
+
+elb_listener_sslpolicy_metadata := {
+    "Policy Code": "PR-AWS-CFR-ELB-015",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure the Load Balancer Listener SSLPolicy is set to at least one value from approved policies",
+    "Policy Description": "Ensure the Load Balancer Listener SSLPolicy is set to at least one value from approved policies, else an Actor can gain access to ADATUM information due to misconfigured cryptographic settings",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
+}
+
+
+#
+# PR-AWS-CFR-ELB-016
+#
+
+default elb_subnet = null
+
+subnet_issue["elb_subnet"] {
+	resource := input.Resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+	not resource.Properties.Subnets
+}
+
+subnet_issue["elb_subnet"] {
+	resource := input.Resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+	resource.Properties.Subnets == null
+}
+
+subnet_issue["elb_subnet"] {
+	resource := input.Resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+	count(resource.Properties.Subnets) == 0
+}
+
+subnet_mapping_issue["elb_subnet"] {
+	resource := input.Resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    not resource.Properties.SubnetMappings
+}
+
+subnet_mapping_issue["elb_subnet"] {
+	resource := input.Resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    resource.Properties.SubnetMappings == null
+}
+
+subnet_mapping_issue["elb_subnet"] {
+	resource := input.Resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    count(resource.Properties.SubnetMappings) == 0
+}
+
+subnet_mapping_issue["elb_subnet"] {
+	resource := input.Resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    SubnetMappings := resource.Properties.SubnetMappings[j]
+    not SubnetMappings.SubnetId
+}
+
+subnet_mapping_issue["elb_subnet"] {
+	resource := input.Resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    SubnetMappings := resource.Properties.SubnetMappings[j]
+    count(SubnetMappings.SubnetId) == 0
+}
+
+subnet_mapping_issue["elb_subnet"] {
+	resource := input.Resources[_]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    SubnetMappings := resource.Properties.SubnetMappings[j]
+    SubnetMappings.SubnetId == null
+}
+
+aws_issue["elb_subnet"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    subnet_issue["elb_subnet"]
+    subnet_mapping_issue["elb_subnet"]
+}
+
+source_path[{"elb_subnet": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    subnet_issue["elb_subnet"]
+    subnet_mapping_issue["elb_subnet"]
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Subnets"],
+            ["Resources", i, "Properties", "SubnetMappings"]
+        ],
+    }
+}
+
+elb_subnet {
+    lower(input.Resources[i].Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    not aws_issue["elb_subnet"]
+}
+
+elb_subnet = false {
+    aws_issue["elb_subnet"]
+}
+
+elb_subnet_err = "Ensure one of Subnets or SubnetMappings is defined for loadbalancer" {
+    aws_issue["elb_subnet"]
+}
+
+elb_subnet_metadata := {
+    "Policy Code": "PR-AWS-CFR-ELB-016",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure one of Subnets or SubnetMappings is defined for loadbalancer",
+    "Policy Description": "Ensure one of Subnets or SubnetMappings is defined for loadbalancer",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-loadbalancer-subnetmapping.html#cfn-elasticloadbalancingv2-loadbalancer-subnetmapping-subnetid"
+}
+
+#
+# PR-AWS-CFR-ELB-017
+#
+
+default elb_scheme = null
+
+aws_attribute_absence["elb_scheme"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    not resource.Properties.Scheme
+}
+
+source_path[{"elb_scheme": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    not resource.Properties.Scheme
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Scheme"]
+        ],
+    }
+}
+
+aws_issue["elb_scheme"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    lower(resource.Properties.Scheme) != "internal"
+}
+
+source_path[{"elb_scheme": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    lower(resource.Properties.Scheme) != "internal"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Scheme"]
+        ],
+    }
+}
+
+aws_issue["elb_scheme"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    resource.Properties.Scheme == null
+}
+
+source_path[{"elb_scheme": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    resource.Properties.Scheme == null
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Scheme"]
+        ],
+    }
+}
+
+elb_scheme {
+    lower(input.Resources[i].Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    not aws_issue["elb_scheme"]
+    not aws_attribute_absence["elb_scheme"]
+}
+
+elb_scheme = false {
+    aws_issue["elb_scheme"]
+}
+
+elb_scheme = false {
+    aws_attribute_absence["elb_scheme"]
+}
+
+elb_scheme_err = "Ensure LoadBalancer scheme is set to internal and not internet-facing" {
+    aws_issue["elb_scheme"]
+} else = "Ensure LoadBalancer scheme is set to internal" {
+    aws_attribute_absence["elb_scheme"]
+}
+
+elb_scheme_metadata := {
+    "Policy Code": "PR-AWS-CFR-ELB-017",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure LoadBalancer scheme is set to internal and not internet-facing",
+    "Policy Description": "LoadBalancer scheme must be explicitly set to internal, else an Actor can allow access to ADATUM information through the misconfiguration of an ELB resource",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html"
+}
+
+
+#
+# PR-AWS-CFR-ELB-018
+#
+
+default elb_type = null
+
+aws_issue["elb_type"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    lower(resource.Properties.Type) != "application"
+}
+
+source_path[{"elb_type": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    lower(resource.Properties.Type) != "application"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Type"]
+        ],
+    }
+}
+
+aws_issue["elb_type"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    resource.Properties.Type == null
+}
+
+source_path[{"elb_type": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    resource.Properties.Type == null
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Type"]
+        ],
+    }
+}
+
+elb_type {
+    lower(input.Resources[i].Type) == "aws::elasticloadbalancingv2::loadbalancer"
+    not aws_issue["elb_type"]
+}
+
+elb_type = false {
+    aws_issue["elb_type"]
+}
+
+elb_type_err = "Ensure all load balancers created are application load balancers" {
+    aws_issue["elb_type"]
+}
+
+elb_type_metadata := {
+    "Policy Code": "PR-AWS-CFR-ELB-018",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure all load balancers created are application load balancers",
+    "Policy Description": "Ensure the value of Type for each LoadBalancer resource is application or the Type is not set, since it defaults to application",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-loadbalancer.html#cfn-elasticloadbalancingv2-loadbalancer-type"
+}
+
+
+#
+# PR-AWS-CFR-ELB-019
+#
+
+default elb_protocol = null
+
+aws_issue["elb_protocol"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::targetgroup"
+    TargetTypeAllowed := ["instance" , "ip"]
+    lower(resource.Properties.TargetType) == TargetTypeAllowed[_]
+    lower(resource.Properties.Protocol) != "https"
+}
+
+source_path[{"elb_protocol": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::targetgroup"
+    TargetTypeAllowed := ["instance" , "ip"]
+    lower(resource.Properties.TargetType) == TargetTypeAllowed[_]
+    lower(resource.Properties.Protocol) != "https"
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Protocol"]
+        ],
+    }
+}
+
+aws_issue["elb_protocol"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::targetgroup"
+    TargetTypeAllowed := ["instance" , "ip"]
+    lower(resource.Properties.TargetType) == TargetTypeAllowed[_]
+    not resource.Properties.Protocol
+}
+
+source_path[{"elb_protocol": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::elasticloadbalancingv2::targetgroup"
+    TargetTypeAllowed := ["instance" , "ip"]
+    lower(resource.Properties.TargetType) == TargetTypeAllowed[_]
+    not resource.Properties.Protocol
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "Protocol"]
+        ],
+    }
+}
+
+elb_protocol {
+    lower(input.Resources[i].Type) == "aws::elasticloadbalancingv2::targetgroup"
+    not aws_issue["elb_protocol"]
+}
+
+elb_protocol = false {
+    aws_issue["elb_protocol"]
+}
+
+elb_protocol_err = "Ensure LoadBalancer TargetGroup Protocol values are limited to HTTPS" {
+    aws_issue["elb_protocol"]
+}
+
+elb_protocol_metadata := {
+    "Policy Code": "PR-AWS-CFR-ELB-019",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure LoadBalancer TargetGroup Protocol values are limited to HTTPS",
+    "Policy Description": "The only allowed Protocol value for LoadBalancer TargetGroups is HTTPS, though the property is ignored if the target type is lambda.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html#cfn-elasticloadbalancingv2-targetgroup-protocol"
 }

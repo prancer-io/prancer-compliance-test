@@ -278,6 +278,13 @@ backend_https_protocol_enabled_metadata := {
 # PR-AZR-TRF-AGW-006
 
 default secret_certificate_is_in_keyvalut = null
+
+azure_attribute_absence ["secret_certificate_is_in_keyvalut"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_application_gateway"
+    not resource.properties.ssl_certificate
+}  
+
 azure_attribute_absence ["secret_certificate_is_in_keyvalut"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_application_gateway"

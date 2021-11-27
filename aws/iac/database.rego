@@ -283,7 +283,7 @@ rds_instance_event_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS RDS event subscription disabled for DB instance",
     "Policy Description": "This policy identifies RDS event subscriptions for which DB instance event subscription is disabled. You can create an Amazon RDS event notification subscription so that you can be notified when an event occurs for a given DB instance.",
-    "Resource Type": "aws::rds::eventsubscription",
+    "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
 }
@@ -360,7 +360,7 @@ rds_secgroup_event_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS RDS event subscription disabled for DB security groups",
     "Policy Description": "This policy identifies RDS event subscriptions for which DB security groups event subscription is disabled. You can create an Amazon RDS event notification subscription so that you can be notified when an event occurs for given DB security groups.",
-    "Resource Type": "aws::rds::eventsubscription",
+    "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
 }
@@ -432,7 +432,7 @@ rds_encrypt_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS RDS instance is not encrypted",
     "Policy Description": "This policy identifies AWS RDS instances which are not encrypted. Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up and manage databases. Amazon allows customers to turn on encryption for RDS which is recommended for compliance and security reasons.",
-    "Resource Type": "aws::rds::dbinstance",
+    "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
 }
@@ -513,7 +513,7 @@ rds_multiaz_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS RDS instance with Multi-Availability Zone disabled",
     "Policy Description": "This policy identifies RDS instances which have Multi-Availability Zone(Multi-AZ) disabled. When RDS DB instance is enabled with Multi-AZ, RDS automatically creates a primary DB Instance and synchronously replicates the data to a standby instance in a different availability zone. These Multi-AZ deployments will improve primary node reachability by providing read replica in case of network connectivity loss or loss of availability in the primaryâ€™s availability zone for read/write operations, so by making them the best fit for production database workloads.",
-    "Resource Type": "aws::rds::dbinstance",
+    "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
 }
@@ -585,7 +585,7 @@ rds_snapshot_metadata := {
     "Language": "AWS Cloud formation",
     "Policy Title": "AWS RDS instance with copy tags to snapshots disabled",
     "Policy Description": "This policy identifies RDS instances which have copy tags to snapshots disabled. Copy tags to snapshots copies all the user-defined tags from the DB instance to snapshots. Copying tags allow you to add metadata and apply access policies to your Amazon RDS resources.",
-    "Resource Type": "aws::rds::dbinstance",
+    "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html"
 }
@@ -2110,6 +2110,56 @@ dynamodb_PITR_enable_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html"
 }
+
+
+#
+# PR-AWS-CFR-DD-003
+#
+
+default dynamodb_kinesis_stream = null
+
+aws_issue["dynamodb_kinesis_stream"] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::dynamodb::table"
+    count(resource.Properties.KinesisStreamSpecification.StreamArn) == 0
+}
+
+source_path[{"dynamodb_kinesis_stream": metadata}] {
+    resource := input.Resources[i]
+    lower(resource.Type) == "aws::dynamodb::table"
+    count(resource.Properties.KinesisStreamSpecification.StreamArn) == 0
+    metadata := {
+        "resource_path": [
+            ["Resources", i, "Properties", "KinesisStreamSpecification", "StreamArn"]
+        ],
+    }
+}
+
+dynamodb_kinesis_stream {
+    lower(input.Resources[i].Type) == "aws::dynamodb::table"
+    not aws_issue["dynamodb_kinesis_stream"]
+}
+
+dynamodb_kinesis_stream = false {
+    aws_issue["dynamodb_kinesis_stream"]
+}
+
+dynamodb_kinesis_stream_err = "Dynamo DB kinesis specification property should not be null" {
+    aws_issue["dynamodb_kinesis_stream"]
+}
+
+dynamodb_kinesis_stream_metadata := {
+    "Policy Code": "PR-AWS-CFR-DD-003",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Dynamo DB kinesis specification property should not be null",
+    "Policy Description": "Dynamo DB kinesis specification property should not be null",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-dynamodb-kinesisstreamspecification.html#cfn-dynamodb-kinesisstreamspecification-streamarn"
+}
+
 
 #
 # PR-AWS-CFR-EC-001
