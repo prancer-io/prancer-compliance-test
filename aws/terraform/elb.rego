@@ -163,9 +163,9 @@ elb_insecure_cipher_metadata := {
 default elb_insecure_protocol = null
 
 insecure_ssl_protocols := [
-    "Protocol-SSLv3",
-    "Protocol-TLSv1",
-    "Protocol-TLSv1.1"
+    "protocol-SSLv3",
+    "protocol-TLSv1",
+    "protocol-TLSv1.1"
 ]
 
 aws_issue["elb_insecure_protocol"] {
@@ -977,13 +977,13 @@ default elb_drop_invalid_header = null
 
 aws_attribute_absence["elb_drop_invalid_header"] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_load_balancer_listener_policy"
+    lower(resource.type) == "aws_load_balancer_policy"
     not resource.properties.policy_attribute
 }
 
 source_path[{"elb_drop_invalid_header": metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_load_balancer_listener_policy"
+    lower(resource.type) == "aws_load_balancer_policy"
     not resource.properties.policy_attribute
     metadata := {
         "resource_path": [
@@ -994,7 +994,7 @@ source_path[{"elb_drop_invalid_header": metadata}] {
 
 aws_issue["elb_drop_invalid_header"] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_load_balancer_listener_policy"
+    lower(resource.type) == "aws_load_balancer_policy"
     item := resource.properties.policy_attribute[j]
     lower(item.name) == "routing.http.drop_invalid_header_fields.enabled"
     lower(item.value) != "true"
@@ -1002,7 +1002,7 @@ aws_issue["elb_drop_invalid_header"] {
 
 source_path[{"elb_drop_invalid_header": metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_load_balancer_listener_policy"
+    lower(resource.type) == "aws_load_balancer_policy"
     item := resource.properties.policy_attribute[j]
     lower(item.name) == "routing.http.drop_invalid_header_fields.enabled"
     lower(item.value) != "true"
@@ -1015,7 +1015,7 @@ source_path[{"elb_drop_invalid_header": metadata}] {
 
 aws_bool_issue["elb_drop_invalid_header"] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_load_balancer_listener_policy"
+    lower(resource.type) == "aws_load_balancer_policy"
     item := resource.properties.policy_attribute[j]
     lower(item.name) == "routing.http.drop_invalid_header_fields.enabled"
     not item.value
@@ -1023,7 +1023,7 @@ aws_bool_issue["elb_drop_invalid_header"] {
 
 source_path[{"elb_drop_invalid_header": metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "aws_load_balancer_listener_policy"
+    lower(resource.type) == "aws_load_balancer_policy"
     item := resource.properties.policy_attribute[j]
     lower(item.name) == "routing.http.drop_invalid_header_fields.enabled"
     not item.value
@@ -1035,7 +1035,7 @@ source_path[{"elb_drop_invalid_header": metadata}] {
 }
 
 elb_drop_invalid_header {
-    lower(input.resources[i].type) == "aws_load_balancer_listener_policy"
+    lower(input.resources[i].type) == "aws_load_balancer_policy"
     not aws_issue["elb_drop_invalid_header"]
     not aws_bool_issue["elb_drop_invalid_header"]
     not aws_attribute_absence["elb_drop_invalid_header"]
@@ -1069,4 +1069,503 @@ elb_drop_invalid_header_metadata := {
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/load_balancer_listener_policy"
+}
+
+
+#
+# PR-AWS-TRF-ELB-014
+#
+
+default elb_certificate_listner_arn = null
+
+aws_attribute_absence["elb_certificate_listner_arn"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb_listener_certificate"
+    not resource.properties.listener_arn
+}
+
+source_path[{"elb_certificate_listner_arn": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb_listener_certificate"
+    not resource.properties.listener_arn
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "listener_arn"]
+        ],
+    }
+}
+
+aws_issue["elb_certificate_listner_arn"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb_listener_certificate"
+    resource.properties.listener_arn == null
+}
+
+source_path[{"elb_certificate_listner_arn": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb_listener_certificate"
+    resource.properties.listener_arn == null
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "listener_arn"]
+        ],
+    }
+}
+
+aws_issue["elb_certificate_listner_arn"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb_listener_certificate"
+    count(resource.properties.listener_arn) == 0
+}
+
+source_path[{"elb_certificate_listner_arn": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb_listener_certificate"
+    count(resource.properties.listener_arn) == 0
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "listener_arn"]
+        ],
+    }
+}
+
+aws_issue["elb_certificate_listner_arn"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb_listener_certificate"
+    resource.properties.listener_arn == ""
+}
+
+source_path[{"elb_certificate_listner_arn": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb_listener_certificate"
+    resource.properties.listener_arn == ""
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "listener_arn"]
+        ],
+    }
+}
+
+
+elb_certificate_listner_arn {
+    lower(input.resources[i].type) == "aws_lb_listener_certificate"
+    not aws_issue["elb_certificate_listner_arn"]
+    not aws_attribute_absence["elb_certificate_listner_arn"]
+}
+
+elb_certificate_listner_arn = false {
+    aws_issue["elb_certificate_listner_arn"]
+}
+
+elb_certificate_listner_arn = false {
+    aws_attribute_absence["elb_certificate_listner_arn"]
+}
+
+elb_certificate_listner_arn_err = "Ensure the ELBv2 ListenerCertificate listener_arn value is defined" {
+    aws_issue["elb_certificate_listner_arn"]
+} else = "Ensure the ELBv2 ListenerCertificate listener_arn value is defined" {
+    aws_attribute_absence["elb_certificate_listner_arn"]
+}
+
+elb_certificate_listner_arn_metadata := {
+    "Policy Code": "PR-AWS-TRF-ELB-014",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure the ELBv2 ListenerCertificate listener_arn value is defined",
+    "Policy Description": "Ensure the ELBv2 ListenerCertificate listener_arn value is defined, else an Actor can provide access to CA to non-ADATUM principals.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener_certificate"
+}
+
+
+#
+# PR-AWS-TRF-ELB-015
+#
+
+
+default elb_listener_sslpolicy = null
+
+allowed_ssl_policies = ["ELBSecurityPolicy-TLS-1-2-2017-01", "ELBSecurityPolicy-TLS-1-2-Ext-2018-06", "ELBSecurityPolicy-FS-1-2-2019-08", "ELBSecurityPolicy-FS-1-2-Res-2019-08", "ELBSecurityPolicy-FS-1-2-Res-2020-10"]
+
+aws_attribute_absence["elb_listener_sslpolicy"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb_listener"
+    not resource.properties.ssl_policy
+}
+
+source_path[{"elb_listener_sslpolicy": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb_listener"
+    not resource.properties.ssl_policy
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "ssl_policy"]
+        ],
+    }
+}
+
+aws_issue["elb_listener_sslpolicy"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb_listener"
+    count([c | lower(resource.properties.ssl_policy) == lower(allowed_ssl_policies[_]); c:=1 ]) == 0
+}
+
+source_path[{"elb_listener_sslpolicy": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb_listener"
+    count([c | lower(resource.properties.ssl_policy) == lower(allowed_ssl_policies[_]); c:=1 ]) == 0
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "ssl_policy"]
+        ],
+    }
+}
+
+elb_listener_sslpolicy {
+    lower(input.resources[i].type) == "aws_lb_listener"
+    not aws_issue["elb_listener_sslpolicy"]
+    not aws_attribute_absence["elb_listener_sslpolicy"]
+}
+
+elb_listener_sslpolicy = false {
+    aws_issue["elb_listener_sslpolicy"]
+}
+
+elb_listener_sslpolicy = false {
+    aws_attribute_absence["elb_listener_sslpolicy"]
+}
+
+elb_listener_sslpolicy_err = "Ensure the Load Balancer Listener SSLPolicy is set to at least one value from approved policies" {
+    aws_issue["elb_listener_sslpolicy"]
+} else = "ELBv2 attribute ssl_policy is missing from the resource" {
+    aws_attribute_absence["elb_listener_sslpolicy"]
+}
+
+elb_listener_sslpolicy_metadata := {
+    "Policy Code": "PR-AWS-TRF-ELB-015",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure the Load Balancer Listener SSLPolicy is set to at least one value from approved policies",
+    "Policy Description": "Ensure the Load Balancer Listener SSLPolicy is set to at least one value from approved policies, else an Actor can gain access to ADATUM information due to misconfigured cryptographic settings",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html"
+}
+
+
+#
+# PR-AWS-TRF-ELB-016
+#
+
+default elb_subnet = null
+
+subnet_issue["elb_subnet"] {
+	resource := input.resources[_]
+    lower(resource.type) == "aws_lb"
+	not resource.properties.subnets
+}
+
+subnet_issue["elb_subnet"] {
+	resource := input.resources[_]
+    lower(resource.type) == "aws_lb"
+	resource.properties.subnets == null
+}
+
+subnet_issue["elb_subnet"] {
+	resource := input.resources[_]
+    lower(resource.type) == "aws_lb"
+	count(resource.properties.subnets) == 0
+}
+
+subnet_mapping_issue["elb_subnet"] {
+	resource := input.resources[_]
+    lower(resource.type) == "aws_lb"
+    not resource.properties.subnet_mapping
+}
+
+subnet_mapping_issue["elb_subnet"] {
+	resource := input.resources[_]
+    lower(resource.type) == "aws_lb"
+    resource.properties.subnet_mapping == null
+}
+
+subnet_mapping_issue["elb_subnet"] {
+	resource := input.resources[_]
+    lower(resource.type) == "aws_lb"
+    count(resource.properties.subnet_mapping) == 0
+}
+
+subnet_mapping_issue["elb_subnet"] {
+	resource := input.resources[_]
+    lower(resource.type) == "aws_lb"
+    subnet_mapping := resource.properties.subnet_mapping[j]
+    not subnet_mapping.subnet_id
+}
+
+subnet_mapping_issue["elb_subnet"] {
+	resource := input.resources[_]
+    lower(resource.type) == "aws_lb"
+    subnet_mapping := resource.properties.subnet_mapping[j]
+    count(subnet_mapping.subnet_id) == 0
+}
+
+subnet_mapping_issue["elb_subnet"] {
+	resource := input.resources[_]
+    lower(resource.type) == "aws_lb"
+    subnet_mapping := resource.properties.subnet_mapping[j]
+    subnet_mapping.subnet_id == null
+}
+
+aws_issue["elb_subnet"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb"
+    subnet_issue["elb_subnet"]
+    subnet_mapping_issue["elb_subnet"]
+}
+
+source_path[{"elb_subnet": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb"
+    subnet_issue["elb_subnet"]
+    subnet_mapping_issue["elb_subnet"]
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "subnets"],
+            ["resources", i, "properties", "subnet_mapping"]
+        ],
+    }
+}
+
+elb_subnet {
+    lower(input.resources[i].type) == "aws_lb"
+    not aws_issue["elb_subnet"]
+}
+
+elb_subnet = false {
+    aws_issue["elb_subnet"]
+}
+
+elb_subnet_err = "Ensure one of subnets or subnet_mapping is defined for loadbalancer" {
+    aws_issue["elb_subnet"]
+}
+
+elb_subnet_metadata := {
+    "Policy Code": "PR-AWS-TRF-ELB-016",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure one of subnets or subnet_mapping is defined for loadbalancer",
+    "Policy Description": "Ensure one of subnets or subnet_mapping is defined for loadbalancer",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticloadbalancingv2-loadbalancer-subnetmapping.html#cfn-elasticloadbalancingv2-loadbalancer-subnetmapping-subnetid"
+}
+
+#
+# PR-AWS-TRF-ELB-017
+#
+
+default elb_scheme = null
+
+aws_issue["elb_scheme"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb"
+    lower(resource.properties.internal) == "true"
+}
+
+source_path[{"elb_scheme": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb"
+    lower(resource.properties.internal) == "true"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "internal"]
+        ],
+    }
+}
+
+aws_issue["elb_scheme"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb"
+    resource.properties.internal == true
+}
+
+source_path[{"elb_scheme": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb"
+    resource.properties.internal == true
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "internal"]
+        ],
+    }
+}
+
+
+elb_scheme {
+    lower(input.resources[i].type) == "aws_lb"
+    not aws_issue["elb_scheme"]
+}
+
+elb_scheme = false {
+    aws_issue["elb_scheme"]
+}
+
+elb_scheme_err = "Ensure LoadBalancer scheme is set to internal and not internet-facing" {
+    aws_issue["elb_scheme"]
+}
+
+elb_scheme_metadata := {
+    "Policy Code": "PR-AWS-TRF-ELB-017",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure LoadBalancer scheme is set to internal and not internet-facing",
+    "Policy Description": "LoadBalancer scheme must be explicitly set to internal, else an Actor can allow access to ADATUM information through the misconfiguration of an ELB resource",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb"
+}
+
+
+#
+# PR-AWS-TRF-ELB-018
+#
+
+default elb_type = null
+
+aws_issue["elb_type"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb"
+    lower(resource.properties.load_balancer_type) != "application"
+}
+
+source_path[{"elb_type": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb"
+    lower(resource.properties.load_balancer_type) != "application"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "load_balancer_type"]
+        ],
+    }
+}
+
+aws_issue["elb_type"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb"
+    resource.properties.load_balancer_type == null
+}
+
+source_path[{"elb_type": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb"
+    resource.properties.load_balancer_type == null
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "load_balancer_type"]
+        ],
+    }
+}
+
+elb_type {
+    lower(input.resources[i].type) == "aws_lb"
+    not aws_issue["elb_type"]
+}
+
+elb_type = false {
+    aws_issue["elb_type"]
+}
+
+elb_type_err = "Ensure all load balancers created are application load balancers" {
+    aws_issue["elb_type"]
+}
+
+elb_type_metadata := {
+    "Policy Code": "PR-AWS-TRF-ELB-018",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure all load balancers created are application load balancers",
+    "Policy Description": "Ensure the value of Type for each LoadBalancer resource is application or the Type is not set, since it defaults to application",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb"
+}
+
+
+#
+# PR-AWS-TRF-ELB-019
+#
+
+default elb_protocol = null
+
+aws_issue["elb_protocol"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb_target_group"
+    allwed_target_type := ["instance" , "ip"]
+    lower(resource.properties.target_type) == allwed_target_type[_]
+    lower(resource.properties.protocol) != "https"
+}
+
+source_path[{"elb_protocol": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb_target_group"
+    allwed_target_type := ["instance" , "ip"]
+    lower(resource.properties.target_type) == allwed_target_type[_]
+    lower(resource.properties.protocol) != "https"
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "protocol"]
+        ],
+    }
+}
+
+aws_issue["elb_protocol"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb_target_group"
+    allwed_target_type := ["instance" , "ip"]
+    lower(resource.properties.target_type) == allwed_target_type[_]
+    not resource.properties.protocol
+}
+
+source_path[{"elb_protocol": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_lb_target_group"
+    allwed_target_type := ["instance" , "ip"]
+    lower(resource.properties.target_type) == allwed_target_type[_]
+    not resource.properties.protocol
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "protocol"]
+        ],
+    }
+}
+
+elb_protocol {
+    lower(input.resources[i].type) == "aws_lb_target_group"
+    not aws_issue["elb_protocol"]
+}
+
+elb_protocol = false {
+    aws_issue["elb_protocol"]
+}
+
+elb_protocol_err = "Ensure LoadBalancer TargetGroup protocol values are limited to HTTPS" {
+    aws_issue["elb_protocol"]
+}
+
+elb_protocol_metadata := {
+    "Policy Code": "PR-AWS-TRF-ELB-019",
+    "Type": "IaC",
+    "Product": "AWS",
+    "Language": "AWS Cloud formation",
+    "Policy Title": "Ensure LoadBalancer TargetGroup protocol values are limited to HTTPS",
+    "Policy Description": "The only allowed protocol value for LoadBalancer TargetGroups is HTTPS, though the property is ignored if the target type is lambda.",
+    "Resource Type": "",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group"
 }

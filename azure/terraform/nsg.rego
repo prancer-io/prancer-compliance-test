@@ -467,6 +467,41 @@ inbound_insecure_port_metadata := {
 }
 
 #
+# PR-AZR-TRF-NSG-011
+#
+
+default inbound_port_11211 = null
+
+azure_issue["inbound_port_11211"] {
+    to_number(nsg_inbound[_]) == 11211
+}
+
+inbound_port_11211 {
+    lower(input.resources[_].type) == "azurerm_network_security_rule"
+    not azure_issue["inbound_port_11211"]
+}
+
+inbound_port_11211 = false {
+    azure_issue["inbound_port_11211"]
+}
+
+inbound_port_11211_err = "Memcached DDoS attacking inbound port 11211 is opened. it should be blocked." {
+    azure_issue["inbound_port_11211"]
+}
+
+inbound_port_11211_metadata := {
+    "Policy Code": "PR-AZR-TRF-NSG-011",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Memcached DDoS attack attempt should be prevented",
+    "Policy Description": "Memcached is a general-purpose distributed memory caching system. It is often used to speed up dynamic database-driven websites by caching data and objects in RAM to reduce the number of times an external data source (such as a database or API) must be read. It is reported that Memcache versions 1.5.5 and below are vulnerable to DDoS amplification attack. This policy aims at finding such attacks and generate alerts.",
+    "Resource Type": "azurerm_network_security_rule",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule"
+}
+
+#
 # PR-AZR-TRF-NSG-015
 #
 

@@ -3440,6 +3440,40 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_postgreSQL_3",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-066",
+                            "eval": "data.rule.postgresql_public_access_disabled",
+                            "message": "data.rule.postgresql_public_access_disabled_err",
+                            "remediationDescription": "In 'microsoft.dbforpostgresql/servers' resource, set 'publicNetworkAccess = disabled' to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_066.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure PostgreSQL servers don't have public network access enabled",
+                    "description": "Always use Private Endpoint for PostgreSQL Server",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.dbforpostgresql/servers"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_PRICING",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -4089,7 +4123,7 @@
                                 "NIST 800",
                                 "NIST CSF",
                                 "PCI-DSS"
-                           ],
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -4383,7 +4417,7 @@
                                 "NIST 800",
                                 "NIST CSF",
                                 "PCI-DSS"
-                           ],
+                            ],
                             "service": [
                                 "arm"
                             ]
@@ -4945,6 +4979,358 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_WEB_6",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(web.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-WEB-006",
+                            "eval": "data.rule.web_service_cors_not_allowing_all",
+                            "message": "data.rule.web_service_cors_not_allowing_all_err",
+                            "remediationDescription": "In 'microsoft.web/sites' resource, don't set '*' as value to 'allowedOrigins' under 'cors' block which exists under 'siteConfig' block to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_WEB_006.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure CORS configuration is not allowing every resources to access Azure Web Service",
+                    "description": "This policy will identify CORS configuration which are allowing every resoruces to access Azure Web service and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_WEB_7",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(web.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-WEB-007",
+                            "eval": "data.rule.web_service_http_logging_enabled",
+                            "message": "data.rule.web_service_http_logging_enabled_err",
+                            "remediationDescription": "In 'microsoft.web/sites' resource, make sure 'httpLoggingEnabled' exists and the value is set to true.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_WEB_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service http logging should be enabled",
+                    "description": "This policy will identify the Azure Web service which dont have http logging enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_WEB_8",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(web.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-WEB-008",
+                            "eval": "data.rule.web_service_detaild_error_message_enabled",
+                            "message": "data.rule.web_service_detaild_error_message_enabled_err",
+                            "remediationDescription": "make sure 'detailedErrorLoggingEnabled' exists and the value is set to true.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_WEB_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service detaild error message should be enabled",
+                    "description": "This policy will identify the Azure Web service which dont have detaild error message enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_WEB_9",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(web.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-WEB-009",
+                            "eval": "data.rule.web_service_request_tracing_enabled",
+                            "message": "data.rule.web_service_request_tracing_enabled_err",
+                            "remediationDescription": "make sure 'requestTracingEnabled' exists and the value is set to true.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_WEB_009.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service request tracing should be enabled",
+                    "description": "This policy will identify the Azure web service which dont have request tracing enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_WEB_10",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(web.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-WEB-010",
+                            "eval": "data.rule.web_service_managed_identity_provider_enabled",
+                            "message": "data.rule.web_service_managed_identity_provider_enabled_err",
+                            "remediationDescription": "In 'microsoft.web/sites' resource, make sure property 'type' exists under 'identity' block to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_WEB_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service Managed Identity provider should be enabled",
+                    "description": "This policy will identify the Azure Web service which dont have Managed Identity provider enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_WEB_11",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(web.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-WEB-011",
+                            "eval": "data.rule.web_service_remote_debugging_disabled",
+                            "message": "data.rule.web_service_remote_debugging_disabled_err",
+                            "remediationDescription": "In 'microsoft.web/sites' resource, make sure property 'remoteDebuggingEnabled' does not exist under 'siteConfig' block or if exists set the value to 'false' to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_WEB_011.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service remote debugging should be disabled",
+                    "description": "This policy will identify the Azure web service which have remote debugging enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_WEB_12",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(web.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-WEB-012",
+                            "eval": "data.rule.web_service_ftp_deployment_disabled",
+                            "message": "data.rule.web_service_ftp_deployment_disabled_err",
+                            "remediationDescription": "In 'microsoft.web/sites' resource, make sure property 'ftpsState' has value either 'Disabled' or 'FtpsOnly' under 'siteConfig' block to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_WEB_012.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service FTP deployments should be disabled",
+                    "description": "This policy will identify the Azure web service which have FTP deployment enabled and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_WEB_13",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(web.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-WEB-013",
+                            "eval": "data.rule.web_service_net_framework_latest",
+                            "message": "data.rule.web_service_net_framework_latest_err",
+                            "remediationDescription": "In 'microsoft.web/sites' resource, set netFrameworkVersion = 'v6.0' under 'siteConfig' block to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_WEB_013.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service Dot Net Framework should be latest",
+                    "description": "This policy will identify the Azure web service which dont have latest version of Net Framework and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_WEB_14",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(web.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-WEB-014",
+                            "eval": "data.rule.web_service_php_version_latest",
+                            "message": "data.rule.web_service_php_version_latest_err",
+                            "remediationDescription": "In 'microsoft.web/sites' resource, set phpVersion = '7.4' under 'siteConfig' block to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_WEB_014.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service PHP version should be latest",
+                    "description": "This policy will identify the Azure web service which dont have latest version of PHP and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_WEB_15",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(web.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-WEB-015",
+                            "eval": "data.rule.web_service_python_version_latest",
+                            "message": "data.rule.web_service_python_version_latest_err",
+                            "remediationDescription": "In 'microsoft.web/sites' resource, set pythonVersion = '3.9' under 'siteConfig' block to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_WEB_015.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service Pyhton version should be latest",
+                    "description": "This policy will identify the Azure web service which dont have latest version of Pyhton and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_WEB_16",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(web.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-WEB-016",
+                            "eval": "data.rule.web_service_java_version_latest",
+                            "message": "data.rule.web_service_java_version_latest_err",
+                            "remediationDescription": "In 'microsoft.web/sites' resource, set javaVersion = '11' under 'siteConfig' block to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_WEB_016.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service Java version should be latest",
+                    "description": "This policy will identify the Azure web service which dont have latest version of Java and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.web/sites"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_SECURITY_CONTACTS_2",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -4963,6 +5349,45 @@
                     "severity": "Medium",
                     "title": "Send email notification should be enabled",
                     "description": "Setting the security alert Send email notification for alerts to On ensures that emails are sent from Microsoft if their security team determines a potential security breach has taken place.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.security/securitycontacts"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SECURITY_CONTACTS_3",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(securitycontacts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-ASC-005",
+                            "eval": "data.rule.securitycontacts_alerts_to_admins_enabled",
+                            "message": "data.rule.securitycontacts_alerts_to_admins_enabled_err",
+                            "remediationDescription": "In 'microsoft.security/securitycontacts' resource, set 'alertsToAdmins = On' to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_ASC_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Security Center shoud send security alerts notifications to subscription admins",
+                    "description": "This policy will identify security centers which dont have configuration enabled to send security alerts notifications to subscription admins and alert if missing.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -5103,6 +5528,74 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_DB_FOR_MY_SQL_2",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbforMySQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-060",
+                            "eval": "data.rule.mysql_public_access_disabled",
+                            "message": "data.rule.mysql_public_access_disabled_err",
+                            "remediationDescription": "In 'microsoft.dbformysql/servers' resource, set 'publicNetworkAccess = Disabled' to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_060.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure MySQL servers don't have public network access enabled",
+                    "description": "Always use Private Endpoint for Azure MySQL Database Server",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.dbformysql/servers"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DB_FOR_MY_SQL_3",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbforMySQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-061",
+                            "eval": "data.rule.mysql_server_latest_tls_configured",
+                            "message": "data.rule.mysql_server_latest_tls_configured_err",
+                            "remediationDescription": "In 'microsoft.dbformysql/servers' resource, set minimalTlsVersion = 'TLS1_2' to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_061.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Azure MySQL Server has latest version of tls configured",
+                    "description": "This policy will identify the Azure MySQL Server which dont have latest version of tls configured and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.dbformysql/servers"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_STORAGE_ACCOUNTS_9",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -5135,12 +5628,49 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_10",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-STR-018",
+                            "eval": "data.rule.storage_account_latest_tls_configured",
+                            "message": "data.rule.storage_account_latest_tls_configured_err",
+                            "remediationDescription": "In 'microsoft.storage/storageaccounts' resource, set minimumTlsVersion = 'TLS1_2' to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_STR_018.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Azure Storage Account has latest version of tls configured",
+                    "description": "This policy will identify the Azure Storage Account which dont have latest version of tls configured and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "CIS",
+                                "HIPAA",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_LOG_PROFILE_1",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(logProfile.rego)",
+                    "rule": "file(activitylogalerts.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-ARM-MNT-009",
@@ -5153,6 +5683,38 @@
                     "severity": "High",
                     "title": "activity log retention should be set to 365 days or greater",
                     "description": "Specifies the retention policy for the log. We recommend you set activity log retention for 365 days or greater. (A value of 0 will retain the events indefinitely.)",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.insights/logprofiles"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_LOG_PROFILE_2",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(activitylogalerts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-MNT-010",
+                            "eval": "data.rule.log_profiles_retention_enabled",
+                            "message": "data.rule.log_profiles_retention_enabled_err",
+                            "remediationDescription": "For Resource type 'microsoft.insights/logprofiles' make sure retentionPolicy.enabled exists and the value is set to true.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/Microsoft.Insights/logprofiles' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_MNT_010.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Activity log profile retention should be enabled",
+                    "description": "This policy identifies Microsoft.Insights/logprofiles which dont have log retention enabled. Activity Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -5233,6 +5795,108 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_DB_FOR_MARIA_DB_3",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbforMariaDB.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-056",
+                            "eval": "data.rule.mairadb_ssl_enforcement_enabled",
+                            "message": "data.rule.mairadb_ssl_enforcement_enabled_err",
+                            "remediationDescription": "In 'microsoft.dbformariadb/servers' resource, set 'sslEnforcement = Enabled' to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformariadb/servers' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_056.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure ssl enforcement is enabled on MariaDB Server.",
+                    "description": "Enable SSL connection on MariaDB Servers. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.dbformariadb/servers"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DB_FOR_MARIA_DB_4",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbforMariaDB.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-057",
+                            "eval": "data.rule.mairadb_public_access_disabled",
+                            "message": "data.rule.mairadb_public_access_disabled_err",
+                            "remediationDescription": "In 'microsoft.dbformariadb/servers' resource, set 'publicNetworkAccess = Disabled' to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformariadb/servers' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_057.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure MariaDB servers don't have public network access enabled",
+                    "description": "Always use Private Endpoint for MariaDB Server",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.dbformariadb/servers"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_DB_FOR_MARIA_DB_5",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(dbforMariaDB.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-058",
+                            "eval": "data.rule.mariadb_geo_redundant_backup_enabled",
+                            "message": "data.rule.mariadb_geo_redundant_backup_enabled_err",
+                            "remediationDescription": "In 'microsoft.dbformariadb/servers' resource, set 'storageProfile.geoRedundantBackup = Enabled' to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformariadb/servers' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_058.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Geo-redundant backup is enabled on MariaDB server.",
+                    "description": "Azure Database for MariaDB provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.dbformariadb/servers"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_DB_FOR_MY_SQL_FIREWALLRULES_1",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
@@ -5299,19 +5963,19 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_LOG_PROFILE_2",
+                    "masterTestId": "TEST_LOG_PROFILE_3",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(logProfile.rego)",
+                    "rule": "file(activitylogalerts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-MNT-010",
+                            "id": "PR-AZR-ARM-MNT-011",
                             "eval": "data.rule.log_profile_category",
                             "message": "data.rule.log_profile_category_err",
                             "remediationDescription": "For Resource type 'microsoft.insights/logprofiles' make sure categories exists and contains 'Write', 'Action' and 'Delete'.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/Microsoft.Insights/logprofiles' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_ARM_MNT_010.py"
+                            "remediationFunction": "PR_AZR_ARM_MNT_011.py"
                         }
                     ],
                     "severity": "High",
@@ -5395,6 +6059,76 @@
                     "severity": "High",
                     "title": "Ensure that Azure Active Directory Admin is configured for SQL Server",
                     "description": "Use Azure Active Directory Authentication for authentication with SQL Databases. Azure Active Directory authentication is a mechanism of connecting Microsoft Azure SQL Databases and SQL Data Warehouses using identities in an Azure Active Directory (Azure AD). With Azure AD authentication, you can centrally manage the identities of database users and other Microsoft services in one central location.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/servers/administrators"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MSSQL_SERVER_5",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-069",
+                            "eval": "data.rule.sql_server_latest_tls_configured",
+                            "message": "data.rule.sql_server_latest_tls_configured_err",
+                            "remediationDescription": "In 'microsoft.sql/servers' resource, set 'minimalTlsVersion = 1.2' to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_069.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Azure SQL Server has latest version of tls configured",
+                    "description": "This policy will identify the Azure SQL Server which dont have latest version of tls configured and give alert",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.sql/servers",
+                        "microsoft.sql/servers/administrators"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MSSQL_SERVER_6",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sql_servers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-SQL-070",
+                            "eval": "data.rule.sql_public_access",
+                            "message": "data.rule.sql_public_access_err",
+                            "remediationDescription": "In 'microsoft.sql/servers' resource, set 'publicNetworkAccess = Disabled' to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/servers' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_SQL_070.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Ensure SQL servers don't have public network access enabled",
+                    "description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance",
                     "tags": [
                         {
                             "cloud": "git",

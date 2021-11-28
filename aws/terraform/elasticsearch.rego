@@ -652,6 +652,24 @@ esearch_zone_awareness_metadata := {
 
 default esearch_node_encryption = null
 
+aws_attribute_absence["esearch_node_encryption"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    not resource.properties.node_to_node_encryption
+}
+
+source_path[{"esearch_node_encryption": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_elasticsearch_domain"
+    not resource.properties.node_to_node_encryption
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "node_to_node_encryption"]
+        ],
+    }
+}
+
 aws_issue["esearch_node_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_elasticsearch_domain"
@@ -696,6 +714,11 @@ esearch_node_encryption {
     lower(input.resources[i].type) == "aws_elasticsearch_domain"
     not aws_issue["esearch_node_encryption"]
     not aws_bool_issue["esearch_node_encryption"]
+    not aws_attribute_absence["esearch_node_encryption"]
+}
+
+esearch_node_encryption = false {
+    aws_attribute_absence["esearch_node_encryption"]
 }
 
 esearch_node_encryption = false {
@@ -710,6 +733,8 @@ esearch_node_encryption_err = "Ensure node-to-node encryption is enabled on each
     aws_issue["esearch_node_encryption"]
 } else = "Ensure node-to-node encryption is enabled on each ElasticSearch Domain" {
     aws_bool_issue["esearch_node_encryption"]
+} else = "Ensure node-to-node encryption is enabled on each ElasticSearch Domain" {
+    aws_attribute_absence["esearch_node_encryption"]
 }
 
 esearch_node_encryption_metadata := {

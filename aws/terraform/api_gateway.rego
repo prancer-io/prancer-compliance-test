@@ -78,6 +78,24 @@ default gateway_private = null
 aws_attribute_absence["gateway_private"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_api_gateway_rest_api"
+    not resource.properties.endpoint_configuration
+}
+
+source_path[{"gateway_private": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_rest_api"
+    not resource.properties.endpoint_configuration
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "endpoint_configuration"]
+        ],
+    }
+}
+
+aws_attribute_absence["gateway_private"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_rest_api"
     endpoint_configuration := resource.properties.endpoint_configuration[j]
     not endpoint_configuration.types
 }
@@ -323,6 +341,23 @@ gateway_request_authorizer_metadata := {
 
 default gateway_logging_enable = null
 
+aws_attribute_absence["gateway_logging_enable"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_stage"
+    not resource.properties.access_log_settings
+}
+
+source_path[{"gateway_logging_enable": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_api_gateway_stage"
+    not resource.properties.access_log_settings
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "access_log_settings"]
+        ],
+    }
+}
+
 aws_issue["gateway_logging_enable"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_api_gateway_stage"
@@ -383,14 +418,21 @@ source_path[{"gateway_logging_enable": metadata}] {
 gateway_logging_enable {
     lower(input.resources[i].type) == "aws_api_gateway_stage"
     not aws_issue["gateway_logging_enable"]
+    not aws_attribute_absence["gateway_logging_enable"]
 }
 
 gateway_logging_enable = false {
     aws_issue["gateway_logging_enable"]
 }
 
+gateway_logging_enable = false {
+    aws_attribute_absence["gateway_logging_enable"]
+}
+
 gateway_logging_enable_err = "Ensure that API Gateway has enabled access logging" {
     aws_issue["gateway_logging_enable"]
+} else = "Ensure that API Gateway has enabled access logging" {
+    aws_attribute_absence["gateway_logging_enable"]
 }
 
 gateway_logging_enable_metadata := {

@@ -152,6 +152,23 @@ eks_version_metadata := {
 
 default eks_encryption_resources = null
 
+aws_attribute_absence["eks_encryption_resources"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_eks_cluster"
+    not resource.properties.encryption_config
+}
+
+source_path[{"eks_encryption_resources": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_eks_cluster"
+    not resource.properties.encryption_config
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encryption_config"]
+        ],
+    }
+}
+
 aws_issue["eks_encryption_resources"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_eks_cluster"
@@ -193,15 +210,23 @@ source_path[{"eks_encryption_resources": metadata}] {
 eks_encryption_resources {
     lower(input.resources[i].type) == "aws_eks_cluster"
     not aws_issue["eks_encryption_resources"]
+    not aws_attribute_absence["eks_encryption_resources"]
 }
 
 eks_encryption_resources = false {
     aws_issue["eks_encryption_resources"]
 }
 
+eks_encryption_resources = false {
+    aws_attribute_absence["eks_encryption_resources"]
+}
+
 eks_encryption_resources_err = "Ensure AWS EKS cluster has secrets encryption enabled" {
     aws_issue["eks_encryption_resources"]
+} else = "Ensure AWS EKS cluster has secrets encryption enabled" {
+    aws_attribute_absence["eks_encryption_resources"]
 }
+
 eks_encryption_resources_metadata := {
     "Policy Code": "PR-AWS-TRF-EKS-003",
     "Type": "IaC",
@@ -221,6 +246,24 @@ eks_encryption_resources_metadata := {
 #
 
 default eks_encryption_kms = null
+
+aws_attribute_absence["eks_encryption_kms"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_eks_cluster"
+    not resource.properties.encryption_config
+
+}
+
+source_path[{"eks_encryption_resources": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_eks_cluster"
+    not resource.properties.encryption_config
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encryption_config"]
+        ],
+    }
+}
 
 aws_issue["eks_encryption_kms"] {
     resource := input.resources[i]
@@ -267,15 +310,23 @@ source_path[{"eks_encryption_resources": metadata}] {
 eks_encryption_kms {
     lower(input.resources[i].type) == "aws_eks_cluster"
     not aws_issue["eks_encryption_kms"]
+    not aws_attribute_absence["eks_encryption_kms"]
 }
 
 eks_encryption_kms = false {
     aws_issue["eks_encryption_kms"]
 }
 
+eks_encryption_kms = false {
+    aws_attribute_absence["eks_encryption_kms"]
+}
+
 eks_encryption_kms_err = "Ensure Kubernetes secrets are encrypted using CMKs managed in AWS KMS" {
     aws_issue["eks_encryption_kms"]
+} else = "Ensure Kubernetes secrets are encrypted using CMKs managed in AWS KMS" {
+    aws_attribute_absence["eks_encryption_kms"]
 }
+
 eks_encryption_kms_metadata := {
     "Policy Code": "PR-AWS-TRF-EKS-004",
     "Type": "IaC",

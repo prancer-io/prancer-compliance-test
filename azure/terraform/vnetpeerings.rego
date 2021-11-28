@@ -1,5 +1,9 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering
 
 #
@@ -7,16 +11,17 @@ package rule
 #
 
 default vnet_peer = null
-# this checking is not necessary here as azurerm_virtual_network can be created without azurerm_virtual_network_peering
-#azure_attribute_absence["vnet_peer"] {
-#    count([c | input.resources[_].type == "azurerm_virtual_network"; c := 1]) != count([c | input.resources[_].type == "azurerm_virtual_network_peering"; c := 1])
-#}
+
+# azure_attribute_absence["vnet_peer"] {
+#    count([c | input.resources[_].type == "azurerm_virtual_network_peering"; c := 1]) == 0
+# }
 
 # Defaults to true.
 azure_attribute_absence["vnet_peer"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_virtual_network_peering"
-    not resource.properties.allow_virtual_network_access
+    #not resource.properties.allow_virtual_network_access
+    not has_property(resource.properties, "allow_virtual_network_access")
 }
 
 azure_issue["vnet_peer"] {
@@ -26,18 +31,19 @@ azure_issue["vnet_peer"] {
 }
 
 vnet_peer {
-    lower(input.resources[_].type) == "azurerm_virtual_network_peering"
+    lower(input.resources[_].type) == "azurerm_virtual_network"
     azure_attribute_absence["vnet_peer"]
     not azure_issue["vnet_peer"]
 }
 
 vnet_peer {
-    lower(input.resources[_].type) == "azurerm_virtual_network_peering"
+    lower(input.resources[_].type) == "azurerm_virtual_network"
     not azure_attribute_absence["vnet_peer"]
     not azure_issue["vnet_peer"]
 }
 
 vnet_peer = false {
+    lower(input.resources[_].type) == "azurerm_virtual_network"
     azure_issue["vnet_peer"]
 }
 

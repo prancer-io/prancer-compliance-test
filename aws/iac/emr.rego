@@ -50,7 +50,7 @@ emr_security = false {
     aws_issue["emr_security"]
 }
 
-emr_security = "AWS EMR cluster is not configured with security configuration" {
+emr_security_err = "AWS EMR cluster is not configured with security configuration" {
     aws_issue["emr_security"]
 }
 
@@ -265,7 +265,7 @@ emr_local_encryption_cmk = false {
     aws_issue["emr_local_encryption_cmk"]
 }
 
-emr_local_encryption_cmk_err = "AWS EMR cluster is not enabled with local disk encryption using CMK" {
+emr_local_encryption_cmk_err = "AWS EMR cluster is not enabled with local disk encryption" {
     aws_issue["emr_local_encryption_cmk"]
 }
 
@@ -274,74 +274,8 @@ emr_local_encryption_cmk_metadata := {
     "Type": "IaC",
     "Product": "AWS",
     "Language": "AWS Cloud formation",
-    "Policy Title": "AWS EMR cluster is not enabled with local disk encryption using CMK",
-    "Policy Description": "This policy identifies AWS EMR clusters that are not enabled with local disk encryption using CMK(Customer Managed Key). Applications using the local file system on each cluster instance for intermediate data throughout workloads, where data could be spilled to disk when it overflows memory. With Local disk encryption at place, data at rest can be protected.",
-    "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration"
-}
-
-
-#
-# PR-AWS-CFR-EMR-005
-#
-
-default emr_local_encryption = null
-
-aws_issue["emr_local_encryption"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::emr::securityconfiguration"
-    not resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration
-}
-
-source_path[{"emr_local_encryption": metadata}] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::emr::securityconfiguration"
-    not resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration
-    metadata := {
-        "resource_path": [
-            ["Resources", i, "Properties", "SecurityConfiguration", "EncryptionConfiguration", "AtRestEncryptionConfiguration", "LocalDiskEncryptionConfiguration"]
-        ],
-    }
-}
-
-aws_issue["emr_local_encryption"] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::emr::securityconfiguration"
-    count(resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration) == 0
-}
-
-source_path[{"emr_local_encryption": metadata}] {
-    resource := input.Resources[i]
-    lower(resource.Type) == "aws::emr::securityconfiguration"
-    count(resource.Properties.SecurityConfiguration.EncryptionConfiguration.AtRestEncryptionConfiguration.LocalDiskEncryptionConfiguration) == 0
-    metadata := {
-        "resource_path": [
-            ["Resources", i, "Properties", "SecurityConfiguration", "EncryptionConfiguration", "AtRestEncryptionConfiguration", "LocalDiskEncryptionConfiguration"]
-        ],
-    }
-}
-
-emr_local_encryption {
-    lower(input.Resources[i].Type) == "aws::emr::securityconfiguration"
-    not aws_issue["emr_local_encryption"]
-}
-
-emr_local_encryption = false {
-    aws_issue["emr_local_encryption"]
-}
-
-emr_local_encryption_err = "AWS EMR cluster is not enabled with local disk encryption" {
-    aws_issue["emr_local_encryption"]
-}
-
-emr_local_encryption_metadata := {
-    "Policy Code": "PR-AWS-CFR-EMR-005",
-    "Type": "IaC",
-    "Product": "AWS",
-    "Language": "AWS Cloud formation",
     "Policy Title": "AWS EMR cluster is not enabled with local disk encryption",
-    "Policy Description": "This policy identifies AWS EMR clusters that are not enabled with local disk encryption. Applications using the local file system on each cluster instance for intermediate data throughout workloads, where data could be spilled to disk when it overflows memory. With Local disk encryption at place, data at rest can be protected.",
+    "Policy Description": "This policy identifies AWS EMR clusters that are not enabled with local disk encryption(Customer Managed Key). Applications using the local file system on each cluster instance for intermediate data throughout workloads, where data could be spilled to disk when it overflows memory. With Local disk encryption at place, data at rest can be protected.",
     "Resource Type": "",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration"

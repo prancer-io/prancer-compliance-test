@@ -59,17 +59,14 @@ enableSslPort_metadata := {
 default serverRole = null
 # as azurerm_redis_linked_server is child resource of microsoft.cache/redis, we need to make sure microsoft.cache/redis exist in the same template first.
 azure_attribute_absence["serverRole"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_redis_cache"
-    count([c | input.resources[_].type == "azurerm_redis_linked_server";
-    	   c := 1]) == 0
+    count([c | input.resources[_].type == "azurerm_redis_linked_server"; c := 1]) == 0
 }
 
-#azure_attribute_absence ["serverRole"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "azurerm_redis_linked_server"
-#    not resource.properties.server_role
-#}
+azure_attribute_absence ["serverRole"] {
+   resource := input.resources[_]
+   lower(resource.type) == "azurerm_redis_linked_server"
+   not resource.properties.server_role
+}
 
 azure_issue ["serverRole"] {
     resource := input.resources[_]
@@ -78,24 +75,26 @@ azure_issue ["serverRole"] {
 }
 
 serverRole = false {
+    lower(input.resources[_].type) == "azurerm_redis_cache"
     azure_attribute_absence["serverRole"]
 }
 
 serverRole {
-    lower(input.resources[_].type) == "azurerm_redis_linked_server"
+    lower(input.resources[_].type) == "azurerm_redis_cache"
     not azure_attribute_absence["serverRole"]
     not azure_issue["serverRole"]
 }
 
 serverRole = false {
+    lower(input.resources[_].type) == "azurerm_redis_cache"
     azure_issue["serverRole"]
 }
 
-serverRole_miss_err = "Azure Redis Cache linked server property 'serverRole' is missing from the resource" {
+serverRole_err = "Azure Redis Cache linked server property 'server_role' is missing from the resource" {
+    lower(input.resources[_].type) == "azurerm_redis_cache"
     azure_attribute_absence["serverRole"]
-}
-
-serverRole_err = "Azure Redis Cache linked backup server currently does not have secondary role." {
+} else = "Azure Redis Cache linked backup server currently does not have secondary role." {
+    lower(input.resources[_].type) == "azurerm_redis_cache"
     azure_issue["serverRole"]
 }
 

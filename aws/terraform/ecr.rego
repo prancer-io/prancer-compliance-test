@@ -56,6 +56,24 @@ ecr_imagetag_metadata := {
 
 default ecr_encryption = null
 
+aws_attribute_absence["ecr_encryption"] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository"
+    not resource.properties.encryption_configuration
+}
+
+source_path[{"ecr_imagetag": metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "aws_ecr_repository"
+    not resource.properties.encryption_configuration
+
+    metadata := {
+        "resource_path": [
+            ["resources", i, "properties", "encryption_configuration"]
+        ],
+    }
+}
+
 aws_issue["ecr_encryption"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_ecr_repository"
@@ -79,10 +97,15 @@ source_path[{"ecr_imagetag": metadata}] {
 ecr_encryption {
     lower(input.resources[i].type) == "aws_ecr_repository"
     not aws_issue["ecr_encryption"]
+    not aws_attribute_absence["ecr_encryption"]
 }
 
 ecr_encryption = false {
     aws_issue["ecr_encryption"]
+}
+
+ecr_encryption = false {
+    aws_attribute_absence["ecr_encryption"]
 }
 
 ecr_encryption_err = "Ensure ECR repositories are encrypted" {
