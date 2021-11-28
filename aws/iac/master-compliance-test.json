@@ -3786,7 +3786,7 @@
                             "id": "PR-AWS-CFR-SQS-003",
                             "eval": "data.rule.sqs_encrypt",
                             "message": "data.rule.sqs_encrypt_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_SQS_003.py"
                         }
                     ],
@@ -3818,7 +3818,7 @@
                             "id": "PR-AWS-CFR-SQS-004",
                             "eval": "data.rule.sqs_policy_public",
                             "message": "data.rule.sqs_policy_public_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sqs-queuepolicy.html#cfn-sqs-queuepolicy-policydocument",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sqs-queuepolicy.html#cfn-sqs-queuepolicy-policydocument' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_SQS_004.py"
                         }
                     ],
@@ -3850,7 +3850,7 @@
                             "id": "PR-AWS-CFR-SQS-005",
                             "eval": "data.rule.sqs_policy_action",
                             "message": "data.rule.sqs_policy_action_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sqs-queuepolicy.html#cfn-sqs-queuepolicy-policydocument",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sqs-queuepolicy.html#cfn-sqs-queuepolicy-policydocument' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_SQS_005.py"
                         }
                     ],
@@ -3882,7 +3882,7 @@
                             "id": "PR-AWS-CFR-MSK-001",
                             "eval": "data.rule.msk_encryption_at_rest_cmk",
                             "message": "data.rule.msk_encryption_at_rest_cmk_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_MSK_001.py"
                         }
                     ],
@@ -3914,7 +3914,7 @@
                             "id": "PR-AWS-CFR-MSK-002",
                             "eval": "data.rule.msk_in_transit_encryption",
                             "message": "data.rule.msk_in_transit_encryption_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_MSK_002.py"
                         }
                     ],
@@ -3946,7 +3946,7 @@
                             "id": "PR-AWS-CFR-MSK-003",
                             "eval": "data.rule.msk_in_transit_encryption_tls",
                             "message": "data.rule.msk_in_transit_encryption_tls_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_MSK_003.py"
                         }
                     ],
@@ -3978,7 +3978,7 @@
                             "id": "PR-AWS-CFR-MSK-004",
                             "eval": "data.rule.msk_vpc",
                             "message": "data.rule.msk_vpc_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_MSK_004.py"
                         }
                     ],
@@ -4010,7 +4010,7 @@
                             "id": "PR-AWS-CFR-MSK-005",
                             "eval": "data.rule.msk_cluster_logging_enable",
                             "message": "data.rule.msk_cluster_logging_enable_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-brokerlogs.html#cfn-msk-cluster-brokerlogs-cloudwatchlogs",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-brokerlogs.html#cfn-msk-cluster-brokerlogs-cloudwatchlogs' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_MSK_005.py"
                         }
                     ],
@@ -4042,7 +4042,7 @@
                             "id": "PR-AWS-CFR-IAM-001",
                             "eval": "data.rule.iam_wildcard_resource",
                             "message": "data.rule.iam_wildcard_resource_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_IAM_001.py"
                         }
                     ],
@@ -4075,7 +4075,7 @@
                             "id": "PR-AWS-CFR-IAM-002",
                             "eval": "data.rule.iam_wildcard_action",
                             "message": "data.rule.iam_wildcard_action_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_IAM_002.py"
                         }
                     ],
@@ -4108,7 +4108,7 @@
                             "id": "PR-AWS-CFR-IAM-003",
                             "eval": "data.rule.iam_wildcard_principal",
                             "message": "data.rule.iam_wildcard_principal_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_IAM_003.py"
                         }
                     ],
@@ -4140,7 +4140,7 @@
                             "id": "PR-AWS-CFR-IAM-004",
                             "eval": "data.rule.iam_resource_format",
                             "message": "data.rule.iam_resource_format_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_IAM_004.py"
                         }
                     ],
@@ -4174,7 +4174,7 @@
                             "id": "PR-AWS-CFR-IAM-005",
                             "eval": "data.rule.iam_assume_permission",
                             "message": "data.rule.iam_assume_permission_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_IAM_005.py"
                         }
                     ],
@@ -4206,7 +4206,7 @@
                             "id": "PR-AWS-CFR-IAM-006",
                             "eval": "data.rule.iam_all_traffic",
                             "message": "data.rule.iam_all_traffic_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_IAM_006.py"
                         }
                     ],
@@ -4238,7 +4238,7 @@
                             "id": "PR-AWS-CFR-IAM-007",
                             "eval": "data.rule.iam_administrative_privileges",
                             "message": "data.rule.iam_administrative_privileges_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_IAM_007.py"
                         }
                     ],
@@ -4270,7 +4270,7 @@
                             "id": "PR-AWS-CFR-IAM-008",
                             "eval": "data.rule.iam_user_group_attach",
                             "message": "data.rule.iam_user_group_attach_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_IAM_008.py"
                         }
                     ],
@@ -4302,7 +4302,7 @@
                             "id": "PR-AWS-CFR-RSH-001",
                             "eval": "data.rule.redshift_encrypt_key",
                             "message": "data.rule.redshift_encrypt_key_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_RSH_001.py"
                         }
                     ],
@@ -4334,7 +4334,7 @@
                             "id": "PR-AWS-CFR-RSH-002",
                             "eval": "data.rule.redshift_public",
                             "message": "data.rule.redshift_public_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_RSH_002.py"
                         }
                     ],
@@ -4373,7 +4373,7 @@
                             "id": "PR-AWS-CFR-RSH-003",
                             "eval": "data.rule.redshift_require_ssl",
                             "message": "data.rule.redshift_require_ssl_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_RSH_003.py"
                         }
                     ],
@@ -4411,7 +4411,7 @@
                             "id": "PR-AWS-CFR-RSH-004",
                             "eval": "data.rule.redshift_encrypt",
                             "message": "data.rule.redshift_encrypt_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_RSH_004.py"
                         }
                     ],
@@ -4451,7 +4451,7 @@
                             "id": "PR-AWS-CFR-RSH-005",
                             "eval": "data.rule.redshift_allow_version_upgrade",
                             "message": "data.rule.redshift_allow_version_upgrade_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html#cfn-redshift-cluster-allowversionupgrade",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html#cfn-redshift-cluster-allowversionupgrade' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_RSH_005.py"
                         }
                     ],
@@ -4483,7 +4483,7 @@
                             "id": "PR-AWS-CFR-RSH-006",
                             "eval": "data.rule.redshift_deploy_vpc",
                             "message": "data.rule.redshift_deploy_vpc_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html#cfn-redshift-cluster-clustersubnetgroupname",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html#cfn-redshift-cluster-clustersubnetgroupname' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_RSH_006.py"
                         }
                     ],
@@ -4515,7 +4515,7 @@
                             "id": "PR-AWS-CFR-RSH-007",
                             "eval": "data.rule.redshift_audit",
                             "message": "data.rule.redshift_audit_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_RSH_007.py"
                         }
                     ],
@@ -4554,7 +4554,7 @@
                             "id": "PR-AWS-CFR-SNS-001",
                             "eval": "data.rule.sns_protocol",
                             "message": "data.rule.sns_protocol_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_SNS_001.py"
                         }
                     ],
@@ -4586,7 +4586,7 @@
                             "id": "PR-AWS-CFR-SNS-002",
                             "eval": "data.rule.sns_encrypt_key",
                             "message": "data.rule.sns_encrypt_key_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_SNS_002.py"
                         }
                     ],
@@ -4618,7 +4618,7 @@
                             "id": "PR-AWS-CFR-SNS-003",
                             "eval": "data.rule.sns_encrypt",
                             "message": "data.rule.sns_encrypt_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_SNS_003.py"
                         }
                     ],
@@ -4650,7 +4650,7 @@
                             "id": "PR-AWS-CFR-SNS-004",
                             "eval": "data.rule.sns_policy_public",
                             "message": "data.rule.sns_policy_public_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_SNS_004.py"
                         }
                     ],
@@ -4682,7 +4682,7 @@
                             "id": "PR-AWS-CFR-ACM-001",
                             "eval": "data.rule.acm_wildcard",
                             "message": "data.rule.acm_wildcard_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_ACM_001.py"
                         }
                     ],
@@ -4714,7 +4714,7 @@
                             "id": "PR-AWS-CFR-ACM-002",
                             "eval": "data.rule.acm_ct_log",
                             "message": "data.rule.acm_ct_log_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_ACM_002.py"
                         }
                     ],
@@ -4750,7 +4750,7 @@
                             "id": "PR-AWS-CFR-ACM-003",
                             "eval": "data.rule.acm_certificate_arn",
                             "message": "data.rule.acm_certificate_arn_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html#cfn-certificatemanager-certificate-certificateauthorityarn",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-certificatemanager-certificate.html#cfn-certificatemanager-certificate-certificateauthorityarn' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_ACM_003.py"
                         }
                     ],
@@ -4784,7 +4784,7 @@
                             "id": "PR-AWS-CFR-ECR-001",
                             "eval": "data.rule.ecr_imagetag",
                             "message": "data.rule.ecr_imagetag_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-imagetagmutability",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-imagetagmutability' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_ECR_001.py"
                         }
                     ],
@@ -4816,7 +4816,7 @@
                             "id": "PR-AWS-CFR-ECR-002",
                             "eval": "data.rule.ecr_encryption",
                             "message": "data.rule.ecr_encryption_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-imagetagmutability",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html#cfn-ecr-repository-imagetagmutability' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_ECR_002.py"
                         }
                     ],
@@ -4848,7 +4848,7 @@
                             "id": "PR-AWS-CFR-ECR-003",
                             "eval": "data.rule.ecr_scan",
                             "message": "data.rule.ecr_scan_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecr-repository-imagescanningconfiguration.html#cfn-ecr-repository-imagescanningconfiguration-scanonpush",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecr-repository-imagescanningconfiguration.html#cfn-ecr-repository-imagescanningconfiguration-scanonpush' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_ECR_003.py"
                         }
                     ],
@@ -4880,7 +4880,7 @@
                             "id": "PR-AWS-CFR-ECR-004",
                             "eval": "data.rule.ecr_public_access_disable",
                             "message": "data.rule.ecr_public_access_disable_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecr-repository-imagescanningconfiguration.html#cfn-ecr-repository-imagescanningconfiguration-scanonpush",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecr-repository-imagescanningconfiguration.html#cfn-ecr-repository-imagescanningconfiguration-scanonpush' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_ECR_004.py"
                         }
                     ],
@@ -4912,7 +4912,7 @@
                             "id": "PR-AWS-CFR-EC2-001",
                             "eval": "data.rule.ec2_iam_role",
                             "message": "data.rule.ec2_iam_role_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_EC2_001.py"
                         }
                     ],
@@ -4944,7 +4944,7 @@
                             "id": "PR-AWS-CFR-EC2-002",
                             "eval": "data.rule.ec2_no_vpc",
                             "message": "data.rule.ec2_no_vpc_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_EC2_002.py"
                         }
                     ],
@@ -4976,7 +4976,7 @@
                             "id": "PR-AWS-CFR-EC2-003",
                             "eval": "data.rule.ec2_public_ip",
                             "message": "data.rule.ec2_public_ip_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_EC2_003.py"
                         }
                     ],
@@ -5008,7 +5008,7 @@
                             "id": "PR-AWS-CFR-EC2-004",
                             "eval": "data.rule.ec2_ebs_optimized",
                             "message": "data.rule.ec2_ebs_optimized_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-ebsoptimized",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-ebsoptimized' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_EC2_004.py"
                         }
                     ],
@@ -5040,7 +5040,7 @@
                             "id": "PR-AWS-CFR-EC2-005",
                             "eval": "data.rule.ec2_monitoring",
                             "message": "data.rule.ec2_monitoring_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-monitoring",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-monitoring' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_EC2_005.py"
                         }
                     ],
@@ -5072,7 +5072,7 @@
                             "id": "PR-AWS-CFR-ECS-001",
                             "eval": "data.rule.ecs_task_evelated",
                             "message": "data.rule.ecs_task_evelated_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_ECS_001.py"
                         }
                     ],
@@ -5104,7 +5104,7 @@
                             "id": "PR-AWS-CFR-ECS-002",
                             "eval": "data.rule.ecs_exec",
                             "message": "data.rule.ecs_exec_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_ECS_002.py"
                         }
                     ],
@@ -5136,7 +5136,7 @@
                             "id": "PR-AWS-CFR-ECS-003",
                             "eval": "data.rule.ecs_root_user",
                             "message": "data.rule.ecs_root_user_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_ECS_003.py"
                         }
                     ],
@@ -5168,7 +5168,7 @@
                             "id": "PR-AWS-CFR-ECS-004",
                             "eval": "data.rule.ecs_root_filesystem",
                             "message": "data.rule.ecs_root_filesystem_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_ECS_004.py"
                         }
                     ],
@@ -5200,7 +5200,7 @@
                             "id": "PR-AWS-CFR-ECS-005",
                             "eval": "data.rule.ecs_resource_limit",
                             "message": "data.rule.ecs_resource_limit_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_ECS_005.py"
                         }
                     ],
@@ -5232,7 +5232,7 @@
                             "id": "PR-AWS-CFR-ECS-006",
                             "eval": "data.rule.ecs_logging",
                             "message": "data.rule.ecs_logging_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_ECS_006.py"
                         }
                     ],
@@ -5264,7 +5264,7 @@
                             "id": "PR-AWS-CFR-ECS-007",
                             "eval": "data.rule.ecs_transit_enabled",
                             "message": "data.rule.ecs_transit_enabled_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-efsvolumeconfiguration.html#cfn-ecs-taskdefinition-efsvolumeconfiguration-transitencryption",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-efsvolumeconfiguration.html#cfn-ecs-taskdefinition-efsvolumeconfiguration-transitencryption' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_ECS_007.py"
                         }
                     ],
@@ -5296,7 +5296,7 @@
                             "id": "PR-AWS-CFR-ECS-008",
                             "eval": "data.rule.ecs_container_insight_enable",
                             "message": "data.rule.ecs_container_insight_enable_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-cluster-clustersettings.html#cfn-ecs-cluster-clustersettings-name",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-cluster-clustersettings.html#cfn-ecs-cluster-clustersettings-name' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_ECS_009.py"
                         }
                     ],
@@ -5328,7 +5328,7 @@
                             "id": "PR-AWS-CFR-ECS-009",
                             "eval": "data.rule.ecs_enable_execute_command",
                             "message": "data.rule.ecs_enable_execute_command_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-enableexecutecommand",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-enableexecutecommand' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_ECS_008.py"
                         }
                     ],
@@ -5361,7 +5361,7 @@
                             "id": "PR-AWS-CFR-ECS-010",
                             "eval": "data.rule.ecs_assign_public_ip",
                             "message": "data.rule.ecs_assign_public_ip_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-enableexecutecommand",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-enableexecutecommand' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_ECS_010.py"
                         }
                     ],
@@ -5394,7 +5394,7 @@
                             "id": "PR-AWS-CFR-ECS-011",
                             "eval": "data.rule.ecs_launch_type",
                             "message": "data.rule.ecs_launch_type_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-launchtype",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html#cfn-ecs-service-launchtype' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_ECS_011.py"
                         }
                     ],
@@ -5427,7 +5427,7 @@
                             "id": "PR-AWS-CFR-ECS-012",
                             "eval": "data.rule.ecs_subnet",
                             "message": "data.rule.ecs_subnet_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-awsvpcconfiguration.html#cfn-ecs-service-awsvpcconfiguration-subnets",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-awsvpcconfiguration.html#cfn-ecs-service-awsvpcconfiguration-subnets' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_ECS_012.py"
                         }
                     ],
@@ -5460,7 +5460,7 @@
                             "id": "PR-AWS-CFR-ECS-013",
                             "eval": "data.rule.ecs_security_group",
                             "message": "data.rule.ecs_security_group_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-awsvpcconfiguration.html#cfn-ecs-service-awsvpcconfiguration-securitygroups",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-service-awsvpcconfiguration.html#cfn-ecs-service-awsvpcconfiguration-securitygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_ECS_013.py"
                         }
                     ],
@@ -5493,7 +5493,7 @@
                             "id": "PR-AWS-CFR-ECS-014",
                             "eval": "data.rule.ecs_network_mode",
                             "message": "data.rule.ecs_network_mode_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html#cfn-ecs-taskdefinition-networkmode",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html#cfn-ecs-taskdefinition-networkmode' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_ECS_014.py"
                         }
                     ],
@@ -5526,7 +5526,7 @@
                             "id": "PR-AWS-CFR-LMD-001",
                             "eval": "data.rule.lambda_env",
                             "message": "data.rule.lambda_env_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_LMD_001.py"
                         }
                     ],
@@ -5558,7 +5558,7 @@
                             "id": "PR-AWS-CFR-LMD-002",
                             "eval": "data.rule.lambda_vpc",
                             "message": "data.rule.lambda_vpc_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_LMD_002.py"
                         }
                     ],
@@ -5590,7 +5590,7 @@
                             "id": "PR-AWS-CFR-LMD-003",
                             "eval": "data.rule.lambda_tracing",
                             "message": "data.rule.lambda_tracing_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_LMD_003.py"
                         }
                     ],
@@ -5625,7 +5625,7 @@
                             "id": "PR-AWS-CFR-LMD-004",
                             "eval": "data.rule.lambda_concurrent_execution",
                             "message": "data.rule.lambda_concurrent_execution_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-reservedconcurrentexecutions",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-reservedconcurrentexecutions' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_LMD_004.py"
                         }
                     ],
@@ -5657,7 +5657,7 @@
                             "id": "PR-AWS-CFR-LMD-005",
                             "eval": "data.rule.lambda_dlq",
                             "message": "data.rule.lambda_dlq_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_LMD_005.py"
                         }
                     ],
@@ -5689,7 +5689,7 @@
                             "id": "PR-AWS-CFR-CF-001",
                             "eval": "data.rule.cf_default_cache",
                             "message": "data.rule.cf_default_cache_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_CF_001.py"
                         }
                     ],
@@ -5721,7 +5721,7 @@
                             "id": "PR-AWS-CFR-CF-002",
                             "eval": "data.rule.cf_ssl_protocol",
                             "message": "data.rule.cf_ssl_protocol_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_CF_002.py"
                         }
                     ],
@@ -5753,7 +5753,7 @@
                             "id": "PR-AWS-CFR-CF-003",
                             "eval": "data.rule.cf_logging",
                             "message": "data.rule.cf_logging_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_CF_003.py"
                         }
                     ],
@@ -5785,7 +5785,7 @@
                             "id": "PR-AWS-CFR-CF-004",
                             "eval": "data.rule.cf_https_only",
                             "message": "data.rule.cf_https_only_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_CF_004.py"
                         }
                     ],
@@ -5817,7 +5817,7 @@
                             "id": "PR-AWS-CFR-CF-005",
                             "eval": "data.rule.cf_https",
                             "message": "data.rule.cf_https_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_CF_005.py"
                         }
                     ],
@@ -5849,7 +5849,7 @@
                             "id": "PR-AWS-CFR-CF-006",
                             "eval": "data.rule.cf_min_protocol",
                             "message": "data.rule.cf_min_protocol_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_CF_006.py"
                         }
                     ],
@@ -5881,7 +5881,7 @@
                             "id": "PR-AWS-CFR-CF-007",
                             "eval": "data.rule.cf_firewall",
                             "message": "data.rule.cf_firewall_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_CF_007.py"
                         }
                     ],
@@ -5913,7 +5913,7 @@
                             "id": "PR-AWS-CFR-CF-008",
                             "eval": "data.rule.cf_default_ssl",
                             "message": "data.rule.cf_default_ssl_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_CF_008.py"
                         }
                     ],
@@ -5945,7 +5945,7 @@
                             "id": "PR-AWS-CFR-CF-009",
                             "eval": "data.rule.cf_geo_restriction",
                             "message": "data.rule.cf_geo_restriction_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_CF_009.py"
                         }
                     ],
@@ -5977,7 +5977,7 @@
                             "id": "PR-AWS-CFR-RDS-001",
                             "eval": "data.rule.rds_cluster_encrypt",
                             "message": "data.rule.rds_cluster_encrypt_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_RDS_001.py"
                         }
                     ],
@@ -6009,7 +6009,7 @@
                             "id": "PR-AWS-CFR-RDS-002",
                             "eval": "data.rule.rds_public",
                             "message": "data.rule.rds_public_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_RDS_002.py"
                         }
                     ],
@@ -6046,7 +6046,7 @@
                             "id": "PR-AWS-CFR-RDS-003",
                             "eval": "data.rule.rds_encrypt_key",
                             "message": "data.rule.rds_encrypt_key_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_RDS_003.py"
                         }
                     ],
@@ -6078,7 +6078,7 @@
                             "id": "PR-AWS-CFR-RDS-004",
                             "eval": "data.rule.rds_instance_event",
                             "message": "data.rule.rds_instance_event_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_RDS_004.py"
                         }
                     ],
@@ -6110,7 +6110,7 @@
                             "id": "PR-AWS-CFR-RDS-005",
                             "eval": "data.rule.rds_secgroup_event",
                             "message": "data.rule.rds_secgroup_event_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_RDS_005.py"
                         }
                     ],
@@ -6142,7 +6142,7 @@
                             "id": "PR-AWS-CFR-RDS-006",
                             "eval": "data.rule.rds_encrypt",
                             "message": "data.rule.rds_encrypt_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_RDS_006.py"
                         }
                     ],
@@ -6183,7 +6183,7 @@
                             "id": "PR-AWS-CFR-RDS-007",
                             "eval": "data.rule.rds_multiaz",
                             "message": "data.rule.rds_multiaz_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_RDS_007.py"
                         }
                     ],
@@ -6215,7 +6215,7 @@
                             "id": "PR-AWS-CFR-RDS-008",
                             "eval": "data.rule.rds_snapshot",
                             "message": "data.rule.rds_snapshot_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_RDS_008.py"
                         }
                     ],
@@ -6247,7 +6247,7 @@
                             "id": "PR-AWS-CFR-RDS-009",
                             "eval": "data.rule.rds_backup",
                             "message": "data.rule.rds_backup_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_RDS_009.py"
                         }
                     ],
@@ -6279,7 +6279,7 @@
                             "id": "PR-AWS-CFR-RDS-010",
                             "eval": "data.rule.rds_upgrade",
                             "message": "data.rule.rds_upgrade_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_RDS_010.py"
                         }
                     ],
@@ -6311,7 +6311,7 @@
                             "id": "PR-AWS-CFR-RDS-011",
                             "eval": "data.rule.rds_retention",
                             "message": "data.rule.rds_retention_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_RDS_011.py"
                         }
                     ],
@@ -6343,7 +6343,7 @@
                             "id": "PR-AWS-CFR-RDS-012",
                             "eval": "data.rule.rds_cluster_retention",
                             "message": "data.rule.rds_cluster_retention_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_RDS_012.py"
                         }
                     ],
@@ -6375,7 +6375,7 @@
                             "id": "PR-AWS-CFR-RDS-013",
                             "eval": "data.rule.rds_cluster_deletion_protection",
                             "message": "data.rule.rds_cluster_deletion_protection_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_RDS_013.py"
                         }
                     ],
@@ -6407,7 +6407,7 @@
                             "id": "PR-AWS-CFR-RDS-014",
                             "eval": "data.rule.rds_pgaudit_enable",
                             "message": "data.rule.rds_pgaudit_enable_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbparametergroup.html#cfn-rds-dbparametergroup-parameters",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented at this URL: <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbparametergroup.html#cfn-rds-dbparametergroup-parameters' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_CFR_RDS_014.py"
                         }
                     ],
