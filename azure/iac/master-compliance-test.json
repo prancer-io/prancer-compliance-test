@@ -3588,6 +3588,76 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_Redis_4",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(Redis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-ARC-004",
+                            "eval": "data.rule.redis_public_access",
+                            "message": "data.rule.redis_public_access_err",
+                            "remediationDescription": "In Resource of type 'Microsoft.Cache/redis' make sure properties.publicNetworkAccess value is set to 'disabled'.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_ARC_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Cache for Redis should disable public network access",
+                    "description": "Disabling public network access improves security by ensuring that the Azure Cache for Redis isn't exposed on the public internet. You can limit exposure of your Azure Cache for Redis by creating private endpoints instead. Learn more at: https://docs.microsoft.com/azure/azure-cache-for-redis/cache-private-link.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.cache/redis/linkedservers",
+                        "microsoft.cache/redis"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_Redis_5",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(Redis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-ARC-005",
+                            "eval": "data.rule.arc_subnet_id",
+                            "message": "data.rule.arc_subnet_id_err",
+                            "remediationDescription": "In Resource of type 'Microsoft.Cache/redis' make sure properties.subnetId exists and connected to Azure Redis.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis' target='_blank'>here</a> for more details.",
+                            "remediationFunction": "PR_AZR_ARM_ARC_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Cache for Redis should use private link",
+                    "description": "Azure Virtual Network deployment provides enhanced security and isolation for your Azure Cache for Redis, as well as subnets, access control policies, and other features to further restrict access.When an Azure Cache for Redis instance is configured with a virtual network, it is not publicly addressable and can only be accessed from virtual machines and applications within the virtual network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.cache/redis/linkedservers",
+                        "microsoft.cache/redis"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_REGISTRIES_LIST",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
