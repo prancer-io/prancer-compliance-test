@@ -1142,6 +1142,9 @@
                                 "ISO 27001",
                                 "NIST 800",
                                 "PCI-DSS"
+                            ],
+                            "service": [
+                               "arm"
                             ]
                         }
                     ],
