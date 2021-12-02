@@ -2316,7 +2316,7 @@
                             "id": "PR-AZR-TRF-DSK-002",
                             "eval": "data.rule.disk_encrypt_cmk",
                             "message": "data.rule.disk_encrypt_cmk_err",
-                            "remediationDescription": "In 'azurerm_managed_disk' resource, set 'enabled = true' under 'encryption_settings' block to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/managed_disk#enabled' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In 'azurerm_managed_disk' resource, set id of target 'azurerm_disk_encryption_set' as value to 'disk_encryption_set_id' property to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/managed_disk#enabled' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_TRF_DSK_002.py"
                         }
                     ],

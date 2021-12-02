@@ -98,9 +98,9 @@ disk_encrypt_cmk = false {
     azure_issue["disk_encrypt_cmk"]
 }
 
-disk_encrypt_cmk_err = "azurerm_managed_disk property 'encryption_settings.enabled' is missing from the resource. Please set the value to 'true' after property addition." {
+disk_encrypt_cmk_err = "azurerm_managed_disk property 'disk_encryption_set_id' is missing from the resource. Please set id of target 'azurerm_disk_encryption_set' as value after property addition." {
     azure_attribute_absence["disk_encrypt_cmk"]
-} else = "Azure disk currently does not have Azure Disk Encryption (ADE) enabled" {
+} else = "Azure disk currently does not have  CMK disk encryption enabled" {
     azure_issue["disk_encrypt_cmk"]
 }
 
