@@ -6,7 +6,7 @@ package rule
 # PR-AZR-ARM-DSK-001
 #
 
-default disk_encryption = null
+default disk_encrypt = null
 
 #azure_attribute_absence["disk_encryption_2"] {
 #    resource := input.resources[_]
@@ -134,7 +134,7 @@ source_path[{"disk_encryption_2":metadata}] {
 azure_issue["disk_encryption_2"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.compute/disks"
-    lowe(resource.properties.encryption.type) != "encryptionatrestwithcustomerkey"
+    lower(resource.properties.encryption.type) != "encryptionatrestwithcustomerkey"
 }
 
 source_path[{"disk_encryption_2":metadata}] {
