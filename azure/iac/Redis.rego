@@ -182,9 +182,6 @@ source_path[{"redis_public_access":metadata}] {
 }
 
 
-redis_public_access {
-    azure_attribute_absence["redis_public_access"]
-}
 
 redis_public_access {
     lower(input.resources[_].type) == "microsoft.cache/redis"
@@ -193,11 +190,17 @@ redis_public_access {
 }
 
 redis_public_access = false {
+    azure_attribute_absence["redis_public_access"]
+}
+
+redis_public_access = false {
     azure_issue["redis_public_access"]
 }
 
 redis_public_access_err = "Azure Redis Cache with public access detected!" {
     azure_issue["redis_public_access"]
+} else = "Azure Cache for Redis attribute publicNetworkAccess missing in the resource" {
+    azure_attribute_absence["redis_public_access"]
 }
 
 redis_public_access_metadata := {
