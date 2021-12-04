@@ -2,11 +2,11 @@
 
 ## All Services
 
-#### https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Nov/output11182021%20Aws%20Compute.md
-#### https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Nov/output11182021%20Aws%20DataStore.md
-#### https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Nov/output11182021%20Aws%20Management.md
-#### https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Nov/output11182021%20Aws%20Networking.md
-#### https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Nov/output11232021%20Aws%20Security.md
+#### Compute: https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Nov/output11182021%20Aws%20Compute.md
+#### Data Store: https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Nov/output11182021%20Aws%20DataStore.md
+#### Management: https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Nov/output11182021%20Aws%20Management.md
+#### Networking: https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Nov/output11182021%20Aws%20Networking.md
+#### Security: https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Nov/output11232021%20Aws%20Security.md
 
 ## Terraform Aws Security Services 
 
