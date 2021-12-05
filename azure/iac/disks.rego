@@ -134,13 +134,13 @@ source_path[{"disk_encryption_2":metadata}] {
 azure_issue["disk_encryption_2"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.compute/disks"
-    lower(resource.properties.encryption.type) != "encryptionatrestwithcustomerkey"
+    lower(resource.properties.encryption.type) == "encryptionatrestwithplatformkey"
 }
 
 source_path[{"disk_encryption_2":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.compute/disks"
-    lower(resource.properties.encryption.type) != "encryptionatrestwithcustomerkey"
+    lower(resource.properties.encryption.type) == "encryptionatrestwithplatformkey"
     metadata:= {
         "resource_path": [["resources",i,"properties","encryption","type"]]
     }
