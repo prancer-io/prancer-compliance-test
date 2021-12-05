@@ -145,7 +145,7 @@ enableSoftDelete_metadata := {
     "Product": "AZR",
     "Language": "ARM template",
     "Policy Title": "Ensure the key vault is recoverable - enable 'Soft Delete' setting for a Key Vault",
-    "Policy Description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation, etc.) supported by the key vault objects. It is recommended the key vault be made recoverable by enabling the 'Do Not Purge' and 'Soft Delete' functions. This is in order to prevent loss of encrypted data including storage accounts, SQL databases, and/or dependent services provided by key vault objects (Keys, Secrets, Certificates) etc., as may happen in the case of accidental deletion by a user or from disruptive activity by a malicious user.",
+    "Policy Description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation, etc.) supported by the key vault objects. It is recommended the key vault be made recoverable by enabling the 'Do Not Purge' and 'Soft Delete' functions. This is in order to prevent loss of encrypted data including storage accounts, KV databases, and/or dependent services provided by key vault objects (Keys, Secrets, Certificates) etc., as may happen in the case of accidental deletion by a user or from disruptive activity by a malicious user.",
     "Resource Type": "microsoft.keyvault/vaults",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults"
@@ -432,8 +432,138 @@ keyvault_service_endpoint_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Service Endpoint should be enabled for Keyvault",
-    "Policy Description": "",
+    "Policy Title": "Key Vault should use a virtual network service endpoint",
+    "Policy Description": "This policy audits any Key Vault not configured to use a virtual network service endpoint.",
+    "Resource Type": "microsoft.keyvault/vaults",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults"
+}
+
+
+# PR-AZR-ARM-KV-009
+#
+
+default kv_private_endpoint = null
+
+azure_attribute_absence["kv_private_endpoint"] {
+    resource := input.resources[_]
+    count([c | resource.type == "microsoft.keyvault/vaults"; c := 1]) != count([c | resource.type == "microsoft.network/privateendpoints"; c := 1])
+}
+
+azure_issue["kv_private_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/privateendpoints"
+    privateLinkServiceConnection := resource.properties.privateLinkServiceConnections[_]
+    contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.keyvault/vaults")
+}
+
+source_path[{"kv_private_endpoint":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/privateendpoints"
+    privateLinkServiceConnection := resource.properties.privateLinkServiceConnections[j]
+    contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.keyvault/vaults")
+    metadata:= {
+        "resource_path": [["resources",i,"properties","privateLinkServiceConnections",j,"properties","privateLinkServiceId"]]
+    }
+}
+
+kv_private_endpoint {
+    azure_issue["kv_private_endpoint"]
+    not azure_attribute_absence["kv_private_endpoint"]
+}
+
+kv_private_endpoint = false {
+	lower(input.resources[_].type) == "microsoft.network/privateendpoints"
+    not azure_issue["kv_private_endpoint"]
+}
+
+kv_private_endpoint = false {
+    azure_attribute_absence["kv_private_endpoint"]
+}
+
+kv_private_endpoint_err = "Azure Key Vaults does not configure with private endpoints" {
+	lower(input.resources[_].type) == "microsoft.network/privateendpoints"
+    not azure_issue["kv_private_endpoint"]
+} else = "Azure Private endpoints resoruce is missing" {
+    azure_attribute_absence["kv_private_endpoint"]
+}
+
+kv_private_endpoint_metadata := {
+    "Policy Code": "PR-AZR-ARM-KV-009",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Configure Azure Key Vaults with private endpoints",
+    "Policy Description": "Private endpoints connect your virtual networks to Azure services without a public IP address at the source or destination. By mapping private endpoints to key vault, you can reduce data leakage risks. Learn more about private links at: https://aka.ms/akvprivatelink.",
+    "Resource Type": "microsoft.containerservice/managedclusters",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults"
+}
+
+
+
+# PR-AZR-ARM-KV-010
+
+default kv_public_access_disabled = null
+
+azure_attribute_absence["kv_public_access_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    not resource.properties.publicNetworkAccess
+}
+
+source_path[{"kv_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    not resource.properties.publicNetworkAccess
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
+    }
+}
+
+azure_issue["kv_public_access_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    lower(resource.properties.publicNetworkAccess) != "disabled"
+}
+
+source_path[{"kv_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.keyvault/vaults"
+    lower(resource.properties.publicNetworkAccess) != "disabled"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
+    }
+}
+
+kv_public_access_disabled {
+    lower(input.resources[_].type) == "microsoft.keyvault/vaults"
+    not azure_attribute_absence["kv_public_access_disabled"]
+    not azure_issue["kv_public_access_disabled"]
+}
+
+kv_public_access_disabled = false {
+    azure_attribute_absence["kv_public_access_disabled"]
+}
+
+kv_public_access_disabled = false {
+    azure_issue["kv_public_access_disabled"]
+}
+
+kv_public_access_disabled_err = "Public Network Access is currently not disabled on Azure KeyVault." {
+    azure_issue["kv_public_access_disabled"]
+} else = "public network access property is missing from the resource." {
+    azure_attribute_absence["kv_public_access_disabled"]
+}
+
+
+kv_public_access_disabled_metadata := {
+    "Policy Code": "PR-AZR-ARM-KV-010",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Ensure Azure KeyVault don't have public network access enabled",
+    "Policy Description": "Always use Private Endpoint for Azure KeyVault",
     "Resource Type": "microsoft.keyvault/vaults",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults"
