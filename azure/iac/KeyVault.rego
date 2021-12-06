@@ -446,8 +446,7 @@ keyvault_service_endpoint_metadata := {
 default kv_private_endpoint = null
 
 azure_attribute_absence["kv_private_endpoint"] {
-    resource := input.resources[_]
-    count([c | resource.type == "microsoft.keyvault/vaults"; c := 1]) != count([c | resource.type == "microsoft.network/privateendpoints"; c := 1])
+    count([c | lower(input.resources[_].type) == "microsoft.keyvault/vaults"; c := 1]) != count([c | lower(input.resources[_].type) == "microsoft.network/privateendpoints"; c := 1])
 }
 
 azure_issue["kv_private_endpoint"] {
@@ -468,33 +467,36 @@ source_path[{"kv_private_endpoint":metadata}] {
 }
 
 kv_private_endpoint {
+	lower(input.resources[_].type) == "microsoft.keyvault/vaults"
     azure_issue["kv_private_endpoint"]
     not azure_attribute_absence["kv_private_endpoint"]
 }
 
 kv_private_endpoint = false {
-	lower(input.resources[_].type) == "microsoft.network/privateendpoints"
+	lower(input.resources[_].type) == "microsoft.keyvault/vaults"
     not azure_issue["kv_private_endpoint"]
 }
 
 kv_private_endpoint = false {
+	lower(input.resources[_].type) == "microsoft.keyvault/vaults"
     azure_attribute_absence["kv_private_endpoint"]
 }
 
-kv_private_endpoint_err = "Azure Key Vaults does not configure with private endpoints" {
-	lower(input.resources[_].type) == "microsoft.network/privateendpoints"
+kv_private_endpoint_err = "Azure Storage Account does not configure with private endpoints" {
+	lower(input.resources[_].type) == "microsoft.keyvault/vaults"
     not azure_issue["kv_private_endpoint"]
 } else = "Azure Private endpoints resoruce is missing" {
+	lower(input.resources[_].type) == "microsoft.keyvault/vaults"
     azure_attribute_absence["kv_private_endpoint"]
 }
 
 kv_private_endpoint_metadata := {
     "Policy Code": "PR-AZR-ARM-KV-009",
-    "Type": "IaC",
+    "Type": "IaC",  
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Configure Azure Key Vaults with private endpoints",
-    "Policy Description": "Private endpoints connect your virtual networks to Azure services without a public IP address at the source or destination. By mapping private endpoints to key vault, you can reduce data leakage risks. Learn more about private links at: https://aka.ms/akvprivatelink.",
+    "Policy Title": "Azure Key Vault should use private link",
+    "Policy Description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your key vault, data leakage risks are reduced. Learn more about private links at - https://aka.ms/azureprivatelinkoverview",
     "Resource Type": "microsoft.keyvault/vaults",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults"
