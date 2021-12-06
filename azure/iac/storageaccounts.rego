@@ -726,3 +726,61 @@ storage_account_latest_tls_configured_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
 }
+
+
+default storage_account_private_endpoint = null
+
+azure_attribute_absence["storage_account_private_endpoint"] {
+    resource := input.resources[_]
+    count([c | resource.type == "microsoft.storage/storageaccounts"; c := 1]) != count([c | resource.type == "microsoft.network/privateendpoints"; c := 1])
+}
+
+azure_issue["storage_account_private_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/privateendpoints"
+    privateLinkServiceConnection := resource.properties.privateLinkServiceConnections[_]
+    contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.storage/storageaccounts")
+}
+
+source_path[{"storage_account_private_endpoint":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/privateendpoints"
+    privateLinkServiceConnection := resource.properties.privateLinkServiceConnections[j]
+    contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.storage/storageaccounts")
+    metadata:= {
+        "resource_path": [["resources",i,"properties","privateLinkServiceConnections",j,"properties","privateLinkServiceId"]]
+    }
+}
+
+storage_account_private_endpoint {
+    azure_issue["storage_account_private_endpoint"]
+    not azure_attribute_absence["storage_account_private_endpoint"]
+}
+
+storage_account_private_endpoint = false {
+	lower(input.resources[_].type) == "microsoft.network/privateendpoints"
+    not azure_issue["storage_account_private_endpoint"]
+}
+
+storage_account_private_endpoint = false {
+    azure_attribute_absence["storage_account_private_endpoint"]
+}
+
+storage_account_private_endpoint_err = "Azure Key Vaults does not configure with private endpoints" {
+	lower(input.resources[_].type) == "microsoft.network/privateendpoints"
+    not azure_issue["storage_account_private_endpoint"]
+} else = "Azure Private endpoints resoruce is missing" {
+    azure_attribute_absence["storage_account_private_endpoint"]
+}
+
+storage_account_private_endpoint_metadata := {
+    "Policy Code": "PR-AZR-ARM-KV-009",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Configure Azure Storage Account with private endpoints",
+    "Policy Description": "Private endpoints connect your virtual networks to Azure services without a public IP address at the source or destination. By mapping private endpoints to storage account, you can reduce data leakage risks. Learn more about private links at: https://aka.ms/akvprivatelink.",
+    "Resource Type": "microsoft.storage/storageaccounts",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
+}
