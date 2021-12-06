@@ -495,7 +495,7 @@ kv_private_endpoint_metadata := {
     "Language": "ARM template",
     "Policy Title": "Configure Azure Key Vaults with private endpoints",
     "Policy Description": "Private endpoints connect your virtual networks to Azure services without a public IP address at the source or destination. By mapping private endpoints to key vault, you can reduce data leakage risks. Learn more about private links at: https://aka.ms/akvprivatelink.",
-    "Resource Type": "microsoft.containerservice/managedclusters",
+    "Resource Type": "microsoft.keyvault/vaults",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults"
 }
