@@ -8,15 +8,24 @@ package rule
 
 default log_keyvault = null
 
+azure_attribute_absence ["log_keyvault"] {
+    count([c | input.resources[_].type == "microsoft.keyvault/vaults"; c := 1]) != count([c | input.resources[_].type == "microsoft.insights/diagnosticsettings"; c := 1])
+}
+
 azure_attribute_absence["log_keyvault"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.keyvault/vaults/providers/diagnosticsettings"
+    not contains(lower(resource.scope, "microsoft.keyvault/vaults"))
+}
+
+azure_attribute_absence["log_keyvault"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.keyvault/vaults"
     not resource.properties.logs
 }
 
 source_path[{"log_keyvault":metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults/providers/diagnosticsettings"
+    lower(resource.type) == "microsoft.keyvault/vaults"
     not resource.properties.logs
     metadata:= {
         "resource_path": [["resources",i,"properties","logs"]]
@@ -25,7 +34,7 @@ source_path[{"log_keyvault":metadata}] {
 
 azure_issue["log_keyvault"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.keyvault/vaults/providers/diagnosticsettings"
+    lower(resource.type) == "microsoft.keyvault/vaults"
     log := resource.properties.logs[_]
     lower(log.category) == "auditevent"
     log.enabled == false
@@ -33,7 +42,7 @@ azure_issue["log_keyvault"] {
 
 source_path[{"log_keyvault":metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "microsoft.keyvault/vaults/providers/diagnosticsettings"
+    lower(resource.type) == "microsoft.keyvault/vaults"
     log := resource.properties.logs[j]
     lower(log.category) == "auditevent"
     log.enabled == false
@@ -43,7 +52,7 @@ source_path[{"log_keyvault":metadata}] {
 }
 
 log_keyvault {
-    lower(input.resources[_].type) == "microsoft.keyvault/vaults/providers/diagnosticsettings"
+    lower(input.resources[_].type) == "microsoft.keyvault/vaults"
     not azure_attribute_absence["log_keyvault"]
     not azure_issue["log_keyvault"]
 }
