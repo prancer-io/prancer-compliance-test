@@ -9,17 +9,19 @@ package rule
 default log_keyvault = null
 
 azure_attribute_absence ["log_keyvault"] {
-    count([c | input.resources[_].type == "microsoft.keyvault/vaults"; c := 1]) == count([c | input.resources[_].type == "microsoft.insights/diagnosticsettings"; c := 1])
+    count([c | lower(input.resources[_].type) == "microsoft.keyvault/vaults"; c := 1]) != count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1])
 }
 
 azure_attribute_absence["log_keyvault"] {
     resource := input.resources[_]
-    contains(lower(resource.scope), "microsoft.keyvault/vaults")
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    not contains(lower(resource.scope), "microsoft.keyvault/vaults")
 }
 
 source_path[{"log_keyvault":metadata}] {
     resource := input.resources[i]
-    contains(lower(resource.scope), "microsoft.keyvault/vaults")
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    not contains(lower(resource.scope), "microsoft.keyvault/vaults")
     metadata:= {
         "resource_path": [["resources",i,"scope"]]
     }
@@ -28,7 +30,7 @@ source_path[{"log_keyvault":metadata}] {
 azure_attribute_absence["log_keyvault"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
-    resource.properties.logs
+    not resource.properties.logs
 }
 
 source_path[{"log_keyvault":metadata}] {
@@ -44,16 +46,14 @@ azure_issue["log_keyvault"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[_]
-    lower(log.category) == "auditevent"
-    log.enabled == true
+    log.enabled != true
 }
 
 source_path[{"log_keyvault":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[j]
-    lower(log.category) == "auditevent"
-    log.enabled == true
+    log.enabled != true
     metadata:= {
         "resource_path": [["resources",i,"properties","logs",j,"enabled"]]
     }
@@ -61,26 +61,26 @@ source_path[{"log_keyvault":metadata}] {
 
 log_keyvault {
     lower(input.resources[_].type) == "microsoft.keyvault/vaults"
-    azure_attribute_absence["log_keyvault"]
+    not azure_attribute_absence["log_keyvault"]
+    not azure_issue["log_keyvault"]
+}
+
+log_keyvault = false {
+	lower(input.resources[_].type) == "microsoft.keyvault/vaults"
     azure_issue["log_keyvault"]
 }
 
 log_keyvault = false {
 	lower(input.resources[_].type) == "microsoft.keyvault/vaults"
-    not azure_issue["log_keyvault"]
-}
-
-log_keyvault = false {
-	lower(input.resources[_].type) == "microsoft.keyvault/vaults"
-    not azure_attribute_absence["log_keyvault"]
+    azure_attribute_absence["log_keyvault"]
 }
 
 log_keyvault_err = "Azure Key Vault audit logging is currently not enabled" {
 	lower(input.resources[_].type) == "microsoft.keyvault/vaults"
-    not azure_issue["log_keyvault"]
+    azure_issue["log_keyvault"]
 } else = "Azure Keyvault diagnostic settings attribute 'logs' is missing from the resource" {
 	lower(input.resources[_].type) == "microsoft.keyvault/vaults"
-	not azure_attribute_absence["log_keyvault"]
+	azure_attribute_absence["log_keyvault"]
 }
 
 log_keyvault_metadata := {
@@ -101,17 +101,19 @@ log_keyvault_metadata := {
 default log_lbs = null
 
 azure_attribute_absence ["log_lbs"] {
-    count([c | input.resources[_].type == "microsoft.network/loadbalancers"; c := 1]) == count([c | input.resources[_].type == "microsoft.insights/diagnosticsettings"; c := 1])
+    count([c | lower(input.resources[_].type) == "microsoft.network/loadbalancers"; c := 1]) != count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1])
 }
 
 azure_attribute_absence["log_lbs"] {
     resource := input.resources[_]
-    contains(lower(resource.scope), "microsoft.network/loadbalancers")
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    not contains(lower(resource.scope), "microsoft.network/loadbalancers")
 }
 
 source_path[{"log_lbs":metadata}] {
     resource := input.resources[i]
-    contains(lower(resource.scope), "microsoft.network/loadbalancers")
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    not contains(lower(resource.scope), "microsoft.network/loadbalancers")
     metadata:= {
         "resource_path": [["resources",i,"scope"]]
     }
@@ -120,13 +122,13 @@ source_path[{"log_lbs":metadata}] {
 azure_attribute_absence["log_lbs"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
-    resource.properties.logs
+    not resource.properties.logs
 }
 
 source_path[{"log_lbs":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
-    resource.properties.logs
+    not resource.properties.logs
     metadata:= {
         "resource_path": [["resources",i,"properties","logs"]]
     }
@@ -136,16 +138,14 @@ azure_issue["log_lbs"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[_]
-    lower(log.category) == "auditevent"
-    log.enabled == true
+    log.enabled != true
 }
 
 source_path[{"log_lbs":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[j]
-    lower(log.category) == "auditevent"
-    log.enabled == true
+    log.enabled != true
     metadata:= {
         "resource_path": [["resources",i,"properties","logs",j,"enabled"]]
     }
@@ -153,26 +153,26 @@ source_path[{"log_lbs":metadata}] {
 
 log_lbs {
     lower(input.resources[_].type) == "microsoft.network/loadbalancers"
-    azure_attribute_absence["log_lbs"]
+    not azure_attribute_absence["log_lbs"]
+    not azure_issue["log_lbs"]
+}
+
+log_lbs = false {
+	lower(input.resources[_].type) == "microsoft.network/loadbalancers"
     azure_issue["log_lbs"]
 }
 
 log_lbs = false {
 	lower(input.resources[_].type) == "microsoft.network/loadbalancers"
-    not azure_issue["log_lbs"]
-}
-
-log_lbs = false {
-	lower(input.resources[_].type) == "microsoft.network/loadbalancers"
-    not azure_attribute_absence["log_lbs"]
+    azure_attribute_absence["log_lbs"]
 }
 
 log_lbs_err = "Azure Load Balancer diagnostics logging is currently not enabled" {
 	lower(input.resources[_].type) == "microsoft.network/loadbalancers"
-    not azure_issue["log_lbs"]
+    azure_issue["log_lbs"]
 } else = "Azure Load Balancer diagnostic settings attribute 'logs' is missing from the resource" {
 	lower(input.resources[_].type) == "microsoft.network/loadbalancers"
-	not azure_attribute_absence["log_lbs"]
+	azure_attribute_absence["log_lbs"]
 }
 
 log_lbs_metadata := {
@@ -191,18 +191,20 @@ log_lbs_metadata := {
 #
 default log_storage_retention = null
 
-azure_attribute_absence ["log_storage_retention"] {
-    count([c | input.resources[_].type == "microsoft.storage/storageaccounts"; c := 1]) == count([c | input.resources[_].type == "microsoft.insights/diagnosticsettings"; c := 1])
+azure_attribute_absence["log_storage_retention"] {
+    count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1]) != count([c | lower(input.resources[_].type) == "microsoft.storage/storageaccounts"; c := 1])
 }
 
 azure_attribute_absence["log_storage_retention"] {
     resource := input.resources[_]
-    contains(lower(resource.scope), "microsoft.storage/storageaccounts")
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    not contains(lower(resource.scope), "microsoft.storage/storageaccounts")
 }
 
 source_path[{"log_storage_retention":metadata}] {
     resource := input.resources[i]
-    contains(lower(resource.scope), "microsoft.storage/storageaccounts")
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    not contains(lower(resource.scope), "microsoft.storage/storageaccounts")
     metadata:= {
         "resource_path": [["resources",i,"scope"]]
     }
@@ -211,15 +213,51 @@ source_path[{"log_storage_retention":metadata}] {
 azure_attribute_absence["log_storage_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
-    resource.properties.logs
+    log := resource.properties.logs[_]
+    not log.enabled
 }
 
 source_path[{"log_storage_retention":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
-    resource.properties.logs
+    log := resource.properties.logs[j]
+    not log.enabled
     metadata:= {
-        "resource_path": [["resources",i,"properties","logs"]]
+        "resource_path": [["resources",i,"properties","logs",j,"enabled"]]
+    }
+}
+
+azure_attribute_absence["log_storage_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    log := resource.properties.logs[_]
+    not log.retentionPolicy.enabled
+}
+
+source_path[{"log_storage_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    log := resource.properties.logs[j]
+    not log.retentionPolicy.enabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","logs",j,"retentionPolicy","enabled"]]
+    }
+}
+
+azure_attribute_absence["log_storage_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    log := resource.properties.logs[_]
+    not log.retentionPolicy.days
+}
+
+source_path[{"log_storage_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    log := resource.properties.logs[j]
+    not log.retentionPolicy.days
+    metadata:= {
+        "resource_path": [["resources",i,"properties","logs",j,"retentionPolicy","days"]]
     }
 }
 
@@ -227,16 +265,14 @@ azure_issue["log_storage_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[_]
-    lower(log.category) == "auditevent"
-    log.enabled == true
+    log.enabled != true
 }
 
 source_path[{"log_storage_retention":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[j]
-    lower(log.category) == "auditevent"
-    log.enabled == true
+    log.enabled != true
     metadata:= {
         "resource_path": [["resources",i,"properties","logs",j,"enabled"]]
     }
@@ -244,37 +280,33 @@ source_path[{"log_storage_retention":metadata}] {
 
 azure_issue["log_storage_retention"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[_]
-    lower(log.category) == "auditevent"
-    log.retentionPolicy.enabled == true
+    log.retentionPolicy.enabled != true
 }
 
 source_path[{"log_storage_retention":metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[j]
-    lower(log.category) == "auditevent"
-    log.retentionPolicy.enabled == true
+    log.retentionPolicy.enabled != true
     metadata:= {
-        "resource_path": [["resources",i,"properties","logs",j,"category"]]
+        "resource_path": [["resources",i,"properties","logs",j,"retentionPolicy","enabled"]]
     }
 }
 
 azure_issue["log_storage_retention"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[_]
-    lower(log.category) == "auditevent"
-    to_number(log.retentionPolicy.days) >= 90
+    to_number(log.retentionPolicy.days) < 90
 }
 
 source_path[{"log_storage_retention":metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts"
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[j]
-    lower(log.category) == "auditevent"
-    to_number(log.retentionPolicy.days) >= 90
+    to_number(log.retentionPolicy.days) < 90
     metadata:= {
         "resource_path": [["resources",i,"properties","logs",j,"retentionPolicy","days"]]
     }
@@ -282,26 +314,26 @@ source_path[{"log_storage_retention":metadata}] {
 
 log_storage_retention {
     lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
-    azure_attribute_absence["log_storage_retention"]
+    not azure_attribute_absence["log_storage_retention"]
+    not azure_issue["log_storage_retention"]
+}
+
+log_storage_retention = false {
+	lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
     azure_issue["log_storage_retention"]
 }
 
 log_storage_retention = false {
 	lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
-    not azure_issue["log_storage_retention"]
-}
-
-log_storage_retention = false {
-	lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
-    not azure_attribute_absence["log_storage_retention"]
+    azure_attribute_absence["log_storage_retention"]
 }
 
 log_storage_retention_err = "Azure Storage Account with Auditing Retention is currently less than 90 days. Its need to be 90 days or more" {
 	lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
-    not azure_issue["log_storage_retention"]
+    azure_issue["log_storage_retention"]
 } else = "Azure Storage Account diagnostics attribute 'logs' is missing from the resource" {
 	lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
-	not azure_attribute_absence["log_storage_retention"]
+	azure_attribute_absence["log_storage_retention"]
 }
 
 log_storage_retention_metadata := {
