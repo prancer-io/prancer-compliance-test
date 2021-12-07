@@ -285,3 +285,65 @@ arc_subnet_id_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis"
 }
+
+#
+# PR-AZR-ARM-ARC-006
+
+default arc_private_endpoint = null
+
+azure_attribute_absence["arc_private_endpoint"] {
+    count([c | lower(input.resources[_].type) == "microsoft.cache/redis"; c := 1]) != count([c | lower(input.resources[_].type) == "microsoft.network/privateendpoints"; c := 1])
+}
+
+azure_issue["arc_private_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/privateendpoints"
+    privateLinkServiceConnection := resource.properties.privateLinkServiceConnections[_]
+    contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.cache/redis")
+}
+
+source_path[{"arc_private_endpoint":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/privateendpoints"
+    privateLinkServiceConnection := resource.properties.privateLinkServiceConnections[j]
+    contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.cache/redis")
+    metadata:= {
+        "resource_path": [["resources",i,"properties","privateLinkServiceConnections",j,"properties","privateLinkServiceId"]]
+    }
+}
+
+arc_private_endpoint {
+	lower(input.resources[_].type) == "microsoft.cache/redis"
+    azure_issue["arc_private_endpoint"]
+    not azure_attribute_absence["arc_private_endpoint"]
+}
+
+arc_private_endpoint = false {
+	lower(input.resources[_].type) == "microsoft.cache/redis"
+    not azure_issue["arc_private_endpoint"]
+}
+
+arc_private_endpoint = false {
+	lower(input.resources[_].type) == "microsoft.cache/redis"
+    azure_attribute_absence["arc_private_endpoint"]
+}
+
+arc_private_endpoint_err = "Azure Storage Account does not configure with private endpoints" {
+	lower(input.resources[_].type) == "microsoft.cache/redis"
+    not azure_issue["arc_private_endpoint"]
+} else = "Azure Private endpoints resoruce is missing" {
+	lower(input.resources[_].type) == "microsoft.cache/redis"
+    azure_attribute_absence["arc_private_endpoint"]
+}
+
+arc_private_endpoint_metadata := {
+    "Policy Code": "PR-AZR-ARM-ARC-006",
+    "Type": "IaC",  
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Cache for redis should use private link",
+    "Policy Description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your cache for redis, data leakage risks are reduced. Learn more about private links at - https://aka.ms/azureprivatelinkoverview",
+    "Resource Type": "microsoft.cache/redis",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis"
+}
