@@ -20,7 +20,7 @@
                             "id": "PR-AWS-0004",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLogging.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLogging.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0004.py"
                         }
                     ],
@@ -56,7 +56,7 @@
                             "id": "PR-AWS-0147",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLogging.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLogging.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0147.py"
                         }
                     ],
@@ -87,7 +87,7 @@
                             "id": "PR-AWS-0139",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0139.py"
                         }
                     ],
@@ -118,7 +118,7 @@
                             "id": "PR-AWS-0140",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0140.py"
                         }
                     ],
@@ -149,7 +149,7 @@
                             "id": "PR-AWS-0141",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0141.py"
                         }
                     ],
@@ -180,7 +180,7 @@
                             "id": "PR-AWS-0142",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0142.py"
                         }
                     ],
@@ -211,7 +211,7 @@
                             "id": "PR-AWS-0143",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0143.py"
                         }
                     ],
@@ -242,7 +242,7 @@
                             "id": "PR-AWS-0145",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0145.py"
                         }
                     ],
@@ -273,7 +273,7 @@
                             "id": "PR-AWS-0148",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0148.py"
                         }
                     ],
@@ -304,7 +304,7 @@
                             "id": "PR-AWS-0149",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketAcl.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketAcl.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0149.py"
                         }
                     ],
@@ -340,7 +340,7 @@
                             "id": "PR-AWS-0150",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketAcl.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketAcl.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0150.py"
                         }
                     ],
@@ -377,7 +377,7 @@
                             "id": "PR-AWS-0196",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketWebsite.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketWebsite.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0196.py"
                         }
                     ],
@@ -408,7 +408,7 @@
                             "id": "PR-AWS-0035",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0035.py"
                         }
                     ],
@@ -446,7 +446,7 @@
                             "id": "PR-AWS-0038",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVolumes.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVolumes.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0038.py"
                         }
                     ],
@@ -477,7 +477,7 @@
                             "id": "PR-AWS-0042",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0042.py"
                         }
                     ],
@@ -508,7 +508,7 @@
                             "id": "PR-AWS-0039",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshotAttribute.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshotAttribute.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0039.py"
                         }
                     ],
@@ -544,7 +544,7 @@
                             "id": "PR-AWS-0044",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0044.py"
                         }
                     ],
@@ -575,7 +575,7 @@
                             "id": "PR-AWS-0045",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0045.py"
                         }
                     ],
@@ -606,7 +606,7 @@
                             "id": "PR-AWS-0046",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0046.py"
                         }
                     ],
@@ -885,7 +885,7 @@
                             "id": "PR-AWS-0167",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0167.py"
                         }
                     ],
@@ -916,7 +916,7 @@
                             "id": "PR-AWS-0168",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0168.py"
                         }
                     ],
@@ -955,7 +955,7 @@
                             "id": "PR-AWS-0169",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0169.py"
                         }
                     ],
@@ -986,7 +986,7 @@
                             "id": "PR-AWS-0170",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0170.py"
                         }
                     ],
@@ -1017,7 +1017,7 @@
                             "id": "PR-AWS-0171",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0171.py"
                         }
                     ],
@@ -1048,8 +1048,8 @@
                             "id": "PR-AWS-0172",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html",
-                            "remediationFunction": "PR_AWS_0172.py"
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL:<a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html' target='_blank'>here</a> ",
+                             "remediationFunction": "PR_AWS_0172.py"
                         }
                     ],
                     "severity": "Medium",
@@ -1079,7 +1079,7 @@
                             "id": "PR-AWS-0173",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0173.py"
                         }
                     ],
@@ -1110,7 +1110,7 @@
                             "id": "PR-AWS-0174",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0174.py"
                         }
                     ],
@@ -1141,7 +1141,7 @@
                             "id": "PR-AWS-0175",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0175.py"
                         }
                     ],
@@ -1172,7 +1172,7 @@
                             "id": "PR-AWS-0176",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0176.py"
                         }
                     ],
@@ -1211,7 +1211,7 @@
                             "id": "PR-AWS-0177",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0177.py"
                         }
                     ],
@@ -1242,7 +1242,7 @@
                             "id": "PR-AWS-0178",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0178.py"
                         }
                     ],
@@ -1273,7 +1273,7 @@
                             "id": "PR-AWS-0179",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0179.py"
                         }
                     ],
@@ -1311,7 +1311,7 @@
                             "id": "PR-AWS-0129",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0129.py"
                         }
                     ],
@@ -1342,7 +1342,7 @@
                             "id": "PR-AWS-0125",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0125.py"
                         }
                     ],
@@ -1380,7 +1380,7 @@
                             "id": "PR-AWS-0128",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0128.py"
                         }
                     ],
@@ -1411,7 +1411,7 @@
                             "id": "PR-AWS-0121",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0121.py"
                         }
                     ],
@@ -1445,7 +1445,7 @@
                             "id": "PR-AWS-0127",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0127.py"
                         }
                     ],
@@ -1476,7 +1476,7 @@
                             "id": "PR-AWS-0130",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0130.py"
                         }
                     ],
@@ -1507,7 +1507,7 @@
                             "id": "PR-AWS-0119",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0119.py"
                         }
                     ],
@@ -1538,7 +1538,7 @@
                             "id": "PR-AWS-0122",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0122.py"
                         }
                     ],
@@ -1569,7 +1569,7 @@
                             "id": "PR-AWS-0131",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0131.py"
                         }
                     ],
@@ -1600,7 +1600,7 @@
                             "id": "PR-AWS-0014",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStacks.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStacks.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0014.py"
                         }
                     ],
@@ -1631,7 +1631,7 @@
                             "id": "PR-AWS-0026",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_GetTrail.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_GetTrail.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0026.py"
                         }
                     ],
@@ -1670,7 +1670,7 @@
                             "id": "PR-AWS-0027",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_GetTrail.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_GetTrail.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0027.py"
                         }
                     ],
@@ -1709,7 +1709,7 @@
                             "id": "PR-AWS-0028",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_GetTrail.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_GetTrail.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0028.py"
                         }
                     ],
@@ -1746,7 +1746,7 @@
                             "id": "PR-AWS-0192",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_GetTrail.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_GetTrail.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0192.py"
                         }
                     ],
@@ -1784,7 +1784,7 @@
                             "id": "PR-AWS-0064",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0064.py"
                         }
                     ],
@@ -1815,7 +1815,7 @@
                             "id": "PR-AWS-0065",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0065.py"
                         }
                     ],
@@ -1846,7 +1846,7 @@
                             "id": "PR-AWS-0066",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0066.py"
                         }
                     ],
@@ -1877,7 +1877,7 @@
                             "id": "PR-AWS-0062",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0062.py"
                         }
                     ],
@@ -1908,7 +1908,7 @@
                             "id": "PR-AWS-0063",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0063.py"
                         }
                     ],
@@ -1939,7 +1939,7 @@
                             "id": "PR-AWS-0067",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0067.py"
                         }
                     ],
@@ -1970,7 +1970,7 @@
                             "id": "PR-AWS-0068",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0068.py"
                         }
                     ],
@@ -2001,7 +2001,7 @@
                             "id": "PR-AWS-0069",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0069.py"
                         }
                     ],
@@ -2032,7 +2032,7 @@
                             "id": "PR-AWS-0072",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0072.py"
                         }
                     ],
@@ -2063,7 +2063,7 @@
                             "id": "PR-AWS-0073",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancerAttributes.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0073.py"
                         }
                     ],
@@ -2100,7 +2100,7 @@
                             "id": "PR-AWS-0155",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_GetQueueAttributes.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_GetQueueAttributes.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0155.py"
                         }
                     ],
@@ -2131,7 +2131,7 @@
                             "id": "PR-AWS-0156",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_GetQueueAttributes.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_GetQueueAttributes.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0156.py"
                         }
                     ],
@@ -2162,7 +2162,7 @@
                             "id": "PR-AWS-0157",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_GetQueueAttributes.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_GetQueueAttributes.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0157.py"
                         }
                     ],
@@ -2193,7 +2193,7 @@
                             "id": "PR-AWS-0105",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0105.py"
                         }
                     ],
@@ -2224,7 +2224,7 @@
                             "id": "PR-AWS-0106",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0106.py"
                         }
                     ],
@@ -2255,7 +2255,7 @@
                             "id": "PR-AWS-0107",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0107.py"
                         }
                     ],
@@ -2287,7 +2287,7 @@
                             "id": "PR-AWS-0108",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0108.py"
                         }
                     ],
@@ -2318,7 +2318,7 @@
                             "id": "PR-AWS-0047",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTaskDefinition.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTaskDefinition.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0047.py"
                         }
                     ],
@@ -2349,7 +2349,7 @@
                             "id": "PR-AWS-0049",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTaskDefinition.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTaskDefinition.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0049.py"
                         }
                     ],
@@ -2380,7 +2380,7 @@
                             "id": "PR-AWS-0048",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTaskDefinition.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTaskDefinition.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0048.py"
                         }
                     ],
@@ -2411,7 +2411,7 @@
                             "id": "PR-AWS-0051",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeCluster.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeCluster.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0051.py"
                         }
                     ],
@@ -2442,7 +2442,7 @@
                             "id": "PR-AWS-0054",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeCluster.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeCluster.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0054.py"
                         }
                     ],
@@ -2473,7 +2473,7 @@
                             "id": "PR-AWS-0055",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeGlobalReplicationGroups.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeGlobalReplicationGroups.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0055.py"
                         }
                     ],
@@ -2504,7 +2504,7 @@
                             "id": "PR-AWS-0056",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeGlobalReplicationGroups.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeGlobalReplicationGroups.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0056.py"
                         }
                     ],
@@ -2535,7 +2535,7 @@
                             "id": "PR-AWS-0009",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0009.py"
                         }
                     ],
@@ -2568,7 +2568,7 @@
                             "id": "PR-AWS-0012",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0012.py"
                         }
                     ],
@@ -2601,7 +2601,7 @@
                             "id": "PR-AWS-0015",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributions.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributions.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0015.py"
                         }
                     ],
@@ -2632,7 +2632,7 @@
                             "id": "PR-AWS-0016",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributions.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributions.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0016.py"
                         }
                     ],
@@ -2663,7 +2663,7 @@
                             "id": "PR-AWS-0017",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributions.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributions.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0017.py"
                         }
                     ],
@@ -2694,7 +2694,7 @@
                             "id": "PR-AWS-0018",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributions.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributions.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0018.py"
                         }
                     ],
@@ -2725,7 +2725,7 @@
                             "id": "PR-AWS-0019",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributions.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributions.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0019.py"
                         }
                     ],
@@ -2756,7 +2756,7 @@
                             "id": "PR-AWS-0021",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributions.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributions.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0021.py"
                         }
                     ],
@@ -2787,7 +2787,7 @@
                             "id": "PR-AWS-0022",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributions.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributions.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0022.py"
                         }
                     ],
@@ -2818,7 +2818,7 @@
                             "id": "PR-AWS-0023",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributions.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributions.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0023.py"
                         }
                     ],
@@ -2849,7 +2849,7 @@
                             "id": "PR-AWS-0030",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistributionConfig.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistributionConfig.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0030.py"
                         }
                     ],
@@ -2916,7 +2916,7 @@
                             "id": "PR-AWS-0061",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/efs/latest/ug/API_DescribeFileSystems.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/efs/latest/ug/API_DescribeFileSystems.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0061.py"
                         }
                     ],
@@ -2947,7 +2947,7 @@
                             "id": "PR-AWS-0060",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/efs/latest/ug/API_DescribeFileSystems.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/efs/latest/ug/API_DescribeFileSystems.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0060.py"
                         }
                     ],
@@ -2978,7 +2978,7 @@
                             "id": "PR-AWS-0003",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountSummary.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountSummary.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0003.py"
                         }
                     ],
@@ -3017,7 +3017,7 @@
                             "id": "PR-AWS-0082",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountPasswordPolicy.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountPasswordPolicy.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0082.py"
                         }
                     ],
@@ -3085,7 +3085,7 @@
                             "id": "PR-AWS-0096",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAttachedUserPolicies.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAttachedUserPolicies.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0096.py"
                         }
                     ],
@@ -3122,7 +3122,7 @@
                             "id": "PR-AWS-0158",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeParameters.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeParameters.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0158.py"
                         }
                     ],
@@ -3153,7 +3153,7 @@
                             "id": "PR-AWS-0137",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation API format presented at this URL: https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeClusters.html",
+                            "remediationDescription": "Make sure you are following the Cloudformation API format presented <a href='https://docs.aws.amazon.com/redshift/latest/APIReference/API_DescribeClusters.html' target='_blank'>here</a>",
                             "remediationFunction": "PR_AWS_0137.py"
                         }
                     ],
