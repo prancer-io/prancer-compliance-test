@@ -348,21 +348,38 @@ log_storage_retention_metadata := {
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings"
 }
 
-#
 # PR-AZR-ARM-MNT-005
 #
-
 default log_blob = null
+
+azure_attribute_absence ["log_blob"] {
+    count([c | lower(input.resources[_].type) == "microsoft.storage/storageaccounts/blobservices"; c := 1]) != count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1])
+}
 
 azure_attribute_absence["log_blob"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/providers/diagnosticsettings"
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    not contains(lower(resource.scope), "microsoft.storage/storageaccounts/blobservices")
+}
+
+source_path[{"log_blob":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    not contains(lower(resource.scope), "microsoft.storage/storageaccounts/blobservices")
+    metadata:= {
+        "resource_path": [["resources",i,"scope"]]
+    }
+}
+
+azure_attribute_absence["log_blob"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
     not resource.properties.logs
 }
 
 source_path[{"log_blob":metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/providers/diagnosticsettings"
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
     not resource.properties.logs
     metadata:= {
         "resource_path": [["resources",i,"properties","logs"]]
@@ -371,57 +388,43 @@ source_path[{"log_blob":metadata}] {
 
 azure_issue["log_blob"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/providers/diagnosticsettings"
-    count(resource.properties.logs) == 0
-}
-
-source_path[{"log_blob":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/providers/diagnosticsettings"
-    count(resource.properties.logs) == 0
-    metadata:= {
-        "resource_path": [["resources",i,"properties","logs"]]
-    }
-}
-
-azure_issue["log_blob"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/providers/diagnosticsettings"
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[_]
-    log.enabled == false
+    log.enabled != true
 }
 
 source_path[{"log_blob":metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/providers/diagnosticsettings"
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[j]
-    log.enabled == false
+    log.enabled != true
     metadata:= {
         "resource_path": [["resources",i,"properties","logs",j,"enabled"]]
     }
 }
 
 log_blob {
-    lower(input.resources[_].type) == "microsoft.storage/storageaccounts/blobservices/providers/diagnosticsettings"
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts/blobservices"
     not azure_attribute_absence["log_blob"]
     not azure_issue["log_blob"]
-    
 }
 
 log_blob = false {
+	lower(input.resources[_].type) == "microsoft.storage/storageaccounts/blobservices"
     azure_issue["log_blob"]
 }
 
 log_blob = false {
+	lower(input.resources[_].type) == "microsoft.storage/storageaccounts/blobservices"
     azure_attribute_absence["log_blob"]
 }
 
-log_blob_err = "Azure storage account blob services diagnostic logs is currently not enabled" {
+log_blob_err = "Azure storage account blob services diagnostics logging is currently not enabled" {
+	lower(input.resources[_].type) == "microsoft.storage/storageaccounts/blobservices"
     azure_issue["log_blob"]
-}
-
-log_blob_miss_err = "Azure storage account blob services diagnostic logs attribute 'logs' is missing from the resource" {
-    azure_attribute_absence["log_blob"]
+} else = "Azure storage account blob services diagnostic settings attribute 'logs' is missing from the resource" {
+	lower(input.resources[_].type) == "microsoft.storage/storageaccounts/blobservices"
+	azure_attribute_absence["log_blob"]
 }
 
 log_blob_metadata := {
@@ -429,28 +432,46 @@ log_blob_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure storage account blob services diagnostic logs should be enabled",
-    "Policy Description": "Storage Logging records details of requests (read, write, and delete operations) against your Azure blobs. The logs include additional information such as:<br>- Timing and server latency.<br>- Success or failure, and HTTP status code.<br>- Authentication details<br><br>This policy identifies Azure storage accounts that do not have logging enabled for blobs. As a best practice, enable logging for read, write, and delete request types on blobs.",
-    "Resource Type": "microsoft.storage/storageaccounts/blobservices/providers/diagnosticsettings",
+    "Policy Title": "Azure storage account blob services diagnostics logs should be enabled",
+    "Policy Description": "torage Logging records details of requests (read, write, and delete operations) against your Azure blobs. The logs include additional information such as:<br>- Timing and server latency.<br>- Success or failure, and HTTP status code.<br>- Authentication details<br><br>This policy identifies Azure storage accounts that do not have logging enabled for blobs. As a best practice, enable logging for read, write, and delete request types on blobs.",
+    "Resource Type": "microsoft.insights/diagnosticsettings",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings"
 }
 
-#
+
 # PR-AZR-ARM-MNT-006
 #
-
 default log_queue = null
+
+azure_attribute_absence ["log_queue"] {
+    count([c | lower(input.resources[_].type) == "microsoft.storage/storageaccounts/queueservices"; c := 1]) != count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1])
+}
 
 azure_attribute_absence["log_queue"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.storage/storageaccounts/queueservices/providers/diagnosticsettings"
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    not contains(lower(resource.scope), "microsoft.storage/storageaccounts/queueservices")
+}
+
+source_path[{"log_queue":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    not contains(lower(resource.scope), "microsoft.storage/storageaccounts/queueservices")
+    metadata:= {
+        "resource_path": [["resources",i,"scope"]]
+    }
+}
+
+azure_attribute_absence["log_queue"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
     not resource.properties.logs
 }
 
 source_path[{"log_queue":metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts/queueservices/providers/diagnosticsettings"
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
     not resource.properties.logs
     metadata:= {
         "resource_path": [["resources",i,"properties","logs"]]
@@ -459,56 +480,43 @@ source_path[{"log_queue":metadata}] {
 
 azure_issue["log_queue"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.storage/storageaccounts/queueservices/providers/diagnosticsettings"
-    count(resource.properties.logs) == 0
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    log := resource.properties.logs[_]
+    log.enabled != true
 }
 
 source_path[{"log_queue":metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts/queueservices/providers/diagnosticsettings"
-    count(resource.properties.logs) == 0
-    metadata:= {
-        "resource_path": [["resources",i,"properties","logs"]]
-    }
-}
-
-azure_issue["log_queue"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.storage/storageaccounts/queueservices/providers/diagnosticsettings"
-    log:= resource.properties.logs[_]
-    log.enabled == false
-}
-
-source_path[{"log_queue":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts/queueservices/providers/diagnosticsettings"
-    log:= resource.properties.logs[j]
-    log.enabled == false
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    log := resource.properties.logs[j]
+    log.enabled != true
     metadata:= {
         "resource_path": [["resources",i,"properties","logs",j,"enabled"]]
     }
 }
 
 log_queue {
-    lower(input.resources[_].type) == "microsoft.storage/storageaccounts/queueservices/providers/diagnosticsettings"
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts/queueservices"
     not azure_attribute_absence["log_queue"]
     not azure_issue["log_queue"]
 }
 
 log_queue = false {
+	lower(input.resources[_].type) == "microsoft.storage/storageaccounts/queueservices"
     azure_issue["log_queue"]
 }
 
 log_queue = false {
+	lower(input.resources[_].type) == "microsoft.storage/storageaccounts/queueservices"
     azure_attribute_absence["log_queue"]
 }
 
-log_queue_err = "Azure storage account queue services diagnostic logs is currently not enabled" {
+log_queue_err = "Azure storage account queue services diagnostics logging is currently not enabled" {
+	lower(input.resources[_].type) == "microsoft.storage/storageaccounts/queueservices"
     azure_issue["log_queue"]
-}
-
-log_queue_miss_err = "Azure storage account queue services diagnostic logs attribute 'logs' is missing from the resource" {
-    azure_attribute_absence["log_queue"]
+} else = "Azure storage account queue services diagnostic settings attribute 'logs' is missing from the resource" {
+	lower(input.resources[_].type) == "microsoft.storage/storageaccounts/queueservices"
+	azure_attribute_absence["log_queue"]
 }
 
 log_queue_metadata := {
@@ -516,28 +524,46 @@ log_queue_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure storage account queue services diagnostic logs should be enabled",
+    "Policy Title": "Azure storage account queue services diagnostics logs should be enabled",
     "Policy Description": "Storage Logging records details of requests (read, write, and delete operations) against your Azure queues. The logs include additional information such as:<br>- Timing and server latency.<br>- Success or failure, and HTTP status code.<br>- Authentication details<br><br>This policy identifies Azure storage accounts that do not have logging enabled for queues. As a best practice, enable logging for read, write, and delete request types on queues.",
-    "Resource Type": "microsoft.storage/storageaccounts/queueservices/providers/diagnosticsettings",
+    "Resource Type": "microsoft.insights/diagnosticsettings",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings"
 }
 
-#
+
 # PR-AZR-ARM-MNT-007
 #
-
 default log_table = null
+
+azure_attribute_absence ["log_table"] {
+    count([c | lower(input.resources[_].type) == "microsoft.storage/storageaccounts/tableservices"; c := 1]) != count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1])
+}
 
 azure_attribute_absence["log_table"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.storage/storageaccounts/tableservices/providers/diagnosticsettings"
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    not contains(lower(resource.scope), "microsoft.storage/storageaccounts/tableservices")
+}
+
+source_path[{"log_table":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    not contains(lower(resource.scope), "microsoft.storage/storageaccounts/tableservices")
+    metadata:= {
+        "resource_path": [["resources",i,"scope"]]
+    }
+}
+
+azure_attribute_absence["log_table"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
     not resource.properties.logs
 }
 
 source_path[{"log_table":metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts/tableservices/providers/diagnosticsettings"
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
     not resource.properties.logs
     metadata:= {
         "resource_path": [["resources",i,"properties","logs"]]
@@ -546,56 +572,43 @@ source_path[{"log_table":metadata}] {
 
 azure_issue["log_table"] {
     resource := input.resources[_]
-    lower(resource.type) == "microsoft.storage/storageaccounts/tableservices/providers/diagnosticsettings"
-    count(resource.properties.logs) == 0
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    log := resource.properties.logs[_]
+    log.enabled != true
 }
 
 source_path[{"log_table":metadata}] {
     resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts/tableservices/providers/diagnosticsettings"
-    count(resource.properties.logs) == 0
-    metadata:= {
-        "resource_path": [["resources",i,"properties","logs"]]
-    }
-}
-
-azure_issue["log_table"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.storage/storageaccounts/tableservices/providers/diagnosticsettings"
-    log:= resource.properties.logs[_]
-    log.enabled == false
-}
-
-source_path[{"log_table":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.storage/storageaccounts/tableservices/providers/diagnosticsettings"
-    log:= resource.properties.logs[j]
-    log.enabled == false
+    lower(resource.type) == "microsoft.insights/diagnosticsettings"
+    log := resource.properties.logs[j]
+    log.enabled != true
     metadata:= {
         "resource_path": [["resources",i,"properties","logs",j,"enabled"]]
     }
 }
 
 log_table {
-    lower(input.resources[_].type) == "microsoft.storage/storageaccounts/tableservices/providers/diagnosticsettings"
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts/tableservices"
     not azure_attribute_absence["log_table"]
     not azure_issue["log_table"]
 }
 
 log_table = false {
+	lower(input.resources[_].type) == "microsoft.storage/storageaccounts/tableservices"
     azure_issue["log_table"]
 }
 
 log_table = false {
+	lower(input.resources[_].type) == "microsoft.storage/storageaccounts/tableservices"
     azure_attribute_absence["log_table"]
 }
 
-log_table_err = "Azure storage account table services diagnostic logs is currently not enabled" {
+log_table_err = "Azure storage account table services diagnostics logging is currently not enabled" {
+	lower(input.resources[_].type) == "microsoft.storage/storageaccounts/tableservices"
     azure_issue["log_table"]
-}
-
-log_table_miss_err = "Azure storage account table services diagnostic logs attribute 'logs' is missing from the resource" {
-    azure_attribute_absence["log_table"]
+} else = "Azure storage account table services diagnostic settings attribute 'logs' is missing from the resource" {
+	lower(input.resources[_].type) == "microsoft.storage/storageaccounts/tableservices"
+	azure_attribute_absence["log_table"]
 }
 
 log_table_metadata := {
@@ -603,9 +616,9 @@ log_table_metadata := {
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Azure storage account table services diagnostic logs should be enabled",
+    "Policy Title": "Azure storage account table services diagnostics logs should be enabled",
     "Policy Description": "Storage Logging records details of requests (read, write, and delete operations) against your Azure queues. The logs include additional information such as:<br>- Timing and server latency.<br>- Success or failure, and HTTP status code.<br>- Authentication details<br><br>This policy identifies Azure storage accounts that do not have logging enabled for tables. As a best practice, enable logging for read, write, and delete request types on tables.",
-    "Resource Type": "microsoft.storage/storageaccounts/tableservices/providers/diagnosticsettings",
+    "Resource Type": "microsoft.insights/diagnosticsettings",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings"
 }
