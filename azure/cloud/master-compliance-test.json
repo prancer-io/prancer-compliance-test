@@ -448,6 +448,179 @@
                     ]
                 },
                 {
+                    "masterTestId": "AZURE_TEST_WEB_1",
+                    "type": "rego",
+                    "rule": "file(appService.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-WEB-001",
+                            "eval": "data.rule.https_only",
+                            "message": "data.rule.https_only_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_WEB_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_100"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Azure App Service Web App enforce https connection",
+                    "description": "Azure Web Apps by default allows sites to run under both HTTP and HTTPS, and can be accessed by anyone using non-secure HTTP links. Non-secure HTTP requests can be restricted and all HTTP requests redirected to the secure HTTPS port. We recommend you enforce HTTPS-only traffic to increase security. This will redirect all non-secure HTTP requests to HTTPS ports. HTTPS uses the SSL/TLS protocol to provide a secure connection, which is both encrypted and authenticated."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_WEB_2",
+                    "type": "rego",
+                    "rule": "file(appService.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-WEB-002",
+                            "eval": "data.rule.min_tls_version",
+                            "message": "data.rule.min_tls_version_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_WEB_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_100"
+                    ],
+                    "severity": "Medium",
+                    "title": "Web App should uses the latest version of TLS encryption",
+                    "description": "App service currently allows the web app to set TLS versions 1.0, 1.1 and 1.2. For secure web app connections it is highly recommended to only use the latest TLS 1.2 version."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_WEB_3",
+                    "type": "rego",
+                    "rule": "file(appService.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-WEB-003",
+                            "eval": "data.rule.client_cert_enabled",
+                            "message": "data.rule.client_cert_enabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_WEB_003.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_100"
+                    ],
+                    "severity": "Medium",
+                    "title": "Web App should has incoming client certificates enabled",
+                    "description": "Client certificates allow the Web App to require a certificate for incoming requests. Only clients that have a valid certificate will be able to reach the app. The TLS mutual authentication technique in enterprise environments ensures the authenticity of clients to the server. If incoming client certificates are enabled only an authenticated client with valid certificates can access the app."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_WEB_4",
+                    "type": "rego",
+                    "rule": "file(appService.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-WEB-004",
+                            "eval": "data.rule.http_20_enabled",
+                            "message": "data.rule.http_20_enabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_WEB_004.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_100"
+                    ],
+                    "severity": "Medium",
+                    "title": "Web App should uses the latest version of HTTP",
+                    "description": "We recommend you use the latest HTTP version for web apps and take advantage of any security fixes and new functionalities featured. With each software installation you can determine if a given update meets your organization's requirements. Organizations should verify the compatibility and support provided for any additional software, assessing the current version against the update revision being considered."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_WEB_6",
+                    "type": "rego",
+                    "rule": "file(appService.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-WEB-006",
+                            "eval": "data.rule.web_service_cors_not_allowing_all",
+                            "message": "data.rule.web_service_cors_not_allowing_all_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_WEB_006.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_100"
+                    ],
+                    "severity": "High",
+                    "title": "Ensure CORS configuration is not allowing every resources to access Azure Web Service",
+                    "description": "This policy will identify CORS configuration which are allowing every resoruces to access Azure Web service and give alert"
+                },
+                {
                     "masterTestId": "AZURE_TEST_216",
                     "type": "rego",
                     "rule": "file(PR_AZR_0007.rego)",
