@@ -7,42 +7,17 @@ package rule
 default https_only = null
 
 azure_attribute_absence ["https_only"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.web/sites"
-    not resource.properties.httpsOnly
-}
-
-source_path[{"https_only":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.web/sites"
-    not resource.properties.httpsOnly
-    metadata:= {
-        "resource_path": [["resources",i,"properties","httpsOnly"]]
-    }
+    not input.properties.httpsOnly
 }
 
 azure_issue ["https_only"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.web/sites"
-    resource.properties.httpsOnly != true
+    input.properties.httpsOnly != true
 }
-
-source_path[{"https_only":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.web/sites"
-    resource.properties.httpsOnly != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","httpsOnly"]]
-    }
-}
-
 
 https_only {
-    lower(input.resources[_].type) == "microsoft.web/sites"
     not azure_attribute_absence["https_only"]
     not azure_issue["https_only"]
 }
-
 
 https_only = false {
     azure_attribute_absence["https_only"]
@@ -60,9 +35,9 @@ https_only_err = "Microsoft.web/Sites resource property httpsOnly missing in the
 
 https_only_metadata := {
     "Policy Code": "PR-AZR-WEB-001",
-    "Type": "IaC",
+    "Type": "Cloud",
     "Product": "AZR",
-    "Language": "ARM template",
+    "Language": "",
     "Policy Title": "Ensure Azure App Service Web App enforce https connection",
     "Policy Description": "Azure Web Apps by default allows sites to run under both HTTP and HTTPS, and can be accessed by anyone using non-secure HTTP links. Non-secure HTTP requests can be restricted and all HTTP requests redirected to the secure HTTPS port. We recommend you enforce HTTPS-only traffic to increase security. This will redirect all non-secure HTTP requests to HTTPS ports. HTTPS uses the SSL/TLS protocol to provide a secure connection, which is both encrypted and authenticated.",
     "Resource Type": "microsoft.web/sites",
@@ -76,38 +51,14 @@ https_only_metadata := {
 default min_tls_version = null
 
 azure_attribute_absence ["min_tls_version"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.web/sites"
-    not resource.properties.siteConfig.minTlsVersion
-}
-
-source_path[{"min_tls_version":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.web/sites"
-    not resource.properties.siteConfig.minTlsVersion
-    metadata:= {
-        "resource_path": [["resources",i,"properties","siteConfig","minTlsVersion"]]
-    }
+    not input.properties.siteConfig.minTlsVersion
 }
 
 azure_issue ["min_tls_version"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.web/sites"
-    resource.properties.siteConfig.minTlsVersion != "1.2"
+    input.properties.siteConfig.minTlsVersion != "1.2"
 }
-
-source_path[{"min_tls_version":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.web/sites"
-    resource.properties.siteConfig.minTlsVersion != "1.2"
-    metadata:= {
-        "resource_path": [["resources",i,"properties","siteConfig","minTlsVersion"]]
-    }
-}
-
 
 min_tls_version {
-    lower(input.resources[_].type) == "microsoft.web/sites"
     not azure_attribute_absence["min_tls_version"]
     not azure_issue["min_tls_version"]
 }
@@ -128,9 +79,9 @@ min_tls_version_err = "microsoft.web/sites resource property minTlsVersion missi
 
 min_tls_version_metadata := {
     "Policy Code": "PR-AZR-WEB-002",
-    "Type": "IaC",
+    "Type": "Cloud",
     "Product": "AZR",
-    "Language": "ARM template",
+    "Language": "",
     "Policy Title": "Web App should uses the latest version of TLS encryption",
     "Policy Description": "App service currently allows the web app to set TLS versions 1.0, 1.1 and 1.2. For secure web app connections it is highly recommended to only use the latest TLS 1.2 version.",
     "Resource Type": "microsoft.web/sites",
@@ -146,38 +97,15 @@ min_tls_version_metadata := {
 default client_cert_enabled = null
 
 azure_attribute_absence ["client_cert_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.web/sites"
-    not resource.properties.clientCertEnabled
-}
-
-source_path[{"client_cert_enabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.web/sites"
-    not resource.properties.clientCertEnabled
-    metadata:= {
-        "resource_path": [["resources",i,"properties","clientCertEnabled"]]
-    }
+    not input.properties.clientCertEnabled
 }
 
 azure_issue ["client_cert_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.web/sites"
-    resource.properties.clientCertEnabled != true
-}
-
-source_path[{"client_cert_enabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.web/sites"
-    resource.properties.clientCertEnabled != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","clientCertEnabled"]]
-    }
+    input.properties.clientCertEnabled != true
 }
 
 
 client_cert_enabled {
-    lower(input.resources[_].type) == "microsoft.web/sites"
     not azure_attribute_absence["client_cert_enabled"]
     not azure_issue["client_cert_enabled"]
 }
@@ -198,9 +126,9 @@ client_cert_enabled_err = "microsoft.web/sites resource property clientCertEnabl
 
 client_cert_enabled_metadata := {
     "Policy Code": "PR-AZR-WEB-003",
-    "Type": "IaC",
+    "Type": "Cloud",
     "Product": "AZR",
-    "Language": "ARM template",
+    "Language": "",
     "Policy Title": "Web App should has incoming client certificates enabled",
     "Policy Description": "Client certificates allow the Web App to require a certificate for incoming requests. Only clients that have a valid certificate will be able to reach the app. The TLS mutual authentication technique in enterprise environments ensures the authenticity of clients to the server. If incoming client certificates are enabled only an authenticated client with valid certificates can access the app.",
     "Resource Type": "microsoft.web/sites",
@@ -217,38 +145,15 @@ client_cert_enabled_metadata := {
 default http_20_enabled = null
 
 azure_attribute_absence ["http_20_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.web/sites"
-    not resource.properties.siteConfig.http20Enabled
+    not input.properties.siteConfig.http20Enabled
 }
 
-source_path[{"http_20_enabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.web/sites"
-    not resource.properties.siteConfig.http20Enabled
-    metadata:= {
-        "resource_path": [["resources",i,"properties","siteConfig","http20Enabled"]]
-    }
-}
 
 azure_issue ["http_20_enabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.web/sites"
-    resource.properties.siteConfig.http20Enabled != true
+    input.properties.siteConfig.http20Enabled != true
 }
-
-source_path[{"http_20_enabled":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.web/sites"
-    resource.properties.siteConfig.http20Enabled != true
-    metadata:= {
-        "resource_path": [["resources",i,"properties","siteConfig","http20Enabled"]]
-    }
-}
-
 
 http_20_enabled {
-    lower(input.resources[_].type) == "microsoft.web/sites"
     not azure_attribute_absence["http_20_enabled"]
     not azure_issue["http_20_enabled"]
 }
@@ -269,9 +174,9 @@ http_20_enabled_err = "microsoft.web/sites resource property http20Enabled missi
 
 http_20_enabled_metadata := {
     "Policy Code": "PR-AZR-WEB-004",
-    "Type": "IaC",
+    "Type": "Cloud",
     "Product": "AZR",
-    "Language": "ARM template",
+    "Language": "",
     "Policy Title": "Web App should uses the latest version of HTTP",
     "Policy Description": "We recommend you use the latest HTTP version for web apps and take advantage of any security fixes and new functionalities featured. With each software installation you can determine if a given update meets your organization's requirements. Organizations should verify the compatibility and support provided for any additional software, assessing the current version against the update revision being considered.",
     "Resource Type": "microsoft.web/sites",
@@ -286,76 +191,28 @@ http_20_enabled_metadata := {
 default web_service_cors_not_allowing_all = null
 
 azure_attribute_absence["web_service_cors_not_allowing_all"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.web/sites"
-    not resource.properties.siteConfig
-}
-
-source_path[{"web_service_cors_not_allowing_all":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.web/sites"
-    not resource.properties.siteConfig
-    metadata:= {
-        "resource_path": [["resources",i,"properties","siteConfig"]]
-    }
-}
-
-
-azure_attribute_absence["web_service_cors_not_allowing_all"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.web/sites"
-    not resource.properties.siteConfig.cors
-}
-
-source_path[{"web_service_cors_not_allowing_all":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.web/sites"
-    not resource.properties.siteConfig.cors
-    metadata:= {
-        "resource_path": [["resources",i,"properties","siteConfig","cors"]]
-    }
+    not input.properties.siteConfig
 }
 
 azure_attribute_absence["web_service_cors_not_allowing_all"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.web/sites"
-    not resource.properties.siteConfig.cors.allowedOrigins
+    not input.properties.siteConfig.cors
 }
 
-source_path[{"web_service_cors_not_allowing_all":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.web/sites"
-    not resource.properties.siteConfig.cors.allowedOrigins
-    metadata:= {
-        "resource_path": [["resources",i,"properties","siteConfig","cors","allowedOrigins"]]
-    }
+azure_attribute_absence["web_service_cors_not_allowing_all"] {
+    not input.properties.siteConfig.cors.allowedOrigins
 }
 
 azure_issue["web_service_cors_not_allowing_all"] {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.web/sites"
-    allowedOrigin := resource.properties.siteConfig.cors.allowedOrigins[_]
+    allowedOrigin := input.properties.siteConfig.cors.allowedOrigins[_]
     contains(allowedOrigin, "*")
-}
-
-source_path[{"web_service_cors_not_allowing_all":metadata}] {
-    resource := input.resources[i]
-    lower(resource.type) == "microsoft.web/sites"
-    allowedOrigin := resource.properties.siteConfig.cors.allowedOrigins[_]
-    contains(allowedOrigin, "*")
-    metadata:= {
-        "resource_path": [["resources",i,"properties","siteConfig","cors","allowedOrigins"]]
-    }
 }
 
 web_service_cors_not_allowing_all {
-    lower(input.resources[_].type) == "microsoft.web/sites"
     azure_attribute_absence["web_service_cors_not_allowing_all"]
     not azure_issue["web_service_cors_not_allowing_all"]
 }
 
 web_service_cors_not_allowing_all {
-    lower(input.resources[_].type) == "microsoft.web/sites"
     not azure_attribute_absence["web_service_cors_not_allowing_all"]
     not azure_issue["web_service_cors_not_allowing_all"]
 }
@@ -370,9 +227,9 @@ web_service_cors_not_allowing_all_err = "CORS configuration is currently allowin
 
 web_service_cors_not_allowing_all_metadata := {
     "Policy Code": "PR-AZR-WEB-006",
-    "Type": "IaC",
+    "Type": "Cloud",
     "Product": "AZR",
-    "Language": "ARM template",
+    "Language": "",
     "Policy Title": "Ensure CORS configuration is not allowing every resources to access Azure Web Service",
     "Policy Description": "This policy will identify CORS configuration which are allowing every resoruces to access Azure Web service and give alert",
     "Resource Type": "microsoft.web/sites",
