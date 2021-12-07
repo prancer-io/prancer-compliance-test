@@ -1,5 +1,13 @@
 # Automated Vulnerability Scan result and Static Code Analysis for Terraform Provider AWS (Nov 2021)
 
+## All Services
+
+#### Compute: https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Nov/output11182021%20Aws%20Compute.md
+#### Data Store: https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Nov/output11182021%20Aws%20DataStore.md
+#### Management: https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Nov/output11182021%20Aws%20Management.md
+#### Networking: https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Nov/output11182021%20Aws%20Networking.md
+#### Security: https://github.com/prancer-io/prancer-compliance-test/blob/master/docs/sca-report/terraform/aws/Nov/output11232021%20Aws%20Security.md
+
 ## Terraform Aws Security Services 
 
 Source Repository: https://github.com/hashicorp/terraform-provider-aws

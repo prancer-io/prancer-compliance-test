@@ -1,7 +1,7 @@
 # Automated Vulnerability Scan result and Static Code Analysis for Google Cloud Platform (k8s-config-connector) (Nov 2021)
 
-### https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/kcc/output11182021%20(Part1).md
-### https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/kcc/output11182021%20(Part2).md
+### k8s-config-connector (Part1): https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/kcc/output11182021%20(Part1).md
+### k8s-config-connector (Part2): https://github.com/prancer-io/prancer-compliance-test/tree/master/docs/sca-report/kcc/output11182021%20(Part2).md
 
 ## Google KCC Services (Part 2)
 
