@@ -621,6 +621,296 @@
                     "description": "This policy will identify CORS configuration which are allowing every resoruces to access Azure Web service and give alert"
                 },
                 {
+                    "masterTestId": "AZURE_TEST_WEB_7",
+                    "type": "rego",
+                    "rule": "file(appService.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-WEB-007",
+                            "eval": "data.rule.web_service_http_logging_enabled",
+                            "message": "data.rule.web_service_http_logging_enabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_WEB_007.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_100"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service http logging should be enabled",
+                    "description": "This policy will identify the Azure Web service which dont have http logging enabled and give alert"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_WEB_8",
+                    "type": "rego",
+                    "rule": "file(appService.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-WEB-008",
+                            "eval": "data.rule.web_service_detaild_error_message_enabled",
+                            "message": "data.rule.web_service_detaild_error_message_enabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_WEB_008.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_100"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service detaild error message should be enabled",
+                    "description": "This policy will identify the Azure Web service which dont have detaild error message enabled and give alert"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_WEB_9",
+                    "type": "rego",
+                    "rule": "file(appService.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-WEB-009",
+                            "eval": "data.rule.web_service_request_tracing_enabled",
+                            "message": "data.rule.web_service_request_tracing_enabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_WEB_009.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_100"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service request tracing should be enabled",
+                    "description": "This policy will identify the Azure web service which dont have request tracing enabled and give alert"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_WEB_10",
+                    "type": "rego",
+                    "rule": "file(appService.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-WEB-010",
+                            "eval": "data.rule.web_service_managed_identity_provider_enabled",
+                            "message": "data.rule.web_service_managed_identity_provider_enabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_WEB_010.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_100"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service Managed Identity provider should be enabled",
+                    "description": "This policy will identify the Azure Web service which dont have Managed Identity provider enabled and give alert"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_WEB_11",
+                    "type": "rego",
+                    "rule": "file(appService.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-WEB-011",
+                            "eval": "data.rule.web_service_remote_debugging_disabled",
+                            "message": "data.rule.web_service_remote_debugging_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_WEB_011.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_100"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service remote debugging should be disabled",
+                    "description": "This policy will identify the Azure web service which have remote debugging enabled and give alert"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_WEB_12",
+                    "type": "rego",
+                    "rule": "file(appService.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-WEB-012",
+                            "eval": "data.rule.web_service_ftp_deployment_disabled",
+                            "message": "data.rule.web_service_ftp_deployment_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_WEB_012.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_100"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service FTP deployments should be disabled",
+                    "description": "This policy will identify the Azure web service which have FTP deployment enabled and give alert"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_WEB_13",
+                    "type": "rego",
+                    "rule": "file(appService.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-WEB-013",
+                            "eval": "data.rule.web_service_net_framework_latest",
+                            "message": "data.rule.web_service_net_framework_latest_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_WEB_013.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_100"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service Dot Net Framework should be latest",
+                    "description": "This policy will identify the Azure web service which dont have latest version of Net Framework and give alert"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_WEB_14",
+                    "type": "rego",
+                    "rule": "file(appService.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-WEB-014",
+                            "eval": "data.rule.web_service_php_version_latest",
+                            "message": "data.rule.web_service_php_version_latest_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_WEB_014.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_100"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service PHP version should be latest",
+                    "description": "This policy will identify the Azure web service which dont have latest version of PHP and give alert"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_WEB_15",
+                    "type": "rego",
+                    "rule": "file(appService.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-WEB-015",
+                            "eval": "data.rule.web_service_python_version_latest",
+                            "message": "data.rule.web_service_python_version_latest_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_WEB_015.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_100"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service Pyhton version should be latest",
+                    "description": "This policy will identify the Azure web service which dont have latest version of Pyhton and give alert"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_WEB_16",
+                    "type": "rego",
+                    "rule": "file(appService.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-WEB-016",
+                            "eval": "data.rule.web_service_java_version_latest",
+                            "message": "data.rule.web_service_java_version_latest_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_WEB_016.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_100"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Web Service Java version should be latest",
+                    "description": "This policy will identify the Azure web service which dont have latest version of Java and give alert"
+                },
+                {
                     "masterTestId": "AZURE_TEST_216",
                     "type": "rego",
                     "rule": "file(PR_AZR_0007.rego)",
