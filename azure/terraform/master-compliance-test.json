@@ -1357,7 +1357,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2399,7 +2399,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices",
+                                "Best Practice",
                                 "HIPAA",
                                 "NIST CSF"
                             ],
@@ -2435,7 +2435,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices "
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2469,7 +2469,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices "
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2508,7 +2508,7 @@
                                 "ISO 27001",
                                 "NIST CSF",
                                 "HIPAA",
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2620,7 +2620,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2655,7 +2655,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2690,7 +2690,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2725,7 +2725,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2760,7 +2760,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2835,7 +2835,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2870,7 +2870,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4369,7 +4369,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4405,7 +4405,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4441,7 +4441,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4477,7 +4477,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4513,7 +4513,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4589,7 +4589,7 @@
                                 "ISO 27001",
                                 "NIST CSF",
                                 "HIPAA",
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4628,7 +4628,7 @@
                                 "ISO 27001",
                                 "NIST CSF",
                                 "HIPAA",
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4638,6 +4638,109 @@
                     "resourceTypes": [
                         "azurerm_redis_linked_server",
                         "azurerm_redis_cache"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_Redis_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(Redis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ARC-003",
+                            "eval": "data.rule.public_network_access_disabled",
+                            "message": "data.rule.public_network_access_disabled_err",
+                            "remediationDescription": "In 'azurerm_redis_cache' resource, set 'public_network_access_enabled = false' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache#public_network_access_enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ARC_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Cache for Redis should disable public network access",
+                    "description": "Disabling public network access improves security by ensuring that the Azure Cache for Redis isn't exposed on the public internet. You can limit exposure of your Azure Cache for Redis by creating private endpoints instead.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_redis_cache"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_Redis_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(Redis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ARC-004",
+                            "eval": "data.rule.redis_cache_inside_vnet",
+                            "message": "data.rule.redis_cache_inside_vnet_err",
+                            "remediationDescription": "In 'azurerm_redis_cache' resource, set 'id' of target 'azurerm_subnet' into property 'subnet_id' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache#subnet_id' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ARC_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Cache for Redis should reside within a virtual network",
+                    "description": "Azure Virtual Network deployment provides enhanced security and isolation for your Azure Cache for Redis, as well as subnets, access control policies, and other features to further restrict access.When an Azure Cache for Redis instance is configured with a virtual network, it is not publicly addressable and can only be accessed from virtual machines and applications within the virtual network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_redis_cache"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_Redis_5",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(Redis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ARC-005",
+                            "eval": "data.rule.redis_cache_uses_privatelink",
+                            "message": "data.rule.redis_cache_uses_privatelink_err",
+                            "remediationDescription": "'azurerm_redis_cache' resource need to have a link with 'azurerm_private_endpoint', set 'id' of 'azurerm_redis_cache' to property 'private_connection_resource_id' under 'azurerm_private_endpoint' resources 'private_service_connection' block to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint#private_connection_resource_id' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ARC_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Cache for Redis should use private link",
+                    "description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your Azure Cache for Redis instances, data leakage risks are reduced.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_redis_cache",
+                        "azurerm_private_endpoint"
                     ]
                 },
                 {
@@ -4740,7 +4843,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -5054,7 +5157,7 @@
                                 "ISO 27001",
                                 "NIST CSF",
                                 "HIPAA",
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -5090,7 +5193,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -5126,7 +5229,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -5279,7 +5382,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
