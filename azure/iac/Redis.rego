@@ -146,7 +146,7 @@ serverRole_metadata := {
 
 
 
-# PR-AZR-ARM-ARC-004
+# PR-AZR-ARM-ARC-003
 
 default redis_public_access = null
 
@@ -204,7 +204,7 @@ redis_public_access_err = "Azure Redis Cache with public access detected!" {
 }
 
 redis_public_access_metadata := {
-    "Policy Code": "PR-AZR-ARM-ARC-004",
+    "Policy Code": "PR-AZR-ARM-ARC-003",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -216,7 +216,7 @@ redis_public_access_metadata := {
 }
 
 
-# PR-AZR-ARM-ARC-005
+# PR-AZR-ARM-ARC-004
 #
 
 default arc_subnet_id = null
@@ -275,7 +275,7 @@ arc_subnet_id_err = "Azure Cache for Redis is not reside within a virtual networ
 
 
 arc_subnet_id_metadata := {
-    "Policy Code": "PR-AZR-ARM-ARC-005",
+    "Policy Code": "PR-AZR-ARM-ARC-004",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
@@ -287,7 +287,7 @@ arc_subnet_id_metadata := {
 }
 
 #
-# PR-AZR-ARM-ARC-006
+# PR-AZR-ARM-ARC-005
 
 default arc_private_endpoint = null
 
@@ -337,7 +337,7 @@ arc_private_endpoint_err = "Azure Storage Account does not configure with privat
 }
 
 arc_private_endpoint_metadata := {
-    "Policy Code": "PR-AZR-ARM-ARC-006",
+    "Policy Code": "PR-AZR-ARM-ARC-005",
     "Type": "IaC",  
     "Product": "AZR",
     "Language": "ARM template",

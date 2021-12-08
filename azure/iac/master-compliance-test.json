@@ -3596,11 +3596,11 @@
                     "rule": "file(Redis.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-ARC-004",
+                            "id": "PR-AZR-ARM-ARC-003",
                             "eval": "data.rule.redis_public_access",
                             "message": "data.rule.redis_public_access_err",
                             "remediationDescription": "In Resource of type 'Microsoft.Cache/redis' make sure properties.publicNetworkAccess value is set to 'disabled'.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_ARM_ARC_004.py"
+                            "remediationFunction": "PR_AZR_ARM_ARC_003.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3631,11 +3631,11 @@
                     "rule": "file(Redis.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-ARC-005",
+                            "id": "PR-AZR-ARM-ARC-004",
                             "eval": "data.rule.arc_subnet_id",
                             "message": "data.rule.arc_subnet_id_err",
                             "remediationDescription": "In Resource of type 'Microsoft.Cache/redis' make sure properties.subnetId exists and connected to Azure Redis.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.cache/redis' target='_blank'>here</a> for more details.",
-                            "remediationFunction": "PR_AZR_ARM_ARC_005.py"
+                            "remediationFunction": "PR_AZR_ARM_ARC_004.py"
                         }
                     ],
                     "severity": "Medium",
@@ -3666,11 +3666,11 @@
                     "rule": "file(Redis.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-ARM-ARC-006",
+                            "id": "PR-AZR-ARM-ARC-005",
                             "eval": "data.rule.arc_private_endpoint",
                             "message": "data.rule.arc_private_endpoint_err",
                             "remediationDescription": "In Resource of type \"Microsoft.Cache/redis\" make sure 'Microsoft.Network/privateEndpoints' exists.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?tabs=json' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_ARM_ARC_006.py"
+                            "remediationFunction": "PR_AZR_ARM_ARC_005.py"
                         }
                     ],
                     "severity": "Medium",
