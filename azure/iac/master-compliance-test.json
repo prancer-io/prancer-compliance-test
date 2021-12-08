@@ -1793,6 +1793,40 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_DISKS_2",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(disks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-DSK-002",
+                            "eval": "data.rule.disk_encryption_2",
+                            "message": "data.rule.disk_encryption_2_err",
+                            "remediationDescription": "Make sure you are following the ARM template guidelines for Disks by visiting <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/disks' target='_blank'>here</a>. encryption.diskEncryptionSetId should be exists and encryption.type should be exists and the value = 'EncryptionATrestWithCustomerkey'",
+                            "remediationFunction": "PR_AZR_ARM_DSK_002.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Enable server-side encryption with customer-managed keys for managed disks",
+                    "description": "Azure Disk Storage allows you to manage your own keys when using server-side encryption (SSE) for managed disks, if you choose",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.compute/disks"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_KeyVault_1",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
