@@ -1357,7 +1357,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2399,7 +2399,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices",
+                                "Best Practice",
                                 "HIPAA",
                                 "NIST CSF"
                             ],
@@ -2435,7 +2435,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices "
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2469,7 +2469,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices "
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2508,7 +2508,7 @@
                                 "ISO 27001",
                                 "NIST CSF",
                                 "HIPAA",
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2620,7 +2620,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2655,7 +2655,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2690,7 +2690,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2725,7 +2725,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2760,7 +2760,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2835,7 +2835,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2870,7 +2870,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4369,7 +4369,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4405,7 +4405,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4441,7 +4441,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4477,7 +4477,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4513,7 +4513,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4589,7 +4589,7 @@
                                 "ISO 27001",
                                 "NIST CSF",
                                 "HIPAA",
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4628,7 +4628,7 @@
                                 "ISO 27001",
                                 "NIST CSF",
                                 "HIPAA",
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4663,7 +4663,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4697,7 +4697,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4731,7 +4731,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4843,7 +4843,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -5157,7 +5157,7 @@
                                 "ISO 27001",
                                 "NIST CSF",
                                 "HIPAA",
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -5193,7 +5193,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -5229,7 +5229,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -5382,7 +5382,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
