@@ -177,7 +177,7 @@ azure_attribute_absence ["redis_cache_inside_vnet"] {
 azure_issue ["redis_cache_inside_vnet"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_redis_cache"
-    resource.properties.subnet_id == true
+    count(resource.properties.subnet_id) == 0
 }
 
 redis_cache_inside_vnet = false {
