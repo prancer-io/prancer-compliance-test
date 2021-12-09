@@ -14,7 +14,7 @@ azure_attribute_absence["kv_expire"] {
 
 
 azure_issue["kv_expire"] {
-    to_number(resource.properties.attributes.exp) < 0
+    to_number(input.properties.attributes.exp) < 0
 }
 
 

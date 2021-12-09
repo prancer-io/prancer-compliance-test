@@ -5,6 +5,11 @@
             "connectorUser": "USER_1",
             "nodes": [
                 {
+                    "masterSnapshotId": "AZRSNP_100",
+                    "type": "Microsoft.Web/sites",
+                    "collection": "Microsoft.Web"
+                },
+                {
                     "masterSnapshotId": "AZRSNP_210",
                     "type": "Microsoft.OperationalInsights/workspaces",
                     "collection": "Microsoft.OperationalInsights"
