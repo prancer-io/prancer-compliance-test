@@ -16,7 +16,7 @@
                             "id": "PR-GCP-GDF-FW-001",
                             "eval": "data.rule.firewall_default",
                             "message": "data.rule.firewall_default_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_FW_001.py"
                         }
                     ],
@@ -54,7 +54,7 @@
                             "id": "PR-GCP-GDF-FW-002",
                             "eval": "data.rule.firewall_port_53",
                             "message": "data.rule.firewall_port_53_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_FW_002.py"
                         }
                     ],
@@ -93,7 +93,7 @@
                             "id": "PR-GCP-GDF-FW-003",
                             "eval": "data.rule.firewall_port_21",
                             "message": "data.rule.firewall_port_21_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_FW_003.py"
                         }
                     ],
@@ -132,7 +132,7 @@
                             "id": "PR-GCP-GDF-FW-004",
                             "eval": "data.rule.firewall_port_80",
                             "message": "data.rule.firewall_port_80_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_FW_004.py"
                         }
                     ],
@@ -171,7 +171,7 @@
                             "id": "PR-GCP-GDF-FW-005",
                             "eval": "data.rule.firewall_port_445",
                             "message": "data.rule.firewall_port_445_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_FW_005.py"
                         }
                     ],
@@ -210,7 +210,7 @@
                             "id": "PR-GCP-GDF-FW-006",
                             "eval": "data.rule.firewall_port_27017",
                             "message": "data.rule.firewall_port_27017_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_FW_006.py"
                         }
                     ],
@@ -249,7 +249,7 @@
                             "id": "PR-GCP-GDF-FW-007",
                             "eval": "data.rule.firewall_port_3306",
                             "message": "data.rule.firewall_port_3306_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_FW_007.py"
                         }
                     ],
@@ -288,7 +288,7 @@
                             "id": "PR-GCP-GDF-FW-008",
                             "eval": "data.rule.firewall_port_139",
                             "message": "data.rule.firewall_port_139_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_FW_008.py"
                         }
                     ],
@@ -327,7 +327,7 @@
                             "id": "PR-GCP-GDF-FW-009",
                             "eval": "data.rule.firewall_port_1521",
                             "message": "data.rule.firewall_port_1521_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_FW_009.py"
                         }
                     ],
@@ -366,7 +366,7 @@
                             "id": "PR-GCP-GDF-FW-010",
                             "eval": "data.rule.firewall_port_110",
                             "message": "data.rule.firewall_port_110_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_FW_010.py"
                         }
                     ],
@@ -405,7 +405,7 @@
                             "id": "PR-GCP-GDF-FW-011",
                             "eval": "data.rule.firewall_port_5432",
                             "message": "data.rule.firewall_port_5432_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_FW_011.py"
                         }
                     ],
@@ -444,7 +444,7 @@
                             "id": "PR-GCP-GDF-FW-012",
                             "eval": "data.rule.firewall_port_3389",
                             "message": "data.rule.firewall_port_3389_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_FW_012.py"
                         }
                     ],
@@ -484,7 +484,7 @@
                             "id": "PR-GCP-GDF-FW-013",
                             "eval": "data.rule.firewall_port_25",
                             "message": "data.rule.firewall_port_25_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_FW_013.py"
                         }
                     ],
@@ -523,7 +523,7 @@
                             "id": "PR-GCP-GDF-FW-014",
                             "eval": "data.rule.firewall_port_22",
                             "message": "data.rule.firewall_port_22_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_FW_014.py"
                         }
                     ],
@@ -563,7 +563,7 @@
                             "id": "PR-GCP-GDF-FW-015",
                             "eval": "data.rule.firewall_port_23",
                             "message": "data.rule.firewall_port_23_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_FW_015.py"
                         }
                     ],
@@ -602,7 +602,7 @@
                             "id": "PR-GCP-GDF-FW-016",
                             "eval": "data.rule.firewall_inbound",
                             "message": "data.rule.firewall_inbound_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_FW_016.py"
                         }
                     ],
@@ -634,7 +634,7 @@
                             "id": "PR-GCP-GDF-FW-017",
                             "eval": "data.rule.firewall_inbound_all",
                             "message": "data.rule.firewall_inbound_all_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/firewalls",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/firewalls' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_FW_017.py"
                         }
                     ],
@@ -668,7 +668,7 @@
                             "id": "PR-GCP-GDF-DISK-001",
                             "eval": "data.rule.disk_encrypt",
                             "message": "data.rule.disk_encrypt_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/disks",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/disks' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_DISK_001.py"
                         }
                     ],
@@ -703,7 +703,7 @@
                             "id": "PR-GCP-GDF-INST-001",
                             "eval": "data.rule.vm_ip_forward",
                             "message": "data.rule.vm_ip_forward_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/instances",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_INST_001.py"
                         }
                     ],
@@ -738,7 +738,7 @@
                             "id": "PR-GCP-GDF-INST-002",
                             "eval": "data.rule.vm_block_project_ssh_keys",
                             "message": "data.rule.vm_block_project_ssh_keys_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/instances",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_INST_002.py"
                         }
                     ],
@@ -773,7 +773,7 @@
                             "id": "PR-GCP-GDF-INST-003",
                             "eval": "data.rule.vm_serial_port",
                             "message": "data.rule.vm_serial_port_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/instances",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_INST_003.py"
                         }
                     ],
@@ -807,7 +807,7 @@
                             "id": "PR-GCP-GDF-INST-004",
                             "eval": "data.rule.vm_pre_emptible",
                             "message": "data.rule.vm_pre_emptible_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/instances",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_INST_004.py"
                         }
                     ],
@@ -841,7 +841,7 @@
                             "id": "PR-GCP-GDF-INST-005",
                             "eval": "data.rule.vm_metadata",
                             "message": "data.rule.vm_metadata_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/instances",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_INST_005.py"
                         }
                     ],
@@ -877,7 +877,7 @@
                             "id": "PR-GCP-GDF-INST-006",
                             "eval": "data.rule.vm_no_labels",
                             "message": "data.rule.vm_no_labels_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/instances",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_INST_006.py"
                         }
                     ],
@@ -913,7 +913,7 @@
                             "id": "PR-GCP-GDF-INST-007",
                             "eval": "data.rule.vm_info",
                             "message": "data.rule.vm_info_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/instances",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/instances' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_INST_007.py"
                         }
                     ],
@@ -949,7 +949,7 @@
                             "id": "PR-GCP-GDF-NET-001",
                             "eval": "data.rule.net_legacy",
                             "message": "data.rule.net_legacy_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/networks",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/networks' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_NET_001.py"
                         }
                     ],
@@ -984,7 +984,7 @@
                             "id": "PR-GCP-GDF-NET-002",
                             "eval": "data.rule.net_default",
                             "message": "data.rule.net_default_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/networks",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/networks' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_NET_002.py"
                         }
                     ],
@@ -1019,7 +1019,7 @@
                             "id": "PR-GCP-GDF-SUBN-001",
                             "eval": "data.rule.vpc_flow_logs",
                             "message": "data.rule.vpc_flow_logs_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/subnetworks",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/subnetworks' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_SUBN_001.py"
                         }
                     ],
@@ -1054,7 +1054,7 @@
                             "id": "PR-GCP-GDF-SUBN-002",
                             "eval": "data.rule.vpc_private_ip_google",
                             "message": "data.rule.vpc_private_ip_google_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/subnetworks",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/subnetworks' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_SUBN_002.py"
                         }
                     ],
@@ -1092,7 +1092,7 @@
                             "id": "PR-GCP-GDF-THP-001",
                             "eval": "data.rule.lbs_ssl_policy",
                             "message": "data.rule.lbs_ssl_policy_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/targetHttpsProxies",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/targetHttpsProxies' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_THP_001.py"
                         }
                     ],
@@ -1124,7 +1124,7 @@
                             "id": "PR-GCP-GDF-THP-002",
                             "eval": "data.rule.lbs_quic",
                             "message": "data.rule.lbs_quic_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/compute/docs/reference/rest/v1/targetHttpsProxies",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/compute/docs/reference/rest/v1/targetHttpsProxies' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_THP_002.py"
                         }
                     ],
@@ -1156,7 +1156,7 @@
                             "id": "PR-GCP-GDF-CLT-001",
                             "eval": "data.rule.k8s_svc_account",
                             "message": "data.rule.k8s_svc_account_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_001.py"
                         }
                     ],
@@ -1195,7 +1195,7 @@
                             "id": "PR-GCP-GDF-CLT-002",
                             "eval": "data.rule.k8s_basicauth",
                             "message": "data.rule.k8s_basicauth_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_002.py"
                         }
                     ],
@@ -1231,7 +1231,7 @@
                             "id": "PR-GCP-GDF-CLT-003",
                             "eval": "data.rule.k8s_client_cert",
                             "message": "data.rule.k8s_client_cert_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_003.py"
                         }
                     ],
@@ -1270,7 +1270,7 @@
                             "id": "PR-GCP-GDF-CLT-004",
                             "eval": "data.rule.k8s_alias_ip",
                             "message": "data.rule.k8s_alias_ip_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_004.py"
                         }
                     ],
@@ -1308,7 +1308,7 @@
                             "id": "PR-GCP-GDF-CLT-005",
                             "eval": "data.rule.k8s_alpha",
                             "message": "data.rule.k8s_alpha_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_005.py"
                         }
                     ],
@@ -1340,7 +1340,7 @@
                             "id": "PR-GCP-GDF-CLT-006",
                             "eval": "data.rule.k8s_http_lbs",
                             "message": "data.rule.k8s_http_lbs_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_006.py"
                         }
                     ],
@@ -1374,7 +1374,7 @@
                             "id": "PR-GCP-GDF-CLT-007",
                             "eval": "data.rule.k8s_legacy_abac",
                             "message": "data.rule.k8s_legacy_abac_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_007.py"
                         }
                     ],
@@ -1412,7 +1412,7 @@
                             "id": "PR-GCP-GDF-CLT-008",
                             "eval": "data.rule.k8s_master_auth_net",
                             "message": "data.rule.k8s_master_auth_net_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_008.py"
                         }
                     ],
@@ -1451,7 +1451,7 @@
                             "id": "PR-GCP-GDF-CLT-009",
                             "eval": "data.rule.k8s_net_policy",
                             "message": "data.rule.k8s_net_policy_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_009.py"
                         }
                     ],
@@ -1490,7 +1490,7 @@
                             "id": "PR-GCP-GDF-CLT-010",
                             "eval": "data.rule.k8s_logging",
                             "message": "data.rule.k8s_logging_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_010.py"
                         }
                     ],
@@ -1528,7 +1528,7 @@
                             "id": "PR-GCP-GDF-CLT-011",
                             "eval": "data.rule.k8s_monitor",
                             "message": "data.rule.k8s_monitor_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_011.py"
                         }
                     ],
@@ -1567,7 +1567,7 @@
                             "id": "PR-GCP-GDF-CLT-012",
                             "eval": "data.rule.k8s_binary_auth",
                             "message": "data.rule.k8s_binary_auth_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_012.py"
                         }
                     ],
@@ -1599,7 +1599,7 @@
                             "id": "PR-GCP-GDF-CLT-013",
                             "eval": "data.rule.k8s_legacy_endpoint",
                             "message": "data.rule.k8s_legacy_endpoint_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_013.py"
                         }
                     ],
@@ -1631,7 +1631,7 @@
                             "id": "PR-GCP-GDF-CLT-014",
                             "eval": "data.rule.k8s_pod_security",
                             "message": "data.rule.k8s_pod_security_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_014.py"
                         }
                     ],
@@ -1666,7 +1666,7 @@
                             "id": "PR-GCP-GDF-CLT-015",
                             "eval": "data.rule.k8s_egress_metering",
                             "message": "data.rule.k8s_egress_metering_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_015.py"
                         }
                     ],
@@ -1698,7 +1698,7 @@
                             "id": "PR-GCP-GDF-CLT-016",
                             "eval": "data.rule.k8s_private",
                             "message": "data.rule.k8s_private_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_016.py"
                         }
                     ],
@@ -1733,7 +1733,7 @@
                             "id": "PR-GCP-GDF-CLT-017",
                             "eval": "data.rule.k8s_private_node",
                             "message": "data.rule.k8s_private_node_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_017.py"
                         }
                     ],
@@ -1765,7 +1765,7 @@
                             "id": "PR-GCP-GDF-CLT-018",
                             "eval": "data.rule.k8s_node_image",
                             "message": "data.rule.k8s_node_image_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_018.py"
                         }
                     ],
@@ -1797,7 +1797,7 @@
                             "id": "PR-GCP-GDF-CLT-019",
                             "eval": "data.rule.k8s_network",
                             "message": "data.rule.k8s_network_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_019.py"
                         }
                     ],
@@ -1829,7 +1829,7 @@
                             "id": "PR-GCP-GDF-CLT-020",
                             "eval": "data.rule.k8s_dashboard",
                             "message": "data.rule.k8s_dashboard_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_020.py"
                         }
                     ],
@@ -1866,7 +1866,7 @@
                             "id": "PR-GCP-GDF-CLT-021",
                             "eval": "data.rule.k8s_labels",
                             "message": "data.rule.k8s_labels_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_021.py"
                         }
                     ],
@@ -1904,7 +1904,7 @@
                             "id": "PR-GCP-GDF-CLT-022",
                             "eval": "data.rule.k8s_db_encrypt",
                             "message": "data.rule.k8s_db_encrypt_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_022.py"
                         }
                     ],
@@ -1936,7 +1936,7 @@
                             "id": "PR-GCP-GDF-CLT-023",
                             "eval": "data.rule.k8s_intra_node",
                             "message": "data.rule.k8s_intra_node_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_023.py"
                         }
                     ],
@@ -1968,7 +1968,7 @@
                             "id": "PR-GCP-GDF-CLT-024",
                             "eval": "data.rule.k8s_istio",
                             "message": "data.rule.k8s_istio_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_024.py"
                         }
                     ],
@@ -2000,7 +2000,7 @@
                             "id": "PR-GCP-GDF-CLT-025",
                             "eval": "data.rule.k8s_zones",
                             "message": "data.rule.k8s_zones_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_CLT_025.py"
                         }
                     ],
@@ -2032,7 +2032,7 @@
                             "id": "PR-GCP-GDF-CLT-026",
                             "eval": "data.rule.k8s_auto_upgrade",
                             "message": "data.rule.k8s_auto_upgrade_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters' target='_blank'>here</a> ",
                             "remediationFunction": "PR_GCP_GDF_CLT_026.py"
                         }
                     ],
@@ -2064,7 +2064,7 @@
                             "id": "PR-GCP-GDF-BKT-001",
                             "eval": "data.rule.storage_encrypt",
                             "message": "data.rule.storage_encrypt_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/storage/docs/json_api/v1/buckets",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/storage/docs/json_api/v1/buckets' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_BKT_001.py"
                         }
                     ],
@@ -2096,7 +2096,7 @@
                             "id": "PR-GCP-GDF-BKT-002",
                             "eval": "data.rule.storage_versioning",
                             "message": "data.rule.storage_versioning_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/storage/docs/json_api/v1/buckets",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/storage/docs/json_api/v1/buckets' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_BKT_002.py"
                         }
                     ],
@@ -2131,7 +2131,7 @@
                             "id": "PR-GCP-GDF-BKT-003",
                             "eval": "data.rule.storage_stack_logging",
                             "message": "data.rule.storage_stack_logging_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/storage/docs/json_api/v1/buckets",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/storage/docs/json_api/v1/buckets' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_BKT_003.py"
                         }
                     ],
@@ -2168,7 +2168,7 @@
                             "id": "PR-GCP-GDF-BKT-004",
                             "eval": "data.rule.storage_logging",
                             "message": "data.rule.storage_logging_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/storage/docs/json_api/v1/buckets",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/storage/docs/json_api/v1/buckets' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_BKT_004.py"
                         }
                     ],
@@ -2207,7 +2207,7 @@
                             "id": "PR-GCP-GDF-BKT-005",
                             "eval": "data.rule.storage_public_logs",
                             "message": "data.rule.storage_public_logs_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/storage/docs/json_api/v1/buckets",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/storage/docs/json_api/v1/buckets' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_BKT_005.py"
                         }
                     ],
@@ -2245,7 +2245,7 @@
                             "id": "PR-GCP-GDF-SQLI-001",
                             "eval": "data.rule.sql_labels",
                             "message": "data.rule.sql_labels_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_SQLI_001.py"
                         }
                     ],
@@ -2281,13 +2281,13 @@
                             "id": "PR-GCP-GDF-SQLI-002",
                             "eval": "data.rule.sql_binary_logs",
                             "message": "data.rule.sql_binary_logs_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_SQLI_002.py"
                         }
                     ],
                     "severity": "Medium",
                     "title": "SQL DB Instance backup Binary logs configuration is not enabled",
-                    "description": "Checks to verify that the configuration for automated backup of Binary logs is enabled. _x005F_x000D_         Restoring from a backup reverts your instance to its state at the backup's creation time. Enabling automated backups creates backup during the scheduled backup window.",
+                    "description": "Checks to verify that the configuration for automated backup of Binary logs is enabled._x005F_x000D_Restoring from a backup reverts your instance to its state at the backup's creation time. Enabling automated backups creates backup during the scheduled backup window.",
                     "tags": [
                         {
                             "cloud": "git",
@@ -2318,7 +2318,7 @@
                             "id": "PR-GCP-GDF-SQLI-003",
                             "eval": "data.rule.sql_backup",
                             "message": "data.rule.sql_backup_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_SQLI_003.py"
                         }
                     ],
@@ -2354,7 +2354,7 @@
                             "id": "PR-GCP-GDF-SQLI-004",
                             "eval": "data.rule.sql_ssl",
                             "message": "data.rule.sql_ssl_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_SQLI_004.py"
                         }
                     ],
@@ -2393,7 +2393,7 @@
                             "id": "PR-GCP-GDF-SQLI-005",
                             "eval": "data.rule.sql_exposed",
                             "message": "data.rule.sql_exposed_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instances",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1beta4/instancess' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_SQLI_005.py"
                         }
                     ],
@@ -2432,7 +2432,7 @@
                             "id": "PR-GCP-GDF-MZ-001",
                             "eval": "data.rule.dnssec_state",
                             "message": "data.rule.dnssec_state_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/dns/docs/reference/v1/managedZones",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/dns/docs/reference/v1/managedZones' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_MZ_001.py"
                         }
                     ],
@@ -2467,7 +2467,7 @@
                             "id": "PR-GCP-GDF-MZ-002",
                             "eval": "data.rule.dnssec_key_rsasha1",
                             "message": "data.rule.dnssec_key_rsasha1_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/dns/docs/reference/v1/managedZones",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/dns/docs/reference/v1/managedZones' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_MZ_002.py"
                         }
                     ],
@@ -2502,7 +2502,7 @@
                             "id": "PR-GCP-GDF-MZ-003",
                             "eval": "data.rule.dnssec_zone_rsasha1",
                             "message": "data.rule.dnssec_zone_rsasha1_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/dns/docs/reference/v1/managedZones",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/dns/docs/reference/v1/managedZones' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_MZ_003.py"
                         }
                     ],
@@ -2536,7 +2536,7 @@
                             "id": "PR-GCP-GDF-SAK-001",
                             "eval": "data.rule.svc_account_key",
                             "message": "data.rule.svc_account_key_err",
-                            "remediationDescription": "make sure you are following the deployment template format at this URL: https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys",
+                            "remediationDescription": "make sure you are following the deployment template format presented <a href='https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts.keys' target='_blank'>here</a>",
                             "remediationFunction": "PR_GCP_GDF_SAK_001.py"
                         }
                     ],

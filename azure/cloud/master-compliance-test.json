@@ -364,7 +364,7 @@
                             "id": "PR-AZR-STR-009",
                             "eval": "data.rule.region",
                             "message": "data.rule.region_err",
-                            "remediationDescription": "Please refer to Azure documentations about Storage Accounts:<br><a href='https://docs.microsoft.com/en-us/azure/storage/common/storage-create-storage-account' target='_blank'>https://docs.microsoft.com/en-us/azure/storage/common/storage-create-storage-account</a>.<br>and<br>Azure documentations about Regions:<br><a href='https://azure.microsoft.com/en-us/global-infrastructure/regions/#services' target='_blank'>https://azure.microsoft.com/en-us/global-infrastructure/regions/#services</a>",
+                            "remediationDescription": "Please refer to Azure documentations about Storage Accounts:<br><a href='https://docs.microsoft.com/en-us/azure/storage/common/storage-create-storage-account' target='_blank'>here</a>.<br>and<br>Azure documentations about Regions:<br><a href='https://azure.microsoft.com/en-us/global-infrastructure/regions/#services' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_STR_009.py"
                         }
                     ],
@@ -1549,7 +1549,7 @@
                             "id": "gID6",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/rest/api/virtualnetwork/networksecuritygroups/get , https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.Network/networkSecurityGroups/hardikVM-nsg",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/rest/api/virtualnetwork/networksecuritygroups/get' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_gID6.py"
                         }
                     ],
@@ -1580,7 +1580,7 @@
                             "id": "PR-AZR-0002",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0002.py"
                         }
                     ],
@@ -1614,7 +1614,7 @@
                             "id": "PR-AZR-0049",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0049.py"
                         }
                     ],
@@ -1649,7 +1649,7 @@
                             "id": "PR-AZR-0076",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0076.py"
                         }
                     ],
@@ -1685,7 +1685,7 @@
                             "id": "PR-AZR-0077",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0077.py"
                         }
                     ],
@@ -1720,7 +1720,7 @@
                             "id": "PR-AZR-0078",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0078.py"
                         }
                     ],
@@ -1753,7 +1753,7 @@
                             "id": "PR-AZR-0079",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0079.py"
                         }
                     ],
@@ -1788,7 +1788,7 @@
                             "id": "PR-AZR-0081",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0081.py"
                         }
                     ],
@@ -1824,7 +1824,7 @@
                             "id": "PR-AZR-0083",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0083.py"
                         }
                     ],
@@ -1860,7 +1860,7 @@
                             "id": "PR-AZR-0086",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0086.py"
                         }
                     ],
@@ -1896,7 +1896,7 @@
                             "id": "PR-AZR-0094",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0094.py"
                         }
                     ],
@@ -1932,7 +1932,7 @@
                             "id": "PR-AZR-0095",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0095.py"
                         }
                     ],
@@ -1967,7 +1967,7 @@
                             "id": "PR-AZR-0099",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0099.py"
                         }
                     ],
@@ -2003,7 +2003,7 @@
                             "id": "PR-AZR-0100",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0100.py"
                         }
                     ],
@@ -2038,7 +2038,7 @@
                             "id": "PR-AZR-0065",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/rest/api/compute/virtualmachines/get , https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.Compute/virtualMachines/hardikVM",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/rest/api/compute/virtualmachines/get' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0065.py"
                         }
                     ],
@@ -2069,7 +2069,7 @@
                             "id": "PR-AZR-0068",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/rest/api/compute/disks/get , https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.Compute/disks",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/rest/api/compute/disks/get' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0068.py"
                         }
                     ],
@@ -2114,7 +2114,7 @@
                             "id": "PR-AZR-0093",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.Storage/storageAccounts/vatsalstorage1 , https://docs.microsoft.com/en-us/rest/api/storagerp/storageaccounts/getproperties",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/rest/api/storagerp/storageaccounts/getproperties' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0093.py"
                         }
                     ],
@@ -2134,7 +2134,7 @@
                             "id": "PR-AZR-0012",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/rest/api/application-gateway/applicationgateways/get , https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.Network/applicationGateways/hardikApplicationGateway",
+                            "remediationDescription": "Make sure you are following the Arm api format presented https://docs.microsoft.com/en-us/rest/api/application-gateway/applicationgateways/get , https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.Network/applicationGateways/hardikApplicationGateway",
                             "remediationFunction": "PR_AZR_0012.py"
                         }
                     ],
@@ -2227,7 +2227,7 @@
                             "id": "gID1",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_gID1.py"
                         }
                     ],
@@ -2257,7 +2257,7 @@
                             "id": "PR-AZR-0001",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/template-workspace-configuration",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/azure-monitor/platform/template-workspace-configuration' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0001.py"
                         }
                     ],
@@ -2291,7 +2291,7 @@
                             "id": "PR-AZR-0003",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0003.py"
                         }
                     ],
@@ -2325,7 +2325,7 @@
                             "id": "PR-AZR-0005",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries/webhooks",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries/webhooks' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0005.py"
                         }
                     ],
@@ -2354,7 +2354,7 @@
                             "id": "PR-AZR-0006",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/2020-04-01/managedclusters",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/2020-04-01/managedclusters' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0006.py"
                         }
                     ],
@@ -2383,7 +2383,7 @@
                             "id": "PR-AZR-0011",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/rest/api/application-gateway/applicationgateways/get , https://resources.azure.com/subscriptions/db3667b7-cef9-4523-8e45-e2d9ed4518ab/resourceGroups/hardikResourceGroup/providers/Microsoft.Network/applicationGateways/hardikApplicationGateway",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/rest/api/application-gateway/applicationgateways/get' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0011.py"
                         }
                     ],
@@ -2412,7 +2412,7 @@
                             "id": "PR-AZR-0013",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-06-01/storageaccounts/blobservices/containers",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-06-01/storageaccounts/blobservices/containers' target='_blank'>here</a> ",
                             "remediationFunction": "PR_AZR_0013.py"
                         }
                     ],
@@ -2441,7 +2441,7 @@
                             "id": "PR-AZR-0017",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-05-01-preview/diagnosticsettings",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-05-01-preview/diagnosticsettings' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0017.py"
                         }
                     ],
@@ -2470,7 +2470,7 @@
                             "id": "PR-AZR-0018",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/secrets",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/secrets' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0018.py"
                         }
                     ],
@@ -2499,7 +2499,7 @@
                             "id": "PR-AZR-0019",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-05-01-preview/diagnosticsettings",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-05-01-preview/diagnosticsettings' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0019.py"
                         }
                     ],
@@ -2528,7 +2528,7 @@
                             "id": "PR-AZR-0052",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/2016-09-01/locks",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/2016-09-01/locks' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0052.py"
                         }
                     ],
@@ -2557,7 +2557,7 @@
                             "id": "PR-AZR-0053",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0053.py"
                         }
                     ],
@@ -2591,7 +2591,7 @@
                             "id": "PR-AZR-0054",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0054.py"
                         }
                     ],
@@ -2625,7 +2625,7 @@
                             "id": "PR-AZR-0055",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0055.py"
                         }
                     ],
@@ -2658,7 +2658,7 @@
                             "id": "PR-AZR-0056",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0056.py"
                         }
                     ],
@@ -2687,7 +2687,7 @@
                             "id": "PR-AZR-0057",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0057.py"
                         }
                     ],
@@ -2716,7 +2716,7 @@
                             "id": "PR-AZR-0058",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/vulnerabilityassessments' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0058.py"
                         }
                     ],
@@ -2745,7 +2745,7 @@
                             "id": "PR-AZR-0059",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/auditingsettings",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/auditingsettings' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0059.py"
                         }
                     ],
@@ -2774,7 +2774,7 @@
                             "id": "PR-AZR-0061",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/securityalertpolicies",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/securityalertpolicies' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0061.py"
                         }
                     ],
@@ -2803,7 +2803,7 @@
                             "id": "PR-AZR-0062",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/securityalertpolicies",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/securityalertpolicies' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0062.py"
                         }
                     ],
@@ -2832,7 +2832,7 @@
                             "id": "PR-AZR-0063",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-05-01-preview/diagnosticsettings",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-05-01-preview/diagnosticsettings' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0063.py"
                         }
                     ],
@@ -2861,7 +2861,7 @@
                             "id": "PR-AZR-0064",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines/extensions",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines/extensions' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0064.py"
                         }
                     ],
@@ -2890,7 +2890,7 @@
                             "id": "PR-AZR-0066",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/subnets",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/subnets' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0066.py"
                         }
                     ],
@@ -2919,7 +2919,7 @@
                             "id": "PR-AZR-0067",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/subnets",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/subnets' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0067.py"
                         }
                     ],
@@ -2948,7 +2948,7 @@
                             "id": "PR-AZR-0069",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-05-01-preview/diagnosticsettings",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-05-01-preview/diagnosticsettings' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0069.py"
                         }
                     ],
@@ -2977,7 +2977,7 @@
                             "id": "PR-AZR-0070",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-05-01-preview/diagnosticsettings",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-05-01-preview/diagnosticsettings' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0070.py"
                         }
                     ],
@@ -3006,7 +3006,7 @@
                             "id": "PR-AZR-0071",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-05-01-preview/diagnosticsettings",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-05-01-preview/diagnosticsettings' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0071.py"
                         }
                     ],
@@ -3035,7 +3035,7 @@
                             "id": "PR-AZR-0072",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-05-01-preview/diagnosticsettings",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-05-01-preview/diagnosticsettings' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0072.py"
                         }
                     ],
@@ -3064,7 +3064,7 @@
                             "id": "PR-AZR-0073",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-05-01-preview/diagnosticsettings",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-05-01-preview/diagnosticsettings' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0073.py"
                         }
                     ],
@@ -3093,7 +3093,7 @@
                             "id": "PR-AZR-0074",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-06-01/storageaccounts/blobservices/containers",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-06-01/storageaccounts/blobservices/containers' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0074.py"
                         }
                     ],
@@ -3122,7 +3122,7 @@
                             "id": "PR-AZR-0082",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2015-05-01-preview/servers/firewallrules",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2015-05-01-preview/servers/firewallrules' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0082.py"
                         }
                     ],
@@ -3155,7 +3155,7 @@
                             "id": "PR-AZR-0084",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/databases/transparentdataencryption",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2014-04-01/servers/databases/transparentdataencryption' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0084.py"
                         }
                     ],
@@ -3189,7 +3189,7 @@
                             "id": "PR-AZR-0085",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2019-06-01-preview/servers/administrators",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2019-06-01-preview/servers/administrators' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0085.py"
                         }
                     ],
@@ -3221,7 +3221,7 @@
                             "id": "PR-AZR-0087",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.security/securitycontacts' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0087.py"
                         }
                     ],
@@ -3255,7 +3255,7 @@
                             "id": "PR-AZR-0088",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0088.py"
                         }
                     ],
@@ -3289,7 +3289,7 @@
                             "id": "PR-AZR-0090",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-04-01/activitylogalerts",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.insights/2017-04-01/activitylogalerts' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0090.py"
                         }
                     ],
@@ -3323,7 +3323,7 @@
                             "id": "gID2",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_gID2.py"
                         }
                     ],
@@ -3353,7 +3353,7 @@
                             "id": "PR-AZR-0091",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.security/pricings",
+                            "remediationDescription": "Make sure you are following the Arm api format presented https://docs.microsoft.com/en-us/azure/templates/microsoft.security/pricings",
                             "remediationFunction": "PR_AZR_0091.py"
                         }
                     ],
@@ -3383,7 +3383,7 @@
                             "id": "PR-AZR-0096",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0096.py"
                         }
                     ],
@@ -3415,7 +3415,7 @@
                             "id": "PR-AZR-0097",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2018-06-01-preview/servers/databases/securityalertpolicies' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0097.py"
                         }
                     ],
@@ -3448,7 +3448,7 @@
                             "id": "PR-AZR-0098",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.network/vpngateways",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/vpngateways' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0098.py"
                         }
                     ],
@@ -3480,7 +3480,7 @@
                             "id": "gID3",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_gID3.py"
                         }
                     ],
@@ -3513,7 +3513,7 @@
                             "id": "gID5",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_gID5.py"
                         }
                     ],
@@ -3542,7 +3542,7 @@
                             "id": "gID7",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_gID7.py"
                         }
                     ],
@@ -3571,7 +3571,7 @@
                             "id": "PR-AZR-0004",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Make sure you are following the Arm api format presented at this URL: https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0",
+                            "remediationDescription": "Make sure you are following the Arm api format presented <a href='https://docs.microsoft.com/en-us/rest/api/resources/policyassignments/list#code-try-0' target='_blank'>here</a>",
                             "remediationFunction": "PR_AZR_0004.py"
                         }
                     ],
