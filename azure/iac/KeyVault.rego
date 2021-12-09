@@ -446,10 +446,10 @@ keyvault_service_endpoint_metadata := {
 default kv_private_endpoint = null
 
 azure_attribute_absence["kv_private_endpoint"] {
-    count([c | lower(input.resources[_].type) == "microsoft.keyvault/vaults"; c := 1]) != count([c | lower(input.resources[_].type) == "microsoft.network/privateendpoints"; c := 1])
+    count([c | lower(input.resources[_].type) == "microsoft.network/privateendpoints"; c := 1]) == 0 
 }
 
-azure_issue["kv_private_endpoint"] {
+no_azure_issue["kv_private_endpoint"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/privateendpoints"
     privateLinkServiceConnection := resource.properties.privateLinkServiceConnections[_]
@@ -468,13 +468,13 @@ source_path[{"kv_private_endpoint":metadata}] {
 
 kv_private_endpoint {
 	lower(input.resources[_].type) == "microsoft.keyvault/vaults"
-    azure_issue["kv_private_endpoint"]
+    no_azure_issue["kv_private_endpoint"]
     not azure_attribute_absence["kv_private_endpoint"]
 }
 
 kv_private_endpoint = false {
 	lower(input.resources[_].type) == "microsoft.keyvault/vaults"
-    not azure_issue["kv_private_endpoint"]
+    not no_azure_issue["kv_private_endpoint"]
 }
 
 kv_private_endpoint = false {
@@ -484,7 +484,7 @@ kv_private_endpoint = false {
 
 kv_private_endpoint_err = "Azure Storage Account does not configure with private endpoints" {
 	lower(input.resources[_].type) == "microsoft.keyvault/vaults"
-    not azure_issue["kv_private_endpoint"]
+    not no_azure_issue["kv_private_endpoint"]
 } else = "Azure Private endpoints resoruce is missing" {
 	lower(input.resources[_].type) == "microsoft.keyvault/vaults"
     azure_attribute_absence["kv_private_endpoint"]
