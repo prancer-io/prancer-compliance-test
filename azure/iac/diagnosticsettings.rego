@@ -9,7 +9,7 @@ package rule
 default log_keyvault = null
 
 azure_attribute_absence ["log_keyvault"] {
-    count([c | lower(input.resources[_].type) == "microsoft.keyvault/vaults"; c := 1]) != count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1])
+    count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1]) == 0
 }
 
 azure_attribute_absence["log_keyvault"] {
@@ -46,6 +46,7 @@ azure_issue["log_keyvault"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[_]
+    lower(log.category) == "auditevent"
     log.enabled != true
 }
 
@@ -53,6 +54,7 @@ source_path[{"log_keyvault":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[j]
+    lower(log.category) == "auditevent"
     log.enabled != true
     metadata:= {
         "resource_path": [["resources",i,"properties","logs",j,"enabled"]]
@@ -101,7 +103,7 @@ log_keyvault_metadata := {
 default log_lbs = null
 
 azure_attribute_absence ["log_lbs"] {
-    count([c | lower(input.resources[_].type) == "microsoft.network/loadbalancers"; c := 1]) != count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1])
+    count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1]) == 0
 }
 
 azure_attribute_absence["log_lbs"] {
@@ -138,6 +140,7 @@ azure_issue["log_lbs"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[_]
+    lower(log.category) == "auditevent"
     log.enabled != true
 }
 
@@ -145,6 +148,7 @@ source_path[{"log_lbs":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[j]
+    lower(log.category) == "auditevent"
     log.enabled != true
     metadata:= {
         "resource_path": [["resources",i,"properties","logs",j,"enabled"]]
@@ -192,7 +196,7 @@ log_lbs_metadata := {
 default log_storage_retention = null
 
 azure_attribute_absence["log_storage_retention"] {
-    count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1]) != count([c | lower(input.resources[_].type) == "microsoft.storage/storageaccounts"; c := 1])
+    count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1]) == 0
 }
 
 azure_attribute_absence["log_storage_retention"] {
@@ -265,6 +269,7 @@ azure_issue["log_storage_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[_]
+    lower(log.category) == "auditevent"
     log.enabled != true
 }
 
@@ -272,6 +277,7 @@ source_path[{"log_storage_retention":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[j]
+    lower(log.category) == "auditevent"
     log.enabled != true
     metadata:= {
         "resource_path": [["resources",i,"properties","logs",j,"enabled"]]
@@ -353,7 +359,7 @@ log_storage_retention_metadata := {
 default log_blob = null
 
 azure_attribute_absence ["log_blob"] {
-    count([c | lower(input.resources[_].type) == "microsoft.storage/storageaccounts/blobservices"; c := 1]) != count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1])
+    count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1]) == 0
 }
 
 azure_attribute_absence["log_blob"] {
@@ -390,6 +396,7 @@ azure_issue["log_blob"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[_]
+    lower(log.category) == "auditevent"
     log.enabled != true
 }
 
@@ -397,6 +404,7 @@ source_path[{"log_blob":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[j]
+    lower(log.category) == "auditevent"
     log.enabled != true
     metadata:= {
         "resource_path": [["resources",i,"properties","logs",j,"enabled"]]
@@ -445,7 +453,7 @@ log_blob_metadata := {
 default log_queue = null
 
 azure_attribute_absence ["log_queue"] {
-    count([c | lower(input.resources[_].type) == "microsoft.storage/storageaccounts/queueservices"; c := 1]) != count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1])
+    count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1]) == 0
 }
 
 azure_attribute_absence["log_queue"] {
@@ -482,6 +490,7 @@ azure_issue["log_queue"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[_]
+    lower(log.category) == "auditevent"
     log.enabled != true
 }
 
@@ -489,6 +498,7 @@ source_path[{"log_queue":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[j]
+    lower(log.category) == "auditevent"
     log.enabled != true
     metadata:= {
         "resource_path": [["resources",i,"properties","logs",j,"enabled"]]
@@ -537,7 +547,7 @@ log_queue_metadata := {
 default log_table = null
 
 azure_attribute_absence ["log_table"] {
-    count([c | lower(input.resources[_].type) == "microsoft.storage/storageaccounts/tableservices"; c := 1]) != count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1])
+    count([c | lower(input.resources[_].type) == "microsoft.insights/diagnosticsettings"; c := 1]) == 0
 }
 
 azure_attribute_absence["log_table"] {
@@ -574,6 +584,7 @@ azure_issue["log_table"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[_]
+    lower(log.category) == "auditevent"
     log.enabled != true
 }
 
@@ -581,6 +592,7 @@ source_path[{"log_table":metadata}] {
     resource := input.resources[i]
     lower(resource.type) == "microsoft.insights/diagnosticsettings"
     log := resource.properties.logs[j]
+    lower(log.category) == "auditevent"
     log.enabled != true
     metadata:= {
         "resource_path": [["resources",i,"properties","logs",j,"enabled"]]
