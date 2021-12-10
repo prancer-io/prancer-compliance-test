@@ -2413,40 +2413,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_KeyVault_3",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(KeyVault.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-TRF-KV-003",
-                            "eval": "data.rule.enablePurgeProtection",
-                            "message": "data.rule.enablePurgeProtection_err",
-                            "remediationDescription": "In 'azurerm_key_vault' resource, set 'purge_protection_enabled = true' to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault#purge_protection_enabled' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_TRF_KV_003.py"
-                        }
-                    ],
-                    "severity": "High",
-                    "title": "Key vault should have purge protection enabled",
-                    "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "Best Practice"
-                            ],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "azurerm_key_vault"
-                    ]
-                },
-                {
                     "masterTestId": "TEST_KeyVault_2",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -2481,12 +2447,46 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_KEYVAULT_KEYS",
+                    "masterTestId": "TEST_KeyVault_3",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(keyvaultkeys.rego)",
+                    "rule": "file(KeyVault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-KV-003",
+                            "eval": "data.rule.enablePurgeProtection",
+                            "message": "data.rule.enablePurgeProtection_err",
+                            "remediationDescription": "In 'azurerm_key_vault' resource, set 'purge_protection_enabled = true' to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault#purge_protection_enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_KV_003.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Key vault should have purge protection enabled",
+                    "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_key_vault"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KeyVault_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(KeyVault.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-TRF-KV-004",
@@ -2520,12 +2520,12 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_KEYVAULT_SECRETS",
+                    "masterTestId": "TEST_KeyVault_5",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(keyvaultsecrets.rego)",
+                    "rule": "file(KeyVault.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-TRF-KV-005",
@@ -2556,6 +2556,143 @@
                     ],
                     "resourceTypes": [
                         "azurerm_key_vault_secret"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KeyVault_6",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(KeyVault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-KV-006",
+                            "eval": "data.rule.kv_public_network_access_disabled",
+                            "message": "data.rule.kv_public_network_access_disabled_err",
+                            "remediationDescription": "In 'azurerm_key_vault' resource, set default_action = 'Deny' under 'network_acls' block to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault#default_action' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_KV_006.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure Key Vault should disable public network access",
+                    "description": "Disable public network access for your key vault so that it's not accessible over the public internet. This can reduce data leakage risks.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_key_vault"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KeyVault_7",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(KeyVault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-KV-007",
+                            "eval": "data.rule.kv_allow_bypass_for_azure_services",
+                            "message": "data.rule.kv_allow_bypass_for_azure_services_err",
+                            "remediationDescription": "In 'azurerm_key_vault' resource, set bypass = 'AzureServices' under 'network_acls' block to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault#bypass' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_KV_007.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure Key Vault Trusted Microsoft Services access should be enabled",
+                    "description": "When you enable the Key Vault Firewall, you will be given an option to 'Allow Trusted Microsoft Services to bypass this firewall'. The trusted services list encompasses services where Microsoft controls all of the code that runs on the service.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_key_vault"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KeyVault_8",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(KeyVault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-KV-008",
+                            "eval": "data.rule.kv_service_endpoint_enabled",
+                            "message": "data.rule.kv_service_endpoint_enabled_err",
+                            "remediationDescription": "In 'azurerm_key_vault' resource, add source subnet ids into 'virtual_network_subnet_ids' array property under 'network_acls' block to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault#virtual_network_subnet_ids' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_KV_008.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure KeyVault should allow access from virtual network service endpoint",
+                    "description": "This policy will identify if One or more Subnet ID's have access to this Key Vault. Will warn if not found.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_key_vault"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KeyVault_9",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(KeyVault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-KV-009",
+                            "eval": "data.rule.kv_usage_private_enpoint",
+                            "message": "data.rule.kv_usage_private_enpoint_err",
+                            "remediationDescription": "'azurerm_key_vault' resource need to have a link with 'azurerm_private_endpoint', set 'id' of 'azurerm_key_vault' to property 'private_connection_resource_id' under 'azurerm_private_endpoint' resources 'private_service_connection' block to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint#private_connection_resource_id' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_KV_009.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure KeyVault should use private link",
+                    "description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your Azure KeyVault, data leakage risks are reduced.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_key_vault",
+                        "azurerm_private_endpoint"
                     ]
                 },
                 {
