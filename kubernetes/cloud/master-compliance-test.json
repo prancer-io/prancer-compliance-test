@@ -551,7 +551,7 @@
                             "id": "PR-K8S-0021",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Seccomp is an alpha feature currently. By default, all alpha features are disabled. So, you would need to enable alpha features in the apiserver by passing \"--feature-gates=AllAlpha=true\" argument. Edit the /etc/kubernetes/apiserver file on the master node and set the KUBE_API_ARGS parameter to \"--feature-gates=AllAlpha=true\" KUBE_API_ARGS=\"--feature-gates=AllAlpha=true\" Based on your system, restart the kube-apiserver service. For example: systemctl restart kube-apiserver.service References: https://github.com/kubernetes/kubernetes/issues/39845 https://github.com/kubernetes/kubernetes/pull/21790 https://github.com/kubernetes/community/blob/master/contributors/design-proposals/seccomp.md#examples https://docs.docker.com/engine/security/seccomp/",
+                            "remediationDescription": "Seccomp is an alpha feature currently. By default, all alpha features are disabled. So, you would need to enable alpha features in the apiserver by passing \"--feature-gates=AllAlpha=true\" argument. Edit the /etc/kubernetes/apiserver file on the master node and set the KUBE_API_ARGS parameter to \"--feature-gates=AllAlpha=true\" KUBE_API_ARGS=\"--feature-gates=AllAlpha=true\" Based on your system, restart the kube-apiserver service. For example: systemctl restart kube-apiserver.service References: <a href='https://github.com/kubernetes/kubernetes/issues/39845' target='_blank'>here</a>, <a href='https://github.com/kubernetes/kubernetes/pull/21790' target='_blank'>here</a>, <a href='https://github.com/kubernetes/community/blob/master/contributors/design-proposals/seccomp.md#examples' target='_blank'>here</a> and <a href='https://docs.docker.com/engine/security/seccomp/' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0021.py"
                         }
                     ],
@@ -582,7 +582,7 @@
                             "id": "PR-K8S-0022",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the below parameter.--profiling=false References: https://kubernetes.io/docs/admin/kube-apiserver/ https://github.com/kubernetes/community/blob/master/contributors/devel/profiling.md",
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the below parameter.--profiling=false References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/ https://github.com/kubernetes/community/blob/master/contributors/devel/profiling.md' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0022.py"
                         }
                     ],
@@ -613,7 +613,7 @@
                             "id": "PR-K8S-0023",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "To enable containers with AppArmor, please refer to the documentation - https://kubernetes.io/docs/tutorials/clusters/apparmor/#securing-a-pod",
+                            "remediationDescription": "To enable containers with AppArmor, please refer to the documentation - <a href='https://kubernetes.io/docs/tutorials/clusters/apparmor/#securing-a-pod' target='_blank'>here</a> ",
                             "remediationFunction": "PR-K8S-0023.py"
                         }
                     ],
@@ -644,7 +644,7 @@
                             "id": "PR-K8S-0024",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Follow the Kubernetes documentation and setup the TLS connection between the /n apiserver and kubelets. Then, edit the API server pod specification file /n $apiserverconf on the master node and set the --kubelet-certificate-authority parameter to the path to the cert file for the certificate authority. --kubelet-certificate-authority= References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/kubelet-authentication-authorization/ https://kubernetes.io/docs/concepts/cluster-administration/master-node-communication/#apiserver---kubelet ",
+                            "remediationDescription": "Follow the Kubernetes documentation and setup the TLS connection between the /n apiserver and kubelets. Then, edit the API server pod specification file /n $apiserverconf on the master node and set the --kubelet-certificate-authority parameter to the path to the cert file for the certificate authority. --kubelet-certificate-authority= References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a>, <a href='https://kubernetes.io/docs/admin/kubelet-authentication-authorization/' target='_blank'>here</a> and <a href='https://kubernetes.io/docs/concepts/cluster-administration/master-node-communication/#apiserver---kubelet' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0024.py"
                         }
                     ],
@@ -675,7 +675,7 @@
                             "id": "PR-K8S-0025",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Follow the Kubernetes documentation and set up the TLS connection between the apiserver and kubelets. Then, edit API server pod specification file /n $apiserverconf on the master node and set the /n kubelet client certificate and key parameters as below. /n --kubelet-client-certificate= /n --kubelet-client-key= /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/kubelet-authentication-authorization/ https://kubernetes.io/docs/concepts/cluster-administration/master-node-communication/#apiserver---kubelet ",
+                            "remediationDescription": "Follow the Kubernetes documentation and set up the TLS connection between the apiserver and kubelets. Then, edit API server pod specification file /n $apiserverconf on the master node and set the /n kubelet client certificate and key parameters as below. /n --kubelet-client-certificate= /n --kubelet-client-key= /n References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a>, <a href='https://kubernetes.io/docs/admin/kubelet-authentication-authorization/' target='_blank'>here</a> and <a href='https://kubernetes.io/docs/concepts/cluster-administration/master-node-communication/#apiserver---kubelet' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0025.py"
                         }
                     ],
@@ -706,7 +706,7 @@
                             "id": "PR-K8S-0026",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Follow the documentation and create Pod Security Policy objects as per your environment. Then, edit the API server pod specification file $apiserverconf /n on the master node and set the --enable-admission-plugins parameter to a /n value that includes PodSecurityPolicy : /n --enable-admission-plugins=...,PodSecurityPolicy,... /n Then restart the API Server. References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/admission-controllers/#podsecuritypolicy https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies",
+                            "remediationDescription": "Follow the documentation and create Pod Security Policy objects as per your environment. Then, edit the API server pod specification file $apiserverconf /n on the master node and set the --enable-admission-plugins parameter to a /n value that includes PodSecurityPolicy : /n --enable-admission-plugins=...,PodSecurityPolicy,... /n Then restart the API Server. References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a>, <a href='https://kubernetes.io/docs/admin/admission-controllers/#podsecuritypolicy' target='_blank'>here</a> and <a href='https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0026.py"
                         }
                     ],
@@ -737,7 +737,7 @@
                             "id": "PR-K8S-0027",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the API server pod specification file $apiserverbin on the master node and set the --authorization-mode parameter to a value that includes RBAC, for example: --authorization-mode=Node,RBAC /n References: https://kubernetes.io/docs/reference/access-authn-authz/rbac/",
+                            "remediationDescription": "Edit the API server pod specification file $apiserverbin on the master node and set the --authorization-mode parameter to a value that includes RBAC, for example: --authorization-mode=Node,RBAC /n References: <a href='https://kubernetes.io/docs/reference/access-authn-authz/rbac/' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0027.py"
                         }
                     ],
@@ -768,7 +768,7 @@
                             "id": "PR-K8S-0028",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the API server pod specification file /etc/kubernetes/manifests/kube-apiserver.yaml on the master node and set the below parameter. --anonymous-auth=false /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/authentication/#anonymous-requests",
+                            "remediationDescription": "Edit the API server pod specification file /etc/kubernetes/manifests/kube-apiserver.yaml on the master node and set the below parameter. --anonymous-auth=false /n References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a> and <a href='https://kubernetes.io/docs/admin/authentication/#anonymous-requests' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0028.py"
                         }
                     ],
@@ -799,7 +799,7 @@
                             "id": "PR-K8S-0029",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the Scheduler pod specification file $schedulerconf /n file on the master node and set the below parameter. --profiling=false /n References: https://kubernetes.io/docs/admin/kube-scheduler/ https://github.com/kubernetes/community/blob/master/contributors/devel/profiling.md",
+                            "remediationDescription": "Edit the Scheduler pod specification file $schedulerconf /n file on the master node and set the below parameter. --profiling=false /n References: <a href='https://kubernetes.io/docs/admin/kube-scheduler/' target='_blank'>here</a> and <a href='https://github.com/kubernetes/community/blob/master/contributors/devel/profiling.md' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0029.py"
                         }
                     ],
@@ -861,7 +861,7 @@
                             "id": "PR-K8S-0031",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the Controller Manager pod specification file $controllermanagerconf /n on the master node and set the --terminated-pod-gc-threshold to an appropriate threshold, for example: /n --terminated-pod-gc-threshold=10 /n References: https://kubernetes.io/docs/admin/kube-controller-manager/ https://github.com/kubernetes/kubernetes/issues/28484",
+                            "remediationDescription": "Edit the Controller Manager pod specification file $controllermanagerconf /n on the master node and set the --terminated-pod-gc-threshold to an appropriate threshold, for example: /n --terminated-pod-gc-threshold=10 /n References: <a href='https://kubernetes.io/docs/admin/kube-controller-manager/' target='_blank'>here</a> and <a href='https://github.com/kubernetes/kubernetes/issues/28484' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0031.py"
                         }
                     ],
@@ -892,7 +892,7 @@
                             "id": "PR-K8S-0032",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the Controller Manager pod specification file $controllermanagerconf /n on the master node and set the below parameter. /n --profiling=false /n References: https://kubernetes.io/docs/admin/kube-controller-manager/ https://github.com/kubernetes/community/blob/master/contributors/devel/profiling.md",
+                            "remediationDescription": "Edit the Controller Manager pod specification file $controllermanagerconf /n on the master node and set the below parameter. /n --profiling=false /n References: <a href='https://kubernetes.io/docs/admin/kube-controller-manager/' target='_blank'>here</a> and <a href='https://github.com/kubernetes/community/blob/master/contributors/devel/profiling.md' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0032.py"
                         }
                     ],
@@ -923,7 +923,7 @@
                             "id": "PR-K8S-0033",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the Controller Manager pod specification file $controllermanagerconf /n on the master node to set the below parameter. /n --use-service-account-credentials=true /n References: https://kubernetes.io/docs/admin/kube-controller-manager/ https://kubernetes.io/docs/admin/service-accounts-admin/ https://github.com/kubernetes/kubernetes/blob/release-1.6/plugin/pkg/auth/authorizer/rbac/bootstrappolicy/testdata/controller-roles.yaml https://github.com/kubernetes/kubernetes/blob/release-1.6/plugin/pkg/auth/authorizer/rbac/bootstrappolicy/testdata/controller-role-bindings.yaml https://kubernetes.io/docs/admin/authorization/rbac/#controller-roles",
+                            "remediationDescription": "Edit the Controller Manager pod specification file $controllermanagerconf /n on the master node to set the below parameter. /n --use-service-account-credentials=true /n References: <a href='https://kubernetes.io/docs/admin/kube-controller-manager/' target='_blank'>here</a>, <a href='https://kubernetes.io/docs/admin/service-accounts-admin/' target='_blank'>here</a>, <a href='https://github.com/kubernetes/kubernetes/blob/release-1.6/plugin/pkg/auth/authorizer/rbac/bootstrappolicy/testdata/controller-roles.yaml' target='_blank'>here</a>, <a href='https://github.com/kubernetes/kubernetes/blob/release-1.6/plugin/pkg/auth/authorizer/rbac/bootstrappolicy/testdata/controller-role-bindings.yaml' target='_blank'>here</a> and <a href='https://kubernetes.io/docs/admin/authorization/rbac/#controller-roles' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0033.py"
                         }
                     ],
@@ -954,7 +954,7 @@
                             "id": "PR-K8S-0034",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the Controller Manager pod specification file $controllermanagerconf /n on the master node and set the --root-ca-file parameter to /n the certificate bundle file. /n --root-ca-file= /n References: https://kubernetes.io/docs/admin/kube-controller-manager/ https://github.com/kubernetes/kubernetes/issues/11000 ",
+                            "remediationDescription": "Edit the Controller Manager pod specification file $controllermanagerconf /n on the master node and set the --root-ca-file parameter to /n the certificate bundle file. /n --root-ca-file= /n References: <a href='https://kubernetes.io/docs/admin/kube-controller-manager/' target='_blank'>here</a> and <a href='https://github.com/kubernetes/kubernetes/issues/11000' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0034.py"
                         }
                     ],
@@ -1016,7 +1016,7 @@
                             "id": "PR-K8S-0036",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Pods in a cluster can communicate with each other and should be controlled using Network Policies as needed for your workload. Network policies are implemented by the network plugin, so you must be using a networking solution which supports NetworkPolicy - simply creating the resource without a controller to implement it will have no effect. Kubernetes' Network Policies make it much more difficult for attackers to move laterally within your cluster. You can also use the Kubernetes Network Policy API to create Pod-level firewall rules. These firewall rules determine which Pods and services can access one another inside your cluster. You can find an example of NetworkPolicy : https://kubernetes.io/docs/concepts/services-networking/network-policies/#the-networkpolicy-resource /nFor more information on NetworkPolicy, please refer : https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.16/#networkpolicy-v1-networking-k8s-io",
+                            "remediationDescription": "Pods in a cluster can communicate with each other and should be controlled using Network Policies as needed for your workload. Network policies are implemented by the network plugin, so you must be using a networking solution which supports NetworkPolicy - simply creating the resource without a controller to implement it will have no effect. Kubernetes' Network Policies make it much more difficult for attackers to move laterally within your cluster. You can also use the Kubernetes Network Policy API to create Pod-level firewall rules. These firewall rules determine which Pods and services can access one another inside your cluster. You can find an example of NetworkPolicy <a href='https://kubernetes.io/docs/concepts/services-networking/network-policies/#the-networkpolicy-resource' target='_blank'>here</a> <br>For more information on NetworkPolicy, please refer <a href='https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.16/#networkpolicy-v1-networking-k8s-io' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0036.py"
                         }
                     ],
@@ -1047,7 +1047,7 @@
                             "id": "PR-K8S-0041",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Follow the Kubernetes documentation and set the desired limits in a configuration file. Then, edit the API server pod specification file /n $apiserverconf and set the below parameters. /n --enable-admission-plugins=...,EventRateLimit,... /n --admission-control-config-file= /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/admission-controllers/#eventratelimit https://github.com/staebler/community/blob/9873b632f4d99b5d99c38c9b15fe2f8b93d0a746/contributors/design-proposals/admission_control_event_rate_limit.md ",
+                            "remediationDescription": "Follow the Kubernetes documentation and set the desired limits in a configuration file. Then, edit the API server pod specification file /n $apiserverconf and set the below parameters. /n --enable-admission-plugins=...,EventRateLimit,... /n --admission-control-config-file= /n References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a>, <a href='https://kubernetes.io/docs/admin/admission-controllers/#eventratelimit' target='_blank'>here</a> and <a href='https://github.com/staebler/community/blob/9873b632f4d99b5d99c38c9b15fe2f8b93d0a746/contributors/design-proposals/admission_control_event_rate_limit.md' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0041.py"
                         }
                     ],
@@ -1078,7 +1078,7 @@
                             "id": "PR-K8S-0042",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the API server pod specification file $apiserverconf /n on the master node and remove the --insecure-bind-address /n parameter. References: https://kubernetes.io/docs/admin/kube-apiserver/",
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf /n on the master node and remove the --insecure-bind-address /n parameter. References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0042.py"
                         }
                     ],
@@ -1109,7 +1109,7 @@
                             "id": "PR-K8S-0043",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and either remove the --secure-port parameter or set it to a different (non-zero) desired port. References: https://kubernetes.io/docs/admin/kube-apiserver/",
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and either remove the --secure-port parameter or set it to a different (non-zero) desired port. References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0043.py"
                         }
                     ],
@@ -1171,7 +1171,7 @@
                             "id": "PR-K8S-0045",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the --enable-admission-plugins to /n include AlwaysPullImages. /n --enable-admission-plugins=...,AlwaysPullImages,... /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/admission-controllers/#alwayspullimages",
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the --enable-admission-plugins to /n include AlwaysPullImages. /n --enable-admission-plugins=...,AlwaysPullImages,... /n References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a> and <a href='https://kubernetes.io/docs/admin/admission-controllers/#alwayspullimages' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0045.py"
                         }
                     ],
@@ -1202,7 +1202,7 @@
                             "id": "PR-K8S-0046",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the API server pod specification file $apiserverconf /n on the master node and set the --disable-admission-plugins parameter to /n ensure it does not include NamespaceLifecycle. /n --disable-admission-plugins=...,NamespaceLifecycle,... /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/admission-controllers/#namespacelifecycle",
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf /n on the master node and set the --disable-admission-plugins parameter to /n ensure it does not include NamespaceLifecycle. /n --disable-admission-plugins=...,NamespaceLifecycle,... /n References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a> and <a href='https://kubernetes.io/docs/admin/admission-controllers/#namespacelifecycle' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0046.py"
                         }
                     ],
@@ -1295,7 +1295,7 @@
                             "id": "PR-K8S-0049",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Follow the Kubernetes documentation and configure NodeRestriction plug-in on kubelets. Then, edit the API server pod specification file $apiserverconf on the master node and set the --enable-admission-plugins parameter to a value that includes NodeRestriction. /n --enable-admission-plugins=...,NodeRestriction,... /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/admission-controllers/#noderestriction https://kubernetes.io/docs/admin/authorization/node/ https://acotten.com/post/kube17-security",
+                            "remediationDescription": "Follow the Kubernetes documentation and configure NodeRestriction plug-in on kubelets. Then, edit the API server pod specification file $apiserverconf on the master node and set the --enable-admission-plugins parameter to a value that includes NodeRestriction. /n --enable-admission-plugins=...,NodeRestriction,... /n References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a>, <a href='https://kubernetes.io/docs/admin/admission-controllers/#noderestriction' target='_blank'>here</a>, <a href='https://kubernetes.io/docs/admin/authorization/node/' target='_blank'>here</a> and <a href='https://acotten.com/post/kube17-security' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0049.py"
                         }
                     ],
@@ -1326,7 +1326,7 @@
                             "id": "PR-K8S-0050",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the API server pod specification file $apiserverconf apiserver.yaml on the master node and set the below parameter. --insecure-port=0 /n References: https://kubernetes.io/docs/admin/kube-apiserver/",
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf apiserver.yaml on the master node and set the below parameter. --insecure-port=0 /n References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0050.py"
                         }
                     ],
@@ -1450,7 +1450,7 @@
                             "id": "PR-K8S-0055",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the Controller Manager pod specification file /etc/kubernetes/manifests/kube-controller-manager.yaml on the master node and ensure the correct value for the --bind-address parameter References: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/",
+                            "remediationDescription": "Edit the Controller Manager pod specification file /etc/kubernetes/manifests/kube-controller-manager.yaml on the master node and ensure the correct value for the --bind-address parameter References: <a href='https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0055.py"
                         }
                     ],
@@ -1481,7 +1481,7 @@
                             "id": "PR-K8S-0056",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the Scheduler pod specification file /etc/kubernetes/manifests/kube-scheduler.yaml on the master node and ensure the correct value for the --bind-address parameter References: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/",
+                            "remediationDescription": "Edit the Scheduler pod specification file /etc/kubernetes/manifests/kube-scheduler.yaml on the master node and ensure the correct value for the --bind-address parameter References: <a href='https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/' target='_blank'>here</a> ",
                             "remediationFunction": "PR-K8S-0056.py"
                         }
                     ],
@@ -1512,7 +1512,7 @@
                             "id": "PR-K8S-0057",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Please refer to the Kubernetes documentation on how to configure the hostpath: https://kubernetes.io/docs/concepts/storage/volumes/#hostpath",
+                            "remediationDescription": "Please refer to the Kubernetes documentation on how to configure the hostpath: <a href='https://kubernetes.io/docs/concepts/storage/volumes/#hostpath' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0057.py"
                         }
                     ],
@@ -1543,7 +1543,7 @@
                             "id": "PR-K8S-0058",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the --authorization-mode parameter to values other than AlwaysAllow. One such example could be as below. --authorization-mode=RBAC References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/authorization/",
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the --authorization-mode parameter to values other than AlwaysAllow. One such example could be as below. --authorization-mode=RBAC References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a> and <a href='https://kubernetes.io/docs/admin/authorization/' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0058.py"
                         }
                     ],
@@ -1605,7 +1605,7 @@
                             "id": "PR-K8S-0060",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the --audit-log-maxage parameter to 30 or as an appropriate number of days: --audit-log-maxage=30 References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/concepts/cluster-administration/audit/ https://github.com/kubernetes/features/issues/22",
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the --audit-log-maxage parameter to 30 or as an appropriate number of days: --audit-log-maxage=30 References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a>, <a href='https://kubernetes.io/docs/concepts/cluster-administration/audit/' target='_blank'>here</a> and <a href='https://github.com/kubernetes/features/issues/22' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0060.py"
                         }
                     ],
@@ -1636,7 +1636,7 @@
                             "id": "PR-K8S-0061",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the --audit-log-maxbackup parameter to 10 or to an appropriate value. --audit-log-maxbackup=10 References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/concepts/cluster-administration/audit/ https://github.com/kubernetes/features/issues/22",
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the --audit-log-maxbackup parameter to 10 or to an appropriate value. --audit-log-maxbackup=10 References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a>, <a href='https://kubernetes.io/docs/concepts/cluster-administration/audit/' target='_blank'>here</a> and <a href='https://github.com/kubernetes/features/issues/22' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0061.py"
                         }
                     ],
@@ -1667,7 +1667,7 @@
                             "id": "PR-K8S-0062",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the --audit-log-maxsize parameter to an appropriate size in MB. For example, to set it as 100 MB: --audit-log-maxsize=100 References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/concepts/cluster-administration/audit/ https://github.com/kubernetes/features/issues/22",
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the --audit-log-maxsize parameter to an appropriate size in MB. For example, to set it as 100 MB: --audit-log-maxsize=100 References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a>, <a href='https://kubernetes.io/docs/concepts/cluster-administration/audit/' target='_blank'>here</a> and <a href='https://github.com/kubernetes/features/issues/22' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0062.py"
                         }
                     ],
@@ -1729,7 +1729,7 @@
                             "id": "PR-K8S-0067",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the Controller Manager pod specification file $controllermanagerconf controller-manager.yaml on the master node and set the --feature-gates parameter to include RotateKubeletServerCertificate=true. --feature-gates=RotateKubeletServerCertificate=true References: https://kubernetes.io/docs/admin/kubelet-tls-bootstrapping/#approval-controller https://github.com/kubernetes/features/issues/267 https://github.com/kubernetes/kubernetes/pull/45059 https://kubernetes.io/docs/admin/kube-controller-manager/",
+                            "remediationDescription": "Edit the Controller Manager pod specification file $controllermanagerconf controller-manager.yaml on the master node and set the --feature-gates parameter to include RotateKubeletServerCertificate=true. --feature-gates=RotateKubeletServerCertificate=true References: <a href='https://kubernetes.io/docs/admin/kubelet-tls-bootstrapping/#approval-controller' target='_blank'>here</a>, <a href='https://github.com/kubernetes/features/issues/267' target='_blank'>here</a>, <a href='https://github.com/kubernetes/kubernetes/pull/45059' target='_blank'>here</a> and <a href='https://kubernetes.io/docs/admin/kube-controller-manager/' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0067.py"
                         }
                     ],
@@ -1760,7 +1760,7 @@
                             "id": "PR-K8S-0068",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Follow the Kubernetes documentation and set up the TLS connection between the apiserver and etcd. Then, edit the API server pod specification file $apiserverconf on the master node and set the etcd certificate authority file parameter. --etcd-cafile= /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://coreos.com/etcd/docs/latest/op-guide/security.html ",
+                            "remediationDescription": "Follow the Kubernetes documentation and set up the TLS connection between the apiserver and etcd. Then, edit the API server pod specification file $apiserverconf on the master node and set the etcd certificate authority file parameter. --etcd-cafile= /n References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a> and <a href='https://coreos.com/etcd/docs/latest/op-guide/security.html' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0068.py"
                         }
                     ],
@@ -1791,7 +1791,7 @@
                             "id": "PR-K8S-0069",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and remove the --kubelet-https parameter. References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/kubelet-authentication-authorization/",
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and remove the --kubelet-https parameter. References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a> and <a href='https://kubernetes.io/docs/admin/kubelet-authentication-authorization/' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0069.py"
                         }
                     ],
@@ -1822,7 +1822,7 @@
                             "id": "PR-K8S-0070",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the Controller Manager pod specification file $controllermanagerconf on the master node and set the --service-account-private- key-file parameter to the private key file for service accounts. --service-account-private-key-file= References: https://kubernetes.io/docs/admin/kube-controller-manager/ ",
+                            "remediationDescription": "Edit the Controller Manager pod specification file $controllermanagerconf on the master node and set the --service-account-private- key-file parameter to the private key file for service accounts. --service-account-private-key-file= References: <a href='https://kubernetes.io/docs/admin/kube-controller-manager/' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0070.py"
                         }
                     ],
@@ -1853,7 +1853,7 @@
                             "id": "PR-K8S-0071",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Follow the Kubernetes documentation and set up the TLS connection between the apiserver and etcd. Then, edit the API server pod specification file $apiserverconf on the master node and set the etcd certificate and key file parameters. /n --etcd-certfile= /n --etcd-keyfile= /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://coreos.com/etcd/docs/latest/op-guide/security.html ",
+                            "remediationDescription": "Follow the Kubernetes documentation and set up the TLS connection between the apiserver and etcd. Then, edit the API server pod specification file $apiserverconf on the master node and set the etcd certificate and key file parameters. /n --etcd-certfile= /n --etcd-keyfile= /n References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a> and <a href='https://coreos.com/etcd/docs/latest/op-guide/security.html' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0071.py"
                         }
                     ],
@@ -1884,7 +1884,7 @@
                             "id": "PR-K8S-0072",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the etcd pod specification file $etcdconf on the master node and set the below parameter. --client-cert-auth=\"true\" /n References: https://coreos.com/etcd/docs/latest/op-guide/security.html https://kubernetes.io/docs/admin/etcd/ https://coreos.com/etcd/docs/latest/op-guide/configuration.html#client-cert-auth",
+                            "remediationDescription": "Edit the etcd pod specification file $etcdconf on the master node and set the below parameter. --client-cert-auth=\"true\" /n References: <a href='https://coreos.com/etcd/docs/latest/op-guide/security.html' target='_blank'>here</a>, <a href='https://kubernetes.io/docs/admin/etcd/' target='_blank'>here</a> and <a href='https://coreos.com/etcd/docs/latest/op-guide/configuration.html#client-cert-auth' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0072.py"
                         }
                     ],
@@ -1915,7 +1915,7 @@
                             "id": "PR-K8S-0073",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the etcd pod specification file $etcdconf on the master node and either remove the --auto-tls parameter or set it to false. --auto-tls=false /n References: https://coreos.com/etcd/docs/latest/op-guide/security.html https://kubernetes.io/docs/admin/etcd/ https://coreos.com/etcd/docs/latest/op-guide/configuration.html#auto-tls",
+                            "remediationDescription": "Edit the etcd pod specification file $etcdconf on the master node and either remove the --auto-tls parameter or set it to false. --auto-tls=false /n References: <a href='https://coreos.com/etcd/docs/latest/op-guide/security.html' target='_blank'>here</a>, <a href='https://kubernetes.io/docs/admin/etcd/' target='_blank'>here</a> and <a href='https://coreos.com/etcd/docs/latest/op-guide/configuration.html#auto-tls' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0073.py"
                         }
                     ],
@@ -1977,7 +1977,7 @@
                             "id": "PR-K8S-0075",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Follow the Kubernetes documentation and set up the TLS connection on the apiserver. Then, edit the API server pod specification file $apiserverconf on the master node and set the TLS certificate and private key file parameters. /n --tls-cert-file= /n --tls-private-key-file= /n References: https://kubernetes.io/docs/admin/kube-apiserver/ http://rootsquash.com/2016/05/10/securing-the-kubernetes-api/ https://github.com/kelseyhightower/docker-kubernetes-tls-guide ",
+                            "remediationDescription": "Follow the Kubernetes documentation and set up the TLS connection on the apiserver. Then, edit the API server pod specification file $apiserverconf on the master node and set the TLS certificate and private key file parameters. /n --tls-cert-file= /n --tls-private-key-file= /n References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a>, <a href='http://rootsquash.com/2016/05/10/securing-the-kubernetes-api/' target='_blank'>here</a> and <a href='https://github.com/kelseyhightower/docker-kubernetes-tls-guide' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0075.py"
                         }
                     ],
@@ -2008,7 +2008,7 @@
                             "id": "PR-K8S-0076",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Follow the Kubernetes documentation and set up the TLS connection on the apiserver. Then, edit the API server pod specification file $apiserverconf on the master node and set the client certificate authority file. /n --client-ca-file= /n References: https://kubernetes.io/docs/admin/kube-apiserver/ http://rootsquash.com/2016/05/10/securing-the-kubernetes-api/ https://github.com/kelseyhightower/docker-kubernetes-tls-guide ",
+                            "remediationDescription": "Follow the Kubernetes documentation and set up the TLS connection on the apiserver. Then, edit the API server pod specification file $apiserverconf on the master node and set the client certificate authority file. /n --client-ca-file= /n References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a>, <a href='http://rootsquash.com/2016/05/10/securing-the-kubernetes-api/' target='_blank'>here</a> and <a href='https://github.com/kelseyhightower/docker-kubernetes-tls-guide' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0076.py"
                         }
                     ],
@@ -2039,7 +2039,7 @@
                             "id": "PR-K8S-0078",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the below parameter. --service-account-lookup=true /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://github.com/kubernetes/kubernetes/issues/24167 https://en.wikipedia.org/wiki/Time_of_check_to_time_of_use",
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the below parameter. --service-account-lookup=true /n References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a>, <a href='https://github.com/kubernetes/kubernetes/issues/24167' target='_blank'>here</a> and <a href='https://en.wikipedia.org/wiki/Time_of_check_to_time_of_use' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0078.py"
                         }
                     ],
@@ -2070,7 +2070,7 @@
                             "id": "PR-K8S-0079",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Follow the documentation and create ServiceAccount objects as per your environment. Then, edit the API server pod specification file $apiserverconf on the master node and set the --enable-admission-plugins parameter to a value that includes ServiceAccount. /n --enable-admission-plugins=...,ServiceAccount,... /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/admission-controllers/#serviceaccount https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/",
+                            "remediationDescription": "Follow the documentation and create ServiceAccount objects as per your environment. Then, edit the API server pod specification file $apiserverconf on the master node and set the --enable-admission-plugins parameter to a value that includes ServiceAccount. /n --enable-admission-plugins=...,ServiceAccount,... /n References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a>, <a href='https://kubernetes.io/docs/admin/admission-controllers/#serviceaccount' target='_blank'>here</a> and <a href='https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0079.py"
                         }
                     ],
@@ -2101,7 +2101,7 @@
                             "id": "PR-K8S-0083",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the --service-account-key-file parameter to the public key file for service accounts: --service-account-key-file= /n References: https://kubernetes.io/docs/admin/kube-apiserver/ https://github.com/kubernetes/kubernetes/issues/24167 ",
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf on the master node and set the --service-account-key-file parameter to the public key file for service accounts: --service-account-key-file= /n References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a> and <a href='https://github.com/kubernetes/kubernetes/issues/24167' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0083.py"
                         }
                     ],
@@ -2132,7 +2132,7 @@
                             "id": "PR-K8S-0084",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Follow the Kubernetes documentation and apply security contexts to your pods. For a suggested list of security contexts, you may refer to the CIS Security Benchmark for Docker Containers. Please refer : https://kubernetes.io/docs/concepts/policy/security-context/",
+                            "remediationDescription": "Follow the Kubernetes documentation and apply security contexts to your pods. For a suggested list of security contexts, you may refer to the CIS Security Benchmark for Docker Containers. Please refer : <a href='https://kubernetes.io/docs/concepts/policy/security-context/' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0084.py"
                         }
                     ],
