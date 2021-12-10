@@ -8,36 +8,31 @@ package rule
 default log_keyvault = null
 
 azure_attribute_absence ["log_keyvault"] {
-    count([c | input.resources[_].type == "azurerm_key_vault"; c := 1]) != count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1])
+    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1]) == 0
 }
 
-#azure_attribute_absence["log_keyvault"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "azurerm_key_vault"
-#    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
-#    	   c := 1]) == 0
-#}
+# azure_issue["log_keyvault"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_monitor_diagnostic_setting"
+#     log := resource.properties.log[_]
+#     lower(log.category) == "auditevent"
+#     log.enabled == false
+# }
 
-azure_attribute_absence["log_keyvault"] {
+azure_issue ["log_keyvault"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-    not resource.properties.log
-}
-
-# providers/Microsoft.KeyVault
-#azure_issue["log_keyvault"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-#    count(resource.properties.target_resource_id) == 0
-    #not contains(lower(resource.properties.target_resource_id), "microsoft.keyvault/vaults") 
-#}
-
-azure_issue["log_keyvault"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-    log := resource.properties.log[_]
-    lower(log.category) == "auditevent"
-    log.enabled == false
+    lower(resource.type) == "azurerm_key_vault"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, resource.properties.compiletime_identity);
+              # as per Farshid: for now we should not check this enabled or category property as log is an array and possiblility that one can be enabled and other can be disabled. which will mislead us. 
+              #r.properties.log[_].enabled == true;
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, concat(".", [resource.type, resource.name]));
+              #r.properties.log[_].enabled == true;
+              c := 1]) == 0
 }
 
 log_keyvault = false {
@@ -57,7 +52,7 @@ log_keyvault = false {
 }
 
 
-log_keyvault_err = "azurerm_key_vault's azurerm_monitor_diagnostic_setting property block 'log' need to be exist. its currently missing from the resource." {
+log_keyvault_err = "azurerm_key_vault's azurerm_monitor_diagnostic_setting and its property block 'log' need to be exist. its currently missing from the resource." {
     lower(input.resources[_].type) == "azurerm_key_vault"
     azure_attribute_absence["log_keyvault"]
 } else = "Azure Key Vault audit logging is currently not enabled" {
