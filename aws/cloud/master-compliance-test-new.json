@@ -1,0 +1,594 @@
+{
+    "contentVersion": "1.0.0.0",
+    "fileType": "mastertest",
+    "masterSnapshot": "mastersnapshot_aws_cloud",
+    "notification": [],
+    "testSet": [
+        {
+            "masterTestName": "test3",
+            "version": "0.1",
+            "cases": [
+                {
+                    "masterTestId": "TEST_KMS_1",
+                    "type": "rego",
+                    "rule": "file(kms.rego)",
+                    "masterSnapshotId": [
+                        "TEST_KMS"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-KMS-001",
+                            "eval": "data.rule.kms_key_rotation",
+                            "message": "data.rule.kms_key_rotation_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enablekeyrotation' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_KMS_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS Customer Master Key (CMK) rotation is not enabled",
+                    "description": "This policy identifies Customer Master Keys (CMKs) that are not enabled with key rotation. AWS KMS (Key Management Service) allows customers to create master keys to encrypt sensitive data in different services. As a security best practice, it is important to rotate the keys periodically so that if the keys are compromised, the data in the underlying service is still secure with the new keys.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "kms"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KMS_2",
+                    "type": "rego",
+                    "rule": "file(kms.rego)",
+                    "masterSnapshotId": [
+                        "TEST_KMS"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-KMS-002",
+                            "eval": "data.rule.kms_key_state",
+                            "message": "data.rule.kms_key_state_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enablekeyrotation' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_KMS_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS KMS Customer Managed Key not in use",
+                    "description": "This policy identifies KMS Customer Managed Keys(CMKs) which are not usable. When you create a CMK, it is enabled by default. If you disable a CMK or schedule it for deletion makes it unusable, it cannot be used to encrypt or decrypt data and AWS KMS does not rotate the backing keys until you re-enable it.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "kms"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_CT_1",
+                    "type": "rego",
+                    "rule": "file(cloudtrail.rego)",
+                    "masterSnapshotId": [
+                        "TEST_CT"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CT-001",
+                            "eval": "data.rule.ct_regions",
+                            "message": "data.rule.ct_regions_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enablekeyrotation' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CT_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS CloudTrail is not enabled in all regions",
+                    "description": "Checks to ensure that CloudTrail is enabled across all regions. AWS CloudTrail is a service that enables governance, compliance, operational risk auditing of the AWS account. It is a compliance and security best practice to turn on CloudTrail across different regions to get a complete audit trail of activities across various services.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudtrail"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_CT_2",
+                    "type": "rego",
+                    "rule": "file(cloudtrail.rego)",
+                    "masterSnapshotId": [
+                        "TEST_CT"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CT-002",
+                            "eval": "data.rule.ct_log_validation",
+                            "message": "data.rule.ct_log_validation_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enablekeyrotation' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CT_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS CloudTrail log validation is not enabled in all regions",
+                    "description": "This policy identifies AWS CloudTrails in which log validation is not enabled in all regions. CloudTrail log file validation creates a digitally signed digest file containing a hash of each log that CloudTrail writes to S3. These digest files can be used to determine whether a log file was modified after CloudTrail delivered the log. It is recommended that file validation be enabled on all CloudTrails.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudtrail"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_CT_3",
+                    "type": "rego",
+                    "rule": "file(cloudtrail.rego)",
+                    "masterSnapshotId": [
+                        "TEST_CT"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CT-003",
+                            "eval": "data.rule.ct_master_key",
+                            "message": "data.rule.ct_master_key_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enablekeyrotation' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CT_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS CloudTrail logs are not encrypted using Customer Master Keys (CMKs)",
+                    "description": "Checks to ensure that CloudTrail logs are encrypted. AWS CloudTrail is a service that enables governance, compliance, operational risk auditing of the AWS account. It is a compliance and security best practice to encrypt the CloudTrail data since it may contain sensitive information.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudtrail"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_CT_4",
+                    "type": "rego",
+                    "rule": "file(cloudtrail.rego)",
+                    "masterSnapshotId": [
+                        "TEST_CT"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-CT-004",
+                            "eval": "data.rule.ct_cloudwatch",
+                            "message": "data.rule.ct_cloudwatch_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enablekeyrotation' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_CT_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "CloudTrail trail is not integrated with CloudWatch Log",
+                    "description": "Enabling the CloudTrail trail logs integrated with CloudWatch Logs will enable the real-time as well as historic activity logging. This will further effective monitoring and alarm capability.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudtrail"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_VPC_1",
+                    "type": "rego",
+                    "rule": "file(vpc.rego)",
+                    "masterSnapshotId": [
+                        "TEST_EC2"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-VPC-001",
+                            "eval": "data.rule.vpc_subnet_autoip",
+                            "message": "data.rule.vpc_subnet_autoip_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enablekeyrotation' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_VPC_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS VPC subnets should not allow automatic public IP assignment",
+                    "description": "This policy identifies VPC subnets which allow automatic public IP assignment. VPC subnet is a part of the VPC having its own rules for traffic. Assigning the Public IP to the subnet automatically (on launch) can accidentally expose the instances within this subnet to internet and should be edited to 'No' post creation of the Subnet.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "subnet"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_VPC_2",
+                    "type": "rego",
+                    "rule": "file(vpc.rego)",
+                    "masterSnapshotId": [
+                        "TEST_EC2"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-VPC-002",
+                            "eval": "data.rule.eip_instance_link",
+                            "message": "data.rule.eip_instance_link_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enablekeyrotation' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_VPC_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure all EIP addresses allocated to a VPC are attached related EC2 instances",
+                    "description": "Ensure that a managed Config rule for AWS Elastic IPs (EIPs) attached to EC2 instances launched inside a VPC is created. Config service tracks changes within your AWS resources configuration and saves the recorded data for security and compliance audits",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "elastic IP"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_VPC_3",
+                    "type": "rego",
+                    "rule": "file(vpc.rego)",
+                    "masterSnapshotId": [
+                        "TEST_EC2"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-VPC-003",
+                            "eval": "data.rule.vpc_endpoint_manual_acceptance",
+                            "message": "data.rule.vpc_endpoint_manual_acceptance_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enablekeyrotation' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_VPC_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure VPC endpoint service is configured for manual acceptance",
+                    "description": "AcceptanceRequired Indicates whether requests from service consumers to create an endpoint to your service must be accepted, we recommend you to enable this feature",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "vpc"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_API_GATEWAY_1",
+                    "type": "rego",
+                    "rule": "file(api_gateway.rego)",
+                    "masterSnapshotId": [
+                        "TEST_API_GATEWAY"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-AG-001",
+                            "eval": "data.rule.gateway_private",
+                            "message": "data.rule.gateway_private_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enablekeyrotation' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_AG_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "API Gateway should have API Endpoint type as private and not exposed to internet",
+                    "description": "Ensure that the Api endpoint type in api gateway is set to private and Is not exposed to the public internet",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "api gateway"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_API_GATEWAY_2",
+                    "type": "rego",
+                    "rule": "file(api_gateway.rego)",
+                    "masterSnapshotId": [
+                        "TEST_API_GATEWAY"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-AG-002",
+                            "eval": "data.rule.gateway_validate_parameter",
+                            "message": "data.rule.gateway_validate_parameter_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enablekeyrotation' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_AG_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS API gateway request parameter is not validated",
+                    "description": "This policy identifies the AWS API gateways for with the request parameters are not validated. It is recommended to validate the request parameters in the URI, query string, and headers of an incoming request to focus on the validation efforts specific to your application.\n",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "api gateway"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_API_GATEWAY_3",
+                    "type": "rego",
+                    "rule": "file(api_gateway.rego)",
+                    "masterSnapshotId": [
+                        "TEST_API_GATEWAY"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-AG-003",
+                            "eval": "data.rule.gateway_request_authorizer",
+                            "message": "data.rule.gateway_request_authorizer_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enablekeyrotation' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_AG_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS API gateway request authorization is not set",
+                    "description": "This policy identifies AWS API Gateways of protocol type REST for which the request authorisation is not set. The method request for API gateways takes the client input that is passed to the back end through the integration request. It is recommended to add authorization type to each of the method to add a layer of protection.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "api gateway"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_API_GATEWAY_4",
+                    "type": "rego",
+                    "rule": "file(api_gateway.rego)",
+                    "masterSnapshotId": [
+                        "TEST_API_GATEWAY"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-AG-004",
+                            "eval": "data.rule.gateway_logging_enable",
+                            "message": "data.rule.gateway_logging_enable_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enablekeyrotation' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_AG_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that API Gateway has enabled access logging",
+                    "description": "Enabling the custom access logging option in API Gateway allows delivery of custom logs to CloudWatch Logs, which can be analyzed using CloudWatch Logs Insights. Using custom domain names in Amazon API Gateway allows insights into requests sent to each custom domain name.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "api gateway"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_API_GATEWAY_5",
+                    "type": "rego",
+                    "rule": "file(api_gateway.rego)",
+                    "masterSnapshotId": [
+                        "TEST_API_GATEWAY"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-AG-005",
+                            "eval": "data.rule.gateway_tracing_enable",
+                            "message": "data.rule.gateway_tracing_enable_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enablekeyrotation' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_AG_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure API Gateway has tracing enabled",
+                    "description": "With tracing enabled X-Ray can provide an end-to-end view of an entire HTTP request. You can use this to analyze latencies in APIs and their backend services",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "api gateway"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_API_GATEWAY_6",
+                    "type": "rego",
+                    "rule": "file(api_gateway.rego)",
+                    "masterSnapshotId": [
+                        "TEST_API_GATEWAY"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-AG-006",
+                            "eval": "data.rule.gateway_method_public_access",
+                            "message": "data.rule.gateway_method_public_access_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enablekeyrotation' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_AG_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure API gateway methods are not publicly accessible",
+                    "description": "We recommend you configure a custom authorizer OR an API key for every method in the API Gateway.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "api gateway"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_API_GATEWAY_7",
+                    "type": "rego",
+                    "rule": "file(api_gateway.rego)",
+                    "masterSnapshotId": [
+                        "TEST_API_GATEWAY"
+                    ],
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-AG-007",
+                            "eval": "data.rule.api_gw_cert",
+                            "message": "data.rule.api_gw_cert_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-key.html#cfn-kms-key-enablekeyrotation' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_AG_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS API Gateway endpoints without client certificate authentication",
+                    "description": "API Gateway can generate an SSL certificate and use its public key in the backend to verify that HTTP requests to your backend system are from API Gateway. This allows your HTTP backend to control and accept only requests originating from Amazon API Gateway, even if the backend is publicly accessible._x005F_x000D_ _x005F_x000D_ Note: Some backend servers may not support SSL client authentication as API Gateway does and could return an SSL certificate error. For a list of incompatible backend servers, see Known Issues. https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-known-issues.html",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "api gateway"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EKS_1",
+                    "masterSnapshotId": [
+                        "TEST_EKS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EKS-001",
+                            "eval": "data.rule.eks_multiple_sg",
+                            "message": "data.rule.eks_multiple_sg_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EKS_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EKS cluster control plane assigned multiple security groups",
+                    "description": "Amazon EKS strongly recommends that you use a dedicated security group for each cluster control plane (one per cluster). This policy checks the number of security groups assigned to your cluster's control plane and alerts if there are more than one.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "eks"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EKS_2",
+                    "masterSnapshotId": [
+                        "TEST_EKS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EKS-002",
+                            "eval": "data.rule.eks_version",
+                            "message": "data.rule.eks_version_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html#cfn-eks-cluster-version' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EKS_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EKS unsupported Master node version.",
+                    "description": "Ensure your EKS Master node version is supported. This policy checks your EKS master node version and generates an alert if the version running is unsupported.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "eks"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EKS_3",
+                    "masterSnapshotId": [
+                        "TEST_EKS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EKS-003",
+                            "eval": "data.rule.eks_encryption_resources",
+                            "message": "data.rule.eks_encryption_resources_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-eks-cluster-encryptionconfig.html#cfn-eks-cluster-encryptionconfig-resources' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EKS_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure AWS EKS cluster has secrets encryption enabled",
+                    "description": "Secrets in Kubernetes enables managing sensitive information such as passwords and API keys using Kubernetes-native APIs. When creating a secret resource the Kubernetes API server stores it in etcd in a base64 encoded form.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "eks"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EKS_4",
+                    "masterSnapshotId": [
+                        "TEST_EKS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(eks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EKS-004",
+                            "eval": "data.rule.eks_encryption_kms",
+                            "message": "data.rule.eks_encryption_kms_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-eks-cluster-encryptionconfig.html#cfn-eks-cluster-encryptionconfig-provider' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EKS_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Kubernetes secrets are encrypted using CMKs managed in AWS KMS",
+                    "description": "Application-layer Secrets Encryption provides an additional layer of security for sensitive data, such as user defined Secrets and Secrets required for the operation of the cluster, such as service account keys, which are all stored in etcd. Using this functionality, you can use a key, that you manage in AWS KMS, to encrypt data at the application layer",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "eks"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
