@@ -576,3 +576,53 @@ aks_kub_dashboard_disabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster"
 }
+
+#
+# PR-AZR-TRF-AKS-010
+#
+
+default aks_local_account_disabled = null
+#Defaults to false
+azure_attribute_absence["aks_local_account_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    not resource.properties.local_account_disabled
+}
+
+azure_issue["aks_local_account_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_kubernetes_cluster"
+    resource.properties.local_account_disabled != true
+}
+
+aks_local_account_disabled {
+    lower(input.resources[_].type) == "azurerm_kubernetes_cluster"
+    not azure_attribute_absence["aks_local_account_disabled"]
+    not azure_issue["aks_local_account_disabled"]
+}
+
+aks_local_account_disabled = false {
+    azure_attribute_absence["aks_local_account_disabled"]
+}
+
+aks_local_account_disabled = false {
+    azure_issue["aks_local_account_disabled"]
+}
+
+aks_local_account_disabled_err = "azurerm_kubernetes_cluster property 'local_account_disabled' is missing from the resource" {
+    azure_attribute_absence["aks_local_account_disabled"]
+} else = "Azure Kubernetes Service Clusters currently dont have local authentication methods disabled" {
+    azure_issue["aks_local_account_disabled"]
+}
+
+aks_local_account_disabled_metadata := {
+    "Policy Code": "PR-AZR-TRF-AKS-010",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Kubernetes Service Clusters should have local authentication methods disabled",
+    "Policy Description": "Disabling local authentication methods improves security by ensuring that Azure Kubernetes Service Clusters should exclusively require Azure Active Directory identities for authentication.",
+    "Resource Type": "azurerm_kubernetes_cluster",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster"
+}
