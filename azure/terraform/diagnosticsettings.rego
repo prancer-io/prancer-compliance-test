@@ -25,7 +25,7 @@ azure_issue ["log_keyvault"] {
     count([c | r := input.resources[_];
               r.type == "azurerm_monitor_diagnostic_setting";
               contains(r.properties.target_resource_id, resource.properties.compiletime_identity);
-              # as per Farshid: for now we should not check this enabled or category property as log is an array and possiblility that one can be enabled and other can be disabled. which will mislead us. 
+              # as per Farshid: for now we should not check this enabled or category property as log is an array and possibility that one can be enabled and other can be disabled. which will mislead us. 
               #r.properties.log[_].enabled == true;
               c := 1]) == 0
     count([c | r := input.resources[_];

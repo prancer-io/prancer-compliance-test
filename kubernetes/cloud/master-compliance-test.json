@@ -148,7 +148,7 @@
                             "id": "PR-K8S-0008",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.privileged field is omitted or set to false.  References: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies",
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.privileged field is omitted or set to false.  References: <a href='https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0008.py"
                         }
                     ],
@@ -179,7 +179,7 @@
                             "id": "PR-K8S-0009",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.runAsUser.rule is set to either MustRunAsNonRoot or MustRunAs with the range of UIDs not including 0. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies",
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.runAsUser.rule is set to either MustRunAsNonRoot or MustRunAs with the range of UIDs not including 0. References: <a href='https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0009.py"
                         }
                     ],
@@ -210,7 +210,7 @@
                             "id": "PR-K8S-0010",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.requiredDropCapabilities is set to include either NET_RAW or ALL. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies https://www.nccgroup.trust/uk/our-research/abusing-privileged-and-unprivileged-linux-containers/",
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.requiredDropCapabilities is set to include either NET_RAW or ALL. References: <a href='https://kubernetes.io/docs/concepts/policy/pod-security-policy/#enabling-pod-security-policies' target='_blank'>here</a> and <a href='https://www.nccgroup.trust/uk/our-research/abusing-privileged-and-unprivileged-linux-containers/' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0010.py"
                         }
                     ],
@@ -241,7 +241,7 @@
                             "id": "PR-K8S-0011",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostIPC field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostIPC field is omitted or set to false. References: <a href='https://kubernetes.io/docs/concepts/policy/pod-security-policy' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0011.py"
                         }
                     ],
@@ -272,7 +272,7 @@
                             "id": "PR-K8S-0012",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostNetwork field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostNetwork field is omitted or set to false. References: <a href='https://kubernetes.io/docs/concepts/policy/pod-security-policy' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0012.py"
                         }
                     ],
@@ -303,7 +303,7 @@
                             "id": "PR-K8S-0013",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostPID field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.hostPID field is omitted or set to false. References: <a href='https://kubernetes.io/docs/concepts/policy/pod-security-policy' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0013.py"
                         }
                     ],
@@ -334,7 +334,7 @@
                             "id": "PR-K8S-0014",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.allowPrivilegeEscalation field is omitted or set to false. References: https://kubernetes.io/docs/concepts/policy/pod-security-policy",
+                            "remediationDescription": "Create a PSP as described in the Kubernetes documentation, ensuring that the .spec.allowPrivilegeEscalation field is omitted or set to false. References: <a href='https://kubernetes.io/docs/concepts/policy/pod-security-policy' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0014.py"
                         }
                     ],
@@ -396,7 +396,7 @@
                             "id": "PR-K8S-0016",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the etcd pod specification file $etcdconf on the master node and set the below parameter. --peer-client-cert-auth=true References: https://coreos.com/etcd/docs/latest/op-guide/security.html https://kubernetes.io/docs/admin/etcd/ https://coreos.com/etcd/docs/latest/op-guide/configuration.html#peer-client-cert-auth",
+                            "remediationDescription": "Edit the etcd pod specification file $etcdconf on the master node and set the below parameter. --peer-client-cert-auth=true References: <a href='https://coreos.com/etcd/docs/latest/op-guide/security.html' target='_blank'>here</a>, <a href='https://kubernetes.io/docs/admin/etcd/' target='_blank'>here</a> and <a href='https://coreos.com/etcd/docs/latest/op-guide/configuration.html#peer-client-cert-auth' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0016.py"
                         }
                     ],
@@ -427,7 +427,7 @@
                             "id": "PR-K8S-0017",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the etcd pod specification file $etcdconf on the master /n node and either remove the --peer-auto-tls parameter or set it to false. --peer-auto-tls=false References: https://coreos.com/etcd/docs/latest/op-guide/security.html https://kubernetes.io/docs/admin/etcd/ https://coreos.com/etcd/docs/latest/op-guide/configuration.html#peer-auto-tls",
+                            "remediationDescription": "Edit the etcd pod specification file $etcdconf on the master /n node and either remove the --peer-auto-tls parameter or set it to false. --peer-auto-tls=false References: <a href='https://coreos.com/etcd/docs/latest/op-guide/security.html' target='_blank'>here</a>, <a href='https://kubernetes.io/docs/admin/etcd/' target='_blank'>here</a> and <a href='https://coreos.com/etcd/docs/latest/op-guide/configuration.html#peer-auto-tls' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0017.py"
                         }
                     ],
@@ -458,7 +458,7 @@
                             "id": "PR-K8S-0018",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Use this example PodSecurityPolicy object in a file to create a policy that simply prevents the creation of privileged pods. apiVersion: policy/v1beta1 /n kind: PodSecurityPolicy /n metadata: /n name: example /n spec: /n privileged: false # Don't allow privileged pods! /n # The rest fills in some required fields. seLinux: /n rule: RunAsAny /n supplementalGroups: /n rule: RunAsAny /n runAsUser: /n rule: RunAsAny /n fsGroup: /n rule: RunAsAny /n volumes: /n - '*' /n For more on how to enable and update pod specification using Pod Security Policy, please refer : https://kubernetes.io/docs/concepts/policy/pod-security-policy/#privileged",
+                            "remediationDescription": "Use this example PodSecurityPolicy object in a file to create a policy that simply prevents the creation of privileged pods. apiVersion: policy/v1beta1 /n kind: PodSecurityPolicy /n metadata: /n name: example /n spec: /n privileged: false # Don't allow privileged pods! /n # The rest fills in some required fields. seLinux: /n rule: RunAsAny /n supplementalGroups: /n rule: RunAsAny /n runAsUser: /n rule: RunAsAny /n fsGroup: /n rule: RunAsAny /n volumes: /n - '*' /n For more on how to enable and update pod specification using Pod Security Policy, please refer : <a href='https://kubernetes.io/docs/concepts/policy/pod-security-policy/#privileged' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0018.py"
                         }
                     ],
@@ -489,7 +489,7 @@
                             "id": "PR-K8S-0019",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Edit the API server pod specification file $apiserverconf /n on the master node and set the --enable-admission-plugins parameter to a /n value that does not include AlwaysAdmit. References: https://kubernetes.io/docs/admin/kube-apiserver/  https://kubernetes.io/docs/admin/admission-controllers/#alwaysadmit",
+                            "remediationDescription": "Edit the API server pod specification file $apiserverconf /n on the master node and set the --enable-admission-plugins parameter to a /n value that does not include AlwaysAdmit. References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a> and <a href='https://kubernetes.io/docs/admin/admission-controllers/#alwaysadmit' target='_blank'>here</a>",
                             "remediationFunction": "PR-K8S-0019.py"
                         }
                     ],
@@ -520,7 +520,7 @@
                             "id": "PR-K8S-0020",
                             "eval": "data.rule.rulepass",
                             "message": "data.rule.rulepass_err",
-                            "remediationDescription": "Follow the documentation and configure alternate mechanisms for authentication. Then, /n edit the API server pod specification file $apiserverconf /n on the master node and remove the --basic-auth-file= /n parameter. References: https://kubernetes.io/docs/admin/kube-apiserver/ https://kubernetes.io/docs/admin/authentication/#static-password-file ",
+                            "remediationDescription": "Follow the documentation and configure alternate mechanisms for authentication. Then, /n edit the API server pod specification file $apiserverconf /n on the master node and remove the --basic-auth-file= /n parameter. References: <a href='https://kubernetes.io/docs/admin/kube-apiserver/' target='_blank'>here</a> and <a href='https://kubernetes.io/docs/admin/authentication/#static-password-file' target='_blank'>here</a> ",
                             "remediationFunction": "PR-K8S-0020.py"
                         }
                     ],
