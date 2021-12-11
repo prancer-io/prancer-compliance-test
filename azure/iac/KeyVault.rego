@@ -482,7 +482,7 @@ kv_private_endpoint = false {
     azure_attribute_absence["kv_private_endpoint"]
 }
 
-kv_private_endpoint_err = "Azure Storage Account does not configure with private endpoints" {
+kv_private_endpoint_err = "Azure Key Vault does not configure with private endpoints" {
 	lower(input.resources[_].type) == "microsoft.keyvault/vaults"
     not no_azure_issue["kv_private_endpoint"]
 } else = "Azure Private endpoints resoruce is missing" {
