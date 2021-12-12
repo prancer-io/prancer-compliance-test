@@ -143,8 +143,6 @@ sql_logical_server_login = false {
 sql_logical_server_login_err = "Azure SQL Server property 'login' is missing from the resource" {
     azure_attribute_absence["sql_logical_server_login"]
 } else = "Azure SQL Server login is currently set to admin or administrator on the resource. Please change the name" {
-    resource := input.resources[_]
-    lower(resource.type) == "microsoft.sql/servers/administrators"
     not no_azure_issue["sql_logical_server_login"]
 }
 
