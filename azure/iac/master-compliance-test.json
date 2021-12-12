@@ -5971,6 +5971,210 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_11",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-STR-019",
+                            "eval": "data.rule.storage_account_private_endpoint",
+                            "message": "data.rule.storage_account_private_endpoint_err",
+                            "remediationDescription": "In 'microsoft.storage/storageaccounts' resource, make sure 'microsoft.network/privateendpoints' resource exists and connects to 'Microsoft.storage/storageAccounts'.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_STR_019.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage accounts should use private link",
+                    "description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your storage account, data leakage risks are reduced. Learn more about private links at - https://aka.ms/azureprivatelinkoverview",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_12",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-STR-020",
+                            "eval": "data.rule.storage_account_require_encryption",
+                            "message": "data.rule.storage_account_require_encryption_err",
+                            "remediationDescription": "In 'microsoft.storage/storageaccounts' resource, set encryption.requireInfrastructureEncryption = 'true' to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_STR_020.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage accounts should have infrastructure encryption",
+                    "description": "Enable infrastructure encryption for higher level of assurance that the data is secure. When infrastructure encryption is enabled, data in a storage account is encrypted twice.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_13",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-STR-021",
+                            "eval": "data.rule.storage_account_scopes_require_encryption",
+                            "message": "data.rule.storage_account_scopes_require_encryption_err",
+                            "remediationDescription": "In 'microsoft.storage/storageaccounts/encryptionscopes' resource, set requireInfrastructureEncryption = 'true' to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/encryptionscopes' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_STR_021.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage account encryption scopes should use double encryption for data at rest",
+                    "description": "Enable infrastructure encryption for encryption at rest of your storage account encryption scopes for added security. Infrastructure encryption ensures that your data is encrypted twice.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_14",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-STR-022",
+                            "eval": "data.rule.storage_account_encryption_scopes_source",
+                            "message": "data.rule.storage_account_encryption_scopes_source_err",
+                            "remediationDescription": "In 'microsoft.storage/storageaccounts/encryptionscopes' resource, set source = 'microsoft.keyvault' to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/encryptionscopes' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_STR_022.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage account encryption scopes should use customer-managed keys to encrypt data at rest",
+                    "description": "Use customer-managed keys to manage the encryption at rest of your storage account encryption scopes. Customer-managed keys enable the data to be encrypted with an Azure key-vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more about storage account encryption scopes at https://aka.ms/encryption-scopes-overview.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_15",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-STR-023",
+                            "eval": "data.rule.storage_vnet_service_endpoint",
+                            "message": "data.rule.storage_vnet_service_endpoint_err",
+                            "remediationDescription": "In 'microsoft.storage/storageaccounts' resource, set networkAcls.defaultAction = 'deny' and networkAcls.virtualNetworkRules.id should to be exists to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/encryptionscopes' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_STR_023.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage Accounts should use a virtual network service endpoint",
+                    "description": "This policy audits any Storage Account not configured to use a virtual network service endpoint.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_16",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-STR-024",
+                            "eval": "data.rule.storage_account_allow_shared_key_access",
+                            "message": "data.rule.storage_account_allow_shared_key_access_err",
+                            "remediationDescription": "In 'microsoft.storage/storageaccounts' resource, set allowSharedKeyAccess = 'false' to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/encryptionscopes' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_STR_024.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage accounts should prevent shared key access",
+                    "description": "Audit requirement of Azure Active Directory (Azure AD) to authorize requests for your storage account. By default, requests can be authorized with either Azure Active Directory credentials, or by using the account access key for Shared Key authorization. Of these two types of authorization, Azure AD provides superior security and ease of use over Shared Key, and is recommended by Microsoft.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_LOG_PROFILE_1",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"
