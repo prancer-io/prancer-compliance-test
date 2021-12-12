@@ -238,6 +238,11 @@
                     "masterSnapshotId": "AZRSNP_407",
                     "type": "Microsoft.Sql/servers/encryptionprotector",
                     "collection": "Microsoft.Sql"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_409",
+                    "type": "Microsoft.Sql/servers/databases",
+                    "collection": "Microsoft.Sql"
                 }
             ]
         }
