@@ -2300,6 +2300,41 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS_7",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(diagnosticsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-MNT-008",
+                            "eval": "data.rule.storage_account_diagonstic_log_enabled",
+                            "message": "data.rule.storage_account_diagonstic_log_enabled_err",
+                            "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, make sure 'log' block exist and 'target_resource_id' contains id of target 'azurerm_storage_account' resource to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_MNT_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Storage Account audit logging should be enabled",
+                    "description": "Diagnostic settings for storage accounts used to stream resource logs to a Log Analytics workspace. this policy will identify any storage account which has this diagnostic settings missing or misconfigured.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_storage_account",
+                        "azurerm_monitor_diagnostic_setting"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_DISKS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -5464,7 +5499,7 @@
                             "id": "PR-AZR-TRF-STR-004",
                             "eval": "data.rule.storage_acl",
                             "message": "data.rule.storage_acl_err",
-                            "remediationDescription": "In 'azurerm_storage_account_network_rules' resource or azurerm_storage_account's inner block 'network_rules', set 'default_action = Deny' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules#default_action' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In 'azurerm_storage_account_network_rules' resource or 'azurerm_storage_account's inner block 'network_rules', set 'default_action = Deny' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules#default_action' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_TRF_STR_004.py"
                         }
                     ],
@@ -5783,6 +5818,145 @@
                     ],
                     "resourceTypes": [
                         "azurerm_storage_account"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_13",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-STR-019",
+                            "eval": "data.rule.storage_account_uses_privatelink",
+                            "message": "data.rule.storage_account_uses_privatelink_err",
+                            "remediationDescription": "'azurerm_storage_account' resource need to have a link with 'azurerm_private_endpoint', set 'id' of 'azurerm_storage_account' to property 'private_connection_resource_id' under 'azurerm_private_endpoint' resources 'private_service_connection' block to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint#private_connection_resource_id' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_STR_019.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure Storage account should use private link",
+                    "description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your Azure Storage account instances, data leakage risks are reduced.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_storage_account",
+                        "azurerm_private_endpoint"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_14",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-STR-020",
+                            "eval": "data.rule.storage_account_uses_double_encryption",
+                            "message": "data.rule.storage_account_uses_double_encryption_err",
+                            "remediationDescription": "'azurerm_storage_account' resource need to have a link with 'azurerm_storage_encryption_scope', set 'id' of 'azurerm_storage_account' to property 'storage_account_id' under 'azurerm_storage_encryption_scope' resource to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_encryption_scope#storage_account_id' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_STR_020.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage account encryption scopes should use double encryption for data at rest",
+                    "description": "Enable infrastructure encryption for encryption at rest of your storage account encryption scopes for added security. Infrastructure encryption ensures that your data is encrypted twice.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_storage_account",
+                        "azurerm_storage_encryption_scope"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_15",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-STR-021",
+                            "eval": "data.rule.storage_shared_access_key_disabled",
+                            "message": "data.rule.storage_shared_access_key_disabled_err",
+                            "remediationDescription": "In 'azurerm_storage_account' resource, set 'shared_access_key_enabled = false' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#shared_access_key_enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_STR_021.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage accounts should prevent shared key access",
+                    "description": "Audit requirement of Azure Active Directory (Azure AD) to authorize requests for your storage account. By default, requests can be authorized with either Azure Active Directory credentials, or by using the account access key for Shared Key authorization. Of these two types of authorization, Azure AD provides superior security and ease of use over Shared Key, and is recommended by Microsoft.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_storage_account"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_16",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-STR-022",
+                            "eval": "data.rule.storage_acl_usage_vnet",
+                            "message": "data.rule.storage_acl_usage_vnet_err",
+                            "remediationDescription": "In 'azurerm_storage_account_network_rules' resource or 'azurerm_storage_account's inner block 'network_rules', set 'default_action = Deny' and set id of target 'azurerm_subnet' into property 'virtual_network_subnet_ids' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules#virtual_network_subnet_ids' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_STR_022.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage Accounts should use a virtual network service endpoint",
+                    "description": "This policy audits any Storage Account not configured to use a virtual network service endpoint.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_storage_account",
+                        "azurerm_storage_account_network_rules"
                     ]
                 },
                 {

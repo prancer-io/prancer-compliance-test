@@ -150,7 +150,7 @@ storage_acl_metadata := {
     "Policy Description": "Turning on firewall rules for your storage account blocks incoming requests for data by default, unless the requests come from a service that is operating within an Azure Virtual Network (VNet). Requests that are blocked include those from other Azure services, from the Azure portal, from logging and metrics services, and so on.<br><br>You can grant access to Azure services that operate from within a VNet by allowing the subnet of the service instance. Enable a limited number of scenarios through the Exceptions mechanism described in the following section. To access the Azure portal, you would need to be on a machine within the trusted boundary (either IP or VNet) that you set up.",
     "Resource Type": "azurerm_storage_account",
     "Policy Help URL": "",
-    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"
 }
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/advanced_threat_protection
@@ -206,9 +206,9 @@ storage_threat_protection_metadata := {
     "Language": "Terraform",
     "Policy Title": "Advanced Threat Protection should be enabled for storage account",
     "Policy Description": "Advanced Threat Protection should be enabled for all the storage accounts",
-    "Resource Type": "azurerm_advanced_threat_protection",
+    "Resource Type": "azurerm_storage_account",
     "Policy Help URL": "",
-    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/advanced_threat_protection"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"
 }
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_encryption_scope
@@ -220,17 +220,32 @@ azure_attribute_absence["keySource"] {
     count([c | input.resources[_].type == "azurerm_storage_encryption_scope"; c := 1]) == 0
 }
 
-azure_attribute_absence["keySource"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_storage_encryption_scope"
-    not resource.properties.source
-}
+# azure_attribute_absence["keySource"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_storage_encryption_scope"
+#     not resource.properties.source
+# }
 
 azure_issue["keySource"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_storage_encryption_scope"
-    lower(resource.properties.source) != "microsoft.keyvault"
+    lower(resource.type) == "azurerm_storage_account"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_storage_encryption_scope";
+              contains(r.properties.storage_account_id, resource.properties.compiletime_identity);
+              lower(r.properties.source) == "microsoft.keyvault";
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_storage_encryption_scope";
+              contains(r.properties.storage_account_id, concat(".", [resource.type, resource.name]));
+              lower(r.properties.source) == "microsoft.keyvault";
+              c := 1]) == 0
 }
+
+# azure_issue["keySource"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_storage_encryption_scope"
+#     lower(resource.properties.source) != "microsoft.keyvault"
+# }
 
 keySource {
     lower(input.resources[_].type) == "azurerm_storage_account"
@@ -248,7 +263,7 @@ keySource = false {
     azure_attribute_absence["keySource"]
 }
 
-keySource_err = "azurerm_storage_encryption_scope property 'source' need to be exist. Its missing from the resource. Please set the value to 'Microsoft.KeyVault' after property addition." {
+keySource_err = "azurerm_storage_encryption_scope with its property 'source' need to be exist. Its missing from the resource. Please set the value to 'Microsoft.KeyVault' after property addition." {
     lower(input.resources[_].type) == "azurerm_storage_account"
     azure_attribute_absence["keySource"]
 } else = "Critical data storage in Storage Account is currently not encrypted with Customer Managed Key" {
@@ -263,9 +278,9 @@ keySource_metadata := {
     "Language": "Terraform",
     "Policy Title": "Ensure critical data storage in Storage Account is encrypted with Customer Managed Key",
     "Policy Description": "By default, data in the storage account is encrypted using Microsoft Managed Keys at rest. All Azure Storage resources are encrypted, including blobs, disks, files, queues, and tables. All object metadata is also encrypted. However, if you want to control and manage this encryption key yourself, you can specify a customer-managed key, that key is used to protect and control access to the key that encrypts your data. You can also choose to automatically update the key version used for Azure Storage encryption whenever a new version is available in the associated Key Vault.",
-    "Resource Type": "azurerm_storage_encryption_scope",
+    "Resource Type": "azurerm_storage_account",
     "Policy Help URL": "",
-    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_encryption_scope"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"
 }
 
 
@@ -655,3 +670,269 @@ storage_account_latest_tls_configured_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"
 }
+
+
+# PR-AZR-TRF-STR-019
+
+default storage_account_uses_privatelink = null
+
+azure_attribute_absence ["storage_account_uses_privatelink"] {
+    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) == 0
+}
+
+azure_issue ["storage_account_uses_privatelink"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+}
+
+storage_account_uses_privatelink = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_attribute_absence["storage_account_uses_privatelink"]
+}
+
+storage_account_uses_privatelink {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    not azure_attribute_absence["storage_account_uses_privatelink"]
+    not azure_issue["storage_account_uses_privatelink"]
+}
+
+storage_account_uses_privatelink = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_issue["storage_account_uses_privatelink"]
+}
+
+storage_account_uses_privatelink_err = "azurerm_storage_account should have link with azurerm_private_endpoint and azurerm_private_endpoint's private_service_connection either need to have 'private_connection_resource_id' or 'private_connection_resource_alias' property. Seems there is no link established or mentioed properties are missing." {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_attribute_absence["storage_account_uses_privatelink"]
+} else = "Azure Storage account currently not using private link" {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_issue["storage_account_uses_privatelink"]
+}
+
+storage_account_uses_privatelink_metadata := {
+    "Policy Code": "PR-AZR-TRF-STR-019",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Storage account should use private link",
+    "Policy Description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your Azure Storage account instances, data leakage risks are reduced.",
+    "Resource Type": "azurerm_storage_account",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"
+}
+
+
+# PR-AZR-TRF-STR-020
+
+default storage_account_uses_double_encryption = null
+
+azure_attribute_absence["storage_account_uses_double_encryption"] {
+    count([c | input.resources[_].type == "azurerm_storage_encryption_scope"; c := 1]) == 0
+}
+
+azure_issue["storage_account_uses_double_encryption"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_storage_encryption_scope";
+              contains(r.properties.storage_account_id, resource.properties.compiletime_identity);
+              r.properties.infrastructure_encryption_required == true;
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_storage_encryption_scope";
+              contains(r.properties.storage_account_id, concat(".", [resource.type, resource.name]));
+              r.properties.infrastructure_encryption_required == true;
+              c := 1]) == 0
+}
+
+storage_account_uses_double_encryption {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    not azure_attribute_absence["storage_account_uses_double_encryption"]
+    not azure_issue["storage_account_uses_double_encryption"]
+}
+
+storage_account_uses_double_encryption = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_issue["storage_account_uses_double_encryption"]
+}
+
+storage_account_uses_double_encryption = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_attribute_absence["storage_account_uses_double_encryption"]
+}
+
+storage_account_uses_double_encryption_err = "azurerm_storage_encryption_scope with its property 'infrastructure_encryption_required' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_attribute_absence["storage_account_uses_double_encryption"]
+} else = "Storage account encryption scopes currently not using double encryptiony" {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_issue["storage_account_uses_double_encryption"] 
+}
+
+storage_account_uses_double_encryption_metadata := {
+    "Policy Code": "PR-AZR-TRF-STR-020",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Storage account encryption scopes should use double encryption for data at rest",
+    "Policy Description": "Enable infrastructure encryption for encryption at rest of your storage account encryption scopes for added security. Infrastructure encryption ensures that your data is encrypted twice.",
+    "Resource Type": "azurerm_storage_account",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"
+}
+
+
+#
+# PR-AZR-TRF-STR-021
+#
+
+default storage_shared_access_key_disabled = null
+# Defaults to true if property not available
+azure_attribute_absence["storage_shared_access_key_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    not has_property(resource.properties, "shared_access_key_enabled")
+}
+
+azure_issue["storage_shared_access_key_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    resource.properties.shared_access_key_enabled != false
+}
+
+storage_shared_access_key_disabled {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    not azure_attribute_absence["storage_shared_access_key_disabled"]
+    not azure_issue["storage_shared_access_key_disabled"]
+}
+
+storage_shared_access_key_disabled = false {
+    azure_attribute_absence["storage_shared_access_key_disabled"]
+}
+
+storage_shared_access_key_disabled = false {
+    azure_issue["storage_shared_access_key_disabled"]
+}
+
+storage_shared_access_key_disabled_err = "azurerm_storage_account property 'shared_access_key_enabled' is missing from the resource" {
+    azure_attribute_absence["storage_shared_access_key_disabled"]
+} else = "Storage Accounts is currently not preventing shared key access" {
+    azure_issue["storage_shared_access_key_disabled"]
+}
+
+storage_shared_access_key_disabled_metadata := {
+    "Policy Code": "PR-AZR-TRF-STR-021",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Storage accounts should prevent shared key access",
+    "Policy Description": "Audit requirement of Azure Active Directory (Azure AD) to authorize requests for your storage account. By default, requests can be authorized with either Azure Active Directory credentials, or by using the account access key for Shared Key authorization. Of these two types of authorization, Azure AD provides superior security and ease of use over Shared Key, and is recommended by Microsoft.",
+    "Resource Type": "azurerm_storage_account",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"
+}
+
+
+#
+# PR-AZR-TRF-STR-022
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules
+
+default storage_acl_usage_vnet = null
+
+azure_attribute_absence ["storage_acl_usage_vnet"] {
+    count([c | input.resources[_].type == "azurerm_storage_account_network_rules"; c := 1]) == 0
+}
+
+azure_issue["storage_acl_usage_vnet"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_storage_account_network_rules";
+              contains(r.properties.storage_account_name, resource.properties.compiletime_identity);
+              lower(r.properties.default_action) == "deny";
+              count(r.properties.virtual_network_subnet_ids) > 0;
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_storage_account_network_rules";
+              contains(r.properties.storage_account_name, concat(".", [resource.type, resource.name]));
+              lower(r.properties.default_action) == "deny";
+              count(r.properties.virtual_network_subnet_ids) > 0;
+              c := 1]) == 0
+}
+
+azure_inner_attribute_absence["storage_acl_usage_vnet"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    not resource.properties.network_rules
+}
+
+azure_inner_issue["storage_acl_usage_vnet"] {
+    count([c | r := input.resources[_];
+              r.type == "azurerm_storage_account";
+              lower(r.properties.network_rules[_].default_action) == "deny";
+              count(r.properties.network_rules[_].virtual_network_subnet_ids) > 0;
+              c := 1]) == 0
+}
+
+storage_acl_usage_vnet {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    not azure_attribute_absence["storage_acl_usage_vnet"]
+    not azure_issue["storage_acl_usage_vnet"]
+}
+
+storage_acl_usage_vnet {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    not azure_inner_attribute_absence["storage_acl_usage_vnet"]
+    not azure_inner_issue["storage_acl_usage_vnet"]
+}
+
+storage_acl_usage_vnet = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_attribute_absence["storage_acl_usage_vnet"]
+    azure_inner_attribute_absence["storage_acl_usage_vnet"]
+}
+
+storage_acl_usage_vnet = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_issue["storage_acl_usage_vnet"]
+    azure_inner_issue["storage_acl_usage_vnet"]
+}
+
+storage_acl_usage_vnet_err = "azurerm_storage_account_network_rules property 'default_action' and 'virtual_network_subnet_ids' or azurerm_storage_account's inner block 'network_rules' with property 'default_action' and 'virtual_network_subnet_ids' need to be exist. Its missing from the resource." {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_attribute_absence["storage_acl_usage_vnet"]
+    azure_inner_attribute_absence["storage_acl_usage_vnet"]
+} else = "Storage Accounts currently not using virtual network service endpoint" {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_issue["storage_acl_usage_vnet"]
+    azure_inner_issue["storage_acl_usage_vnet"]
+}
+
+storage_acl_usage_vnet_metadata := {
+    "Policy Code": "PR-AZR-TRF-STR-022",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Storage Accounts should use a virtual network service endpoint",
+    "Policy Description": "This policy audits any Storage Account not configured to use a virtual network service endpoint.",
+    "Resource Type": "azurerm_storage_account",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules"
+}
+
