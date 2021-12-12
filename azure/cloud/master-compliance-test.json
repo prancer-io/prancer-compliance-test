@@ -1237,16 +1237,16 @@
                     "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL servers that do not have ADS enabled. As a best practice, enable ADS on mission-critical SQL servers."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_",
+                    "masterTestId": "AZURE_TEST_SQL_24",
                     "type": "rego",
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-",
-                            "eval": "data.rule.",
-                            "message": "data.rule._err",
+                            "id": "PR-AZR-SQL-024",
+                            "eval": "data.rule.db_ads_mail",
+                            "message": "data.rule.db_ads_mail_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_.py"
+                            "remediationFunction": "PR_AZR_SQL_024.py"
                         }
                     ],
                     "tags": [
@@ -1256,23 +1256,23 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        ""
+                        "AZRSNP_265"
                     ],
                     "severity": "Medium",
-                    "title": "",
-                    "description": ""
+                    "title": "Azure SQL Server advanced data security should have email alert recipient to get scan notification",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that do not have an email address configured for ADS alert notifications. As a best practice, provide one or more email addresses where you want to receive alerts for any anomalous activities detected on SQL Servers."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_",
+                    "masterTestId": "AZURE_TEST_SQL_25",
                     "type": "rego",
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-",
-                            "eval": "data.rule.",
-                            "message": "data.rule._err",
+                            "id": "PR-AZR-SQL-025",
+                            "eval": "data.rule.db_logical_ads_mail",
+                            "message": "data.rule.db_logical_ads_mail_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_.py"
+                            "remediationFunction": "PR_AZR_SQL_025.py"
                         }
                     ],
                     "tags": [
@@ -1282,23 +1282,23 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        ""
+                        "AZRSNP_409"
                     ],
                     "severity": "Medium",
-                    "title": "",
-                    "description": ""
+                    "title": "Azure SQL Server advanced data security should have email alert recipient to get scan notification",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that do not have an email address configured for ADS alert notifications. As a best practice, provide one or more email addresses where you want to receive alerts for any anomalous activities detected on SQL Servers."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_",
+                    "masterTestId": "AZURE_TEST_SQL_26",
                     "type": "rego",
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-",
-                            "eval": "data.rule.",
-                            "message": "data.rule._err",
+                            "id": "PR-AZR-SQL-026",
+                            "eval": "data.rule.db_ads_alert",
+                            "message": "data.rule.db_ads_alert_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_.py"
+                            "remediationFunction": "PR_AZR_SQL_026.py"
                         }
                     ],
                     "tags": [
@@ -1308,23 +1308,23 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        ""
+                        "AZRSNP_263"
                     ],
                     "severity": "Medium",
-                    "title": "",
-                    "description": ""
+                    "title": "Azure SQL Server advanced data security should send alerts to subscription administrators",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the administratorsâ€”service and co-administratorâ€”can receive email alerts when anomalous activities are detected on the SQL Servers."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_SQL_",
+                    "masterTestId": "AZURE_TEST_SQL_27",
                     "type": "rego",
                     "rule": "file(dbvulnerabilityassessments.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-SQL-",
-                            "eval": "data.rule.",
-                            "message": "data.rule._err",
+                            "id": "PR-AZR-SQL-027",
+                            "eval": "data.rule.db_logical_ads_alert",
+                            "message": "data.rule.db_logical_ads_alert_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_.py"
+                            "remediationFunction": "PR_AZR_SQL_027.py"
                         }
                     ],
                     "tags": [
@@ -1334,11 +1334,11 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        ""
+                        "AZRSNP_409"
                     ],
                     "severity": "Medium",
-                    "title": "",
-                    "description": ""
+                    "title": "Azure SQL Server advanced data security should send alerts to subscription administrators",
+                    "description": "Advanced data security (ADS) provides a set of advanced SQL security capabilities, including vulnerability assessment, threat detection, and data discovery and classification.<br><br>This policy identifies Azure SQL Servers that are not enabled with ADS. As a best practice, enable ADS so that the administratorsâ€”service and co-administratorâ€”can receive email alerts when anomalous activities are detected on the SQL Servers."
                 },
                 {
                     "masterTestId": "AZURE_TEST_SQL_30",
