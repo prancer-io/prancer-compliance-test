@@ -5804,6 +5804,74 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_15",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-STR-023",
+                            "eval": "data.rule.storage_vnet_service_endpoint",
+                            "message": "data.rule.storage_vnet_service_endpoint_err",
+                            "remediationDescription": "In 'microsoft.storage/storageaccounts' resource, set networkAcls.defaultAction = 'deny' and networkAcls.virtualNetworkRules.id should to be exists to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/encryptionscopes' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_STR_023.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage Accounts should use a virtual network service endpoint",
+                    "description": "This policy audits any Storage Account not configured to use a virtual network service endpoint.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_16",
+                    "masterSnapshotId": [
+                        "ARM_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARM-STR-024",
+                            "eval": "data.rule.storage_account_allow_shared_key_access",
+                            "message": "data.rule.storage_account_allow_shared_key_access_err",
+                            "remediationDescription": "In 'microsoft.storage/storageaccounts' resource, set allowSharedKeyAccess = 'false' to fix the issue.<br>Please Visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/encryptionscopes' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_ARM_STR_024.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage accounts should prevent shared key access",
+                    "description": "Audit requirement of Azure Active Directory (Azure AD) to authorize requests for your storage account. By default, requests can be authorized with either Azure Active Directory credentials, or by using the account access key for Shared Key authorization. Of these two types of authorization, Azure AD provides superior security and ease of use over Shared Key, and is recommended by Microsoft.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "arm"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "microsoft.storage/storageaccounts"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_LOG_PROFILE_1",
                     "masterSnapshotId": [
                         "ARM_TEMPLATE_SNAPSHOT"

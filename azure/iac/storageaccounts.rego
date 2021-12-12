@@ -1,5 +1,9 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts
 
 #
@@ -924,7 +928,7 @@ storage_account_scopes_require_encryption_metadata := {
     "Type": "IaC",  
     "Product": "AZR",
     "Language": "ARM template",
-    "Policy Title": "Storage account encryption scopes should use double encryption for data at rest",
+    "Policy Title": "Storage account encryption scopes should have infrastructure encryption",
     "Policy Description": "Enable infrastructure encryption for encryption at rest of your storage account encryption scopes for added security. Infrastructure encryption ensures that your data is encrypted twice.",
     "Resource Type": "microsoft.storage/storageaccounts/encryptionscopes",
     "Policy Help URL": "",
@@ -1005,69 +1009,172 @@ storage_account_encryption_scopes_source_metadata := {
 # PR-AZR-ARM-STR-023
 #
 
-# default storage_account_allow_shared_key_access = null
+default storage_vnet_service_endpoint = null
 
-# azure_attribute_absence["storage_account_allow_shared_key_access"] {
-#     resource := input.resources[_]
-#     lower(resource.type) == "microsoft.storage/storageaccounts"
-#     not resource.properties.allowSharedKeyAccess
-# }
+azure_attribute_absence["storage_vnet_service_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.networkAcls.defaultAction
+}
 
-# source_path[{"storage_account_allow_shared_key_access":metadata}] {
-#     resource := input.resources[i]
-#     lower(resource.type) == "microsoft.storage/storageaccounts"
-#     not resource.properties.allowSharedKeyAccess
-#     metadata:= {
-#         "resource_path": [["resources",i,"properties","allowSharedKeyAccess"]]
-#     }
-# }
+source_path[{"storage_vnet_service_endpoint":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.networkAcls.defaultAction
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkAcls","defaultAction"]]
+    }
+}
 
+azure_attribute_absence["storage_vnet_service_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.networkAcls.virtualNetworkRules
+}
 
-# azure_issue["storage_account_allow_shared_key_access"] {
-#     resource := input.resources[_]
-#     lower(resource.type) == "microsoft.storage/storageaccounts"
-#     resource.properties.allowSharedKeyAccess != false
-# }
+source_path[{"storage_vnet_service_endpoint":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.networkAcls.virtualNetworkRules
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkAcls","virtualNetworkRules"]]
+    }
+}
 
+azure_issue["storage_vnet_service_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    lower(resource.properties.networkAcls.defaultAction) != "deny"
+}
 
-# source_path[{"storage_account_allow_shared_key_access":metadata}] {
-#     resource := input.resources[i]
-#     lower(resource.type) == "microsoft.storage/storageaccounts"
-#     resource.properties.allowSharedKeyAccess != false
-#     metadata:= {
-#         "resource_path": [["resources",i,"properties","allowSharedKeyAccess"]]
-#     }
-# }
-
-# storage_account_allow_shared_key_access {
-#     lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
-#     not azure_issue["storage_account_allow_shared_key_access"]
-#     not azure_attribute_absence["storage_account_allow_shared_key_access"]
-# }
-
-# storage_account_allow_shared_key_access = false {
-#     azure_issue["storage_account_allow_shared_key_access"]
-# }
-
-# storage_account_allow_shared_key_access = false {
-#     azure_attribute_absence["storage_account_allow_shared_key_access"]
-# }
-
-# storage_account_allow_shared_key_access_err = "Storage accounts currently use shared key access" {
-#     azure_issue["storage_account_allow_shared_key_access"]
-# } else = "microsoft.storage/storageaccounts property 'allowSharedKeyAccess' need to be exist. Its missing from the resource. Please set the value to 'false' after property addition." {
-#     azure_attribute_absence["storage_account_allow_shared_key_access"]
-# }
+source_path[{"storage_vnet_service_endpoint":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    lower(resource.properties.networkAcls.defaultAction) != "deny"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkAcls","defaultAction"]]
+    }
+}
 
 
-# storage_account_allow_shared_key_access_metadata := {
-#     "Policy Code": "PR-AZR-ARM-STR-023",
-#     "Type": "IaC",
-#     "Product": "AZR",
-#     "Language": "ARM template",
-#     "Policy Title": "Storage accounts should prevent shared key access",
-#     "Policy Description": "Audit requirement of Azure Active Directory (Azure AD) to authorize requests for your storage account. By default, requests can be authorized with either Azure Active Directory credentials, or by using the account access key for Shared Key authorization. Of these two types of authorization, Azure AD provides superior security and ease of use over Shared Key, and is recommended by Microsoft.",
-#     "Resource Type": "microsoft.storage/storageaccounts",
-#     "Policy Help URL": "",
-#     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
-# }
+azure_issue["storage_vnet_service_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    virtualNetworkRule := resource.properties.networkAcls.virtualNetworkRules[_]
+    count(virtualNetworkRule.id) == 0
+}
+
+source_path[{"storage_vnet_service_endpoint":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    virtualNetworkRule := resource.properties.networkAcls.virtualNetworkRules[j]
+    count(virtualNetworkRule.id) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkAcls","virtualNetworkRules",j,"id"]]
+    }
+}
+
+storage_vnet_service_endpoint {
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    not azure_attribute_absence["storage_vnet_service_endpoint"]
+    not azure_issue["storage_vnet_service_endpoint"]
+}
+
+storage_vnet_service_endpoint = false {
+    azure_issue["storage_vnet_service_endpoint"]
+}
+
+storage_vnet_service_endpoint = false {
+    azure_attribute_absence["storage_vnet_service_endpoint"]
+}
+
+storage_vnet_service_endpoint_err = "Storage Accounts firewall rule is currently not enabled" {
+    azure_issue["storage_vnet_service_endpoint"]
+} else = "Storage Account attribute networkAcls.defaultAction or networkAcls.virtualNetworkRules.id is missing from the resource" {
+    azure_attribute_absence["storage_vnet_service_endpoint"]
+}
+
+storage_vnet_service_endpoint_metadata := {
+    "Policy Code": "PR-AZR-ARM-STR-023",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Storage Accounts should use a virtual network service endpoint",
+    "Policy Description": "This policy audits any Storage Account not configured to use a virtual network service endpoint.",
+    "Resource Type": "microsoft.storage/storageaccounts",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
+}
+
+
+#
+# PR-AZR-ARM-STR-024
+#
+
+
+default storage_account_allow_shared_key_access = null
+
+azure_attribute_absence["storage_account_allow_shared_key_access"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not has_property(resource.properties,"allowSharedKeyAccess")
+}
+
+source_path[{"storage_account_allow_shared_key_access":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not has_property(resource.properties,"allowSharedKeyAccess")
+    metadata:= {
+        "resource_path": [["resources",i,"properties","allowSharedKeyAccess"]]
+    }
+}
+
+
+azure_issue["storage_account_allow_shared_key_access"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    resource.properties.allowSharedKeyAccess != false
+}
+
+
+source_path[{"storage_account_allow_shared_key_access":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    resource.properties.allowSharedKeyAccess != false
+    metadata:= {
+        "resource_path": [["resources",i,"properties","allowSharedKeyAccess"]]
+    }
+}
+
+storage_account_allow_shared_key_access {
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    not azure_issue["storage_account_allow_shared_key_access"]
+    not azure_attribute_absence["storage_account_allow_shared_key_access"]
+}
+
+storage_account_allow_shared_key_access = false {
+    azure_issue["storage_account_allow_shared_key_access"]
+}
+
+storage_account_allow_shared_key_access = false {
+    azure_attribute_absence["storage_account_allow_shared_key_access"]
+}
+
+storage_account_allow_shared_key_access_err = "Storage accounts currently use shared key access" {
+    azure_issue["storage_account_allow_shared_key_access"]
+} else = "microsoft.storage/storageaccounts property 'allowSharedKeyAccess' need to be exist. Its missing from the resource. Please set the value to 'false' after property addition." {
+    azure_attribute_absence["storage_account_allow_shared_key_access"]
+}
+
+
+storage_account_allow_shared_key_access_metadata := {
+    "Policy Code": "PR-AZR-ARM-STR-023",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Storage accounts should prevent shared key access",
+    "Policy Description": "Audit requirement of Azure Active Directory (Azure AD) to authorize requests for your storage account. By default, requests can be authorized with either Azure Active Directory credentials, or by using the account access key for Shared Key authorization. Of these two types of authorization, Azure AD provides superior security and ease of use over Shared Key, and is recommended by Microsoft.",
+    "Resource Type": "microsoft.storage/storageaccounts",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
+}
