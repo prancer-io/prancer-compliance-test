@@ -5899,11 +5899,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-STR-021",
+                            "id": "PR-AZR-TRF-STR-024",
                             "eval": "data.rule.storage_shared_access_key_disabled",
                             "message": "data.rule.storage_shared_access_key_disabled_err",
                             "remediationDescription": "In 'azurerm_storage_account' resource, set 'shared_access_key_enabled = false' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#shared_access_key_enabled' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_TRF_STR_021.py"
+                            "remediationFunction": "PR_AZR_TRF_STR_024.py"
                         }
                     ],
                     "severity": "High",
@@ -5933,11 +5933,11 @@
                     "rule": "file(storageaccounts.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-TRF-STR-022",
+                            "id": "PR-AZR-TRF-STR-023",
                             "eval": "data.rule.storage_acl_usage_vnet",
                             "message": "data.rule.storage_acl_usage_vnet_err",
                             "remediationDescription": "In 'azurerm_storage_account_network_rules' resource or 'azurerm_storage_account's inner block 'network_rules', set 'default_action = Deny' and set id of target 'azurerm_subnet' into property 'virtual_network_subnet_ids' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules#virtual_network_subnet_ids' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_TRF_STR_022.py"
+                            "remediationFunction": "PR_AZR_TRF_STR_023.py"
                         }
                     ],
                     "severity": "High",

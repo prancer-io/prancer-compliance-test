@@ -799,7 +799,7 @@ storage_account_uses_double_encryption_metadata := {
 
 
 #
-# PR-AZR-TRF-STR-021
+# PR-AZR-TRF-STR-024
 #
 
 default storage_shared_access_key_disabled = null
@@ -837,7 +837,7 @@ storage_shared_access_key_disabled_err = "azurerm_storage_account property 'shar
 }
 
 storage_shared_access_key_disabled_metadata := {
-    "Policy Code": "PR-AZR-TRF-STR-021",
+    "Policy Code": "PR-AZR-TRF-STR-024",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
@@ -850,7 +850,7 @@ storage_shared_access_key_disabled_metadata := {
 
 
 #
-# PR-AZR-TRF-STR-022
+# PR-AZR-TRF-STR-023
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules
 
 default storage_acl_usage_vnet = null
@@ -925,7 +925,7 @@ storage_acl_usage_vnet_err = "azurerm_storage_account_network_rules property 'de
 }
 
 storage_acl_usage_vnet_metadata := {
-    "Policy Code": "PR-AZR-TRF-STR-022",
+    "Policy Code": "PR-AZR-TRF-STR-023",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "Terraform",
