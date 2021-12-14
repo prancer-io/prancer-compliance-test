@@ -2521,6 +2521,217 @@
                     "description": "Disable the Kubernetes dashboard on Azure Kubernetes Service"
                 },
                 {
+                    "masterTestId": "AZURE_TEST_AGW_1",
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-AGW-001",
+                            "eval": "data.rule.gw_tls",
+                            "message": "data.rule.gw_tls_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_AGW_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_221"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Application Gateway should not allow TLSv1.1 or lower",
+                    "description": "Transport Layer Security (TLS), previously known as Secure Sockets Layer (SSL), is the standard security technology for establishing an encrypted link between a web server and a browser. This link ensures that all data passed between the web server and browsers remain private and encrypted. Application gateway supports both TLS termination at the gateway as well as end to end TLS encryption. The minimum allowed TLS version should be 1.2"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_AGW_2",
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-AGW-002",
+                            "eval": "data.rule.gw_waf",
+                            "message": "data.rule.gw_waf_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_AGW_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_221"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Application Gateway should have the Web application firewall (WAF) enabled",
+                    "description": "Azure Web Application Firewall (WAF) on Azure Application Gateway provides centralized protection of your web applications from common exploits and vulnerabilities. Web applications are increasingly targeted by malicious attacks that exploit commonly known vulnerabilities. SQL injection and cross-site scripting are among the most common attacks."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_AGW_3",
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-AGW-003",
+                            "eval": "data.rule.protocol",
+                            "message": "data.rule.protocol_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_AGW_003.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_221"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Application Gateway is using Https protocol",
+                    "description": "Application Gateway allows to set network protocols Http and Https. It is highly recommended to use Https protocol for secure connections."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_AGW_4",
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-AGW-004",
+                            "eval": "data.rule.frontendPublicIPConfigurationsDisabled",
+                            "message": "data.rule.frontendPublicIPConfigurationsDisabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_AGW_004.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_221"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Application Gateway frontendIPConfigurations does not have public ip configured",
+                    "description": "Application Gateway allows to set public or private ip in frontendIPConfigurations. It is highly recommended to only configure private ip in frontendIPConfigurations."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_AGW_5",
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-AGW-005",
+                            "eval": "data.rule.backend_https_protocol_enabled",
+                            "message": "data.rule.backend_https_protocol_enabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_AGW_005.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_221"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Application Gateway Backend is using Https protocol",
+                    "description": "Application Gateway allows to set backend network protocols Http and Https. It is highly recommended to use Https protocol for secure connections."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_AGW_6",
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-AGW-006",
+                            "eval": "data.rule.secret_certificate_is_in_keyvalut",
+                            "message": "data.rule.secret_certificate_is_in_keyvalut_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_AGW_006.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_221"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Application Gateway secret certificates stores in keyvault",
+                    "description": "This policy will identify application gateways which dont have ssl certificates stored in keyvalut and alert"
+                },
+                {
                     "masterTestId": "AZURE_TEST_216",
                     "type": "rego",
                     "rule": "file(PR_AZR_0007.rego)",
