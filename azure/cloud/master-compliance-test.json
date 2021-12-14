@@ -911,6 +911,543 @@
                     "description": "This policy will identify the Azure web service which dont have latest version of Java and give alert"
                 },
                 {
+                    "masterTestId": "AZURE_TEST_SQL_12",
+                    "type": "rego",
+                    "rule": "file(dbforMariaDB.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-012",
+                            "eval": "data.rule.maria_ingress_from_any_ip_disabled",
+                            "message": "data.rule.maria_ingress_from_any_ip_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_012.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_408"
+                    ],
+                    "severity": "High",
+                    "title": "MariaDB should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
+                    "description": "This policy will identify MariaDB firewall rule that are currently allowing ingress from all Azure-internal IP addresses"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_13",
+                    "type": "rego",
+                    "rule": "file(dbforMariaDB.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-013",
+                            "eval": "data.rule.dbmaria_ingress_from_any_ip_disabled",
+                            "message": "data.rule.dbmaria_ingress_from_any_ip_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_013.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_409"
+                    ],
+                    "severity": "High",
+                    "title": "MariaDB should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
+                    "description": "This policy will identify MariaDB firewall rule that are currently allowing ingress from all Azure-internal IP addresses"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_14",
+                    "type": "rego",
+                    "rule": "file(dbforMySQL_firewallrules.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-014",
+                            "eval": "data.rule.mysql_ingress_from_any_ip_disabled",
+                            "message": "data.rule.mysql_ingress_from_any_ip_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_014.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_410"
+                    ],
+                    "severity": "High",
+                    "title": "MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
+                    "description": "This policy will identify MySQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_15",
+                    "type": "rego",
+                    "rule": "file(dbforMySQL_firewallrules.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-015",
+                            "eval": "data.rule.my_logical_sql_ingress_from_any_ip_disabled",
+                            "message": "data.rule.my_logical_sql_ingress_from_any_ip_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_015.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_411"
+                    ],
+                    "severity": "High",
+                    "title": "MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
+                    "description": "This policy will identify MySQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_16",
+                    "type": "rego",
+                    "rule": "file(dbforMySQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-016",
+                            "eval": "data.rule.ssl_enforcement",
+                            "message": "data.rule.ssl_enforcement_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_016.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_411"
+                    ],
+                    "severity": "High",
+                    "title": "Ensure ssl enforcement is enabled on MySQL server Database Server.",
+                    "description": "Enable SSL connection on MySQL Servers databases. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_60",
+                    "type": "rego",
+                    "rule": "file(dbforMySQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-060",
+                            "eval": "data.rule.mysql_public_access_disabled",
+                            "message": "data.rule.mysql_public_access_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_060.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_411"
+                    ],
+                    "severity": "High",
+                    "title": "Ensure MySQL servers don't have public network access enabled",
+                    "description": "Always use Private Endpoint for Azure MySQL Database Server"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_61",
+                    "type": "rego",
+                    "rule": "file(dbforMySQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-061",
+                            "eval": "data.rule.mysql_server_latest_tls_configured",
+                            "message": "data.rule.mysql_server_latest_tls_configured_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_061.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_411"
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Azure MySQL Server has latest version of tls configured",
+                    "description": "This policy will identify the Azure MySQL Server which dont have latest version of tls configured and give alert"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_56",
+                    "type": "rego",
+                    "rule": "file(dbforMariaDB.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-056",
+                            "eval": "data.rule.mairadb_ssl_enforcement_enabled",
+                            "message": "data.rule.mairadb_ssl_enforcement_enabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_056.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_409"
+                    ],
+                    "severity": "High",
+                    "title": "Ensure ssl enforcement is enabled on MariaDB Server.",
+                    "description": "Enable SSL connection on MariaDB Servers. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_57",
+                    "type": "rego",
+                    "rule": "file(dbforMariaDB.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-057",
+                            "eval": "data.rule.mairadb_public_access_disabled",
+                            "message": "data.rule.mairadb_public_access_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_057.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_409"
+                    ],
+                    "severity": "High",
+                    "title": "Ensure MariaDB servers don't have public network access enabled",
+                    "description": "Always use Private Endpoint for MariaDB Server"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_58",
+                    "type": "rego",
+                    "rule": "file(dbforMariaDB.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-058",
+                            "eval": "data.rule.mariadb_geo_redundant_backup_enabled",
+                            "message": "data.rule.mariadb_geo_redundant_backup_enabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_058.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_409"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Geo-redundant backup is enabled on MariaDB server.",
+                    "description": "Azure Database for MariaDB provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_",
+                    "type": "rego",
+                    "rule": "file(.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-",
+                            "eval": "data.rule.",
+                            "message": "data.rule._err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        ""
+                    ],
+                    "severity": "Medium",
+                    "title": "",
+                    "description": ""
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_",
+                    "type": "rego",
+                    "rule": "file(.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-",
+                            "eval": "data.rule.",
+                            "message": "data.rule._err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        ""
+                    ],
+                    "severity": "Medium",
+                    "title": "",
+                    "description": ""
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_",
+                    "type": "rego",
+                    "rule": "file(.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-",
+                            "eval": "data.rule.",
+                            "message": "data.rule._err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        ""
+                    ],
+                    "severity": "Medium",
+                    "title": "",
+                    "description": ""
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_",
+                    "type": "rego",
+                    "rule": "file(.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-",
+                            "eval": "data.rule.",
+                            "message": "data.rule._err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        ""
+                    ],
+                    "severity": "Medium",
+                    "title": "",
+                    "description": ""
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_",
+                    "type": "rego",
+                    "rule": "file(.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-",
+                            "eval": "data.rule.",
+                            "message": "data.rule._err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        ""
+                    ],
+                    "severity": "Medium",
+                    "title": "",
+                    "description": ""
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_",
+                    "type": "rego",
+                    "rule": "file(.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-",
+                            "eval": "data.rule.",
+                            "message": "data.rule._err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        ""
+                    ],
+                    "severity": "Medium",
+                    "title": "",
+                    "description": ""
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_",
+                    "type": "rego",
+                    "rule": "file(.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-",
+                            "eval": "data.rule.",
+                            "message": "data.rule._err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        ""
+                    ],
+                    "severity": "Medium",
+                    "title": "",
+                    "description": ""
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_",
+                    "type": "rego",
+                    "rule": "file(.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-",
+                            "eval": "data.rule.",
+                            "message": "data.rule._err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        ""
+                    ],
+                    "severity": "Medium",
+                    "title": "",
+                    "description": ""
+                },
+                {
                     "masterTestId": "AZURE_TEST_SQL_30",
                     "type": "rego",
                     "rule": "file(sql_alert_policy.rego)",
