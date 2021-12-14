@@ -1168,7 +1168,7 @@ storage_account_allow_shared_key_access_err = "Storage accounts currently use sh
 
 
 storage_account_allow_shared_key_access_metadata := {
-    "Policy Code": "PR-AZR-ARM-STR-023",
+    "Policy Code": "PR-AZR-ARM-STR-024",
     "Type": "IaC",
     "Product": "AZR",
     "Language": "ARM template",
