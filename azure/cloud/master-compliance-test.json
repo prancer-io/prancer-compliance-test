@@ -2228,6 +2228,299 @@
                     "description": "This policy will identify the Azure SQL Server which dont have latest version of tls configured and give alert"
                 },
                 {
+                    "masterTestId": "AZURE_TEST_AKS_1",
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-AKS-001",
+                            "eval": "data.rule.aks_cni_net",
+                            "message": "data.rule.aks_cni_net_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_AKS_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_219"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure CNI networking should be enabled in Azure AKS cluster",
+                    "description": "Azure CNI provides the following features over kubenet networking:<br><br>- Every pod in the cluster is assigned an IP address in the virtual network. The pods can directly communicate with other pods in the cluster, and other nodes in the virtual network.<br>- Pods in a subnet that have service endpoints enabled can securely connect to Azure services, such as Azure Storage and SQL DB.<br>- You can create user-defined routes (UDR) to route traffic from pods to a Network Virtual Appliance.<br>- Support for Network Policies securing communication between pods.<br><br>This policy checks your AKS cluster for the Azure CNI network plugin and generates an alert if not found."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_AKS_2",
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-AKS-002",
+                            "eval": "data.rule.aks_http_routing",
+                            "message": "data.rule.aks_http_routing_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_AKS_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_219"
+                    ],
+                    "severity": "Low",
+                    "title": "Azure AKS cluster HTTP application routing should be disabled",
+                    "description": "The HTTP application routing add-on is designed to let you quickly create an ingress controller and access your applications. This add-on is not currently designed for use in a production environment and is not recommended for production use. For production-ready ingress deployments that include multiple replicas and TLS support, see Create an HTTPS ingress controller."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_AKS_3",
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-AKS-003",
+                            "eval": "data.rule.aks_monitoring",
+                            "message": "data.rule.aks_monitoring_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_AKS_003.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_219"
+                    ],
+                    "severity": "Low",
+                    "title": "Azure AKS cluster monitoring not enabled",
+                    "description": "Azure Monitor for containers gives you performance visibility by collecting memory and processor metrics from controllers, nodes, and containers that are available in Kubernetes through the Metrics API. Container logs are also collected. After you enable monitoring from Kubernetes clusters, metrics and logs are automatically collected for you through a containerized version of the Log Analytics agent for Linux. Metrics are written to the metrics store and log data is written to the logs store associated with your Log Analytics workspace."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_AKS_4",
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-AKS-004",
+                            "eval": "data.rule.aks_nodes",
+                            "message": "data.rule.aks_nodes_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_AKS_004.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_219"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure AKS cluster pool profile count should contain 3 nodes or more",
+                    "description": "Ensure your AKS cluster pool profile count contains 3 or more nodes. This is recommended for a more resilient cluster. (Clusters smaller than 3 may experience downtime during upgrades.)<br><br>This policy checks the size of your cluster pool profiles and alerts if there are fewer than 3 nodes."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_AKS_5",
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-AKS-005",
+                            "eval": "data.rule.aks_rbac",
+                            "message": "data.rule.aks_rbac_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_AKS_005.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_219"
+                    ],
+                    "severity": "High",
+                    "title": "Azure AKS enable role-based access control (RBAC) should be enforced",
+                    "description": "To provide granular filtering of the actions that users can perform, Kubernetes uses role-based access controls (RBAC). This control mechanism lets you assign users, or groups of users, permission to do things like create or modify resources, or view logs from running application workloads. These permissions can be scoped to a single namespace, or granted across the entire AKS cluster._x005F<br>_x005F<br>This policy checks your AKS cluster RBAC setting and alerts if disabled."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_AKS_6",
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-AKS-006",
+                            "eval": "data.rule.aks_aad_azure_rbac",
+                            "message": "data.rule.aks_aad_azure_rbac_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_AKS_006.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_219"
+                    ],
+                    "severity": "Medium",
+                    "title": "Managed Azure AD RBAC for AKS cluster should be enabled",
+                    "description": "Azure Kubernetes Service (AKS) can be configured to use Azure Active Directory (AD) for user authentication. In this configuration, you sign in to an AKS cluster using an Azure AD authentication token. You can also configure Kubernetes role-based access control (Kubernetes RBAC) to limit access to cluster resources based a user's identity or group membership. Visit https://docs.microsoft.com/en-us/azure/aks/azure-ad-rbac for details."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_AKS_7",
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-AKS-007",
+                            "eval": "data.rule.aks_authorized_Ip",
+                            "message": "data.rule.aks_authorized_Ip_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_AKS_007.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_219"
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AKS API server defines authorized IP ranges",
+                    "description": "The AKS API server receives requests to perform actions in the cluster , for example, to create resources, and scale the number of nodes. The API server provides a secure way to manage a cluster."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_AKS_8",
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-AKS-008",
+                            "eval": "data.rule.network_policy",
+                            "message": "data.rule.network_policy_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_AKS_008.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_219"
+                    ],
+                    "severity": "Low",
+                    "title": "Ensure AKS cluster network policies are enforced",
+                    "description": "Network policy options in AKS include two ways to implement a network policy. You can choose between Azure Network Policies or Calico Network Policies. In both cases, the underlying controlling layer is based on Linux IPTables to enforce the specified policies. Policies are translated into sets of allowed and disallowed IP pairs. These pairs are then programmed as IPTable rules."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_AKS_9",
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-AKS-009",
+                            "eval": "data.rule.aks_kub_dashboard_disabled",
+                            "message": "data.rule.aks_kub_dashboard_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_AKS_009.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_219"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Kubernetes Dashboard is disabled",
+                    "description": "Disable the Kubernetes dashboard on Azure Kubernetes Service"
+                },
+                {
                     "masterTestId": "AZURE_TEST_216",
                     "type": "rego",
                     "rule": "file(PR_AZR_0007.rego)",
