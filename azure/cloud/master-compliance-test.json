@@ -2800,6 +2800,140 @@
                     "description": "Azure VPN gateways to use a custom IPsec/IKE policy with specific cryptographic algorithms and key strengths, rather than the Azure default policy sets. IPsec and IKE protocol standard supports a wide range of cryptographic algorithms in various combinations. If customers do not request a specific combination of cryptographic algorithms and parameters, Azure VPN gateways use a set of default proposals. Typically due to compliance or security requirements, you can now configure your Azure VPN gateways to use a custom IPsec/IKE policy with specific cryptographic algorithms and key strengths, rather than the Azure default policy sets. It is thus recommended to use custom policy sets and choose strong cryptography."
                 },
                 {
+                    "masterTestId": "AZURE_TEST_NTW_1",
+                    "type": "rego",
+                    "rule": "file(networkwatchersflowlogs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-NTW-001",
+                            "eval": "data.rule.netwatchFlowlogs",
+                            "message": "data.rule.netwatchFlowlogs_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_NTW_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_431"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Network Watcher Network Security Group (NSG) flow logs should be enabled",
+                    "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs are disabled. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.<br><br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:<br>- Outbound and inbound flows on a per-rule basis.<br>- Network interface to which the flow applies.<br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).<br>- Whether the traffic was allowed or denied.<br><br>As a best practice, enable NSG flow logs to improve network visibility."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_NTW_2",
+                    "type": "rego",
+                    "rule": "file(networkwatchersflowlogs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-NTW-002",
+                            "eval": "data.rule.netwatch_logs",
+                            "message": "data.rule.netwatch_logs_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_NTW_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_431"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Network Watcher Network Security Group (NSG) traffic analytics should be enabled",
+                    "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs are disabled. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.<br><br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:<br>- Outbound and inbound flows on a per-rule basis.<br>- Network interface to which the flow applies.<br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).<br>- Whether the traffic was allowed or denied.<br><br>As a best practice, enable NSG flow logs to improve network visibility."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_NTW_3",
+                    "type": "rego",
+                    "rule": "file(networkwatchersflowlogs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-NTW-003",
+                            "eval": "data.rule.netwatch_log_retention",
+                            "message": "data.rule.netwatch_log_retention_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_NTW_003.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_431"
+                    ],
+                    "severity": "High",
+                    "title": "Azure Network Watcher Network Security Group (NSG) flow logs retention should be greater than 90 days",
+                    "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs retention period is 90 days or less. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.<br><br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:<br>- Outbound and inbound flows on a per-rule basis.<br>- Network interface to which the flow applies.<br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).<br>- Whether the traffic was allowed or denied.<br><br>As a best practice, enable NSG flow logs and set the log retention period to at least 90 days."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_",
+                    "type": "rego",
+                    "rule": "file(.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-",
+                            "eval": "data.rule.",
+                            "message": "data.rule._err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                ""
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        ""
+                    ],
+                    "severity": "Medium",
+                    "title": "",
+                    "description": ""
+                },
+                {
                     "masterTestId": "AZURE_TEST_216",
                     "type": "rego",
                     "rule": "file(PR_AZR_0007.rego)",
