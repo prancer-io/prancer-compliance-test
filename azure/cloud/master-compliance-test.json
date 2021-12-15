@@ -880,7 +880,7 @@
                     "severity": "Medium",
                     "title": "Azure Web Service Pyhton version should be latest",
                     "description": "This policy will identify the Azure web service which dont have latest version of Pyhton and give alert"
-                },
+                },  
                 {
                     "masterTestId": "AZURE_TEST_WEB_16",
                     "type": "rego",
@@ -1214,238 +1214,6 @@
                     "severity": "Medium",
                     "title": "Ensure Geo-redundant backup is enabled on MariaDB server.",
                     "description": "Azure Database for MariaDB provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage."
-                },
-                {
-                    "masterTestId": "AZURE_TEST_SQL_",
-                    "type": "rego",
-                    "rule": "file(.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-SQL-",
-                            "eval": "data.rule.",
-                            "message": "data.rule._err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        ""
-                    ],
-                    "severity": "Medium",
-                    "title": "",
-                    "description": ""
-                },
-                {
-                    "masterTestId": "AZURE_TEST_SQL_",
-                    "type": "rego",
-                    "rule": "file(.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-SQL-",
-                            "eval": "data.rule.",
-                            "message": "data.rule._err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        ""
-                    ],
-                    "severity": "Medium",
-                    "title": "",
-                    "description": ""
-                },
-                {
-                    "masterTestId": "AZURE_TEST_SQL_",
-                    "type": "rego",
-                    "rule": "file(.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-SQL-",
-                            "eval": "data.rule.",
-                            "message": "data.rule._err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        ""
-                    ],
-                    "severity": "Medium",
-                    "title": "",
-                    "description": ""
-                },
-                {
-                    "masterTestId": "AZURE_TEST_SQL_",
-                    "type": "rego",
-                    "rule": "file(.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-SQL-",
-                            "eval": "data.rule.",
-                            "message": "data.rule._err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        ""
-                    ],
-                    "severity": "Medium",
-                    "title": "",
-                    "description": ""
-                },
-                {
-                    "masterTestId": "AZURE_TEST_SQL_",
-                    "type": "rego",
-                    "rule": "file(.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-SQL-",
-                            "eval": "data.rule.",
-                            "message": "data.rule._err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        ""
-                    ],
-                    "severity": "Medium",
-                    "title": "",
-                    "description": ""
-                },
-                {
-                    "masterTestId": "AZURE_TEST_SQL_",
-                    "type": "rego",
-                    "rule": "file(.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-SQL-",
-                            "eval": "data.rule.",
-                            "message": "data.rule._err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        ""
-                    ],
-                    "severity": "Medium",
-                    "title": "",
-                    "description": ""
-                },
-                {
-                    "masterTestId": "AZURE_TEST_SQL_",
-                    "type": "rego",
-                    "rule": "file(.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-SQL-",
-                            "eval": "data.rule.",
-                            "message": "data.rule._err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        ""
-                    ],
-                    "severity": "Medium",
-                    "title": "",
-                    "description": ""
-                },
-                {
-                    "masterTestId": "AZURE_TEST_SQL_",
-                    "type": "rego",
-                    "rule": "file(.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-SQL-",
-                            "eval": "data.rule.",
-                            "message": "data.rule._err",
-                            "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_SQL_.py"
-                        }
-                    ],
-                    "tags": [
-                        {
-                            "cloud": "azure",
-                            "compliance": [],
-                            "service": [
-                                "Databases"
-                            ]
-                        }
-                    ],
-                    "masterSnapshotId": [
-                        ""
-                    ],
-                    "severity": "Medium",
-                    "title": "",
-                    "description": ""
                 },
                 {
                     "masterTestId": "AZURE_TEST_SQL_30",
@@ -2730,6 +2498,78 @@
                     "severity": "Medium",
                     "title": "Ensure Application Gateway secret certificates stores in keyvault",
                     "description": "This policy will identify application gateways which dont have ssl certificates stored in keyvalut and alert"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_ARC_1",
+                    "type": "rego",
+                    "rule": "file(Redis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARC-001",
+                            "eval": "data.rule.enableSslPort",
+                            "message": "data.rule.enableSslPort_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_ARC_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "PCI-DSS",
+                                "GDPR",
+                                "ISO 27001",
+                                "NIST CSF",
+                                "HIPAA",
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_420"
+                    ],
+                    "severity": "High",
+                    "title": "Ensure that the Redis Cache accepts only SSL connections",
+                    "description": "It is recommended that Redis Cache should allow only SSL connections. Note: some Redis tools (like redis-cli) do not support SSL. When using such tools plain connection ports should be enabled."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_ARC_2",
+                    "type": "rego",
+                    "rule": "file(Redis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ARC-002",
+                            "eval": "data.rule.serverRole",
+                            "message": "data.rule.serverRole_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_ARC_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "PCI-DSS",
+                                "ISO 27001",
+                                "NIST CSF",
+                                "HIPAA",
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_420",
+                        "AZRSNP_421"
+                    ],
+                    "severity": "Medium",
+                    "title": "Redis cache should have a backup",
+                    "description": "Replicate Redis Cache server data to another Redis Cache server using geo replication. This feature is only available for Premium tier Redis Cache. From performance point of view, Microsoft recommends that both Redis Caches (Primary and the linked secondary) reside in the same region."
                 },
                 {
                     "masterTestId": "AZURE_TEST_216",

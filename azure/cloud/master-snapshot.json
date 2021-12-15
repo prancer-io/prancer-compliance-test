@@ -258,6 +258,16 @@
                     "masterSnapshotId": "AZRSNP_411",
                     "type": "Microsoft.DBforMySQL/servers",
                     "collection": "Microsoft.Sql"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_420",
+                    "type": "Microsoft.Cache/redis",
+                    "collection": "Microsoft.Cache"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_421",
+                    "type": "Microsoft.Cache/redis/linkedServers",
+                    "collection": "Microsoft.Cache"
                 }
             ]
         }
