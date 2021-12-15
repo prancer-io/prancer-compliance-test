@@ -1,302 +1,232 @@
 {
-  "snapshots": [
-    {
-      "type": "aws",
-      "connectorUser": "USER_1",
-      "nodes": [
-        {
-          "masterSnapshotId": "AWS_S3_01",
-          "arn": "arn:aws:s3:::",
-          "collection": "aws_s3",
-          "listMethod": "list_buckets",
-          "detailMethods": [
-            "get_bucket_acl",
-            "get_bucket_location",
-            "get_bucket_logging",
-            "get_bucket_versioning",
-            "get_bucket_policy"
-          ],
-          "tags": [
-            {
-                "cloud": "AWS",
-                "service": [
-                    "aws_s3"
-                ]
-            }
-        ]
-        },
-        {
-          "masterSnapshotId": "AWS_EC2_01",
-          "arn": "arn:aws:ec2:::",
-          "collection": "aws_ec2",
-          "listMethod": "describe_instances",
-          "detailMethods": [
-            "describe_instances",
-            "describe_security_groups",
-            "describe_snapshots",
-            "describe_snapshot_attribute",
-            "describe_images",
-            "describe_volumes"
-          ],
-          "tags": [
-            {
-                "cloud": "AWS",
-                "service": [
-                    "aws_ec2"
-                ]
-            }
-        ]
-        },
-        {
-          "masterSnapshotId": "AWS_RDS_01",
-          "arn": "arn:aws:rds:::",
-          "collection": "aws_rds",
-          "listMethod": "describe_db_instances",
-          "detailMethods": [
-            "describe_db_instances",
-            "describe_db_snapshots"
-          ],
-          "tags": [
-            {
-                "cloud": "AWS",
-                "service": [
-                    "aws_rds"
-                ]
-            }
-        ]
-        },
-        {
-          "masterSnapshotId": "AWS_CF_01",
-          "arn": "arn:aws:cloudformation:::",
-          "collection": "aws_cloudformation",
-          "listMethod": "list_stacks",
-          "detailMethods": [
-            "describe_stacks",
-            "describe_stack_resource",
-            "describe_stack_resource_drifts",
-            "get_stack_policy",
-            "describe_stack_events"
-          ],
-          "tags": [
-            {
-                "cloud": "AWS",
-                "service": [
-                    "aws_cloudformation"
-                ]
-            }
-        ]
-        },
-        {
-          "masterSnapshotId": "AWS_CT_01",
-          "arn": "arn:aws:cloudtrail:::",
-          "collection": "aws_cloudtrail",
-          "listMethod": "list_trails",
-          "detailMethods": [
-            "describe_trails"
-          ],
-          "tags": [
-            {
-                "cloud": "AWS",
-                "service": [
-                    "aws_cloudtrail"
-                ]
-            }
-        ]
-        },
-        {
-          "masterSnapshotId": "AWS_ELB_01",
-          "arn": "arn:aws:elb:::",
-          "collection": "aws_elb",
-          "listMethod": "describe_load_balancers",
-          "detailMethods": [
-            "describe_load_balancers",
-            "describe_load_balancer_attributes",
-            "describe_load_balancer_policies"
-          ],
-          "tags": [
-            {
-                "cloud": "AWS",
-                "service": [
-                    "aws_elb"
-                ]
-            }
-        ]
-        },
-        {
-          "masterSnapshotId": "AWS_SQS_01",
-          "arn": "arn:aws:sqs:::",
-          "collection": "aws_sqs",
-          "listMethod": "list_queues",
-          "detailMethods": [
-            "get_queue_attributes"
-          ],
-          "tags": [
-            {
-                "cloud": "AWS",
-                "service": [
-                    "aws_sqs"
-                ]
-            }
-        ]
-        },
-        {
-          "masterSnapshotId": "AWS_LAMBDA_01",
-          "arn": "arn:aws:lambda:::",
-          "collection": "aws_lambda",
-          "listMethod": "list_functions",
-          "detailMethods": [
-            "get_function"
-          ],
-          "tags": [
-            {
-                "cloud": "AWS",
-                "service": [
-                    "aws_lambda"
-                ]
-            }
-        ]
-        },
-        {
-          "masterSnapshotId": "AWS_ECS_01",
-          "arn": "arn:aws:ecs:::",
-          "collection": "aws_ecs",
-          "listMethod": "list_task_definitions",
-          "detailMethods": [
-            "describe_task_definition"
-          ],
-          "tags": [
-            {
-                "cloud": "AWS",
-                "service": [
-                    "aws_ecs"
-                ]
-            }
-        ]
-        },
-        {
-          "masterSnapshotId": "AWS_EKS_01",
-          "arn": "arn:aws:eks:::",
-          "collection": "aws_eks",
-          "listMethod": "list_clusters",
-          "detailMethods": [
-            "describe_cluster"
-          ],
-          "tags": [
-            {
-                "cloud": "AWS",
-                "service": [
-                    "aws_eks"
-                ]
-            }
-        ]
-        },
-        {
-          "masterSnapshotId": "AWS_ELASTICCACHE_01",
-          "arn": "arn:aws:elasticache:::",
-          "collection": "aws_elasticache",
-          "listMethod": "describe_replication_groups",
-          "detailMethods": [
-            "describe_replication_groups"
-          ],
-          "tags": [
-            {
-                "cloud": "AWS",
-                "service": [
-                    "aws_elasticache"
-                ]
-            }
-        ]
-        },
-        {
-          "masterSnapshotId": "AWS_ACM_01",
-          "arn": "arn:aws:acm:::",
-          "collection": "aws_acm",
-          "listMethod": "list_certificates",
-          "detailMethods": [
-            "describe_certificate"
-          ],
-          "tags": [
-            {
-                "cloud": "AWS",
-                "service": [
-                    "aws_acm"
-                ]
-            }
-        ]
-        },
-        {
-          "masterSnapshotId": "AWS_CLOUDFRONT_01",
-          "arn": "arn:aws:cloudfront:::",
-          "collection": "aws_cloudfront",
-          "listMethod": "list_distributions",
-          "detailMethods": [
-            "get_distribution"
-          ],
-          "tags": [
-            {
-                "cloud": "AWS",
-                "service": [
-                    "aws_cloudfront"
-                ]
-            }
-        ]
-        },
-        {
-          "masterSnapshotId": "AWS_EFS_01",
-          "arn": "arn:aws:efs:::",
-          "collection": "aws_efs",
-          "listMethod": "describe_file_systems",
-          "detailMethods": [
-            "describe_file_systems"
-          ],
-          "tags": [
-            {
-                "cloud": "AWS",
-                "service": [
-                    "aws_efs"
-                ]
-            }
-        ]
-        },
-        {
-          "masterSnapshotId": "AWS_IAM_01",
-          "arn": "arn:aws:iam:::",
-          "collection": "aws_iam",
-          "listMethod": "list_users",
-          "detailMethods": [
-            "get_user",
-            "list_ssh_public_keys",
-            "get_account_summary",
-            "get_account_password_policy",
-            "list_attached_user_policies"
-          ],
-          "tags": [
-            {
-                "cloud": "AWS",
-                "service": [
-                    "aws_iam"
-                ]
-            }
-        ]
-        },
-        {
-          "masterSnapshotId": "AWS_REDSHIFT_01",
-          "arn": "arn:aws:redshift:::",
-          "collection": "aws_redshift",
-          "listMethod": "describe_clusters",
-          "detailMethods": [
-            "describe_clusters"
-          ],
-          "tags": [
-            {
-                "cloud": "AWS",
-                "service": [
-                    "aws_redshift"
-                ]
-            }
-        ]
-        }
-      ]
-    }
-  ]
+	"snapshots": [
+		{
+			"type": "aws",
+			"source": "aws_cloud_connector",
+			"testUser": "USER_1",
+			"accountId": "155603667260",
+			"nodes": [
+				{
+					"masterSnapshotId": "TEST_KMS",
+					"arn": "arn:aws:kms:::",
+					"collection": "aws_kms",
+					"listMethod": "list_keys",
+					"detailMethods": [
+						"describe_key",
+						"get_key_rotation_status"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"kms"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_CT",
+					"arn": "arn:aws:cloudtrail:::",
+					"collection": "aws_cloudtrail",
+					"listMethod": "list_trails",
+					"detailMethods": [
+						"describe_trails",
+						"get_trail_status"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"cloudtrail"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_EC2",
+					"arn": "arn:aws:ec2:::",
+					"collection": "aws_ec2",
+					"listMethod": "describe_instances",
+					"detailMethods": [
+						"describe_instances",
+						"describe_subnets",
+						"describe_addresses",
+						"describe_vpc_endpoint_connections",
+						"describe_volumes"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"ec2"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_API_GATEWAY_01",
+					"arn": "arn:aws:apigateway:::",
+					"collection": "aws_api_gateway_01",
+					"listMethod": "get_rest_apis",
+					"detailMethods": [
+						"get_rest_api",
+						"get_authorizers",
+						"get_stages"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"api gateway"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_API_GATEWAY_02",
+					"arn": "arn:aws:apigateway:::",
+					"collection": "aws_api_gateway_02",
+					"listMethod": "get_rest_apis",
+					"detailMethods": [
+						"get_request_validators"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"api gateway"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_API_GATEWAY_03",
+					"arn": "arn:aws:apigateway:::",
+					"collection": "aws_api_gateway_03",
+					"listMethod": "get_rest_apis",
+					"detailMethods": [
+						"get_resources"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"api gateway"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_EKS",
+					"arn": "arn:aws:eks:::",
+					"collection": "aws_eks",
+					"listMethod": "list_clusters",
+					"detailMethods": [
+						"describe_cluster"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"Eks"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_ELASTICSEARCH",
+					"arn": "arn:aws:es:::",
+					"collection": "aws_elasticsearch",
+					"listMethod": "list_domain_names",
+					"detailMethods": [
+						"describe_elasticsearch_domain"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"elasticsearch"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_S3",
+					"arn": "arn:aws:s3:::",
+					"collection": "aws_s3",
+					"listMethod": "list_buckets",
+					"detailMethods": [
+						"get_bucket_logging",
+						"get_bucket_policy",
+						"get_bucket_versioning",
+						"get_bucket_encryption",
+						"get_bucket_cors",
+						"get_object_lock_configuration",
+						"get_bucket_replication",
+						"get_public_access_block",
+						"get_bucket_website"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"s3"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_EFS",
+					"arn": "arn:aws:efs:::",
+					"collection": "aws_efs",
+					"listMethod": "describe_file_systems",
+					"detailMethods": [
+						"describe_file_systems"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"efs"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_BKP",
+					"arn": "arn:aws:backup:::",
+					"collection": "aws_bkp",
+					"listMethod": "list_backup_vaults",
+					"detailMethods": [
+						"get_backup_vault_access_policy"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"backup"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_TRF",
+					"arn": "arn:aws:transfer:::",
+					"collection": "aws_trf",
+					"listMethod": "list_servers",
+					"detailMethods": [
+						"describe_server"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"transter"
+							]
+						}
+					]
+				}
+			]
+		}
+	]
 }
