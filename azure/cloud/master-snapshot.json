@@ -220,11 +220,6 @@
                     "collection": "Microsoft.Sql"
                 },
                 {
-                    "masterSnapshotId": "AZRSNP_40",
-                    "type": "Microsoft.Sql/servers/auditingSettings",
-                    "collection": "Microsoft.Sql"
-                },
-                {
                     "masterSnapshotId": "AZRSNP_232",
                     "type": "Microsoft.Network/publicIPAddresses",
                     "collection": "Microsoft.Network"
@@ -237,6 +232,31 @@
                 {
                     "masterSnapshotId": "AZRSNP_406",
                     "type": "Microsoft.Sql/managedInstances/administrators",
+                    "collection": "Microsoft.Sql"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_407",
+                    "type": "Microsoft.Sql/servers/encryptionprotector",
+                    "collection": "Microsoft.Sql"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_408",
+                    "type": "Microsoft.DBforMariaDB/servers/firewallRules",
+                    "collection": "Microsoft.Sql"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_409",
+                    "type": "Microsoft.DBforMariaDB/servers",
+                    "collection": "Microsoft.Sql"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_410",
+                    "type": "Microsoft.DBforMySQL/servers/firewallRules",
+                    "collection": "Microsoft.Sql"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_411",
+                    "type": "Microsoft.DBforMySQL/servers",
                     "collection": "Microsoft.Sql"
                 }
             ]

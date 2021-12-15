@@ -221,39 +221,24 @@ azure_attribute_absence ["redis_cache_uses_privatelink"] {
     count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) == 0
 }
 
-azure_attribute_absence ["redis_cache_uses_privatelink"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_private_endpoint"
-    not resource.properties.private_service_connection
-}
-
-azure_attribute_absence ["redis_cache_uses_privatelink"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_private_endpoint"
-    private_service_connection := resource.properties.private_service_connection[_]
-    not private_service_connection.private_connection_resource_id
-    not private_service_connection.private_connection_resource_alias
-}
-
 azure_issue ["redis_cache_uses_privatelink"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_private_endpoint"
-    private_service_connection := resource.properties.private_service_connection[_]
+    lower(resource.type) == "azurerm_redis_cache"
     count([c | r := input.resources[_];
-              r.type == "azurerm_redis_cache";
-              contains(private_service_connection.private_connection_resource_id, r.properties.compiletime_identity);
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, resource.properties.compiletime_identity);
               c := 1]) == 0
     count([c | r := input.resources[_];
-              r.type == "azurerm_redis_cache";
-              contains(private_service_connection.private_connection_resource_id, concat(".", [r.type, r.name]));
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, concat(".", [resource.type, resource.name]));
               c := 1]) == 0
     count([c | r := input.resources[_];
-              r.type == "azurerm_redis_cache";
-              contains(private_service_connection.private_connection_resource_alias, r.properties.compiletime_identity);
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, resource.properties.compiletime_identity);
               c := 1]) == 0
     count([c | r := input.resources[_];
-              r.type == "azurerm_redis_cache";
-              contains(private_service_connection.private_connection_resource_alias, concat(".", [r.type, r.name]));
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, concat(".", [resource.type, resource.name]));
               c := 1]) == 0
 }
 

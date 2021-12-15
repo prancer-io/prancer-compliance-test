@@ -1,5 +1,9 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts
 
 #
@@ -722,6 +726,454 @@ storage_account_latest_tls_configured_metadata := {
     "Language": "ARM template",
     "Policy Title": "Ensure Azure Storage Account has latest version of tls configured",
     "Policy Description": "This policy will identify the Azure Storage Account which dont have latest version of tls configured and give alert",
+    "Resource Type": "microsoft.storage/storageaccounts",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
+}
+
+# PR-AZR-ARM-STR-019
+#
+default storage_account_private_endpoint = null
+
+azure_attribute_absence["storage_account_private_endpoint"] {
+    count([c | lower(input.resources[_].type) == "microsoft.network/privateendpoints"; c := 1]) == 0
+}
+
+no_azure_issue["storage_account_private_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/privateendpoints"
+    privateLinkServiceConnection := resource.properties.privateLinkServiceConnections[_]
+    contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.storage/storageaccounts")
+}
+
+source_path[{"storage_account_private_endpoint":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/privateendpoints"
+    privateLinkServiceConnection := resource.properties.privateLinkServiceConnections[j]
+    contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.storage/storageaccounts")
+    metadata:= {
+        "resource_path": [["resources",i,"properties","privateLinkServiceConnections",j,"properties","privateLinkServiceId"]]
+    }
+}
+
+storage_account_private_endpoint {
+	lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    no_azure_issue["storage_account_private_endpoint"]
+    not azure_attribute_absence["storage_account_private_endpoint"]
+}
+
+storage_account_private_endpoint = false {
+	lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    not no_azure_issue["storage_account_private_endpoint"]
+}
+
+storage_account_private_endpoint = false {
+	lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    azure_attribute_absence["storage_account_private_endpoint"]
+}
+
+storage_account_private_endpoint_err = "Azure Storage Account does not configure with private endpoints" {
+	lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    not no_azure_issue["storage_account_private_endpoint"]
+} else = "Azure Private endpoints resoruce is missing" {
+	lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    azure_attribute_absence["storage_account_private_endpoint"]
+}
+
+storage_account_private_endpoint_metadata := {
+    "Policy Code": "PR-AZR-ARM-STR-019",
+    "Type": "IaC",  
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Storage accounts should use private link",
+    "Policy Description": "Azure Private Link lets you connect your virtual network to Azure services without a public IP address at the source or destination. The Private Link platform handles the connectivity between the consumer and services over the Azure backbone network. By mapping private endpoints to your storage account, data leakage risks are reduced. Learn more about private links at - https://aka.ms/azureprivatelinkoverview",
+    "Resource Type": "microsoft.storage/storageaccounts",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
+}
+
+
+#
+# PR-AZR-ARM-STR-020
+#
+
+default storage_account_require_encryption = null
+
+azure_attribute_absence["storage_account_require_encryption"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.encryption.requireInfrastructureEncryption
+}
+
+source_path[{"storage_account_require_encryption":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.encryption.requireInfrastructureEncryption
+    metadata:= {
+        "resource_path": [["resources",i,"properties","encryption","requireInfrastructureEncryption"]]
+    }
+}
+
+
+azure_issue["storage_account_require_encryption"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    resource.properties.encryption.requireInfrastructureEncryption != true
+}
+
+
+source_path[{"storage_account_require_encryption":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    resource.properties.encryption.requireInfrastructureEncryption != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","encryption","requireInfrastructureEncryption"]]
+    }
+}
+
+storage_account_require_encryption {
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    not azure_issue["storage_account_require_encryption"]
+    not azure_attribute_absence["storage_account_require_encryption"]
+}
+
+storage_account_require_encryption = false {
+    azure_issue["storage_account_require_encryption"]
+}
+
+storage_account_require_encryption = false {
+    azure_attribute_absence["storage_account_require_encryption"]
+}
+
+storage_account_require_encryption_err = "Storage account encryption scopes currently disabled for double encryption for data at rest" {
+    azure_issue["storage_account_require_encryption"]
+} else = "microsoft.storage/storageaccounts property 'encryption.requireInfrastructureEncryption' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
+    azure_attribute_absence["storage_account_require_encryption"]
+}
+
+
+storage_account_require_encryption_metadata := {
+    "Policy Code": "PR-AZR-ARM-STR-020",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Storage accounts should have infrastructure encryption",
+    "Policy Description": "Enable infrastructure encryption for higher level of assurance that the data is secure. When infrastructure encryption is enabled, data in a storage account is encrypted twice.",
+    "Resource Type": "microsoft.storage/storageaccounts",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
+}
+
+#
+# PR-AZR-ARM-STR-021
+#
+
+default storage_account_scopes_require_encryption = null
+
+azure_attribute_absence["storage_account_scopes_require_encryption"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts/encryptionscopes"
+    not resource.properties.requireInfrastructureEncryption
+}
+
+source_path[{"storage_account_scopes_require_encryption":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/encryptionscopes"
+    not resource.properties.requireInfrastructureEncryption
+    metadata:= {
+        "resource_path": [["resources",i,"properties","requireInfrastructureEncryption"]]
+    }
+}
+
+
+azure_issue["storage_account_scopes_require_encryption"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts/encryptionscopes"
+    resource.properties.requireInfrastructureEncryption != true
+}
+
+
+source_path[{"storage_account_scopes_require_encryption":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/encryptionscopes"
+    resource.properties.requireInfrastructureEncryption != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","requireInfrastructureEncryption"]]
+    }
+}
+
+storage_account_scopes_require_encryption {
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts/encryptionscopes"
+    not azure_issue["storage_account_scopes_require_encryption"]
+    not azure_attribute_absence["storage_account_scopes_require_encryption"]
+}
+
+storage_account_scopes_require_encryption = false {
+    azure_issue["storage_account_scopes_require_encryption"]
+}
+
+storage_account_scopes_require_encryption = false {
+    azure_attribute_absence["storage_account_scopes_require_encryption"]
+}
+
+storage_account_scopes_require_encryption_err = "Storage account encryption scopes currently disabled for double encryption for data at rest" {
+    azure_issue["storage_account_scopes_require_encryption"]
+} else = "microsoft.storage/storageaccounts/encryptionscopes property 'requireInfrastructureEncryption' need to be exist. Its missing from the resource. Please set the value to 'true' after property addition." {
+    azure_attribute_absence["storage_account_scopes_require_encryption"]
+}
+
+
+storage_account_scopes_require_encryption_metadata := {
+    "Policy Code": "PR-AZR-ARM-STR-021",
+    "Type": "IaC",  
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Storage account encryption scopes should have infrastructure encryption",
+    "Policy Description": "Enable infrastructure encryption for encryption at rest of your storage account encryption scopes for added security. Infrastructure encryption ensures that your data is encrypted twice.",
+    "Resource Type": "microsoft.storage/storageaccounts/encryptionscopes",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/encryptionscopes"
+}
+
+# PR-AZR-ARM-STR-022
+#
+
+default storage_account_encryption_scopes_source = null
+
+azure_attribute_absence["storage_account_encryption_scopes_source"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts/encryptionscopes"
+    not resource.properties.source
+}
+
+source_path[{"storage_account_encryption_scopes_source":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/encryptionscopes"
+    not resource.properties.source
+    metadata:= {
+        "resource_path": [["resources",i,"properties","source"]]
+    }
+}
+
+
+azure_issue["storage_account_encryption_scopes_source"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts/encryptionscopes"
+    lower(resource.properties.source) != "microsoft.keyvault"
+}
+
+
+source_path[{"storage_account_encryption_scopes_source":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/encryptionscopes"
+    lower(resource.properties.source) != "microsoft.keyvault"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","source"]]
+    }
+}
+
+storage_account_encryption_scopes_source {
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts/encryptionscopes"
+    not azure_issue["storage_account_encryption_scopes_source"]
+    not azure_attribute_absence["storage_account_encryption_scopes_source"]
+}
+
+storage_account_encryption_scopes_source = false {
+    azure_issue["storage_account_encryption_scopes_source"]
+}
+
+storage_account_encryption_scopes_source = false {
+    azure_attribute_absence["storage_account_encryption_scopes_source"]
+}
+
+storage_account_encryption_scopes_source_err = "Critical data storage in Storage Account Encryption Scopes is currently not encrypted with Customer Managed Key" {
+    azure_issue["storage_account_encryption_scopes_source"]
+} else = "microsoft.storage/storageaccounts/encryptionscopes property 'source' need to be exist. Its missing from the resource. Please set the value to 'microsoft.keyvault' after property addition." {
+    azure_attribute_absence["storage_account_encryption_scopes_source"]
+}
+
+
+storage_account_encryption_scopes_source_metadata := {
+    "Policy Code": "PR-AZR-ARM-STR-022",
+    "Type": "IaC",  
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Storage account encryption scopes should use customer-managed keys to encrypt data at rest",
+    "Policy Description": "Use customer-managed keys to manage the encryption at rest of your storage account encryption scopes. Customer-managed keys enable the data to be encrypted with an Azure key-vault key created and owned by you. You have full control and responsibility for the key lifecycle, including rotation and management. Learn more about storage account encryption scopes at https://aka.ms/encryption-scopes-overview.",
+    "Resource Type": "microsoft.storage/storageaccounts/encryptionscopes",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts/encryptionscopes"
+}
+
+#
+# PR-AZR-ARM-STR-023
+#
+
+default storage_vnet_service_endpoint = null
+
+azure_attribute_absence["storage_vnet_service_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.networkAcls.defaultAction
+}
+
+source_path[{"storage_vnet_service_endpoint":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.networkAcls.defaultAction
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkAcls","defaultAction"]]
+    }
+}
+
+azure_attribute_absence["storage_vnet_service_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.networkAcls.virtualNetworkRules
+}
+
+source_path[{"storage_vnet_service_endpoint":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not resource.properties.networkAcls.virtualNetworkRules
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkAcls","virtualNetworkRules"]]
+    }
+}
+
+azure_issue["storage_vnet_service_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    lower(resource.properties.networkAcls.defaultAction) != "deny"
+}
+
+source_path[{"storage_vnet_service_endpoint":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    lower(resource.properties.networkAcls.defaultAction) != "deny"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkAcls","defaultAction"]]
+    }
+}
+
+
+azure_issue["storage_vnet_service_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    virtualNetworkRule := resource.properties.networkAcls.virtualNetworkRules[_]
+    count(virtualNetworkRule.id) == 0
+}
+
+source_path[{"storage_vnet_service_endpoint":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    virtualNetworkRule := resource.properties.networkAcls.virtualNetworkRules[j]
+    count(virtualNetworkRule.id) == 0
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkAcls","virtualNetworkRules",j,"id"]]
+    }
+}
+
+storage_vnet_service_endpoint {
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    not azure_attribute_absence["storage_vnet_service_endpoint"]
+    not azure_issue["storage_vnet_service_endpoint"]
+}
+
+storage_vnet_service_endpoint = false {
+    azure_issue["storage_vnet_service_endpoint"]
+}
+
+storage_vnet_service_endpoint = false {
+    azure_attribute_absence["storage_vnet_service_endpoint"]
+}
+
+storage_vnet_service_endpoint_err = "Storage Accounts firewall rule is currently not enabled" {
+    azure_issue["storage_vnet_service_endpoint"]
+} else = "Storage Account attribute networkAcls.defaultAction or networkAcls.virtualNetworkRules.id is missing from the resource" {
+    azure_attribute_absence["storage_vnet_service_endpoint"]
+}
+
+storage_vnet_service_endpoint_metadata := {
+    "Policy Code": "PR-AZR-ARM-STR-023",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Storage Accounts should use a virtual network service endpoint",
+    "Policy Description": "This policy audits any Storage Account not configured to use a virtual network service endpoint.",
+    "Resource Type": "microsoft.storage/storageaccounts",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
+}
+
+
+#
+# PR-AZR-ARM-STR-024
+#
+
+
+default storage_account_allow_shared_key_access = null
+
+azure_attribute_absence["storage_account_allow_shared_key_access"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not has_property(resource.properties,"allowSharedKeyAccess")
+}
+
+source_path[{"storage_account_allow_shared_key_access":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    not has_property(resource.properties,"allowSharedKeyAccess")
+    metadata:= {
+        "resource_path": [["resources",i,"properties","allowSharedKeyAccess"]]
+    }
+}
+
+
+azure_issue["storage_account_allow_shared_key_access"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    resource.properties.allowSharedKeyAccess != false
+}
+
+
+source_path[{"storage_account_allow_shared_key_access":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    resource.properties.allowSharedKeyAccess != false
+    metadata:= {
+        "resource_path": [["resources",i,"properties","allowSharedKeyAccess"]]
+    }
+}
+
+storage_account_allow_shared_key_access {
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts"
+    not azure_issue["storage_account_allow_shared_key_access"]
+    not azure_attribute_absence["storage_account_allow_shared_key_access"]
+}
+
+storage_account_allow_shared_key_access = false {
+    azure_issue["storage_account_allow_shared_key_access"]
+}
+
+storage_account_allow_shared_key_access = false {
+    azure_attribute_absence["storage_account_allow_shared_key_access"]
+}
+
+storage_account_allow_shared_key_access_err = "Storage accounts currently use shared key access" {
+    azure_issue["storage_account_allow_shared_key_access"]
+} else = "microsoft.storage/storageaccounts property 'allowSharedKeyAccess' need to be exist. Its missing from the resource. Please set the value to 'false' after property addition." {
+    azure_attribute_absence["storage_account_allow_shared_key_access"]
+}
+
+
+storage_account_allow_shared_key_access_metadata := {
+    "Policy Code": "PR-AZR-ARM-STR-024",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Storage accounts should prevent shared key access",
+    "Policy Description": "Audit requirement of Azure Active Directory (Azure AD) to authorize requests for your storage account. By default, requests can be authorized with either Azure Active Directory credentials, or by using the account access key for Shared Key authorization. Of these two types of authorization, Azure AD provides superior security and ease of use over Shared Key, and is recommended by Microsoft.",
     "Resource Type": "microsoft.storage/storageaccounts",
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts"
