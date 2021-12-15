@@ -11,6 +11,12 @@ azure_attribute_absence ["log_keyvault"] {
     count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1]) == 0
 }
 
+azure_attribute_absence["log_keyvault"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
+    not resource.properties.log
+}
+
 # azure_issue["log_keyvault"] {
 #     resource := input.resources[_]
 #     lower(resource.type) == "azurerm_monitor_diagnostic_setting"
@@ -67,7 +73,7 @@ log_keyvault_metadata := {
     "Language": "Terraform",
     "Policy Title": "Azure Key Vault audit logging should be enabled",
     "Policy Description": "This policy identifies Azure Key Vault instances for which audit logging is disabled. As a best practice, enable audit event logging for Key Vault instances to monitor how and when your key vaults are accessed, and by whom.",
-    "Resource Type": "azurerm_monitor_diagnostic_setting",
+    "Resource Type": "azurerm_key_vault",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting"
 }
@@ -80,7 +86,7 @@ log_keyvault_metadata := {
 default log_lbs = null
 
 azure_attribute_absence ["log_lbs"] {
-    count([c | input.resources[_].type == "azurerm_lb"; c := 1]) != count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1])
+    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1]) == 0
 }
 
 #azure_attribute_absence["log_lbs"] {
@@ -96,19 +102,29 @@ azure_attribute_absence["log_lbs"] {
     not resource.properties.log
 }
 
-#azure_issue["log_lbs"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-#    not contains(lower(resource.properties.target_resource_id), "microsoft.network/loadbalancers") 
-#}
-
-azure_issue["log_lbs"] {
+azure_issue ["log_lbs"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-    log := resource.properties.log[_]
-    lower(log.category) == "auditevent"
-    log.enabled == false
+    lower(resource.type) == "azurerm_lb"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, resource.properties.compiletime_identity);
+              # as per Farshid: for now we should not check this enabled or category property as log is an array and possibility that one can be enabled and other can be disabled. which will mislead us. 
+              #r.properties.log[_].enabled == true;
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, concat(".", [resource.type, resource.name]));
+              #r.properties.log[_].enabled == true;
+              c := 1]) == 0
 }
+
+# azure_issue["log_lbs"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_monitor_diagnostic_setting"
+#     log := resource.properties.log[_]
+#     lower(log.category) == "auditevent"
+#     log.enabled == false
+# }
 
 log_lbs {
     lower(input.resources[_].type) == "azurerm_lb"
@@ -141,7 +157,7 @@ log_lbs_metadata := {
     "Language": "Terraform",
     "Policy Title": "Azure Load Balancer diagnostic logs should be enabled",
     "Policy Description": "Azure Load Balancers provide different types of logsâ€”alert events, health probe, metricsâ€”to help you manage and troubleshoot issues. This policy identifies Azure Load Balancers that have diagnostics logs disabled. As a best practice, enable diagnostic logs to start collecting the data available through these logs.",
-    "Resource Type": "azurerm_monitor_diagnostic_setting",
+    "Resource Type": "azurerm_lb",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting"
 }
@@ -154,15 +170,8 @@ log_lbs_metadata := {
 default log_storage_retention = null
 
 azure_attribute_absence ["log_storage_retention"] {
-    count([c | input.resources[_].type == "azurerm_storage_account"; c := 1]) != count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1])
+    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1]) == 0
 }
-
-#azure_attribute_absence["log_storage_retention"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "azurerm_storage_account"
-#    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
-#    	   c := 1]) == 0
-#}
 
 azure_attribute_absence["log_storage_retention"] {
     resource := input.resources[_]
@@ -170,37 +179,89 @@ azure_attribute_absence["log_storage_retention"] {
     not resource.properties.log
 }
 
-#azure_issue["log_storage_retention"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-#    not contains(lower(resource.properties.target_resource_id), "microsoft.storage/storageaccounts") 
-#}
-
-azure_issue["log_storage_retention"] {
+azure_attribute_absence["log_storage_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_monitor_diagnostic_setting"
     log := resource.properties.log[_]
-    lower(log.category) == "auditevent"
-    log.enabled == false
+    not log.retention_policy
 }
 
-azure_issue["log_storage_retention"] {
+azure_attribute_absence["log_storage_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_monitor_diagnostic_setting"
     log := resource.properties.log[_]
-    lower(log.category) == "auditevent"
     retention_policy := log.retention_policy[_]
-    retention_policy.enabled == false
+    not retention_policy.enabled
 }
 
-azure_issue["log_storage_retention"] {
+azure_attribute_absence["log_storage_retention"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_monitor_diagnostic_setting"
     log := resource.properties.log[_]
-    lower(log.category) == "auditevent"
     retention_policy := log.retention_policy[_]
-    to_number(retention_policy.days) < 90
+    not retention_policy.days
 }
+
+azure_issue ["log_storage_retention"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, resource.properties.compiletime_identity);
+              # as per Farshid: for now we should not check this enabled or category property as log is an array and possibility that one can be enabled and other can be disabled. which will mislead us. 
+              #r.properties.log[_].enabled == true;
+              r.properties.log[_].retention_policy[_].enabled == true;
+              to_number(r.properties.log[_].retention_policy[_].days) >= 90;
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, concat(".", [resource.type, resource.name]));
+              #r.properties.log[_].enabled == true;
+              r.properties.log[_].retention_policy[_].enabled == true;
+              to_number(r.properties.log[_].retention_policy[_].days) >= 90;
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, resource.properties.compiletime_identity);
+              # as per Farshid: for now we should not check this enabled or category property as log is an array and possibility that one can be enabled and other can be disabled. which will mislead us. 
+              #r.properties.log[_].enabled == true;
+              r.properties.log[_].retention_policy[_].enabled == true;
+              to_number(r.properties.log[_].retention_policy[_].days) == 0; # 0 will retain the events indefinitely
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, concat(".", [resource.type, resource.name]));
+              #r.properties.log[_].enabled == true;
+              r.properties.log[_].retention_policy[_].enabled == true;
+              to_number(r.properties.log[_].retention_policy[_].days) == 0; # 0 will retain the events indefinitely
+              c := 1]) == 0
+}
+
+# azure_issue["log_storage_retention"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_monitor_diagnostic_setting"
+#     log := resource.properties.log[_]
+#     lower(log.category) == "auditevent"
+#     log.enabled == false
+# }
+
+# azure_issue["log_storage_retention"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_monitor_diagnostic_setting"
+#     log := resource.properties.log[_]
+#     lower(log.category) == "auditevent"
+#     retention_policy := log.retention_policy[_]
+#     retention_policy.enabled == false
+# }
+
+# azure_issue["log_storage_retention"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_monitor_diagnostic_setting"
+#     log := resource.properties.log[_]
+#     lower(log.category) == "auditevent"
+#     retention_policy := log.retention_policy[_]
+#     to_number(retention_policy.days) < 90
+# }
 
 log_storage_retention {
     lower(input.resources[_].type) == "azurerm_storage_account"
@@ -233,7 +294,7 @@ log_storage_retention_metadata := {
     "Language": "Terraform",
     "Policy Title": "Azure Storage Account auditing retention should be 90 days or more",
     "Policy Description": "This policy identifies Storage Accounts which have Auditing Retentions less than 90 days. Audit Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access. It is recommended to configure Storage Account Audit Log Retention to be greater than or equal to 90 days.",
-    "Resource Type": "azurerm_monitor_diagnostic_setting",
+    "Resource Type": "azurerm_storage_account",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting"
 }
@@ -245,15 +306,8 @@ log_storage_retention_metadata := {
 default log_blob = null
 
 azure_attribute_absence ["log_blob"] {
-    count([c | input.resources[_].type == "azurerm_storage_blob"; c := 1]) != count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1])
+    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1]) == 0
 }
-
-#azure_attribute_absence["log_blob"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "azurerm_storage_blob"
-#    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
-#    	   c := 1]) == 0
-#}
 
 azure_attribute_absence["log_blob"] {
     resource := input.resources[_]
@@ -261,19 +315,29 @@ azure_attribute_absence["log_blob"] {
     not resource.properties.log
 }
 
-#azure_issue["log_blob"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-#    not contains(lower(resource.properties.target_resource_id), "microsoft.storage/storageaccounts/blobservices") 
-#}
-
-azure_issue["log_blob"] {
+azure_issue ["log_blob"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-    log := resource.properties.log[_]
-    lower(log.category) == "auditevent"
-    log.enabled == false
+    lower(resource.type) == "azurerm_storage_blob"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, resource.properties.compiletime_identity);
+              # as per Farshid: for now we should not check this enabled or category property as log is an array and possibility that one can be enabled and other can be disabled. which will mislead us. 
+              #r.properties.log[_].enabled == true;
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, concat(".", [resource.type, resource.name]));
+              #r.properties.log[_].enabled == true;
+              c := 1]) == 0
 }
+
+# azure_issue["log_blob"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_monitor_diagnostic_setting"
+#     log := resource.properties.log[_]
+#     lower(log.category) == "auditevent"
+#     log.enabled == false
+# }
 
 log_blob {
     lower(input.resources[_].type) == "azurerm_storage_blob"
@@ -318,15 +382,8 @@ log_blob_metadata := {
 default log_queue = null
 
 azure_attribute_absence ["log_queue"] {
-    count([c | input.resources[_].type == "azurerm_storage_queue"; c := 1]) != count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1])
+    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1]) == 0
 }
-
-#azure_attribute_absence["log_queue"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "azurerm_storage_queue"
-#    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
-#    	   c := 1]) == 0
-#}
 
 azure_attribute_absence["log_queue"] {
     resource := input.resources[_]
@@ -334,19 +391,29 @@ azure_attribute_absence["log_queue"] {
     not resource.properties.log
 }
 
-#azure_issue["log_queue"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-#    not contains(lower(resource.properties.target_resource_id), "microsoft.storage/storageaccounts/queueservices") 
-#}
-
-azure_issue["log_queue"] {
+azure_issue ["log_queue"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-    log := resource.properties.log[_]
-    lower(log.category) == "auditevent"
-    log.enabled == false
+    lower(resource.type) == "azurerm_storage_queue"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, resource.properties.compiletime_identity);
+              # as per Farshid: for now we should not check this enabled or category property as log is an array and possibility that one can be enabled and other can be disabled. which will mislead us. 
+              #r.properties.log[_].enabled == true;
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, concat(".", [resource.type, resource.name]));
+              #r.properties.log[_].enabled == true;
+              c := 1]) == 0
 }
+
+# azure_issue["log_queue"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_monitor_diagnostic_setting"
+#     log := resource.properties.log[_]
+#     lower(log.category) == "auditevent"
+#     log.enabled == false
+# }
 
 log_queue {
     lower(input.resources[_].type) == "azurerm_storage_queue"
@@ -391,15 +458,8 @@ log_queue_metadata := {
 default log_table = null
 
 azure_attribute_absence ["log_table"] {
-    count([c | input.resources[_].type == "azurerm_storage_table"; c := 1]) != count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1])
+    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1]) == 0
 }
-
-#azure_attribute_absence["log_table"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "azurerm_storage_table"
-#    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
-#    	   c := 1]) == 0
-#}
 
 azure_attribute_absence["log_table"] {
     resource := input.resources[_]
@@ -407,19 +467,29 @@ azure_attribute_absence["log_table"] {
     not resource.properties.log
 }
 
-#azure_issue["log_table"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-#    not contains(lower(resource.properties.target_resource_id), "microsoft.storage/storageaccounts/tableservices") 
-#}
-
-azure_issue["log_table"] {
+azure_issue ["log_table"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-    log := resource.properties.log[_]
-    lower(log.category) == "auditevent"
-    log.enabled == false
+    lower(resource.type) == "azurerm_storage_table"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, resource.properties.compiletime_identity);
+              # as per Farshid: for now we should not check this enabled or category property as log is an array and possibility that one can be enabled and other can be disabled. which will mislead us. 
+              #r.properties.log[_].enabled == true;
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, concat(".", [resource.type, resource.name]));
+              #r.properties.log[_].enabled == true;
+              c := 1]) == 0
 }
+
+# azure_issue["log_table"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_monitor_diagnostic_setting"
+#     log := resource.properties.log[_]
+#     lower(log.category) == "auditevent"
+#     log.enabled == false
+# }
 
 log_table {
     lower(input.resources[_].type) == "azurerm_storage_table"
@@ -464,6 +534,12 @@ default storage_account_diagonstic_log_enabled = null
 
 azure_attribute_absence ["storage_account_diagonstic_log_enabled"] {
     count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1]) == 0
+}
+
+azure_attribute_absence["storage_account_diagonstic_log_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
+    not resource.properties.log
 }
 
 azure_issue ["storage_account_diagonstic_log_enabled"] {
