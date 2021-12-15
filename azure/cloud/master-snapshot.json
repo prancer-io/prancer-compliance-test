@@ -240,8 +240,23 @@
                     "collection": "Microsoft.Sql"
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_408",
+                    "type": "Microsoft.DBforMariaDB/servers/firewallRules",
+                    "collection": "Microsoft.Sql"
+                },
+                {
                     "masterSnapshotId": "AZRSNP_409",
-                    "type": "Microsoft.Sql/servers/databases",
+                    "type": "Microsoft.DBforMariaDB/servers",
+                    "collection": "Microsoft.Sql"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_410",
+                    "type": "Microsoft.DBforMySQL/servers/firewallRules",
+                    "collection": "Microsoft.Sql"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_411",
+                    "type": "Microsoft.DBforMySQL/servers",
                     "collection": "Microsoft.Sql"
                 }
             ]
