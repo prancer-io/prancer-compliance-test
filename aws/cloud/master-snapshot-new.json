@@ -1,0 +1,111 @@
+{
+	"snapshots": [
+		{
+			"type": "aws",
+			"source": "aws_cloud_connector",
+			"testUser": "USER_1",
+			"accountId": "155603667260",
+			"nodes": [
+				{
+					"masterSnapshotId": "TEST_KMS",
+					"arn": "arn:aws:kms:::",
+					"collection": "aws_kms",
+					"listMethod": "list_keys",
+					"detailMethods": [
+						"describe_key",
+						"get_key_rotation_status"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"kms"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_CT",
+					"arn": "arn:aws:cloudtrail:::",
+					"collection": "aws_cloudtrail",
+					"listMethod": "list_trails",
+					"detailMethods": [
+						"describe_trails"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"cloudtrail"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_EC2",
+					"arn": "arn:aws:ec2:::",
+					"collection": "aws_ec2",
+					"listMethod": "describe_instances",
+					"detailMethods": [
+						"describe_instances",
+						"describe_security_groups",
+						"describe_snapshots",
+						"describe_snapshot_attribute",
+						"describe_images",
+						"describe_volumes",
+						"describe_vpcs",
+						"describe_addresses",
+						"describe_subnets",
+						"monitor_instances"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"ec2"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_API_GATEWAY",
+					"arn": "arn:aws:apigateway:::",
+					"collection": "aws_api_gateway",
+					"listMethod": "get_rest_apis",
+					"detailMethods": [
+						"get_rest_api",
+						"get_request_validator",
+						"get_authorizer",
+						"get_stage",
+						"get_method"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"api gateway"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_EKS",
+					"arn": "arn:aws:eks:::",
+					"collection": "aws_eks",
+					"listMethod": "list_clusters",
+					"detailMethods": [
+						"describe_clusters"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"Eks"
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
