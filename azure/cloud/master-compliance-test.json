@@ -2666,6 +2666,140 @@
                     "description": "This policy identifies Azure Virtual Machines (VMs) that do not have endpoint protection installed. Installing endpoint protection systems (like Antimalware for Azure) provides for real-time protection capability that helps identify and remove viruses, spyware, and other malicious software. As a best practice, install endpoint protection on all VMs and computers to help identify and remove viruses, spyware, and other malicious software."
                 },
                 {
+                    "masterTestId": "AZURE_TEST_DSK_1",
+                    "type": "rego",
+                    "rule": "file(disks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-DSK-001",
+                            "eval": "data.rule.disk_encrypt",
+                            "message": "data.rule.disk_encrypt_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_DSK_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_277"
+                    ],
+                    "severity": "High",
+                    "title": "Azure disk should have Azure Disk Encryption (ADE) enabled",
+                    "description": "To meet your organizational security or compliance requirement, Azure provides disk encryption at rest using Azure Storage Service Encryption (SSE) and Azure Disk Encryption (ADE). Starting February 2017, SSE is enabled by default for all managed disks. ADE is integrated with Azure Key Vault to help you control, manage, and audit the disk encryption keys and secrets.<br><br>This policy detects Virtual Machine (VM) OS disks that are not encrypted at rest using ADE. As a best practice, enable ADE for provide volume encryption for the OS disk. For more information, see https://docs.microsoft.com/en-us/azure/security/azure-security-disk-encryption-overview."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_VNET_4",
+                    "type": "rego",
+                    "rule": "file(vnetpeerings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-NET-004",
+                            "eval": "data.rule.vnet_peer",
+                            "message": "data.rule.vnet_peer_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_NET_004.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_430"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure virtual network peering state should be connected",
+                    "description": "Virtual network peering enables you to connect two Azure virtual networks so that the resources in these networks are directly connected.<br><br>This policy identifies Azure virtual network peers that are disconnected. Typically, the disconnection happens when a peering configuration is deleted on one virtual network, and the other virtual network reports the peering status as disconnected."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_VNET_5",
+                    "type": "rego",
+                    "rule": "file(vnetsubnets.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-NET-005",
+                            "eval": "data.rule.vnet_subnet_nsg",
+                            "message": "data.rule.vnet_subnet_nsg_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_NET-005.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_275"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Virtual Network subnet should be configured with Network Security Group",
+                    "description": "This policy identifies Azure Virtual Network (VNet) subnet which dont have any association with Network Security Group (NSG). While binding an NSG to a network interface of a Virtual Machine (VM) enables fine-grained control to the VM, associating a NSG to a subnet enables better control over network traffic to all resources within a subnet. As a best practice, associate an NSG with a subnet so that you can protect your VMs on a subnet-level._x005F<br>_x005F<br>For more information, see https://blogs.msdn.microsoft.com/igorpag/2016/05/14/azure-network-security-groups-nsg-best-practices-and-lessons-learned/"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_VNET_6",
+                    "type": "rego",
+                    "rule": "file(vpngateways.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-NET-006",
+                            "eval": "data.rule.vpn_encrypt",
+                            "message": "data.rule.vpn_encrypt_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_NET_006.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Networking"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_307"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure VPN gateways is configured with cryptographic algorithm",
+                    "description": "Azure VPN gateways to use a custom IPsec/IKE policy with specific cryptographic algorithms and key strengths, rather than the Azure default policy sets. IPsec and IKE protocol standard supports a wide range of cryptographic algorithms in various combinations. If customers do not request a specific combination of cryptographic algorithms and parameters, Azure VPN gateways use a set of default proposals. Typically due to compliance or security requirements, you can now configure your Azure VPN gateways to use a custom IPsec/IKE policy with specific cryptographic algorithms and key strengths, rather than the Azure default policy sets. It is thus recommended to use custom policy sets and choose strong cryptography."
+                },
+                {
                     "masterTestId": "AZURE_TEST_216",
                     "type": "rego",
                     "rule": "file(PR_AZR_0007.rego)",
