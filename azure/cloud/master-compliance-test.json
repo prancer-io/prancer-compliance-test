@@ -2823,7 +2823,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Networking"
+                                "Management and Governance"
                             ]
                         }
                     ],
@@ -2858,7 +2858,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Networking"
+                                "Management and Governance"
                             ]
                         }
                     ],
@@ -2893,7 +2893,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Networking"
+                                "Management and Governance"
                             ]
                         }
                     ],
@@ -2905,33 +2905,35 @@
                     "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs retention period is 90 days or less. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.<br><br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:<br>- Outbound and inbound flows on a per-rule basis.<br>- Network interface to which the flow applies.<br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).<br>- Whether the traffic was allowed or denied.<br><br>As a best practice, enable NSG flow logs and set the log retention period to at least 90 days."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_",
+                    "masterTestId": "AZURE_TEST_DBK",
                     "type": "rego",
-                    "rule": "file(.rego)",
+                    "rule": "file(databricks.rego)",
                     "evals": [
                         {
-                            "id": "PR-AZR-",
-                            "eval": "data.rule.",
-                            "message": "data.rule._err",
+                            "id": "PR-AZR-DBK-001",
+                            "eval": "data.rule.databrics_workspace_has_public_ip_disabled",
+                            "message": "data.rule.databrics_workspace_has_public_ip_disabled_err",
                             "remediationDescription": "",
-                            "remediationFunction": "PR_AZR_.py"
+                            "remediationFunction": "PR_AZR_DBK_001.py"
                         }
                     ],
                     "tags": [
                         {
                             "cloud": "azure",
-                            "compliance": [],
+                            "compliance": [
+                                "Best Practices"
+                            ],
                             "service": [
-                                ""
+                                "Analytics"
                             ]
                         }
                     ],
                     "masterSnapshotId": [
-                        ""
+                        "AZRSNP_440"
                     ],
-                    "severity": "Medium",
-                    "title": "",
-                    "description": ""
+                    "severity": "High",
+                    "title": "Azure Databricks shoud not use public IP address",
+                    "description": "Azure Databricks is a data analytics platform optimized for the Microsoft Azure cloud services platform. This policy will identify Databricks which does not have public ip disabled and warn."
                 },
                 {
                     "masterTestId": "AZURE_TEST_216",
