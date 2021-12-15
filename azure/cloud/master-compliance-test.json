@@ -2823,7 +2823,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Management and Governance"
+                                "Networking"
                             ]
                         }
                     ],
@@ -2858,7 +2858,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Management and Governance"
+                                "Networking"
                             ]
                         }
                     ],
@@ -2893,7 +2893,7 @@
                                 "PCI-DSS"
                             ],
                             "service": [
-                                "Management and Governance"
+                                "Networking"
                             ]
                         }
                     ],
@@ -2905,7 +2905,7 @@
                     "description": "This policy identifies Azure Network Security Groups (NSG) for which flow logs retention period is 90 days or less. To perform this check, enable this action on the Azure Service Principal: 'Microsoft.Network/networkWatchers/queryFlowLogStatus/action'.<br><br>NSG flow logs, a feature of the Network Watcher app, enable you to view information about ingress and egress IP traffic through an NSG. The flow logs include information such as:<br>- Outbound and inbound flows on a per-rule basis.<br>- Network interface to which the flow applies.<br>- 5-tuple information about the flow (source/destination IP, source/destination port, protocol).<br>- Whether the traffic was allowed or denied.<br><br>As a best practice, enable NSG flow logs and set the log retention period to at least 90 days."
                 },
                 {
-                    "masterTestId": "AZURE_TEST_DBK",
+                    "masterTestId": "AZURE_TEST_DBK_1",
                     "type": "rego",
                     "rule": "file(databricks.rego)",
                     "evals": [
@@ -2934,6 +2934,242 @@
                     "severity": "High",
                     "title": "Azure Databricks shoud not use public IP address",
                     "description": "Azure Databricks is a data analytics platform optimized for the Microsoft Azure cloud services platform. This policy will identify Databricks which does not have public ip disabled and warn."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_DBK_2",
+                    "type": "rego",
+                    "rule": "file(databricks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-DBK-002",
+                            "eval": "data.rule.databrics_workspace_has_vnet_integration",
+                            "message": "data.rule.databrics_workspace_has_vnet_integration_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_DBK_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Analytics"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_440",
+                        "AZRSNP_284"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Databricks should have vnet integration",
+                    "description": "Azure Databricks is a data analytics platform optimized for the Microsoft Azure cloud services platform. This policy will identify Databricks which does not have vnet integration and warn."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_28",
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-028",
+                            "eval": "data.rule.geoRedundantBackup",
+                            "message": "data.rule.geoRedundantBackup_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_028.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_412"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Geo-redundant backup is enabled on PostgreSQL database server.",
+                    "description": "Azure Database for PostgreSQL provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_29",
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-029",
+                            "eval": "data.rule.sslEnforcement",
+                            "message": "data.rule.sslEnforcement_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_029.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_412"
+                    ],
+                    "severity": "High",
+                    "title": "Ensure ssl enforcement is enabled on PostgreSQL Database Server.",
+                    "description": "Enable SSL connection on PostgreSQL Servers. Rationale: SSL connectivity helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against 'man in the middle' attacks by encrypting the data stream between the server and application."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_SQL_66",
+                    "type": "rego",
+                    "rule": "file(postgreSQL.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-SQL-066",
+                            "eval": "data.rule.postgresql_public_access_disabled",
+                            "message": "data.rule.postgresql_public_access_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_SQL_066.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Databases"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_412"
+                    ],
+                    "severity": "High",
+                    "title": "Ensure PostgreSQL servers don't have public network access enabled",
+                    "description": "Always use Private Endpoint for PostgreSQL Server"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_ACR_001",
+                    "type": "rego",
+                    "rule": "file(registrieswebhooks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ACR-001",
+                            "eval": "data.rule.acr_webhooks",
+                            "message": "data.rule.acr_webhooks_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_ACR_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_214"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure ACR should have HTTPS protocol enabled for webhook",
+                    "description": "Ensure you send container registry webhooks only to a HTTPS endpoint. This policy checks your container registry webhooks and alerts if it finds a URI with HTTP."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_ACR_2",
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ACR-002",
+                            "eval": "data.rule.adminUserDisabled",
+                            "message": "data.rule.adminUserDisabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_ACR_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "Best Practices"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_224"
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that admin user is disabled for Container Registry",
+                    "description": "The value that indicates whether the admin user is enabled. Each container registry includes an admin user account, which is disabled by default. You can enable the admin user and manage its credentials in the Azure portal, or by using the Azure CLI or other Azure tools. All users authenticating with the admin account appear as a single user with push and pull access to the registry. Changing or disabling this account disables registry access for all users who use its credentials."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_ACR_3",
+                    "type": "rego",
+                    "rule": "file(registry.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ACR-003",
+                            "eval": "data.rule.acr_classic",
+                            "message": "data.rule.acr_classic_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_ACR_003.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Containers"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_224"
+                    ],
+                    "severity": "High",
+                    "title": "Azure Container Registry should not use the deprecated classic registry",
+                    "description": "This policy identifies an Azure Container Registry (ACR) that is using the classic SKU. The initial release of the Azure Container Registry (ACR) service that was offered as a classic SKU is being deprecated and will be unavailable after April 2019. As a best practice, upgrade your existing classic registry to a managed registry.<br><br>For more information, visit https://docs.microsoft.com/en-us/azure/container-registry/container-registry-upgrade"
                 },
                 {
                     "masterTestId": "AZURE_TEST_216",
