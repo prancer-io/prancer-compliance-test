@@ -2572,6 +2572,100 @@
                     "description": "Replicate Redis Cache server data to another Redis Cache server using geo replication. This feature is only available for Premium tier Redis Cache. From performance point of view, Microsoft recommends that both Redis Caches (Primary and the linked secondary) reside in the same region."
                 },
                 {
+                    "masterTestId": "AZURE_TEST_VM_1",
+                    "type": "rego",
+                    "rule": "file(vm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-VM-001",
+                            "eval": "data.rule.vm_aset",
+                            "message": "data.rule.vm_aset_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_VM_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_274"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Virtual Machine should be assigned to an availability set",
+                    "description": "To provide application redundancy during planned or unplanned maintenance events, you can group two or more virtual machines (VMs) in an availability set. An availability set ensures that the VMs are distributed across multiple isolated hardware nodes in a cluster so that only a subset of your VMs are impacted should a hardware or software failure occur on Azure.<br><br>This policy identifies Azure VMs that are not deployed in an availability set. As a high availability (HA) best practice, deploy your VMs in an availability set."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_VM_2",
+                    "type": "rego",
+                    "rule": "file(vm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-VM-002",
+                            "eval": "data.rule.linux_configuration",
+                            "message": "data.rule.linux_configuration_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_VM_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_274"
+                    ],
+                    "severity": "High",
+                    "title": "Ensure Azure instance authenticates using SSH keys",
+                    "description": "SSH is an encrypted connection protocol that allows secure sign-ins over unsecured connections. SSH is the default connection protocol for Linux VMs hosted in Azure. Using secure shell (SSH) key pair, it is possible to spin up a Linux virtual machine on Azure that defaults to using SSH keys for authentication, eliminating the need for passwords to sign in. We recommend connecting to a VM using SSH keys. Using basic authentication with SSH connections leaves VMs vulnerable to brute-force attacks or guessing of passwords."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_VM_3",
+                    "type": "rego",
+                    "rule": "file(vm.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-VM-003",
+                            "eval": "data.rule.vm_protection",
+                            "message": "data.rule.vm_protection_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_VM_003.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Compute"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_273"
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Virtual Machine should have endpoint protection installed",
+                    "description": "This policy identifies Azure Virtual Machines (VMs) that do not have endpoint protection installed. Installing endpoint protection systems (like Antimalware for Azure) provides for real-time protection capability that helps identify and remove viruses, spyware, and other malicious software. As a best practice, install endpoint protection on all VMs and computers to help identify and remove viruses, spyware, and other malicious software."
+                },
+                {
                     "masterTestId": "AZURE_TEST_216",
                     "type": "rego",
                     "rule": "file(PR_AZR_0007.rego)",
