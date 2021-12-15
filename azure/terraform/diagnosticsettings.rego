@@ -8,36 +8,31 @@ package rule
 default log_keyvault = null
 
 azure_attribute_absence ["log_keyvault"] {
-    count([c | input.resources[_].type == "azurerm_key_vault"; c := 1]) != count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1])
+    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1]) == 0
 }
 
-#azure_attribute_absence["log_keyvault"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "azurerm_key_vault"
-#    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting";
-#    	   c := 1]) == 0
-#}
+# azure_issue["log_keyvault"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_monitor_diagnostic_setting"
+#     log := resource.properties.log[_]
+#     lower(log.category) == "auditevent"
+#     log.enabled == false
+# }
 
-azure_attribute_absence["log_keyvault"] {
+azure_issue ["log_keyvault"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-    not resource.properties.log
-}
-
-# providers/Microsoft.KeyVault
-#azure_issue["log_keyvault"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-#    count(resource.properties.target_resource_id) == 0
-    #not contains(lower(resource.properties.target_resource_id), "microsoft.keyvault/vaults") 
-#}
-
-azure_issue["log_keyvault"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_monitor_diagnostic_setting"
-    log := resource.properties.log[_]
-    lower(log.category) == "auditevent"
-    log.enabled == false
+    lower(resource.type) == "azurerm_key_vault"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, resource.properties.compiletime_identity);
+              # as per Farshid: for now we should not check this enabled or category property as log is an array and possibility that one can be enabled and other can be disabled. which will mislead us. 
+              #r.properties.log[_].enabled == true;
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, concat(".", [resource.type, resource.name]));
+              #r.properties.log[_].enabled == true;
+              c := 1]) == 0
 }
 
 log_keyvault = false {
@@ -57,7 +52,7 @@ log_keyvault = false {
 }
 
 
-log_keyvault_err = "azurerm_key_vault's azurerm_monitor_diagnostic_setting property block 'log' need to be exist. its currently missing from the resource." {
+log_keyvault_err = "azurerm_key_vault's azurerm_monitor_diagnostic_setting and its property block 'log' need to be exist. its currently missing from the resource." {
     lower(input.resources[_].type) == "azurerm_key_vault"
     azure_attribute_absence["log_keyvault"]
 } else = "Azure Key Vault audit logging is currently not enabled" {
@@ -460,4 +455,66 @@ log_table_metadata := {
     "Resource Type": "azurerm_monitor_diagnostic_setting",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting"
+}
+
+#
+# PR-AZR-TRF-MNT-008
+#
+default storage_account_diagonstic_log_enabled = null
+
+azure_attribute_absence ["storage_account_diagonstic_log_enabled"] {
+    count([c | input.resources[_].type == "azurerm_monitor_diagnostic_setting"; c := 1]) == 0
+}
+
+azure_issue ["storage_account_diagonstic_log_enabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_storage_account"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, resource.properties.compiletime_identity);
+              # as per Farshid: for now we should not check this enabled or category property as log is an array and possibility that one can be enabled and other can be disabled. which will mislead us. 
+              #r.properties.log[_].enabled == true;
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_monitor_diagnostic_setting";
+              contains(r.properties.target_resource_id, concat(".", [resource.type, resource.name]));
+              #r.properties.log[_].enabled == true;
+              c := 1]) == 0
+}
+
+storage_account_diagonstic_log_enabled = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_attribute_absence["storage_account_diagonstic_log_enabled"]
+}
+
+storage_account_diagonstic_log_enabled {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    not azure_attribute_absence["storage_account_diagonstic_log_enabled"]
+    not azure_issue["storage_account_diagonstic_log_enabled"]
+}
+
+storage_account_diagonstic_log_enabled = false {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_issue["storage_account_diagonstic_log_enabled"]
+}
+
+
+storage_account_diagonstic_log_enabled_err = "azurerm_storage_account's azurerm_monitor_diagnostic_setting and its property block 'log' need to be exist. its currently missing from the resource." {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_attribute_absence["storage_account_diagonstic_log_enabled"]
+} else = "Azure Key Vault audit logging is currently not enabled" {
+    lower(input.resources[_].type) == "azurerm_storage_account"
+    azure_issue["storage_account_diagonstic_log_enabled"] 
+}
+
+storage_account_diagonstic_log_enabled_metadata := {
+    "Policy Code": "PR-AZR-TRF-MNT-008",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "Azure Storage Account audit logging should be enabled",
+    "Policy Description": "Diagnostic settings for storage accounts used to stream resource logs to a Log Analytics workspace. this policy will identify any storage account which has this diagnostic settings missing or misconfigured.",
+    "Resource Type": "azurerm_storage_account",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"
 }

@@ -29,10 +29,23 @@ azure_attribute_absence ["db_ad_admin"] {
     count([c | input.resources[_].type == "azurerm_sql_active_directory_administrator"; c := 1]) == 0
 }
 
+azure_issue["db_ad_admin"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_sql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_sql_active_directory_administrator";
+              contains(r.properties.server_name, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_sql_active_directory_administrator";
+              contains(r.properties.server_name, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+}
+
 db_ad_admin {
     lower(input.resources[_].type) == "azurerm_sql_server"
     not azure_attribute_absence["db_ad_admin"]
-    #not azure_issue["db_ad_admin"]
+    not azure_issue["db_ad_admin"]
 }
 
 db_ad_admin = false {
@@ -40,16 +53,18 @@ db_ad_admin = false {
     azure_attribute_absence["db_ad_admin"]
 }
 
-#db_ad_admin = false {
-#    azure_issue["db_ad_admin"]
-#}
+db_ad_admin = false {
+   lower(input.resources[_].type) == "azurerm_sql_server"
+   azure_issue["db_ad_admin"]
+}
 
-db_ad_admin_err = "sql_active_directory_administrator resource is missing from template" {
+db_ad_admin_err = "sql_active_directory_administrator resource is missing from template or its not linked with target azurerm_sql_server" {
     lower(input.resources[_].type) == "azurerm_sql_server"
     azure_attribute_absence["db_ad_admin"]
-} #else = "SQL servers does not have Azure Active Directory admin configured" {
-  #  azure_issue["db_ad_admin"]
-#}
+} else = "SQL servers does not have Azure Active Directory admin configured" {
+    lower(input.resources[_].type) == "azurerm_sql_server"
+    azure_issue["db_ad_admin"]
+}
 
 db_ad_admin_metadata := {
     "Policy Code": "PR-AZR-TRF-SQL-001",

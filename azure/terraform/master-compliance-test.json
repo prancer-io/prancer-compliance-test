@@ -502,6 +502,40 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_AKS_10",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(aks.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-AKS-010",
+                            "eval": "data.rule.aks_local_account_disabled",
+                            "message": "data.rule.aks_local_account_disabled_err",
+                            "remediationDescription": "In 'azurerm_kubernetes_cluster' resource, set 'local_account_disabled = true' to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#local_account_disabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_AKS_010.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Kubernetes Service Clusters should have local authentication methods disabled",
+                    "description": "Disabling local authentication methods improves security by ensuring that Azure Kubernetes Service Clusters should exclusively require Azure Active Directory identities for authentication.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_kubernetes_cluster"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_APPLICATION_GATEWAYS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -1357,7 +1391,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2266,6 +2300,41 @@
                     ]
                 },
                 {
+                    "masterTestId": "TEST_DIAGONASTIC_SETTINGS_7",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(diagnosticsettings.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-MNT-008",
+                            "eval": "data.rule.storage_account_diagonstic_log_enabled",
+                            "message": "data.rule.storage_account_diagonstic_log_enabled_err",
+                            "remediationDescription": "In 'azurerm_monitor_diagnostic_setting' resource, make sure 'log' block exist and 'target_resource_id' contains id of target 'azurerm_storage_account' resource to fix the issue. please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#log' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_MNT_008.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Storage Account audit logging should be enabled",
+                    "description": "Diagnostic settings for storage accounts used to stream resource logs to a Log Analytics workspace. this policy will identify any storage account which has this diagnostic settings missing or misconfigured.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_storage_account",
+                        "azurerm_monitor_diagnostic_setting"
+                    ]
+                },
+                {
                     "masterTestId": "TEST_DISKS_1",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
@@ -2399,43 +2468,9 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices",
+                                "Best Practice",
                                 "HIPAA",
                                 "NIST CSF"
-                            ],
-                            "service": [
-                                "terraform"
-                            ]
-                        }
-                    ],
-                    "resourceTypes": [
-                        "azurerm_key_vault"
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_KeyVault_3",
-                    "masterSnapshotId": [
-                        "TRF_TEMPLATE_SNAPSHOT"
-                    ],
-                    "type": "rego",
-                    "rule": "file(KeyVault.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AZR-TRF-KV-003",
-                            "eval": "data.rule.enablePurgeProtection",
-                            "message": "data.rule.enablePurgeProtection_err",
-                            "remediationDescription": "In 'azurerm_key_vault' resource, set 'purge_protection_enabled = true' to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault#purge_protection_enabled' target='_blank'>here</a> for details.",
-                            "remediationFunction": "PR_AZR_TRF_KV_003.py"
-                        }
-                    ],
-                    "severity": "High",
-                    "title": "Key vault should have purge protection enabled",
-                    "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [
-                                "Best Practices "
                             ],
                             "service": [
                                 "terraform"
@@ -2469,7 +2504,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices "
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2481,12 +2516,46 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_KEYVAULT_KEYS",
+                    "masterTestId": "TEST_KeyVault_3",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(keyvaultkeys.rego)",
+                    "rule": "file(KeyVault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-KV-003",
+                            "eval": "data.rule.enablePurgeProtection",
+                            "message": "data.rule.enablePurgeProtection_err",
+                            "remediationDescription": "In 'azurerm_key_vault' resource, set 'purge_protection_enabled = true' to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault#purge_protection_enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_KV_003.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Key vault should have purge protection enabled",
+                    "description": "The key vault contains object keys, secrets and certificates. Accidental unavailability of a key vault can cause immediate data loss or loss of security functions (authentication, validation, verification, non-repudiation",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_key_vault"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KeyVault_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(KeyVault.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-TRF-KV-004",
@@ -2508,7 +2577,7 @@
                                 "ISO 27001",
                                 "NIST CSF",
                                 "HIPAA",
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2520,12 +2589,12 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_KEYVAULT_SECRETS",
+                    "masterTestId": "TEST_KeyVault_5",
                     "masterSnapshotId": [
                         "TRF_TEMPLATE_SNAPSHOT"
                     ],
                     "type": "rego",
-                    "rule": "file(keyvaultsecrets.rego)",
+                    "rule": "file(KeyVault.rego)",
                     "evals": [
                         {
                             "id": "PR-AZR-TRF-KV-005",
@@ -2556,6 +2625,143 @@
                     ],
                     "resourceTypes": [
                         "azurerm_key_vault_secret"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KeyVault_6",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(KeyVault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-KV-006",
+                            "eval": "data.rule.kv_public_network_access_disabled",
+                            "message": "data.rule.kv_public_network_access_disabled_err",
+                            "remediationDescription": "In 'azurerm_key_vault' resource, set default_action = 'Deny' under 'network_acls' block to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault#default_action' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_KV_006.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure Key Vault should disable public network access",
+                    "description": "Disable public network access for your key vault so that it's not accessible over the public internet. This can reduce data leakage risks.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_key_vault"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KeyVault_7",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(KeyVault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-KV-007",
+                            "eval": "data.rule.kv_allow_bypass_for_azure_services",
+                            "message": "data.rule.kv_allow_bypass_for_azure_services_err",
+                            "remediationDescription": "In 'azurerm_key_vault' resource, set bypass = 'AzureServices' under 'network_acls' block to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault#bypass' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_KV_007.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure Key Vault Trusted Microsoft Services access should be enabled",
+                    "description": "When you enable the Key Vault Firewall, you will be given an option to 'Allow Trusted Microsoft Services to bypass this firewall'. The trusted services list encompasses services where Microsoft controls all of the code that runs on the service.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_key_vault"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KeyVault_8",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(KeyVault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-KV-008",
+                            "eval": "data.rule.kv_service_endpoint_enabled",
+                            "message": "data.rule.kv_service_endpoint_enabled_err",
+                            "remediationDescription": "In 'azurerm_key_vault' resource, add source subnet ids into 'virtual_network_subnet_ids' array property under 'network_acls' block to fix the issue. Please visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault#virtual_network_subnet_ids' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_KV_008.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure KeyVault should allow access from virtual network service endpoint",
+                    "description": "This policy will identify if One or more Subnet ID's have access to this Key Vault. Will warn if not found.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_key_vault"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_KeyVault_9",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(KeyVault.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-KV-009",
+                            "eval": "data.rule.kv_usage_private_enpoint",
+                            "message": "data.rule.kv_usage_private_enpoint_err",
+                            "remediationDescription": "'azurerm_key_vault' resource need to have a link with 'azurerm_private_endpoint', set 'id' of 'azurerm_key_vault' to property 'private_connection_resource_id' under 'azurerm_private_endpoint' resources 'private_service_connection' block to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint#private_connection_resource_id' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_KV_009.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure KeyVault should use private link",
+                    "description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your Azure KeyVault, data leakage risks are reduced.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_key_vault",
+                        "azurerm_private_endpoint"
                     ]
                 },
                 {
@@ -2620,7 +2826,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2655,7 +2861,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2690,7 +2896,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2725,7 +2931,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2760,7 +2966,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2835,7 +3041,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -2870,7 +3076,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4369,7 +4575,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4405,7 +4611,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4441,7 +4647,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4477,7 +4683,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4513,7 +4719,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4589,7 +4795,7 @@
                                 "ISO 27001",
                                 "NIST CSF",
                                 "HIPAA",
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4628,7 +4834,7 @@
                                 "ISO 27001",
                                 "NIST CSF",
                                 "HIPAA",
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -4638,6 +4844,109 @@
                     "resourceTypes": [
                         "azurerm_redis_linked_server",
                         "azurerm_redis_cache"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_Redis_3",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(Redis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ARC-003",
+                            "eval": "data.rule.public_network_access_disabled",
+                            "message": "data.rule.public_network_access_disabled_err",
+                            "remediationDescription": "In 'azurerm_redis_cache' resource, set 'public_network_access_enabled = false' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache#public_network_access_enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ARC_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Cache for Redis should disable public network access",
+                    "description": "Disabling public network access improves security by ensuring that the Azure Cache for Redis isn't exposed on the public internet. You can limit exposure of your Azure Cache for Redis by creating private endpoints instead.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_redis_cache"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_Redis_4",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(Redis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ARC-004",
+                            "eval": "data.rule.redis_cache_inside_vnet",
+                            "message": "data.rule.redis_cache_inside_vnet_err",
+                            "remediationDescription": "In 'azurerm_redis_cache' resource, set 'id' of target 'azurerm_subnet' into property 'subnet_id' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/redis_cache#subnet_id' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ARC_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Cache for Redis should reside within a virtual network",
+                    "description": "Azure Virtual Network deployment provides enhanced security and isolation for your Azure Cache for Redis, as well as subnets, access control policies, and other features to further restrict access.When an Azure Cache for Redis instance is configured with a virtual network, it is not publicly addressable and can only be accessed from virtual machines and applications within the virtual network.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_redis_cache"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_Redis_5",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(Redis.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-ARC-005",
+                            "eval": "data.rule.redis_cache_uses_privatelink",
+                            "message": "data.rule.redis_cache_uses_privatelink_err",
+                            "remediationDescription": "'azurerm_redis_cache' resource need to have a link with 'azurerm_private_endpoint', set 'id' of 'azurerm_redis_cache' to property 'private_connection_resource_id' under 'azurerm_private_endpoint' resources 'private_service_connection' block to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint#private_connection_resource_id' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_ARC_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Azure Cache for Redis should use private link",
+                    "description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your Azure Cache for Redis instances, data leakage risks are reduced.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_redis_cache",
+                        "azurerm_private_endpoint"
                     ]
                 },
                 {
@@ -4740,7 +5049,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -5054,7 +5363,7 @@
                                 "ISO 27001",
                                 "NIST CSF",
                                 "HIPAA",
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -5090,7 +5399,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -5126,7 +5435,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -5190,7 +5499,7 @@
                             "id": "PR-AZR-TRF-STR-004",
                             "eval": "data.rule.storage_acl",
                             "message": "data.rule.storage_acl_err",
-                            "remediationDescription": "In 'azurerm_storage_account_network_rules' resource or azurerm_storage_account's inner block 'network_rules', set 'default_action = Deny' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules#default_action' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In 'azurerm_storage_account_network_rules' resource or 'azurerm_storage_account's inner block 'network_rules', set 'default_action = Deny' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules#default_action' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_TRF_STR_004.py"
                         }
                     ],
@@ -5279,7 +5588,7 @@
                         {
                             "cloud": "git",
                             "compliance": [
-                                "Best Practices"
+                                "Best Practice"
                             ],
                             "service": [
                                 "terraform"
@@ -5509,6 +5818,145 @@
                     ],
                     "resourceTypes": [
                         "azurerm_storage_account"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_13",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-STR-019",
+                            "eval": "data.rule.storage_account_uses_privatelink",
+                            "message": "data.rule.storage_account_uses_privatelink_err",
+                            "remediationDescription": "'azurerm_storage_account' resource need to have a link with 'azurerm_private_endpoint', set 'id' of 'azurerm_storage_account' to property 'private_connection_resource_id' under 'azurerm_private_endpoint' resources 'private_service_connection' block to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint#private_connection_resource_id' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_STR_019.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Azure Storage account should use private link",
+                    "description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your Azure Storage account instances, data leakage risks are reduced.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_storage_account",
+                        "azurerm_private_endpoint"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_14",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-STR-020",
+                            "eval": "data.rule.storage_account_uses_double_encryption",
+                            "message": "data.rule.storage_account_uses_double_encryption_err",
+                            "remediationDescription": "'azurerm_storage_account' resource need to have a link with 'azurerm_storage_encryption_scope', set 'id' of 'azurerm_storage_account' to property 'storage_account_id' under 'azurerm_storage_encryption_scope' resource to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_encryption_scope#storage_account_id' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_STR_020.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage account encryption scopes should use double encryption for data at rest",
+                    "description": "Enable infrastructure encryption for encryption at rest of your storage account encryption scopes for added security. Infrastructure encryption ensures that your data is encrypted twice.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_storage_account",
+                        "azurerm_storage_encryption_scope"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_15",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-STR-024",
+                            "eval": "data.rule.storage_shared_access_key_disabled",
+                            "message": "data.rule.storage_shared_access_key_disabled_err",
+                            "remediationDescription": "In 'azurerm_storage_account' resource, set 'shared_access_key_enabled = false' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#shared_access_key_enabled' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_STR_024.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage accounts should prevent shared key access",
+                    "description": "Audit requirement of Azure Active Directory (Azure AD) to authorize requests for your storage account. By default, requests can be authorized with either Azure Active Directory credentials, or by using the account access key for Shared Key authorization. Of these two types of authorization, Azure AD provides superior security and ease of use over Shared Key, and is recommended by Microsoft.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_storage_account"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_STORAGE_ACCOUNT_16",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(storageaccounts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-STR-023",
+                            "eval": "data.rule.storage_acl_usage_vnet",
+                            "message": "data.rule.storage_acl_usage_vnet_err",
+                            "remediationDescription": "In 'azurerm_storage_account_network_rules' resource or 'azurerm_storage_account's inner block 'network_rules', set 'default_action = Deny' and set id of target 'azurerm_subnet' into property 'virtual_network_subnet_ids' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules#virtual_network_subnet_ids' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_STR_023.py"
+                        }
+                    ],
+                    "severity": "High",
+                    "title": "Storage Accounts should use a virtual network service endpoint",
+                    "description": "This policy audits any Storage Account not configured to use a virtual network service endpoint.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_storage_account",
+                        "azurerm_storage_account_network_rules"
                     ]
                 },
                 {

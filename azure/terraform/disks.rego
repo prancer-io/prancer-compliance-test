@@ -82,6 +82,10 @@ azure_issue["disk_encrypt_cmk"] {
               r.type == "azurerm_disk_encryption_set";
               contains(disk_encryption_set_id_found, r.properties.compiletime_identity);
               c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_disk_encryption_set";
+              contains(disk_encryption_set_id_found, concat(".", [r.type, r.name]));
+              c := 1]) == 0
 }
 
 disk_encrypt_cmk = false {

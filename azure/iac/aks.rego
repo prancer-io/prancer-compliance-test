@@ -1,5 +1,9 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters
 
 #
@@ -665,3 +669,55 @@ aks_kub_dashboard_disabled_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
 }
+
+
+#
+# PR-AZR-ARM-AKS-010
+#
+
+default aks_local_account_disabled = null
+#Defaults to false
+azure_attribute_absence["aks_local_account_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    not has_property(resource.properties, "disableLocalAccounts")
+}
+
+azure_issue["aks_local_account_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerservice/managedclusters"
+    resource.properties.disableLocalAccounts != true
+}
+
+aks_local_account_disabled {
+    lower(input.resources[_].type) == "microsoft.containerservice/managedclusters"
+    not azure_attribute_absence["aks_local_account_disabled"]
+    not azure_issue["aks_local_account_disabled"]
+}
+
+aks_local_account_disabled = false {
+    azure_attribute_absence["aks_local_account_disabled"]
+}
+
+aks_local_account_disabled = false {
+    azure_issue["aks_local_account_disabled"]
+}
+
+aks_local_account_disabled_err = "microsoft.containerservice/managedclusters property 'disableLocalAccounts' is missing from the resource" {
+    azure_attribute_absence["aks_local_account_disabled"]
+} else = "Azure Kubernetes Service Clusters currently dont have local authentication methods disabled" {
+    azure_issue["aks_local_account_disabled"]
+}
+
+aks_local_account_disabled_metadata := {
+    "Policy Code": "PR-AZR-ARM-AKS-010",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Kubernetes Service Clusters should have local authentication methods disabled",
+    "Policy Description": "Disabling local authentication methods improves security by ensuring that Azure Kubernetes Service Clusters should exclusively require Azure Active Directory identities for authentication.",
+    "Resource Type": "microsoft.containerservice/managedclusters",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.containerservice/managedclusters"
+}
+
