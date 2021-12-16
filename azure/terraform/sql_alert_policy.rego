@@ -16,7 +16,7 @@ azure_attribute_absence["sql_server_alert"] {
     not resource.properties.state
 }
 
-azure_issue["sql_alert"] {
+azure_issue["sql_server_alert"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_mssql_server"
     count([c | r := input.resources[_];
