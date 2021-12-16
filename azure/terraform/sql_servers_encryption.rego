@@ -80,12 +80,12 @@ azure_issue["serverKeyType"] {
     count([c | r := input.resources[_];
               r.type == "azurerm_mssql_server_transparent_data_encryption";
               contains(r.properties.server_id, resource.properties.compiletime_identity);
-              count(resource.properties.key_vault_key_id) > 0;
+              count(r.properties.key_vault_key_id) > 0;
               c := 1]) == 0
     count([c | r := input.resources[_];
               r.type == "azurerm_mssql_server_transparent_data_encryption";
               contains(r.properties.server_id, concat(".", [resource.type, resource.name]));
-              count(resource.properties.key_vault_key_id) > 0;
+              count(r.properties.key_vault_key_id) > 0;
               c := 1]) == 0
 }
 
