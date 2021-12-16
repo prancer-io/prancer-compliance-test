@@ -876,122 +876,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_2",
-                    "masterSnapshotId": [
-                        "TEST_S3"
-                    ],
-                    "type": "rego",
-                    "rule": "file(storage.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-S3-002",
-                            "eval": "data.rule.s3_acl_delete",
-                            "message": "data.rule.s3_acl_delete_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_S3_002.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "AWS S3 Bucket has Global DELETE Permissions enabled via bucket policy",
-                    "description": "This policy identifies the S3 Bucket(s) which will allow any unauthenticated user to DELETE objects from a bucket. These permissions permit anyone, malicious or not, to DELETE objects from your S3 bucket if they can guess the namespace. Since the S3 service does not protect the namespace other than with ACLs and Bucket Policy, you risk loss or compromise of critical data by leaving this open.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "cloud"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_STORAGE_3",
-                    "masterSnapshotId": [
-                        "TEST_S3"
-                    ],
-                    "type": "rego",
-                    "rule": "file(storage.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-S3-003",
-                            "eval": "data.rule.s3_acl_get",
-                            "message": "data.rule.s3_acl_get_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_S3_003.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "AWS S3 Bucket has Global GET Permissions enabled via bucket policy",
-                    "description": "This policy identifies the S3 Bucket(s) which will allow any unauthenticated user to GET objects from a bucket. These permissions permit anyone, malicious or not, to GET objects from your S3 bucket if they can guess the namespace. Since the S3 service does not protect the namespace other than with ACLs and Bucket Policy, you risk loss or compromise of critical data by leaving this open.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "cloud"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_STORAGE_4",
-                    "masterSnapshotId": [
-                        "TEST_S3"
-                    ],
-                    "type": "rego",
-                    "rule": "file(storage.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-S3-004",
-                            "eval": "data.rule.s3_acl_list",
-                            "message": "data.rule.s3_acl_list_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_S3_004.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "AWS S3 Bucket has Global LIST Permissions enabled via bucket policy",
-                    "description": "This policy identifies the S3 Bucket(s) which will allow any unauthenticated user to LIST objects from a bucket. These permissions permit anyone, malicious or not, to LIST objects from your S3 bucket if they can guess the namespace. Since the S3 service does not protect the namespace other than with ACLs and Bucket Policy, you risk loss or compromise of critical data by leaving this open.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "cloud"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_STORAGE_5",
-                    "masterSnapshotId": [
-                        "TEST_S3"
-                    ],
-                    "type": "rego",
-                    "rule": "file(storage.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-S3-005",
-                            "eval": "data.rule.s3_acl_put",
-                            "message": "data.rule.s3_acl_put_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_S3_005.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "AWS S3 Bucket has Global PUT Permissions enabled via bucket policy",
-                    "description": "This policy identifies the S3 Bucket(s) which will allow any unauthenticated user to PUT objects into a bucket. These permissions permit anyone, malicious or not, to PUT objects into your S3 bucket if they can guess the namespace. Since the S3 service does not protect the namespace other than with ACLs and Bucket Policy, you risk compromise of critical data by leaving this open.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "cloud"
-                            ]
-                        }
-                    ]
-                },
-                {
                     "masterTestId": "TEST_STORAGE_6",
                     "masterSnapshotId": [
                         "TEST_CT"
@@ -1068,35 +952,6 @@
                     "severity": "low",
                     "title": "AWS S3 bucket has global view ACL permissions enabled.",
                     "description": "This policy determines if any S3 bucket(s) has Global View ACL permissions enabled for the All Users group. These permissions allow external resources to see the permission settings associated to the object.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "cloud"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "masterTestId": "TEST_STORAGE_9",
-                    "masterSnapshotId": [
-                        "TEST_S3"
-                    ],
-                    "type": "rego",
-                    "rule": "file(storage.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-S3-009",
-                            "eval": "data.rule.s3_transport",
-                            "message": "data.rule.s3_transport_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_S3_009.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "AWS S3 bucket not configured with secure data transport policy",
-                    "description": "This policy identifies S3 buckets which are not configured with secure data transport policy. AWS S3 buckets should enforce encryption of data over the network using Secure Sockets Layer (SSL). It is recommended to add a bucket policy that explicitly denies (Effect: Deny) all access (Action: s3:*) from anybody who browses (Principal: *) to Amazon S3 objects within an Amazon S3 bucket if they are not accessed through HTTPS (aws:SecureTransport: false).",
                     "tags": [
                         {
                             "cloud": "git",
@@ -1554,35 +1409,6 @@
                     ]
                 },
                 {
-                    "masterTestId": "TEST_STORAGE_25",
-                    "masterSnapshotId": [
-                        "TEST_BKP"
-                    ],
-                    "type": "rego",
-                    "rule": "file(storage.rego)",
-                    "evals": [
-                        {
-                            "id": "PR-AWS-CLD-BKP-001",
-                            "eval": "data.rule.backup_public_access_disable",
-                            "message": "data.rule.backup_public_access_disable_err",
-                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-backup-backupvault.html#cfn-backup-backupvault-accesspolicy' target='_blank'>here</a>",
-                            "remediationFunction": "PR_AWS_CLD_BKP_001.py"
-                        }
-                    ],
-                    "severity": "Medium",
-                    "title": "Ensure Glacier Backup policy is not publicly accessible",
-                    "description": "Public Glacier backup potentially expose existing interfaces to unwanted 3rd parties that can tap into an existing data stream, resulting in data leak to an unwanted party.",
-                    "tags": [
-                        {
-                            "cloud": "git",
-                            "compliance": [],
-                            "service": [
-                                "cloud"
-                            ]
-                        }
-                    ]
-                },
-                {
                     "masterTestId": "TEST_STORAGE_26",
                     "masterSnapshotId": [
                         "TEST_TRF"
@@ -1606,7 +1432,384 @@
                             "cloud": "git",
                             "compliance": [],
                             "service": [
-                                "cloudformation"
+                                "emr"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EMR_1",
+                    "masterSnapshotId": [
+                        "TEST_EMR"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EMR-001",
+                            "eval": "data.rule.emr_security",
+                            "message": "data.rule.emr_security_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EMR_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EMR cluster is not configured with security configuration",
+                    "description": "This policy identifies EMR clusters which are not configured with security configuration. With Amazon EMR release version 4.8.0 or later, you can use security configurations to configure data encryption, Kerberos authentication, and Amazon S3 authorization for EMRFS.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "emr"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EMR_2",
+                    "masterSnapshotId": [
+                        "TEST_EMR"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EMR-002",
+                            "eval": "data.rule.emr_kerberos",
+                            "message": "data.rule.emr_kerberos_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-kerberosattributes' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EMR_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EMR cluster is not configured with Kerberos Authentication",
+                    "description": "This policy identifies EMR clusters which are not configured with Kerberos Authentication. Kerberos uses secret-key cryptography to provide strong authentication so that passwords or other credentials aren't sent over the network in an unencrypted format.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "emr"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EMR_3",
+                    "masterSnapshotId": [
+                        "TEST_EMR"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EMR-003",
+                            "eval": "data.rule.emr_s3_encryption",
+                            "message": "data.rule.emr_s3_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EMR_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EMR cluster is not configured with CSE CMK for data at rest encryption (Amazon S3 with EMRFS)",
+                    "description": "This policy identifies EMR clusters which are not configured with Client Side Encryption with Customer Master Keys(CSE CMK) for data at rest encryption of Amazon S3 with EMRFS. As a best practice, use Customer Master Keys (CMK) to encrypt the data in your EMR cluster and ensure full control over your data.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "emr"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EMR_4",
+                    "masterSnapshotId": [
+                        "TEST_EMR"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EMR-004",
+                            "eval": "data.rule.emr_local_encryption_cmk",
+                            "message": "data.rule.emr_local_encryption_cmk_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EMR_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EMR cluster is not enabled with local disk encryption using CMK",
+                    "description": "This policy identifies AWS EMR clusters that are not enabled with local disk encryption using CMK(Customer Managed Key). Applications using the local file system on each cluster instance for intermediate data throughout workloads, where data could be spilled to disk when it overflows memory. With Local disk encryption at place, data at rest can be protected.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "emr"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EMR_6",
+                    "masterSnapshotId": [
+                        "TEST_EMR"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EMR-006",
+                            "eval": "data.rule.emr_rest_encryption",
+                            "message": "data.rule.emr_rest_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EMR_006.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EMR cluster is not enabled with data encryption at rest",
+                    "description": "This policy identifies AWS EMR clusters for which data encryption at rest is not enabled. Encryption of data at rest is required to prevent unauthorized users from accessing the sensitive information available on your  EMR clusters and associated storage systems.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "emr"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EMR_7",
+                    "masterSnapshotId": [
+                        "TEST_EMR"
+                    ],
+                    "type": "rego",
+                    "rule": "file(emr.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EMR-007",
+                            "eval": "data.rule.emr_transit_encryption",
+                            "message": "data.rule.emr_transit_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html#cfn-elasticmapreduce-cluster-securityconfiguration' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EMR_007.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EMR cluster is not enabled with data encryption in transit",
+                    "description": "This policy identifies AWS EMR clusters which are not enabled with data encryption in transit. It is highly recommended to implement in-transit encryption in order to protect data from unauthorized access as it travels through the network, between clients and storage server. Enabling data encryption in-transit helps prevent unauthorized users from reading sensitive data between your EMR clusters and their associated storage systems.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "emr"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SQS_2",
+                    "masterSnapshotId": [
+                        "TEST_SQS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sqs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SQS-002",
+                            "eval": "data.rule.sqs_encrypt_key",
+                            "message": "data.rule.sqs_encrypt_key_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SQS_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS SQS queue encryption using default KMS key instead of CMK",
+                    "description": "This policy identifies CloudFront web distributions which have a default SSL certificate to access CloudFront content. It is a best practice to use custom SSL Certificate to access CloudFront content. It gives you full control over the content data. custom SSL certificates also allow your users to access your content by using an alternate domain name. You can use a certificate stored in AWS Certificate Manager (ACM) or you can use a certificate stored in IAM.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "sqs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SQS_3",
+                    "masterSnapshotId": [
+                        "TEST_SQS"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sqs.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SQS-003",
+                            "eval": "data.rule.sqs_encrypt",
+                            "message": "data.rule.sqs_encrypt_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SQS_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS SQS server side encryption not enabled",
+                    "description": "SSE lets you transmit sensitive data in encrypted queues. SSE protects the contents of messages in Amazon SQS queues using keys managed in the AWS Key Management Service (AWS KMS). SSE encrypts messages as soon as Amazon SQS receives them. The messages are stored in encrypted form and Amazon SQS decrypts messages only when they are sent to an authorized consumer._x005F_x000D_ _x005F_x000D_ SQS SSE and the AWS KMS security standards can help you meet encryption-related compliance requirements.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "sqs"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MSK_1",
+                    "masterSnapshotId": [
+                        "TEST_MSK"
+                    ],
+                    "type": "rego",
+                    "rule": "file(msk.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-MSK-001",
+                            "eval": "data.rule.msk_encryption_at_rest_cmk",
+                            "message": "data.rule.msk_encryption_at_rest_cmk_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_MSK_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Use KMS Customer Master Keys for AWS MSK Clusters",
+                    "description": "Ensure that Amazon Managed Streaming for Kafka (MSK) clusters are using AWS KMS Customer Master Keys (CMKs) instead of AWS managed-keys (i.e. default keys) for data encryption, in order to have a fine-grained control over data-at-rest encryption/decryption process and meet compliance requirements. MSK is a fully managed AWS service that enables you to migrate, build and run real-time streaming applications on Apache Kafka.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "msk"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MSK_2",
+                    "masterSnapshotId": [
+                        "TEST_MSK"
+                    ],
+                    "type": "rego",
+                    "rule": "file(msk.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-MSK-002",
+                            "eval": "data.rule.msk_in_transit_encryption",
+                            "message": "data.rule.msk_in_transit_encryption_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_MSK_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure data is Encrypted in transit (TLS)",
+                    "description": "Ensure data is Encrypted in transit (TLS)",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "msk"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MSK_3",
+                    "masterSnapshotId": [
+                        "TEST_MSK"
+                    ],
+                    "type": "rego",
+                    "rule": "file(msk.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-MSK-003",
+                            "eval": "data.rule.msk_in_transit_encryption_tls",
+                            "message": "data.rule.msk_in_transit_encryption_tls_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_MSK_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure client authentication is enabled with TLS (mutual TLS authentication)",
+                    "description": "Enable TLS by setting EncryptionInfo.EncryptionInTransit.ClientBroker value to 'TLS'. to provide trasport layes security to MSK instance",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "msk"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MSK_4",
+                    "masterSnapshotId": [
+                        "TEST_MSK"
+                    ],
+                    "type": "rego",
+                    "rule": "file(msk.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-MSK-004",
+                            "eval": "data.rule.msk_vpc",
+                            "message": "data.rule.msk_vpc_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-msk-cluster.html#cfn-msk-cluster-encryptioninfo' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_MSK_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure MSK cluster is setup in GS VPC",
+                    "description": "To Add MKS Cluster in gs VPC,Specify exactly two subnets if you are using the US West (N. California) Region. For other Regions where Amazon MSK is available, you can specify either two or three subnets. The subnets that you specify must be in distinct Availability Zones. When you create a cluster, Amazon MSK distributes the broker nodes evenly across the subnets that you specify.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "msk"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MSK_5",
+                    "masterSnapshotId": [
+                        "TEST_MSK"
+                    ],
+                    "type": "rego",
+                    "rule": "file(msk.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-MSK-005",
+                            "eval": "data.rule.msk_cluster_logging_enable",
+                            "message": "data.rule.msk_cluster_logging_enable_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-msk-cluster-brokerlogs.html#cfn-msk-cluster-brokerlogs-cloudwatchlogs' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_MSK_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure Amazon MSK cluster has logging enabled",
+                    "description": "Consistent cluster logging helps you determine if a request was made with root or AWS Identity and Access Management (IAM) user credentials and whether the request was made with temporary security credentials for a role or federated user.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "msk"
                             ]
                         }
                     ]

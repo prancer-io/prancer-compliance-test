@@ -225,6 +225,58 @@
 							]
 						}
 					]
+				},
+				{
+					"masterSnapshotId": "TEST_EMR",
+					"arn": "arn:aws:emr:::",
+					"collection": "aws_emr",
+					"listMethod": "list_clusters",
+					"detailMethods": [
+						"describe_cluster",
+						"describe_security_configuration"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"emr"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_SQS",
+					"arn": "arn:aws:sqs:::",
+					"collection": "aws_sqs",
+					"listMethod": "list_queues",
+					"detailMethods": [
+						"get_queue_attributes"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"sqs"
+							]
+						}
+					]
+				},
+				{
+					"masterSnapshotId": "TEST_MSK",
+					"arn": "arn:aws:kafka:::",
+					"collection": "aws_msk",
+					"listMethod": "list_clusters",
+					"detailMethods": [
+						"describe_cluster"
+					],
+					"tags": [
+						{
+							"cloud": "AWS",
+							"service": [
+								"msk"
+							]
+						}
+					]
 				}
 			]
 		}
