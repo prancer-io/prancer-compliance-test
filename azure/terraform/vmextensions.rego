@@ -20,9 +20,24 @@ azure_attribute_absence["vm_protection"] {
 
 azure_issue["vm_protection"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_virtual_machine_extension"
-    lower(resource.properties.type) != "iaasantimalware"
+    lower(resource.type) == "azurerm_virtual_machine"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_virtual_machine_extension";
+              contains(r.properties.virtual_machine_id, resource.properties.compiletime_identity);
+              lower(r.properties.type) == "iaasantimalware";
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_virtual_machine_extension";
+              contains(r.properties.virtual_machine_id, concat(".", [resource.type, resource.name]));
+              lower(r.properties.type) == "iaasantimalware";
+              c := 1]) == 0
 }
+
+# azure_issue["vm_protection"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_virtual_machine_extension"
+#     lower(resource.properties.type) != "iaasantimalware"
+# }
 
 vm_protection {
     lower(input.resources[_].type) == "azurerm_virtual_machine"
@@ -55,7 +70,7 @@ vm_protection_metadata := {
     "Language": "Terraform",
     "Policy Title": "Azure Virtual Machine should have endpoint protection installed",
     "Policy Description": "This policy identifies Azure Virtual Machines (VMs) that do not have endpoint protection installed. Installing endpoint protection systems (like Antimalware for Azure) provides for real-time protection capability that helps identify and remove viruses, spyware, and other malicious software. As a best practice, install endpoint protection on all VMs and computers to help identify and remove viruses, spyware, and other malicious software.",
-    "Resource Type": "azurerm_virtual_machine_extension",
+    "Resource Type": "azurerm_virtual_machine",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_extension"
 }

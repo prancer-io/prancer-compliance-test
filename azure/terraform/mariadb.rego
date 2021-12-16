@@ -1,5 +1,9 @@
 package rule
 
+has_property(parent_object, target_property) { 
+	_ = parent_object[target_property]
+}
+
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_firewall_rule
 
 # PR-AZR-TRF-SQL-012
@@ -22,17 +26,34 @@ azure_attribute_absence ["maria_ingress_from_any_ip_disabled"] {
     not resource.properties.end_ip_address
 }
 
-azure_issue ["maria_ingress_from_any_ip_disabled"] {
+azure_issue["maria_ingress_from_any_ip_disabled"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_mariadb_firewall_rule"
-    contains(resource.properties.start_ip_address, "0.0.0.0")
+    lower(resource.type) == "azurerm_mariadb_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mariadb_firewall_rule";
+              contains(r.properties.server_name, resource.properties.compiletime_identity);
+              not contains(r.properties.start_ip_address, "0.0.0.0");
+              not contains(r.properties.end_ip_address, "0.0.0.0");
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mariadb_firewall_rule";
+              contains(r.properties.server_name, concat(".", [resource.type, resource.name]));
+              not contains(r.properties.start_ip_address, "0.0.0.0");
+              not contains(r.properties.end_ip_address, "0.0.0.0");
+              c := 1]) == 0
 }
 
-azure_issue ["maria_ingress_from_any_ip_disabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_mariadb_firewall_rule"
-    contains(resource.properties.end_ip_address, "0.0.0.0")
-}
+# azure_issue ["maria_ingress_from_any_ip_disabled"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_mariadb_firewall_rule"
+#     contains(resource.properties.start_ip_address, "0.0.0.0")
+# }
+
+# azure_issue ["maria_ingress_from_any_ip_disabled"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_mariadb_firewall_rule"
+#     contains(resource.properties.end_ip_address, "0.0.0.0")
+# }
 
 maria_ingress_from_any_ip_disabled {
     lower(input.resources[_].type) == "azurerm_mariadb_server"
@@ -66,7 +87,7 @@ maria_ingress_from_any_ip_disabled_metadata := {
     "Language": "Terraform",
     "Policy Title": "MariaDB should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
     "Policy Description": "This policy will identify MariaDB firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
-    "Resource Type": "azurerm_mariadb_firewall_rule",
+    "Resource Type": "azurerm_mariadb_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_firewall_rule"
 }
@@ -127,25 +148,11 @@ mairadb_ssl_enforcement_enabled_metadata := {
 
 default mairadb_public_access_disabled = null
 
-has_property(parent_object, target_property) { 
-	_ = parent_object[target_property]
-}
-
-# public_network_access_enabled Defaults to true if not exist. This was an issue because we need to fail if property not exist and also need to passed if property has value false.
-# if property does not exist it has false value in OPA, and explicitly setting false value will be treated as property not exist as well. so we need to implement a comparison like below.
-# no_azure_issue(resource_type) {
-#     count([c | input.resources[_].type == resource_type; c := 1]) == count([c | r := input.resources[_];
-#                r.type == resource_type;
-#                r.properties.public_network_access_enabled == false; # this is not same as not r.properties.public_network_access_enabled. not will give you correct result if property does not exist
-#                c := 1])
-# } else = false {
-# 	true
+# is_private_endpoint_exist["mairadb_public_access_disabled"] {
+#     count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) > 0
 # }
 
-is_private_endpoint_exist["mairadb_public_access_disabled"] {
-    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) > 0
-}
-
+#public_network_access_enabled Defaults to true if not exist.
 azure_attribute_absence["mairadb_public_access_disabled"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_mariadb_server"
@@ -158,10 +165,10 @@ azure_issue["mairadb_public_access_disabled"] {
     resource.properties.public_network_access_enabled == true
 }
 
-mairadb_public_access_disabled {
-    lower(input.resources[_].type) == "azurerm_mariadb_server"
-    is_private_endpoint_exist["mairadb_public_access_disabled"]
-} 
+# mairadb_public_access_disabled {
+#     lower(input.resources[_].type) == "azurerm_mariadb_server"
+#     is_private_endpoint_exist["mairadb_public_access_disabled"]
+# } 
 
 mairadb_public_access_disabled {
     lower(input.resources[_].type) == "azurerm_mariadb_server"
@@ -172,35 +179,23 @@ mairadb_public_access_disabled {
 mairadb_public_access_disabled = false {
     lower(input.resources[_].type) == "azurerm_mariadb_server"
     azure_attribute_absence["mairadb_public_access_disabled"]
-    not is_private_endpoint_exist["mairadb_public_access_disabled"]
+    #not is_private_endpoint_exist["mairadb_public_access_disabled"]
 }
 
 mairadb_public_access_disabled = false {
     lower(input.resources[_].type) == "azurerm_mariadb_server"
     azure_issue["mairadb_public_access_disabled"]
-    not is_private_endpoint_exist["mairadb_public_access_disabled"]
+    #not is_private_endpoint_exist["mairadb_public_access_disabled"]
 }
-
-# mairadb_public_access_disabled {
-#     lower(input.resources[_].type) == "azurerm_mariadb_server"
-#     no_azure_issue("azurerm_mariadb_server")
-# } else = false {
-# 	lower(input.resources[_].type) == "azurerm_mariadb_server"
-# }
-
-# mairadb_public_access_disabled_err = "Public Network Access is currently not disabled on MariaDB Server." {
-#     lower(input.resources[_].type) == "azurerm_mariadb_server"
-#     not no_azure_issue("azurerm_mariadb_server")
-# }
 
 mairadb_public_access_disabled_err = "Resource azurerm_mariadb_server and azurerm_private_endpoint or property 'public_network_access_enabled' need to be exist under azurerm_mariadb_server. one or all are missing from the resource." {
     lower(input.resources[_].type) == "azurerm_mariadb_server"
     azure_attribute_absence["mairadb_public_access_disabled"]
-    not is_private_endpoint_exist["mairadb_public_access_disabled"]
+    #not is_private_endpoint_exist["mairadb_public_access_disabled"]
 } else = "Public Network Access is currently not disabled on MariaDB Server." {
     lower(input.resources[_].type) == "azurerm_mariadb_server"
     azure_issue["mairadb_public_access_disabled"]
-    not is_private_endpoint_exist["mairadb_public_access_disabled"]
+    #not is_private_endpoint_exist["mairadb_public_access_disabled"]
 }
 
 mairadb_public_access_disabled_metadata := {
@@ -260,6 +255,72 @@ mariadb_geo_redundant_backup_enabled_metadata := {
     "Language": "Terraform",
     "Policy Title": "Ensure Geo-redundant backup is enabled on MariaDB server.",
     "Policy Description": "Azure Database for MariaDB provides the flexibility to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. The Basic tier only offers locally redundant backup storage.",
+    "Resource Type": "azurerm_mariadb_server",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server"
+}
+
+
+# PR-AZR-TRF-SQL-059
+
+default mariadb_server_uses_privatelink = null
+
+azure_attribute_absence ["mariadb_server_uses_privatelink"] {
+    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) == 0
+}
+
+azure_issue ["mariadb_server_uses_privatelink"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mariadb_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+}
+
+mariadb_server_uses_privatelink = false {
+    lower(input.resources[_].type) == "azurerm_mariadb_server"
+    azure_attribute_absence["mariadb_server_uses_privatelink"]
+}
+
+mariadb_server_uses_privatelink {
+    lower(input.resources[_].type) == "azurerm_mariadb_server"
+    not azure_attribute_absence["mariadb_server_uses_privatelink"]
+    not azure_issue["mariadb_server_uses_privatelink"]
+}
+
+mariadb_server_uses_privatelink = false {
+    lower(input.resources[_].type) == "azurerm_mariadb_server"
+    azure_issue["mariadb_server_uses_privatelink"]
+}
+
+mariadb_server_uses_privatelink_err = "azurerm_mariadb_server should have link with azurerm_private_endpoint and azurerm_private_endpoint's private_service_connection either need to have 'private_connection_resource_id' or 'private_connection_resource_alias' property. Seems there is no link established or mentioed properties are missing." {
+    lower(input.resources[_].type) == "azurerm_mariadb_server"
+    azure_attribute_absence["mariadb_server_uses_privatelink"]
+} else = "Redis cache currently not using private link" {
+    lower(input.resources[_].type) == "azurerm_mariadb_server"
+    azure_issue["mariadb_server_uses_privatelink"]
+}
+
+mariadb_server_uses_privatelink_metadata := {
+    "Policy Code": "PR-AZR-TRF-SQL-059",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "MariaDB server should use private link",
+    "Policy Description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your MariaDB Server instances, data leakage risks are reduced.",
     "Resource Type": "azurerm_mariadb_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server"

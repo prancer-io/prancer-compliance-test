@@ -20,9 +20,24 @@ azure_attribute_absence["mssql_log_retention"] {
 
 azure_issue["mssql_log_retention"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_mssql_server_extended_auditing_policy"
-    to_number(resource.properties.retention_in_days) < 91
+    lower(resource.type) == "azurerm_mssql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mssql_server_extended_auditing_policy";
+              contains(r.properties.server_id, resource.properties.compiletime_identity);
+              to_number(r.properties.retention_in_days) >= 91;
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mssql_server_extended_auditing_policy";
+              contains(r.properties.server_id, concat(".", [resource.type, resource.name]));
+              to_number(r.properties.retention_in_days) >= 91;
+              c := 1]) == 0
 }
+
+# azure_issue["mssql_log_retention"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_mssql_server_extended_auditing_policy"
+#     to_number(resource.properties.retention_in_days) < 91
+# }
 
 mssql_log_retention {
     lower(input.resources[_].type) == "azurerm_mssql_server"
@@ -55,7 +70,7 @@ mssql_log_retention_metadata := {
     "Language": "Terraform",
     "Policy Title": "Azure MSSQL Server audit log retention should be greater then 90 days",
     "Policy Description": "Audit Logs can help you find suspicious events, unusual activity, and trends. Auditing the SQL server, at the server-level, allows you to track all existing and newly created databases on the instance.<br><br>This policy identifies SQL servers which do not retain audit logs for more than 90 days. As a best practice, configure the audit logs retention time period to be greater than 90 days.",
-    "Resource Type": "azurerm_mssql_server_extended_auditing_policy",
+    "Resource Type": "azurerm_mssql_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_extended_auditing_policy"
 }

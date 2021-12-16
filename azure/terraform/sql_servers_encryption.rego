@@ -8,24 +8,21 @@ package rule
 # Depricated rule. test case should be removed. as All the new Azure SQL Server TDE is enabled by default. There is no way to create an Azure SQL with TDE disabled
 default db_server_encrypt = null
 
-#azure_attribute_absence["db_server_encrypt"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "azurerm_mssql_server"
-#    count([c | input.resources[_].type == "azurerm_mssql_server_transparent_data_encryption"; 
-#           c := 1]) == 0
-#}
-
-#azure_issue["db_server_encrypt"] {
-#    resource := input.resources[_]
-#    lower(resource.type) == "azurerm_mssql_server"
-#    count([c | r := input.resources[_];
-#               r.type == "azurerm_mssql_server_transparent_data_encryption";
-#               count(r.properties.server_id) == 0;
-#               c := 1]) == 0
-#}
-
 azure_attribute_absence["db_server_encrypt"] {
     count([c | input.resources[_].type == "azurerm_mssql_server_transparent_data_encryption"; c := 1]) == 0
+}
+
+azure_issue["db_server_encrypt"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mssql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mssql_server_transparent_data_encryption";
+              contains(r.properties.server_id, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mssql_server_transparent_data_encryption";
+              contains(r.properties.server_id, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
 }
 
 db_server_encrypt = false {
@@ -36,19 +33,19 @@ db_server_encrypt = false {
 db_server_encrypt {
     lower(input.resources[_].type) == "azurerm_mssql_server"
     not azure_attribute_absence["db_server_encrypt"]
-#    not azure_issue["db_server_encrypt"]
+    not azure_issue["db_server_encrypt"]
 }
 
-#db_server_encrypt = false {
-#    azure_issue["db_server_encrypt"]
-#}
+db_server_encrypt = false {
+   azure_issue["db_server_encrypt"]
+}
 
 db_server_encrypt_err = "azurerm_mssql_server dont have any associative azurerm_mssql_server_transparent_data_encryption resource" {
     lower(input.resources[_].type) == "azurerm_mssql_server"
     azure_attribute_absence["db_server_encrypt"]
-} #else = "Azure SQL Server currently dont have transparent data encryption enabled" {
-  #  azure_issue["db_server_encrypt"]
-#}
+} else = "Azure SQL Server currently dont have transparent data encryption enabled" {
+    azure_issue["db_server_encrypt"]
+}
 
 db_server_encrypt_metadata := {
     "Policy Code": "PR-AZR-TRF-SQL-067",
@@ -79,9 +76,24 @@ azure_attribute_absence["serverKeyType"] {
 
 azure_issue["serverKeyType"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_mssql_server_transparent_data_encryption"
-    count(resource.properties.key_vault_key_id) == 0
+    lower(resource.type) == "azurerm_mssql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mssql_server_transparent_data_encryption";
+              contains(r.properties.server_id, resource.properties.compiletime_identity);
+              count(r.properties.key_vault_key_id) > 0;
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mssql_server_transparent_data_encryption";
+              contains(r.properties.server_id, concat(".", [resource.type, resource.name]));
+              count(r.properties.key_vault_key_id) > 0;
+              c := 1]) == 0
 }
+
+# azure_issue["serverKeyType"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_mssql_server_transparent_data_encryption"
+#     count(resource.properties.key_vault_key_id) == 0
+# }
 
 serverKeyType {
     lower(input.resources[_].type) == "azurerm_mssql_server"
