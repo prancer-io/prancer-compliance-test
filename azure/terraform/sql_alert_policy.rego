@@ -16,16 +16,31 @@ azure_attribute_absence["sql_server_alert"] {
     not resource.properties.state
 }
 
-azure_sql_security_alert_disabled["sql_server_alert"] {
+azure_issue["sql_server_alert"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_mssql_server_security_alert_policy"
-    lower(resource.properties.state) == "disabled"
+    lower(resource.type) == "azurerm_mssql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mssql_server_security_alert_policy";
+              contains(r.properties.server_name, resource.properties.compiletime_identity);
+              lower(r.properties.state) == "enabled";
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mssql_server_security_alert_policy";
+              contains(r.properties.server_name, concat(".", [resource.type, resource.name]));
+              lower(r.properties.state) == "enabled";
+              c := 1]) == 0
 }
+
+# azure_issue["sql_server_alert"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_mssql_server_security_alert_policy"
+#     lower(resource.properties.state) != "enabled"
+# }
 
 sql_server_alert {
     lower(input.resources[_].type) == "azurerm_mssql_server"
     not azure_attribute_absence["sql_server_alert"]
-    not azure_sql_security_alert_disabled["sql_server_alert"]
+    not azure_issue["sql_server_alert"]
 }
 
 sql_server_alert = false {
@@ -35,7 +50,7 @@ sql_server_alert = false {
 
 sql_server_alert = false {
     lower(input.resources[_].type) == "azurerm_mssql_server"
-    azure_sql_security_alert_disabled["sql_server_alert"]
+    azure_issue["sql_server_alert"]
 }
 
 sql_server_alert_err = "Make sure resource azurerm_mssql_server and azurerm_mssql_server_security_alert_policy both exist and property 'state' exist under azurerm_mssql_server_security_alert_policy. Its missing from the resource. Please set the value to 'Enabled' after property 'state' addition." {
@@ -43,7 +58,7 @@ sql_server_alert_err = "Make sure resource azurerm_mssql_server and azurerm_mssq
     azure_attribute_absence["sql_server_alert"]
 } else = "Security alert is currently not enabled on SQL Server" {
     lower(input.resources[_].type) == "azurerm_mssql_server"
-    azure_sql_security_alert_disabled["sql_server_alert"]
+    azure_issue["sql_server_alert"]
 }
 
 sql_server_alert_metadata := {
@@ -53,7 +68,7 @@ sql_server_alert_metadata := {
     "Language": "Terraform",
     "Policy Title": "Ensure Security Alert is enabled on Azure SQL Server",
     "Policy Description": "Advanced data security should be enabled on your SQL servers.",
-    "Resource Type": "azurerm_mssql_server_security_alert_policy",
+    "Resource Type": "azurerm_mssql_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mssql_server_security_alert_policy"
 }
