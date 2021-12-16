@@ -260,6 +260,11 @@
                     "collection": "Microsoft.Sql"
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_412",
+                    "type": "Microsoft.DBforPostgreSQL/servers",
+                    "collection": "Microsoft.Sql"
+                },
+                {
                     "masterSnapshotId": "AZRSNP_420",
                     "type": "Microsoft.Cache/redis",
                     "collection": "Microsoft.Cache"
@@ -268,6 +273,21 @@
                     "masterSnapshotId": "AZRSNP_421",
                     "type": "Microsoft.Cache/redis/linkedServers",
                     "collection": "Microsoft.Cache"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_430",
+                    "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+                    "collection": "Microsoft.Network"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_431",
+                    "type": "Microsoft.Network/networkWatchers/flowLogs",
+                    "collection": "Microsoft.Network"
+                },
+                {
+                    "masterSnapshotId": "AZRSNP_440",
+                    "type": "Microsoft.Databricks/workspaces",
+                    "collection": "Microsoft.Databricks"
                 }
             ]
         }
