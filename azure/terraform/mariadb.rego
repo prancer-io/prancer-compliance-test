@@ -7,8 +7,39 @@ has_property(parent_object, target_property) {
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_firewall_rule
 
 # PR-AZR-TRF-SQL-012
+# As per Farshid Mahdavipour
+# this shoud be a smart policy 
+# we have to check for firewall 
+# but if it is on private endpoint
+# it means there is no public connectivity
+# so the rule should pass
 
 default maria_ingress_from_any_ip_disabled = null
+
+mariadb_dont_have_private_endpoint["maria_ingress_from_any_ip_disabled"] {
+    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) == 0
+}
+
+mariadb_dont_have_private_endpoint["maria_ingress_from_any_ip_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mariadb_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+}
 
 azure_attribute_absence ["maria_ingress_from_any_ip_disabled"] {
     count([c | input.resources[_].type == "azurerm_mariadb_firewall_rule"; c := 1]) == 0
@@ -57,6 +88,11 @@ azure_issue["maria_ingress_from_any_ip_disabled"] {
 
 maria_ingress_from_any_ip_disabled {
     lower(input.resources[_].type) == "azurerm_mariadb_server"
+    not mariadb_dont_have_private_endpoint["maria_ingress_from_any_ip_disabled"]
+}
+
+maria_ingress_from_any_ip_disabled {
+    lower(input.resources[_].type) == "azurerm_mariadb_server"
     not azure_attribute_absence["maria_ingress_from_any_ip_disabled"]
     not azure_issue["maria_ingress_from_any_ip_disabled"]
 }
@@ -64,20 +100,23 @@ maria_ingress_from_any_ip_disabled {
 maria_ingress_from_any_ip_disabled = false {
     lower(input.resources[_].type) == "azurerm_mariadb_server"
     azure_issue["maria_ingress_from_any_ip_disabled"]
+    mariadb_dont_have_private_endpoint["maria_ingress_from_any_ip_disabled"]
 }
 
 maria_ingress_from_any_ip_disabled = false {
     lower(input.resources[_].type) == "azurerm_mariadb_server"
     azure_attribute_absence["maria_ingress_from_any_ip_disabled"]
+    mariadb_dont_have_private_endpoint["maria_ingress_from_any_ip_disabled"]
 }
 
-
-maria_ingress_from_any_ip_disabled_err = "Resource azurerm_mariadb_server and azurerm_mariadb_firewall_rule need to be exist and property 'start_ip_address' and 'end_ip_address' need to be exist under azurerm_mariadb_firewall_rule as well. one or all are missing from the resource." {
+maria_ingress_from_any_ip_disabled_err = "Resource azurerm_mariadb_server and azurerm_private_endpoint or azurerm_mariadb_firewall_rule need to be exist and property 'start_ip_address' and 'end_ip_address' need to be exist under azurerm_mariadb_firewall_rule as well. one or all are missing from the resource." {
     lower(input.resources[_].type) == "azurerm_mariadb_server"
     azure_attribute_absence["maria_ingress_from_any_ip_disabled"]
+    mariadb_dont_have_private_endpoint["maria_ingress_from_any_ip_disabled"]
 } else = "MariaDB currently allowing ingress from all Azure-internal IP addresses" {
     lower(input.resources[_].type) == "azurerm_mariadb_server"
     azure_issue["maria_ingress_from_any_ip_disabled"]
+    mariadb_dont_have_private_endpoint["maria_ingress_from_any_ip_disabled"]
 }
 
 maria_ingress_from_any_ip_disabled_metadata := {
@@ -148,9 +187,30 @@ mairadb_ssl_enforcement_enabled_metadata := {
 
 default mairadb_public_access_disabled = null
 
-# is_private_endpoint_exist["mairadb_public_access_disabled"] {
-#     count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) > 0
-# }
+mairadb_dont_have_private_endpoint ["mairadb_public_access_disabled"] {
+    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) == 0
+}
+
+mairadb_dont_have_private_endpoint ["mairadb_public_access_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mariadb_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+}
 
 #public_network_access_enabled Defaults to true if not exist.
 azure_attribute_absence["mairadb_public_access_disabled"] {
@@ -165,10 +225,10 @@ azure_issue["mairadb_public_access_disabled"] {
     resource.properties.public_network_access_enabled == true
 }
 
-# mairadb_public_access_disabled {
-#     lower(input.resources[_].type) == "azurerm_mariadb_server"
-#     is_private_endpoint_exist["mairadb_public_access_disabled"]
-# } 
+mairadb_public_access_disabled {
+    lower(input.resources[_].type) == "azurerm_mariadb_server"
+    not mairadb_dont_have_private_endpoint["mairadb_public_access_disabled"]
+} 
 
 mairadb_public_access_disabled {
     lower(input.resources[_].type) == "azurerm_mariadb_server"
@@ -179,23 +239,23 @@ mairadb_public_access_disabled {
 mairadb_public_access_disabled = false {
     lower(input.resources[_].type) == "azurerm_mariadb_server"
     azure_attribute_absence["mairadb_public_access_disabled"]
-    #not is_private_endpoint_exist["mairadb_public_access_disabled"]
+    mairadb_dont_have_private_endpoint["mairadb_public_access_disabled"]
 }
 
 mairadb_public_access_disabled = false {
     lower(input.resources[_].type) == "azurerm_mariadb_server"
     azure_issue["mairadb_public_access_disabled"]
-    #not is_private_endpoint_exist["mairadb_public_access_disabled"]
+    mairadb_dont_have_private_endpoint["mairadb_public_access_disabled"]
 }
 
-mairadb_public_access_disabled_err = "Resource azurerm_mariadb_server's property 'public_network_access_enabled' need to be exist. its missing from the resource." {
+mairadb_public_access_disabled_err = "Resource azurerm_mariadb_server and azurerm_private_endpoint or property 'public_network_access_enabled' need to be exist. its missing from the resource." {
     lower(input.resources[_].type) == "azurerm_mariadb_server"
     azure_attribute_absence["mairadb_public_access_disabled"]
-    #not is_private_endpoint_exist["mairadb_public_access_disabled"]
+    mairadb_dont_have_private_endpoint["mairadb_public_access_disabled"]
 } else = "Public Network Access is currently not disabled on MariaDB Server." {
     lower(input.resources[_].type) == "azurerm_mariadb_server"
     azure_issue["mairadb_public_access_disabled"]
-    #not is_private_endpoint_exist["mairadb_public_access_disabled"]
+    mairadb_dont_have_private_endpoint["mairadb_public_access_disabled"]
 }
 
 mairadb_public_access_disabled_metadata := {

@@ -62,7 +62,7 @@ default sslEnforcement = null
 azure_attribute_absence ["sslEnforcement"] {
     resource := input.resources[_]
     lower(resource.type) == "azurerm_postgresql_server"
-    not resource.properties.ssl_enforcement_enabled
+    not has_property(resource.properties, "ssl_enforcement_enabled")
 }
 
 azure_issue ["sslEnforcement"] {
@@ -115,12 +115,29 @@ sslEnforcement_metadata := {
 
 default pg_ingress_from_any_ip_disabled = null
 
-# azure_attribute_absence ["pg_ingress_from_any_ip_disabled"] {
-#     count([c | input.resources[_].type == "azurerm_postgresql_server"; c := 1]) != count([c | input.resources[_].type == "azurerm_postgresql_firewall_rule"; c := 1])
-# }
+pg_dont_have_private_endpoint["pg_ingress_from_any_ip_disabled"] {
+    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) == 0
+}
 
-is_private_endpoint_exist["pg_ingress_from_any_ip_disabled"] {
-    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) > 0
+pg_dont_have_private_endpoint["pg_ingress_from_any_ip_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_postgresql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
 }
 
 firewall_rule_attribute_absence ["pg_ingress_from_any_ip_disabled"] {
@@ -139,21 +156,38 @@ firewall_rule_attribute_absence ["pg_ingress_from_any_ip_disabled"] {
     not resource.properties.end_ip_address
 }
 
-firewall_rule_issue ["pg_ingress_from_any_ip_disabled"] {
+firewall_rule_issue["pg_ingress_from_any_ip_disabled"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_postgresql_firewall_rule"
-    contains(resource.properties.start_ip_address, "0.0.0.0")
+    lower(resource.type) == "azurerm_postgresql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_postgresql_firewall_rule";
+              contains(r.properties.server_name, resource.properties.compiletime_identity);
+              not contains(r.properties.start_ip_address, "0.0.0.0");
+              not contains(r.properties.end_ip_address, "0.0.0.0");
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_postgresql_firewall_rule";
+              contains(r.properties.server_name, concat(".", [resource.type, resource.name]));
+              not contains(r.properties.start_ip_address, "0.0.0.0");
+              not contains(r.properties.end_ip_address, "0.0.0.0");
+              c := 1]) == 0
 }
 
-firewall_rule_issue ["pg_ingress_from_any_ip_disabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_postgresql_firewall_rule"
-    contains(resource.properties.end_ip_address, "0.0.0.0")
-}
+# firewall_rule_issue ["pg_ingress_from_any_ip_disabled"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_postgresql_firewall_rule"
+#     contains(resource.properties.start_ip_address, "0.0.0.0")
+# }
+
+# firewall_rule_issue ["pg_ingress_from_any_ip_disabled"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_postgresql_firewall_rule"
+#     contains(resource.properties.end_ip_address, "0.0.0.0")
+# }
 
 pg_ingress_from_any_ip_disabled {
     lower(input.resources[_].type) == "azurerm_postgresql_server"
-    is_private_endpoint_exist["pg_ingress_from_any_ip_disabled"]
+    not pg_dont_have_private_endpoint["pg_ingress_from_any_ip_disabled"]
 }
 
 pg_ingress_from_any_ip_disabled {
@@ -165,23 +199,23 @@ pg_ingress_from_any_ip_disabled {
 pg_ingress_from_any_ip_disabled = false {
     lower(input.resources[_].type) == "azurerm_postgresql_server"
     firewall_rule_issue["pg_ingress_from_any_ip_disabled"]
-    not is_private_endpoint_exist["pg_ingress_from_any_ip_disabled"]
+    pg_dont_have_private_endpoint["pg_ingress_from_any_ip_disabled"]
 }
 
 pg_ingress_from_any_ip_disabled = false {
     lower(input.resources[_].type) == "azurerm_postgresql_server"
     firewall_rule_attribute_absence["pg_ingress_from_any_ip_disabled"]
-    not is_private_endpoint_exist["pg_ingress_from_any_ip_disabled"]
+    pg_dont_have_private_endpoint["pg_ingress_from_any_ip_disabled"]
 }
 
 pg_ingress_from_any_ip_disabled_err = "Resource azurerm_postgresql_server and azurerm_private_endpoint or azurerm_postgresql_firewall_rule need to be exist and property 'start_ip_address' and 'end_ip_address' need to be exist under azurerm_postgresql_firewall_rule as well. one or all are missing from the resource." {
     lower(input.resources[_].type) == "azurerm_postgresql_server"
     firewall_rule_attribute_absence["pg_ingress_from_any_ip_disabled"]
-    not is_private_endpoint_exist["pg_ingress_from_any_ip_disabled"]
+    pg_dont_have_private_endpoint["pg_ingress_from_any_ip_disabled"]
 } else = "PostgreSQL Database Server currently allowing ingress from all Azure-internal IP addresses" {
     lower(input.resources[_].type) == "azurerm_postgresql_server"
     firewall_rule_issue["pg_ingress_from_any_ip_disabled"]
-    not is_private_endpoint_exist["pg_ingress_from_any_ip_disabled"]
+    pg_dont_have_private_endpoint["pg_ingress_from_any_ip_disabled"]
 }
 
 pg_ingress_from_any_ip_disabled_metadata := {
@@ -191,7 +225,7 @@ pg_ingress_from_any_ip_disabled_metadata := {
     "Language": "Terraform",
     "Policy Title": "PostgreSQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
     "Policy Description": "This policy will identify PostgreSQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
-    "Resource Type": "azurerm_postgresql_firewall_rule",
+    "Resource Type": "azurerm_postgresql_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_firewall_rule"
 }
@@ -208,10 +242,27 @@ azure_attribute_absence ["azurerm_postgresql_configuration_log_checkpoints"] {
 
 azure_issue ["azurerm_postgresql_configuration_log_checkpoints"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_postgresql_configuration"
-    lower(resource.properties.name) == "log_checkpoints"
-    lower(resource.properties.value) == "off"
+    lower(resource.type) == "azurerm_postgresql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_postgresql_configuration";
+              contains(r.properties.server_name, resource.properties.compiletime_identity);
+              lower(r.properties.name) == "log_checkpoints";
+              lower(r.properties.value) == "on";
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_postgresql_configuration";
+              contains(r.properties.server_name, concat(".", [resource.type, resource.name]));
+              lower(r.properties.name) == "log_checkpoints";
+              lower(r.properties.value) == "on";
+              c := 1]) == 0
 }
+
+# azure_issue ["azurerm_postgresql_configuration_log_checkpoints"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_postgresql_configuration"
+#     lower(resource.properties.name) == "log_checkpoints"
+#     lower(resource.properties.value) == "off"
+# }
 
 azurerm_postgresql_configuration_log_checkpoints {
     lower(input.resources[_].type) == "azurerm_postgresql_server"
@@ -244,7 +295,7 @@ azurerm_postgresql_configuration_log_checkpoints_metadata := {
     "Language": "Terraform",
     "Policy Title": "PostgreSQL Database Server should have log_checkpoints enabled",
     "Policy Description": "A checkpoint is a point in the transaction log sequence at which all data files have been updated to reflect the information in the log. All data files will be flushed to disk. Refer to Section 29.4 for more details about what happens during a checkpoint. this policy will identify Postgresql DB Server which dont have checkpoint log enabled and alert.",
-    "Resource Type": "azurerm_postgresql_configuration",
+    "Resource Type": "azurerm_postgresql_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration"
 }
@@ -261,10 +312,27 @@ azure_attribute_absence ["azurerm_postgresql_configuration_log_connections"] {
 
 azure_issue ["azurerm_postgresql_configuration_log_connections"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_postgresql_configuration"
-    lower(resource.properties.name) == "log_connections"
-    lower(resource.properties.value) == "off"
+    lower(resource.type) == "azurerm_postgresql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_postgresql_configuration";
+              contains(r.properties.server_name, resource.properties.compiletime_identity);
+              lower(r.properties.name) == "log_connections";
+              lower(r.properties.value) == "on";
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_postgresql_configuration";
+              contains(r.properties.server_name, concat(".", [resource.type, resource.name]));
+              lower(r.properties.name) == "log_connections";
+              lower(r.properties.value) == "on";
+              c := 1]) == 0
 }
+
+# azure_issue ["azurerm_postgresql_configuration_log_connections"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_postgresql_configuration"
+#     lower(resource.properties.name) == "log_connections"
+#     lower(resource.properties.value) == "off"
+# }
 
 azurerm_postgresql_configuration_log_connections {
     lower(input.resources[_].type) == "azurerm_postgresql_server"
@@ -297,7 +365,7 @@ azurerm_postgresql_configuration_log_connections_metadata := {
     "Language": "Terraform",
     "Policy Title": "PostgreSQL Database Server should have log_connections enabled",
     "Policy Description": "Causes each attempted connection to the server to be logged, as well as successful completion of client authentication. Only superusers can change this parameter at session start, and it cannot be changed at all within a session. this policy will identify Postgresql DB Server which dont have log_connections enabled and alert.",
-    "Resource Type": "azurerm_postgresql_configuration",
+    "Resource Type": "azurerm_postgresql_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration"
 }
@@ -314,10 +382,27 @@ azure_attribute_absence ["azurerm_postgresql_configuration_connection_throttling
 
 azure_issue ["azurerm_postgresql_configuration_connection_throttling"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_postgresql_configuration"
-    lower(resource.properties.name) == "connection_throttling"
-    lower(resource.properties.value) == "off"
+    lower(resource.type) == "azurerm_postgresql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_postgresql_configuration";
+              contains(r.properties.server_name, resource.properties.compiletime_identity);
+              lower(r.properties.name) == "connection_throttling";
+              lower(r.properties.value) == "on";
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_postgresql_configuration";
+              contains(r.properties.server_name, concat(".", [resource.type, resource.name]));
+              lower(r.properties.name) == "connection_throttling";
+              lower(r.properties.value) == "on";
+              c := 1]) == 0
 }
+
+# azure_issue ["azurerm_postgresql_configuration_connection_throttling"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_postgresql_configuration"
+#     lower(resource.properties.name) == "connection_throttling"
+#     lower(resource.properties.value) == "off"
+# }
 
 azurerm_postgresql_configuration_connection_throttling {
     lower(input.resources[_].type) == "azurerm_postgresql_server"
@@ -350,7 +435,7 @@ azurerm_postgresql_configuration_connection_throttling_metadata := {
     "Language": "Terraform",
     "Policy Title": "PostgreSQL Database Server should have connection_throttling enabled",
     "Policy Description": "Enabling connection_throttling allows the PostgreSQL Database to set the verbosity of logged messages which in turn generates query and error logs with respect to concurrent connections, that could lead to a successful Denial of Service (DoS) attack by exhausting connection resources.",
-    "Resource Type": "azurerm_postgresql_configuration",
+    "Resource Type": "azurerm_postgresql_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration"
 }
@@ -372,8 +457,29 @@ default postgresql_public_access_disabled = null
 # 	true
 # }
 
-is_private_endpoint_exist["postgresql_public_access_disabled"] {
-    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) > 0
+postgresql_dont_have_private_endpoint ["postgresql_public_access_disabled"] {
+    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) == 0
+}
+
+postgresql_dont_have_private_endpoint ["postgresql_public_access_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_postgresql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
 }
 
 azure_attribute_absence["postgresql_public_access_disabled"] {
@@ -390,7 +496,7 @@ azure_issue["postgresql_public_access_disabled"] {
 
 postgresql_public_access_disabled {
     lower(input.resources[_].type) == "azurerm_postgresql_server"
-    is_private_endpoint_exist["postgresql_public_access_disabled"]
+    not postgresql_dont_have_private_endpoint["postgresql_public_access_disabled"]
 } 
 
 postgresql_public_access_disabled {
@@ -402,13 +508,13 @@ postgresql_public_access_disabled {
 postgresql_public_access_disabled = false {
     lower(input.resources[_].type) == "azurerm_postgresql_server"
     azure_attribute_absence["postgresql_public_access_disabled"]
-    not is_private_endpoint_exist["postgresql_public_access_disabled"]
+    postgresql_dont_have_private_endpoint["postgresql_public_access_disabled"]
 }
 
 postgresql_public_access_disabled = false {
     lower(input.resources[_].type) == "azurerm_postgresql_server"
     azure_issue["postgresql_public_access_disabled"]
-    not is_private_endpoint_exist["postgresql_public_access_disabled"]
+    postgresql_dont_have_private_endpoint["postgresql_public_access_disabled"]
 }
 
 #else = false {
@@ -418,11 +524,11 @@ postgresql_public_access_disabled = false {
 postgresql_public_access_disabled_err = "Resource azurerm_postgresql_server and azurerm_private_endpoint or property 'public_network_access_enabled' need to be exist under azurerm_postgresql_server. one or all are missing from the resource." {
     lower(input.resources[_].type) == "azurerm_postgresql_server"
     azure_attribute_absence["postgresql_public_access_disabled"]
-    not is_private_endpoint_exist["postgresql_public_access_disabled"]
+    postgresql_dont_have_private_endpoint["postgresql_public_access_disabled"]
 } else = "Public Network Access is currently not disabled on PostgreSQL Server." {
     lower(input.resources[_].type) == "azurerm_postgresql_server"
     azure_issue["postgresql_public_access_disabled"]
-    not is_private_endpoint_exist["postgresql_public_access_disabled"]
+    postgresql_dont_have_private_endpoint["postgresql_public_access_disabled"]
 }
 
 postgresql_public_access_disabled_metadata := {
@@ -432,6 +538,72 @@ postgresql_public_access_disabled_metadata := {
     "Language": "Terraform",
     "Policy Title": "Ensure PostgreSQL servers don't have public network access enabled",
     "Policy Description": "Always use Private Endpoint for PostgreSQL Server",
+    "Resource Type": "azurerm_postgresql_server",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server"
+}
+
+
+# PR-AZR-TRF-SQL-003
+
+default pgsql_server_uses_privatelink = null
+
+azure_attribute_absence ["pgsql_server_uses_privatelink"] {
+    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) == 0
+}
+
+azure_issue ["pgsql_server_uses_privatelink"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_postgresql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+}
+
+pgsql_server_uses_privatelink = false {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    azure_attribute_absence["pgsql_server_uses_privatelink"]
+}
+
+pgsql_server_uses_privatelink {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    not azure_attribute_absence["pgsql_server_uses_privatelink"]
+    not azure_issue["pgsql_server_uses_privatelink"]
+}
+
+pgsql_server_uses_privatelink = false {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    azure_issue["pgsql_server_uses_privatelink"]
+}
+
+pgsql_server_uses_privatelink_err = "azurerm_postgresql_server should have link with azurerm_private_endpoint and azurerm_private_endpoint's private_service_connection either need to have 'private_connection_resource_id' or 'private_connection_resource_alias' property. Seems there is no link established or mentioed properties are missing." {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    azure_attribute_absence["pgsql_server_uses_privatelink"]
+} else = "MySQL server currently not using private link" {
+    lower(input.resources[_].type) == "azurerm_postgresql_server"
+    azure_issue["pgsql_server_uses_privatelink"]
+}
+
+pgsql_server_uses_privatelink_metadata := {
+    "Policy Code": "PR-AZR-TRF-SQL-003",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "PostgreSQL servers should use private link",
+    "Policy Description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your PostgreSQL servers instances, data leakage risks are reduced.",
     "Resource Type": "azurerm_postgresql_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server"
