@@ -2885,7 +2885,7 @@
                             "id": "PR-AZR-TRF-SQL-057",
                             "eval": "data.rule.mairadb_public_access_disabled",
                             "message": "data.rule.mairadb_public_access_disabled_err",
-                            "remediationDescription": "In 'azurerm_mariadb_server' resource, set 'public_network_access_enabled = false' or make sure resource 'azurerm_private_endpoint' exist to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server#public_network_access_enabled' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In 'azurerm_mariadb_server' resource, set 'public_network_access_enabled = false' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mariadb_server#public_network_access_enabled' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_TRF_SQL_057.py"
                         }
                     ],
@@ -3065,7 +3065,7 @@
                             "id": "PR-AZR-TRF-SQL-060",
                             "eval": "data.rule.mysql_public_access_disabled",
                             "message": "data.rule.mysql_public_access_disabled_err",
-                            "remediationDescription": "In 'azurerm_mysql_server' resource, set 'public_network_access_enabled = false' or make sure resource 'azurerm_private_endpoint' exist to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server#public_network_access_enabled' target='_blank'>here</a> for details.",
+                            "remediationDescription": "In 'azurerm_mysql_server' resource, set 'public_network_access_enabled = false' to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server#public_network_access_enabled' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_TRF_SQL_060.py"
                         }
                     ],
@@ -3121,6 +3121,41 @@
                     "resourceTypes": [
                         "azurerm_mysql_firewall_rule",
                         "azurerm_mysql_server"
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_MySQL_SERVER_5",
+                    "masterSnapshotId": [
+                        "TRF_TEMPLATE_SNAPSHOT"
+                    ],
+                    "type": "rego",
+                    "rule": "file(mysql_server.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-TRF-SQL-002",
+                            "eval": "data.rule.mysql_server_uses_privatelink",
+                            "message": "data.rule.mysql_server_uses_privatelink_err",
+                            "remediationDescription": "'azurerm_mysql_server' resource need to have a link with 'azurerm_private_endpoint', set 'id' of 'azurerm_mysql_server' to property 'private_connection_resource_id' under 'azurerm_private_endpoint' resources 'private_service_connection' block to fix the issue. Visit <a href='https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint#private_connection_resource_id' target='_blank'>here</a> for details.",
+                            "remediationFunction": "PR_AZR_TRF_SQL_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "MySQL server should use private link",
+                    "description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your MySQL Server instances, data leakage risks are reduced.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [
+                                "Best Practice"
+                            ],
+                            "service": [
+                                "terraform"
+                            ]
+                        }
+                    ],
+                    "resourceTypes": [
+                        "azurerm_mysql_server",
+                        "azurerm_private_endpoint"
                     ]
                 },
                 {

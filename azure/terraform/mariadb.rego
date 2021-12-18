@@ -188,7 +188,7 @@ mairadb_public_access_disabled = false {
     #not is_private_endpoint_exist["mairadb_public_access_disabled"]
 }
 
-mairadb_public_access_disabled_err = "Resource azurerm_mariadb_server and azurerm_private_endpoint or property 'public_network_access_enabled' need to be exist under azurerm_mariadb_server. one or all are missing from the resource." {
+mairadb_public_access_disabled_err = "Resource azurerm_mariadb_server's property 'public_network_access_enabled' need to be exist. its missing from the resource." {
     lower(input.resources[_].type) == "azurerm_mariadb_server"
     azure_attribute_absence["mairadb_public_access_disabled"]
     #not is_private_endpoint_exist["mairadb_public_access_disabled"]
@@ -309,7 +309,7 @@ mariadb_server_uses_privatelink = false {
 mariadb_server_uses_privatelink_err = "azurerm_mariadb_server should have link with azurerm_private_endpoint and azurerm_private_endpoint's private_service_connection either need to have 'private_connection_resource_id' or 'private_connection_resource_alias' property. Seems there is no link established or mentioed properties are missing." {
     lower(input.resources[_].type) == "azurerm_mariadb_server"
     azure_attribute_absence["mariadb_server_uses_privatelink"]
-} else = "Redis cache currently not using private link" {
+} else = "MariaDB server currently not using private link" {
     lower(input.resources[_].type) == "azurerm_mariadb_server"
     azure_issue["mariadb_server_uses_privatelink"]
 }
