@@ -4549,6 +4549,70 @@
                     "severity": "Low",
                     "title": "Azure Deployment Scope Resource Group should have a remove protection resource lock configured",
                     "description": "Azure Resource Manager locks provide a way to lock down Azure resources from being deleted or modified. The lock level can be set to either 'CanNotDelete' or 'ReadOnly'. When you apply a lock at a parent scope, all resources within the scope inherit the same lock, and the most restrictive lock takes precedence.<br><br>This policy identifies Azure Resource Groups that do not have a lock set. As a best practice, place a lock on important resources to prevent accidental or malicious modification or deletion by unauthorized users."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_STR_12",
+                    "type": "rego",
+                    "rule": "file(storageblobcontainers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-STR-012",
+                            "eval": "data.rule.storage_container_public_access_disabled",
+                            "message": "data.rule.storage_container_public_access_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_STR_012.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Storage"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_283"
+                    ],
+                    "severity": "High",
+                    "title": "Azure storage blob container should not have public access enabled",
+                    "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature._x005F<br>_x005F<br>This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB'). As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_STR_13",
+                    "type": "rego",
+                    "rule": "file(storageblobcontainers.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-STR-013",
+                            "eval": "data.rule.storage__logical_container_public_access_disabled",
+                            "message": "data.rule.storage__logical_container_public_access_disabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_STR_013.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Storage"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_283"
+                    ],
+                    "severity": "High",
+                    "title": "Azure storage blob container should not have public access enabled",
+                    "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature._x005F<br>_x005F<br>This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB'). As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers."
                 }
             ]
         }
