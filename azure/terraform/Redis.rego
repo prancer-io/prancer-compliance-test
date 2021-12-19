@@ -118,6 +118,32 @@ serverRole_metadata := {
 # PR-AZR-TRF-ARC-003
 
 default public_network_access_disabled = null
+
+redis_dont_have_private_endpoint ["public_network_access_disabled"] {
+    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) == 0
+}
+
+redis_dont_have_private_endpoint ["public_network_access_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_redis_cache"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+}
+
 # default is true
 azure_attribute_absence ["public_network_access_disabled"] {
     resource := input.resources[_]
@@ -131,9 +157,10 @@ azure_issue ["public_network_access_disabled"] {
     resource.properties.public_network_access_enabled == true
 }
 
-public_network_access_disabled = false {
-    azure_attribute_absence["public_network_access_disabled"]
-}
+public_network_access_disabled {
+    lower(input.resources[_].type) == "azurerm_redis_cache"
+    not redis_dont_have_private_endpoint["public_network_access_disabled"]
+} 
 
 public_network_access_disabled {
     lower(input.resources[_].type) == "azurerm_redis_cache"
@@ -142,13 +169,25 @@ public_network_access_disabled {
 }
 
 public_network_access_disabled = false {
-    azure_issue["public_network_access_disabled"]
+    lower(input.resources[_].type) == "azurerm_redis_cache"
+    azure_attribute_absence["public_network_access_disabled"]
+    redis_dont_have_private_endpoint["public_network_access_disabled"]
 }
 
-public_network_access_disabled_err = "azurerm_redis_cache property 'public_network_access_enabled' need to be exist. Its missing from the resource. Please set the value to false after property addition." {
-    azure_attribute_absence["public_network_access_disabled"]
-} else = "Redis cache currently does not have public network access disabled" {
+public_network_access_disabled = false {
+    lower(input.resources[_].type) == "azurerm_redis_cache"
     azure_issue["public_network_access_disabled"]
+    redis_dont_have_private_endpoint["public_network_access_disabled"]
+}
+
+public_network_access_disabled_err = "azurerm_redis_cache and azurerm_private_endpoint or property 'public_network_access_enabled' need to be exist. Its missing from the resource. Please set the value to false after property addition." {
+    lower(input.resources[_].type) == "azurerm_redis_cache"
+    azure_attribute_absence["public_network_access_disabled"]
+    redis_dont_have_private_endpoint["public_network_access_disabled"]
+} else = "Redis cache currently does not have public network access disabled" {
+    lower(input.resources[_].type) == "azurerm_redis_cache"
+    azure_issue["public_network_access_disabled"]
+    redis_dont_have_private_endpoint["public_network_access_disabled"]
 }
 
 public_network_access_disabled_metadata := {

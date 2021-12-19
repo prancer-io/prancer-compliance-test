@@ -7,8 +7,39 @@ has_property(parent_object, target_property) {
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_firewall_rule
 
 # PR-AZR-TRF-SQL-014
+# As per Farshid Mahdavipour
+# this shoud be a smart policy 
+# we have to check for firewall 
+# but if it is on private endpoint
+# it means there is no public connectivity
+# so the rule should pass
 
 default mysql_ingress_from_any_ip_disabled = null
+
+mysql_dont_have_private_endpoint["mysql_ingress_from_any_ip_disabled"] {
+    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) == 0
+}
+
+mysql_dont_have_private_endpoint["mysql_ingress_from_any_ip_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mysql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+}
 
 azure_attribute_absence ["mysql_ingress_from_any_ip_disabled"] {
     count([c | input.resources[_].type == "azurerm_mysql_firewall_rule"; c := 1]) == 0
@@ -26,16 +57,38 @@ azure_attribute_absence ["mysql_ingress_from_any_ip_disabled"] {
     not resource.properties.end_ip_address
 }
 
-azure_issue ["mysql_ingress_from_any_ip_disabled"] {
+azure_issue["mysql_ingress_from_any_ip_disabled"] {
     resource := input.resources[_]
-    lower(resource.type) == "azurerm_mysql_firewall_rule"
-    contains(resource.properties.start_ip_address, "0.0.0.0")
+    lower(resource.type) == "azurerm_mysql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mysql_firewall_rule";
+              contains(r.properties.server_name, resource.properties.compiletime_identity);
+              not contains(r.properties.start_ip_address, "0.0.0.0");
+              not contains(r.properties.end_ip_address, "0.0.0.0");
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_mysql_firewall_rule";
+              contains(r.properties.server_name, concat(".", [resource.type, resource.name]));
+              not contains(r.properties.start_ip_address, "0.0.0.0");
+              not contains(r.properties.end_ip_address, "0.0.0.0");
+              c := 1]) == 0
 }
 
-azure_issue ["mysql_ingress_from_any_ip_disabled"] {
-    resource := input.resources[_]
-    lower(resource.type) == "azurerm_mysql_firewall_rule"
-    contains(resource.properties.end_ip_address, "0.0.0.0")
+# azure_issue ["mysql_ingress_from_any_ip_disabled"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_mysql_firewall_rule"
+#     contains(resource.properties.start_ip_address, "0.0.0.0")
+# }
+
+# azure_issue ["mysql_ingress_from_any_ip_disabled"] {
+#     resource := input.resources[_]
+#     lower(resource.type) == "azurerm_mysql_firewall_rule"
+#     contains(resource.properties.end_ip_address, "0.0.0.0")
+# }
+
+mysql_ingress_from_any_ip_disabled {
+    lower(input.resources[_].type) == "azurerm_mysql_server"
+    not mysql_dont_have_private_endpoint["mysql_ingress_from_any_ip_disabled"]
 }
 
 mysql_ingress_from_any_ip_disabled {
@@ -47,20 +100,23 @@ mysql_ingress_from_any_ip_disabled {
 mysql_ingress_from_any_ip_disabled = false {
     lower(input.resources[_].type) == "azurerm_mysql_server"
     azure_issue["mysql_ingress_from_any_ip_disabled"]
+    mysql_dont_have_private_endpoint["mysql_ingress_from_any_ip_disabled"]
 }
 
 mysql_ingress_from_any_ip_disabled = false {
     lower(input.resources[_].type) == "azurerm_mysql_server"
     azure_attribute_absence["mysql_ingress_from_any_ip_disabled"]
+    mysql_dont_have_private_endpoint["mysql_ingress_from_any_ip_disabled"]
 }
 
-
-mysql_ingress_from_any_ip_disabled_err = "Resource azurerm_mysql_server and azurerm_mysql_firewall_rule need to be exist and property 'start_ip_address' and 'end_ip_address' need to be exist under azurerm_mysql_firewall_rule as well. one or all are missing from the resource." {
+mysql_ingress_from_any_ip_disabled_err = "Resource azurerm_mysql_server and azurerm_private_endpoint or azurerm_mysql_firewall_rule need to be exist and property 'start_ip_address' and 'end_ip_address' need to be exist under azurerm_mysql_firewall_rule as well. one or all are missing from the resource." {
     lower(input.resources[_].type) == "azurerm_mysql_server"
     azure_attribute_absence["mysql_ingress_from_any_ip_disabled"]
+    mysql_dont_have_private_endpoint["mysql_ingress_from_any_ip_disabled"]
 } else = "MySQL Database Server currently allowing ingress from all Azure-internal IP addresses" {
     lower(input.resources[_].type) == "azurerm_mysql_server"
     azure_issue["mysql_ingress_from_any_ip_disabled"]
+    mysql_dont_have_private_endpoint["mysql_ingress_from_any_ip_disabled"]
 }
 
 mysql_ingress_from_any_ip_disabled_metadata := {
@@ -70,7 +126,7 @@ mysql_ingress_from_any_ip_disabled_metadata := {
     "Language": "Terraform",
     "Policy Title": "MySQL Database Server should not allow ingress from all Azure-internal IP addresses (0.0.0.0/0)",
     "Policy Description": "This policy will identify MySQL Database Server firewall rule that are currently allowing ingress from all Azure-internal IP addresses",
-    "Resource Type": "azurerm_mysql_firewall_rule",
+    "Resource Type": "azurerm_mysql_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_firewall_rule"
 }
@@ -121,7 +177,7 @@ mysql_server_ssl_enforcement_enabled_metadata := {
     "Language": "Terraform",
     "Policy Title": "Ensure MySQL Database Server accepts only SSL connections",
     "Policy Description": "This policy will identify MySQL Database Server which are not enforcing all the incoming connection over SSL and alert if found.",
-    "Resource Type": "azurerm_mysql_firewall_rule",
+    "Resource Type": "azurerm_mysql_server",
     "Policy Help URL": "",
     "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server"
 }
@@ -144,8 +200,29 @@ default mysql_public_access_disabled = null
 # 	true
 # }
 
-is_private_endpoint_exist["mysql_public_access_disabled"] {
-    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) > 0
+mysql_dont_have_private_endpoint ["mysql_public_access_disabled"] {
+    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) == 0
+}
+
+mysql_dont_have_private_endpoint ["mysql_public_access_disabled"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mysql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
 }
 
 azure_attribute_absence["mysql_public_access_disabled"] {
@@ -162,7 +239,7 @@ azure_issue["mysql_public_access_disabled"] {
 
 mysql_public_access_disabled {
     lower(input.resources[_].type) == "azurerm_mysql_server"
-    is_private_endpoint_exist["mysql_public_access_disabled"]
+    not mysql_dont_have_private_endpoint["mysql_public_access_disabled"]
 } 
 
 mysql_public_access_disabled {
@@ -174,23 +251,23 @@ mysql_public_access_disabled {
 mysql_public_access_disabled = false {
     lower(input.resources[_].type) == "azurerm_mysql_server"
     azure_attribute_absence["mysql_public_access_disabled"]
-    not is_private_endpoint_exist["mysql_public_access_disabled"]
+    mysql_dont_have_private_endpoint["mysql_public_access_disabled"]
 }
 
 mysql_public_access_disabled = false {
     lower(input.resources[_].type) == "azurerm_mysql_server"
     azure_issue["mysql_public_access_disabled"]
-    not is_private_endpoint_exist["mysql_public_access_disabled"]
+    mysql_dont_have_private_endpoint["mysql_public_access_disabled"]
 }
 
-mysql_public_access_disabled_err = "Resource azurerm_mysql_server and azurerm_private_endpoint or property 'public_network_access_enabled' need to be exist under azurerm_mysql_server. one or all are missing from the resource." {
+mysql_public_access_disabled_err = "Resource azurerm_mysql_server and azurerm_private_endpoint or property 'public_network_access_enabled' need to be exist. Its missing from the resource." {
     lower(input.resources[_].type) == "azurerm_mysql_server"
     azure_attribute_absence["mysql_public_access_disabled"]
-    not is_private_endpoint_exist["mysql_public_access_disabled"]
+    mysql_dont_have_private_endpoint["mysql_public_access_disabled"]
 } else = "Public Network Access is currently not disabled on MySQL Server." {
     lower(input.resources[_].type) == "azurerm_mysql_server"
     azure_issue["mysql_public_access_disabled"]
-    not is_private_endpoint_exist["mysql_public_access_disabled"]
+    mysql_dont_have_private_endpoint["mysql_public_access_disabled"]
 }
 
 mysql_public_access_disabled_metadata := {
@@ -254,5 +331,70 @@ storage_account_latest_tls_configured_metadata := {
     "Policy Description": "This policy will identify the Azure MySQL Server which dont have latest version of tls configured and give alert",
     "Resource Type": "azurerm_mysql_server",
     "Policy Help URL": "",
-    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account"
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server"
+}
+
+# PR-AZR-TRF-SQL-002
+
+default mysql_server_uses_privatelink = null
+
+azure_attribute_absence ["mysql_server_uses_privatelink"] {
+    count([c | input.resources[_].type == "azurerm_private_endpoint"; c := 1]) == 0
+}
+
+azure_issue ["mysql_server_uses_privatelink"] {
+    resource := input.resources[_]
+    lower(resource.type) == "azurerm_mysql_server"
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_id, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, resource.properties.compiletime_identity);
+              c := 1]) == 0
+    count([c | r := input.resources[_];
+              r.type == "azurerm_private_endpoint";
+              contains(r.properties.private_service_connection[_].private_connection_resource_alias, concat(".", [resource.type, resource.name]));
+              c := 1]) == 0
+}
+
+mysql_server_uses_privatelink = false {
+    lower(input.resources[_].type) == "azurerm_mysql_server"
+    azure_attribute_absence["mysql_server_uses_privatelink"]
+}
+
+mysql_server_uses_privatelink {
+    lower(input.resources[_].type) == "azurerm_mysql_server"
+    not azure_attribute_absence["mysql_server_uses_privatelink"]
+    not azure_issue["mysql_server_uses_privatelink"]
+}
+
+mysql_server_uses_privatelink = false {
+    lower(input.resources[_].type) == "azurerm_mysql_server"
+    azure_issue["mysql_server_uses_privatelink"]
+}
+
+mysql_server_uses_privatelink_err = "azurerm_mysql_server should have link with azurerm_private_endpoint and azurerm_private_endpoint's private_service_connection either need to have 'private_connection_resource_id' or 'private_connection_resource_alias' property. Seems there is no link established or mentioed properties are missing." {
+    lower(input.resources[_].type) == "azurerm_mysql_server"
+    azure_attribute_absence["mysql_server_uses_privatelink"]
+} else = "MySQL server currently not using private link" {
+    lower(input.resources[_].type) == "azurerm_mysql_server"
+    azure_issue["mysql_server_uses_privatelink"]
+}
+
+mysql_server_uses_privatelink_metadata := {
+    "Policy Code": "PR-AZR-TRF-SQL-002",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "Terraform",
+    "Policy Title": "MySQL server should use private link",
+    "Policy Description": "Private endpoints lets you connect your virtual network to Azure services without a public IP address at the source or destination. By mapping private endpoints to your MySQL Server instances, data leakage risks are reduced.",
+    "Resource Type": "azurerm_mysql_server",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/mysql_server"
 }
