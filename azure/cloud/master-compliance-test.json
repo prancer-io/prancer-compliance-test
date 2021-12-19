@@ -4443,6 +4443,78 @@
                     "description": "the categories of the logs. These categories are created as is convenient to the user. Some values are: 'Write', 'Delete', and/or 'Action.' We recommend you configure the log profile to export all activities from the control/management plane."
                 },
                 {
+                    "masterTestId": "AZURE_TEST_STR_1",
+                    "type": "rego",
+                    "rule": "file(blobservices.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-STR-001",
+                            "eval": "data.rule.storage_blob_soft_delete",
+                            "message": "data.rule.storage_blob_soft_delete_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_STR_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA=CCM",
+                                "HITTRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Storage"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_223"
+                    ],
+                    "severity": "Medium",
+                    "title": "Soft delete on blob service should be enabled",
+                    "description": "The blob service properties for blob soft delete. It helps to restore removed blob within configured retention days"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_STR_2",
+                    "type": "rego",
+                    "rule": "file(blobservices.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-STR-002",
+                            "eval": "data.rule.storage_blob_container_soft_delete",
+                            "message": "data.rule.storage_blob_container_soft_delete_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_STR_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA=CCM",
+                                "HITTRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Storage"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_223"
+                    ],
+                    "severity": "Medium",
+                    "title": "Soft delete on blob service container should be enabled",
+                    "description": "The blob service properties for container soft delete. It helps to restore removed blob containers within configured retention days."
+                },
+                {
                     "masterTestId": "AZURE_TEST_216",
                     "type": "rego",
                     "rule": "file(PR_AZR_0007.rego)",
@@ -7102,7 +7174,7 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_283"
+                        "AZRSNP_222"
                     ],
                     "severity": "Medium",
                     "title": "Azure storage accounts has blob container(s) with public access",
