@@ -4645,6 +4645,114 @@
                     "severity": "High",
                     "title": "Azure Security Center should have pricing tier configured to 'standard'",
                     "description": "Selecting the standard pricing tier will enable threat detection for networks and virtual systems by providing threat intelligence, anomaly detection, and behavior analytics in Azure Security Center."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_ASC_2",
+                    "type": "rego",
+                    "rule": "file(securitycontacts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ASC-002",
+                            "eval": "data.rule.securitycontacts",
+                            "message": "data.rule.securitycontacts_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_ASC_002.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_296"
+                    ],
+                    "severity": "Low",
+                    "title": "Security Center shoud have security contact emails configured to get notifications",
+                    "description": "Setting a valid email address in Security contact emails will enable Microsoft to contact you if the Microsoft Security Response Center (MSRC) discovers that your data has been accessed by an unlawful or unauthorized party. This will make sure that you are aware of any security issues and take prompt actions to mitigate the risks."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_ASC_3",
+                    "type": "rego",
+                    "rule": "file(securitycontacts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ASC-003",
+                            "eval": "data.rule.alert_notifications",
+                            "message": "data.rule.alert_notifications_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_ASC_003.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_296"
+                    ],
+                    "severity": "Medium",
+                    "title": "Send email notification should be enabled",
+                    "description": "Setting the security alert Send email notification for alerts to On ensures that emails are sent from Microsoft if their security team determines a potential security breach has taken place."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_ASC_5",
+                    "type": "rego",
+                    "rule": "file(securitycontacts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ASC-005",
+                            "eval": "data.rule.securitycontacts_alerts_to_admins_enabled",
+                            "message": "data.rule.securitycontacts_alerts_to_admins_enabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_ASC_005.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO 27001",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_296"
+                    ],
+                    "severity": "Medium",
+                    "title": "Security Center shoud send security alerts notifications to subscription admins",
+                    "description": "This policy will identify security centers which dont have configuration enabled to send security alerts notifications to subscription admins and alert if missing."
                 }
             ]
         }
