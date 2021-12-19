@@ -4313,6 +4313,136 @@
                     "description": "Blocking OMI port 5985, 5986, 1270 will protect vnet/subnet/vms from OMIGOD attacks from internet."
                 },
                 {
+                    "masterTestId": "AZURE_TEST_MNT_1",
+                    "type": "rego",
+                    "rule": "file(activitylogalerts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-MNT-001",
+                            "eval": "data.rule.alerts",
+                            "message": "data.rule.alerts_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_MNT_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HIPAA",
+                                "ISO",
+                                "NIST 800",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Management and governance"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_299"
+                    ],
+                    "severity": "Low",
+                    "title": "Activity log alerts settings should be enabled",
+                    "description": "Activity log alerts are alerts that activate when a new activity log event occurs that matches the conditions specified in the alert. Based on the order and volume of the events recorded in Azure activity log, the alert rule will fire. Activity log alert rules are Azure resources, so they can be created by using an Azure Resource Manager template. "
+                },
+                {
+                    "masterTestId": "AZURE_TEST_MNT_9",
+                    "type": "rego",
+                    "rule": "file(activitylogalerts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-MNT-009",
+                            "eval": "data.rule.log_profiles_retention_days",
+                            "message": "data.rule.log_profiles_retention_days_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_MNT_009.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Management and governance"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_299"
+                    ],
+                    "severity": "High",
+                    "title": "activity log retention should be set to 365 days or greater",
+                    "description": "Specifies the retention policy for the log. We recommend you set activity log retention for 365 days or greater. (A value of 0 will retain the events indefinitely.)"
+                },
+                {
+                    "masterTestId": "AZURE_TEST_MNT_10",
+                    "type": "rego",
+                    "rule": "file(activitylogalerts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-MNT-010",
+                            "eval": "data.rule.log_profiles_retention_enabled",
+                            "message": "data.rule.log_profiles_retention_enabled_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_MNT_010.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [],
+                            "service": [
+                                "Management and governance"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_299"
+                    ],
+                    "severity": "High",
+                    "title": "Activity log profile retention should be enabled",
+                    "description": "This policy identifies Microsoft.Insights/logprofiles which dont have log retention enabled. Activity Logs can be used to check for anomalies and gives insight into suspected breaches or misuse of information and access."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_MNT_11",
+                    "type": "rego",
+                    "rule": "file(activitylogalerts.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-MNT-011",
+                            "eval": "data.rule.log_profile_category",
+                            "message": "data.rule.log_profile_category_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_MNT_011.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "CSA-CCM",
+                                "HITRUST",
+                                "NIST 800",
+                                "NIST CSF",
+                                "PCI-DSS"
+                            ],
+                            "service": [
+                                "Management and governance"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_299"
+                    ],
+                    "severity": "High",
+                    "title": "log profile should be configured to capture all activities",
+                    "description": "the categories of the logs. These categories are created as is convenient to the user. Some values are: 'Write', 'Delete', and/or 'Action.' We recommend you configure the log profile to export all activities from the control/management plane."
+                },
+                {
                     "masterTestId": "AZURE_TEST_216",
                     "type": "rego",
                     "rule": "file(PR_AZR_0007.rego)",
