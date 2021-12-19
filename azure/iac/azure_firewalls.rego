@@ -33,6 +33,10 @@ azure_issue["azure_firewall_configured_with_idpc_and_tls_inspection"] {
 }
 
 azure_attribute_absence["azure_firewall_configured_with_idpc_and_tls_inspection"] {
+    count([c | lower(input.resources[_].type) == "microsoft.network/firewallpolicies"; c := 1]) == 0
+}
+
+azure_attribute_absence["azure_firewall_configured_with_idpc_and_tls_inspection"] {
     resource := input.resources[_]
     lower(resource.type) == "microsoft.network/firewallpolicies"
     not resource.properties.sku.tier
