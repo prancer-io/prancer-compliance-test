@@ -361,3 +361,103 @@ secret_certificate_is_in_keyvalut_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways"
 }
+
+
+#
+# PR-AZR-ARM-AGW-007
+#
+
+default application_gateways_v2_waf_ruleset_OWASP_active = null
+
+azure_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    not resource.properties.sku.name
+}
+
+azure_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    not resource.properties.sku.tier
+}
+
+azure_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    not resource.properties.webApplicationFirewallConfiguration.enabled
+}
+
+azure_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    not resource.properties.webApplicationFirewallConfiguration.ruleSetType
+}
+
+azure_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    not resource.properties.webApplicationFirewallConfiguration.ruleSetVersion
+}
+
+azure_issue["application_gateways_v2_waf_ruleset_OWASP_active"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    not contains(lower(resource.properties.sku.name), "v2")
+}
+
+azure_issue["application_gateways_v2_waf_ruleset_OWASP_active"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    not contains(lower(resource.properties.sku.tier), "v2")
+}
+
+azure_issue["application_gateways_v2_waf_ruleset_OWASP_active"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    resource.properties.webApplicationFirewallConfiguration.enabled != true
+}
+
+azure_issue["application_gateways_v2_waf_ruleset_OWASP_active"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    lower(resource.properties.webApplicationFirewallConfiguration.ruleSetType) != "owasp"
+}
+
+azure_issue["application_gateways_v2_waf_ruleset_OWASP_active"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/applicationgateways"
+    # The above protection is also available on OWASP ModSecurity Core Rule Set (CRS) version 3.2 for preview version of Azure Application Gateway V2 along with 3.1
+    to_number(resource.properties.webApplicationFirewallConfiguration.ruleSetVersion) < 3.1
+}
+
+application_gateways_v2_waf_ruleset_OWASP_active {
+    lower(input.resources[_].type) == "microsoft.network/applicationgateways"
+    not azure_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"]
+    not azure_issue["application_gateways_v2_waf_ruleset_OWASP_active"]
+}
+
+application_gateways_v2_waf_ruleset_OWASP_active = false {
+    azure_issue["application_gateways_v2_waf_ruleset_OWASP_active"]
+}
+
+application_gateways_v2_waf_ruleset_OWASP_active = false {
+    azure_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"]
+}
+
+application_gateways_v2_waf_ruleset_OWASP_active_err = "Azure Application Gateway V2 currently does not have the Web application firewall (WAF) enabled with minimum OWASP ModSecurity Core Rule Set (CRS) version 3.1" {
+    azure_issue["application_gateways_v2_waf_ruleset_OWASP_active"]
+} else = "'microsoft.network/applicationgateways' resource property 'name' and 'tier' under 'sku' block and 'enabled', 'ruleSetType' and 'ruleSetVersion' under 'webApplicationFirewallConfiguration' block need to be exist. one or all are missing." {
+    azure_attribute_absence["application_gateways_v2_waf_ruleset_OWASP_active"]
+}
+
+application_gateways_v2_waf_ruleset_OWASP_active_metadata := {
+    "Policy Code": "PR-AZR-ARM-AGW-007",
+    "Type": "IaC",
+    "Product": "AZR",
+    "Language": "ARM template",
+    "Policy Title": "Azure Application Gateway V2 should have the Web application firewall (WAF) enabled with minimum OWASP ModSecurity Core Rule Set (CRS) version 3.1 for proactive protection against CVE-2021-44228 exploit",
+    "Policy Description": "It is recommended to enable WAF policy with minimum OWASP ModSecurity Core Rule Set (CRS) version 3.1 on Application Gateway V2 to immediately avail of additional protection from log4j Remote Command Execution. details at https://www.microsoft.com/security/blog/2021/12/11/guidance-for-preventing-detecting-and-hunting-for-cve-2021-44228-log4j-2-exploitation/",
+    "Resource Type": "microsoft.network/applicationgateways",
+    "Policy Help URL": "",
+    "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/applicationgateways"
+}
