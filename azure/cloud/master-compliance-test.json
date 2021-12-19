@@ -4608,11 +4608,43 @@
                         }
                     ],
                     "masterSnapshotId": [
-                        "AZRSNP_283"
+                        "AZRSNP_301"
                     ],
                     "severity": "High",
                     "title": "Azure storage blob container should not have public access enabled",
                     "description": "'Public access level' allows you to grant anonymous/public read access to a container and the blobs within Azure blob storage. By doing so, you can grant read-only access to these resources without sharing your account key, and without requiring a shared access signature._x005F<br>_x005F<br>This policy identifies blob containers within an Azure storage account that allow anonymous/public access ('CONTAINER' or 'BLOB'). As a best practice, do not allow anonymous/public access to blob containers unless you have a very good reason. Instead, you should consider using a shared access signature token for providing controlled and time-limited access to blob containers."
+                },
+                {
+                    "masterTestId": "AZURE_TEST_ASC_1",
+                    "type": "rego",
+                    "rule": "file(pricing.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AZR-ASC-001",
+                            "eval": "data.rule.pricing",
+                            "message": "data.rule.pricing_err",
+                            "remediationDescription": "",
+                            "remediationFunction": "PR_AZR_ASC_001.py"
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "cloud": "azure",
+                            "compliance": [
+                                "CIS",
+                                "ISO 27001"
+                            ],
+                            "service": [
+                                "Security"
+                            ]
+                        }
+                    ],
+                    "masterSnapshotId": [
+                        "AZRSNP_300"
+                    ],
+                    "severity": "High",
+                    "title": "Azure Security Center should have pricing tier configured to 'standard'",
+                    "description": "Selecting the standard pricing tier will enable threat detection for networks and virtual systems by providing threat intelligence, anomaly detection, and behavior analytics in Azure Security Center."
                 }
             ]
         }
