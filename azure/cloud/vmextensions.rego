@@ -3,20 +3,43 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines/extensions
 
 #
-# PR-AZR-VM-003
+# PR-AZR-CLD-VM-003
 #
 
 default vm_protection = null
 
 azure_attribute_absence["vm_protection"] {
-    not input.properties.type
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.compute/virtualmachines/extensions"
+    not resource.properties.type
+}
+
+source_path[{"vm_protection":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.compute/virtualmachines/extensions"
+    not resource.properties.type
+    metadata:= {
+        "resource_path": [["resources",i,"properties","type"]]
+    }
 }
 
 azure_issue["vm_protection"] {
-    lower(input.properties.type) != "iaasantimalware"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.compute/virtualmachines/extensions"
+    lower(resource.properties.type) != "iaasantimalware"
+}
+
+source_path[{"vm_protection":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.compute/virtualmachines/extensions"
+    lower(resource.properties.type) != "iaasantimalware"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","type"]]
+    }
 }
 
 vm_protection {
+    lower(input.resources[_].type) == "microsoft.compute/virtualmachines/extensions"
     not azure_attribute_absence["vm_protection"]
     not azure_issue["vm_protection"]
 }
@@ -31,12 +54,14 @@ vm_protection = false {
 
 vm_protection_err = "Azure Virtual Machine does not have endpoint protection installed" {
     azure_issue["vm_protection"]
-} else = "VM extension attribute type missing in the resource" {
+}
+
+vm_protection_miss_err = "VM extension attribute type missing in the resource" {
     azure_attribute_absence["vm_protection"]
 }
 
 vm_protection_metadata := {
-    "Policy Code": "PR-AZR-VM-003",
+    "Policy Code": "PR-AZR-CLD-VM-003",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",

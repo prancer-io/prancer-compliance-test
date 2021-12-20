@@ -3,33 +3,83 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/vpngateways
 
 #
-# PR-AZR-NET-006
+# PR-AZR-CLD-NET-006
 #
 
 default vpn_encrypt = null
 
 azure_attribute_absence["vpn_encrypt"] {
-    not input.properties.connections
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/vpngateways"
+    not resource.properties.connections
+}
+
+source_path[{"vpn_encrypt":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/vpngateways"
+    not resource.properties.connections
+    metadata:= {
+        "resource_path": [["resources",i,"properties","connections"]]
+    }
 }
 
 azure_attribute_absence["vpn_encrypt"] {
-    con := input.properties.connections[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/vpngateways"
+    con := resource.properties.connections[_]
     not con.properties.ipsecPolicies
 }
 
+source_path[{"vpn_encrypt":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/vpngateways"
+    con := resource.properties.connections[j]
+    not con.properties.ipsecPolicies
+    metadata:= {
+        "resource_path": [["resources",i,"properties","connections",j,"properties","ipsecPolicies"]]
+    }
+}
+
 azure_attribute_absence["vpn_encrypt"] {
-    con := input.properties.connections[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/vpngateways"
+    con := resource.properties.connections[_]
     ipsec := con.properties.ipsecPolicies[_]
     not ipsec.ipsecEncryption
 }
 
+source_path[{"vpn_encrypt":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/vpngateways"
+    con := resource.properties.connections[j]
+    ipsec := con.properties.ipsecPolicies[k]
+    not ipsec.ipsecEncryption
+    metadata:= {
+        "resource_path": [["resources",i,"properties","connections",j,"properties","ipsecPolicies",k,"ipsecEncryption"]]
+    }
+}
+
 azure_issue["vpn_encrypt"] {
-    con := input.properties.connections[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/vpngateways"
+    con := resource.properties.connections[_]
     ipsec := con.properties.ipsecPolicies[_]
     lower(ipsec.ipsecEncryption) == "none"
 }
 
+source_path[{"vpn_encrypt":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/vpngateways"
+    con := resource.properties.connections[j]
+    ipsec := con.properties.ipsecPolicies[k]
+    lower(ipsec.ipsecEncryption) == "none"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","connections",j,"properties","ipsecPolicies",k,"ipsecEncryption"]]
+    }
+}
+
 vpn_encrypt {
+    lower(input.resources[_].type) == "microsoft.network/vpngateways"
     not azure_attribute_absence["vpn_encrypt"]
     not azure_issue["vpn_encrypt"]
 }
@@ -44,12 +94,14 @@ vpn_encrypt = false {
 
 vpn_encrypt_err = "VPN gateways is currently not configured with cryptographic algorithm" {
     azure_issue["vpn_encrypt"]
-} else = "VPN gateways connections or ipsec policies property 'ipsecEncryption' is missing from the resource" {
+}
+
+vpn_encrypt_miss_err = "VPN gateways connections or ipsec policies property 'ipsecEncryption' is missing from the resource" {
     azure_attribute_absence["vpn_encrypt"]
 }
 
 vpn_encrypt_metadata := {
-    "Policy Code": "PR-AZR-NET-006",
+    "Policy Code": "PR-AZR-CLD-NET-006",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",

@@ -3,16 +3,36 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/subnets
 
 #
-# PR-AZR-NET-005
+# PR-AZR-CLD-NET-005
 #
 
 default vnet_subnet_nsg = null
 
+# id property is optional
+#azure_issue["vnet_subnet_nsg"] {
+#    resource := input.resources[_]
+#    lower(resource.type) == "microsoft.network/virtualnetworks/subnets"
+#    count([c | resource.properties.networkSecurityGroup.id; c := 1]) == 0
+#}
+
 azure_issue["vnet_subnet_nsg"] {
-    not input.properties.networkSecurityGroup
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/virtualnetworks/subnets"
+    not resource.properties.networkSecurityGroup
 }
 
+source_path[{"vnet_subnet_nsg":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/virtualnetworks/subnets"
+    not resource.properties.networkSecurityGroup
+    metadata:= {
+        "resource_path": [["resources",i,"properties","networkSecurityGroup"]]
+    }
+}
+
+
 vnet_subnet_nsg {
+    lower(input.resources[_].type) == "microsoft.network/virtualnetworks/subnets"
     not azure_issue["vnet_subnet_nsg"]
 }
 
@@ -25,7 +45,7 @@ vnet_subnet_nsg_err = "Azure Virtual Network subnet is currently not configured 
 }
 
 vnet_subnet_nsg_metadata := {
-    "Policy Code": "PR-AZR-NET-005",
+    "Policy Code": "PR-AZR-CLD-NET-005",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",

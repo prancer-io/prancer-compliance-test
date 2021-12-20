@@ -3,20 +3,44 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.databricks/workspaces?tabs=json
 
 #
-# PR-AZR-DBK-001
+# PR-AZR-CLD-DBK-001
 #
 
 default databrics_workspace_has_public_ip_disabled = null
 
 azure_attribute_absence["databrics_workspace_has_public_ip_disabled"] {
-    not input.properties.parameters.enableNoPublicIp.value
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.databricks/workspaces"
+    not resource.properties.parameters.enableNoPublicIp.value
+}
+
+source_path[{"databrics_workspace_has_public_ip_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.databricks/workspaces"
+    not resource.properties.parameters.enableNoPublicIp.value
+    metadata:= {
+        "resource_path": [["resources",i,"properties","parameters","enableNoPublicIp","value"]]
+    }
 }
 
 azure_issue["databrics_workspace_has_public_ip_disabled"] {
-    input.properties.parameters.enableNoPublicIp.value != true
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.databricks/workspaces"
+    resource.properties.parameters.enableNoPublicIp.value != true
 }
 
+source_path[{"databrics_workspace_has_public_ip_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.databricks/workspaces"
+    resource.properties.parameters.enableNoPublicIp.value != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","parameters","enableNoPublicIp","value"]]
+    }
+}
+
+
 databrics_workspace_has_public_ip_disabled {
+    lower(input.resources[_].type) == "microsoft.databricks/workspaces"
     not azure_attribute_absence["databrics_workspace_has_public_ip_disabled"]
     not azure_issue["databrics_workspace_has_public_ip_disabled"]
 }
@@ -36,7 +60,7 @@ databrics_workspace_has_public_ip_disabled_err = "Azure Databricks currenty does
 }
 
 databrics_workspace_has_public_ip_disabled_metadata := {
-    "Policy Code": "PR-AZR-DBK-001",
+    "Policy Code": "PR-AZR-CLD-DBK-001",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -49,20 +73,43 @@ databrics_workspace_has_public_ip_disabled_metadata := {
 
 
 #
-# PR-AZR-DBK-002
+# PR-AZR-CLD-DBK-002
 #
 
 default databrics_workspace_has_vnet_integration = null
 
 azure_attribute_absence["databrics_workspace_has_vnet_integration"] {
-    not input.properties.parameters.customVirtualNetworkId.value
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.databricks/workspaces"
+    not resource.properties.parameters.customVirtualNetworkId.value
+}
+
+source_path[{"databrics_workspace_has_vnet_integration":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.databricks/workspaces"
+    not resource.properties.parameters.customVirtualNetworkId.value
+    metadata:= {
+        "resource_path": [["resources",i,"properties","parameters","customVirtualNetworkId","value"]]
+    }
 }
 
 azure_issue["databrics_workspace_has_vnet_integration"] {
-    not contains(lower(input.properties.parameters.customVirtualNetworkId.value), "microsoft.network/virtualnetworks")
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.databricks/workspaces"
+    not contains(lower(resource.properties.parameters.customVirtualNetworkId.value), "microsoft.network/virtualnetworks")
+}
+
+source_path[{"databrics_workspace_has_vnet_integration":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.databricks/workspaces"
+    not contains(lower(resource.properties.parameters.customVirtualNetworkId.value), "microsoft.network/virtualnetworks")
+    metadata:= {
+        "resource_path": [["resources",i,"properties","parameters","customVirtualNetworkId","value"]]
+    }
 }
 
 databrics_workspace_has_vnet_integration {
+    lower(input.resources[_].type) == "microsoft.databricks/workspaces"
     not azure_attribute_absence["databrics_workspace_has_vnet_integration"]
     not azure_issue["databrics_workspace_has_vnet_integration"]
 }
@@ -82,7 +129,7 @@ databrics_workspace_has_vnet_integration_err = "Azure Databricks currenty does n
 }
 
 databrics_workspace_has_vnet_integration_metadata := {
-    "Policy Code": "PR-AZR-DBK-002",
+    "Policy Code": "PR-AZR-CLD-DBK-002",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",

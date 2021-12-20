@@ -3,24 +3,58 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-06-01/storageaccounts/blobservices/containers
 
 #
-# PR-AZR-STR-012
+# PR-AZR-CLD-STR-012
 #
 
 default storage_container_public_access_disabled = null
-
+#https://docs.microsoft.com/en-us/azure/storage/blobs/anonymous-read-access-configure?tabs=portal
 azure_attribute_absence["storage_container_public_access_disabled"] {
-    not input.properties.publicAccess
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/containers"
+    not resource.properties.publicAccess
+}
+
+source_path[{"storage_container_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/containers"
+    not resource.properties.publicAccess
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicAccess"]]
+    }
 }
 
 azure_issue["storage_container_public_access_disabled"] {
-    lower(input.properties.publicAccess) == "container"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/containers"
+    lower(resource.properties.publicAccess) == "container"
+}
+
+source_path[{"storage_container_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/containers"
+    lower(resource.properties.publicAccess) == "container"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicAccess"]]
+    }
 }
 
 azure_issue["storage_container_public_access_disabled"] {
-    lower(input.properties.publicAccess) == "blob"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/containers"
+    lower(resource.properties.publicAccess) == "blob"
+}
+
+source_path[{"storage_container_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts/blobservices/containers"
+    lower(resource.properties.publicAccess) == "blob"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicAccess"]]
+    }
 }
 
 storage_container_public_access_disabled {
+    lower(input.resources[_].type) == "microsoft.storage/storageaccounts/blobservices/containers"
     not azure_attribute_absence["storage_container_public_access_disabled"]
     not azure_issue["storage_container_public_access_disabled"]
 }
@@ -40,7 +74,7 @@ storage_container_public_access_disabled_err = "Azure storage account currently 
 }
 
 storage_container_public_access_disabled_metadata := {
-    "Policy Code": "PR-AZR-STR-012",
+    "Policy Code": "PR-AZR-CLD-STR-012",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -53,31 +87,72 @@ storage_container_public_access_disabled_metadata := {
 
 
 
-# PR-AZR-STR-013
+# PR-AZR-CLD-STR-013
 #
 
 default storage__logical_container_public_access_disabled = null
 
 azure_attribute_absence["storage__logical_container_public_access_disabled"] {
-    storage_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    storage_resources := resource.resources[_]
     lower(storage_resources.type) == "blobservices/containers"
     not storage_resources.properties.publicAccess
 }
 
+source_path[{"storage__logical_container_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    storage_resources := resource.resources[j]
+    lower(storage_resources.type) == "blobservices/containers"
+    not storage_resources.properties.publicAccess
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","publicAccess"]]
+    }
+}
+
 azure_issue["storage__logical_container_public_access_disabled"] {
-    storage_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    storage_resources := resource.resources[_]
     lower(storage_resources.type) == "blobservices/containers"
     lower(storage_resources.properties.publicAccess) == "container"
 }
 
+source_path[{"storage__logical_container_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    storage_resources := resource.resources[j]
+    lower(storage_resources.type) == "blobservices/containers"
+    lower(storage_resources.properties.publicAccess) == "container"
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","publicAccess"]]
+    }
+}
+
 azure_issue["storage__logical_container_public_access_disabled"] {
-    storage_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    storage_resources := resource.resources[_]
     lower(storage_resources.type) == "blobservices/containers"
     lower(storage_resources.properties.publicAccess) == "blob"
 }
 
+source_path[{"storage__logical_container_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    storage_resources := resource.resources[j]
+    lower(storage_resources.type) == "blobservices/containers"
+    lower(storage_resources.properties.publicAccess) == "blob"
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","publicAccess"]]
+    }
+}
+
 storage__logical_container_public_access_disabled {
-    storage_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.storage/storageaccounts"
+    storage_resources := resource.resources[_]
     lower(storage_resources.type) == "blobservices/containers"
     not azure_attribute_absence["storage__logical_container_public_access_disabled"]
     not azure_issue["storage__logical_container_public_access_disabled"]
@@ -98,7 +173,7 @@ storage__logical_container_public_access_disabled_err = "Azure storage account c
 }
 
 storage__logical_container_public_access_disabled_metadata := {
-    "Policy Code": "PR-AZR-STR-013",
+    "Policy Code": "PR-AZR-CLD-STR-013",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",

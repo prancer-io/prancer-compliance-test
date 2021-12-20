@@ -10,8 +10,10 @@ iports := [
 
 # allowed in all
 nsg_inbound[port] {
-    port := input.iports[_]
-    rules := input.properties.securityRules[_]
+    resource := input.resources[_]
+    port := iports[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.destinationAddressPrefix == "*"
@@ -20,8 +22,10 @@ nsg_inbound[port] {
 
 # allowed in port
 nsg_inbound[port] {
-    port := input.iports[_]
-    rules := input.properties.securityRules[_]
+    resource := input.resources[_]
+    port := iports[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.destinationAddressPrefix == "*"
@@ -30,8 +34,10 @@ nsg_inbound[port] {
 
 # allowed in range
 nsg_inbound[port] {
-    port := input.iports[_]
-    rules := input.properties.securityRules[_]
+    resource := input.resources[_]
+    port := iports[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.destinationAddressPrefix == "*"
@@ -43,8 +49,10 @@ nsg_inbound[port] {
 
 # allowed in list
 nsg_inbound[port] {
-    port := input.iports[_]
-    rules := input.properties.securityRules[_]
+    resource := input.resources[_]
+    port := iports[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.destinationAddressPrefix == "*"
@@ -53,8 +61,10 @@ nsg_inbound[port] {
 
 # allowed in list range
 nsg_inbound[port] {
-    port := input.iports[_]
-    rules := input.properties.securityRules[_]
+    resource := input.resources[_]
+    port := iports[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.destinationAddressPrefix == "*"
@@ -64,13 +74,15 @@ nsg_inbound[port] {
 }
 
 #
-# PR-AZR-NSG-001
+# PR-AZR-CLD-NSG-001
 #
 
 default nsg_in_tcp_all_src = null
 
 azure_issue["nsg_in_tcp_all_src"] {
-    rules := input.properties.securityRules[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.protocol == "TCP"
@@ -79,6 +91,7 @@ azure_issue["nsg_in_tcp_all_src"] {
 }
 
 nsg_in_tcp_all_src {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["nsg_in_tcp_all_src"]
 }
 
@@ -91,7 +104,7 @@ nsg_in_tcp_all_src_err = "Azure NSG having Inbound rule overly permissive to all
 }
 
 nsg_in_tcp_all_src_metadata := {
-    "Policy Code": "PR-AZR-NSG-001",
+    "Policy Code": "PR-AZR-CLD-NSG-001",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -103,13 +116,15 @@ nsg_in_tcp_all_src_metadata := {
 }
 
 #
-# PR-AZR-NSG-002
+# PR-AZR-CLD-NSG-002
 #
 
 default nsg_in_udp_all_src = null
 
 azure_issue["nsg_in_udp_all_src"] {
-    rules := input.properties.securityRules[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.protocol == "UDP"
@@ -118,6 +133,7 @@ azure_issue["nsg_in_udp_all_src"] {
 }
 
 nsg_in_udp_all_src {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["nsg_in_udp_all_src"]
 }
 
@@ -130,7 +146,7 @@ nsg_in_udp_all_src_err = "Azure NSG having Inbound rule overly permissive to all
 }
 
 nsg_in_udp_all_src_metadata := {
-    "Policy Code": "PR-AZR-NSG-002",
+    "Policy Code": "PR-AZR-CLD-NSG-002",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -142,13 +158,15 @@ nsg_in_udp_all_src_metadata := {
 }
 
 #
-# PR-AZR-NSG-003
+# PR-AZR-CLD-NSG-003
 #
 
 default nsg_in_tcp_all = null
 
 azure_issue["nsg_in_tcp_all"] {
-    rules := input.properties.securityRules[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.protocol == "TCP"
@@ -158,6 +176,7 @@ azure_issue["nsg_in_tcp_all"] {
 }
 
 nsg_in_tcp_all {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["nsg_in_tcp_all"]
 }
 
@@ -170,7 +189,7 @@ nsg_in_tcp_all_err = "Azure NSG having Inbound rule overly permissive to all tra
 }
 
 nsg_in_tcp_all_metadata := {
-    "Policy Code": "PR-AZR-NSG-003",
+    "Policy Code": "PR-AZR-CLD-NSG-003",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -182,13 +201,15 @@ nsg_in_tcp_all_metadata := {
 }
 
 #
-# PR-AZR-NSG-004
+# PR-AZR-CLD-NSG-004
 #
 
 default nsg_in_udp_all = null
 
 azure_issue["nsg_in_udp_all"] {
-    rules := input.properties.securityRules[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.protocol == "UDP"
@@ -198,6 +219,7 @@ azure_issue["nsg_in_udp_all"] {
 }
 
 nsg_in_udp_all {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["nsg_in_udp_all"]
 }
 
@@ -210,7 +232,7 @@ nsg_in_udp_all_err = "Azure NSG having Inbound rule overly permissive to all UDP
 }
 
 nsg_in_udp_all_metadata := {
-    "Policy Code": "PR-AZR-NSG-004",
+    "Policy Code": "PR-AZR-CLD-NSG-004",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -222,13 +244,15 @@ nsg_in_udp_all_metadata := {
 }
 
 #
-# PR-AZR-NSG-005
+# PR-AZR-CLD-NSG-005
 #
 
 default nsg_in_all = null
 
 azure_issue["nsg_in_all"] {
-    rules := input.properties.securityRules[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.protocol == "*"
@@ -237,6 +261,7 @@ azure_issue["nsg_in_all"] {
 }
 
 nsg_in_all {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["nsg_in_all"]
 }
 
@@ -249,7 +274,7 @@ nsg_in_all_err = "Azure NSG having Inbound rule overly permissive to all traffic
 }
 
 nsg_in_all_metadata := {
-    "Policy Code": "PR-AZR-NSG-005",
+    "Policy Code": "PR-AZR-CLD-NSG-005",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -261,13 +286,15 @@ nsg_in_all_metadata := {
 }
 
 #
-# PR-AZR-NSG-006
+# PR-AZR-CLD-NSG-006
 #
 
 default nsg_in_all_src = null
 
 azure_issue["nsg_in_all_src"] {
-    rules := input.properties.securityRules[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.protocol == "*"
@@ -277,6 +304,7 @@ azure_issue["nsg_in_all_src"] {
 }
 
 nsg_in_all_src {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["nsg_in_all_src"]
 }
 
@@ -289,7 +317,7 @@ nsg_in_all_src_err = "Azure NSG having Inbound rule overly permissive to allow a
 }
 
 nsg_in_all_src_metadata := {
-    "Policy Code": "PR-AZR-NSG-006",
+    "Policy Code": "PR-AZR-CLD-NSG-006",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -301,13 +329,15 @@ nsg_in_all_src_metadata := {
 }
 
 #
-# PR-AZR-NSG-007
+# PR-AZR-CLD-NSG-007
 #
 
 default nsg_in_all_dst = null
 
 azure_issue["nsg_in_all_dst"] {
-    rules := input.properties.securityRules[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.protocol == "*"
@@ -317,6 +347,7 @@ azure_issue["nsg_in_all_dst"] {
 }
 
 nsg_in_all_dst {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["nsg_in_all_dst"]
 }
 
@@ -329,7 +360,7 @@ nsg_in_all_dst_err = "Azure NSG having Inbound rule overly permissive to allow a
 }
 
 nsg_in_all_dst_metadata := {
-    "Policy Code": "PR-AZR-NSG-007",
+    "Policy Code": "PR-AZR-CLD-NSG-007",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -342,13 +373,15 @@ nsg_in_all_dst_metadata := {
 
 
 #
-# PR-AZR-NSG-008
+# PR-AZR-CLD-NSG-008
 #
 
 default nsg_allow_icmp = null
 
 azure_issue["nsg_allow_icmp"] {
-    rules := input.properties.securityRules[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Inbound"
     rules.properties.protocol == "ICMP"
@@ -356,6 +389,7 @@ azure_issue["nsg_allow_icmp"] {
 }
 
 nsg_allow_icmp {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["nsg_allow_icmp"]
 }
 
@@ -368,7 +402,7 @@ nsg_allow_icmp_err = "Azure NSG having Inbound rule overly permissive to allow a
 }
 
 nsg_allow_icmp_metadata := {
-    "Policy Code": "PR-AZR-NSG-008",
+    "Policy Code": "PR-AZR-CLD-NSG-008",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -380,7 +414,7 @@ nsg_allow_icmp_metadata := {
 }
 
 #
-# PR-AZR-NSG-009
+# PR-AZR-CLD-NSG-009
 #
 
 default inbound_port_21 = null
@@ -390,6 +424,7 @@ azure_issue["inbound_port_21"] {
 }
 
 inbound_port_21 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_port_21"]
 }
 
@@ -402,7 +437,7 @@ inbound_port_21_err = "Azure Network Security Group allows FTP" {
 }
 
 inbound_port_21_metadata := {
-    "Policy Code": "PR-AZR-NSG-009",
+    "Policy Code": "PR-AZR-CLD-NSG-009",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -414,7 +449,7 @@ inbound_port_21_metadata := {
 }
 
 #
-# PR-AZR-NSG-010
+# PR-AZR-CLD-NSG-010
 #
 
 default inbound_insecure_port = null
@@ -432,6 +467,7 @@ azure_issue["inbound_insecure_port"] {
 }
 
 inbound_insecure_port {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_insecure_port"]
 }
 
@@ -444,7 +480,7 @@ inbound_insecure_port_err = "Internet connectivity via tcp over insecure port" {
 }
 
 inbound_insecure_port_metadata := {
-    "Policy Code": "PR-AZR-NSG-010",
+    "Policy Code": "PR-AZR-CLD-NSG-010",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -456,7 +492,7 @@ inbound_insecure_port_metadata := {
 }
 
 #
-# PR-AZR-NSG-011
+# PR-AZR-CLD-NSG-011
 #
 
 default inbound_port_11211 = null
@@ -466,6 +502,7 @@ azure_issue["inbound_port_11211"] {
 }
 
 inbound_port_11211 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_port_11211"]
 }
 
@@ -478,7 +515,7 @@ inbound_port_11211_err = "Memcached DDoS attack attempted" {
 }
 
 inbound_port_11211_metadata := {
-    "Policy Code": "PR-AZR-NSG-011",
+    "Policy Code": "PR-AZR-CLD-NSG-011",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -490,7 +527,7 @@ inbound_port_11211_metadata := {
 }
 
 #
-# PR-AZR-NSG-012
+# PR-AZR-CLD-NSG-012
 #
 
 default inbound_port_6379 = null
@@ -500,6 +537,7 @@ azure_issue["inbound_port_6379"] {
 }
 
 inbound_port_6379 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_port_6379"]
 }
 
@@ -512,7 +550,7 @@ inbound_port_6379_err = "RedisWannaMine vulnerable instances with active network
 }
 
 inbound_port_6379_metadata := {
-    "Policy Code": "PR-AZR-NSG-012",
+    "Policy Code": "PR-AZR-CLD-NSG-012",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -524,7 +562,7 @@ inbound_port_6379_metadata := {
 }
 
 #
-# PR-AZR-NSG-013
+# PR-AZR-CLD-NSG-013
 #
 
 default inbound_port_dbs = null
@@ -586,6 +624,7 @@ azure_issue["inbound_port_dbs"] {
 }
 
 inbound_port_dbs {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_port_dbs"]
 }
 
@@ -598,7 +637,7 @@ inbound_port_dbs_err = "Publicly exposed DB Ports" {
 }
 
 inbound_port_dbs_metadata := {
-    "Policy Code": "PR-AZR-NSG-013",
+    "Policy Code": "PR-AZR-CLD-NSG-013",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -610,7 +649,7 @@ inbound_port_dbs_metadata := {
 }
 
 #
-# PR-AZR-NSG-014
+# PR-AZR-CLD-NSG-014
 #
 
 default inbound_port_22 = null
@@ -620,6 +659,7 @@ azure_issue["inbound_port_22"] {
 }
 
 inbound_port_22 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_port_22"]
 }
 
@@ -632,7 +672,7 @@ inbound_port_22_err = "Azure NSG allows SSH traffic from internet on port 22" {
 }
 
 inbound_port_22_metadata := {
-    "Policy Code": "PR-AZR-NSG-014",
+    "Policy Code": "PR-AZR-CLD-NSG-014",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -644,7 +684,7 @@ inbound_port_22_metadata := {
 }
 
 #
-# PR-AZR-NSG-015
+# PR-AZR-CLD-NSG-015
 #
 
 default inbound_port_3389 = null
@@ -654,6 +694,7 @@ azure_issue["inbound_port_3389"] {
 }
 
 inbound_port_3389 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_port_3389"]
 }
 
@@ -666,7 +707,7 @@ inbound_port_3389_err = "Azure NSG allows traffic from internet on port 3389" {
 }
 
 inbound_port_3389_metadata := {
-    "Policy Code": "PR-AZR-NSG-015",
+    "Policy Code": "PR-AZR-CLD-NSG-015",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -679,7 +720,7 @@ inbound_port_3389_metadata := {
 
 #
 
-# PR-AZR-NSG-016
+# PR-AZR-CLD-NSG-016
 #
 
 default inbound_port_445 = null
@@ -689,6 +730,7 @@ azure_issue["inbound_port_445"] {
 }
 
 inbound_port_445 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_port_445"]
 }
 
@@ -702,7 +744,7 @@ inbound_port_445_err = "Azure Network Security Group allows CIFS" {
 
 
 inbound_port_445_metadata := {
-    "Policy Code": "PR-AZR-NSG-06",
+    "Policy Code": "PR-AZR-CLD-NSG-06",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -714,7 +756,7 @@ inbound_port_445_metadata := {
 }
 
 #
-# PR-AZR-NSG-017
+# PR-AZR-CLD-NSG-017
 
 
 #
@@ -738,6 +780,7 @@ inbound_insecure_omi_port {
 }
  
 inbound_insecure_omi_port = false {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_insecure_omi_port"]
 }
  
@@ -746,10 +789,10 @@ inbound_insecure_omi_port_err = "Azure Network Security Group (NSG) currently no
 }
  
 inbound_insecure_omi_port_metadata := {
-    "Policy Code": "PR-AZR-NSG-017",
+    "Policy Code": "PR-AZR-CLD-NSG-017",
     "Type": "Cloud",
     "Product": "AZR",
-    "Language": "",
+    "Language": "ARM",
     "Policy Title": "Azure Network Security Group (NSG) should protect OMIGOD attack from internet",
     "Policy Description": "Blocking OMI port 5985, 5986, 1270 will protect vnet/subnet/vms from OMIGOD attacks from internet.",
     "Resource Type": "microsoft.network/networksecuritygroups",
@@ -757,7 +800,7 @@ inbound_insecure_omi_port_metadata := {
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.network/networksecuritygroups"
 }
 
-# PR-AZR-NSG-018
+# PR-AZR-CLD-NSG-018
 #
 
 default inbound_port_53 = null
@@ -767,6 +810,7 @@ azure_issue["inbound_port_53"] {
 }
 
 inbound_port_53 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_port_53"]
 }
 
@@ -779,7 +823,7 @@ inbound_port_53_err = "Azure Network Security Group allows DNS" {
 }
 
 inbound_port_53_metadata := {
-    "Policy Code": "PR-AZR-NSG-018",
+    "Policy Code": "PR-AZR-CLD-NSG-018",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -791,7 +835,7 @@ inbound_port_53_metadata := {
 }
 
 #
-# PR-AZR-NSG-019
+# PR-AZR-CLD-NSG-019
 #
 
 default inbound_port_20 = null
@@ -801,6 +845,7 @@ azure_issue["inbound_port_20"] {
 }
 
 inbound_port_20 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_port_20"]
 }
 
@@ -814,7 +859,7 @@ inbound_port_20_err = "Azure Network Security Group allows FTP-Data" {
 
 
 inbound_port_20_metadata := {
-    "Policy Code": "PR-AZR-NSG-019",
+    "Policy Code": "PR-AZR-CLD-NSG-019",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -826,7 +871,7 @@ inbound_port_20_metadata := {
 }
 
 #
-# PR-AZR-NSG-020
+# PR-AZR-CLD-NSG-020
 #
 
 default inbound_port_4333 = null
@@ -836,6 +881,7 @@ azure_issue["inbound_port_4333"] {
 }
 
 inbound_port_4333 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_port_4333"]
 }
 
@@ -848,7 +894,7 @@ inbound_port_4333_err = "Azure Network Security Group allows MSQL" {
 }
 
 inbound_port_4333_metadata := {
-    "Policy Code": "PR-AZR-NSG-020",
+    "Policy Code": "PR-AZR-CLD-NSG-020",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -860,7 +906,7 @@ inbound_port_4333_metadata := {
 }
 
 #
-# PR-AZR-NSG-021
+# PR-AZR-CLD-NSG-021
 #
 
 default inbound_port_3306 = null
@@ -870,6 +916,7 @@ azure_issue["inbound_port_3306"] {
 }
 
 inbound_port_3306 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_port_3306"]
 }
 
@@ -882,7 +929,7 @@ inbound_port_3306_err = "Azure Network Security Group allows MySQL" {
 }
 
 inbound_port_3306_metadata := {
-    "Policy Code": "PR-AZR-NSG-021",
+    "Policy Code": "PR-AZR-CLD-NSG-021",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -894,7 +941,7 @@ inbound_port_3306_metadata := {
 }
 
 #
-# PR-AZR-NSG-022
+# PR-AZR-CLD-NSG-022
 
 default inbound_port_netbios = null
 
@@ -907,6 +954,7 @@ azure_issue["inbound_port_netbios"] {
 }
 
 inbound_port_netbios {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_port_netbios"]
 }
 
@@ -919,7 +967,7 @@ inbound_port_netbios_err = "Azure Network Security Group allows NetBIOS" {
 }
 
 inbound_port_netbios_metadata := {
-    "Policy Code": "PR-AZR-NSG-022",
+    "Policy Code": "PR-AZR-CLD-NSG-022",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -931,7 +979,7 @@ inbound_port_netbios_metadata := {
 }
 
 #
-# PR-AZR-NSG-023
+# PR-AZR-CLD-NSG-023
 #
 
 default inbound_port_5432 = null
@@ -941,6 +989,7 @@ azure_issue["inbound_port_5432"] {
 }
 
 inbound_port_5432 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_port_5432"]
 }
 
@@ -953,7 +1002,7 @@ inbound_port_5432_err = "Azure Network Security Group allows PostgreSQL" {
 }
 
 inbound_port_5432_metadata := {
-    "Policy Code": "PR-AZR-NSG-023",
+    "Policy Code": "PR-AZR-CLD-NSG-023",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -965,7 +1014,7 @@ inbound_port_5432_metadata := {
 }
 
 #
-# PR-AZR-NSG-024
+# PR-AZR-CLD-NSG-024
 #
 
 default inbound_port_25 = null
@@ -975,6 +1024,7 @@ azure_issue["inbound_port_25"] {
 }
 
 inbound_port_25 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_port_25"]
 }
 
@@ -987,7 +1037,7 @@ inbound_port_25_err = "Azure Network Security Group allows SMTP" {
 }
 
 inbound_port_25_metadata := {
-    "Policy Code": "PR-AZR-NSG-024",
+    "Policy Code": "PR-AZR-CLD-NSG-024",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -999,7 +1049,7 @@ inbound_port_25_metadata := {
 }
 
 #
-# PR-AZR-NSG-025
+# PR-AZR-CLD-NSG-025
 
 default inbound_port_sqlserver = null
 
@@ -1014,6 +1064,7 @@ azure_issue["inbound_port_sqlserver"] {
 }
 
 inbound_port_sqlserver {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_port_sqlserver"]
 }
 
@@ -1026,7 +1077,7 @@ inbound_port_sqlserver_err = "Azure Network Security Group allows SQLServer" {
 }
 
 inbound_port_sqlserver_metadata := {
-    "Policy Code": "PR-AZR-NSG-025",
+    "Policy Code": "PR-AZR-CLD-NSG-025",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -1039,7 +1090,7 @@ inbound_port_sqlserver_metadata := {
 
 
 #
-# PR-AZR-NSG-026
+# PR-AZR-CLD-NSG-026
 #
 
 default inbound_port_23 = null
@@ -1049,6 +1100,7 @@ azure_issue["inbound_port_23"] {
 }
 
 inbound_port_23 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_port_23"]
 }
 
@@ -1061,7 +1113,7 @@ inbound_port_23_err = "Azure Network Security Group allows Telnet" {
 }
 
 inbound_port_23_metadata := {
-    "Policy Code": "PR-AZR-NSG-026",
+    "Policy Code": "PR-AZR-CLD-NSG-026",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -1073,7 +1125,7 @@ inbound_port_23_metadata := {
 }
 
 #
-# PR-AZR-NSG-027
+# PR-AZR-CLD-NSG-027
 #
 
 default inbound_port_5500 = null
@@ -1083,6 +1135,7 @@ azure_issue["inbound_port_5500"] {
 }
 
 inbound_port_5500 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_port_5500"]
 }
 
@@ -1095,7 +1148,7 @@ inbound_port_5500_err = "Azure Network Security Group allows VNC Listener" {
 }
 
 inbound_port_5500_metadata := {
-    "Policy Code": "PR-AZR-NSG-027",
+    "Policy Code": "PR-AZR-CLD-NSG-027",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -1107,7 +1160,7 @@ inbound_port_5500_metadata := {
 }
 
 #
-# PR-AZR-NSG-028
+# PR-AZR-CLD-NSG-028
 #
 
 default inbound_port_5900 = null
@@ -1117,6 +1170,7 @@ azure_issue["inbound_port_5900"] {
 }
 
 inbound_port_5900 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_port_5900"]
 }
 
@@ -1129,7 +1183,7 @@ inbound_port_5900_err = "Azure Network Security Group allows VNC Server" {
 }
 
 inbound_port_5900_metadata := {
-    "Policy Code": "PR-AZR-NSG-028",
+    "Policy Code": "PR-AZR-CLD-NSG-028",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -1141,7 +1195,7 @@ inbound_port_5900_metadata := {
 }
 
 #
-# PR-AZR-NSG-029
+# PR-AZR-CLD-NSG-029
 #
 
 default inbound_port_135 = null
@@ -1151,6 +1205,7 @@ azure_issue["inbound_port_135"] {
 }
 
 inbound_port_135 {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["inbound_port_135"]
 }
 
@@ -1163,7 +1218,7 @@ inbound_port_135_err = "Azure Network Security Group allows Windows RPC" {
 }
 
 inbound_port_135_metadata := {
-    "Policy Code": "PR-AZR-NSG-029",
+    "Policy Code": "PR-AZR-CLD-NSG-029",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -1180,8 +1235,10 @@ oports := ["8332", "8333", "8545", "30303"]
 
 # allowed in all
 nsg_outbound[port] {
-    port := input.oports[_]
-    rules := input.properties.securityRules[_]
+    port := oports[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Outbound"
     rules.properties.destinationAddressPrefix == "*"
@@ -1190,8 +1247,10 @@ nsg_outbound[port] {
 
 # allowed in port
 nsg_outbound[port] {
-    port := input.oports[_]
-    rules := input.properties.securityRules[_]
+    port := oports[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Outbound"
     rules.properties.destinationAddressPrefix == "*"
@@ -1200,8 +1259,10 @@ nsg_outbound[port] {
 
 # allowed in range
 nsg_outbound[port] {
-    port := input.oports[_]
-    rules := input.properties.securityRules[_]
+    port := oports[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Outbound"
     rules.properties.destinationAddressPrefix == "*"
@@ -1213,7 +1274,8 @@ nsg_outbound[port] {
 
 # allowed in list
 nsg_outbound[port] {
-    port := input.oports[_]
+    port := oports[_]
+    lower(input.type) == "microsoft.network/networksecuritygroups"
     rules := input.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Outbound"
@@ -1223,8 +1285,10 @@ nsg_outbound[port] {
 
 # allowed in list range
 nsg_outbound[port] {
-    port := input.oports[_]
-    rules := input.properties.securityRules[_]
+    port := oports[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Outbound"
     rules.properties.destinationAddressPrefix == "*"
@@ -1234,13 +1298,15 @@ nsg_outbound[port] {
 }
 
 #
-# PR-AZR-NSG-030
+# PR-AZR-CLD-NSG-030
 #
 
 default nsg_out_all = null
 
 azure_issue["nsg_out_all"] {
-    rules := input.properties.securityRules[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/networksecuritygroups"
+    rules := resource.properties.securityRules[_]
     rules.properties.access == "Allow"
     rules.properties.direction == "Outbound"
     rules.properties.destinationAddressPrefix == "*"
@@ -1248,6 +1314,7 @@ azure_issue["nsg_out_all"] {
 }
 
 nsg_out_all {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["nsg_out_all"]
 }
 
@@ -1260,7 +1327,7 @@ nsg_out_all_err = "Azure NSG with Outbound rule to allow all traffic to any sour
 }
 
 nsg_out_all_metadata := {
-    "Policy Code": "PR-AZR-NSG-030",
+    "Policy Code": "PR-AZR-CLD-NSG-030",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -1272,7 +1339,7 @@ nsg_out_all_metadata := {
 }
 
 #
-# PR-AZR-NSG-031
+# PR-AZR-CLD-NSG-031
 #
 
 default outbound_port_bitcoin = null
@@ -1286,6 +1353,7 @@ azure_issue["outbound_port_bitcoin"] {
 }
 
 outbound_port_bitcoin {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["outbound_port_bitcoin"]
 }
 
@@ -1298,7 +1366,7 @@ outbound_port_bitcoin_err = "Instance is communicating with ports known to mine 
 }
 
 outbound_port_bitcoin_metadata := {
-    "Policy Code": "PR-AZR-NSG-031",
+    "Policy Code": "PR-AZR-CLD-NSG-031",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -1310,7 +1378,7 @@ outbound_port_bitcoin_metadata := {
 }
 
 #
-# PR-AZR-NSG-032
+# PR-AZR-CLD-NSG-032
 #
 
 default outbound_port_ethereum = null
@@ -1324,6 +1392,7 @@ azure_issue["outbound_port_ethereum"] {
 }
 
 outbound_port_ethereum {
+    lower(input.resources[_].type) == "microsoft.network/networksecuritygroups"
     not azure_issue["outbound_port_ethereum"]
 }
 
@@ -1336,7 +1405,7 @@ outbound_port_ethereum_err = "Instance is communicating with ports known to mine
 }
 
 outbound_port_ethereum_metadata := {
-    "Policy Code": "PR-AZR-NSG-032",
+    "Policy Code": "PR-AZR-CLD-NSG-032",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",

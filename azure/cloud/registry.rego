@@ -2,16 +2,38 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.containerregistry/registries
 
-# PR-AZR-ACR-002
+# PR-AZR-CLD-ACR-002
 
 default adminUserDisabled = null
 
 azure_attribute_absence ["adminUserDisabled"] {
-    not input.properties.adminUserEnabled
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerregistry/registries"
+    not resource.properties.adminUserEnabled
+}
+
+source_path[{"adminUserDisabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerregistry/registries"
+    not resource.properties.adminUserEnabled
+    metadata:= {
+        "resource_path": [["resources",i,"properties","adminUserEnabled"]]
+    }
 }
 
 azure_issue ["adminUserDisabled"] {
-    input.properties.adminUserEnabled != false
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerregistry/registries"
+    resource.properties.adminUserEnabled != false
+}
+
+source_path[{"adminUserDisabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerregistry/registries"
+    resource.properties.adminUserEnabled != false
+    metadata:= {
+        "resource_path": [["resources",i,"properties","adminUserEnabled"]]
+    }
 }
 
 adminUserDisabled {
@@ -32,7 +54,7 @@ adminUserDisabled_err = "Azure Container Registry admin user is currently not di
 }
 
 adminUserDisabled_metadata := {
-    "Policy Code": "PR-AZR-ACR-002",
+    "Policy Code": "PR-AZR-CLD-ACR-002",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -46,20 +68,45 @@ adminUserDisabled_metadata := {
 
 
 #
-# PR-AZR-ACR-003
+# PR-AZR-CLD-ACR-003
 #
 
 default acr_classic = null
 
 azure_attribute_absence["acr_classic"] {
-    not input.sku.name
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerregistry/registries"
+    not resource.sku.name
+}
+
+
+source_path[{"acr_classic":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerregistry/registries"
+    not resource.sku.name
+    metadata:= {
+        "resource_path": [["resources",i,"sku","name"]]
+    }
 }
 
 azure_issue["acr_classic"] {
-    lower(input.sku.name) == "classic"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.containerregistry/registries"
+    lower(resource.sku.name) == "classic"
 }
 
+source_path[{"acr_classic":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.containerregistry/registries"
+    lower(resource.sku.name) == "classic"
+    metadata:= {
+        "resource_path": [["resources",i,"sku","name"]]
+    }
+}
+
+
 acr_classic {
+    lower(input.resources[_].type) == "microsoft.containerregistry/registries"
     not azure_attribute_absence["acr_classic"]
     not azure_issue["acr_classic"]
 }
@@ -74,12 +121,14 @@ acr_classic = false {
 
 acr_classic_err = "Azure Container Registry currently configured with deprecated classic registry. Please change the SKU" {
     azure_issue["acr_classic"]
-} else = "Azure Container registry property sku.name is missing from the resource" {
+}
+
+acr_classic_miss_err = "Azure Container registry property sku.name is missing from the resource" {
     azure_attribute_absence["acr_classic"]
 }
 
 acr_classic_metadata := {
-    "Policy Code": "PR-AZR-ACR-003",
+    "Policy Code": "PR-AZR-CLD-ACR-003",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",

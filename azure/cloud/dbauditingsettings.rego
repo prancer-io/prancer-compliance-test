@@ -3,20 +3,43 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.sql/2017-03-01-preview/servers/databases/auditingsettings
 
 #
-# PR-AZR-SQL-004
+# PR-AZR-CLD-SQL-004
 #
 
 default sql_db_log_audit = null
 
 azure_attribute_absence["sql_db_log_audit"] {
-    not input.properties.state
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
+    not resource.properties.state
+}
+
+source_path[{"sql_db_log_audit":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
+    not resource.properties.state
+    metadata:= {
+        "resource_path": [["resources",i,"properties","state"]]
+    }
 }
 
 azure_issue["sql_db_log_audit"] {
-    lower(input.properties.state) != "enabled"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
+    lower(resource.properties.state) != "enabled"
+}
+
+source_path[{"sql_db_log_audit":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
+    lower(resource.properties.state) != "enabled"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","state"]]
+    }
 }
 
 sql_db_log_audit {
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases/auditingsettings"
     not azure_attribute_absence["sql_db_log_audit"]
     not azure_issue["sql_db_log_audit"]
 }
@@ -31,12 +54,14 @@ sql_db_log_audit = false {
 
 sql_db_log_audit_err = "Azure SQL Database auditing is currently not enabled" {
     azure_issue["sql_db_log_audit"]
-} else = "Azure SQL Database Auditing settings attribute 'state' is missing" {
+}
+
+sql_db_log_audit_miss_err = "Azure SQL Database Auditing settings attribute 'state' is missing" {
     azure_attribute_absence["sql_db_log_audit"]
 }
 
 sql_db_log_audit_metadata := {
-    "Policy Code": "PR-AZR-SQL-004",
+    "Policy Code": "PR-AZR-CLD-SQL-004",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -49,25 +74,54 @@ sql_db_log_audit_metadata := {
 
 
 
-# PR-AZR-SQL-005
+# PR-AZR-CLD-SQL-005
 #
 
 default sql_logical_db_log_audit = null
 
 azure_attribute_absence["sql_logical_db_log_audit"] {
-    sql_db := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_db := resource.resources[_]
     lower(sql_db.type) == "auditingsettings"
     not sql_db.properties.state
 }
 
+source_path[{"sql_logical_db_log_audit":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_db := resource.resources[j]
+    lower(sql_db.type) == "auditingsettings"
+    not sql_db.properties.state
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","state"]]
+    }
+}
+
+
 azure_issue["sql_logical_db_log_audit"] {
-    sql_db := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_db := resource.resources[_]
     lower(sql_db.type) == "auditingsettings"
     lower(sql_db.properties.state) != "enabled"
 }
 
+source_path[{"sql_logical_db_log_audit":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_db := resource.resources[j]
+    lower(sql_db.type) == "auditingsettings"
+    lower(sql_db.properties.state) != "enabled"
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","state"]]
+    }
+}
+
 sql_logical_db_log_audit {
-    sql_db := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_db := resource.resources[_]
     lower(sql_db.type) == "auditingsettings"
     not azure_attribute_absence["sql_logical_db_log_audit"]
     not azure_issue["sql_logical_db_log_audit"]
@@ -81,15 +135,15 @@ sql_logical_db_log_audit = false {
     azure_attribute_absence["sql_logical_db_log_audit"]
 }
 
-sql_logical_db_log_audit_err = "Azure SQL Database auditing is currently not enabled" {
-    azure_issue["sql_logical_db_log_audit"]
-} else = "Azure SQL Database Auditing settings attribute 'state' is missing" {
+sql_logical_db_log_audit_err = "Azure SQL Database Auditing settings attribute 'state' is missing" {
     azure_attribute_absence["sql_logical_db_log_audit"]
+} else = "Azure SQL Database auditing is currently not enabled" {
+    azure_issue["sql_logical_db_log_audit"]
 }
 
 
 sql_logical_db_log_audit_metadata := {
-    "Policy Code": "PR-AZR-SQL-005",
+    "Policy Code": "PR-AZR-CLD-SQL-005",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -103,20 +157,43 @@ sql_logical_db_log_audit_metadata := {
 
 
 #
-# PR-AZR-SQL-006
+# PR-AZR-CLD-SQL-006
 #
 
 default sql_db_log_retention = null
 
 azure_attribute_absence["sql_db_log_retention"] {
-    not input.properties.retentionDays
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
+    not resource.properties.retentionDays
+}
+
+source_path[{"sql_db_log_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
+    not resource.properties.retentionDays
+    metadata:= {
+        "resource_path": [["resources",i,"properties","retentionDays"]]
+    }
 }
 
 azure_issue["sql_db_log_retention"] {
-    to_number(input.properties.retentionDays) < 90
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
+    to_number(resource.properties.retentionDays) < 90
+}
+
+source_path[{"sql_db_log_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases/auditingsettings"
+    to_number(resource.properties.retentionDays) < 90
+    metadata:= {
+        "resource_path": [["resources",i,"properties","retentionDays"]]
+    }
 }
 
 sql_db_log_retention {
+    lower(input.resources[_].type) == "microsoft.sql/servers/databases/auditingsettings"
     not azure_attribute_absence["sql_db_log_retention"]
     not azure_issue["sql_db_log_retention"]
 }
@@ -131,12 +208,14 @@ sql_db_log_retention = false {
 
 sql_db_log_retention_err = "Azure SQL Database Auditing Retention is currently less than 90 days. It should be 90 days or more" {
     azure_issue["sql_db_log_retention"]
-} else = "Azure SQL Database Auditing settings attribute 'retentionDays' is missing from the resource" {
+}
+
+sql_db_log_retention_miss_err = "Azure SQL Database Auditing settings attribute 'retentionDays' is missing from the resource" {
     azure_attribute_absence["sql_db_log_retention"]
 }
 
 sql_db_log_retention_metadata := {
-    "Policy Code": "PR-AZR-SQL-006",
+    "Policy Code": "PR-AZR-CLD-SQL-006",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -149,25 +228,54 @@ sql_db_log_retention_metadata := {
 
 
 
-# PR-AZR-SQL-007
+# PR-AZR-CLD-SQL-007
 #
 
 default sql_logical_db_log_retention = null
 
 azure_attribute_absence["sql_logical_db_log_retention"] {
-    sql_db := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_db := resource.resources[_]
     lower(sql_db.type) == "auditingsettings"
     not sql_db.properties.retentionDays
 }
 
+source_path[{"sql_logical_db_log_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_db := resource.resources[j]
+    lower(sql_db.type) == "auditingsettings"
+    not sql_db.properties.retentionDays
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","retentionDays"]]
+    }
+}
+
+
 azure_issue["sql_logical_db_log_retention"] {
-    sql_db := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_db := resource.resources[_]
     lower(sql_db.type) == "auditingsettings"
     to_number(sql_db.properties.retentionDays) < 90
 }
 
+source_path[{"sql_logical_db_log_retention":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_db := resource.resources[j]
+    lower(sql_db.type) == "auditingsettings"
+    to_number(sql_db.properties.retentionDays) < 90
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","retentionDays"]]
+    }
+}
+
 sql_logical_db_log_retention {
-    sql_db := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.sql/servers/databases"
+    sql_db := resource.resources[_]
     lower(sql_db.type) == "auditingsettings"
     not azure_attribute_absence["sql_logical_db_log_retention"]
     not azure_issue["sql_logical_db_log_retention"]
@@ -181,14 +289,14 @@ sql_logical_db_log_retention = false {
     azure_attribute_absence["sql_logical_db_log_retention"]
 }
 
-sql_logical_db_log_retention_err = "Azure SQL Database Auditing Retention is currently less than 90 days. It should be 90 days or more" {
-    azure_issue["sql_logical_db_log_retention"]
-} else = "Azure SQL Database Auditing settings attribute 'retentionDays' is missing from the resource" {
+sql_logical_db_log_retention_err = "Azure SQL Database Auditing settings attribute 'retentionDays' is missing from the resource" {
     azure_attribute_absence["sql_logical_db_log_retention"]
+} else = "Azure SQL Database Auditing Retention is currently less than 90 days. It should be 90 days or more" {
+    azure_issue["sql_logical_db_log_retention"]
 }
 
 sql_logical_db_log_retention_metadata := {
-    "Policy Code": "PR-AZR-SQL-007",
+    "Policy Code": "PR-AZR-CLD-SQL-007",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",

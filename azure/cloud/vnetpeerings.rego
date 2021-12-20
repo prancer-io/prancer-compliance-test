@@ -3,20 +3,43 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/virtualnetworkpeerings
 
 #
-# PR-AZR-NET-004
+# PR-AZR-CLD-NET-004
 #
 
 default vnet_peer = null
 
 azure_attribute_absence["vnet_peer"] {
-    not input.properties.peeringState
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/virtualnetworks/virtualnetworkpeerings"
+    not resource.properties.peeringState
+}
+
+source_path[{"vnet_peer":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/virtualnetworks/virtualnetworkpeerings"
+    not resource.properties.peeringState
+    metadata:= {
+        "resource_path": [["resources",i,"properties","peeringState"]]
+    }
 }
 
 azure_issue["vnet_peer"] {
-    lower(input.properties.peeringState) != "connected"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/virtualnetworks/virtualnetworkpeerings"
+    lower(resource.properties.peeringState) != "connected"
+}
+
+source_path[{"vnet_peer":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.network/virtualnetworks/virtualnetworkpeerings"
+    lower(resource.properties.peeringState) != "connected"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","peeringState"]]
+    }
 }
 
 vnet_peer {
+    lower(input.resources[_].type) == "microsoft.network/virtualnetworks/virtualnetworkpeerings"
     not azure_attribute_absence["vnet_peer"]
     not azure_issue["vnet_peer"]
 }
@@ -31,12 +54,14 @@ vnet_peer = false {
 
 vnet_peer_err = "Azure virtual network peering state is currently not connected" {
     azure_issue["vnet_peer"]
-} else = "Azure virtual network peering state property 'peeringState' is missing from the resource" {
+}
+
+vnet_peer_miss_err = "Azure virtual network peering state property 'peeringState' is missing from the resource" {
     azure_attribute_absence["vnet_peer"]
 }
 
 vnet_peer_metadata := {
-    "Policy Code": "PR-AZR-NET-004",
+    "Policy Code": "PR-AZR-CLD-NET-004",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",

@@ -2,19 +2,45 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers
 
-# PR-AZR-SQL-028
+# PR-AZR-CLD-SQL-028
 
 default geoRedundantBackup = null
 
 azure_attribute_absence["geoRedundantBackup"] {
-    not input.properties.storageProfile.geoRedundantBackup
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    not resource.properties.storageProfile.geoRedundantBackup
 }
+
+source_path[{"geoRedundantBackup":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    not resource.properties.storageProfile.geoRedundantBackup
+    metadata:= {
+        "resource_path": [["resources",i,"properties","storageProfile","geoRedundantBackup"]]
+    }
+}
+
 
 azure_issue["geoRedundantBackup"] {
-    lower(input.properties.storageProfile.geoRedundantBackup) != "enabled"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    lower(resource.properties.storageProfile.geoRedundantBackup) != "enabled"
 }
 
+
+source_path[{"geoRedundantBackup":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    lower(resource.properties.storageProfile.geoRedundantBackup) != "enabled"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","storageProfile","geoRedundantBackup"]]
+    }
+}
+
+
 geoRedundantBackup {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     not azure_attribute_absence["geoRedundantBackup"]
     not azure_issue["geoRedundantBackup"]
 }
@@ -29,12 +55,14 @@ geoRedundantBackup = false {
 
 geoRedundantBackup_err = "Geo-redundant backup is currently not enabled on PostgreSQL database server." {
     azure_issue["geoRedundantBackup"]
-} else = "Property geoRedundantBackup of type enum is absent from resource of type 'Microsoft.DBforPostgreSQL/servers'" {
+}
+
+geoRedundantBackup_miss_err = "Property geoRedundantBackup of type enum is absent from resource of type \"Microsoft.DBforPostgreSQL/servers\"" {
     azure_attribute_absence["geoRedundantBackup"]
 }
 
 geoRedundantBackup_metadata := {
-    "Policy Code": "PR-AZR-SQL-028",
+    "Policy Code": "PR-AZR-CLD-SQL-028",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -49,19 +77,42 @@ geoRedundantBackup_metadata := {
 
 
 
-# PR-AZR-SQL-029
+# PR-AZR-CLD-SQL-029
 
 default sslEnforcement = null
 
 azure_attribute_absence ["sslEnforcement"] {
-    not input.properties.sslEnforcement
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    not resource.properties.sslEnforcement
+}
+
+source_path[{"sslEnforcement":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    not resource.properties.sslEnforcement
+    metadata:= {
+        "resource_path": [["resources",i,"properties","sslEnforcement"]]
+    }
 }
 
 azure_issue ["sslEnforcement"] {
-    lower(input.properties.sslEnforcement) != "enabled"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    lower(resource.properties.sslEnforcement) != "enabled"
+}
+
+source_path[{"sslEnforcement":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    lower(resource.properties.sslEnforcement) != "enabled"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","sslEnforcement"]]
+    }
 }
 
 sslEnforcement {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     not azure_attribute_absence["sslEnforcement"]
     not azure_issue["sslEnforcement"]
 }
@@ -77,12 +128,14 @@ sslEnforcement = false {
 
 sslEnforcement_err = "Either ssl enforcement is absent or disabled on PostgreSQL Database Server." {
     azure_issue["sslEnforcement"]
-} else "Property sslEnforcement of type enum is absent from resource of type 'Microsoft.DBforPostgreSQL/servers'" {
+}
+
+sslEnforcement_miss_err = "Property sslEnforcement of type enum is absent from resource of type \"Microsoft.DBforPostgreSQL/servers\"" {
     azure_attribute_absence["sslEnforcement"]
 }
 
 sslEnforcement_metadata := {
-    "Policy Code": "PR-AZR-SQL-029",
+    "Policy Code": "PR-AZR-CLD-SQL-029",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -93,16 +146,38 @@ sslEnforcement_metadata := {
     "Resource Help URL": "https://docs.microsoft.com/en-us/azure/templates/microsoft.dbforpostgresql/servers"
 }
 
-# PR-AZR-SQL-066
+# PR-AZR-CLD-SQL-066
 
 default postgresql_public_access_disabled = null
 
 azure_attribute_absence["postgresql_public_access_disabled"] {
-    not input.properties.publicNetworkAccess
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    not resource.properties.publicNetworkAccess
+}
+
+source_path[{"postgresql_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    not resource.properties.publicNetworkAccess
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
+    }
 }
 
 azure_issue["postgresql_public_access_disabled"] {
-    lower(input.properties.publicNetworkAccess) != "disabled"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    lower(resource.properties.publicNetworkAccess) != "disabled"
+}
+
+source_path[{"mairadb_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbforpostgresql/servers"
+    not resource.properties.publicNetworkAccess
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
+    }
 }
 
 postgresql_public_access_disabled {
@@ -110,6 +185,7 @@ postgresql_public_access_disabled {
 } 
 
 postgresql_public_access_disabled {
+    lower(input.resources[_].type) == "microsoft.dbforpostgresql/servers"
     not azure_attribute_absence["postgresql_public_access_disabled"]
     not azure_issue["postgresql_public_access_disabled"]
 }
@@ -123,7 +199,7 @@ postgresql_public_access_disabled_err = "Public Network Access is currently not 
 }
 
 postgresql_public_access_disabled_metadata := {
-    "Policy Code": "PR-AZR-SQL-066",
+    "Policy Code": "PR-AZR-CLD-SQL-066",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",

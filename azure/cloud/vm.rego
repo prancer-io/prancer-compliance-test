@@ -3,16 +3,28 @@ package rule
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines
 
 #
-# PR-AZR-VM-001
+# PR-AZR-CLD-VM-001
 #
 
 default vm_aset = null
 
 azure_issue["vm_aset"] {
-    not input.properties.availabilitySet
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.compute/virtualmachines"
+    not resource.properties.availabilitySet
+}
+
+source_path[{"vm_aset":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.compute/virtualmachines"
+    not resource.properties.availabilitySet
+    metadata:= {
+        "resource_path": [["resources",i,"properties","availabilitySet"]]
+    }
 }
 
 vm_aset {
+    lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
     not azure_issue["vm_aset"]
 }
 
@@ -25,7 +37,7 @@ vm_aset_err = "Azure Virtual Machine is not assigned to an availability set" {
 }
 
 vm_aset_metadata := {
-    "Policy Code": "PR-AZR-VM-001",
+    "Policy Code": "PR-AZR-CLD-VM-001",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -39,20 +51,45 @@ vm_aset_metadata := {
 
 
 
-# PR-AZR-VM-002
+# PR-AZR-CLD-VM-002
 #
 
 default linux_configuration = null
 
 azure_attribute_absence["linux_configuration"] {
-    not input.properties.osProfile.linuxConfiguration.disablePasswordAuthentication
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.compute/virtualmachines"
+    not resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication
 }
+
+source_path[{"linux_configuration":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.compute/virtualmachines"
+    not resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication
+    metadata:= {
+        "resource_path": [["resources",i,"properties","osProfile","linuxConfiguration","disablePasswordAuthentication"]]
+    }
+}
+
 
 azure_issue["linux_configuration"] {
-    input.properties.osProfile.linuxConfiguration.disablePasswordAuthentication != true
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.compute/virtualmachines"
+    resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication != true
 }
 
+source_path[{"linux_configuration":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.compute/virtualmachines"
+    resource.properties.osProfile.linuxConfiguration.disablePasswordAuthentication != true
+    metadata:= {
+        "resource_path": [["resources",i,"properties","osProfile","linuxConfiguration","disablePasswordAuthentication"]]
+    }
+}
+
+
 linux_configuration {
+    lower(input.resources[_].type) == "microsoft.compute/virtualmachines"
     not azure_attribute_absence["linux_configuration"]
     not azure_issue["linux_configuration"]
 }
@@ -66,14 +103,14 @@ linux_configuration = false {
     azure_attribute_absence["linux_configuration"]
 }
 
-linux_configuration_err = "Azure instance does not authenticate using SSH keys" {
-    azure_issue["linux_configuration"]
-} else = "microsoft.compute/virtualmachines resource property linuxConfiguration.disablePasswordAuthentication missing in the resource" {
+linux_configuration_err = "microsoft.compute/virtualmachines resource property linuxConfiguration.disablePasswordAuthentication missing in the resource" {
     azure_attribute_absence["linux_configuration"]
+} else = "Azure instance does not authenticate using SSH keys" {
+    azure_issue["linux_configuration"]
 }
 
 linux_configuration_metadata := {
-    "Policy Code": "PR-AZR-VM-002",
+    "Policy Code": "PR-AZR-CLD-VM-002",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",

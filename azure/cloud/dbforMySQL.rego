@@ -2,19 +2,41 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers
 
-# PR-AZR-SQL-016
+# PR-AZR-CLD-SQL-016
 
 default ssl_enforcement = null
-
 azure_attribute_absence ["ssl_enforcement"] {
-    not input.properties.sslEnforcement
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    not resource.properties.sslEnforcement
+}
+
+source_path[{"ssl_enforcement":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    not resource.properties.sslEnforcement
+    metadata:= {
+        "resource_path": [["resources",i,"properties","sslEnforcement"]]
+    }
 }
 
 azure_issue ["ssl_enforcement"] {
-    lower(input.properties.sslEnforcement) != "enabled"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    lower(resource.properties.sslEnforcement) != "enabled"
+}
+
+source_path[{"ssl_enforcement":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    lower(resource.properties.sslEnforcement) != "enabled"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","sslEnforcement"]]
+    }
 }
 
 ssl_enforcement {
+    lower(input.resources[_].type) == "microsoft.dbformysql/servers"
     not azure_attribute_absence["ssl_enforcement"]
     not azure_issue["ssl_enforcement"]
 }
@@ -35,7 +57,7 @@ ssl_enforcement_err = "Either ssl enforcement is absent or disabled on MySQL ser
 }
 
 ssl_enforcement_metadata := {
-    "Policy Code": "PR-AZR-SQL-016",
+    "Policy Code": "PR-AZR-CLD-SQL-016",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -47,16 +69,38 @@ ssl_enforcement_metadata := {
 }
 
 
-# PR-AZR-SQL-060
+# PR-AZR-CLD-SQL-060
 
 default mysql_public_access_disabled = null
 
 azure_attribute_absence["mysql_public_access_disabled"] {
-    not input.properties.publicNetworkAccess 
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    not resource.properties.publicNetworkAccess 
+}
+
+source_path[{"mysql_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    not resource.properties.publicNetworkAccess
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
+    }
 }
 
 azure_issue["mysql_public_access_disabled"] {
-    lower(input.properties.publicNetworkAccess) != "disabled"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    lower(resource.properties.publicNetworkAccess) != "disabled"
+}
+
+source_path[{"mysql_public_access_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    lower(resource.properties.publicNetworkAccess) != "disabled"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","publicNetworkAccess"]]
+    }
 }
 
 mysql_public_access_disabled {
@@ -64,6 +108,7 @@ mysql_public_access_disabled {
 } 
 
 mysql_public_access_disabled {
+    lower(input.resources[_].type) == "microsoft.dbformysql/servers"
     not azure_attribute_absence["mysql_public_access_disabled"]
     not azure_issue["mysql_public_access_disabled"]
 }
@@ -77,7 +122,7 @@ mysql_public_access_disabled_err = "Public Network Access is currently not disab
 }
 
 mysql_public_access_disabled_metadata := {
-    "Policy Code": "PR-AZR-SQL-060",
+    "Policy Code": "PR-AZR-CLD-SQL-060",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -89,21 +134,44 @@ mysql_public_access_disabled_metadata := {
 }
 
 
-# PR-AZR-SQL-061
+# PR-AZR-CLD-SQL-061
 
 
 default mysql_server_latest_tls_configured = null
 
 #default to TLSEnforcementDisabled
 azure_attribute_absence["mysql_server_latest_tls_configured"] {
-    not input.properties.minimalTlsVersion
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    not resource.properties.minimalTlsVersion
+}
+
+source_path[{"mysql_server_latest_tls_configured":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    not resource.properties.minimalTlsVersion
+    metadata:= {
+        "resource_path": [["resources",i,"properties","minimalTlsVersion"]]
+    }
 }
 
 azure_issue["mysql_server_latest_tls_configured"] {
-    lower(input.properties.minimalTlsVersion) != "tls1_2"
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    lower(resource.properties.minimalTlsVersion) != "tls1_2"
+}
+
+source_path[{"mysql_server_latest_tls_configured":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    lower(resource.properties.minimalTlsVersion) != "tls1_2"
+    metadata:= {
+        "resource_path": [["resources",i,"properties","minimalTlsVersion"]]
+    }
 }
 
 mysql_server_latest_tls_configured {
+    lower(input.resources[_].type) == "microsoft.dbformysql/servers"
     not azure_attribute_absence["mysql_server_latest_tls_configured"]
     not azure_issue["mysql_server_latest_tls_configured"]
 }
@@ -123,7 +191,7 @@ mysql_server_latest_tls_configured_err = "Azure MySQL Server currently dont have
 }
 
 storage_account_latest_tls_configured_metadata := {
-    "Policy Code": "PR-AZR-SQL-061",
+    "Policy Code": "PR-AZR-CLD-SQL-061",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",

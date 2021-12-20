@@ -2,27 +2,72 @@ package rule
 
 # https://docs.microsoft.com/en-us/azure/templates/microsoft.dbformysql/servers/firewallrules
 
-# PR-AZR-SQL-014
+# PR-AZR-CLD-SQL-014
 
 default mysql_ingress_from_any_ip_disabled = null
-
 azure_attribute_absence ["mysql_ingress_from_any_ip_disabled"] {
-    not input.properties.startIpAddress
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformysql/servers/firewallrules"
+    not resource.properties.startIpAddress
 }
 
+source_path[{"mysql_ingress_from_any_ip_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformariadb/servers/firewallrules"
+    not resource.properties.startIpAddress
+    metadata:= {
+        "resource_path": [["resources",i,"properties","startIpAddress"]]
+    }
+}
+
+
 azure_attribute_absence ["mysql_ingress_from_any_ip_disabled"] {
-    not input.properties.endIpAddress
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformysql/servers/firewallrules"
+    not resource.properties.endIpAddress
+}
+
+source_path[{"mysql_ingress_from_any_ip_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformariadb/servers/firewallrules"
+    not resource.properties.endIpAddress
+    metadata:= {
+        "resource_path": [["resources",i,"properties","endIpAddress"]]
+    }
 }
 
 azure_issue ["mysql_ingress_from_any_ip_disabled"] {
-    contains(input.properties.startIpAddress, "0.0.0.0")
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformysql/servers/firewallrules"
+    contains(resource.properties.startIpAddress, "0.0.0.0")
+}
+
+source_path[{"mysql_ingress_from_any_ip_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformariadb/servers/firewallrules"
+    contains(resource.properties.startIpAddress, "0.0.0.0")
+    metadata:= {
+        "resource_path": [["resources",i,"properties","startIpAddress"]]
+    }
 }
 
 azure_issue ["mysql_ingress_from_any_ip_disabled"] {
-    contains(input.properties.endIpAddress, "0.0.0.0")
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformysql/servers/firewallrules"
+    contains(resource.properties.endIpAddress, "0.0.0.0")
+}
+
+source_path[{"mysql_ingress_from_any_ip_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformariadb/servers/firewallrules"
+    contains(resource.properties.endIpAddress, "0.0.0.0")
+    metadata:= {
+        "resource_path": [["resources",i,"properties","endIpAddress"]]
+    }
 }
 
 mysql_ingress_from_any_ip_disabled {
+    lower(input.resources[_].type) == "microsoft.dbformysql/servers/firewallrules"
     not azure_attribute_absence["mysql_ingress_from_any_ip_disabled"]
     not azure_issue["mysql_ingress_from_any_ip_disabled"]
 }
@@ -43,7 +88,7 @@ mysql_ingress_from_any_ip_disabled_err = "microsoft.dbformysql/servers/firewallr
 }
 
 mysql_ingress_from_any_ip_disabled_metadata := {
-    "Policy Code": "PR-AZR-SQL-014",
+    "Policy Code": "PR-AZR-CLD-SQL-014",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
@@ -56,36 +101,89 @@ mysql_ingress_from_any_ip_disabled_metadata := {
 
 
 
-# PR-AZR-SQL-015
+# PR-AZR-CLD-SQL-015
 
 default my_logical_sql_ingress_from_any_ip_disabled = null
-
 azure_attribute_absence ["my_logical_sql_ingress_from_any_ip_disabled"] {
-    dbsql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    dbsql_resources := resource.resources[_]
     lower(dbsql_resources.type) == "firewallrules"
     not dbsql_resources.properties.startIpAddress
 }
 
+source_path[{"my_logical_sql_ingress_from_any_ip_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    dbsql_resources := resource.resources[j]
+    lower(dbsql_resources.type) == "firewallrules"
+    not dbsql_resources.properties.startIpAddress
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","startIpAddress"]]
+    }
+}
+
 azure_attribute_absence ["my_logical_sql_ingress_from_any_ip_disabled"] {
-    dbsql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    dbsql_resources := resource.resources[_]
     lower(dbsql_resources.type) == "firewallrules"
     not dbsql_resources.properties.endIpAddress
 }
 
+source_path[{"my_logical_sql_ingress_from_any_ip_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    dbsql_resources := resource.resources[j]
+    lower(dbsql_resources.type) == "firewallrules"
+    not dbsql_resources.properties.endIpAddress
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","endIpAddress"]]
+    }
+}
+
 azure_issue ["my_logical_sql_ingress_from_any_ip_disabled"] {
-    dbsql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    dbsql_resources := resource.resources[_]
     lower(dbsql_resources.type) == "firewallrules"
     contains(dbsql_resources.properties.startIpAddress, "0.0.0.0")
 }
 
+source_path[{"my_logical_sql_ingress_from_any_ip_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    dbsql_resources := resource.resources[j]
+    lower(dbsql_resources.type) == "firewallrules"
+    contains(dbsql_resources.properties.startIpAddress, "0.0.0.0")
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","startIpAddress"]]
+    }
+}
+
 azure_issue ["my_logical_sql_ingress_from_any_ip_disabled"] {
-    dbsql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    dbsql_resources := resource.resources[_]
     lower(dbsql_resources.type) == "firewallrules"
     contains(dbsql_resources.properties.endIpAddress, "0.0.0.0")
 }
 
+source_path[{"my_logical_sql_ingress_from_any_ip_disabled":metadata}] {
+    resource := input.resources[i]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    dbsql_resources := resource.resources[j]
+    lower(dbsql_resources.type) == "firewallrules"
+    contains(dbsql_resources.properties.endIpAddress, "0.0.0.0")
+    metadata:= {
+        "resource_path": [["resources",i,"resources",j,"properties","endIpAddress"]]
+    }
+}
+
 my_logical_sql_ingress_from_any_ip_disabled {
-    dbsql_resources := input.resources[_]
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.dbformysql/servers"
+    dbsql_resources := resource.resources[_]
     lower(dbsql_resources.type) == "firewallrules"
     not azure_attribute_absence["my_logical_sql_ingress_from_any_ip_disabled"]
     not azure_issue["my_logical_sql_ingress_from_any_ip_disabled"]
@@ -107,7 +205,7 @@ my_logical_sql_ingress_from_any_ip_disabled_err = "microsoft.dbformysql/servers/
 }
 
 my_logical_sql_ingress_from_any_ip_disabled_metadata := {
-    "Policy Code": "PR-AZR-SQL-015",
+    "Policy Code": "PR-AZR-CLD-SQL-015",
     "Type": "Cloud",
     "Product": "AZR",
     "Language": "",
