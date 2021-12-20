@@ -64,11 +64,12 @@ eip_instance_link_metadata := {
 # PR-AWS-CLD-VPC-003
 #
 
-default vpc_endpoint_manual_acceptance = false
+default vpc_endpoint_manual_acceptance = true
 
-vpc_endpoint_manual_acceptance = true {
+vpc_endpoint_manual_acceptance = false {
     # lower(resource.Type) == "aws::ec2::vpcendpointservice"
-    lower(input.vpcEndpointState) == "available"
+    VpcEndpointConnections := input.VpcEndpointConnections[_]
+    lower(VpcEndpointConnections.vpcEndpointState) != "available"
 }
 
 vpc_endpoint_manual_acceptance_err = "Ensure VPC endpoint service is configured for manual acceptance" {

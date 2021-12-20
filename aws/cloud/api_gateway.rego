@@ -34,17 +34,19 @@ gateway_private_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-restapi-endpointconfiguration.html"
 }
 
+
 #
 # PR-AWS-CLD-AG-002
 #
 
-# get_request_validator
+# get_request_validators
 
-default gateway_validate_parameter = false
+default gateway_validate_parameter = true
 
-gateway_validate_parameter {
+gateway_validate_parameter = false {
     # lower(resource.Type) == "aws::apigateway::requestvalidator"
-    input.validateRequestParameters
+    items := input.items[_]
+    items.validateRequestParameters == false
 }
 
 gateway_validate_parameter_err = "AWS API Gateway request parameter is not validated" {
@@ -64,18 +66,18 @@ gateway_validate_parameter_metadata := {
 }
 
 
-
 #
 # PR-AWS-CLD-AG-003
 #
 
-# get_authorizer
+# get_authorizers
 
-default gateway_request_authorizer = false
+default gateway_request_authorizer = true
 
-gateway_request_authorizer = true {
+gateway_request_authorizer = false {
     # lower(resource.Type) == "aws::apigateway::authorizer"
-    lower(input.Type) == "request"
+    items := input.items[_]
+    lower(items.type) != "request"
 }
 
 gateway_request_authorizer_err = "AWS API gateway request authorization is not set" {
@@ -94,17 +96,19 @@ gateway_request_authorizer_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-restapi-endpointconfiguration.html"
 }
 
+
 #
 # PR-AWS-CLD-AG-004
 #
 
-# get_stage
+# get_stages
 
 default gateway_logging_enable = true
 
 gateway_logging_enable = false {
     # lower(input.Resources[i].Type) == "aws::apigateway::stage"
-    count(input.accessLogSettings.destinationArn) == 0
+    item := input.item[_]
+    count(item.accessLogSettings.destinationArn) == 0
 }
 
 gateway_logging_enable = false {
@@ -132,13 +136,14 @@ gateway_logging_enable_metadata := {
 # PR-AWS-CLD-AG-005
 #
 
-# get_stage
+# get_stages
 
-default gateway_tracing_enable = false
+default gateway_tracing_enable = true
 
-gateway_tracing_enable = true {
+gateway_tracing_enable = false {
     # lower(resource.Type) == "aws::apigateway::stage"
-    input.tracingEnabled == true
+    item := input.item[_]
+    item.tracingEnabled != true
 }
 
 gateway_tracing_enable_err = "Ensure API Gateway has tracing enabled" {
@@ -162,14 +167,16 @@ gateway_tracing_enable_metadata := {
 # PR-AWS-CLD-AG-006
 #
 
-# get_method
+# get_resources
 
 default gateway_method_public_access = true
 
 gateway_method_public_access = false {
     # lower(resource.Type) == "aws::apigateway::method"
-    not input.authorizationType
-    not input.apiKeyRequired
+    some string
+    items := input.items[_]
+    lower(items.resourceMethods[string].authorizationType) == "none"
+    not items.resourceMethods[string].apiKeyRequired
 }
 
 gateway_method_public_access_err = "Ensure API gateway methods are not publicly accessible" {
@@ -194,13 +201,20 @@ gateway_method_public_access_metadata := {
 # PR-AWS-CLD-AG-007
 #
 
-# get_stage
+# get_stages
 
 default api_gw_cert = true
 
 api_gw_cert = false {
     # lower(resource.Type) == "aws::apigateway::stage"
-    not input.clientcertificateId
+    item := input.item[_]
+    count(item.clientcertificateId) == 0
+}
+
+api_gw_cert = false {
+    # lower(resource.Type) == "aws::apigateway::stage"
+    item := input.item[_]
+    not item.clientcertificateId
 }
 
 api_gw_cert_err = "AWS API Gateway endpoints without client certificate authentication" {

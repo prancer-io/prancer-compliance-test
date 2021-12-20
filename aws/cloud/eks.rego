@@ -10,7 +10,7 @@ package rule
 
 default eks_multiple_sg = false
 
-eks_multiple_sg = true{
+eks_multiple_sg = true {
     # lower(resource.Type) == "aws::eks::cluster"
     count(input.cluster.resourcesVpcConfig.securityGroupIds) < 1
 }
@@ -30,35 +30,6 @@ eks_multiple_sg_metadata := {
     "Policy Help URL": "",
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html"
 }
-
-#
-# PR-AWS-CLD-EKS-002
-#
-
-# describe_cluster
-
-default eks_version = true
-
-eks_version = false {
-    # lower(resource.Type) == "aws::eks::cluster"
-    startswith(lower(input.cluster.version), "1.9.")
-}
-
-eks_version_err = "AWS EKS unsupported Master node version." {
-    not eks_version
-}
-eks_version_metadata := {
-    "Policy Code": "PR-AWS-CLD-EKS-002",
-    "Type": "cloud",
-    "Product": "AWS",
-    "Language": "AWS Cloud",
-    "Policy Title": "AWS EKS unsupported Master node version.",
-    "Policy Description": "Ensure your EKS Master node version is supported. This policy checks your EKS master node version and generates an alert if the version running is unsupported.",
-    "Resource Type": "",
-    "Policy Help URL": "",
-    "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html#cfn-eks-cluster-version"
-}
-
 
 #
 # PR-AWS-CLD-EKS-003
