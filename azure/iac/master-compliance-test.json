@@ -1907,7 +1907,7 @@
                             "id": "PR-AZR-ARM-FRD-001",
                             "eval": "data.rule.frontdoors_has_drs_configured",
                             "message": "data.rule.frontdoors_has_drs_configured_err",
-                            "remediationDescription": "For resource type 'microsoft.network/frontdoors' make sure 'properties.webApplicationFirewallPolicyLink.id' contains 'id' from 'microsoft.network/frontdoorwebapplicationfirewallpolicies' under 'frontendEndpoints' array. Also make sure 'microsoft.network/frontdoorwebapplicationfirewallpolicies' 'properties.managedRules.managedRuleSets' contains either 'Microsoft_DefaultRuleSet' or 'DefaultRuleSet' as ruleSetType and '1.1' or '1.0' as ruleSetVersion respectively to fix the issue.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/frontdoors?tabs=json' target='_blank'>here</a> for details.",
+                            "remediationDescription": "For resource type 'microsoft.network/frontdoors' make sure 'properties.webApplicationFirewallPolicyLink.id' contains 'id' from 'microsoft.network/frontdoorwebapplicationfirewallpolicies' under 'properties.frontendEndpoints' array. Also make sure 'microsoft.network/frontdoorwebapplicationfirewallpolicies' 'properties.managedRules.managedRuleSets' contains either 'Microsoft_DefaultRuleSet' or 'DefaultRuleSet' as ruleSetType and '1.1' or '1.0' as ruleSetVersion respectively to fix the issue.<br>Please visit <a href='https://docs.microsoft.com/en-us/azure/templates/microsoft.network/frontdoors?tabs=json' target='_blank'>here</a> for details.",
                             "remediationFunction": "PR_AZR_ARM_FRD_001.py"
                         }
                     ],
