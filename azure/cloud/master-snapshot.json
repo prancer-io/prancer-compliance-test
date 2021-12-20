@@ -115,6 +115,11 @@
                     "collection": "Microsoft.Storage"
                 },
                 {
+                    "masterSnapshotId": "AZRSNP_223",
+                    "type": "Microsoft.Storage/storageAccounts/blobServices",
+                    "collection": "Microsoft.Storage"
+                },
+                {
                     "masterSnapshotId": "AZRSNP_226",
                     "type": "Microsoft.Insights/diagnosticSettings",
                     "collection": "Microsoft.Insights"
