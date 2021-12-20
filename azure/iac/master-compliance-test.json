@@ -558,7 +558,7 @@
                             "cloud": "git",
                             "compliance": [
                                 "CIS",
-                                "CSA=CCM",
+                                "CSA-CCM",
                                 "HITTRUST",
                                 "NIST 800",
                                 "NIST CSF",
@@ -597,7 +597,7 @@
                             "cloud": "git",
                             "compliance": [
                                 "CIS",
-                                "CSA=CCM",
+                                "CSA-CCM",
                                 "HITTRUST",
                                 "NIST 800",
                                 "NIST CSF",
