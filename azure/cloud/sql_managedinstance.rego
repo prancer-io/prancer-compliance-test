@@ -47,7 +47,7 @@ sql_mi_public_endpoint_disabled_err = "SQL Managed Instance currently have publi
 sql_mi_public_endpoint_disabled_metadata := {
     "Policy Code": "PR-AZR-CLD-SQL-041",
     "Type": "Cloud",
-    "Product": "",
+    "Product": "AZR",
     "Language": "",
     "Policy Title": "SQL Managed Instance should have public endpoint access disabled",
     "Policy Description": "Always use Private Endpoint for Azure SQL Database and SQL Managed Instance",
