@@ -331,6 +331,12 @@ azure_attribute_absence["kv_private_endpoint"] {
     count([c | lower(input.resources[_].type) == "microsoft.network/privateendpoints"; c := 1]) == 0 
 }
 
+no_azure_issue["kv_private_endpoint"] {
+    resource := input.resources[_]
+    lower(resource.type) == "microsoft.network/privateendpoints"
+    privateLinkServiceConnection := resource.properties.privateLinkServiceConnections[_]
+    contains(lower(privateLinkServiceConnection.properties.privateLinkServiceId), "microsoft.keyvault/vaults")
+}
 
 kv_private_endpoint {
 	lower(input.resources[_].type) == "microsoft.keyvault/vaults"
