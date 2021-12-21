@@ -1428,7 +1428,6 @@ as_volume_encrypted_metadata := {
     "Resource Help URL": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig-blockdev-template.html#cfn-as-launchconfig-blockdev-template-encrypted"
 }
 
-
 #
 # PR-AWS-TRF-WAF-001
 #
@@ -1439,10 +1438,11 @@ aws_issue["waf_log4j_vulnerability"] {
     resource := input.resources[i]
     lower(resource.type) == "aws_wafv2_web_acl"
     rule := resource.properties.rule[_]
-    lower(rule.statement.managed_rule_group_statement.name) == "awsmanagedrulesknownbadinputsruleset"
-    excluded_rule := rule.statement.managed_rule_group_statement.excluded_rule[_]
+    statement := rule.statement[_]
+    managed_rule_group_statement := statement.managed_rule_group_statement[_]
+    lower(managed_rule_group_statement.name) == "awsmanagedrulesknownbadinputsruleset"
+    excluded_rule := managed_rule_group_statement.excluded_rule[_]
     lower(excluded_rule.name) == "log4jrce"
-
 }
 
 aws_issue["waf_log4j_vulnerability"] {
