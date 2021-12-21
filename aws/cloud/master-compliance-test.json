@@ -2576,6 +2576,122 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterTestId": "TEST_SNS_1",
+                    "masterSnapshotId": [
+                        "TEST_SNS_01"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sns.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SNS-001",
+                            "eval": "data.rule.sns_protocol",
+                            "message": "data.rule.sns_protocol_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SNS_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS SNS subscription is not configured with HTTPS",
+                    "description": "This policy identifies SNS subscriptions using HTTP instead of HTTPS as the delivery protocol in order to enforce SSL encryption for all subscription requests. It is strongly recommended use only HTTPS-based subscriptions by implementing secure SNS topic policies.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "sns"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SNS_2",
+                    "masterSnapshotId": [
+                        "TEST_SNS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sns.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SNS-002",
+                            "eval": "data.rule.sns_encrypt_key",
+                            "message": "data.rule.sns_encrypt_key_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SNS_002.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS SNS topic encrypted using default KMS key instead of CMK",
+                    "description": "This policy identifies Amazon Simple Notification Service (SNS) topics that are encrypted with the default AWS Key Management Service (KMS) keys. As a best practice, use Customer Master Keys (CMK) to encrypt the data in your SNS topics and ensure full control over your data.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "sns"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SNS_3",
+                    "masterSnapshotId": [
+                        "TEST_SNS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sns.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SNS-003",
+                            "eval": "data.rule.sns_encrypt",
+                            "message": "data.rule.sns_encrypt_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-subscription.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SNS_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS SNS topic with server-side encryption disabled",
+                    "description": "This policy identifies Amazon Simple Notification Service (SNS) topics that have server-side encryption disabled. As a best practice, enable server-side encryption for at-rest encryption of message content published to SNS topics. When you publish a message, the SNS encrypts your message as soon as it receives it, and decrypts it just prior to delivery.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "sns"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_SNS_4",
+                    "masterSnapshotId": [
+                        "TEST_SNS_02"
+                    ],
+                    "type": "rego",
+                    "rule": "file(sns.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-SNS-004",
+                            "eval": "data.rule.sns_policy_public",
+                            "message": "data.rule.sns_policy_public_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_SNS_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure SNS Topic policy is not publicly accessible",
+                    "description": "Public SNS Topic potentially expose existing interfaces to unwanted 3rd parties that can tap into an existing data stream, resulting in data leak to an unwanted party.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "sns"
+                            ]
+                        }
+                    ]
                 }
             ]
         }
