@@ -2692,6 +2692,151 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "masterTestId": "TEST_EC2_1",
+                    "masterSnapshotId": [
+                        "TEST_EC2"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC2-001",
+                            "eval": "data.rule.ec2_iam_role",
+                            "message": "data.rule.ec2_iam_role_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC2_001.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EC2 Instance IAM Role not enabled",
+                    "description": "AWS provides Identity Access Management (IAM) roles to securely access AWS services and resources. The role is an identity with permission policies that define what the identity can and cannot do in AWS. As a best practice, create IAM roles and attach the role to manage EC2 instance permissions securely instead of distributing or sharing keys or passwords.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EC2_2",
+                    "masterSnapshotId": [
+                        "TEST_EC2"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC2-002",
+                            "eval": "data.rule.ec2_no_vpc",
+                            "message": "data.rule.ec2_no_vpc_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC2_002.py"
+                        }
+                    ],
+                    "severity": "high",
+                    "title": "AWS EC2 instance is not configured with VPC",
+                    "description": "This policy identifies the EC2 instances which are still using EC2 Classic. There are no VPCs deployed any EC2 instances will be running on AWS EC2 Classic. Deploying VPCs will enable you to leverage enhanced infrastructure security controls.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EC2_3",
+                    "masterSnapshotId": [
+                        "TEST_EC2"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC2-003",
+                            "eval": "data.rule.ec2_public_ip",
+                            "message": "data.rule.ec2_public_ip_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC2_003.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "AWS EC2 instances with Public IP and associated with Security Groups have Internet Access",
+                    "description": "This policy identifies AWS EC2 instances with Public IP and associated with Security Groups have Internet Access. EC2 instance receives a public IP address when launched in a default VPC security group (A security group acts as a virtual firewall for your instance to control inbound and outbound traffic.) and we don't assign a public IP address to instances launched in a non-default subnet. Therefore it's a best practice to ensure that there are no EC2 instances with Public IP that are associated with Security Groups which have Internet Access.",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EC2_4",
+                    "masterSnapshotId": [
+                        "TEST_EC2"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC2-004",
+                            "eval": "data.rule.ec2_ebs_optimized",
+                            "message": "data.rule.ec2_ebs_optimized_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-ebsoptimized' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC2_004.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure that EC2 instace is EBS Optimized",
+                    "description": "Enable EbsOptimized provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal Amazon EBS I/O performance",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "masterTestId": "TEST_EC2_5",
+                    "masterSnapshotId": [
+                        "TEST_EC2"
+                    ],
+                    "type": "rego",
+                    "rule": "file(ec2.rego)",
+                    "evals": [
+                        {
+                            "id": "PR-AWS-CLD-EC2-005",
+                            "eval": "data.rule.ec2_monitoring",
+                            "message": "data.rule.ec2_monitoring_err",
+                            "remediationDescription": "Make sure you are following the Cloudformation template format presented <a href='https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#cfn-ec2-instance-monitoring' target='_blank'>here</a>",
+                            "remediationFunction": "PR_AWS_CLD_EC2_005.py"
+                        }
+                    ],
+                    "severity": "Medium",
+                    "title": "Ensure detailed monitoring is enabled for EC2 instances",
+                    "description": "Ensure that detailed monitoring is enabled for your Amazon EC2 instances in order to have enough monitoring data to help you make better decisions on architecting and managing compute resources within your AWS account",
+                    "tags": [
+                        {
+                            "cloud": "git",
+                            "compliance": [],
+                            "service": [
+                                "cloudformation"
+                            ]
+                        }
+                    ]
                 }
             ]
         }
